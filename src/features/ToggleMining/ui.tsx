@@ -1,4 +1,4 @@
-import { MainActionButton } from 'shared/ui/components';
+import { MainActionButton } from 'shared/ui';
 import { toggleMining, userStore } from 'entities/user/model';
 import { useStore } from 'effector-react';
 import React from 'react';

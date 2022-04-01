@@ -1,3 +1,3 @@
-export * from './BackButton';
+export * from '../ui-kit/BackButton';
 export * from './Header';
-export * from './MainActionButton';
+export * from '../ui-kit/MainActionButton';

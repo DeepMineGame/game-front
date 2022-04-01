@@ -1,4 +1,4 @@
-import { BackButton, Header } from 'shared/ui/components';
+import { BackButton, Header } from 'shared/ui';
 import classNames from 'classnames';
 import React from 'react';
 import { ToggleMining } from 'features/ToggleMining/ui';
