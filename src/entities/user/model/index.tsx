@@ -1,11 +1,14 @@
-import {createEvent, createStore} from "effector";
+import { createEvent, createStore } from 'effector';
 
 export type User = {
-    isMining: boolean
-}
+    isMining: boolean;
+};
 
-export const userStore = createStore<User>({isMining: false});
+export const userStore = createStore<User>({ isMining: false });
 
 export const toggleMining = createEvent('toggleMining');
 
-userStore.on(toggleMining, (state) => ({...state, isMining: !state?.isMining}));
+userStore.on(toggleMining, (state) => ({
+    ...state,
+    isMining: !state?.isMining,
+}));
