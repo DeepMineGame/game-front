@@ -1,7 +1,7 @@
-import { BackButton, Header } from 'shared/ui';
 import classNames from 'classnames';
 import React from 'react';
-import { ToggleMining } from 'features/ToggleMining/ui';
+import { ToggleMining } from 'features';
+import { BackButton, Header } from 'shared/ui';
 import styles from './index.module.scss';
 
 const ContractorMainPage = () => {

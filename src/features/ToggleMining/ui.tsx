@@ -1,7 +1,7 @@
-import { MainActionButton } from 'shared/ui';
-import { toggleMining, userStore } from 'entities/user/model';
 import { useStore } from 'effector-react';
 import React from 'react';
+import { userStore, toggleMining } from 'entities/user';
+import { MainActionButton } from 'shared/ui';
 
 export function ToggleMining() {
     const user = useStore(userStore);

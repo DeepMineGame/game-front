@@ -1,6 +1,6 @@
 import React from 'react';
-import { ArrowLeftIcon } from 'shared/ui/icons';
 import cn from 'classnames';
+import { ArrowLeftIcon } from 'shared/ui/icons';
 import styles from './index.module.scss';
 
 export function BackButton() {
