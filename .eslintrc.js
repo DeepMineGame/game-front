@@ -15,10 +15,21 @@ module.exports = {
     parserOptions: {
         requireConfigFile: false,
     },
+    overrides: [
+        {
+            files: ['**/*.spec.ts', '**/*.spec.tsx'],
+            env: {
+                jest: true,
+            },
+        },
+    ],
     rules: {
         'react/destructuring-assignment': 'off',
         'react/prop-types': 'off',
-        'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+        'react/jsx-filename-extension': [
+            1,
+            { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
+        ],
         'react/jsx-no-constructed-context-values': 'warn',
         'react/button-has-type': 'off',
         'react/function-component-definition': 'off',
