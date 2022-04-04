@@ -3,8 +3,8 @@ import './index.scss';
 import { Routing } from 'pages';
 import { withProviders } from './providers';
 
-function App() {
+const App = () => {
     return <Routing />;
-}
+};
 
 export default withProviders(App);

@@ -3,7 +3,7 @@ import React from 'react';
 import { userStore, toggleMining } from 'entities/user';
 import { MainActionButton } from 'shared/ui';
 
-export function ToggleMining() {
+export const ToggleMining = () => {
     const user = useStore(userStore);
 
     return (
@@ -11,4 +11,4 @@ export function ToggleMining() {
             {user?.isMining ? 'Stop Mining' : 'Mine DME'}
         </MainActionButton>
     );
-}
+};
