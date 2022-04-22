@@ -1,1 +1,2 @@
-export * from './ToggleMining/ui';
+export * from './getAccountFromDeepMineBackend';
+export * from './useLogout';

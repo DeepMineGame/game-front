@@ -1,14 +1,10 @@
 import { createEvent, createStore } from 'effector';
 
-export type User = {
-    isMining: boolean;
-};
+import { fetchUserFromDeepMineBackendEffect } from 'features';
+import { User } from './type';
 
-export const userStore = createStore<User>({ isMining: false });
+export const clearUserStoreEvent = createEvent('clearUserStore');
 
-export const toggleMining = createEvent('toggleMining');
-
-userStore.on(toggleMining, (state) => ({
-    ...state,
-    isMining: !state?.isMining,
-}));
+export const userStore = createStore<User | null>(null)
+    .on(fetchUserFromDeepMineBackendEffect.doneData, (_, user) => user)
+    .reset(clearUserStoreEvent);

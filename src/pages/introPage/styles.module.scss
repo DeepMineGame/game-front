@@ -1,0 +1,44 @@
+@import '../../app/styles/vars.scss';
+
+.wrapper {
+  min-height: 100vh;
+  background: var(--color-neutral-10);
+  font-family:  var(--font-orbitron), sans-serif;
+}
+
+.logoWrapper{
+  padding-top: 80px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 45px;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    padding-top: 287px;
+    margin-bottom: 90px;
+  }
+}
+
+.actionButton {
+  padding: 10px 35px;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    margin-bottom: 18px;
+  }
+}
+
+.warning {
+  color: var(--color-red-5);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  justify-content: center;
+  font-family: var(--font-bai-jamjuree), sans-serif;
+}
