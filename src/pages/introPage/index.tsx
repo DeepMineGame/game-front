@@ -1,10 +1,9 @@
-import React, { useCallback, useContext, useEffect } from 'react';
-import { fetchUserFromDeepMineBackendEffect } from 'features';
+import React, { useCallback, useEffect } from 'react';
+import { authDeepMineUserEffect, useChainAuthContext } from 'features';
 import { useStore } from 'effector-react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLogout } from 'features/useLogout';
-import { useChainAuthContext } from 'features/hooks/useChanUser';
 import { userStore } from 'entities/user';
 import { DeepMineLogo, Button } from 'shared/ui';
 import styles from './styles.module.scss';
@@ -25,7 +24,7 @@ export default function IntroPage() {
 
     useEffect(() => {
         if (chainUser) {
-            fetchUserFromDeepMineBackendEffect(chainUser.accountName).then(() =>
+            authDeepMineUserEffect(chainUser.accountName).then(() =>
                 navigate('/contractor-cabin')
             );
         }
