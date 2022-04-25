@@ -1,5 +1,7 @@
 # DeepMine game frontend
 
+![logo](./src/shared/ui/icons/DeepMinelogo.svg)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). And has [feature-sliced](https://feature-sliced.design/) structure.
 
 ## Available Scripts
