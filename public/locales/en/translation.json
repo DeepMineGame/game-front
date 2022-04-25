@@ -1,0 +1,10 @@
+{
+  "intro": {
+    "connect": "CONNECT WAX WALLET",
+    "disconnect": "DISCONNECT WAX WALLET",
+    "only-members": "Only DeepMine team members are allowed access"
+  },
+  "kit": {
+    "back": "Back"
+  }
+}
