@@ -1,8 +1,10 @@
 {
-  "Back": "Back",
-  "Stop Mining": "Stop Mining",
-  "Mine DME": "Mine DME",
-  "CONNECT WAX WALLET": "CONNECT WAX WALLET",
-  "DISCONNECT WAX WALLET": "DISCONNECT WAX WALLET",
-  "Only DeepMine team members are allowed access": "Only DeepMine team members are allowed access"
+  "common": {
+    "Back": "Back",
+    "Stop Mining": "Stop Mining",
+    "Mine DME": "Mine DME",
+    "CONNECT WAX WALLET": "CONNECT WAX WALLET",
+    "DISCONNECT WAX WALLET": "DISCONNECT WAX WALLET",
+    "only-members": "Only DeepMine team members are allowed access"
+  }
 }

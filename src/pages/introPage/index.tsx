@@ -39,14 +39,12 @@ export default function IntroPage() {
             <div className={styles.buttonWrapper}>
                 <Button className={styles.button} onClick={onAuthButtonClick}>
                     {user
-                        ? t('DISCONNECT WAX WALLET')
-                        : t('CONNECT WAX WALLET')}
+                        ? t('common.DISCONNECT WAX WALLET')
+                        : t('common.CONNECT WAX WALLET')}
                 </Button>
             </div>
             <div className={styles.warning}>
-                {user &&
-                    !user.is_admin &&
-                    t('Only DeepMine team members are allowed access')}
+                {user && !user.is_admin && t('common.only-members')}
             </div>
         </div>
     );

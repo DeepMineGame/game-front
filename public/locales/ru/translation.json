@@ -4,5 +4,5 @@
   "Mine DME": "Добывать DME",
   "CONNECT WAX WALLET" : "ИСПОЛЬЗОВАТЬ WAX КОШЕЛЁК",
   "DISCONNECT WAX WALLET": "ОТВЯЗАТЬ WAX КОШЕЛЁК",
-  "Only DeepMine team members are allowed access": "Доступ разрешен только членам команды Deep Mine"
+  "only-members": "Доступ разрешен только членам команды Deep Mine"
 }
