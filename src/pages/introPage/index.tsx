@@ -3,10 +3,9 @@ import { authDeepMineUserEffect } from 'features';
 import { useStore } from 'effector-react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useChainAuthContext } from 'shared';
+import { useChainAuthContext, DeepMineLogo, Button } from 'shared';
 import { useLogout } from 'features/useLogout';
 import { userStore } from 'entities/user';
-import { DeepMineLogo, Button } from 'shared/ui';
 import styles from './styles.module.scss';
 
 export default function IntroPage() {

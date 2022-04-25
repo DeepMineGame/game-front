@@ -1,8 +1,9 @@
-@import '../../app/styles/vars.scss';
+@import 'src/shared/ui/variables/media';
+@import "src/shared/ui/variables/colors";
 
 .wrapper {
   min-height: 100vh;
-  background: var(--color-neutral-10);
+  background: $color-extra-background-3;
   font-family:  var(--font-orbitron), sans-serif;
 }
 
@@ -33,7 +34,7 @@
 }
 
 .warning {
-  color: var(--color-red-5);
+  color: $color-red-red-5;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
