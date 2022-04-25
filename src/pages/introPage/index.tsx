@@ -38,13 +38,11 @@ export default function IntroPage() {
             </div>
             <div className={styles.buttonWrapper}>
                 <Button className={styles.button} onClick={onAuthButtonClick}>
-                    {user
-                        ? t('common.DISCONNECT WAX WALLET')
-                        : t('common.CONNECT WAX WALLET')}
+                    {user ? t('intro.connect') : t('intro.disconnect')}
                 </Button>
             </div>
             <div className={styles.warning}>
-                {user && !user.is_admin && t('common.only-members')}
+                {user && !user.is_admin && t('intro.only-members')}
             </div>
         </div>
     );

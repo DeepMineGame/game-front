@@ -10,7 +10,7 @@ export const BackButton = () => {
     return (
         <div className={cn(styles.button)}>
             <ArrowLeftIcon />
-            <div>{t('common.Back')}</div>
+            <div>{t('kit.Back')}</div>
         </div>
     );
 };

@@ -1,8 +1,10 @@
 {
-  "Back": "Назад",
-  "Stop Mining": "Остановить добычу",
-  "Mine DME": "Добывать DME",
-  "CONNECT WAX WALLET" : "ИСПОЛЬЗОВАТЬ WAX КОШЕЛЁК",
-  "DISCONNECT WAX WALLET": "ОТВЯЗАТЬ WAX КОШЕЛЁК",
-  "only-members": "Доступ разрешен только членам команды Deep Mine"
+  "intro": {
+    "connect": "ИСПОЛЬЗОВАТЬ WAX КОШЕЛЁК",
+    "disconnect": "ОТВЯЗАТЬ WAX КОШЕЛЁК",
+    "only-members": "Доступ разрешен только членам команды Deep Mine"
+  },
+  "kit": {
+    "back": "Назад"
+  }
 }
