@@ -1,35 +1,35 @@
 import React, { useCallback, useContext, useEffect } from 'react';
-import { UALContext } from 'ual-reactjs-renderer';
 import { fetchUserFromDeepMineBackendEffect } from 'features';
 import { useStore } from 'effector-react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLogout } from 'features/useLogout';
+import { useChainAuthContext } from 'features/hooks/useChanUser';
 import { userStore } from 'entities/user';
 import { DeepMineLogo, Button } from 'shared/ui';
 import styles from './styles.module.scss';
 
 export default function IntroPage() {
-    const { activeUser: waxUser, showModal } = useContext(UALContext);
+    const { activeUser: chainUser, showModal } = useChainAuthContext();
     const logout = useLogout();
     const user = useStore(userStore);
     const navigate = useNavigate();
     const { t } = useTranslation();
 
     const onAuthButtonClick = useCallback(() => {
-        if (waxUser) {
+        if (chainUser) {
             return logout();
         }
         return showModal();
-    }, [waxUser, logout, showModal]);
+    }, [chainUser, logout, showModal]);
 
     useEffect(() => {
-        if (waxUser) {
-            fetchUserFromDeepMineBackendEffect(waxUser.accountName).then(() =>
+        if (chainUser) {
+            fetchUserFromDeepMineBackendEffect(chainUser.accountName).then(() =>
                 navigate('/contractor-cabin')
             );
         }
-    }, [waxUser, navigate]);
+    }, [chainUser, navigate]);
 
     return (
         <div className={styles.wrapper}>
