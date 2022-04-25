@@ -37,7 +37,7 @@ export default function IntroPage() {
             </div>
             <div className={styles.buttonWrapper}>
                 <Button className={styles.button} onClick={onAuthButtonClick}>
-                    {user ? t('intro.connect') : t('intro.disconnect')}
+                    {user ? t('intro.disconnect') : t('intro.connect')}
                 </Button>
             </div>
             <div className={styles.warning}>
