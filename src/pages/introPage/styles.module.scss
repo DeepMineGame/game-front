@@ -1,10 +1,10 @@
 @import 'src/shared/ui/variables/media';
 @import "src/shared/ui/variables/colors";
+@import "src/shared/ui/variables/typography";
 
 .wrapper {
   min-height: 100vh;
   background: $color-extra-background-3;
-  font-family:  var(--font-orbitron), sans-serif;
 }
 
 .logoWrapper{
@@ -35,11 +35,8 @@
 
 .warning {
   color: $color-red-red-5;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
   line-height: 16px;
   display: flex;
   justify-content: center;
-  font-family: var(--font-bai-jamjuree), sans-serif;
+  @include text-style-bai-regular-14-px-22-px;
 }

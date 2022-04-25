@@ -1,4 +1,6 @@
 @import "src/shared/ui/variables/colors";
+@import "src/shared/ui/variables/typography";
+
 
 .button {
   border: 1px solid $color-primary-primary-6;
@@ -6,8 +8,5 @@
   cursor: pointer;
   padding: 12px;
   display: inline-block;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.04em;
+  @include text-style-orbitron-16-px-24-px;
 }

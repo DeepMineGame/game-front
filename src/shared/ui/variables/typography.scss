@@ -1,0 +1,229 @@
+@mixin text-style-bai-regular-6-px-14-px {
+  font-size: 0.429rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  line-height: 14px;
+}
+@mixin text-style-bai-regular-8-px-16-px {
+  font-size: 0.571rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  line-height: 16px;
+}
+@mixin text-style-bai-regular-10-px-18-px {
+  font-size: 0.714rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  line-height: 18px;
+}
+@mixin text-style-bai-regular-12-px-20-px {
+  font-size: 0.857rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  line-height: 20px;
+}
+@mixin text-style-bai-regular-14-px-22-px {
+  font-size: 1rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  line-height: 22px;
+}
+@mixin text-style-bai-regular-16-px-24-px {
+  font-size: 1.143rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  line-height: 24px;
+}
+@mixin text-style-bai-regular-20-px-28-px {
+  font-size: 1.429rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  line-height: 28px;
+}
+@mixin text-style-bai-regular-24-px-32-px {
+  font-size: 1.714rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  line-height: 32px;
+}
+@mixin text-style-bai-regular-30-px-38-px {
+  font-size: 2.143rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  line-height: 38px;
+}
+@mixin text-style-bai-regular-38-px-46-px {
+  font-size: 2.714rem;
+  font-family: "Bai Jamjuree", sans-serif;
+
+  line-height: 46px;
+}
+@mixin text-style-bai-regular-46-px-54-px {
+  font-size: 3.286rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  line-height: 54px;
+}
+@mixin text-style-bai-regular-56-px-64-px {
+  font-size: 4rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  line-height: 64px;
+}
+@mixin text-style-bai-bold-6-px-14-px {
+  font-size: 0.429rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  font-weight: bolder;
+  line-height: 14px;
+}
+@mixin text-style-bai-bold-8-px-16-px {
+  font-size: 0.571rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  font-weight: bolder;
+  line-height: 16px;
+}
+@mixin text-style-bai-bold-10-px-18-px {
+  font-size: 0.714rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  font-weight: bolder;
+  line-height: 18px;
+}
+@mixin text-style-bai-bold-12-px-20-px {
+  font-size: 0.857rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  font-weight: bolder;
+  line-height: 20px;
+}
+@mixin text-style-bai-bold-14-px-22-px {
+  font-size: 1rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  font-weight: bolder;
+  line-height: 22px;
+}
+@mixin text-style-bai-bold-16-px-24-px {
+  font-size: 1.143rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  font-weight: bolder;
+  line-height: 24px;
+}
+@mixin text-style-bai-bold-20-px-28-px {
+  font-size: 1.429rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  font-weight: bolder;
+  line-height: 28px;
+}
+@mixin text-style-bai-bold-24-px-32-px {
+  font-size: 1.714rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  font-weight: bolder;
+  line-height: 32px;
+}
+@mixin text-style-bai-bold-30-px-38-px {
+  font-size: 2.143rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  font-weight: bolder;
+  line-height: 38px;
+}
+@mixin text-style-bai-bold-38-px-46-px {
+  font-size: 2.714rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  font-weight: bolder;
+  line-height: 46px;
+}
+@mixin text-style-bai-bold-46-px-54-px {
+  font-size: 3.286rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  font-weight: bolder;
+  line-height: 54px;
+}
+@mixin text-style-bai-bold-56-px-64-px {
+  font-size: 4rem;
+  font-family: "Bai Jamjuree", sans-serif;
+  font-weight: bolder;
+  line-height: 64px;
+}
+@mixin text-style-orbitron-6-px-14-px {
+  font-size: 0.429rem;
+  font-family: "Orbitron", sans-serif;
+  font-weight: bolder;
+  line-height: 14px;
+  letter-spacing: 0.04em;
+}
+@mixin text-style-orbitron-8-px-16-px {
+  font-size: 0.571rem;
+  font-family: "Orbitron", sans-serif;
+  font-weight: bolder;
+  line-height: 18px;
+  letter-spacing: 0.04em;
+}
+@mixin text-style-orbitron-10-px-18-px {
+  font-size: 0.714rem;
+  font-family: "Orbitron", sans-serif;
+  font-weight: bolder;
+  line-height: 18px;
+  letter-spacing: 0.04em;
+}
+@mixin text-style-orbitron-12-px-20-px {
+  font-size: 0.857rem;
+  font-family: "Orbitron", sans-serif;
+  font-weight: bolder;
+  line-height: 20px;
+  letter-spacing: 0.04em;
+}
+@mixin text-style-orbitron-14-px-22-px {
+  font-size: 1rem;
+  font-family: "Orbitron", sans-serif;
+  font-weight: bolder;
+  line-height: 22px;
+  letter-spacing: 0.04em;
+}
+@mixin text-style-orbitron-16-px-24-px {
+  font-size: 1.143rem;
+  font-family: "Orbitron", sans-serif;
+  font-weight: bolder;
+  line-height: 24px;
+  letter-spacing: 0.04em;
+}
+@mixin text-style-orbitron-20-px-28-px {
+  font-size: 1.429rem;
+  font-family: "Orbitron", sans-serif;
+  font-weight: bolder;
+  line-height: 28px;
+  letter-spacing: 0.04em;
+}
+@mixin text-style-orbitron-24-px-32-px {
+  font-size: 1.714rem;
+  font-family: "Orbitron", sans-serif;
+  font-weight: bolder;
+  line-height: 32px;
+  letter-spacing: 0.04em;
+}
+@mixin text-style-orbitron-30-px-38-px {
+  font-size: 2.143rem;
+  font-family: "Orbitron", sans-serif;
+  font-weight: bolder;
+  line-height: 38px;
+  letter-spacing: 0.04em;
+}
+@mixin text-style-orbitron-38-px-46-px {
+  font-size: 2.714rem;
+  font-family: "Orbitron", sans-serif;
+  font-weight: bolder;
+  line-height: 46px;
+  letter-spacing: 0.04em;
+}
+@mixin text-style-orbitron-46-px-54-px {
+  font-size: 3.286rem;
+  font-family: "Orbitron", sans-serif;
+  font-weight: bolder;
+  line-height: 54px;
+  letter-spacing: 0.04em;
+}
+@mixin text-style-orbitron-56-px-64-px {
+  font-size: 4rem;
+  font-family: "Orbitron", sans-serif;
+  font-weight: bolder;
+  line-height: 64px;
+  letter-spacing: 0.04em;
+}
+@mixin effect-style-elevation {
+  box-shadow: 0px 3px 6px -4px rgba(0, 0, 0, 0.12);
+}
+@mixin effect-style-input-default-focus {
+  box-shadow: 0px 0px 4px rgba(24, 144, 255, 0.5);
+}
+@mixin effect-style-input-error-focus {
+  box-shadow: 0px 0px 4px rgba(245, 34, 45, 0.5);
+}
+@mixin effect-style-input-warning-focus {
+  box-shadow: 0px 0px 4px rgba(250, 173, 20, 0.5);
+}
