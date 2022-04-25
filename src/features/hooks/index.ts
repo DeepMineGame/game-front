@@ -1,1 +1,1 @@
-export * from './useChanUser';
+export * from './useChainAuthContext';
