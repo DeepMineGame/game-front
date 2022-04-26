@@ -1,9 +1,9 @@
-@import '../../app/styles/vars.scss';
+@import 'src/shared';
 
 .wrapper {
   min-height: 100vh;
-  background: var(--color-neutral-10);
-  font-family:  var(--font-orbitron), sans-serif;
+  background: $color-extra-background-3;
+  font-family: $bai;
 }
 
 .logoWrapper{
@@ -19,7 +19,7 @@
 }
 
 .actionButton {
-  padding: 10px 35px;
+  font-family: $orbitron;
 }
 
 .buttonWrapper {
@@ -33,12 +33,6 @@
 }
 
 .warning {
-  color: var(--color-red-5);
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
   display: flex;
   justify-content: center;
-  font-family: var(--font-bai-jamjuree), sans-serif;
 }

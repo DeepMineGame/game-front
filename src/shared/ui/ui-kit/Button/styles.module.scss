@@ -1,11 +1,16 @@
+@import "src/shared";
+
 .button {
-  border: 1px solid var(--color-primary-6);
-  color: var(--color-primary-6);
+  border: 1px solid $color-primary-primary-6;
+  color: $color-primary-primary-6;
   cursor: pointer;
-  padding: 12px;
-  display: inline-block;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.04em;
+
+  &:hover, &:focus {
+    border: 1px solid $color-primary-primary-5;
+    color: $color-primary-primary-5;
+  }
+  &:active {
+    border: 1px solid $color-primary-primary-7;
+    color: $color-primary-primary-7;
+  }
 }
