@@ -2,6 +2,7 @@ import React, { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useStore } from 'effector-react';
 import { useLogout } from 'features';
+import { Title } from 'shared';
 import { userStore } from 'entities/user';
 
 const IntroPage = lazy(() => import('./introPage'));
@@ -16,7 +17,9 @@ export const Routing = () => {
                     path="/contractor-cabin"
                     element={
                         <div>
-                            contractor cabin in progress...🧑🏻‍💻
+                            <Title level={3} italic fontFamily="bai">
+                                contractor cabin in progress...🧑🏻‍💻
+                            </Title>
                             <div onClick={logout}>logout</div>
                         </div>
                     }
