@@ -2,6 +2,7 @@ import React from 'react';
 import './index.scss';
 // import i18n (needs to be bundled ;))
 import './index.i18n';
+import 'antd/dist/antd.css';
 import { Routing } from 'pages';
 import axios from 'axios';
 import { withProviders } from './providers';

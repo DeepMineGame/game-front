@@ -4,6 +4,7 @@ import { useStore } from 'effector-react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useChainAuthContext, DeepMineLogo, Button } from 'shared';
+import { Typography } from 'antd';
 import { useLogout } from 'features/useLogout';
 import { userStore } from 'entities/user';
 import styles from './styles.module.scss';
@@ -36,13 +37,17 @@ export default function IntroPage() {
                 <DeepMineLogo />
             </div>
             <div className={styles.buttonWrapper}>
-                <Button className={styles.button} onClick={onAuthButtonClick}>
+                <Button
+                    size="large"
+                    onClick={onAuthButtonClick}
+                    className={styles.actionButton}
+                >
                     {user ? t('intro.disconnect') : t('intro.connect')}
                 </Button>
             </div>
-            <div className={styles.warning}>
+            <Typography.Text type="danger" className={styles.warning}>
                 {user && !user.is_admin && t('intro.only-members')}
-            </div>
+            </Typography.Text>
         </div>
     );
 }

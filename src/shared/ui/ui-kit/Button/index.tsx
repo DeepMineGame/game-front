@@ -1,16 +1,21 @@
 import React, { MouseEventHandler, ReactNode } from 'react';
 import classNames from 'classnames';
+import { Button as ButtonAnt, ButtonProps } from 'antd';
 import styles from './styles.module.scss';
 
 type Props = {
     children: ReactNode;
     onClick: MouseEventHandler;
-    className: string;
-};
-export const Button = ({ children, onClick, className }: Props) => {
+} & ButtonProps;
+export const Button = ({ children, onClick, className, ...props }: Props) => {
     return (
-        <div onClick={onClick} className={classNames(styles.button, className)}>
+        <ButtonAnt
+            onClick={onClick}
+            className={classNames(styles.button, className)}
+            {...props}
+            type="ghost"
+        >
             {children}
-        </div>
+        </ButtonAnt>
     );
 };

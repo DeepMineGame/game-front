@@ -3,6 +3,7 @@
 .wrapper {
   min-height: 100vh;
   background: $color-extra-background-3;
+  font-family: "Bai Jamjuree", sans-serif;;
 }
 
 .logoWrapper{
@@ -18,7 +19,7 @@
 }
 
 .actionButton {
-  padding: 10px 35px;
+  font-family: "Orbitron", sans-serif;
 }
 
 .buttonWrapper {
@@ -32,9 +33,6 @@
 }
 
 .warning {
-  color: $color-red-red-5;
-  line-height: 16px;
   display: flex;
   justify-content: center;
-  @include text-style-bai-regular-14-px-22-px;
 }
