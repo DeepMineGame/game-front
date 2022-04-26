@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import classNames from 'classnames';
 import { Typography } from 'antd';
 import { TitleProps } from 'antd/lib/typography/Title';
@@ -9,7 +9,7 @@ type Props = TitleProps &
         fontFamily: 'bai' | 'orbitron';
     };
 
-export const Title = (props: Props) => {
+export const Title: FC<Props> = (props) => {
     return (
         <Typography.Title
             className={classNames({

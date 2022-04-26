@@ -3,7 +3,7 @@
 .wrapper {
   min-height: 100vh;
   background: $color-extra-background-3;
-  font-family: "Bai Jamjuree", sans-serif;;
+  font-family: $bai;
 }
 
 .logoWrapper{
@@ -19,7 +19,7 @@
 }
 
 .actionButton {
-  font-family: "Orbitron", sans-serif;
+  font-family: $orbitron;
 }
 
 .buttonWrapper {
