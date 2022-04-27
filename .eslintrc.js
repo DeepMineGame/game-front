@@ -64,6 +64,7 @@ module.exports = {
         'react/function-component-definition': 'off',
         'react/jsx-props-no-spreading': 'off',
         'react/no-unescaped-entities': 'warn',
+
         'react/jsx-no-bind': 'warn',
         'react/no-array-index-key': 'warn',
         'import/named': 'off',
@@ -83,7 +84,8 @@ module.exports = {
         'no-param-reassign': 'off',
         'no-await-in-loop': 'off',
         'no-promise-executor-return': 'warn',
-        'no-shadow': 'warn',
+        // https://stackoverflow.com/questions/63961803/eslint-says-all-enums-in-typescript-app-are-already-declared-in-the-upper-scope
+        'no-shadow': 'off',
         'no-unused-vars': 'warn',
         'consistent-return': 'warn',
         semi: [2, 'always'],
