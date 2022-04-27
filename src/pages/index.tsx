@@ -2,7 +2,8 @@ import React, { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useStore } from 'effector-react';
 import { useLogout } from 'features';
-import { Title } from 'shared';
+import { ContractorMenu, Title, ContractorMenuItems } from 'shared';
+import { Typography } from 'antd';
 import { userStore } from 'entities/user';
 
 const IntroPage = lazy(() => import('./introPage'));
@@ -20,7 +21,28 @@ export const Routing = () => {
                             <Title level={3} italic fontFamily="bai">
                                 contractor cabin in progress...🧑🏻‍💻
                             </Title>
-                            <div onClick={logout}>logout</div>
+                            <Typography.Text strong>
+                                WAX address - {user.wax_address}
+                            </Typography.Text>
+                            <br />
+                            <Typography.Link onClick={logout}>
+                                logout
+                            </Typography.Link>
+                            <ContractorMenu
+                                config={{
+                                    disabledItems: {
+                                        [ContractorMenuItems.InfoPanel]: true,
+                                        [ContractorMenuItems.MiningDeck]: true,
+                                    },
+                                    callbacks: {
+                                        [ContractorMenuItems.InfoPanel]:
+                                            () => {},
+                                    },
+                                    activeTooltip:
+                                        ContractorMenuItems.InfoPanel,
+                                    primaryButtonVisibility: true,
+                                }}
+                            />
                         </div>
                     }
                 />

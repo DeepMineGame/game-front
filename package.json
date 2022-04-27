@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@eosdacio/ual-wax": "^1.5.1",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
@@ -31,7 +32,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
     "sass": "^1.49.10",
-    "ual-anchor": "^1.1.5",
+    "ual-anchor": "^1.1.6",
     "ual-reactjs-renderer": "^0.3.1"
   },
   "scripts": {

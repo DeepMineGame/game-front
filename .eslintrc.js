@@ -59,6 +59,7 @@ module.exports = {
             { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
         ],
         'react/jsx-no-constructed-context-values': 'warn',
+        'react/require-default-props': 'off', // Since we do not use prop-types
         'react/button-has-type': 'off',
         'react/function-component-definition': 'off',
         'react/jsx-props-no-spreading': 'off',

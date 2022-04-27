@@ -13,15 +13,12 @@ function devServerConfig(config) {
     };
 }
 
-function addFallback(config) {
-    config.resolve.fallback = {
-        crypto: false,
-    };
-
+function ignoreSourceMapWarnings(config) {
+    config.ignoreWarnings = [/Failed to parse source map/];
     return config;
 }
 
 module.exports = {
     devServer: overrideDevServer(devServerConfig, watchAll()),
-    webpack: override(addFallback),
+    webpack: override(ignoreSourceMapWarnings),
 };
