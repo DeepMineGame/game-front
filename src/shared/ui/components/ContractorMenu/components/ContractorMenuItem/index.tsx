@@ -11,7 +11,7 @@ type Props = {
 
 const icons = {
     [ContractorMenuItems.InfoPanel]: <DesktopOutlined />,
-    [ContractorMenuItems.MiningDeck]: <Icon component={() => <DrillBit />} />,
+    [ContractorMenuItems.MiningDeck]: <Icon component={DrillBit} />,
     [ContractorMenuItems.Equipment]: <ToolOutlined />,
 };
 
