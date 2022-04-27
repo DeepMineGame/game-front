@@ -4,7 +4,7 @@ import { Button as ButtonAnt, ButtonProps } from 'antd';
 import styles from './styles.module.scss';
 
 type Props = {
-    onClick: MouseEventHandler;
+    onClick?: MouseEventHandler;
 } & ButtonProps;
 
 export const Button: FC<Props> = ({

@@ -1,6 +1,6 @@
 import Icon, { DesktopOutlined, ToolOutlined } from '@ant-design/icons';
 import React, { FC } from 'react';
-import { DrillBit, MenuItem, noop } from 'shared';
+import { DrillBit, MenuItem } from 'shared';
 import { Config, ContractorMenuItems } from '../../types';
 import { useTooltipText } from '../../hooks';
 
@@ -20,7 +20,7 @@ export const ContractorMenuItem: FC<Props> = ({ item, config }) => {
 
     return (
         <MenuItem
-            onClick={config.callbacks[item] || noop}
+            onClick={config.callbacks[item]}
             icon={icons[item]()}
             disabled={config.disabledItems[item]}
             tooltipText={pickTooltip(item)}

@@ -6,7 +6,7 @@ import { ButtonType } from 'antd/lib/button/button';
 type Props = {
     icon: ReactNode;
     disabled?: boolean;
-    onClick: MouseEventHandler;
+    onClick?: MouseEventHandler;
     type?: ButtonType;
     ghost?: boolean;
     tooltipText?: string;
