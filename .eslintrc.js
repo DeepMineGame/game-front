@@ -39,7 +39,7 @@ module.exports = {
         'prettier',
     ],
     parser: '@typescript-eslint/parser',
-    plugins: ['react'],
+    plugins: ['react', '@typescript-eslint'],
     parserOptions: {
         requireConfigFile: false,
     },
@@ -84,9 +84,10 @@ module.exports = {
         'no-param-reassign': 'off',
         'no-await-in-loop': 'off',
         'no-promise-executor-return': 'warn',
-        // https://stackoverflow.com/questions/63961803/eslint-says-all-enums-in-typescript-app-are-already-declared-in-the-upper-scope
         'no-shadow': 'off',
-        'no-unused-vars': 'warn',
+        '@typescript-eslint/no-shadow': 'error',
+        'no-unused-vars': 'off',
+        '@typescript-eslint/no-unused-vars': 'error',
         'consistent-return': 'warn',
         semi: [2, 'always'],
         camelcase: 'off',
