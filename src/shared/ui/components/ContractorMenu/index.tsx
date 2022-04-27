@@ -6,7 +6,6 @@ import { ContractorMenuItems, Props } from './types';
 import { ContractorMenuItem } from './components';
 import styles from './styles.module.scss';
 
-const noop = () => {};
 export * from './types';
 export const ContractorMenu: FC<Props> = ({ config }) => {
     return (
@@ -28,7 +27,7 @@ export const ContractorMenu: FC<Props> = ({ config }) => {
 
                     {config.primaryButtonVisibility && (
                         <MenuItem
-                            onClick={config.primaryButtonCallback || noop}
+                            onClick={config.primaryButtonCallback}
                             icon={<RightOutlined />}
                             type="primary"
                         />

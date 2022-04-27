@@ -16,9 +16,8 @@ export const Button: FC<Props> = ({
     return (
         <ButtonAnt
             onClick={onClick}
-            className={classNames(className, {
-                [styles.button]: true,
-                [styles.disabled]: props.disabled,
+            className={classNames(className, styles.button, {
+                [styles.disabled]: props?.disabled,
                 [styles.primary]: props?.type === 'primary',
                 [styles.ghost]: props?.ghost,
             })}
