@@ -64,7 +64,6 @@ module.exports = {
         'react/function-component-definition': 'off',
         'react/jsx-props-no-spreading': 'off',
         'react/no-unescaped-entities': 'warn',
-
         'react/jsx-no-bind': 'warn',
         'react/no-array-index-key': 'warn',
         'import/named': 'off',

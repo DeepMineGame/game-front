@@ -10,9 +10,9 @@ type Props = {
 };
 
 const icons = {
-    [ContractorMenuItems.InfoPanel]: <DesktopOutlined />,
-    [ContractorMenuItems.MiningDeck]: <Icon component={() => <DrillBit />} />,
-    [ContractorMenuItems.Equipment]: <ToolOutlined />,
+    [ContractorMenuItems.InfoPanel]: () => <DesktopOutlined />,
+    [ContractorMenuItems.MiningDeck]: () => <Icon component={DrillBit} />,
+    [ContractorMenuItems.Equipment]: () => <ToolOutlined />,
 };
 
 export const ContractorMenuItem: FC<Props> = ({ item, config }) => {
@@ -21,7 +21,7 @@ export const ContractorMenuItem: FC<Props> = ({ item, config }) => {
     return (
         <MenuItem
             onClick={config.callbacks[item] || noop}
-            icon={icons[item]}
+            icon={icons[item]()}
             disabled={config.disabledItems[item]}
             tooltipText={pickTooltip(item)}
         />
