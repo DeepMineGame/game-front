@@ -1,24 +1,24 @@
 import React, { FC } from 'react';
 import classNames from 'classnames';
 import { Typography } from 'antd';
-import { TitleProps } from 'antd/lib/typography/Title';
+import { TextProps } from 'antd/es/typography/Text';
 import styles from '../styles.module.scss';
 
-type Props = TitleProps &
+type Props = TextProps &
     React.RefAttributes<HTMLHeadingElement> & {
-        fontFamily: 'bai' | 'orbitron';
+        fontFamily?: 'bai' | 'orbitron';
     };
 
-export const Title: FC<Props> = (props) => {
+export const Text: FC<Props> = ({ className, ...props }) => {
     return (
-        <Typography.Title
-            className={classNames({
+        <Typography.Text
+            className={classNames(className, {
                 [styles.fontFamilyBai]: props.fontFamily === 'bai',
                 [styles.fontFamilyOrbitron]: props.fontFamily === 'orbitron',
             })}
             {...props}
         >
             {props.children}
-        </Typography.Title>
+        </Typography.Text>
     );
 };

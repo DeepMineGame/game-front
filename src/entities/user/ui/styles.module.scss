@@ -1,0 +1,14 @@
+@import 'src/shared';
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  color: $color-neutral-neutral-10
+}
+
+.energyCount {
+  color: $color-neutral-neutral-10;
+  margin-left: 7px;
+  margin-right: 16px;
+  font-size: 12px;
+}
