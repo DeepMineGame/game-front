@@ -41,7 +41,8 @@ export default function IntroPage() {
                     size="large"
                     onClick={onAuthButtonClick}
                     className={styles.actionButton}
-                    type="ghost"
+                    type="primary"
+                    ghost
                 >
                     {user ? t('intro.disconnect') : t('intro.connect')}
                 </Button>

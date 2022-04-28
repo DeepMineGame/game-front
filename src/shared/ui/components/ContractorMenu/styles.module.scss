@@ -1,0 +1,7 @@
+@import "src/shared";
+
+.contractorMenu {
+  @media only screen and (min-width: $media-desktop-l)  {
+    display: none;
+  }
+}

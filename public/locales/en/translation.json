@@ -6,5 +6,12 @@
   },
   "kit": {
     "back": "Back"
+  },
+  "components": {
+    "contractorMenu": {
+      "infoPanelTooltip": "Info panel is located here",
+      "miningDeskTooltip": "Mining deck is located here",
+      "equipmentTooltip": "Your equipment is located here"
+    }
   }
 }

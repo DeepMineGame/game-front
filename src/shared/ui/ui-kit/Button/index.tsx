@@ -4,7 +4,7 @@ import { Button as ButtonAnt, ButtonProps } from 'antd';
 import styles from './styles.module.scss';
 
 type Props = {
-    onClick: MouseEventHandler;
+    onClick?: MouseEventHandler;
 } & ButtonProps;
 
 export const Button: FC<Props> = ({
@@ -16,7 +16,11 @@ export const Button: FC<Props> = ({
     return (
         <ButtonAnt
             onClick={onClick}
-            className={classNames(styles.button, className)}
+            className={classNames(className, styles.button, {
+                [styles.disabled]: props?.disabled,
+                [styles.primary]: props?.type === 'primary',
+                [styles.ghost]: props?.ghost,
+            })}
             {...props}
         >
             {children}
