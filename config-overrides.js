@@ -5,7 +5,7 @@ function devServerConfig(config) {
         ...config,
         proxy: {
             '/ubs': {
-                target: 'https://api1.deepmine.world',
+                target: 'https://rc.deepmine.world',
                 changeOrigin: true,
                 withCredentials: true,
             },

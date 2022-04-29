@@ -1,0 +1,27 @@
+@import 'src/shared';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 16px;
+}
+
+.logo {
+  width: 48px;
+  height: 28px;
+  margin-top: 6px;
+}
+
+h4.title {
+  margin-bottom: 0;
+  margin-left: 11px;
+  color: $color-neutral-neutral-9;
+
+}
+
+.iconAndTitleWrapper {
+  color: $color-neutral-neutral-9;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
