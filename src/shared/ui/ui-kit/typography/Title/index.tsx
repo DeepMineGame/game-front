@@ -9,10 +9,10 @@ type Props = TitleProps &
         fontFamily: 'bai' | 'orbitron';
     };
 
-export const Title: FC<Props> = (props) => {
+export const Title: FC<Props> = ({ className, ...props }) => {
     return (
         <Typography.Title
-            className={classNames({
+            className={classNames(className, {
                 [styles.fontFamilyBai]: props.fontFamily === 'bai',
                 [styles.fontFamilyOrbitron]: props.fontFamily === 'orbitron',
             })}

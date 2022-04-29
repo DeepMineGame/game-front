@@ -3,6 +3,8 @@ import { Route, Routes } from 'react-router-dom';
 import { useStore } from 'effector-react';
 import { userStore } from 'entities/user';
 import { ContractorCabin } from './contractorCabin';
+import { EquipmentSetPage } from './equipmentSet';
+import { contractorCabin, equipmentSet } from './constants';
 
 const IntroPage = lazy(() => import('./introPage'));
 
@@ -11,7 +13,13 @@ export const Routing = () => {
     return (
         <Routes>
             {user?.is_admin && (
-                <Route path="/contractor-cabin" element={<ContractorCabin />} />
+                <>
+                    <Route
+                        path={contractorCabin}
+                        element={<ContractorCabin />}
+                    />
+                    <Route path={equipmentSet} element={<EquipmentSetPage />} />
+                </>
             )}
             <Route path="/intro" element={<IntroPage />} />
             <Route path="*" element={<IntroPage />} />

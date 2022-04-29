@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Avatar, Badge, Progress } from 'antd';
 import { AvatarIcon, Text } from 'shared';
 import { ThunderboltOutlined } from '@ant-design/icons';
+import { useLogout } from 'features';
 import { User } from '../model/type';
 import styles from './styles.module.scss';
 
@@ -13,8 +14,9 @@ type Props = {
 
 export const UserAvatar: FC<Props> = ({ user }) => {
     const avatar = () => <Avatar src={user?.avatar} icon={<AvatarIcon />} />;
+    const logout = useLogout();
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} onClick={logout}>
             <div>
                 <ThunderboltOutlined />
                 <span>
