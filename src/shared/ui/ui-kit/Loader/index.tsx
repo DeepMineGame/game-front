@@ -10,11 +10,13 @@ export enum LoaderSize {
 }
 
 type Props = {
-    size?: LoaderSize;
+    size?: 'small' | 'default' | 'large';
 };
 
-export const Loader: FC<Props> = ({ size = LoaderSize.default }) => {
-    const antIcon = <LoadingOutlined style={{ fontSize: size }} spin />;
+export const Loader: FC<Props> = ({ size = 'default' }) => {
+    const antIcon = (
+        <LoadingOutlined style={{ fontSize: LoaderSize[size] }} spin />
+    );
 
     return <Spin className={styles.loader} indicator={antIcon} />;
 };

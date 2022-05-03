@@ -30,7 +30,7 @@ export const Header: FC<Props> = ({ title }) => {
                         className={styles.iconAndTitleWrapper}
                         onClick={goToBack}
                     >
-                        <LeftOutlined />
+                        <LeftOutlined className={styles.backArrow} />
                         <Title
                             level={4}
                             className={styles.title}

@@ -1,11 +1,11 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { Loader, LoaderSize } from 'shared';
+import { Loader } from 'shared';
 
 export const withRouter = (component: () => React.ReactNode) => () =>
     (
         <BrowserRouter>
-            <Suspense fallback={<Loader size={LoaderSize.small} />}>
+            <Suspense fallback={<Loader size="default" />}>
                 {component()}
             </Suspense>
         </BrowserRouter>

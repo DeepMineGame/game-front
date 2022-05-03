@@ -14,9 +14,7 @@
 
 h4.title, h1.title {
   margin-bottom: 0;
-  margin-left: 11px;
   color: $color-neutral-neutral-9;
-
 }
 
 .iconAndTitleWrapper {
@@ -34,7 +32,12 @@ h4.title, h1.title {
   justify-content: space-between;
   padding: 36px 56px;
   display: none;
+  
   @media only screen and (min-width: $media-desktop-s)  {
     display: flex;
   }
+}
+
+.backArrow {
+  margin-right: 11px;
 }
