@@ -1,8 +1,11 @@
+@import "src/shared";
+
 .button {
   display: flex;
-  height: 32px;
-  width: 86px;
-  background: url('assets/layout.svg') no-repeat;
   justify-content: center;
   align-items: center;
+  gap: 8px;
+  color: $color-neutral-neutral-9;
+  cursor: pointer;
+  font-family: "Bai Jamjuree", sans-serif;
 }
