@@ -1,6 +1,7 @@
 @import "src/shared";
 
 .cabinBackground {
+  position: relative;
   background: url("../../shared/ui/images/DarkGreyMin.png") no-repeat center center fixed;
   min-height: 100vh;
   background-size: cover;
@@ -9,4 +10,10 @@
     background: url("../../shared/ui/images/DarkGrey.png") no-repeat center center fixed;
     background-size: cover;
   }
+}
+
+.cabinMonitor {
+  top: 120px;
+  left: 68px;
+  position: absolute;
 }

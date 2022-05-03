@@ -10,6 +10,7 @@ const IntroPage = lazy(() => import('./introPage'));
 
 export const Routing = () => {
     const user = useStore(userStore);
+
     return (
         <Routes>
             {user?.is_admin && (
