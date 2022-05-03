@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { FC, MouseEventHandler } from 'react';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeftIcon } from 'shared/ui/icons';
+import { LeftOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 
-export const BackButton = () => {
+type Props = {
+    onClick: MouseEventHandler;
+};
+
+export const BackButton: FC<Props> = ({ onClick }) => {
     const { t } = useTranslation();
 
     return (
-        <div className={cn(styles.button)}>
-            <ArrowLeftIcon />
-            <div>{t('kit.Back')}</div>
+        <div className={cn(styles.button)} onClick={onClick}>
+            <LeftOutlined />
+            <div>{t('kit.back')}</div>
         </div>
     );
 };
