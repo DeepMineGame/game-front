@@ -13,6 +13,8 @@ export default function IntroPage() {
     const { activeUser: chainUser, showModal } = useChainAuthContext();
     const logout = useLogout();
     const user = useStore(userStore);
+    const isUserLoading = useStore(authDeepMineUserEffect.pending);
+
     const navigate = useNavigate();
     const { t } = useTranslation();
 
@@ -43,6 +45,7 @@ export default function IntroPage() {
                     className={styles.actionButton}
                     type="primary"
                     ghost
+                    loading={isUserLoading}
                 >
                     {user ? t('intro.disconnect') : t('intro.connect')}
                 </Button>

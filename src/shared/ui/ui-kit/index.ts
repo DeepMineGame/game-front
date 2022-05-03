@@ -4,3 +4,4 @@ export * from './typography/Title';
 export * from './typography/Text';
 export * from './Menu';
 export * from './CardHolder';
+export * from './Loader';
