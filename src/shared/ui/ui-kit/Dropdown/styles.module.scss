@@ -1,0 +1,14 @@
+@import "src/shared";
+
+.dropdown {
+  background: $color-neutral-neutral-1;
+}
+
+.dropdownItem {
+  color: $color-neutral-neutral-9;
+  font-family: "Bai Jamjuree", sans-serif;
+
+  &:hover {
+    background: $color-neutral-neutral-2;
+  }
+}

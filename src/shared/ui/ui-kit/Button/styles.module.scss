@@ -51,3 +51,18 @@
     background: none;
   }
 }
+
+.button.link {
+  color: $color-primary-primary-6;
+  border: none;
+
+  &:hover,
+  &:focus, {
+    border: none;
+    color: $color-primary-primary-5;
+  }
+
+  &:active {
+    color: $color-primary-primary-7;
+  }
+}
