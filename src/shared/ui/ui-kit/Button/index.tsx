@@ -20,6 +20,7 @@ export const Button: FC<Props> = ({
                 [styles.disabled]: props?.disabled,
                 [styles.primary]: props?.type === 'primary',
                 [styles.ghost]: props?.ghost,
+                [styles.link]: props?.type === 'link',
             })}
             {...props}
         >

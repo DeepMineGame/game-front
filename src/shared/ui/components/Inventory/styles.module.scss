@@ -1,0 +1,15 @@
+@import "src/shared";
+
+.icon {
+  svg {
+    fill: $color-primary-primary-6;
+  }
+}
+
+.space {
+  margin-bottom: 4px;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    margin-bottom: 28px;
+  }
+}
