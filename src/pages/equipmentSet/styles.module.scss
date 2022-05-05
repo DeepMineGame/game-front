@@ -3,8 +3,29 @@
 .wrapper {
   background: $color-neutral-neutral-3;
   min-height: 100vh;
+  font-family: $bai;
 }
 
 .content {
   padding: 44px 56px;
+}
+
+.installButtonWrapper {
+  padding-top: 37px;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    padding-top: 72px;
+  }
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 64px;
+  justify-content: flex-start;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    gap: 32px;
+    justify-content: center;
+  }
 }

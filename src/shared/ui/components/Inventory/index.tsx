@@ -4,25 +4,24 @@ import { ModalProps, Space } from 'antd';
 import { SortAscendingOutlined } from '@ant-design/icons';
 import styles from './styles.module.scss';
 
+const sortConfig = [
+    {
+        label: 'Rarity',
+        key: 0,
+    },
+    {
+        label: 'Level',
+        key: 1,
+    },
+    {
+        label: 'Deprecation',
+        key: 2,
+    },
+];
 export const Inventory: FC<ModalProps> = (props) => {
     return (
-        <Modal {...props} title="Active inventory">
-            <Dropdown
-                items={[
-                    {
-                        label: 'Rarity',
-                        key: 0,
-                    },
-                    {
-                        label: 'Level',
-                        key: 1,
-                    },
-                    {
-                        label: 'Deprecation',
-                        key: 2,
-                    },
-                ]}
-            >
+        <Modal wideOnMobile {...props} title="Active inventory">
+            <Dropdown items={sortConfig}>
                 <Space className={styles.space}>
                     <SortAscendingOutlined className={styles.icon} />
                     <Button type="link">Sort by</Button>

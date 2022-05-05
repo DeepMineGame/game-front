@@ -1,10 +1,14 @@
 @import "src/shared";
 
 .modal {
-  max-width: 100vh;
+  font-family: $bai;
   padding: 0;
+}
+
+.wideOnMobile {
+  max-width: 100vh;
+  margin: 0;
   top: 0;
-  font-family: "Bai Jamjuree", sans-serif;
 
   @media only screen and (min-width: $media-desktop-s)  {
     max-width: calc(100vw - 32px);
@@ -12,7 +16,6 @@
     top: 100px;
   }
 }
-
 .modalWrapper {
   div, svg {
     background: $color-neutral-neutral-2;
