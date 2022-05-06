@@ -11,6 +11,10 @@ type Props = {
     progressCurrent: number;
 };
 
+function getPercentage(value: number, total: number) {
+    return (value / total) * 100;
+}
+
 export const Card: FC<Props> = ({
     imageSrc,
     initialProgress,
@@ -22,8 +26,8 @@ export const Card: FC<Props> = ({
             {progressCurrent}/{progressRemained} ({initialProgress})
         </div>
     );
-    const currentProgress = (progressCurrent / progressRemained) * 100;
-    const disabledProgress = (progressRemained / initialProgress) * 100;
+    const currentProgress = getPercentage(progressCurrent, progressRemained);
+    const disabledProgress = getPercentage(progressRemained, initialProgress);
     const lvlTooltip = () => (
         <div className={styles.lvlTooltipContent}>
             <Logo />
