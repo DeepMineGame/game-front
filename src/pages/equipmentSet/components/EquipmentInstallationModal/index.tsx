@@ -20,10 +20,14 @@ export const EquipmentInstallationModal = () => {
             </Button>
             <Modal
                 visible={infoModalVisibility}
-                title={t('pages.installation')}
+                title={
+                    <Title fontFamily="bai" level={5}>
+                        {t('pages.installation')}
+                    </Title>
+                }
                 onCancel={toggleModal}
             >
-                <Title level={5} fontFamily="bai">
+                <Title level={5} fontFamily="bai" thin>
                     This action will take:
                 </Title>
             </Modal>
