@@ -3,6 +3,11 @@
 h1,h2,h3,h4,h5.title {
   color: inherit;
 }
+
+h1,h2,h3,h4,h5.thin {
+  font-weight: 400;
+}
+
 .fontFamilyBai {
   font-family: $bai;
 }
