@@ -40,11 +40,14 @@ export const Card: FC<Props> = ({
             color={neutral4}
         >
             <div className={styles.wrapper}>
-                <img
-                    className={styles.image}
-                    src={imageSrc || cutterImg}
-                    alt="nft-equipment-card"
-                />
+                <div className={styles.image}>
+                    <img
+                        height="100%"
+                        width="100%"
+                        src={imageSrc || cutterImg}
+                        alt="nft-equipment-card"
+                    />
+                </div>
                 <Progress
                     className={styles.progress}
                     strokeColor="#1D1D1D"
