@@ -5,7 +5,11 @@
     "only-members": "Only DeepMine team members are allowed access"
   },
   "kit": {
-    "back": "Back"
+    "back": "Back",
+    "timer": {
+      "time": "Time",
+      "energy": "Energy"
+    }
   },
   "components": {
     "contractorMenu": {
