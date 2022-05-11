@@ -26,6 +26,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
 .info {
@@ -35,4 +36,11 @@
 .lvlTooltipContent {
   padding-top: 4px;
   color: $color-primary-primary-6;
+}
+
+.status {
+  margin-bottom: 4px;
+  & > span {
+    color: $color-neutral-neutral-7;
+  }
 }

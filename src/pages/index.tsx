@@ -4,7 +4,8 @@ import { useStore } from 'effector-react';
 import { userStore } from 'entities/user';
 import { ContractorCabin } from './contractorCabin';
 import { EquipmentSetPage } from './equipmentSet';
-import { contractorCabin, equipmentSet } from './constants';
+import { contractorCabin, equipmentSet, mining } from './constants';
+import { MiningPage } from './mining';
 
 const IntroPage = lazy(() => import('./introPage'));
 
@@ -19,6 +20,7 @@ export const Routing = () => {
                         element={<ContractorCabin />}
                     />
                     <Route path={equipmentSet} element={<EquipmentSetPage />} />
+                    <Route path={mining} element={<MiningPage />} />
                 </>
             )}
             <Route path="/intro" element={<IntroPage />} />

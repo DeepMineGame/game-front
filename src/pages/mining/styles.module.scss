@@ -1,0 +1,54 @@
+@import "src/shared";
+
+.wrapperForTittleWithRightSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    margin-bottom: 36px;
+  }
+}
+
+.status > span {
+  color: $color-neutral-neutral-7;
+}
+
+.data {
+  background-color: $color-neutral-neutral-1;
+  border: 1px solid $color-neutral-neutral-4;
+  border-radius: 2px;
+}
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid $color-neutral-neutral-4;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.firsColumn {
+  border-right: 1px solid $color-neutral-neutral-4;
+}
+
+.grid {
+  border-bottom: 1px solid $color-neutral-neutral-4;
+  padding-bottom: 27px;
+  margin-bottom: 27px;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    border-bottom: none;
+  }
+}
+
+.cards {
+  display: flex;
+  gap: 48px;
+  overflow: auto;
+  white-space: nowrap;
+}

@@ -5,7 +5,14 @@
     "only-members": "Only DeepMine team members are allowed access"
   },
   "kit": {
-    "back": "Back"
+    "back": "Back",
+    "addConsumable": "add consumable",
+    "statuses": {
+      "installed": "Installed",
+      "broken": "Broken",
+      "notInstalled": "Not installed",
+      "default": "Status unavailable"
+    }
   },
   "components": {
     "contractorMenu": {
@@ -17,6 +24,15 @@
   "pages": {
     "equipmentSet": "EQUIPMENT SET",
     "install": "Install the Equipment set",
-    "installation": "Equipment installation"
+    "installation": "Equipment installation",
+    "mining": {
+      "mining": "MINING",
+      "miningStats": "MINING STATS",
+      "consumables": "CONSUMABLES",
+      "startMining": "Start Mining",
+      "myEquipment": "MY EQUIPMENT",
+      "configure": "CONFIGURE",
+      "miningStatus": "mining status"
+    }
   }
 }

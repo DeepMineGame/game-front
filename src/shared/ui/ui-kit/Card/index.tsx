@@ -3,12 +3,16 @@ import { Progress, Tooltip } from 'antd';
 import { Logo } from 'shared';
 import cutterImg from '../../images/cutter.png';
 import styles from './styles.module.scss';
+import { CardBadge } from './components/CardBadge';
+
+export type Status = 'installed' | 'broken' | 'notInstalled';
 
 type Props = {
     imageSrc?: string;
     initialProgress: number;
     progressRemained: number;
     progressCurrent: number;
+    status?: Status;
 };
 
 function getPercentage(value: number, total: number) {
@@ -20,6 +24,7 @@ export const Card: FC<Props> = ({
     initialProgress,
     progressCurrent,
     progressRemained,
+    status,
 }) => {
     const info = () => (
         <div className={styles.info}>
@@ -35,6 +40,7 @@ export const Card: FC<Props> = ({
         </div>
     );
     const neutral4 = '#303030';
+
     return (
         <Tooltip
             overlay={lvlTooltip}
@@ -44,6 +50,7 @@ export const Card: FC<Props> = ({
             color={neutral4}
         >
             <div className={styles.wrapper}>
+                <CardBadge status={status} />
                 <div className={styles.image}>
                     <img
                         height="100%"
@@ -61,7 +68,7 @@ export const Card: FC<Props> = ({
                         strokeColor: '#F5C913',
                     }}
                     format={info}
-                />{' '}
+                />
             </div>
         </Tooltip>
     );

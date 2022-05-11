@@ -8,3 +8,5 @@ export * from './Loader';
 export * from './Modal';
 export * from './Dropdown';
 export * from './Card';
+export * from './Page';
+export * from './Plugin';

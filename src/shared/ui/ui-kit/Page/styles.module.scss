@@ -1,0 +1,17 @@
+@import "src/shared";
+
+.wrapper {
+  background: $color-neutral-neutral-3;
+  min-height: 100vh;
+  font-family: $bai;
+  color: $color-neutral-neutral-9;
+}
+
+.content {
+  padding: 56px 16px;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    padding: 44px 56px;
+
+  }
+}

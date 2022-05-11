@@ -13,10 +13,12 @@ export const ContractorCabin: FC = () => {
                 config={{
                     disabledItems: {
                         [ContractorMenuItems.InfoPanel]: true,
-                        [ContractorMenuItems.MiningDeck]: true,
+                        [ContractorMenuItems.MiningDeck]: false,
                     },
                     callbacks: {
                         [ContractorMenuItems.InfoPanel]: () => {},
+                        [ContractorMenuItems.MiningDeck]: () =>
+                            navigate('/mining'),
                     },
                     activeTooltip: ContractorMenuItems.InfoPanel,
                     primaryButtonVisibility: true,
