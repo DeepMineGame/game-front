@@ -13,6 +13,10 @@
       "notInstalled": "Not installed",
       "default": "Status unavailable"
     }
+    "timer": {
+      "time": "Time",
+      "energy": "Energy"
+    }
   },
   "components": {
     "contractorMenu": {

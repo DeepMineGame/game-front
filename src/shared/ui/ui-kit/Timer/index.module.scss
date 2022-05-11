@@ -1,0 +1,46 @@
+@import "src/shared";
+
+.timer {
+  border: 1px solid $color-neutral-neutral-4;
+  color: $color-neutral-neutral-9;
+  width: 296px;
+}
+
+.line {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  padding: 15px 16px;
+  background: $color-neutral-neutral-1;
+  border-bottom: 1px solid $color-neutral-neutral-4;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.lineContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.lineText {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.lineValue {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.icon {
+  height: 24px;
+  width: 24px;
+  margin-right: 32px;
+}
