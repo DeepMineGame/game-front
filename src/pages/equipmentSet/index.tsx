@@ -29,7 +29,6 @@ export const EquipmentSetPage: FC = () => {
                         Remove
                     </Button>
                 </div>
-
                 <Card
                     initialProgress={20}
                     progressCurrent={3}

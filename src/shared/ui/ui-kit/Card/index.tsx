@@ -1,23 +1,17 @@
 import React, { FC } from 'react';
-import { Progress, Tooltip } from 'antd';
+import { Tooltip } from 'antd';
 import { Logo } from 'shared';
 import cutterImg from '../../images/cutter.png';
 import styles from './styles.module.scss';
 import { CardBadge } from './components/CardBadge';
+import { NftProgressBar, ProgressProps } from './components/NftProgressBar';
 
 export type Status = 'installed' | 'broken' | 'notInstalled';
 
 type Props = {
     imageSrc?: string;
-    initialProgress: number;
-    progressRemained: number;
-    progressCurrent: number;
     status?: Status;
-};
-
-function getPercentage(value: number, total: number) {
-    return (value / total) * 100;
-}
+} & ProgressProps;
 
 export const Card: FC<Props> = ({
     imageSrc,
@@ -26,13 +20,6 @@ export const Card: FC<Props> = ({
     progressRemained,
     status,
 }) => {
-    const info = () => (
-        <div className={styles.info}>
-            {progressCurrent}/{progressRemained} ({initialProgress})
-        </div>
-    );
-    const currentProgress = getPercentage(progressCurrent, progressRemained);
-    const disabledProgress = getPercentage(progressRemained, initialProgress);
     const lvlTooltip = () => (
         <div className={styles.lvlTooltipContent}>
             <Logo />
@@ -59,15 +46,10 @@ export const Card: FC<Props> = ({
                         alt="nft-equipment-card"
                     />
                 </div>
-                <Progress
-                    className={styles.progress}
-                    strokeColor="#1D1D1D"
-                    percent={disabledProgress}
-                    success={{
-                        percent: currentProgress,
-                        strokeColor: '#F5C913',
-                    }}
-                    format={info}
+                <NftProgressBar
+                    initialProgress={initialProgress}
+                    progressCurrent={progressCurrent}
+                    progressRemained={progressRemained}
                 />
             </div>
         </Tooltip>
