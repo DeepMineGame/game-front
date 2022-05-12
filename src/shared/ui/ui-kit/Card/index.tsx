@@ -1,33 +1,25 @@
 import React, { FC } from 'react';
-import { Progress, Tooltip } from 'antd';
+import { Tooltip } from 'antd';
 import { Logo } from 'shared';
 import cutterImg from '../../images/cutter.png';
 import styles from './styles.module.scss';
+import { CardBadge } from './components/CardBadge';
+import { NftProgressBar, ProgressProps } from './components/NftProgressBar';
+
+export type Status = 'installed' | 'broken' | 'notInstalled';
 
 type Props = {
     imageSrc?: string;
-    initialProgress: number;
-    progressRemained: number;
-    progressCurrent: number;
-};
-
-function getPercentage(value: number, total: number) {
-    return (value / total) * 100;
-}
+    status?: Status;
+} & ProgressProps;
 
 export const Card: FC<Props> = ({
     imageSrc,
-    initialProgress,
-    progressCurrent,
-    progressRemained,
+    initial,
+    current,
+    remained,
+    status,
 }) => {
-    const info = () => (
-        <div className={styles.info}>
-            {progressCurrent}/{progressRemained} ({initialProgress})
-        </div>
-    );
-    const currentProgress = getPercentage(progressCurrent, progressRemained);
-    const disabledProgress = getPercentage(progressRemained, initialProgress);
     const lvlTooltip = () => (
         <div className={styles.lvlTooltipContent}>
             <Logo />
@@ -35,6 +27,7 @@ export const Card: FC<Props> = ({
         </div>
     );
     const neutral4 = '#303030';
+
     return (
         <Tooltip
             overlay={lvlTooltip}
@@ -44,6 +37,7 @@ export const Card: FC<Props> = ({
             color={neutral4}
         >
             <div className={styles.wrapper}>
+                <CardBadge status={status} />
                 <div className={styles.image}>
                     <img
                         height="100%"
@@ -52,16 +46,11 @@ export const Card: FC<Props> = ({
                         alt="nft-equipment-card"
                     />
                 </div>
-                <Progress
-                    className={styles.progress}
-                    strokeColor="#1D1D1D"
-                    percent={disabledProgress}
-                    success={{
-                        percent: currentProgress,
-                        strokeColor: '#F5C913',
-                    }}
-                    format={info}
-                />{' '}
+                <NftProgressBar
+                    initial={initial}
+                    current={current}
+                    remained={remained}
+                />
             </div>
         </Tooltip>
     );

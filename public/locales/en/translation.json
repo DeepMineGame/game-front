@@ -6,6 +6,13 @@
   },
   "kit": {
     "back": "Back",
+    "addConsumable": "add consumable",
+    "statuses": {
+      "installed": "Installed",
+      "broken": "Broken",
+      "notInstalled": "Not installed",
+      "default": "Status unavailable"
+    },
     "timer": {
       "time": "Time",
       "energy": "Energy"
@@ -21,6 +28,15 @@
   "pages": {
     "equipmentSet": "EQUIPMENT SET",
     "install": "Install the Equipment set",
-    "installation": "Equipment installation"
+    "installation": "Equipment installation",
+    "mining": {
+      "mining": "MINING",
+      "miningStats": "MINING STATS",
+      "consumables": "CONSUMABLES",
+      "startMining": "Start Mining",
+      "myEquipment": "MY EQUIPMENT",
+      "configure": "CONFIGURE",
+      "miningStatus": "mining status"
+    }
   }
 }
