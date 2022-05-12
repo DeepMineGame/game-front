@@ -4,22 +4,11 @@ import './index.i18n';
 import 'antd/dist/antd.min.css';
 import { Routing } from 'pages';
 import axios from 'axios';
-import { notification } from 'antd';
-import styles from './index.module.scss';
+import './index.module.scss';
+import { errorNotify } from 'shared';
 import { withProviders } from './providers';
 
-axios.interceptors.response.use(
-    (response) => response,
-    (error) => {
-        notification.error({
-            description: error.message,
-            message: <span className={styles.errorNotificator}>Error</span>,
-            placement: 'bottomRight',
-            className: styles.errorNotificator,
-        });
-        return Promise.reject(error);
-    }
-);
+axios.interceptors.response.use((response) => response, errorNotify);
 
 const App = () => {
     return <Routing />;
