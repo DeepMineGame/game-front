@@ -1,12 +1,6 @@
 import { name } from '../..';
-import { Action } from './type';
 
-export function startMining(
-    wax_user: string,
-    contract_id: number
-): {
-    actions: Action<{ wax_user: string; contract_id: number }>;
-} {
+export function startMining(wax_user: string, contract_id: number) {
     return {
         actions: [
             {
