@@ -9,7 +9,7 @@ import { useLogout } from 'features/useLogout';
 import { userStore } from 'entities/user';
 import styles from './styles.module.scss';
 
-export default function IntroPage() {
+export const IntroPage = () => {
     const { activeUser: chainUser, showModal } = useChainAuthContext();
     const logout = useLogout();
     const user = useStore(userStore);
@@ -55,4 +55,4 @@ export default function IntroPage() {
             </Typography.Text>
         </div>
     );
-}
+};
