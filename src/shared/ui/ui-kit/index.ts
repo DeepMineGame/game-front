@@ -11,4 +11,3 @@ export * from './Card';
 export * from './Page';
 export * from './Plugin';
 export * from './Timer';
-export { NftProgressBar } from './Card/components/NftProgressBar';

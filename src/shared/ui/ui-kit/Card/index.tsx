@@ -15,9 +15,9 @@ type Props = {
 
 export const Card: FC<Props> = ({
     imageSrc,
-    initialProgress,
-    progressCurrent,
-    progressRemained,
+    initial,
+    current,
+    remained,
     status,
 }) => {
     const lvlTooltip = () => (
@@ -47,9 +47,9 @@ export const Card: FC<Props> = ({
                     />
                 </div>
                 <NftProgressBar
-                    initialProgress={initialProgress}
-                    progressCurrent={progressCurrent}
-                    progressRemained={progressRemained}
+                    initial={initial}
+                    current={current}
+                    remained={remained}
                 />
             </div>
         </Tooltip>

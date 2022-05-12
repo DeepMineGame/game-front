@@ -14,11 +14,7 @@ export const EquipmentSetPage: FC = () => {
             <div className={styles.cards}>
                 <div className={styles.cardWrapper}>
                     <div className={styles.card}>
-                        <Card
-                            initialProgress={10}
-                            progressCurrent={3}
-                            progressRemained={7}
-                        />
+                        <Card initial={10} current={3} remained={7} />
                     </div>
 
                     <Button
@@ -29,16 +25,8 @@ export const EquipmentSetPage: FC = () => {
                         Remove
                     </Button>
                 </div>
-                <Card
-                    initialProgress={20}
-                    progressCurrent={3}
-                    progressRemained={10}
-                />
-                <Card
-                    initialProgress={25}
-                    progressCurrent={15}
-                    progressRemained={20}
-                />
+                <Card initial={20} current={3} remained={10} />
+                <Card initial={25} current={15} remained={20} />
                 <CardHolder onClick={toggleInventoryVisibility} />
                 <CardHolder onClick={toggleInventoryVisibility} />
                 <CardHolder onClick={toggleInventoryVisibility} />

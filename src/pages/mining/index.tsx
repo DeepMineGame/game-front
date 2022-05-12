@@ -86,28 +86,24 @@ export const MiningPage: FC = () => {
             </Row>
             <div className={styles.cards}>
                 <Card
-                    initialProgress={100}
-                    progressRemained={10}
-                    progressCurrent={20}
+                    initial={100}
+                    remained={10}
+                    current={20}
                     status="installed"
                 />
                 <Card
-                    initialProgress={100}
-                    progressRemained={10}
-                    progressCurrent={20}
+                    initial={100}
+                    remained={10}
+                    current={20}
                     status="broken"
                 />
                 <Card
-                    initialProgress={100}
-                    progressRemained={10}
-                    progressCurrent={20}
+                    initial={100}
+                    remained={10}
+                    current={20}
                     status="notInstalled"
                 />
-                <Card
-                    initialProgress={100}
-                    progressRemained={10}
-                    progressCurrent={20}
-                />
+                <Card initial={100} remained={10} current={20} />
             </div>
         </Page>
     );

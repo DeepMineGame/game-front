@@ -6,21 +6,21 @@ function getPercentage(value: number, total: number) {
     return (value / total) * 100;
 }
 export type ProgressProps = {
-    initialProgress?: number;
-    progressCurrent?: number;
-    progressRemained?: number;
+    initial?: number;
+    current?: number;
+    remained?: number;
 };
 
 export function NftProgressBar({
-    progressCurrent = 0,
-    progressRemained = 0,
-    initialProgress = 0,
+    current = 0,
+    remained = 0,
+    initial = 0,
 }: ProgressProps) {
-    const currentProgress = getPercentage(progressCurrent, progressRemained);
-    const disabledProgress = getPercentage(progressRemained, initialProgress);
+    const currentProgress = getPercentage(current, remained);
+    const disabledProgress = getPercentage(remained, initial);
     const info = () => (
         <div className={styles.info}>
-            {progressCurrent}/{progressRemained} ({initialProgress})
+            {current}/{remained} ({initial})
         </div>
     );
     return (
