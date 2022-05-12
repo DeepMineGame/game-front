@@ -37,6 +37,43 @@
       "myEquipment": "MY EQUIPMENT",
       "configure": "CONFIGURE",
       "miningStatus": "mining status"
+    },
+    "contractor": {
+      "signingContract": {
+        "title": "Signing the contract",
+        "description": "You should find or create a contract with a Mine Owner to start mining",
+        "findButton": "Find a contract",
+        "createButton": "Create a contract"
+      },
+      "welcome": {
+        "title": "Welcome, Citizen",
+        "description": "You need full equipment set in your active inventory. Check your storage or go to Market to buy. ",
+        "check": "Check my Storage",
+        "goToMarket": "Go to Market"
+      },
+      "setup": {
+        "title": "set up the Equipment",
+        "description": "To start mining you need to install the equipment \nand you need to perform a physical shit to this location.",
+        "descriptionShort": "To start mining we need to install the equipment"
+      },
+      "ready": {
+        "title": "ready to mine",
+        "description": "You are all set, proceed to the Mining Deck to start mining"
+      },
+      "miningProgress": {
+        "title": "mining in progress"
+      },
+      "miningError": {
+        "title": "mining Was interrupted",
+        "description": "Go to the Mining deck to see the cause"
+      },
+      "miningOver": {
+        "title": "mining is over",
+        "description": "Proceed to the Mining Deck to finalize mining"
+      },
+      "lastResults": {
+        "title": "Last mining results"
+      }
     }
   }
 }
