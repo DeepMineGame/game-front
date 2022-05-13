@@ -7,9 +7,12 @@ import {
     Card,
     useMediaQuery,
     desktopS,
+    useChainAuthContext,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { Badge, Col, Row, Space } from 'antd';
+import { useSmartContractAction } from 'features';
+import { startMining } from 'entities/smartcontracts';
 import styles from './styles.module.scss';
 
 export const MiningPage: FC = () => {
@@ -17,6 +20,12 @@ export const MiningPage: FC = () => {
     const isDesktop = useMediaQuery(desktopS);
     const subTitleLevel = isDesktop ? 3 : 4;
     const gutter = isDesktop ? 80 : 16;
+    const chainAccount = useChainAuthContext();
+
+    const startMiningCallback = useSmartContractAction<{
+        wax_user: string;
+        contract_id: number;
+    }>(startMining(chainAccount.activeUser?.accountName || '', 2));
 
     return (
         <Page headerTitle={t('pages.mining.mining')}>
@@ -68,6 +77,7 @@ export const MiningPage: FC = () => {
                             type="primary"
                             block
                             size={isDesktop ? 'large' : 'middle'}
+                            onClick={() => startMiningCallback()}
                         >
                             {t('pages.mining.startMining')}
                         </Button>
@@ -86,24 +96,19 @@ export const MiningPage: FC = () => {
             </Row>
             <div className={styles.cards}>
                 <Card
-                    initial={100}
+                    initial={10}
                     remained={10}
-                    current={20}
+                    current={8}
                     status="installed"
                 />
+                <Card initial={100} remained={10} current={2} status="broken" />
                 <Card
                     initial={100}
-                    remained={10}
-                    current={20}
-                    status="broken"
-                />
-                <Card
-                    initial={100}
-                    remained={10}
-                    current={20}
+                    remained={50}
+                    current={5}
                     status="notInstalled"
                 />
-                <Card initial={100} remained={10} current={20} />
+                <Card initial={3} remained={2} current={1} />
             </div>
         </Page>
     );
