@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import { ContractorMenu, ContractorMenuItems, Header, Monitor } from 'shared';
 import { useNavigate } from 'react-router-dom';
-import { equipmentSet } from '../constants';
+
+import { ContractorMenu, ContractorMenuItems, Header, Monitor } from 'shared';
+import { equipmentSet } from 'app/router/paths';
 import styles from './styles.module.scss';
 
 export const ContractorCabin: FC = () => {

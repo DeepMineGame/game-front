@@ -13,7 +13,6 @@ const ALLOWED_PATH_GROUPS = [
 /** Для запрета приватных путей */
 const DENIED_PATH_GROUPS = [
     // Private imports are prohibited, use public imports instead
-    'app/**',
     'pages/*/**',
     'features/*/**',
     'entities/*/**',
