@@ -73,6 +73,10 @@
       },
       "lastResults": {
         "title": "Last mining results"
+      },
+      "physicalShiftBadge": {
+        "text": "Do you want to travel here?",
+        "button": "Physical Shift"
       }
     }
   }

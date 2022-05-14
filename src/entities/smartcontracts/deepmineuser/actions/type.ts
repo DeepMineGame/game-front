@@ -4,3 +4,8 @@ export type Action<Data> = {
     name: string;
     account: string;
 }[];
+
+export type PhysicalShiftArgs = {
+    wax_user: string;
+    new_location: number;
+};

@@ -1,5 +1,10 @@
 /** Разрешенные импорты (для сортировки) */
-const ALLOWED_PATH_GROUPS = ['pages/**', 'features/**', 'entities/**', 'shared/**'].map((pattern) => ({
+const ALLOWED_PATH_GROUPS = [
+    'pages/**',
+    'features/**',
+    'entities/**',
+    'shared/**',
+].map((pattern) => ({
     pattern,
     group: 'internal',
     position: 'after',
@@ -48,7 +53,10 @@ module.exports = {
     rules: {
         'react/destructuring-assignment': 'off',
         'react/prop-types': 'off',
-        'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+        'react/jsx-filename-extension': [
+            1,
+            { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
+        ],
         'react/jsx-no-constructed-context-values': 'warn',
         'react/require-default-props': 'off', // Since we do not use prop-types
         'react/button-has-type': 'off',
@@ -62,6 +70,7 @@ module.exports = {
         'import/no-unresolved': 'off',
         'import/prefer-default-export': 'off',
         'import/no-cycle': 'warn',
+        'import/no-extraneous-dependencies': 'warn',
         'jsx-a11y/no-static-element-interactions': 'off',
         'jsx-a11y/click-events-have-key-events': 'off',
         'jsx-a11y/mouse-events-have-key-events': 'off',
@@ -86,7 +95,14 @@ module.exports = {
             {
                 pathGroups: ALLOWED_PATH_GROUPS,
                 pathGroupsExcludedImportTypes: ['builtin'],
-                groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+                groups: [
+                    'builtin',
+                    'external',
+                    'internal',
+                    'parent',
+                    'sibling',
+                    'index',
+                ],
             },
         ],
         'no-restricted-imports': [

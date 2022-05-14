@@ -1,22 +1,31 @@
-import React, { FC } from 'react';
+import React, { useState } from 'react';
 import {
     ContractorMenu,
     ContractorMenuItems,
     Header,
     Monitor,
+    useAccountName,
     useDimensions,
+    useTableData,
 } from 'shared';
 import { useNavigate } from 'react-router-dom';
+import { useSmartContractAction } from 'features';
+import {
+    getContractsConfig,
+    getInventoryConfig,
+    getUserConfig,
+    physicalShift,
+    PhysicalShiftArgs,
+    UserContractsType,
+    UserInfoType,
+    UserInventoryType,
+} from 'entities/smartcontracts';
 import { equipmentSet } from '../constants';
 
 import styles from './styles.module.scss';
-// import { Welcome } from './components/Welcome';
-// import { Setup } from './components/Setup';
-// import { Ready } from './components/Ready';
-// import { MiningOver } from './components/MiningOver';
-// import { MiningResults } from './components/MiningResults';
-// import { MiningProgress } from './components/MiningProgress';
-import { MiningError } from './components/MiningError';
+import { SignContract } from './components/SignContract';
+import { Setup } from './components/Setup';
+import { PhysicalShiftBadge } from './components/PhysicalShiftBadge';
 
 // const equipments = [
 //     {
@@ -42,10 +51,62 @@ import { MiningError } from './components/MiningError';
 // ];
 
 export const ContractorCabin = () => {
+    const accountName = useAccountName();
     const { width, height } = useDimensions();
+    const [neeShiftBadge, setNeedShiftBadge] = useState(false);
     const navigate = useNavigate();
     const bgRatio = 1366 / 712;
     const isBgWidthHidden = width > height * bgRatio;
+
+    const userInfo = useTableData<UserInfoType>(getUserConfig);
+    const userContracts = useTableData<UserContractsType>(getContractsConfig);
+    const userInventory = useTableData<UserInventoryType>(getInventoryConfig);
+    const physicalShiftCallback = useSmartContractAction<PhysicalShiftArgs>(
+        physicalShift(accountName, 4)
+    );
+
+    const hasPhysicalShift = userInfo.length > 0 && userInfo[0].location === 2;
+
+    const openShiftBadge = () => {
+        setNeedShiftBadge(true);
+    };
+    const closeShiftBadge = () => {
+        setNeedShiftBadge(false);
+    };
+
+    const getMonitorContent = () => {
+        if (userContracts.length === 0) {
+            return <SignContract />;
+        }
+
+        // const inventoryCount = Object.keys(ID_TO_INVENTORY).length;
+        // const activeInventory = userInventory.filter((v) => v.activated);
+        // if (activeInventory.length < inventoryCount) {
+        //     const activeInventoryIds = activeInventory.map(
+        //         (v) => v.asset_template_id
+        //     );
+        //     const equipments = Object.entries(ID_TO_INVENTORY).map(
+        //         ([id, name]) => ({
+        //             name,
+        //             isAvailable: activeInventoryIds.includes(+id),
+        //         })
+        //     );
+        //     return <Welcome equipments={equipments} />;
+        // }
+
+        return (
+            <Setup
+                hasShift={hasPhysicalShift}
+                onMount={openShiftBadge}
+                onUnmount={closeShiftBadge}
+            />
+        );
+    };
+
+    const handleCallShift = async () => {
+        await physicalShiftCallback();
+        closeShiftBadge();
+    };
 
     return (
         <div className={styles.cabinBackground}>
@@ -56,14 +117,12 @@ export const ContractorCabin = () => {
                         : styles.cabinMonitorHeight
                 }
             >
-                {/* <SignContract /> */}
-                {/* <Welcome equipments={equipments} /> */}
-                {/* <Setup hasShift /> */}
+                {getMonitorContent()}
                 {/* <Ready /> */}
                 {/* <MiningOver /> */}
                 {/* <MiningResults /> */}
                 {/* <MiningProgress msUntil={15 * 60 * 60 * 1000} /> */}
-                <MiningError />
+                {/* <MiningError /> */}
             </Monitor>
             <Header />
             <ContractorMenu
@@ -82,6 +141,12 @@ export const ContractorCabin = () => {
                     primaryButtonCallback: () => navigate(equipmentSet),
                 }}
             />
+            {neeShiftBadge && (
+                <PhysicalShiftBadge
+                    onClose={closeShiftBadge}
+                    onClick={handleCallShift}
+                />
+            )}
         </div>
     );
 };
