@@ -74,6 +74,12 @@
       "lastResults": {
         "title": "Last mining results"
       },
+      "travel": {
+        "title": "Travel to Contractor’s cabin",
+        "contentTitle": "This action will take:",
+        "cancel": "Cancel",
+        "travel": "Travel"
+      },
       "physicalShiftBadge": {
         "text": "Do you want to travel here?",
         "button": "Physical Shift"

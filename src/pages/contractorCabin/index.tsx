@@ -26,6 +26,7 @@ import styles from './styles.module.scss';
 import { SignContract } from './components/SignContract';
 import { Setup } from './components/Setup';
 import { PhysicalShiftBadge } from './components/PhysicalShiftBadge';
+import { TravelModal } from './components/TravelModal';
 
 // const equipments = [
 //     {
@@ -54,6 +55,7 @@ export const ContractorCabin = () => {
     const accountName = useAccountName();
     const { width, height } = useDimensions();
     const [neeShiftBadge, setNeedShiftBadge] = useState(false);
+    const [isTravelModalVisible, setIsTravelModalVisible] = useState(false);
     const navigate = useNavigate();
     const bgRatio = 1366 / 712;
     const isBgWidthHidden = width > height * bgRatio;
@@ -72,6 +74,13 @@ export const ContractorCabin = () => {
     };
     const closeShiftBadge = () => {
         setNeedShiftBadge(false);
+    };
+
+    const openTravelModal = () => {
+        setIsTravelModalVisible(true);
+    };
+    const closeTravelModal = () => {
+        setIsTravelModalVisible(false);
     };
 
     const getMonitorContent = () => {
@@ -144,9 +153,14 @@ export const ContractorCabin = () => {
             {neeShiftBadge && (
                 <PhysicalShiftBadge
                     onClose={closeShiftBadge}
-                    onClick={handleCallShift}
+                    onClick={openTravelModal}
                 />
             )}
+            <TravelModal
+                visible={isTravelModalVisible}
+                onClick={handleCallShift}
+                onClose={closeTravelModal}
+            />
         </div>
     );
 };
