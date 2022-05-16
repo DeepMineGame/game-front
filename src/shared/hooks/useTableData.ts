@@ -16,10 +16,14 @@ export function useTableData<T>(
     >(undefined);
 
     useEffect(() => {
-        getTableData(getConfig(accountName)).then((data) => {
-            setResult(data);
-        });
-    }, []);
+        if (accountName) {
+            getTableData(getConfig(accountName)).then((data) => {
+                setResult(data);
+            });
+        } else {
+            setResult(undefined);
+        }
+    }, [accountName]);
 
     return result?.rows ?? [];
 }

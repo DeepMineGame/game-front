@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     ContractorMenu,
     ContractorMenuItems,
@@ -11,51 +11,31 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useSmartContractAction } from 'features';
 import {
+    CABIN_STATUS,
     getContractsConfig,
+    getHistoryConfig,
     getInventoryConfig,
     getUserConfig,
+    LOCATION_TO_ID,
     physicalShift,
     PhysicalShiftArgs,
     UserContractsType,
+    UserHistoryType,
     UserInfoType,
     UserInventoryType,
 } from 'entities/smartcontracts';
-import { equipmentSet } from '../constants';
 
 import styles from './styles.module.scss';
-import { SignContract } from './components/SignContract';
-import { Setup } from './components/Setup';
 import { PhysicalShiftBadge } from './components/PhysicalShiftBadge';
 import { TravelModal } from './components/TravelModal';
-
-// const equipments = [
-//     {
-//         name: 'Cutter',
-//         isAvailable: true,
-//     },
-//     {
-//         name: 'Delaminator',
-//         isAvailable: false,
-//     },
-//     {
-//         name: 'DME WIRE',
-//         isAvailable: false,
-//     },
-//     {
-//         name: 'Plunging box',
-//         isAvailable: true,
-//     },
-//     {
-//         name: 'Wandering reactor',
-//         isAvailable: false,
-//     },
-// ];
+import { ContractorCabinContent } from './components/ContractorCabinContent';
 
 export const ContractorCabin = () => {
     const accountName = useAccountName();
     const { width, height } = useDimensions();
-    const [neeShiftBadge, setNeedShiftBadge] = useState(false);
+    const [needShiftBadge, setNeedShiftBadge] = useState(false);
     const [isTravelModalVisible, setIsTravelModalVisible] = useState(false);
+    const [status, setStatus] = useState(0);
     const navigate = useNavigate();
     const bgRatio = 1366 / 712;
     const isBgWidthHidden = width > height * bgRatio;
@@ -63,11 +43,13 @@ export const ContractorCabin = () => {
     const userInfo = useTableData<UserInfoType>(getUserConfig);
     const userContracts = useTableData<UserContractsType>(getContractsConfig);
     const userInventory = useTableData<UserInventoryType>(getInventoryConfig);
+    const userHistory = useTableData<UserHistoryType>(getHistoryConfig);
     const physicalShiftCallback = useSmartContractAction<PhysicalShiftArgs>(
-        physicalShift(accountName, 4)
+        physicalShift(accountName, LOCATION_TO_ID.cabinet)
     );
 
-    const hasPhysicalShift = userInfo.length > 0 && userInfo[0].location === 2;
+    const hasPhysicalShift =
+        userInfo.length > 0 && userInfo[0].location === LOCATION_TO_ID.cabinet;
 
     const openShiftBadge = () => {
         setNeedShiftBadge(true);
@@ -75,6 +57,14 @@ export const ContractorCabin = () => {
     const closeShiftBadge = () => {
         setNeedShiftBadge(false);
     };
+    useEffect(() => {
+        if (status === CABIN_STATUS.setup && !needShiftBadge) {
+            openShiftBadge();
+        }
+        if (status !== CABIN_STATUS.setup && needShiftBadge) {
+            closeShiftBadge();
+        }
+    }, [status]);
 
     const openTravelModal = () => {
         setIsTravelModalVisible(true);
@@ -83,38 +73,9 @@ export const ContractorCabin = () => {
         setIsTravelModalVisible(false);
     };
 
-    const getMonitorContent = () => {
-        if (userContracts.length === 0) {
-            return <SignContract />;
-        }
-
-        // const inventoryCount = Object.keys(ID_TO_INVENTORY).length;
-        // const activeInventory = userInventory.filter((v) => v.activated);
-        // if (activeInventory.length < inventoryCount) {
-        //     const activeInventoryIds = activeInventory.map(
-        //         (v) => v.asset_template_id
-        //     );
-        //     const equipments = Object.entries(ID_TO_INVENTORY).map(
-        //         ([id, name]) => ({
-        //             name,
-        //             isAvailable: activeInventoryIds.includes(+id),
-        //         })
-        //     );
-        //     return <Welcome equipments={equipments} />;
-        // }
-
-        return (
-            <Setup
-                hasShift={hasPhysicalShift}
-                onMount={openShiftBadge}
-                onUnmount={closeShiftBadge}
-            />
-        );
-    };
-
     const handleCallShift = async () => {
         await physicalShiftCallback();
-        closeShiftBadge();
+        setNeedShiftBadge(false);
     };
 
     return (
@@ -126,31 +87,36 @@ export const ContractorCabin = () => {
                         : styles.cabinMonitorHeight
                 }
             >
-                {getMonitorContent()}
-                {/* <Ready /> */}
-                {/* <MiningOver /> */}
-                {/* <MiningResults /> */}
-                {/* <MiningProgress msUntil={15 * 60 * 60 * 1000} /> */}
-                {/* <MiningError /> */}
+                <ContractorCabinContent
+                    hasPhysicalShift={hasPhysicalShift}
+                    setStatus={setStatus}
+                    userContracts={userContracts}
+                    userInventory={userInventory}
+                    userHistory={userHistory}
+                />
             </Monitor>
             <Header />
             <ContractorMenu
                 config={{
                     disabledItems: {
-                        [ContractorMenuItems.InfoPanel]: true,
-                        [ContractorMenuItems.MiningDeck]: false,
+                        [ContractorMenuItems.InfoPanel]:
+                            status <= CABIN_STATUS.mining_over,
+                        [ContractorMenuItems.MiningDeck]:
+                            status <= CABIN_STATUS.ready,
+                        [ContractorMenuItems.Equipment]: !hasPhysicalShift,
                     },
                     callbacks: {
-                        [ContractorMenuItems.InfoPanel]: () => {},
+                        [ContractorMenuItems.InfoPanel]: () =>
+                            navigate('/info'),
                         [ContractorMenuItems.MiningDeck]: () =>
                             navigate('/mining'),
+                        [ContractorMenuItems.MiningDeck]: () =>
+                            navigate('/equipment'),
                     },
-                    activeTooltip: ContractorMenuItems.InfoPanel,
-                    primaryButtonVisibility: true,
-                    primaryButtonCallback: () => navigate(equipmentSet),
+                    // activeTooltip: ContractorMenuItems.InfoPanel,
                 }}
             />
-            {neeShiftBadge && (
+            {needShiftBadge && (
                 <PhysicalShiftBadge
                     onClose={closeShiftBadge}
                     onClick={openTravelModal}

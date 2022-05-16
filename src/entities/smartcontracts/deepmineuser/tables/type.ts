@@ -34,3 +34,16 @@ export type UserInfoType = {
     level: number;
     reputation: number;
 };
+
+export type UserHistoryType = {
+    id: number;
+    owner: string;
+    contract_id: number;
+    type: number;
+    state: number;
+    finishes_at: number;
+    processes: {
+        key: string;
+        value: string;
+    }[];
+};

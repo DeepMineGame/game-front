@@ -7,19 +7,9 @@ import styles from './styles.module.scss';
 
 interface SetupProps {
     hasShift?: boolean;
-    onMount: () => void;
-    onUnmount: () => void;
 }
-export const Setup = ({ hasShift, onMount, onUnmount }: SetupProps) => {
+export const Setup = ({ hasShift }: SetupProps) => {
     const { t } = useTranslation();
-
-    useEffect(() => {
-        onMount();
-
-        return () => {
-            onUnmount();
-        };
-    }, []);
 
     return (
         <div className={styles.container}>
