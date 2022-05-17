@@ -1,6 +1,5 @@
 import {
     GetTableDataConfigType,
-    INDEX_POSITION_CONTRACT,
     INDEX_POSITION_HISTORY,
     INDEX_POSITION_INVENTORY,
     INDEX_POSITION_USER,
@@ -9,19 +8,6 @@ import {
 
 export * from './actions';
 export * from './contracts';
-
-export const getContractsConfig = (account: string) => {
-    return {
-        code: name,
-        scope: name,
-        table: 'contracts',
-        index_position: INDEX_POSITION_CONTRACT.nickname,
-        key_type: 'name',
-        lower_bound: account,
-        upper_bound: account,
-        limit: 1,
-    } as GetTableDataConfigType;
-};
 
 export const getUserConfig = (account: string) => {
     return {

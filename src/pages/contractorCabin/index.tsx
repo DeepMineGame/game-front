@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSmartContractAction } from 'features';
 import { equipmentSet, mining } from 'app/router/paths';
 import {
-    getContractsConfig,
+    getContractsByNickNameConfig,
     getHistoryConfig,
     getInventoryConfig,
     getUserConfig,
@@ -42,7 +42,9 @@ export const ContractorCabin = () => {
     const isBgWidthHidden = width > height * bgRatio;
 
     const userInfo = useTableData<UserInfoType>(getUserConfig);
-    const userContracts = useTableData<UserContractsType>(getContractsConfig);
+    const userContracts = useTableData<UserContractsType>(
+        getContractsByNickNameConfig
+    );
     const userInventory = useTableData<UserInventoryType>(getInventoryConfig);
     const userHistory = useTableData<UserHistoryType>(getHistoryConfig);
     const physicalShiftCallback = useSmartContractAction<PhysicalShiftArgs>(
