@@ -1,0 +1,74 @@
+@import "src/shared";
+
+.container {
+  padding: 28px 24px;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info {
+  padding-right: 20px;
+  max-width: 237px;
+  margin: 0 auto;
+}
+
+.title {
+  padding-bottom: 13px;
+}
+.description {
+  padding-top: 15px;
+  max-width: 320px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 24px;
+
+  > div {
+    cursor: pointer;
+    padding: 4px;
+
+    &:first-child {
+      padding-left: 0;
+    }
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+}
+
+.equipments {
+  border: 1px solid $color-neutral-neutral-10;
+  width: 192px;
+}
+
+.equipmentLine {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $color-neutral-neutral-10;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.equipmentName {
+  padding: 4px 8px;
+}
+
+.equipmentValue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+
+  border-left: 1px solid $color-neutral-neutral-10;
+}

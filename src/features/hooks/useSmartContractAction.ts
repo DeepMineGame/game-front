@@ -12,9 +12,8 @@ export function useSmartContractAction<T>(
 ) {
     const chainAccount = useChainAuthContext();
 
-    return () => {
+    return () =>
         chainAccount?.activeUser
             ?.signTransaction(action, options)
             .catch(errorNotify);
-    };
 }

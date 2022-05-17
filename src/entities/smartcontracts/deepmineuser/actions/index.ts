@@ -1,6 +1,6 @@
 import { name } from '../..';
 
-export function startMining(wax_user: string, contract_id: number) {
+export function startMining(waxUser: string, contractId: number) {
     return {
         actions: [
             {
@@ -8,13 +8,34 @@ export function startMining(wax_user: string, contract_id: number) {
                 name: 'startmining',
                 authorization: [
                     {
-                        actor: wax_user,
+                        actor: waxUser,
                         permission: 'active',
                     },
                 ],
                 data: {
-                    wax_user,
-                    contract_id,
+                    wax_user: waxUser,
+                    contract_id: contractId,
+                },
+            },
+        ],
+    };
+}
+
+export function physicalShift(waxUser: string, newLocation: number) {
+    return {
+        actions: [
+            {
+                account: name,
+                name: 'changelocn',
+                authorization: [
+                    {
+                        actor: waxUser,
+                        permission: 'active',
+                    },
+                ],
+                data: {
+                    wax_user: waxUser,
+                    new_location: newLocation,
                 },
             },
         ],

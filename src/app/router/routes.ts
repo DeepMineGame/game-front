@@ -13,12 +13,12 @@ export const routes = {
             path: intro,
             Component: IntroPage,
         },
-    ],
-    admin: [
         {
             path: contractorCabin,
             Component: ContractorCabin,
         },
+    ],
+    admin: [
         {
             path: equipmentSet,
             Component: EquipmentSetPage,

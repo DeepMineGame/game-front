@@ -28,3 +28,6 @@ export const waxChain = {
         },
     ],
 };
+
+export const WAX_GET_TABLE_ENDPOINT =
+    'http://testnet-wax.3dkrender.com/v1/chain/get_table_rows';
