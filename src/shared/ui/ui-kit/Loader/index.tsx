@@ -1,6 +1,7 @@
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 import React, { FC } from 'react';
+import classNames from 'classnames';
 import styles from './styles.module.scss';
 
 export enum LoaderSize {
@@ -11,12 +12,20 @@ export enum LoaderSize {
 
 type Props = {
     size?: 'small' | 'default' | 'large';
+    centered?: boolean;
 };
 
-export const Loader: FC<Props> = ({ size = 'default' }) => {
+export const Loader: FC<Props> = ({ size = 'default', centered }) => {
     const antIcon = (
         <LoadingOutlined style={{ fontSize: LoaderSize[size] }} spin />
     );
 
-    return <Spin className={styles.loader} indicator={antIcon} />;
+    return (
+        <Spin
+            className={classNames(styles.loader, {
+                [styles.centered]: centered,
+            })}
+            indicator={antIcon}
+        />
+    );
 };

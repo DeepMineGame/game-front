@@ -13,10 +13,10 @@ const ALLOWED_PATH_GROUPS = [
 /** Для запрета приватных путей */
 const DENIED_PATH_GROUPS = [
     // Private imports are prohibited, use public imports instead
-    'app/**',
+    'app/*/**',
+    'entities/*/**',
     'pages/*/**',
     'features/*/**',
-    'entities/*/**',
     'shared/*/*/**', // Для shared +1 уровень, т.к. там чаще мы обращаемся к конкретной библиотеке/компоненты
     // Prefer absolute imports instead of relatives (for root modules)
     '../**/app',
@@ -69,6 +69,7 @@ module.exports = {
         'import/named': 'off',
         'import/extensions': 'off',
         'import/no-unresolved': 'off',
+        'import/no-extraneous-dependencies': 'warn',
         'import/prefer-default-export': 'off',
         'import/no-cycle': 'warn',
         'jsx-a11y/no-static-element-interactions': 'off',

@@ -1,3 +1,4 @@
 export * from './deepmineuser';
+export * from './deepminearea';
 
-export const name = 'deepmineuser';
+export const name = 'deepminearea';

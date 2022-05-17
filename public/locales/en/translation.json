@@ -34,9 +34,13 @@
       "miningStats": "MINING STATS",
       "consumables": "CONSUMABLES",
       "startMining": "Start Mining",
+      "stopMining": "Stop Mining",
       "myEquipment": "MY EQUIPMENT",
       "configure": "CONFIGURE",
-      "miningStatus": "mining status"
+      "miningStatus": "mining status",
+      "miningInProgress": "Mining is progress",
+      "miningWasInterrupted": "Mining was interrupted",
+      "miningHasFinished": "Mining has finished"
     }
   }
 }

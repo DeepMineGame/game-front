@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import {
     Page,
     Title,
@@ -10,10 +10,21 @@ import {
     useChainAuthContext,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { Badge, Col, Row, Space } from 'antd';
-import { useSmartContractAction } from 'features';
-import { startMining } from 'entities/smartcontracts';
+import { Badge, Col, Row, Skeleton, Space } from 'antd';
+import { useStore } from 'effector-react';
+import {
+    mapSearchParamForIndexPosition as mapSearchParamForIndexPositionForContract,
+    actionsStore,
+    getActionEffect,
+    ActionType,
+    contractStore,
+    getContractEffect,
+    mapSearchParamForIndexPositionToFindContracts,
+} from 'entities/smartcontracts';
+import { userStore } from 'entities/user';
 import styles from './styles.module.scss';
+import { MiningTitle } from './components/MiningTitle';
+import { MiningButton } from './components/MiningButton';
 
 export const MiningPage: FC = () => {
     const { t } = useTranslation();
@@ -21,18 +32,50 @@ export const MiningPage: FC = () => {
     const subTitleLevel = isDesktop ? 3 : 4;
     const gutter = isDesktop ? 80 : 16;
     const chainAccount = useChainAuthContext();
+    const contracts = useStore(contractStore);
+    const actions = useStore(actionsStore);
+    const isContractsLoading = useStore(getContractEffect.pending);
+    const isActionsLoading = useStore(getActionEffect.pending);
+    const mineActions = actions?.filter(({ type }) => type === ActionType.mine);
+    const user = useStore(userStore);
 
-    const startMiningCallback = useSmartContractAction<{
-        wax_user: string;
-        contract_id: number;
-    }>(startMining(chainAccount.activeUser?.accountName || '', 2));
+    const action = mineActions && mineActions[0];
+
+    useEffect(() => {
+        if (user && chainAccount.activeUser?.accountName) {
+            getContractEffect({
+                searchIdentification:
+                    mapSearchParamForIndexPositionToFindContracts.executorId,
+                searchParam: chainAccount.activeUser.accountName,
+            });
+        }
+    }, [user]);
+
+    useEffect(() => {
+        if (contracts?.length) {
+            getActionEffect({
+                searchIdentification:
+                    mapSearchParamForIndexPositionForContract.contractId,
+                searchParam: contracts[0].id,
+            });
+        }
+    }, [contracts]);
 
     return (
         <Page headerTitle={t('pages.mining.mining')}>
+            {action ? (
+                <MiningTitle action={action} />
+            ) : (
+                <Skeleton
+                    title={false}
+                    loading={isActionsLoading || isContractsLoading}
+                />
+            )}
+
             <Row justify="center" gutter={gutter} className={styles.grid}>
                 <Col sm={17} xs={24} className={styles.firsColumn}>
                     <div className={styles.wrapperForTittleWithRightSection}>
-                        <Title level={subTitleLevel}>
+                        <Title level={subTitleLevel} fontFamily="orbitron">
                             {t('pages.mining.miningStats')}
                         </Title>
                         <Badge
@@ -65,7 +108,9 @@ export const MiningPage: FC = () => {
                     </div>
                 </Col>
                 <Col sm={7} xs={24}>
-                    <Title level={4}>{t('pages.mining.consumables')}</Title>
+                    <Title level={4} fontFamily="orbitron">
+                        {t('pages.mining.consumables')}
+                    </Title>
                     <Space size="large" direction="vertical">
                         <Space
                             direction={isDesktop ? 'horizontal' : 'vertical'}
@@ -73,20 +118,13 @@ export const MiningPage: FC = () => {
                             <Plugin />
                             <Plugin />
                         </Space>
-                        <Button
-                            type="primary"
-                            block
-                            size={isDesktop ? 'large' : 'middle'}
-                            onClick={() => startMiningCallback()}
-                        >
-                            {t('pages.mining.startMining')}
-                        </Button>
+                        <MiningButton action={action} />
                     </Space>
                 </Col>
             </Row>
             <Row gutter={gutter}>
                 <Col sm={17} xs={24}>
-                    <Title level={subTitleLevel}>
+                    <Title fontFamily="orbitron" level={subTitleLevel}>
                         {t('pages.mining.myEquipment')}
                     </Title>
                 </Col>
