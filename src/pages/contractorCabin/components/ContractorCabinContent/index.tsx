@@ -2,7 +2,6 @@ import React, { Dispatch } from 'react';
 
 import {
     ACTION_STATE_TO_ID,
-    CABIN_STATUS,
     ID_TO_INVENTORY,
     INVENTORY_NAMES,
     UserContractsType,
@@ -16,6 +15,7 @@ import { Ready } from '../Ready';
 import { MiningProgress } from '../MiningProgress';
 import { MiningError } from '../MiningError';
 import { MiningOver } from '../MiningOver';
+import { CABIN_STATUS } from '../../../constants';
 
 interface ContractorCabinContentProps {
     userContracts: UserContractsType[];

@@ -5,7 +5,6 @@ export type UserInventoryType = {
     activated: 0 | 1;
     is_visible: 0 | 1;
 };
-export type UserInventoryWithNameType = UserInventoryType & { name: string };
 
 export type UserContractsType = {
     attrs: { key: string; value: string }[];

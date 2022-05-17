@@ -11,7 +11,6 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useSmartContractAction } from 'features';
 import {
-    CABIN_STATUS,
     getContractsConfig,
     getHistoryConfig,
     getInventoryConfig,
@@ -25,6 +24,7 @@ import {
     UserInventoryType,
 } from 'entities/smartcontracts';
 
+import { CABIN_STATUS } from '../constants';
 import styles from './styles.module.scss';
 import { PhysicalShiftBadge } from './components/PhysicalShiftBadge';
 import { TravelModal } from './components/TravelModal';
