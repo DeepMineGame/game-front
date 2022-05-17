@@ -66,6 +66,10 @@ export const ContractorCabin = () => {
         }
     }, [status]);
 
+    useEffect(() => {
+        document.title = 'Contractor — DeepMine';
+    }, []);
+
     const openTravelModal = () => {
         setIsTravelModalVisible(true);
     };

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
+import { CheckOutlined } from '@ant-design/icons';
 
-import { OkGreenIcon } from 'shared';
 import contractorStyles from '../../styles.module.scss';
 import styles from './styles.module.scss';
 
@@ -12,7 +12,7 @@ export const MiningOver = () => {
     return (
         <div className={styles.container}>
             <div className={cn(contractorStyles.title, styles.title)}>
-                <OkGreenIcon />
+                <CheckOutlined style={{ color: '#47FF40' }} />
                 <div>{t('pages.contractor.miningOver.title')}</div>
             </div>
             <div

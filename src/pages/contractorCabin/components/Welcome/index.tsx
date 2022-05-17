@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
-import { ErrorIcon, OkIcon } from 'shared';
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import contractorStyles from '../../styles.module.scss';
 import styles from './styles.module.scss';
 
@@ -45,7 +45,11 @@ export const Welcome = ({ equipments }: SignContractProps) => {
                         <div className={styles.equipmentLine}>
                             <div className={styles.equipmentName}>{name}</div>
                             <div className={styles.equipmentValue}>
-                                {isAvailable ? <OkIcon /> : <ErrorIcon />}
+                                {isAvailable ? (
+                                    <CheckOutlined />
+                                ) : (
+                                    <CloseOutlined />
+                                )}
                             </div>
                         </div>
                     ))}
