@@ -27,8 +27,14 @@ export const Modal: FC<Props> = (props) => {
             footer={
                 props?.footer || (
                     <div>
-                        <Button ghost>Cancel</Button>
-                        <Button type="primary">Ok</Button>
+                        {props.onCancel && (
+                            <Button onClick={props.onCancel} ghost>
+                                {props.cancelText || 'Cancel'}
+                            </Button>
+                        )}
+                        <Button onClick={props.onOk} type="primary">
+                            {props.okText || 'Ok'}
+                        </Button>
                     </div>
                 )
             }

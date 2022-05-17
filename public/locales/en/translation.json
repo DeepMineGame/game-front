@@ -35,6 +35,7 @@
       "consumables": "CONSUMABLES",
       "startMining": "Start Mining",
       "stopMining": "Stop Mining",
+      "getTheReport": "Get the report",
       "myEquipment": "MY EQUIPMENT",
       "configure": "CONFIGURE",
       "miningStatus": "mining status",

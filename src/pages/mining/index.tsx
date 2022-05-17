@@ -10,7 +10,7 @@ import {
     useChainAuthContext,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { Badge, Col, Row, Skeleton, Space } from 'antd';
+import { Badge, Col, Row, Skeleton, Space, Tooltip } from 'antd';
 import { useStore } from 'effector-react';
 import {
     mapSearchParamForIndexPosition as mapSearchParamForIndexPositionForContract,
@@ -24,7 +24,7 @@ import {
 import { userStore } from 'entities/user';
 import styles from './styles.module.scss';
 import { MiningTitle } from './components/MiningTitle';
-import { MiningButton } from './components/MiningButton';
+import { MiningAndClaimButton } from './components/MiningButton';
 
 export const MiningPage: FC = () => {
     const { t } = useTranslation();
@@ -60,7 +60,7 @@ export const MiningPage: FC = () => {
             });
         }
     }, [contracts]);
-
+    const neutral4 = '#303030';
     return (
         <Page headerTitle={t('pages.mining.mining')}>
             {action ? (
@@ -111,14 +111,23 @@ export const MiningPage: FC = () => {
                     <Title level={4} fontFamily="orbitron">
                         {t('pages.mining.consumables')}
                     </Title>
+
                     <Space size="large" direction="vertical">
-                        <Space
-                            direction={isDesktop ? 'horizontal' : 'vertical'}
+                        <Tooltip
+                            placement="left"
+                            color={neutral4}
+                            title="This is where improvements are installed that allow you to make mining more efficient. They will be available for the Mine level 1"
                         >
-                            <Plugin />
-                            <Plugin />
-                        </Space>
-                        <MiningButton action={action} />
+                            <Space
+                                direction={
+                                    isDesktop ? 'horizontal' : 'vertical'
+                                }
+                            >
+                                <Plugin />
+                                <Plugin />
+                            </Space>
+                        </Tooltip>
+                        <MiningAndClaimButton action={action} />
                     </Space>
                 </Col>
             </Row>

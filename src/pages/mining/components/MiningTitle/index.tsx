@@ -27,12 +27,12 @@ export const MiningTitle: FC<Props> = memo(({ action, onMiningExpire }) => {
 
     const isMining = action?.state === ActionState.active;
 
-    console.log(action);
     return (
         <Title
             level={isDesktop ? 2 : 4}
             className={classNames(styles.miningStatusTitle, {
                 [styles.interrupted]: action.state === ActionState.interrupted,
+                [styles.finished]: action.state === ActionState.finished,
             })}
             fontFamily="orbitron"
         >

@@ -29,4 +29,24 @@ export function toggleMining({
     };
 }
 
+export function claimdme({ waxUser }: { waxUser: string }) {
+    return {
+        actions: [
+            {
+                account: name,
+                name: 'claimdme',
+                authorization: [
+                    {
+                        actor: waxUser,
+                        permission: 'active',
+                    },
+                ],
+                data: {
+                    wax_user: waxUser,
+                },
+            },
+        ],
+    };
+}
+
 export * from './type';
