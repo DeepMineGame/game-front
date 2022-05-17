@@ -109,8 +109,7 @@ export const ContractorCabin = () => {
                     disabledItems: {
                         [ContractorMenuItems.InfoPanel]:
                             status <= CABIN_STATUS.mining_over,
-                        [ContractorMenuItems.MiningDeck]:
-                            status <= CABIN_STATUS.ready,
+                        [ContractorMenuItems.MiningDeck]: false,
                         [ContractorMenuItems.Equipment]: !hasPhysicalShift,
                     },
                     callbacks: {

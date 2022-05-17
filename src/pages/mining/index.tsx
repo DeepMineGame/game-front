@@ -19,6 +19,7 @@ import {
     ActionType,
     getContractEffect,
     minesStore,
+    getMinesEffect,
 } from 'entities/smartcontracts';
 import styles from './styles.module.scss';
 import { MiningTitle } from './components/MiningTitle';
@@ -41,6 +42,7 @@ export const MiningPage: FC = () => {
     const isActionsLoading = useStore(getActionEffect.pending);
     const mineActions = actions?.filter(({ type }) => type === ActionType.mine);
     const mineStore = useStore(minesStore);
+    const isMineStoreLoading = useStore(getMinesEffect.pending);
     const action = mineActions && mineActions[0];
     const neutral4 = '#303030';
     const estMiningTime =
@@ -76,7 +78,7 @@ export const MiningPage: FC = () => {
                         )}
                         <MineStatus />
                     </div>
-                    <Skeleton loading={isLoading} />
+                    <Skeleton loading={isMineStoreLoading || !mineStore} />
                     <div className={styles.data}>
                         {mineStore && (
                             <div className={styles.line}>
