@@ -52,7 +52,7 @@ export const getHistoryConfig = (account: string) => {
     } as GetTableDataConfigType;
 };
 
-export const ID_TO_INVENTORY = {
+export const ID_TO_INVENTORY: Record<number, string> = {
     177577: 'DME Wire',
     177576: 'DME Wire',
     177575: 'DME Wire',
@@ -79,6 +79,9 @@ export const ID_TO_INVENTORY = {
     176872: 'Wandering Reactor',
     176871: 'Wandering Reactor',
 };
+export const INVENTORY_NAMES = [
+    ...new Set(Object.entries(ID_TO_INVENTORY).map(([key, value]) => value)),
+];
 
 export const LOCATION_TO_ID = {
     mine: 1,

@@ -4,6 +4,7 @@ import {
     ACTION_STATE_TO_ID,
     CABIN_STATUS,
     ID_TO_INVENTORY,
+    INVENTORY_NAMES,
     UserContractsType,
     UserHistoryType,
     UserInventoryType,
@@ -24,6 +25,11 @@ interface ContractorCabinContentProps {
     setStatus: Dispatch<React.SetStateAction<number>>;
 }
 
+const getInventoryNames = (arr: UserInventoryType[]) => {
+    const names = arr.map((v) => ID_TO_INVENTORY[+v.asset_template_id]);
+    return [...new Set(names)];
+};
+
 export const ContractorCabinContent = ({
     userContracts,
     userInventory,
@@ -36,25 +42,21 @@ export const ContractorCabinContent = ({
         return <SignContract />;
     }
 
-    const inventoryCount = Object.keys(ID_TO_INVENTORY).length;
-    const activeInventory = userInventory.filter((v) => v.activated);
-    const visibleInventory = userInventory.filter((v) => v.is_visible);
+    const inventoryNames = getInventoryNames(userInventory);
+    const activeInventoryNames = getInventoryNames(
+        userInventory.filter((v) => v.activated)
+    );
 
-    if (visibleInventory.length < inventoryCount) {
+    if (inventoryNames.length < INVENTORY_NAMES.length) {
         setStatus(CABIN_STATUS.welcome);
-        const activeInventoryIds = visibleInventory.map(
-            (v) => v.asset_template_id
-        );
-        const equipments = Object.entries(ID_TO_INVENTORY).map(
-            ([id, name]) => ({
-                name,
-                isAvailable: activeInventoryIds.includes(+id),
-            })
-        );
+        const equipments = INVENTORY_NAMES.map((name) => ({
+            name,
+            isAvailable: inventoryNames.includes(name),
+        }));
         return <Welcome equipments={equipments} />;
     }
 
-    if (activeInventory.length < inventoryCount) {
+    if (activeInventoryNames.length < INVENTORY_NAMES.length) {
         setStatus(CABIN_STATUS.setup);
         return <Setup hasShift={hasPhysicalShift} />;
     }
