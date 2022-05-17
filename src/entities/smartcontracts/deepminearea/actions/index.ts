@@ -1,4 +1,4 @@
-import { name } from '../../index';
+import { deepminearea } from '../constants';
 
 export function toggleMining({
     waxUser,
@@ -12,7 +12,7 @@ export function toggleMining({
     return {
         actions: [
             {
-                account: name,
+                account: deepminearea,
                 name: type === 'start' ? 'startmining' : 'stopmining',
                 authorization: [
                     {
@@ -33,7 +33,7 @@ export function claimdme({ waxUser }: { waxUser: string }) {
     return {
         actions: [
             {
-                account: name,
+                account: deepminearea,
                 name: 'claimdme',
                 authorization: [
                     {

@@ -1,9 +1,9 @@
 import { createEffect, createStore } from 'effector';
 import { getTableData } from 'features';
 import {
+    deepmineuser,
     GetTableDataConfigType,
     INDEX_POSITION_CONTRACT,
-    name,
 } from '../../../index';
 import { ContractDto } from './types';
 
@@ -23,8 +23,8 @@ export const getContractEffect = createEffect(
         searchParam: string;
     }) => {
         return getTableData({
-            code: name,
-            scope: name,
+            code: deepmineuser,
+            scope: deepmineuser,
             table: 'contracts',
             index_position: searchIdentification,
             key_type: 'i64',
@@ -41,8 +41,8 @@ export const contractStore = createStore<ContractDto[] | null>(null).on(
 
 export const getContractsByNickNameConfig = (account: string) => {
     return {
-        code: name,
-        scope: name,
+        code: deepmineuser,
+        scope: deepmineuser,
         table: 'contracts',
         index_position: INDEX_POSITION_CONTRACT.nickname,
         key_type: 'name',

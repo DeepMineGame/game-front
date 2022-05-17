@@ -1,5 +1,6 @@
 import { createEffect, createStore } from 'effector';
 import { getTableData } from 'features';
+import { deepmineuser } from '../../constants';
 import { ActionDto } from './types';
 
 export enum mapSearchParamForIndexPosition {
@@ -23,8 +24,8 @@ export const getActionEffect = createEffect(
         searchParam: number;
     }) => {
         return getTableData({
-            code: 'deepmineuser',
-            scope: 'deepmineuser',
+            code: deepmineuser,
+            scope: deepmineuser,
             table: 'actions',
             index_position: searchIdentification,
             key_type: 'i64',

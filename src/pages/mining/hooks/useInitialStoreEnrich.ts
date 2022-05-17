@@ -39,7 +39,7 @@ export function useInitialStoreEnrich() {
     }, [contracts]);
 
     useEffect(() => {
-        if (contracts && !mineStore) {
+        if (contracts?.length && !mineStore) {
             getMinesEffect({ assetId: contracts[0].client_asset_id });
         }
     }, [contracts, mineStore]);

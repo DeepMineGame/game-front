@@ -75,3 +75,5 @@ export enum INDEX_POSITION_USER {
     undefined,
     nickname,
 }
+
+export const deepmineuser = 'deepmineuser';
