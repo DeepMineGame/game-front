@@ -86,10 +86,11 @@ export const MiningAndClaimButton: FC<Props> = ({ action }) => {
                     if (isClaimed) {
                         return setClaimModalVisibility(false);
                     }
-                    claimDmeCallback()?.then(() => {
+                    return claimDmeCallback()?.then(() => {
                         return setIsClaimed(true);
                     });
                 }}
+                onCancel={() => setClaimModalVisibility(false)}
                 okText={isClaimed ? "That's cool" : 'Claim'}
                 visible={claimModalVisibility}
                 title="Mining has finished successfully!"

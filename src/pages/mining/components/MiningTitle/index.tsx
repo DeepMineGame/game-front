@@ -10,6 +10,7 @@ type Props = {
     action: ActionDto;
     onMiningExpire?: () => void;
 };
+
 export const MiningTitle: FC<Props> = memo(({ action, onMiningExpire }) => {
     const { t } = useTranslation();
 
