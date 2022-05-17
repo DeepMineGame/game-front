@@ -1,5 +1,5 @@
 import { errorNotify, useChainAuthContext } from 'shared';
-import { Action } from 'entities';
+import { Action } from 'entities/smartcontracts';
 
 const defaultTransactionOptions = {
     blocksBehind: 3,
