@@ -29,22 +29,5 @@ export const waxChain = {
     ],
 };
 
-export const waxEndpoints = isMainNet
-    ? [
-          'https://api.waxsweden.org',
-          'https://api.wax.greeneosio.com',
-          'https://wax.blokcrafters.io',
-          'https://wax.greymass.com',
-          'https://wax.dapplica.io',
-          'https://wax.cryptolions.io',
-          'https://wax.pink.gg',
-      ]
-    : [
-          'https://waxtestnet.greymass.com',
-          'https://wax-test.blokcrafters.io',
-          'https://testnet-wax.3dkrender.com',
-          'https://testnet.wax.blacklusion.io',
-          'https://wax-testnet.eosphere.io',
-          'https://api-testnet-wax.eosarabia.net',
-          'https://testnet.wax.pink.gg',
-      ];
+export const WAX_GET_TABLE_ENDPOINT =
+    'http://testnet-wax.3dkrender.com/v1/chain/get_table_rows';

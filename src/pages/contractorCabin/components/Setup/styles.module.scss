@@ -1,0 +1,18 @@
+@import "src/shared";
+
+.container {
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.title {
+  padding-top: 56px;
+}
+
+.description, .descriptionCenter {
+  padding-top: 16px;
+}
+
+.descriptionCenter {
+  text-align: center;
+}

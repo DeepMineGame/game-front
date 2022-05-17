@@ -1,19 +1,55 @@
 @import "src/shared";
 
 .cabinBackground {
+  font-family: $bai;
   position: relative;
-  background: url("../../shared/ui/images/DarkGreyMin.png") no-repeat center center fixed;
+  background: url("../../shared/ui/images/DarkGreyMin.png") no-repeat left bottom fixed;
   min-height: 100vh;
   background-size: cover;
 
   @media only screen and (min-width: $media-tablet)  {
-    background: url("../../shared/ui/images/DarkGrey.png") no-repeat center center fixed;
+    background: url("../../shared/ui/images/DarkGrey.png") no-repeat left bottom fixed;
     background-size: cover;
   }
 }
 
-.cabinMonitor {
-  top: 120px;
-  left: 68px;
+.cabinMonitorHeight {
+  top: 33%;
+  left: 15.3vh;
+  height: 35.4vh;
+  width: 71vh;
   position: absolute;
+}
+
+.cabinMonitorWidth {
+  bottom: 16.4vw;
+  left: 8vw;
+  height: 18.5vw;
+  width: 36.9vw;
+  position: absolute;
+}
+
+.title {
+  font-family: $orbitron;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  color: $color-neutral-neutral-9;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.description {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: $color-neutral-neutral-9;
+}
+
+.coloredText {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: $color-primary-primary-6;
 }
