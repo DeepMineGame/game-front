@@ -64,6 +64,7 @@ export const ContractorCabin = () => {
         if (status !== CABIN_STATUS.setup && needShiftBadge) {
             closeShiftBadge();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [status]);
 
     useEffect(() => {

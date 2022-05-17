@@ -27,6 +27,7 @@ export const ID_TO_INVENTORY: Record<number, string> = {
 };
 
 export const INVENTORY_NAMES = [
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     ...new Set(Object.entries(ID_TO_INVENTORY).map(([key, value]) => value)),
 ];
 

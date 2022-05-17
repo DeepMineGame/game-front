@@ -23,7 +23,7 @@ export function useTableData<T>(
         } else {
             setResult(undefined);
         }
-    }, [accountName]);
+    }, [accountName, getConfig]);
 
     return result?.rows ?? [];
 }
