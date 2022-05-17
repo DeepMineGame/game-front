@@ -7,12 +7,12 @@ import {
     Card,
     useMediaQuery,
     desktopS,
+    getTimeLeft,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { Col, Row, Skeleton, Space, Tooltip } from 'antd';
 import { useStore } from 'effector-react';
-import * as dayjs from 'dayjs';
-import duration from 'dayjs/plugin/duration';
+
 import {
     actionsStore,
     getActionEffect,
@@ -26,9 +26,6 @@ import { MiningTitle } from './components/MiningTitle';
 import { MiningAndClaimButton } from './components/MiningButton';
 import { MineStatus } from './components/MineStatus';
 import { useInitialStoreEnrich } from './hooks/useInitialStoreEnrich';
-
-dayjs.extend(duration);
-const SECOND = 1000;
 
 export const MiningPage: FC = () => {
     useInitialStoreEnrich();
@@ -55,10 +52,8 @@ export const MiningPage: FC = () => {
             ?.value;
 
     const formatEstimateMineTime =
-        estMiningTime &&
-        dayjs
-            .duration((estMiningTime.value as unknown as number) * SECOND)
-            .format('HH:mm:ss');
+        estMiningTime && getTimeLeft(estMiningTime.value, true);
+
     const isLoading = isActionsLoading || isContractsLoading;
     return (
         <Page headerTitle={t('pages.mining.mining')}>

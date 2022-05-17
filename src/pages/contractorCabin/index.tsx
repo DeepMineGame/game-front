@@ -10,7 +10,7 @@ import {
 } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import { useSmartContractAction } from 'features';
-import { equipmentSet, mining } from 'app/router/paths';
+import * as PATHS from 'app/router/paths';
 import {
     getContractsByNickNameConfig,
     getHistoryConfig,
@@ -109,17 +109,18 @@ export const ContractorCabin = () => {
                     disabledItems: {
                         [ContractorMenuItems.InfoPanel]:
                             status <= CABIN_STATUS.mining_over,
-                        [ContractorMenuItems.MiningDeck]:
-                            status <= CABIN_STATUS.ready,
+                        [ContractorMenuItems.MiningDeck]: false,
+                        // TODO: debug - uncomment line before release
+                        //  status <= CABIN_STATUS.ready,
                         [ContractorMenuItems.Equipment]: !hasPhysicalShift,
                     },
                     callbacks: {
                         [ContractorMenuItems.InfoPanel]: () =>
                             navigate('/TODO'),
                         [ContractorMenuItems.MiningDeck]: () =>
-                            navigate(mining),
+                            navigate(PATHS.mining),
                         [ContractorMenuItems.Equipment]: () =>
-                            navigate(equipmentSet),
+                            navigate(PATHS.equipmentSet),
                     },
                     // activeTooltip: ContractorMenuItems.InfoPanel,
                 }}

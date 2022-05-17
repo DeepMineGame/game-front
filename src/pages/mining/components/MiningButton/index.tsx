@@ -61,6 +61,22 @@ export const MiningAndClaimButton: FC<Props> = ({ action }) => {
         ? t('pages.mining.stopMining')
         : t('pages.mining.startMining');
 
+    const onClaimButtonClick = async () => {
+        if (isClaimed) {
+            return setClaimModalVisibility(false);
+        }
+        await claimDmeCallback();
+        return setIsClaimed(true);
+    };
+    const onMiningButtonClick = () => {
+        if (isMiningFinished) {
+            return setClaimModalVisibility(true);
+        }
+        return toggleMiningCallback();
+    };
+    const buttonText = isMiningFinished
+        ? t('pages.mining.getTheReport')
+        : miningButtonText;
     return (
         <>
             {' '}
@@ -69,27 +85,13 @@ export const MiningAndClaimButton: FC<Props> = ({ action }) => {
                 type="primary"
                 block
                 size={isDesktop ? 'large' : 'middle'}
-                onClick={() => {
-                    if (isMiningFinished) {
-                        return setClaimModalVisibility(true);
-                    }
-                    return toggleMiningCallback();
-                }}
+                onClick={onMiningButtonClick}
                 ghost={isMining}
             >
-                {isMiningFinished
-                    ? t('pages.mining.getTheReport')
-                    : miningButtonText}
+                {buttonText}
             </Button>
             <Modal
-                onOk={() => {
-                    if (isClaimed) {
-                        return setClaimModalVisibility(false);
-                    }
-                    return claimDmeCallback()?.then(() => {
-                        return setIsClaimed(true);
-                    });
-                }}
+                onOk={onClaimButtonClick}
                 onCancel={() => setClaimModalVisibility(false)}
                 okText={isClaimed ? "That's cool" : 'Claim'}
                 visible={claimModalVisibility}
