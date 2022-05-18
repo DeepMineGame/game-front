@@ -7,86 +7,125 @@ import {
     Card,
     useMediaQuery,
     desktopS,
-    useChainAuthContext,
+    getTimeLeft,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { Badge, Col, Row, Space } from 'antd';
-import { useSmartContractAction } from 'features';
-import { startMining } from 'entities/smartcontracts';
+import { Col, Row, Skeleton, Space, Tooltip } from 'antd';
+import { useStore } from 'effector-react';
+
+import {
+    actionsStore,
+    getActionEffect,
+    ActionType,
+    getContractEffect,
+    minesStore,
+    getMinesEffect,
+} from 'entities/smartcontracts';
 import styles from './styles.module.scss';
+import { MiningTitle } from './components/MiningTitle';
+import { MiningAndClaimButton } from './components/MiningButton';
+import { MineStatus } from './components/MineStatus';
+import { useInitialStoreEnrich } from './hooks/useInitialStoreEnrich';
 
 export const MiningPage: FC = () => {
+    useInitialStoreEnrich();
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
     const subTitleLevel = isDesktop ? 3 : 4;
     const gutter = isDesktop ? 80 : 16;
-    const chainAccount = useChainAuthContext();
 
-    const startMiningCallback = useSmartContractAction<{
-        wax_user: string;
-        contract_id: number;
-    }>(startMining(chainAccount.activeUser?.accountName || '', 2));
+    const actions = useStore(actionsStore);
+    const isContractsLoading = useStore(getContractEffect.pending);
+    const isActionsLoading = useStore(getActionEffect.pending);
+    const mineActions = actions?.filter(({ type }) => type === ActionType.mine);
+    const mineStore = useStore(minesStore);
+    const isMineStoreLoading = useStore(getMinesEffect.pending);
+    const action = mineActions && mineActions[0];
+    const neutral4 = '#303030';
+    const estMiningTime =
+        action &&
+        action.processes.filter(({ key }) => key === 'est_mining_time')[0];
 
+    const estDmeAmount =
+        action &&
+        action.processes.filter(({ key }) => key === 'est_dme_amount')[0]
+            ?.value;
+
+    const formatEstimateMineTime =
+        estMiningTime && getTimeLeft(estMiningTime.value, true);
+
+    const isLoading = isActionsLoading || isContractsLoading;
     return (
         <Page headerTitle={t('pages.mining.mining')}>
+            {action ? (
+                <MiningTitle action={action} />
+            ) : (
+                <Skeleton title={false} loading={isLoading} />
+            )}
+
             <Row justify="center" gutter={gutter} className={styles.grid}>
                 <Col sm={17} xs={24} className={styles.firsColumn}>
                     <div className={styles.wrapperForTittleWithRightSection}>
-                        <Title level={subTitleLevel}>
-                            {t('pages.mining.miningStats')}
-                        </Title>
-                        <Badge
-                            className={styles.status}
-                            status="success"
-                            text={t('pages.mining.miningStatus')}
-                        />
+                        {!isLoading && (
+                            <Title level={subTitleLevel} fontFamily="orbitron">
+                                {t('pages.mining.miningStats')}
+                            </Title>
+                        )}
+                        <MineStatus />
                     </div>
+                    <Skeleton loading={isMineStoreLoading || !mineStore} />
                     <div className={styles.data}>
-                        <div className={styles.line}>
-                            <div>Mine depth</div>
-                            <div>2</div>
-                        </div>
-                        <div className={styles.line}>
-                            <div>Mine depth</div>
-                            <div>2</div>
-                        </div>
-                        <div className={styles.line}>
-                            <div>Estimates mining time</div>
-                            <div>1:13:10 - 2:12:40</div>
-                        </div>
-                        <div className={styles.line}>
-                            <div>Estimates amount of DME</div>
-                            <div>9999.99900000 - 9999.99999999</div>
-                        </div>
-                        <div className={styles.line}>
-                            <div>Fossil Chance</div>
-                            <div>4%</div>
-                        </div>
+                        {mineStore && (
+                            <div className={styles.line}>
+                                <div>Mine depth</div>
+                                <div>{mineStore[0].layer_depth}</div>
+                            </div>
+                        )}
+                        {action && (
+                            <>
+                                {formatEstimateMineTime && (
+                                    <div className={styles.line}>
+                                        <div>Estimates mining time</div>
+                                        <div>{formatEstimateMineTime}</div>
+                                    </div>
+                                )}
+                                {estDmeAmount && (
+                                    <div className={styles.line}>
+                                        <div>Estimates amount of DME</div>
+                                        <div>{estDmeAmount}</div>
+                                    </div>
+                                )}
+                            </>
+                        )}
                     </div>
                 </Col>
                 <Col sm={7} xs={24}>
-                    <Title level={4}>{t('pages.mining.consumables')}</Title>
+                    <Title level={4} fontFamily="orbitron">
+                        {t('pages.mining.consumables')}
+                    </Title>
+
                     <Space size="large" direction="vertical">
-                        <Space
-                            direction={isDesktop ? 'horizontal' : 'vertical'}
+                        <Tooltip
+                            placement="left"
+                            color={neutral4}
+                            title="This is where improvements are installed that allow you to make mining more efficient. They will be available for the Mine level 1"
                         >
-                            <Plugin />
-                            <Plugin />
-                        </Space>
-                        <Button
-                            type="primary"
-                            block
-                            size={isDesktop ? 'large' : 'middle'}
-                            onClick={() => startMiningCallback()}
-                        >
-                            {t('pages.mining.startMining')}
-                        </Button>
+                            <Space
+                                direction={
+                                    isDesktop ? 'horizontal' : 'vertical'
+                                }
+                            >
+                                <Plugin />
+                                <Plugin />
+                            </Space>
+                        </Tooltip>
+                        <MiningAndClaimButton action={action} />
                     </Space>
                 </Col>
             </Row>
             <Row gutter={gutter}>
                 <Col sm={17} xs={24}>
-                    <Title level={subTitleLevel}>
+                    <Title fontFamily="orbitron" level={subTitleLevel}>
                         {t('pages.mining.myEquipment')}
                     </Title>
                 </Col>

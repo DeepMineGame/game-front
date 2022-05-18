@@ -1,29 +1,18 @@
 import {
+    deepmineuser,
     GetTableDataConfigType,
-    INDEX_POSITION_CONTRACT,
     INDEX_POSITION_HISTORY,
     INDEX_POSITION_INVENTORY,
     INDEX_POSITION_USER,
-    name,
 } from '../..';
 
-export const getContractsConfig = (account: string) => {
-    return {
-        code: name,
-        scope: name,
-        table: 'contracts',
-        index_position: INDEX_POSITION_CONTRACT.nickname,
-        key_type: 'name',
-        lower_bound: account,
-        upper_bound: account,
-        limit: 1,
-    } as GetTableDataConfigType;
-};
+export * from './actions';
+export * from './contracts';
 
 export const getUserConfig = (account: string) => {
     return {
-        code: name,
-        scope: name,
+        code: deepmineuser,
+        scope: deepmineuser,
         table: 'users',
         index_position: INDEX_POSITION_USER.nickname,
         key_type: 'name',
@@ -35,8 +24,8 @@ export const getUserConfig = (account: string) => {
 
 export const getInventoryConfig = (account: string) => {
     return {
-        code: name,
-        scope: name,
+        code: deepmineuser,
+        scope: deepmineuser,
         table: 'inventories',
         index_position: INDEX_POSITION_INVENTORY.nickname,
         key_type: 'name',
@@ -48,8 +37,8 @@ export const getInventoryConfig = (account: string) => {
 
 export const getHistoryConfig = (account: string) => {
     return {
-        code: name,
-        scope: name,
+        code: deepmineuser,
+        scope: deepmineuser,
         table: 'actions',
         index_position: INDEX_POSITION_HISTORY.nickname,
         key_type: 'name',

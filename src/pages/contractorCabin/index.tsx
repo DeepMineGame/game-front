@@ -10,8 +10,9 @@ import {
 } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import { useSmartContractAction } from 'features';
+import * as PATHS from 'app/router/paths';
 import {
-    getContractsConfig,
+    getContractsByNickNameConfig,
     getHistoryConfig,
     getInventoryConfig,
     getUserConfig,
@@ -41,7 +42,9 @@ export const ContractorCabin = () => {
     const isBgWidthHidden = width > height * bgRatio;
 
     const userInfo = useTableData<UserInfoType>(getUserConfig);
-    const userContracts = useTableData<UserContractsType>(getContractsConfig);
+    const userContracts = useTableData<UserContractsType>(
+        getContractsByNickNameConfig
+    );
     const userInventory = useTableData<UserInventoryType>(getInventoryConfig);
     const userHistory = useTableData<UserHistoryType>(getHistoryConfig);
     const physicalShiftCallback = useSmartContractAction<PhysicalShiftArgs>(
@@ -106,17 +109,18 @@ export const ContractorCabin = () => {
                     disabledItems: {
                         [ContractorMenuItems.InfoPanel]:
                             status <= CABIN_STATUS.mining_over,
-                        [ContractorMenuItems.MiningDeck]:
-                            status <= CABIN_STATUS.ready,
+                        [ContractorMenuItems.MiningDeck]: false,
+                        // TODO: debug - uncomment line before release
+                        //  status <= CABIN_STATUS.ready,
                         [ContractorMenuItems.Equipment]: !hasPhysicalShift,
                     },
                     callbacks: {
                         [ContractorMenuItems.InfoPanel]: () =>
-                            navigate('/info'),
+                            navigate('/TODO'),
                         [ContractorMenuItems.MiningDeck]: () =>
-                            navigate('/mining'),
-                        [ContractorMenuItems.MiningDeck]: () =>
-                            navigate('/equipment'),
+                            navigate(PATHS.mining),
+                        [ContractorMenuItems.Equipment]: () =>
+                            navigate(PATHS.equipmentSet),
                     },
                     // activeTooltip: ContractorMenuItems.InfoPanel,
                 }}

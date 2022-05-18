@@ -12,7 +12,7 @@ i18n
     .use(initReactI18next)
     .init({
         fallbackLng: 'en',
-        debug: true,
+        debug: false,
         // Распознавание и кэширование языковых кук
         detection: {
             order: ['queryString', 'cookie'],

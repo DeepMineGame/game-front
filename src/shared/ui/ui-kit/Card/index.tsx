@@ -29,13 +29,7 @@ export const Card: FC<Props> = ({
     const neutral4 = '#303030';
 
     return (
-        <Tooltip
-            overlay={lvlTooltip}
-            className={styles.tooltip}
-            overlayClassName={styles.tooltipOverlay}
-            placement="rightTop"
-            color={neutral4}
-        >
+        <Tooltip overlay={lvlTooltip} placement="rightTop" color={neutral4}>
             <div className={styles.wrapper}>
                 <CardBadge status={status} />
                 <div className={styles.image}>

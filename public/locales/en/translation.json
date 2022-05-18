@@ -34,9 +34,16 @@
       "miningStats": "MINING STATS",
       "consumables": "CONSUMABLES",
       "startMining": "Start Mining",
+      "stopMining": "Stop Mining",
+      "getTheReport": "Get the report",
       "myEquipment": "MY EQUIPMENT",
       "configure": "CONFIGURE",
-      "miningStatus": "mining status"
+      "miningStatus": "Mine: ",
+      "active":  "Active",
+      "inactive": "Inactive",
+      "miningInProgress": "Mining is progress",
+      "miningWasInterrupted": "Mining was interrupted",
+      "miningHasFinished": "Mining has finished"
     },
     "contractor": {
       "signingContract": {

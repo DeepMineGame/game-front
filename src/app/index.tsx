@@ -16,5 +16,5 @@ const App = () => {
     return <Router />;
 };
 
-export * from './constants';
 export default withProviders(App);
+export * from './constants';
