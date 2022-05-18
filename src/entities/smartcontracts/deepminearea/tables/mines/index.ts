@@ -1,6 +1,6 @@
 import { createEffect, createStore } from 'effector';
 import { getTableData } from 'features';
-import { deepminearea } from '../constants';
+import { deepminearea } from '../../constants';
 import { MineDto } from './types';
 
 export const getMinesEffect = createEffect(
