@@ -50,3 +50,4 @@ export function claimdme({ waxUser }: { waxUser: string }) {
 }
 
 export * from './type';
+export * from './calcmining';

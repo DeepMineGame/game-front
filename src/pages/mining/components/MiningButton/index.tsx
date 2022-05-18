@@ -22,6 +22,7 @@ import {
     getContractEffect,
     toggleMining,
 } from 'entities/smartcontracts';
+import { ClaimInfo } from '../ClaimInfo';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -77,9 +78,9 @@ export const MiningAndClaimButton: FC<Props> = ({ action }) => {
     const buttonText = isMiningFinished
         ? t('pages.mining.getTheReport')
         : miningButtonText;
+    const okText = isClaimed ? t('pages.mining.cool') : t('pages.mining.claim');
     return (
         <>
-            {' '}
             <Button
                 loading={isContractsLoading || isActionsLoading}
                 type="primary"
@@ -93,9 +94,9 @@ export const MiningAndClaimButton: FC<Props> = ({ action }) => {
             <Modal
                 onOk={onClaimButtonClick}
                 onCancel={() => setClaimModalVisibility(false)}
-                okText={isClaimed ? "That's cool" : 'Claim'}
+                okText={okText}
                 visible={claimModalVisibility}
-                title="Mining has finished successfully!"
+                title={t('pages.mining.miningFinishedSuccessfully')}
             >
                 {isClaimed ? (
                     <Space
@@ -107,7 +108,7 @@ export const MiningAndClaimButton: FC<Props> = ({ action }) => {
                         <Title level={3}>Your DME has been claimed</Title>
                     </Space>
                 ) : (
-                    <span>DME will be claimed</span>
+                    <ClaimInfo />
                 )}
             </Modal>
         </>
