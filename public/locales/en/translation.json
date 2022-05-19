@@ -46,7 +46,8 @@
       "miningHasFinished": "Mining has finished",
       "miningFinishedSuccessfully": "Mining has finished successfully!",
       "cool": "That's cool",
-      "claim": "Claim"
+      "claim": "Claim",
+      "tooltipAroundConsumables": "This is where improvements are installed that allow you to make mining more efficient. They will be available for the Mine level 1"
     },
     "contractor": {
       "signingContract": {

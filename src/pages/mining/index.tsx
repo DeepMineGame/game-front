@@ -3,8 +3,6 @@ import {
     Page,
     Title,
     Plugin,
-    Button,
-    Card,
     useMediaQuery,
     desktopS,
     getTimeLeft,
@@ -26,6 +24,7 @@ import { MiningTitle } from './components/MiningTitle';
 import { MiningAndClaimButton } from './components/MiningButton';
 import { MineStatus } from './components/MineStatus';
 import { useInitialStoreEnrich } from './hooks/useInitialStoreEnrich';
+import { Equipment } from './components/Equipment';
 
 export const MiningPage: FC = () => {
     useInitialStoreEnrich();
@@ -108,7 +107,7 @@ export const MiningPage: FC = () => {
                         <Tooltip
                             placement="left"
                             color={neutral4}
-                            title="This is where improvements are installed that allow you to make mining more efficient. They will be available for the Mine level 1"
+                            title={t('pages.mining.tooltipAroundConsumables')}
                         >
                             <Space
                                 direction={
@@ -123,32 +122,7 @@ export const MiningPage: FC = () => {
                     </Space>
                 </Col>
             </Row>
-            <Row gutter={gutter}>
-                <Col sm={17} xs={24}>
-                    <Title fontFamily="orbitron" level={subTitleLevel}>
-                        {t('pages.mining.myEquipment')}
-                    </Title>
-                </Col>
-                <Col sm={7} xs={24}>
-                    <Button type="link">{t('pages.mining.configure')}</Button>
-                </Col>
-            </Row>
-            <div className={styles.cards}>
-                <Card
-                    initial={10}
-                    remained={10}
-                    current={8}
-                    status="installed"
-                />
-                <Card initial={100} remained={10} current={2} status="broken" />
-                <Card
-                    initial={100}
-                    remained={50}
-                    current={5}
-                    status="notInstalled"
-                />
-                <Card initial={3} remained={2} current={1} />
-            </div>
+            <Equipment />
         </Page>
     );
 };
