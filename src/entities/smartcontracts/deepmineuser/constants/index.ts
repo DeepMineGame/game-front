@@ -1,4 +1,4 @@
-export const ID_TO_INVENTORY: Record<number, string> = {
+export const ID_TO_INVENTORY = {
     177577: 'DME Wire',
     177576: 'DME Wire',
     177575: 'DME Wire',
@@ -24,7 +24,10 @@ export const ID_TO_INVENTORY: Record<number, string> = {
     176873: 'Wandering Reactor',
     176872: 'Wandering Reactor',
     176871: 'Wandering Reactor',
-};
+} as const;
+
+export type InventoryIdType = keyof typeof ID_TO_INVENTORY;
+export type InventoryNameType = typeof ID_TO_INVENTORY[InventoryIdType];
 
 export const INVENTORY_NAMES = [
     ...new Set(Object.entries(ID_TO_INVENTORY).map(([, value]) => value)),

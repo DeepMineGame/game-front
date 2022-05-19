@@ -16,10 +16,24 @@
 }
 
 .progress {
-  max-width: 110px;
+  max-width: 144px;
+  display: flex;
+  padding-bottom: 10px;
 
   @media only screen and (min-width: $media-desktop-s)  {
-    max-width: 170px;
+    max-width: 198px;
+  }
+
+  :global {
+    .ant-progress-outer {
+      margin: 0 !important;
+      padding: 0 !important;
+      flex: 1;
+    }
+
+    .ant-progress-text {
+      width: fit-content !important;
+    }
   }
 }
 
@@ -30,7 +44,15 @@
 }
 
 .info {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
   color: $color-neutral-neutral-7;
+  width: 100%;
+}
+
+.rightContent {
+  padding-left: 8px;
 }
 
 .lvlTooltipContent {
@@ -43,4 +65,10 @@
   & > span {
     color: $color-neutral-neutral-7;
   }
+}
+
+.statusEmpty {
+  height: 18px;
+  width: 1px;
+  margin-bottom: 4px;
 }
