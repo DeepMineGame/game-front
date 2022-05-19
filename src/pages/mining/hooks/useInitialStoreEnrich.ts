@@ -6,9 +6,10 @@ import {
     getActionEffect,
     getContractEffect,
     getMinesEffect,
-    mapSearchParamForIndexPosition as mapSearchParamForIndexPositionForContract,
     mapSearchParamForIndexPositionToFindContracts,
     minesStore,
+    getInventoriesEffect,
+    mapSearchParamForIndexPosition,
 } from 'entities/smartcontracts';
 import { userStore } from 'entities/user';
 
@@ -31,8 +32,7 @@ export function useInitialStoreEnrich() {
     useEffect(() => {
         if (contracts?.length) {
             getActionEffect({
-                searchIdentification:
-                    mapSearchParamForIndexPositionForContract.contractId,
+                searchIdentification: mapSearchParamForIndexPosition.contractId,
                 searchParam: contracts[0].id,
             });
         }
@@ -43,4 +43,12 @@ export function useInitialStoreEnrich() {
             getMinesEffect({ assetId: contracts[0].client_asset_id });
         }
     }, [contracts, mineStore]);
+
+    useEffect(() => {
+        if (chainAccount?.activeUser?.accountName) {
+            getInventoriesEffect({
+                searchParam: chainAccount.activeUser.accountName,
+            });
+        }
+    });
 }

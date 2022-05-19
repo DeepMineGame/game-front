@@ -27,6 +27,7 @@ export const Card: FC<Props> = ({
         </div>
     );
     const neutral4 = '#303030';
+    const hasProgress = initial || current || remained;
 
     return (
         <Tooltip overlay={lvlTooltip} placement="rightTop" color={neutral4}>
@@ -40,11 +41,13 @@ export const Card: FC<Props> = ({
                         alt="nft-equipment-card"
                     />
                 </div>
-                <NftProgressBar
-                    initial={initial}
-                    current={current}
-                    remained={remained}
-                />
+                {hasProgress && (
+                    <NftProgressBar
+                        initial={initial}
+                        current={current}
+                        remained={remained}
+                    />
+                )}
             </div>
         </Tooltip>
     );

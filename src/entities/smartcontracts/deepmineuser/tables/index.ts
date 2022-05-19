@@ -8,6 +8,7 @@ import {
 
 export * from './actions';
 export * from './contracts';
+export * from './inventories';
 
 export const getUserConfig = (account: string) => {
     return {
