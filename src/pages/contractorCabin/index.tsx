@@ -102,11 +102,6 @@ export const ContractorCabin = () => {
             })}
         >
             <Monitor
-                className={
-                    isBgWidthHidden
-                        ? styles.cabinMonitorWidth
-                        : styles.cabinMonitorHeight
-                }
                 classNameContainer={
                     isBgWidthHidden
                         ? styles.cabinMonitorContainerWidth
