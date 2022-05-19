@@ -23,6 +23,12 @@
       "infoPanelTooltip": "Info panel is located here",
       "miningDeskTooltip": "Mining deck is located here",
       "equipmentTooltip": "Your equipment is located here"
+    },
+    "common": {
+      "button": {
+        "cancel": "Cancel",
+        "install": "Install"
+      }
     }
   },
   "pages": {

@@ -17,6 +17,7 @@ export const Modal: FC<Props> = (props) => {
 
     return (
         <ModalAnt
+            {...props}
             className={classNames(styles.modal, {
                 [styles.wideOnMobile]: props?.wideOnMobile,
             })}
@@ -38,7 +39,6 @@ export const Modal: FC<Props> = (props) => {
                     </div>
                 )
             }
-            {...props}
         />
     );
 };
