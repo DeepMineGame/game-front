@@ -71,7 +71,7 @@ export const ContractorCabinContent = ({
     );
     if (activeMining.length !== 0) {
         setStatus(CABIN_STATUS.mining_progress);
-        return <MiningProgress msUntil={activeMining[0].finishes_at * 1000} />;
+        return <MiningProgress msUntil={activeMining[0].finishes_at} />;
     }
 
     const interruptedMining = userHistory.filter(

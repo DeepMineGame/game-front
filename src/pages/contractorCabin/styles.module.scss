@@ -3,30 +3,53 @@
 .cabinBackground {
   font-family: $bai;
   position: relative;
-  background: url("../../shared/ui/images/DarkGreyMin.png") no-repeat left bottom fixed;
   min-height: 100vh;
-  background-size: cover;
 
   @media only screen and (min-width: $media-tablet)  {
-    background: url("../../shared/ui/images/DarkGrey.png") no-repeat left bottom fixed;
+    background: url("../../shared/ui/images/Dark_Gray.jpg") no-repeat right center fixed;
     background-size: cover;
+
+    &DarkRed {
+      background: url("../../shared/ui/images/Dark_Red.jpg") no-repeat right center fixed;
+      background-size: cover;
+    }
+    &LightGreen {
+      background: url("../../shared/ui/images/Light_Green.jpg") no-repeat right center fixed;
+      background-size: cover;
+    }
+    &LightRed {
+      background: url("../../shared/ui/images/Light_Red.jpg") no-repeat right center fixed;
+      background-size: cover;
+    }
+    &LightYellow {
+      background: url("../../shared/ui/images/Light_Yellow.jpg") no-repeat right center fixed;
+      background-size: cover;
+    }
+  }
+
+  @media only screen and (max-width: $media-tablet)  {
+    background: url("../../shared/ui/images/DarkGreyMin.png") no-repeat right center fixed;
+    height: 100vh;
+    width: 100vw;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 }
 
 .cabinMonitorHeight {
-  top: 33%;
-  left: 15.3vh;
-  height: 35.4vh;
+}
+.cabinMonitorContainerHeight {
   width: 71vh;
-  position: absolute;
+  left: 15.3vh;
 }
 
 .cabinMonitorWidth {
-  bottom: 16.4vw;
+}
+.cabinMonitorContainerWidth {
+  width: 635px;
   left: 8vw;
-  height: 18.5vw;
-  width: 36.9vw;
-  position: absolute;
 }
 
 .title {
