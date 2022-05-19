@@ -3,9 +3,7 @@
 .cabinBackground {
   font-family: $bai;
   position: relative;
-  background: url("../../shared/ui/images/DarkGreyMin.png") no-repeat right center fixed;
   min-height: 100vh;
-  background-size: cover;
 
   @media only screen and (min-width: $media-tablet)  {
     background: url("../../shared/ui/images/Dark_Gray.jpg") no-repeat right center fixed;
@@ -27,6 +25,16 @@
       background: url("../../shared/ui/images/Light_Yellow.jpg") no-repeat right center fixed;
       background-size: cover;
     }
+  }
+
+  @media only screen and (max-width: $media-tablet)  {
+    background: url("../../shared/ui/images/DarkGreyMin.png") no-repeat right center fixed;
+    height: 100vh;
+    width: 100vw;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 }
 
