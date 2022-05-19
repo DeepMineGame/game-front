@@ -93,12 +93,12 @@ export const ContractorCabin = () => {
                 [styles.cabinBackgroundLightRed]:
                     status === CABIN_STATUS.mining_interrupted,
                 [styles.cabinBackgroundLightGreen]:
-                    status > CABIN_STATUS.mining_over
-                    || status === CABIN_STATUS.ready
-                    || status === CABIN_STATUS.setup,
+                    status > CABIN_STATUS.mining_over ||
+                    status === CABIN_STATUS.ready ||
+                    status === CABIN_STATUS.setup,
                 [styles.cabinBackgroundLightYellow]:
-                    status === CABIN_STATUS.mining_over
-                    || status === CABIN_STATUS.mining_progress,
+                    status === CABIN_STATUS.mining_over ||
+                    status === CABIN_STATUS.mining_progress,
             })}
         >
             <Monitor

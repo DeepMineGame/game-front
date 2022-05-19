@@ -3,24 +3,29 @@
 .cabinBackground {
   font-family: $bai;
   position: relative;
-  background: url("../../shared/ui/images/DarkGreyMin.png") no-repeat left center fixed;
+  background: url("../../shared/ui/images/DarkGreyMin.png") no-repeat right center fixed;
   min-height: 100vh;
   background-size: cover;
 
   @media only screen and (min-width: $media-tablet)  {
-    background: url("../../shared/ui/images/Dark_Gray.jpg") no-repeat left center fixed;
+    background: url("../../shared/ui/images/Dark_Gray.jpg") no-repeat right center fixed;
+    background-size: cover;
 
     &DarkRed {
-      background: url("../../shared/ui/images/Dark_Red.jpg") no-repeat left center fixed;
+      background: url("../../shared/ui/images/Dark_Red.jpg") no-repeat right center fixed;
+      background-size: cover;
     }
     &LightGreen {
-      background: url("../../shared/ui/images/Light_Green.jpg") no-repeat left center fixed;
+      background: url("../../shared/ui/images/Light_Green.jpg") no-repeat right center fixed;
+      background-size: cover;
     }
     &LightRed {
-      background: url("../../shared/ui/images/Light_Red.jpg") no-repeat left center fixed;
+      background: url("../../shared/ui/images/Light_Red.jpg") no-repeat right center fixed;
+      background-size: cover;
     }
     &LightYellow {
-      background: url("../../shared/ui/images/Light_Yellow.jpg") no-repeat left center fixed;
+      background: url("../../shared/ui/images/Light_Yellow.jpg") no-repeat right center fixed;
+      background-size: cover;
     }
   }
 }
@@ -35,7 +40,7 @@
 .cabinMonitorWidth {
 }
 .cabinMonitorContainerWidth {
-  width: 36.9vw;
+  width: 635px;
   left: 8vw;
 }
 
