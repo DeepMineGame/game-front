@@ -1,4 +1,43 @@
+@import "src/shared";
+
 .actionButton {
   margin: 0 auto;
   display: block;
+}
+
+.modalFooter {
+  display: grid;
+  grid-template-columns: 5fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . .";
+  text-align: left;
+}
+
+.dmpButton {
+  width: 100px;
+  justify-content: center;
+  align-items: center;
+}
+
+.infoCard {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . .";
+  background-color: $color-neutral-neutral-1;
+  border: 1px solid $color-neutral-neutral-4;
+  padding: 16px;
+  border-bottom: none;
+
+  &:last-child {
+    border-bottom: 1px solid $color-neutral-neutral-4;
+  }
+}
+
+.infoCardValue {
+  text-align: right;
 }

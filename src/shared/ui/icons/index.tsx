@@ -4,3 +4,4 @@ export { ReactComponent as AvatarIcon } from './avatar.svg';
 export { ReactComponent as Logo } from './logo.svg';
 export { ReactComponent as EnergyIcon } from './energy.svg';
 export { ReactComponent as TimerIcon } from './timer.svg';
+export { ReactComponent as DmpIcon } from './DMP.svg';
