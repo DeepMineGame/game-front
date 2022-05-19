@@ -1,4 +1,5 @@
 .monitor {
+    width: 100%;
     position: relative;
     color: white;
     clip-path: polygon(
@@ -47,5 +48,16 @@
             font-size: 8px;
         }
     }
+}
+
+.monitorBg {
+    background: url("../../images/Monitor.png") no-repeat center center fixed;
+    height: 100vh;
+    background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    position: absolute;
 }
   

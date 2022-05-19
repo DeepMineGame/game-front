@@ -11,6 +11,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useSmartContractAction } from 'features';
 import * as PATHS from 'app/router/paths';
+import cn from 'classnames';
 import {
     getContractsByNickNameConfig,
     getHistoryConfig,
@@ -87,12 +88,29 @@ export const ContractorCabin = () => {
     };
 
     return (
-        <div className={styles.cabinBackground}>
+        <div
+            className={cn(styles.cabinBackground, {
+                [styles.cabinBackgroundLightRed]:
+                    status === CABIN_STATUS.mining_interrupted,
+                [styles.cabinBackgroundLightGreen]:
+                    status > CABIN_STATUS.mining_over
+                    || status === CABIN_STATUS.ready
+                    || status === CABIN_STATUS.setup,
+                [styles.cabinBackgroundLightYellow]:
+                    status === CABIN_STATUS.mining_over
+                    || status === CABIN_STATUS.mining_progress,
+            })}
+        >
             <Monitor
                 className={
                     isBgWidthHidden
                         ? styles.cabinMonitorWidth
                         : styles.cabinMonitorHeight
+                }
+                classNameContainer={
+                    isBgWidthHidden
+                        ? styles.cabinMonitorContainerWidth
+                        : styles.cabinMonitorContainerHeight
                 }
             >
                 <ContractorCabinContent
