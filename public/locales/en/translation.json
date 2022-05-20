@@ -109,5 +109,20 @@
         "button": "Physical Shift"
       }
     }
+  },
+  "characteristics": {
+    "title": "Characteristics",
+    "mineLevel": "Mine Level",
+    "mineSublevel": "Mine Sublevel",
+    "mineDepth": "Mine Depth",
+    "estimatesMiningTime": "Estimates mining Time",
+    "estimatesAmountDME": "Estimates Amount of DME",
+    "estimateMiningEfficiency": "Estimate Mining Efficiency",
+    "estimateMiningPower": "Estimate Mining Power",
+    "sublevelEfficiensy": "Sublevel Efficiensy",
+    "equipmentBreakageProbabillity": "Equipment Breakage Probabillity",
+    "fossilChance": "Fossil Chance",
+    "install": "Install the Equipment set",
+    "uninstall": "Uninstall the Equipment set"
   }
 }

@@ -17,12 +17,12 @@ export const routes = {
             path: contractorCabin,
             Component: ContractorCabin,
         },
-    ],
-    admin: [
         {
             path: equipmentSet,
             Component: EquipmentSetPage,
         },
+    ],
+    admin: [
         {
             path: mining,
             Component: MiningPage,

@@ -9,18 +9,23 @@ export type ProgressProps = {
     initial?: number;
     current?: number;
     remained?: number;
+    rightContent?: React.ReactNode;
 };
 
 export function NftProgressBar({
     current = 0,
     remained = 0,
     initial = 0,
+    rightContent,
 }: ProgressProps) {
     const currentProgress = getPercentage(current, remained);
     const disabledProgress = getPercentage(remained, initial);
     const info = () => (
         <div className={styles.info}>
-            {current}/{remained} ({initial})
+            {current}/{remained}
+            <div className={styles.rightContent}>
+                {rightContent ?? <span>({initial})</span>}
+            </div>
         </div>
     );
     return (

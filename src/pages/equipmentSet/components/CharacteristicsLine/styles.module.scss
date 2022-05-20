@@ -1,0 +1,15 @@
+@import "src/shared";
+
+.line {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: $color-neutral-neutral-1;
+  color: $color-neutral-neutral-9;
+}
+
+.lineName, .lineValue {
+  padding: 16px;
+}
