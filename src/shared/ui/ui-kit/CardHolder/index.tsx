@@ -4,16 +4,18 @@ import { Title } from '../typography/Title';
 import styles from './styles.module.scss';
 
 type Props = {
-    text?: string;
+    name?: string;
     onClick: MouseEventHandler;
 };
 
-export const CardHolder: FC<Props> = ({ text = 'add\na cutter', onClick }) => {
+export const CardHolder: FC<Props> = ({ name, onClick }) => {
     return (
         <div className={styles.cardHolder} onClick={onClick}>
             <PlusOutlined className={styles.icon} />
             <Title className={styles.title} level={5} fontFamily="orbitron">
-                {text}
+                ADD
+                <br />
+                {name}
             </Title>
         </div>
     );

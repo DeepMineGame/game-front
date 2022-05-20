@@ -1,6 +1,6 @@
 export type UserInventoryType = {
     asset_id: string;
-    asset_template_id: number;
+    asset_template_id: string;
     owner_user_id: string;
     activated: 0 | 1;
     is_visible: 0 | 1;

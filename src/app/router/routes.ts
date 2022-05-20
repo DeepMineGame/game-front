@@ -19,13 +19,13 @@ export const routes = {
             Component: ContractorCabin,
             titleTag: 'Contractor — DeepMine',
         },
-    ],
-    admin: [
         {
             path: equipmentSet,
             Component: EquipmentSetPage,
             titleTag: 'Equipment set — DeepMine',
         },
+    ],
+    admin: [
         {
             path: mining,
             Component: MiningPage,
