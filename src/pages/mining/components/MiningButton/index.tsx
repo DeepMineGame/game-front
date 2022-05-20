@@ -21,6 +21,7 @@ import {
     ContractType,
     getActionEffect,
     getContractEffect,
+    mapSearchParamForIndexPositionToFindContracts,
     toggleMining,
 } from 'entities/smartcontracts';
 import { ClaimInfo } from '../ClaimInfo';
@@ -32,7 +33,6 @@ type Props = {
 
 export const MiningAndClaimButton: FC<Props> = ({ action }) => {
     const [claimModalVisibility, setClaimModalVisibility] = useState(false);
-    const [isClaimed, setIsClaimed] = useState(false);
     const chainAccount = useChainAuthContext();
     const isDesktop = useMediaQuery(desktopS);
     const { t } = useTranslation();
@@ -53,10 +53,18 @@ export const MiningAndClaimButton: FC<Props> = ({ action }) => {
             type: isMining ? 'stop' : 'start',
         })
     );
+    const updateContract = () =>
+        getContractEffect({
+            searchIdentification:
+                mapSearchParamForIndexPositionToFindContracts.executorId,
+            searchParam: chainAccount?.activeUser?.accountName || '',
+        });
+    const toggleMiningAndReinitializeStores = () =>
+        toggleMiningCallback()?.then(updateContract);
+    const [isClaimed, setIsClaimed] = useState(false);
     const claimDmeCallback = useSmartContractAction(
         claimdme({ waxUser: chainAccount.activeUser?.accountName || '' })
     );
-
     const isContractsLoading = useStore(getContractEffect.pending);
     const isActionsLoading = useStore(getActionEffect.pending);
     const miningButtonText = isMining
@@ -67,22 +75,21 @@ export const MiningAndClaimButton: FC<Props> = ({ action }) => {
         if (isClaimed) {
             return setClaimModalVisibility(false);
         }
-        await claimDmeCallback();
+        await claimDmeCallback()?.then(updateContract);
         return setIsClaimed(true);
     };
     const onMiningButtonClick = () => {
         if (isMining) {
             return warning({
-                title: 'Do you really want to stop mining?',
-                content:
-                    'Your consumables will burn out and you won’t be able to use them anymore',
-                onOk: toggleMiningCallback,
+                title: t('pages.mining.doWantStopMining'),
+                content: t('pages.mining.consumablesWillBurnOut'),
+                onOk: toggleMiningAndReinitializeStores,
             });
         }
         if (isMiningFinished) {
             return setClaimModalVisibility(true);
         }
-        return toggleMiningCallback();
+        return toggleMiningAndReinitializeStores();
     };
     const buttonText = isMiningFinished
         ? t('pages.mining.getTheReport')
@@ -114,7 +121,9 @@ export const MiningAndClaimButton: FC<Props> = ({ action }) => {
                         align="center"
                     >
                         <CheckCircleOutlined className={styles.icon} />
-                        <Title level={3}>Your DME has been claimed</Title>
+                        <Title level={3}>
+                            {t('pages.mining.yourDMEHasBeenClaimed')}
+                        </Title>
                     </Space>
                 ) : (
                     <ClaimInfo />

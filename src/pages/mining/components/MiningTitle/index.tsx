@@ -22,7 +22,7 @@ export const MiningTitle: FC<Props> = memo(({ action, onMiningExpire }) => {
         [ActionState.claimed]: t('pages.mining.miningHasClaimed'),
         [ActionState.undefined]: '',
     };
-    const { seconds, minutes, hours, days } = useTimer({
+    const { seconds, minutes, hours, days, isRunning } = useTimer({
         expiryTimestamp: new Date(action.finishes_at * 1000),
         onExpire: onMiningExpire,
     });
