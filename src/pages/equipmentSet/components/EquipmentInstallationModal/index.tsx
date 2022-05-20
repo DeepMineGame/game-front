@@ -4,11 +4,23 @@ import { Button, DmpIcon, Modal, Timer, Title } from 'shared';
 import Icon from '@ant-design/icons';
 import styles from './styles.module.scss';
 
-export const EquipmentInstallationModal = () => {
+interface Props {
+    disabled?: boolean;
+    onInstall?: () => Promise<void>;
+}
+export const EquipmentInstallationModal = ({ disabled, onInstall }: Props) => {
     const { t } = useTranslation();
     const [infoModalVisibility, setInfoModalVisibility] = useState(false);
     const toggleModal = () => setInfoModalVisibility(!infoModalVisibility);
     const [useDmp, setUseDmp] = useState(false);
+
+    const handleInstall = async () => {
+        if (onInstall) {
+            await onInstall();
+            toggleModal();
+        }
+    };
+
     const footer = (
         <div className={styles.modalFooter}>
             <Button
@@ -20,7 +32,7 @@ export const EquipmentInstallationModal = () => {
                 22
             </Button>
             <Button type="ghost">{t('components.common.button.cancel')}</Button>
-            <Button type="primary">
+            <Button type="primary" onClick={handleInstall}>
                 {t('components.common.button.install')}
             </Button>
         </div>
@@ -29,6 +41,7 @@ export const EquipmentInstallationModal = () => {
     return (
         <>
             <Button
+                disabled={disabled}
                 type="primary"
                 onClick={toggleModal}
                 className={styles.actionButton}

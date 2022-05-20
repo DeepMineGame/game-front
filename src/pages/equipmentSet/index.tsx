@@ -9,6 +9,7 @@ import {
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
+import { useSmartContractAction } from 'features';
 import {
     contractorsStore,
     getContractorsEffect,
@@ -16,6 +17,7 @@ import {
     getInventoryConfig,
     getMinesEffect,
     ID_TO_INVENTORY,
+    installEquipment,
     InventoryIdType,
     InventoryNameType,
     UserContractsType,
@@ -32,6 +34,14 @@ const findEquipmentByName = (
     inventory.find(
         (v) => ID_TO_INVENTORY[+v.asset_template_id as InventoryIdType] === name
     );
+
+const equipmentSetAvailableNames = [
+    'Cutter',
+    'Delaminator',
+    'DME Wire',
+    'Plunging Blocks',
+    'Wandering Reactor',
+] as InventoryNameType[];
 
 export const EquipmentSetPage: FC = () => {
     const { t } = useTranslation();
@@ -62,20 +72,34 @@ export const EquipmentSetPage: FC = () => {
     const userContracts = useTableData<UserContractsType>(
         getContractsByNickNameConfig
     );
-    const currentContractId = userContracts?.[0]?.id;
+    const contractId = userContracts?.[0]?.id ?? 0;
     const userInventory = useTableData<UserInventoryType>(getInventoryConfig);
 
     const userEquipment = Object.fromEntries(
-        (
-            [
-                'Cutter',
-                'Delaminator',
-                'DME Wire',
-                'Plunging Blocks',
-                'Wandering Reactor',
-            ] as InventoryNameType[]
-        ).map((name) => [name, findEquipmentByName(userInventory, name)])
+        equipmentSetAvailableNames.map((name) => [
+            name,
+            findEquipmentByName(userInventory, name),
+        ])
     );
+
+    const assetIds = Object.entries(userEquipment)
+        .map(([, inventory]) => inventory?.asset_id?.toString() ?? '')
+        .filter((v) => v);
+    const hasAllEquipment =
+        assetIds.length === equipmentSetAvailableNames.length;
+
+    const installEquipmentCallback = useSmartContractAction(
+        installEquipment({
+            waxUser: accountName,
+            contractId,
+            items: assetIds,
+        })
+    );
+    const handleInstallEquipment = async () => {
+        if (hasAllEquipment) {
+            await installEquipmentCallback();
+        }
+    };
 
     return (
         <Page headerTitle={t('pages.equipmentSet')}>
@@ -87,7 +111,7 @@ export const EquipmentSetPage: FC = () => {
                             initial={10}
                             current={3}
                             remained={7}
-                            hasRemove
+                            hasRemove={!!inventory.activated}
                             status={
                                 inventory.activated
                                     ? 'installed'
@@ -107,7 +131,10 @@ export const EquipmentSetPage: FC = () => {
                 <Characteristics />
             </div>
             <div className={styles.installButtonWrapper}>
-                <EquipmentInstallationModal />
+                <EquipmentInstallationModal
+                    onInstall={handleInstallEquipment}
+                    disabled={!hasAllEquipment}
+                />
             </div>
             <Inventory
                 visible={inventoryVisibility}

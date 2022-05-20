@@ -1,5 +1,8 @@
 import { deepminearea } from '../constants';
 
+export * from './type';
+export * from './calcmining';
+
 export function toggleMining({
     waxUser,
     contractId,
@@ -49,5 +52,59 @@ export function claimdme({ waxUser }: { waxUser: string }) {
     };
 }
 
-export * from './type';
-export * from './calcmining';
+interface InstallEquipmentArgsType {
+    waxUser: string;
+    contractId: number;
+    items: string[];
+}
+export const installEquipment = ({
+    waxUser,
+    contractId,
+    items,
+}: InstallEquipmentArgsType) => {
+    return {
+        actions: [
+            {
+                account: deepminearea,
+                name: 'instacequip',
+                authorization: [
+                    {
+                        actor: waxUser,
+                        permission: 'active',
+                    },
+                ],
+                data: {
+                    wax_user: waxUser,
+                    contract_id: contractId,
+                    items,
+                },
+            },
+        ],
+    };
+};
+
+export const uninstallEquipment = ({
+    waxUser,
+    contractId,
+    items,
+}: InstallEquipmentArgsType) => {
+    return {
+        actions: [
+            {
+                account: deepminearea,
+                name: 'uninsacequip',
+                authorization: [
+                    {
+                        actor: waxUser,
+                        permission: 'active',
+                    },
+                ],
+                data: {
+                    wax_user: waxUser,
+                    contract_id: contractId,
+                    items,
+                },
+            },
+        ],
+    };
+};
