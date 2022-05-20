@@ -8,6 +8,7 @@ import {
     Title,
     useChainAuthContext,
     useMediaQuery,
+    warning,
 } from 'shared';
 import { useSmartContractAction } from 'features';
 import { CheckCircleOutlined } from '@ant-design/icons';
@@ -70,6 +71,14 @@ export const MiningAndClaimButton: FC<Props> = ({ action }) => {
         return setIsClaimed(true);
     };
     const onMiningButtonClick = () => {
+        if (isMining) {
+            return warning({
+                title: 'Do you really want to stop mining?',
+                content:
+                    'Your consumables will burn out and you won’t be able to use them anymore',
+                onOk: toggleMiningCallback,
+            });
+        }
         if (isMiningFinished) {
             return setClaimModalVisibility(true);
         }

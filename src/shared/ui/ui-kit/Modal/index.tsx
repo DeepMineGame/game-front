@@ -1,5 +1,5 @@
 import { Modal as ModalAnt, ModalProps } from 'antd';
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 import { Button } from '../Button';
@@ -42,3 +42,22 @@ export const Modal: FC<Props> = (props) => {
         />
     );
 };
+
+export function warning({
+    title,
+    content,
+    ...props
+}: {
+    title: ReactNode;
+    content: ReactNode;
+} & ModalProps) {
+    ModalAnt.warning({
+        ...props,
+        title: <span className={styles.warningTitle}>{title}</span>,
+        content,
+        className: styles.warningModal,
+        okButtonProps: { className: styles.modalButton, type: 'primary' },
+        okCancel: true,
+        cancelButtonProps: { className: styles.ghostButton, ghost: true },
+    });
+}
