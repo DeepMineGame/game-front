@@ -12,26 +12,31 @@ export const routes = {
         {
             path: intro,
             Component: IntroPage,
+            titleTag: 'Intro - Deepmine',
         },
         {
             path: contractorCabin,
             Component: ContractorCabin,
+            titleTag: 'Contractor — DeepMine',
         },
     ],
     admin: [
         {
             path: equipmentSet,
             Component: EquipmentSetPage,
+            titleTag: 'Equipment set — DeepMine',
         },
         {
             path: mining,
             Component: MiningPage,
+            titleTag: 'Mining — DeepMine',
         },
     ],
     default: [
         {
             path: '*',
             Component: IntroPage,
+            titleTag: 'Intro - Deepmine',
         },
     ],
 };

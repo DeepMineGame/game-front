@@ -4,10 +4,22 @@ import { useStore } from 'effector-react';
 
 import { userStore } from 'entities/user';
 import { routes } from './routes';
+import { DocumentTitle } from './components/DocumentTitle';
 
-const renderRoutes = (routeList: { path: string; Component: React.FC }[]) =>
-    routeList.map(({ path, Component }) => (
-        <Route key={path} path={path} element={<Component />} />
+const renderRoutes = (
+    routeList: { path: string; Component: React.FC; titleTag: string }[]
+) =>
+    routeList.map(({ path, Component, titleTag }) => (
+        <Route
+            key={path}
+            path={path}
+            element={
+                <>
+                    <DocumentTitle title={titleTag} />
+                    <Component />
+                </>
+            }
+        />
     ));
 
 export const Router = () => {
