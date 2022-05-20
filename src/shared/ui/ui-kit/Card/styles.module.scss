@@ -18,6 +18,7 @@
 .progress {
   max-width: 144px;
   display: flex;
+  align-items: center;
   padding-bottom: 10px;
 
   @media only screen and (min-width: $media-desktop-s)  {

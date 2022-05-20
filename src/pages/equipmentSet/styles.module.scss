@@ -13,10 +13,6 @@
   flex-wrap: wrap;
   gap: 64px;
   justify-content: center;
-
-  @media only screen and (min-width: $media-desktop-s)  {
-    justify-content: center;
-  }
 }
 
 .cardWrapper {
