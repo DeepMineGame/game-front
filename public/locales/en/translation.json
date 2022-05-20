@@ -50,10 +50,14 @@
       "miningInProgress": "Mining is progress",
       "miningWasInterrupted": "Mining was interrupted",
       "miningHasFinished": "Mining has finished",
+      "miningHasClaimed": "Mining has claimed",
       "miningFinishedSuccessfully": "Mining has finished successfully!",
       "cool": "That's cool",
       "claim": "Claim",
-      "tooltipAroundConsumables": "This is where improvements are installed that allow you to make mining more efficient. They will be available for the Mine level 1"
+      "tooltipAroundConsumables": "This is where improvements are installed that allow you to make mining more efficient. They will be available for the Mine level 1",
+      "estimatesMiningTime": "Estimates mining time",
+      "estimatesDme": "Estimates amount of DME",
+      "mineDepth": "Mine depth"
     },
     "contractor": {
       "signingContract": {

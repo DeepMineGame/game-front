@@ -19,6 +19,7 @@ export const MiningTitle: FC<Props> = memo(({ action, onMiningExpire }) => {
         [ActionState.active]: t('pages.mining.miningInProgress'),
         [ActionState.interrupted]: t('pages.mining.miningWasInterrupted'),
         [ActionState.finished]: t('pages.mining.miningHasFinished'),
+        [ActionState.claimed]: t('pages.mining.miningHasClaimed'),
         [ActionState.undefined]: '',
     };
     const { seconds, minutes, hours, days } = useTimer({

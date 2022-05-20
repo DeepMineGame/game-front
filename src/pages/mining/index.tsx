@@ -76,7 +76,7 @@ export const MiningPage: FC = () => {
                     <div className={styles.data}>
                         {mineStore && (
                             <div className={styles.line}>
-                                <div>Mine depth</div>
+                                <div>{t('pages.mining.mineDepth')}</div>
                                 <div>{mineStore[0].layer_depth}</div>
                             </div>
                         )}
@@ -84,13 +84,19 @@ export const MiningPage: FC = () => {
                             <>
                                 {formatEstimateMineTime && (
                                     <div className={styles.line}>
-                                        <div>Estimates mining time</div>
+                                        <div>
+                                            {t(
+                                                'pages.mining.estimatesMiningTime'
+                                            )}
+                                        </div>
                                         <div>{formatEstimateMineTime}</div>
                                     </div>
                                 )}
                                 {estDmeAmount && (
                                     <div className={styles.line}>
-                                        <div>Estimates amount of DME</div>
+                                        <div>
+                                            {t('pages.mining.estimatesDme')}
+                                        </div>
                                         <div>{estDmeAmount}</div>
                                     </div>
                                 )}

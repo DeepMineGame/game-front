@@ -5,6 +5,7 @@ export enum ActionState {
     active,
     interrupted,
     finished,
+    claimed,
 }
 
 export type ActionDto = {
