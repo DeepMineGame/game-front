@@ -17,3 +17,15 @@ export function useSmartContractAction<T>(
             ?.signTransaction(action, options)
             .catch(errorNotify);
 }
+
+export const useSmartContractActionDynamic = () => {
+    const chainAccount = useChainAuthContext();
+
+    return <T>(
+        action: { actions: Action<T> },
+        options = defaultTransactionOptions
+    ) =>
+        chainAccount?.activeUser
+            ?.signTransaction(action, options)
+            .catch(errorNotify);
+};

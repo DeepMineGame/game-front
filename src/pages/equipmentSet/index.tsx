@@ -9,7 +9,10 @@ import {
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
-import { useSmartContractAction } from 'features';
+import {
+    useSmartContractAction,
+    useSmartContractActionDynamic,
+} from 'features';
 import {
     contractorsStore,
     getContractorsEffect,
@@ -20,6 +23,7 @@ import {
     installEquipment,
     InventoryIdType,
     InventoryNameType,
+    uninstallEquipment,
     UserContractsType,
     UserInventoryType,
 } from 'entities/smartcontracts';
@@ -51,6 +55,8 @@ export const EquipmentSetPage: FC = () => {
     const toggleInventoryVisibility = () => {
         setInventoryVisibility(!inventoryVisibility);
     };
+
+    const callAction = useSmartContractActionDynamic();
 
     useEffect(() => {
         let interval: ReturnType<typeof setInterval>;
@@ -88,6 +94,13 @@ export const EquipmentSetPage: FC = () => {
     const hasAllEquipment =
         assetIds.length === equipmentSetAvailableNames.length;
 
+    const activatedEquipment = Object.entries(userEquipment).filter(
+        ([, equipment]) => equipment?.activated
+    );
+    const hasAllEquipmentActive =
+        hasAllEquipment &&
+        activatedEquipment.length === equipmentSetAvailableNames.length;
+
     const installEquipmentCallback = useSmartContractAction(
         installEquipment({
             waxUser: accountName,
@@ -95,14 +108,28 @@ export const EquipmentSetPage: FC = () => {
             items: assetIds,
         })
     );
+
     const handleInstallEquipment = async () => {
         if (hasAllEquipment) {
             await installEquipmentCallback();
         }
     };
 
+    const handleRemoveEquipment = (inventoryIds: string[]) => async () => {
+        const filteredIds = inventoryIds.filter((v) => v);
+        if (filteredIds.length) {
+            await callAction(
+                uninstallEquipment({
+                    waxUser: accountName,
+                    contractId,
+                    items: filteredIds,
+                })
+            );
+        }
+    };
+
     return (
-        <Page headerTitle={t('pages.equipmentSet')}>
+        <Page headerTitle={t('pages.equipmentSet.title')}>
             <div className={styles.cards}>
                 {Object.entries(userEquipment).map(([name, inventory]) =>
                     inventory ? (
@@ -112,6 +139,9 @@ export const EquipmentSetPage: FC = () => {
                             current={3}
                             remained={7}
                             hasRemove={!!inventory.activated}
+                            onRemove={handleRemoveEquipment([
+                                inventory.asset_id,
+                            ])}
                             status={
                                 inventory.activated
                                     ? 'installed'
@@ -132,8 +162,10 @@ export const EquipmentSetPage: FC = () => {
             </div>
             <div className={styles.installButtonWrapper}>
                 <EquipmentInstallationModal
+                    onUninstall={handleRemoveEquipment(assetIds)}
                     onInstall={handleInstallEquipment}
                     disabled={!hasAllEquipment}
+                    isInstall={!hasAllEquipmentActive}
                 />
             </div>
             <Inventory

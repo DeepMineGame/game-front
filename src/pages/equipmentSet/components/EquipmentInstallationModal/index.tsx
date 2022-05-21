@@ -6,9 +6,16 @@ import styles from './styles.module.scss';
 
 interface Props {
     disabled?: boolean;
+    isInstall?: boolean;
     onInstall?: () => Promise<void>;
+    onUninstall?: () => Promise<void>;
 }
-export const EquipmentInstallationModal = ({ disabled, onInstall }: Props) => {
+export const EquipmentInstallationModal = ({
+    disabled,
+    onInstall,
+    onUninstall,
+    isInstall,
+}: Props) => {
     const { t } = useTranslation();
     const [infoModalVisibility, setInfoModalVisibility] = useState(false);
     const toggleModal = () => setInfoModalVisibility(!infoModalVisibility);
@@ -17,6 +24,13 @@ export const EquipmentInstallationModal = ({ disabled, onInstall }: Props) => {
     const handleInstall = async () => {
         if (onInstall) {
             await onInstall();
+            toggleModal();
+        }
+    };
+
+    const handleUninstall = async () => {
+        if (onUninstall) {
+            await onUninstall();
             toggleModal();
         }
     };
@@ -32,9 +46,15 @@ export const EquipmentInstallationModal = ({ disabled, onInstall }: Props) => {
                 22
             </Button>
             <Button type="ghost">{t('components.common.button.cancel')}</Button>
-            <Button type="primary" onClick={handleInstall}>
-                {t('components.common.button.install')}
-            </Button>
+            {isInstall ? (
+                <Button type="primary" onClick={handleInstall}>
+                    {t('components.common.button.install')}
+                </Button>
+            ) : (
+                <Button type="primary" onClick={handleUninstall}>
+                    {t('components.common.button.uninstall')}
+                </Button>
+            )}
         </div>
     );
 
@@ -47,13 +67,15 @@ export const EquipmentInstallationModal = ({ disabled, onInstall }: Props) => {
                 className={styles.actionButton}
                 size="large"
             >
-                {t('pages.install')}
+                {isInstall
+                    ? t('pages.equipmentSet.install')
+                    : t('pages.equipmentSet.uninstall')}
             </Button>
             <Modal
                 visible={infoModalVisibility}
                 title={
                     <Title fontFamily="bai" level={5}>
-                        {t('pages.installation')}
+                        {t('pages.equipmentSet.installation')}
                     </Title>
                 }
                 onCancel={toggleModal}
