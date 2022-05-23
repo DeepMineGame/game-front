@@ -27,14 +27,12 @@
     "common": {
       "button": {
         "cancel": "Cancel",
-        "install": "Install"
+        "install": "Install",
+        "uninstall": "Uninstall"
       }
     }
   },
   "pages": {
-    "equipmentSet": "EQUIPMENT SET",
-    "install": "Install the Equipment set",
-    "installation": "Equipment installation",
     "mining": {
       "mining": "MINING",
       "miningStats": "MINING STATS",
@@ -108,6 +106,12 @@
         "text": "Do you want to travel here?",
         "button": "Physical Shift"
       }
+    },
+    "equipmentSet": {
+      "title": "EQUIPMENT SET",
+      "installation": "Equipment installation",
+      "install": "Install the Equipment set",
+      "uninstall": "Uninstall the Equipment set"
     }
   },
   "characteristics": {
@@ -121,8 +125,6 @@
     "estimateMiningPower": "Estimate Mining Power",
     "sublevelEfficiensy": "Sublevel Efficiensy",
     "equipmentBreakageProbabillity": "Equipment Breakage Probabillity",
-    "fossilChance": "Fossil Chance",
-    "install": "Install the Equipment set",
-    "uninstall": "Uninstall the Equipment set"
+    "fossilChance": "Fossil Chance"
   }
 }

@@ -8,7 +8,8 @@ import {
 import { useAccountName } from './useAccountName';
 
 export function useTableData<T>(
-    getConfig: (accountName: string) => GetTableDataConfigType
+    getConfig: (accountName: string) => GetTableDataConfigType,
+    needUpdate?: boolean
 ) {
     const accountName = useAccountName();
     const [result, setResult] = useState<
@@ -16,14 +17,16 @@ export function useTableData<T>(
     >(undefined);
 
     useEffect(() => {
-        if (accountName) {
-            getTableData(getConfig(accountName)).then((data) => {
-                setResult(data);
-            });
-        } else {
-            setResult(undefined);
+        if (needUpdate !== false) {
+            if (accountName) {
+                getTableData(getConfig(accountName)).then((data) => {
+                    setResult(data);
+                });
+            } else {
+                setResult(undefined);
+            }
         }
-    }, [accountName, getConfig]);
+    }, [accountName, getConfig, needUpdate]);
 
     return result?.rows ?? [];
 }

@@ -9,6 +9,7 @@ import {
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
+import { useSmartContractActionDynamic } from 'features';
 import {
     contractorsStore,
     getContractorsEffect,
@@ -16,8 +17,10 @@ import {
     getInventoryConfig,
     getMinesEffect,
     ID_TO_INVENTORY,
+    installEquipment,
     InventoryIdType,
     InventoryNameType,
+    uninstallEquipment,
     UserContractsType,
     UserInventoryType,
 } from 'entities/smartcontracts';
@@ -33,6 +36,14 @@ const findEquipmentByName = (
         (v) => ID_TO_INVENTORY[+v.asset_template_id as InventoryIdType] === name
     );
 
+const equipmentSetAvailableNames = [
+    'Cutter',
+    'Delaminator',
+    'DME Wire',
+    'Plunging Blocks',
+    'Wandering Reactor',
+] as InventoryNameType[];
+
 export const EquipmentSetPage: FC = () => {
     const { t } = useTranslation();
     const contractors = useStore(contractorsStore);
@@ -41,6 +52,11 @@ export const EquipmentSetPage: FC = () => {
     const toggleInventoryVisibility = () => {
         setInventoryVisibility(!inventoryVisibility);
     };
+    const [needUpdate, setNeedUpdate] = useState<boolean | undefined>(
+        undefined
+    );
+
+    const callAction = useSmartContractActionDynamic();
 
     useEffect(() => {
         let interval: ReturnType<typeof setInterval>;
@@ -62,23 +78,69 @@ export const EquipmentSetPage: FC = () => {
     const userContracts = useTableData<UserContractsType>(
         getContractsByNickNameConfig
     );
-    const currentContractId = userContracts?.[0]?.id;
-    const userInventory = useTableData<UserInventoryType>(getInventoryConfig);
-
-    const userEquipment = Object.fromEntries(
-        (
-            [
-                'Cutter',
-                'Delaminator',
-                'DME Wire',
-                'Plunging Blocks',
-                'Wandering Reactor',
-            ] as InventoryNameType[]
-        ).map((name) => [name, findEquipmentByName(userInventory, name)])
+    const contractId = userContracts?.[0]?.id ?? 0;
+    const userInventory = useTableData<UserInventoryType>(
+        getInventoryConfig,
+        needUpdate
     );
 
+    const userEquipment = Object.fromEntries(
+        equipmentSetAvailableNames.map((name) => [
+            name,
+            findEquipmentByName(userInventory, name),
+        ])
+    );
+
+    const assetIds = Object.entries(userEquipment)
+        .map(([, inventory]) => inventory?.asset_id?.toString() ?? '')
+        .filter((v) => v);
+    const hasAllEquipment =
+        assetIds.length === equipmentSetAvailableNames.length;
+
+    const activatedEquipment = Object.entries(userEquipment).filter(
+        ([, equipment]) => equipment?.activated
+    );
+    const notActivatedEquipment = Object.entries(userEquipment).filter(
+        ([, equipment]) => !equipment?.activated
+    );
+    const hasAllEquipmentActive =
+        hasAllEquipment &&
+        activatedEquipment.length === equipmentSetAvailableNames.length;
+
+    const handleInstallEquipment = async () => {
+        setNeedUpdate(false);
+        const notActivatedEquipmentIds = notActivatedEquipment
+            .map(([, equipment]) => equipment?.asset_id)
+            .filter((v) => v) as string[];
+        if (notActivatedEquipmentIds.length) {
+            await callAction(
+                installEquipment({
+                    waxUser: accountName,
+                    contractId,
+                    items: notActivatedEquipmentIds,
+                })
+            );
+            setNeedUpdate(true);
+        }
+    };
+
+    const handleRemoveEquipment = (inventoryIds: string[]) => async () => {
+        setNeedUpdate(false);
+        const filteredIds = inventoryIds.filter((v) => v);
+        if (filteredIds.length) {
+            await callAction(
+                uninstallEquipment({
+                    waxUser: accountName,
+                    contractId,
+                    items: filteredIds,
+                })
+            );
+            setNeedUpdate(true);
+        }
+    };
+
     return (
-        <Page headerTitle={t('pages.equipmentSet')}>
+        <Page headerTitle={t('pages.equipmentSet.title')}>
             <div className={styles.cards}>
                 {Object.entries(userEquipment).map(([name, inventory]) =>
                     inventory ? (
@@ -87,7 +149,10 @@ export const EquipmentSetPage: FC = () => {
                             initial={10}
                             current={3}
                             remained={7}
-                            hasRemove
+                            hasRemove={!!inventory.activated}
+                            onRemove={handleRemoveEquipment([
+                                inventory.asset_id,
+                            ])}
                             status={
                                 inventory.activated
                                     ? 'installed'
@@ -107,7 +172,12 @@ export const EquipmentSetPage: FC = () => {
                 <Characteristics />
             </div>
             <div className={styles.installButtonWrapper}>
-                <EquipmentInstallationModal />
+                <EquipmentInstallationModal
+                    onUninstall={handleRemoveEquipment(assetIds)}
+                    onInstall={handleInstallEquipment}
+                    disabled={!hasAllEquipment}
+                    isInstall={!hasAllEquipmentActive}
+                />
             </div>
             <Inventory
                 visible={inventoryVisibility}
