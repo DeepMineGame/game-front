@@ -44,6 +44,7 @@ export const MiningAndClaimButton: FC<Props> = ({
     const isMiningFinished =
         (action?.state === ActionState.active && !isMiningWillEndInFuture) ||
         action?.state === ActionState.finished;
+    const isClaimed = action?.state === ActionState.claimed;
     const contracts = useStore(contractStore);
     const mineContracts = contracts?.filter(
         ({ type }) => type === ContractType.mineowner_contractor
@@ -87,7 +88,7 @@ export const MiningAndClaimButton: FC<Props> = ({
             return setClaimModalVisibility(true);
         }
 
-        if (!isMiningFinished) {
+        if (!isMiningFinished && !isClaimed) {
             return warning({
                 title: t('pages.mining.doWantStopMining'),
                 content: t('pages.mining.consumablesWillBurnOut'),

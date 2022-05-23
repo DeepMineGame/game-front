@@ -42,7 +42,7 @@ export const Welcome = ({ equipments }: SignContractProps) => {
                 </div>
                 <div className={styles.equipments}>
                     {equipments.map(({ name, isAvailable }) => (
-                        <div className={styles.equipmentLine}>
+                        <div className={styles.equipmentLine} key={name}>
                             <div className={styles.equipmentName}>{name}</div>
                             <div className={styles.equipmentValue}>
                                 {isAvailable ? (

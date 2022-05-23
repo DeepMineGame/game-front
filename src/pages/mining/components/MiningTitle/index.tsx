@@ -25,6 +25,8 @@ export const MiningTitle: FC<Props> = memo(
         };
         const isMining =
             action?.state === ActionState.active && isMiningWillEndInFuture;
+
+        // TODO: отказаться от этого пакета в пользу time.ts из utils
         const {
             seconds,
             minutes,
