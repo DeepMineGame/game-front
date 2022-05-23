@@ -9,10 +9,7 @@ import {
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
-import {
-    useSmartContractAction,
-    useSmartContractActionDynamic,
-} from 'features';
+import { useSmartContractActionDynamic } from 'features';
 import {
     contractorsStore,
     getContractorsEffect,
@@ -55,6 +52,9 @@ export const EquipmentSetPage: FC = () => {
     const toggleInventoryVisibility = () => {
         setInventoryVisibility(!inventoryVisibility);
     };
+    const [needUpdate, setNeedUpdate] = useState<boolean | undefined>(
+        undefined
+    );
 
     const callAction = useSmartContractActionDynamic();
 
@@ -79,7 +79,10 @@ export const EquipmentSetPage: FC = () => {
         getContractsByNickNameConfig
     );
     const contractId = userContracts?.[0]?.id ?? 0;
-    const userInventory = useTableData<UserInventoryType>(getInventoryConfig);
+    const userInventory = useTableData<UserInventoryType>(
+        getInventoryConfig,
+        needUpdate
+    );
 
     const userEquipment = Object.fromEntries(
         equipmentSetAvailableNames.map((name) => [
@@ -97,25 +100,32 @@ export const EquipmentSetPage: FC = () => {
     const activatedEquipment = Object.entries(userEquipment).filter(
         ([, equipment]) => equipment?.activated
     );
+    const notActivatedEquipment = Object.entries(userEquipment).filter(
+        ([, equipment]) => !equipment?.activated
+    );
     const hasAllEquipmentActive =
         hasAllEquipment &&
         activatedEquipment.length === equipmentSetAvailableNames.length;
 
-    const installEquipmentCallback = useSmartContractAction(
-        installEquipment({
-            waxUser: accountName,
-            contractId,
-            items: assetIds,
-        })
-    );
-
     const handleInstallEquipment = async () => {
-        if (hasAllEquipment) {
-            await installEquipmentCallback();
+        setNeedUpdate(false);
+        const notActivatedEquipmentIds = notActivatedEquipment
+            .map(([, equipment]) => equipment?.asset_id)
+            .filter((v) => v) as string[];
+        if (notActivatedEquipmentIds.length) {
+            await callAction(
+                installEquipment({
+                    waxUser: accountName,
+                    contractId,
+                    items: notActivatedEquipmentIds,
+                })
+            );
+            setNeedUpdate(true);
         }
     };
 
     const handleRemoveEquipment = (inventoryIds: string[]) => async () => {
+        setNeedUpdate(false);
         const filteredIds = inventoryIds.filter((v) => v);
         if (filteredIds.length) {
             await callAction(
@@ -125,6 +135,7 @@ export const EquipmentSetPage: FC = () => {
                     items: filteredIds,
                 })
             );
+            setNeedUpdate(true);
         }
     };
 
