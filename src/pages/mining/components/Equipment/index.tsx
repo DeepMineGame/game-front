@@ -30,6 +30,7 @@ export const Equipment = () => {
             <div className={styles.cards}>
                 {installedItems?.map(({ asset_template_id }) => (
                     <Card
+                        key={asset_template_id}
                         imageSrc={getImagePath(
                             asset_template_id as keyof typeof TEST_NET_ASSETS_ID_MAP
                         )}

@@ -9,8 +9,10 @@ import {
 } from 'entities/smartcontracts';
 import styles from '../../styles.module.scss';
 
+const THREE_SECONDS = 3000;
 export const ClaimInfo = memo(() => {
     const contractors = useStore(contractorsStore);
+
     const user = useChainAuthContext();
     const accountName = user.activeUser?.accountName;
     const calcMining = useSmartContractAction(
@@ -27,7 +29,7 @@ export const ClaimInfo = memo(() => {
         if (accountName) {
             interval = setInterval(() => {
                 getContractorsEffect({ nickname: accountName });
-            }, 3000);
+            }, THREE_SECONDS);
         }
         return () => clearInterval(interval);
     }, [accountName]);
@@ -39,9 +41,11 @@ export const ClaimInfo = memo(() => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [areaId]);
 
-    return isTimeSpentEmpty ? (
-        <Loader />
-    ) : (
+    if (timeSpent === null) {
+        return <Loader />;
+    }
+
+    return (
         <div className={styles.data}>
             <div className={styles.line}>
                 <div>Time spent</div>
