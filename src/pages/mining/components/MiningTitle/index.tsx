@@ -1,4 +1,4 @@
-import React, { FC, memo, useEffect, useState } from 'react';
+import React, { FC, memo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTimer } from 'react-timer-hook';
 import { desktopS, Title, useMediaQuery } from 'shared';
@@ -43,6 +43,7 @@ export const MiningTitle: FC<Props> = memo(
         });
         useEffect(() => {
             timerRestart(new Date(action.finishes_at * 1000), true);
+            // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [isMining]);
 
         const isMiningFinished =

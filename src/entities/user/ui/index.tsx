@@ -3,6 +3,7 @@ import { Avatar, Badge, Progress } from 'antd';
 import { AvatarIcon, Text } from 'shared';
 import { ThunderboltOutlined } from '@ant-design/icons';
 import { useLogout } from 'features';
+import { useNavigate } from 'react-router-dom';
 import { User } from '../model/type';
 import styles from './styles.module.scss';
 
@@ -14,7 +15,10 @@ type Props = {
 
 export const UserAvatar: FC<Props> = ({ user }) => {
     const avatar = () => <Avatar src={user?.avatar} icon={<AvatarIcon />} />;
-    const logout = useLogout();
+    const navigate = useNavigate();
+
+    const logout = useLogout(() => navigate('/'));
+
     return (
         <div className={styles.wrapper} onClick={logout}>
             <div>
