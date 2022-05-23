@@ -72,3 +72,23 @@
 
   border-left: 1px solid $color-neutral-neutral-10;
 }
+
+@media only screen and (max-width: $media-tablet)  {
+  .container {
+    padding: 12px 19px;
+  }
+  .title {
+    padding-bottom: 10px;
+  }
+  .description {
+    padding-top: 0;
+    text-align: center;
+  }
+  .info {
+    padding: 0;
+  }
+
+  .buttons {
+    padding-top: 6px;
+  }
+}

@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import {
     ContractorMenu,
     ContractorMenuItems,
+    desktopS,
     Header,
     Monitor,
     useAccountName,
     useDimensions,
+    useMediaQuery,
     useTableData,
 } from 'shared';
 import { useNavigate } from 'react-router-dom';
@@ -35,6 +37,7 @@ import { ContractorCabinContent } from './components/ContractorCabinContent';
 export const ContractorCabin = () => {
     const accountName = useAccountName();
     const { width, height } = useDimensions();
+    const isDesktop = useMediaQuery(desktopS);
     const [needShiftBadge, setNeedShiftBadge] = useState(false);
     const [isTravelModalVisible, setIsTravelModalVisible] = useState(false);
     const [status, setStatus] = useState(0);
@@ -99,7 +102,7 @@ export const ContractorCabin = () => {
         >
             <Monitor
                 classNameContainer={
-                    isBgWidthHidden
+                    isBgWidthHidden && isDesktop
                         ? styles.cabinMonitorContainerWidth
                         : styles.cabinMonitorContainerHeight
                 }

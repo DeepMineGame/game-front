@@ -16,3 +16,12 @@
 .descriptionCenter {
   text-align: center;
 }
+
+@media only screen and (max-width: $media-tablet)  {
+  .container {
+    padding: 15px 19px;
+  }
+  .title {
+    padding-top: 0;
+  }
+}

@@ -19,3 +19,14 @@
   font-size: 20px;
   line-height: 28px;
 }
+
+@media only screen and (max-width: $media-tablet)  {
+  .timer {
+    font-size: 12px;
+    line-height: 20px;
+  }
+
+  .timerContainer {
+    padding-top: 10px;
+  }
+}

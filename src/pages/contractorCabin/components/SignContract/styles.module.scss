@@ -3,6 +3,7 @@
 .container {
   max-width: 320px;
   margin: 0 auto;
+  padding: 0 19px;
 }
 
 .title {
@@ -31,4 +32,21 @@
   justify-content: center;
 
   cursor: pointer;
+}
+
+@media only screen and (max-width: $media-tablet)  {
+  .title {
+    padding-top: 12px;
+  }
+  .description {
+    padding-top: 6px;
+  }
+
+  .buttons {
+    padding-top: 0;
+  }
+
+  .button {
+    border: none;
+  }
 }

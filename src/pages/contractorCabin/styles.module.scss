@@ -24,14 +24,6 @@
     background: url("../../shared/ui/images/Light_Yellow.jpg") no-repeat right center fixed;
     background-size: cover;
   }
-
-  @media only screen and (max-width: $media-tablet)  {
-    height: 100vh;
-    width: 100vw;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
 }
 
 .cabinMonitorContainerHeight {
@@ -67,4 +59,19 @@
   font-size: 14px;
   line-height: 22px;
   color: $color-primary-primary-6;
+}
+
+@media only screen and (max-width: $media-tablet)  {
+  .title, .description {
+    font-size: 12px;
+    line-height: 20px;
+  }
+
+  .cabinBackground {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 }

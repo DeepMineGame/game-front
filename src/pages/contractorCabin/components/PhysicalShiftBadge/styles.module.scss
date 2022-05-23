@@ -36,3 +36,14 @@
 
   cursor: pointer;
 }
+
+@media only screen and (max-width: $media-tablet)  {
+  .container {
+    right: 14px;
+    bottom: 90px
+  }
+
+  .text {
+    padding: 9px 20px 9px 0;
+  }
+}
