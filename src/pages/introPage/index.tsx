@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { authDeepMineUserEffect } from 'features';
 import { useStore } from 'effector-react';
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useChainAuthContext, DeepMineLogo, Button } from 'shared';
+import { Navigate } from 'react-router';
 import { Typography } from 'antd';
+import { useChainAuthContext, DeepMineLogo, Button } from 'shared';
 import { home } from 'app/router/paths';
 import { useLogout } from 'features/useLogout';
 import { userStore } from 'entities/user';
@@ -15,8 +15,6 @@ export const IntroPage = () => {
     const logout = useLogout();
     const user = useStore(userStore);
     const isUserLoading = useStore(authDeepMineUserEffect.pending);
-
-    const navigate = useNavigate();
     const { t } = useTranslation();
 
     const onAuthButtonClick = useCallback(() => {
@@ -26,13 +24,7 @@ export const IntroPage = () => {
         return showModal();
     }, [chainUser, logout, showModal]);
 
-    useEffect(() => {
-        if (chainUser) {
-            authDeepMineUserEffect(chainUser.accountName).then(() =>
-                navigate(home)
-            );
-        }
-    }, [chainUser, navigate]);
+    if (chainUser) return <Navigate to={home} replace />;
 
     return (
         <div className={styles.wrapper}>

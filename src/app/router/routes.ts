@@ -7,41 +7,50 @@ const IntroPage = React.lazy(async () => ({
     default: (await import('pages')).IntroPage,
 }));
 
-export const routes = {
-    public: [
-        {
-            path: intro,
-            Component: IntroPage,
-            titleTag: 'Intro - Deepmine',
-        },
-        {
-            path: contractorCabin,
-            Component: ContractorCabin,
-            titleTag: 'Contractor — DeepMine',
-        },
-        {
-            path: equipmentSet,
-            Component: EquipmentSetPage,
-            titleTag: 'Equipment set — DeepMine',
-        },
-        {
-            path: home,
-            Component: HomePage,
-            titleTag: 'Hometown — DeepMine',
-        },
-    ],
-    admin: [
-        {
-            path: mining,
-            Component: MiningPage,
-            titleTag: 'Mining — DeepMine',
-        },
-    ],
-    default: [
-        {
-            path: '*',
-            Component: IntroPage,
-            titleTag: 'Intro - Deepmine',
-        },
-    ],
+export type AppRoute = {
+    titleTag: string;
+    path: string;
+    Component: React.FC;
+    forLoggedIn?: boolean;
+    forAdmin?: boolean;
+};
+
+export const routes: AppRoute[] = [
+    {
+        path: intro,
+        Component: IntroPage,
+        titleTag: 'Intro - Deepmine',
+    },
+    {
+        path: contractorCabin,
+        Component: ContractorCabin,
+        forLoggedIn: true,
+        titleTag: 'Contractor — DeepMine',
+    },
+    {
+        path: equipmentSet,
+        Component: EquipmentSetPage,
+        forLoggedIn: true,
+        forAdmin: true,
+        titleTag: 'Equipment set — DeepMine',
+    },
+    {
+        path: home,
+        Component: HomePage,
+        forLoggedIn: true,
+        titleTag: 'Hometown — DeepMine',
+    },
+    {
+        path: mining,
+        Component: MiningPage,
+        forLoggedIn: true,
+        forAdmin: true,
+        titleTag: 'Mining — DeepMine',
+    },
+];
+
+export const fallbackRoute: AppRoute = {
+    path: '*',
+    Component: IntroPage,
+    titleTag: 'Intro - Deepmine',
 };
