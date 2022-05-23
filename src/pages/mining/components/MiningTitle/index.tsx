@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTimer } from 'react-timer-hook';
 import { desktopS, Title, useMediaQuery } from 'shared';
@@ -8,45 +8,68 @@ import styles from './styles.module.scss';
 
 type Props = {
     action: ActionDto;
-    onMiningExpire?: () => void;
+    onMiningExpire?: (date: Date) => void;
+    isMiningWillEndInFuture: boolean;
 };
 
-export const MiningTitle: FC<Props> = memo(({ action, onMiningExpire }) => {
-    const { t } = useTranslation();
+export const MiningTitle: FC<Props> = memo(
+    ({ action, onMiningExpire, isMiningWillEndInFuture }) => {
+        const { t } = useTranslation();
+        const isDesktop = useMediaQuery(desktopS);
+        const miningTitleMap = {
+            [ActionState.active]: t('pages.mining.miningInProgress'),
+            [ActionState.interrupted]: t('pages.mining.miningWasInterrupted'),
+            [ActionState.finished]: t('pages.mining.miningHasFinished'),
+            [ActionState.claimed]: t('pages.mining.miningHasClaimed'),
+            [ActionState.undefined]: '',
+        };
+        const isMining =
+            action?.state === ActionState.active && isMiningWillEndInFuture;
+        const {
+            seconds,
+            minutes,
+            hours,
+            days,
+            restart: timerRestart,
+        } = useTimer({
+            expiryTimestamp: new Date(action.finishes_at * 1000),
+            onExpire: () => {
+                if (onMiningExpire) {
+                    onMiningExpire(new Date());
+                }
+            },
+        });
+        useEffect(() => {
+            timerRestart(new Date(action.finishes_at * 1000), true);
+        }, [isMining]);
 
-    const isDesktop = useMediaQuery(desktopS);
-    const miningTitleMap = {
-        [ActionState.active]: t('pages.mining.miningInProgress'),
-        [ActionState.interrupted]: t('pages.mining.miningWasInterrupted'),
-        [ActionState.finished]: t('pages.mining.miningHasFinished'),
-        [ActionState.claimed]: t('pages.mining.miningHasClaimed'),
-        [ActionState.undefined]: '',
-    };
-    const { seconds, minutes, hours, days, isRunning } = useTimer({
-        expiryTimestamp: new Date(action.finishes_at * 1000),
-        onExpire: onMiningExpire,
-    });
+        const isMiningFinished =
+            (action?.state === ActionState.active &&
+                !isMiningWillEndInFuture) ||
+            action?.state === ActionState.finished;
 
-    const isMining = action?.state === ActionState.active;
-
-    return (
-        <Title
-            level={isDesktop ? 2 : 4}
-            className={classNames(styles.miningStatusTitle, {
-                [styles.interrupted]: action.state === ActionState.interrupted,
-                [styles.finished]: action.state === ActionState.finished,
-            })}
-            fontFamily="orbitron"
-        >
-            {miningTitleMap[action.state]}{' '}
-            {isMining && (
-                <>
-                    {days}d{' '}
-                    <span className={styles.timerRemained}>
-                        {hours}:{minutes}:{seconds}
-                    </span>
-                </>
-            )}
-        </Title>
-    );
-});
+        return (
+            <Title
+                level={isDesktop ? 2 : 4}
+                className={classNames(styles.miningStatusTitle, {
+                    [styles.interrupted]:
+                        action.state === ActionState.interrupted,
+                    [styles.finished]: isMiningFinished,
+                })}
+                fontFamily="orbitron"
+            >
+                {isMiningFinished
+                    ? miningTitleMap[ActionState.finished]
+                    : miningTitleMap[action.state]}{' '}
+                {isMining && (
+                    <>
+                        {days}d{' '}
+                        <span className={styles.timerRemained}>
+                            {hours}:{minutes}:{seconds}
+                        </span>
+                    </>
+                )}
+            </Title>
+        );
+    }
+);

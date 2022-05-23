@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import {
     Page,
     Title,
@@ -40,6 +40,11 @@ export const MiningPage: FC = () => {
     const mineStore = useStore(minesStore);
     const isMineStoreLoading = useStore(getMinesEffect.pending);
     const action = mineActions && mineActions[0];
+
+    const [now, setNow] = useState(new Date());
+    const isMiningWillEndInFuture =
+        action && now < new Date(action.finishes_at * 1000);
+
     const neutral4 = '#303030';
     const estMiningTime =
         action &&
@@ -57,9 +62,13 @@ export const MiningPage: FC = () => {
     return (
         <Page headerTitle={t('pages.mining.mining')}>
             {action ? (
-                <MiningTitle action={action} />
+                <MiningTitle
+                    action={action}
+                    onMiningExpire={setNow}
+                    isMiningWillEndInFuture={Boolean(isMiningWillEndInFuture)}
+                />
             ) : (
-                <Skeleton title={false} loading={isLoading} />
+                <Skeleton title={false} loading={isActionsLoading} />
             )}
 
             <Row justify="center" gutter={gutter} className={styles.grid}>
@@ -108,7 +117,6 @@ export const MiningPage: FC = () => {
                     <Title level={4} fontFamily="orbitron">
                         {t('pages.mining.consumables')}
                     </Title>
-
                     <Space size="large" direction="vertical">
                         <Tooltip
                             placement="left"
@@ -124,7 +132,12 @@ export const MiningPage: FC = () => {
                                 <Plugin />
                             </Space>
                         </Tooltip>
-                        <MiningAndClaimButton action={action} />
+                        <MiningAndClaimButton
+                            action={action}
+                            isMiningWillEndInFuture={Boolean(
+                                isMiningWillEndInFuture
+                            )}
+                        />
                     </Space>
                 </Col>
             </Row>

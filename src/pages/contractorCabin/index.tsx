@@ -71,10 +71,6 @@ export const ContractorCabin = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [status]);
 
-    useEffect(() => {
-        document.title = 'Contractor — DeepMine';
-    }, []);
-
     const openTravelModal = () => {
         setIsTravelModalVisible(true);
     };

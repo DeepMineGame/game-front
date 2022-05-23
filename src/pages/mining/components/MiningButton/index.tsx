@@ -29,15 +29,21 @@ import styles from './styles.module.scss';
 
 type Props = {
     action: ActionDto | undefined;
+    isMiningWillEndInFuture: boolean;
 };
 
-export const MiningAndClaimButton: FC<Props> = ({ action }) => {
+export const MiningAndClaimButton: FC<Props> = ({
+    action,
+    isMiningWillEndInFuture,
+}) => {
     const [claimModalVisibility, setClaimModalVisibility] = useState(false);
     const chainAccount = useChainAuthContext();
     const isDesktop = useMediaQuery(desktopS);
     const { t } = useTranslation();
     const isMining = action?.state === ActionState.active;
-    const isMiningFinished = action?.state === ActionState.finished;
+    const isMiningFinished =
+        (action?.state === ActionState.active && !isMiningWillEndInFuture) ||
+        action?.state === ActionState.finished;
     const contracts = useStore(contractStore);
     const mineContracts = contracts?.filter(
         ({ type }) => type === ContractType.mineowner_contractor
@@ -61,40 +67,49 @@ export const MiningAndClaimButton: FC<Props> = ({ action }) => {
         });
     const toggleMiningAndReinitializeStores = () =>
         toggleMiningCallback()?.then(updateContract);
-    const [isClaimed, setIsClaimed] = useState(false);
+    const [isClaimedState, setIsClaimedState] = useState(false);
     const claimDmeCallback = useSmartContractAction(
         claimdme({ waxUser: chainAccount.activeUser?.accountName || '' })
     );
     const isContractsLoading = useStore(getContractEffect.pending);
     const isActionsLoading = useStore(getActionEffect.pending);
-    const miningButtonText = isMining
-        ? t('pages.mining.stopMining')
-        : t('pages.mining.startMining');
 
     const onClaimButtonClick = async () => {
-        if (isClaimed) {
+        if (isClaimedState) {
             return setClaimModalVisibility(false);
         }
         await claimDmeCallback()?.then(updateContract);
-        return setIsClaimed(true);
+        return setIsClaimedState(true);
     };
     const onMiningButtonClick = () => {
-        if (isMining) {
+        if (isMiningFinished) {
+            setIsClaimedState(false);
+            return setClaimModalVisibility(true);
+        }
+
+        if (!isMiningFinished) {
             return warning({
                 title: t('pages.mining.doWantStopMining'),
                 content: t('pages.mining.consumablesWillBurnOut'),
                 onOk: toggleMiningAndReinitializeStores,
             });
         }
-        if (isMiningFinished) {
-            return setClaimModalVisibility(true);
-        }
+
         return toggleMiningAndReinitializeStores();
     };
-    const buttonText = isMiningFinished
-        ? t('pages.mining.getTheReport')
-        : miningButtonText;
-    const okText = isClaimed ? t('pages.mining.cool') : t('pages.mining.claim');
+
+    const buttonText = {
+        [ActionState.claimed]: t('pages.mining.startMining'),
+        [ActionState.finished]: t('pages.mining.getTheReport'),
+        [ActionState.interrupted]: t('pages.mining.startMining'),
+        [ActionState.active]: t('pages.mining.stopMining'),
+        [ActionState.undefined]: t('pages.mining.startMining'),
+    };
+
+    const okText = isClaimedState
+        ? t('pages.mining.cool')
+        : t('pages.mining.claim');
+
     return (
         <>
             <Button
@@ -105,7 +120,9 @@ export const MiningAndClaimButton: FC<Props> = ({ action }) => {
                 onClick={onMiningButtonClick}
                 ghost={isMining}
             >
-                {buttonText}
+                {isMiningFinished
+                    ? buttonText[ActionState.finished]
+                    : buttonText[action?.state || ActionState.interrupted]}
             </Button>
             <Modal
                 onOk={onClaimButtonClick}
@@ -114,7 +131,7 @@ export const MiningAndClaimButton: FC<Props> = ({ action }) => {
                 visible={claimModalVisibility}
                 title={t('pages.mining.miningFinishedSuccessfully')}
             >
-                {isClaimed ? (
+                {isClaimedState ? (
                     <Space
                         className={styles.wide}
                         direction="vertical"
