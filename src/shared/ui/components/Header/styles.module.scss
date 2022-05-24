@@ -12,6 +12,10 @@
   margin-top: 6px;
 }
 
+.hideLogo {
+  visibility: hidden;
+}
+
 h4.title, h1.title {
   margin-bottom: 0;
   color: $color-neutral-neutral-9 !important;

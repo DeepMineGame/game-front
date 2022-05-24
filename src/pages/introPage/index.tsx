@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useChainAuthContext, DeepMineLogo, Button } from 'shared';
 import { Typography } from 'antd';
+import { home } from 'app/router/paths';
 import { useLogout } from 'features/useLogout';
 import { userStore } from 'entities/user';
 import styles from './styles.module.scss';
@@ -28,7 +29,7 @@ export const IntroPage = () => {
     useEffect(() => {
         if (chainUser) {
             authDeepMineUserEffect(chainUser.accountName).then(() =>
-                navigate('/contractor-cabin')
+                navigate(home)
             );
         }
     }, [chainUser, navigate]);
