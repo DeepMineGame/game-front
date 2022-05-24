@@ -1,7 +1,7 @@
 @import "src/shared";
 
 .container {
-  padding: 28px 24px;
+  padding: 12px 19px;
 }
 
 .content {
@@ -11,16 +11,17 @@
 }
 
 .info {
-  padding-right: 20px;
+  padding: 0;
   max-width: 237px;
   margin: 0 auto;
 }
 
 .title {
-  padding-bottom: 13px;
+  padding-bottom: 10px;
 }
 .description {
-  padding-top: 15px;
+  padding-top: 0;
+  text-align: center;
   max-width: 320px;
 }
 
@@ -28,7 +29,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 24px;
+  padding-top: 6px;
 
   > div {
     cursor: pointer;
@@ -73,22 +74,22 @@
   border-left: 1px solid $color-neutral-neutral-10;
 }
 
-@media only screen and (max-width: $media-tablet)  {
+@media only screen and (min-width: $media-desktop-s)  {
   .container {
-    padding: 12px 19px;
+    padding: 28px 24px;
   }
   .title {
-    padding-bottom: 10px;
+    padding-bottom: 13px;
   }
   .description {
-    padding-top: 0;
-    text-align: center;
+    padding-top: 15px;
+    text-align: left;
   }
   .info {
-    padding: 0;
+    padding-right: 20px;
   }
 
   .buttons {
-    padding-top: 6px;
+    padding-top: 24px;
   }
 }

@@ -10,23 +10,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 24px;
+  padding-top: 10px;
 }
 
 .timer {
   padding-left: 8px;
   font-weight: 400;
-  font-size: 20px;
-  line-height: 28px;
+  font-size: 12px;
+  line-height: 20px;
 }
 
-@media only screen and (max-width: $media-tablet)  {
+@media only screen and (min-width: $media-desktop-s)  {
   .timer {
-    font-size: 12px;
-    line-height: 20px;
+    font-size: 20px;
+    line-height: 28px;
   }
 
   .timerContainer {
-    padding-top: 10px;
+    padding-top: 24px;
   }
 }

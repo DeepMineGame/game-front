@@ -1,16 +1,16 @@
 @import "src/shared";
 
 .container {
-  max-width: 320px;
+  max-width: 350px;
   margin: 0 auto;
-  padding: 0 19px;
+  padding: 0 15px;
 }
 
 .title {
-  padding-top: 50px;
+  padding-top: 12px;
 }
 .description {
-  padding-top: 19px;
+  padding-top: 6px;
   max-width: 320px;
 }
 
@@ -18,12 +18,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 28px;
+  padding-top: 0;
 }
 
 .button {
-  border: 1px solid $color-primary-primary-6;
-  border-radius: 2px;
+  border: none;
   width: 141px;
   height: 38px;
 
@@ -34,19 +33,20 @@
   cursor: pointer;
 }
 
-@media only screen and (max-width: $media-tablet)  {
+@media only screen and (min-width: $media-desktop-s)  {
   .title {
-    padding-top: 12px;
+    padding-top: 50px;
   }
   .description {
-    padding-top: 6px;
+    padding-top: 19px;
   }
 
   .buttons {
-    padding-top: 0;
+    padding-top: 28px;
   }
 
   .button {
-    border: none;
+    border: 1px solid $color-primary-primary-6;
+    border-radius: 2px;
   }
 }

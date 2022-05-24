@@ -9,8 +9,8 @@
   width: fit-content;
 
   position: absolute;
-  bottom: 10vh;
-  right: 5vw;
+  right: 14px;
+  bottom: 90px;
 }
 
 .close {
@@ -23,7 +23,7 @@
   font-size: 14px;
   line-height: 22px;
   color: $color-neutral-neutral-9;
-  padding: 9px 40px 9px 0;
+  padding: 9px 20px 9px 0;
 }
 
 .button {
@@ -37,13 +37,13 @@
   cursor: pointer;
 }
 
-@media only screen and (max-width: $media-tablet)  {
+@media only screen and (min-width: $media-desktop-s)  {
   .container {
-    right: 14px;
-    bottom: 90px
+    bottom: 10vh;
+    right: 5vw;
   }
 
   .text {
-    padding: 9px 20px 9px 0;
+    padding: 9px 40px 9px 0;
   }
 }
