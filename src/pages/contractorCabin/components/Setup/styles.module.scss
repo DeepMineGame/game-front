@@ -8,6 +8,10 @@
 
 .title {
   padding-top: 0;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    padding-top: 56px;
+  }
 }
 
 .description, .descriptionCenter {
@@ -16,10 +20,4 @@
 
 .descriptionCenter {
   text-align: center;
-}
-
-@media only screen and (min-width: $media-desktop-s)  {
-  .title {
-    padding-top: 56px;
-  }
 }

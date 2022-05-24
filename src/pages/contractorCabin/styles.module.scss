@@ -28,6 +28,11 @@
     background: url("../../shared/ui/images/Light_Yellow.jpg") no-repeat right center fixed;
     background-size: cover;
   }
+
+  @media only screen and (min-width: $media-desktop-s) {
+    position: relative;
+    min-height: 100vh;
+  }
 }
 
 .cabinMonitorContainerHeight {
@@ -49,6 +54,11 @@
   letter-spacing: 0.04em;
   text-align: center;
   text-transform: uppercase;
+
+  @media only screen and (min-width: $media-desktop-s) {
+    font-size: 20px;
+    line-height: 28px;
+  }
 }
 
 .description {
@@ -56,6 +66,11 @@
   font-size: 12px;
   line-height: 20px;
   color: $color-neutral-neutral-9;
+
+  @media only screen and (min-width: $media-desktop-s) {
+    font-size: 14px;
+    line-height: 22px;
+  }
 }
 
 .coloredText {
@@ -63,21 +78,4 @@
   font-size: 14px;
   line-height: 22px;
   color: $color-primary-primary-6;
-}
-
-@media only screen and (min-width: $media-desktop-s)  {
-  .title {
-    font-size: 20px;
-    line-height: 28px;
-  }
-
-  .description {
-    font-size: 14px;
-    line-height: 22px;
-  }
-
-  .cabinBackground {
-    position: relative;
-    min-height: 100vh;
-  }
 }

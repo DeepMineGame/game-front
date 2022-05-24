@@ -11,6 +11,10 @@
   align-items: center;
   justify-content: center;
   padding-top: 10px;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    padding-top: 24px;
+  }
 }
 
 .timer {
@@ -18,15 +22,9 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 20px;
-}
 
-@media only screen and (min-width: $media-desktop-s)  {
-  .timer {
+  @media only screen and (min-width: $media-desktop-s)  {
     font-size: 20px;
     line-height: 28px;
-  }
-
-  .timerContainer {
-    padding-top: 24px;
   }
 }

@@ -8,10 +8,18 @@
 
 .title {
   padding-top: 12px;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    padding-top: 50px;
+  }
 }
 .description {
   padding-top: 6px;
   max-width: 320px;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    padding-top: 19px;
+  }
 }
 
 .buttons {
@@ -19,6 +27,10 @@
   align-items: center;
   justify-content: space-between;
   padding-top: 0;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    padding-top: 28px;
+  }
 }
 
 .button {
@@ -31,21 +43,8 @@
   justify-content: center;
 
   cursor: pointer;
-}
 
-@media only screen and (min-width: $media-desktop-s)  {
-  .title {
-    padding-top: 50px;
-  }
-  .description {
-    padding-top: 19px;
-  }
-
-  .buttons {
-    padding-top: 28px;
-  }
-
-  .button {
+  @media only screen and (min-width: $media-desktop-s)  {
     border: 1px solid $color-primary-primary-6;
     border-radius: 2px;
   }

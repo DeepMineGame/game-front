@@ -11,6 +11,11 @@
   position: absolute;
   right: 14px;
   bottom: 90px;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    bottom: 10vh;
+    right: 5vw;
+  }
 }
 
 .close {
@@ -24,6 +29,10 @@
   line-height: 22px;
   color: $color-neutral-neutral-9;
   padding: 9px 20px 9px 0;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    padding: 9px 40px 9px 0;
+  }
 }
 
 .button {
@@ -35,15 +44,4 @@
   color: $color-primary-primary-6;
 
   cursor: pointer;
-}
-
-@media only screen and (min-width: $media-desktop-s)  {
-  .container {
-    bottom: 10vh;
-    right: 5vw;
-  }
-
-  .text {
-    padding: 9px 40px 9px 0;
-  }
 }

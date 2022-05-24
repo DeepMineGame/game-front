@@ -4,6 +4,10 @@
   max-width: 300px;
   width: 100%;
   margin: 25px auto 0 auto;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    margin: 15% auto 0 auto;
+  }
 }
 
 .title {
@@ -19,14 +23,8 @@
 .description {
   padding: 10px 0;
   text-align: center;
-}
 
-@media only screen and (min-width: $media-desktop-s)  {
-  .container {
-    margin: 15% auto 0 auto;
-  }
-
-  .description {
+  @media only screen and (min-width: $media-desktop-s)  {
     padding: 16px 0;
   }
 }
