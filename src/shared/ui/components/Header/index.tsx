@@ -9,13 +9,15 @@ import {
 import { useStore } from 'effector-react';
 import { LeftOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import classNames from 'classnames';
 import { UserAvatar, userStore } from 'entities/user';
 import styles from './styles.module.scss';
 
 type Props = {
     title?: string;
+    hideLogo?: boolean;
 };
-export const Header: FC<Props> = ({ title }) => {
+export const Header: FC<Props> = ({ title, hideLogo }) => {
     const user = useStore(userStore);
     const navigate = useNavigate();
     const goToBack = () => navigate(-1);
@@ -40,7 +42,11 @@ export const Header: FC<Props> = ({ title }) => {
                         </Title>
                     </div>
                 ) : (
-                    <DeepMineLogo className={styles.logo} />
+                    <DeepMineLogo
+                        className={classNames(styles.logo, {
+                            [styles.hideLogo]: hideLogo,
+                        })}
+                    />
                 )}
                 <UserAvatar user={user} />
             </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { ContractorCabin, EquipmentSetPage, MiningPage } from 'pages';
-import { contractorCabin, equipmentSet, intro, mining } from './paths';
+import { ContractorCabin, EquipmentSetPage, HomePage, MiningPage } from 'pages';
+import { contractorCabin, equipmentSet, home, intro, mining } from './paths';
 
 const IntroPage = React.lazy(async () => ({
     default: (await import('pages')).IntroPage,
@@ -23,6 +23,11 @@ export const routes = {
             path: equipmentSet,
             Component: EquipmentSetPage,
             titleTag: 'Equipment set — DeepMine',
+        },
+        {
+            path: home,
+            Component: HomePage,
+            titleTag: 'Hometown — DeepMine',
         },
     ],
     admin: [

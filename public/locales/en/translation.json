@@ -60,6 +60,10 @@
       "doWantStopMining": "Do you really want to stop mining?",
       "consumablesWillBurnOut": "Your consumables will burn out and you won’t be able to use them anymore"
     },
+    "home": {
+      "mineOwnerCabin": "MINE OWNER CABIN",
+      "contractorCabin": "CONTRACTOR'S CABIN"
+    },
     "contractor": {
       "signingContract": {
         "title": "Signing the contract",
