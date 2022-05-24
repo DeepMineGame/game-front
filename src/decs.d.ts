@@ -3,9 +3,10 @@ declare module 'ual-reactjs-renderer' {
     import { WaxUser } from '@eosdacio/ual-wax';
 
     export const UALContext: Context<{
-        activeUser?: WaxUser;
+        activeUser: WaxUser | null;
         showModal: Function;
         logout: Function;
+        loading: boolean;
     }>;
     export const UALProvider: any;
 }
