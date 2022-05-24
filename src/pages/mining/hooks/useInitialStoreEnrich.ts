@@ -27,7 +27,7 @@ export function useInitialStoreEnrich() {
                 searchParam: chainAccount.activeUser.accountName,
             });
         }
-    }, [user, chainAccount]);
+    }, [user, chainAccount.activeUser?.accountName]);
 
     useEffect(() => {
         if (contracts?.length) {
@@ -50,5 +50,5 @@ export function useInitialStoreEnrich() {
                 searchParam: chainAccount.activeUser.accountName,
             });
         }
-    });
+    }, [chainAccount.activeUser?.accountName]);
 }
