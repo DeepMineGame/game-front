@@ -42,7 +42,7 @@ export const MiningProgress = React.memo(({ msUntil }: MiningProgressProps) => {
                 {t('pages.contractor.miningProgress.title')}
             </div>
             <div className={styles.timerContainer}>
-                <Loader />
+                <Loader size="small" />
                 <div className={styles.timer}>
                     {getTimeLeft(currentMsUntil / 1000)}
                 </div>

@@ -2,11 +2,16 @@
 
 .container {
   max-width: 360px;
+  padding: 15px 19px;
   margin: 0 auto;
 }
 
 .title {
-  padding-top: 56px;
+  padding-top: 0;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    padding-top: 56px;
+  }
 }
 
 .description, .descriptionCenter {

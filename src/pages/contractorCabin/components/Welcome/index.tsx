@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
+import { desktopS, useMediaQuery } from 'shared';
 import contractorStyles from '../../styles.module.scss';
 import styles from './styles.module.scss';
 
@@ -15,6 +16,7 @@ interface SignContractProps {
 
 export const Welcome = ({ equipments }: SignContractProps) => {
     const { t } = useTranslation();
+    const isDesktop = useMediaQuery(desktopS);
 
     return (
         <div className={styles.container}>
@@ -29,7 +31,9 @@ export const Welcome = ({ equipments }: SignContractProps) => {
                             styles.description
                         )}
                     >
-                        {t('pages.contractor.welcome.description')}
+                        {isDesktop
+                            ? t('pages.contractor.welcome.description')
+                            : t('pages.contractor.welcome.descriptionMobile')}
                     </div>
                     <div className={styles.buttons}>
                         <div className={cn(contractorStyles.coloredText)}>
@@ -40,20 +44,24 @@ export const Welcome = ({ equipments }: SignContractProps) => {
                         </div>
                     </div>
                 </div>
-                <div className={styles.equipments}>
-                    {equipments.map(({ name, isAvailable }) => (
-                        <div className={styles.equipmentLine} key={name}>
-                            <div className={styles.equipmentName}>{name}</div>
-                            <div className={styles.equipmentValue}>
-                                {isAvailable ? (
-                                    <CheckOutlined />
-                                ) : (
-                                    <CloseOutlined />
-                                )}
+                {isDesktop && (
+                    <div className={styles.equipments}>
+                        {equipments.map(({ name, isAvailable }) => (
+                            <div className={styles.equipmentLine} key={name}>
+                                <div className={styles.equipmentName}>
+                                    {name}
+                                </div>
+                                <div className={styles.equipmentValue}>
+                                    {isAvailable ? (
+                                        <CheckOutlined />
+                                    ) : (
+                                        <CloseOutlined />
+                                    )}
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     );

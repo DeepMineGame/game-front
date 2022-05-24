@@ -3,10 +3,18 @@
 .container {
   max-width: 285px;
   width: 100%;
-  margin: 15% auto 0 auto;
+  margin: 25px auto 0 auto;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    margin: 15% auto 0 auto;
+  }
 }
 
 .description {
-  padding: 16px 0;
+  padding: 10px 0;
   text-align: center;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    padding: 16px 0;
+  }
 }

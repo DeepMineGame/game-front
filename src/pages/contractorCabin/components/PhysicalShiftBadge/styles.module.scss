@@ -9,8 +9,13 @@
   width: fit-content;
 
   position: absolute;
-  bottom: 10vh;
-  right: 5vw;
+  right: 14px;
+  bottom: 90px;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    bottom: 10vh;
+    right: 5vw;
+  }
 }
 
 .close {
@@ -23,7 +28,11 @@
   font-size: 14px;
   line-height: 22px;
   color: $color-neutral-neutral-9;
-  padding: 9px 40px 9px 0;
+  padding: 9px 20px 9px 0;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    padding: 9px 40px 9px 0;
+  }
 }
 
 .button {

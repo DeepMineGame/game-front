@@ -1,7 +1,11 @@
 @import "src/shared";
 
 .container {
-  padding: 28px 24px;
+  padding: 12px 19px;
+
+  @media only screen and (min-width: $media-desktop-s) {
+    padding: 28px 24px;
+  }
 }
 
 .content {
@@ -11,24 +15,38 @@
 }
 
 .info {
-  padding-right: 20px;
+  padding: 0;
   max-width: 237px;
   margin: 0 auto;
+
+  @media only screen and (min-width: $media-desktop-s) {
+    padding-right: 20px;
+  }
 }
 
 .title {
-  padding-bottom: 13px;
+  padding-bottom: 10px;
+
+  @media only screen and (min-width: $media-desktop-s) {
+    padding-bottom: 13px;
+  }
 }
 .description {
-  padding-top: 15px;
+  padding-top: 0;
+  text-align: center;
   max-width: 320px;
+
+  @media only screen and (min-width: $media-desktop-s) {
+    padding-top: 15px;
+    text-align: left;
+  }
 }
 
 .buttons {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 24px;
+  padding-top: 6px;
 
   > div {
     cursor: pointer;
@@ -40,6 +58,10 @@
     &:last-child {
       padding-right: 0;
     }
+  }
+
+  @media only screen and (min-width: $media-desktop-s) {
+    padding-top: 24px;
   }
 }
 

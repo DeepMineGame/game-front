@@ -2,8 +2,12 @@
 
 .cabinBackground {
   font-family: $bai;
-  position: relative;
-  min-height: 100vh;
+
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
 
   background-color: $color-extra-background-3;
   background: url("../../shared/ui/images/Dark_Gray.jpg") no-repeat right center fixed;
@@ -26,12 +30,9 @@
     background-size: cover;
   }
 
-  @media only screen and (max-width: $media-tablet)  {
-    height: 100vh;
-    width: 100vw;
-    position: absolute;
-    top: 0;
-    left: 0;
+  @media only screen and (min-width: $media-desktop-s) {
+    position: relative;
+    min-height: 100vh;
   }
 }
 
@@ -41,26 +42,36 @@
 }
 
 .cabinMonitorContainerWidth {
-  width: 700px;
+  width: 71vh;
   left: 8vw;
 }
 
 .title {
   font-family: $orbitron;
   font-weight: 700;
-  font-size: 20px;
-  line-height: 28px;
+  font-size: 12px;
+  line-height: 20px;
   color: $color-neutral-neutral-9;
   letter-spacing: 0.04em;
   text-align: center;
   text-transform: uppercase;
+
+  @media only screen and (min-width: $media-desktop-s) {
+    font-size: 20px;
+    line-height: 28px;
+  }
 }
 
 .description {
   font-weight: 400;
-  font-size: 14px;
-  line-height: 22px;
+  font-size: 12px;
+  line-height: 20px;
   color: $color-neutral-neutral-9;
+
+  @media only screen and (min-width: $media-desktop-s) {
+    font-size: 14px;
+    line-height: 22px;
+  }
 }
 
 .coloredText {
