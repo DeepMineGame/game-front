@@ -50,7 +50,7 @@ export const UserAvatar: FC<Props> = ({ user }) => {
     const avatarWithData = (
         <Text fontFamily="bai">
             <Badge
-                count={50}
+                count={smartContractUserData?.level}
                 showZero
                 offset={[-35, 30]}
                 color={neutral3Color}
