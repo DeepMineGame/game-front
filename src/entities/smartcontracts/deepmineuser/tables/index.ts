@@ -9,6 +9,7 @@ import {
 export * from './actions';
 export * from './contracts';
 export * from './inventories';
+export * from './users';
 
 export const getUserConfig = (account: string) => {
     return {

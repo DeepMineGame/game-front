@@ -30,3 +30,4 @@ export const waxChain = {
 };
 
 export const WAX_GET_TABLE_ENDPOINT = `https://${WAX_RPC_ENDPOINTS_HOST}/v1/chain/get_table_rows`;
+export const WAX_GET_BALANCE_ENDPOINT = `https://${WAX_RPC_ENDPOINTS_HOST}/v1/chain/get_currency_balance`;

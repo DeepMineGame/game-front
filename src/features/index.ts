@@ -3,3 +3,4 @@ export * from './useLogout';
 export * from './hooks';
 export * from './utils';
 export * from './getNftImagePath';
+export * from './fetchWaxBalance';

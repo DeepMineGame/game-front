@@ -12,3 +12,32 @@
   margin-right: 16px;
   font-size: 12px;
 }
+
+.overlay {
+  background: $color-neutral-neutral-3;
+  padding: 12px 24px 16px 24px;
+  text-align: center;
+  font-family: $bai;
+}
+
+.attrs {
+  margin-top: 12px;
+  min-width: 225px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  color: $color-neutral-neutral-8;
+}
+
+.balance {
+  font-weight: 700;
+  color: $color-neutral-neutral-10;
+}
+
+.logoutButton {
+  width: 100%;
+}
+
+.divider {
+  border: 1px solid #303030;
+}

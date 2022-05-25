@@ -4,7 +4,8 @@ import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import styles from './styles.module.scss';
 
 type Props = {
-    items: ItemType[];
+    items?: ItemType[];
+    overlay?: DropdownProps['overlay'];
 } & Omit<DropdownProps, 'overlay'>;
 
 function enrichItemsWithDefaultCssSelector(items: ItemType[]): ItemType[] {
@@ -20,12 +21,12 @@ function enrichItemsWithDefaultCssSelector(items: ItemType[]): ItemType[] {
 export const Dropdown: FC<Props> = ({ children, items, ...props }) => {
     const menu = (
         <Menu
-            items={enrichItemsWithDefaultCssSelector(items)}
+            items={enrichItemsWithDefaultCssSelector(items || [])}
             className={styles.dropdown}
         />
     );
     return (
-        <DropdownAnt {...props} overlay={menu}>
+        <DropdownAnt {...props} overlay={props?.overlay || menu}>
             {children}
         </DropdownAnt>
     );

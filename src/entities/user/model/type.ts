@@ -12,4 +12,5 @@ export type User = {
     updated_at: string;
     user_created: boolean;
     wax_address: string;
+    email: string;
 };

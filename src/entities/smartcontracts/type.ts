@@ -3,7 +3,7 @@ export type GetTableDataConfigType = {
     scope: string;
     table: string;
     index_position: number;
-    key_type: 'id' | 'i64' | 'name';
+    key_type: 'id' | 'i64' | 'name' | '';
     lower_bound: string | number;
     limit: number;
 };
