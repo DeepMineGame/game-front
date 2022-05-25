@@ -36,7 +36,7 @@ export const UserAvatar: FC<Props> = ({ user }) => {
     useEffect(() => {
         if (user?.wax_address) {
             fetchWaxBalance({
-                account: user?.wax_address || '',
+                account: user.wax_address,
             }).then(setWaxBalance);
         }
     }, [user?.wax_address]);

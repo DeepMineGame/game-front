@@ -29,7 +29,8 @@
         "cancel": "Cancel",
         "install": "Install",
         "uninstall": "Uninstall"
-      }
+      },
+      "logout": "Logout"
     }
   },
   "pages": {

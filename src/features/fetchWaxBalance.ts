@@ -12,5 +12,5 @@ export const fetchWaxBalance = async ({ account }: { account: string }) => {
 
     const [value] = data[0].split(' ');
 
-    return `${Number(value).toFixed(1)}`;
+    return Number(value).toFixed(1);
 };
