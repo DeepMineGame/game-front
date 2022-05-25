@@ -4,7 +4,7 @@ import { getTableData } from 'features';
 import {
     GetTableDataConfigType,
     GetTableDataResponseType,
-} from 'entities/smartcontracts';
+} from 'entities/smartcontract';
 import { useAccountName } from './useAccountName';
 
 export function useTableData<T>(

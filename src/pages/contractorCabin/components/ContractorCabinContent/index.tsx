@@ -8,7 +8,7 @@ import {
     UserContractsType,
     UserHistoryType,
     UserInventoryType,
-} from 'entities/smartcontracts';
+} from 'entities/smartcontract';
 import { SignContract } from '../SignContract';
 import { Setup } from '../Setup';
 import { Welcome } from '../Welcome';

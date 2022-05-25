@@ -1,20 +1,23 @@
+import { GetTableDataConfigType } from '../type';
 import {
-    deepmineuser,
-    GetTableDataConfigType,
+    deepminegame,
     INDEX_POSITION_HISTORY,
     INDEX_POSITION_INVENTORY,
     INDEX_POSITION_USER,
-} from '../..';
+} from '../constants';
 
-export * from './actions';
-export * from './contracts';
-export * from './inventories';
-export * from './users';
+export * from './mines';
+export * from './contractors';
+export * from '../tables/actions';
+export * from '../tables/contracts';
+export * from '../tables/inventories';
+export * from '../tables/users';
+export * from './types';
 
 export const getUserConfig = (account: string) => {
     return {
-        code: deepmineuser,
-        scope: deepmineuser,
+        code: deepminegame,
+        scope: deepminegame,
         table: 'users',
         index_position: INDEX_POSITION_USER.nickname,
         key_type: 'name',
@@ -26,8 +29,8 @@ export const getUserConfig = (account: string) => {
 
 export const getInventoryConfig = (account: string) => {
     return {
-        code: deepmineuser,
-        scope: deepmineuser,
+        code: deepminegame,
+        scope: deepminegame,
         table: 'inventories',
         index_position: INDEX_POSITION_INVENTORY.nickname,
         key_type: 'name',
@@ -39,8 +42,8 @@ export const getInventoryConfig = (account: string) => {
 
 export const getHistoryConfig = (account: string) => {
     return {
-        code: deepmineuser,
-        scope: deepmineuser,
+        code: deepminegame,
+        scope: deepminegame,
         table: 'actions',
         index_position: INDEX_POSITION_HISTORY.nickname,
         key_type: 'name',

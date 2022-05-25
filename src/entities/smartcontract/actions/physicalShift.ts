@@ -1,10 +1,10 @@
-import { deepmineuser } from '../..';
+import { deepminegame } from '../index';
 
 export function physicalShift(waxUser: string, newLocation: number) {
     return {
         actions: [
             {
-                account: deepmineuser,
+                account: deepminegame,
                 name: 'changelocn',
                 authorization: [
                     {

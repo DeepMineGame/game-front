@@ -1,6 +1,6 @@
 import { createEffect, createStore } from 'effector';
 import { getTableData } from 'features';
-import { deepmineuser } from '../../constants';
+import { deepminegame } from '../../constants';
 import { InventoriesDto } from './types';
 
 export enum SEARCH_BY {
@@ -18,8 +18,8 @@ export const getInventoriesEffect = createEffect(
         searchParam: string;
     }) => {
         return getTableData({
-            code: deepmineuser,
-            scope: deepmineuser,
+            code: deepminegame,
+            scope: deepminegame,
             table: 'inventories',
             index_position: searchIdentificationType,
             key_type: 'name',

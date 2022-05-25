@@ -17,7 +17,7 @@ import { useTranslation } from 'react-i18next';
 import {
     getSmartContractUserEffect,
     smartContractUserStore,
-} from 'entities/smartcontracts';
+} from 'entities/smartcontract';
 import { User } from '../model/type';
 
 import styles from './styles.module.scss';

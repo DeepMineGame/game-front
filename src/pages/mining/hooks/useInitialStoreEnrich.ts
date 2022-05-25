@@ -10,7 +10,7 @@ import {
     minesStore,
     getInventoriesEffect,
     mapSearchParamForIndexPosition,
-} from 'entities/smartcontracts';
+} from 'entities/smartcontract';
 import { userStore } from 'entities/user';
 
 export function useInitialStoreEnrich() {

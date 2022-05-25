@@ -1,13 +1,13 @@
 import { createEffect, createStore } from 'effector';
 import { getTableData } from 'features';
-import { deepminearea } from '../../constants';
+import { deepminegame } from '../../constants';
 import { MineDto } from './types';
 
 export const getMinesEffect = createEffect(
     async ({ assetId }: { assetId: string }) => {
         return getTableData({
-            code: deepminearea,
-            scope: deepminearea,
+            code: deepminegame,
+            scope: deepminegame,
             table: 'mines',
             index_position: 1,
             key_type: 'id',

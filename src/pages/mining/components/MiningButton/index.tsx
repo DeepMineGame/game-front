@@ -23,7 +23,7 @@ import {
     getContractEffect,
     mapSearchParamForIndexPositionToFindContracts,
     toggleMining,
-} from 'entities/smartcontracts';
+} from 'entities/smartcontract';
 import { ClaimInfo } from '../ClaimInfo';
 import styles from './styles.module.scss';
 

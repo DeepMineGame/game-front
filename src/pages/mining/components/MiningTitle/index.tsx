@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useTimer } from 'react-timer-hook';
 import { desktopS, Title, useMediaQuery } from 'shared';
 import classNames from 'classnames';
-import { ActionDto, ActionState } from 'entities/smartcontracts';
+import { ActionDto, ActionState } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
 type Props = {
