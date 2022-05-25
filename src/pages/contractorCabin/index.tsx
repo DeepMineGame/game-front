@@ -26,7 +26,7 @@ import {
     UserHistoryType,
     UserInfoType,
     UserInventoryType,
-} from 'entities/smartcontracts';
+} from 'entities/smartcontract';
 
 import { CABIN_STATUS } from '../constants';
 import styles from './styles.module.scss';

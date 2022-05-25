@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 
-import { minesStore } from 'entities/smartcontracts';
+import { minesStore } from 'entities/smartcontract';
 import { CharacteristicsLine } from '../CharacteristicsLine';
 
 import styles from './styles.module.scss';

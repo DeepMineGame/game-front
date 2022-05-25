@@ -1,7 +1,8 @@
-import { deepminearea } from '../constants';
+import { deepminegame } from '../constants';
 
 export * from './type';
 export * from './calcmining';
+export * from './physicalShift';
 
 export function toggleMining({
     waxUser,
@@ -15,7 +16,7 @@ export function toggleMining({
     return {
         actions: [
             {
-                account: deepminearea,
+                account: deepminegame,
                 name: type === 'start' ? 'startmining' : 'stopmining',
                 authorization: [
                     {
@@ -38,7 +39,7 @@ export function claimdme({ waxUser }: { waxUser: string }) {
     return {
         actions: [
             {
-                account: deepminearea,
+                account: deepminegame,
                 name: 'claimdme',
                 authorization: [
                     {
@@ -67,7 +68,7 @@ export const installEquipment = ({
     return {
         actions: [
             {
-                account: deepminearea,
+                account: deepminegame,
                 name: 'instacequip',
                 authorization: [
                     {
@@ -93,7 +94,7 @@ export const uninstallEquipment = ({
     return {
         actions: [
             {
-                account: deepminearea,
+                account: deepminegame,
                 name: 'uninsacequip',
                 authorization: [
                     {

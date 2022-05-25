@@ -23,7 +23,7 @@ import {
     uninstallEquipment,
     UserContractsType,
     UserInventoryType,
-} from 'entities/smartcontracts';
+} from 'entities/smartcontract';
 import styles from './styles.module.scss';
 import { EquipmentInstallationModal } from './components/EquipmentInstallationModal';
 import { Characteristics } from './components/Characteristics';

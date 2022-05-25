@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { WAX_GET_TABLE_ENDPOINT } from 'app';
-import { GetTableDataConfigType } from 'entities/smartcontracts';
+import { GetTableDataConfigType } from 'entities/smartcontract';
 
 export const getTableData = async (config: GetTableDataConfigType) => {
     const { data } = await axios.post(WAX_GET_TABLE_ENDPOINT, {

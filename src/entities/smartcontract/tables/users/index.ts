@@ -1,13 +1,13 @@
 import { createEffect, createStore } from 'effector';
 import { getTableData } from 'features';
-import { deepmineuser } from '../../constants';
+import { deepminegame } from '../../constants';
 import { UserDto } from './types';
 
 export const getSmartContractUserEffect = createEffect(
     async ({ owner }: { owner: string }) => {
         return getTableData({
-            code: deepmineuser,
-            scope: deepmineuser,
+            code: deepminegame,
+            scope: deepminegame,
             table: 'users',
             index_position: 1,
             key_type: '',

@@ -18,7 +18,7 @@ import {
     getContractEffect,
     minesStore,
     getMinesEffect,
-} from 'entities/smartcontracts';
+} from 'entities/smartcontract';
 import styles from './styles.module.scss';
 import { MiningTitle } from './components/MiningTitle';
 import { MiningAndClaimButton } from './components/MiningButton';

@@ -4,7 +4,7 @@ import { useStore } from 'effector-react';
 import { getImagePath, TEST_NET_ASSETS_ID_MAP } from 'features';
 import { Col, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { inventoriesStore } from 'entities/smartcontracts';
+import { inventoriesStore } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
 export const Equipment = () => {

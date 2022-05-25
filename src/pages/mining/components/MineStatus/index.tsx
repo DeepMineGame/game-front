@@ -2,7 +2,7 @@ import React, { FC, memo } from 'react';
 import { Badge } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
-import { minesStore } from 'entities/smartcontracts';
+import { minesStore } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
 export const MineStatus: FC = memo(() => {

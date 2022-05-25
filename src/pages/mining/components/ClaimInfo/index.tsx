@@ -6,7 +6,7 @@ import {
     contractorsStore,
     getContractorsEffect,
     calcmining,
-} from 'entities/smartcontracts';
+} from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
 
 const THREE_SECONDS = 3000;

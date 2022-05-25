@@ -1,2 +1,2 @@
 export * from './user';
-export * from './smartcontracts';
+export * from './smartcontract';
