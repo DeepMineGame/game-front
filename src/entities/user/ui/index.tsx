@@ -1,6 +1,14 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Avatar, Badge, Divider, Progress } from 'antd';
-import { AvatarIcon, Button, Dropdown, Text, WaxCoinIcon } from 'shared';
+import { Avatar, Badge, Progress } from 'antd';
+import {
+    AvatarIcon,
+    Button,
+    Divider,
+    Dropdown,
+    neutral3Color,
+    Text,
+    WaxCoinIcon,
+} from 'shared';
 import Icon, { LogoutOutlined, ThunderboltOutlined } from '@ant-design/icons';
 import { useLogout, fetchWaxBalance } from 'features';
 import { useNavigate } from 'react-router-dom';
@@ -14,8 +22,6 @@ import { User } from '../model/type';
 
 import styles from './styles.module.scss';
 
-const neutral3Color = '#262626';
-
 type Props = {
     user: User | null;
 };
@@ -25,7 +31,7 @@ export const UserAvatar: FC<Props> = ({ user }) => {
     const navigate = useNavigate();
     const logout = useLogout(() => navigate('/'));
     const smartContractUsers = useStore(smartContractUserStore);
-    const smartContractUserData = smartContractUsers && smartContractUsers[0];
+    const smartContractUserData = smartContractUsers?.[0];
     const [waxBalance, setWaxBalance] = useState<null | string>(null);
     const { t } = useTranslation();
 
@@ -44,7 +50,7 @@ export const UserAvatar: FC<Props> = ({ user }) => {
     const avatarWithData = (
         <Text fontFamily="bai">
             <Badge
-                count={smartContractUserData?.level}
+                count={50}
                 showZero
                 offset={[-35, 30]}
                 color={neutral3Color}
@@ -68,6 +74,7 @@ export const UserAvatar: FC<Props> = ({ user }) => {
             </Badge>
         </Text>
     );
+
     const userDropdownOverlay = () => (
         <div className={styles.overlay}>
             {avatarWithData}
@@ -79,7 +86,7 @@ export const UserAvatar: FC<Props> = ({ user }) => {
                     </div>
                 )}
             </div>
-            <Divider className={styles.divider} />
+            <Divider />
             <Button
                 className={styles.logoutButton}
                 ghost

@@ -8,8 +8,6 @@ export const fetchWaxBalance = async ({ account }: { account: string }) => {
         symbol: 'WAX',
     });
 
-    if (!data[0]) return `0 WAX`;
-
     const [value] = data[0].split(' ');
 
     return Number(value).toFixed(1);

@@ -12,3 +12,4 @@ export * from './Page';
 export * from './Plugin';
 export * from './Timer';
 export * from './Notificators';
+export * from './Divider';

@@ -18,10 +18,10 @@ function enrichItemsWithDefaultCssSelector(items: ItemType[]): ItemType[] {
     );
 }
 
-export const Dropdown: FC<Props> = ({ children, items, ...props }) => {
+export const Dropdown: FC<Props> = ({ children, items = [], ...props }) => {
     const menu = (
         <Menu
-            items={enrichItemsWithDefaultCssSelector(items || [])}
+            items={enrichItemsWithDefaultCssSelector(items)}
             className={styles.dropdown}
         />
     );

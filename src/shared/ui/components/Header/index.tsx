@@ -17,6 +17,7 @@ type Props = {
     title?: string;
     hideLogo?: boolean;
 };
+
 export const Header: FC<Props> = ({ title, hideLogo }) => {
     const user = useStore(userStore);
     const navigate = useNavigate();
