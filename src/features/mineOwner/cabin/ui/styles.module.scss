@@ -1,0 +1,25 @@
+@import "src/shared";
+
+.cabinWrapper {
+  min-height: 100vh;
+  min-width: 100vw;
+  background: url('images/mineOwnerCabinDefaultMobile.png') no-repeat bottom center;
+  background-size: cover;
+
+
+  @media (min-width: $media-desktop-s)  {
+    background: url('images/mineOwnerCabinDefault.png') no-repeat bottom center fixed;
+    background-size: cover;
+  }
+}
+
+.progress {
+  background: url('images/mineOwnerCabinProgressMobile.png') no-repeat bottom center;
+  background-size: cover;
+
+
+  @media (min-width: $media-desktop-s)  {
+    background: url('images/mineOwnerCabinProgress.png') no-repeat bottom center fixed;
+    background-size: cover;
+  }
+}

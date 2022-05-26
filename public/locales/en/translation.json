@@ -132,5 +132,15 @@
     "sublevelEfficiensy": "Sublevel Efficiensy",
     "equipmentBreakageProbabillity": "Equipment Breakage Probabillity",
     "fossilChance": "Fossil Chance"
+  },
+  "features": {
+    "mineOwner": {
+      "needMineCardDesktop": "You need a Mine card in your active inventory. Check your storage or go to Market to buy one.",
+      "needMineCardMobile": "You need a Mine card in your active inventory",
+      "pickUpFromStorage": "Pick up from storage",
+      "storage": "Storage",
+      "goToMarket": "Go to market",
+      "market": "Market"
+    }
   }
 }
