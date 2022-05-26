@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { Header, Title } from 'shared';
 import { DownOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { contractorCabin } from 'app/router/paths';
+import { contractorCabin, mineOwner } from 'app/router/paths';
 import { useTranslation } from 'react-i18next';
 import styles from './styles.module.scss';
 
@@ -13,7 +13,10 @@ export const HomePage: FC = () => {
     return (
         <div className={styles.homeScreen}>
             <Header hideLogo />
-            <div className={classNames(styles.mineOwnerLink, styles.enterLink)}>
+            <div
+                onClick={() => navigate(mineOwner)}
+                className={classNames(styles.mineOwnerLink, styles.enterLink)}
+            >
                 <Title level={5}>{t('pages.home.mineOwnerCabin')}</Title>
                 <DownOutlined />
             </div>
