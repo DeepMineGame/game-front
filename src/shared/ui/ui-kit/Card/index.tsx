@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Tooltip } from 'antd';
+import cn from 'classnames';
 import { Button, DMECoinIcon, Logo } from 'shared';
 import cutterImg from '../../images/cutter.png';
 import styles from './styles.module.scss';
@@ -14,6 +15,8 @@ type Props = {
     needTooltip?: boolean;
     hasRemove?: boolean;
     onRemove?: () => void;
+    onClick?: (e: any) => void;
+    className?: string;
 } & ProgressProps;
 
 export const Card: FC<Props> = ({
@@ -25,6 +28,8 @@ export const Card: FC<Props> = ({
     needTooltip,
     hasRemove,
     onRemove,
+    onClick,
+    className,
 }) => {
     const lvlTooltip = () => (
         <div className={styles.lvlTooltipContent}>
@@ -41,7 +46,7 @@ export const Card: FC<Props> = ({
             placement="rightTop"
             color={neutral4}
         >
-            <div className={styles.wrapper}>
+            <div className={cn(styles.wrapper, className)} onClick={onClick}>
                 <CardBadge status={status} />
                 <div className={styles.image}>
                     <img
