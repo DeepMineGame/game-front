@@ -36,7 +36,8 @@ export const CardBadge: FC<Props> = ({ status }) => {
                     text={t('kit.statuses.notInstalled')}
                 />
             );
-
+        case undefined:
+            return null;
         default:
             return (
                 <Badge

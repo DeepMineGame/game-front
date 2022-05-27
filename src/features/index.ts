@@ -4,4 +4,5 @@ export * from './hooks';
 export * from './utils';
 export * from './getNftImagePath';
 export * from './fetchWaxBalance';
+export * from './equipmentSet';
 export * from './mineOwner';

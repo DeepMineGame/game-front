@@ -8,6 +8,7 @@ import styles from './styles.module.scss';
 
 type Props = {
     wideOnMobile?: boolean;
+    className?: string;
 } & ModalProps;
 
 export const Modal: FC<Props> = (props) => {
@@ -18,7 +19,7 @@ export const Modal: FC<Props> = (props) => {
     return (
         <ModalAnt
             {...props}
-            className={classNames(styles.modal, {
+            className={classNames(styles.modal, props?.className, {
                 [styles.wideOnMobile]: props?.wideOnMobile,
             })}
             width={width}

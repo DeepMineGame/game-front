@@ -9,7 +9,7 @@ import {
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
-import { useSmartContractActionDynamic } from 'features';
+import { useSmartContractActionDynamic, findEquipmentByName } from 'features';
 import {
     contractorsStore,
     getContractorsEffect,
@@ -27,14 +27,6 @@ import {
 import styles from './styles.module.scss';
 import { EquipmentInstallationModal } from './components/EquipmentInstallationModal';
 import { Characteristics } from './components/Characteristics';
-
-const findEquipmentByName = (
-    inventory: UserInventoryType[],
-    name: InventoryNameType
-) =>
-    inventory.find(
-        (v) => ID_TO_INVENTORY[+v.asset_template_id as InventoryIdType] === name
-    );
 
 const equipmentSetAvailableNames = [
     'Cutter',
@@ -55,6 +47,12 @@ export const EquipmentSetPage: FC = () => {
     const [needUpdate, setNeedUpdate] = useState<boolean | undefined>(
         undefined
     );
+    const [selectedEquipment, setSelectedEquipment] = useState(
+        {} as Record<InventoryNameType, UserInventoryType> | {}
+    );
+    const [selectedEquipmentName, setSelectedEquipmentName] = useState<
+        InventoryNameType | undefined
+    >(undefined);
 
     const callAction = useSmartContractActionDynamic();
 
@@ -84,23 +82,30 @@ export const EquipmentSetPage: FC = () => {
         needUpdate
     );
 
-    const userEquipment = Object.fromEntries(
-        equipmentSetAvailableNames.map((name) => [
-            name,
-            findEquipmentByName(userInventory, name),
-        ])
-    );
+    useEffect(() => {
+        if (userInventory) {
+            const activatedEquipment = userInventory.filter((v) => v.activated);
+            const newSelectedEquipment = Object.fromEntries(
+                equipmentSetAvailableNames.map((name) => [
+                    name,
+                    findEquipmentByName(activatedEquipment, name),
+                ])
+            ) as Record<InventoryNameType, UserInventoryType>;
 
-    const assetIds = Object.entries(userEquipment)
+            setSelectedEquipment(newSelectedEquipment);
+        }
+    }, [userInventory]);
+
+    const assetIds = Object.entries(selectedEquipment)
         .map(([, inventory]) => inventory?.asset_id?.toString() ?? '')
         .filter((v) => v);
     const hasAllEquipment =
         assetIds.length === equipmentSetAvailableNames.length;
 
-    const activatedEquipment = Object.entries(userEquipment).filter(
+    const activatedEquipment = Object.entries(selectedEquipment).filter(
         ([, equipment]) => equipment?.activated
     );
-    const notActivatedEquipment = Object.entries(userEquipment).filter(
+    const notActivatedEquipment = Object.entries(selectedEquipment).filter(
         ([, equipment]) => !equipment?.activated
     );
     const hasAllEquipmentActive =
@@ -124,25 +129,58 @@ export const EquipmentSetPage: FC = () => {
         }
     };
 
-    const handleRemoveEquipment = (inventoryIds: string[]) => async () => {
-        setNeedUpdate(false);
-        const filteredIds = inventoryIds.filter((v) => v);
-        if (filteredIds.length) {
+    const handleRemoveAllEquipment = async () => {
+        await callAction(
+            uninstallEquipment({
+                waxUser: accountName,
+                contractId,
+                items: assetIds,
+            })
+        );
+        setSelectedEquipment({});
+    };
+
+    const handleRemoveEquipment =
+        (inventory: UserInventoryType) => async () => {
+            setNeedUpdate(false);
             await callAction(
                 uninstallEquipment({
                     waxUser: accountName,
                     contractId,
-                    items: filteredIds,
+                    items: [inventory.asset_id],
                 })
             );
+
+            const inventoryName =
+                ID_TO_INVENTORY[
+                    +inventory.asset_template_id as InventoryIdType
+                ];
+
+            setSelectedEquipment({
+                ...selectedEquipment,
+                [inventoryName]: undefined,
+            });
             setNeedUpdate(true);
+        };
+
+    const openInventoryModal = (name: InventoryNameType) => () => {
+        setSelectedEquipmentName(name);
+        toggleInventoryVisibility();
+    };
+
+    const handleCardSelect = (card: UserInventoryType) => {
+        if (selectedEquipmentName) {
+            setSelectedEquipment({
+                ...selectedEquipment,
+                [selectedEquipmentName]: card,
+            });
         }
     };
 
     return (
         <Page headerTitle={t('pages.equipmentSet.title')}>
             <div className={styles.cards}>
-                {Object.entries(userEquipment).map(([name, inventory]) =>
+                {Object.entries(selectedEquipment).map(([name, inventory]) =>
                     inventory ? (
                         <Card
                             key={name}
@@ -150,9 +188,7 @@ export const EquipmentSetPage: FC = () => {
                             current={3}
                             remained={7}
                             hasRemove={!!inventory.activated}
-                            onRemove={handleRemoveEquipment([
-                                inventory.asset_id,
-                            ])}
+                            onRemove={handleRemoveEquipment(inventory)}
                             status={
                                 inventory.activated
                                     ? 'installed'
@@ -162,7 +198,9 @@ export const EquipmentSetPage: FC = () => {
                     ) : (
                         <CardHolder
                             key={name}
-                            onClick={toggleInventoryVisibility}
+                            onClick={openInventoryModal(
+                                name as InventoryNameType
+                            )}
                             name={name}
                         />
                     )
@@ -173,16 +211,21 @@ export const EquipmentSetPage: FC = () => {
             </div>
             <div className={styles.installButtonWrapper}>
                 <EquipmentInstallationModal
-                    onUninstall={handleRemoveEquipment(assetIds)}
+                    onUninstall={handleRemoveAllEquipment}
                     onInstall={handleInstallEquipment}
                     disabled={!hasAllEquipment}
                     isInstall={!hasAllEquipmentActive}
                 />
             </div>
-            <Inventory
-                visible={inventoryVisibility}
-                onCancel={toggleInventoryVisibility}
-            />
+            {selectedEquipmentName && (
+                <Inventory
+                    onSelect={handleCardSelect}
+                    userInventory={userInventory}
+                    name={selectedEquipmentName}
+                    visible={inventoryVisibility}
+                    onCancel={toggleInventoryVisibility}
+                />
+            )}
         </Page>
     );
 };
