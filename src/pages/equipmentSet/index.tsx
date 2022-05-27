@@ -71,7 +71,7 @@ export const EquipmentSetPage: FC = () => {
     useEffect(() => {
         const contractorAreaId = contractors?.[0]?.area_id;
         if (contractorAreaId) {
-            getMinesEffect({ assetId: contractorAreaId });
+            getMinesEffect({ searchParam: contractorAreaId });
         }
     }, [contractors]);
 

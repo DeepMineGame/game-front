@@ -59,7 +59,7 @@ export const routes: AppRoute[] = [
         path: mineOwner,
         Component: MineOwnerPage,
         forLoggedIn: true,
-        forAdmin: true,
+        forAdmin: false,
         titleTag: 'Mine owner cabin — DeepMine',
     },
 ];

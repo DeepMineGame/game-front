@@ -24,6 +24,7 @@ export const getInventoriesEffect = createEffect(
             index_position: searchIdentificationType,
             key_type: 'name',
             lower_bound: searchParam,
+            upper_bound: searchParam,
             limit: 1000,
         });
     }

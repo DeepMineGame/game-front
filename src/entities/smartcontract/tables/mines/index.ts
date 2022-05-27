@@ -3,15 +3,26 @@ import { getTableData } from 'features';
 import { deepminegame } from '../../constants';
 import { MineDto } from './types';
 
+enum searchBy {
+    undefined,
+    assetId,
+    owner,
+}
 export const getMinesEffect = createEffect(
-    async ({ assetId }: { assetId: string }) => {
+    async ({
+        searchParam,
+        searchIdentificationType = searchBy.assetId,
+    }: {
+        searchParam: string;
+        searchIdentificationType?: searchBy;
+    }) => {
         return getTableData({
             code: deepminegame,
             scope: deepminegame,
             table: 'mines',
-            index_position: 1,
+            index_position: searchIdentificationType,
             key_type: 'id',
-            lower_bound: assetId,
+            lower_bound: searchParam,
             limit: 1,
         });
     }

@@ -5,6 +5,7 @@ export type GetTableDataConfigType = {
     index_position: number;
     key_type: 'id' | 'i64' | 'name' | '';
     lower_bound: string | number;
+    upper_bound?: string | number;
     limit: number;
 };
 
