@@ -29,7 +29,8 @@ export const ID_TO_INVENTORY = {
 } as const;
 
 export const mineAssetTemplateId = isMainNet
-    ? 'TODO ADD MAINNET MINE TEMPLATE ID'
+    ? // TODO ADD MAINNET MINE TEMPLATE ID
+      0
     : 176451;
 
 export type InventoryIdType = keyof typeof ID_TO_INVENTORY;

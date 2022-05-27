@@ -1,26 +1,27 @@
-import { createStore, forward, sample } from 'effector';
+import { createEvent, createStore, forward, guard } from 'effector';
 import { createGate } from 'effector-react';
 import {
     getInventoriesEffect,
-    InventoriesDto,
+    getMinesEffect,
+    getSmartContractUserEffect,
     inventoriesStore,
-    mineAssetTemplateId,
+    minesStore,
+    smartContractUserStore,
 } from 'entities/smartcontract';
+import {
+    checkIsMineInActiveFilter,
+    checkIsUserLocationOutsideMineFilter,
+    hasMineNftFilter,
+} from './filters';
 
 export const MineOwnerCabinGate = createGate<{ searchParam: string }>(
     'MineOwnerCabinGate'
 );
 
-const hasMineFilter = (data: InventoriesDto[] | null) => {
-    return Boolean(
-        data?.filter(
-            ({ asset_template_id }) => asset_template_id === mineAssetTemplateId
-        )[0]
-    );
-};
-
 export enum mineOwnerCabinState {
     initial,
+    isOutsideFromLocation,
+    needSignContractWithLandLord,
     isMining,
     hasMineNft,
     isMineSet,
@@ -28,19 +29,49 @@ export enum mineOwnerCabinState {
     isMineActive,
 }
 
+const setHasMineNft = createEvent();
+const setIsUserOutsideFromLocation = createEvent();
+const setNeedSignContractWithLandLord = createEvent();
+
 export const $mineOwnerCabinState = createStore<mineOwnerCabinState>(
     mineOwnerCabinState.initial
-);
+)
+    .on(setHasMineNft, () => mineOwnerCabinState.hasMineNft)
+    .on(
+        setIsUserOutsideFromLocation,
+        () => mineOwnerCabinState.isOutsideFromLocation
+    )
+    .on(
+        setNeedSignContractWithLandLord,
+        () => mineOwnerCabinState.needSignContractWithLandLord
+    );
 
+// На открытие гейта заполняем нужные сторы
 forward({
     from: MineOwnerCabinGate.open,
-    to: getInventoriesEffect,
+    to: [getInventoriesEffect, getSmartContractUserEffect, getMinesEffect],
 });
 
-sample({
+// Проверяем что есть NFT
+guard({
     source: inventoriesStore,
-    target: $mineOwnerCabinState,
+    target: setHasMineNft,
     clock: inventoriesStore,
-    filter: hasMineFilter,
-    fn: () => mineOwnerCabinState.hasMineNft,
+    filter: hasMineNftFilter,
+});
+
+// Проверяем что пользователь за пределами локации
+guard({
+    source: smartContractUserStore,
+    target: setIsUserOutsideFromLocation,
+    clock: setHasMineNft,
+    filter: checkIsUserLocationOutsideMineFilter,
+});
+
+// Проверяем что заключен контракт с владельцем земли
+guard({
+    source: minesStore,
+    target: setNeedSignContractWithLandLord,
+    clock: [setIsUserOutsideFromLocation, setHasMineNft],
+    filter: checkIsMineInActiveFilter,
 });

@@ -36,7 +36,7 @@ export const UserAvatar: FC<Props> = ({ user }) => {
     const { t } = useTranslation();
 
     useEffect(() => {
-        getSmartContractUserEffect({ owner: user?.wax_address || '' });
+        getSmartContractUserEffect({ searchParam: user?.wax_address || '' });
     }, [user?.wax_address]);
 
     useEffect(() => {

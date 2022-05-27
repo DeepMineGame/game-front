@@ -4,14 +4,14 @@ import { deepminegame } from '../../constants';
 import { UserDto } from './types';
 
 export const getSmartContractUserEffect = createEffect(
-    async ({ owner }: { owner: string }) => {
+    async ({ searchParam }: { searchParam: string }) => {
         return getTableData({
             code: deepminegame,
             scope: deepminegame,
             table: 'users',
             index_position: 1,
             key_type: '',
-            lower_bound: owner,
+            lower_bound: searchParam,
             limit: 1,
         });
     }

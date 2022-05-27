@@ -40,7 +40,7 @@ export function useInitialStoreEnrich() {
 
     useEffect(() => {
         if (contracts?.length && !mineStore) {
-            getMinesEffect({ assetId: contracts[0].client_asset_id });
+            getMinesEffect({ searchParam: contracts[0].client_asset_id });
         }
     }, [contracts, mineStore]);
 
