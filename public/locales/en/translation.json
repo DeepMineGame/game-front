@@ -140,7 +140,9 @@
       "pickUpFromStorage": "Pick up from storage",
       "storage": "Storage",
       "goToMarket": "Go to market",
-      "market": "Market"
+      "market": "Market",
+      "welcome": "Welcome, Citizen",
+      "mineNotSet": "Mine is not set"
     }
   }
 }

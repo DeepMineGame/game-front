@@ -1,3 +1,5 @@
+import { isMainNet } from 'app/constants';
+
 export const ID_TO_INVENTORY = {
     177577: 'DME Wire',
     177576: 'DME Wire',
@@ -25,6 +27,10 @@ export const ID_TO_INVENTORY = {
     176872: 'Wandering Reactor',
     176871: 'Wandering Reactor',
 } as const;
+
+export const mineAssetTemplateId = isMainNet
+    ? 'TODO ADD MAINNET MINE TEMPLATE ID'
+    : 176451;
 
 export type InventoryIdType = keyof typeof ID_TO_INVENTORY;
 export type InventoryNameType = typeof ID_TO_INVENTORY[InventoryIdType];
