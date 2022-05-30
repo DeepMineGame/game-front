@@ -5,30 +5,27 @@
   color: $color-neutral-neutral-9;
   margin: 45vh auto;
   max-width: 70vw;
+  font-size: 12px;
 
   @media  (min-width: $media-mobile-oriental)  {
     margin: 30vh auto;
     max-width: 27vw;
-    font-size: 12px;
+    font-size: 16px;
   }
   @media  (min-width: $media-tablet)  {
     margin: 36vh auto;
     max-width: 27vw;
-    font-size: 12px;
   }
   @media  (min-width: $media-desktop-s)  {
     margin: 30vh auto;
     max-width: 27vw;
-    font-size: 12px;
   }
   @media  (min-width: $media-desktop-l)  {
     margin: 32vh auto;
     max-width: 27vw;
-    font-size: 12px;
   }
   @media  (min-width: $media-wide)  {
     margin: 45vh auto;
     max-width: 27vw;
-    font-size: 12px;
   }
 }
