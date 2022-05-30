@@ -29,6 +29,7 @@ export enum mineOwnerCabinState {
     hasMineNft,
     isMineSetupInProgress,
     isMineSet,
+    // hasContracts, //
     isMineActive,
 }
 
@@ -79,7 +80,7 @@ guard({
 guard({
     source: smartContractUserStore,
     target: setIsUserOutsideFromLocation,
-    clock: setHasMineNft,
+    clock: [setHasMineNft, getSmartContractUserEffect],
     filter: checkIsUserLocationOutsideMineFilter,
 });
 
@@ -113,5 +114,5 @@ guard({
         setHasMineNft,
         setNeedSignContractWithLandLord,
     ],
-    filter: (mines) => Boolean(mines?.[0].is_active),
+    filter: (mines) => Boolean(mines?.[0]?.is_active),
 });
