@@ -144,7 +144,8 @@
       "welcome": "Welcome, Citizen",
       "mineNotSet": "Mine is not set",
       "needShift": "To start the Mine you need to perform a physical shit to this location",
-      "needLandLord": "Choose a card and sign a contract with the landlord"
+      "needLandLord": "Choose a card and sign a contract with the landlord",
+      "progress": "Setup in progress"
     }
   }
 }

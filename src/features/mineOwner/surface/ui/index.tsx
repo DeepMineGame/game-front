@@ -35,7 +35,7 @@ export const Surface: FC<Props> = ({ user }) => {
         [mineOwnerCabinState.isMineSet]: t('features.mineOwner.welcome'),
         [mineOwnerCabinState.isMining]: t('features.mineOwner.welcome'),
         [mineOwnerCabinState.isMineSetupInProgress]: t(
-            'features.mineOwner.welcome'
+            'features.mineOwner.progress'
         ),
     };
 
@@ -54,7 +54,7 @@ export const Surface: FC<Props> = ({ user }) => {
         [mineOwnerCabinState.isMineSet]: t('features.mineOwner.welcome'),
         [mineOwnerCabinState.isMining]: t('features.mineOwner.welcome'),
         [mineOwnerCabinState.isMineSetupInProgress]: t(
-            'features.mineOwner.welcome'
+            'features.mineOwner.progress'
         ),
     };
 
