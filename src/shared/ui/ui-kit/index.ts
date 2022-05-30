@@ -13,3 +13,4 @@ export * from './Plugin';
 export * from './Timer';
 export * from './Notificators';
 export * from './Divider';
+export * from './PhysicalShiftBadge';

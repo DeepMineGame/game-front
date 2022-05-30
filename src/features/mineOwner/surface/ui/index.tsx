@@ -18,9 +18,7 @@ export const Surface: FC<Props> = ({ user }) => {
 
     const isDesktop = useMediaQuery(desktopS);
     const cabinState = useStore($mineOwnerCabinState);
-
     const titles = useTitles();
-
     const texts = useDescriptions();
     const buttons = useLinks();
 

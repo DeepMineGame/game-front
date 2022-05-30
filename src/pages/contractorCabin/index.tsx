@@ -9,6 +9,7 @@ import {
     useDimensions,
     useMediaQuery,
     useTableData,
+    PhysicalShiftBadge,
 } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import { useSmartContractAction } from 'features';
@@ -28,9 +29,8 @@ import {
     UserInventoryType,
 } from 'entities/smartcontract';
 
-import { CABIN_STATUS } from '../constants';
+import { CABIN_STATUS } from './constants';
 import styles from './styles.module.scss';
-import { PhysicalShiftBadge } from './components/PhysicalShiftBadge';
 import { TravelModal } from './components/TravelModal';
 import { ContractorCabinContent } from './components/ContractorCabinContent';
 
