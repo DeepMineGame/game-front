@@ -1,6 +1,7 @@
 @import "src/shared";
 
 .container {
+  font-family: $bai;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(15px);
   padding: 0;

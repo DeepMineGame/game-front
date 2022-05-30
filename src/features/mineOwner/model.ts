@@ -1,14 +1,17 @@
 import { createEvent, createStore, forward, guard } from 'effector';
 import { createGate } from 'effector-react';
 import {
+    actionsStore,
+    getActionByUserEffect,
     getInventoriesEffect,
-    getMinesEffect,
+    getMinesEffectByOwnerEffect,
     getSmartContractUserEffect,
     inventoriesStore,
     minesStore,
     smartContractUserStore,
 } from 'entities/smartcontract';
 import {
+    checkIfMineSetupWillFinishedInFuture,
     checkIsMineInActiveFilter,
     checkIsUserLocationOutsideMineFilter,
     hasMineNftFilter,
@@ -24,14 +27,17 @@ export enum mineOwnerCabinState {
     needSignContractWithLandLord,
     isMining,
     hasMineNft,
-    isMineSet,
     isMineSetupInProgress,
+    isMineSet,
+    // hasContracts, //
     isMineActive,
 }
 
 const setHasMineNft = createEvent();
 const setIsUserOutsideFromLocation = createEvent();
 const setNeedSignContractWithLandLord = createEvent();
+const setIsMineSetupInProgressEvent = createEvent();
+const setIsMineSetEvent = createEvent();
 
 export const $mineOwnerCabinState = createStore<mineOwnerCabinState>(
     mineOwnerCabinState.initial
@@ -44,12 +50,22 @@ export const $mineOwnerCabinState = createStore<mineOwnerCabinState>(
     .on(
         setNeedSignContractWithLandLord,
         () => mineOwnerCabinState.needSignContractWithLandLord
-    );
+    )
+    .on(
+        setIsMineSetupInProgressEvent,
+        () => mineOwnerCabinState.isMineSetupInProgress
+    )
+    .on(setIsMineSetEvent, () => mineOwnerCabinState.isMineSet);
 
 // На открытие гейта заполняем нужные сторы
 forward({
     from: MineOwnerCabinGate.open,
-    to: [getInventoriesEffect, getSmartContractUserEffect, getMinesEffect],
+    to: [
+        getInventoriesEffect,
+        getSmartContractUserEffect,
+        getMinesEffectByOwnerEffect,
+        getActionByUserEffect,
+    ],
 });
 
 // Проверяем что есть NFT
@@ -64,14 +80,39 @@ guard({
 guard({
     source: smartContractUserStore,
     target: setIsUserOutsideFromLocation,
-    clock: setHasMineNft,
+    clock: [setHasMineNft, getSmartContractUserEffect],
     filter: checkIsUserLocationOutsideMineFilter,
 });
 
-// Проверяем что заключен контракт с владельцем земли
+// Проверяем что заключен контракт с владельцем земли (landLord)
 guard({
     source: minesStore,
     target: setNeedSignContractWithLandLord,
     clock: [setIsUserOutsideFromLocation, setHasMineNft],
     filter: checkIsMineInActiveFilter,
+});
+
+// Проверяем что установка шахты в in progress
+guard({
+    source: actionsStore,
+    target: setIsMineSetupInProgressEvent,
+    clock: [
+        setIsUserOutsideFromLocation,
+        setHasMineNft,
+        setNeedSignContractWithLandLord,
+    ],
+    filter: checkIfMineSetupWillFinishedInFuture,
+});
+
+// Проверяем что шахта установлена
+guard({
+    source: minesStore,
+    target: setIsMineSetEvent,
+    clock: [
+        getMinesEffectByOwnerEffect,
+        setIsUserOutsideFromLocation,
+        setHasMineNft,
+        setNeedSignContractWithLandLord,
+    ],
+    filter: (mines) => Boolean(mines?.[0]?.is_active),
 });

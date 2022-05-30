@@ -16,7 +16,7 @@ import { Ready } from '../Ready';
 import { MiningProgress } from '../MiningProgress';
 import { MiningError } from '../MiningError';
 import { MiningOver } from '../MiningOver';
-import { CABIN_STATUS } from '../../../constants';
+import { CABIN_STATUS } from '../../constants';
 
 interface ContractorCabinContentProps {
     userContracts: UserContractsType[];

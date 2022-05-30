@@ -1,4 +1,5 @@
 import {
+    ActionDto,
     InventoriesDto,
     LOCATION_TO_ID,
     mineAssetTemplateId,
@@ -19,3 +20,10 @@ export const checkIsUserLocationOutsideMineFilter = (user: UserDto[] | null) =>
 
 export const checkIsMineInActiveFilter = (mines: MineDto[] | null) =>
     !mines?.[0]?.is_active;
+
+export const checkIfMineSetupWillFinishedInFuture = (
+    actions: ActionDto[] | null
+) =>
+    Boolean(
+        actions?.[0] && new Date(actions[0].finishes_at * 1000) > new Date()
+    );

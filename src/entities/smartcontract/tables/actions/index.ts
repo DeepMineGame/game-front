@@ -21,7 +21,7 @@ export const getActionEffect = createEffect(
         searchParam,
     }: {
         searchIdentification: mapSearchParamForIndexPosition;
-        searchParam: number;
+        searchParam: number | string;
     }) => {
         return getTableData({
             code: deepminegame,
@@ -33,6 +33,14 @@ export const getActionEffect = createEffect(
             limit: 1,
         });
     }
+);
+
+export const getActionByUserEffect = createEffect(
+    async ({ searchParam }: { searchParam: string }) =>
+        getActionEffect({
+            searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
+            searchParam,
+        })
 );
 
 export const actionsStore = createStore<ActionDto[] | null>(null).on(
