@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, desktopS, Title, useMediaQuery } from 'shared';
 import { useStore } from 'effector-react';
-import { getImagePath, TEST_NET_ASSETS_ID_MAP } from 'features';
+import { TemplateIdType } from 'features';
 import { Col, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { inventoriesStore } from 'entities/smartcontract';
@@ -31,9 +31,7 @@ export const Equipment = () => {
                 {installedItems?.map(({ asset_template_id }) => (
                     <Card
                         key={asset_template_id}
-                        imageSrc={getImagePath(
-                            asset_template_id as keyof typeof TEST_NET_ASSETS_ID_MAP
-                        )}
+                        templateId={asset_template_id as TemplateIdType}
                         status="installed"
                     />
                 ))}

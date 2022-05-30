@@ -4,7 +4,7 @@ import { ModalProps, Space } from 'antd';
 import { SortAscendingOutlined, FilterOutlined } from '@ant-design/icons';
 import cn from 'classnames';
 
-import { filterEquipmentByName } from 'features';
+import { filterEquipmentByName, TemplateIdType } from 'features';
 import { InventoryNameType, UserInventoryType } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
@@ -35,6 +35,7 @@ type InventoryProps = ModalProps & {
     name: InventoryNameType;
     userInventory: UserInventoryType[];
     onSelect: (card: UserInventoryType) => void;
+    onOpenCard: (card: UserInventoryType) => void;
 };
 
 const TABS = [
@@ -51,6 +52,7 @@ export const Inventory: FC<InventoryProps> = ({
     name,
     userInventory,
     onSelect,
+    onOpenCard,
     ...props
 }) => {
     const [selectedTab, setSelectedTab] = useState('Equipment');
@@ -64,12 +66,19 @@ export const Inventory: FC<InventoryProps> = ({
             }
         };
 
+    const handleDetailsClick = (card: UserInventoryType) => () => {
+        onOpenCard(card);
+    };
+
+    console.log(cards);
+
     return (
         <Modal
             wideOnMobile
             {...props}
             title="Active inventory"
             className={styles.modal}
+            removeFooter
         >
             <div className={styles.container}>
                 <div className={styles.filterHeader}>
@@ -94,6 +103,7 @@ export const Inventory: FC<InventoryProps> = ({
                     {TABS.map((tab) => (
                         <div
                             key={tab}
+                            onClick={() => setSelectedTab(tab)}
                             className={cn(styles.tab, {
                                 [styles.tabSelected]: tab === selectedTab,
                             })}
@@ -106,13 +116,17 @@ export const Inventory: FC<InventoryProps> = ({
                     <div className={styles.content}>
                         {cards.map((card) => (
                             <Card
+                                templateId={
+                                    +card.asset_template_id as TemplateIdType
+                                }
                                 className={styles.card}
                                 onClick={handleCardSelect(card)}
                                 key={card.asset_id}
                                 initial={10}
                                 current={3}
                                 remained={7}
-                                hasRemove={false}
+                                buttonText="Details"
+                                onButtonClick={handleDetailsClick(card)}
                             />
                         ))}
                     </div>

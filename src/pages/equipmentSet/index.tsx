@@ -6,10 +6,15 @@ import {
     Page,
     useTableData,
     useAccountName,
+    InventoryCardModal,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
-import { useSmartContractActionDynamic, findEquipmentByName } from 'features';
+import {
+    useSmartContractActionDynamic,
+    findEquipmentByName,
+    TemplateIdType,
+} from 'features';
 import {
     contractorsStore,
     getContractorsEffect,
@@ -40,9 +45,12 @@ export const EquipmentSetPage: FC = () => {
     const { t } = useTranslation();
     const contractors = useStore(contractorsStore);
     const accountName = useAccountName();
-    const [inventoryVisibility, setInventoryVisibility] = useState(false);
-    const toggleInventoryVisibility = () => {
-        setInventoryVisibility(!inventoryVisibility);
+    const [isInventoryVisible, setIsInventoryVisible] = useState(false);
+    const [isInventoryCardVisible, setIsInventoryCardVisible] = useState(false);
+    const [selectedInventoryModalCard, setSelectedInventoryModalCard] =
+        useState<UserInventoryType | undefined>(undefined);
+    const toggleIsInventoryVisible = () => {
+        setIsInventoryVisible((v) => !v);
     };
     const [needUpdate, setNeedUpdate] = useState<boolean | undefined>(
         undefined
@@ -165,7 +173,7 @@ export const EquipmentSetPage: FC = () => {
 
     const openInventoryModal = (name: InventoryNameType) => () => {
         setSelectedEquipmentName(name);
-        toggleInventoryVisibility();
+        toggleIsInventoryVisible();
     };
 
     const handleCardSelect = (card: UserInventoryType) => {
@@ -174,8 +182,16 @@ export const EquipmentSetPage: FC = () => {
                 ...selectedEquipment,
                 [selectedEquipmentName]: card,
             });
+            setIsInventoryVisible(false);
         }
     };
+
+    const handleOpenCard = (card: UserInventoryType) => {
+        setIsInventoryCardVisible(true);
+        setSelectedInventoryModalCard(card);
+    };
+
+    console.log(isInventoryCardVisible, selectedInventoryModalCard);
 
     return (
         <Page headerTitle={t('pages.equipmentSet.title')}>
@@ -183,12 +199,17 @@ export const EquipmentSetPage: FC = () => {
                 {Object.entries(selectedEquipment).map(([name, inventory]) =>
                     inventory ? (
                         <Card
+                            templateId={
+                                +inventory.asset_template_id as TemplateIdType
+                            }
                             key={name}
                             initial={10}
                             current={3}
                             remained={7}
-                            hasRemove={!!inventory.activated}
-                            onRemove={handleRemoveEquipment(inventory)}
+                            buttonText={
+                                inventory.activated ? 'Remove' : undefined
+                            }
+                            onButtonClick={handleRemoveEquipment(inventory)}
                             status={
                                 inventory.activated
                                     ? 'installed'
@@ -219,11 +240,20 @@ export const EquipmentSetPage: FC = () => {
             </div>
             {selectedEquipmentName && (
                 <Inventory
+                    onOpenCard={handleOpenCard}
                     onSelect={handleCardSelect}
                     userInventory={userInventory}
                     name={selectedEquipmentName}
-                    visible={inventoryVisibility}
-                    onCancel={toggleInventoryVisibility}
+                    visible={isInventoryVisible}
+                    onCancel={toggleIsInventoryVisible}
+                />
+            )}
+            {selectedInventoryModalCard && (
+                <InventoryCardModal
+                    onSelect={handleCardSelect}
+                    card={selectedInventoryModalCard}
+                    visible={isInventoryCardVisible}
+                    onCancel={() => setIsInventoryCardVisible(false)}
                 />
             )}
         </Page>

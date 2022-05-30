@@ -118,6 +118,18 @@
       "installation": "Equipment installation",
       "install": "Install the Equipment set",
       "uninstall": "Uninstall the Equipment set"
+    },
+    "inventoryCardModal": {
+      "select": "Select",
+      "rarity": "Rarity",
+      "level": "Level",
+      "depreciation": "Depreciation",
+      "breakageProbability": "Breakage probability",
+      "mineLevel": "Mine level",
+      "mineSublevel": "Mine sublevel",
+      "upgrade": "Upgrade",
+      "repair": "Repair",
+      "refurbish": "Refurbish"
     }
   },
   "characteristics": {

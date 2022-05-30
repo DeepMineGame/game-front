@@ -41,9 +41,9 @@ export const TEST_NET_ASSETS_ID_MAP = {
     411109: 492803,
 };
 
-export const getImagePath = (
-    templateId: keyof typeof TEST_NET_ASSETS_ID_MAP
-) => {
+export type TemplateIdType = keyof typeof TEST_NET_ASSETS_ID_MAP;
+
+export const getImagePath = (templateId: TemplateIdType) => {
     const ID = TEST_NET_ASSETS_ID_MAP[templateId] || templateId;
     const isGif = GIF_IMAGES.some((gifId) => gifId === ID);
     const ext = isGif ? 'gif' : 'png';

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Tooltip } from 'antd';
 import cn from 'classnames';
 import { Button, DMECoinIcon, Logo } from 'shared';
-import cutterImg from '../../images/cutter.png';
+import { getImagePath, TemplateIdType } from 'features';
 import styles from './styles.module.scss';
 import { CardBadge } from './components/CardBadge';
 import { NftProgressBar, ProgressProps } from './components/NftProgressBar';
@@ -13,10 +13,12 @@ type Props = {
     imageSrc?: string;
     status?: Status;
     needTooltip?: boolean;
-    hasRemove?: boolean;
-    onRemove?: () => void;
+    buttonText?: string;
+    onButtonClick?: () => void;
+    buttonClassName?: string;
     onClick?: (e: any) => void;
     className?: string;
+    templateId?: TemplateIdType;
 } & ProgressProps;
 
 export const Card: FC<Props> = ({
@@ -26,10 +28,12 @@ export const Card: FC<Props> = ({
     remained,
     status,
     needTooltip,
-    hasRemove,
-    onRemove,
+    buttonText,
+    onButtonClick,
+    buttonClassName,
     onClick,
     className,
+    templateId,
 }) => {
     const lvlTooltip = () => (
         <div className={styles.lvlTooltipContent}>
@@ -46,37 +50,42 @@ export const Card: FC<Props> = ({
             placement="rightTop"
             color={neutral4}
         >
-            <div className={cn(styles.wrapper, className)} onClick={onClick}>
-                <CardBadge status={status} />
-                <div className={styles.image}>
-                    <img
-                        height="100%"
-                        width="100%"
-                        src={imageSrc || cutterImg}
-                        alt="nft-equipment-card"
+            <div className={cn(styles.wrapper, className)}>
+                <div className={styles.content} onClick={onClick}>
+                    <CardBadge status={status} />
+                    <div className={styles.image}>
+                        <img
+                            height="100%"
+                            width="100%"
+                            src={
+                                templateId ? getImagePath(templateId) : imageSrc
+                            }
+                            alt="nft-equipment-card"
+                        />
+                    </div>
+                    {hasProgress && (
+                        <NftProgressBar
+                            initial={initial}
+                            current={current}
+                            remained={remained}
+                        />
+                    )}
+                    <NftProgressBar
+                        initial={30}
+                        current={30}
+                        remained={120}
+                        rightContent={<DMECoinIcon />}
                     />
                 </div>
-                {hasProgress && (
-                    <NftProgressBar
-                        initial={initial}
-                        current={current}
-                        remained={remained}
-                    />
-                )}
-                <NftProgressBar
-                    initial={30}
-                    current={30}
-                    remained={120}
-                    rightContent={<DMECoinIcon />}
-                />
-                {hasRemove && (
+
+                {buttonText && (
                     <Button
-                        className={styles.removeButton}
+                        className={cn(styles.button, buttonClassName)}
                         size="large"
                         type="link"
-                        onClick={onRemove}
+                        onClick={onButtonClick}
                     >
-                        Remove
+                        {buttonText}
                     </Button>
                 )}
             </div>
