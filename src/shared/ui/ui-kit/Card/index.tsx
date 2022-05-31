@@ -3,9 +3,9 @@ import { Tooltip } from 'antd';
 import cn from 'classnames';
 import { Button, DMECoinIcon, Logo } from 'shared';
 import { getImagePath, TemplateIdType } from 'features';
+import { NftProgressBar, ProgressProps } from '../NftProgressBar';
 import styles from './styles.module.scss';
 import { CardBadge } from './components/CardBadge';
-import { NftProgressBar, ProgressProps } from './components/NftProgressBar';
 
 export type Status = 'installed' | 'broken' | 'notInstalled';
 
@@ -65,12 +65,14 @@ export const Card: FC<Props> = ({
                     </div>
                     {hasProgress && (
                         <NftProgressBar
+                            className={styles.progress}
                             initial={initial}
                             current={current}
                             remained={remained}
                         />
                     )}
                     <NftProgressBar
+                        className={styles.progress}
                         initial={30}
                         current={30}
                         remained={120}

@@ -1,10 +1,11 @@
-import { Modal } from 'shared';
+import { desktopS, DMECoinIcon, Modal, useMediaQuery } from 'shared';
 import React, { FC } from 'react';
 import { ModalProps } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 import { getImagePath, TemplateIdType } from 'features';
 import { UserInventoryType } from 'entities/smartcontract';
+import { NftProgressBar } from '../../ui-kit/NftProgressBar';
 import styles from './styles.module.scss';
 
 type InventoryCardModalProps = ModalProps & {
@@ -18,6 +19,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     ...props
 }) => {
     const { t } = useTranslation();
+    const isDesktop = useMediaQuery(desktopS);
 
     const handleSelect = (e: React.MouseEvent<HTMLElement>) => {
         onSelect(card);
@@ -37,7 +39,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
             <div className={styles.container}>
                 <div>
                     <img
-                        width={144}
+                        width={isDesktop ? 170 : 144}
                         src={getImagePath(
                             +card.asset_template_id as TemplateIdType
                         )}
@@ -68,13 +70,27 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                 {t('pages.inventoryCardModal.level')}
                             </div>
                             <div className={styles.value}>1</div>
-                            <div className={styles.action}>30/120</div>
+                            <div className={styles.action}>
+                                <NftProgressBar
+                                    initial={30}
+                                    current={30}
+                                    remained={120}
+                                    rightContent={<DMECoinIcon />}
+                                />
+                            </div>
                         </div>
                         <div className={styles.infoLine}>
                             <div className={styles.key}>
                                 {t('pages.inventoryCardModal.depreciation')}
                             </div>
-                            <div className={styles.value}>1</div>
+                            <div className={styles.value}>
+                                <NftProgressBar
+                                    initial={1}
+                                    current={1}
+                                    remained={20}
+                                    rightContent={<DMECoinIcon />}
+                                />
+                            </div>
                             <div className={styles.action}>
                                 {t('pages.inventoryCardModal.repair')}
                             </div>

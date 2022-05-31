@@ -4,6 +4,7 @@
   width: 100% !important;
   max-width: none !important;
   height: 100%;
+  background: $color-neutral-neutral-2 !important;
 
   :global {
     .ant-modal-footer {
@@ -17,7 +18,7 @@
 
   @media only screen and (min-width: $media-desktop-s)  {
     width: calc(100% - 250px) !important;
-    height: 624px;
+    height: 698px;
     overflow: auto;
   }
 }
@@ -43,6 +44,10 @@
   border-radius: 2px;
 
   text-align: center;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    width: 170px;
+  }
 }
 
 .infoContainer {
@@ -90,7 +95,7 @@
 
 .value {
   font-weight: 700;
-  width: 145px;
+  width: 175px;
   text-align: right;
   padding-right: 44px;
   color: $color-neutral-neutral-9 !important;
@@ -99,4 +104,5 @@
 .action {
   color: $color-primary-primary-6 !important;
   cursor: pointer;
+  width: 180px;
 }

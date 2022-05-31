@@ -2,8 +2,7 @@ export type UserInventoryType = {
     asset_id: string;
     asset_template_id: string;
     owner_user_id: string;
-    activated: 0 | 1;
-    is_visible: 0 | 1;
+    in_use: 0 | 1;
 };
 
 export type UserContractsType = {

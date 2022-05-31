@@ -58,19 +58,13 @@ export const Inventory: FC<InventoryProps> = ({
     const [selectedTab, setSelectedTab] = useState('Equipment');
     const cards = filterEquipmentByName(userInventory, name);
 
-    const handleCardSelect =
-        (card: UserInventoryType) => (e: React.MouseEvent<HTMLElement>) => {
-            onSelect(card);
-            if (props.onCancel) {
-                props.onCancel(e);
-            }
-        };
+    const handleCardSelect = (card: UserInventoryType) => () => {
+        onSelect(card);
+    };
 
     const handleDetailsClick = (card: UserInventoryType) => () => {
         onOpenCard(card);
     };
-
-    console.log(cards);
 
     return (
         <Modal

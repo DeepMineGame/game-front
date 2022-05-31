@@ -47,7 +47,7 @@ export const ContractorCabinContent = ({
 
     const inventoryNames = getInventoryNames(userInventory);
     const activeInventoryNames = getInventoryNames(
-        userInventory.filter((v) => v.activated)
+        userInventory.filter((v) => v.in_use)
     );
 
     if (inventoryNames.length < INVENTORY_NAMES.length) {
