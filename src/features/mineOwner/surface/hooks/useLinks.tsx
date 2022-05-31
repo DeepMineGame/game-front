@@ -37,9 +37,9 @@ export function useLinks() {
                 </Button>
             </div>
         ),
-        [mineOwnerCabinState.isMineActive]: null,
         [mineOwnerCabinState.isMineSet]: null,
-        [mineOwnerCabinState.isMining]: null,
+        [mineOwnerCabinState.contractsFree]: null,
         [mineOwnerCabinState.isMineSetupInProgress]: null,
+        [mineOwnerCabinState.isMineActive]: null,
     };
 }

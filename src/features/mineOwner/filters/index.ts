@@ -1,5 +1,6 @@
 import {
     ActionDto,
+    ContractDto,
     InventoriesDto,
     LOCATION_TO_ID,
     mineAssetTemplateId,
@@ -27,3 +28,28 @@ export const checkIfMineSetupWillFinishedInFuture = (
     Boolean(
         actions?.[0] && new Date(actions[0].finishes_at * 1000) > new Date()
     );
+
+export const findActiveMineContract = ({
+    contract,
+    inventory,
+}: {
+    contract: ContractDto[] | null;
+    inventory: InventoriesDto[] | null;
+}) => {
+    const mineAssetIdByTemplateId = inventory?.find(
+        ({ asset_template_id }) => asset_template_id === mineAssetTemplateId
+    )?.asset_id;
+
+    const mineContract = contract?.find(
+        ({ client_asset_id }) =>
+            String(client_asset_id) === mineAssetIdByTemplateId
+    );
+
+    return Boolean(!mineContract?.is_active);
+};
+
+export const hasMinesFilter = (mines: MineDto[] | null) =>
+    Boolean(mines?.length);
+
+export const isMineActiveFilter = (mines: MineDto[] | null) =>
+    Boolean(mines?.[0].is_active);

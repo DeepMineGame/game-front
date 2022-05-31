@@ -17,11 +17,17 @@ export function useDescriptions() {
             'features.mineOwner.needLandLord'
         ),
         [mineOwnerCabinState.hasMineNft]: t('features.mineOwner.mineNotSet'),
-        [mineOwnerCabinState.isMineActive]: t('features.mineOwner.welcome'),
-        [mineOwnerCabinState.isMineSet]: t('features.mineOwner.welcome'),
-        [mineOwnerCabinState.isMining]: t('features.mineOwner.welcome'),
+        [mineOwnerCabinState.contractsFree]: t(
+            'features.mineOwner.needTeamDescription'
+        ),
+        [mineOwnerCabinState.isMineSet]: t(
+            'features.mineOwner.mineManagementDescription'
+        ),
         [mineOwnerCabinState.isMineSetupInProgress]: t(
             'features.mineOwner.progress'
         ),
+        [mineOwnerCabinState.isMineActive]: isDesktop
+            ? t('features.mineOwner.mineIsActiveDescription')
+            : t('features.mineOwner.mineIsActiveDescriptionMobile'),
     };
 }
