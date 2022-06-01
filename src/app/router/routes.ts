@@ -52,7 +52,7 @@ export const routes: AppRoute[] = [
         path: mining,
         Component: MiningPage,
         forLoggedIn: true,
-        forAdmin: true,
+        forAdmin: false,
         titleTag: 'Mining — DeepMine',
     },
     {

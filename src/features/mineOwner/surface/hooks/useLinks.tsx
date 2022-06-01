@@ -22,7 +22,7 @@ export function useLinks() {
             </div>
         ),
         [mineOwnerCabinState.isOutsideFromLocation]: null,
-        [mineOwnerCabinState.hasMineNft]: null,
+        [mineOwnerCabinState.hasNoMineNft]: null,
         [mineOwnerCabinState.needSignContractWithLandLord]: (
             <div>
                 <Button type="link">

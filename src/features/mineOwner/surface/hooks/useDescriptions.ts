@@ -16,7 +16,9 @@ export function useDescriptions() {
         [mineOwnerCabinState.needSignContractWithLandLord]: t(
             'features.mineOwner.needLandLord'
         ),
-        [mineOwnerCabinState.hasMineNft]: t('features.mineOwner.mineNotSet'),
+        [mineOwnerCabinState.hasNoMineNft]: isDesktop
+            ? t('features.mineOwner.needMineCardDesktop')
+            : t('features.mineOwner.needMineCardMobile'),
         [mineOwnerCabinState.contractsFree]: t(
             'features.mineOwner.needTeamDescription'
         ),

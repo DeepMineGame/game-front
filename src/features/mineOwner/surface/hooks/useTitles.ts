@@ -6,7 +6,7 @@ export function useTitles() {
 
     return {
         [mineOwnerCabinState.initial]: t('features.mineOwner.welcome'),
-        [mineOwnerCabinState.hasMineNft]: t('features.mineOwner.mineNotSet'),
+        [mineOwnerCabinState.hasNoMineNft]: t('features.mineOwner.welcome'),
         [mineOwnerCabinState.isOutsideFromLocation]: t(
             'features.mineOwner.mineNotSet'
         ),

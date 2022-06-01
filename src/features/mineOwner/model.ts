@@ -1,5 +1,6 @@
 import { createEvent, createStore, forward, sample } from 'effector';
 import { createGate } from 'effector-react';
+import compose from 'compose-function';
 import {
     actionsStore,
     contractStore,
@@ -13,6 +14,7 @@ import {
     smartContractUserStore,
 } from 'entities/smartcontract';
 import {
+    avoidApplyIfAffectCurrentStatus,
     checkIfMineSetupWillFinishedInFuture,
     checkIsMineInActiveFilter,
     checkIsUserLocationOutsideMineFilter,
@@ -28,16 +30,16 @@ export const MineOwnerCabinGate = createGate<{ searchParam: string }>(
 
 export enum mineOwnerCabinState {
     initial,
+    hasNoMineNft,
     isOutsideFromLocation,
     needSignContractWithLandLord,
-    hasMineNft,
     isMineSetupInProgress,
     isMineSet,
     contractsFree,
     isMineActive,
 }
 
-const setHasMineNft = createEvent();
+const setHasNoMineNft = createEvent();
 const setIsUserOutsideFromLocation = createEvent();
 const setNeedSignContractWithLandLord = createEvent();
 const setIsMineSetupInProgressEvent = createEvent();
@@ -48,7 +50,7 @@ const setMineActive = createEvent();
 export const $mineOwnerCabinState = createStore<mineOwnerCabinState>(
     mineOwnerCabinState.initial
 )
-    .on(setHasMineNft, () => mineOwnerCabinState.hasMineNft)
+    .on(setHasNoMineNft, () => mineOwnerCabinState.hasNoMineNft)
     .on(
         setIsUserOutsideFromLocation,
         () => mineOwnerCabinState.isOutsideFromLocation
@@ -80,7 +82,7 @@ forward({
 // Проверяем что есть NFT
 sample({
     source: inventoriesStore,
-    target: setHasMineNft,
+    target: setHasNoMineNft,
     clock: inventoriesStore,
     filter: hasMineNftFilter,
 });
@@ -89,16 +91,22 @@ sample({
 sample({
     source: smartContractUserStore,
     target: setIsUserOutsideFromLocation,
-    clock: [setHasMineNft, getSmartContractUserEffect],
+    clock: [setHasNoMineNft, getSmartContractUserEffect],
     filter: checkIsUserLocationOutsideMineFilter,
 });
 
-// Проверяем что заключен контракт с владельцем земли (landLord)
+// Проверяем что заключен контракт с владельцем земли
 sample({
     source: minesStore,
     target: setNeedSignContractWithLandLord,
-    clock: [setIsUserOutsideFromLocation, setHasMineNft],
-    filter: checkIsMineInActiveFilter,
+    clock: [setIsUserOutsideFromLocation, setHasNoMineNft],
+    filter: compose(
+        avoidApplyIfAffectCurrentStatus(
+            $mineOwnerCabinState,
+            mineOwnerCabinState.needSignContractWithLandLord
+        ),
+        checkIsMineInActiveFilter
+    ),
 });
 
 // Проверяем что установка шахты в in progress
@@ -107,7 +115,7 @@ sample({
     target: setIsMineSetupInProgressEvent,
     clock: [
         setIsUserOutsideFromLocation,
-        setHasMineNft,
+        setHasNoMineNft,
         setNeedSignContractWithLandLord,
     ],
     filter: checkIfMineSetupWillFinishedInFuture,
@@ -120,23 +128,35 @@ sample({
     clock: [
         getMinesEffectByOwnerEffect,
         setIsUserOutsideFromLocation,
-        setHasMineNft,
+        setHasNoMineNft,
         setNeedSignContractWithLandLord,
     ],
-    filter: hasMinesFilter,
+    filter: compose(
+        avoidApplyIfAffectCurrentStatus(
+            $mineOwnerCabinState,
+            mineOwnerCabinState.isMineSet
+        ),
+        hasMinesFilter
+    ),
 });
 
-// Проверяем что заключен хоть один контракт
+// Проверяем что заключен хоть один контракт (contractsFree)
 sample({
     source: { contract: contractStore, inventory: inventoriesStore },
     target: setContractsFreeEvent,
     clock: [
         getMinesEffectByOwnerEffect,
         setIsUserOutsideFromLocation,
-        setHasMineNft,
+        setHasNoMineNft,
         setNeedSignContractWithLandLord,
     ],
-    filter: findActiveMineContract,
+    filter: compose(
+        avoidApplyIfAffectCurrentStatus(
+            $mineOwnerCabinState,
+            mineOwnerCabinState.contractsFree
+        ),
+        findActiveMineContract
+    ),
 });
 
 // Проверяем что шахта активна
@@ -147,7 +167,7 @@ sample({
         getMinesEffectByOwnerEffect,
         setIsMineSetEvent,
         setIsUserOutsideFromLocation,
-        setHasMineNft,
+        setHasNoMineNft,
         setNeedSignContractWithLandLord,
         setContractsFreeEvent,
     ],
