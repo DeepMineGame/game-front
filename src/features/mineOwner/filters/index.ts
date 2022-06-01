@@ -1,11 +1,11 @@
 import {
     ActionDto,
     ContractDto,
-    InventoriesDto,
     LOCATION_TO_ID,
     mineAssetTemplateId,
     MineDto,
     UserDto,
+    UserInventoryType,
 } from 'entities/smartcontract';
 import { $mineOwnerCabinState, mineOwnerCabinState } from '../model';
 
@@ -16,7 +16,7 @@ export function ignoreIfInStatus(
     return (param: boolean) =>
         !targetStatuses.includes($currentStatus.getState()) && param;
 }
-export const hasMineNftFilter = (inventories: InventoriesDto[] | null) => {
+export const hasMineNftFilter = (inventories: UserInventoryType[] | null) => {
     return Boolean(
         inventories?.filter(
             ({ asset_template_id }) => asset_template_id === mineAssetTemplateId
@@ -42,7 +42,7 @@ export const hasActiveMineContractFilter = ({
     inventory,
 }: {
     contract: ContractDto[] | null;
-    inventory: InventoriesDto[] | null;
+    inventory: UserInventoryType[] | null;
 }) => {
     const mineAssetIdByTemplateId = inventory?.find(
         ({ asset_template_id }) => asset_template_id === mineAssetTemplateId

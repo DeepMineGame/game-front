@@ -14,3 +14,5 @@ export * from './Timer';
 export * from './Notificators';
 export * from './Divider';
 export * from './PhysicalShiftBadge';
+export * from './Line';
+export * from './NftProgressBar';

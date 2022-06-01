@@ -16,7 +16,6 @@ import {
     getInventoryConfig,
     ID_TO_INVENTORY,
     installEquipment,
-    InventoryIdType,
     InventoryNameType,
     uninstallEquipment,
     UserContractsType,
@@ -142,8 +141,7 @@ export const EquipmentSetPage: FC = () => {
             })
         );
 
-        const inventoryName =
-            ID_TO_INVENTORY[+inventory.asset_template_id as InventoryIdType];
+        const inventoryName = ID_TO_INVENTORY[inventory.asset_template_id];
 
         setSelectedEquipment({
             ...selectedEquipment,
@@ -173,7 +171,7 @@ export const EquipmentSetPage: FC = () => {
     };
 
     return (
-        <Page headerTitle={t('pages.equipmentSet.title')}>
+        <Page headerTitle={t('pages.equipmentSet.main.title')}>
             <EquipmentCards
                 selectedEquipment={selectedEquipment}
                 onCardButtonClick={handleRemoveEquipment}

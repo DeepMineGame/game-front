@@ -114,36 +114,41 @@
       }
     },
     "equipmentSet": {
-      "title": "EQUIPMENT SET",
-      "installation": "Equipment installation",
-      "install": "Install the Equipment set",
-      "uninstall": "Uninstall the Equipment set"
-    },
-    "inventoryCardModal": {
-      "select": "Select",
-      "rarity": "Rarity",
-      "level": "Level",
-      "depreciation": "Depreciation",
-      "breakageProbability": "Breakage probability",
-      "mineLevel": "Mine level",
-      "mineSublevel": "Mine sublevel",
-      "upgrade": "Upgrade",
-      "repair": "Repair",
-      "refurbish": "Refurbish"
+      "main": {
+        "title": "EQUIPMENT SET",
+        "installation": "Equipment installation",
+        "install": "Install the Equipment set",
+        "uninstall": "Uninstall the Equipment set",
+        "remove": "Remove"
+      },
+
+      "cardModal": {
+        "select": "Select",
+        "rarity": "Rarity",
+        "level": "Level",
+        "depreciation": "Depreciation",
+        "breakageProbability": "Breakage probability",
+        "mineLevel": "Mine level",
+        "mineSublevel": "Mine sublevel",
+        "upgrade": "Upgrade",
+        "repair": "Repair",
+        "refurbish": "Refurbish"
+      },
+
+      "characteristics": {
+        "title": "Characteristics",
+        "mineLevel": "Mine Level",
+        "mineSublevel": "Mine Sublevel",
+        "mineDepth": "Mine Depth",
+        "estimatesMiningTime": "Estimates mining Time",
+        "estimatesAmountDME": "Estimates Amount of DME",
+        "estimateMiningEfficiency": "Estimate Mining Efficiency",
+        "estimateMiningPower": "Estimate Mining Power",
+        "sublevelEfficiensy": "Sublevel Efficiensy",
+        "equipmentBreakageProbabillity": "Equipment Breakage Probabillity",
+        "fossilChance": "Fossil Chance"
+      }
     }
-  },
-  "characteristics": {
-    "title": "Characteristics",
-    "mineLevel": "Mine Level",
-    "mineSublevel": "Mine Sublevel",
-    "mineDepth": "Mine Depth",
-    "estimatesMiningTime": "Estimates mining Time",
-    "estimatesAmountDME": "Estimates Amount of DME",
-    "estimateMiningEfficiency": "Estimate Mining Efficiency",
-    "estimateMiningPower": "Estimate Mining Power",
-    "sublevelEfficiensy": "Sublevel Efficiensy",
-    "equipmentBreakageProbabillity": "Equipment Breakage Probabillity",
-    "fossilChance": "Fossil Chance"
   },
   "features": {
     "mineOwner": {

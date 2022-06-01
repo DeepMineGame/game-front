@@ -4,7 +4,6 @@ import {
     ACTION_STATE_TO_ID,
     ID_TO_INVENTORY,
     INVENTORY_NAMES,
-    InventoryIdType,
     UserContractsType,
     UserHistoryType,
     UserInventoryType,
@@ -27,9 +26,7 @@ interface ContractorCabinContentProps {
 }
 
 const getInventoryNames = (arr: UserInventoryType[]) => {
-    const names = arr.map(
-        (v) => ID_TO_INVENTORY[+v.asset_template_id as InventoryIdType]
-    );
+    const names = arr.map((v) => ID_TO_INVENTORY[v.asset_template_id]);
     return [...new Set(names)];
 };
 
@@ -55,7 +52,7 @@ export const ContractorCabinContent = ({
         const equipments = INVENTORY_NAMES.map((name) => ({
             name,
             isAvailable: inventoryNames.includes(name),
-        }));
+        })).filter((v) => v.name);
         return <Welcome equipments={equipments} />;
     }
 

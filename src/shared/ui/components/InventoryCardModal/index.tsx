@@ -1,12 +1,12 @@
 import { desktopS, DMECoinIcon, Modal, useMediaQuery } from 'shared';
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useCallback } from 'react';
 import { ModalProps } from 'antd';
 import { useTranslation } from 'react-i18next';
 
-import { getImagePath, TemplateIdType } from 'features';
+import { getImagePath } from 'features';
 import { AssetDataType, getAtomicAssetsDataById } from 'entities/atomicassets';
 import { UserInventoryType } from 'entities/smartcontract';
-import { NftProgressBar } from '../../ui-kit/NftProgressBar';
+import { Line, NftProgressBar } from 'shared/ui/ui-kit';
 import styles from './styles.module.scss';
 
 type InventoryCardModalProps = ModalProps & {
@@ -32,15 +32,15 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         }
     };
 
-    const updateData = async () => {
+    const updateData = useCallback(async () => {
         if (card?.asset_id) {
             setCardData(await getAtomicAssetsDataById(card.asset_id));
         }
-    };
+    }, [card]);
 
     useEffect(() => {
         updateData();
-    }, [card]);
+    }, [updateData]);
 
     return (
         <Modal
@@ -54,13 +54,11 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                 <div>
                     <img
                         width={isDesktop ? 170 : 144}
-                        src={getImagePath(
-                            +card.asset_template_id as TemplateIdType
-                        )}
+                        src={getImagePath(card.asset_template_id)}
                         alt="nft-equipment-card"
                     />
                     <div className={styles.select} onClick={handleSelect}>
-                        {t('pages.inventoryCardModal.select')}
+                        {t('pages.equipmentSet.cardModal.select')}
                     </div>
                 </div>
                 <div className={styles.infoContainer}>
@@ -69,20 +67,20 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                         {cardData?.data.description}
                     </div>
                     <div className={styles.info}>
-                        <div className={styles.infoLine}>
+                        <Line className={styles.infoLine}>
                             <div className={styles.key}>
-                                {t('pages.inventoryCardModal.rarity')}
+                                {t('pages.equipmentSet.cardModal.rarity')}
                             </div>
                             <div className={styles.value}>
                                 {cardData?.data.rarity}
                             </div>
                             <div className={styles.action}>
-                                {t('pages.inventoryCardModal.upgrade')}
+                                {t('pages.equipmentSet.cardModal.upgrade')}
                             </div>
-                        </div>
-                        <div className={styles.infoLine}>
+                        </Line>
+                        <Line className={styles.infoLine}>
                             <div className={styles.key}>
-                                {t('pages.inventoryCardModal.level')}
+                                {t('pages.equipmentSet.cardModal.level')}
                             </div>
                             <div className={styles.value}>
                                 {cardData?.data.level}
@@ -95,10 +93,10 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                     rightContent={<DMECoinIcon />}
                                 />
                             </div>
-                        </div>
-                        <div className={styles.infoLine}>
+                        </Line>
+                        <Line className={styles.infoLine}>
                             <div className={styles.key}>
-                                {t('pages.inventoryCardModal.depreciation')}
+                                {t('pages.equipmentSet.cardModal.depreciation')}
                             </div>
                             <div className={styles.value}>
                                 <NftProgressBar
@@ -109,20 +107,20 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                 />
                             </div>
                             <div className={styles.action}>
-                                {t('pages.inventoryCardModal.repair')}
+                                {t('pages.equipmentSet.cardModal.repair')}
                             </div>
-                        </div>
-                        <div className={styles.infoLine}>
+                        </Line>
+                        <Line className={styles.infoLine}>
                             <div className={styles.key}>
                                 {t(
-                                    'pages.inventoryCardModal.breakageProbability'
+                                    'pages.equipmentSet.cardModal.breakageProbability'
                                 )}
                             </div>
                             <div className={styles.value}>1</div>
                             <div className={styles.action}>
-                                {t('pages.inventoryCardModal.refurbish')}
+                                {t('pages.equipmentSet.cardModal.refurbish')}
                             </div>
-                        </div>
+                        </Line>
                     </div>
                 </div>
             </div>

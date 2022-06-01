@@ -4,7 +4,7 @@ import { ModalProps, Space } from 'antd';
 import { SortAscendingOutlined, FilterOutlined } from '@ant-design/icons';
 import cn from 'classnames';
 
-import { filterEquipmentByName, TemplateIdType } from 'features';
+import { filterEquipmentByName } from 'features';
 import { InventoryNameType, UserInventoryType } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
@@ -110,9 +110,7 @@ export const Inventory: FC<InventoryProps> = ({
                     <div className={styles.content}>
                         {cards.map((card) => (
                             <Card
-                                templateId={
-                                    +card.asset_template_id as TemplateIdType
-                                }
+                                templateId={card.asset_template_id}
                                 className={styles.card}
                                 onClick={handleCardSelect(card)}
                                 key={card.asset_id}

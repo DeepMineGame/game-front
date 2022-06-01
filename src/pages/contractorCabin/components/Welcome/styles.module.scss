@@ -67,21 +67,16 @@
 
 .equipments {
   border: 1px solid $color-neutral-neutral-10;
+  border-bottom: none;
   width: 192px;
 }
 
 .equipmentLine {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   border-bottom: 1px solid $color-neutral-neutral-10;
-
-  &:last-child {
-    border-bottom: none;
-  }
 }
 
 .equipmentName {
+  flex: 1;
   padding: 4px 8px;
 }
 

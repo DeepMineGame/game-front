@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, desktopS, Title, useMediaQuery } from 'shared';
 import { useStore } from 'effector-react';
-import { TemplateIdType } from 'features';
 import { Col, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { inventoriesStore } from 'entities/smartcontract';
@@ -9,7 +8,7 @@ import styles from './styles.module.scss';
 
 export const Equipment = () => {
     const inventories = useStore(inventoriesStore);
-    const installedItems = inventories?.filter(({ activated }) => activated);
+    const installedItems = inventories?.filter(({ in_use }) => in_use);
     const isDesktop = useMediaQuery(desktopS);
     const subTitleLevel = isDesktop ? 3 : 4;
     const gutter = isDesktop ? 80 : 16;
@@ -31,7 +30,7 @@ export const Equipment = () => {
                 {installedItems?.map(({ asset_template_id }) => (
                     <Card
                         key={asset_template_id}
-                        templateId={asset_template_id as TemplateIdType}
+                        templateId={asset_template_id}
                         status="installed"
                     />
                 ))}

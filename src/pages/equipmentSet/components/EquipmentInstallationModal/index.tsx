@@ -68,14 +68,14 @@ export const EquipmentInstallationModal = ({
                 size="large"
             >
                 {isInstall
-                    ? t('pages.equipmentSet.install')
-                    : t('pages.equipmentSet.uninstall')}
+                    ? t('pages.equipmentSet.main.install')
+                    : t('pages.equipmentSet.main.uninstall')}
             </Button>
             <Modal
                 visible={infoModalVisibility}
                 title={
                     <Title fontFamily="bai" level={5}>
-                        {t('pages.equipmentSet.installation')}
+                        {t('pages.equipmentSet.main.installation')}
                     </Title>
                 }
                 onCancel={toggleModal}

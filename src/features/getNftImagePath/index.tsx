@@ -39,6 +39,9 @@ export const TEST_NET_ASSETS_ID_MAP = {
     411111: 492746,
     411110: 492745,
     411109: 492803,
+    // TODO: ADD MINE TEMPLATE IMAGES
+    176451: undefined,
+    0: undefined,
 };
 
 export type TemplateIdType = keyof typeof TEST_NET_ASSETS_ID_MAP;

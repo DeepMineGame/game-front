@@ -1,6 +1,8 @@
+import { InventoryIdType } from '../constants';
+
 export type UserInventoryType = {
     asset_id: string;
-    asset_template_id: string;
+    asset_template_id: InventoryIdType;
     owner_user_id: string;
     in_use: 0 | 1;
 };
