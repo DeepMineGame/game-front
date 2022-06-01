@@ -14,13 +14,13 @@ import {
     smartContractUserStore,
 } from 'entities/smartcontract';
 import {
-    avoidApplyIfAffectCurrentStatus,
     checkIfMineSetupWillFinishedInFuture,
     checkIsMineInActiveFilter,
     checkIsUserLocationOutsideMineFilter,
     findActiveMineContract,
     hasMineNftFilter,
     hasMinesFilter,
+    ignoreIfInStatus,
     isMineActiveFilter,
 } from './filters';
 
@@ -29,7 +29,6 @@ export const MineOwnerCabinGate = createGate<{ searchParam: string }>(
 );
 
 export enum mineOwnerCabinState {
-    initial,
     hasNoMineNft,
     isOutsideFromLocation,
     needSignContractWithLandLord,
@@ -48,7 +47,7 @@ const setContractsFreeEvent = createEvent();
 const setMineActive = createEvent();
 
 export const $mineOwnerCabinState = createStore<mineOwnerCabinState>(
-    mineOwnerCabinState.initial
+    mineOwnerCabinState.hasNoMineNft
 )
     .on(setHasNoMineNft, () => mineOwnerCabinState.hasNoMineNft)
     .on(
@@ -92,7 +91,12 @@ sample({
     source: smartContractUserStore,
     target: setIsUserOutsideFromLocation,
     clock: [setHasNoMineNft, getSmartContractUserEffect],
-    filter: checkIsUserLocationOutsideMineFilter,
+    filter: compose(
+        ignoreIfInStatus($mineOwnerCabinState, [
+            mineOwnerCabinState.hasNoMineNft,
+        ]),
+        checkIsUserLocationOutsideMineFilter
+    ),
 });
 
 // Проверяем что заключен контракт с владельцем земли
@@ -101,10 +105,10 @@ sample({
     target: setNeedSignContractWithLandLord,
     clock: [setIsUserOutsideFromLocation, setHasNoMineNft],
     filter: compose(
-        avoidApplyIfAffectCurrentStatus(
-            $mineOwnerCabinState,
-            mineOwnerCabinState.needSignContractWithLandLord
-        ),
+        ignoreIfInStatus($mineOwnerCabinState, [
+            mineOwnerCabinState.hasNoMineNft,
+            mineOwnerCabinState.isOutsideFromLocation,
+        ]),
         checkIsMineInActiveFilter
     ),
 });
@@ -132,10 +136,12 @@ sample({
         setNeedSignContractWithLandLord,
     ],
     filter: compose(
-        avoidApplyIfAffectCurrentStatus(
-            $mineOwnerCabinState,
-            mineOwnerCabinState.isMineSet
-        ),
+        ignoreIfInStatus($mineOwnerCabinState, [
+            mineOwnerCabinState.hasNoMineNft,
+            mineOwnerCabinState.isMineSet,
+            mineOwnerCabinState.isOutsideFromLocation,
+            mineOwnerCabinState.isMineSetupInProgress,
+        ]),
         hasMinesFilter
     ),
 });
@@ -151,10 +157,12 @@ sample({
         setNeedSignContractWithLandLord,
     ],
     filter: compose(
-        avoidApplyIfAffectCurrentStatus(
-            $mineOwnerCabinState,
-            mineOwnerCabinState.contractsFree
-        ),
+        ignoreIfInStatus($mineOwnerCabinState, [
+            mineOwnerCabinState.hasNoMineNft,
+            mineOwnerCabinState.isMineSet,
+            mineOwnerCabinState.isOutsideFromLocation,
+            mineOwnerCabinState.isMineSetupInProgress,
+        ]),
         findActiveMineContract
     ),
 });

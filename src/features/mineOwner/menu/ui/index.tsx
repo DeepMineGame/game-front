@@ -9,7 +9,6 @@ type Props = {
 };
 export const MineOwnerMenu: FC<Props> = ({ currentMineOwnerCabinState }) => {
     const statusThatDisableManagementButton = [
-        mineOwnerCabinState.initial,
         mineOwnerCabinState.hasNoMineNft,
         mineOwnerCabinState.isOutsideFromLocation,
         mineOwnerCabinState.needSignContractWithLandLord,

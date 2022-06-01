@@ -7,7 +7,8 @@ export function useLinks() {
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
     return {
-        [mineOwnerCabinState.initial]: (
+        [mineOwnerCabinState.isOutsideFromLocation]: null,
+        [mineOwnerCabinState.hasNoMineNft]: (
             <div>
                 <Button type="link">
                     {isDesktop
@@ -21,8 +22,6 @@ export function useLinks() {
                 </Button>
             </div>
         ),
-        [mineOwnerCabinState.isOutsideFromLocation]: null,
-        [mineOwnerCabinState.hasNoMineNft]: null,
         [mineOwnerCabinState.needSignContractWithLandLord]: (
             <div>
                 <Button type="link">

@@ -9,19 +9,19 @@ import {
 } from 'entities/smartcontract';
 import { $mineOwnerCabinState, mineOwnerCabinState } from '../model';
 
-export function avoidApplyIfAffectCurrentStatus(
+export function ignoreIfInStatus(
     $currentStatus: typeof $mineOwnerCabinState,
-    targetStatus: mineOwnerCabinState
+    targetStatuses: mineOwnerCabinState[]
 ) {
-    return () => $currentStatus.getState() > targetStatus;
+    return (param: boolean) =>
+        !targetStatuses.includes($currentStatus.getState()) && param;
 }
 export const hasMineNftFilter = (inventories: InventoriesDto[] | null) => {
-    const hasMineNft = Boolean(
+    return Boolean(
         inventories?.filter(
             ({ asset_template_id }) => asset_template_id === mineAssetTemplateId
         )?.[0]
     );
-    return !hasMineNft;
 };
 
 export const checkIsUserLocationOutsideMineFilter = (user: UserDto[] | null) =>
