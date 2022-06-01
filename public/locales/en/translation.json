@@ -118,6 +118,10 @@
       "installation": "Equipment installation",
       "install": "Install the Equipment set",
       "uninstall": "Uninstall the Equipment set"
+    },
+    "mineManagement": {
+      "title": "MINE MANAGEMENT",
+      "mine": "MINE"
     }
   },
   "characteristics": {

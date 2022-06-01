@@ -67,3 +67,18 @@
     }
   }
 }
+
+.button.ghost.danger {
+  background: none;
+  color: $color-red-red-5;
+  border: 1px solid $color-red-red-5;
+
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $color-red-red-4;
+    background: none;
+    border: 1px solid $color-red-red-4;
+  }
+}

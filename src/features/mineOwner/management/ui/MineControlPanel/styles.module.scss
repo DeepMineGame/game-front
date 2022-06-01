@@ -1,0 +1,20 @@
+@import "src/shared";
+
+.background {
+  max-width: 608px;
+  min-height: 136px;
+  background: url('./images/mineControlPanel.png');
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  margin: auto;
+}
+
+.badgeText span {
+  color: $color-neutral-neutral-7;
+}
+
+h4.title {
+  margin-bottom: 0;
+}

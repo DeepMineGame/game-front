@@ -21,6 +21,7 @@ export const Button: FC<Props> = ({
                 [styles.primary]: props?.type === 'primary',
                 [styles.ghost]: props?.ghost,
                 [styles.link]: props?.type === 'link',
+                [styles.danger]: props.danger,
             })}
             {...props}
         >
