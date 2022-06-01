@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { ContractorCabin, EquipmentSetPage, HomePage, MiningPage } from 'pages';
-import { MineOwnerPage } from 'pages/mineOwner';
+import { MineManagementPage, MineOwnerPage } from 'pages/mineOwner';
 import {
     contractorCabin,
     equipmentSet,
     home,
     intro,
+    mineManagement,
     mineOwner,
     mining,
 } from './paths';
@@ -61,6 +62,13 @@ export const routes: AppRoute[] = [
         forLoggedIn: true,
         forAdmin: false,
         titleTag: 'Mine owner cabin — DeepMine',
+    },
+    {
+        path: mineManagement,
+        Component: MineManagementPage,
+        forLoggedIn: true,
+        forAdmin: false,
+        titleTag: 'Mine management — DeepMine',
     },
 ];
 

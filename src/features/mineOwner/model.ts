@@ -17,7 +17,7 @@ import {
     checkIfMineSetupWillFinishedInFuture,
     checkIsMineInActiveFilter,
     checkIsUserLocationOutsideMineFilter,
-    findActiveMineContract,
+    hasActiveMineContractFilter,
     hasMineNftFilter,
     hasMinesFilter,
     ignoreIfInStatus,
@@ -163,7 +163,7 @@ sample({
             mineOwnerCabinState.isOutsideFromLocation,
             mineOwnerCabinState.isMineSetupInProgress,
         ]),
-        findActiveMineContract
+        hasActiveMineContractFilter
     ),
 });
 

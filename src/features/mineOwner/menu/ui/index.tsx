@@ -12,18 +12,18 @@ type Props = {
     currentMineOwnerCabinState: mineOwnerCabinState;
 };
 export const MineOwnerMenu: FC<Props> = ({ currentMineOwnerCabinState }) => {
-    const prepareStates = [
+    const baseButtonDisableStates = [
         mineOwnerCabinState.hasNoMineNft,
         mineOwnerCabinState.isOutsideFromLocation,
         mineOwnerCabinState.needSignContractWithLandLord,
     ];
     const statusThatDisableManagementButton = [
-        ...prepareStates,
+        ...baseButtonDisableStates,
         mineOwnerCabinState.isMineSet,
     ];
-    const statusThatDisableTeamButton = [...prepareStates];
+    const statusThatDisableTeamButton = [...baseButtonDisableStates];
     const statusThatDisableStatsButton = [
-        ...prepareStates,
+        ...baseButtonDisableStates,
         mineOwnerCabinState.isMineSet,
         mineOwnerCabinState.contractsFree,
     ];
