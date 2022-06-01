@@ -180,7 +180,7 @@ export const EquipmentSetPage: FC = () => {
                 onCardHolderClick={openInventoryModal}
             />
             <div className={styles.characteristics}>
-                <Characteristics />
+                <Characteristics contractors={contractors} />
             </div>
             <div className={styles.installButtonWrapper}>
                 <EquipmentInstallationModal

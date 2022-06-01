@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 
-import { minesStore } from 'entities/smartcontract';
+import {
+    ContractorDto,
+    getMinesEffect,
+    minesStore,
+} from 'entities/smartcontract';
 import { CharacteristicsLine } from '../CharacteristicsLine';
 
 import styles from './styles.module.scss';
 
-export const Characteristics = () => {
+interface Props {
+    contractors: ContractorDto[] | null;
+}
+
+export const Characteristics = ({ contractors }: Props) => {
     const { t } = useTranslation();
     const mineStore = useStore(minesStore);
+    useEffect(() => {
+        const contractorAreaId = contractors?.[0]?.area_id;
+        if (contractorAreaId) {
+            getMinesEffect({ searchParam: contractorAreaId });
+        }
+    }, [contractors]);
 
     return (
         <div className={styles.container}>

@@ -86,4 +86,4 @@ export enum INDEX_POSITION_USER {
     nickname,
 }
 
-export const deepminegame = 'deepminegame';
+export const deepminegame = 'deepmineappg';

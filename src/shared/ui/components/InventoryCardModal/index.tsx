@@ -1,9 +1,10 @@
 import { desktopS, DMECoinIcon, Modal, useMediaQuery } from 'shared';
-import React, { FC } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { ModalProps } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 import { getImagePath, TemplateIdType } from 'features';
+import { AssetDataType, getAtomicAssetsDataById } from 'entities/atomicassets';
 import { UserInventoryType } from 'entities/smartcontract';
 import { NftProgressBar } from '../../ui-kit/NftProgressBar';
 import styles from './styles.module.scss';
@@ -18,6 +19,9 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     onSelect,
     ...props
 }) => {
+    const [cardData, setCardData] = useState<AssetDataType | undefined>(
+        undefined
+    );
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
 
@@ -27,6 +31,16 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
             props.onCancel(e);
         }
     };
+
+    const updateData = async () => {
+        if (card?.asset_id) {
+            setCardData(await getAtomicAssetsDataById(card.asset_id));
+        }
+    };
+
+    useEffect(() => {
+        updateData();
+    }, [card]);
 
     return (
         <Modal
@@ -50,17 +64,18 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                     </div>
                 </div>
                 <div className={styles.infoContainer}>
-                    <div className={styles.title}>Mine Educational Module</div>
+                    <div className={styles.title}>{cardData?.data.name}</div>
                     <div className={styles.description}>
-                        Generates energy (DME token) through processing the
-                        irradiated matter extracted by the mining equipment.
+                        {cardData?.data.description}
                     </div>
                     <div className={styles.info}>
                         <div className={styles.infoLine}>
                             <div className={styles.key}>
                                 {t('pages.inventoryCardModal.rarity')}
                             </div>
-                            <div className={styles.value}>Epic</div>
+                            <div className={styles.value}>
+                                {cardData?.data.rarity}
+                            </div>
                             <div className={styles.action}>
                                 {t('pages.inventoryCardModal.upgrade')}
                             </div>
@@ -69,7 +84,9 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             <div className={styles.key}>
                                 {t('pages.inventoryCardModal.level')}
                             </div>
-                            <div className={styles.value}>1</div>
+                            <div className={styles.value}>
+                                {cardData?.data.level}
+                            </div>
                             <div className={styles.action}>
                                 <NftProgressBar
                                     initial={30}
