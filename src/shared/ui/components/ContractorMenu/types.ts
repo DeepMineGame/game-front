@@ -11,6 +11,7 @@ export type Config = {
     callbacks: { [key in ContractorMenuItems]?: MouseEventHandler };
     activeTooltip?: ContractorMenuItems;
 };
+
 export type Props = {
     config: Config;
 };

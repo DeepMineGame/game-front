@@ -7,7 +7,8 @@ export function useLinks() {
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
     return {
-        [mineOwnerCabinState.initial]: (
+        [mineOwnerCabinState.isOutsideFromLocation]: null,
+        [mineOwnerCabinState.hasNoMineNft]: (
             <div>
                 <Button type="link">
                     {isDesktop
@@ -21,8 +22,6 @@ export function useLinks() {
                 </Button>
             </div>
         ),
-        [mineOwnerCabinState.isOutsideFromLocation]: null,
-        [mineOwnerCabinState.hasMineNft]: null,
         [mineOwnerCabinState.needSignContractWithLandLord]: (
             <div>
                 <Button type="link">
@@ -37,9 +36,9 @@ export function useLinks() {
                 </Button>
             </div>
         ),
-        [mineOwnerCabinState.isMineActive]: null,
         [mineOwnerCabinState.isMineSet]: null,
-        [mineOwnerCabinState.isMining]: null,
+        [mineOwnerCabinState.contractsFree]: null,
         [mineOwnerCabinState.isMineSetupInProgress]: null,
+        [mineOwnerCabinState.isMineActive]: null,
     };
 }

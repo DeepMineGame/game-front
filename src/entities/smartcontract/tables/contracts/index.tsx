@@ -16,7 +16,7 @@ export enum mapSearchParamForIndexPositionToFindContracts {
 
 export const getContractEffect = createEffect(
     async ({
-        searchIdentification,
+        searchIdentification = mapSearchParamForIndexPositionToFindContracts.executorId,
         searchParam,
     }: {
         searchIdentification: mapSearchParamForIndexPositionToFindContracts;
@@ -29,7 +29,7 @@ export const getContractEffect = createEffect(
             index_position: searchIdentification,
             key_type: 'i64',
             lower_bound: searchParam,
-            limit: 1,
+            limit: 100,
         });
     }
 );

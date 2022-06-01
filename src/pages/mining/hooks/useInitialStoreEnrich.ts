@@ -11,23 +11,21 @@ import {
     getInventoriesEffect,
     mapSearchParamForIndexPosition,
 } from 'entities/smartcontract';
-import { userStore } from 'entities/user';
 
 export function useInitialStoreEnrich() {
-    const user = useStore(userStore);
     const chainAccount = useChainAuthContext();
     const contracts = useStore(contractStore);
     const mineStore = useStore(minesStore);
 
     useEffect(() => {
-        if (user && chainAccount.activeUser?.accountName) {
+        if (chainAccount.activeUser?.accountName) {
             getContractEffect({
                 searchIdentification:
                     mapSearchParamForIndexPositionToFindContracts.executorId,
                 searchParam: chainAccount.activeUser.accountName,
             });
         }
-    }, [user, chainAccount.activeUser?.accountName]);
+    }, [chainAccount.activeUser?.accountName]);
 
     useEffect(() => {
         if (contracts?.length) {

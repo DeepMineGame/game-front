@@ -5,19 +5,23 @@ export function useTitles() {
     const { t } = useTranslation();
 
     return {
-        [mineOwnerCabinState.initial]: t('features.mineOwner.welcome'),
-        [mineOwnerCabinState.hasMineNft]: t('features.mineOwner.mineNotSet'),
+        [mineOwnerCabinState.hasNoMineNft]: t('features.mineOwner.welcome'),
         [mineOwnerCabinState.isOutsideFromLocation]: t(
             'features.mineOwner.mineNotSet'
         ),
         [mineOwnerCabinState.needSignContractWithLandLord]: t(
             'features.mineOwner.mineNotSet'
         ),
-        [mineOwnerCabinState.isMineActive]: t('features.mineOwner.welcome'),
-        [mineOwnerCabinState.isMineSet]: t('features.mineOwner.welcome'),
-        [mineOwnerCabinState.isMining]: t('features.mineOwner.welcome'),
+
+        [mineOwnerCabinState.isMineSet]: t('features.mineOwner.mineManagement'),
         [mineOwnerCabinState.isMineSetupInProgress]: t(
             'features.mineOwner.progress'
+        ),
+        [mineOwnerCabinState.contractsFree]: t(
+            'features.mineOwner.needTeamTitle'
+        ),
+        [mineOwnerCabinState.isMineActive]: t(
+            'features.mineOwner.mineIsActive'
         ),
     };
 }

@@ -1,8 +1,11 @@
-import { createEvent, createStore, forward, guard } from 'effector';
+import { createEvent, createStore, forward, sample } from 'effector';
 import { createGate } from 'effector-react';
+import compose from 'compose-function';
 import {
     actionsStore,
+    contractStore,
     getActionByUserEffect,
+    getContractEffect,
     getInventoriesEffect,
     getMinesEffectByOwnerEffect,
     getSmartContractUserEffect,
@@ -14,7 +17,11 @@ import {
     checkIfMineSetupWillFinishedInFuture,
     checkIsMineInActiveFilter,
     checkIsUserLocationOutsideMineFilter,
+    hasActiveMineContractFilter,
     hasMineNftFilter,
+    hasMinesFilter,
+    ignoreIfInStatus,
+    isMineActiveFilter,
 } from './filters';
 
 export const MineOwnerCabinGate = createGate<{ searchParam: string }>(
@@ -22,27 +29,27 @@ export const MineOwnerCabinGate = createGate<{ searchParam: string }>(
 );
 
 export enum mineOwnerCabinState {
-    initial,
+    hasNoMineNft,
     isOutsideFromLocation,
     needSignContractWithLandLord,
-    isMining,
-    hasMineNft,
     isMineSetupInProgress,
     isMineSet,
-    // hasContracts, //
+    contractsFree,
     isMineActive,
 }
 
-const setHasMineNft = createEvent();
+const setHasNoMineNft = createEvent();
 const setIsUserOutsideFromLocation = createEvent();
 const setNeedSignContractWithLandLord = createEvent();
 const setIsMineSetupInProgressEvent = createEvent();
 const setIsMineSetEvent = createEvent();
+const setContractsFreeEvent = createEvent();
+const setMineActive = createEvent();
 
 export const $mineOwnerCabinState = createStore<mineOwnerCabinState>(
-    mineOwnerCabinState.initial
+    mineOwnerCabinState.hasNoMineNft
 )
-    .on(setHasMineNft, () => mineOwnerCabinState.hasMineNft)
+    .on(setHasNoMineNft, () => mineOwnerCabinState.hasNoMineNft)
     .on(
         setIsUserOutsideFromLocation,
         () => mineOwnerCabinState.isOutsideFromLocation
@@ -55,7 +62,9 @@ export const $mineOwnerCabinState = createStore<mineOwnerCabinState>(
         setIsMineSetupInProgressEvent,
         () => mineOwnerCabinState.isMineSetupInProgress
     )
-    .on(setIsMineSetEvent, () => mineOwnerCabinState.isMineSet);
+    .on(setIsMineSetEvent, () => mineOwnerCabinState.isMineSet)
+    .on(setContractsFreeEvent, () => mineOwnerCabinState.contractsFree)
+    .on(setMineActive, () => mineOwnerCabinState.isMineActive);
 
 // На открытие гейта заполняем нужные сторы
 forward({
@@ -65,54 +74,110 @@ forward({
         getSmartContractUserEffect,
         getMinesEffectByOwnerEffect,
         getActionByUserEffect,
+        getContractEffect,
     ],
 });
 
 // Проверяем что есть NFT
-guard({
+sample({
     source: inventoriesStore,
-    target: setHasMineNft,
+    target: setHasNoMineNft,
     clock: inventoriesStore,
     filter: hasMineNftFilter,
 });
 
 // Проверяем что пользователь за пределами локации
-guard({
+sample({
     source: smartContractUserStore,
     target: setIsUserOutsideFromLocation,
-    clock: [setHasMineNft, getSmartContractUserEffect],
-    filter: checkIsUserLocationOutsideMineFilter,
+    clock: [setHasNoMineNft, getSmartContractUserEffect],
+    filter: compose(
+        ignoreIfInStatus($mineOwnerCabinState, [
+            mineOwnerCabinState.hasNoMineNft,
+        ]),
+        checkIsUserLocationOutsideMineFilter
+    ),
 });
 
-// Проверяем что заключен контракт с владельцем земли (landLord)
-guard({
+// Проверяем что заключен контракт с владельцем земли
+sample({
     source: minesStore,
     target: setNeedSignContractWithLandLord,
-    clock: [setIsUserOutsideFromLocation, setHasMineNft],
-    filter: checkIsMineInActiveFilter,
+    clock: [setIsUserOutsideFromLocation, setHasNoMineNft],
+    filter: compose(
+        ignoreIfInStatus($mineOwnerCabinState, [
+            mineOwnerCabinState.hasNoMineNft,
+            mineOwnerCabinState.isOutsideFromLocation,
+        ]),
+        checkIsMineInActiveFilter
+    ),
 });
 
 // Проверяем что установка шахты в in progress
-guard({
+sample({
     source: actionsStore,
     target: setIsMineSetupInProgressEvent,
     clock: [
         setIsUserOutsideFromLocation,
-        setHasMineNft,
+        setHasNoMineNft,
         setNeedSignContractWithLandLord,
     ],
     filter: checkIfMineSetupWillFinishedInFuture,
 });
 
 // Проверяем что шахта установлена
-guard({
+sample({
     source: minesStore,
     target: setIsMineSetEvent,
     clock: [
         getMinesEffectByOwnerEffect,
         setIsUserOutsideFromLocation,
-        setHasMineNft,
+        setHasNoMineNft,
         setNeedSignContractWithLandLord,
     ],
-    filter: (mines) => Boolean(mines?.[0]?.is_active),
+    filter: compose(
+        ignoreIfInStatus($mineOwnerCabinState, [
+            mineOwnerCabinState.hasNoMineNft,
+            mineOwnerCabinState.isMineSet,
+            mineOwnerCabinState.isOutsideFromLocation,
+            mineOwnerCabinState.isMineSetupInProgress,
+        ]),
+        hasMinesFilter
+    ),
+});
+
+// Проверяем что заключен хоть один контракт (contractsFree)
+sample({
+    source: { contract: contractStore, inventory: inventoriesStore },
+    target: setContractsFreeEvent,
+    clock: [
+        getMinesEffectByOwnerEffect,
+        setIsUserOutsideFromLocation,
+        setHasNoMineNft,
+        setNeedSignContractWithLandLord,
+    ],
+    filter: compose(
+        ignoreIfInStatus($mineOwnerCabinState, [
+            mineOwnerCabinState.hasNoMineNft,
+            mineOwnerCabinState.isMineSet,
+            mineOwnerCabinState.isOutsideFromLocation,
+            mineOwnerCabinState.isMineSetupInProgress,
+        ]),
+        hasActiveMineContractFilter
+    ),
+});
+
+// Проверяем что шахта активна
+sample({
+    source: minesStore,
+    target: setMineActive,
+    clock: [
+        getMinesEffectByOwnerEffect,
+        setIsMineSetEvent,
+        setIsUserOutsideFromLocation,
+        setHasNoMineNft,
+        setNeedSignContractWithLandLord,
+        setContractsFreeEvent,
+    ],
+    filter: isMineActiveFilter,
 });
