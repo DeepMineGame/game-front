@@ -7,6 +7,9 @@ export function useDescriptions() {
     const isDesktop = useMediaQuery(desktopS);
 
     return {
+        [mineOwnerCabinState.initial]: isDesktop
+            ? t('features.mineOwner.needMineCardDesktop')
+            : t('features.mineOwner.needMineCardMobile'),
         [mineOwnerCabinState.isOutsideFromLocation]: t(
             'features.mineOwner.needShift'
         ),

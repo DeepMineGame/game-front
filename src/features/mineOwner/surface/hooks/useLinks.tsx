@@ -8,6 +8,20 @@ export function useLinks() {
     const isDesktop = useMediaQuery(desktopS);
     return {
         [mineOwnerCabinState.isOutsideFromLocation]: null,
+        [mineOwnerCabinState.initial]: (
+            <div>
+                <Button type="link">
+                    {isDesktop
+                        ? t('features.mineOwner.pickUpFromStorage')
+                        : t('features.mineOwner.storage')}
+                </Button>
+                <Button type="link">
+                    {isDesktop
+                        ? t('features.mineOwner.goToMarket')
+                        : t('features.mineOwner.market')}
+                </Button>
+            </div>
+        ),
         [mineOwnerCabinState.hasNoMineNft]: (
             <div>
                 <Button type="link">

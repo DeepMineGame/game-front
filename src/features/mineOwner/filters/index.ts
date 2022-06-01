@@ -17,15 +17,13 @@ export function ignoreIfInStatus(
         !targetStatuses.includes($currentStatus.getState()) && param;
 }
 export const hasMineNftFilter = (inventories: InventoriesDto[] | null) => {
-    return Boolean(
-        inventories?.filter(
-            ({ asset_template_id }) => asset_template_id === mineAssetTemplateId
-        )?.[0]
-    );
+    return !inventories?.filter(
+        ({ asset_template_id }) => asset_template_id === mineAssetTemplateId
+    )?.[0];
 };
 
 export const checkIsUserLocationOutsideMineFilter = (user: UserDto[] | null) =>
-    user?.[0]?.location !== LOCATION_TO_ID.mine_deck;
+    Boolean(user?.[0]?.location !== LOCATION_TO_ID.mine_deck);
 
 export const checkIsMineInActiveFilter = (mines: MineDto[] | null) =>
     !mines?.[0]?.is_active;

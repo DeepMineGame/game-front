@@ -5,6 +5,8 @@ export function useTitles() {
     const { t } = useTranslation();
 
     return {
+        [mineOwnerCabinState.initial]: t('features.mineOwner.welcome'),
+
         [mineOwnerCabinState.hasNoMineNft]: t('features.mineOwner.welcome'),
         [mineOwnerCabinState.isOutsideFromLocation]: t(
             'features.mineOwner.mineNotSet'
