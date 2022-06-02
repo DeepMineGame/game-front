@@ -19,7 +19,9 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
     const mines = useStore(minesStore);
     const mine = mines?.[0];
     const isMineActive = mine?.is_active;
-    const statusText = isMineActive ? 'Active' : 'Inactive';
+    const statusText = isMineActive
+        ? t('pages.mining.active')
+        : t('pages.mining.inactive');
 
     return (
         <div className={styles.background}>

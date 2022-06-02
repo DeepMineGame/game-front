@@ -32,6 +32,11 @@ export const Surface: FC<Props> = ({ user }) => {
     const texts = useDescriptions();
     const buttons = useLinks();
 
+    const onTravelSuccess = async () => {
+        await getSmartContractUserEffect({ searchParam: user });
+
+        setInitialStateEvent();
+    };
     return (
         <div className={styles.surface}>
             {isDesktop && (
@@ -42,11 +47,7 @@ export const Surface: FC<Props> = ({ user }) => {
             {cabinState === mineOwnerCabinState.isOutsideFromLocation && (
                 <Travel
                     toLocationId={LOCATION_TO_ID.mine_deck}
-                    onSuccess={() => {
-                        getSmartContractUserEffect({ searchParam: user }).then(
-                            () => setInitialStateEvent()
-                        );
-                    }}
+                    onSuccess={onTravelSuccess}
                 />
             )}
         </div>
