@@ -25,8 +25,9 @@ export const Surface: FC<Props> = ({ user }) => {
     useGate(MineOwnerCabinGate, {
         searchParam: user,
     });
-    const isDesktop = useMediaQuery(desktopS);
     const cabinState = useStore($mineOwnerCabinState);
+
+    const isDesktop = useMediaQuery(desktopS);
     const titles = useTitles();
     const texts = useDescriptions();
     const buttons = useLinks();

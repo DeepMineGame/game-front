@@ -133,13 +133,7 @@ sample({
 sample({
     source: minesStore,
     target: setIsMineSetEvent,
-    clock: [
-        getMinesByOwnerEffect,
-        setIsUserOutsideFromLocation,
-        setHasNoMineNft,
-        setNeedSignContractWithLandLord,
-        setInitialStateEvent,
-    ],
+    clock: [setInitialStateEvent, minesStore, getMinesByOwnerEffect],
     filter: compose(
         ignoreIfInStatus($mineOwnerCabinState, [
             mineOwnerCabinState.hasNoMineNft,
@@ -155,14 +149,7 @@ sample({
 sample({
     source: { contract: contractStore, inventory: inventoriesStore },
     target: setContractsFreeEvent,
-    clock: [
-        getMinesByOwnerEffect,
-        setIsUserOutsideFromLocation,
-        setHasNoMineNft,
-        setNeedSignContractWithLandLord,
-        getSmartContractUserEffect,
-        setInitialStateEvent,
-    ],
+    clock: [setInitialStateEvent, contractStore, inventoriesStore],
     filter: compose(
         ignoreIfInStatus($mineOwnerCabinState, [
             mineOwnerCabinState.hasNoMineNft,

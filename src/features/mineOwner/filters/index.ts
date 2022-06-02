@@ -60,12 +60,14 @@ export const hasActiveMineContractFilter = ({
         ({ client_asset_id }) =>
             String(client_asset_id) === mineAssetIdByTemplateId
     );
-
+    if (!mineContract) {
+        return false;
+    }
     return Boolean(!mineContract?.is_active);
 };
 
 export const hasMinesFilter = (mines: MineDto[] | null) =>
-    Boolean(mines?.length);
+    Boolean(!mines?.length);
 
 export const isMineActiveFilter = (mines: MineDto[] | null) =>
     Boolean(mines?.[0]?.is_active);
