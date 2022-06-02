@@ -30,7 +30,7 @@ export const getMinesEffect = createEffect(
     }
 );
 
-export const getMinesEffectByOwnerEffect = createEffect(
+export const getMinesByOwnerEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
         return getMinesEffect({
             searchIdentificationType: searchBy.owner,

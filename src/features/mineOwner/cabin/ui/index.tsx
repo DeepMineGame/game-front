@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import classNames from 'classnames';
-import { mineOwnerCabinState } from '../../model';
+import { mineOwnerCabinState } from '../../models/mineOwnerState';
 import styles from './styles.module.scss';
 
 type Props = {

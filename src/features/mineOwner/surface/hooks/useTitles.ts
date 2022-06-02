@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { mineOwnerCabinState } from '../../model';
+import { mineOwnerCabinState } from '../../models/mineOwnerState';
 
 export function useTitles() {
     const { t } = useTranslation();

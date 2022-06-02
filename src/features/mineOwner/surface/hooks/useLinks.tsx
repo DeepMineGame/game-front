@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Button, desktopS, useMediaQuery } from 'shared';
 import React from 'react';
-import { mineOwnerCabinState } from '../../model';
+import { mineOwnerCabinState } from '../../models/mineOwnerState';
 
 export function useLinks() {
     const { t } = useTranslation();

@@ -28,7 +28,9 @@
       "button": {
         "cancel": "Cancel",
         "install": "Install",
-        "uninstall": "Uninstall"
+        "uninstall": "Uninstall",
+        "deactivate": "Deactivate",
+        "activate": "Activate"
       },
       "logout": "Logout"
     }
@@ -165,7 +167,6 @@
         "addons": "ADD-ONS",
         "petobot": "Petobot",
         "modules": "Modules",
-        "activate": "Activate",
         "unsetup": "Unsetup"
       }
     }

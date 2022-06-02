@@ -7,7 +7,7 @@ import {
     getActionByUserEffect,
     getContractEffect,
     getInventoriesEffect,
-    getMinesEffectByOwnerEffect,
+    getMinesByOwnerEffect,
     getSmartContractUserEffect,
     inventoriesStore,
     minesStore,
@@ -22,7 +22,7 @@ import {
     hasMinesFilter,
     ignoreIfInStatus,
     isMineActiveFilter,
-} from './filters';
+} from '../filters';
 
 export const MineOwnerCabinGate = createGate<{ searchParam: string }>(
     'MineOwnerCabinGate'
@@ -75,7 +75,7 @@ forward({
     to: [
         getInventoriesEffect,
         getSmartContractUserEffect,
-        getMinesEffectByOwnerEffect,
+        getMinesByOwnerEffect,
         getActionByUserEffect,
         getContractEffect,
     ],
@@ -104,10 +104,10 @@ sample({
 
 // Проверяем что заключен контракт с владельцем земли
 sample({
-    source: minesStore,
+    source: contractStore,
     target: setNeedSignContractWithLandLord,
     clock: [
-        getMinesEffectByOwnerEffect,
+        getMinesByOwnerEffect,
         setIsUserOutsideFromLocation,
         setHasNoMineNft,
         setInitialStateEvent,
@@ -139,7 +139,7 @@ sample({
     source: minesStore,
     target: setIsMineSetEvent,
     clock: [
-        getMinesEffectByOwnerEffect,
+        getMinesByOwnerEffect,
         setIsUserOutsideFromLocation,
         setHasNoMineNft,
         setNeedSignContractWithLandLord,
@@ -161,7 +161,7 @@ sample({
     source: { contract: contractStore, inventory: inventoriesStore },
     target: setContractsFreeEvent,
     clock: [
-        getMinesEffectByOwnerEffect,
+        getMinesByOwnerEffect,
         setIsUserOutsideFromLocation,
         setHasNoMineNft,
         setNeedSignContractWithLandLord,
@@ -185,7 +185,7 @@ sample({
     source: minesStore,
     target: setMineActive,
     clock: [
-        getMinesEffectByOwnerEffect,
+        getMinesByOwnerEffect,
         setIsMineSetEvent,
         setIsUserOutsideFromLocation,
         setHasNoMineNft,

@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { mineManagement } from 'app/router/paths';
-import { mineOwnerCabinState } from '../../model';
+import { mineOwnerCabinState } from '../../models/mineOwnerState';
 
 type Props = {
     currentMineOwnerCabinState: mineOwnerCabinState;

@@ -10,7 +10,7 @@ import {
     MineOwnerCabinGate,
     mineOwnerCabinState,
     setInitialStateEvent,
-} from '../../model';
+} from '../../models/mineOwnerState';
 import { useTitles } from '../hooks/useTitles';
 import { useDescriptions } from '../hooks/useDescriptions';
 import { useLinks } from '../hooks/useLinks';

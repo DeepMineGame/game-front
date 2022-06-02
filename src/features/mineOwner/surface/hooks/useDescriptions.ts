@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { desktopS, useMediaQuery } from 'shared';
-import { mineOwnerCabinState } from '../../model';
+import { mineOwnerCabinState } from '../../models/mineOwnerState';
 
 export function useDescriptions() {
     const { t } = useTranslation();
