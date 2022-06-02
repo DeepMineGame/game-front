@@ -1,13 +1,17 @@
 import {
     ActionDto,
     ContractDto,
+    ContractType,
     InventoriesDto,
     LOCATION_TO_ID,
     mineAssetTemplateId,
     MineDto,
     UserDto,
 } from 'entities/smartcontract';
-import { $mineOwnerCabinState, mineOwnerCabinState } from '../model';
+import {
+    $mineOwnerCabinState,
+    mineOwnerCabinState,
+} from '../models/mineOwnerState';
 
 export function ignoreIfInStatus(
     $currentStatus: typeof $mineOwnerCabinState,
@@ -25,8 +29,14 @@ export const hasMineNftFilter = (inventories: InventoriesDto[] | null) => {
 export const checkIsUserLocationOutsideMineFilter = (user: UserDto[] | null) =>
     Boolean(user?.[0]?.location !== LOCATION_TO_ID.mine_deck);
 
-export const checkIsMineInActiveFilter = (mines: MineDto[] | null) =>
-    !mines?.[0]?.is_active;
+export const checkHasActiveContractWithLandlord = (
+    contracts: ContractDto[] | null
+) => {
+    const contractWithLandlord = contracts?.filter(
+        ({ type }) => type === ContractType.landlord_mineowner
+    )?.[0];
+    return !contractWithLandlord?.is_active;
+};
 
 export const checkIfMineSetupWillFinishedInFuture = (
     actions: ActionDto[] | null

@@ -15,7 +15,7 @@ import {
 } from 'entities/smartcontract';
 import {
     checkIfMineSetupWillFinishedInFuture,
-    checkIsMineInActiveFilter,
+    checkHasActiveContractWithLandlord,
     checkIsUserLocationOutsideMineFilter,
     hasActiveMineContractFilter,
     hasMineNftFilter,
@@ -106,18 +106,13 @@ sample({
 sample({
     source: contractStore,
     target: setNeedSignContractWithLandLord,
-    clock: [
-        getMinesByOwnerEffect,
-        setIsUserOutsideFromLocation,
-        setHasNoMineNft,
-        setInitialStateEvent,
-    ],
+    clock: [setInitialStateEvent, contractStore],
     filter: compose(
         ignoreIfInStatus($mineOwnerCabinState, [
             mineOwnerCabinState.hasNoMineNft,
             mineOwnerCabinState.isOutsideFromLocation,
         ]),
-        checkIsMineInActiveFilter
+        checkHasActiveContractWithLandlord
     ),
 });
 
