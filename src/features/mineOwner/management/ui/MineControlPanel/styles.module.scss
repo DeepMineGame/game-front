@@ -1,0 +1,22 @@
+@import "src/shared";
+@import "../styles.module";
+
+.background {
+  background: url('./images/mineControlPanel.png');
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  composes: deck;
+}
+
+.badgeText span {
+  color: $color-neutral-neutral-7;
+}
+
+h4.title {
+  margin-bottom: 0;
+}
+
+.wideButton {
+  width: 100%;
+}

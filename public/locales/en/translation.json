@@ -28,7 +28,9 @@
       "button": {
         "cancel": "Cancel",
         "install": "Install",
-        "uninstall": "Uninstall"
+        "uninstall": "Uninstall",
+        "deactivate": "Deactivate",
+        "activate": "Activate"
       },
       "logout": "Logout"
     }
@@ -148,6 +150,10 @@
         "equipmentBreakageProbabillity": "Equipment Breakage Probabillity",
         "fossilChance": "Fossil Chance"
       }
+    },
+    "mineManagement": {
+      "title": "MINE MANAGEMENT",
+      "mine": "MINE"
     }
   },
   "features": {
@@ -173,7 +179,13 @@
       "mineManagementDescription": "Go to Mine Management unit to activate the Mine",
       "mineIsActive": "Mine is Active",
       "mineIsActiveDescription": "Everything is fine, Mine is ready to go. Now you can see the statistics of the mining process and efficiency",
-      "mineIsActiveDescriptionMobile": "Now you can see the statistics of the mining process and efficiency"
+      "mineIsActiveDescriptionMobile": "Now you can see the statistics of the mining process and efficiency",
+      "management": {
+        "addons": "ADD-ONS",
+        "petobot": "Petobot",
+        "modules": "Modules",
+        "unsetup": "Unsetup"
+      }
     }
   }
 }

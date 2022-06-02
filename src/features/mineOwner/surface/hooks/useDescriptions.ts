@@ -1,12 +1,15 @@
 import { useTranslation } from 'react-i18next';
 import { desktopS, useMediaQuery } from 'shared';
-import { mineOwnerCabinState } from '../../model';
+import { mineOwnerCabinState } from '../../models/mineOwnerState';
 
 export function useDescriptions() {
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
 
     return {
+        [mineOwnerCabinState.initial]: isDesktop
+            ? t('features.mineOwner.needMineCardDesktop')
+            : t('features.mineOwner.needMineCardMobile'),
         [mineOwnerCabinState.isOutsideFromLocation]: t(
             'features.mineOwner.needShift'
         ),

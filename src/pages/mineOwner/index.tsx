@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, useChainAuthContext } from 'shared';
+import { Header, useAccountName } from 'shared';
 import { useStore } from 'effector-react';
 import {
     MineOwnerMenu,
@@ -10,15 +10,14 @@ import {
 import styles from './styles.module.scss';
 
 export const MineOwnerPage = () => {
-    const chainAccount = useChainAuthContext();
+    const chainAccountName = useAccountName();
+
     const cabinState = useStore($mineOwnerCabinState);
     return (
         <MineOwnerCabin state={cabinState}>
             <Header />
             <div className={styles.overturnLayout}>
-                {chainAccount?.activeUser && (
-                    <Surface user={chainAccount?.activeUser?.accountName} />
-                )}
+                {chainAccountName && <Surface user={chainAccountName} />}
             </div>
             <MineOwnerMenu currentMineOwnerCabinState={cabinState} />
         </MineOwnerCabin>

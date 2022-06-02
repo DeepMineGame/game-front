@@ -67,3 +67,30 @@
     }
   }
 }
+
+.ghost.disabled {
+  &,
+  &:hover,
+  &:focus,
+  &:active {
+    color: $color-neutral-neutral-5 !important;
+    background-color: initial;
+    border: 1px solid $color-neutral-neutral-5 !important;
+  }
+
+}
+
+.button.ghost.danger {
+  background: none;
+  color: $color-red-red-5;
+  border: 1px solid $color-red-red-5;
+
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $color-red-red-4;
+    background: none;
+    border: 1px solid $color-red-red-4;
+  }
+}

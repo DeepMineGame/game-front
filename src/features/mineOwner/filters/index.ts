@@ -1,13 +1,17 @@
 import {
     ActionDto,
     ContractDto,
+    ContractType,
     LOCATION_TO_ID,
     mineAssetTemplateId,
     MineDto,
     UserDto,
     UserInventoryType,
 } from 'entities/smartcontract';
-import { $mineOwnerCabinState, mineOwnerCabinState } from '../model';
+import {
+    $mineOwnerCabinState,
+    mineOwnerCabinState,
+} from '../models/mineOwnerState';
 
 export function ignoreIfInStatus(
     $currentStatus: typeof $mineOwnerCabinState,
@@ -17,18 +21,22 @@ export function ignoreIfInStatus(
         !targetStatuses.includes($currentStatus.getState()) && param;
 }
 export const hasMineNftFilter = (inventories: UserInventoryType[] | null) => {
-    return Boolean(
-        inventories?.filter(
-            ({ asset_template_id }) => asset_template_id === mineAssetTemplateId
-        )?.[0]
-    );
+    return !inventories?.filter(
+        ({ asset_template_id }) => asset_template_id === mineAssetTemplateId
+    )?.[0];
 };
 
 export const checkIsUserLocationOutsideMineFilter = (user: UserDto[] | null) =>
-    user?.[0]?.location !== LOCATION_TO_ID.mine_deck;
+    Boolean(user?.[0]?.location !== LOCATION_TO_ID.mine_deck);
 
-export const checkIsMineInActiveFilter = (mines: MineDto[] | null) =>
-    !mines?.[0]?.is_active;
+export const checkHasActiveContractWithLandlord = (
+    contracts: ContractDto[] | null
+) => {
+    const contractWithLandlord = contracts?.filter(
+        ({ type }) => type === ContractType.landlord_mineowner
+    )?.[0];
+    return !contractWithLandlord?.is_active;
+};
 
 export const checkIfMineSetupWillFinishedInFuture = (
     actions: ActionDto[] | null
@@ -52,12 +60,13 @@ export const hasActiveMineContractFilter = ({
         ({ client_asset_id }) =>
             String(client_asset_id) === mineAssetIdByTemplateId
     );
-
+    if (!mineContract) {
+        return false;
+    }
     return Boolean(!mineContract?.is_active);
 };
 
-export const hasMinesFilter = (mines: MineDto[] | null) =>
-    Boolean(mines?.length);
+export const hasMinesFilter = (mines: MineDto[] | null) => !mines?.length;
 
 export const isMineActiveFilter = (mines: MineDto[] | null) =>
     Boolean(mines?.[0]?.is_active);

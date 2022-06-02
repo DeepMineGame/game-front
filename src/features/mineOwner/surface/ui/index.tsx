@@ -9,7 +9,8 @@ import {
     $mineOwnerCabinState,
     MineOwnerCabinGate,
     mineOwnerCabinState,
-} from '../../model';
+    setInitialStateEvent,
+} from '../../models/mineOwnerState';
 import { useTitles } from '../hooks/useTitles';
 import { useDescriptions } from '../hooks/useDescriptions';
 import { useLinks } from '../hooks/useLinks';
@@ -24,13 +25,18 @@ export const Surface: FC<Props> = ({ user }) => {
     useGate(MineOwnerCabinGate, {
         searchParam: user,
     });
+    const cabinState = useStore($mineOwnerCabinState);
 
     const isDesktop = useMediaQuery(desktopS);
-    const cabinState = useStore($mineOwnerCabinState);
     const titles = useTitles();
     const texts = useDescriptions();
     const buttons = useLinks();
 
+    const onTravelSuccess = async () => {
+        await getSmartContractUserEffect({ searchParam: user });
+
+        setInitialStateEvent();
+    };
     return (
         <div className={styles.surface}>
             {isDesktop && (
@@ -41,9 +47,7 @@ export const Surface: FC<Props> = ({ user }) => {
             {cabinState === mineOwnerCabinState.isOutsideFromLocation && (
                 <Travel
                     toLocationId={LOCATION_TO_ID.mine_deck}
-                    onSuccess={() =>
-                        getSmartContractUserEffect({ searchParam: user })
-                    }
+                    onSuccess={onTravelSuccess}
                 />
             )}
         </div>

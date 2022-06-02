@@ -1,10 +1,12 @@
 import { useTranslation } from 'react-i18next';
-import { mineOwnerCabinState } from '../../model';
+import { mineOwnerCabinState } from '../../models/mineOwnerState';
 
 export function useTitles() {
     const { t } = useTranslation();
 
     return {
+        [mineOwnerCabinState.initial]: t('features.mineOwner.welcome'),
+
         [mineOwnerCabinState.hasNoMineNft]: t('features.mineOwner.welcome'),
         [mineOwnerCabinState.isOutsideFromLocation]: t(
             'features.mineOwner.mineNotSet'

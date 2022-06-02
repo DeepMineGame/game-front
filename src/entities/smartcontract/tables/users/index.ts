@@ -12,6 +12,7 @@ export const getSmartContractUserEffect = createEffect(
             index_position: 1,
             key_type: '',
             lower_bound: searchParam,
+            upper_bound: searchParam,
             limit: 1,
         });
     }

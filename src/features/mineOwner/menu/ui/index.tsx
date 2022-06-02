@@ -6,12 +6,15 @@ import {
     ProjectOutlined,
     TeamOutlined,
 } from '@ant-design/icons';
-import { mineOwnerCabinState } from '../../model';
+import { useNavigate } from 'react-router-dom';
+import { mineManagement } from 'app/router/paths';
+import { mineOwnerCabinState } from '../../models/mineOwnerState';
 
 type Props = {
     currentMineOwnerCabinState: mineOwnerCabinState;
 };
 export const MineOwnerMenu: FC<Props> = ({ currentMineOwnerCabinState }) => {
+    const navigate = useNavigate();
     const baseButtonDisableStates = [
         mineOwnerCabinState.hasNoMineNft,
         mineOwnerCabinState.isOutsideFromLocation,
@@ -46,7 +49,7 @@ export const MineOwnerMenu: FC<Props> = ({ currentMineOwnerCabinState }) => {
                     )}
                 />
                 <MenuItem
-                    onClick={() => {}}
+                    onClick={() => navigate(mineManagement)}
                     icon={<ProjectOutlined />}
                     disabled={statusThatDisableStatsButton.includes(
                         currentMineOwnerCabinState
