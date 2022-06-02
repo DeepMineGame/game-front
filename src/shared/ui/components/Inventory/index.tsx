@@ -35,6 +35,7 @@ type InventoryProps = ModalProps & {
     name: InventoryNameType;
     userInventory: UserInventoryType[];
     onSelect: (card: UserInventoryType) => void;
+    onOpenCard: (card: UserInventoryType) => void;
 };
 
 const TABS = [
@@ -51,18 +52,19 @@ export const Inventory: FC<InventoryProps> = ({
     name,
     userInventory,
     onSelect,
+    onOpenCard,
     ...props
 }) => {
     const [selectedTab, setSelectedTab] = useState('Equipment');
     const cards = filterEquipmentByName(userInventory, name);
 
-    const handleCardSelect =
-        (card: UserInventoryType) => (e: React.MouseEvent<HTMLElement>) => {
-            onSelect(card);
-            if (props.onCancel) {
-                props.onCancel(e);
-            }
-        };
+    const handleCardSelect = (card: UserInventoryType) => () => {
+        onSelect(card);
+    };
+
+    const handleDetailsClick = (card: UserInventoryType) => () => {
+        onOpenCard(card);
+    };
 
     return (
         <Modal
@@ -70,6 +72,7 @@ export const Inventory: FC<InventoryProps> = ({
             {...props}
             title="Active inventory"
             className={styles.modal}
+            removeFooter
         >
             <div className={styles.container}>
                 <div className={styles.filterHeader}>
@@ -94,6 +97,7 @@ export const Inventory: FC<InventoryProps> = ({
                     {TABS.map((tab) => (
                         <div
                             key={tab}
+                            onClick={() => setSelectedTab(tab)}
                             className={cn(styles.tab, {
                                 [styles.tabSelected]: tab === selectedTab,
                             })}
@@ -106,13 +110,15 @@ export const Inventory: FC<InventoryProps> = ({
                     <div className={styles.content}>
                         {cards.map((card) => (
                             <Card
+                                templateId={card.asset_template_id}
                                 className={styles.card}
                                 onClick={handleCardSelect(card)}
                                 key={card.asset_id}
                                 initial={10}
                                 current={3}
                                 remained={7}
-                                hasRemove={false}
+                                buttonText="Details"
+                                onButtonClick={handleDetailsClick(card)}
                             />
                         ))}
                     </div>

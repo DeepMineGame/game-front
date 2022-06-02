@@ -4,19 +4,9 @@
   width: 100% !important;
   max-width: none !important;
 
-  :global {
-    .ant-modal-footer {
-      display: none;
-    }
-
-    .ant-modal-content {
-      box-shadow: none;
-    }
-  }
-
   @media only screen and (min-width: $media-desktop-s)  {
     width: calc(100% - 250px) !important;
-    height: 624px;
+    height: 698px;
     overflow: auto;
   }
 }
@@ -75,6 +65,7 @@
   cursor: pointer;
   padding: 12px 0;
   margin: 0 24px;
+  pointer-events: none;
 }
 
 .tabSelected {
@@ -84,11 +75,15 @@
 }
 
 .content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   margin-top: 16px;
 }
 
 .card {
   cursor: pointer;
+  margin: 16px;
 }
 
 .sortIcon {

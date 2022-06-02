@@ -9,6 +9,7 @@ import styles from './styles.module.scss';
 type Props = {
     wideOnMobile?: boolean;
     className?: string;
+    removeFooter?: boolean;
 } & ModalProps;
 
 export const Modal: FC<Props> = (props) => {
@@ -21,6 +22,7 @@ export const Modal: FC<Props> = (props) => {
             {...props}
             className={classNames(styles.modal, props?.className, {
                 [styles.wideOnMobile]: props?.wideOnMobile,
+                [styles.removeFooter]: props?.removeFooter,
             })}
             width={width}
             wrapClassName={styles.modalWrapper}
