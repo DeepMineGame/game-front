@@ -1,14 +1,12 @@
 @import "src/shared";
+@import "../styles.module";
 
 .background {
-  max-width: 608px;
-  min-height: 136px;
   background: url('./images/mineControlPanel.png');
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px;
-  margin: auto;
+  composes: deck;
 }
 
 .badgeText span {

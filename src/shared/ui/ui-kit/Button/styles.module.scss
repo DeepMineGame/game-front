@@ -68,6 +68,18 @@
   }
 }
 
+.ghost.disabled {
+  &,
+  &:hover,
+  &:focus,
+  &:active {
+    color: $color-neutral-neutral-5 !important;
+    background-color: initial;
+    border: 1px solid $color-neutral-neutral-5 !important;
+  }
+
+}
+
 .button.ghost.danger {
   background: none;
   color: $color-red-red-5;
