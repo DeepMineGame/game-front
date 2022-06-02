@@ -66,7 +66,8 @@ export const hasActiveMineContractFilter = ({
     return Boolean(!mineContract?.is_active);
 };
 
-export const hasMinesFilter = (mines: MineDto[] | null) => !mines?.length;
+export const hasMinesFilter = (mines: MineDto[] | null) =>
+    Number(mines?.length) > 0;
 
 export const isMineActiveFilter = (mines: MineDto[] | null) =>
     Boolean(mines?.[0]?.is_active);

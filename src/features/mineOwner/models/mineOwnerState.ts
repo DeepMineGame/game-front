@@ -129,22 +129,6 @@ sample({
     filter: checkIfMineSetupWillFinishedInFuture,
 });
 
-// Проверяем что шахта установлена
-sample({
-    source: minesStore,
-    target: setIsMineSetEvent,
-    clock: [setInitialStateEvent, minesStore, getMinesByOwnerEffect],
-    filter: compose(
-        ignoreIfInStatus($mineOwnerCabinState, [
-            mineOwnerCabinState.hasNoMineNft,
-            mineOwnerCabinState.isMineSet,
-            mineOwnerCabinState.isOutsideFromLocation,
-            mineOwnerCabinState.isMineSetupInProgress,
-        ]),
-        hasMinesFilter
-    ),
-});
-
 // Проверяем что заключен хоть один контракт (contractsFree)
 sample({
     source: { contract: contractStore, inventory: inventoriesStore },
@@ -159,6 +143,21 @@ sample({
             mineOwnerCabinState.needSignContractWithLandLord,
         ]),
         hasActiveMineContractFilter
+    ),
+});
+
+// Проверяем что шахта установлена
+sample({
+    source: minesStore,
+    target: setIsMineSetEvent,
+    clock: [setInitialStateEvent, minesStore, getMinesByOwnerEffect],
+    filter: compose(
+        ignoreIfInStatus($mineOwnerCabinState, [
+            mineOwnerCabinState.hasNoMineNft,
+            mineOwnerCabinState.isOutsideFromLocation,
+            mineOwnerCabinState.isMineSetupInProgress,
+        ]),
+        hasMinesFilter
     ),
 });
 
