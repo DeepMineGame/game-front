@@ -17,6 +17,19 @@
     top: 100px;
   }
 }
+
+.removeFooter {
+  :global {
+    .ant-modal-footer {
+      display: none;
+    }
+
+    .ant-modal-content {
+      box-shadow: none;
+    }
+  }
+}
+
 .modalWrapper {
   div, svg {
     background: $color-neutral-neutral-2;

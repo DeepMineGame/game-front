@@ -39,11 +39,14 @@ export const TEST_NET_ASSETS_ID_MAP = {
     411111: 492746,
     411110: 492745,
     411109: 492803,
+    // TODO: ADD MINE TEMPLATE IMAGES
+    176451: undefined,
+    0: undefined,
 };
 
-export const getImagePath = (
-    templateId: keyof typeof TEST_NET_ASSETS_ID_MAP
-) => {
+export type TemplateIdType = keyof typeof TEST_NET_ASSETS_ID_MAP;
+
+export const getImagePath = (templateId: TemplateIdType) => {
     const ID = TEST_NET_ASSETS_ID_MAP[templateId] || templateId;
     const isGif = GIF_IMAGES.some((gifId) => gifId === ID);
     const ext = isGif ? 'gif' : 'png';

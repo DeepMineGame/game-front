@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import { desktopS, useMediaQuery } from 'shared';
+import { desktopS, useMediaQuery, Line } from 'shared';
 import contractorStyles from '../../styles.module.scss';
 import styles from './styles.module.scss';
 
@@ -47,7 +47,7 @@ export const Welcome = ({ equipments }: SignContractProps) => {
                 {isDesktop && (
                     <div className={styles.equipments}>
                         {equipments.map(({ name, isAvailable }) => (
-                            <div className={styles.equipmentLine} key={name}>
+                            <Line className={styles.equipmentLine} key={name}>
                                 <div className={styles.equipmentName}>
                                     {name}
                                 </div>
@@ -58,7 +58,7 @@ export const Welcome = ({ equipments }: SignContractProps) => {
                                         <CloseOutlined />
                                     )}
                                 </div>
-                            </div>
+                            </Line>
                         ))}
                     </div>
                 )}

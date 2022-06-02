@@ -1,0 +1,7 @@
+@import "src/shared";
+
+.line {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $color-neutral-neutral-4;
+}

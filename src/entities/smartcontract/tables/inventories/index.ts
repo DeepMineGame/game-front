@@ -1,7 +1,7 @@
 import { createEffect, createStore } from 'effector';
 import { getTableData } from 'features';
 import { deepminegame } from '../../constants';
-import { InventoriesDto } from './types';
+import { UserInventoryType } from '../types';
 
 export enum SEARCH_BY {
     undefined,
@@ -30,9 +30,6 @@ export const getInventoriesEffect = createEffect(
     }
 );
 
-export const inventoriesStore = createStore<InventoriesDto[] | null>(null).on(
-    getInventoriesEffect.doneData,
-    (_, { rows }) => rows
-);
-
-export * from './types';
+export const inventoriesStore = createStore<UserInventoryType[] | null>(
+    null
+).on(getInventoriesEffect.doneData, (_, { rows }) => rows);

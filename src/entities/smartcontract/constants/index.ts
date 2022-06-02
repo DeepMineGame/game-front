@@ -26,15 +26,18 @@ export const ID_TO_INVENTORY = {
     176873: 'Wandering Reactor',
     176872: 'Wandering Reactor',
     176871: 'Wandering Reactor',
+    176451: '',
+    0: '',
 } as const;
 
-export const mineAssetTemplateId = isMainNet
-    ? // TODO ADD MAINNET MINE TEMPLATE ID
-      0
-    : 176451;
+// TODO ADD MAINNET MINE TEMPLATE ID
+export const mineAssetTemplateId = isMainNet ? 0 : 176451;
 
-export type InventoryIdType = keyof typeof ID_TO_INVENTORY;
-export type InventoryNameType = typeof ID_TO_INVENTORY[InventoryIdType];
+export type InventoryIdTypeWithName = keyof typeof ID_TO_INVENTORY;
+export type InventoryIdType =
+    | InventoryIdTypeWithName
+    | typeof mineAssetTemplateId;
+export type InventoryNameType = typeof ID_TO_INVENTORY[InventoryIdTypeWithName];
 
 export const INVENTORY_NAMES = [
     ...new Set(Object.entries(ID_TO_INVENTORY).map(([, value]) => value)),
@@ -86,4 +89,4 @@ export enum INDEX_POSITION_USER {
     nickname,
 }
 
-export const deepminegame = 'deepminegame';
+export const deepminegame = 'deepmineappg';
