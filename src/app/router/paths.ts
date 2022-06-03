@@ -5,4 +5,4 @@ export const mining = '/mining';
 export const home = '/home';
 export const mineOwner = '/mine-owner-cabin';
 export const mineManagement = '/mine-management';
-export const statsAndInfo = '/stats-and-info';
+export const contractorStatsAndInfo = '/contractor/stats-and-info';

@@ -7,3 +7,4 @@ export * from './fetchWaxBalance';
 export * from './equipmentSet';
 export * from './mineOwner';
 export * from './physicalShift';
+export * from './contractor';
