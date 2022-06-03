@@ -16,3 +16,4 @@ export * from './Divider';
 export * from './PhysicalShiftBadge';
 export * from './Line';
 export * from './NftProgressBar';
+export * from './KeyValueTable';
