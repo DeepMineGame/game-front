@@ -149,6 +149,13 @@
         "fossilChance": "Fossil Chance"
       }
     },
+    "statsAndInfo": {
+      "title": "Stats & info",
+      "miningStats": "Mining stats",
+      "mineAreaInfo": "Mine & Area Info",
+      "mineCrew": "Mine crew",
+      "contract": "Contract"
+    },
     "mineManagement": {
       "title": "MINE MANAGEMENT",
       "mine": "MINE"

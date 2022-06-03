@@ -1,0 +1,37 @@
+@import "src/shared";
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 24px;
+}
+
+.navbarItem {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  margin-right: 32px;
+  padding: 12px 0;
+  color: $color-neutral-neutral-9;
+  cursor: pointer;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.navbarItemSelected {
+  color: $color-primary-primary-6;
+  border-bottom: 1px solid $color-primary-primary-6;
+  pointer-events: none;
+}
+
+.content {
+  padding: 36px 56px;
+}
