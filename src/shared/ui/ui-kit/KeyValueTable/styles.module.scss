@@ -17,3 +17,9 @@
     border-bottom: none;
   }
 }
+
+.unitColored {
+  .value {
+    color: $color-primary-primary-6;
+  }
+}

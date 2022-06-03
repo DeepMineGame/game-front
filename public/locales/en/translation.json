@@ -156,7 +156,29 @@
       "miningStats": "Mining stats",
       "mineAreaInfo": "Mine & Area Info",
       "mineCrew": "Mine crew",
-      "contract": "Contract"
+      "contract": "Contract",
+      "mineArea": {
+        "mineInfo": "Mine info",
+        "mine":  "Mine",
+        "mineOwner":  "Mine Owner",
+        "mineRarity":  "Mine Rarity",
+        "level":  "Level",
+        "sublevel":  "Sublevel",
+        "depth":  "Depth",
+        "mineFee":  "Mine fee",
+        "miningDifficulty":  "Mining Difficulty",
+        "miningEfficiency":  "Mining Efficiency",
+        "fossilChance":  "Fossil Chance",
+        "stability":  "Stability",
+        "habitation":  "Habitation",
+        "areaInfo": "Area info",
+        "area":  "Area",
+        "landlord":  "Landlord",
+        "areaRarity":  "Area Rarity",
+        "minesOnArea":  "Mines on Area",
+        "areaFee":  "Area Fee",
+        "saturation":  "Saturation"
+      }
     },
     "mineManagement": {
       "title": "MINE MANAGEMENT",

@@ -1,1 +1,34 @@
-@import "../../../../../shared/index";
+@import "src/shared";
+
+.mineAreaInfo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-bottom: 32px;
+}
+
+.info {
+  flex: 1;
+
+  &:first-child {
+    margin-right: 34px;
+  }
+}
+
+.initialInfo {
+  min-height: 428px;
+}
+
+.title {
+  font-family: $orbitron;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  padding-bottom: 16px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.subInfo {
+  margin-top: 24px;
+}

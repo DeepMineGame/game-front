@@ -51,7 +51,7 @@ export const ContractorStatsAndInfoPage: FC = () => {
     return (
         <Page
             removeContentPadding
-            headerTitle={t('components.statsAndInfo.title')}
+            headerTitle={t('components.statsAndInfo.title').toUpperCase()}
         >
             <DocumentTitle
                 title={`Contractor / Stats and Info / ${t(
