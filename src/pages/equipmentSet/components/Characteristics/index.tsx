@@ -32,11 +32,11 @@ export const Characteristics = ({ contractors }: Props) => {
             </div>
             <div className={styles.content}>
                 <CharacteristicsLine
-                    name={t('pages.equipmentSet.characteristics.mineLevel')}
+                    name={t('features.mining.mineLevel')}
                     value={mineStore?.[0]?.level ?? '-'}
                 />
                 <CharacteristicsLine
-                    name={t('pages.equipmentSet.characteristics.mineSublevel')}
+                    name={t('features.mining.mineSublevel')}
                     value={mineStore?.[0]?.sub_level ?? '-'}
                 />
                 <CharacteristicsLine

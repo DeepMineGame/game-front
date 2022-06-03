@@ -139,8 +139,6 @@
 
       "characteristics": {
         "title": "Characteristics",
-        "mineLevel": "Mine Level",
-        "mineSublevel": "Mine Sublevel",
         "mineDepth": "Mine Depth",
         "estimatesMiningTime": "Estimates mining Time",
         "estimatesAmountDME": "Estimates Amount of DME",
@@ -157,6 +155,11 @@
     }
   },
   "features": {
+    "mining": {
+      "mineLevel": "Mine Level",
+      "mineSublevel": "Mine Sublevel",
+      "depthLevel": "Depth level"
+    },
     "mineOwner": {
       "needMineCardDesktop": "You need a Mine card in your active inventory. Check your storage or go to Market to buy one.",
       "needMineCardMobile": "You need a Mine card in your active inventory",

@@ -31,7 +31,6 @@ export const Surface: FC<Props> = ({ user }) => {
     const titles = useTitles();
     const texts = useDescriptions();
     const buttons = useLinks();
-
     const onTravelSuccess = async () => {
         await getSmartContractUserEffect({ searchParam: user });
 
