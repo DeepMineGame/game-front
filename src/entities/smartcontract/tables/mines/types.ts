@@ -5,10 +5,11 @@ export enum MineState {
 }
 
 export type MineDto = {
-    asset_id: string;
+    asset_id: number;
     area_id: string;
     layer_depth: number;
     level: number;
     sub_level: number;
     state: MineState;
+    id: number;
 };

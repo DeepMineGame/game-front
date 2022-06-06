@@ -3,6 +3,8 @@ import { deepminegame } from '../constants';
 export * from './type';
 export * from './calcmining';
 export * from './physicalShift';
+export * from './activatemine';
+export * from './deactmine';
 
 export function toggleMining({
     waxUser,
@@ -27,8 +29,7 @@ export function toggleMining({
                 data: {
                     wax_user: waxUser,
                     contract_id: contractId,
-
-                    mining_duration: 30,
+                    duration: 30,
                 },
             },
         ],

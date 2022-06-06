@@ -71,4 +71,4 @@ export const hasMinesFilter = (mines: MineDto[] | null) =>
     Number(mines?.length) > 0;
 
 export const isMineActiveFilter = (mines: MineDto[] | null) =>
-    Boolean(mines?.[0]?.state === MineState.activated);
+    mines?.[0]?.state === MineState.activated;

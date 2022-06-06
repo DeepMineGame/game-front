@@ -13,7 +13,7 @@ export const KeyValueTable: FC<Props> = ({ items, wrapperClassName }) => {
         <div className={cn(styles.wrapper, wrapperClassName)}>
             {items?.map((item) => {
                 return Object.entries(item).map(([key, value]) => (
-                    <div className={styles.unit}>
+                    <div className={styles.unit} key={key}>
                         <span>{key}</span> <span>{value}</span>
                     </div>
                 ));

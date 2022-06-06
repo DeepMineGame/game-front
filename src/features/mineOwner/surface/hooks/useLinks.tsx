@@ -9,15 +9,15 @@ export function useLinks() {
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
     const navigate = useNavigate();
+    const navigateToWipPageWithTittle = (title: string) => () =>
+        navigate(wipPage, { state: { title } });
     return {
         [mineOwnerCabinState.isOutsideFromLocation]: null,
         [mineOwnerCabinState.initial]: (
             <div>
                 <Button
                     type="link"
-                    onClick={() =>
-                        navigate(wipPage, { state: { title: 'storage' } })
-                    }
+                    onClick={navigateToWipPageWithTittle('Storage')}
                 >
                     {isDesktop
                         ? t('features.mineOwner.pickUpFromStorage')
@@ -25,9 +25,7 @@ export function useLinks() {
                 </Button>
                 <Button
                     type="link"
-                    onClick={() =>
-                        navigate(wipPage, { state: { title: 'Market' } })
-                    }
+                    onClick={navigateToWipPageWithTittle('Market')}
                 >
                     {isDesktop
                         ? t('features.mineOwner.goToMarket')
@@ -39,9 +37,7 @@ export function useLinks() {
             <div>
                 <Button
                     type="link"
-                    onClick={() =>
-                        navigate(wipPage, { state: { title: 'Storage' } })
-                    }
+                    onClick={navigateToWipPageWithTittle('Storage')}
                 >
                     {isDesktop
                         ? t('features.mineOwner.pickUpFromStorage')
@@ -49,9 +45,7 @@ export function useLinks() {
                 </Button>
                 <Button
                     type="link"
-                    onClick={() =>
-                        navigate(wipPage, { state: { title: 'Market' } })
-                    }
+                    onClick={navigateToWipPageWithTittle('Market')}
                 >
                     {isDesktop
                         ? t('features.mineOwner.goToMarket')
@@ -63,9 +57,7 @@ export function useLinks() {
             <div>
                 <Button
                     type="link"
-                    onClick={() =>
-                        navigate(wipPage, { state: { title: 'Contract' } })
-                    }
+                    onClick={navigateToWipPageWithTittle('Contract')}
                 >
                     {isDesktop
                         ? t('features.mineOwner.chooseContract')
