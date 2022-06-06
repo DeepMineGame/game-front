@@ -9,11 +9,6 @@ export enum mapSearchParamForIndexPosition {
     ownerUserId,
     contractId,
 }
-export enum ActionType {
-    undefined,
-    mine_setup,
-    mine,
-}
 
 export const getActionEffect = createEffect(
     async ({
@@ -30,7 +25,7 @@ export const getActionEffect = createEffect(
             index_position: searchIdentification,
             key_type: 'i64',
             lower_bound: searchParam,
-            limit: 1,
+            limit: 1000,
         });
     }
 );

@@ -3,6 +3,7 @@ import { Button, desktopS, useMediaQuery } from 'shared';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { wipPage } from 'app/router/paths';
+import { ATOMICHUB_URL } from 'app';
 import { mineOwnerCabinState } from '../../models/mineOwnerState';
 
 export function useLinks() {
@@ -11,6 +12,7 @@ export function useLinks() {
     const navigate = useNavigate();
     const navigateToWipPageWithTittle = (title: string) => () =>
         navigate(wipPage, { state: { title } });
+
     return {
         [mineOwnerCabinState.isOutsideFromLocation]: null,
         [mineOwnerCabinState.initial]: (
@@ -23,10 +25,7 @@ export function useLinks() {
                         ? t('features.mineOwner.pickUpFromStorage')
                         : t('features.mineOwner.storage')}
                 </Button>
-                <Button
-                    type="link"
-                    onClick={navigateToWipPageWithTittle('Market')}
-                >
+                <Button type="link" onClick={() => navigate(ATOMICHUB_URL)}>
                     {isDesktop
                         ? t('features.mineOwner.goToMarket')
                         : t('features.mineOwner.market')}

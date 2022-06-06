@@ -1,5 +1,3 @@
-import { ActionType } from './index';
-
 export enum ActionState {
     undefined,
     active,
@@ -7,7 +5,12 @@ export enum ActionState {
     finished,
     claimed,
 }
-
+export enum ActionType {
+    undefined,
+    physical_shift,
+    mine_setup,
+    mine,
+}
 export type ActionDto = {
     contract_id: number;
     finishes_at: number;
