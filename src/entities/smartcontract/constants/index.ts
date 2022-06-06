@@ -40,7 +40,11 @@ export type InventoryIdType =
 export type InventoryNameType = typeof ID_TO_INVENTORY[InventoryIdTypeWithName];
 
 export const INVENTORY_NAMES = [
-    ...new Set(Object.entries(ID_TO_INVENTORY).map(([, value]) => value)),
+    ...new Set(
+        Object.entries(ID_TO_INVENTORY)
+            .map(([, value]) => value)
+            .filter((v) => v)
+    ),
 ] as InventoryNameType[];
 
 export enum LOCATION_TO_ID {
