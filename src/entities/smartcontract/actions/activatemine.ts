@@ -1,15 +1,19 @@
-import { deepminegame } from '../index';
+import { deepminegame } from '../constants';
 
-export function physicalShift(
-    waxUser: string,
-    newLocation: number,
-    duration = 0
-) {
+export function activatemine({
+    waxUser,
+    mineId,
+    duration = 1,
+}: {
+    waxUser: string;
+    mineId?: number;
+    duration?: number;
+}) {
     return {
         actions: [
             {
                 account: deepminegame,
-                name: 'changelocn',
+                name: 'activatemine',
                 authorization: [
                     {
                         actor: waxUser,
@@ -18,7 +22,7 @@ export function physicalShift(
                 ],
                 data: {
                     wax_user: waxUser,
-                    new_location: newLocation,
+                    mine_id: mineId,
                     duration,
                 },
             },

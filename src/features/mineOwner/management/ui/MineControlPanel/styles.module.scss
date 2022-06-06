@@ -2,7 +2,7 @@
 @import "../styles.module";
 
 .background {
-  background: url('./images/mineControlPanel.png');
+  background: url('./images/mineControlPanel.png') no-repeat;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -19,4 +19,8 @@ h4.title {
 
 .wideButton {
   width: 100%;
+}
+
+.title {
+  margin: 0 auto;
 }

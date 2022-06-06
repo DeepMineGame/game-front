@@ -66,6 +66,12 @@
       "doWantStopMining": "Do you really want to stop mining?",
       "consumablesWillBurnOut": "Your consumables will burn out and you won’t be able to use them anymore"
     },
+    "pageNotFound": {
+      "weLost": "WE GOT LOST",
+      "itSeem": "It seems like this page doesn’t exist Try going back or click the button bellow and we’ll take you to the city",
+      "soon": "This page is coming soon",
+      "weWork": "We are working very hard to get this page up as soon as possible For now you can try to go back or click the button bellow and we’ll take you to the city"
+    },
     "home": {
       "mineOwnerCabin": "MINE OWNER CABIN",
       "contractorCabin": "CONTRACTOR'S CABIN"

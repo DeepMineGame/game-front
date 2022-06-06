@@ -18,7 +18,6 @@ export const MineManagementPage = () => {
                     <MineControlPanel chainAccountName={chainAccountName} />
                 </div>
             )}
-
             <div className={styles.table}>
                 <KeyValueTable
                     items={{

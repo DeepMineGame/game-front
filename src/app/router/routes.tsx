@@ -8,6 +8,7 @@ import {
     ContractorStatsAndInfoPage,
 } from 'pages';
 import { MineManagementPage, MineOwnerPage } from 'pages/mineOwner';
+import { PageNotFound } from 'pages/pageNotFound';
 import {
     contractorCabin,
     equipmentSet,
@@ -16,6 +17,9 @@ import {
     mineManagement,
     mineOwner,
     mining,
+    pageNotFound,
+    root,
+    wipPage,
     contractorStatsAndInfo,
 } from './paths';
 
@@ -32,6 +36,11 @@ export type AppRoute = {
 };
 
 export const routes: AppRoute[] = [
+    {
+        path: root,
+        Component: IntroPage,
+        titleTag: 'Intro - Deepmine',
+    },
     {
         path: intro,
         Component: IntroPage,
@@ -84,10 +93,24 @@ export const routes: AppRoute[] = [
         forAdmin: false,
         titleTag: 'Contractor / Stats and Info',
     },
+    {
+        path: pageNotFound,
+        Component: PageNotFound,
+        forLoggedIn: false,
+        forAdmin: false,
+        titleTag: 'Badlands — DeepMine',
+    },
+    {
+        path: wipPage,
+        Component: () => <PageNotFound type="wip" />,
+        forLoggedIn: false,
+        forAdmin: false,
+        titleTag: 'Badlands — DeepMine',
+    },
 ];
 
 export const fallbackRoute: AppRoute = {
     path: '*',
-    Component: IntroPage,
+    Component: PageNotFound,
     titleTag: 'Intro - Deepmine',
 };

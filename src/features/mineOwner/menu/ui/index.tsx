@@ -27,7 +27,6 @@ export const MineOwnerMenu: FC<Props> = ({ currentMineOwnerCabinState }) => {
     const statusThatDisableTeamButton = [...baseButtonDisableStates];
     const statusThatDisableStatsButton = [
         ...baseButtonDisableStates,
-        mineOwnerCabinState.isMineSet,
         mineOwnerCabinState.contractsFree,
     ];
 
