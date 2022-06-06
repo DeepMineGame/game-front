@@ -1,6 +1,12 @@
 import React from 'react';
 
-import { ContractorCabin, EquipmentSetPage, HomePage, MiningPage } from 'pages';
+import {
+    ContractorCabin,
+    EquipmentSetPage,
+    HomePage,
+    MiningPage,
+    ContractorStatsAndInfoPage,
+} from 'pages';
 import { MineManagementPage, MineOwnerPage } from 'pages/mineOwner';
 import { PageNotFound } from 'pages/pageNotFound';
 import {
@@ -14,6 +20,7 @@ import {
     pageNotFound,
     root,
     wipPage,
+    contractorStatsAndInfo,
 } from './paths';
 
 const IntroPage = React.lazy(async () => ({
@@ -78,6 +85,13 @@ export const routes: AppRoute[] = [
         forLoggedIn: true,
         forAdmin: false,
         titleTag: 'Mine management — DeepMine',
+    },
+    {
+        path: contractorStatsAndInfo,
+        Component: ContractorStatsAndInfoPage,
+        forLoggedIn: true,
+        forAdmin: false,
+        titleTag: 'Contractor / Stats and Info',
     },
     {
         path: pageNotFound,

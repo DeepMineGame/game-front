@@ -1,6 +1,5 @@
 import {
     ID_TO_INVENTORY,
-    InventoryIdType,
     InventoryNameType,
     UserInventoryType,
 } from 'entities/smartcontract';

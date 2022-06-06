@@ -71,7 +71,7 @@ export const installEquipment = ({
         actions: [
             {
                 account: deepminegame,
-                name: 'instacequip',
+                name: 'instequip',
                 authorization: [
                     {
                         actor: waxUser,
@@ -97,7 +97,7 @@ export const uninstallEquipment = ({
         actions: [
             {
                 account: deepminegame,
-                name: 'uninsacequip',
+                name: 'uninstequip',
                 authorization: [
                     {
                         actor: waxUser,
