@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { KeyValueTable } from 'shared';
+import { KeyValueTable, Title } from 'shared';
 import styles from './styles.module.scss';
 
 export const MineAreaInfo = () => {
@@ -47,9 +47,13 @@ export const MineAreaInfo = () => {
         <div className={styles.mineAreaInfo}>
             <div className={styles.info}>
                 <div className={styles.initialInfo}>
-                    <div className={styles.title}>
+                    <Title
+                        fontFamily="orbitron"
+                        level={5}
+                        className={styles.title}
+                    >
                         {t('pages.contractorStatsAndInfo.mineArea.mineInfo')}
-                    </div>
+                    </Title>
                     <KeyValueTable
                         items={mineInfoData}
                         coloredItems={Object.keys(mineInfoData).slice(0, 2)}
@@ -62,9 +66,13 @@ export const MineAreaInfo = () => {
             </div>
             <div className={styles.info}>
                 <div className={styles.initialInfo}>
-                    <div className={styles.title}>
+                    <Title
+                        fontFamily="orbitron"
+                        level={5}
+                        className={styles.title}
+                    >
                         {t('pages.contractorStatsAndInfo.mineArea.areaInfo')}
-                    </div>
+                    </Title>
                     <KeyValueTable
                         items={areaInfoData}
                         coloredItems={Object.keys(areaInfoData).slice(0, 2)}
