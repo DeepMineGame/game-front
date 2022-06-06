@@ -25,7 +25,10 @@ export function useLinks() {
                         ? t('features.mineOwner.pickUpFromStorage')
                         : t('features.mineOwner.storage')}
                 </Button>
-                <Button type="link" onClick={() => navigate(ATOMICHUB_URL)}>
+                <Button
+                    type="link"
+                    onClick={() => window.open(ATOMICHUB_URL, '_blank')}
+                >
                     {isDesktop
                         ? t('features.mineOwner.goToMarket')
                         : t('features.mineOwner.market')}
@@ -44,7 +47,7 @@ export function useLinks() {
                 </Button>
                 <Button
                     type="link"
-                    onClick={navigateToWipPageWithTittle('Market')}
+                    onClick={() => window.open(ATOMICHUB_URL, '_blank')}
                 >
                     {isDesktop
                         ? t('features.mineOwner.goToMarket')
