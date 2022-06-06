@@ -70,7 +70,6 @@ export const MiningPage: FC = () => {
             ) : (
                 <Skeleton title={false} loading={isActionsLoading} />
             )}
-
             <Row justify="center" gutter={gutter} className={styles.grid}>
                 <Col sm={17} xs={24} className={styles.firsColumn}>
                     <div className={styles.wrapperForTittleWithRightSection}>
@@ -83,12 +82,12 @@ export const MiningPage: FC = () => {
                     </div>
                     <Skeleton loading={isMineStoreLoading || !mineStore} />
                     <div className={styles.data}>
-                        {mineStore && (
+                        {mineStore?.length ? (
                             <div className={styles.line}>
                                 <div>{t('pages.mining.mineDepth')}</div>
                                 <div>{mineStore[0].layer_depth}</div>
                             </div>
-                        )}
+                        ) : null}
                         {action && (
                             <>
                                 {formatEstimateMineTime && (
