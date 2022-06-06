@@ -10,7 +10,7 @@ import styles from '../../styles.module.scss';
 export function SettingMenu() {
     const navigate = useNavigate();
     const accountName = useAccountName();
-    const logout = useLogout(() => navigate('/'));
+    const logout = useLogout();
     const { t } = useTranslation();
 
     return (

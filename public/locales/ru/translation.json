@@ -2,7 +2,8 @@
   "intro": {
     "connect": "ИСПОЛЬЗОВАТЬ WAX КОШЕЛЁК",
     "disconnect": "ОТВЯЗАТЬ WAX КОШЕЛЁК",
-    "only-members": "Доступ разрешен только членам команды Deep Mine"
+    "only-members": "Доступ разрешен только членам команды Deep Mine",
+    "signInGoogle": "ВОЙТИ ЧЕРЕЗ ГУГЛ"
   },
   "kit": {
     "back": "Назад"

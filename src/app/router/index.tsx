@@ -1,37 +1,40 @@
-import React, { useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useEvent, useStore } from 'effector-react';
 
-import { useChainAuthContext, LoadingSection } from 'shared';
-import { authDeepMineUserEffect } from 'features';
-import { userStore, userStoreError } from 'entities/user';
+import { useChainAuthContext, LoadingScreen } from 'shared';
+import { userStore, getUserFromSessionEffect } from 'entities/user';
 import { routes, fallbackRoute, AppRoute } from './routes';
-import { intro } from './paths';
 import { DocumentTitle } from './components/DocumentTitle';
 
 const LogInWrapper: React.FC<{
     children: any;
     forAdmin?: boolean;
 }> = ({ children, forAdmin }) => {
-    const { activeUser, notLoggedIn, loading } = useChainAuthContext();
+    const navigate = useNavigate();
+    const { activeUser: chainUser, notLoggedIn } = useChainAuthContext();
     const user = useStore(userStore);
-    const hasUserError = !!useStore(userStoreError);
-    const isUserLoading = useStore(authDeepMineUserEffect.pending);
+    const getUserFromSession = useEvent(getUserFromSessionEffect);
 
-    const renderLoadingSection = () => (
-        <LoadingSection key="loading" size="large" />
-    );
+    const [isFetching, setIsFetching] = useState(false);
 
-    const renderRedirect = () => <Navigate to={intro} replace />;
+    useEffect(() => {
+        if (!user) {
+            setIsFetching(true);
+            getUserFromSession()
+                .catch(() => navigate('/', { replace: true }))
+                .finally(() => setIsFetching(false));
+        }
+    }, [user, navigate, getUserFromSession]);
 
-    if (notLoggedIn) return renderRedirect();
-    if (loading && !activeUser) return renderLoadingSection();
+    useEffect(() => {
+        if (notLoggedIn || (forAdmin && user?.is_admin === false)) {
+            navigate('/', { replace: true });
+        }
+    }, [notLoggedIn, forAdmin, user, navigate]);
 
-    if (forAdmin) {
-        if (isUserLoading || (!user && !hasUserError))
-            return renderLoadingSection();
-        if (!user?.is_admin) return renderRedirect();
-    }
+    if (isFetching || (!chainUser && !notLoggedIn))
+        return <LoadingScreen key="loading" size="large" />;
 
     return children;
 };
@@ -58,17 +61,11 @@ const renderRoutes = (routeList: AppRoute[]) =>
     ));
 
 export const Router = () => {
-    const { activeUser } = useChainAuthContext();
-    const authUser = useEvent(authDeepMineUserEffect);
-
-    useEffect(() => {
-        if (activeUser) authUser(activeUser.accountName);
-    }, [activeUser, authUser]);
-
     return (
         <Routes>
             {renderRoutes(routes)}
             <Route
+                key="*"
                 path="*"
                 element={
                     <>

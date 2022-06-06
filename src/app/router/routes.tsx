@@ -21,6 +21,7 @@ import {
     LandlordStatsAndInfoPage,
     OperationPage,
     NftPreviewPage,
+    AuthPage,
 } from 'pages';
 
 import {
@@ -49,10 +50,6 @@ import {
     inventoryItemPreview,
 } from './paths';
 
-const IntroPage = React.lazy(async () => ({
-    default: (await import('pages')).IntroPage,
-}));
-
 export type AppRoute = {
     titleTag: string;
     path: string;
@@ -64,12 +61,12 @@ export type AppRoute = {
 export const routes: AppRoute[] = [
     {
         path: root,
-        Component: IntroPage,
+        Component: AuthPage,
         titleTag: 'Intro - Deepmine',
     },
     {
         path: intro,
-        Component: IntroPage,
+        Component: AuthPage,
         titleTag: 'Intro - Deepmine',
     },
     {

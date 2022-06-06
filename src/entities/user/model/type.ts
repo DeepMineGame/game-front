@@ -1,4 +1,5 @@
 export type User = {
+    email: string;
     avatar: string;
     confirmed: boolean;
     created_at: string;
@@ -12,5 +13,4 @@ export type User = {
     updated_at: string;
     user_created: boolean;
     wax_address: string;
-    email: string;
 };

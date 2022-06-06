@@ -7,7 +7,7 @@ type Props = {
     size?: 'small' | 'default' | 'large';
 };
 
-export const LoadingSection: React.FC<Props> = ({ size }) => (
+export const LoadingScreen: React.FC<Props> = ({ size }) => (
     <section className={styles.loadingSection}>
         <Loader size={size} />
     </section>

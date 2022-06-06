@@ -4,7 +4,7 @@ declare module 'ual-reactjs-renderer' {
 
     export const UALContext: Context<{
         activeUser: WaxUser | null;
-        showModal: Function;
+        showModal: () => void;
         logout: Function;
         loading: boolean;
     }>;

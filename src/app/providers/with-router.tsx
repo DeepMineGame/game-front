@@ -1,12 +1,12 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { Loader } from 'shared';
+import { LoadingScreen } from 'shared';
 
-export const withRouter = (component: () => React.ReactNode) => () =>
+export const withRouter = (Component: React.FC) => () =>
     (
         <BrowserRouter>
-            <Suspense fallback={<Loader size="default" />}>
-                {component()}
+            <Suspense fallback={<LoadingScreen key="loading" size="large" />}>
+                <Component />
             </Suspense>
         </BrowserRouter>
     );

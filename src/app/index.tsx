@@ -2,7 +2,7 @@ import React from 'react';
 // import i18n (needs to be bundled ;))
 import './index.i18n';
 import 'antd/dist/antd.min.css';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 import { errorNotify } from 'shared';
 import { withProviders } from './providers';
@@ -10,7 +10,12 @@ import { Router } from './router';
 
 import './index.module.scss';
 
-axios.interceptors.response.use((response) => response, errorNotify);
+axios.interceptors.response.use(
+    (response) => response,
+    (error: AxiosError) => {
+        if (!error.config.url?.includes('/ubs/auth/me')) errorNotify(error);
+    }
+);
 
 const App = () => {
     return <Router />;

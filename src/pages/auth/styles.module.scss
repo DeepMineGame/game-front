@@ -1,0 +1,55 @@
+@import 'src/shared';
+
+.wrapper {
+  min-height: 100vh;
+  background: black;
+  font-family: $bai;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.actionButton {
+  margin-top: 45px;
+  max-width: 310px;
+  font-family: $orbitron;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    margin-top: 80px;
+  }
+}
+
+.warning {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.textColor {
+  color: $color-neutral-neutral-9;
+  margin: 0;
+}
+
+.loggedInBlock {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 16px;
+  line-height: 22px;
+
+  & > p {
+    margin: 0;
+  }
+}
+
+.logoutButton {
+  font-size: 16px;
+  margin-top: 14px;
+}

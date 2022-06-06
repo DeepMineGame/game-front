@@ -4,20 +4,21 @@ import { Anchor } from 'ual-anchor';
 import { Wax } from '@eosdacio/ual-wax';
 import { isMainNet, waxChain } from '../constants';
 
-const anchor = new Anchor([waxChain], { appName: 'DeepMine' });
-const waxCloudWallet = new Wax([waxChain]);
+const chains = [waxChain];
+const anchor = new Anchor(chains, { appName: 'DeepMine' });
+const waxCloudWallet = new Wax(chains);
 
 export const waxAuthenticators = isMainNet
     ? [anchor, waxCloudWallet]
     : [anchor];
 
-export const withUalContext = (app: () => React.ReactNode) => () =>
+export const withUalContext = (App: React.FC) => () =>
     (
         <UALProvider
-            chains={[waxChain]}
+            chains={chains}
             appName="DeepMine"
             authenticators={waxAuthenticators}
         >
-            {app()}
+            <App />
         </UALProvider>
     );
