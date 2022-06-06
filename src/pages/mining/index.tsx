@@ -48,12 +48,11 @@ export const MiningPage: FC = () => {
     const neutral4 = '#303030';
     const estMiningTime =
         action &&
-        action.processes.filter(({ key }) => key === 'est_mining_time')[0];
+        action?.attrs?.filter(({ key }) => key === 'est_mining_time')[0];
 
     const estDmeAmount =
         action &&
-        action.processes.filter(({ key }) => key === 'est_dme_amount')[0]
-            ?.value;
+        action?.attrs?.filter(({ key }) => key === 'est_dme_amount')[0]?.value;
 
     const formatEstimateMineTime =
         estMiningTime && getTimeLeft(estMiningTime.value, true);
