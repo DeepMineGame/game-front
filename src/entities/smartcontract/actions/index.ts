@@ -30,6 +30,7 @@ export function toggleMining({
                     wax_user: waxUser,
                     contract_id: contractId,
                     duration: 30,
+                    mining_duration: 100000,
                 },
             },
         ],

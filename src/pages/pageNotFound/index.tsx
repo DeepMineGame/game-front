@@ -17,13 +17,10 @@ export const PageNotFound: FC<Props> = ({ title = '404', type = 'lost' }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const { t } = useTranslation();
-
+    const titleFromStateOrDefault =
+        (location?.state as { title: string } | null)?.title || title;
     return (
-        <Page
-            headerTitle={
-                (location?.state as { title: string } | null)?.title || title
-            }
-        >
+        <Page headerTitle={titleFromStateOrDefault}>
             <Space className={styles.content} direction="vertical" size="large">
                 {type === 'lost' ? (
                     <Space direction="vertical" size="large">

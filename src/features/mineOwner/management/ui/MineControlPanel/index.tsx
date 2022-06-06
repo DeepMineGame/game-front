@@ -4,6 +4,7 @@ import React, { FC } from 'react';
 import { Badge, Space } from 'antd';
 import { useGate, useStore } from 'effector-react';
 import { useSmartContractAction } from 'features';
+import { FrownOutlined } from '@ant-design/icons';
 import {
     minesStore,
     MineState,
@@ -37,6 +38,23 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
     const activateMine = useSmartContractAction(
         activatemine({ waxUser: chainAccountName, mineId: mine?.id })
     );
+    const onActivationButtonClick = async () => {
+        const action = isMineActive ? deactivateMine : activateMine;
+        await action();
+        return getMinesByOwnerEffect({ searchParam: chainAccountName });
+    };
+    if (mines?.length === 0) {
+        return (
+            <div className={styles.background}>
+                <Title className={styles.title}>
+                    <Space direction="vertical" align="center">
+                        <FrownOutlined />
+                        <div>There is no mine</div>
+                    </Space>
+                </Title>
+            </div>
+        );
+    }
 
     return (
         <div className={styles.background}>
@@ -54,7 +72,7 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
                 <Space direction="vertical">
                     <Button
                         type={isMineActive ? 'ghost' : 'primary'}
-                        onClick={isMineActive ? deactivateMine : activateMine}
+                        onClick={onActivationButtonClick}
                         loading={isMinesLoading}
                     >
                         {isMineActive
