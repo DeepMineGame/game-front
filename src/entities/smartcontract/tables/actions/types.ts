@@ -16,7 +16,7 @@ export type ActionDto = {
     finishes_at: number;
     id: number;
     owner_user_id: string;
-    processes: { key: string; value: number }[];
+    attrs: { key: string; value: number }[];
     state: ActionState;
     type: ActionType;
 };

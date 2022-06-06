@@ -43,7 +43,7 @@ export type UserHistoryType = {
     type: number;
     state: number;
     finishes_at: number;
-    processes: {
+    attrs: {
         key: string;
         value: string;
     }[];
