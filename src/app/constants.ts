@@ -38,4 +38,4 @@ export const ATOMIC_ASSETS_ENDPOINT = isMainNet
 
 export const ATOMICHUB_URL = isMainNet
     ? 'https://wax.atomichub.io/'
-    : 'https://wax-test.atomichub.io/market/sale/32270';
+    : 'https://wax-test.atomichub.io/';
