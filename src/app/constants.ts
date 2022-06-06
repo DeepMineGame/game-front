@@ -35,3 +35,7 @@ export const WAX_GET_BALANCE_ENDPOINT = `https://${WAX_RPC_ENDPOINTS_HOST}/v1/ch
 export const ATOMIC_ASSETS_ENDPOINT = isMainNet
     ? 'https://wax.api.atomicassets.io'
     : 'https://test.wax.api.atomicassets.io';
+
+export const ATOMICHUB_URL = isMainNet
+    ? 'https://wax.atomichub.io/'
+    : 'https://wax-test.atomichub.io/';

@@ -30,19 +30,19 @@ export function toggleMining({
                     wax_user: waxUser,
                     contract_id: contractId,
                     duration: 30,
-                    mining_duration: 100000,
+                    real_mined_amount: 100000,
                 },
             },
         ],
     };
 }
 
-export function claimdme({ waxUser }: { waxUser: string }) {
+export function contrclaim({ waxUser }: { waxUser: string }) {
     return {
         actions: [
             {
                 account: deepminegame,
-                name: 'claimdme',
+                name: 'contrclaim',
                 authorization: [
                     {
                         actor: waxUser,

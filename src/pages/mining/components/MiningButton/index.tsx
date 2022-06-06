@@ -16,7 +16,7 @@ import { Space } from 'antd';
 import {
     ActionDto,
     ActionState,
-    claimdme,
+    contrclaim,
     contractStore,
     ContractType,
     getActionEffect,
@@ -70,7 +70,7 @@ export const MiningAndClaimButton: FC<Props> = ({
         toggleMiningCallback()?.then(updateContract);
     const [isClaimedState, setIsClaimedState] = useState(false);
     const claimDmeCallback = useSmartContractAction(
-        claimdme({ waxUser: chainAccount.activeUser?.accountName || '' })
+        contrclaim({ waxUser: chainAccount.activeUser?.accountName || '' })
     );
     const isContractsLoading = useStore(getContractEffect.pending);
     const isActionsLoading = useStore(getActionEffect.pending);
@@ -88,7 +88,7 @@ export const MiningAndClaimButton: FC<Props> = ({
             return setClaimModalVisibility(true);
         }
 
-        if (!isMiningFinished && !isClaimed) {
+        if (!isMiningFinished && !isClaimed && isMiningFinished === undefined) {
             return warning({
                 title: t('pages.mining.doWantStopMining'),
                 content: t('pages.mining.consumablesWillBurnOut'),

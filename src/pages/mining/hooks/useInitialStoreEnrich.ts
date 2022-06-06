@@ -28,13 +28,14 @@ export function useInitialStoreEnrich() {
     }, [chainAccount.activeUser?.accountName]);
 
     useEffect(() => {
-        if (contracts?.length) {
+        if (contracts?.length && chainAccount.activeUser) {
             getActionEffect({
-                searchIdentification: mapSearchParamForIndexPosition.contractId,
-                searchParam: contracts[0].id,
+                searchIdentification:
+                    mapSearchParamForIndexPosition.ownerUserId,
+                searchParam: chainAccount.activeUser.accountName,
             });
         }
-    }, [contracts]);
+    }, [contracts, chainAccount?.activeUser]);
 
     useEffect(() => {
         if (contracts?.length && !mineStore) {
