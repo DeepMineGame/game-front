@@ -85,7 +85,7 @@ export const MiningPage: FC = () => {
                         {mineStore?.length ? (
                             <div className={styles.line}>
                                 <div>{t('pages.mining.mineDepth')}</div>
-                                <div>{mineStore[0].layer_depth}</div>
+                                <div>{mineStore[0]?.layer_depth}</div>
                             </div>
                         ) : null}
                         {action && (
