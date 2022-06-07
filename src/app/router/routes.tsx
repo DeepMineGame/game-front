@@ -6,6 +6,7 @@ import {
     HomePage,
     MiningPage,
     ContractorStatsAndInfoPage,
+    MineOwnerStatAndInfoPage,
 } from 'pages';
 import { MineManagementPage, MineOwnerPage } from 'pages/mineOwner';
 import { PageNotFound } from 'pages/pageNotFound';
@@ -21,6 +22,7 @@ import {
     root,
     wipPage,
     contractorStatsAndInfo,
+    mineOwnerStatsAndInfo,
 } from './paths';
 
 const IntroPage = React.lazy(async () => ({
@@ -93,6 +95,14 @@ export const routes: AppRoute[] = [
         forAdmin: false,
         titleTag: 'Contractor / Stats and Info',
     },
+    {
+        path: mineOwnerStatsAndInfo,
+        Component: MineOwnerStatAndInfoPage,
+        forLoggedIn: true,
+        forAdmin: false,
+        titleTag: 'Mine owner / Stats and Info',
+    },
+
     {
         path: pageNotFound,
         Component: PageNotFound,
