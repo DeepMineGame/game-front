@@ -4,3 +4,4 @@ export * from './Inventory';
 export * from './InventoryCardModal';
 export * from './Monitor';
 export * from './LoadingSection';
+export * from './StatsAndInfo';
