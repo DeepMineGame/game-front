@@ -56,11 +56,29 @@ export function warning({
 } & ModalProps) {
     ModalAnt.warning({
         ...props,
-        title: <span className={styles.warningTitle}>{title}</span>,
+        title: <span className={styles.simpleModalTitle}>{title}</span>,
         content,
-        className: styles.warningModal,
+        className: styles.simpleModal,
         okButtonProps: { className: styles.modalButton, type: 'primary' },
         okCancel: true,
+        cancelButtonProps: { className: styles.ghostButton, ghost: true },
+    });
+}
+
+export function success({
+    title,
+    content,
+    ...props
+}: {
+    title: ReactNode;
+    content: ReactNode;
+} & ModalProps) {
+    ModalAnt.success({
+        ...props,
+        title: <span className={styles.simpleModalTitle}>{title}</span>,
+        content,
+        className: styles.simpleModal,
+        okButtonProps: { className: styles.modalButton, type: 'primary' },
         cancelButtonProps: { className: styles.ghostButton, ghost: true },
     });
 }

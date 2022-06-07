@@ -6,6 +6,7 @@ import {
     useMediaQuery,
     desktopS,
     getTimeLeft,
+    neutral4,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { Col, Row, Skeleton, Space, Tooltip } from 'antd';
@@ -45,7 +46,6 @@ export const MiningPage: FC = () => {
     const isMiningWillEndInFuture =
         action && now < new Date(action.finishes_at * 1000);
 
-    const neutral4 = '#303030';
     const estMiningTime =
         action &&
         action?.attrs?.filter(({ key }) => key === 'est_mining_time')[0];

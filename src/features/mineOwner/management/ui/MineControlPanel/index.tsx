@@ -89,6 +89,7 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
                             : t('components.common.button.activate')}
                     </Button>
                     <Button
+                        disabled
                         ghost
                         danger
                         className={styles.wideButton}

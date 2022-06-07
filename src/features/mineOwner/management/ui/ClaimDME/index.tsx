@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import { Button, useAccountName } from 'shared';
+import { Button, success, useAccountName } from 'shared';
 import { useStore } from 'effector-react';
 import { useSmartContractAction } from 'features';
+import { useTranslation } from 'react-i18next';
 import {
     extractDmeToClaimAttr,
     rolesStore,
@@ -12,6 +13,8 @@ import {
 
 export const ClaimDME: FC = () => {
     const waxUser = useAccountName();
+    const { t } = useTranslation();
+
     const roles = useStore(rolesStore);
     const mineOwnerRole = roles?.filter(
         ({ role }) => role === UserRoles.mine_owner
@@ -26,11 +29,16 @@ export const ClaimDME: FC = () => {
     const onDmeClick = async () => {
         await claimDme();
         await getRolesEffect({ searchParam: waxUser });
+        success({
+            title: t('components.common.button.claim'),
+            content: t('components.common.yourDMEHasBeenClaimed'),
+        });
     };
 
     return dmeMoreThenZero ? (
         <Button type="primary" onClick={onDmeClick}>
-            Claim {dmeToClaim} DME
+            {t('components.common.button.claim')} {dmeToClaim}{' '}
+            {t('components.common.button.dme')}
         </Button>
     ) : null;
 };
