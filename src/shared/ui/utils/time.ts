@@ -19,3 +19,6 @@ export const getTimeLeft = (seconds: number, showDays?: boolean) => {
 
     return showDays ? `${getPadTime(d)}:${timeWithHour}` : timeWithHour;
 };
+
+export const secondsToTime = (seconds: number) =>
+    new Date(seconds * 1000).toISOString().slice(11, 19);
