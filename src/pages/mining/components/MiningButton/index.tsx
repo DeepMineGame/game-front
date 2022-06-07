@@ -109,7 +109,7 @@ export const MiningAndClaimButton: FC<Props> = ({
 
     const okText = isClaimedState
         ? t('pages.mining.cool')
-        : t('pages.mining.claim');
+        : t('components.common.button.claim');
 
     return (
         <>
@@ -140,7 +140,9 @@ export const MiningAndClaimButton: FC<Props> = ({
                     >
                         <CheckCircleOutlined className={styles.icon} />
                         <Title level={3}>
-                            {t('pages.mining.yourDMEHasBeenClaimed')}
+                            {t(
+                                'components.common.modals.yourDMEHasBeenClaimed'
+                            )}
                         </Title>
                     </Space>
                 ) : (

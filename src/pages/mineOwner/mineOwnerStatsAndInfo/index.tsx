@@ -1,13 +1,12 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { MiningStats, MineAreaInfo, MineCrew, Contract } from 'features';
+import { MiningStats, MineAreaInfo, Contract } from 'features';
 import { StatsAndInfo } from 'shared';
 
 enum StatsAndInfoTab {
     miningStats,
     mineAreaInfo,
-    mineCrew,
     contract,
 }
 
@@ -33,15 +32,7 @@ const useTabs = () => {
                 }`
             ),
         },
-        {
-            id: StatsAndInfoTab.mineCrew,
-            component: MineCrew,
-            name: t(
-                `pages.contractorStatsAndInfo.${
-                    StatsAndInfoTab[StatsAndInfoTab.mineCrew]
-                }`
-            ),
-        },
+
         {
             id: StatsAndInfoTab.contract,
             component: Contract,
@@ -54,7 +45,7 @@ const useTabs = () => {
     ];
 };
 
-export const ContractorStatsAndInfoPage: FC = () => {
+export const MineOwnerStatAndInfoPage: FC = () => {
     const tabs = useTabs();
-    return <StatsAndInfo tabs={tabs} documentTitleScope="Contractor" />;
+    return <StatsAndInfo tabs={tabs} documentTitleScope="Mine owner" />;
 };

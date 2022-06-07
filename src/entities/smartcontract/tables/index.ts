@@ -13,6 +13,7 @@ export * from '../tables/contracts';
 export * from '../tables/inventories';
 export * from '../tables/users';
 export * from './types';
+export * from './roles';
 
 export const getUserConfig = (account: string) => {
     return {

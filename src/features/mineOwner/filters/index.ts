@@ -1,5 +1,6 @@
 import {
     ActionDto,
+    ActionType,
     ContractDto,
     ContractType,
     LOCATION_TO_ID,
@@ -41,10 +42,15 @@ export const checkHasActiveContractWithLandlord = (
 
 export const checkIfMineSetupWillFinishedInFuture = (
     actions: ActionDto[] | null
-) =>
-    Boolean(
-        actions?.[0] && new Date(actions[0].finishes_at * 1000) > new Date()
+) => {
+    const mineSetupAction = actions?.filter(
+        ({ type }) => type === ActionType.mine_setup
     );
+    return Boolean(
+        mineSetupAction?.[0] &&
+            new Date(mineSetupAction[0].finishes_at * 1000) > new Date()
+    );
+};
 
 export const hasActiveMineContractFilter = ({
     contract,

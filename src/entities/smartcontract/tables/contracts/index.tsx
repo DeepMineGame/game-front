@@ -28,6 +28,7 @@ export const getContractEffect = createEffect(
             table: 'contracts',
             index_position: searchIdentification,
             key_type: 'i64',
+            upper_bound: searchParam,
             lower_bound: searchParam,
             limit: 100,
         });

@@ -125,6 +125,7 @@ sample({
         setHasNoMineNft,
         setNeedSignContractWithLandLord,
         setInitialStateEvent,
+        actionsStore,
     ],
     filter: checkIfMineSetupWillFinishedInFuture,
 });
