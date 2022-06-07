@@ -25,6 +25,7 @@ export const getActionEffect = createEffect(
             index_position: searchIdentification,
             key_type: 'i64',
             lower_bound: searchParam,
+            upper_bound: searchParam,
             limit: 1000,
         });
     }
