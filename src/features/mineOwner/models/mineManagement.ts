@@ -1,6 +1,6 @@
 import { createGate } from 'effector-react';
 import { forward } from 'effector';
-import { getMinesByOwnerEffect } from 'entities/smartcontract';
+import { getMinesByOwnerEffect, getRolesEffect } from 'entities/smartcontract';
 
 export const MineManagementGate = createGate<{ searchParam: string }>(
     'MineManagementGate'
@@ -8,5 +8,5 @@ export const MineManagementGate = createGate<{ searchParam: string }>(
 
 forward({
     from: MineManagementGate.open,
-    to: [getMinesByOwnerEffect],
+    to: [getMinesByOwnerEffect, getRolesEffect],
 });

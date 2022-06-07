@@ -13,6 +13,7 @@ import {
     getMinesByOwnerEffect,
 } from 'entities/smartcontract';
 import { MineManagementGate } from '../../../models/mineManagement';
+import { ClaimDME } from '../ClaimDME';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -58,16 +59,24 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
 
     return (
         <div className={styles.background}>
-            <Space size="large">
-                <Title className={styles.title} fontFamily="orbitron" level={4}>
-                    {t('pages.mineManagement.mine')}
-                </Title>
-                <Badge
-                    className={styles.badgeText}
-                    color={isMineActive ? greenGreen6 : sunsetOrange6}
-                    text={statusText}
-                />
+            <Space direction="vertical">
+                <Space size="large">
+                    <Title
+                        className={styles.title}
+                        fontFamily="orbitron"
+                        level={4}
+                    >
+                        {t('pages.mineManagement.mine')}
+                    </Title>
+                    <Badge
+                        className={styles.badgeText}
+                        color={isMineActive ? greenGreen6 : sunsetOrange6}
+                        text={statusText}
+                    />
+                </Space>
+                <ClaimDME />
             </Space>
+
             <div>
                 <Space direction="vertical">
                     <Button
