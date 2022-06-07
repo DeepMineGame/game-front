@@ -5,6 +5,8 @@ export * from './calcmining';
 export * from './physicalShift';
 export * from './activatemine';
 export * from './deactmine';
+export * from './contrclaim';
+export * from './moclaim';
 
 export function toggleMining({
     waxUser,
@@ -31,26 +33,6 @@ export function toggleMining({
                     contract_id: contractId,
                     duration: 30,
                     real_mined_amount: 100000,
-                },
-            },
-        ],
-    };
-}
-
-export function contrclaim({ waxUser }: { waxUser: string }) {
-    return {
-        actions: [
-            {
-                account: deepminegame,
-                name: 'contrclaim',
-                authorization: [
-                    {
-                        actor: waxUser,
-                        permission: 'active',
-                    },
-                ],
-                data: {
-                    wax_user: waxUser,
                 },
             },
         ],
