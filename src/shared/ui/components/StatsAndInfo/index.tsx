@@ -43,6 +43,7 @@ export const StatsAndInfo: FC<Props> = ({ tabs, documentTitleScope }) => {
                 tabs={navbarTabs}
                 onTabSelect={handleTabSelect}
             />
+            {/* @ts-ignore */}
             <ContentComponent />
         </Page>
     );

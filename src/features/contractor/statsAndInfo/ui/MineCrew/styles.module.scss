@@ -1,1 +1,15 @@
 @import "src/shared";
+
+.contractor {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+
+  span {
+    font-weight: 700;
+  }
+}
+
+.table {
+  padding-top: 12px;
+}

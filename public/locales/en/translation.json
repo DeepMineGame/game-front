@@ -189,6 +189,20 @@
         "saturation":  "Saturation"
       }
     },
+    "contractorMineCrew": {
+      "contractors": "Contractors",
+      "contractor": "Contractor",
+      "status": "Status",
+      "dmePerEjection": "DME per ejection",
+      "reputation": "Reputation",
+      "activity": "Activity",
+      "idle": "Idle",
+      "working": "Working",
+      "active": "Active",
+      "high": "High",
+      "average": "Average",
+      "low": "Low"
+    },
     "mineManagement": {
       "title": "MINE MANAGEMENT",
       "mine": "MINE"
