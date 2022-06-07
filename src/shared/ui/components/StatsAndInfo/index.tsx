@@ -6,7 +6,7 @@ import { Navbar, Page } from '../../ui-kit';
 type Props = {
     tabs: {
         id: number;
-        component: JSXElementConstructor<{}>;
+        component: JSXElementConstructor<any>;
         name: string;
     }[];
     documentTitleScope?: string;

@@ -19,11 +19,10 @@ export const ClaimDME: FC = () => {
     const mineOwnerRole = roles?.filter(
         ({ role }) => role === UserRoles.mine_owner
     );
-    const dmeToClaimAttr = mineOwnerRole?.length
-        ? extractDmeToClaimAttr(mineOwnerRole[0])
+    const dmeToClaim = mineOwnerRole?.length
+        ? extractDmeToClaimAttr(mineOwnerRole[0])?.value
         : null;
 
-    const dmeToClaim = dmeToClaimAttr?.value;
     const dmeMoreThenZero = Number(dmeToClaim) > 0;
     const claimDme = useSmartContractAction(moclaim({ waxUser }));
     const onDmeClick = async () => {

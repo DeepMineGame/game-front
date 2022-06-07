@@ -1,8 +1,14 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { MiningStats, MineAreaInfo, Contract } from 'features';
-import { StatsAndInfo } from 'shared';
+import { StatsAndInfo, useAccountName } from 'shared';
+import { useStore } from 'effector-react';
+import {
+    contractStore,
+    ContractType,
+    getContractEffect,
+} from 'entities/smartcontract';
 
 enum StatsAndInfoTab {
     miningStats,
@@ -10,8 +16,18 @@ enum StatsAndInfoTab {
     contract,
 }
 
-const useTabs = () => {
+const useTabs = (userAccountName: string) => {
     const { t } = useTranslation();
+    const contracts = useStore(contractStore);
+
+    useEffect(() => {
+        if (userAccountName)
+            getContractEffect({ searchParam: userAccountName });
+    }, [userAccountName]);
+
+    const landLordMineOwnerContract = contracts?.filter(
+        ({ type }) => type === ContractType.landlord_mineowner
+    )?.[0];
 
     return [
         {
@@ -35,7 +51,12 @@ const useTabs = () => {
 
         {
             id: StatsAndInfoTab.contract,
-            component: Contract,
+            component: () =>
+                landLordMineOwnerContract ? (
+                    <Contract contract={landLordMineOwnerContract} />
+                ) : (
+                    <div>No data</div>
+                ),
             name: t(
                 `pages.contractorStatsAndInfo.${
                     StatsAndInfoTab[StatsAndInfoTab.contract]
@@ -46,6 +67,8 @@ const useTabs = () => {
 };
 
 export const MineOwnerStatAndInfoPage: FC = () => {
-    const tabs = useTabs();
+    const userAccountName = useAccountName();
+
+    const tabs = useTabs(userAccountName);
     return <StatsAndInfo tabs={tabs} documentTitleScope="Mine owner" />;
 };

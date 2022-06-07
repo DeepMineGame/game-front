@@ -6,7 +6,7 @@ export enum ContractType {
 
 export type ContractDto = {
     id: number;
-    client_id: string;
+    client: string;
     client_asset_id: string;
     executor_id: string;
     executor_asset_id: string;

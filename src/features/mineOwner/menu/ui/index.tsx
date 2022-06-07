@@ -7,7 +7,7 @@ import {
     TeamOutlined,
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { mineManagement } from 'app/router/paths';
+import { mineManagement, mineOwnerStatsAndInfo } from 'app/router/paths';
 import { mineOwnerCabinState } from '../../models/mineOwnerState';
 
 type Props = {
@@ -34,7 +34,7 @@ export const MineOwnerMenu: FC<Props> = ({ currentMineOwnerCabinState }) => {
         <Menu>
             <Space>
                 <MenuItem
-                    onClick={() => {}}
+                    onClick={() => navigate(mineOwnerStatsAndInfo)}
                     icon={<DesktopOutlined />}
                     disabled={statusThatDisableManagementButton.includes(
                         currentMineOwnerCabinState
