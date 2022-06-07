@@ -28,7 +28,11 @@ export const StatsAndInfo: FC<Props> = ({ tabs, documentTitleScope }) => {
     }));
 
     return (
-        <Page headerTitle={t('components.statsAndInfo.title').toUpperCase()}>
+        <Page
+            headerTitle={t(
+                'components.common.statsAndInfo.title'
+            ).toUpperCase()}
+        >
             <DocumentTitle
                 title={`${
                     documentTitleScope ? `${documentTitleScope} / ` : ''
