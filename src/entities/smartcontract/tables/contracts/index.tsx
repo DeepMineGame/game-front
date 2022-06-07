@@ -19,7 +19,7 @@ export const getContractEffect = createEffect(
         searchIdentification = mapSearchParamForIndexPositionToFindContracts.executorId,
         searchParam,
     }: {
-        searchIdentification: mapSearchParamForIndexPositionToFindContracts;
+        searchIdentification?: mapSearchParamForIndexPositionToFindContracts;
         searchParam: string;
     }) => {
         return getTableData({

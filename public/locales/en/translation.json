@@ -35,10 +35,12 @@
         "dme": "DME"
       },
       "logout": "Logout",
-      "yourDMEHasBeenClaimed": "Your DME has been claimed"
-    },
-    "statsAndInfo": {
-      "title": "Stats & info"
+      "yourDMEHasBeenClaimed": "Your DME has been claimed",
+      "statsAndInfo": {
+        "title": "Stats & info",
+        "contractInfo": "CONTRACT INFO",
+        "contractIsActive": "Contract is active"
+      }
     }
   },
   "pages": {
