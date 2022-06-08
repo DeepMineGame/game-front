@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { MiningStats, MineAreaInfo, Contract } from 'features';
-import { PageWithTabs, useAccountName } from 'shared';
+import { MiningStats, MineAreaInfo } from 'features';
+import { Contract, PageWithTabs, useAccountName } from 'shared';
 import { useStore } from 'effector-react';
 import {
     contractStore,

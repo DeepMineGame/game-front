@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { MiningStats, MineAreaInfo, MineCrew, Contract } from 'features';
-import { PageWithTabs } from 'shared';
+import { MiningStats, MineAreaInfo, MineCrew } from 'features';
+import { Contract, PageWithTabs } from 'shared';
 
 enum StatsAndInfoTab {
     miningStats,
