@@ -10,6 +10,9 @@ export enum ActionType {
     physical_shift,
     mine_setup,
     mine,
+    mine_activation,
+    mine_deactivation,
+    mine_unsetup,
 }
 export type ActionDto = {
     contract_id: number;

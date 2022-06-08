@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { MiningStats, MineAreaInfo, Contract } from 'features';
-import { StatsAndInfo, useAccountName } from 'shared';
+import { MiningStats, MineAreaInfo } from 'features';
+import { Contract, PageWithTabs, useAccountName } from 'shared';
 import { useStore } from 'effector-react';
 import {
     contractStore,
@@ -70,5 +70,5 @@ export const MineOwnerStatAndInfoPage: FC = () => {
     const userAccountName = useAccountName();
 
     const tabs = useTabs(userAccountName);
-    return <StatsAndInfo tabs={tabs} documentTitleScope="Mine owner" />;
+    return <PageWithTabs tabs={tabs} documentTitleScope="Mine owner" />;
 };

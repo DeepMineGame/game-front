@@ -7,6 +7,7 @@ import { ContractDto } from 'entities/smartcontract';
 type Props = {
     contract: ContractDto;
 };
+
 export const Contract: FC<Props> = ({ contract }) => {
     const { t } = useTranslation();
 
@@ -19,9 +20,9 @@ export const Contract: FC<Props> = ({ contract }) => {
             </div>
             <KeyValueTable
                 items={{
-                    Area: contract.client_asset_id,
-                    Landlord: contract.client,
-                    Fee: contract.fee,
+                    Area: contract?.client_asset_id || '-',
+                    Landlord: contract?.client || '-',
+                    Fee: contract?.fee || '-',
                 }}
             />
         </>

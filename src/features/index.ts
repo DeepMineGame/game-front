@@ -8,4 +8,3 @@ export * from './equipmentSet';
 export * from './mineOwner';
 export * from './physicalShift';
 export * from './contractor';
-export * from './statsAndInfo';

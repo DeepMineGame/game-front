@@ -3,15 +3,21 @@ import { useTranslation } from 'react-i18next';
 import { DocumentTitle } from 'app/router/components/DocumentTitle';
 import { Navbar, Page } from '../../ui-kit';
 
-type Props = {
-    tabs: {
-        id: number;
-        component: JSXElementConstructor<any>;
-        name: string;
-    }[];
-    documentTitleScope?: string;
+export type Tab = {
+    id: number;
+    component: JSXElementConstructor<any>;
+    name: string;
 };
-export const StatsAndInfo: FC<Props> = ({ tabs, documentTitleScope }) => {
+type Props = {
+    tabs: Tab[];
+    documentTitleScope?: string;
+    title?: string;
+};
+export const PageWithTabs: FC<Props> = ({
+    tabs,
+    documentTitleScope,
+    title,
+}) => {
     const { t } = useTranslation();
     const [selectedTab, setSelectedTab] = useState(tabs[0].id);
 
@@ -29,9 +35,9 @@ export const StatsAndInfo: FC<Props> = ({ tabs, documentTitleScope }) => {
 
     return (
         <Page
-            headerTitle={t(
-                'components.common.statsAndInfo.title'
-            ).toUpperCase()}
+            headerTitle={
+                title || t('components.common.statsAndInfo.title').toUpperCase()
+            }
         >
             <DocumentTitle
                 title={`${

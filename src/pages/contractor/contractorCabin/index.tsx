@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {
-    ContractorMenu,
-    ContractorMenuItems,
     desktopS,
     Header,
     Monitor,
@@ -12,7 +10,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import * as PATHS from 'app/router/paths';
 import cn from 'classnames';
-import { Travel } from 'features';
+import { ContractorMenu, ContractorMenuItems, Travel } from 'features';
 import {
     getContractsByNickNameConfig,
     getHistoryConfig,
