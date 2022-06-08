@@ -1,4 +1,4 @@
-import { Space } from 'antd';
+import { Space, Tooltip } from 'antd';
 import React, { FC } from 'react';
 import { Menu, MenuItem } from 'shared';
 import {
@@ -12,6 +12,7 @@ import {
     mineOwnerMineCrew,
     mineOwnerStatsAndInfo,
 } from 'app/router/paths';
+import { useTranslation } from 'react-i18next';
 import { mineOwnerCabinState } from '../../models/mineOwnerState';
 
 type Props = {
@@ -19,6 +20,8 @@ type Props = {
 };
 export const MineOwnerMenu: FC<Props> = ({ currentMineOwnerCabinState }) => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
+
     const baseButtonDisableStates = [
         mineOwnerCabinState.hasNoMineNft,
         mineOwnerCabinState.isOutsideFromLocation,
@@ -37,27 +40,40 @@ export const MineOwnerMenu: FC<Props> = ({ currentMineOwnerCabinState }) => {
     return (
         <Menu>
             <Space>
-                <MenuItem
-                    onClick={() => navigate(mineOwnerStatsAndInfo)}
-                    icon={<DesktopOutlined />}
-                    disabled={statusThatDisableManagementButton.includes(
-                        currentMineOwnerCabinState
-                    )}
-                />
-                <MenuItem
-                    onClick={() => navigate(mineOwnerMineCrew)}
-                    icon={<TeamOutlined />}
-                    disabled={statusThatDisableTeamButton.includes(
-                        currentMineOwnerCabinState
-                    )}
-                />
-                <MenuItem
-                    onClick={() => navigate(mineManagement)}
-                    icon={<ProjectOutlined />}
-                    disabled={statusThatDisableStatsButton.includes(
-                        currentMineOwnerCabinState
-                    )}
-                />
+                <Tooltip overlay={t('pages.mineOwner.menu.manageMine')}>
+                    {/* TODO: Remove div wrapper after figure out why it doesn't work without it */}
+                    <div>
+                        <MenuItem
+                            onClick={() => navigate(mineOwnerStatsAndInfo)}
+                            icon={<DesktopOutlined />}
+                            disabled={statusThatDisableManagementButton.includes(
+                                currentMineOwnerCabinState
+                            )}
+                        />
+                    </div>
+                </Tooltip>
+                <Tooltip overlay={t('pages.mineOwner.menu.team')}>
+                    <div>
+                        <MenuItem
+                            onClick={() => navigate(mineOwnerMineCrew)}
+                            icon={<TeamOutlined />}
+                            disabled={statusThatDisableTeamButton.includes(
+                                currentMineOwnerCabinState
+                            )}
+                        />
+                    </div>
+                </Tooltip>
+                <Tooltip overlay={t('pages.mineOwner.menu.stats')}>
+                    <div>
+                        <MenuItem
+                            onClick={() => navigate(mineManagement)}
+                            icon={<ProjectOutlined />}
+                            disabled={statusThatDisableStatsButton.includes(
+                                currentMineOwnerCabinState
+                            )}
+                        />
+                    </div>
+                </Tooltip>
             </Space>
         </Menu>
     );

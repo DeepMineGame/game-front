@@ -192,6 +192,13 @@
     "mineManagement": {
       "title": "MINE MANAGEMENT",
       "mine": "MINE"
+    },
+    "mineOwner": {
+      "menu": {
+        "manageMine": "Go here to manage the Mine",
+        "team": "Go here to form a team",
+        "stats": "Stats & Info located here"
+      }
     }
   },
   "features": {
