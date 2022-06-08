@@ -6,6 +6,7 @@ import {
     INDEX_POSITION_USER,
 } from '../constants';
 
+export * from './areas';
 export * from './mines';
 export * from './contractors';
 export * from '../tables/actions';

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useStore } from 'effector-react';
-import { useChainAuthContext } from 'shared';
 import {
+    areasStore,
     contractStore,
     getActionEffect,
     getContractEffect,
@@ -11,11 +11,13 @@ import {
     getInventoriesEffect,
     mapSearchParamForIndexPosition,
 } from 'entities/smartcontract';
+import { useChainAuthContext } from 'shared/index';
 
 export function useInitialStoreEnrich() {
     const chainAccount = useChainAuthContext();
     const contracts = useStore(contractStore);
     const mineStore = useStore(minesStore);
+    const areaStore = useStore(areasStore);
 
     useEffect(() => {
         if (chainAccount.activeUser?.accountName) {
@@ -42,6 +44,12 @@ export function useInitialStoreEnrich() {
             getMinesEffect({ searchParam: contracts[0].client_asset_id });
         }
     }, [contracts, mineStore]);
+
+    useEffect(() => {
+        if (contracts?.length && !areaStore) {
+            getMinesEffect({ searchParam: contracts[0].client_asset_id });
+        }
+    }, [contracts, areaStore]);
 
     useEffect(() => {
         if (chainAccount?.activeUser?.accountName) {

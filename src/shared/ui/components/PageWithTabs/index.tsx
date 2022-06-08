@@ -26,7 +26,7 @@ export const PageWithTabs: FC<Props> = ({
     };
 
     const selectedTabData = tabs.find((tab) => tab.id === selectedTab);
-    const ContentComponent = selectedTabData?.component ?? (() => null);
+    const ContentComponent = (selectedTabData?.component ?? (() => null)) as FC;
 
     const navbarTabs = tabs.map((tab) => ({
         id: tab.id,

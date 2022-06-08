@@ -10,6 +10,7 @@ export type MineDto = {
     layer_depth: number;
     level: number;
     sub_level: number;
+    owner: string;
     state: MineState;
     id: number;
 };

@@ -1,21 +1,39 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useStore } from 'effector-react';
 
-import { KeyValueTable, Title } from 'shared';
+import { KeyValueTable, Title, useInitialStoreEnrich } from 'shared';
+import {
+    AreaRarity,
+    areasStore,
+    contractStore,
+    minesStore,
+} from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
 export const MineAreaInfo = () => {
+    useInitialStoreEnrich();
     const { t } = useTranslation();
+    const areas = useStore(areasStore);
+    const mines = useStore(minesStore);
+    const userMine = mines?.[0];
+    const userArea = areas?.[0];
+    const contracts = useStore(contractStore);
 
     const mineInfoData = {
-        [t('pages.contractorStatsAndInfo.mineArea.mine')]: 'ID 34658645',
+        [t('pages.contractorStatsAndInfo.mineArea.mine')]: userMine
+            ? `ID ${userMine.area_id}`
+            : '-',
         [t('pages.contractorStatsAndInfo.mineArea.mineOwner')]:
-            'Foxelchanger324',
+            userMine?.owner ?? '-',
         [t('pages.contractorStatsAndInfo.mineArea.mineRarity')]: 'Common',
-        [t('pages.contractorStatsAndInfo.mineArea.level')]: 3,
-        [t('pages.contractorStatsAndInfo.mineArea.sublevel')]: 2,
-        [t('pages.contractorStatsAndInfo.mineArea.depth')]: 5,
-        [t('pages.contractorStatsAndInfo.mineArea.mineFee')]: '4$',
+        [t('pages.contractorStatsAndInfo.mineArea.level')]:
+            userMine?.level ?? '-',
+        [t('pages.contractorStatsAndInfo.mineArea.sublevel')]:
+            userMine?.sub_level ?? '-',
+        [t('pages.contractorStatsAndInfo.mineArea.depth')]:
+            userMine?.layer_depth ?? '-',
+        [t('pages.contractorStatsAndInfo.mineArea.mineFee')]: '4%',
     };
 
     const mineSubInfoData = {
@@ -27,11 +45,16 @@ export const MineAreaInfo = () => {
     };
 
     const areaInfoData = {
-        [t('pages.contractorStatsAndInfo.mineArea.area')]: 'ID 34658645',
+        [t('pages.contractorStatsAndInfo.mineArea.area')]: userArea
+            ? `ID ${userArea.id}`
+            : '-',
         [t('pages.contractorStatsAndInfo.mineArea.landlord')]:
             'Foxelchanger324',
-        [t('pages.contractorStatsAndInfo.mineArea.areaRarity')]: 'Common',
-        [t('pages.contractorStatsAndInfo.mineArea.minesOnArea')]: 3,
+        [t('pages.contractorStatsAndInfo.mineArea.areaRarity')]: userArea
+            ? AreaRarity[userArea.rarity]
+            : '-',
+        [t('pages.contractorStatsAndInfo.mineArea.minesOnArea')]:
+            userArea?.mines_slots.filter((v) => !!v).length ?? '-',
         [t('pages.contractorStatsAndInfo.mineArea.areaFee')]: 2,
     };
 
