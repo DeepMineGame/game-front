@@ -1,5 +1,11 @@
 import React from 'react';
+import { LandLordMenu } from 'features';
 
 export const LandLordPage = () => {
-    return <div>👷</div>;
+    return (
+        <div>
+            👷
+            <LandLordMenu />
+        </div>
+    );
 };

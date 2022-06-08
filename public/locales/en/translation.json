@@ -199,6 +199,12 @@
         "team": "Go here to form a team",
         "stats": "Stats & Info located here"
       }
+    },
+    "landLord": {
+      "menu": {
+        "goLandActivate": "Go here activate the land",
+        "statsAndInfo": "Go here to see stats & info"
+      }
     }
   },
   "features": {
