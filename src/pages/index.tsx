@@ -4,4 +4,5 @@ export { ContractorStatsAndInfoPage } from './contractor/contractorStatAndInfo';
 export { IntroPage } from './introPage';
 export { MiningPage } from './mining';
 export { HomePage } from './home';
-export * from './mineOwner/MineOwnerStatsAndInfo';
+export * from './mineOwner';
+export * from './landLord';
