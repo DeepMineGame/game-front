@@ -7,6 +7,7 @@ import { ContractDto } from 'entities/smartcontract';
 type Props = {
     contract: ContractDto;
 };
+
 export const Contract: FC<Props> = ({ contract }) => {
     const { t } = useTranslation();
 

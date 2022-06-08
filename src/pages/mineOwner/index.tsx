@@ -23,4 +23,5 @@ export const MineOwnerPage = () => {
         </MineOwnerCabin>
     );
 };
-export * from './components/Management';
+export * from './Management';
+export * from './MineOwnerMiningCrewPage';

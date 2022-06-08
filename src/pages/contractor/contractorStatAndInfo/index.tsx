@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { MiningStats, MineAreaInfo, MineCrew, Contract } from 'features';
-import { StatsAndInfo } from 'shared';
+import { PageWithTabs } from 'shared';
 
 enum StatsAndInfoTab {
     miningStats,
@@ -56,5 +56,5 @@ const useTabs = () => {
 
 export const ContractorStatsAndInfoPage: FC = () => {
     const tabs = useTabs();
-    return <StatsAndInfo tabs={tabs} documentTitleScope="Contractor" />;
+    return <PageWithTabs tabs={tabs} documentTitleScope="Contractor" />;
 };
