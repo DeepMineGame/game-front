@@ -22,3 +22,15 @@ export const getTimeLeft = (seconds: number, showDays?: boolean) => {
 
 export const secondsToTime = (seconds: number) =>
     new Date(seconds * 1000).toISOString().slice(11, 19);
+
+export const toLocaleDate = (
+    date: number,
+    options?: Intl.DateTimeFormatOptions
+) => {
+    return new Date(date).toLocaleString('en-gb', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        ...options,
+    });
+};

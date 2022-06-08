@@ -1,1 +1,26 @@
-@import "src/shared";
+@import 'src/shared';
+
+.mineCrew {
+    margin-right: -16px;
+    overflow-x: auto;
+
+    @media only screen and (min-width: $media-desktop-s) {
+        // .content padding size
+        margin-right: -56px;
+    }
+}
+
+.mineCrewTable {
+    width: 1116px;
+}
+
+.contractors {
+    margin-bottom: 12px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+
+    b {
+        font-weight: 700;
+    }
+}

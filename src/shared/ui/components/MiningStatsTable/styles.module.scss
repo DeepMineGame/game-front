@@ -1,19 +1,5 @@
 @import 'src/shared';
 
-.miningStats {
-    margin-right: -16px;
-    overflow-x: auto;
-
-    @media only screen and (min-width: $media-desktop-s) {
-        // .content padding size
-        margin-right: -56px;
-    }
-}
-
-.miningStatsTable {
-    width: 1116px;
-}
-
 .expandedTable {
     :global {
         .ant-table {
