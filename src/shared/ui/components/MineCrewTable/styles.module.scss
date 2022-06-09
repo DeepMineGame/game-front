@@ -1,0 +1,21 @@
+@import 'src/shared';
+
+.status {
+    display: flex;
+    color: $color-neutral-neutral-7;
+}
+
+.contractor {
+    display: flex;
+}
+
+.contractorName {
+    color: $color-primary-primary-6;
+}
+
+.contractorTag {
+    margin-left: 12px;
+    color: $color-primary-primary-6;
+    background-color: $color-neutral-neutral-2;
+    border-color: $color-neutral-neutral-5;
+}

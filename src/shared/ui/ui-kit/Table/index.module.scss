@@ -1,0 +1,58 @@
+@import 'src/shared';
+
+.table {
+    :global {
+        .ant-table {
+            background-color: $color-neutral-neutral-1;
+        }
+
+        .ant-table-thead > tr > th,
+        .ant-table-content > table,
+        .ant-table {
+            color: $color-neutral-neutral-9;
+            border-color: $color-neutral-neutral-4 !important;
+        }
+
+        .ant-table-thead > tr > th {
+            background-color: $color-neutral-neutral-2;
+        }
+
+        .ant-table-container,
+        td {
+            border-color: $color-neutral-neutral-4 !important;
+        }
+
+        .ant-table-row-expand-icon {
+            border-color: $color-neutral-neutral-9;
+            background-color: transparent;
+        }
+
+        .ant-table-row-expand-icon:hover,
+        .ant-table-row-expand-icon:focus {
+            color: $color-neutral-neutral-9;
+        }
+
+        tr.ant-table-expanded-row:hover > td,
+        tr.ant-table-expanded-row > td {
+            background-color: $color-neutral-neutral-3;
+        }
+
+        .ant-table-tbody > tr.ant-table-row:hover > td,
+        .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+            background-color: $color-neutral-neutral-2;
+        }
+
+        .ant-table-column-sorter-down.active,
+        .ant-table-column-sorter-up.active {
+            color: $color-primary-primary-6;
+        }
+
+        td.ant-table-column-sort {
+            background-color: initial;
+        }
+
+        .ant-table-thead .ant-table-cell {
+            font-weight: bold;
+        }
+    }
+}
