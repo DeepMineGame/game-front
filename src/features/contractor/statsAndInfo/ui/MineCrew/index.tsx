@@ -68,12 +68,11 @@ export const MineCrew = () => {
 
     return (
         <div className={styles.mineCrew}>
-            <div className={styles.contractors}>
-                {t('pages.contractorMineCrew.contractors')}{' '}
-                <b>{contractorsNumber}</b>
-            </div>
-
             <div className={styles.mineCrewTable}>
+                <div className={styles.contractors}>
+                    {t('pages.contractorMineCrew.contractors')}{' '}
+                    <b>{contractorsNumber}</b>
+                </div>
                 <MineCrewTable data={data} />
             </div>
         </div>

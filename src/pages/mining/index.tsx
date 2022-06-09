@@ -7,6 +7,7 @@ import {
     desktopS,
     getTimeLeft,
     neutral4,
+    useInitialStoreEnrich,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { Col, Row, Skeleton, Space, Tooltip } from 'antd';
@@ -24,7 +25,6 @@ import styles from './styles.module.scss';
 import { MiningTitle } from './components/MiningTitle';
 import { MiningAndClaimButton } from './components/MiningButton';
 import { MineStatus } from './components/MineStatus';
-import { useInitialStoreEnrich } from './hooks/useInitialStoreEnrich';
 import { Equipment } from './components/Equipment';
 
 export const MiningPage: FC = () => {
