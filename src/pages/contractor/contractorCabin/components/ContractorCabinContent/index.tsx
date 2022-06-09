@@ -26,7 +26,7 @@ interface ContractorCabinContentProps {
 }
 
 const getInventoryNames = (arr: UserInventoryType[]) => {
-    const names = arr.map((v) => ID_TO_INVENTORY[v.asset_template_id]);
+    const names = arr.map((v) => ID_TO_INVENTORY[v.template_id]);
     return [...new Set(names)];
 };
 

@@ -54,14 +54,33 @@ export const ContractorCabin = () => {
     };
 
     useEffect(() => {
-        if (status === CABIN_STATUS.setup && !needShiftBadge) {
+        if (
+            status >= CABIN_STATUS.setup &&
+            !hasPhysicalShift &&
+            !needShiftBadge
+        ) {
             openShiftBadge();
-        }
-        if (status !== CABIN_STATUS.setup && needShiftBadge) {
+        } else if (needShiftBadge) {
             closeShiftBadge();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [status]);
+    }, [status, hasPhysicalShift]);
+
+    const getActiveTooltip = () => {
+        if (status === CABIN_STATUS.setup && hasPhysicalShift) {
+            return ContractorMenuItems.Equipment;
+        }
+
+        if (status === CABIN_STATUS.ready) {
+            return ContractorMenuItems.MiningDeck;
+        }
+
+        if (status === CABIN_STATUS.last_results) {
+            return ContractorMenuItems.InfoPanel;
+        }
+
+        return undefined;
+    };
 
     return (
         <div
@@ -99,18 +118,19 @@ export const ContractorCabin = () => {
                         [ContractorMenuItems.InfoPanel]:
                             status <= CABIN_STATUS.mining_over,
                         [ContractorMenuItems.MiningDeck]:
-                            status <= CABIN_STATUS.ready,
-                        [ContractorMenuItems.Equipment]: !hasPhysicalShift,
+                            status < CABIN_STATUS.ready,
+                        [ContractorMenuItems.Equipment]:
+                            status < CABIN_STATUS.setup || !hasPhysicalShift,
                     },
                     callbacks: {
                         [ContractorMenuItems.InfoPanel]: () =>
-                            navigate('/TODO'),
+                            navigate(PATHS.contractorStatsAndInfo),
                         [ContractorMenuItems.MiningDeck]: () =>
                             navigate(PATHS.mining),
                         [ContractorMenuItems.Equipment]: () =>
                             navigate(PATHS.equipmentSet),
                     },
-                    // activeTooltip: ContractorMenuItems.InfoPanel,
+                    activeTooltip: getActiveTooltip(),
                 }}
             />
             {needShiftBadge && (

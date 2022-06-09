@@ -141,7 +141,7 @@ export const EquipmentSetPage: FC = () => {
             })
         );
 
-        const inventoryName = ID_TO_INVENTORY[inventory.asset_template_id];
+        const inventoryName = ID_TO_INVENTORY[inventory.template_id];
 
         setSelectedEquipment({
             ...selectedEquipment,

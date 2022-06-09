@@ -54,7 +54,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                 <div>
                     <img
                         width={isDesktop ? 170 : 144}
-                        src={getImagePath(card.asset_template_id)}
+                        src={getImagePath(card.template_id)}
                         alt="nft-equipment-card"
                     />
                     <div className={styles.select} onClick={handleSelect}>

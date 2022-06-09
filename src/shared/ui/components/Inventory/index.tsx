@@ -110,7 +110,7 @@ export const Inventory: FC<InventoryProps> = ({
                     <div className={styles.content}>
                         {cards.map((card) => (
                             <Card
-                                templateId={card.asset_template_id}
+                                templateId={card.template_id}
                                 className={styles.card}
                                 onClick={handleCardSelect(card)}
                                 key={card.asset_id}

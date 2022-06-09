@@ -24,7 +24,7 @@ export const EquipmentCards = ({
             {Object.entries(selectedEquipment).map(([name, inventory]) =>
                 inventory ? (
                     <Card
-                        templateId={inventory.asset_template_id}
+                        templateId={inventory.template_id}
                         key={name}
                         initial={10}
                         current={3}
