@@ -8,27 +8,24 @@ export const MineOwnerCrew: FC = () => {
     const accountName = useAccountName();
     useGate(MineConsumerGate, { searchParam: accountName });
     const mines = useStore(minesStore);
+    const activeSlots = mines?.[0]?.contractor_slots.filter((slot) => slot);
+    const mapSlotToTableDate = activeSlots?.map((slot) => ({
+        key: slot,
+        discord: '-',
+        contractor: slot,
+        status: 2,
+        ejection: 0,
+        reputation: 0,
+        activity: 0,
+    }));
+    const mapEmptySlotsToAddButton = mines?.[0]?.contractor_slots
+        .filter((slot) => !slot)
+        .map(() => <AddItem />);
 
     return (
         <>
-            <MineCrewTable
-                data={mines?.[0]?.contractor_slots
-                    .filter((slot) => slot)
-                    .map((slot) => ({
-                        key: slot,
-                        discord: '-',
-                        contractor: slot,
-                        status: 2,
-                        ejection: 0,
-                        reputation: 0,
-                        activity: 0,
-                    }))}
-            />
-            {mines?.[0]?.contractor_slots
-                .filter((slot) => !slot)
-                .map(() => (
-                    <AddItem />
-                ))}
+            <MineCrewTable data={mapSlotToTableDate} />
+            {mapEmptySlotsToAddButton}
         </>
     );
 };
