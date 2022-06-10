@@ -24,7 +24,7 @@ export function ignoreIfInStatus(
 }
 export const hasMineNftFilter = (inventories: UserInventoryType[] | null) => {
     return !inventories?.filter(
-        ({ asset_template_id }) => asset_template_id === mineAssetTemplateId
+        ({ template_id }) => template_id === mineAssetTemplateId
     )?.[0];
 };
 
@@ -60,7 +60,7 @@ export const hasActiveMineContractFilter = ({
     inventory: UserInventoryType[] | null;
 }) => {
     const mineAssetIdByTemplateId = inventory?.find(
-        ({ asset_template_id }) => asset_template_id === mineAssetTemplateId
+        ({ template_id }) => template_id === mineAssetTemplateId
     )?.asset_id;
 
     const mineContract = contract?.find(

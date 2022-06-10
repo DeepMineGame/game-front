@@ -2,9 +2,11 @@ import { InventoryIdType } from '../constants';
 
 export type UserInventoryType = {
     asset_id: string;
-    asset_template_id: InventoryIdType;
-    owner_user_id: string;
+    template_id: InventoryIdType;
+    owner: string;
     in_use: 0 | 1;
+    rarity: number;
+    weight: number;
 };
 
 export type UserContractsType = {
@@ -26,14 +28,14 @@ export type UserContractsType = {
 };
 
 export type UserInfoType = {
-    id: string;
-    nickname: string;
+    owner: string;
     location: number;
     weight: number;
     stamina: number;
     experience: number;
     level: number;
     reputation: number;
+    register_datetime: number;
 };
 
 export type UserHistoryType = {

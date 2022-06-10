@@ -27,10 +27,10 @@ export const Equipment = () => {
                 {/* </Col> */}
             </Row>
             <div className={styles.cards}>
-                {installedItems?.map(({ asset_template_id }) => (
+                {installedItems?.map(({ template_id }) => (
                     <Card
-                        key={asset_template_id}
-                        templateId={asset_template_id}
+                        key={template_id}
+                        templateId={template_id}
                         status="installed"
                     />
                 ))}
