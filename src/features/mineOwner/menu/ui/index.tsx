@@ -37,43 +37,46 @@ export const MineOwnerMenu: FC<Props> = ({ currentMineOwnerCabinState }) => {
         mineOwnerCabinState.contractsFree,
     ];
 
+    const menuItems = [
+        {
+            link: mineOwnerStatsAndInfo,
+            icon: <DesktopOutlined />,
+            disabled: statusThatDisableManagementButton.includes(
+                currentMineOwnerCabinState
+            ),
+            tooltip: t('pages.mineOwner.menu.manageMine'),
+        },
+        {
+            link: mineOwnerMineCrew,
+            icon: <TeamOutlined />,
+            disabled: statusThatDisableTeamButton.includes(
+                currentMineOwnerCabinState
+            ),
+            tooltip: t('pages.mineOwner.menu.team'),
+        },
+        {
+            link: mineManagement,
+            icon: <ProjectOutlined />,
+            disabled: statusThatDisableStatsButton.includes(
+                currentMineOwnerCabinState
+            ),
+            tooltip: t('pages.mineOwner.menu.stats'),
+        },
+    ];
     return (
         <Menu>
             <Space>
-                <Tooltip overlay={t('pages.mineOwner.menu.manageMine')}>
-                    {/* TODO: Remove div wrapper after figure out why it doesn't work without it */}
-                    <div>
-                        <MenuItem
-                            onClick={() => navigate(mineOwnerStatsAndInfo)}
-                            icon={<DesktopOutlined />}
-                            disabled={statusThatDisableManagementButton.includes(
-                                currentMineOwnerCabinState
-                            )}
-                        />
-                    </div>
-                </Tooltip>
-                <Tooltip overlay={t('pages.mineOwner.menu.team')}>
-                    <div>
-                        <MenuItem
-                            onClick={() => navigate(mineOwnerMineCrew)}
-                            icon={<TeamOutlined />}
-                            disabled={statusThatDisableTeamButton.includes(
-                                currentMineOwnerCabinState
-                            )}
-                        />
-                    </div>
-                </Tooltip>
-                <Tooltip overlay={t('pages.mineOwner.menu.stats')}>
-                    <div>
-                        <MenuItem
-                            onClick={() => navigate(mineManagement)}
-                            icon={<ProjectOutlined />}
-                            disabled={statusThatDisableStatsButton.includes(
-                                currentMineOwnerCabinState
-                            )}
-                        />
-                    </div>
-                </Tooltip>
+                {menuItems.map(({ tooltip, link, icon, disabled }) => (
+                    <Tooltip overlay={tooltip}>
+                        <div>
+                            <MenuItem
+                                onClick={() => navigate(link)}
+                                icon={icon}
+                                disabled={disabled}
+                            />
+                        </div>
+                    </Tooltip>
+                ))}
             </Space>
         </Menu>
     );
