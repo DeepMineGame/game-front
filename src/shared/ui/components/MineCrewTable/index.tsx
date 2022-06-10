@@ -41,8 +41,12 @@ const getStatusColor = (status: Status) => {
     }
 };
 
-export const MineCrewTable: FC<{ data: MineCrewDataType[] }> = ({ data }) => {
+export const MineCrewTable: FC<{ data?: MineCrewDataType[] }> = ({ data }) => {
     const { t } = useTranslation();
+
+    if (!data) {
+        return <div>{t('components.common.noData')}</div>;
+    }
 
     const columns: ColumnsType<MineCrewDataType> = [
         {

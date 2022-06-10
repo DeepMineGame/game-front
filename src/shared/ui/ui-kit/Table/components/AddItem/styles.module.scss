@@ -1,0 +1,10 @@
+@import 'src/shared';
+
+.item {
+  background: $color-neutral-neutral-1;
+  color: $color-neutral-neutral-9;
+  padding: 16px;
+  border: 1px solid $color-neutral-neutral-4;
+  border-top: none;
+  cursor: pointer;
+}

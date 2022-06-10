@@ -12,4 +12,5 @@ export type MineDto = {
     sub_level: number;
     state: MineState;
     id: number;
+    contractor_slots: string[];
 };

@@ -34,6 +34,10 @@
         "claim": "Claim",
         "dme": "DME"
       },
+      "table": {
+        "addNewContractor": "Add new contractor"
+      },
+      "noData": "No data",
       "logout": "Logout",
       "yourDMEHasBeenClaimed": "Your DME has been claimed",
       "statsAndInfo": {
