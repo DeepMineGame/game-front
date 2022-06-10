@@ -1,4 +1,4 @@
-import { Space } from 'antd';
+import { Space, Tooltip } from 'antd';
 import React, { FC } from 'react';
 import { Menu, MenuItem } from 'shared';
 import {
@@ -12,6 +12,7 @@ import {
     mineOwnerMineCrew,
     mineOwnerStatsAndInfo,
 } from 'app/router/paths';
+import { useTranslation } from 'react-i18next';
 import { mineOwnerCabinState } from '../../models/mineOwnerState';
 
 type Props = {
@@ -19,6 +20,8 @@ type Props = {
 };
 export const MineOwnerMenu: FC<Props> = ({ currentMineOwnerCabinState }) => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
+
     const baseButtonDisableStates = [
         mineOwnerCabinState.hasNoMineNft,
         mineOwnerCabinState.isOutsideFromLocation,
@@ -34,30 +37,46 @@ export const MineOwnerMenu: FC<Props> = ({ currentMineOwnerCabinState }) => {
         mineOwnerCabinState.contractsFree,
     ];
 
+    const menuItems = [
+        {
+            link: mineOwnerStatsAndInfo,
+            icon: <DesktopOutlined />,
+            disabled: statusThatDisableManagementButton.includes(
+                currentMineOwnerCabinState
+            ),
+            tooltip: t('pages.mineOwner.menu.manageMine'),
+        },
+        {
+            link: mineOwnerMineCrew,
+            icon: <TeamOutlined />,
+            disabled: statusThatDisableTeamButton.includes(
+                currentMineOwnerCabinState
+            ),
+            tooltip: t('pages.mineOwner.menu.team'),
+        },
+        {
+            link: mineManagement,
+            icon: <ProjectOutlined />,
+            disabled: statusThatDisableStatsButton.includes(
+                currentMineOwnerCabinState
+            ),
+            tooltip: t('pages.mineOwner.menu.stats'),
+        },
+    ];
     return (
         <Menu>
             <Space>
-                <MenuItem
-                    onClick={() => navigate(mineOwnerStatsAndInfo)}
-                    icon={<DesktopOutlined />}
-                    disabled={statusThatDisableManagementButton.includes(
-                        currentMineOwnerCabinState
-                    )}
-                />
-                <MenuItem
-                    onClick={() => navigate(mineOwnerMineCrew)}
-                    icon={<TeamOutlined />}
-                    disabled={statusThatDisableTeamButton.includes(
-                        currentMineOwnerCabinState
-                    )}
-                />
-                <MenuItem
-                    onClick={() => navigate(mineManagement)}
-                    icon={<ProjectOutlined />}
-                    disabled={statusThatDisableStatsButton.includes(
-                        currentMineOwnerCabinState
-                    )}
-                />
+                {menuItems.map(({ tooltip, link, icon, disabled }) => (
+                    <Tooltip overlay={tooltip}>
+                        <div>
+                            <MenuItem
+                                onClick={() => navigate(link)}
+                                icon={icon}
+                                disabled={disabled}
+                            />
+                        </div>
+                    </Tooltip>
+                ))}
             </Space>
         </Menu>
     );

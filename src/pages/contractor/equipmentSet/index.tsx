@@ -56,7 +56,7 @@ export const EquipmentSetPage: FC = () => {
     const contractors = useStore(contractorsStore);
     useEffect(() => {
         if (accountName && needUpdate !== false) {
-            getContractorsEffect({ nickname: accountName });
+            getContractorsEffect({ searchParam: accountName });
         }
     }, [accountName, needUpdate]);
 

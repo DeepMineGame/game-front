@@ -11,3 +11,5 @@ export const contractorStatsAndInfo = '/contractor/stats-and-info';
 export const mineOwnerStatsAndInfo = '/mine-owner/stats-and-info';
 export const mineOwnerMineCrew = '/mine-owner/mine-crew';
 export const mineOwner = '/mine-owner/cabin';
+export const landLord = '/landLord';
+export const serviceMarket = '/service-market';

@@ -1,11 +1,14 @@
-import { PageWithTabs, Tab, Crew } from 'shared';
-import React, { memo } from 'react';
+import { PageWithTabs, Tab, useAccountName } from 'shared';
+import React from 'react';
+
+import { MineOwnerCrew } from 'features';
 
 export const MineOwnerMiningCrewPage = () => {
+    const accountName = useAccountName();
     const tabs: Tab[] = [
         {
             id: 1,
-            component: memo(() => <Crew />),
+            component: accountName ? MineOwnerCrew : () => <div>No data</div>,
             name: 'Mine crew',
         },
     ];

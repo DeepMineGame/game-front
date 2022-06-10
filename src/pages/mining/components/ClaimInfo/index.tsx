@@ -28,7 +28,7 @@ export const ClaimInfo = memo(() => {
         let interval: ReturnType<typeof setInterval>;
         if (accountName) {
             interval = setInterval(() => {
-                getContractorsEffect({ nickname: accountName });
+                getContractorsEffect({ searchParam: accountName });
             }, THREE_SECONDS);
         }
         return () => clearInterval(interval);

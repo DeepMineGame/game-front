@@ -3,16 +3,31 @@ import { getTableData } from 'features';
 import { deepminegame } from '../../constants';
 import { ContractorDto } from './types';
 
+export enum ContractorsSearchType {
+    undefined,
+    owenr,
+    areaId,
+    mineId,
+}
+
 export const getContractorsEffect = createEffect(
-    async ({ nickname }: { nickname: string }) => {
+    async ({
+        searchParam,
+        searchType = ContractorsSearchType.owenr,
+    }: {
+        searchParam: string;
+        searchType?: ContractorsSearchType;
+    }) => {
         return getTableData({
             code: deepminegame,
             scope: deepminegame,
             table: 'contractors',
-            index_position: 1,
-            key_type: 'name',
-            lower_bound: nickname,
-            limit: 1,
+            index_position: searchType,
+            key_type:
+                searchType === ContractorsSearchType.owenr ? 'name' : 'i64',
+            lower_bound: searchParam,
+            upper_bound: searchParam,
+            limit: 100,
         });
     }
 );

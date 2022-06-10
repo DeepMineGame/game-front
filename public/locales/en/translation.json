@@ -34,6 +34,10 @@
         "claim": "Claim",
         "dme": "DME"
       },
+      "table": {
+        "addNewContractor": "Add new contractor"
+      },
+      "noData": "No data",
       "logout": "Logout",
       "yourDMEHasBeenClaimed": "Your DME has been claimed",
       "statsAndInfo": {
@@ -216,6 +220,19 @@
     "mineManagement": {
       "title": "MINE MANAGEMENT",
       "mine": "MINE"
+    },
+    "mineOwner": {
+      "menu": {
+        "manageMine": "Go here to manage the Mine",
+        "team": "Go here to form a team",
+        "stats": "Stats & Info located here"
+      }
+    },
+    "landLord": {
+      "menu": {
+        "goLandActivate": "Go here activate the land",
+        "statsAndInfo": "Go here to see stats & info"
+      }
     }
   },
   "features": {
