@@ -40,8 +40,10 @@
         "dmp": "DMP"
       },
       "table": {
+        "table": "Table",
         "addNewContractor": "Add new contractor"
       },
+      "graph": "Graph",
       "noData": "No data",
       "logout": "Logout",
       "inventory": "Inventory",
@@ -58,7 +60,7 @@
       "areaInfo": "Area info"
     },
     "user": {
-      "accountSettings":"Account settings",
+      "accountSettings": "Account settings",
       "personalInfo": "Personal information"
     }
   },
@@ -77,7 +79,7 @@
       "myEquipment": "MY EQUIPMENT",
       "configure": "CONFIGURE",
       "miningStatus": "Mine: ",
-      "active":  "Active",
+      "active": "Active",
       "inactive": "Inactive",
       "miningInProgress": "Mining is progress",
       "miningWasInterrupted": "Mining was interrupted",
@@ -159,7 +161,6 @@
         "uninstall": "Uninstall the Equipment set",
         "remove": "Remove"
       },
-
       "cardModal": {
         "select": "Select",
         "rarity": "Rarity",
@@ -172,7 +173,6 @@
         "repair": "Repair",
         "refurbish": "Refurbish"
       },
-
       "characteristics": {
         "title": "Characteristics",
         "mineDepth": "Mine Depth",
@@ -191,24 +191,24 @@
       "mineCrew": "Mine crew",
       "contract": "Contract",
       "mineArea": {
-        "mine":  "Mine",
-        "mineOwner":  "Mine Owner",
-        "mineRarity":  "Mine Rarity",
-        "level":  "Level",
-        "sublevel":  "Sublevel",
-        "depth":  "Depth",
-        "mineFee":  "Mine fee",
-        "miningDifficulty":  "Mining Difficulty",
-        "miningEfficiency":  "Mining Efficiency",
-        "fossilChance":  "Fossil Chance",
-        "stability":  "Stability",
-        "habitation":  "Habitation",
-        "area":  "Area",
-        "landlord":  "Landlord",
-        "areaRarity":  "Area Rarity",
-        "minesOnArea":  "Mines on Area",
-        "areaFee":  "Area Fee",
-        "saturation":  "Saturation"
+        "area": "Area",
+        "landlord": "Landlord",
+        "areaRarity": "Area Rarity",
+        "minesOnArea": "Mines on Area",
+        "areaFee": "Area Fee",
+        "saturation": "Saturation",
+        "mine": "Mine",
+        "mineOwner": "Mine Owner",
+        "mineRarity": "Mine Rarity",
+        "level": "Level",
+        "sublevel": "Sublevel",
+        "depth": "Depth",
+        "mineFee": "Mine fee",
+        "miningDifficulty": "Mining Difficulty",
+        "miningEfficiency": "Mining Efficiency",
+        "fossilChance": "Fossil Chance",
+        "stability": "Stability",
+        "habitation": "Habitation"
       }
     },
     "contractorMiningStats": {
