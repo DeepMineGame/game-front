@@ -32,19 +32,22 @@
         "deactivate": "Deactivate",
         "activate": "Activate",
         "claim": "Claim",
-        "dme": "DME"
+        "dme": "DME",
+        "dmp": "DMP"
       },
       "table": {
         "addNewContractor": "Add new contractor"
       },
       "noData": "No data",
       "logout": "Logout",
+      "inventory": "Inventory",
       "yourDMEHasBeenClaimed": "Your DME has been claimed",
       "statsAndInfo": {
         "title": "Stats & info",
         "contractInfo": "CONTRACT INFO",
         "contractIsActive": "Contract is active"
-      }
+      },
+      "reputation": "Reputation"
     }
   },
   "pages": {
@@ -270,6 +273,14 @@
         "modules": "Modules",
         "unsetup": "Unsetup"
       }
+    },
+    "actions": {
+      "mine": "Mine",
+      "mineDeactivation": "Mine deactivation",
+      "mineActivation": "Mine activation",
+      "mineSetup": "Mine setup",
+      "mineUnsetup": "Mine unsetup",
+      "physicalShift": "Physical shift"
     }
   }
 }

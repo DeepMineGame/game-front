@@ -1,16 +1,13 @@
 import React, { FC } from 'react';
 import { Badge } from 'antd';
 import { useGate, useStore } from 'effector-react';
-import {
-    actionsStore,
-    ActionState,
-    ActionType,
-    UserDto,
-} from 'entities/smartcontract';
+import { actionsStore, ActionState, UserDto } from 'entities/smartcontract';
 import { UserActionGate } from '../model';
+import { useActionTitle } from '../hooks/useActionTitle';
 
 type Props = {
     smartContractUserData: UserDto;
+    className?: string;
 };
 
 const actionsStateToBadgeStatusMap = {
@@ -22,26 +19,19 @@ const actionsStateToBadgeStatusMap = {
     [ActionState.idle]: 'default' as const,
 };
 
-export const UserAction: FC<Props> = ({ smartContractUserData }) => {
+export const UserAction: FC<Props> = ({ smartContractUserData, className }) => {
     useGate(UserActionGate, { searchParam: smartContractUserData.owner });
     const actions = useStore(actionsStore);
     const lastAction = actions && actions[actions.length - 1];
-    const mapActionText = {
-        [ActionType.mine]: 'mine',
-        [ActionType.mine_activation]: 'mine deactivation',
-        [ActionType.mine_deactivation]: 'mine activation',
-        [ActionType.mine_setup]: 'mine setup',
-        [ActionType.mine_unsetup]: 'mine unsetup',
-        [ActionType.physical_shift]: 'physical shift',
-        [ActionType.undefined]: null,
-    };
-
+    const mapActionText = useActionTitle();
     if (lastAction) {
         return (
-            <Badge
-                status={actionsStateToBadgeStatusMap[lastAction.state]}
-                text={mapActionText[lastAction.type]}
-            />
+            <div className={className}>
+                <Badge
+                    status={actionsStateToBadgeStatusMap[lastAction.state]}
+                    text={mapActionText[lastAction.type]}
+                />
+            </div>
         );
     }
     return null;

@@ -12,12 +12,17 @@ import {
     useTableData,
     WaxCoinIcon,
 } from 'shared';
-import Icon, { LogoutOutlined, ThunderboltOutlined } from '@ant-design/icons';
+import Icon, {
+    DatabaseOutlined,
+    LogoutOutlined,
+    ThunderboltOutlined,
+} from '@ant-design/icons';
 import { useLogout, fetchWaxBalance, UserAction } from 'features';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
+import { inventory } from 'app/router/paths';
 import {
     getSmartContractUserEffect,
     getUserConfig,
@@ -138,29 +143,29 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                 <Divider />
                 <div className={cn(styles.dataUnit)}>
                     <div>
-                        <div>Energy</div>
+                        <div>{t('kit.timer.energy')}</div>
                         <Title className={styles.dataUnitTitle} level={5}>
-                            {userInfo?.stamina}
+                            {userInfo?.stamina || '-'}
                         </Title>
                     </div>
                     <div>
-                        <div>Reputation</div>
+                        <div>{t('components.common.reputation')}</div>
                         <Title className={styles.dataUnitTitle} level={5}>
-                            {userInfo?.reputation}
+                            {userInfo?.reputation || '-'}
                         </Title>
                     </div>
                 </div>
                 <div className={cn(styles.dataUnit)}>
                     <div>
-                        <div>DME</div>
+                        <div>{t('components.common.button.dme')}</div>
                         <Title className={styles.dataUnitTitle} level={5}>
                             {userInfo?.location}
                         </Title>
                     </div>
                     <div>
-                        <div>DMP</div>
+                        <div>{t('components.common.button.dmp')}</div>
                         <Title className={styles.dataUnitTitle} level={5}>
-                            {userInfo?.reputation}
+                            -
                         </Title>
                     </div>
                 </div>
@@ -186,6 +191,7 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                                 }}
                             />
                             <UserAction
+                                className={styles.userAction}
                                 smartContractUserData={smartContractUserData}
                             />
                         </>
@@ -199,6 +205,14 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                         onClick={logout}
                     >
                         {t('components.common.logout')}
+                    </Button>
+                    <Button
+                        className={styles.logoutButton}
+                        ghost
+                        icon={<DatabaseOutlined />}
+                        onClick={() => navigate(inventory)}
+                    >
+                        {t('components.common.inventory')}
                     </Button>
                 </div>
             </Drawer>

@@ -31,6 +31,7 @@ import {
     mineOwnerMineCrew,
     landLord,
     serviceMarket,
+    inventory,
 } from './paths';
 
 const IntroPage = React.lazy(async () => ({
@@ -142,6 +143,13 @@ export const routes: AppRoute[] = [
     {
         path: landLord,
         Component: LandLordPage,
+        forLoggedIn: false,
+        forAdmin: false,
+        titleTag: 'Landlord — DeepMine',
+    },
+    {
+        path: inventory,
+        Component: () => <PageNotFound type="wip" title="Inventory" />,
         forLoggedIn: false,
         forAdmin: false,
         titleTag: 'Landlord — DeepMine',
