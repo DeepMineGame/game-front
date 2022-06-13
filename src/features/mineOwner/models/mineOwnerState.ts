@@ -81,7 +81,7 @@ forward({
     ],
 });
 
-// Проверяем что есть NFT
+// Checks that user has the mine NFT
 guard({
     source: inventoriesStore,
     target: setHasNoMineNft,
@@ -89,7 +89,7 @@ guard({
     filter: hasMineNftFilter,
 });
 
-// Проверяем что пользователь за пределами локации
+// Checks that the user is outside the mine location
 sample({
     source: smartContractUserStore,
     target: setIsUserOutsideFromLocation,
@@ -102,7 +102,7 @@ sample({
     ),
 });
 
-// Проверяем что заключен контракт с владельцем земли
+// Checks that a contract has been signed with the landlord
 sample({
     source: contractStore,
     target: setNeedSignContractWithLandLord,
@@ -116,7 +116,7 @@ sample({
     ),
 });
 
-// Проверяем что установка шахты в in progress
+// Checks that the mine setup in prgoress
 sample({
     source: actionsStore,
     target: setIsMineSetupInProgressEvent,
@@ -130,7 +130,7 @@ sample({
     filter: checkIfMineSetupWillFinishedInFuture,
 });
 
-// Проверяем что заключен хоть один контракт (contractsFree)
+// Check that has mine contract (contractsFree)
 sample({
     source: { contract: contractStore, inventory: inventoriesStore },
     target: setContractsFreeEvent,
@@ -147,7 +147,7 @@ sample({
     ),
 });
 
-// Проверяем что шахта установлена
+// Check that mine setup finished
 sample({
     source: minesStore,
     target: setIsMineSetEvent,
@@ -162,7 +162,7 @@ sample({
     ),
 });
 
-// Проверяем что шахта активна
+// Check that mine is active
 sample({
     source: minesStore,
     target: setMineActive,
