@@ -13,7 +13,7 @@ import {
     WaxCoinIcon,
 } from 'shared';
 import Icon, { LogoutOutlined, ThunderboltOutlined } from '@ant-design/icons';
-import { useLogout, fetchWaxBalance } from 'features';
+import { useLogout, fetchWaxBalance, UserAction } from 'features';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
@@ -26,7 +26,7 @@ import {
 } from 'entities/smartcontract';
 import { User } from '../model/type';
 
-import { locationMap } from '../../smartcontract/tables/users/constants';
+import { locationMap } from '../../smartcontract';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -136,7 +136,7 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                     </div>
                 </div>
                 <Divider />
-                <div className={cn(styles.dataUnit, styles.item)}>
+                <div className={cn(styles.dataUnit)}>
                     <div>
                         <div>Energy</div>
                         <Title className={styles.dataUnitTitle} level={5}>
@@ -150,15 +150,15 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                         </Title>
                     </div>
                 </div>
-                <div className={cn(styles.dataUnit, styles.item)}>
+                <div className={cn(styles.dataUnit)}>
                     <div>
-                        <div>Location</div>
+                        <div>DME</div>
                         <Title className={styles.dataUnitTitle} level={5}>
                             {userInfo?.location}
                         </Title>
                     </div>
                     <div>
-                        <div>Reputation</div>
+                        <div>DMP</div>
                         <Title className={styles.dataUnitTitle} level={5}>
                             {userInfo?.reputation}
                         </Title>
@@ -166,23 +166,29 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                 </div>
                 <div>
                     {smartContractUserData && (
-                        <KeyValueTable
-                            className={styles.location}
-                            items={{
-                                Location: (
-                                    <Title
-                                        level={5}
-                                        title={styles.locationTitle}
-                                    >
-                                        {
-                                            locationMap[
-                                                smartContractUserData.location
-                                            ]
-                                        }
-                                    </Title>
-                                ),
-                            }}
-                        />
+                        <>
+                            <KeyValueTable
+                                className={styles.location}
+                                items={{
+                                    Location: (
+                                        <Title
+                                            level={5}
+                                            title={styles.locationTitle}
+                                        >
+                                            {
+                                                locationMap[
+                                                    smartContractUserData
+                                                        .location
+                                                ]
+                                            }
+                                        </Title>
+                                    ),
+                                }}
+                            />
+                            <UserAction
+                                smartContractUserData={smartContractUserData}
+                            />
+                        </>
                     )}
                 </div>
                 <div>

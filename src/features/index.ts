@@ -9,3 +9,4 @@ export * from './mineOwner';
 export * from './physicalShift';
 export * from './contractor';
 export * from './landLord';
+export * from './user';

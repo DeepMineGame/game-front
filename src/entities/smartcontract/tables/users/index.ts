@@ -24,4 +24,4 @@ export const smartContractUserStore = createStore<UserDto[] | null>(null).on(
 );
 
 export * from './types';
-export { LOCATION_TO_ID } from './constants';
+export * from './constants';

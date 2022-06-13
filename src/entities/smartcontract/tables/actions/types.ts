@@ -4,7 +4,9 @@ export enum ActionState {
     interrupted,
     finished,
     claimed,
+    idle,
 }
+
 export enum ActionType {
     undefined,
     physical_shift,
