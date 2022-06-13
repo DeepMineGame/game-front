@@ -1,0 +1,15 @@
+@import "src/shared";
+
+.cabinBackground {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  background-color: $color-extra-background-3;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
