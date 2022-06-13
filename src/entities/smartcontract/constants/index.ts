@@ -47,20 +47,6 @@ export const INVENTORY_NAMES = [
     ),
 ] as InventoryNameType[];
 
-export enum LOCATION_TO_ID {
-    undefined,
-    mine,
-    landlords_reception,
-    cabinet,
-    city,
-    geologists_camp,
-    map,
-    scientists_laboratory,
-    mine_deck,
-    engineers_workshop,
-    factory,
-}
-
 export enum ACTION_STATE_TO_ID {
     undefined,
     active,

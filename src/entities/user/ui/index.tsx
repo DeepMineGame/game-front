@@ -1,12 +1,15 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Avatar, Badge, Progress } from 'antd';
+import { Avatar, Badge, Progress, Space } from 'antd';
 import {
     AvatarIcon,
     Button,
     Divider,
-    Dropdown,
+    Drawer,
+    KeyValueTable,
     neutral3Color,
     Text,
+    Title,
+    useTableData,
     WaxCoinIcon,
 } from 'shared';
 import Icon, { LogoutOutlined, ThunderboltOutlined } from '@ant-design/icons';
@@ -14,19 +17,23 @@ import { useLogout, fetchWaxBalance } from 'features';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
+import cn from 'classnames';
 import {
     getSmartContractUserEffect,
+    getUserConfig,
     smartContractUserStore,
+    UserInfoType,
 } from 'entities/smartcontract';
 import { User } from '../model/type';
 
+import { locationMap } from '../../smartcontract/tables/users/constants';
 import styles from './styles.module.scss';
 
 type Props = {
     user: User | null;
 };
 
-export const UserAvatar: FC<Props> = ({ user }) => {
+export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
     const avatar = () => <Avatar src={user?.avatar} icon={<AvatarIcon />} />;
     const navigate = useNavigate();
     const logout = useLogout(() => navigate('/'));
@@ -34,7 +41,16 @@ export const UserAvatar: FC<Props> = ({ user }) => {
     const smartContractUserData = smartContractUsers?.[0];
     const [waxBalance, setWaxBalance] = useState<null | string>(null);
     const { t } = useTranslation();
+    const userInfo = useTableData<UserInfoType>(getUserConfig)?.[0];
+    const [visible, setVisible] = useState(false);
 
+    const showDrawer = () => {
+        setVisible(true);
+    };
+
+    const onClose = () => {
+        setVisible(false);
+    };
     useEffect(() => {
         if (user?.wax_address) {
             getSmartContractUserEffect({
@@ -52,7 +68,7 @@ export const UserAvatar: FC<Props> = ({ user }) => {
     }, [user?.wax_address]);
 
     const avatarWithData = (
-        <Text fontFamily="bai">
+        <Text fontFamily="bai" onClick={showDrawer}>
             <Badge
                 count={smartContractUserData?.level}
                 showZero
@@ -60,59 +76,126 @@ export const UserAvatar: FC<Props> = ({ user }) => {
                 color={neutral3Color}
                 size="small"
             >
-                <Badge
-                    dot
-                    offset={[-42, 4]}
-                    style={{ boxShadow: 'none' }}
-                    status="success"
-                >
-                    <Progress
-                        percent={smartContractUserData?.experience}
-                        type="circle"
-                        width={38}
-                        format={avatar}
-                        strokeWidth={8}
-                        strokeColor="#F5C913"
-                    />
-                </Badge>
+                <Progress
+                    percent={smartContractUserData?.experience}
+                    type="circle"
+                    width={38}
+                    format={avatar}
+                    strokeWidth={8}
+                    strokeColor="#F5C913"
+                />
             </Badge>
         </Text>
     );
 
-    const userDropdownOverlay = () => (
-        <div className={styles.overlay}>
-            {avatarWithData}
-            <div className={styles.attrs}>
-                {user?.wax_address && <div>{user.wax_address}</div>}
-                {waxBalance && (
-                    <div className={styles.balance}>
-                        <Icon component={WaxCoinIcon} /> {waxBalance}
-                    </div>
-                )}
-            </div>
-            <Divider />
-            <Button
-                className={styles.logoutButton}
-                ghost
-                icon={<LogoutOutlined />}
-                onClick={logout}
-            >
-                {t('components.common.logout')}
-            </Button>
-        </div>
-    );
-
     return (
-        <div className={styles.wrapper}>
-            <div>
-                <ThunderboltOutlined />
-                <span>
-                    <Text className={styles.energyCount} fontFamily="orbitron">
-                        58
-                    </Text>
-                </span>
+        <>
+            <div className={styles.wrapper}>
+                <div>
+                    <ThunderboltOutlined />
+                    <span>
+                        <Text
+                            className={styles.energyCount}
+                            fontFamily="orbitron"
+                        >
+                            {userInfo?.stamina}
+                        </Text>
+                    </span>
+                </div>
+                {avatarWithData}
             </div>
-            <Dropdown overlay={userDropdownOverlay}>{avatarWithData}</Dropdown>
-        </div>
+            <Drawer
+                placement="right"
+                onClose={onClose}
+                visible={visible}
+                closable={false}
+                width={292}
+                bodyStyle={{ background: neutral3Color, padding: 0 }}
+            >
+                <div className={styles.item}>
+                    <Space>
+                        {avatarWithData}
+                        <div className={styles.userMenuHeader}>
+                            <Title
+                                className={styles.name}
+                                level={5}
+                                fontFamily="orbitron"
+                            >
+                                {smartContractUserData?.owner}
+                            </Title>
+                            <div>Level {smartContractUserData?.level}</div>
+                        </div>
+                    </Space>
+                    <div className={styles.attrs}>
+                        {user?.wax_address && <div>{user.wax_address}</div>}
+                        {waxBalance && (
+                            <Title level={5} className={styles.dataUnitTitle}>
+                                <Icon component={WaxCoinIcon} /> {waxBalance}
+                            </Title>
+                        )}
+                    </div>
+                </div>
+                <Divider />
+                <div className={cn(styles.dataUnit, styles.item)}>
+                    <div>
+                        <div>Energy</div>
+                        <Title className={styles.dataUnitTitle} level={5}>
+                            {userInfo?.stamina}
+                        </Title>
+                    </div>
+                    <div>
+                        <div>Reputation</div>
+                        <Title className={styles.dataUnitTitle} level={5}>
+                            {userInfo?.reputation}
+                        </Title>
+                    </div>
+                </div>
+                <div className={cn(styles.dataUnit, styles.item)}>
+                    <div>
+                        <div>Location</div>
+                        <Title className={styles.dataUnitTitle} level={5}>
+                            {userInfo?.location}
+                        </Title>
+                    </div>
+                    <div>
+                        <div>Reputation</div>
+                        <Title className={styles.dataUnitTitle} level={5}>
+                            {userInfo?.reputation}
+                        </Title>
+                    </div>
+                </div>
+                <div>
+                    {smartContractUserData && (
+                        <KeyValueTable
+                            className={styles.location}
+                            items={{
+                                Location: (
+                                    <Title
+                                        level={5}
+                                        title={styles.locationTitle}
+                                    >
+                                        {
+                                            locationMap[
+                                                smartContractUserData.location
+                                            ]
+                                        }
+                                    </Title>
+                                ),
+                            }}
+                        />
+                    )}
+                </div>
+                <div>
+                    <Button
+                        className={styles.logoutButton}
+                        ghost
+                        icon={<LogoutOutlined />}
+                        onClick={logout}
+                    >
+                        {t('components.common.logout')}
+                    </Button>
+                </div>
+            </Drawer>
+        </>
     );
 };

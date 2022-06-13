@@ -6,18 +6,19 @@
   color: $color-neutral-neutral-10
 }
 
+.userMenuHeader {
+  color: $color-neutral-neutral-8;
+}
+
+.name {
+  color: $color-neutral-neutral-9 !important;
+}
+
 .energyCount {
   color: $color-neutral-neutral-10;
   margin-left: 7px;
   margin-right: 16px;
   font-size: 12px;
-}
-
-.overlay {
-  background: $color-neutral-neutral-3;
-  padding: 12px 24px 16px 24px;
-  text-align: center;
-  font-family: $bai;
 }
 
 .attrs {
@@ -29,15 +30,25 @@
   color: $color-neutral-neutral-8;
 }
 
-.balance {
-  font-weight: 700;
-  color: $color-neutral-neutral-10;
+.dataUnitTitle {
+  color: $color-neutral-neutral-10 !important;
 }
 
 .logoutButton {
   width: 100%;
 }
 
-.divider {
-  border: 1px solid #303030;
+.dataUnit {
+  display: flex;
+  justify-content: space-between;
+  color: $color-neutral-neutral-7;
 }
+
+.item {
+  padding: 11px 10px 0 10px;
+}
+
+.location {
+  color: $color-neutral-neutral-9;
+}
+
