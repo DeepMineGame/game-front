@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Avatar, Badge, Progress, Space } from 'antd';
 import {
     AvatarIcon,
@@ -17,14 +17,13 @@ import Icon, {
     LogoutOutlined,
     ThunderboltOutlined,
 } from '@ant-design/icons';
-import { useLogout, fetchWaxBalance, UserAction } from 'features';
+import { useLogout, UserAction } from 'features';
 import { useNavigate } from 'react-router-dom';
-import { useStore } from 'effector-react';
+import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import { inventory } from 'app/router/paths';
 import {
-    getSmartContractUserEffect,
     getUserConfig,
     smartContractUserStore,
     UserInfoType,
@@ -32,19 +31,21 @@ import {
 import { User } from '../model/type';
 
 import { locationMap } from '../../smartcontract';
+import { balancesStore, UserGate } from '../model';
 import styles from './styles.module.scss';
 
 type Props = {
-    user: User | null;
+    user: User;
 };
 
 export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
+    useGate(UserGate, { searchParam: user.wax_address });
     const avatar = () => <Avatar src={user?.avatar} icon={<AvatarIcon />} />;
     const navigate = useNavigate();
     const logout = useLogout(() => navigate('/'));
     const smartContractUsers = useStore(smartContractUserStore);
     const smartContractUserData = smartContractUsers?.[0];
-    const [waxBalance, setWaxBalance] = useState<null | string>(null);
+    const { waxBalance, dmeBalance } = useStore(balancesStore);
     const { t } = useTranslation();
     const userInfo = useTableData<UserInfoType>(getUserConfig)?.[0];
     const [visible, setVisible] = useState(false);
@@ -56,21 +57,6 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
     const onClose = () => {
         setVisible(false);
     };
-    useEffect(() => {
-        if (user?.wax_address) {
-            getSmartContractUserEffect({
-                searchParam: user?.wax_address,
-            });
-        }
-    }, [user?.wax_address]);
-
-    useEffect(() => {
-        if (user?.wax_address) {
-            fetchWaxBalance({
-                account: user.wax_address,
-            }).then(setWaxBalance);
-        }
-    }, [user?.wax_address]);
 
     const avatarWithData = (
         <Text fontFamily="bai" onClick={showDrawer}>
@@ -159,7 +145,7 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                     <div>
                         <div>{t('components.common.button.dme')}</div>
                         <Title className={styles.dataUnitTitle} level={5}>
-                            {userInfo?.location}
+                            {dmeBalance}
                         </Title>
                     </div>
                     <div>

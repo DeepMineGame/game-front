@@ -49,7 +49,7 @@ export const Header: FC<Props> = ({ title, hideLogo }) => {
                         })}
                     />
                 )}
-                <UserAvatarAndDrawer user={user} />
+                {user && <UserAvatarAndDrawer user={user} />}
             </div>
             {title && (
                 <div className={styles.backButtonAndTitleWrapper}>

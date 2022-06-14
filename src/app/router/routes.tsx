@@ -138,7 +138,7 @@ export const routes: AppRoute[] = [
         Component: () => <PageNotFound type="wip" title="Service market" />,
         forLoggedIn: false,
         forAdmin: false,
-        titleTag: 'Badlands — DeepMine',
+        titleTag: 'Service — DeepMine',
     },
     {
         path: landLord,
@@ -152,7 +152,7 @@ export const routes: AppRoute[] = [
         Component: () => <PageNotFound type="wip" title="Inventory" />,
         forLoggedIn: false,
         forAdmin: false,
-        titleTag: 'Landlord — DeepMine',
+        titleTag: 'Inventory — DeepMine',
     },
 ];
 
