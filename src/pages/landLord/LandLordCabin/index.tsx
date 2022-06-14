@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
-import { EngageArea, MineIsSet, NoArea, Setup, Travel } from 'features';
+import {
+    EngageArea,
+    LandStats,
+    MineIsSet,
+    NoArea,
+    Searching,
+    Setup,
+    Travel,
+} from 'features';
 import { useTableData } from 'shared';
 import {
     getUserConfig,
@@ -11,7 +19,7 @@ import styles from './styles.module.scss';
 import { CABIN_STATUS } from './constants';
 
 const getStatus = () => {
-    return CABIN_STATUS.mine_is_set;
+    return CABIN_STATUS.no_area;
 };
 
 const getBackground = (
@@ -86,6 +94,10 @@ export const LandLordCabin = () => {
                 )}
                 {status === CABIN_STATUS.setup && <Setup />}
                 {status === CABIN_STATUS.mine_is_set && <MineIsSet />}
+                {status === CABIN_STATUS.searching && (
+                    <Searching msUntil={1000 * 60 * 60 * 24} />
+                )}
+                {status === CABIN_STATUS.stats && <LandStats />}
             </div>
             {needShiftBadge && (
                 <Travel

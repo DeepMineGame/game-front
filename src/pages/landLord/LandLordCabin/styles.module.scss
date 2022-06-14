@@ -14,13 +14,10 @@
 }
 
 .monitor {
-  max-width: 162px;
+  max-width: 25.5vw;
+  padding-left: 0.5vw;
   position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
-  @media only screen and (min-width: $media-desktop-s) {
-    max-width: 25vw;
-  }
 }
