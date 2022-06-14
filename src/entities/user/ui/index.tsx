@@ -17,7 +17,6 @@ import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { inventory } from 'app/router/paths';
 import { smartContractUserStore } from 'entities/smartcontract';
-import { User } from '../model/type';
 
 import { locationMap } from '../../smartcontract';
 import { balancesStore, UserGate } from '../model';
@@ -26,11 +25,11 @@ import { AvatarWithLvl } from './components/Avatar';
 import { SettingMenu } from './components/SettingMenu';
 
 type Props = {
-    user: User;
+    user: string;
 };
 
 export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
-    useGate(UserGate, { searchParam: user.wax_address });
+    useGate(UserGate, { searchParam: user });
     const navigate = useNavigate();
     const smartContractUsers = useStore(smartContractUserStore);
     const smartContractUserData = smartContractUsers?.[0];
@@ -50,7 +49,6 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
         <AvatarWithLvl
             onClick={showDrawer}
             smartContractUserData={smartContractUserData}
-            avatarSrc={user?.avatar}
         />
     );
 
@@ -105,7 +103,7 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                         </div>
                     </Space>
                     <div className={styles.attrs}>
-                        {user?.wax_address && <div>{user.wax_address}</div>}
+                        {user && <div>{user}</div>}
                         {waxBalance && (
                             <Title level={5} className={styles.dataUnitTitle}>
                                 <Icon component={WaxCoinIcon} /> {waxBalance}
