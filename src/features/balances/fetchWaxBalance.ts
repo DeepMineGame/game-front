@@ -1,10 +1,14 @@
 import axios from 'axios';
 import { WAX_GET_BALANCE_ENDPOINT } from 'app';
 
-export const fetchWaxBalance = async ({ account }: { account: string }) => {
+export const fetchWaxBalance = async ({
+    searchParam,
+}: {
+    searchParam: string;
+}) => {
     const { data = [] } = await axios.post(WAX_GET_BALANCE_ENDPOINT, {
         code: 'eosio.token',
-        account,
+        account: searchParam,
         symbol: 'WAX',
     });
 

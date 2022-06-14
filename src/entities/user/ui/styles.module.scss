@@ -1,9 +1,21 @@
 @import 'src/shared';
 
+.avatar {
+  cursor: pointer
+}
+
 .wrapper {
   display: flex;
   align-items: center;
   color: $color-neutral-neutral-10
+}
+
+.userMenuHeader {
+  color: $color-neutral-neutral-8;
+}
+
+.name {
+  color: $color-neutral-neutral-9 !important;
 }
 
 .energyCount {
@@ -11,13 +23,6 @@
   margin-left: 7px;
   margin-right: 16px;
   font-size: 12px;
-}
-
-.overlay {
-  background: $color-neutral-neutral-3;
-  padding: 12px 24px 16px 24px;
-  text-align: center;
-  font-family: $bai;
 }
 
 .attrs {
@@ -29,15 +34,55 @@
   color: $color-neutral-neutral-8;
 }
 
-.balance {
-  font-weight: 700;
-  color: $color-neutral-neutral-10;
+.dataUnitTitle {
+  color: $color-neutral-neutral-10 !important;
+  margin-bottom: 0 !important;
 }
 
-.logoutButton {
+.button {
   width: 100%;
 }
 
-.divider {
-  border: 1px solid #303030;
+.buttonWrapper {
+  padding: 16px;
+}
+
+.item {
+  padding: 11px 10px 0 10px;
+}
+
+.location {
+  color: $color-neutral-neutral-9;
+}
+
+.userAction {
+  padding: 16px;
+  background: $color-neutral-neutral-1;
+  border: 1px solid $color-neutral-neutral-4;
+  border-top: none;
+  
+  span {
+    color: $color-neutral-neutral-7 !important;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 12px 0;
+  grid-template-areas:
+    ". ."
+    ". .";
+  color: $color-neutral-neutral-7;
+  padding-left: 16px;
+  margin-bottom: 16px;
+}
+
+.settingsIcon {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  font-size: 21px;
+  color: $color-neutral-neutral-9
 }

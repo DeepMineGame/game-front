@@ -22,6 +22,7 @@ export const MiningTitle: FC<Props> = memo(
             [ActionState.finished]: t('pages.mining.miningHasFinished'),
             [ActionState.claimed]: t('pages.mining.miningHasClaimed'),
             [ActionState.undefined]: '',
+            [ActionState.idle]: undefined,
         };
         const isMining =
             action?.state === ActionState.active && isMiningWillEndInFuture;

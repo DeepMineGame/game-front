@@ -105,6 +105,7 @@ export const MiningAndClaimButton: FC<Props> = ({
         [ActionState.interrupted]: t('pages.mining.startMining'),
         [ActionState.active]: t('pages.mining.stopMining'),
         [ActionState.undefined]: t('pages.mining.startMining'),
+        [ActionState.idle]: undefined,
     };
 
     const okText = isClaimedState

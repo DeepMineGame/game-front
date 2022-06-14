@@ -19,3 +19,4 @@ export * from './NftProgressBar';
 export * from './KeyValueTable';
 export * from './Navbar';
 export * from './Table';
+export * from './Drawer';
