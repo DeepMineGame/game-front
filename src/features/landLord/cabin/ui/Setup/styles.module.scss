@@ -1,0 +1,9 @@
+@import 'src/shared';
+
+.title {
+  padding-bottom: 4px;
+
+  @media only screen and (min-width: $media-desktop-s) {
+    padding-bottom: 12px;
+  }
+}

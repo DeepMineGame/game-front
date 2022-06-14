@@ -29,7 +29,7 @@
   }
 }
 .primary.ghost {
-  background: none;
+  background: none !important;
   color: $color-primary-primary-6;
 
   &:hover,

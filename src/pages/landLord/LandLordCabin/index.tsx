@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { NoArea, Travel } from 'features';
+import { EngageArea, MineIsSet, NoArea, Setup, Travel } from 'features';
 import { useTableData } from 'shared';
 import {
     getUserConfig,
@@ -11,7 +11,7 @@ import styles from './styles.module.scss';
 import { CABIN_STATUS } from './constants';
 
 const getStatus = () => {
-    return CABIN_STATUS.no_area;
+    return CABIN_STATUS.mine_is_set;
 };
 
 const getBackground = (
@@ -81,6 +81,11 @@ export const LandLordCabin = () => {
         >
             <div className={styles.monitor}>
                 {status === CABIN_STATUS.no_area && <NoArea />}
+                {status === CABIN_STATUS.engage && (
+                    <EngageArea disabled={!hasPhysicalShift} />
+                )}
+                {status === CABIN_STATUS.setup && <Setup />}
+                {status === CABIN_STATUS.mine_is_set && <MineIsSet />}
             </div>
             {needShiftBadge && (
                 <Travel
