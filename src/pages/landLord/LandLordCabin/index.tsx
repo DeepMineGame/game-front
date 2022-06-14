@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Travel } from 'features';
+import { NoArea, Travel } from 'features';
 import { useTableData } from 'shared';
 import {
     getUserConfig,
@@ -38,7 +38,7 @@ const getBackground = (
 
 export const LandLordCabin = () => {
     const [needShiftBadge, setNeedShiftBadge] = useState(false);
-    const [status, setStatus] = useState<CABIN_STATUS>(getStatus());
+    const [status, setStatus] = useState<CABIN_STATUS>(CABIN_STATUS.no_area);
 
     const userInfo = useTableData<UserInfoType>(getUserConfig);
 
@@ -66,6 +66,10 @@ export const LandLordCabin = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [status, hasPhysicalShift]);
 
+    useEffect(() => {
+        setStatus(getStatus());
+    }, []);
+
     const backgroundName = getBackground(status, 'uncommon', hasPhysicalShift);
 
     return (
@@ -75,6 +79,9 @@ export const LandLordCabin = () => {
             }}
             className={styles.cabinBackground}
         >
+            <div className={styles.monitor}>
+                {status === CABIN_STATUS.no_area && <NoArea />}
+            </div>
             {needShiftBadge && (
                 <Travel
                     onBadgeCrossClick={closeShiftBadge}

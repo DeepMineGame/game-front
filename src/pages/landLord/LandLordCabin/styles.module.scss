@@ -13,3 +13,14 @@
   background-size: cover;
 }
 
+.monitor {
+  max-width: 162px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  @media only screen and (min-width: $media-desktop-s) {
+    max-width: 25vw;
+  }
+}
