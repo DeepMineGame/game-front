@@ -6,3 +6,4 @@ export const neutral2 = '#1D1D1D';
 export const neutral1 = '#ACACAC';
 export const gold6 = '#D89614';
 export const green6 = '#47FF40';
+export const primary6 = '#F5C913';

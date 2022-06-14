@@ -10,7 +10,7 @@ import { useStore } from 'effector-react';
 import { LeftOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
-import { UserAvatarAndDrawer, userStore } from 'entities/user';
+import { SettingMenu, UserAvatarAndDrawer, userStore } from 'entities/user';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -49,7 +49,13 @@ export const Header: FC<Props> = ({ title, hideLogo }) => {
                         })}
                     />
                 )}
-                {user && <UserAvatarAndDrawer user={user} />}
+                {user ? (
+                    <UserAvatarAndDrawer user={user} />
+                ) : (
+                    <div>
+                        <SettingMenu />
+                    </div>
+                )}
             </div>
             {title && (
                 <div className={styles.backButtonAndTitleWrapper}>

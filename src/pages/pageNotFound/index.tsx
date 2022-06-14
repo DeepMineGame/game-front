@@ -39,8 +39,13 @@ export const PageNotFound: FC<Props> = ({ title = '404', type = 'lost' }) => {
                         <div>{t('pages.pageNotFound.weWork')}</div>
                     </Space>
                 )}
-                <Button ghost type="primary" onClick={() => navigate(home)}>
-                    Go to the city
+                <Button
+                    size="large"
+                    ghost
+                    type="primary"
+                    onClick={() => navigate(home)}
+                >
+                    {t('pages.pageNotFound.goToCity')}
                 </Button>
             </Space>
         </Page>

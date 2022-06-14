@@ -1,5 +1,9 @@
 @import 'src/shared';
 
+.avatar {
+  cursor: pointer
+}
+
 .wrapper {
   display: flex;
   align-items: center;
@@ -32,16 +36,14 @@
 
 .dataUnitTitle {
   color: $color-neutral-neutral-10 !important;
+  margin-bottom: 0 !important;
 }
 
-.logoutButton {
+.button {
   width: 100%;
 }
 
-.dataUnit {
-  display: flex;
-  justify-content: space-between;
-  color: $color-neutral-neutral-7;
+.buttonWrapper {
   padding: 16px;
 }
 
@@ -64,3 +66,23 @@
   }
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 12px 0;
+  grid-template-areas:
+    ". ."
+    ". .";
+  color: $color-neutral-neutral-7;
+  padding-left: 16px;
+  margin-bottom: 16px;
+}
+
+.settingsIcon {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  font-size: 21px;
+  color: $color-neutral-neutral-9
+}

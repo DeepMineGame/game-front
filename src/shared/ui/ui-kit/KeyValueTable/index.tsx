@@ -21,6 +21,7 @@ export const KeyValueTable: FC<Props> = ({
                     className={cn(styles.unit, {
                         [styles.unitColored]: coloredItems?.includes(key),
                     })}
+                    key={key}
                 >
                     <div className={styles.key}>{key}</div>
                     <div className={styles.value}>{value}</div>

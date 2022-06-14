@@ -14,3 +14,4 @@ export const mineOwner = '/mine-owner/cabin';
 export const landLord = '/landLord';
 export const serviceMarket = '/service-market';
 export const inventory = '/inventory';
+export const hive = '/hive';

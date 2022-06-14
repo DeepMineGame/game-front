@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react';
-import { Avatar, Badge, Progress, Space } from 'antd';
+import { Space } from 'antd';
 import {
-    AvatarIcon,
     Button,
     Divider,
     Drawer,
@@ -9,30 +8,22 @@ import {
     neutral3Color,
     Text,
     Title,
-    useTableData,
     WaxCoinIcon,
 } from 'shared';
-import Icon, {
-    DatabaseOutlined,
-    LogoutOutlined,
-    ThunderboltOutlined,
-} from '@ant-design/icons';
-import { useLogout, UserAction } from 'features';
+import Icon, { DatabaseOutlined, ThunderboltOutlined } from '@ant-design/icons';
+import { UserAction } from 'features';
 import { useNavigate } from 'react-router-dom';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
-import cn from 'classnames';
 import { inventory } from 'app/router/paths';
-import {
-    getUserConfig,
-    smartContractUserStore,
-    UserInfoType,
-} from 'entities/smartcontract';
+import { smartContractUserStore } from 'entities/smartcontract';
 import { User } from '../model/type';
 
 import { locationMap } from '../../smartcontract';
 import { balancesStore, UserGate } from '../model';
 import styles from './styles.module.scss';
+import { AvatarWithLvl } from './components/Avatar';
+import { SettingMenu } from './components/SettingMenu';
 
 type Props = {
     user: User;
@@ -40,14 +31,11 @@ type Props = {
 
 export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
     useGate(UserGate, { searchParam: user.wax_address });
-    const avatar = () => <Avatar src={user?.avatar} icon={<AvatarIcon />} />;
     const navigate = useNavigate();
-    const logout = useLogout(() => navigate('/'));
     const smartContractUsers = useStore(smartContractUserStore);
     const smartContractUserData = smartContractUsers?.[0];
     const { waxBalance, dmeBalance } = useStore(balancesStore);
     const { t } = useTranslation();
-    const userInfo = useTableData<UserInfoType>(getUserConfig)?.[0];
     const [visible, setVisible] = useState(false);
 
     const showDrawer = () => {
@@ -58,25 +46,12 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
         setVisible(false);
     };
 
-    const avatarWithData = (
-        <Text fontFamily="bai" onClick={showDrawer}>
-            <Badge
-                count={smartContractUserData?.level}
-                showZero
-                offset={[-35, 30]}
-                color={neutral3Color}
-                size="small"
-            >
-                <Progress
-                    percent={smartContractUserData?.experience}
-                    type="circle"
-                    width={38}
-                    format={avatar}
-                    strokeWidth={8}
-                    strokeColor="#F5C913"
-                />
-            </Badge>
-        </Text>
+    const avatar = smartContractUserData && (
+        <AvatarWithLvl
+            onClick={showDrawer}
+            smartContractUserData={smartContractUserData}
+            avatarSrc={user?.avatar}
+        />
     );
 
     return (
@@ -89,11 +64,11 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                             className={styles.energyCount}
                             fontFamily="orbitron"
                         >
-                            {userInfo?.stamina}
+                            {smartContractUserData?.stamina}
                         </Text>
                     </span>
                 </div>
-                {avatarWithData}
+                {avatar}
             </div>
             <Drawer
                 placement="right"
@@ -101,11 +76,16 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                 visible={visible}
                 closable={false}
                 width={292}
-                bodyStyle={{ background: neutral3Color, padding: 0 }}
+                bodyStyle={{
+                    background: neutral3Color,
+                    padding: 0,
+                    position: 'relative',
+                }}
             >
+                <SettingMenu />
                 <div className={styles.item}>
                     <Space>
-                        {avatarWithData}
+                        {avatar}
                         <div className={styles.userMenuHeader}>
                             <Title
                                 className={styles.name}
@@ -114,7 +94,14 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                             >
                                 {smartContractUserData?.owner}
                             </Title>
-                            <div>Level {smartContractUserData?.level}</div>
+                            <div>
+                                {t('components.common.level')}{' '}
+                                {smartContractUserData?.level}
+                            </div>
+                            <div>
+                                {t('components.common.exp')}{' '}
+                                {smartContractUserData?.experience}
+                            </div>
                         </div>
                     </Space>
                     <div className={styles.attrs}>
@@ -127,21 +114,19 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                     </div>
                 </div>
                 <Divider />
-                <div className={cn(styles.dataUnit)}>
+                <div className={styles.grid}>
                     <div>
                         <div>{t('kit.timer.energy')}</div>
                         <Title className={styles.dataUnitTitle} level={5}>
-                            {userInfo?.stamina || '-'}
+                            {smartContractUserData?.stamina || '-'}
                         </Title>
                     </div>
                     <div>
                         <div>{t('components.common.reputation')}</div>
                         <Title className={styles.dataUnitTitle} level={5}>
-                            {userInfo?.reputation || '-'}
+                            {smartContractUserData?.reputation || '-'}
                         </Title>
                     </div>
-                </div>
-                <div className={cn(styles.dataUnit)}>
                     <div>
                         <div>{t('components.common.button.dme')}</div>
                         <Title className={styles.dataUnitTitle} level={5}>
@@ -183,20 +168,13 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                         </>
                     )}
                 </div>
-                <div>
+                <div className={styles.buttonWrapper}>
                     <Button
-                        className={styles.logoutButton}
-                        ghost
-                        icon={<LogoutOutlined />}
-                        onClick={logout}
-                    >
-                        {t('components.common.logout')}
-                    </Button>
-                    <Button
-                        className={styles.logoutButton}
+                        className={styles.button}
                         ghost
                         icon={<DatabaseOutlined />}
                         onClick={() => navigate(inventory)}
+                        size="large"
                     >
                         {t('components.common.inventory')}
                     </Button>
