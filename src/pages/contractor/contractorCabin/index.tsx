@@ -44,7 +44,7 @@ export const ContractorCabin = () => {
     const userHistory = useTableData<UserHistoryType>(getHistoryConfig);
 
     const hasPhysicalShift =
-        userInfo.length > 0 && userInfo[0].location === LOCATION_TO_ID.cabinet;
+        userInfo.length > 0 && userInfo[0].location === LOCATION_TO_ID.mine;
 
     const openShiftBadge = () => {
         setNeedShiftBadge(true);
@@ -136,7 +136,7 @@ export const ContractorCabin = () => {
             {needShiftBadge && (
                 <Travel
                     onBadgeCrossClick={closeShiftBadge}
-                    toLocationId={LOCATION_TO_ID.cabinet}
+                    toLocationId={LOCATION_TO_ID.mine}
                     onSuccess={closeShiftBadge}
                 />
             )}
