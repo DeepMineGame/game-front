@@ -1,14 +1,24 @@
 import React, { FC } from 'react';
 import { useStore } from 'effector-react';
-import { Button, desktopS, Page, Tabs, Title, useMediaQuery } from 'shared';
+import {
+    Button,
+    desktopS,
+    Page,
+    Tabs,
+    Title,
+    useAccountName,
+    useMediaQuery,
+} from 'shared';
 import { ShareAltOutlined } from '@ant-design/icons';
 import { Col, Row, Space, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { CitizenInfo } from 'features';
 import { AvatarWithLvl } from 'entities/user';
 import { smartContractUserStore } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
 export const InfoPage: FC = () => {
+    const accountName = useAccountName();
     const smartContractUsers = useStore(smartContractUserStore);
     const smartContractUserData = smartContractUsers?.[0];
     const isDesktop = useMediaQuery(desktopS);
@@ -42,7 +52,17 @@ export const InfoPage: FC = () => {
         <Tabs
             tabPosition={isDesktop ? 'right' : 'top'}
             config={[
-                { tabName: 'Citizen', tabContent: <div>{userLine}</div> },
+                {
+                    tabName: t('roles.citizen'),
+                    tabContent: smartContractUserData && (
+                        <>
+                            {userLine}
+                            {accountName && (
+                                <CitizenInfo accountName={accountName} />
+                            )}
+                        </>
+                    ),
+                },
                 { tabName: 'Landlord', tabContent: <div>{userLine}</div> },
             ]}
         />

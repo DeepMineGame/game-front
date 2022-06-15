@@ -1,0 +1,16 @@
+@import "src/shared";
+
+.doubleTableWrapper {
+  color: $color-neutral-neutral-9;
+}
+
+.userAction {
+  padding: 16px;
+  background: $color-neutral-neutral-1;
+  border: 1px solid $color-neutral-neutral-4;
+  border-top: none;
+
+  span {
+    color: $color-neutral-neutral-9 !important;
+  }
+}

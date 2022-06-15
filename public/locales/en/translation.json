@@ -293,5 +293,8 @@
       "mineUnsetup": "Mine unsetup",
       "physicalShift": "Physical shift"
     }
+  },
+  "roles": {
+    "citizen": "Citizen"
   }
 }

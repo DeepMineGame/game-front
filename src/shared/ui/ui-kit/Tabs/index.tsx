@@ -10,7 +10,7 @@ type Props = {
 export const Tabs: FC<Props> = ({ config, ...props }) => {
     return (
         <TabsA {...props} className={styles.tabs}>
-            {config?.map(({ tabName, tabContent }) => (
+            {config.map(({ tabName, tabContent }) => (
                 <TabsA.TabPane tab={tabName} key={tabName}>
                     {tabContent}
                 </TabsA.TabPane>
