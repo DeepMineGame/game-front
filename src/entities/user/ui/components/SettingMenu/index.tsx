@@ -2,13 +2,14 @@ import { useNavigate } from 'react-router-dom';
 import { SettingOutlined } from '@ant-design/icons';
 import React from 'react';
 import { useLogout } from 'features';
-import { Dropdown } from 'shared';
+import { Dropdown, useAccountName } from 'shared';
 import { hive } from 'app/router/paths';
 import { useTranslation } from 'react-i18next';
 import styles from '../../styles.module.scss';
 
 export function SettingMenu() {
     const navigate = useNavigate();
+    const accountName = useAccountName();
     const logout = useLogout(() => navigate('/'));
     const { t } = useTranslation();
 
@@ -23,7 +24,7 @@ export function SettingMenu() {
                 {
                     label: t('components.user.personalInfo'),
                     key: 'Personal information',
-                    onClick: () => navigate(hive),
+                    onClick: () => navigate(`/user/${accountName}`),
                 },
                 {
                     type: 'divider',

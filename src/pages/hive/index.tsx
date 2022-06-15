@@ -9,6 +9,8 @@ import {
 } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
+export * from './info';
+
 export const HivePage: FC = () => {
     const isUserInFlat = useStore(isUserInHive);
     const accountName = useAccountName();
