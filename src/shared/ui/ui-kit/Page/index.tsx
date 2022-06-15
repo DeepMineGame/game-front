@@ -1,19 +1,22 @@
 import React, { FC } from 'react';
 import { Header } from 'shared';
+import cn from 'classnames';
 import styles from './styles.module.scss';
 
 type Props = {
     headerTitle: string;
     removeContentPadding?: boolean;
+    className?: string;
 };
 
 export const Page: FC<Props> = ({
     headerTitle,
     children,
     removeContentPadding,
+    className,
 }) => {
     return (
-        <div className={styles.wrapper}>
+        <div className={cn(styles.wrapper, className)}>
             <Header title={headerTitle} />
             <div className={removeContentPadding ? undefined : styles.content}>
                 {children}

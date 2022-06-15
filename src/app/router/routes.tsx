@@ -8,13 +8,13 @@ import {
     ContractorStatsAndInfoPage,
     MineOwnerStatAndInfoPage,
     LandLordPage,
-} from 'pages';
-import {
+    HivePage,
+    PageNotFound,
     MineManagementPage,
     MineOwnerPage,
     MineOwnerMiningCrewPage,
-} from 'pages/mineOwner';
-import { PageNotFound } from 'pages/pageNotFound';
+} from 'pages';
+
 import {
     contractorCabin,
     equipmentSet,
@@ -32,6 +32,7 @@ import {
     landLord,
     serviceMarket,
     inventory,
+    hive,
 } from './paths';
 
 const IntroPage = React.lazy(async () => ({
@@ -153,6 +154,13 @@ export const routes: AppRoute[] = [
         forLoggedIn: false,
         forAdmin: false,
         titleTag: 'Inventory — DeepMine',
+    },
+    {
+        path: hive,
+        Component: HivePage,
+        forLoggedIn: true,
+        forAdmin: false,
+        titleTag: 'Hive — DeepMine',
     },
 ];
 

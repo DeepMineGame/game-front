@@ -3,12 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 
 import { KeyValueTable, Title, useInitialStoreEnrich } from 'shared';
-import {
-    AreaRarity,
-    areasStore,
-    contractStore,
-    minesStore,
-} from 'entities/smartcontract';
+import { AreaRarity, areasStore, minesStore } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
 export const MineAreaInfo = () => {
@@ -18,7 +13,6 @@ export const MineAreaInfo = () => {
     const mines = useStore(minesStore);
     const userMine = mines?.[0];
     const userArea = areas?.[0];
-    const contracts = useStore(contractStore);
 
     const mineInfoData = {
         [t('pages.contractorStatsAndInfo.mineArea.mine')]: userMine

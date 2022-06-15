@@ -1,17 +1,20 @@
 import { Avatar, Badge, Progress } from 'antd';
 import React from 'react';
 import { AvatarIcon, neutral3Color, primary6, Text } from 'shared';
+import { useStore } from 'effector-react';
 import { UserDto } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
+import { userStore } from '../../../model';
 
 type Props = {
     onClick: () => void;
     smartContractUserData: UserDto;
-    avatarSrc?: string;
 };
 
 export function AvatarWithLvl(props: Props) {
-    const avatar = () => <Avatar src={props.avatarSrc} icon={<AvatarIcon />} />;
+    const user = useStore(userStore);
+
+    const avatar = () => <Avatar src={user?.avatar} icon={<AvatarIcon />} />;
 
     return (
         <Text

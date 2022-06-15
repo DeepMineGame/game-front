@@ -4,13 +4,13 @@ import {
     DeepMineLogo,
     desktopS,
     Title,
+    useAccountName,
     useMediaQuery,
 } from 'shared';
-import { useStore } from 'effector-react';
 import { LeftOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
-import { SettingMenu, UserAvatarAndDrawer, userStore } from 'entities/user';
+import { SettingMenu, UserAvatarAndDrawer } from 'entities/user';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -19,7 +19,7 @@ type Props = {
 };
 
 export const Header: FC<Props> = ({ title, hideLogo }) => {
-    const user = useStore(userStore);
+    const user = useAccountName();
     const navigate = useNavigate();
     const goToBack = () => navigate(-1);
     const isDesktop = useMediaQuery(desktopS);

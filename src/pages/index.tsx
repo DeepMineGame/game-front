@@ -6,3 +6,5 @@ export { MiningPage } from './mining';
 export { HomePage } from './home';
 export * from './mineOwner';
 export * from './landLord';
+export * from './hive';
+export * from './pageNotFound';
