@@ -26,15 +26,6 @@ export const getAreasEffect = createEffect(
     }
 );
 
-export const getAreasByOwnerEffect = createEffect(
-    async ({ searchParam }: { searchParam: string }) => {
-        return getAreasEffect({
-            searchIdentificationType: searchBy.owner,
-            searchParam,
-        });
-    }
-);
-
 export const areasStore = createStore<AreasDto[] | null>(null).on(
     getAreasEffect.doneData,
     (_, { rows }) => rows

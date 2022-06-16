@@ -1,14 +1,3 @@
-import { InventoryIdType } from '../constants';
-
-export type UserInventoryType = {
-    asset_id: string;
-    template_id: InventoryIdType;
-    owner: string;
-    in_use: 0 | 1;
-    rarity: number;
-    weight: number;
-};
-
 export type UserContractsType = {
     attrs: { key: string; value: string }[];
     client_asset_id: string;

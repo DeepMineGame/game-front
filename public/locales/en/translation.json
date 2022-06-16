@@ -57,6 +57,10 @@
     }
   },
   "pages": {
+    "info": {
+      "share": "Share profile",
+      "copied": "Copied to clipboard"
+    },
     "mining": {
       "mining": "MINING",
       "miningStats": "MINING STATS",
@@ -289,5 +293,9 @@
       "mineUnsetup": "Mine unsetup",
       "physicalShift": "Physical shift"
     }
+  },
+  "roles": {
+    "citizen": "Citizen",
+    "landlord": "Landlord"
   }
 }

@@ -13,6 +13,7 @@ import {
     MineManagementPage,
     MineOwnerPage,
     MineOwnerMiningCrewPage,
+    InfoPage,
 } from 'pages';
 
 import {
@@ -33,6 +34,7 @@ import {
     serviceMarket,
     inventory,
     hive,
+    user,
 } from './paths';
 
 const IntroPage = React.lazy(async () => ({
@@ -159,6 +161,13 @@ export const routes: AppRoute[] = [
         path: hive,
         Component: HivePage,
         forLoggedIn: true,
+        forAdmin: false,
+        titleTag: 'Hive — DeepMine',
+    },
+    {
+        path: user,
+        Component: InfoPage,
+        forLoggedIn: false,
         forAdmin: false,
         titleTag: 'Hive — DeepMine',
     },

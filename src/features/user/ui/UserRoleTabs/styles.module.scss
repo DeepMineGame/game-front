@@ -1,0 +1,17 @@
+@import "src/shared";
+
+.userLine {
+  display: flex;
+  padding: 16px;
+  justify-content: space-between;
+  background: $color-neutral-neutral-1;
+  margin-bottom: 16px;
+
+  @media (min-width: $media-desktop-s)  {
+    margin-bottom: 32px;
+  }
+}
+
+.title {
+  color: $color-neutral-neutral-9 !important;
+}

@@ -10,5 +10,5 @@ export type AreasDto = {
     id: number;
     initialized: boolean;
     rarity: AreaRarity;
-    mines_slots: string[];
+    mine_slots: string[];
 };

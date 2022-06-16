@@ -7,7 +7,7 @@ import styles from '../../styles.module.scss';
 import { userStore } from '../../../model';
 
 type Props = {
-    onClick: () => void;
+    onClick?: () => void;
     smartContractUserData: UserDto;
 };
 
