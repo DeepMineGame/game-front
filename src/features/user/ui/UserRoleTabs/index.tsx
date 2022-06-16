@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useStore, useGate } from 'effector-react';
 import { useTranslation } from 'react-i18next';
-import { Space, Tooltip } from 'antd';
+import { Empty, Space, Tooltip } from 'antd';
 import { ShareAltOutlined } from '@ant-design/icons';
 import { Button, desktopS, Tabs, Title, useMediaQuery } from 'shared';
 import {
@@ -12,6 +12,7 @@ import {
 import { AvatarWithLvl, UserGate } from 'entities/user';
 
 import { CitizenInfo } from '../../citizen';
+import { LandlordInfo } from '../../landlord';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -54,27 +55,32 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
         </div>
     );
 
-    return (
+    return accountName ? (
         <Tabs
             tabPosition={isDesktop ? 'right' : 'top'}
             config={[
                 {
                     tabName: t('roles.citizen'),
-                    tabContent: smartContractUserData && (
+                    tabContent: (
                         <>
                             {userLine}
-                            {accountName && (
-                                <CitizenInfo accountName={accountName} />
-                            )}
+                            <CitizenInfo accountName={accountName} />
                         </>
                     ),
                 },
                 {
                     tabName: t('roles.landlord'),
                     disabled: !hasLandlordRole,
-                    tabContent: <div>{userLine}</div>,
+                    tabContent: (
+                        <>
+                            {userLine}
+                            <LandlordInfo />
+                        </>
+                    ),
                 },
             ]}
         />
+    ) : (
+        <Empty />
     );
 };

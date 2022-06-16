@@ -4,6 +4,7 @@ import { createGate } from 'effector-react';
 import { authDeepMineUserEffect } from 'features';
 import { fetchDmeBalance, fetchWaxBalance } from 'features/balances';
 import {
+    getInventoriesEffect,
     getRolesEffect,
     getSmartContractUserEffect,
 } from '../../smartcontract';
@@ -41,5 +42,6 @@ forward({
         fetchDmeBalanceEffect,
         getSmartContractUserEffect,
         getRolesEffect,
+        getInventoriesEffect,
     ],
 });

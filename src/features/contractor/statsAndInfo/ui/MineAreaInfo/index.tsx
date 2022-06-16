@@ -48,7 +48,7 @@ export const MineAreaInfo = () => {
             ? AreaRarity[userArea.rarity]
             : '-',
         [t('pages.contractorStatsAndInfo.mineArea.minesOnArea')]:
-            userArea?.mines_slots.filter((v) => !!v).length ?? '-',
+            userArea?.mine_slots.filter((v) => !!v).length ?? '-',
         [t('pages.contractorStatsAndInfo.mineArea.areaFee')]: 2,
     };
 

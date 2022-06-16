@@ -1,13 +1,14 @@
 import { createEffect, createStore } from 'effector';
 import { getTableData } from 'features';
 import { deepminegame } from '../../constants';
-import { UserInventoryType } from '../types';
+import { UserInventoryType } from './types';
 
 export enum SEARCH_BY {
     undefined,
     inventoryId,
     ownerNickname,
 }
+export * from './types';
 
 export const getInventoriesEffect = createEffect(
     async ({
