@@ -1,6 +1,19 @@
 import React, { useEffect, useState } from 'react';
 
 import {
+    LightBlueBg,
+    LightGrayBg,
+    LightGreenBg,
+    LightYellowBg,
+    LightVioletBg,
+    DarkYellowBg,
+    DarkVioletBg,
+    DarkBlueBg,
+    DarkGrayBg,
+    DarkGreenBg,
+    useTableData,
+} from 'shared';
+import {
     EngageArea,
     LandStats,
     MineIsSet,
@@ -9,7 +22,6 @@ import {
     Setup,
     Travel,
 } from 'features';
-import { useTableData } from 'shared';
 import {
     getUserConfig,
     LOCATION_TO_ID,
@@ -31,16 +43,16 @@ const getBackground = (
 
     switch (rarity) {
         case 'legendary':
-            return `Yellow_${isLight ? 'Light' : 'Dark'}.png`;
+            return isLight ? LightYellowBg : DarkYellowBg;
         case 'epic':
-            return `Violet_${isLight ? 'Light' : 'Dark'}.png`;
+            return isLight ? LightVioletBg : DarkVioletBg;
         case 'rare':
-            return `Blue_${isLight ? 'Light' : 'Dark'}.png`;
+            return isLight ? LightBlueBg : DarkBlueBg;
         case 'uncommon':
-            return `Green_${isLight ? 'Light' : 'Dark'}.png`;
+            return isLight ? LightGreenBg : DarkGreenBg;
         case 'common':
         default:
-            return `Gray_${isLight ? 'Light' : 'Dark'}.png`;
+            return isLight ? LightGrayBg : DarkGrayBg;
     }
 };
 
@@ -51,8 +63,7 @@ export const LandLordCabin = () => {
     const userInfo = useTableData<UserInfoType>(getUserConfig);
 
     const hasPhysicalShift =
-        userInfo.length > 0 &&
-        userInfo[0].location === LOCATION_TO_ID.landlords_reception;
+        userInfo?.[0]?.location === LOCATION_TO_ID.landlords_reception;
 
     const openShiftBadge = () => {
         setNeedShiftBadge(true);
@@ -78,15 +89,13 @@ export const LandLordCabin = () => {
         setStatus(getStatus());
     }, []);
 
-    const backgroundName = getBackground(status, 'uncommon', hasPhysicalShift);
-
     return (
-        <div
-            style={{
-                backgroundImage: `url("img/area/${backgroundName}")`,
-            }}
-            className={styles.cabinBackground}
-        >
+        <div className={styles.cabin}>
+            <img
+                className={styles.cabinBackground}
+                src={getBackground(status, 'uncommon', hasPhysicalShift)}
+                alt=""
+            />
             <div className={styles.monitor}>
                 {status === CABIN_STATUS.no_area && <NoArea />}
                 {status === CABIN_STATUS.engage && (

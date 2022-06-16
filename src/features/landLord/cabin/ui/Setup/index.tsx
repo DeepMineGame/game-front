@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 
@@ -9,7 +9,7 @@ interface Props {
     className?: string;
 }
 
-export const Setup = ({ className }: Props) => {
+export const Setup: FC<Props> = ({ className }) => {
     const { t } = useTranslation();
 
     return (

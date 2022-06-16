@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 
@@ -10,7 +10,7 @@ interface Props {
     className?: string;
 }
 
-export const NoArea = ({ className }: Props) => {
+export const NoArea: FC<Props> = ({ className }) => {
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
 

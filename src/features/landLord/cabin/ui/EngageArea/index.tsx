@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 
@@ -11,7 +11,7 @@ interface Props {
     disabled: boolean;
 }
 
-export const EngageArea = ({ className, disabled = true }: Props) => {
+export const EngageArea: FC<Props> = ({ className, disabled = true }) => {
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
 

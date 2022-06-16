@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 
@@ -11,7 +11,7 @@ interface Props {
     msUntil: number;
 }
 
-export const Searching = ({ className, msUntil }: Props) => {
+export const Searching: FC<Props> = ({ className, msUntil }) => {
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
     const [currentMsUntil, setCurrentMsUntil] = useState(0);
