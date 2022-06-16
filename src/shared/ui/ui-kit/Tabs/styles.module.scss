@@ -17,5 +17,9 @@
     .ant-tabs-tab {
       color: $color-neutral-neutral-9
     }
+
+    .ant-tabs-tab-disabled {
+      color: $color-neutral-neutral-6;
+    }
   }
 }

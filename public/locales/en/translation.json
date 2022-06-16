@@ -295,6 +295,7 @@
     }
   },
   "roles": {
-    "citizen": "Citizen"
+    "citizen": "Citizen",
+    "landlord": "Landlord"
   }
 }

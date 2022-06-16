@@ -3,7 +3,10 @@ import { createEvent, createStore, forward, createEffect } from 'effector';
 import { createGate } from 'effector-react';
 import { authDeepMineUserEffect } from 'features';
 import { fetchDmeBalance, fetchWaxBalance } from 'features/balances';
-import { getSmartContractUserEffect } from '../../smartcontract';
+import {
+    getRolesEffect,
+    getSmartContractUserEffect,
+} from '../../smartcontract';
 import { User } from './type';
 
 export const clearUserStoreEvent = createEvent('clearUserStore');
@@ -37,5 +40,6 @@ forward({
         fetchWaxBalanceEffect,
         fetchDmeBalanceEffect,
         getSmartContractUserEffect,
+        getRolesEffect,
     ],
 });
