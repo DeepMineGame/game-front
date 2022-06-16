@@ -1,0 +1,27 @@
+@import 'src/shared';
+
+.title {
+  padding-bottom: 7px;
+
+  @media only screen and (min-width: $media-desktop-s) {
+    padding-bottom: 12px;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    margin: 0 10px;
+  }
+}
+
+.description {
+  padding-bottom: 0;
+
+  @media only screen and (min-width: $media-desktop-s) {
+    padding-bottom: 14px;
+  }
+}

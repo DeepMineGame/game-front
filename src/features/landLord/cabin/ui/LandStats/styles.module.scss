@@ -1,0 +1,29 @@
+@import 'src/shared';
+
+.title {
+  padding-bottom: 0;
+
+  @media only screen and (min-width: $media-desktop-s) {
+    padding-bottom: 18px;
+  }
+}
+
+.table {
+  color: $color-neutral-neutral-9;
+  background-color: transparent !important;
+  border: none !important;
+  margin: 0 12px;
+
+  & > div {
+    padding: 5px 0;
+    border-bottom: 1px solid $color-neutral-neutral-10 !important;
+
+    @media only screen and (min-width: $media-desktop-s) {
+      padding: 16px 0;
+    }
+  }
+
+  @media only screen and (min-width: $media-desktop-s) {
+    margin: 0 24px;
+  }
+}

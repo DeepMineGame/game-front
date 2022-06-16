@@ -243,6 +243,25 @@
       }
     },
     "landLord": {
+      "cabin": {
+        "noAreaTitle": "Area is not detected",
+        "noAreaDescription": "You need a Area card in your active inventory. Check your storage or go to Market to buy one.",
+        "goToMarket": "Go to Market",
+        "pickUp": "Pick up from storage",
+        "storage": "Storage",
+        "market": "Market",
+        "engageTitle": "Engage the Area",
+        "engageDescription": "You need to perform a physical shit to this location",
+        "engageButton": "Engage the Area",
+        "setupTitle": "Setup a Mine",
+        "setupDescription": "You need to setup mine to your land to proceed",
+        "searching": "Searching for a Mine owner",
+        "mineIsSetTitle": "The Mine is set to the land",
+        "mineIsSetDescription": "Now you can see the full stastistics",
+        "landStats": "Land stats",
+        "DMEToClaim": "DME to claim",
+        "mines": "Mines"
+      },
       "menu": {
         "goLandActivate": "Go here activate the land",
         "statsAndInfo": "Go here to see stats & info"

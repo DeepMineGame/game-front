@@ -6,12 +6,13 @@ import styles from './styles.module.scss';
 
 export enum LoaderSize {
     small = 16,
+    semiSmall = 24,
     default = 32,
     large = 64,
 }
 
 type Props = {
-    size?: 'small' | 'default' | 'large';
+    size?: 'small' | 'semiSmall' | 'default' | 'large';
     centered?: boolean;
 };
 

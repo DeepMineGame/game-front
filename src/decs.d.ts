@@ -10,3 +10,8 @@ declare module 'ual-reactjs-renderer' {
     }>;
     export const UALProvider: any;
 }
+
+declare module '*.png' {
+    const value: any;
+    export = value;
+}
