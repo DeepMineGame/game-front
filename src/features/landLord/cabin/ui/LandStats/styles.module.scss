@@ -16,7 +16,7 @@
 
   & > div {
     padding: 5px 0;
-    border-bottom: 1px solid #FFFFFF !important;
+    border-bottom: 1px solid $color-neutral-neutral-10 !important;
 
     @media only screen and (min-width: $media-desktop-s) {
       padding: 16px 0;

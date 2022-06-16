@@ -9,14 +9,14 @@
 }
 
 .timerContainer {
-  color: white;
+  color: $color-neutral-neutral-10;
   display: flex;
   align-items: center;
   justify-content: center;
   padding-top: 10px;
 
   svg {
-    fill: white;
+    fill: $color-neutral-neutral-10;
   }
 
   @media only screen and (min-width: $media-desktop-s)  {
