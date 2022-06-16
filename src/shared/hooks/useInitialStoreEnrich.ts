@@ -30,7 +30,7 @@ export function useInitialStoreEnrich() {
     }, [chainAccount.activeUser?.accountName]);
 
     useEffect(() => {
-        if (contracts?.length && chainAccount.activeUser) {
+        if (contracts?.length && chainAccount?.activeUser?.accountName) {
             getActionEffect({
                 searchIdentification:
                     mapSearchParamForIndexPosition.ownerUserId,
