@@ -111,7 +111,7 @@ export const LandLordCabin = () => {
             {needShiftBadge && (
                 <Travel
                     onBadgeCrossClick={closeShiftBadge}
-                    toLocationId={LOCATION_TO_ID.cabinet}
+                    toLocationId={LOCATION_TO_ID.landlords_reception}
                     onSuccess={closeShiftBadge}
                 />
             )}
