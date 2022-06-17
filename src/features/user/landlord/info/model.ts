@@ -1,7 +1,6 @@
 import { createEvent, createStore, sample } from 'effector';
 import {
     getAreasEffect,
-    getInventoriesEffect,
     inventoriesStore,
     InventoryType,
     UserInventoryType,
@@ -20,7 +19,6 @@ export const areaNftStore = createStore<UserInventoryType[] | null>(null).on(
 sample({
     source: inventoriesStore,
     target: setAreaNftEvent,
-    clock: getInventoriesEffect.doneData,
     filter: (inventory) =>
         Boolean(
             inventory?.filter(

@@ -5,6 +5,7 @@ import { authDeepMineUserEffect } from 'features';
 import { fetchDmeBalance, fetchWaxBalance } from 'features/balances';
 import {
     getInventoriesEffect,
+    getMinesByOwnerEffect,
     getRolesEffect,
     getSmartContractUserEffect,
 } from '../../smartcontract';
@@ -43,5 +44,6 @@ forward({
         getSmartContractUserEffect,
         getRolesEffect,
         getInventoriesEffect,
+        getMinesByOwnerEffect,
     ],
 });
