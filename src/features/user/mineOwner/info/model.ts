@@ -30,7 +30,7 @@ export const areaOwnerStore = createStore<UserInventoryType | null>(null).on(
 sample({
     source: minesStore,
     target: getAreasEffect,
-    fn: (mines) => ({ searchParam: mines?.[0].area_id || '' }),
+    fn: (mines) => ({ searchParam: mines?.[0]?.area_id || '' }),
 });
 
 // fetch area nft from inventory

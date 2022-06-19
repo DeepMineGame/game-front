@@ -316,6 +316,7 @@
   "roles": {
     "citizen": "Citizen",
     "landlord": "Landlord",
-    "mineOwner": "Mine owner"
+    "mineOwner": "Mine owner",
+    "contractor": "Contractor"
   }
 }

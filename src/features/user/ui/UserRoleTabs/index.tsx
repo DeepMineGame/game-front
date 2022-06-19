@@ -5,6 +5,7 @@ import { Empty, Space, Tooltip } from 'antd';
 import { ShareAltOutlined } from '@ant-design/icons';
 import { Button, desktopS, Tabs, Title, useMediaQuery } from 'shared';
 import {
+    contractorsStore,
     rolesStore,
     smartContractUserStore,
     UserRoles,
@@ -14,6 +15,7 @@ import { AvatarWithLvl, UserGate } from 'entities/user';
 import { CitizenInfo } from '../../citizen';
 import { LandlordInfo } from '../../landlord';
 import { MineOwnerInfo } from '../../mineOwner';
+import { Contractor } from '../../contractor';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -27,6 +29,7 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
     const isDesktop = useMediaQuery(desktopS);
     const { t } = useTranslation();
     const roles = useStore(rolesStore);
+    const contractors = useStore(contractorsStore);
     const hasLandlordRole = Boolean(
         roles?.filter(({ role }) => role === UserRoles.landlord)?.length
     );
@@ -58,7 +61,6 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
             </div>
         </div>
     );
-
     return accountName ? (
         <Tabs
             tabPosition={isDesktop ? 'right' : 'top'}
@@ -89,6 +91,18 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
                         <>
                             {userLine}
                             <MineOwnerInfo />
+                        </>
+                    ),
+                },
+                {
+                    tabName: t('roles.contractor'),
+                    disabled: Boolean(!contractors?.length),
+                    tabContent: (
+                        <>
+                            {userLine}
+                            {contractors && (
+                                <Contractor contractor={contractors[0]} />
+                            )}
                         </>
                     ),
                 },
