@@ -1,17 +1,30 @@
 import React, { FC } from 'react';
 import { Col, Empty, Row } from 'antd';
 import { Button, KeyValueTable, Title } from 'shared';
-import { useStore } from 'effector-react';
+import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
-import { minesStore, rarityMap } from 'entities/smartcontract';
+import { ContractorDto, rarityMap } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
-import { areaForMineStore, areaOwnerStore } from './model';
+import {
+    areaNftStore,
+    contractorAreaStore,
+    ContractorGate,
+    contractorMineStore,
+} from './model';
 
-export const MineOwnerInfo: FC = () => {
-    const mines = useStore(minesStore);
-    const area = useStore(areaForMineStore);
-    const areaNft = useStore(areaOwnerStore);
-    const mine = mines?.[0];
+type Props = {
+    contractor: ContractorDto;
+};
+
+export const Contractor: FC<Props> = ({ contractor }) => {
+    useGate(ContractorGate, {
+        mineId: contractor.mine_id,
+        areaId: Number(contractor.area_id),
+    });
+    const mine = useStore(contractorMineStore);
+    const area = useStore(contractorAreaStore);
+    const areaNft = useStore(areaNftStore);
+
     const { t } = useTranslation();
 
     return (
