@@ -24,6 +24,10 @@
       "miningDeskTooltip": "Mining deck is located here",
       "equipmentTooltip": "Your equipment is located here"
     },
+    "hive": {
+      "info&Actions": "Info&Actions",
+      "warehouse": "Warehouse"
+    },
     "common": {
       "button": {
         "cancel": "Cancel",

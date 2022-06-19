@@ -16,3 +16,4 @@ export const serviceMarket = '/service-market';
 export const inventory = '/inventory';
 export const hive = '/hive';
 export const user = '/user/:accountName';
+export const warehouse = 'warehouse';
