@@ -14,7 +14,7 @@ export const WAX_CHAIN_ID = isMainNet
 
 export const WAX_RPC_ENDPOINTS_HOST = isMainNet
     ? 'wax.cryptolions.io'
-    : 'testnet.waxsweden.org';
+    : 'wax-test.blokcrafters.io';
 
 export const WAX_RPC_ENDPOINTS_PROTOCOL = 'https';
 
