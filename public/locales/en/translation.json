@@ -44,7 +44,8 @@
       },
       "table": {
         "table": "Table",
-        "addNewContractor": "Add new contractor"
+        "addNewContractor": "Add new contractor",
+        "discoverNewLand": "Discover new land"
       },
       "graph": "Graph",
       "noData": "No data",
@@ -283,12 +284,12 @@
       "claim": "Claim DME",
       "engage": "Engage the Area",
       "unengage": "Unengage the Area",
-      "mine slots": "Mine slots",
+      "mineSlots": "Mine slots",
       "mine": "Mine",
-      "mineStatus": "Mine status",
+      "status": "Mine status",
       "dmePerEjection": "DME per ejection",
-      "mineCrew": "Mine crew",
-      "mineActivity": "Mine activity",
+      "crew": "Mine crew",
+      "activity": "Mine activity",
       "add": "Add new mine",
       "searching": "Searching for Mine owner",
       "cancel": "Cancel",

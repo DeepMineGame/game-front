@@ -1,0 +1,21 @@
+@import "src/shared";
+
+.emptySlot, .discoverSlot {
+  span {
+    padding-right: 33px;
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: default;
+
+  .emptySlot, .discoverSlot {
+    color: $color-neutral-neutral-6;
+  }
+}
