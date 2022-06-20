@@ -1,6 +1,11 @@
 @import 'src/shared';
 
 .miningStats {
+    max-width: 1116px;
+    margin: 0 auto;
+}
+
+.miningStatsTableWrapper {
     margin-right: -16px;
     overflow-x: auto;
 
@@ -12,7 +17,6 @@
 
 .miningStatsTable {
     width: 1116px;
-    margin: 0 auto;
 }
 
 .expandedTable {
@@ -23,6 +27,55 @@
 
         .ant-table-tbody > tr > td {
             border-color: $color-neutral-neutral-3 !important;
+        }
+    }
+}
+
+.title.title {
+    margin-bottom: 15px;
+    color: $color-neutral-neutral-9;
+}
+
+.tabs {
+    :global {
+        .ant-tabs-nav {
+            display: inline-flex;
+            align-self: start;
+            margin-bottom: 24px;
+
+            &::before {
+                content: none;
+            }
+        }
+
+        .ant-tabs-nav-wrap {
+            padding: 2px;
+            border-radius: 2px;
+            background: $color-neutral-neutral-4 !important;
+        }
+
+        .ant-tabs-tab {
+            background: $color-neutral-neutral-4 !important;
+            border: none !important;
+            border-radius: 2px !important;
+
+            & + .ant-tabs-tab {
+                margin-left: 0 !important;
+            }
+
+            &.ant-tabs-tab-active {
+                padding: 5px 16px;
+                background-color: $color-neutral-neutral-2 !important;
+                border-radius: 2px;
+            }
+
+            .ant-tabs-tab-btn {
+                color: $color-neutral-neutral-9 !important;
+            }
+
+            .anticon {
+                margin-right: 8px;
+            }
         }
     }
 }
