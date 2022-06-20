@@ -4,6 +4,7 @@ import { useStore } from 'effector-react';
 import { useTableData } from 'shared';
 import {
     getUserConfig,
+    InUseType,
     inventoriesStore,
     InventoryType,
     LOCATION_TO_ID,
@@ -26,9 +27,12 @@ export const useLandLordStatus = () => {
         );
         if (!areaItem) {
             setStatus(CABIN_STATUS.no_area);
-        } else if (areaItem?.in_use === 0 || !hasPhysicalShift) {
+        } else if (
+            areaItem?.in_use === InUseType.notInUse ||
+            !hasPhysicalShift
+        ) {
             setStatus(CABIN_STATUS.engage);
-        } else if (areaItem?.in_use === 1) {
+        } else if (areaItem?.in_use === InUseType.inUse) {
             setStatus(CABIN_STATUS.setup);
         }
     }, [inventories, hasPhysicalShift]);
