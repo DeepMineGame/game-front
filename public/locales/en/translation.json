@@ -274,6 +274,25 @@
         "goLandActivate": "Go here activate the land",
         "statsAndInfo": "Go here to see stats & info"
       }
+    },
+    "areaManagement": {
+      "title": "Area management",
+      "area": "Area",
+      "active": "Active",
+      "inactive": "Inactive",
+      "claim": "Claim DME",
+      "engage": "Engage the Area",
+      "unengage": "Unengage the Area",
+      "mine slots": "Mine slots",
+      "mine": "Mine",
+      "mineStatus": "Mine status",
+      "dmePerEjection": "DME per ejection",
+      "mineCrew": "Mine crew",
+      "mineActivity": "Mine activity",
+      "add": "Add new mine",
+      "searching": "Searching for Mine owner",
+      "cancel": "Cancel",
+      "discover": "Discover new land"
     }
   },
   "features": {
