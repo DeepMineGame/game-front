@@ -24,6 +24,10 @@
       "miningDeskTooltip": "Mining deck is located here",
       "equipmentTooltip": "Your equipment is located here"
     },
+    "hive": {
+      "info&Actions": "Info&Actions",
+      "warehouse": "Warehouse"
+    },
     "common": {
       "button": {
         "cancel": "Cancel",
@@ -49,7 +53,9 @@
       },
       "reputation": "Reputation",
       "level": "Level",
-      "exp": "Exp"
+      "exp": "Exp",
+      "mineInfo": "Mine info",
+      "areaInfo": "Area info"
     },
     "user": {
       "accountSettings":"Account settings",
@@ -185,7 +191,6 @@
       "mineCrew": "Mine crew",
       "contract": "Contract",
       "mineArea": {
-        "mineInfo": "Mine info",
         "mine":  "Mine",
         "mineOwner":  "Mine Owner",
         "mineRarity":  "Mine Rarity",
@@ -198,7 +203,6 @@
         "fossilChance":  "Fossil Chance",
         "stability":  "Stability",
         "habitation":  "Habitation",
-        "areaInfo": "Area info",
         "area":  "Area",
         "landlord":  "Landlord",
         "areaRarity":  "Area Rarity",
@@ -315,6 +319,8 @@
   },
   "roles": {
     "citizen": "Citizen",
-    "landlord": "Landlord"
+    "landlord": "Landlord",
+    "mineOwner": "Mine owner",
+    "contractor": "Contractor"
   }
 }

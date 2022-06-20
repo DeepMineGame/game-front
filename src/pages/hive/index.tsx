@@ -1,7 +1,12 @@
 import React, { FC } from 'react';
-import { Page, useAccountName } from 'shared';
+import { Menu, MenuItem, Page, useAccountName } from 'shared';
 import { useStore } from 'effector-react';
 import { Travel } from 'features';
+import { Space, Tooltip } from 'antd';
+import { AreaChartOutlined, HddOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { warehouse } from 'app/router/paths';
 import { Flat, isUserInHive } from 'features/hive';
 import {
     getSmartContractUserEffect,
@@ -14,6 +19,8 @@ export * from './info';
 export const HivePage: FC = () => {
     const isUserInFlat = useStore(isUserInHive);
     const accountName = useAccountName();
+    const { t } = useTranslation();
+    const navigate = useNavigate();
 
     return (
         <Flat>
@@ -26,6 +33,27 @@ export const HivePage: FC = () => {
                     }
                 />
             )}
+            <Menu>
+                <Space>
+                    <Tooltip overlay={t('components.hive.info&Actions')}>
+                        {/* TODO: Remove div wrapper after figure out why it doesn't work without it */}
+                        <div>
+                            <MenuItem
+                                onClick={() => navigate(`/user/${accountName}`)}
+                                icon={<AreaChartOutlined />}
+                            />
+                        </div>
+                    </Tooltip>
+                    <Tooltip overlay={t('components.hive.warehouse')}>
+                        <div>
+                            <MenuItem
+                                onClick={() => navigate(warehouse)}
+                                icon={<HddOutlined />}
+                            />
+                        </div>
+                    </Tooltip>
+                </Space>
+            </Menu>
         </Flat>
     );
 };

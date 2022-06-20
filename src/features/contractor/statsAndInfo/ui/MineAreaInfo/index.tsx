@@ -69,7 +69,7 @@ export const MineAreaInfo = () => {
                         level={5}
                         className={styles.title}
                     >
-                        {t('pages.contractorStatsAndInfo.mineArea.mineInfo')}
+                        {t('components.common.mineInfo')}
                     </Title>
                     <KeyValueTable
                         items={mineInfoData}
@@ -88,7 +88,7 @@ export const MineAreaInfo = () => {
                         level={5}
                         className={styles.title}
                     >
-                        {t('pages.contractorStatsAndInfo.mineArea.areaInfo')}
+                        {t('components.common.areaInfo')}
                     </Title>
                     <KeyValueTable
                         items={areaInfoData}
