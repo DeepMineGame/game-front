@@ -11,7 +11,6 @@ import {
     DarkBlueBg,
     DarkGrayBg,
     DarkGreenBg,
-    useTableData,
 } from 'shared';
 import {
     EngageArea,
@@ -21,18 +20,11 @@ import {
     Searching,
     Setup,
     Travel,
+    CABIN_STATUS,
+    useLandLordStatus,
 } from 'features';
-import {
-    getUserConfig,
-    LOCATION_TO_ID,
-    UserInfoType,
-} from 'entities/smartcontract';
+import { LOCATION_TO_ID } from 'entities/smartcontract';
 import styles from './styles.module.scss';
-import { CABIN_STATUS } from './constants';
-
-const getStatus = () => {
-    return CABIN_STATUS.no_area;
-};
 
 const getBackground = (
     status: CABIN_STATUS,
@@ -58,12 +50,7 @@ const getBackground = (
 
 export const LandLordCabin = () => {
     const [needShiftBadge, setNeedShiftBadge] = useState(false);
-    const [status, setStatus] = useState<CABIN_STATUS>(CABIN_STATUS.no_area);
-
-    const userInfo = useTableData<UserInfoType>(getUserConfig);
-
-    const hasPhysicalShift =
-        userInfo?.[0]?.location === LOCATION_TO_ID.landlords_reception;
+    const { status, hasPhysicalShift } = useLandLordStatus();
 
     const openShiftBadge = () => {
         setNeedShiftBadge(true);
@@ -84,10 +71,6 @@ export const LandLordCabin = () => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [status, hasPhysicalShift]);
-
-    useEffect(() => {
-        setStatus(getStatus());
-    }, []);
 
     return (
         <div className={styles.cabin}>

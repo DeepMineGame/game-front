@@ -16,6 +16,11 @@ export enum RarityType {
     /* [5] */ legendary,
 }
 
+export enum InUseType {
+    notInUse,
+    inUse,
+}
+
 export const rarityMap = {
     [RarityType.undefined]: null,
     [RarityType.common]: 'Common',
@@ -29,7 +34,7 @@ export type UserInventoryType = {
     asset_id: string;
     template_id: InventoryIdType;
     owner: string;
-    in_use: 0 | 1;
+    in_use: InUseType;
     rarity: RarityType;
     weight: number;
     inv_type: InventoryType;
