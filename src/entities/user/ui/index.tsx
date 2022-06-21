@@ -15,7 +15,7 @@ import { UserAction } from 'features';
 import { useNavigate } from 'react-router-dom';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
-import { inventory } from 'app/router/paths';
+import { warehouse } from 'app/router/paths';
 import { smartContractUserStore } from 'entities/smartcontract';
 
 import { locationMap } from '../../smartcontract';
@@ -171,7 +171,7 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                         className={styles.button}
                         ghost
                         icon={<DatabaseOutlined />}
-                        onClick={() => navigate(inventory)}
+                        onClick={() => navigate(warehouse)}
                         size="large"
                     >
                         {t('components.common.inventory')}

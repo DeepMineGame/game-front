@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Button, desktopS, useMediaQuery } from 'shared';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { wipPage } from 'app/router/paths';
+import { warehouse, wipPage } from 'app/router/paths';
 import { ATOMICHUB_URL } from 'app';
 import { mineOwnerCabinState } from '../../models/mineOwnerState';
 
@@ -17,10 +17,7 @@ export function useLinks() {
         [mineOwnerCabinState.isOutsideFromLocation]: null,
         [mineOwnerCabinState.initial]: (
             <div>
-                <Button
-                    type="link"
-                    onClick={navigateToWipPageWithTittle('Storage')}
-                >
+                <Button type="link" onClick={() => navigate(warehouse)}>
                     {isDesktop
                         ? t('features.mineOwner.pickUpFromStorage')
                         : t('features.mineOwner.storage')}
@@ -37,10 +34,7 @@ export function useLinks() {
         ),
         [mineOwnerCabinState.hasNoMineNft]: (
             <div>
-                <Button
-                    type="link"
-                    onClick={navigateToWipPageWithTittle('Storage')}
-                >
+                <Button type="link" onClick={() => navigate(warehouse)}>
                     {isDesktop
                         ? t('features.mineOwner.pickUpFromStorage')
                         : t('features.mineOwner.storage')}

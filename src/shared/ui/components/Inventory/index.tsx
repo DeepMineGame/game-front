@@ -32,7 +32,7 @@ const sortConfig = [
 ];
 
 type InventoryProps = ModalProps & {
-    name: InventoryNameType;
+    name?: InventoryNameType;
     userInventory: UserInventoryType[];
     onSelect: (card: UserInventoryType) => void;
     onOpenCard: (card: UserInventoryType) => void;
@@ -56,7 +56,9 @@ export const Inventory: FC<InventoryProps> = ({
     ...props
 }) => {
     const [selectedTab, setSelectedTab] = useState('Equipment');
-    const cards = filterEquipmentByName(userInventory, name);
+    const cards = name
+        ? filterEquipmentByName(userInventory, name)
+        : userInventory;
 
     const handleCardSelect = (card: UserInventoryType) => () => {
         onSelect(card);

@@ -8,3 +8,4 @@ export * from './mineOwner';
 export * from './landLord';
 export * from './hive';
 export * from './pageNotFound';
+export * from './warehouse';
