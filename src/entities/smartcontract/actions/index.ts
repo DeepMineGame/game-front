@@ -7,6 +7,7 @@ export * from './activatemine';
 export * from './deactmine';
 export * from './contrclaim';
 export * from './moclaim';
+export * from './withdrawAssets';
 
 export function toggleMining({
     waxUser,
