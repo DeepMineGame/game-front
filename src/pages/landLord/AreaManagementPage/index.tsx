@@ -14,7 +14,7 @@ export const AreaManagementPage = () => {
             <div className={styles.miningSlots}>
                 {t('pages.areaManagement.mineSlots')} <span>10/100</span>
             </div>
-            <AreaManagementTable disabled />
+            <AreaManagementTable disabled={false} />
         </Page>
     );
 };
