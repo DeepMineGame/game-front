@@ -9,6 +9,7 @@ import {
     MineCrewDataType,
     Status,
 } from '../AreaManagementTableContent';
+import { AddMineOwnerModal } from '../AddMineOwnerModal';
 import styles from './styles.module.scss';
 
 const data: MineCrewDataType[] = [
@@ -32,6 +33,7 @@ type Props = {
 export const AreaManagementTable: FC<Props> = ({ disabled }) => {
     const { t } = useTranslation();
     const [searchingSlotsCount, setSearchingSlotsCount] = useState(1);
+    const [isAddModalVisible, setIsAddModalVisible] = useState(false);
 
     const searchingSlots = new Array(searchingSlotsCount).fill(
         <SearchingItem
@@ -40,7 +42,10 @@ export const AreaManagementTable: FC<Props> = ({ disabled }) => {
         />
     );
     const emptySlots = new Array(emptySlotsCount).fill(
-        <AddItem className={styles.emptySlot} />
+        <AddItem
+            className={styles.emptySlot}
+            onClick={() => setIsAddModalVisible(true)}
+        />
     );
     const discoverSlots = new Array(discoverSlotsCount).fill(
         <DiscoverItem className={styles.discoverSlot} />
@@ -52,6 +57,10 @@ export const AreaManagementTable: FC<Props> = ({ disabled }) => {
             {searchingSlots}
             {emptySlots}
             {discoverSlots}
+            <AddMineOwnerModal
+                visible={isAddModalVisible}
+                onCancel={() => setIsAddModalVisible(false)}
+            />
         </div>
     );
 };

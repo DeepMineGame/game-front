@@ -1,0 +1,50 @@
+@import "src/shared";
+
+.modal {
+  :global {
+    .ant-modal-body {
+      padding: 16px 81px;
+    }
+  }
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: space-between;
+}
+
+.infoCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $color-neutral-neutral-1 !important;
+  border: 1px solid $color-neutral-neutral-4;
+  padding: 16px;
+  border-bottom: none;
+
+  &:last-child {
+    border-bottom: 1px solid $color-neutral-neutral-4;
+  }
+}
+
+.timer div {
+  background: $color-neutral-neutral-1 !important;
+}
+
+.infoCardText {
+  display: flex;
+  align-items: center;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  span {
+    padding-right: 32px;
+  }
+}
+
+.infoCardValue {
+  text-align: right;
+}

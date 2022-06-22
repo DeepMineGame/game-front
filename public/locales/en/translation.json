@@ -42,6 +42,10 @@
         "dme": "DME",
         "dmp": "DMP"
       },
+      "actionModal": {
+        "descriptionTime": "This action will take:",
+        "descriptionDMP": "This action will be instant and take 0 energy, but will cost:"
+      },
       "table": {
         "table": "Table",
         "addNewContractor": "Add new contractor",
@@ -284,6 +288,7 @@
       "claim": "Claim DME",
       "engage": "Engage the Area",
       "unengage": "Unengage the Area",
+      "unengageDescription": "Deactivation will result in contractors not being able to start mining",
       "search": "Searching for Mine owner",
       "mineSlots": "Mine slots",
       "mine": "Mine",
@@ -294,7 +299,11 @@
       "add": "Add new mine",
       "searching": "Searching for Mine owner",
       "cancel": "Cancel",
-      "discover": "Discover new land"
+      "discover": "Discover new land",
+      "landActivation": "Land activation",
+      "addMineOwner": "Add new Mine owner",
+      "findMineOwner": "Find a Mine owner on the servicemaret",
+      "createOrder": "Create an order for a Mine owner"
     }
   },
   "features": {

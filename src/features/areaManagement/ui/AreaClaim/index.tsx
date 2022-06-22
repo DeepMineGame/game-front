@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 
-import { Button, Title } from 'shared';
+import { Button, Title, ActionModal } from 'shared';
+import { UnengageAreaModal } from '../UnengageAreaModal';
 import styles from './styles.module.scss';
 
-export const AreaClaim = () => {
+type Props = {
+    isActive: boolean;
+};
+
+export const AreaClaim: FC<Props> = ({ isActive }) => {
     const { t } = useTranslation();
-    const isActive = true;
+    const [isModalActionVisible, setIsModalActionVisible] = useState(false);
+    const [isModalUnengageVisible, setIsModalUnengageVisible] = useState(false);
+
+    const onEngage = () => {
+        // some logic
+        setIsModalActionVisible(false);
+    };
+
+    const onUnengage = () => {
+        // some logic
+        setIsModalUnengageVisible(false);
+    };
 
     return (
         <div className={styles.areaClaim}>
@@ -45,8 +61,35 @@ export const AreaClaim = () => {
             </div>
 
             <div className={styles.engageContainer}>
-                <Button type="ghost">{t('pages.areaManagement.engage')}</Button>
+                {isActive ? (
+                    <Button
+                        type="ghost"
+                        onClick={() => setIsModalUnengageVisible(true)}
+                    >
+                        {t('pages.areaManagement.unengage')}
+                    </Button>
+                ) : (
+                    <Button
+                        type="ghost"
+                        onClick={() => setIsModalActionVisible(false)}
+                    >
+                        {t('pages.areaManagement.engage')}
+                    </Button>
+                )}
             </div>
+
+            <UnengageAreaModal
+                onSubmit={onUnengage}
+                visible={isModalUnengageVisible}
+                onCancel={() => setIsModalUnengageVisible(false)}
+            />
+            <ActionModal
+                submitText={t('components.common.button.activate')}
+                visible={isModalActionVisible}
+                onCancel={() => setIsModalActionVisible(false)}
+                onSubmit={onEngage}
+                title={t('pages.areaManagement.landActivation')}
+            />
         </div>
     );
 };

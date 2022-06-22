@@ -29,7 +29,7 @@ export const Modal: FC<Props> = (props) => {
             centered={isDesktop}
             closeIcon={<CloseOutlined />}
             footer={
-                props?.footer || (
+                props?.footer === undefined ? (
                     <div>
                         {props.onCancel && (
                             <Button onClick={props.onCancel} ghost>
@@ -40,7 +40,7 @@ export const Modal: FC<Props> = (props) => {
                             {props.okText || 'Ok'}
                         </Button>
                     </div>
-                )
+                ) : null
             }
         />
     );
