@@ -1,7 +1,9 @@
 export enum ContractType {
     undefined,
-    landlord_mineowner,
-    mineowner_contractor,
+    landlord_mineowner = 1,
+    mineowner_landlord = 2,
+    mineowner_contractor = 4,
+    contractor_mineowner = 8,
 }
 
 export type ContractDto = {

@@ -26,7 +26,10 @@
     },
     "hive": {
       "info&Actions": "Info&Actions",
-      "warehouse": "Warehouse"
+      "warehouse": "Warehouse",
+      "activeInventory": "Active inventory",
+      "confirmTransfer": "Confirm transfer",
+      "storage": "Storage"
     },
     "common": {
       "button": {
@@ -103,7 +106,8 @@
     },
     "home": {
       "mineOwnerCabin": "MINE OWNER CABIN",
-      "contractorCabin": "CONTRACTOR'S CABIN"
+      "contractorCabin": "CONTRACTOR'S CABIN",
+      "hive": "HIVE"
     },
     "contractor": {
       "signingContract": {
