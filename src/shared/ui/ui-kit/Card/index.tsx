@@ -1,8 +1,13 @@
 import React, { FC } from 'react';
 import { Tooltip } from 'antd';
 import cn from 'classnames';
-import { Button, DMECoinIcon, Logo } from 'shared';
-import { getImagePath, TemplateIdType } from 'features';
+import {
+    Button,
+    DMECoinIcon,
+    Logo,
+    getImagePath,
+    TemplateIdType,
+} from 'shared';
 import { NftProgressBar, ProgressProps } from '../NftProgressBar';
 import styles from './styles.module.scss';
 import { CardBadge } from './components/CardBadge';

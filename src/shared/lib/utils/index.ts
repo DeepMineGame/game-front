@@ -13,3 +13,4 @@ export const getTableData = async (config: GetTableDataConfigType) => {
 
     return data;
 };
+export * from './getNftImagePath';
