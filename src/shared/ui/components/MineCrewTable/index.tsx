@@ -98,7 +98,7 @@ export const MineCrewTable: FC<{ data?: MineCrewDataType[] }> = ({ data }) => {
             render: (status: Status) => (
                 <div className={styles.status}>
                     <Badge color={getStatusColor(status)} />{' '}
-                    {t(`pages.contractorMineCrew.${Status[status]}`)}
+                    {t(`components.common.status.${Status[status]}`)}
                 </div>
             ),
         },

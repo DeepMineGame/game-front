@@ -34,7 +34,7 @@ export const AreaClaim: FC<Props> = ({ isActive }) => {
                         level={4}
                         className={styles.area}
                     >
-                        {t('pages.areaManagement.area')}
+                        {t('components.common.area')}
                     </Title>
                     <div
                         className={cn(
@@ -46,8 +46,8 @@ export const AreaClaim: FC<Props> = ({ isActive }) => {
                     >
                         {t(
                             isActive
-                                ? 'pages.areaManagement.active'
-                                : 'pages.areaManagement.inactive'
+                                ? 'components.common.status.active'
+                                : 'components.common.status.inactive'
                         )}
                     </div>
                 </div>

@@ -82,7 +82,7 @@ export const AreaManagementTableContent: FC<Props> = ({ data, disabled }) => {
             render: (status: Status) => (
                 <div className={styles.status}>
                     <Badge color={getStatusColor(status)} />{' '}
-                    {t(`pages.contractorMineCrew.${Status[status]}`)}
+                    {t(`components.common.status.${Status[status]}`)}
                 </div>
             ),
         },
