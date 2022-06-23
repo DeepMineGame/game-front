@@ -13,5 +13,5 @@ export type MineDto = {
     owner: string;
     state: MineState;
     id: number;
-    contractor_slots: string[];
+    contractor_slots: { reserved: number; contractor: string }[];
 };

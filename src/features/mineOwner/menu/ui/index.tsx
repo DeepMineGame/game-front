@@ -67,7 +67,7 @@ export const MineOwnerMenu: FC<Props> = ({ currentMineOwnerCabinState }) => {
         <Menu>
             <Space>
                 {menuItems.map(({ tooltip, link, icon, disabled }) => (
-                    <Tooltip overlay={tooltip}>
+                    <Tooltip overlay={tooltip} key={tooltip}>
                         <div>
                             <MenuItem
                                 onClick={() => navigate(link)}
