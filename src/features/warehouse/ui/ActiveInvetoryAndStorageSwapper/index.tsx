@@ -1,15 +1,20 @@
 import { Col, Row } from 'antd';
 import React, { DragEventHandler, FC, useState } from 'react';
-import { Button, Card, Divider, Title, useTableData } from 'shared';
+import { Button, Title, useTableData } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
-import { getInventoryConfig, UserInventoryType } from 'entities/smartcontract';
+import {
+    getInventoryConfig,
+    UserInventoryType,
+    withdrawAssets,
+} from 'entities/smartcontract';
 import { atomicTransfer } from 'entities/atomicassets';
 import { userAtomicAssetsStore, WarehouseGate } from '../../model';
 import { useSmartContractAction } from '../../../hooks';
 import styles from './styles.module.scss';
 import { renderCards } from './utils/renderCards';
+import { removeDraggedElementFromState } from './utils/removeDraggedElementFromState';
 
 export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     accountName,
@@ -17,49 +22,60 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     const { t } = useTranslation();
     useGate(WarehouseGate, { accountName });
     const userAtomicAssets = useStore(userAtomicAssetsStore);
-    const userInventory = useTableData<UserInventoryType>(getInventoryConfig);
+    const userInventory = useTableData<UserInventoryType>(
+        getInventoryConfig
+    )?.filter(({ in_use }) => !in_use);
     const [draggedElement, setDraggedElement] =
         useState<null | UserInventoryType>(null);
     const navigate = useNavigate();
     const [draggedElements, setDraggedElements] = useState(
         new Set<UserInventoryType>()
     );
-    const onActiveInventoryDrop: DragEventHandler<HTMLDivElement> = (e) => {
-        e?.preventDefault();
+    const isAtomicIncludesDragged =
+        userAtomicAssets.filter((item) => draggedElements.has(item))?.length >
+        0;
 
-        if (draggedElement) {
-            setDraggedElements((state) => new Set([...state, draggedElement]));
-        }
-    };
-
-    const onStorageDrop: DragEventHandler<HTMLDivElement> = (e) => {
+    const onDrop: DragEventHandler<HTMLDivElement> = (e) => {
         e?.preventDefault();
-        const removeDraggedElementFromState = (state: Set<UserInventoryType>) =>
-            new Set(
-                [...state].filter(
-                    ({ asset_id }) => asset_id !== draggedElement?.asset_id
-                )
-            );
         if (draggedElement && draggedElements.has(draggedElement)) {
-            setDraggedElements(removeDraggedElementFromState);
+            return setDraggedElements(
+                removeDraggedElementFromState(draggedElement)
+            );
         }
+        if (draggedElement) {
+            return setDraggedElements(
+                (state) => new Set([...state, draggedElement])
+            );
+        }
+        return null;
     };
-    const transferAction = useSmartContractAction(
+
+    const draggedElementsIds = Array.from(draggedElements).map(
+        ({ asset_id }) => asset_id
+    );
+    const transferFromAtomicStorageToDeepMineInventory = useSmartContractAction(
         atomicTransfer({
             accountName,
-            ids: Array.from(draggedElements).map(({ asset_id }) => asset_id),
+            ids: draggedElementsIds,
         })
     );
+    const transferFromDeepMineInventoryToAtomicStorage = useSmartContractAction(
+        withdrawAssets(accountName, draggedElementsIds)
+    );
     const onTransferClick = async () => {
-        await transferAction();
-        navigate(0);
+        if (!isAtomicIncludesDragged) {
+            await transferFromDeepMineInventoryToAtomicStorage();
+        } else {
+            await transferFromAtomicStorageToDeepMineInventory();
+        }
+        return navigate(0);
     };
     return (
         <Row>
             <Col
                 span={11}
                 className={styles.cardColumn}
-                onDrop={onActiveInventoryDrop}
+                onDrop={onDrop}
                 // https://stackoverflow.com/questions/32084053/why-is-ondrop-not-working
                 onDragOver={(e) => e.preventDefault()}
             >
@@ -67,16 +83,9 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                     {t('components.hive.activeInventory')}
                 </Title>
                 <div>
-                    {draggedElements?.size ? (
-                        <div className={styles.cardsWrapper}>
-                            <div className={styles.filter}>
-                                {renderCards(
-                                    draggedElements,
-                                    setDraggedElement
-                                )}{' '}
-                            </div>
-                            <Divider />
-                            {renderCards(userInventory, setDraggedElement)}
+                    {isAtomicIncludesDragged && draggedElements.size ? (
+                        <div className={styles.draggedElements}>
+                            {renderCards(draggedElements, setDraggedElement)}
                         </div>
                     ) : (
                         <div className={styles.cardsWrapper}>
@@ -89,7 +98,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                 offset={1}
                 span={11}
                 className={styles.cardColumn}
-                onDrop={onStorageDrop}
+                onDrop={onDrop}
                 onDragOver={(e) => e.preventDefault()}
             >
                 <Title level={5} className={styles.title}>
@@ -104,23 +113,13 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                     </Button>
                 </Title>
                 <div className={styles.cardsWrapper}>
-                    {userAtomicAssets.map((card) => (
-                        <div
-                            draggable
-                            id={card.asset_id}
-                            key={card.asset_id}
-                            onDragStart={() => setDraggedElement(card)}
-                        >
-                            <Card
-                                templateId={card.template_id}
-                                className={styles.card}
-                                key={card.asset_id}
-                                initial={10}
-                                current={3}
-                                remained={7}
-                            />
+                    {!isAtomicIncludesDragged && draggedElements?.size ? (
+                        <div className={styles.draggedElements}>
+                            {renderCards(draggedElements, setDraggedElement)}
                         </div>
-                    ))}
+                    ) : (
+                        renderCards(userAtomicAssets, setDraggedElement)
+                    )}
                 </div>
             </Col>
         </Row>
