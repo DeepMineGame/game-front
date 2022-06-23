@@ -45,27 +45,32 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
         setVisible(false);
     };
 
-    const avatar = smartContractUserData && (
+    const avatar = smartContractUserData ? (
         <AvatarWithLvl
             onClick={showDrawer}
             smartContractUserData={smartContractUserData}
         />
+    ) : (
+        <div>
+            <SettingMenu />
+        </div>
     );
-
     return (
         <>
             <div className={styles.wrapper}>
-                <div>
-                    <ThunderboltOutlined />
-                    <span>
-                        <Text
-                            className={styles.energyCount}
-                            fontFamily="orbitron"
-                        >
-                            {smartContractUserData?.stamina}
-                        </Text>
-                    </span>
-                </div>
+                {smartContractUserData && (
+                    <div>
+                        <ThunderboltOutlined />
+                        <span>
+                            <Text
+                                className={styles.energyCount}
+                                fontFamily="orbitron"
+                            >
+                                {smartContractUserData?.stamina}
+                            </Text>
+                        </span>
+                    </div>
+                )}
                 {avatar}
             </div>
             <Drawer
