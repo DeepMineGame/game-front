@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Modal } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 
-import { Button } from 'shared';
+import { Button, Title } from 'shared';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -32,9 +32,9 @@ export const UnengageAreaModal: FC<Props> = ({
             <div className={styles.content}>
                 <ExclamationCircleOutlined />
                 <div>
-                    <div className={styles.title}>
+                    <Title level={5}>
                         {t('pages.areaManagement.unengage')}
-                    </div>
+                    </Title>
                     <div className={styles.description}>
                         {t('pages.areaManagement.unengageDescription')}
                     </div>

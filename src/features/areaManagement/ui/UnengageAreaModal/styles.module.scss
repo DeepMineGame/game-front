@@ -18,17 +18,9 @@
   align-items: flex-start;
 
   svg {
-    width: 24px;
-    height: 24px;
+    font-size: 24px;
     margin-right: 16px;
   }
-}
-
-.title {
-  font-size: 16px;
-  line-height: 24px;
-  padding-bottom: 8px;
-  color: $color-neutral-neutral-10;
 }
 
 .description {

@@ -21,10 +21,10 @@ export const AddMineOwnerModal: FC<Props> = ({ visible, onCancel }) => {
             title={t('pages.areaManagement.addMineOwner')}
             footer={null}
         >
-            <Button className={styles.button} type="ghost">
+            <Button className={styles.button} block type="ghost">
                 {t('pages.areaManagement.findMineOwner')}
             </Button>
-            <Button className={styles.button} type="ghost">
+            <Button className={styles.button} block type="ghost">
                 {t('pages.areaManagement.createOrder')}
             </Button>
         </Modal>

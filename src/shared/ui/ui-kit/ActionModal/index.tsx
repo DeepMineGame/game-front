@@ -76,7 +76,7 @@ export const ActionModal: FC<Props> = ({
                     <div className={styles.infoCard}>
                         <div className={styles.infoCardText}>
                             <Icon component={DmpIcon} />
-                            <div>DMP</div>
+                            <div>{t('components.common.button.dmp')}</div>
                         </div>
                         <div className={styles.infoCardValue}>22</div>
                     </div>

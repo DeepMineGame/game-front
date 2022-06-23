@@ -21,7 +21,7 @@
   margin-bottom: 16px;
 }
 
-.area {
+.title {
   margin-bottom: 0 !important;
   padding-right: 15px;
   text-transform: uppercase;
@@ -30,26 +30,13 @@
 .status {
   display: flex;
   align-items: center;
-  color: $color-neutral-neutral-7;
 
-  &:before {
-    content: '.';
-    color: transparent;
-    border-radius: 8px;
-    width: 8px;
-    height: 8px;
-    margin-right: 8px;
+  span {
+    color: $color-neutral-neutral-7;
   }
-}
-.statusActive:before {
-  background: $color-green-green-6;
-}
-.statusInactive:before {
-  background: $color-sunset-orange-orange-6;
 }
 
 .claimButton {
-  width: 100%;
   font-size: 16px;
   line-height: 24px;
   height: 40px;

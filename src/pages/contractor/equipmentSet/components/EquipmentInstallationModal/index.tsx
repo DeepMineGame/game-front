@@ -89,7 +89,7 @@ export const EquipmentInstallationModal = ({
                     {useDmp && (
                         <div className={styles.infoCard}>
                             <Icon component={DmpIcon} />
-                            <div>DMP</div>
+                            <div>{t('components.common.button.dmp')}</div>
                             <div className={styles.infoCardValue}>22</div>
                         </div>
                     )}

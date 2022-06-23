@@ -10,12 +10,8 @@
   border-top: none;
   cursor: pointer;
 
-  svg {
-    width: 24px;
-    height: 24px;
-  }
-
   & > span:first-child {
+    font-size: 24px;
     margin-right: 33px;
   }
 }

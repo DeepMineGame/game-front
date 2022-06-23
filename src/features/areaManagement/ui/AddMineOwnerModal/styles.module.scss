@@ -8,10 +8,6 @@
   }
 }
 
-.button {
-  width: 100%;
-
-  &:first-child {
-    margin-bottom: 16px;
-  }
+.button:first-child {
+  margin-bottom: 16px;
 }

@@ -40,7 +40,9 @@ export const Modal: FC<Props> = (props) => {
                             {props.okText || 'Ok'}
                         </Button>
                     </div>
-                ) : null
+                ) : (
+                    props.footer
+                )
             }
         />
     );

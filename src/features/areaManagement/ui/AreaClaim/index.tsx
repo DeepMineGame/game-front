@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import cn from 'classnames';
+import { Badge } from 'antd';
 
-import { Button, Title, ActionModal } from 'shared';
+import { Button, Title, ActionModal, greenGreen6, sunsetOrange6 } from 'shared';
 import { UnengageAreaModal } from '../UnengageAreaModal';
 import styles from './styles.module.scss';
 
@@ -32,28 +32,24 @@ export const AreaClaim: FC<Props> = ({ isActive }) => {
                     <Title
                         fontFamily="orbitron"
                         level={4}
-                        className={styles.area}
+                        className={styles.title}
                     >
                         {t('components.common.area')}
                     </Title>
-                    <div
-                        className={cn(
-                            styles.status,
-                            isActive
-                                ? styles.statusActive
-                                : styles.statusInactive
-                        )}
-                    >
-                        {t(
+                    <Badge
+                        className={styles.status}
+                        color={isActive ? greenGreen6 : sunsetOrange6}
+                        text={t(
                             isActive
                                 ? 'components.common.status.active'
                                 : 'components.common.status.inactive'
                         )}
-                    </div>
+                    />
                 </div>
                 <Button
                     type={isActive ? 'primary' : 'ghost'}
                     disabled={!isActive}
+                    block
                     className={styles.claimButton}
                 >
                     {t('pages.areaManagement.claim')}
@@ -71,7 +67,7 @@ export const AreaClaim: FC<Props> = ({ isActive }) => {
                 ) : (
                     <Button
                         type="ghost"
-                        onClick={() => setIsModalActionVisible(false)}
+                        onClick={() => setIsModalActionVisible(true)}
                     >
                         {t('pages.areaManagement.engage')}
                     </Button>
