@@ -3,20 +3,23 @@
 @keyframes pulse {
   25% {
     filter: grayscale(25%);
+    opacity: 0.5;
     transform: scale(0.995);
   }
   50% {
     filter: grayscale(50%);
     transform: scale(1.001);
+    opacity: 0.75;
   }
   75% {
     filter: grayscale(75%);
-
+    opacity: 0.9;
     transform: scale(0.995);
   }
   100% {
     filter: grayscale(50%);
-    transform: scale(1)
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
@@ -61,7 +64,7 @@
   justify-content: space-between;
 }
 
-.filter {
+.draggedElements {
   animation: pulse 3s linear infinite;
   composes: cardsWrapper;
 }
