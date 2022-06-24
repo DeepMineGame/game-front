@@ -3,7 +3,7 @@ import React, { FC, ReactNode } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 import { Button } from '../Button';
-import { desktopS, useMediaQuery } from '../../../hooks';
+import { desktopS, useMediaQuery } from '../../../lib/hooks';
 import styles from './styles.module.scss';
 
 type Props = {

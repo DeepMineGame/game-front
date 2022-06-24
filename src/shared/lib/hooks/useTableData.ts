@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { getTableData } from 'features';
+import { getTableData } from 'shared';
 import {
     GetTableDataConfigType,
     GetTableDataResponseType,

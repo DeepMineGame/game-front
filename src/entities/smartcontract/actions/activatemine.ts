@@ -3,7 +3,7 @@ import { deepminegame } from '../constants';
 export function activatemine({
     waxUser,
     mineId,
-    duration = 1,
+    duration = 0,
 }: {
     waxUser: string;
     mineId?: number;

@@ -283,6 +283,12 @@
         "statsAndInfo": "Go here to see stats & info"
       }
     },
+    "serviceMarket": {
+      "serviceMarket": "SERVICE MARKET",
+      "myContracts": "My contracts",
+      "miningContracts": "Mining contracts",
+      "mineOperation": "Mine operation"
+    },
     "areaManagement": {
       "title": "Area management",
       "claim": "Claim DME",

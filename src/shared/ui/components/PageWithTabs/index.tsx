@@ -1,6 +1,7 @@
 import React, { FC, useState, JSXElementConstructor } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DocumentTitle } from 'app/router/components/DocumentTitle';
+import { Empty } from 'antd';
 import { Navbar, Page } from '../../ui-kit';
 
 export type Tab = {
@@ -12,14 +13,18 @@ type Props = {
     tabs: Tab[];
     documentTitleScope?: string;
     title?: string;
+    className?: string;
+    defaultDocTitle?: boolean;
 };
 export const PageWithTabs: FC<Props> = ({
     tabs,
     documentTitleScope,
     title,
+    className,
+    defaultDocTitle,
 }) => {
     const { t } = useTranslation();
-    const [selectedTab, setSelectedTab] = useState(tabs[0].id);
+    const [selectedTab, setSelectedTab] = useState(tabs?.[0]?.id);
 
     const handleTabSelect = (id: number) => {
         setSelectedTab(id);
@@ -38,18 +43,29 @@ export const PageWithTabs: FC<Props> = ({
             headerTitle={
                 title || t('components.common.statsAndInfo.title').toUpperCase()
             }
+            className={className}
         >
-            <DocumentTitle
-                title={`${
-                    documentTitleScope ? `${documentTitleScope} / ` : ''
-                } Stats and Info / ${selectedTabData?.name || ''} — DeepMine`}
-            />
-            <Navbar
-                selectedTabId={selectedTab}
-                tabs={navbarTabs}
-                onTabSelect={handleTabSelect}
-            />
-            <ContentComponent />
+            {!defaultDocTitle && (
+                <DocumentTitle
+                    title={`${
+                        documentTitleScope ? `${documentTitleScope} / ` : ''
+                    } Stats and Info / ${
+                        selectedTabData?.name || ''
+                    } — DeepMine`}
+                />
+            )}
+            {tabs?.length ? (
+                <>
+                    <Navbar
+                        selectedTabId={selectedTab}
+                        tabs={navbarTabs}
+                        onTabSelect={handleTabSelect}
+                    />
+                    <ContentComponent />
+                </>
+            ) : (
+                <Empty />
+            )}
         </Page>
     );
 };

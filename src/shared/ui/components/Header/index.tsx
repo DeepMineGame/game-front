@@ -23,7 +23,6 @@ export const Header: FC<Props> = ({ title, hideLogo }) => {
     const navigate = useNavigate();
     const goToBack = () => navigate(-1);
     const isDesktop = useMediaQuery(desktopS);
-
     return (
         <>
             <div className={styles.header}>

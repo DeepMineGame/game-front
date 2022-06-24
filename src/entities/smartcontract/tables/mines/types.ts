@@ -1,7 +1,9 @@
 export enum MineState {
     undefined,
+    setuped,
     activated,
     deactivated,
+    unsetuped,
 }
 
 export type MineDto = {

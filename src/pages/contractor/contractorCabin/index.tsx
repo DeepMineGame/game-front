@@ -12,12 +12,12 @@ import * as PATHS from 'app/router/paths';
 import cn from 'classnames';
 import { ContractorMenu, ContractorMenuItems, Travel } from 'features';
 import {
-    getContractsByNickNameConfig,
+    ContractDto,
+    getContractsNameConfig,
     getHistoryConfig,
     getInventoryConfig,
     getUserConfig,
     LOCATION_TO_ID,
-    UserContractsType,
     UserHistoryType,
     UserInfoType,
     UserInventoryType,
@@ -37,9 +37,7 @@ export const ContractorCabin = () => {
     const isBgWidthHidden = width > height * bgRatio;
 
     const userInfo = useTableData<UserInfoType>(getUserConfig);
-    const userContracts = useTableData<UserContractsType>(
-        getContractsByNickNameConfig
-    );
+    const userContracts = useTableData<ContractDto>(getContractsNameConfig);
     const userInventory = useTableData<UserInventoryType>(getInventoryConfig);
     const userHistory = useTableData<UserHistoryType>(getHistoryConfig);
 

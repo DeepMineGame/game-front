@@ -7,3 +7,4 @@ export * from './PageWithTabs';
 export * from './statsAndInfo';
 export * from './MiningStatsTable';
 export * from './MineCrewTable';
+export * from './ContractsTable';

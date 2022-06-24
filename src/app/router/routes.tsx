@@ -15,6 +15,7 @@ import {
     MineOwnerMiningCrewPage,
     InfoPage,
     Warehouse,
+    ServiceMarketPage,
     AreaManagementPage,
 } from 'pages';
 
@@ -141,10 +142,10 @@ export const routes: AppRoute[] = [
     },
     {
         path: serviceMarket,
-        Component: () => <PageNotFound type="wip" title="Service market" />,
+        Component: ServiceMarketPage,
         forLoggedIn: false,
         forAdmin: false,
-        titleTag: 'Service — DeepMine',
+        titleTag: 'Service-market — DeepMine',
     },
     {
         path: landLord,

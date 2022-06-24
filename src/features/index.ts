@@ -1,8 +1,6 @@
 export * from './authDeepMineUser';
 export * from './useLogout';
 export * from './hooks';
-export * from './utils';
-export * from './getNftImagePath';
 export * from './balances/fetchWaxBalance';
 export * from './equipmentSet';
 export * from './mineOwner';
@@ -12,4 +10,5 @@ export * from './landLord';
 export * from './user';
 export * from './balances';
 export * from './warehouse';
+export * from './serviceMarket';
 export * from './areaManagement';

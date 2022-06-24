@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { EnergyIcon, TimerIcon } from '../../icons';
-import { getTimeLeft } from '../../utils/time';
+import { getTimeLeft } from '../../utils';
 import styles from './index.module.scss';
 
 type Props = {

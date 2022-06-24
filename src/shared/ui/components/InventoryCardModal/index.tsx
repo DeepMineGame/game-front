@@ -1,9 +1,14 @@
-import { desktopS, DMECoinIcon, Modal, useMediaQuery } from 'shared';
+import {
+    desktopS,
+    DMECoinIcon,
+    Modal,
+    useMediaQuery,
+    getImagePath,
+} from 'shared';
 import React, { FC, useState, useEffect, useCallback } from 'react';
 import { ModalProps } from 'antd';
 import { useTranslation } from 'react-i18next';
 
-import { getImagePath } from 'features';
 import { AssetDataType, getAtomicAssetsDataById } from 'entities/atomicassets';
 import { UserInventoryType } from 'entities/smartcontract';
 import { Line, NftProgressBar } from 'shared/ui/ui-kit';

@@ -1,5 +1,5 @@
 import { createEffect, createStore } from 'effector';
-import { getTableData } from 'features';
+import { getTableData } from 'shared';
 import { deepminegame } from '../../constants';
 import { ActionDto } from './types';
 
