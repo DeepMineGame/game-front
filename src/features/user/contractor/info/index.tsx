@@ -31,7 +31,7 @@ export const Contractor: FC<Props> = ({ contractor }) => {
         <Row gutter={16}>
             <Col span={12}>
                 <Title level={5} fontFamily="orbitron" className={styles.title}>
-                    {t('components.common.mineInfo').toUpperCase()}
+                    {t('components.common.mine.mineInfo').toUpperCase()}
                 </Title>
                 {mine ? (
                     <KeyValueTable

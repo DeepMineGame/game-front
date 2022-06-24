@@ -1,0 +1,91 @@
+import React, { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Badge } from 'antd';
+
+import { Button, Title, ActionModal, greenGreen6, sunsetOrange6 } from 'shared';
+import { UnengageAreaModal } from '../UnengageAreaModal';
+import styles from './styles.module.scss';
+
+type Props = {
+    isActive: boolean;
+};
+
+export const AreaClaim: FC<Props> = ({ isActive }) => {
+    const { t } = useTranslation();
+    const [isModalActionVisible, setIsModalActionVisible] = useState(false);
+    const [isModalUnengageVisible, setIsModalUnengageVisible] = useState(false);
+
+    const onEngage = () => {
+        // some logic
+        setIsModalActionVisible(false);
+    };
+
+    const onUnengage = () => {
+        // some logic
+        setIsModalUnengageVisible(false);
+    };
+
+    return (
+        <div className={styles.areaClaim}>
+            <div className={styles.claimContainer}>
+                <div className={styles.statusContainer}>
+                    <Title
+                        fontFamily="orbitron"
+                        level={4}
+                        className={styles.title}
+                    >
+                        {t('components.common.area')}
+                    </Title>
+                    <Badge
+                        className={styles.status}
+                        color={isActive ? greenGreen6 : sunsetOrange6}
+                        text={t(
+                            isActive
+                                ? 'components.common.status.active'
+                                : 'components.common.status.inactive'
+                        )}
+                    />
+                </div>
+                <Button
+                    type={isActive ? 'primary' : 'ghost'}
+                    disabled={!isActive}
+                    block
+                    className={styles.claimButton}
+                >
+                    {t('pages.areaManagement.claim')}
+                </Button>
+            </div>
+
+            <div className={styles.engageContainer}>
+                {isActive ? (
+                    <Button
+                        type="ghost"
+                        onClick={() => setIsModalUnengageVisible(true)}
+                    >
+                        {t('pages.areaManagement.unengage')}
+                    </Button>
+                ) : (
+                    <Button
+                        type="ghost"
+                        onClick={() => setIsModalActionVisible(true)}
+                    >
+                        {t('pages.areaManagement.engage')}
+                    </Button>
+                )}
+            </div>
+
+            <UnengageAreaModal
+                onSubmit={onUnengage}
+                visible={isModalUnengageVisible}
+                onCancel={() => setIsModalUnengageVisible(false)}
+            />
+            <ActionModal
+                submitText={t('components.common.button.activate')}
+                visible={isModalActionVisible}
+                onCancel={() => setIsModalActionVisible(false)}
+                onSubmit={onEngage}
+                title={t('pages.areaManagement.landActivation')}
+            />
+        </div>
+    );
+};

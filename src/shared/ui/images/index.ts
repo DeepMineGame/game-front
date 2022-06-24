@@ -1,14 +1,14 @@
-import LightGrayBg from './area/Gray_light.jpg';
-import LightGreenBg from './area/Green_light.jpg';
-import LightVioletBg from './area/Violet_light.jpg';
-import LightYellowBg from './area/Yellow_light.jpg';
-import LightBlueBg from './area/Blue_light.jpg';
+import LightGrayBg from './landlord/Gray_light.jpg';
+import LightGreenBg from './landlord/Green_light.jpg';
+import LightVioletBg from './landlord/Violet_light.jpg';
+import LightYellowBg from './landlord/Yellow_light.jpg';
+import LightBlueBg from './landlord/Blue_light.jpg';
 
-import DarkBlueBg from './area/Blue_Dark.jpg';
-import DarkGrayBg from './area/Gray_Dark.jpg';
-import DarkGreenBg from './area/Green_Dark.jpg';
-import DarkVioletBg from './area/Violet_Dark.jpg';
-import DarkYellowBg from './area/Yellow_Dark.jpg';
+import DarkBlueBg from './landlord/Blue_Dark.jpg';
+import DarkGrayBg from './landlord/Gray_Dark.jpg';
+import DarkGreenBg from './landlord/Green_Dark.jpg';
+import DarkVioletBg from './landlord/Violet_Dark.jpg';
+import DarkYellowBg from './landlord/Yellow_Dark.jpg';
 
 export {
     LightBlueBg,

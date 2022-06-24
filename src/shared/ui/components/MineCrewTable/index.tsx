@@ -2,8 +2,7 @@ import React, { FC } from 'react';
 import { Tag, Badge } from 'antd';
 import type { ColumnsType } from 'antd/lib/table';
 import { useTranslation } from 'react-i18next';
-import { Table, neutral2, neutral1, green6, gold6 } from 'shared';
-import { DiscordIcon } from './DiscordIcon';
+import { Table, DiscordIcon, neutral2, neutral1, green6, gold6 } from 'shared';
 import styles from './styles.module.scss';
 
 enum Status {
@@ -99,7 +98,7 @@ export const MineCrewTable: FC<{ data?: MineCrewDataType[] }> = ({ data }) => {
             render: (status: Status) => (
                 <div className={styles.status}>
                     <Badge color={getStatusColor(status)} />{' '}
-                    {t(`pages.contractorMineCrew.${Status[status]}`)}
+                    {t(`components.common.status.${Status[status]}`)}
                 </div>
             ),
         },

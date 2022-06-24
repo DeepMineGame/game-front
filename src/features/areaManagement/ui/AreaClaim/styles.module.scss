@@ -1,0 +1,48 @@
+@import "src/shared";
+
+.areaClaim {
+  padding: 24px;
+  background: url("../../../../shared/ui/images/area/areaClaimBg.png") no-repeat;
+  background-size: cover;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.claimContainer {
+  width: 325px;
+}
+
+.statusContainer {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+
+  margin-bottom: 16px;
+}
+
+.title {
+  margin-bottom: 0 !important;
+  padding-right: 15px;
+  text-transform: uppercase;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+
+  span {
+    color: $color-neutral-neutral-7;
+  }
+}
+
+.claimButton {
+  font-size: 16px;
+  line-height: 24px;
+  height: 40px;
+}
+
+.engageContainer {
+  display: flex;
+  align-items: flex-end;
+}

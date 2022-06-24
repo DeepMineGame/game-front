@@ -42,9 +42,14 @@
         "dme": "DME",
         "dmp": "DMP"
       },
+      "actionModal": {
+        "descriptionTime": "This action will take:",
+        "descriptionDMP": "This action will be instant and take 0 energy, but will cost:"
+      },
       "table": {
         "table": "Table",
-        "addNewContractor": "Add new contractor"
+        "addNewContractor": "Add new contractor",
+        "discoverNewLand": "Discover new land"
       },
       "graph": "Graph",
       "noData": "No data",
@@ -59,8 +64,18 @@
       "reputation": "Reputation",
       "level": "Level",
       "exp": "Exp",
-      "mineInfo": "Mine info",
-      "areaInfo": "Area info"
+      "area": "Area",
+      "areaInfo": "Area info",
+      "status": {
+        "active": "Active",
+        "inactive": "Inactive",
+        "idle": "Idle",
+        "working": "Working"
+      },
+      "mine": {
+        "title": "Mine",
+        "mineInfo": "Mine info"
+      }
     },
     "user": {
       "accountSettings": "Account settings",
@@ -82,8 +97,6 @@
       "myEquipment": "MY EQUIPMENT",
       "configure": "CONFIGURE",
       "miningStatus": "Mine: ",
-      "active": "Active",
-      "inactive": "Inactive",
       "miningInProgress": "Mining is progress",
       "miningWasInterrupted": "Mining was interrupted",
       "miningHasFinished": "Mining has finished",
@@ -195,13 +208,11 @@
       "mineCrew": "Mine crew",
       "contract": "Contract",
       "mineArea": {
-        "area": "Area",
         "landlord": "Landlord",
         "areaRarity": "Area Rarity",
         "minesOnArea": "Mines on Area",
         "areaFee": "Area Fee",
         "saturation": "Saturation",
-        "mine": "Mine",
         "mineOwner": "Mine Owner",
         "mineRarity": "Mine Rarity",
         "level": "Level",
@@ -230,9 +241,6 @@
       "dmePerEjection": "DME per ejection",
       "reputation": "Reputation",
       "activity": "Activity",
-      "idle": "Idle",
-      "working": "Working",
-      "active": "Active",
       "high": "High",
       "average": "Average",
       "low": "Low",
@@ -274,6 +282,26 @@
         "goLandActivate": "Go here activate the land",
         "statsAndInfo": "Go here to see stats & info"
       }
+    },
+    "areaManagement": {
+      "title": "Area management",
+      "claim": "Claim DME",
+      "engage": "Engage the Area",
+      "unengage": "Unengage the Area",
+      "unengageDescription": "Deactivation will result in contractors not being able to start mining",
+      "search": "Searching for Mine owner",
+      "mineSlots": "Mine slots",
+      "status": "Mine status",
+      "dmePerEjection": "DME per ejection",
+      "crew": "Mine crew",
+      "activity": "Mine activity",
+      "add": "Add new mine",
+      "searching": "Searching for Mine owner",
+      "discover": "Discover new land",
+      "landActivation": "Land activation",
+      "addMineOwner": "Add new Mine owner",
+      "findMineOwner": "Find a Mine owner on the servicemaret",
+      "createOrder": "Create an order for a Mine owner"
     }
   },
   "features": {

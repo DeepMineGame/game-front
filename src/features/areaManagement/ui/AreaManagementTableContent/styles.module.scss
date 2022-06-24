@@ -1,0 +1,17 @@
+@import 'src/shared';
+
+.status {
+  display: flex;
+}
+
+.mine {
+  color: $color-primary-primary-6;
+}
+
+.disabled {
+  :global {
+    .ant-table-tbody {
+      display: none;
+    }
+  }
+}
