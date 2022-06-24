@@ -74,7 +74,9 @@
         "setuped": "Setuped",
         "deactivated": "Deactivated",
         "activated": "Activated",
-        "unsetuped": "Unsetuped"
+        "unsetuped": "Unsetuped",
+        "success": "Success",
+        "error": "Error"
       },
       "mine": {
         "title": "Mine",
@@ -89,7 +91,17 @@
   "pages": {
     "info": {
       "share": "Share profile",
-      "copied": "Copied to clipboard"
+      "copied": "Copied to clipboard",
+      "actions": "Actions",
+      "information": "Information"
+    },
+    "actions": {
+      "number": "Number",
+      "action": "Action",
+      "started": "Started",
+      "finished": "Finished",
+      "result": "Result",
+      "mining": "Mining"
     },
     "mining": {
       "mining": "MINING",
