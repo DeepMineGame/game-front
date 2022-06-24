@@ -1,12 +1,9 @@
 import { createEffect, createStore } from 'effector';
 import { getTableData } from 'shared';
-import {
-    deepminegame,
-    GetTableDataConfigType,
-    INDEX_POSITION_CONTRACT,
-} from '../..';
+import { deepminegame, GetTableDataConfigType } from 'entities/smartcontract';
 import { ContractDto } from './types';
 
+export * from './types';
 export enum mapSearchParamForIndexPositionToFindContracts {
     undefined,
     contractId,
@@ -40,16 +37,20 @@ export const contractStore = createStore<ContractDto[] | null>(null).on(
     (_, { rows }) => rows
 );
 
-export const getContractsByNickNameConfig = (account: string) => {
+export const getContractsNameConfig = (
+    account: string,
+    indexPosition = mapSearchParamForIndexPositionToFindContracts.executorId,
+    limit = 1
+) => {
     return {
         code: deepminegame,
         scope: deepminegame,
         table: 'contracts',
-        index_position: INDEX_POSITION_CONTRACT.nickname,
+        index_position: indexPosition,
         key_type: 'name',
         lower_bound: account,
         upper_bound: account,
-        limit: 1,
+        limit,
     } as GetTableDataConfigType;
 };
 

@@ -5,7 +5,7 @@
   text-align: center;
   margin-bottom: 16px;
 
-  @media only screen and (min-width: $media-desktop-s)  {
+  @media (min-width: $media-desktop-s)  {
     margin-bottom: 40px !important;
   }
 }

@@ -14,12 +14,14 @@ type Props = {
     documentTitleScope?: string;
     title?: string;
     className?: string;
+    defaultDocTitle?: boolean;
 };
 export const PageWithTabs: FC<Props> = ({
     tabs,
     documentTitleScope,
     title,
     className,
+    defaultDocTitle,
 }) => {
     const { t } = useTranslation();
     const [selectedTab, setSelectedTab] = useState(tabs?.[0]?.id);
@@ -43,11 +45,15 @@ export const PageWithTabs: FC<Props> = ({
             }
             className={className}
         >
-            <DocumentTitle
-                title={`${
-                    documentTitleScope ? `${documentTitleScope} / ` : ''
-                } Stats and Info / ${selectedTabData?.name || ''} — DeepMine`}
-            />
+            {!defaultDocTitle && (
+                <DocumentTitle
+                    title={`${
+                        documentTitleScope ? `${documentTitleScope} / ` : ''
+                    } Stats and Info / ${
+                        selectedTabData?.name || ''
+                    } — DeepMine`}
+                />
+            )}
             {tabs?.length ? (
                 <>
                     <Navbar

@@ -10,15 +10,15 @@ import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 import { useSmartContractActionDynamic, findEquipmentByName } from 'features';
 import {
+    ContractDto,
     contractorsStore,
     getContractorsEffect,
-    getContractsByNickNameConfig,
+    getContractsNameConfig,
     getInventoryConfig,
     ID_TO_INVENTORY,
     installEquipment,
     InventoryNameType,
     uninstallEquipment,
-    UserContractsType,
     UserInventoryType,
 } from 'entities/smartcontract';
 import styles from './styles.module.scss';
@@ -64,9 +64,7 @@ export const EquipmentSetPage: FC = () => {
         getInventoryConfig,
         needUpdate
     );
-    const userContracts = useTableData<UserContractsType>(
-        getContractsByNickNameConfig
-    );
+    const userContracts = useTableData<ContractDto>(getContractsNameConfig);
     const contractId = userContracts?.[0]?.id ?? 0;
 
     useEffect(() => {

@@ -274,6 +274,12 @@
         "goLandActivate": "Go here activate the land",
         "statsAndInfo": "Go here to see stats & info"
       }
+    },
+    "serviceMarket": {
+      "serviceMarket": "SERVICE MARKET",
+      "myContracts": "My contracts",
+      "miningContracts": "Mining contracts",
+      "mineOperation": "Mine operation"
     }
   },
   "features": {

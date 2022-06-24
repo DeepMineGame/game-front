@@ -10,3 +10,4 @@ export * from './landLord';
 export * from './user';
 export * from './balances';
 export * from './warehouse';
+export * from './serviceMarket';

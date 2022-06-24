@@ -2,9 +2,9 @@ import React, { Dispatch } from 'react';
 
 import {
     ACTION_STATE_TO_ID,
+    ContractDto,
     ID_TO_INVENTORY,
     INVENTORY_NAMES,
-    UserContractsType,
     UserHistoryType,
     UserInventoryType,
 } from 'entities/smartcontract';
@@ -18,7 +18,7 @@ import { MiningOver } from '../MiningOver';
 import { CABIN_STATUS } from '../../constants';
 
 interface ContractorCabinContentProps {
-    userContracts: UserContractsType[];
+    userContracts: ContractDto[];
     userInventory: UserInventoryType[];
     userHistory: UserHistoryType[];
     hasPhysicalShift: boolean;

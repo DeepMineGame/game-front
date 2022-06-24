@@ -143,7 +143,7 @@ export const routes: AppRoute[] = [
         Component: ServiceMarketPage,
         forLoggedIn: false,
         forAdmin: false,
-        titleTag: 'Service — DeepMine',
+        titleTag: 'Service-market — DeepMine',
     },
     {
         path: landLord,
