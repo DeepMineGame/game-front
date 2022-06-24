@@ -1,6 +1,6 @@
 import { createGate } from 'effector-react';
 import { createEffect, createStore, forward } from 'effector';
-import { getTableData } from 'shared';
+import { getTableData, uniqBy } from 'shared';
 import {
     ContractDto,
     getContractsNameConfig,
@@ -33,10 +33,8 @@ export const getContractsEffect = createEffect(
 
 export const contractsStore = createStore<null | ContractDto[]>(null).on(
     getContractsEffect.doneData,
-    (_, [ownerContracts, clientContracts]) => [
-        ...ownerContracts.rows,
-        ...clientContracts.rows,
-    ]
+    (_, [ownerContracts, clientContracts]) =>
+        uniqBy([...ownerContracts.rows, ...clientContracts.rows], 'id')
 );
 
 forward({

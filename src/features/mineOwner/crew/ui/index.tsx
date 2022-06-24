@@ -22,7 +22,7 @@ export const MineOwnerCrew: FC = () => {
     }));
     const mapEmptySlotsToAddButton = mines?.[0]?.contractor_slots
         .filter((slot) => !slot?.contractor)
-        .map(() => <AddItem key={Math.random()} />);
+        .map((_, i) => <AddItem key={i} />);
 
     return (
         <>
