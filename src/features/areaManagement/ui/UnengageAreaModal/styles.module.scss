@@ -1,0 +1,44 @@
+@import "src/shared";
+
+.modal {
+  & > div {
+    background: $color-neutral-neutral-2;
+  }
+
+  :global {
+    .ant-modal-body {
+      padding: 32px 32px 24px 32px;
+    }
+  }
+}
+
+.content {
+  color: $color-neutral-neutral-10;
+  display: flex;
+  align-items: flex-start;
+
+  svg {
+    font-size: 24px;
+    margin-right: 16px;
+  }
+}
+
+.description {
+  font-size: 14px;
+  line-height: 22px;
+  color: $color-neutral-neutral-9;
+  max-width: 296px;
+  padding-bottom: 24px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.button {
+  &:first-child {
+    margin-right: 8px;
+  }
+}

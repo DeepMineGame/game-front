@@ -18,8 +18,8 @@ export const MineStatus: FC = memo(() => {
                 status={isActive ? 'success' : 'error'}
                 text={`${t('pages.mining.miningStatus')} ${
                     isActive
-                        ? t('pages.mining.active')
-                        : t('pages.mining.inactive')
+                        ? t('components.common.status.active')
+                        : t('components.common.status.inactive')
                 }`}
             />
         );

@@ -15,7 +15,7 @@ export const MineAreaInfo = () => {
     const userArea = areas?.[0];
 
     const mineInfoData = {
-        [t('pages.contractorStatsAndInfo.mineArea.mine')]: userMine
+        [t('components.common.mine.title')]: userMine
             ? `ID ${userMine.area_id}`
             : '-',
         [t('pages.contractorStatsAndInfo.mineArea.mineOwner')]:
@@ -39,9 +39,7 @@ export const MineAreaInfo = () => {
     };
 
     const areaInfoData = {
-        [t('pages.contractorStatsAndInfo.mineArea.area')]: userArea
-            ? `ID ${userArea.id}`
-            : '-',
+        [t('components.common.area')]: userArea ? `ID ${userArea.id}` : '-',
         [t('pages.contractorStatsAndInfo.mineArea.landlord')]:
             'Foxelchanger324',
         [t('pages.contractorStatsAndInfo.mineArea.areaRarity')]: userArea
@@ -69,7 +67,7 @@ export const MineAreaInfo = () => {
                         level={5}
                         className={styles.title}
                     >
-                        {t('components.common.mineInfo')}
+                        {t('components.common.mine.mineInfo')}
                     </Title>
                     <KeyValueTable
                         items={mineInfoData}

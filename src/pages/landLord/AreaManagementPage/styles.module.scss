@@ -1,0 +1,13 @@
+@import "src/shared";
+
+.miningSlots {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  padding-top: 24px;
+  padding-bottom: 12px;
+
+  span {
+    font-weight: 700;
+  }
+}

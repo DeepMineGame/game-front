@@ -12,6 +12,7 @@ export const mineOwnerStatsAndInfo = '/mine-owner/stats-and-info';
 export const mineOwnerMineCrew = '/mine-owner/mine-crew';
 export const mineOwner = '/mine-owner/cabin';
 export const landLord = '/landLord';
+export const areaManagement = '/landLord/area-management';
 export const serviceMarket = '/service-market';
 export const hive = '/hive';
 export const user = '/user/:accountName';

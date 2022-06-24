@@ -2,12 +2,12 @@ import React, { FC } from 'react';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { EnergyIcon, TimerIcon } from '../../icons';
-import { getTimeLeft } from '../../utils/time';
+import { getTimeLeft } from '../../utils';
 import styles from './index.module.scss';
 
 type Props = {
     timeSeconds: number;
-    energy: number;
+    energy?: number;
     className?: string;
 };
 
@@ -25,15 +25,17 @@ export const Timer: FC<Props> = ({ timeSeconds, energy, className }) => {
                     </div>
                 </div>
             </div>
-            <div className={styles.line}>
-                <EnergyIcon className={styles.icon} />
-                <div className={styles.lineContent}>
-                    <div className={styles.lineText}>
-                        {t('kit.timer.energy')}
+            {energy !== undefined && (
+                <div className={styles.line}>
+                    <EnergyIcon className={styles.icon} />
+                    <div className={styles.lineContent}>
+                        <div className={styles.lineText}>
+                            {t('kit.timer.energy')}
+                        </div>
+                        <div className={styles.lineValue}>{energy}</div>
                     </div>
-                    <div className={styles.lineValue}>{energy}</div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };

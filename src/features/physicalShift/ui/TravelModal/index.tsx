@@ -42,7 +42,7 @@ export const TravelModal = ({
                 <div className={styles.actions}>
                     <div className={styles.buttons}>
                         <div className={styles.cancelButton} onClick={onClose}>
-                            {t('pages.contractor.travel.cancel')}
+                            {t('components.common.button.cancel')}
                         </div>
                         <div className={styles.travelButton} onClick={onClick}>
                             {t('pages.contractor.travel.travel')}

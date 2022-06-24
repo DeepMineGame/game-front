@@ -30,8 +30,8 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
     const mine = mines?.[0];
     const isMineActive = mine?.state === MineState.activated;
     const statusText = isMineActive
-        ? t('pages.mining.active')
-        : t('pages.mining.inactive');
+        ? t('components.common.status.active')
+        : t('components.common.status.inactive');
 
     const deactivateMine = useSmartContractAction(
         deactmine({ waxUser: chainAccountName, mineId: mine?.id })

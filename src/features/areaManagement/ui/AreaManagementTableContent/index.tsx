@@ -1,29 +1,28 @@
 import React, { FC } from 'react';
-import { Tag, Badge } from 'antd';
+import { Badge } from 'antd';
 import type { ColumnsType } from 'antd/lib/table';
 import { useTranslation } from 'react-i18next';
-import { Table, DiscordIcon, neutral2, neutral1, green6, gold6 } from 'shared';
+import { Table, DiscordIcon, neutral1, green6, gold6 } from 'shared';
 import styles from './styles.module.scss';
 
-enum Status {
+export enum Status {
     'idle',
     'working',
     'active',
 }
 
-enum Activity {
+export enum Activity {
     'low',
     'average',
     'high',
 }
 
 export interface MineCrewDataType {
-    key: React.Key;
     discord: string;
-    contractor: string;
+    mine: string;
     status: Status;
     ejection: number;
-    reputation: number;
+    crew: [number, number];
     activity: Activity;
 }
 
@@ -34,13 +33,17 @@ const getStatusColor = (status: Status) => {
         case Status.working:
             return neutral1;
         case Status.active:
-            return green6;
         default:
             return green6;
     }
 };
 
-export const MineCrewTable: FC<{ data?: MineCrewDataType[] }> = ({ data }) => {
+type Props = {
+    data?: MineCrewDataType[];
+    disabled?: boolean;
+};
+
+export const AreaManagementTableContent: FC<Props> = ({ data, disabled }) => {
     const { t } = useTranslation();
 
     if (!data) {
@@ -60,34 +63,15 @@ export const MineCrewTable: FC<{ data?: MineCrewDataType[] }> = ({ data }) => {
                 ),
         },
         {
-            title: t('pages.contractorMineCrew.contractor'),
-            dataIndex: 'contractor',
-            key: 'contractor',
-            render: (contractor: string, _: MineCrewDataType, idx: number) => {
-                const whose = {
-                    0: 'you',
-                    2: 'mineOwner',
-                };
-
-                return (
-                    <div className={styles.contractor}>
-                        <span className={styles.contractorName}>
-                            {contractor}
-                        </span>
-                        {(idx === 0 || idx === 2) && (
-                            <Tag
-                                className={styles.contractorTag}
-                                color={neutral2}
-                            >
-                                {t(`pages.contractorMineCrew.${whose[idx]}`)}
-                            </Tag>
-                        )}
-                    </div>
-                );
+            title: t('pages.areaManagement.mine'),
+            dataIndex: 'mine',
+            key: 'mine',
+            render: (mine: string) => {
+                return <div className={styles.mine}>{mine}</div>;
             },
         },
         {
-            title: t('pages.contractorMineCrew.status'),
+            title: t('pages.areaManagement.status'),
             dataIndex: 'status',
             key: 'status',
             sorter: {
@@ -103,7 +87,7 @@ export const MineCrewTable: FC<{ data?: MineCrewDataType[] }> = ({ data }) => {
             ),
         },
         {
-            title: t('pages.contractorMineCrew.dmePerEjection'),
+            title: t('pages.areaManagement.dmePerEjection'),
             dataIndex: 'ejection',
             key: 'ejection',
             sorter: {
@@ -113,17 +97,22 @@ export const MineCrewTable: FC<{ data?: MineCrewDataType[] }> = ({ data }) => {
             },
         },
         {
-            title: t('pages.contractorMineCrew.reputation'),
-            dataIndex: 'reputation',
-            key: 'reputation',
+            title: t('pages.areaManagement.crew'),
+            dataIndex: 'crew',
+            key: 'crew',
             sorter: {
                 compare: (a: MineCrewDataType, b: MineCrewDataType) =>
-                    a.reputation - b.reputation,
+                    a.crew[0] - b.crew[0],
                 multiple: 3,
             },
+            render: (crew: [number, number]) => (
+                <div className={styles.crew}>
+                    {crew[0]}/{crew[1]}
+                </div>
+            ),
         },
         {
-            title: t('pages.contractorMineCrew.activity'),
+            title: t('pages.areaManagement.activity'),
             dataIndex: 'activity',
             key: 'activity',
             sorter: {
@@ -135,6 +124,16 @@ export const MineCrewTable: FC<{ data?: MineCrewDataType[] }> = ({ data }) => {
                 t(`pages.contractorMineCrew.${Activity[activity]}`),
         },
     ];
+
+    if (disabled) {
+        return (
+            <Table
+                className={styles.disabled}
+                columns={columns}
+                tableLayout="fixed"
+            />
+        );
+    }
 
     return <Table dataSource={data} columns={columns} tableLayout="fixed" />;
 };
