@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useEvent, useStore } from 'effector-react';
 
-import { useChainAuthContext, LoadingScreen } from 'shared';
+import { useChainAuthContext, LoadingScreen, LogAs } from 'shared';
 import { userStore, getUserFromSessionEffect } from 'entities/user';
 import { routes, fallbackRoute, AppRoute } from './routes';
 import { DocumentTitle } from './components/DocumentTitle';
@@ -61,19 +61,24 @@ const renderRoutes = (routeList: AppRoute[]) =>
     ));
 
 export const Router = () => {
+    const user = useStore(userStore);
+
     return (
-        <Routes>
-            {renderRoutes(routes)}
-            <Route
-                key="*"
-                path="*"
-                element={
-                    <>
-                        <DocumentTitle title={fallbackRoute.titleTag} />
-                        <fallbackRoute.Component />
-                    </>
-                }
-            />
-        </Routes>
+        <>
+            {user?.is_log_as && <LogAs />}
+            <Routes>
+                {renderRoutes(routes)}
+                <Route
+                    key="*"
+                    path="*"
+                    element={
+                        <>
+                            <DocumentTitle title={fallbackRoute.titleTag} />
+                            <fallbackRoute.Component />
+                        </>
+                    }
+                />
+            </Routes>
+        </>
     );
 };

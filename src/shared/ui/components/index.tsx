@@ -8,3 +8,4 @@ export * from './MiningStatsTable';
 export * from './MineCrewTable';
 export * from './ContractsTable';
 export * from './LoadingScreen';
+export * from './LogAs';

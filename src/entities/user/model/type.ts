@@ -13,4 +13,5 @@ export type User = {
     updated_at: string;
     user_created: boolean;
     wax_address: string;
+    is_log_as: boolean;
 };

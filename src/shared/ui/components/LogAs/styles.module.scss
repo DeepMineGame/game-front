@@ -1,0 +1,25 @@
+@import 'src/shared';
+
+.logAs {
+    font-family: $bai;
+    position: fixed;
+    right: 0;
+    top: 60px;
+    padding: 8px 16px;
+    background-color: rgb(61, 49, 0);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(calc(100% - 46px));
+    color: #DBDBDB;
+
+    &Opened {
+        transform: translateX(0);
+    }
+
+    &Icon {
+        margin-right: 16px;
+        color: $color-primary-primary-6;
+    }
+}
