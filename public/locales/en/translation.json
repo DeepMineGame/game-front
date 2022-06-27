@@ -70,7 +70,11 @@
         "active": "Active",
         "inactive": "Inactive",
         "idle": "Idle",
-        "working": "Working"
+        "working": "Working",
+        "setuped": "Setuped",
+        "deactivated": "Deactivated",
+        "activated": "Activated",
+        "unsetuped": "Unsetuped"
       },
       "mine": {
         "title": "Mine",

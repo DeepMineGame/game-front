@@ -2,39 +2,29 @@ import React, { FC } from 'react';
 import { Badge } from 'antd';
 import type { ColumnsType } from 'antd/lib/table';
 import { useTranslation } from 'react-i18next';
-import { Table, DiscordIcon, neutral1, green6, gold6 } from 'shared';
+import {
+    Table,
+    DiscordIcon,
+    neutral1,
+    green6,
+    gold6,
+    neutral3Color,
+} from 'shared';
+import { MineState } from 'entities/smartcontract';
+import { Activity, MineCrewDataType } from '../../types';
 import styles from './styles.module.scss';
 
-export enum Status {
-    'idle',
-    'working',
-    'active',
-}
-
-export enum Activity {
-    'low',
-    'average',
-    'high',
-}
-
-export interface MineCrewDataType {
-    discord: string;
-    mine: string;
-    status: Status;
-    ejection: number;
-    crew: [number, number];
-    activity: Activity;
-}
-
-const getStatusColor = (status: Status) => {
+const getStatusColor = (status: MineState) => {
     switch (status) {
-        case Status.idle:
+        case MineState.setuped:
             return gold6;
-        case Status.working:
+        case MineState.deactivated:
             return neutral1;
-        case Status.active:
-        default:
+        case MineState.activated:
             return green6;
+        case MineState.unsetuped:
+        default:
+            return neutral3Color;
     }
 };
 
@@ -63,7 +53,7 @@ export const AreaManagementTableContent: FC<Props> = ({ data, disabled }) => {
                 ),
         },
         {
-            title: t('pages.areaManagement.mine'),
+            title: t('components.common.mine.title'),
             dataIndex: 'mine',
             key: 'mine',
             render: (mine: string) => {
@@ -79,10 +69,10 @@ export const AreaManagementTableContent: FC<Props> = ({ data, disabled }) => {
                     a.status - b.status,
                 multiple: 1,
             },
-            render: (status: Status) => (
+            render: (status: MineState) => (
                 <div className={styles.status}>
                     <Badge color={getStatusColor(status)} />{' '}
-                    {t(`components.common.status.${Status[status]}`)}
+                    {t(`components.common.status.${MineState[status]}`)}
                 </div>
             ),
         },
@@ -125,7 +115,7 @@ export const AreaManagementTableContent: FC<Props> = ({ data, disabled }) => {
         },
     ];
 
-    if (disabled) {
+    if (disabled || data.length === 0) {
         return (
             <Table
                 className={styles.disabled}
