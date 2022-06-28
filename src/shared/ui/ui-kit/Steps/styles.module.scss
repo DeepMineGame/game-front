@@ -1,0 +1,30 @@
+@import "src/shared";
+.steps {
+  :global {
+    .ant-steps-item-finish .ant-steps-item-icon {
+      background: $color-neutral-neutral-1;
+      border-color: $color-primary-primary-6;
+
+      span {
+        color: $color-primary-primary-6;
+      }
+    }
+    .ant-steps-item-process .ant-steps-item-icon {
+      background: $color-primary-primary-6;
+      border-color: $color-primary-primary-6;
+      span {
+        color: $color-neutral-neutral-1 !important;
+      }
+    }
+    .ant-steps-item-wait .ant-steps-item-icon {
+      background: $color-neutral-neutral-1;
+      border-color: $color-neutral-neutral-5;
+      span {
+        color: $color-neutral-neutral-7 !important;
+      }
+    }
+    .ant-steps-item-tail::after {
+      background-color: $color-neutral-neutral-4 !important;
+    }
+  }
+}
