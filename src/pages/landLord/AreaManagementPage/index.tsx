@@ -27,6 +27,7 @@ export const AreaManagementPage = () => {
     const inventories = useStore(inventoriesStore);
     const area = useStore(areasStore);
     const mines = useStore(minesStore);
+
     const areaItem = inventories?.find(
         ({ inv_type }) => inv_type === InventoryType.areas
     );

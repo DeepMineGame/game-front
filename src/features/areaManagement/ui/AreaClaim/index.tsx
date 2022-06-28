@@ -10,7 +10,7 @@ import {
     sunsetOrange6,
     useAccountName,
 } from 'shared';
-import { setuparea } from 'entities/smartcontract';
+import { engageArea, unEngageArea, claimArea } from 'entities/smartcontract';
 import { UnengageAreaModal } from '../UnengageAreaModal';
 import { useSmartContractAction } from '../../../hooks';
 import styles from './styles.module.scss';
@@ -26,24 +26,34 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, onUpdate }) => {
     const accountName = useAccountName();
     const [isModalActionVisible, setIsModalActionVisible] = useState(false);
     const [isModalUnengageVisible, setIsModalUnengageVisible] = useState(false);
-    const setupArea = useSmartContractAction(
-        setuparea({ waxUser: accountName, areaId })
+    const engageAreaAction = useSmartContractAction(
+        engageArea({ waxUser: accountName, areaId })
+    );
+    const unEngageAreaAction = useSmartContractAction(
+        unEngageArea({ waxUser: accountName, areaId })
+    );
+    const claimAction = useSmartContractAction(
+        claimArea({ waxUser: accountName, areaId })
     );
 
     const onEngage = async () => {
-        await setupArea();
+        await engageAreaAction();
         if (onUpdate) {
             onUpdate();
         }
         setIsModalActionVisible(false);
     };
 
-    const onUnengage = () => {
-        // TODO: not implemented in blockchain now
+    const onUnengage = async () => {
+        await unEngageAreaAction();
         if (onUpdate) {
             onUpdate();
         }
         setIsModalUnengageVisible(false);
+    };
+
+    const handleClaim = async () => {
+        await claimAction();
     };
 
     return (
@@ -68,6 +78,7 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, onUpdate }) => {
                     />
                 </div>
                 <Button
+                    onClick={handleClaim}
                     type={isActive ? 'primary' : 'ghost'}
                     disabled={!isActive}
                     block

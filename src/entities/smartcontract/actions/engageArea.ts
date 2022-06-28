@@ -1,6 +1,6 @@
 import { deepminegame } from '../constants';
 
-export function setuparea({
+export function engageArea({
     waxUser,
     areaId,
 }: {
@@ -11,7 +11,7 @@ export function setuparea({
         actions: [
             {
                 account: deepminegame,
-                name: 'setuparea',
+                name: 'engagearea',
                 authorization: [
                     {
                         actor: waxUser,

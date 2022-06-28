@@ -8,7 +8,9 @@ export * from './deactmine';
 export * from './contrclaim';
 export * from './moclaim';
 export * from './withdrawAssets';
-export * from './setuparea';
+export * from './engageArea';
+export * from './unEngageArea';
+export * from './claimArea';
 
 export function toggleMining({
     waxUser,
