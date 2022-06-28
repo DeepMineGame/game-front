@@ -37,14 +37,14 @@
   white-space: nowrap;
   position: relative;
   cursor: pointer;
-  padding: 16px 16px 6px 16px ;
+  padding: 16px 16px 6px;
   color: $color-primary-primary-6;
   text-decoration: underline;
   text-align: center;
   display: inline-block;
   z-index: 1;
 
-  &:after {
+  &::after {
     content: '';
     position: absolute;
     top: 0;

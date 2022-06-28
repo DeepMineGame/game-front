@@ -14,7 +14,6 @@
   text-transform: uppercase;
   white-space: pre-line;
   text-align: center;
-
   margin-top: 25px;
 
   @media only screen and (min-width: $media-desktop-s)  {
@@ -22,7 +21,7 @@
     width: 198px;
   }
 
-  &:after {
+  &::after {
     position: absolute;
     top: 0;
     bottom: 0;
