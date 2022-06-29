@@ -26,5 +26,12 @@
     .ant-steps-item-tail::after {
       background-color: $color-neutral-neutral-4 !important;
     }
+
+    .ant-steps-item-title {
+      color: $color-neutral-neutral-9 !important;
+    }
+    .ant-steps-item-description {
+      color: $color-neutral-neutral-7 !important;
+    }
   }
 }

@@ -1,5 +1,6 @@
 import { Steps as StepsA, StepProps, StepsProps } from 'antd';
 import React, { FC } from 'react';
+import cn from 'classnames';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -8,7 +9,7 @@ type Props = {
 
 export const Steps: FC<Props> = ({ steps, ...props }) => {
     return (
-        <StepsA {...props} className={styles.steps}>
+        <StepsA {...props} className={cn(styles.steps, props?.className)}>
             {steps?.map((step) => (
                 <StepsA.Step {...step} />
             ))}

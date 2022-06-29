@@ -1,19 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Steps } from 'shared';
+import { Form } from 'antd';
 import styles from './styles.module.scss';
+import { ContractTypeField } from './components/ContractTypeField';
 
 export const CreateOrderForm = () => {
+    const [currentStep] = useState(0);
     return (
-        <div className={styles.form}>
+        <Form
+            className={styles.form}
+            layout="vertical"
+            onValuesChange={() => {}}
+        >
             <Steps
+                className={styles.steps}
                 direction="vertical"
-                current={1}
+                current={currentStep}
                 steps={[
-                    { title: 'hello', description: 'world' },
-                    { title: 'hello', description: 'world' },
-                    { title: 'hello', description: 'world' },
+                    {
+                        title: 'Contract type',
+                        description: currentStep === 0 ? 'In progress' : '',
+                    },
+                    {
+                        title: 'General conditions',
+                        description: currentStep === 1 ? 'In progress' : '',
+                    },
+                    {
+                        title: 'Terms',
+                        description: currentStep === 2 ? 'In progress' : '',
+                    },
                 ]}
             />
-        </div>
+            {currentStep === 0 && <ContractTypeField />}
+        </Form>
     );
 };

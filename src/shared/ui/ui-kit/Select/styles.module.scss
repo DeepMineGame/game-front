@@ -1,0 +1,26 @@
+@import "src/shared";
+
+.select {
+  :global {
+    .ant-select-selector {
+      background: $color-neutral-neutral-1 !important;
+      border-color: $color-neutral-neutral-5 !important;
+      color: $color-neutral-neutral-9 !important;
+    }
+  }
+}
+
+.dropDownSelect {
+  background: $color-neutral-neutral-1 !important;
+  :global {
+    .ant-select-item {
+      color: $color-neutral-neutral-9 !important;
+      background: $color-neutral-neutral-1 !important;
+    }
+    .ant-select-item-option-active {
+      background: $color-neutral-neutral-1 !important;
+      color: $color-neutral-neutral-9 !important;
+
+    }
+  }
+}
