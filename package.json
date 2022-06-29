@@ -43,7 +43,9 @@
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
     "lint": "eslint --ext .tsx,.ts .",
-    "lint:fix": "eslint --ext .tsx,.ts . --fix"
+    "lint:fix": "eslint --ext .tsx,.ts . --fix",
+    "stylelint": "stylelint **/*.{css,scss,sass} --cache",
+    "stylelint:fix": "stylelint **/*.{css,scss,sass} --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -70,6 +72,9 @@
     "@typescript-eslint/eslint-plugin": "^5.21.0",
     "@typescript-eslint/parser": "^5.17.0",
     "react-app-rewired": "^2.2.1",
+    "stylelint": "^14.9.1",
+    "stylelint-config-prettier-scss": "^0.0.1",
+    "stylelint-config-standard-scss": "^4.0.0",
     "typescript": "^4.6.3"
   }
 }

@@ -32,8 +32,8 @@
             color: $color-neutral-neutral-9;
         }
 
-        tr.ant-table-expanded-row:hover > td,
-        tr.ant-table-expanded-row > td {
+        tr.ant-table-expanded-row > td,
+        tr.ant-table-expanded-row:hover > td {
             background-color: $color-neutral-neutral-3;
         }
 
