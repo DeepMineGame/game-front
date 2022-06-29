@@ -3,36 +3,23 @@ import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 
 import { AddItem, DiscoverItem, SearchingItem } from 'shared';
-import {
-    Activity,
-    AreaManagementTableContent,
-    MineCrewDataType,
-    Status,
-} from '../AreaManagementTableContent';
+import { AreaManagementTableContent } from '../AreaManagementTableContent';
 import { AddMineOwnerModal } from '../AddMineOwnerModal';
+import { MineCrewDataType } from '../../types';
 import styles from './styles.module.scss';
-
-const data: MineCrewDataType[] = [
-    {
-        discord: 'https://discord.com/',
-        mine: 'ID34653485',
-        status: Status.idle,
-        crew: [5, 10],
-        ejection: 346,
-        activity: Activity.high,
-    },
-];
 
 const emptySlotsCount = 5;
 const discoverSlotsCount = 2;
 
 type Props = {
+    data?: MineCrewDataType[];
     disabled?: boolean;
 };
 
-export const AreaManagementTable: FC<Props> = ({ disabled }) => {
+export const AreaManagementTable: FC<Props> = ({ data, disabled }) => {
     const { t } = useTranslation();
-    const [searchingSlotsCount, setSearchingSlotsCount] = useState(1);
+    // TODO: implement it after creating orders for mine owner
+    const [searchingSlotsCount, setSearchingSlotsCount] = useState(0);
     const [isAddModalVisible, setIsAddModalVisible] = useState(false);
 
     const searchingSlots = new Array(searchingSlotsCount).fill(
