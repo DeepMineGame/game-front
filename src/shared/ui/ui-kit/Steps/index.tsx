@@ -10,8 +10,8 @@ type Props = {
 export const Steps: FC<Props> = ({ steps, ...props }) => {
     return (
         <StepsA {...props} className={cn(styles.steps, props?.className)}>
-            {steps?.map((step) => (
-                <StepsA.Step {...step} />
+            {steps?.map((step, index) => (
+                <StepsA.Step key={index} {...step} />
             ))}
         </StepsA>
     );

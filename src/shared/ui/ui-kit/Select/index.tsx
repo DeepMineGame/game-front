@@ -4,10 +4,8 @@ import styles from './styles.module.scss';
 
 export const Select: FC<SelectProps> = (props) => {
     return (
-        <SelectA
-            dropdownClassName={styles.dropDownSelect}
-            className={styles.select}
-            {...props}
-        />
+        <div className={styles.select}>
+            <SelectA dropdownClassName={styles.dropDownSelect} {...props} />
+        </div>
     );
 };

@@ -3,16 +3,16 @@ import { Steps } from 'shared';
 import { Form } from 'antd';
 import styles from './styles.module.scss';
 import { ContractTypeField } from './components/ContractTypeField';
+import { RoleField } from './components/RoleField';
 
 export const CreateOrderForm = () => {
     const [currentStep] = useState(0);
+    const [form] = Form.useForm();
+
     return (
-        <Form
-            className={styles.form}
-            layout="vertical"
-            onValuesChange={() => {}}
-        >
+        <Form className={styles.form} layout="vertical" form={form}>
             <Steps
+                onChange={() => {}}
                 className={styles.steps}
                 direction="vertical"
                 current={currentStep}
@@ -31,7 +31,12 @@ export const CreateOrderForm = () => {
                     },
                 ]}
             />
-            {currentStep === 0 && <ContractTypeField />}
+            {currentStep === 0 && (
+                <div className={styles.rightSection}>
+                    <ContractTypeField />
+                    <RoleField form={form} />
+                </div>
+            )}
         </Form>
     );
 };

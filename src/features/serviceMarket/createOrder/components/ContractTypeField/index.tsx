@@ -1,26 +1,19 @@
 import { Form } from 'antd';
 import React from 'react';
-import { useForm } from 'antd/es/form/Form';
 import { Select } from 'shared';
 import { ContractType } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
+import { fieldNames } from '../../constants';
 
 export const ContractTypeField = () => {
-    const [form] = useForm();
     return (
         <Form.Item
             className={styles.formField}
             label="Contract type"
-            name="contract_type"
+            name={fieldNames.contractType}
         >
             <Select
                 placeholder="Select contract type"
-                onChange={({ value }) =>
-                    form.setFieldsValue({
-                        ...form.getFieldsValue(),
-                        contract_type: value,
-                    })
-                }
                 options={[
                     {
                         value: ContractType.landlord_mineowner,
