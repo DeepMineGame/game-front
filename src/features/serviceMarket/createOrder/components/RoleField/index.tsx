@@ -8,14 +8,14 @@ import { fieldNames } from '../../constants';
 
 export const RoleField: FC<{ form: FormInstance }> = ({ form }) => {
     const contractType = useWatch(fieldNames.contractType, form);
-    const isDisabled = !contractType;
+    const isDisabled = contractType === undefined;
     const isMineSetupContractTypeSelected =
         contractType === ContractType.landlord_mineowner;
     return (
         <Form.Item
             className={styles.formField}
             label="Your role"
-            name="is_client"
+            name={fieldNames.isClient}
             dependencies={[fieldNames.contractType]}
         >
             <Select
@@ -27,11 +27,13 @@ export const RoleField: FC<{ form: FormInstance }> = ({ form }) => {
                 }
                 options={[
                     {
-                        value: 1,
-                        label: 'Contrcator',
+                        value: isMineSetupContractTypeSelected ? 1 : 0,
+                        label: isMineSetupContractTypeSelected
+                            ? 'Land lord'
+                            : 'Contrcator',
                     },
                     {
-                        value: 0,
+                        value: isMineSetupContractTypeSelected ? 0 : 1,
                         label: 'Mine owner',
                     },
                 ]}

@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { Steps } from 'shared';
+import { Button, Steps, useAccountName } from 'shared';
 import { Form } from 'antd';
 import styles from './styles.module.scss';
 import { ContractTypeField } from './components/ContractTypeField';
 import { RoleField } from './components/RoleField';
+import { MineSelectField } from './components/MineSelectField';
 
 export const CreateOrderForm = () => {
-    const [currentStep] = useState(0);
+    const [currentStep, setStep] = useState(0);
     const [form] = Form.useForm();
+    const accountName = useAccountName();
 
     return (
         <Form className={styles.form} layout="vertical" form={form}>
@@ -33,8 +35,17 @@ export const CreateOrderForm = () => {
             />
             {currentStep === 0 && (
                 <div className={styles.rightSection}>
-                    <ContractTypeField />
+                    <ContractTypeField form={form} />
                     <RoleField form={form} />
+                    {accountName && (
+                        <MineSelectField
+                            form={form}
+                            accountName={accountName}
+                        />
+                    )}
+                    <Button block type="primary" onClick={() => setStep(1)}>
+                        Next
+                    </Button>
                 </div>
             )}
         </Form>
