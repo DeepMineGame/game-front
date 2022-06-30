@@ -25,3 +25,4 @@ export * from './AreaChart';
 export * from './ActionModal';
 export * from './Steps';
 export * from './Select';
+export * from './Input';

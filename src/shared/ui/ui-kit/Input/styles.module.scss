@@ -1,0 +1,11 @@
+@import "src/shared";
+
+.input {
+  background: $color-neutral-neutral-1;
+  border-color: $color-neutral-neutral-5;
+  color: $color-neutral-neutral-9;
+
+  &:focus, &:hover {
+    border-color: $color-neutral-neutral-7;
+  }
+}

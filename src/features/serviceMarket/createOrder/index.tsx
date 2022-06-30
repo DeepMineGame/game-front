@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import { Button, Steps, useAccountName } from 'shared';
+import { Steps } from 'shared';
 import { Form } from 'antd';
 import styles from './styles.module.scss';
-import { ContractTypeField } from './components/ContractTypeField';
-import { RoleField } from './components/RoleField';
-import { MineSelectField } from './components/MineSelectField';
+import { FirsStep } from './components/FirsеStep';
+import { SecondStep } from './components/SecondStep/indes';
 
 export const CreateOrderForm = () => {
     const [currentStep, setStep] = useState(0);
     const [form] = Form.useForm();
-    const accountName = useAccountName();
 
     return (
         <Form className={styles.form} layout="vertical" form={form}>
@@ -33,21 +31,8 @@ export const CreateOrderForm = () => {
                     },
                 ]}
             />
-            {currentStep === 0 && (
-                <div className={styles.rightSection}>
-                    <ContractTypeField form={form} />
-                    <RoleField form={form} />
-                    {accountName && (
-                        <MineSelectField
-                            form={form}
-                            accountName={accountName}
-                        />
-                    )}
-                    <Button block type="primary" onClick={() => setStep(1)}>
-                        Next
-                    </Button>
-                </div>
-            )}
+            {currentStep === 0 && <FirsStep form={form} setStep={setStep} />}
+            {currentStep === 1 && <SecondStep setStep={setStep} />}
         </Form>
     );
 };
