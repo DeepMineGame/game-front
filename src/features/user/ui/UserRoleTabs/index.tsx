@@ -28,13 +28,13 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
     const smartContractUserData = smartContractUsers?.[0];
     const isDesktop = useMediaQuery(desktopS);
     const { t } = useTranslation();
-    const roles = useStore(rolesStore);
+    const roles = useStore(rolesStore) || [];
     const contractors = useStore(contractorsStore);
-    const hasLandlordRole = Boolean(
-        roles?.filter(({ role }) => role === UserRoles.landlord)?.length
+    const hasLandlordRole = roles.some(
+        ({ role }) => role === UserRoles.landlord
     );
-    const hasMineOwnerRole = Boolean(
-        roles?.filter(({ role }) => role === UserRoles.mine_owner)?.length
+    const hasMineOwnerRole = roles.some(
+        ({ role }) => role === UserRoles.mine_owner
     );
 
     const userLine = smartContractUserData && (
