@@ -3,8 +3,11 @@ import { useWatch } from 'antd/es/form/Form';
 import { FormInstance, Form, Alert } from 'antd';
 import { useGate, useStore } from 'effector-react';
 import { Select } from 'shared';
-import { ContractType, mineAssetTemplateId } from 'entities/smartcontract';
-import { fieldNames } from '../../constants';
+import {
+    ContractType,
+    createContrFormFields,
+    mineAssetTemplateId,
+} from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
 import { MineSelectGate, userInventoryStore } from './model';
 
@@ -17,8 +20,8 @@ export const MineSelectField: FC<{
     const userMines = userInventory?.filter(
         ({ template_id }) => template_id === mineAssetTemplateId
     );
-    const isClient = useWatch(fieldNames.isClient, form);
-    const contractType = useWatch(fieldNames.contractType, form);
+    const isClient = useWatch(createContrFormFields.isClient, form);
+    const contractType = useWatch(createContrFormFields.contractType, form);
 
     const isMineSetupContractTypeSelected =
         contractType === ContractType.landlord_mineowner;
@@ -32,7 +35,7 @@ export const MineSelectField: FC<{
             <Form.Item
                 className={styles.formField}
                 label="Contract type"
-                name={fieldNames.assetId}
+                name={createContrFormFields.assetId}
             >
                 <Select
                     placeholder="Mine"

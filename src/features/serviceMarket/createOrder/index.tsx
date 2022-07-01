@@ -1,18 +1,33 @@
 import React, { useState } from 'react';
-import { Steps } from 'shared';
+import { Steps, useAccountName } from 'shared';
 import { Form } from 'antd';
+import { createContr, CreateContrDto } from 'entities/smartcontract';
+import { useSmartContractActionDynamic } from '../../hooks';
 import styles from './styles.module.scss';
 import { FirsStep } from './components/FirsеStep';
 import { SecondStep } from './components/SecondStep/indes';
+import { ThirdStep } from './components/ThirdStep';
 
 export const CreateOrderForm = () => {
     const [currentStep, setStep] = useState(0);
     const [form] = Form.useForm();
-
+    const [values, setValues] = useState<CreateContrDto>();
+    const callAction = useSmartContractActionDynamic();
+    const accountName = useAccountName();
     return (
-        <Form className={styles.form} layout="vertical" form={form}>
+        <Form
+            className={styles.form}
+            layout="vertical"
+            form={form}
+            onValuesChange={(oldValues, currentValues) =>
+                setValues({ ...values, ...currentValues })
+            }
+            onFinish={() =>
+                values &&
+                callAction(createContr({ ...values, wax_user: accountName }))
+            }
+        >
             <Steps
-                onChange={() => {}}
                 className={styles.steps}
                 direction="vertical"
                 current={currentStep}
@@ -33,6 +48,7 @@ export const CreateOrderForm = () => {
             />
             {currentStep === 0 && <FirsStep form={form} setStep={setStep} />}
             {currentStep === 1 && <SecondStep setStep={setStep} />}
+            {currentStep === 2 && <ThirdStep setStep={setStep} />}
         </Form>
     );
 };

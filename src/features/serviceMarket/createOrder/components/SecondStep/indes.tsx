@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Form, Input as InputA, Space } from 'antd';
-import { Button, Input, Select } from 'shared';
-import { fieldNames } from '../../constants';
+import { Button, Input, Select, getDaysSelectItem } from 'shared';
+import { createContrFormFields } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
 
 export const SecondStep: FC<{
@@ -11,7 +11,7 @@ export const SecondStep: FC<{
         <Form.Item>
             <InputA.Group compact>
                 <Form.Item
-                    name={fieldNames.fee}
+                    name={createContrFormFields.fee}
                     label="Fee"
                     className={styles.formField}
                 >
@@ -24,7 +24,7 @@ export const SecondStep: FC<{
                     />
                 </Form.Item>
                 <Form.Item
-                    name={fieldNames.deadlineTime}
+                    name={createContrFormFields.finishesAt}
                     label="Duration"
                     className={styles.formField}
                 >
@@ -33,15 +33,21 @@ export const SecondStep: FC<{
                             width: '160px',
                         }}
                         placeholder="Days"
-                        options={Array.from(Array(21).keys()).map(
-                            (_, index) => ({
-                                label: `${index} Day`,
-                                value: index,
-                            })
-                        )}
+                        options={getDaysSelectItem({ amountOfDays: 21 })}
                     />
                 </Form.Item>
             </InputA.Group>
+            <Form.Item
+                name={createContrFormFields.deadlineTime}
+                label="Start of operation"
+                className={styles.formField}
+                style={{ width: '352px' }}
+            >
+                <Select
+                    placeholder="Days"
+                    options={getDaysSelectItem({ amountOfDays: 3 })}
+                />
+            </Form.Item>
             <Space direction="horizontal">
                 <Button onClick={() => setStep(0)} ghost>
                     Back
