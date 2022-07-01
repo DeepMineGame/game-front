@@ -11,6 +11,7 @@ export const Steps: FC<Props> = ({ steps, ...props }) => {
     return (
         <StepsA {...props} className={cn(styles.steps, props?.className)}>
             {steps?.map((step, index) => (
+                // eslint-disable-next-line react/no-array-index-key
                 <StepsA.Step key={index} {...step} />
             ))}
         </StepsA>

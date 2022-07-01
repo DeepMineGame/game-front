@@ -7,7 +7,7 @@ import { ContractTypeField } from '../ContractTypeField';
 import { RoleField } from '../RoleField';
 import { MineSelectField } from '../MineSelectField';
 
-export const FirsStep: FC<{
+export const ContractTypeAndRoleStep: FC<{
     form: FormInstance;
     setStep: React.Dispatch<React.SetStateAction<number>>;
 }> = ({ form, setStep }) => {

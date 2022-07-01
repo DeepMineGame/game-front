@@ -5,9 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { createContr, CreateContrDto } from 'entities/smartcontract';
 import { useSmartContractActionDynamic } from '../../hooks';
 import styles from './styles.module.scss';
-import { FirsStep } from './components/FirsеStep';
-import { SecondStep } from './components/SecondStep/indes';
-import { ThirdStep } from './components/ThirdStep';
+import { ContractTypeAndRoleStep } from './components/ContractTypeAndRoleStep';
+import { GeneralConditionStep } from './components/GeneralConditionStep/indes';
+import { TermsStep } from './components/TermsStep';
 
 export const CreateOrderForm = () => {
     const { t } = useTranslation();
@@ -25,8 +25,7 @@ export const CreateOrderForm = () => {
                 setValues({ ...values, ...currentValues })
             }
             onFinish={() =>
-                values &&
-                callAction(createContr({ ...values, wax_user: accountName }))
+                callAction(createContr({ ...values!, wax_user: accountName }))
             }
         >
             <Steps
@@ -61,9 +60,11 @@ export const CreateOrderForm = () => {
                     },
                 ]}
             />
-            {currentStep === 0 && <FirsStep form={form} setStep={setStep} />}
-            {currentStep === 1 && <SecondStep setStep={setStep} />}
-            {currentStep === 2 && <ThirdStep setStep={setStep} />}
+            {currentStep === 0 && (
+                <ContractTypeAndRoleStep form={form} setStep={setStep} />
+            )}
+            {currentStep === 1 && <GeneralConditionStep setStep={setStep} />}
+            {currentStep === 2 && <TermsStep setStep={setStep} />}
         </Form>
     );
 };

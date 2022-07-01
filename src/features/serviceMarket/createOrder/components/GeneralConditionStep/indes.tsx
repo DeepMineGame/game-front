@@ -7,7 +7,7 @@ import { createContrFormFields } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
 import localStyles from './styles.module.scss';
 
-export const SecondStep: FC<{
+export const GeneralConditionStep: FC<{
     setStep: React.Dispatch<React.SetStateAction<number>>;
 }> = ({ setStep }) => {
     const { t } = useTranslation();
