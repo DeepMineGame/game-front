@@ -1,14 +1,19 @@
-import { PageWithTabs, useAccountName, Loader } from 'shared';
+import { PageWithTabs, useAccountName, Loader, Button } from 'shared';
 import React, { memo } from 'react';
 import { Empty } from 'antd';
 import { ServiceMarketContractsTable } from 'features';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { createOrder } from 'app/router/paths';
+import { PlusOutlined } from '@ant-design/icons';
 import styles from './styles.module.scss';
+
+export * from './order';
 
 export const ServiceMarketPage = () => {
     const accountName = useAccountName();
     const { t } = useTranslation();
-
+    const navigate = useNavigate();
     return (
         <PageWithTabs
             className={styles.page}
@@ -19,9 +24,22 @@ export const ServiceMarketPage = () => {
                     id: 1,
                     component: accountName
                         ? memo(() => (
-                              <ServiceMarketContractsTable
-                                  accountName={accountName}
-                              />
+                              <>
+                                  <div className={styles.createButtonWrapper}>
+                                      <Button
+                                          type="primary"
+                                          onClick={() => navigate(createOrder)}
+                                          icon={<PlusOutlined />}
+                                      >
+                                          {t(
+                                              'pages.serviceMarket.createOrder.createOrder'
+                                          )}
+                                      </Button>
+                                  </div>
+                                  <ServiceMarketContractsTable
+                                      accountName={accountName}
+                                  />
+                              </>
                           ))
                         : memo(() => <Loader centered size="large" />),
                     name: t('pages.serviceMarket.myContracts'),

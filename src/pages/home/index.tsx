@@ -3,7 +3,12 @@ import classNames from 'classnames';
 import { Header, Title } from 'shared';
 import { DownOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { contractorCabin, mineOwner } from 'app/router/paths';
+import {
+    contractorCabin,
+    hive,
+    mineOwner,
+    serviceMarket,
+} from 'app/router/paths';
 import { useTranslation } from 'react-i18next';
 import styles from './styles.module.scss';
 
@@ -25,6 +30,22 @@ export const HomePage: FC = () => {
                 onClick={() => navigate(contractorCabin)}
             >
                 <Title level={5}>{t('pages.home.contractorCabin')}</Title>
+                <DownOutlined />
+            </div>
+            <div
+                className={classNames(styles.hive, styles.enterLink)}
+                onClick={() => navigate(hive)}
+            >
+                <Title level={5}>{t('pages.home.hive')}</Title>
+                <DownOutlined />
+            </div>
+            <div
+                className={classNames(styles.serviceMarket, styles.enterLink)}
+                onClick={() => navigate(serviceMarket)}
+            >
+                <Title level={5}>
+                    {t('pages.serviceMarket.serviceMarket')}
+                </Title>
                 <DownOutlined />
             </div>
         </div>

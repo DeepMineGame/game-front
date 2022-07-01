@@ -65,3 +65,33 @@
     margin-bottom: 0;
   }
 }
+
+.hive {
+    margin-left: 10vw;
+    margin-top: 0;
+
+    @media only screen and (min-width: $media-mobile-oriental)  {
+      margin-left: 20vw;
+      margin-top: 0;
+    }
+
+    @media only screen and (min-width: $media-desktop-s)  {
+      margin-left: 25vw;
+      margin-top: 0;
+    }
+}
+
+.serviceMarket {
+  margin-left: 25vw;
+  margin-top: 0;
+
+  @media only screen and (min-width: $media-mobile-oriental)  {
+    margin-left: 25vw;
+    margin-top: 0;
+  }
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    margin-left: 25vw;
+    margin-top: 0;
+  }
+}
