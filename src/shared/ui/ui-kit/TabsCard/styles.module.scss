@@ -1,0 +1,42 @@
+@import 'src/shared';
+
+:global {
+    // prevent styling nested tabs
+    :local(.tabs).ant-tabs-card {
+        & > .ant-tabs-nav {
+            &::before {
+                content: none;
+            }
+
+            .ant-tabs-nav-list {
+                padding: 2px;
+                border-radius: 2px;
+                background: $color-neutral-neutral-4 !important;
+            }
+
+            .ant-tabs-tab {
+                background: $color-neutral-neutral-4 !important;
+                border: none !important;
+                border-radius: 2px !important;
+
+                & + .ant-tabs-tab {
+                    margin-left: 0 !important;
+                }
+
+                &.ant-tabs-tab-active {
+                    padding: 5px 16px;
+                    background-color: $color-neutral-neutral-2 !important;
+                    border-radius: 2px;
+                }
+
+                .ant-tabs-tab-btn {
+                    color: $color-neutral-neutral-9 !important;
+                }
+
+                .anticon {
+                    margin-right: 8px;
+                }
+            }
+        }
+    }
+}

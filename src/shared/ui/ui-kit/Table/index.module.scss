@@ -54,5 +54,35 @@
         .ant-table-thead .ant-table-cell {
             font-weight: bold;
         }
+
+        .ant-pagination-item {
+            background-color: $color-neutral-neutral-1;
+            border-color: $color-neutral-neutral-5;
+
+            & a {
+                color: $color-neutral-neutral-9;
+            }
+        }
+
+        .ant-pagination-item-active {
+            border-color: $color-primary-primary-6;
+
+            & a {
+                color: $color-primary-primary-6;
+            }
+        }
+
+        .ant-pagination-next .ant-pagination-item-link,
+        .ant-pagination-prev .ant-pagination-item-link {
+            background-color: $color-neutral-neutral-1;
+            border-color: $color-neutral-neutral-5;
+            color: $color-neutral-neutral-9;
+        }
+
+        .ant-pagination-disabled .ant-pagination-item-link {
+            background-color: $color-neutral-neutral-3;
+            border-color: $color-neutral-neutral-5;
+            color: $color-neutral-neutral-6;
+        }
     }
 }

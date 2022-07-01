@@ -1,12 +1,15 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { MiningStatsTable, AreaChart, Title } from 'shared';
+import {
+    MiningStatsTable,
+    AreaChart,
+    Title,
+    TabsCard,
+    TabsCardPane,
+} from 'shared';
 import type { MiningStatsDataType, MiningStatsDataTypeExpanded } from 'shared';
-import { Tabs } from 'antd';
 import { UnorderedListOutlined, BarChartOutlined } from '@ant-design/icons';
 import styles from './styles.module.scss';
-
-const { TabPane } = Tabs;
 
 const data: MiningStatsDataType[] = [
     {
@@ -104,13 +107,8 @@ export const MiningStats = () => {
 
     return (
         <div className={styles.miningStats}>
-            <Tabs
-                className={styles.tabs}
-                defaultActiveKey="1"
-                type="card"
-                size="small"
-            >
-                <TabPane
+            <TabsCard defaultActiveKey="1">
+                <TabsCardPane
                     tab={
                         <>
                             <UnorderedListOutlined
@@ -129,8 +127,8 @@ export const MiningStats = () => {
                             />
                         </div>
                     </div>
-                </TabPane>
-                <TabPane
+                </TabsCardPane>
+                <TabsCardPane
                     tab={
                         <>
                             <BarChartOutlined style={{ fontSize: '16px' }} />
@@ -148,8 +146,8 @@ export const MiningStats = () => {
                         {t('pages.contractorMiningStats.miningEvents')}
                     </Title>
                     <AreaChart options={chartOptions} />
-                </TabPane>
-            </Tabs>
+                </TabsCardPane>
+            </TabsCard>
         </div>
     );
 };
