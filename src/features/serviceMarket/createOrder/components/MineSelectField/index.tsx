@@ -3,6 +3,7 @@ import { useWatch } from 'antd/es/form/Form';
 import { FormInstance, Form, Alert } from 'antd';
 import { useGate, useStore } from 'effector-react';
 import { Select } from 'shared';
+import { useTranslation } from 'react-i18next';
 import {
     ContractType,
     createContrFormFields,
@@ -16,6 +17,8 @@ export const MineSelectField: FC<{
     accountName: string;
 }> = ({ form, accountName }) => {
     useGate(MineSelectGate, { searchParam: accountName });
+    const { t } = useTranslation();
+
     const userInventory = useStore(userInventoryStore);
     const userMines = userInventory?.filter(
         ({ template_id }) => template_id === mineAssetTemplateId
@@ -34,11 +37,11 @@ export const MineSelectField: FC<{
         return userMines?.length ? (
             <Form.Item
                 className={styles.formField}
-                label="Contract type"
+                label={t('features.actions.mine')}
                 name={createContrFormFields.assetId}
             >
                 <Select
-                    placeholder="Mine"
+                    placeholder={t('features.actions.mine')}
                     options={userMines.map(({ asset_id }) => ({
                         value: asset_id,
                         label: asset_id,
@@ -46,12 +49,16 @@ export const MineSelectField: FC<{
                 />
             </Form.Item>
         ) : (
-            <Alert
-                message="Warning"
-                description="You don’t have an NFT to create this order. Please visit the Marketplace"
-                type="warning"
-                showIcon
-            />
+            <Form.Item>
+                <Alert
+                    message={t('components.common.warning')}
+                    description={t(
+                        'pages.serviceMarket.createOrder.haveNoNftAlert.haveNo'
+                    )}
+                    type="warning"
+                    showIcon
+                />
+            </Form.Item>
         );
     }
     return null;

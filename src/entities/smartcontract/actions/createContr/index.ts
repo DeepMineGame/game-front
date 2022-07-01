@@ -19,8 +19,6 @@ export type CreateContrDto = {
     contract_type: ContractType;
     asset_id: number;
     is_client: 0 | 1;
-    client: string;
-    executor: string;
     fee_percent: number;
     fee_daily_min_amount: number;
     days_for_penalty: number;

@@ -7,6 +7,7 @@ export * from './types';
 export enum mapSearchParamForIndexPositionToFindContracts {
     undefined,
     contractId,
+    contractType,
     clientId,
     executorId,
 }

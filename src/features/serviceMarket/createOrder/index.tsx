@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Steps, useAccountName } from 'shared';
 import { Form } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { createContr, CreateContrDto } from 'entities/smartcontract';
 import { useSmartContractActionDynamic } from '../../hooks';
 import styles from './styles.module.scss';
@@ -9,6 +10,7 @@ import { SecondStep } from './components/SecondStep/indes';
 import { ThirdStep } from './components/ThirdStep';
 
 export const CreateOrderForm = () => {
+    const { t } = useTranslation();
     const [currentStep, setStep] = useState(0);
     const [form] = Form.useForm();
     const [values, setValues] = useState<CreateContrDto>();
@@ -33,16 +35,29 @@ export const CreateOrderForm = () => {
                 current={currentStep}
                 steps={[
                     {
-                        title: 'Contract type',
-                        description: currentStep === 0 ? 'In progress' : '',
+                        title: t(
+                            'pages.serviceMarket.createOrder.contractType'
+                        ),
+                        description:
+                            currentStep === 0
+                                ? t('components.common.inProgress')
+                                : '',
                     },
                     {
-                        title: 'General conditions',
-                        description: currentStep === 1 ? 'In progress' : '',
+                        title: t(
+                            'pages.serviceMarket.createOrder.generalCondition'
+                        ),
+                        description:
+                            currentStep === 1
+                                ? t('components.common.inProgress')
+                                : '',
                     },
                     {
-                        title: 'Terms',
-                        description: currentStep === 2 ? 'In progress' : '',
+                        title: t('pages.serviceMarket.createOrder.terms'),
+                        description:
+                            currentStep === 2
+                                ? t('components.common.inProgress')
+                                : '',
                     },
                 ]}
             />

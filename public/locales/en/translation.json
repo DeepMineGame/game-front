@@ -40,7 +40,9 @@
         "activate": "Activate",
         "claim": "Claim",
         "dme": "DME",
-        "dmp": "DMP"
+        "dmp": "DMP",
+        "next": "Next",
+        "create": "Create"
       },
       "actionModal": {
         "descriptionTime": "This action will take:",
@@ -66,6 +68,10 @@
       "exp": "Exp",
       "area": "Area",
       "areaInfo": "Area info",
+      "warning": "Warning",
+      "duration": "Duration",
+      "days": "Days",
+      "inProgress": "In progress",
       "status": {
         "active": "Active",
         "inactive": "Inactive",
@@ -291,7 +297,25 @@
       "serviceMarket": "SERVICE MARKET",
       "myContracts": "My contracts",
       "miningContracts": "Mining contracts",
-      "mineOperation": "Mine operation"
+      "mineOperation": "Mine operation",
+      "createOrder": {
+        "contractType": "Contract type",
+        "generalCondition": "General condition",
+        "terms": "Terms",
+        "selectContractType": "Select contract type",
+        "miningContract": "Mining contract",
+        "yourRole": "Your role",
+        "selectToDisable": "Select contract type to disable",
+        "selectRole": "Select role",
+        "fee": "Fee",
+        "ifDuring": "If during the entire contract, the contractor within",
+        "contractorFined": "contractor can be fined and the contract can be terminated with",
+        "miningTerms": "Mining terms",
+        "startOfOperation": "Start of operation",
+        "haveNoNftAlert": {
+          "haveNo": "You don’t have an NFT to create this order. Please visit the Marketplace"
+        }
+      }
     },
     "areaManagement": {
       "title": "Area management",
@@ -363,6 +387,7 @@
     "citizen": "Citizen",
     "landlord": "Landlord",
     "mineOwner": "Mine owner",
-    "contractor": "Contractor"
+    "contractor": "Contractor",
+    "landLord": "Land lord"
   }
 }
