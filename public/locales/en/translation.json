@@ -299,6 +299,7 @@
       "miningContracts": "Mining contracts",
       "mineOperation": "Mine operation",
       "createOrder": {
+        "createOrder": "Create order",
         "contractType": "Contract type",
         "generalCondition": "General condition",
         "terms": "Terms",

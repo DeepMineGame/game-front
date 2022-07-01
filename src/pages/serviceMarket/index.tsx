@@ -31,7 +31,9 @@ export const ServiceMarketPage = () => {
                                           onClick={() => navigate(createOrder)}
                                           icon={<PlusOutlined />}
                                       >
-                                          Create order
+                                          {t(
+                                              'pages.serviceMarket.createOrder.createOrder'
+                                          )}
                                       </Button>
                                   </div>
                                   <ServiceMarketContractsTable
