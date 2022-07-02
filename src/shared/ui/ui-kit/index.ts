@@ -28,3 +28,4 @@ export * from './Select';
 export * from './Input';
 export * from './TabsCard';
 export * from './Result';
+export * from './Segmented';

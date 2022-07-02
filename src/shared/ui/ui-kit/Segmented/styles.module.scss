@@ -1,0 +1,23 @@
+@import "src/shared";
+
+.segment {
+    color: $color-neutral-neutral-9;
+    background-color: $color-neutral-neutral-3;
+
+    &:not(.ant-segmented-disabled):hover {
+        background-color: $color-neutral-neutral-3;
+    }
+
+    :global {
+        .ant-segmented-item-selected {
+            color: $color-neutral-neutral-9;
+            background-color: $color-neutral-neutral-2;
+        }
+        .ant-segmented-item:hover {
+            color: $color-neutral-neutral-9;
+        }
+        .ant-segmented-thumb {
+            background-color: $color-neutral-neutral-2;
+        }
+    }
+}

@@ -22,7 +22,7 @@ export const Contract: FC<Props> = ({ contract }) => {
                 items={{
                     Area: contract?.client_asset_id || '-',
                     Landlord: contract?.client || '-',
-                    Fee: contract?.fee || '-',
+                    Fee: contract?.fee_daily_min_amount || '-',
                 }}
             />
         </>
