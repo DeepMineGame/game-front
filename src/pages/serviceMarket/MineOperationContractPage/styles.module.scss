@@ -1,0 +1,52 @@
+@import "src/shared";
+
+.contractId, .discord {
+  display: flex;
+  align-items: center;
+
+  div {
+    color: $color-primary-primary-6;
+  }
+
+  svg {
+    cursor: pointer;
+    margin-right: 8px;
+  }
+}
+
+.title {
+  text-transform: uppercase;
+  padding-bottom: 8px;
+}
+
+.generalSection {
+  .table:nth-child(2) {
+    margin-top: 34px;
+  }
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    display: flex;
+
+    .table {
+      flex: 1;
+      margin-top: 0 !important;
+
+      &:first-child {
+        margin-right: 34px;
+      }
+    }
+  }
+}
+
+.additionalSection {
+  display: flex;
+  margin-top: 24px;
+
+  .table {
+    flex: 1;
+
+    &:first-child {
+      margin-right: 34px;
+    }
+  }
+}

@@ -339,7 +339,24 @@
       "lookingForContractor": "Looking for Contractor",
       "nickname": "Nickname",
       "creationDate": "Creation date",
-      "Penalty&DME": "Penalty, DME"
+      "Penalty&DME": "Penalty, DME",
+      "contract": {
+        "title": "mine operation contract",
+        "generalInformation": "general information",
+        "conditions": "conditions",
+        "landlord": "Landlord",
+        "mineOwner": "Mine owner",
+        "id": "Contract ID",
+        "date": "Creation date",
+        "duration": "Duration",
+        "operationStart": "Start of operation in",
+        "penalty": "Penalty",
+        "miningTerms": "Mining terms",
+        "fee": "Fee",
+        "wallet": "WAX wallet",
+        "area": "Area",
+        "mine": "Mine"
+      }
     },
     "areaManagement": {
       "title": "Area management",
