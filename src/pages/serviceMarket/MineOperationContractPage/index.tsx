@@ -2,6 +2,7 @@ import React from 'react';
 import { CopyOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { DiscordIcon, KeyValueTable, Page, Title } from 'shared';
+import { Penalty } from 'features';
 
 import styles from './styles.module.scss';
 
@@ -89,7 +90,13 @@ export const MineOperationContractPage = () => {
             headerTitle={t('pages.serviceMarket.contract.title').toUpperCase()}
         >
             <div className={styles.generalSection}>
-                <TableWithTitle title={infoData.title} data={infoData.table} />
+                <div className={styles.table}>
+                    <TableWithTitle
+                        title={infoData.title}
+                        data={infoData.table}
+                    />
+                    <Penalty />
+                </div>
                 <TableWithTitle
                     title={conditionsData.title}
                     data={conditionsData.table}
