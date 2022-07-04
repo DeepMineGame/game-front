@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { Steps, useAccountName } from 'shared';
 import { Form } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { serviceMarket } from 'app/router/paths';
 import { createContr, CreateContrDto } from 'entities/smartcontract';
 import { useSmartContractActionDynamic } from '../../hooks';
 import styles from './styles.module.scss';
 import { ContractTypeAndRoleStep } from './components/ContractTypeAndRoleStep';
 import { GeneralConditionStep } from './components/GeneralConditionStep/indes';
 import { TermsStep } from './components/TermsStep';
+import { CreateResult } from './components/CreateResult';
 
 export const CreateOrderForm = () => {
     const { t } = useTranslation();
@@ -16,6 +19,16 @@ export const CreateOrderForm = () => {
     const [values, setValues] = useState<CreateContrDto>();
     const callAction = useSmartContractActionDynamic();
     const accountName = useAccountName();
+    const navigate = useNavigate();
+    const [formStatus, setFormStatus] = useState<'init' | 'success'>('init');
+
+    if (formStatus === 'success') {
+        return (
+            <CreateResult
+                button={{ callback: () => navigate(serviceMarket) }}
+            />
+        );
+    }
     return (
         <Form
             className={styles.form}
@@ -25,7 +38,12 @@ export const CreateOrderForm = () => {
                 setValues({ ...values, ...currentValues })
             }
             onFinish={() =>
-                callAction(createContr({ ...values!, wax_user: accountName }))
+                callAction(
+                    createContr({ ...values!, wax_user: accountName })
+                )?.then(() => {
+                    setFormStatus('success');
+                    setTimeout(() => navigate(serviceMarket), 3000);
+                })
             }
         >
             <Steps

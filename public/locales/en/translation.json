@@ -313,6 +313,9 @@
         "contractorFined": "contractor can be fined and the contract can be terminated with",
         "miningTerms": "Mining terms",
         "startOfOperation": "Start of operation",
+        "goToServiceMarket": "To the Service Market",
+        "orderCreated": "Your order was successfully created",
+        "redirected": "You will be automatically redirected to the main page of the service market",
         "haveNoNftAlert": {
           "haveNo": "You don’t have an NFT to create this order. Please visit the Marketplace"
         }
