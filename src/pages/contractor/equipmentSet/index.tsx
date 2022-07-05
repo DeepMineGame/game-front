@@ -68,7 +68,7 @@ export const EquipmentSetPage: FC = () => {
     const contractId = userContracts?.[0]?.id ?? 0;
 
     useEffect(() => {
-        const equipmentSlots = contractors?.[0].equip_slots ?? [];
+        const equipmentSlots = contractors?.[0]?.equip_slots ?? [];
         if (equipmentSlots) {
             const equipment = equipmentSlots
                 .map((id) => userInventory.find((v) => v.asset_id === id))
