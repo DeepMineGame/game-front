@@ -14,16 +14,21 @@ export enum LoaderSize {
 type Props = {
     size?: 'small' | 'semiSmall' | 'default' | 'large';
     centered?: boolean;
+    className?: string;
 };
 
-export const Loader: FC<Props> = ({ size = 'default', centered }) => {
+export const Loader: FC<Props> = ({
+    size = 'default',
+    centered,
+    className,
+}) => {
     const antIcon = (
         <LoadingOutlined style={{ fontSize: LoaderSize[size] }} spin />
     );
 
     return (
         <Spin
-            className={classNames(styles.loader, {
+            className={classNames(styles.loader, className, {
                 [styles.centered]: centered,
             })}
             indicator={antIcon}

@@ -1,5 +1,5 @@
-import { ContractsTable } from 'shared';
 import React, { FC } from 'react';
+import { ContractsTable } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { Empty, Skeleton } from 'antd';
 import { ContractsGate, contractsStore, getContractsEffect } from './model';

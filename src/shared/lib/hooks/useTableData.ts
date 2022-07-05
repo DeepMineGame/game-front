@@ -15,18 +15,22 @@ export function useTableData<T>(
     const [result, setResult] = useState<
         GetTableDataResponseType<T> | undefined
     >(undefined);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (needUpdate !== false) {
             if (accountName) {
-                getTableData(getConfig(accountName)).then((data) => {
-                    setResult(data);
-                });
+                setIsLoading(true);
+                getTableData(getConfig(accountName))
+                    .then((data) => {
+                        setResult(data);
+                    })
+                    .finally(() => setIsLoading(false));
             } else {
                 setResult(undefined);
             }
         }
     }, [accountName, getConfig, needUpdate]);
 
-    return result?.rows ?? [];
+    return { data: result?.rows ?? [], isLoading };
 }
