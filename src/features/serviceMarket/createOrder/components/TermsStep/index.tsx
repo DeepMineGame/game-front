@@ -1,16 +1,34 @@
 import React, { FC } from 'react';
-import { Form, Space } from 'antd';
+import { Form, FormInstance, Space } from 'antd';
 import { Button, getDaysSelectItem, Input, Select, Title } from 'shared';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
+import { useWatch } from 'antd/es/form/Form';
 import { createContrFormFields } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
 import localStyles from './styles.module.scss';
 
 export const TermsStep: FC<{
     setStep: React.Dispatch<React.SetStateAction<number>>;
-}> = ({ setStep }) => {
+    form: FormInstance;
+}> = ({ setStep, form }) => {
     const { t } = useTranslation();
+    const daysForPenaltyFieldValue = useWatch(
+        createContrFormFields.daysForPenalty,
+        form
+    );
+    const feeDailyMinAmountValue = useWatch(
+        createContrFormFields.feeDailyMinAmount,
+        form
+    );
+    const penaltyAmountFieldValue = useWatch(
+        createContrFormFields.penaltyAmount,
+        form
+    );
+    const hasAllValues =
+        daysForPenaltyFieldValue &&
+        feeDailyMinAmountValue &&
+        penaltyAmountFieldValue;
 
     return (
         <div>
@@ -60,7 +78,11 @@ export const TermsStep: FC<{
                 <Button onClick={() => setStep(1)} ghost>
                     {t('kit.back')}
                 </Button>
-                <Button htmlType="submit" type="primary">
+                <Button
+                    disabled={!hasAllValues}
+                    htmlType="submit"
+                    type="primary"
+                >
                     {t('components.common.button.create')}
                 </Button>
             </Space>

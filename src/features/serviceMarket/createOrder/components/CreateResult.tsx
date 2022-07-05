@@ -1,0 +1,44 @@
+import React, { FC } from 'react';
+import { Button, Result } from 'shared';
+import { useTranslation } from 'react-i18next';
+import { ResultProps } from 'antd';
+import styles from '../styles.module.scss';
+
+type Props = {
+    title?: string;
+    subTitle?: string;
+    status?: ResultProps['status'];
+    button?: {
+        text?: string;
+        callback: () => void;
+    };
+};
+export const CreateResult: FC<Props> = (props) => {
+    const { t } = useTranslation();
+
+    return (
+        <div className={styles.backPlate}>
+            <div className={styles.backPlateInner}>
+                <Result
+                    status={props.status}
+                    title={
+                        props.title ||
+                        t('pages.serviceMarket.createOrder.orderCreated')
+                    }
+                    subTitle={
+                        props.subTitle ||
+                        t('pages.serviceMarket.createOrder.orderCreated')
+                    }
+                    extra={[
+                        <Button type="primary" onClick={props.button?.callback}>
+                            {props.button?.text ||
+                                t(
+                                    'pages.serviceMarket.createOrder.goToServiceMarket'
+                                )}
+                        </Button>,
+                    ]}
+                />
+            </div>
+        </div>
+    );
+};
