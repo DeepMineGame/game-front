@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
-import { Button, Table, toLocaleDate } from 'shared';
+import { useTranslation } from 'react-i18next';
+
+import { Link, Table, toLocaleDate } from 'shared';
 import { ContractDto } from 'entities/smartcontract';
 
 type Props = {
@@ -14,49 +16,55 @@ const calcDuration = (contract: ContractDto) =>
     );
 
 export const MiningContractsTable: FC<Props> = ({ contracts }) => {
+    const { t } = useTranslation();
+
     return (
         <Table
             columns={[
                 {
-                    title: 'Nickname',
+                    title: t('pages.serviceMarket.nickname'),
                     dataIndex: 'nickName',
                     key: 'nickName',
-                    render: (value) => <Button type="link">{value}</Button>,
+                    render: (value) => (
+                        <Link to="/service-market/contract">{value}</Link>
+                    ),
                 },
                 {
-                    title: 'Creation date',
+                    title: t('pages.serviceMarket.creationDate'),
                     dataIndex: 'creationDate',
                     key: 'creationDate',
                     sorter: (a, b) => a.creationDate - b.creationDate,
                     render: (value) => toLocaleDate(value * 1000),
                 },
                 {
-                    title: 'Fee',
+                    title: t('pages.serviceMarket.createOrder.fee'),
                     dataIndex: 'fee',
                     key: 'fee',
                     sorter: (a, b) => a.fee - b.fee,
                     render: (value) => `${value} %`,
                 },
                 {
-                    title: 'Penalty, DME',
+                    title: t('pages.serviceMarket.Penalty&DME'),
                     dataIndex: 'penaltyDme',
                     key: 'penaltyDme',
                     sorter: (a, b) => a.penaltyDme - b.penaltyDme,
                 },
                 {
-                    title: 'Mining terms',
+                    title: t('pages.serviceMarket.createOrder.miningTerms'),
                     dataIndex: 'miningTerms',
                     key: 'miningTerms',
                 },
                 {
-                    title: 'Start of operations',
+                    title: t(
+                        'pages.serviceMarket.createOrder.startOfOperation'
+                    ),
                     dataIndex: 'startOf',
                     key: 'startOf',
                     sorter: (a, b) => a.startOf - b.startOf,
                     render: (value) => toLocaleDate(value * 1000),
                 },
                 {
-                    title: 'Duration',
+                    title: t('components.common.duration'),
                     dataIndex: 'duration',
                     key: 'duration',
                     sorter: (a, b) => a.duration - b.duration,

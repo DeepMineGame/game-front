@@ -16,8 +16,8 @@ import {
 } from 'entities/smartcontract';
 
 export enum Filter {
-    LookingForMineOwner = 'Looking for Mine owner',
-    LookingForContractor = 'Looking for Contractor',
+    LookingForMineOwner,
+    LookingForContractor,
 }
 
 export const MiningContractsGate = createGate('MiningContractsGate');
