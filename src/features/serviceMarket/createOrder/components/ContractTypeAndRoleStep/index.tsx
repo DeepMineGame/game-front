@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 import { FormInstance } from 'antd';
 import { Button, useAccountName } from 'shared';
 import { useTranslation } from 'react-i18next';
+import { useWatch } from 'antd/es/form/Form';
+import { createContrFormFields } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
 import { ContractTypeField } from '../ContractTypeField';
 import { RoleField } from '../RoleField';
@@ -13,6 +15,9 @@ export const ContractTypeAndRoleStep: FC<{
 }> = ({ form, setStep }) => {
     const accountName = useAccountName();
     const { t } = useTranslation();
+    const contractType = useWatch(createContrFormFields.contractType, form);
+    const isClientField = useWatch(createContrFormFields.isClient, form);
+    const hasValueToGoNextStep = contractType && isClientField !== undefined;
 
     return (
         <div className={styles.rightSection}>
@@ -21,7 +26,12 @@ export const ContractTypeAndRoleStep: FC<{
             {accountName && (
                 <MineSelectField form={form} accountName={accountName} />
             )}
-            <Button block type="primary" onClick={() => setStep(1)}>
+            <Button
+                disabled={!hasValueToGoNextStep}
+                block
+                type="primary"
+                onClick={() => setStep(1)}
+            >
                 {t('components.common.button.next')}
             </Button>
         </div>

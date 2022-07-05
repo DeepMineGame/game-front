@@ -81,8 +81,10 @@ export const CreateOrderForm = () => {
             {currentStep === 0 && (
                 <ContractTypeAndRoleStep form={form} setStep={setStep} />
             )}
-            {currentStep === 1 && <GeneralConditionStep setStep={setStep} />}
-            {currentStep === 2 && <TermsStep setStep={setStep} />}
+            {currentStep === 1 && (
+                <GeneralConditionStep setStep={setStep} form={form} />
+            )}
+            {currentStep === 2 && <TermsStep form={form} setStep={setStep} />}
         </Form>
     );
 };

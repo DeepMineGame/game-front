@@ -1,16 +1,29 @@
 import React, { FC } from 'react';
-import { Form, Input as InputA, Space } from 'antd';
+import { Form, FormInstance, Input as InputA, Space } from 'antd';
 import { Button, Input, Select, getDaysSelectItem } from 'shared';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
+import { useWatch } from 'antd/es/form/Form';
 import { createContrFormFields } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
 import localStyles from './styles.module.scss';
 
 export const GeneralConditionStep: FC<{
     setStep: React.Dispatch<React.SetStateAction<number>>;
-}> = ({ setStep }) => {
+    form: FormInstance;
+}> = ({ setStep, form }) => {
     const { t } = useTranslation();
+    const feeFieldValue = useWatch(createContrFormFields.fee, form);
+    const finishesAtFieldValue = useWatch(
+        createContrFormFields.finishesAt,
+        form
+    );
+    const deadlineTimeFieldValue = useWatch(
+        createContrFormFields.deadlineTime,
+        form
+    );
+    const hasAllValues =
+        feeFieldValue && deadlineTimeFieldValue && finishesAtFieldValue;
 
     return (
         <Form.Item>
@@ -47,7 +60,11 @@ export const GeneralConditionStep: FC<{
                 <Button onClick={() => setStep(0)} ghost>
                     {t('kit.back')}
                 </Button>
-                <Button onClick={() => setStep(2)} type="primary">
+                <Button
+                    disabled={!hasAllValues}
+                    onClick={() => setStep(2)}
+                    type="primary"
+                >
                     {t('components.common.button.next')}
                 </Button>
             </Space>
