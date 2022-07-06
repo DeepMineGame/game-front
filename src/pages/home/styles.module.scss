@@ -68,11 +68,11 @@
 
 .hive {
     margin-left: 10vw;
-    margin-top: 0;
+    margin-top: 5vh;
 
     @media only screen and (min-width: $media-mobile-oriental)  {
       margin-left: 20vw;
-      margin-top: 0;
+      margin-top: 5vh;
     }
 
     @media only screen and (min-width: $media-desktop-s)  {
@@ -87,11 +87,26 @@
 
   @media only screen and (min-width: $media-mobile-oriental)  {
     margin-left: 25vw;
-    margin-top: 0;
+    margin-top: 5vh;
   }
 
   @media only screen and (min-width: $media-desktop-s)  {
     margin-left: 25vw;
-    margin-top: 0;
+    margin-top: 5vh;
+  }
+}
+
+.landlordCabin {
+  margin-left: 15vw;
+  margin-top: 10vh;
+
+  @media only screen and (min-width: $media-mobile-oriental)  {
+    margin-left: 15vw;
+    margin-top: 10vh;
+  }
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    margin-left: 15vw;
+    margin-top: 10vh;
   }
 }
