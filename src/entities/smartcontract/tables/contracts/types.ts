@@ -3,7 +3,8 @@ export enum ContractType {
     landlord_mineowner,
     mineowner_contractor,
 }
-enum ContractStatus {
+
+export enum ContractStatus {
     undefined,
     signed_by_client,
     signed_by_executor,
@@ -24,24 +25,30 @@ export type ContractDto = {
     client: string;
     client_asset_id: string;
     executor: string;
-    executor_asset_id: string;
+    executor_asset_id: number;
     type: ContractType;
+    fee_percent: number;
+    fee_daily_min_amount: number;
+    days_for_penalty: number;
+    penalty_amount: number;
+    demand_penalty: number;
+    penalty_available: number;
+    create_time: number;
+    activation_time: number;
+    start_time: number;
+    deadline_time: number;
+    term_time: number;
+    term_initiator: string;
     finishes_at: number;
-    fee: number;
-    min_amount: number;
-    client_warranty_amount: number;
-    executor_warranty_amount: number;
+    is_active: number;
+    status: ContractStatus;
+    fee_days: any[];
     attrs: [
         {
             key: string;
             value: string;
         }
     ];
-    is_active: number;
-    signed_by_client: number;
-    signed_by_executor: number;
-    penalty_amount: number;
-    status: ContractStatus;
 };
 
 export const contractName = {
