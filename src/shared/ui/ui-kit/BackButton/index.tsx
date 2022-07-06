@@ -6,13 +6,14 @@ import styles from './index.module.scss';
 
 type Props = {
     onClick: MouseEventHandler;
+    className?: string;
 };
 
-export const BackButton: FC<Props> = ({ onClick }) => {
+export const BackButton: FC<Props> = ({ onClick, className }) => {
     const { t } = useTranslation();
 
     return (
-        <div className={cn(styles.button)} onClick={onClick}>
+        <div className={cn(styles.button, className)} onClick={onClick}>
             <LeftOutlined />
             <div>{t('kit.back')}</div>
         </div>

@@ -109,7 +109,7 @@ export const ContractorCabin = () => {
                     userHistory={userHistory}
                 />
             </Monitor>
-            <Header />
+            <Header withBackButton />
             <ContractorMenu
                 config={{
                     disabledItems: {

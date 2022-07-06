@@ -16,9 +16,10 @@ import styles from './styles.module.scss';
 type Props = {
     title?: string;
     hideLogo?: boolean;
+    withBackButton?: boolean;
 };
 
-export const Header: FC<Props> = ({ title, hideLogo }) => {
+export const Header: FC<Props> = ({ withBackButton, title, hideLogo }) => {
     const user = useAccountName();
     const navigate = useNavigate();
     const goToBack = () => navigate(-1);
@@ -26,7 +27,7 @@ export const Header: FC<Props> = ({ title, hideLogo }) => {
     return (
         <>
             <div className={styles.header}>
-                <div />
+                {withBackButton ? <BackButton onClick={goToBack} /> : <div />}
                 {title && !isDesktop ? (
                     <div
                         className={styles.iconAndTitleWrapper}
