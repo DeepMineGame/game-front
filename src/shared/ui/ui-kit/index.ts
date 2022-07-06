@@ -30,3 +30,5 @@ export * from './TabsCard';
 export * from './Result';
 export * from './Segmented';
 export * from './Link';
+export * from './ExclamationModal';
+export * from './SuccessModal';

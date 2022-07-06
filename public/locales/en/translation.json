@@ -42,6 +42,7 @@
         "dme": "DME",
         "dmp": "DMP",
         "next": "Next",
+        "okay": "Okay",
         "create": "Create",
         "sign": "Sign",
         "visitMarketplace": "Visit Marketplace"
@@ -358,7 +359,13 @@
         "mine": "Mine",
         "penaltyDescription": "Counterpary has terminated the contract prematurely and you can collect a penalty for it.",
         "collectPenalty": "Collect a penalty",
-        "noCollectPenalty": "Don’t collect a penalty"
+        "noCollectPenalty": "Don’t collect a penalty",
+        "collect": "Collect",
+        "collectDescription": "Are you sure you want to collect a penalty of 10 DME from the Mine owner?",
+        "noCollectDescription": "Are you sure you don’t want to collect a penalty of 10 DME from the Mine owner?",
+        "noCollect": "Don’t collect",
+        "termination": "Contract termination",
+        "youReceived": "You received 10 DME"
       }
     },
     "areaManagement": {
