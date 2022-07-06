@@ -22,7 +22,6 @@ type Props = {
 };
 
 export const AreaClaim: FC<Props> = ({ isActive, areaId, onUpdate }) => {
-    isActive = true;
     const { t } = useTranslation();
     const accountName = useAccountName();
     const [isModalActionVisible, setIsModalActionVisible] = useState(false);

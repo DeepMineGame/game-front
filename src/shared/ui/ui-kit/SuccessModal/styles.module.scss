@@ -12,12 +12,15 @@
       background-color: $color-neutral-neutral-2;
       border-bottom: 1px solid $color-neutral-neutral-4;
     }
+
     .ant-modal-title {
       color: $color-neutral-neutral-9;
     }
+
     .ant-modal-body {
-      padding: 20px 32px 56px 32px;
+      padding: 20px 32px 56px;
     }
+
     .ant-modal-footer {
       border-top: 1px solid $color-neutral-neutral-4;
     }

@@ -357,7 +357,7 @@
         "wallet": "WAX wallet",
         "area": "Area",
         "mine": "Mine",
-        "penaltyDescription": "Counterpary has terminated the contract prematurely and you can collect a penalty for it.",
+        "penaltyDescription": "Counterparty has terminated the contract prematurely and you can collect a penalty for it.",
         "collectPenalty": "Collect a penalty",
         "noCollectPenalty": "Don’t collect a penalty",
         "collect": "Collect",

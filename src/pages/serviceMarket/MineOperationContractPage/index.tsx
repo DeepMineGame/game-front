@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { CopyOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { DiscordIcon, KeyValueTable, Page, Title } from 'shared';
@@ -11,7 +11,7 @@ interface TableProps {
     data: Record<string, string | React.ReactNode>;
 }
 
-const TableWithTitle = ({ title, data }: TableProps) => {
+const TableWithTitle: FC<TableProps> = ({ title, data }) => {
     return (
         <div className={styles.table}>
             <Title fontFamily="orbitron" level={5} className={styles.title}>
@@ -34,7 +34,7 @@ export const MineOperationContractPage = () => {
     const infoData = {
         title: t('pages.serviceMarket.contract.generalInformation'),
         table: {
-            [t('pages.serviceMarket.contract.generalInformation')]: (
+            [t('pages.serviceMarket.contract.id')]: (
                 <div className={styles.contractId}>
                     <CopyOutlined onClick={handleCopy('457457')} />
                     <div>457457</div>
