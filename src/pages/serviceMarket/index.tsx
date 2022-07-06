@@ -1,7 +1,7 @@
 import { PageWithTabs, useAccountName, Loader, Button } from 'shared';
 import React, { memo } from 'react';
 import { Empty } from 'antd';
-import { ServiceMarketContractsTable } from 'features';
+import { MiningContracts, ServiceMarketContractsTable } from 'features';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { createOrder } from 'app/router/paths';
@@ -46,7 +46,7 @@ export const ServiceMarketPage = () => {
                 },
                 {
                     id: 2,
-                    component: Empty,
+                    component: MiningContracts,
                     name: t('pages.serviceMarket.miningContracts'),
                 },
                 {

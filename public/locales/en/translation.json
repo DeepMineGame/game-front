@@ -331,7 +331,12 @@
         "haveNoNftAlert": {
           "haveNo": "You don’t have an NFT to create this order. Please visit the Marketplace"
         }
-      }
+      },
+      "lookingForMineOwner": "Looking for Mine owner",
+      "lookingForContractor": "Looking for Contractor",
+      "nickname": "Nickname",
+      "creationDate": "Creation date",
+      "Penalty&DME": "Penalty, DME"
     },
     "areaManagement": {
       "title": "Area management",
