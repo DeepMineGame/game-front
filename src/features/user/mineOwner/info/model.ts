@@ -37,5 +37,5 @@ sample({
 sample({
     source: areaForMineStore,
     target: getInventoryByIdEffect,
-    fn: (area) => ({ searchParam: area?.id || 0 }),
+    fn: (area) => ({ searchParam: Number(area?.id) || 0 }),
 });

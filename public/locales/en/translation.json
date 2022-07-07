@@ -42,7 +42,9 @@
         "dme": "DME",
         "dmp": "DMP",
         "next": "Next",
-        "create": "Create"
+        "create": "Create",
+        "sign": "Sign",
+        "visitMarketplace": "Visit Marketplace"
       },
       "actionModal": {
         "descriptionTime": "This action will take:",
@@ -356,8 +358,28 @@
       "discover": "Discover new land",
       "landActivation": "Land activation",
       "addMineOwner": "Add new Mine owner",
-      "findMineOwner": "Find a Mine owner on the servicemaret",
+      "findMineOwner": "Find a Mine owner on the servicemarket",
       "createOrder": "Create an order for a Mine owner"
+    },
+    "mineOperationOrder": {
+      "mineOperationOrder": "Mine operation order",
+      "generalInformation": "General information",
+      "conditions": "conditions",
+      "selectMineAndSign": "Select mine and sign the order",
+      "selectMine": "Select the mine",
+      "startOperation": "Start of operation in",
+      "createOrder": "Create an order for a Mine owner",
+      "orderId": "Order ID",
+      "creationDate": "Creation date",
+      "duration": "Duration",
+      "waxWallet": "WAX wallet",
+      "landlord": "Landlord",
+      "penalty": "Penalty",
+      "miningTerms": "Mining terms",
+      "fee": "Fee",
+      "minimumDmeInDays": "Minimum {{amount}} DME in {{penalty}} Days",
+      "doNotHaveMine": "You do not have a mine that meets the conditions of the order",
+      "doNotHaveArea": "You do not have a area that meets the conditions of the order"
     }
   },
   "features": {

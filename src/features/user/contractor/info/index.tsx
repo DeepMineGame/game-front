@@ -19,7 +19,7 @@ type Props = {
 export const Contractor: FC<Props> = ({ contractor }) => {
     useGate(ContractorGate, {
         mineId: contractor.mine_id,
-        areaId: Number(contractor.area_id),
+        areaId: contractor.area_id,
     });
     const mine = useStore(contractorMineStore);
     const area = useStore(contractorAreaStore);

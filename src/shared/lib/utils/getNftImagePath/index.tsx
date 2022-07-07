@@ -1,6 +1,6 @@
 const GIF_IMAGES = [
     314105, 314134, 314712, 314721, 314749, 314748, 314747, 314744, 314743,
-    314738, 492749,
+    314738, 492749, 314739,
 ];
 
 export const TEST_NET_ASSETS_ID_MAP = {
@@ -39,8 +39,7 @@ export const TEST_NET_ASSETS_ID_MAP = {
     411111: 492746,
     411110: 492745,
     411109: 492803,
-    // TODO: ADD MINE TEMPLATE IMAGES
-    176451: undefined,
+    176451: 314739,
     0: undefined,
 };
 

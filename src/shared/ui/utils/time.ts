@@ -1,7 +1,7 @@
 const SECOND = 1;
-const MINUTE = 60 * SECOND;
-const HOUR = 60 * MINUTE;
-const DAY = 24 * HOUR;
+export const MINUTE_IN_SECONDS = 60 * SECOND;
+export const HOUR_IN_SECONDS = 60 * MINUTE_IN_SECONDS;
+export const DAY_IN_SECONDS = 24 * HOUR_IN_SECONDS;
 
 const getPadTime = (time: number) => (time > 9 ? time : `0${time}`);
 
@@ -10,10 +10,18 @@ export const getTimeLeft = (seconds: number, showDays?: boolean) => {
         return '00:00:00';
     }
 
-    const d = showDays ? Math.floor(seconds / DAY) : 0;
-    const h = Math.floor((seconds - d * DAY) / HOUR);
-    const m = Math.floor((seconds - d * DAY - h * HOUR) / MINUTE);
-    const s = Math.floor((seconds - d * DAY - h * HOUR - m * MINUTE) / SECOND);
+    const d = showDays ? Math.floor(seconds / DAY_IN_SECONDS) : 0;
+    const h = Math.floor((seconds - d * DAY_IN_SECONDS) / HOUR_IN_SECONDS);
+    const m = Math.floor(
+        (seconds - d * DAY_IN_SECONDS - h * HOUR_IN_SECONDS) / MINUTE_IN_SECONDS
+    );
+    const s = Math.floor(
+        (seconds -
+            d * DAY_IN_SECONDS -
+            h * HOUR_IN_SECONDS -
+            m * MINUTE_IN_SECONDS) /
+            SECOND
+    );
 
     const timeWithHour = `${getPadTime(h)}:${getPadTime(m)}:${getPadTime(s)}`;
 

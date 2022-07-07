@@ -116,7 +116,7 @@ sample({
     ),
 });
 
-// Checks that the mine setup in prgoress
+// Checks that the mine setup in progress
 sample({
     source: actionsStore,
     target: setIsMineSetupInProgressEvent,

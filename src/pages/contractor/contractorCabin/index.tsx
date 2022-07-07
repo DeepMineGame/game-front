@@ -37,12 +37,18 @@ export const ContractorCabin = () => {
     const bgRatio = 1366 / 712;
     const isBgWidthHidden = width > height * bgRatio;
 
-    const userInfo = useTableData<UserInfoType>(getUserConfig);
-    const userContracts = useTableData<ContractDto>(
+    const { data: userInfo } = useTableData<UserInfoType>(getUserConfig);
+    const { data: userContracts } = useTableData<ContractDto>(
         getContractsNameConfig
-    ).filter(({ type }) => type === ContractType.mineowner_contractor);
-    const userInventory = useTableData<UserInventoryType>(getInventoryConfig);
-    const userHistory = useTableData<UserHistoryType>(getHistoryConfig);
+    );
+    const { data: userInventory } =
+        useTableData<UserInventoryType>(getInventoryConfig);
+    const { data: userHistory } =
+        useTableData<UserHistoryType>(getHistoryConfig);
+
+    const mineOwnerContracts = userContracts.filter(
+        ({ type }) => type === ContractType.mineowner_contractor
+    );
 
     const hasPhysicalShift =
         userInfo.length > 0 && userInfo[0].location === LOCATION_TO_ID.mine;
@@ -107,7 +113,7 @@ export const ContractorCabin = () => {
                 <ContractorCabinContent
                     hasPhysicalShift={hasPhysicalShift}
                     setStatus={setStatus}
-                    userContracts={userContracts}
+                    userContracts={mineOwnerContracts}
                     userInventory={userInventory}
                     userHistory={userHistory}
                 />

@@ -6,9 +6,18 @@ export enum AreaRarity {
     dmeSprings,
 }
 
+export enum SlotStatus {
+    unreserved,
+    reserved,
+}
+
 export type AreasDto = {
-    id: number;
+    id: string;
+    engaged: number;
+    init_id: number;
+    fee_to_claim: number;
     initialized: boolean;
     rarity: AreaRarity;
-    mine_slots: string[];
+    owner: string;
+    mine_slots: { reserved: SlotStatus; mine_id: number }[];
 };
