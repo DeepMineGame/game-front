@@ -28,10 +28,14 @@ const LogInWrapper: React.FC<{
     }, [user, navigate, getUserFromSession]);
 
     useEffect(() => {
-        if (notLoggedIn || (forAdmin && user?.is_admin === false)) {
+        if (
+            notLoggedIn ||
+            (forAdmin && user?.is_admin === false) ||
+            (!!user?.wax_address && user.wax_address !== chainUser?.accountName)
+        ) {
             navigate('/', { replace: true });
         }
-    }, [notLoggedIn, forAdmin, user, navigate]);
+    }, [notLoggedIn, forAdmin, user, navigate, chainUser?.accountName]);
 
     if (isFetching || (!chainUser && !notLoggedIn))
         return <LoadingScreen key="loading" size="large" />;

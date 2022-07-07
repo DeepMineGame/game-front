@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useStore } from 'effector-react';
+import { useEvent, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { Typography } from 'antd';
+import { WaxUser } from '@eosdacio/ual-wax';
 
 import {
     DeepMineLogo,
@@ -9,12 +10,16 @@ import {
     useChainAuthContext,
     LoadingScreen,
     errorNotify,
+    getTableData,
 } from 'shared';
+import { authorizeUser, getUserConfig } from 'entities/smartcontract';
 import {
-    createSignTransactionData,
-    deepminegame,
-} from 'entities/smartcontract';
-import { userStore, User, connectUserWithWaxAccount } from 'entities/user';
+    userStore,
+    User,
+    connectUserWithWaxAccountEffect,
+    userStoreError,
+    setUserEvent,
+} from 'entities/user';
 import { LoggedInBlock } from '../LoggedInBlock';
 import styles from '../styles.module.scss';
 
@@ -27,50 +32,87 @@ export const BlockchainAuthPage: React.FC<Props> = ({ onSuccess }) => {
     const { activeUser, showModal, logout, notLoggedIn } =
         useChainAuthContext();
     const user = useStore(userStore) as User;
-    const [isWaxWalletAlreadyExists, setIsWaxWalletAlreadyExists] =
-        useState(false);
+    const userError = useStore(userStoreError);
+    const connectUserWithWaxAccount = useEvent(connectUserWithWaxAccountEffect);
+    const setUser = useEvent(setUserEvent);
 
-    useEffect(() => {
-        if (activeUser && user.wax_address) onSuccess();
-    }, [user, activeUser]);
+    const [isWaitingForConnectWax, setIsWaitingForConnectWax] = useState(false);
+    const [hasError, setHasError] = useState(false);
 
-    useEffect(() => {
-        if (!user.wax_address) {
-            if (activeUser) {
-                activeUser
-                    .signTransaction(
-                        createSignTransactionData({
-                            contractName: deepminegame,
-                            contractAction: 'authorize',
-                            accountName: activeUser.accountName,
-                            data: {
-                                wax_user: activeUser.accountName,
-                                key: user.id,
-                            },
-                        }),
-                        { expireSeconds: 300 }
-                    )
-                    .then(async () => {
-                        try {
-                            await connectUserWithWaxAccount(
-                                activeUser.accountName
-                            );
-                        } catch (error) {
-                            setIsWaxWalletAlreadyExists(true);
-                        }
-                    })
-                    .catch(errorNotify);
-            }
+    const authorizeUserInBlockchain = async (
+        chain: WaxUser,
+        waxAddress: string,
+        userId: string
+    ) => {
+        try {
+            await authorizeUser(chain, waxAddress, userId);
+            setIsWaitingForConnectWax(true);
+            await new Promise((resolve) => {
+                window.setTimeout(resolve, 3000);
+            });
+            setIsWaitingForConnectWax(false);
+        } catch (error) {
+            errorNotify(error as Error);
+            throw error;
         }
-    }, [activeUser, user, onSuccess]);
+    };
+
+    useEffect(() => {
+        (async () => {
+            if (activeUser && !user.user_created) {
+                if (user.wax_address) {
+                    if (activeUser.accountName !== user.wax_address) {
+                        setHasError(true);
+                    } else {
+                        const data = await getTableData(
+                            getUserConfig(user.wax_address)
+                        );
+                        const isExist = !!data.rows?.length;
+
+                        if (!isExist) {
+                            await authorizeUserInBlockchain(
+                                activeUser,
+                                user.wax_address,
+                                user.id
+                            );
+                        }
+
+                        onSuccess();
+                    }
+                } else {
+                    const waxAddress = activeUser.accountName;
+                    await authorizeUserInBlockchain(
+                        activeUser,
+                        waxAddress,
+                        user.id
+                    );
+                    await connectUserWithWaxAccount(waxAddress);
+                    onSuccess();
+                }
+            }
+        })();
+    }, [activeUser, user.user_created, user.wax_address]);
 
     const handleConnectClick = () => {
         logout();
         showModal();
+        setHasError(false);
+        setUser({
+            ...user,
+            user_created: false,
+        });
     };
 
     if (!activeUser && !notLoggedIn)
         return <LoadingScreen key="loading" size="large" />;
+
+    if (isWaitingForConnectWax) {
+        return (
+            <LoadingScreen key="loading" size="large">
+                <div>Wait please...</div>
+            </LoadingScreen>
+        );
+    }
 
     return (
         <div className={styles.wrapper}>
@@ -85,7 +127,7 @@ export const BlockchainAuthPage: React.FC<Props> = ({ onSuccess }) => {
                 >
                     {t('intro.connect')}
                 </Button>
-                {isWaxWalletAlreadyExists && (
+                {(!!userError || hasError) && (
                     <p style={{ marginTop: 4 }}>
                         <Typography.Text
                             type="danger"
