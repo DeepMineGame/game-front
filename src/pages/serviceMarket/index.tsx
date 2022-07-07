@@ -1,14 +1,15 @@
-import { PageWithTabs, useAccountName, Loader, Button } from 'shared';
 import React, { memo } from 'react';
 import { Empty } from 'antd';
-import { MiningContracts, ServiceMarketContractsTable } from 'features';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { createOrder } from 'app/router/paths';
 import { PlusOutlined } from '@ant-design/icons';
+import { PageWithTabs, useAccountName, Loader, Button } from 'shared';
+import { MiningContracts, ServiceMarketContractsTable } from 'features';
 import styles from './styles.module.scss';
 
 export * from './order';
+export * from './operationOrder';
 
 export const ServiceMarketPage = () => {
     const accountName = useAccountName();

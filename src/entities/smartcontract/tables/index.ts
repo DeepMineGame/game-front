@@ -16,7 +16,7 @@ export * from '../tables/users';
 export * from './types';
 export * from './roles';
 
-export const getUserConfig = (account: string) => {
+export const getUserConfig = (account: string): GetTableDataConfigType => {
     return {
         code: deepminegame,
         scope: deepminegame,
@@ -26,10 +26,10 @@ export const getUserConfig = (account: string) => {
         lower_bound: account,
         upper_bound: account,
         limit: 1,
-    } as GetTableDataConfigType;
+    };
 };
 
-export const getInventoryConfig = (account: string) => {
+export const getInventoryConfig = (account: string): GetTableDataConfigType => {
     return {
         code: deepminegame,
         scope: deepminegame,
@@ -39,10 +39,10 @@ export const getInventoryConfig = (account: string) => {
         lower_bound: account,
         upper_bound: account,
         limit: 100,
-    } as GetTableDataConfigType;
+    };
 };
 
-export const getHistoryConfig = (account: string) => {
+export const getHistoryConfig = (account: string): GetTableDataConfigType => {
     return {
         code: deepminegame,
         scope: deepminegame,
@@ -52,5 +52,5 @@ export const getHistoryConfig = (account: string) => {
         lower_bound: account,
         upper_bound: account,
         limit: 100,
-    } as GetTableDataConfigType;
+    };
 };

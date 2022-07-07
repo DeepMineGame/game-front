@@ -17,7 +17,7 @@ export const useLandLordStatus = () => {
     const inventories = useStore(inventoriesStore);
     const mines = useStore(minesStore);
 
-    const userInfo = useTableData<UserInfoType>(getUserConfig);
+    const { data: userInfo } = useTableData<UserInfoType>(getUserConfig);
 
     const hasPhysicalShift =
         userInfo?.[0]?.location === LOCATION_TO_ID.landlords_reception;

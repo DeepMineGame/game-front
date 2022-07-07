@@ -42,12 +42,17 @@ export type ContractDto = {
     finishes_at: number;
     status: ContractStatus;
     fee_days: any[];
+    min_amount: number;
+    client_warranty_amount: number;
+    executor_warranty_amount: number;
     attrs: [
         {
             key: string;
             value: string;
         }
     ];
+    signed_by_client: number;
+    signed_by_executor: number;
 };
 
 export const contractName = {

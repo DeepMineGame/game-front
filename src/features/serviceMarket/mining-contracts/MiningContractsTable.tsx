@@ -1,19 +1,15 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Link, Table, toLocaleDate } from 'shared';
+import { Link, Table, toLocaleDate, DAY_IN_SECONDS } from 'shared';
 import { ContractDto } from 'entities/smartcontract';
 
 type Props = {
     contracts: ContractDto[];
 };
 
-const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
-
 const calcDuration = (contract: ContractDto) =>
-    Math.floor(
-        (contract.finishes_at - contract.create_time) / ONE_DAY_IN_SECONDS
-    );
+    Math.floor((contract.finishes_at - contract.create_time) / DAY_IN_SECONDS);
 
 export const MiningContractsTable: FC<Props> = ({ contracts }) => {
     const { t } = useTranslation();
@@ -25,8 +21,10 @@ export const MiningContractsTable: FC<Props> = ({ contracts }) => {
                     title: t('pages.serviceMarket.nickname'),
                     dataIndex: 'nickName',
                     key: 'nickName',
-                    render: (value) => (
-                        <Link to="/service-market/contract">{value}</Link>
+                    render: (value, props) => (
+                        <Link to={`/service-market/order/${props.key}`}>
+                            {value}
+                        </Link>
                     ),
                 },
                 {

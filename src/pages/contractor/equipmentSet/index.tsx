@@ -60,11 +60,13 @@ export const EquipmentSetPage: FC = () => {
         }
     }, [accountName, needUpdate]);
 
-    const userInventory = useTableData<UserInventoryType>(
+    const { data: userInventory } = useTableData<UserInventoryType>(
         getInventoryConfig,
         needUpdate
     );
-    const userContracts = useTableData<ContractDto>(getContractsNameConfig);
+    const { data: userContracts } = useTableData<ContractDto>(
+        getContractsNameConfig
+    );
     const contractId = userContracts?.[0]?.id ?? 0;
 
     useEffect(() => {

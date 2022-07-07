@@ -1,36 +1,35 @@
-@import "src/shared";
+@import 'src/shared';
 
 .select {
-  :global {
-    .ant-select-selector {
-      background: $color-neutral-neutral-1 !important;
-      border-color: $color-neutral-neutral-5 !important;
-      color: $color-neutral-neutral-9 !important;
-    }
+    :global {
+        .ant-select-selector {
+            background: $color-neutral-neutral-1 !important;
+            border-color: $color-neutral-neutral-5 !important;
+            color: $color-neutral-neutral-9 !important;
+        }
 
-    .ant-select-disabled > .ant-select-selector {
-      background: $color-neutral-neutral-3 !important;
-    }
+        .ant-select-disabled > .ant-select-selector {
+            background: $color-neutral-neutral-3 !important;
+        }
 
-    .ant-select-disabled .ant-select-selection-placeholder {
-      color: $color-neutral-neutral-6;
+        .ant-select-disabled .ant-select-selection-placeholder {
+            color: $color-neutral-neutral-6;
+        }
     }
-  }
 }
 
 .dropDownSelect {
-  background: $color-neutral-neutral-1 !important;
+    background: $color-neutral-neutral-1 !important;
 
-  :global {
-    .ant-select-item {
-      color: $color-neutral-neutral-9 !important;
-      background: $color-neutral-neutral-1 !important;
+    :global {
+        .ant-select-item {
+            color: $color-neutral-neutral-9 !important;
+            background: $color-neutral-neutral-1 !important;
+        }
+
+        .ant-select-item-option-active {
+            background: $color-neutral-neutral-1 !important;
+            color: $color-neutral-neutral-9 !important;
+        }
     }
-
-    .ant-select-item-option-active {
-      background: $color-neutral-neutral-1 !important;
-      color: $color-neutral-neutral-9 !important;
-
-    }
-  }
 }

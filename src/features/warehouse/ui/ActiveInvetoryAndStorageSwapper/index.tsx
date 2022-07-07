@@ -22,9 +22,10 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     const { t } = useTranslation();
     useGate(WarehouseGate, { accountName });
     const userAtomicAssets = useStore(userAtomicAssetsStore);
-    const userInventory = useTableData<UserInventoryType>(
-        getInventoryConfig
-    )?.filter(({ in_use }) => !in_use);
+    const { data: userInventory } =
+        useTableData<UserInventoryType>(getInventoryConfig);
+    const userInventoryNotUse = userInventory.filter(({ in_use }) => !in_use);
+
     const [draggedElement, setDraggedElement] =
         useState<null | UserInventoryType>(null);
     const navigate = useNavigate();
@@ -93,7 +94,10 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                         </div>
                     ) : (
                         <div className={styles.cardsWrapper}>
-                            {renderCards(userInventory, setDraggedElement)}
+                            {renderCards(
+                                userInventoryNotUse,
+                                setDraggedElement
+                            )}
                         </div>
                     )}
                 </div>

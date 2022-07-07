@@ -6,7 +6,7 @@ import { UserInventoryType } from 'entities/smartcontract';
 export const WarehouseGate = createGate<{ accountName: string }>(
     'warehouseGate'
 );
-const getAtomicAssetsEffect = createEffect(getAtomicAssetsByUser);
+export const getAtomicAssetsEffect = createEffect(getAtomicAssetsByUser);
 
 export const userAtomicAssetsStore = createStore<UserInventoryType[]>([]).on(
     getAtomicAssetsEffect.doneData,
