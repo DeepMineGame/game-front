@@ -13,6 +13,7 @@ import cn from 'classnames';
 import { ContractorMenu, ContractorMenuItems, Travel } from 'features';
 import {
     ContractDto,
+    ContractType,
     getContractsNameConfig,
     getHistoryConfig,
     getInventoryConfig,
@@ -37,7 +38,9 @@ export const ContractorCabin = () => {
     const isBgWidthHidden = width > height * bgRatio;
 
     const userInfo = useTableData<UserInfoType>(getUserConfig);
-    const userContracts = useTableData<ContractDto>(getContractsNameConfig);
+    const userContracts = useTableData<ContractDto>(
+        getContractsNameConfig
+    ).filter(({ type }) => type === ContractType.mineowner_contractor);
     const userInventory = useTableData<UserInventoryType>(getInventoryConfig);
     const userHistory = useTableData<UserHistoryType>(getHistoryConfig);
 
