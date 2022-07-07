@@ -1,8 +1,19 @@
 import React, { FC } from 'react';
 import { CopyOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
-import { DiscordIcon, KeyValueTable, Page, Title } from 'shared';
-import { Penalty } from 'features';
+import { useGate, useStore } from 'effector-react';
+import {
+    DiscordIcon,
+    KeyValueTable,
+    Page,
+    secondsToDate,
+    secondsToDays,
+    secondsToHour,
+    Title,
+    useAccountName,
+} from 'shared';
+import { ContractsGate, contractsStore, Penalty } from 'features';
+import { ContractStatus } from 'entities/smartcontract';
 
 import styles from './styles.module.scss';
 
@@ -24,6 +35,12 @@ const TableWithTitle: FC<TableProps> = ({ title, data }) => {
 
 export const MineOperationContractPage = () => {
     const { t } = useTranslation();
+    const accountName = useAccountName();
+    useGate(ContractsGate, { searchParam: accountName });
+    const contracts = useStore(contractsStore);
+    const contract = contracts?.filter((v) => v.executor === accountName)?.[0];
+    const contractId = contract?.id;
+
     const handleCopy = (data: string) => () => {
         navigator.clipboard.writeText(data);
     };
@@ -36,52 +53,73 @@ export const MineOperationContractPage = () => {
         table: {
             [t('pages.serviceMarket.contract.id')]: (
                 <div className={styles.contractId}>
-                    <CopyOutlined onClick={handleCopy('457457')} />
-                    <div>457457</div>
+                    {contractId && (
+                        <CopyOutlined onClick={handleCopy(`${contractId}`)} />
+                    )}
+                    <div>{contractId ?? '-'}</div>
                 </div>
             ),
-            [t('pages.serviceMarket.contract.date')]:
-                new Date().toLocaleDateString(),
-            [t('pages.serviceMarket.contract.duration')]: '21 days',
+            [t('pages.serviceMarket.contract.date')]: contract
+                ? secondsToDate(contract.create_time)
+                : '-',
+            [t('pages.serviceMarket.contract.duration')]: contract
+                ? `${secondsToDays(
+                      contract.finishes_at - contract.create_time
+                  )} days`
+                : '-',
         },
     };
+
+    const operationStartsIn = contract?.start_time
+        ? contract.start_time * 1000 - Date.now()
+        : undefined;
 
     const conditionsData = {
         title: t('pages.serviceMarket.contract.conditions'),
         table: {
-            [t('pages.serviceMarket.contract.operationStart')]: '24 hours',
-            [t('pages.serviceMarket.contract.penalty')]: '10 DME',
-            [t('pages.serviceMarket.contract.miningTerms')]:
-                'Minimum 5 DME in 7 Days',
-            [t('pages.serviceMarket.contract.fee')]: '5%',
+            [t('pages.serviceMarket.contract.operationStart')]:
+                operationStartsIn
+                    ? Math.max(secondsToHour(operationStartsIn / 1000), 0)
+                    : '-',
+            [t('pages.serviceMarket.contract.penalty')]: contract
+                ? `${contract.penalty_amount} DME`
+                : '-',
+            [t('pages.serviceMarket.contract.miningTerms')]: '-',
+            [t('pages.serviceMarket.contract.fee')]: contract
+                ? `${contract.fee_percent} %`
+                : '-',
         },
     };
 
     const landlordData = {
         title: t('pages.serviceMarket.contract.landlord'),
         table: {
-            [t('pages.serviceMarket.contract.wallet')]: 'Wkfuknf.wam',
-            [t('pages.serviceMarket.contract.landlord')]: (
+            [t('pages.serviceMarket.contract.wallet')]: '-',
+            [t('pages.serviceMarket.contract.landlord')]: contract?.executor ? (
                 <div className={styles.discord}>
                     <DiscordIcon onClick={handleOpenDiscord} />
-                    <div>Skyfidelity</div>
+                    <div>{contract?.executor}</div>
                 </div>
+            ) : (
+                '-'
             ),
-            [t('pages.serviceMarket.contract.area')]: 'ID368530',
+            [t('pages.serviceMarket.contract.area')]: '-',
         },
     };
 
     const mineOwnerData = {
         title: t('pages.serviceMarket.contract.mineOwner'),
         table: {
-            [t('pages.serviceMarket.contract.wallet')]: 'Ljfekj.wam',
-            [t('pages.serviceMarket.contract.mineOwner')]: (
+            [t('pages.serviceMarket.contract.wallet')]: '-',
+            [t('pages.serviceMarket.contract.mineOwner')]: contract?.client ? (
                 <div className={styles.discord}>
                     <DiscordIcon />
-                    <div>Stranglethorn</div>
+                    <div>{contract.client}</div>
                 </div>
+            ) : (
+                '-'
             ),
-            [t('pages.serviceMarket.contract.mine')]: 'ID368530',
+            [t('pages.serviceMarket.contract.mine')]: '-',
         },
     };
 
@@ -95,7 +133,9 @@ export const MineOperationContractPage = () => {
                         title={infoData.title}
                         data={infoData.table}
                     />
-                    <Penalty />
+                    {contract?.status === ContractStatus.terminated && (
+                        <Penalty contractId={contract.id} />
+                    )}
                 </div>
                 <TableWithTitle
                     title={conditionsData.title}

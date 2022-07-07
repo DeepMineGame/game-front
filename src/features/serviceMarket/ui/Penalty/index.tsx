@@ -2,15 +2,30 @@ import React, { useState } from 'react';
 import { InfoCircleFilled } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 
-import { Button, ExclamationModal, SuccessModal } from 'shared';
+import { Button, ExclamationModal, SuccessModal, useAccountName } from 'shared';
+import { terminateContract } from 'entities/smartcontract';
+import { useSmartContractAction } from '../../../hooks';
 import styles from './styles.module.scss';
 
-export const Penalty = () => {
+type Props = {
+    contractId: number;
+};
+
+export const Penalty = ({ contractId }: Props) => {
     const { t } = useTranslation();
+    const accountName = useAccountName();
+
     const [isCollectModalVisible, setIsCollectModalVisible] = useState(false);
     const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
     const [isNoCollectModalVisible, setIsNoCollectModalVisible] =
         useState(false);
+
+    const getPenaltyAction = useSmartContractAction(
+        terminateContract(accountName, contractId, 1)
+    );
+    const getNoPenaltyAction = useSmartContractAction(
+        terminateContract(accountName, contractId, 0)
+    );
 
     const closeSuccessModal = () => {
         setIsSuccessModalVisible(false);
@@ -18,14 +33,18 @@ export const Penalty = () => {
     const openSuccessModal = () => {
         setIsSuccessModalVisible(true);
     };
+    const submitSuccessModal = () => {
+        closeSuccessModal();
+        setIsCollectModalVisible(false);
+    };
 
-    const handlePenaltyClick = () => {
-        console.log('penalty');
+    const handlePenaltyClick = async () => {
+        await getPenaltyAction();
         openSuccessModal();
     };
 
-    const handleNoPenaltyClick = () => {
-        console.log('no penalty');
+    const handleNoPenaltyClick = async () => {
+        await getNoPenaltyAction();
     };
 
     return (
@@ -65,7 +84,7 @@ export const Penalty = () => {
             <SuccessModal
                 visible={isSuccessModalVisible}
                 onCancel={closeSuccessModal}
-                onSubmit={closeSuccessModal}
+                onSubmit={submitSuccessModal}
                 title={t('pages.serviceMarket.contract.termination')}
                 description={t('pages.serviceMarket.contract.youReceived')}
             />
