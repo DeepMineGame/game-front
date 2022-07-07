@@ -1,16 +1,36 @@
 import { useTranslation } from 'react-i18next';
-import { Button, desktopS, useMediaQuery } from 'shared';
+import { Button, desktopS, useAccountName, useMediaQuery } from 'shared';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createOrder, serviceMarket, warehouse } from 'app/router/paths';
 import { ATOMICHUB_URL } from 'app';
+import { useStore } from 'effector-react';
+import {
+    ContractStatus,
+    contractStore,
+    ContractType,
+    setupMine,
+} from 'entities/smartcontract';
 import { mineOwnerCabinState } from '../../models/mineOwnerState';
+import { useSmartContractAction } from '../../../hooks';
 
 export function useLinks() {
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
     const navigate = useNavigate();
-
+    const accountName = useAccountName();
+    const contracts = useStore(contractStore);
+    const activeMinesContract = contracts?.filter(
+        ({ type, status }) =>
+            type === ContractType.landlord_mineowner &&
+            status === ContractStatus.active
+    );
+    const setupMineAction = useSmartContractAction(
+        setupMine({
+            waxUser: accountName,
+            contractId: activeMinesContract?.[0]?.id || 0,
+        })
+    );
     return {
         [mineOwnerCabinState.isOutsideFromLocation]: null,
         [mineOwnerCabinState.initial]: (
@@ -60,6 +80,14 @@ export function useLinks() {
                         : t('features.mineOwner.create')}
                 </Button>
             </div>
+        ),
+        [mineOwnerCabinState.needSetupMine]: (
+            <>
+                <div />
+                <Button type="link" onClick={setupMineAction}>
+                    {t('features.mineOwner.setupMine')}
+                </Button>
+            </>
         ),
         [mineOwnerCabinState.isMineSet]: null,
         [mineOwnerCabinState.contractsFree]: null,

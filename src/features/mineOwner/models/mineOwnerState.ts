@@ -22,6 +22,7 @@ import {
     hasMinesFilter,
     ignoreIfInStatus,
     isMineActiveFilter,
+    checkMineNotSetup,
 } from '../filters';
 
 export const MineOwnerCabinGate = createGate<{ searchParam: string }>(
@@ -33,6 +34,7 @@ export enum mineOwnerCabinState {
     hasNoMineNft,
     isOutsideFromLocation,
     needSignContractWithLandLord,
+    needSetupMine,
     isMineSetupInProgress,
     isMineSet,
     contractsFree,
@@ -47,6 +49,7 @@ const setIsMineSetupInProgressEvent = createEvent();
 const setIsMineSetEvent = createEvent();
 const setContractsFreeEvent = createEvent();
 const setMineActive = createEvent();
+const needSetupMineEvent = createEvent();
 
 export const $mineOwnerCabinState = createStore<mineOwnerCabinState>(
     mineOwnerCabinState.initial
@@ -61,6 +64,7 @@ export const $mineOwnerCabinState = createStore<mineOwnerCabinState>(
         setNeedSignContractWithLandLord,
         () => mineOwnerCabinState.needSignContractWithLandLord
     )
+    .on(needSetupMineEvent, () => mineOwnerCabinState.needSetupMine)
     .on(
         setIsMineSetupInProgressEvent,
         () => mineOwnerCabinState.isMineSetupInProgress
@@ -69,7 +73,6 @@ export const $mineOwnerCabinState = createStore<mineOwnerCabinState>(
     .on(setContractsFreeEvent, () => mineOwnerCabinState.contractsFree)
     .on(setMineActive, () => mineOwnerCabinState.isMineActive);
 
-// На открытие гейта заполняем нужные сторы
 forward({
     from: MineOwnerCabinGate.open,
     to: [
@@ -102,34 +105,6 @@ sample({
     ),
 });
 
-// Checks that a contract has been signed with the landlord
-sample({
-    source: contractStore,
-    target: setNeedSignContractWithLandLord,
-    clock: [setInitialStateEvent, contractStore],
-    filter: compose(
-        ignoreIfInStatus($mineOwnerCabinState, [
-            mineOwnerCabinState.hasNoMineNft,
-            mineOwnerCabinState.isOutsideFromLocation,
-        ]),
-        checkHasActiveContractWithLandlord
-    ),
-});
-
-// Checks that the mine setup in progress
-sample({
-    source: actionsStore,
-    target: setIsMineSetupInProgressEvent,
-    clock: [
-        setIsUserOutsideFromLocation,
-        setHasNoMineNft,
-        setNeedSignContractWithLandLord,
-        setInitialStateEvent,
-        actionsStore,
-    ],
-    filter: checkIfMineSetupWillFinishedInFuture,
-});
-
 // Check that has mine contract (contractsFree)
 sample({
     source: { contract: contractStore, inventory: inventoriesStore },
@@ -145,6 +120,49 @@ sample({
         ]),
         hasActiveMineContractFilter
     ),
+});
+
+// Checks that a contract has been signed with the landlord
+sample({
+    source: contractStore,
+    target: setNeedSignContractWithLandLord,
+    clock: [setInitialStateEvent, contractStore],
+    filter: compose(
+        ignoreIfInStatus($mineOwnerCabinState, [
+            mineOwnerCabinState.hasNoMineNft,
+            mineOwnerCabinState.isOutsideFromLocation,
+        ]),
+        checkHasActiveContractWithLandlord
+    ),
+});
+
+// Checks that mine not setup
+sample({
+    source: minesStore,
+    target: needSetupMineEvent,
+    clock: [setInitialStateEvent, contractStore, minesStore],
+    filter: compose(
+        ignoreIfInStatus($mineOwnerCabinState, [
+            mineOwnerCabinState.hasNoMineNft,
+            mineOwnerCabinState.isOutsideFromLocation,
+            mineOwnerCabinState.needSignContractWithLandLord,
+        ]),
+        checkMineNotSetup
+    ),
+});
+
+// Checks that the mine setup in progress
+sample({
+    source: actionsStore,
+    target: setIsMineSetupInProgressEvent,
+    clock: [
+        setIsUserOutsideFromLocation,
+        setHasNoMineNft,
+        setNeedSignContractWithLandLord,
+        setInitialStateEvent,
+        actionsStore,
+    ],
+    filter: checkIfMineSetupWillFinishedInFuture,
 });
 
 // Check that mine setup finished

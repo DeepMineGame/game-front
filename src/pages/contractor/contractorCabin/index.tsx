@@ -13,6 +13,7 @@ import cn from 'classnames';
 import { ContractorMenu, ContractorMenuItems, Travel } from 'features';
 import {
     ContractDto,
+    ContractStatus,
     ContractType,
     getContractsNameConfig,
     getHistoryConfig,
@@ -47,7 +48,10 @@ export const ContractorCabin = () => {
         useTableData<UserHistoryType>(getHistoryConfig);
 
     const mineOwnerContracts = userContracts.filter(
-        ({ type }) => type === ContractType.mineowner_contractor
+        ({ type, executor, status: contractStatus }) =>
+            type === ContractType.mineowner_contractor &&
+            executor === userInfo[0]?.owner &&
+            contractStatus === ContractStatus.active
     );
 
     const hasPhysicalShift =

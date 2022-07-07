@@ -16,7 +16,6 @@ export const MineOwnerPage = () => {
     return (
         <MineOwnerCabin state={cabinState}>
             <Header withBackButton />
-
             <div className={styles.overturnLayout}>
                 {chainAccountName && <Surface user={chainAccountName} />}
             </div>

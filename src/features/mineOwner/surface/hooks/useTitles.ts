@@ -14,7 +14,7 @@ export function useTitles() {
         [mineOwnerCabinState.needSignContractWithLandLord]: t(
             'features.mineOwner.mineNotSet'
         ),
-
+        [mineOwnerCabinState.needSetupMine]: t('features.mineOwner.mineNotSet'),
         [mineOwnerCabinState.isMineSet]: t('features.mineOwner.mineManagement'),
         [mineOwnerCabinState.isMineSetupInProgress]: t(
             'features.mineOwner.progress'
