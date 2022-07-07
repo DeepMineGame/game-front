@@ -1,11 +1,15 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
+import { Button } from 'shared';
+import { useNavigate } from 'react-router-dom';
+import { createOrder, serviceMarket } from 'app/router/paths';
 import contractorStyles from '../../styles.module.scss';
 import styles from './styles.module.scss';
 
 export const SignContract = () => {
     const { t } = useTranslation();
+    const navigate = useNavigate();
 
     return (
         <div className={styles.container}>
@@ -18,16 +22,22 @@ export const SignContract = () => {
                 {t('pages.contractor.signingContract.description')}
             </div>
             <div className={styles.buttons}>
-                <div
-                    className={cn(contractorStyles.coloredText, styles.button)}
+                <Button
+                    type="primary"
+                    ghost
+                    className={cn(contractorStyles.coloredText)}
+                    onClick={() => navigate(serviceMarket)}
                 >
                     {t('pages.contractor.signingContract.findButton')}
-                </div>
-                <div
-                    className={cn(contractorStyles.coloredText, styles.button)}
+                </Button>
+                <Button
+                    className={cn(contractorStyles.coloredText)}
+                    ghost
+                    type="primary"
+                    onClick={() => navigate(createOrder)}
                 >
                     {t('pages.contractor.signingContract.createButton')}
-                </div>
+                </Button>
             </div>
         </div>
     );

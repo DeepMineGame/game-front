@@ -6,3 +6,10 @@
   height: calc(100vh - 46px);
   width: 100vw;
 }
+
+.backButton {
+  display: inline-flex;
+  position: absolute;
+  margin-top: 20px;
+  margin-left: 20px;
+}

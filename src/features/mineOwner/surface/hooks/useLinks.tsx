@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Button, desktopS, useMediaQuery } from 'shared';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { warehouse, wipPage } from 'app/router/paths';
+import { createOrder, serviceMarket, warehouse } from 'app/router/paths';
 import { ATOMICHUB_URL } from 'app';
 import { mineOwnerCabinState } from '../../models/mineOwnerState';
 
@@ -10,8 +10,6 @@ export function useLinks() {
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
     const navigate = useNavigate();
-    const navigateToWipPageWithTittle = (title: string) => () =>
-        navigate(wipPage, { state: { title } });
 
     return {
         [mineOwnerCabinState.isOutsideFromLocation]: null,
@@ -51,15 +49,12 @@ export function useLinks() {
         ),
         [mineOwnerCabinState.needSignContractWithLandLord]: (
             <div>
-                <Button
-                    type="link"
-                    onClick={navigateToWipPageWithTittle('Contract')}
-                >
+                <Button type="link" onClick={() => navigate(serviceMarket)}>
                     {isDesktop
                         ? t('features.mineOwner.chooseContract')
                         : t('features.mineOwner.choose')}
                 </Button>
-                <Button type="link" onClick={() => navigate(wipPage)}>
+                <Button type="link" onClick={() => navigate(createOrder)}>
                     {isDesktop
                         ? t('features.mineOwner.createContract')
                         : t('features.mineOwner.create')}

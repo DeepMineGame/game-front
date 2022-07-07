@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import {
     contractorCabin,
     hive,
+    landLord,
     mineOwner,
     serviceMarket,
 } from 'app/router/paths';
@@ -46,6 +47,13 @@ export const HomePage: FC = () => {
                 <Title level={5}>
                     {t('pages.serviceMarket.serviceMarket')}
                 </Title>
+                <DownOutlined />
+            </div>{' '}
+            <div
+                className={classNames(styles.landlordCabin, styles.enterLink)}
+                onClick={() => navigate(landLord)}
+            >
+                <Title level={5}>{t('pages.home.landlordCabin')}</Title>
                 <DownOutlined />
             </div>
         </div>

@@ -76,7 +76,7 @@ export const routes: AppRoute[] = [
         path: equipmentSet,
         Component: EquipmentSetPage,
         forLoggedIn: true,
-        forAdmin: true,
+        forAdmin: false,
         titleTag: 'Equipment set — DeepMine',
     },
     {

@@ -142,7 +142,8 @@
     "home": {
       "mineOwnerCabin": "MINE OWNER CABIN",
       "contractorCabin": "CONTRACTOR'S CABIN",
-      "hive": "HIVE"
+      "hive": "HIVE",
+      "landlordCabin":"LANDLORD CABIN"
     },
     "contractor": {
       "signingContract": {

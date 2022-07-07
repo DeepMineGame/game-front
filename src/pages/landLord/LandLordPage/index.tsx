@@ -6,7 +6,7 @@ import { LandLordCabin } from './LandLordCabin';
 export const LandLordPage = () => {
     return (
         <div>
-            <Header />
+            <Header withBackButton />
             <LandLordCabin />
             <LandLordMenu />
         </div>
