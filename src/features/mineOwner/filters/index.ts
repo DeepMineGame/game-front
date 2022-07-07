@@ -38,8 +38,12 @@ export const checkHasActiveContractWithLandlord = (
     return contracts?.filter(
         ({ type, status }) =>
             type === ContractType.landlord_mineowner &&
-            status === ContractStatus.active
+            status !== ContractStatus.active
     )?.[0];
+};
+
+export const checkMineNotSetup = (mines: MineDto[] | null) => {
+    return !mines?.filter(({ state }) => state === MineState.setuped)?.[0];
 };
 
 export const checkIfMineSetupWillFinishedInFuture = (
