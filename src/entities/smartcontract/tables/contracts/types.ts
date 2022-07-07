@@ -40,7 +40,6 @@ export type ContractDto = {
     term_time: number;
     term_initiator: string;
     finishes_at: number;
-    is_active: number;
     status: ContractStatus;
     fee_days: any[];
     attrs: [

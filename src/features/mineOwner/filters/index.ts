@@ -2,6 +2,7 @@ import {
     ActionDto,
     ActionType,
     ContractDto,
+    ContractStatus,
     ContractType,
     LOCATION_TO_ID,
     mineAssetTemplateId,
@@ -34,10 +35,11 @@ export const checkIsUserLocationOutsideMineFilter = (user: UserDto[] | null) =>
 export const checkHasActiveContractWithLandlord = (
     contracts: ContractDto[] | null
 ) => {
-    const contractWithLandlord = contracts?.filter(
-        ({ type }) => type === ContractType.landlord_mineowner
+    return contracts?.filter(
+        ({ type, status }) =>
+            type === ContractType.landlord_mineowner &&
+            status === ContractStatus.active
     )?.[0];
-    return !contractWithLandlord?.is_active;
 };
 
 export const checkIfMineSetupWillFinishedInFuture = (
@@ -70,7 +72,7 @@ export const hasActiveMineContractFilter = ({
     if (!mineContract) {
         return false;
     }
-    return Boolean(!mineContract?.is_active);
+    return mineContract?.status === ContractStatus.active;
 };
 
 export const hasMinesFilter = (mines: MineDto[] | null) =>
