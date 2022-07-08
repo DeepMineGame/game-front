@@ -1,6 +1,7 @@
 @import "src/shared";
 
 .cabin {
+  z-index: -1;
   height: 100vh;
   width: 100vw;
   position: absolute;
@@ -9,7 +10,7 @@
 }
 
 .cabinBackground {
-  z-index: -1;
+  z-index: -2;
   height: 100vh;
   width: 100vw;
   position: absolute;
