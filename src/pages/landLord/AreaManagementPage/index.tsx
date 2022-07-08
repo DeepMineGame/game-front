@@ -34,7 +34,7 @@ export const AreaManagementPage = () => {
     const areaId = areaItem ? +areaItem.asset_id : undefined;
     const isActive = !!areaItem?.in_use;
     const currentMineSlots = mines?.length ?? 0;
-    const maxMineSlots = area?.[0].mine_slots.length ?? 0;
+    const maxMineSlots = area?.[0]?.mine_slots.length ?? 0;
     const data = mines?.map(
         (mine) =>
             ({

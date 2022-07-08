@@ -2,7 +2,14 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 
-import { Button, desktopS, useMediaQuery } from 'shared';
+import { Button, desktopS, useAccountName, useMediaQuery } from 'shared';
+import { useStore } from 'effector-react';
+import { useSmartContractAction } from 'features';
+import {
+    engageArea,
+    inventoriesStore,
+    InventoryType,
+} from 'entities/smartcontract';
 import commonStyles from '../../styles/styles.module.scss';
 import styles from './styles.module.scss';
 
@@ -12,8 +19,17 @@ interface Props {
 }
 
 export const EngageArea: FC<Props> = ({ className, disabled = true }) => {
+    const accountName = useAccountName();
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
+    const inventories = useStore(inventoriesStore);
+    const areaItem = inventories?.find(
+        ({ inv_type }) => inv_type === InventoryType.areas
+    );
+    const areaId = areaItem ? +areaItem.asset_id : undefined;
+    const engageAreaAction = useSmartContractAction(
+        engageArea({ waxUser: accountName, areaId })
+    );
 
     return (
         <div className={cn(styles.engageArea, className)}>
@@ -27,7 +43,11 @@ export const EngageArea: FC<Props> = ({ className, disabled = true }) => {
                     {t('pages.landLord.cabin.engageDescription')}
                 </div>
             )}
-            <Button type="primary" disabled={disabled}>
+            <Button
+                type="primary"
+                disabled={disabled}
+                onClick={engageAreaAction}
+            >
                 {t('pages.landLord.cabin.engageButton')}
             </Button>
         </div>
