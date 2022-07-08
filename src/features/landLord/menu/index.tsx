@@ -3,12 +3,14 @@ import React, { FC } from 'react';
 import { Menu, MenuItem } from 'shared';
 import { BuildOutlined, ProjectOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { wipPage } from 'app/router/paths';
+import { areaManagement, wipPage } from 'app/router/paths';
 import { useTranslation } from 'react-i18next';
+import { CABIN_STATUS, useLandLordStatus } from '../cabin';
 
 export const LandLordMenu: FC = () => {
     const navigate = useNavigate();
     const { t } = useTranslation();
+    const { status } = useLandLordStatus();
 
     return (
         <Menu>
@@ -17,9 +19,9 @@ export const LandLordMenu: FC = () => {
                     {/* TODO: Remove div wrapper after figure out why it doesn't work without it */}
                     <div>
                         <MenuItem
-                            onClick={() => navigate(wipPage)}
+                            onClick={() => navigate(areaManagement)}
                             icon={<BuildOutlined />}
-                            disabled
+                            disabled={status < CABIN_STATUS.setup}
                         />
                     </div>
                 </Tooltip>
@@ -28,7 +30,7 @@ export const LandLordMenu: FC = () => {
                         <MenuItem
                             onClick={() => navigate(wipPage)}
                             icon={<ProjectOutlined />}
-                            disabled
+                            disabled={status < CABIN_STATUS.searching}
                         />
                     </div>
                 </Tooltip>
