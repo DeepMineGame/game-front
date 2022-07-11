@@ -4,16 +4,6 @@
     color: $color-primary-primary-6;
 }
 
-.title.title {
-    margin-bottom: 16px;
-}
-
-.table > div {
-    & div:last-child {
-        font-weight: 700;
-    }
-}
-
 .copyIcon {
     margin-right: 10px;
     font-size: 16px;
@@ -23,4 +13,19 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 24px;
+}
+
+.contractId,
+.discord {
+    display: flex;
+    align-items: center;
+
+    div {
+        color: $color-primary-primary-6;
+    }
+
+    svg {
+        cursor: pointer;
+        margin-right: 8px;
+    }
 }

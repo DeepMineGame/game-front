@@ -28,8 +28,17 @@ export const getTimeLeft = (seconds: number, showDays?: boolean) => {
     return showDays ? `${getPadTime(d)}:${timeWithHour}` : timeWithHour;
 };
 
+export const secondsToDate = (seconds: number) =>
+    new Date(seconds * 1000).toLocaleDateString();
+
 export const secondsToTime = (seconds: number) =>
     new Date(seconds * 1000).toISOString().slice(11, 19);
+
+export const secondsToDays = (seconds: number) =>
+    Math.ceil(seconds / DAY_IN_SECONDS);
+
+export const secondsToHour = (seconds: number) =>
+    Math.ceil(seconds / HOUR_IN_SECONDS);
 
 export const toLocaleDate = (
     date: number,

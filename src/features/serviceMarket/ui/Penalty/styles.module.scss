@@ -1,0 +1,36 @@
+@import "src/shared";
+
+.penalty {
+  background: $color-primary-primary-1;
+  border: 1px solid $color-primary-primary-3;
+  border-radius: 2px;
+  padding: 12px 16px;
+  margin-top: 16px;
+  display: flex;
+
+  svg {
+    margin-top: 4px;
+    color: $color-primary-primary-6;
+  }
+}
+
+.content {
+  padding-left: 10px;
+}
+
+.description {
+  padding-bottom: 12px;
+}
+
+.buttons {
+  display: flex;
+
+  .button {
+    border-color: $color-primary-primary-6 !important;
+    color: $color-primary-primary-6 !important;
+
+    &:first-child {
+      margin-right: 16px;
+    }
+  }
+}
