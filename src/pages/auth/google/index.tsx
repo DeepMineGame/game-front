@@ -26,7 +26,7 @@ export const GoogleAuthPage: React.FC<Props> = ({ onSuccess }) => {
     const user = useStore(userStore);
 
     const [isFetching, setIsFetching] = useState(true);
-    const [isButtonLoading, setIsButtonLoading] = useState(false);
+    const [isAuthLinkFetching, setIsAuthLinkFetching] = useState(false);
 
     useEffect(() => {
         if (user?.is_admin) onSuccess();
@@ -58,14 +58,14 @@ export const GoogleAuthPage: React.FC<Props> = ({ onSuccess }) => {
 
     const handleAuthClick = async () => {
         try {
-            setIsButtonLoading(true);
+            setIsAuthLinkFetching(true);
             const { google } = await getAuthLinks();
 
             window.location.href = `${google}&redirect_uri=${encodeURIComponent(
                 window.location.origin
             )}`;
         } finally {
-            setIsButtonLoading(false);
+            setIsAuthLinkFetching(false);
         }
     };
 
@@ -89,7 +89,7 @@ export const GoogleAuthPage: React.FC<Props> = ({ onSuccess }) => {
                         onClick={handleAuthClick}
                         className={styles.actionButton}
                         type="primary"
-                        loading={isButtonLoading}
+                        loading={isAuthLinkFetching}
                         ghost
                     >
                         {t('intro.signInGoogle')}

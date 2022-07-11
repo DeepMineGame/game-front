@@ -45,7 +45,9 @@ export const BlockchainAuthPage: React.FC<Props> = ({ onSuccess }) => {
         userId: string
     ) => {
         try {
-            await authorizeUser(chain, waxAddress, userId);
+            await chain.signTransaction(authorizeUser(waxAddress, userId), {
+                expireSeconds: 300,
+            });
             setIsWaitingForConnectWax(true);
             await new Promise((resolve) => {
                 window.setTimeout(resolve, 3000);
@@ -109,7 +111,7 @@ export const BlockchainAuthPage: React.FC<Props> = ({ onSuccess }) => {
     if (isWaitingForConnectWax) {
         return (
             <LoadingScreen key="loading" size="large">
-                <div>Wait please...</div>
+                <div>{t('pages.auth.wait')}</div>
             </LoadingScreen>
         );
     }

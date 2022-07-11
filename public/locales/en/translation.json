@@ -103,6 +103,10 @@
     }
   },
   "pages": {
+    "auth": {
+      "wait": "Wait please...",
+      "logAs": "You’re logged in as another user <b>{{email}}</b>"
+    },
     "info": {
       "share": "Share profile",
       "copied": "Copied to clipboard",

@@ -6,13 +6,13 @@
     right: 0;
     top: 60px;
     padding: 8px 16px;
-    background-color: rgb(61, 49, 0);
+    background-color: $color-primary-primary-1;
     display: flex;
     align-items: center;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
     transform: translateX(calc(100% - 46px));
-    color: #DBDBDB;
+    color: $color-neutral-neutral-9;
 
     &Opened {
         transform: translateX(0);

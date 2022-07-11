@@ -27,9 +27,7 @@ export const LogAs = () => {
             onClick={handleClick}
         >
             <UserSwitchOutlined className={styles.logAsIcon} />
-            <span>
-                You’re logged in as another user <b>{user?.email}</b>
-            </span>
+            <span>{t('pages.auth.logAs', { email: user?.email })}</span>
             <Button type="link" onClick={logout}>
                 {t('intro.Logout')}
             </Button>
