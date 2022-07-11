@@ -8,10 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { warehouse } from 'app/router/paths';
 import { Flat, isUserInHive } from 'features/hive';
-import {
-    getSmartContractUserEffect,
-    LOCATION_TO_ID,
-} from 'entities/smartcontract';
+import { LOCATION_TO_ID } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
 export * from './info';
@@ -21,16 +18,14 @@ export const HivePage: FC = () => {
     const accountName = useAccountName();
     const { t } = useTranslation();
     const navigate = useNavigate();
-
+    const reloadPage = () => navigate(0);
     return (
         <Flat>
             <Page className={styles.page} headerTitle="Hive" />
             {!isUserInFlat && (
                 <Travel
                     toLocationId={LOCATION_TO_ID.hive}
-                    onSuccess={() =>
-                        getSmartContractUserEffect({ searchParam: accountName })
-                    }
+                    onSuccess={reloadPage}
                 />
             )}
             <Menu>
