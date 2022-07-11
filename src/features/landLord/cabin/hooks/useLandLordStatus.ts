@@ -8,10 +8,11 @@ import {
     minesStore,
 } from 'entities/smartcontract';
 import { CABIN_STATUS } from '../constants';
+import { minesForAreaSlots } from '../../areaManagement';
 
 export const useLandLordStatus = () => {
     const inventories = useStore(inventoriesStore);
-    const mines = useStore(minesStore);
+    const mines = useStore(minesForAreaSlots);
 
     // TODO: add searching and mine_is_set statuses after Service Market
     const status = useMemo(() => {
@@ -28,7 +29,7 @@ export const useLandLordStatus = () => {
         }
 
         if (areaItem.in_use === InUseType.inUse) {
-            if (mines && mines.length >= 2) {
+            if (mines && mines.length >= 1) {
                 return CABIN_STATUS.stats;
             }
 

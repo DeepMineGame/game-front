@@ -6,6 +6,7 @@ import { useStore } from 'effector-react';
 import { KeyValueTable } from 'shared';
 import { contractorsStore, minesStore } from 'entities/smartcontract';
 import commonStyles from '../../styles/styles.module.scss';
+import { minesForAreaSlots } from '../../../areaManagement';
 import styles from './styles.module.scss';
 
 interface Props {
@@ -14,7 +15,7 @@ interface Props {
 
 export const LandStats: FC<Props> = ({ className }) => {
     const { t } = useTranslation();
-    const mines = useStore(minesStore);
+    const mines = useStore(minesForAreaSlots);
     const contractors = useStore(contractorsStore);
 
     return (

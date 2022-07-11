@@ -1,17 +1,30 @@
 import { createGate } from 'effector-react';
 import { createEffect, createStore, forward, sample } from 'effector';
 import {
-    getInventoriesEffect,
     getMinesTableData,
-    inventoriesStore,
+    inventoryTableDataConfig,
     InventoryType,
     MineDto,
+    SEARCH_BY,
     searchBy,
     UserInventoryType,
 } from 'entities/smartcontract';
 
-export const AreaManagementGate = createGate<{ searchParam: string }>(
-    'AreaManagementGate'
+export const AreaGate = createGate<{ searchParam: string }>('AreaGate');
+
+export const getInventoriesEffect = createEffect(
+    async ({
+        searchIdentificationType = SEARCH_BY.ownerNickname,
+        searchParam,
+    }: {
+        searchIdentificationType?: SEARCH_BY;
+        searchParam: string;
+    }) => {
+        return inventoryTableDataConfig({
+            searchIdentificationType,
+            searchParam,
+        });
+    }
 );
 
 export const getMinesByAreaId = createEffect(
@@ -27,11 +40,26 @@ export const getMinesByAreaId = createEffect(
     }
 );
 
+export const inventoriesStore = createStore<UserInventoryType[] | null>(
+    null
+).on(getInventoriesEffect.doneData, (_, { rows }) => rows);
+
 export const userAreaNftStore = createStore<UserInventoryType[] | null>(null);
+
 export const minesForAreaSlots = createStore<MineDto[] | null>(null).on(
     getMinesByAreaId.doneData,
     (_, { rows }) => rows
 );
+
+forward({
+    from: AreaGate.open,
+    to: getInventoriesEffect,
+});
+
+forward({
+    from: userAreaNftStore,
+    to: getMinesByAreaId,
+});
 
 sample({
     source: inventoriesStore,
@@ -42,14 +70,4 @@ sample({
                 ({ inv_type }) => inv_type === InventoryType.areas
             )?.length
         ),
-});
-
-forward({
-    from: AreaManagementGate.open,
-    to: getInventoriesEffect,
-});
-
-forward({
-    from: userAreaNftStore,
-    to: getMinesByAreaId,
 });

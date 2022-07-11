@@ -8,7 +8,7 @@ import { MineDto } from 'entities/smartcontract';
 import { AreaManagementTableContent } from '../AreaManagementTableContent';
 import { AddMineOwnerModal } from '../AddMineOwnerModal';
 import { Activity, MineCrewDataType } from '../../types';
-import { AreaManagementGate, minesForAreaSlots } from '../../model';
+import { AreaGate, minesForAreaSlots } from '../../model';
 import styles from './styles.module.scss';
 
 const emptySlotsCount = 5;
@@ -23,7 +23,7 @@ const getMineCrewContractors = (mine: MineDto) =>
 
 export const AreaManagementTable: FC<Props> = ({ disabled, accountName }) => {
     const { t } = useTranslation();
-    useGate(AreaManagementGate, { searchParam: accountName });
+    useGate(AreaGate, { searchParam: accountName });
     const [searchingSlotsCount, setSearchingSlotsCount] = useState(0);
     const [isAddModalVisible, setIsAddModalVisible] = useState(false);
     const mines = useStore(minesForAreaSlots);

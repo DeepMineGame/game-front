@@ -39,7 +39,7 @@ export const MineOwnerMenu: FC<Props> = ({ currentMineOwnerCabinState }) => {
 
     const menuItems = [
         {
-            link: mineOwnerStatsAndInfo,
+            link: mineManagement,
             icon: <DesktopOutlined />,
             disabled: statusThatDisableManagementButton.includes(
                 currentMineOwnerCabinState
@@ -55,7 +55,7 @@ export const MineOwnerMenu: FC<Props> = ({ currentMineOwnerCabinState }) => {
             tooltip: t('pages.mineOwner.menu.team'),
         },
         {
-            link: mineManagement,
+            link: mineOwnerStatsAndInfo,
             icon: <ProjectOutlined />,
             disabled: statusThatDisableStatsButton.includes(
                 currentMineOwnerCabinState

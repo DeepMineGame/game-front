@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import {
     LightBlueBg,
@@ -23,8 +23,10 @@ import {
     Travel,
     CABIN_STATUS,
     useLandLordStatus,
+    AreaGate,
 } from 'features';
 import { useNavigate } from 'react-router-dom';
+import { useGate } from 'effector-react';
 import {
     getUserConfig,
     LOCATION_TO_ID,
@@ -54,7 +56,8 @@ const getBackground = (
     }
 };
 
-export const LandLordCabin = () => {
+export const LandLordCabin: FC<{ accountName: string }> = ({ accountName }) => {
+    useGate(AreaGate, { searchParam: accountName });
     const { status } = useLandLordStatus();
     const navigate = useNavigate();
     const reloadPage = () => navigate(0);
