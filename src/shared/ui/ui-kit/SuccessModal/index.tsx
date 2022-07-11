@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Modal } from 'antd';
-import { CheckCircleFilled } from '@ant-design/icons';
+import { Modal, Result } from 'antd';
 
 import { Button } from 'shared';
 import styles from './styles.module.scss';
@@ -37,10 +36,11 @@ export const SuccessModal: FC<Props> = ({
                 </Button>
             }
         >
-            <div className={styles.content}>
-                <CheckCircleFilled className={styles.icon} />
-                <div className={styles.description}>{description}</div>
-            </div>
+            <Result
+                status="success"
+                className={styles.success}
+                title={<div className={styles.description}>{description}</div>}
+            />
         </Modal>
     );
 };

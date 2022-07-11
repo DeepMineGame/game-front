@@ -1,50 +1,50 @@
-@import "src/shared";
+@import 'src/shared';
 
 .modal {
-  & > div {
-    background: $color-neutral-neutral-2;
-  }
-
-  color: $color-neutral-neutral-9;
-
-  :global {
-    .ant-modal-header {
-      background-color: $color-neutral-neutral-2;
-      border-bottom: 1px solid $color-neutral-neutral-4;
+    & > div {
+        background: $color-neutral-neutral-2;
     }
 
-    .ant-modal-title {
-      color: $color-neutral-neutral-9;
-    }
+    color: $color-neutral-neutral-9;
 
-    .ant-modal-body {
-      padding: 20px 32px 56px;
-    }
+    :global {
+        .ant-modal-header {
+            background-color: $color-neutral-neutral-2;
+            border-bottom: 1px solid $color-neutral-neutral-4;
+        }
 
-    .ant-modal-footer {
-      border-top: 1px solid $color-neutral-neutral-4;
+        .ant-modal-title {
+            color: $color-neutral-neutral-9;
+        }
+
+        .ant-modal-body {
+            padding: 20px 32px 56px;
+        }
+
+        .ant-modal-footer {
+            border-top: 1px solid $color-neutral-neutral-4;
+        }
     }
-  }
 }
 
 .content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.icon {
-  padding-bottom: 24px;
+.success {
+    padding: 0;
 
-  svg {
-    font-size: 64px;
-    color: $color-green-green-6;
-  }
+    svg {
+        font-size: 64px;
+    }
 }
 
 .description {
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 32px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+    color: $color-neutral-neutral-9;
 }

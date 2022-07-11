@@ -1,31 +1,13 @@
-import React, { FC, ReactNode, useState } from 'react';
+import React, { FC, useState } from 'react';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { Row, Col } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
 import { SignOrderModal, useSmartContractAction } from 'features';
-import {
-    Button,
-    DAY_IN_SECONDS,
-    KeyValueTable,
-    Text,
-    Title,
-    toLocaleDate,
-} from 'shared';
+import { Button, DAY_IN_SECONDS, Text, toLocaleDate } from 'shared';
 import { ContractDto, signOrder } from 'entities/smartcontract';
+import { TableWithTitle } from '../ui/TableTitle';
 import styles from './styles.module.scss';
-
-const Table: FC<{ title: string; data: Record<string, ReactNode> }> = ({
-    title,
-    data,
-}) => (
-    <>
-        <Title className={styles.title} fontFamily="orbitron" level={5}>
-            {title.toUpperCase()}
-        </Title>
-        <KeyValueTable className={styles.table} items={data} />
-    </>
-);
 
 type Props = { contract: ContractDto; accountName: string };
 
@@ -110,19 +92,19 @@ const OperationOrder: FC<Props> = ({ contract, accountName }) => {
         <div>
             <Row gutter={[32, 32]}>
                 <Col span={24}>
-                    <Table
+                    <TableWithTitle
                         title={t('pages.mineOperationOrder.generalInformation')}
                         data={generalData}
                     />
                 </Col>
                 <Col xs={24} md={12}>
-                    <Table
+                    <TableWithTitle
                         title={t('pages.mineOperationOrder.landlord')}
                         data={landlordData}
                     />
                 </Col>
                 <Col xs={24} md={12}>
-                    <Table
+                    <TableWithTitle
                         title={t('pages.mineOperationOrder.conditions')}
                         data={conditionsData}
                     />

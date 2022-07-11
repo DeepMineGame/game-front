@@ -361,11 +361,11 @@
         "collectPenalty": "Collect a penalty",
         "noCollectPenalty": "Don’t collect a penalty",
         "collect": "Collect",
-        "collectDescription": "Are you sure you want to collect a penalty of 10 DME from the Mine owner?",
-        "noCollectDescription": "Are you sure you don’t want to collect a penalty of 10 DME from the Mine owner?",
+        "collectDescription": "Are you sure you want to collect a penalty of {{amount}} DME from the Mine owner?",
+        "noCollectDescription": "Are you sure you don’t want to collect a penalty of {{amount}} DME from the Mine owner?",
         "noCollect": "Don’t collect",
         "termination": "Contract termination",
-        "youReceived": "You received 10 DME"
+        "youReceived": "You received {{amount}} DME"
       }
     },
     "areaManagement": {

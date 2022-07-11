@@ -18,5 +18,4 @@ export const user = '/user/:accountName';
 export const warehouse = '/warehouse';
 export const serviceMarket = '/service-market';
 export const createOrder = '/service-market/create-order';
-export const serviceMarketContract = '/service-market/contract';
 export const serviceMarketOrder = '/service-market/order/:orderId';
