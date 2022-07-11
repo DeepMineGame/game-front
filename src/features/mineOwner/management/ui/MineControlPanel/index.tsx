@@ -5,6 +5,7 @@ import { Badge, Space } from 'antd';
 import { useGate, useStore } from 'effector-react';
 import { useSmartContractAction } from 'features';
 import { FrownOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 import {
     minesStore,
     MineState,
@@ -24,6 +25,8 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
     useGate(MineManagementGate, {
         searchParam: chainAccountName,
     });
+    const navigate = useNavigate();
+    const reloadPage = () => navigate(0);
     const { t } = useTranslation();
     const isMinesLoading = useStore(getMinesByOwnerEffect.pending);
     const mines = useStore(minesStore);
@@ -42,7 +45,7 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
     const onActivationButtonClick = async () => {
         const action = isMineActive ? deactivateMine : activateMine;
         await action();
-        return getMinesByOwnerEffect({ searchParam: chainAccountName });
+        return reloadPage();
     };
     if (mines?.length === 0) {
         return (
