@@ -15,24 +15,24 @@ import {
 
 export enum Filter {
     LookingForMineOwner,
-    LookingForContractor,
+    LookingForLandlord,
 }
 
-export const MiningContractsGate = createGate();
+export const MineOperationContractsGate = createGate();
 export const changeFilterEvent = createEvent<Filter>();
 
-export const getMiningContractsEffect = createEffect(() =>
+export const getMineOperationContractsEffect = createEffect(() =>
     getTableData(
         getContractsNameConfig(
-            2,
+            1,
             mapSearchParamForIndexPositionToFindContracts.contractType,
             150
         )
     )
 );
 
-export const miningContractsStore = createStore<ContractDto[]>([]).on(
-    getMiningContractsEffect.doneData,
+export const mineOperationContractsStore = createStore<ContractDto[]>([]).on(
+    getMineOperationContractsEffect.doneData,
     (_, contracts) =>
         contracts.rows?.filter(
             (contract: ContractDto) => !contract.client || !contract.executor
@@ -44,19 +44,19 @@ export const filterStore = createStore<Filter>(Filter.LookingForMineOwner).on(
     (_state, filter) => filter
 );
 
-export const filteredMiningContractsStore = combine(
-    miningContractsStore,
+export const filteredMineOperationContractsStore = combine(
+    mineOperationContractsStore,
     filterStore,
     (contracts, filter) => {
         if (filter === Filter.LookingForMineOwner) {
-            return contracts.filter((contract) => !contract.client);
+            return contracts.filter((contract) => !contract.executor);
         }
 
-        return contracts.filter((contract) => !contract.executor);
+        return contracts.filter((contract) => !contract.client);
     }
 );
 
 forward({
-    from: MiningContractsGate.open,
-    to: getMiningContractsEffect,
+    from: MineOperationContractsGate.open,
+    to: getMineOperationContractsEffect,
 });

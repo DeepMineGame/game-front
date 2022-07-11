@@ -39,7 +39,7 @@ export const contractStore = createStore<ContractDto[] | null>(null).on(
 );
 
 export const getContractsNameConfig = (
-    account: string,
+    account: string | number,
     indexPosition = mapSearchParamForIndexPositionToFindContracts.executorId,
     limit = 1
 ) => {

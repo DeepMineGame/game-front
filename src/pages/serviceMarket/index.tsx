@@ -1,11 +1,15 @@
 import React, { memo } from 'react';
-import { Empty } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { createOrder } from 'app/router/paths';
 import { PlusOutlined } from '@ant-design/icons';
 import { PageWithTabs, useAccountName, Loader, Button } from 'shared';
-import { MiningContracts, ServiceMarketContractsTable } from 'features';
+import {
+    MineOperationContracts,
+    MiningContracts,
+    ServiceMarketContractsTable,
+} from 'features';
+
 import styles from './styles.module.scss';
 
 export * from './order';
@@ -52,7 +56,7 @@ export const ServiceMarketPage = () => {
                 },
                 {
                     id: 3,
-                    component: Empty,
+                    component: MineOperationContracts,
                     name: t('pages.serviceMarket.mineOperation'),
                 },
             ]}
