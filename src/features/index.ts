@@ -11,4 +11,4 @@ export * from './user';
 export * from './balances';
 export * from './warehouse';
 export * from './serviceMarket';
-export * from './areaManagement';
+export * from './landLord/areaManagement';

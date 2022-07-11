@@ -12,7 +12,7 @@ import {
 } from 'shared';
 import { engageArea, unEngageArea, claimArea } from 'entities/smartcontract';
 import { UnengageAreaModal } from '../UnengageAreaModal';
-import { useSmartContractAction } from '../../../hooks';
+import { useSmartContractAction } from '../../../../hooks';
 import styles from './styles.module.scss';
 
 type Props = {

@@ -7,7 +7,35 @@ export enum searchBy {
     undefined,
     assetId,
     owner,
+    areaId,
 }
+const keyType = {
+    [searchBy.undefined]: '' as const,
+    [searchBy.assetId]: 'id' as const,
+    [searchBy.owner]: 'name' as const,
+    [searchBy.areaId]: 'i64' as const,
+};
+export const getMinesTableData = ({
+    searchParam,
+    searchIdentificationType = searchBy.assetId,
+    limit = 1,
+}: {
+    searchParam: string;
+    searchIdentificationType?: searchBy;
+    limit?: number;
+}) => {
+    return getTableData({
+        code: deepminegame,
+        scope: deepminegame,
+        table: 'mines',
+        index_position: searchIdentificationType,
+        key_type: keyType[searchIdentificationType],
+        lower_bound: searchParam,
+        upper_bound: searchParam,
+        limit,
+    });
+};
+
 export const getMinesEffect = createEffect(
     async ({
         searchParam,
@@ -15,19 +43,7 @@ export const getMinesEffect = createEffect(
     }: {
         searchParam: string;
         searchIdentificationType?: searchBy;
-    }) => {
-        return getTableData({
-            code: deepminegame,
-            scope: deepminegame,
-            table: 'mines',
-            index_position: searchIdentificationType,
-            key_type:
-                searchIdentificationType === searchBy.assetId ? 'id' : 'name',
-            lower_bound: searchParam,
-            upper_bound: searchParam,
-            limit: 1,
-        });
-    }
+    }) => getMinesTableData({ searchParam, searchIdentificationType })
 );
 
 export const getMinesByOwnerEffect = createEffect(
