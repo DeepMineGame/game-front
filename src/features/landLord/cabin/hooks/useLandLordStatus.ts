@@ -32,7 +32,7 @@ export const useLandLordStatus = () => {
             return CABIN_STATUS.no_area;
         }
 
-        if (areaItem.in_use === InUseType.notInUse || !hasPhysicalShift) {
+        if (areaItem.in_use === InUseType.notInUse) {
             return CABIN_STATUS.engage;
         }
 
@@ -45,7 +45,7 @@ export const useLandLordStatus = () => {
         }
 
         return CABIN_STATUS.no_area;
-    }, [inventories, hasPhysicalShift, mines]);
+    }, [inventories, mines]);
 
     return { status, hasPhysicalShift };
 };
