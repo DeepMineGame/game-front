@@ -5,8 +5,8 @@ import {
     UserInventoryType,
 } from 'entities/smartcontract';
 
-export const MineSelectGate = createGate<{ searchParam: string }>(
-    'MineSelectGate'
+export const InventoryGate = createGate<{ searchParam: string }>(
+    'InventoryGate'
 );
 const getInventory = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
@@ -18,6 +18,6 @@ export const userInventoryStore = createStore<UserInventoryType[] | null>(
 ).on(getInventory.doneData, (_, { rows }) => rows);
 
 forward({
-    from: MineSelectGate.open,
+    from: InventoryGate.open,
     to: getInventory,
 });

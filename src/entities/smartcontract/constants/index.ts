@@ -30,8 +30,10 @@ export const ID_TO_INVENTORY = {
     0: '',
 } as const;
 
-// TODO ADD MAINNET MINE TEMPLATE ID
 export const mineAssetTemplateId = isMainNet ? 0 : 176451;
+export const areasAssetTemplateId = isMainNet
+    ? [314749, 314748, 314747, 314744, 314743]
+    : [176450, 176449, 176448, 176447, 176446];
 
 export type InventoryIdTypeWithName = keyof typeof ID_TO_INVENTORY;
 export type InventoryIdType =
