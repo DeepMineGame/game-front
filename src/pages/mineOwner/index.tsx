@@ -1,16 +1,26 @@
 import React from 'react';
-import { Header, useAccountName } from 'shared';
+import { Header, useAccountName, useReloadPage, useTableData } from 'shared';
 import { useStore } from 'effector-react';
 import {
     MineOwnerMenu,
     $mineOwnerCabinState,
     MineOwnerCabin,
     Surface,
+    Travel,
 } from 'features';
+import {
+    getUserConfig,
+    LOCATION_TO_ID,
+    UserInfoType,
+} from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
 export const MineOwnerPage = () => {
     const chainAccountName = useAccountName();
+    const { data: userInfo } = useTableData<UserInfoType>(getUserConfig);
+    const reloadPage = useReloadPage();
+    const inUserInMineOwnerLocation =
+        userInfo?.[0]?.location === LOCATION_TO_ID.mine_deck;
 
     const cabinState = useStore($mineOwnerCabinState);
     return (
@@ -20,6 +30,12 @@ export const MineOwnerPage = () => {
                 {chainAccountName && <Surface user={chainAccountName} />}
             </div>
             <MineOwnerMenu currentMineOwnerCabinState={cabinState} />
+            {userInfo?.length && !inUserInMineOwnerLocation && (
+                <Travel
+                    toLocationId={LOCATION_TO_ID.mine_deck}
+                    onSuccess={reloadPage}
+                />
+            )}
         </MineOwnerCabin>
     );
 };

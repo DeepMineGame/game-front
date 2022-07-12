@@ -12,7 +12,7 @@ import {
     ExclamationModal,
 } from 'shared';
 import { engageArea, unEngageArea, claimArea } from 'entities/smartcontract';
-import { useSmartContractAction } from '../../../hooks';
+import { useSmartContractAction } from '../../../../hooks';
 import styles from './styles.module.scss';
 
 type Props = {

@@ -1,4 +1,10 @@
-import { Button, greenGreen6, sunsetOrange6, Title } from 'shared';
+import {
+    Button,
+    greenGreen6,
+    sunsetOrange6,
+    Title,
+    useReloadPage,
+} from 'shared';
 import { useTranslation } from 'react-i18next';
 import React, { FC } from 'react';
 import { Badge, Space } from 'antd';
@@ -24,6 +30,7 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
     useGate(MineManagementGate, {
         searchParam: chainAccountName,
     });
+    const reloadPage = useReloadPage();
     const { t } = useTranslation();
     const isMinesLoading = useStore(getMinesByOwnerEffect.pending);
     const mines = useStore(minesStore);
@@ -42,7 +49,7 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
     const onActivationButtonClick = async () => {
         const action = isMineActive ? deactivateMine : activateMine;
         await action();
-        return getMinesByOwnerEffect({ searchParam: chainAccountName });
+        return reloadPage();
     };
     if (mines?.length === 0) {
         return (

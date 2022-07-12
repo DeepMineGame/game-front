@@ -3,11 +3,15 @@ import { FormInstance } from 'antd';
 import { Button, useAccountName } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { useWatch } from 'antd/es/form/Form';
-import { createContrFormFields } from 'entities/smartcontract';
+import {
+    areasAssetTemplateId,
+    createContrFormFields,
+    mineAssetTemplateId,
+} from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
 import { ContractTypeField } from '../ContractTypeField';
 import { RoleField } from '../RoleField';
-import { MineSelectField } from '../MineSelectField';
+import { AssetSelectField } from '../AreaSelectField';
 
 export const ContractTypeAndRoleStep: FC<{
     form: FormInstance;
@@ -15,17 +19,32 @@ export const ContractTypeAndRoleStep: FC<{
 }> = ({ form, setStep }) => {
     const accountName = useAccountName();
     const { t } = useTranslation();
-    const contractType = useWatch(createContrFormFields.contractType, form);
     const isClientField = useWatch(createContrFormFields.isClient, form);
-    const hasValueToGoNextStep = contractType && isClientField !== undefined;
 
+    const contractType = useWatch(createContrFormFields.contractType, form);
+    const hasValueToGoNextStep = contractType && isClientField !== undefined;
+    const assetSelect = accountName ? (
+        <div>
+            {isClientField ? (
+                <AssetSelectField
+                    templatesId={areasAssetTemplateId}
+                    form={form}
+                    accountName={accountName}
+                />
+            ) : (
+                <AssetSelectField
+                    templatesId={[mineAssetTemplateId]}
+                    form={form}
+                    accountName={accountName}
+                />
+            )}
+        </div>
+    ) : null;
     return (
         <div className={styles.rightSection}>
             <ContractTypeField form={form} />
             <RoleField form={form} />
-            {accountName && (
-                <MineSelectField form={form} accountName={accountName} />
-            )}
+            {assetSelect}
             <Button
                 disabled={!hasValueToGoNextStep}
                 block

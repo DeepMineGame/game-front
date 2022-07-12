@@ -6,4 +6,3 @@ export * from './contracts';
 export * from './ui';
 export * from './contracts/model';
 export { CreateResult } from './createOrder/components/CreateResult';
-export { MineSelectField } from './createOrder/components/MineSelectField';

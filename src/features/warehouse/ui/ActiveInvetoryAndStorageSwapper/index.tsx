@@ -1,9 +1,8 @@
 import { Col, Row } from 'antd';
 import React, { DragEventHandler, FC, useState } from 'react';
-import { Button, Title, useTableData } from 'shared';
+import { Button, Title, useReloadPage, useTableData } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router';
 import {
     getInventoryConfig,
     UserInventoryType,
@@ -28,7 +27,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
 
     const [draggedElement, setDraggedElement] =
         useState<null | UserInventoryType>(null);
-    const navigate = useNavigate();
+    const reloadPage = useReloadPage();
     const [draggedElements, setDraggedElements] = useState(
         new Set<UserInventoryType>()
     );
@@ -73,7 +72,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
         } else {
             await transferFromAtomicStorageToDeepMineInventory();
         }
-        return navigate(0);
+        return reloadPage();
     };
     return (
         <Row>

@@ -24,22 +24,17 @@ export const MineOwnerMenu: FC<Props> = ({ currentMineOwnerCabinState }) => {
 
     const baseButtonDisableStates = [
         mineOwnerCabinState.hasNoMineNft,
-        mineOwnerCabinState.isOutsideFromLocation,
         mineOwnerCabinState.needSignContractWithLandLord,
     ];
-    const statusThatDisableManagementButton = [
-        ...baseButtonDisableStates,
-        mineOwnerCabinState.isMineSet,
-    ];
+    const statusThatDisableManagementButton = [...baseButtonDisableStates];
     const statusThatDisableTeamButton = [...baseButtonDisableStates];
     const statusThatDisableStatsButton = [
         ...baseButtonDisableStates,
         mineOwnerCabinState.contractsFree,
     ];
-
     const menuItems = [
         {
-            link: mineOwnerStatsAndInfo,
+            link: mineManagement,
             icon: <DesktopOutlined />,
             disabled: statusThatDisableManagementButton.includes(
                 currentMineOwnerCabinState
@@ -55,7 +50,7 @@ export const MineOwnerMenu: FC<Props> = ({ currentMineOwnerCabinState }) => {
             tooltip: t('pages.mineOwner.menu.team'),
         },
         {
-            link: mineManagement,
+            link: mineOwnerStatsAndInfo,
             icon: <ProjectOutlined />,
             disabled: statusThatDisableStatsButton.includes(
                 currentMineOwnerCabinState

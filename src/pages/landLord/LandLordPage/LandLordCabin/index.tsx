@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC } from 'react';
 
 import {
     LightBlueBg,
@@ -11,6 +11,8 @@ import {
     DarkBlueBg,
     DarkGrayBg,
     DarkGreenBg,
+    useTableData,
+    useReloadPage,
 } from 'shared';
 import {
     EngageArea,
@@ -22,8 +24,14 @@ import {
     Travel,
     CABIN_STATUS,
     useLandLordStatus,
+    AreaGate,
 } from 'features';
-import { LOCATION_TO_ID } from 'entities/smartcontract';
+import { useGate } from 'effector-react';
+import {
+    getUserConfig,
+    LOCATION_TO_ID,
+    UserInfoType,
+} from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
 const getBackground = (
@@ -48,41 +56,29 @@ const getBackground = (
     }
 };
 
-export const LandLordCabin = () => {
-    const [needShiftBadge, setNeedShiftBadge] = useState(false);
-    const { status, hasPhysicalShift } = useLandLordStatus();
+export const LandLordCabin: FC<{ accountName: string }> = ({ accountName }) => {
+    useGate(AreaGate, { searchParam: accountName });
+    const { status } = useLandLordStatus();
+    const reloadPage = useReloadPage();
+    const { data: userInfo } = useTableData<UserInfoType>(getUserConfig);
 
-    const openShiftBadge = () => {
-        setNeedShiftBadge(true);
-    };
-    const closeShiftBadge = () => {
-        setNeedShiftBadge(false);
-    };
-
-    useEffect(() => {
-        if (
-            status >= CABIN_STATUS.setup &&
-            !hasPhysicalShift &&
-            !needShiftBadge
-        ) {
-            openShiftBadge();
-        } else if (needShiftBadge) {
-            closeShiftBadge();
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [status, hasPhysicalShift]);
-
+    const inUserInLandlordLocation =
+        userInfo?.[0]?.location === LOCATION_TO_ID.landlords_reception;
     return (
         <div className={styles.cabin}>
             <img
                 className={styles.cabinBackground}
-                src={getBackground(status, 'uncommon', hasPhysicalShift)}
+                src={getBackground(
+                    status,
+                    'uncommon',
+                    inUserInLandlordLocation
+                )}
                 alt=""
             />
             <div className={styles.monitor}>
                 {status === CABIN_STATUS.no_area && <NoArea />}
                 {status === CABIN_STATUS.engage && (
-                    <EngageArea disabled={!hasPhysicalShift} />
+                    <EngageArea disabled={!inUserInLandlordLocation} />
                 )}
                 {status === CABIN_STATUS.setup && <Setup />}
                 {status === CABIN_STATUS.mine_is_set && <MineIsSet />}
@@ -91,11 +87,10 @@ export const LandLordCabin = () => {
                 )}
                 {status === CABIN_STATUS.stats && <LandStats />}
             </div>
-            {needShiftBadge && (
+            {userInfo?.length && !inUserInLandlordLocation && (
                 <Travel
-                    onBadgeCrossClick={closeShiftBadge}
                     toLocationId={LOCATION_TO_ID.landlords_reception}
-                    onSuccess={closeShiftBadge}
+                    onSuccess={reloadPage}
                 />
             )}
         </div>

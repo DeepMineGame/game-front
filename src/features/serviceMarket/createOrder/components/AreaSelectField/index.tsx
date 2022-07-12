@@ -4,45 +4,46 @@ import { FormInstance, Form, Alert } from 'antd';
 import { useGate, useStore } from 'effector-react';
 import { Select } from 'shared';
 import { useTranslation } from 'react-i18next';
-import {
-    ContractType,
-    createContrFormFields,
-    mineAssetTemplateId,
-} from 'entities/smartcontract';
+import { ContractType, createContrFormFields } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
-import { MineSelectGate, userInventoryStore } from './model';
+import { InventoryGate, userInventoryStore } from './model';
 
-export const MineSelectField: FC<{
+export const AssetSelectField: FC<{
     form: FormInstance;
     accountName: string;
-}> = ({ form, accountName }) => {
-    useGate(MineSelectGate, { searchParam: accountName });
+    templatesId: number[];
+}> = ({ form, accountName, templatesId }) => {
+    useGate(InventoryGate, { searchParam: accountName });
     const { t } = useTranslation();
+    const isClientField = useWatch(createContrFormFields.isClient, form);
 
     const userInventory = useStore(userInventoryStore);
-    const userMines = userInventory?.filter(
-        ({ template_id }) => template_id === mineAssetTemplateId
+    const assetsFilteredByTemplates = userInventory?.filter(({ template_id }) =>
+        templatesId.includes(template_id)
     );
-    const isClient = useWatch(createContrFormFields.isClient, form);
     const contractType = useWatch(createContrFormFields.contractType, form);
 
     const isMineSetupContractTypeSelected =
         contractType === ContractType.landlord_mineowner;
 
-    if (
-        isMineSetupContractTypeSelected &&
-        !isClient &&
-        isClient !== undefined
-    ) {
-        return userMines?.length ? (
+    if (isMineSetupContractTypeSelected && isClientField !== undefined) {
+        return assetsFilteredByTemplates?.length ? (
             <Form.Item
                 className={styles.formField}
-                label={t('features.actions.mine')}
+                label={
+                    isClientField
+                        ? t('components.common.area')
+                        : t('features.actions.mine')
+                }
                 name={createContrFormFields.assetId}
             >
                 <Select
-                    placeholder={t('features.actions.mine')}
-                    options={userMines.map(({ asset_id }) => ({
+                    placeholder={
+                        isClientField
+                            ? t('components.common.area')
+                            : t('features.actions.mine')
+                    }
+                    options={assetsFilteredByTemplates.map(({ asset_id }) => ({
                         value: asset_id,
                         label: asset_id,
                     }))}
