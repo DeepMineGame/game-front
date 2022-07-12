@@ -1,0 +1,9 @@
+.title.title {
+    margin-bottom: 16px;
+}
+
+.table > div {
+    & div:last-child {
+        font-weight: 700;
+    }
+}

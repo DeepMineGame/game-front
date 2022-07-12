@@ -9,7 +9,13 @@ import {
     ContractsGate,
     contractsStore,
     getContractsEffect,
+    TerminatedOrder,
 } from 'features';
+import {
+    ContractDto,
+    ContractStatus,
+    ContractType,
+} from 'entities/smartcontract';
 
 export const OrderPage = () => {
     const accountName = useAccountName();
@@ -20,7 +26,28 @@ export const OrderPage = () => {
     const contracts = useStore(contractsStore);
     const isLoading = useStore(getContractsEffect.pending);
 
-    const contract = contracts?.find(({ id }) => id === +orderId);
+    const currentContract = contracts?.find(({ id }) => id === +orderId);
+
+    const renderContract = (contract: ContractDto) => {
+        if (contract.status === ContractStatus.terminated) {
+            return <TerminatedOrder contract={contract} />;
+        }
+
+        if (contract.type === ContractType.landlord_mineowner) {
+            return (
+                <OperationOrder contract={contract} accountName={accountName} />
+            );
+        }
+
+        return (
+            <span>
+                {/* todo: add other contact types */}
+                contract type: {contract.type}
+                <br />
+                contract status: {contract.status}
+            </span>
+        );
+    };
 
     return (
         <Page
@@ -31,8 +58,8 @@ export const OrderPage = () => {
             {/* eslint-disable-next-line no-nested-ternary */}
             {isLoading || !accountName ? (
                 <Skeleton />
-            ) : contract ? (
-                <OperationOrder accountName={accountName} contract={contract} />
+            ) : currentContract ? (
+                renderContract(currentContract)
             ) : (
                 <Empty />
             )}

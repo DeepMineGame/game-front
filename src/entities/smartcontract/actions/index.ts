@@ -14,6 +14,7 @@ export * from './claimArea';
 export * from './createContr';
 export * from './signOrder';
 export * from './setupMine';
+export * from './terminateContract';
 
 export function toggleMining({
     waxUser,

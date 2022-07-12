@@ -9,9 +9,9 @@ import {
     greenGreen6,
     sunsetOrange6,
     useAccountName,
+    ExclamationModal,
 } from 'shared';
 import { engageArea, unEngageArea, claimArea } from 'entities/smartcontract';
-import { UnengageAreaModal } from '../UnengageAreaModal';
 import { useSmartContractAction } from '../../../../hooks';
 import styles from './styles.module.scss';
 
@@ -106,10 +106,13 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, onUpdate }) => {
                 )}
             </div>
 
-            <UnengageAreaModal
-                onSubmit={onUnengage}
+            <ExclamationModal
                 visible={isModalUnengageVisible}
+                onSubmit={onUnengage}
                 onCancel={() => setIsModalUnengageVisible(false)}
+                title={t('pages.areaManagement.unengage')}
+                description={t('pages.areaManagement.unengageDescription')}
+                submitText={t('pages.areaManagement.unengage')}
             />
             <ActionModal
                 submitText={t('components.common.button.activate')}

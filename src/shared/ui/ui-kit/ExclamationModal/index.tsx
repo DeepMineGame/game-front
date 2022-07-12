@@ -10,12 +10,18 @@ type Props = {
     visible?: boolean;
     onCancel: () => void;
     onSubmit: () => void;
+    title: string;
+    description: string;
+    submitText: string;
 };
 
-export const UnengageAreaModal: FC<Props> = ({
+export const ExclamationModal: FC<Props> = ({
     visible,
     onCancel,
     onSubmit,
+    title,
+    description,
+    submitText,
 }) => {
     const { t } = useTranslation();
 
@@ -32,12 +38,8 @@ export const UnengageAreaModal: FC<Props> = ({
             <div className={styles.content}>
                 <ExclamationCircleOutlined />
                 <div>
-                    <Title level={5}>
-                        {t('pages.areaManagement.unengage')}
-                    </Title>
-                    <div className={styles.description}>
-                        {t('pages.areaManagement.unengageDescription')}
-                    </div>
+                    <Title level={5}>{title}</Title>
+                    <div className={styles.description}>{description}</div>
                 </div>
             </div>
 
@@ -54,7 +56,7 @@ export const UnengageAreaModal: FC<Props> = ({
                     type="primary"
                     onClick={onSubmit}
                 >
-                    {t('pages.areaManagement.unengage')}
+                    {submitText}
                 </Button>
             </div>
         </Modal>
