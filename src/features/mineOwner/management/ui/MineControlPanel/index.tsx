@@ -12,14 +12,15 @@ import { useGate, useStore } from 'effector-react';
 import { useSmartContractAction } from 'features';
 import { FrownOutlined } from '@ant-design/icons';
 import {
+    activatemine,
+    deactmine,
+    getMinesByOwnerEffect,
     minesStore,
     MineState,
-    deactmine,
-    activatemine,
-    getMinesByOwnerEffect,
 } from 'entities/smartcontract';
 import { MineManagementGate } from '../../../models/mineManagement';
 import { ClaimDME } from '../ClaimDME';
+import { UnsetupMine } from '../UnsetupMine';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -95,15 +96,9 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
                             ? t('components.common.button.deactivate')
                             : t('components.common.button.activate')}
                     </Button>
-                    <Button
-                        disabled
-                        ghost
-                        danger
-                        className={styles.wideButton}
-                        loading={isMinesLoading}
-                    >
-                        {t('features.mineOwner.management.unsetup')}
-                    </Button>
+                    {chainAccountName && (
+                        <UnsetupMine accountName={chainAccountName} />
+                    )}
                 </Space>
             </div>
         </div>
