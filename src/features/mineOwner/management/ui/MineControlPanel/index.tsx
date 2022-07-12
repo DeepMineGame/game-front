@@ -1,11 +1,16 @@
-import { Button, greenGreen6, sunsetOrange6, Title } from 'shared';
+import {
+    Button,
+    greenGreen6,
+    sunsetOrange6,
+    Title,
+    useReloadPage,
+} from 'shared';
 import { useTranslation } from 'react-i18next';
 import React, { FC } from 'react';
 import { Badge, Space } from 'antd';
 import { useGate, useStore } from 'effector-react';
 import { useSmartContractAction } from 'features';
 import { FrownOutlined } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
 import {
     minesStore,
     MineState,
@@ -25,8 +30,7 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
     useGate(MineManagementGate, {
         searchParam: chainAccountName,
     });
-    const navigate = useNavigate();
-    const reloadPage = () => navigate(0);
+    const reloadPage = useReloadPage();
     const { t } = useTranslation();
     const isMinesLoading = useStore(getMinesByOwnerEffect.pending);
     const mines = useStore(minesStore);

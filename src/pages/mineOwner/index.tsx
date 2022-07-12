@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, useAccountName, useTableData } from 'shared';
+import { Header, useAccountName, useReloadPage, useTableData } from 'shared';
 import { useStore } from 'effector-react';
 import {
     MineOwnerMenu,
@@ -8,7 +8,6 @@ import {
     Surface,
     Travel,
 } from 'features';
-import { useNavigate } from 'react-router-dom';
 import {
     getUserConfig,
     LOCATION_TO_ID,
@@ -19,8 +18,7 @@ import styles from './styles.module.scss';
 export const MineOwnerPage = () => {
     const chainAccountName = useAccountName();
     const { data: userInfo } = useTableData<UserInfoType>(getUserConfig);
-    const navigate = useNavigate();
-    const reloadPage = () => navigate(0);
+    const reloadPage = useReloadPage();
     const inUserInMineOwnerLocation =
         userInfo?.[0]?.location === LOCATION_TO_ID.mine_deck;
 

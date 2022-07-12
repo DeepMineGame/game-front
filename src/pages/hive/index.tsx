@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Menu, MenuItem, Page, useAccountName } from 'shared';
+import { Menu, MenuItem, Page, useAccountName, useReloadPage } from 'shared';
 import { useStore } from 'effector-react';
 import { Travel } from 'features';
 import { Space, Tooltip } from 'antd';
@@ -18,7 +18,7 @@ export const HivePage: FC = () => {
     const accountName = useAccountName();
     const { t } = useTranslation();
     const navigate = useNavigate();
-    const reloadPage = () => navigate(0);
+    const reloadPage = useReloadPage();
     return (
         <Flat>
             <Page className={styles.page} headerTitle="Hive" />

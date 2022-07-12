@@ -12,6 +12,7 @@ import {
     DarkGrayBg,
     DarkGreenBg,
     useTableData,
+    useReloadPage,
 } from 'shared';
 import {
     EngageArea,
@@ -25,7 +26,6 @@ import {
     useLandLordStatus,
     AreaGate,
 } from 'features';
-import { useNavigate } from 'react-router-dom';
 import { useGate } from 'effector-react';
 import {
     getUserConfig,
@@ -59,8 +59,7 @@ const getBackground = (
 export const LandLordCabin: FC<{ accountName: string }> = ({ accountName }) => {
     useGate(AreaGate, { searchParam: accountName });
     const { status } = useLandLordStatus();
-    const navigate = useNavigate();
-    const reloadPage = () => navigate(0);
+    const reloadPage = useReloadPage();
     const { data: userInfo } = useTableData<UserInfoType>(getUserConfig);
 
     const inUserInLandlordLocation =
