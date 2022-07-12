@@ -32,3 +32,5 @@ export * from './Segmented';
 export * from './Link';
 export * from './ExclamationModal';
 export * from './SuccessModal';
+export * from './WarningModal';
+export * from './Tag';

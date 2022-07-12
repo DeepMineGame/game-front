@@ -13,7 +13,7 @@ import {
 import styles from './styles.module.scss';
 
 export * from './order';
-export * from './operationOrder';
+export * from './operation';
 
 export const ServiceMarketPage = () => {
     const accountName = useAccountName();

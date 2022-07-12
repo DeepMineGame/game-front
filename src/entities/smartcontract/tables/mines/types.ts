@@ -7,6 +7,8 @@ export enum MineState {
     abandoned,
 }
 
+export type ContractorSlots = { reserved: number; contractor: string }[];
+
 export type MineDto = {
     id: number;
     owner: string;
@@ -20,5 +22,5 @@ export type MineDto = {
     contract_finishes_at: number;
     area_fee_percent: number;
     fee_to_claim: number;
-    contractor_slots: { reserved: number; contractor: string }[];
+    contractor_slots: ContractorSlots;
 };

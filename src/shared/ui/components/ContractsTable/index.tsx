@@ -1,13 +1,12 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { FC } from 'react';
 import { serviceMarket } from 'app/router/paths';
 import { ContractDto, contractName, statusMap } from 'entities/smartcontract';
-import { Button, Table } from '../../ui-kit';
+import { Link, Table } from '../../ui-kit';
 import { toLocaleDate } from '../../utils';
 
-export const ContractsTable = ({ contracts }: { contracts: ContractDto[] }) => {
-    const navigate = useNavigate();
+type Props = { contracts: ContractDto[] };
 
+export const ContractsTable: FC<Props> = ({ contracts }) => {
     return (
         <Table
             columns={[
@@ -44,14 +43,9 @@ export const ContractsTable = ({ contracts }: { contracts: ContractDto[] }) => {
             ]}
             dataSource={contracts.map((contract) => ({
                 nickName: (
-                    <Button
-                        onClick={() =>
-                            navigate(`${serviceMarket}/order/${contract.id}`)
-                        }
-                        type="link"
-                    >
-                        {contract.executor}
-                    </Button>
+                    <Link to={`${serviceMarket}/contract/${contract.id}`}>
+                        {contract.executor || contract.client}
+                    </Link>
                 ),
                 key: contract.id,
                 reputation: '-',

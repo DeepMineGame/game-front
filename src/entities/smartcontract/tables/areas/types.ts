@@ -11,6 +11,8 @@ export enum SlotStatus {
     reserved,
 }
 
+export type MineSlots = { reserved: SlotStatus; mine_id: number }[];
+
 export type AreasDto = {
     id: string;
     engaged: number;
@@ -19,5 +21,5 @@ export type AreasDto = {
     initialized: boolean;
     rarity: AreaRarity;
     owner: string;
-    mine_slots: { reserved: SlotStatus; mine_id: number }[];
+    mine_slots: MineSlots;
 };

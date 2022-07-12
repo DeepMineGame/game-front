@@ -18,8 +18,8 @@ import {
     ServiceMarketPage,
     AreaManagementPage,
     CreateOrderPage,
-    OrderPage,
     LandlordStatsAndInfoPage,
+    OperationPage,
 } from 'pages';
 
 import {
@@ -154,7 +154,7 @@ export const routes: AppRoute[] = [
     },
     {
         path: serviceMarketOrder,
-        Component: OrderPage,
+        Component: OperationPage,
         forLoggedIn: true,
         forAdmin: false,
         titleTag: 'Service-market — DeepMine',

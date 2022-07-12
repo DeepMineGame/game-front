@@ -22,7 +22,7 @@ export const MiningContractsTable: FC<Props> = ({ contracts }) => {
                     dataIndex: 'nickName',
                     key: 'nickName',
                     render: (value, props) => (
-                        <Link to={`/service-market/order/${props.key}`}>
+                        <Link to={`/service-market/contract/${props.key}`}>
                             {value}
                         </Link>
                     ),
@@ -59,14 +59,16 @@ export const MiningContractsTable: FC<Props> = ({ contracts }) => {
                     dataIndex: 'startOf',
                     key: 'startOf',
                     sorter: (a, b) => a.startOf - b.startOf,
-                    render: (value) => toLocaleDate(value * 1000),
+                    render: (value) =>
+                        value ? toLocaleDate(value * 1000) : '-',
                 },
                 {
                     title: t('components.common.duration'),
                     dataIndex: 'duration',
                     key: 'duration',
                     sorter: (a, b) => a.duration - b.duration,
-                    render: (value) => `${value} days`,
+                    render: (value) =>
+                        `${value} ${t('components.common.days').toLowerCase()}`,
                 },
             ]}
             dataSource={contracts.map((contract) => ({
@@ -75,7 +77,9 @@ export const MiningContractsTable: FC<Props> = ({ contracts }) => {
                 creationDate: contract.create_time,
                 fee: contract.fee_percent,
                 penaltyDme: contract.penalty_amount,
-                miningTerms: `${contract.days_for_penalty}/${contract.fee_daily_min_amount} DME`,
+                miningTerms: `${contract.days_for_penalty}/${
+                    contract.fee_daily_min_amount
+                } ${t('components.common.button.dme')}`,
                 startOf: contract.start_time,
                 duration: calcDuration(contract),
             }))}
