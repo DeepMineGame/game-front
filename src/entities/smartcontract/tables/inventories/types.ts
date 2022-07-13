@@ -22,7 +22,7 @@ export enum InUseType {
 }
 
 export const rarityMap = {
-    [RarityType.undefined]: null,
+    [RarityType.undefined]: '',
     [RarityType.common]: 'Common',
     [RarityType.uncommon]: 'Uncommon',
     [RarityType.rare]: 'Rare',
