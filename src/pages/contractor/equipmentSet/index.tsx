@@ -18,6 +18,7 @@ import {
     ID_TO_INVENTORY,
     installEquipment,
     InventoryNameType,
+    miningEquipmentNames,
     uninstallEquipment,
     UserInventoryType,
 } from 'entities/smartcontract';
@@ -25,14 +26,6 @@ import styles from './styles.module.scss';
 import { EquipmentInstallationModal } from './components/EquipmentInstallationModal';
 import { Characteristics } from './components/Characteristics';
 import { EquipmentCards } from './components/EquipmentCards';
-
-const equipmentSetAvailableNames = [
-    'Cutter',
-    'Delaminator',
-    'DME Wire',
-    'Plunging Blocks',
-    'Wandering Reactor',
-] as InventoryNameType[];
 
 export const EquipmentSetPage: FC = () => {
     const { t } = useTranslation();
@@ -77,7 +70,7 @@ export const EquipmentSetPage: FC = () => {
                 .filter((v) => v) as UserInventoryType[];
 
             const newSelectedEquipment = Object.fromEntries(
-                equipmentSetAvailableNames.map((name) => [
+                miningEquipmentNames.map((name) => [
                     name,
                     findEquipmentByName(equipment, name),
                 ])
@@ -90,8 +83,7 @@ export const EquipmentSetPage: FC = () => {
     const assetIds = Object.entries(selectedEquipment)
         .map(([, inventory]) => inventory?.asset_id?.toString() ?? '')
         .filter((v) => v);
-    const hasAllEquipment =
-        assetIds.length === equipmentSetAvailableNames.length;
+    const hasAllEquipment = assetIds.length === miningEquipmentNames.length;
 
     const installedEquipment = Object.entries(selectedEquipment).filter(
         ([, equipment]) => equipment?.in_use
@@ -101,7 +93,7 @@ export const EquipmentSetPage: FC = () => {
     );
     const hasAllEquipmentActive =
         hasAllEquipment &&
-        installedEquipment.length === equipmentSetAvailableNames.length;
+        installedEquipment.length === miningEquipmentNames.length;
 
     const handleInstallEquipment = async () => {
         setNeedUpdate(false);

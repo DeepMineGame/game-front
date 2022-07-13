@@ -3,12 +3,19 @@ import { Card, desktopS, Title, useMediaQuery } from 'shared';
 import { useStore } from 'effector-react';
 import { Col, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { inventoriesStore } from 'entities/smartcontract';
+import { findEquipmentByName } from 'features';
+import { inventoriesStore, miningEquipmentNames } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
 export const Equipment = () => {
     const inventories = useStore(inventoriesStore);
     const installedItems = inventories?.filter(({ in_use }) => in_use);
+    const installedMiningEquipment = Object.fromEntries(
+        miningEquipmentNames.map((name) => [
+            name,
+            findEquipmentByName(installedItems || [], name),
+        ])
+    );
     const isDesktop = useMediaQuery(desktopS);
     const subTitleLevel = isDesktop ? 3 : 4;
     const gutter = isDesktop ? 80 : 16;
@@ -27,13 +34,16 @@ export const Equipment = () => {
                 {/* </Col> */}
             </Row>
             <div className={styles.cards}>
-                {installedItems?.map(({ template_id }) => (
-                    <Card
-                        key={template_id}
-                        templateId={template_id}
-                        status="installed"
-                    />
-                ))}
+                {Object.values(installedMiningEquipment).map(
+                    (inventoryItem) =>
+                        inventoryItem && (
+                            <Card
+                                key={inventoryItem.template_id}
+                                templateId={inventoryItem.template_id}
+                                status="installed"
+                            />
+                        )
+                )}
             </div>
         </>
     );
