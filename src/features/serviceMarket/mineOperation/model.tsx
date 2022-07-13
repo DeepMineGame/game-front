@@ -9,6 +9,7 @@ import { createGate } from 'effector-react';
 import { getTableData } from 'shared';
 import {
     ContractDto,
+    ContractType,
     getContractsNameConfig,
     mapSearchParamForIndexPositionToFindContracts,
 } from 'entities/smartcontract';
@@ -24,7 +25,7 @@ export const changeFilterEvent = createEvent<Filter>();
 export const getMineOperationContractsEffect = createEffect(() =>
     getTableData(
         getContractsNameConfig(
-            1,
+            ContractType.landlord_mineowner,
             mapSearchParamForIndexPositionToFindContracts.contractType,
             150
         )

@@ -39,7 +39,7 @@ export const contractStore = createStore<ContractDto[] | null>(null).on(
 );
 
 export const getContractsNameConfig = (
-    account: string | number,
+    searchParam: string | number,
     indexPosition = mapSearchParamForIndexPositionToFindContracts.executorId,
     limit = 1
 ) => {
@@ -49,8 +49,8 @@ export const getContractsNameConfig = (
         table: 'contracts',
         index_position: indexPosition,
         key_type: 'name',
-        lower_bound: account,
-        upper_bound: account,
+        lower_bound: searchParam,
+        upper_bound: searchParam,
         limit,
     } as GetTableDataConfigType;
 };
