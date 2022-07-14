@@ -2,6 +2,7 @@ import React, { Dispatch } from 'react';
 
 import {
     ACTION_STATE_TO_ID,
+    ActionType,
     ContractDto,
     ID_TO_INVENTORY,
     INVENTORY_NAMES,
@@ -37,15 +38,20 @@ export const ContractorCabinContent = ({
     hasPhysicalShift,
     setStatus,
 }: ContractorCabinContentProps) => {
-    if (userContracts.length === 0) {
-        setStatus(CABIN_STATUS.sign_contract);
-        return <SignContract />;
-    }
-
+    const activeMining = userHistory.filter(
+        (item) =>
+            item.type === ActionType.mine &&
+            item.state === ACTION_STATE_TO_ID.active
+    );
     const inventoryNames = getInventoryNames(userInventory);
     const activeInventoryNames = getInventoryNames(
         userInventory.filter((v) => v.in_use)
     );
+
+    if (userContracts.length === 0) {
+        setStatus(CABIN_STATUS.sign_contract);
+        return <SignContract />;
+    }
 
     if (inventoryNames.length < INVENTORY_NAMES.length) {
         setStatus(CABIN_STATUS.welcome);
@@ -61,14 +67,11 @@ export const ContractorCabinContent = ({
         return <Setup hasShift={hasPhysicalShift} />;
     }
 
-    if (userHistory.length === 0) {
+    if (activeMining.length === 0) {
         setStatus(CABIN_STATUS.ready);
         return <Ready />;
     }
 
-    const activeMining = userHistory.filter(
-        (item) => item.state === ACTION_STATE_TO_ID.active
-    );
     if (activeMining.length !== 0) {
         setStatus(CABIN_STATUS.mining_progress);
         return <MiningProgress msUntil={activeMining[0].finishes_at} />;

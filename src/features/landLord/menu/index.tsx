@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { Menu, MenuItem } from 'shared';
 import { BuildOutlined, ProjectOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { areaManagement, wipPage } from 'app/router/paths';
+import { areaManagement, landLordStats } from 'app/router/paths';
 import { useTranslation } from 'react-i18next';
 import { CABIN_STATUS, useLandLordStatus } from '../cabin';
 
@@ -28,7 +28,7 @@ export const LandLordMenu: FC = () => {
                 <Tooltip overlay={t('pages.landLord.menu.statsAndInfo')}>
                     <div>
                         <MenuItem
-                            onClick={() => navigate(wipPage)}
+                            onClick={() => navigate(landLordStats)}
                             icon={<ProjectOutlined />}
                             disabled={status < CABIN_STATUS.searching}
                         />

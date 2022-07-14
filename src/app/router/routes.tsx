@@ -19,6 +19,7 @@ import {
     AreaManagementPage,
     CreateOrderPage,
     OrderPage,
+    LandlordStatsAndInfoPage,
 } from 'pages';
 
 import {
@@ -43,6 +44,7 @@ import {
     areaManagement,
     createOrder,
     serviceMarketOrder,
+    landLordStats,
 } from './paths';
 
 const IntroPage = React.lazy(async () => ({
@@ -160,6 +162,13 @@ export const routes: AppRoute[] = [
     {
         path: landLord,
         Component: LandLordPage,
+        forLoggedIn: false,
+        forAdmin: false,
+        titleTag: 'Landlord — DeepMine',
+    },
+    {
+        path: landLordStats,
+        Component: LandlordStatsAndInfoPage,
         forLoggedIn: false,
         forAdmin: false,
         titleTag: 'Landlord — DeepMine',
