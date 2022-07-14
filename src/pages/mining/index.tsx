@@ -35,24 +35,28 @@ export const MiningPage: FC = () => {
     const gutter = isDesktop ? 80 : 16;
 
     const actions = useStore(actionsStore);
+    const mineActions = actions?.filter(({ type }) => type === ActionType.mine);
+    const lastMineAction = mineActions && mineActions.reverse()?.[0];
+
     const isContractsLoading = useStore(getContractEffect.pending);
     const isActionsLoading = useStore(getActionEffect.pending);
-    const mineActions = actions?.filter(({ type }) => type === ActionType.mine);
     const mineStore = useStore(minesStore);
     const isMineStoreLoading = useStore(getMinesEffect.pending);
-    const action = mineActions && mineActions[0];
 
     const [now, setNow] = useState(new Date());
     const isMiningWillEndInFuture =
-        action && now < new Date(action.finishes_at * 1000);
+        lastMineAction && now < new Date(lastMineAction.finishes_at * 1000);
 
     const estMiningTime =
-        action &&
-        action?.attrs?.filter(({ key }) => key === 'est_mining_time')[0];
+        lastMineAction &&
+        lastMineAction?.attrs?.filter(
+            ({ key }) => key === 'est_mining_time'
+        )[0];
 
     const estDmeAmount =
-        action &&
-        action?.attrs?.filter(({ key }) => key === 'est_dme_amount')[0]?.value;
+        lastMineAction &&
+        lastMineAction?.attrs?.filter(({ key }) => key === 'est_dme_amount')[0]
+            ?.value;
 
     const formatEstimateMineTime =
         estMiningTime && getTimeLeft(estMiningTime.value, true);
@@ -60,9 +64,9 @@ export const MiningPage: FC = () => {
     const isLoading = isActionsLoading || isContractsLoading;
     return (
         <Page headerTitle={t('pages.mining.mining')}>
-            {action ? (
+            {lastMineAction ? (
                 <MiningTitle
-                    action={action}
+                    action={lastMineAction}
                     onMiningExpire={setNow}
                     isMiningWillEndInFuture={Boolean(isMiningWillEndInFuture)}
                 />
@@ -87,7 +91,7 @@ export const MiningPage: FC = () => {
                                 <div>{mineStore[0]?.layer_depth}</div>
                             </div>
                         ) : null}
-                        {action && (
+                        {lastMineAction && (
                             <>
                                 {formatEstimateMineTime && (
                                     <div className={styles.line}>
@@ -131,7 +135,7 @@ export const MiningPage: FC = () => {
                             </Space>
                         </Tooltip>
                         <MiningAndClaimButton
-                            action={action}
+                            action={lastMineAction}
                             isMiningWillEndInFuture={Boolean(
                                 isMiningWillEndInFuture
                             )}

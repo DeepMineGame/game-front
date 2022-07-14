@@ -41,7 +41,7 @@ export const landlordAreaNftStore = createStore<UserInventoryType | null>(
 ).on(
     getInventoriesEffect.doneData,
     (_, { rows }: { rows: UserInventoryType[] }) =>
-        rows.filter(({ template_id }) =>
+        rows?.filter(({ template_id }) =>
             areasAssetTemplateId.includes(template_id)
         )[0]
 );
