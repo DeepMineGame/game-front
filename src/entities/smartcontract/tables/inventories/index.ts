@@ -3,6 +3,7 @@ import { getTableData } from 'shared';
 import { deepminegame } from '../../constants';
 import { UserInventoryType } from './types';
 
+export * from './constants';
 export enum SEARCH_BY {
     undefined,
     inventoryId,
