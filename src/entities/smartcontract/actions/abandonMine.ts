@@ -1,17 +1,11 @@
-import { deepminegame } from '../constants';
+import { deepminegame } from '../index';
 
-export function termContract({
-    waxUser,
-    contractId,
-}: {
-    waxUser: string;
-    contractId: number;
-}) {
+export function abandonMine(waxUser: string, mineId: number) {
     return {
         actions: [
             {
                 account: deepminegame,
-                name: 'termcontract',
+                name: 'abandonmine',
                 authorization: [
                     {
                         actor: waxUser,
@@ -20,8 +14,7 @@ export function termContract({
                 ],
                 data: {
                     wax_user: waxUser,
-                    contract_id: contractId,
-                    demand_penalty: false,
+                    mine_id: mineId,
                 },
             },
         ],

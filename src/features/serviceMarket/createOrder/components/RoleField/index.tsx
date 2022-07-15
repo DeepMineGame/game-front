@@ -10,6 +10,7 @@ export const RoleField: FC<{ form: FormInstance }> = ({ form }) => {
     const { t } = useTranslation();
 
     const contractType = useWatch(createContrFormFields.contractType, form);
+
     const isDisabled = contractType === undefined;
     const isMineSetupContractTypeSelected =
         contractType === ContractType.landlord_mineowner;
@@ -30,13 +31,13 @@ export const RoleField: FC<{ form: FormInstance }> = ({ form }) => {
                 }
                 options={[
                     {
-                        value: isMineSetupContractTypeSelected ? 1 : 0,
+                        value: isMineSetupContractTypeSelected ? 0 : 1,
                         label: isMineSetupContractTypeSelected
                             ? t('roles.landlord')
                             : t('roles.contractor'),
                     },
                     {
-                        value: isMineSetupContractTypeSelected ? 0 : 1,
+                        value: isMineSetupContractTypeSelected ? 1 : 0,
                         label: t('roles.mineOwner'),
                     },
                 ]}

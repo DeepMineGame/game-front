@@ -5,7 +5,6 @@ import {
     InUseType,
     inventoriesStore,
     InventoryType,
-    minesStore,
 } from 'entities/smartcontract';
 import { CABIN_STATUS } from '../constants';
 import { minesForAreaSlots } from '../../areaManagement';

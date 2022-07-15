@@ -11,6 +11,8 @@ import { Badge, Space } from 'antd';
 import { useGate, useStore } from 'effector-react';
 import { useSmartContractAction } from 'features';
 import { FrownOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
+import { serviceMarket } from 'app/router/paths';
 import {
     activatemine,
     deactmine,
@@ -21,6 +23,7 @@ import {
 import { MineManagementGate } from '../../../models/mineManagement';
 import { ClaimDME } from '../ClaimDME';
 import { UnsetupMine } from '../UnsetupMine';
+import { activeMineOwnerExecutorContractStore } from '../../../models/unsetupMineModel';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -31,6 +34,8 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
     useGate(MineManagementGate, {
         searchParam: chainAccountName,
     });
+    const contract = useStore(activeMineOwnerExecutorContractStore);
+    const navigate = useNavigate();
     const reloadPage = useReloadPage();
     const { t } = useTranslation();
     const isMinesLoading = useStore(getMinesByOwnerEffect.pending);
@@ -48,6 +53,9 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
         activatemine({ waxUser: chainAccountName, mineId: mine?.id })
     );
     const onActivationButtonClick = async () => {
+        if (!contract) {
+            return navigate(serviceMarket);
+        }
         const action = isMineActive ? deactivateMine : activateMine;
         await action();
         return reloadPage();
@@ -64,7 +72,9 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
             </div>
         );
     }
-
+    const toggleMineText = isMineActive
+        ? t('components.common.button.deactivate')
+        : t('components.common.button.activate');
     return (
         <div className={styles.background}>
             <Space direction="vertical">
@@ -92,12 +102,14 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
                         onClick={onActivationButtonClick}
                         loading={isMinesLoading}
                     >
-                        {isMineActive
-                            ? t('components.common.button.deactivate')
-                            : t('components.common.button.activate')}
+                        {contract ? toggleMineText : 'Sign new contract'}
                     </Button>
                     {chainAccountName && (
-                        <UnsetupMine accountName={chainAccountName} />
+                        <UnsetupMine
+                            activeContract={contract}
+                            isMineActive={isMineActive}
+                            accountName={chainAccountName}
+                        />
                     )}
                 </Space>
             </div>

@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { useStore } from 'effector-react';
 
 import { KeyValueTable } from 'shared';
-import { contractorsStore, minesStore } from 'entities/smartcontract';
+import { contractorsStore } from 'entities/smartcontract';
 import commonStyles from '../../styles/styles.module.scss';
 import { minesForAreaSlots } from '../../../areaManagement';
 import styles from './styles.module.scss';
