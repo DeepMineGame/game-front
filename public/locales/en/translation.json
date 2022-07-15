@@ -445,7 +445,8 @@
         "addons": "ADD-ONS",
         "petobot": "Petobot",
         "modules": "Modules",
-        "unsetup": "Unsetup"
+        "unsetup": "Unsetup",
+        "abandon": "Abandon mine"
       }
     },
     "actions": {

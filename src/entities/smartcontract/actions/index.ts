@@ -15,6 +15,7 @@ export * from './createContr';
 export * from './signOrder';
 export * from './setupMine';
 export * from './terminateContract';
+export * from './abandonMine';
 
 export function toggleMining({
     waxUser,

@@ -1,6 +1,6 @@
 import { Space, Tooltip } from 'antd';
 import React, { FC } from 'react';
-import { Menu, MenuItem } from 'shared';
+import { Menu, MenuItem, useAccountName } from 'shared';
 import {
     DesktopOutlined,
     ProjectOutlined,
@@ -13,15 +13,19 @@ import {
     mineOwnerStatsAndInfo,
 } from 'app/router/paths';
 import { useTranslation } from 'react-i18next';
+import { useStore } from 'effector-react';
+import { minesStore } from 'entities/smartcontract';
 import { mineOwnerCabinState } from '../../models/mineOwnerState';
 
 type Props = {
     currentMineOwnerCabinState: mineOwnerCabinState;
 };
 export const MineOwnerMenu: FC<Props> = ({ currentMineOwnerCabinState }) => {
+    const accountName = useAccountName();
     const navigate = useNavigate();
     const { t } = useTranslation();
-
+    const mines = useStore(minesStore);
+    const userMine = mines?.filter(({ owner }) => owner === accountName);
     const baseButtonDisableStates = [
         mineOwnerCabinState.hasNoMineNft,
         mineOwnerCabinState.needSignContractWithLandLord,
@@ -36,25 +40,31 @@ export const MineOwnerMenu: FC<Props> = ({ currentMineOwnerCabinState }) => {
         {
             link: mineManagement,
             icon: <DesktopOutlined />,
-            disabled: statusThatDisableManagementButton.includes(
-                currentMineOwnerCabinState
-            ),
+            disabled:
+                userMine?.length === 0 &&
+                statusThatDisableManagementButton.includes(
+                    currentMineOwnerCabinState
+                ),
             tooltip: t('pages.mineOwner.menu.manageMine'),
         },
         {
             link: mineOwnerMineCrew,
             icon: <TeamOutlined />,
-            disabled: statusThatDisableTeamButton.includes(
-                currentMineOwnerCabinState
-            ),
+            disabled:
+                userMine?.length === 0 &&
+                statusThatDisableTeamButton.includes(
+                    currentMineOwnerCabinState
+                ),
             tooltip: t('pages.mineOwner.menu.team'),
         },
         {
             link: mineOwnerStatsAndInfo,
             icon: <ProjectOutlined />,
-            disabled: statusThatDisableStatsButton.includes(
-                currentMineOwnerCabinState
-            ),
+            disabled:
+                userMine?.length === 0 &&
+                statusThatDisableStatsButton.includes(
+                    currentMineOwnerCabinState
+                ),
             tooltip: t('pages.mineOwner.menu.stats'),
         },
     ];

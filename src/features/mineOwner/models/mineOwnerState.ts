@@ -175,11 +175,12 @@ sample({
             mineOwnerCabinState.hasNoMineNft,
             mineOwnerCabinState.isOutsideFromLocation,
             mineOwnerCabinState.isMineSetupInProgress,
+            mineOwnerCabinState.needSignContractWithLandLord,
+            mineOwnerCabinState.needSetupMine,
         ]),
         hasMinesFilter
     ),
 });
-
 // Check that mine is active
 sample({
     source: minesStore,
@@ -193,5 +194,11 @@ sample({
         setContractsFreeEvent,
         setInitialStateEvent,
     ],
-    filter: isMineActiveFilter,
+    filter: compose(
+        ignoreIfInStatus($mineOwnerCabinState, [
+            mineOwnerCabinState.needSignContractWithLandLord,
+            mineOwnerCabinState.needSetupMine,
+        ]),
+        isMineActiveFilter
+    ),
 });
