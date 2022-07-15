@@ -43,7 +43,7 @@ export function createContr(data: CreateContrDto) {
                     wax_user: data.wax_user,
                     contract_type: data[createContrFormFields.contractType],
                     opt_asset_id: data[createContrFormFields.assetId] || 0,
-                    is_client: data[createContrFormFields.isClient],
+                    is_client: Boolean(data[createContrFormFields.isClient]),
                     fee_percent: data[createContrFormFields.fee],
                     fee_daily_min_amount:
                         data[createContrFormFields.feeDailyMinAmount],

@@ -4,6 +4,7 @@ export enum MineState {
     activated,
     deactivated,
     unsetuped,
+    abandoned,
 }
 
 export type MineDto = {
