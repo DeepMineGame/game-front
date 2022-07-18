@@ -8,6 +8,7 @@ import {
     getTimeLeft,
     neutral4,
     useInitialStoreEnrich,
+    isUtcDateExpired,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { Col, Row, Skeleton, Space, Tooltip } from 'antd';
@@ -42,10 +43,7 @@ export const MiningPage: FC = () => {
     const isActionsLoading = useStore(getActionEffect.pending);
     const mineStore = useStore(minesStore);
     const isMineStoreLoading = useStore(getMinesEffect.pending);
-
-    const [now, setNow] = useState(new Date());
-    const isMiningWillEndInFuture =
-        lastMineAction && now < new Date(lastMineAction.finishes_at * 1000);
+    const [isMiningFinished, setIsMiningFinished] = useState(true);
 
     const estMiningTime =
         lastMineAction &&
@@ -67,8 +65,7 @@ export const MiningPage: FC = () => {
             {lastMineAction ? (
                 <MiningTitle
                     action={lastMineAction}
-                    onMiningExpire={setNow}
-                    isMiningWillEndInFuture={Boolean(isMiningWillEndInFuture)}
+                    setIsMiningFinished={setIsMiningFinished}
                 />
             ) : (
                 <Skeleton title={false} loading={isActionsLoading} />
@@ -136,9 +133,9 @@ export const MiningPage: FC = () => {
                         </Tooltip>
                         <MiningAndClaimButton
                             action={lastMineAction}
-                            isMiningWillEndInFuture={Boolean(
-                                isMiningWillEndInFuture
-                            )}
+                            isMiningWillEndInFuture={
+                                !!lastMineAction && !isMiningFinished
+                            }
                         />
                     </Space>
                 </Col>
