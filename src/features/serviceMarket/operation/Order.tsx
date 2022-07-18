@@ -46,15 +46,9 @@ const Order: FC<Props> = ({ contract, accountName }) => {
     const isUserNotExecutor = contract.executor !== accountName;
 
     const canSignContractorOrder =
-        isMiningOrder &&
-        isExecutorSigned &&
-        isUserNotExecutor &&
-        userRoles.isMineOwner;
+        isMiningOrder && isExecutorSigned && isUserNotExecutor;
     const canSignMineOwnerContractorOrder =
-        isMiningOrder &&
-        isClientSigned &&
-        isUserNotClient &&
-        userRoles.isContractor;
+        isMiningOrder && isClientSigned && isUserNotClient;
 
     const canSignMineOwnerOrder =
         isExecutorSigned && isUserNotExecutor && userRoles.isLandlord;
