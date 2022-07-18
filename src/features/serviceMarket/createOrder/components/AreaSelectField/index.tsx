@@ -25,13 +25,18 @@ export const AssetSelectField: FC<{
 
     const isMineSetupContractTypeSelected =
         contractType === ContractType.landlord_mineowner;
+    const isMineOwnerRoleSelected =
+        contractType === ContractType.mineowner_contractor && isClientField;
 
-    if (isMineSetupContractTypeSelected && isClientField !== undefined) {
+    if (
+        (isMineOwnerRoleSelected || isMineSetupContractTypeSelected) &&
+        isClientField !== undefined
+    ) {
         return assetsFilteredByTemplates?.length ? (
             <Form.Item
                 className={styles.formField}
                 label={
-                    isClientField
+                    !isMineOwnerRoleSelected && isClientField
                         ? t('components.common.area')
                         : t('features.actions.mine')
                 }
@@ -39,7 +44,7 @@ export const AssetSelectField: FC<{
             >
                 <Select
                     placeholder={
-                        isClientField
+                        !isMineOwnerRoleSelected && isClientField
                             ? t('components.common.area')
                             : t('features.actions.mine')
                     }

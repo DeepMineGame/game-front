@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useWatch } from 'antd/es/form/Form';
 import {
     areasAssetTemplateId,
+    ContractType,
     createContrFormFields,
     mineAssetTemplateId,
 } from 'entities/smartcontract';
@@ -22,10 +23,12 @@ export const ContractTypeAndRoleStep: FC<{
     const isClientField = useWatch(createContrFormFields.isClient, form);
 
     const contractType = useWatch(createContrFormFields.contractType, form);
+    const isMiningContract = contractType === ContractType.mineowner_contractor;
+
     const hasValueToGoNextStep = contractType && isClientField !== undefined;
     const assetSelect = accountName ? (
         <div>
-            {isClientField ? (
+            {isClientField && !isMiningContract ? (
                 <AssetSelectField
                     templatesId={areasAssetTemplateId}
                     form={form}
