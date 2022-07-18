@@ -58,8 +58,7 @@ const Order: FC<Props> = ({ contract, accountName }) => {
 
     const canSignMineOwnerOrder =
         isExecutorSigned && isUserNotExecutor && userRoles.isLandlord;
-    const canSignLandlordOrder =
-        isClientSigned && isUserNotClient && userRoles.isMineOwner;
+    const canSignLandlordOrder = isClientSigned && isUserNotClient;
 
     const canDeleteOrder =
         (isExecutorSigned && contract.executor === accountName) ||
