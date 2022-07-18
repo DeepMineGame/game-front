@@ -12,6 +12,25 @@ export enum mapSearchParamForIndexPositionToFindContracts {
     executorId,
 }
 
+export const getContractConfig = ({
+    searchParam,
+    searchIdentification = mapSearchParamForIndexPositionToFindContracts.executorId,
+    limit = 100,
+}: {
+    searchParam: string;
+    searchIdentification?: mapSearchParamForIndexPositionToFindContracts;
+    limit?: number;
+}): GetTableDataConfigType => ({
+    code: deepminegame,
+    scope: deepminegame,
+    table: 'contracts',
+    index_position: searchIdentification,
+    key_type: 'i64',
+    upper_bound: searchParam,
+    lower_bound: searchParam,
+    limit,
+});
+
 export const getContractEffect = createEffect(
     async ({
         searchIdentification = mapSearchParamForIndexPositionToFindContracts.executorId,
@@ -20,16 +39,9 @@ export const getContractEffect = createEffect(
         searchIdentification?: mapSearchParamForIndexPositionToFindContracts;
         searchParam: string;
     }) => {
-        return getTableData({
-            code: deepminegame,
-            scope: deepminegame,
-            table: 'contracts',
-            index_position: searchIdentification,
-            key_type: 'i64',
-            upper_bound: searchParam,
-            lower_bound: searchParam,
-            limit: 100,
-        });
+        return getTableData(
+            getContractConfig({ searchParam, searchIdentification })
+        );
     }
 );
 

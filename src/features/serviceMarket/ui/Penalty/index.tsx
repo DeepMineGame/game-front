@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { InfoCircleFilled } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 
 import { Button, ExclamationModal, SuccessModal, useAccountName } from 'shared';
+import { serviceMarket } from 'app/router/paths';
 import { terminateContract } from 'entities/smartcontract';
 import { useSmartContractAction } from '../../../hooks';
 import styles from './styles.module.scss';
 
 type Props = {
+    penalty: number;
     contractId: number;
 };
 
-export const Penalty = ({ contractId }: Props) => {
+export const Penalty: FC<Props> = ({ contractId, penalty }) => {
     const { t } = useTranslation();
+    const navigate = useNavigate();
     const accountName = useAccountName();
 
     const [isCollectModalVisible, setIsCollectModalVisible] = useState(false);
@@ -36,6 +40,7 @@ export const Penalty = ({ contractId }: Props) => {
     const submitSuccessModal = () => {
         closeSuccessModal();
         setIsCollectModalVisible(false);
+        navigate(serviceMarket);
     };
 
     const handlePenaltyClick = async () => {
@@ -45,6 +50,7 @@ export const Penalty = ({ contractId }: Props) => {
 
     const handleNoPenaltyClick = async () => {
         await getNoPenaltyAction();
+        navigate(serviceMarket);
     };
 
     return (
@@ -77,7 +83,8 @@ export const Penalty = ({ contractId }: Props) => {
                 onCancel={() => setIsCollectModalVisible(false)}
                 title={t('pages.serviceMarket.contract.collectPenalty')}
                 description={t(
-                    'pages.serviceMarket.contract.collectDescription'
+                    'pages.serviceMarket.contract.collectDescription',
+                    { amount: penalty * 2 }
                 )}
                 submitText={t('pages.serviceMarket.contract.collect')}
             />
@@ -86,7 +93,9 @@ export const Penalty = ({ contractId }: Props) => {
                 onCancel={closeSuccessModal}
                 onSubmit={submitSuccessModal}
                 title={t('pages.serviceMarket.contract.termination')}
-                description={t('pages.serviceMarket.contract.youReceived')}
+                description={t('pages.serviceMarket.contract.youReceived', {
+                    amount: penalty * 2,
+                })}
             />
             <ExclamationModal
                 visible={isNoCollectModalVisible}
@@ -94,7 +103,8 @@ export const Penalty = ({ contractId }: Props) => {
                 onCancel={() => setIsNoCollectModalVisible(false)}
                 title={t('pages.serviceMarket.contract.noCollectPenalty')}
                 description={t(
-                    'pages.serviceMarket.contract.noCollectDescription'
+                    'pages.serviceMarket.contract.noCollectDescription',
+                    { amount: penalty * 2 }
                 )}
                 submitText={t('pages.serviceMarket.contract.noCollect')}
             />

@@ -75,6 +75,7 @@
       "duration": "Duration",
       "days": "Days",
       "inProgress": "In progress",
+      "you": "You",
       "status": {
         "active": "Active",
         "inactive": "Inactive",
@@ -314,6 +315,8 @@
       "myContracts": "My contracts",
       "miningContracts": "Mining contracts",
       "mineOperation": "Mine operation",
+      "miningOrder": "Mining order",
+      "mineOperationContract": "Mine operation contract",
       "createOrder": {
         "createOrder": "Create order",
         "contractType": "Contract type",
@@ -342,18 +345,29 @@
       "nickname": "Nickname",
       "creationDate": "Creation date",
       "Penalty&DME": "Penalty, DME",
+      "order": {
+        "title": "Mine operation order",
+        "orderId": "Order ID",
+        "signOrder": "Sign the order",
+        "deleteOrder": "Delete the order",
+        "selectMine": "Select the mine",
+        "selectMineAndSign": "Select mine and sign the order",
+        "doNotHaveMine": "You do not have a mine that meets the conditions of the order",
+        "doNotHaveMineSlot": "You do not have a mine slot that meets the conditions of the order",
+        "doNotHaveArea": "You do not have a area that meets the conditions of the order",
+        "doNotHaveAreaSlot": "You do not have a area slot that meets the conditions of the order"
+      },
       "contract": {
-        "title": "mine operation contract",
-        "generalInformation": "general information",
-        "conditions": "conditions",
+        "generalInformation": "General information",
+        "conditions": "Conditions",
         "landlord": "Landlord",
+        "contractor": "Contractor",
         "mineOwner": "Mine owner",
-        "id": "Contract ID",
-        "date": "Creation date",
-        "duration": "Duration",
+        "contractId": "Contract ID",
         "operationStart": "Start of operation in",
         "penalty": "Penalty",
         "miningTerms": "Mining terms",
+        "minimumDmeInDays": "Minimum {{amount}} DME in {{penalty}} Days",
         "fee": "Fee",
         "wallet": "WAX wallet",
         "area": "Area",
@@ -366,7 +380,14 @@
         "noCollectDescription": "Are you sure you don’t want to collect a penalty of {{amount}} DME from the Mine owner?",
         "noCollect": "Don’t collect",
         "termination": "Contract termination",
-        "youReceived": "You received {{amount}} DME"
+        "terminateContract": "Terminate the contract",
+        "youReceived": "You received {{amount}} DME",
+        "terminateModal": {
+          "title": "Contract termination",
+          "submit": "Terminate",
+          "description": "If you terminate the contract prematurely, you might pay a penalty of {{amount}} DME",
+          "success": "The contract is terminated. You may have to pay a fine of {{amount}} DME"
+        }
       }
     },
     "areaManagement": {
@@ -388,26 +409,6 @@
       "addMineOwner": "Add new Mine owner",
       "findMineOwner": "Find a Mine owner on the servicemarket",
       "createOrder": "Create an order for a Mine owner"
-    },
-    "mineOperationOrder": {
-      "mineOperationOrder": "Mine operation order",
-      "generalInformation": "General information",
-      "conditions": "conditions",
-      "selectMineAndSign": "Select mine and sign the order",
-      "selectMine": "Select the mine",
-      "startOperation": "Start of operation in",
-      "createOrder": "Create an order for a Mine owner",
-      "orderId": "Order ID",
-      "creationDate": "Creation date",
-      "duration": "Duration",
-      "waxWallet": "WAX wallet",
-      "landlord": "Landlord",
-      "penalty": "Penalty",
-      "miningTerms": "Mining terms",
-      "fee": "Fee",
-      "minimumDmeInDays": "Minimum {{amount}} DME in {{penalty}} Days",
-      "doNotHaveMine": "You do not have a mine that meets the conditions of the order",
-      "doNotHaveArea": "You do not have a area that meets the conditions of the order"
     }
   },
   "features": {

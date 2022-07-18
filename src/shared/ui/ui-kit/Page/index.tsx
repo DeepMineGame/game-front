@@ -4,7 +4,7 @@ import cn from 'classnames';
 import styles from './styles.module.scss';
 
 type Props = {
-    headerTitle: string;
+    headerTitle?: string;
     removeContentPadding?: boolean;
     className?: string;
 };

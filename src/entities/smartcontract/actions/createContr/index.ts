@@ -56,7 +56,6 @@ export function createContr(data: CreateContrDto) {
                     finishes_at: addDaysToCurrentDateUnixTime(
                         data[createContrFormFields.finishesAt]
                     ),
-                    attrs: [],
                 },
             },
         ],
