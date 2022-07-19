@@ -16,7 +16,7 @@ export const ServiceMarketContractsTable: FC<{ accountName: string }> = ({
     }
 
     return contracts?.length ? (
-        <ContractsTable contracts={contracts} />
+        <ContractsTable contracts={contracts} account={accountName} />
     ) : (
         <Empty />
     );
