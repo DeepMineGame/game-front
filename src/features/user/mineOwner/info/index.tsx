@@ -21,9 +21,8 @@ export const MineOwnerInfo: FC<{ accountName: string }> = ({ accountName }) => {
     const area = useStore(areaForMineStore);
     const areaNft = useStore(areaNftStore);
     const mine = mines?.[0];
-    const areaReservedSlotCount = area?.mine_slots?.filter(
-        ({ reserved }) => reserved
-    )?.length;
+    const areaReservedSlotCount =
+        area?.mine_slots?.filter(({ reserved }) => reserved)?.length || 0;
     const isMineLoading = useStore(getMinesEffect.pending);
     const isAreaLoading = useStore(getAreasEffect.pending);
 

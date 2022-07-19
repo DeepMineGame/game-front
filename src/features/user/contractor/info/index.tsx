@@ -23,9 +23,8 @@ export const Contractor: FC<Props> = ({ accountName }) => {
     const mine = useStore(contractorMineStore);
     const area = useStore(contractorAreaStore);
     const areaNft = useStore(areaNftStore);
-    const areaReservedSlotCount = area?.mine_slots?.filter(
-        ({ reserved }) => reserved
-    )?.length;
+    const areaReservedSlotCount =
+        area?.mine_slots?.filter(({ reserved }) => reserved)?.length || 0;
     const { t } = useTranslation();
 
     return (
