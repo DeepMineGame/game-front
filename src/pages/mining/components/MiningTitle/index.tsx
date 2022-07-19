@@ -1,19 +1,24 @@
 import React, { FC, memo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useTimer } from 'react-timer-hook';
-import { desktopS, Title, useMediaQuery } from 'shared';
+import {
+    desktopS,
+    getTimeLeftFromUtc,
+    isUtcDateExpired,
+    Title,
+    useMediaQuery,
+    useTick,
+} from 'shared';
 import classNames from 'classnames';
 import { ActionDto, ActionState } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
 type Props = {
     action: ActionDto;
-    onMiningExpire?: (date: Date) => void;
-    isMiningWillEndInFuture: boolean;
+    setIsMiningFinished: (value: boolean) => void;
 };
 
 export const MiningTitle: FC<Props> = memo(
-    ({ action, onMiningExpire, isMiningWillEndInFuture }) => {
+    ({ action, setIsMiningFinished }) => {
         const { t } = useTranslation();
         const isDesktop = useMediaQuery(desktopS);
         const miningTitleMap = {
@@ -24,55 +29,28 @@ export const MiningTitle: FC<Props> = memo(
             [ActionState.undefined]: '',
             [ActionState.idle]: undefined,
         };
-        const isMining =
-            action?.state === ActionState.active && isMiningWillEndInFuture;
 
-        // TODO: отказаться от этого пакета в пользу time.ts из utils
-        const {
-            seconds,
-            minutes,
-            hours,
-            days,
-            restart: timerRestart,
-        } = useTimer({
-            expiryTimestamp: new Date(action.finishes_at * 1000),
-            onExpire: () => {
-                if (onMiningExpire) {
-                    onMiningExpire(new Date());
-                }
-            },
-        });
+        const isFinished = isUtcDateExpired(action.finishes_at);
+
         useEffect(() => {
-            timerRestart(new Date(action.finishes_at * 1000), true);
-            // eslint-disable-next-line react-hooks/exhaustive-deps
-        }, [isMining]);
+            setIsMiningFinished(isFinished);
+        }, [isFinished, setIsMiningFinished]);
 
-        const isMiningFinished =
-            (action?.state === ActionState.active &&
-                !isMiningWillEndInFuture) ||
-            action?.state === ActionState.finished;
+        useTick(!isFinished);
+
+        const state = isFinished ? ActionState.finished : action.state;
 
         return (
             <Title
                 level={isDesktop ? 2 : 4}
                 className={classNames(styles.miningStatusTitle, {
-                    [styles.interrupted]:
-                        action.state === ActionState.interrupted,
-                    [styles.finished]: isMiningFinished,
+                    [styles.interrupted]: state === ActionState.interrupted,
+                    [styles.finished]: isFinished,
                 })}
                 fontFamily="orbitron"
             >
-                {isMiningFinished
-                    ? miningTitleMap[ActionState.finished]
-                    : miningTitleMap[action.state]}{' '}
-                {isMining && (
-                    <>
-                        {days}d{' '}
-                        <span className={styles.timerRemained}>
-                            {hours}:{minutes}:{seconds}
-                        </span>
-                    </>
-                )}
+                {miningTitleMap[state]}{' '}
+                {!isFinished && getTimeLeftFromUtc(action.finishes_at, true)}
             </Title>
         );
     }
