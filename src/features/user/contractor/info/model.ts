@@ -5,6 +5,8 @@ import {
     AreasDto,
     ContractorDto,
     getAreasEffect,
+    getContractorsConfig,
+    getContractorsEffect,
     getMinesEffect,
     inventoryTableDataConfig,
     MineDto,
@@ -12,18 +14,22 @@ import {
     UserInventoryType,
 } from 'entities/smartcontract';
 
+export const ContractorGate = createGate<{
+    searchParam: string;
+}>('ContractorGate');
+
+const getContractorDataEffect = createEffect(
+    async ({ searchParam }: { searchParam: string }) =>
+        getContractorsConfig({ searchParam })
+);
 const getMineEffect = createEffect(
-    async ({ mineId }: { mineId: ContractorDto['mine_id'] }) =>
-        getMinesEffect({ searchParam: mineId })
+    async (contractorDto: ContractorDto | null) =>
+        contractorDto && getMinesEffect({ searchParam: contractorDto.mine_id })
 );
 
 const getAreaEffect = createEffect(
-    async ({
-        areaId,
-    }: {
-        mineId: ContractorDto['mine_id'];
-        areaId: AreasDto['id'];
-    }) => getAreasEffect({ searchParam: String(areaId) })
+    async (contractorDto: ContractorDto | null) =>
+        contractorDto && getAreasEffect({ searchParam: contractorDto.area_id })
 );
 export const getInventoryByIdEffect = createEffect(
     async ({ searchParam }: { searchParam: number }) =>
@@ -37,7 +43,10 @@ export const contractorMineStore = createStore<null | MineDto>(null).on(
     getMinesEffect.doneData,
     (_, { rows }) => rows?.[0]
 );
-
+export const contractorDataStore = createStore<ContractorDto | null>(null).on(
+    getContractorsEffect.doneData,
+    (_, { rows }) => rows?.[0]
+);
 export const contractorAreaStore = createStore<null | AreasDto>(null).on(
     getAreasEffect.doneData,
     (_, { rows }) => rows?.[0]
@@ -47,16 +56,14 @@ export const areaNftStore = createStore<UserInventoryType | null>(null).on(
     (_, { rows }) => rows?.[0]
 );
 
-export const ContractorGate = createGate<{
-    mineId: ContractorDto['mine_id'];
-    areaId: AreasDto['id'];
-}>('ContractorGate');
-
 forward({
     from: ContractorGate.open,
-    to: [getMineEffect, getAreaEffect],
+    to: getContractorDataEffect,
 });
-
+sample({
+    source: contractorDataStore,
+    target: [getMineEffect, getAreaEffect],
+});
 // fetch area nft from inventory
 sample({
     source: contractorAreaStore,

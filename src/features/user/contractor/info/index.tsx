@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { Col, Empty, Row } from 'antd';
-import { Button, KeyValueTable, Title } from 'shared';
+import { Area, Button, KeyValueTable, Title } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
-import { ContractorDto, rarityMap } from 'entities/smartcontract';
+import { rarityMap } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
 import {
     areaNftStore,
@@ -13,18 +13,19 @@ import {
 } from './model';
 
 type Props = {
-    contractor: ContractorDto;
+    accountName: string;
 };
 
-export const Contractor: FC<Props> = ({ contractor }) => {
+export const Contractor: FC<Props> = ({ accountName }) => {
     useGate(ContractorGate, {
-        mineId: contractor.mine_id,
-        areaId: contractor.area_id,
+        searchParam: accountName,
     });
     const mine = useStore(contractorMineStore);
     const area = useStore(contractorAreaStore);
     const areaNft = useStore(areaNftStore);
-
+    const areaReservedSlotCount = area?.mine_slots?.filter(
+        ({ reserved }) => reserved
+    )?.length;
     const { t } = useTranslation();
 
     return (
@@ -52,14 +53,11 @@ export const Contractor: FC<Props> = ({ contractor }) => {
                     {t('components.common.areaInfo').toUpperCase()}
                 </Title>
                 {area ? (
-                    <KeyValueTable
-                        items={{
-                            Area: <Button type="link">ID {area.id}</Button>,
-                            Landlord: areaNft?.owner || '',
-                            'Area Rarity': areaNft && rarityMap[areaNft.rarity],
-                            'Mines on Area': area.mine_slots.length,
-                            'Area fee': '-',
-                        }}
+                    <Area
+                        area={area.id}
+                        landlord={areaNft?.owner || '-'}
+                        slots={`${areaReservedSlotCount}/${area.mine_slots.length}`}
+                        rarity={areaNft ? rarityMap[areaNft.rarity] : '-'}
                     />
                 ) : (
                     <Empty />

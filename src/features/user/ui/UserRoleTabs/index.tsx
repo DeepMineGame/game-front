@@ -5,7 +5,6 @@ import { Empty, Space, Tooltip } from 'antd';
 import { ShareAltOutlined } from '@ant-design/icons';
 import { Button, desktopS, Tabs, Title, useMediaQuery } from 'shared';
 import {
-    contractorsStore,
     rolesStore,
     smartContractUserStore,
     UserRoles,
@@ -29,12 +28,14 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
     const isDesktop = useMediaQuery(desktopS);
     const { t } = useTranslation();
     const roles = useStore(rolesStore) || [];
-    const contractors = useStore(contractorsStore);
     const hasLandlordRole = roles.some(
         ({ role }) => role === UserRoles.landlord
     );
     const hasMineOwnerRole = roles.some(
         ({ role }) => role === UserRoles.mine_owner
+    );
+    const hasContractorRole = roles.some(
+        ({ role }) => role === UserRoles.contractor
     );
 
     const userLine = smartContractUserData && (
@@ -90,19 +91,17 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
                     tabContent: (
                         <>
                             {userLine}
-                            <MineOwnerInfo />
+                            <MineOwnerInfo accountName={accountName} />
                         </>
                     ),
                 },
                 {
                     tabName: t('roles.contractor'),
-                    disabled: Boolean(!contractors?.length),
+                    disabled: !hasContractorRole,
                     tabContent: (
                         <>
                             {userLine}
-                            {contractors && (
-                                <Contractor contractor={contractors[0]} />
-                            )}
+                            <Contractor accountName={accountName} />
                         </>
                     ),
                 },
