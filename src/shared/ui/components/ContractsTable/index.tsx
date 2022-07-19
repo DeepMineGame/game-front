@@ -55,7 +55,16 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
                                 {contract.executor || contract.client}
                             </Link>
                             {role && (
-                                <Tag kind="secondary">{t(`roles.${role}`)}</Tag>
+                                <Tag kind="secondary">
+                                    {t(
+                                        `roles.${
+                                            role === 'mineOwnerContractor' ||
+                                            role === 'mineOwnerLandlord'
+                                                ? 'mineOwner'
+                                                : role
+                                        }`
+                                    )}
+                                </Tag>
                             )}
                         </>
                     ),
