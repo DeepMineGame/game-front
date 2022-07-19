@@ -18,27 +18,25 @@ export const getTableData = async (config: GetTableDataConfigType) => {
     return data;
 };
 
-enum Role {
-    contractor = 'contractor',
-    mineOwner = 'mineOwner',
-    landlord = 'landlord',
-}
-
 export const getUserRoleInContract = (
     contract: ContractDto,
     account: string
-): Role | null => {
-    let role: Role | null = null;
-
+):
+    | 'contractor'
+    | 'mineOwnerContractor'
+    | 'mineOwnerLandlord'
+    | 'landlord'
+    | null => {
     if (contract.type === ContractType.landlord_mineowner) {
-        if (contract.client === account) role = Role.landlord;
-        else if (contract.executor === account) role = Role.mineOwner;
-    } else if (contract.type === ContractType.mineowner_contractor) {
-        if (contract.client === account) role = Role.mineOwner;
-        else if (contract.executor === account) role = Role.contractor;
+        if (contract.client === account) return 'landlord';
+        if (contract.executor === account) return 'mineOwnerLandlord';
+    }
+    if (contract.type === ContractType.mineowner_contractor) {
+        if (contract.client === account) return 'mineOwnerContractor';
+        if (contract.executor === account) return 'contractor';
     }
 
-    return role;
+    return null;
 };
 
 export * from './getNftImagePath';
