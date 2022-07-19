@@ -1,34 +1,10 @@
 import React, { FC } from 'react';
 import { serviceMarket } from 'app/router/paths';
 import { t } from 'i18next';
-import {
-    ContractDto,
-    contractName,
-    ContractType,
-    statusMap,
-} from 'entities/smartcontract';
+import { ContractDto, contractName, statusMap } from 'entities/smartcontract';
+import { getUserRoleInContract } from 'shared/lib/utils';
 import { Link, Table, Tag } from '../../ui-kit';
 import { toLocaleDate } from '../../utils';
-
-const getRole = (contract: ContractDto, account: string): string | null => {
-    enum Role {
-        contractor = 'contractor',
-        mineOwner = 'mineOwner',
-        landlord = 'landlord',
-    }
-
-    let role: Role | null = null;
-
-    if (contract.type === ContractType.landlord_mineowner) {
-        if (contract.client === account) role = Role.landlord;
-        else if (contract.executor === account) role = Role.mineOwner;
-    } else if (contract.type === ContractType.mineowner_contractor) {
-        if (contract.client === account) role = Role.mineOwner;
-        else if (contract.executor === account) role = Role.contractor;
-    }
-
-    return role;
-};
 
 type Props = { contracts: ContractDto[]; account: string };
 
@@ -68,7 +44,7 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
                 },
             ]}
             dataSource={contracts.map((contract) => {
-                const role = getRole(contract, account);
+                const role = getUserRoleInContract(contract, account);
 
                 return {
                     nickName: (
