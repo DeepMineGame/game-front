@@ -8,7 +8,6 @@ import {
     getTimeLeft,
     neutral4,
     useInitialStoreEnrich,
-    isUtcDateExpired,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { Col, Row, Skeleton, Space, Tooltip } from 'antd';

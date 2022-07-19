@@ -1,15 +1,23 @@
 import { useEffect, useReducer } from 'react';
 
-export const useTick = (active = true, timeoutMs = 1000) => {
+/**
+ * can be used for rerender component on timeout
+ * for example timer or countdown
+
+ * @param isActive - activated or not
+ * @param timeoutMs - timeout in milliseconds
+ */
+
+export const useTick = (isActive = true, timeoutMs = 1000) => {
     const [, update] = useReducer((state) => !state, true);
 
     useEffect(() => {
         let timerId: number;
 
-        if (active) {
+        if (isActive) {
             timerId = window.setInterval(update, timeoutMs);
         }
 
         return () => window.clearInterval(timerId);
-    }, [active, timeoutMs, update]);
+    }, [isActive, timeoutMs, update]);
 };
