@@ -8,7 +8,7 @@ import {
 } from '../../models/mineOwnerState';
 import { useTitles } from '../hooks/useTitles';
 import { useDescriptions } from '../hooks/useDescriptions';
-import { useLinks } from '../hooks/useLinks';
+import { useActionsButton } from '../hooks/useActionsButton';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -24,7 +24,7 @@ export const Surface: FC<Props> = ({ user }) => {
     const isDesktop = useMediaQuery(desktopS);
     const titles = useTitles();
     const texts = useDescriptions();
-    const buttons = useLinks();
+    const buttons = useActionsButton();
 
     return (
         <div className={styles.surface}>

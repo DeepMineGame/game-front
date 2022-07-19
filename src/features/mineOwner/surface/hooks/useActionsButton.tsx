@@ -1,6 +1,12 @@
 import { useTranslation } from 'react-i18next';
-import { Button, desktopS, useAccountName, useMediaQuery } from 'shared';
-import React from 'react';
+import {
+    ActionModal,
+    Button,
+    desktopS,
+    useAccountName,
+    useMediaQuery,
+} from 'shared';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createOrder, serviceMarket, warehouse } from 'app/router/paths';
 import { ATOMICHUB_URL } from 'app';
@@ -14,7 +20,9 @@ import {
 import { mineOwnerCabinState } from '../../models/mineOwnerState';
 import { useSmartContractAction } from '../../../hooks';
 
-export function useLinks() {
+export function useActionsButton() {
+    const [isSetupMineModalVisible, setSetupMineModalVisible] = useState(false);
+
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
     const navigate = useNavigate();
@@ -83,8 +91,17 @@ export function useLinks() {
         ),
         [mineOwnerCabinState.needSetupMine]: (
             <>
-                <div />
-                <Button type="link" onClick={setupMineAction}>
+                <ActionModal
+                    submitText={t('components.common.button.activate')}
+                    visible={isSetupMineModalVisible}
+                    onCancel={() => setSetupMineModalVisible(false)}
+                    onSubmit={setupMineAction}
+                    title={t('pages.areaManagement.landActivation')}
+                />
+                <Button
+                    type="link"
+                    onClick={() => setSetupMineModalVisible(true)}
+                >
                     {t('features.mineOwner.setupMine')}
                 </Button>
             </>
