@@ -36,7 +36,7 @@ export const ActionModal: FC<Props> = ({
                 className={styles.dmpButton}
                 onClick={() => setUseDmp(!useDmp)}
             >
-                22
+                0
             </Button>
             <div>
                 <Button type="ghost">
@@ -69,16 +69,14 @@ export const ActionModal: FC<Props> = ({
                 )}
             </Title>
             <div>
-                {!useDmp && (
-                    <Timer className={styles.timer} timeSeconds={100} />
-                )}
+                {!useDmp && <Timer className={styles.timer} timeSeconds={0} />}
                 {useDmp && (
                     <div className={styles.infoCard}>
                         <div className={styles.infoCardText}>
                             <Icon component={DmpIcon} />
                             <div>{t('components.common.button.dmp')}</div>
                         </div>
-                        <div className={styles.infoCardValue}>22</div>
+                        <div className={styles.infoCardValue}>0</div>
                     </div>
                 )}
             </div>
