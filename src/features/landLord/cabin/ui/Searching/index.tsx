@@ -2,7 +2,13 @@ import React, { useState, useEffect, useRef, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 
-import { desktopS, getTimeLeft, Loader, useMediaQuery } from 'shared';
+import {
+    desktopS,
+    getTimeLeft,
+    Loader,
+    msToSeconds,
+    useMediaQuery,
+} from 'shared';
 import commonStyles from '../../styles/styles.module.scss';
 import styles from './styles.module.scss';
 
@@ -46,7 +52,7 @@ export const Searching: FC<Props> = ({ className, msUntil }) => {
             <div className={styles.timerContainer}>
                 <Loader size={isDesktop ? 'semiSmall' : 'small'} />
                 <div className={styles.timer}>
-                    {getTimeLeft(currentMsUntil / 1000)}
+                    {getTimeLeft(msToSeconds(currentMsUntil))}
                 </div>
             </div>
         </div>

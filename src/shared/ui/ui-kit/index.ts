@@ -34,3 +34,4 @@ export * from './ExclamationModal';
 export * from './SuccessModal';
 export * from './WarningModal';
 export * from './Tag';
+export * from './Alert';

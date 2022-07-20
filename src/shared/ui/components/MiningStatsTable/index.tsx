@@ -35,7 +35,7 @@ const expandedColumns = [
     {
         dataIndex: 'time',
         key: 'time',
-        render: (time: number) => secondsToTime(time),
+        render: (time: number) => secondsToTime(time * 1000),
     },
     {
         dataIndex: 'fossil',
@@ -102,7 +102,7 @@ export const MiningStatsTable: FC<{
             title: t('pages.contractorMiningStats.miningTime'),
             dataIndex: 'time',
             key: 'time',
-            render: (time: number) => secondsToTime(time),
+            render: (time: number) => secondsToTime(time * 1000),
             sorter: {
                 compare: (a: MiningStatsDataType, b: MiningStatsDataType) =>
                     a.time - b.time,

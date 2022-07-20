@@ -12,9 +12,10 @@ import styles from './styles.module.scss';
 type Props = {
     penalty: number;
     contractId: number;
+    isViolated: boolean;
 };
 
-export const Penalty: FC<Props> = ({ contractId, penalty }) => {
+export const Penalty: FC<Props> = ({ isViolated, contractId, penalty }) => {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const accountName = useAccountName();
@@ -58,7 +59,11 @@ export const Penalty: FC<Props> = ({ contractId, penalty }) => {
             <InfoCircleFilled />
             <div className={styles.content}>
                 <div className={styles.description}>
-                    {t('pages.serviceMarket.contract.penaltyDescription')}
+                    {t(
+                        isViolated
+                            ? 'pages.serviceMarket.contract.penaltyViolatedDescription'
+                            : 'pages.serviceMarket.contract.penaltyTerminatedDescription'
+                    )}
                 </div>
                 <div className={styles.buttons}>
                     <Button
@@ -66,14 +71,22 @@ export const Penalty: FC<Props> = ({ contractId, penalty }) => {
                         className={styles.button}
                         onClick={() => setIsCollectModalVisible(true)}
                     >
-                        {t('pages.serviceMarket.contract.collectPenalty')}
+                        {t(
+                            isViolated
+                                ? 'pages.serviceMarket.contract.collectPenaltyAndBreak'
+                                : 'pages.serviceMarket.contract.collectPenalty'
+                        )}
                     </Button>
                     <Button
                         ghost
                         className={styles.button}
                         onClick={() => setIsNoCollectModalVisible(true)}
                     >
-                        {t('pages.serviceMarket.contract.noCollectPenalty')}
+                        {t(
+                            isViolated
+                                ? 'pages.serviceMarket.contract.noCollectPenaltyAndBreak'
+                                : 'pages.serviceMarket.contract.noCollectPenalty'
+                        )}
                     </Button>
                 </div>
             </div>

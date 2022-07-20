@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ContractDto } from 'entities/smartcontract';
-import { secondsToHour } from 'shared/ui';
+import { DAY_IN_SECONDS, secondsToTime, msToSeconds } from 'shared/ui';
 import { TableWithTitle } from '../../ui';
 
 type Props = {
@@ -10,14 +10,13 @@ type Props = {
 
 const ConditionTable: FC<Props> = ({ contract }) => {
     const { t } = useTranslation();
-
-    const operationStartsIn = contract.start_time
-        ? contract.start_time * 1000 - Date.now()
-        : undefined;
+    const workDuration = Date.now() - contract.start_time * 1000;
 
     const conditionData = {
-        [t('pages.serviceMarket.contract.operationStart')]: operationStartsIn
-            ? Math.max(secondsToHour(operationStartsIn / 1000), 0)
+        [t('pages.serviceMarket.contract.operationStart')]: contract.start_time
+            ? `${Math.floor(
+                  msToSeconds(workDuration) / DAY_IN_SECONDS
+              )}d ${secondsToTime(workDuration)}`
             : '-',
         [t('pages.serviceMarket.contract.penalty')]: `${
             contract.penalty_amount
