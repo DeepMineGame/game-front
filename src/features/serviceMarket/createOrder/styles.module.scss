@@ -48,8 +48,24 @@
 
 .formField {
   :global {
-    .ant-form-item-label > label {
+    .ant-form-item-label > label, .ant-form-item-tooltip {
       color: $color-neutral-neutral-8 !important;
+    }
+  }
+}
+
+.tooltipCard {
+  background: $color-neutral-neutral-1;
+  border: 1px solid $color-neutral-neutral-5;
+  border-radius: 2px;
+  color: $color-neutral-neutral-9;
+
+  :global {
+    .ant-card-head-title {
+      color: $color-neutral-neutral-9;
+    }
+    .ant-card-head {
+      border: 1px solid $color-neutral-neutral-5;
     }
   }
 }

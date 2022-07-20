@@ -5,14 +5,14 @@ import { ContractorDto } from './types';
 
 export enum ContractorsSearchType {
     undefined,
-    owenr,
+    owner,
     areaId,
     mineId,
 }
 
 export const getContractorsConfig = ({
     searchParam,
-    searchType = ContractorsSearchType.owenr,
+    searchType = ContractorsSearchType.owner,
 }: {
     searchParam: string;
     searchType?: ContractorsSearchType;
@@ -22,7 +22,7 @@ export const getContractorsConfig = ({
         scope: deepminegame,
         table: 'contractors',
         index_position: searchType,
-        key_type: searchType === ContractorsSearchType.owenr ? 'name' : 'i64',
+        key_type: searchType === ContractorsSearchType.owner ? 'name' : 'i64',
         lower_bound: searchParam,
         upper_bound: searchParam,
         limit: 100,
@@ -31,7 +31,7 @@ export const getContractorsConfig = ({
 export const getContractorsEffect = createEffect(
     async ({
         searchParam,
-        searchType = ContractorsSearchType.owenr,
+        searchType = ContractorsSearchType.owner,
     }: {
         searchParam: string;
         searchType?: ContractorsSearchType;
