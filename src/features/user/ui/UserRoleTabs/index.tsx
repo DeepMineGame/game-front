@@ -3,12 +3,15 @@ import { useStore, useGate } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { Empty, Space, Tooltip } from 'antd';
 import { ShareAltOutlined } from '@ant-design/icons';
-import { Button, desktopS, Tabs, Title, useMediaQuery } from 'shared';
 import {
-    rolesStore,
-    smartContractUserStore,
-    UserRoles,
-} from 'entities/smartcontract';
+    Button,
+    desktopS,
+    Tabs,
+    Title,
+    useMediaQuery,
+    useUserRoles,
+} from 'shared';
+import { rolesStore, smartContractUserStore } from 'entities/smartcontract';
 import { AvatarWithLvl, UserGate } from 'entities/user';
 
 import { CitizenInfo } from '../../citizen';
@@ -28,15 +31,7 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
     const isDesktop = useMediaQuery(desktopS);
     const { t } = useTranslation();
     const roles = useStore(rolesStore) || [];
-    const hasLandlordRole = roles.some(
-        ({ role }) => role === UserRoles.landlord
-    );
-    const hasMineOwnerRole = roles.some(
-        ({ role }) => role === UserRoles.mine_owner
-    );
-    const hasContractorRole = roles.some(
-        ({ role }) => role === UserRoles.contractor
-    );
+    const userRoles = useUserRoles(roles);
 
     const userLine = smartContractUserData && (
         <div className={styles.userLine}>
@@ -77,7 +72,7 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
                 },
                 {
                     tabName: t('roles.landlord'),
-                    disabled: !hasLandlordRole,
+                    disabled: !userRoles.isLandlord,
                     tabContent: (
                         <>
                             {userLine}
@@ -87,7 +82,7 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
                 },
                 {
                     tabName: t('roles.mineOwner'),
-                    disabled: !hasMineOwnerRole,
+                    disabled: !userRoles.isMineOwner,
                     tabContent: (
                         <>
                             {userLine}
@@ -97,7 +92,7 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
                 },
                 {
                     tabName: t('roles.contractor'),
-                    disabled: !hasContractorRole,
+                    disabled: !userRoles.isContractor,
                     tabContent: (
                         <>
                             {userLine}
