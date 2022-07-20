@@ -8,7 +8,7 @@ import { createContr, CreateContrDto } from 'entities/smartcontract';
 import { useSmartContractActionDynamic } from '../../hooks';
 import styles from './styles.module.scss';
 import { ContractTypeAndRoleStep } from './components/ContractTypeAndRoleStep';
-import { GeneralConditionStep } from './components/GeneralConditionStep/indes';
+import { GeneralConditionStep } from './components/GeneralConditionStep';
 import { TermsStep } from './components/TermsStep';
 import { CreateResult } from './components/CreateResult';
 

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Form, FormInstance, Input as InputA, Space } from 'antd';
+import { Card, Form, FormInstance, Input as InputA, Space } from 'antd';
 import { Button, Input, Select, getDaysSelectItem } from 'shared';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
@@ -32,6 +32,14 @@ export const GeneralConditionStep: FC<{
                     name={createContrFormFields.fee}
                     label={t('pages.serviceMarket.createOrder.fee')}
                     className={cn(styles.formField, localStyles.feeInput)}
+                    tooltip={
+                        <Card
+                            title={t('pages.serviceMarket.createOrder.fee')}
+                            className={styles.tooltipCard}
+                        >
+                            {t('pages.serviceMarket.createOrder.feeTooltip')}
+                        </Card>
+                    }
                 >
                     <Input placeholder="%" />
                 </Form.Item>
@@ -50,6 +58,18 @@ export const GeneralConditionStep: FC<{
                 name={createContrFormFields.deadlineTime}
                 label={t('pages.serviceMarket.createOrder.startOfOperation')}
                 className={cn(localStyles.deadLineField, styles.formField)}
+                tooltip={
+                    <Card
+                        title={t(
+                            'pages.serviceMarket.createOrder.startOfOperation'
+                        )}
+                        className={styles.tooltipCard}
+                    >
+                        {t(
+                            'pages.serviceMarket.createOrder.startOfOperationTooltip'
+                        )}
+                    </Card>
+                }
             >
                 <Select
                     placeholder={t('components.common.days')}
