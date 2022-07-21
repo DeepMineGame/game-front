@@ -10,11 +10,13 @@ import styles from './styles.module.scss';
 const IS_FIRST_VISIT_KEY = 'IS_FIRST_VISIT_KEY';
 export const MineStat = () => {
     const { t } = useTranslation();
-    const [isFirstRender] = useState(!localStorage.getItem(IS_FIRST_VISIT_KEY));
+    const [isFirstRender] = useState(
+        localStorage.getItem(IS_FIRST_VISIT_KEY) !== 'false'
+    );
     const userRoles = useStore(rolesStore);
-    const mineOwnerRole = userRoles?.filter(
+    const mineOwnerRole = userRoles?.find(
         ({ role }) => role === UserRoles.mine_owner
-    )?.[0];
+    );
 
     const feeToClaim = mineOwnerRole?.attrs?.find(
         ({ key }) => key === 'fee_to_claim'
@@ -33,7 +35,8 @@ export const MineStat = () => {
         <KeyValueTable
             className={styles.table}
             items={{
-                [t('pages.landLord.cabin.DMEToClaim')]: feeToClaim?.value,
+                [t('pages.landLord.cabin.DMEToClaim')]:
+                    feeToClaim?.value ?? '-',
                 [t('pages.mining.mineDepth')]: userMine?.[0]?.layer_depth,
             }}
         />
