@@ -23,7 +23,7 @@ export const Surface: FC<Props> = ({ user }) => {
 
     const isDesktop = useMediaQuery(desktopS);
     const titles = useTitles();
-    const texts = useDescriptions();
+    const descriptions = useDescriptions();
     const buttons = useActionsButton();
 
     return (
@@ -31,7 +31,7 @@ export const Surface: FC<Props> = ({ user }) => {
             {isDesktop && (
                 <Title fontFamily="orbitron">{titles[cabinState]}</Title>
             )}
-            {texts[cabinState]}
+            {descriptions[cabinState]}
             {buttons[cabinState]}
         </div>
     );

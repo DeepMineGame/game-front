@@ -1,0 +1,12 @@
+@import "src/shared";
+
+.table {
+  background: none !important;
+  border: none !important;
+  border-bottom: 1px solid $color-neutral-neutral-10 !important;
+
+  & > div {
+    border-bottom: 1px solid $color-neutral-neutral-10 !important;
+
+  }
+}
