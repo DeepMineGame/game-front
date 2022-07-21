@@ -445,7 +445,7 @@
       "mineManagement": "Mine Management",
       "mineManagementDescription": "Go to Mine Management unit to activate the Mine",
       "mineIsActive": "Mine is Active",
-      "mineIsActiveDescription": "Everything is fine, Mine is ready to go. Now you can see the statistics of the mining process and efficiency",
+      "mineIsActiveDescription": "Everything is fine, Mine is running. Now you can see the information about the mining process and efficiency",
       "mineIsActiveDescriptionMobile": "Now you can see the statistics of the mining process and efficiency",
       "management": {
         "addons": "ADD-ONS",

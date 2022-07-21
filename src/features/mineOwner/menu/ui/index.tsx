@@ -1,6 +1,6 @@
 import { Space, Tooltip } from 'antd';
 import React, { FC } from 'react';
-import { Menu, MenuItem, useAccountName } from 'shared';
+import { Menu, MenuItem } from 'shared';
 import {
     DesktopOutlined,
     ProjectOutlined,
@@ -13,19 +13,22 @@ import {
     mineOwnerStatsAndInfo,
 } from 'app/router/paths';
 import { useTranslation } from 'react-i18next';
-import { useStore } from 'effector-react';
-import { minesStore } from 'entities/smartcontract';
+import { useGate, useStore } from 'effector-react';
 import { mineOwnerCabinState } from '../../models/mineOwnerState';
+import { MineConsumerGate, userMineStore } from '../../models';
 
 type Props = {
     currentMineOwnerCabinState: mineOwnerCabinState;
+    accountName: string;
 };
-export const MineOwnerMenu: FC<Props> = ({ currentMineOwnerCabinState }) => {
-    const accountName = useAccountName();
+export const MineOwnerMenu: FC<Props> = ({
+    currentMineOwnerCabinState,
+    accountName,
+}) => {
+    useGate(MineConsumerGate, { searchParam: accountName });
     const navigate = useNavigate();
     const { t } = useTranslation();
-    const mines = useStore(minesStore);
-    const userMine = mines?.filter(({ owner }) => owner === accountName);
+    const userMine = useStore(userMineStore)?.[0];
     const baseButtonDisableStates = [
         mineOwnerCabinState.hasNoMineNft,
         mineOwnerCabinState.needSignContractWithLandLord,
@@ -41,7 +44,7 @@ export const MineOwnerMenu: FC<Props> = ({ currentMineOwnerCabinState }) => {
             link: mineManagement,
             icon: <DesktopOutlined />,
             disabled:
-                userMine?.length === 0 &&
+                !userMine &&
                 statusThatDisableManagementButton.includes(
                     currentMineOwnerCabinState
                 ),
@@ -51,7 +54,7 @@ export const MineOwnerMenu: FC<Props> = ({ currentMineOwnerCabinState }) => {
             link: mineOwnerMineCrew,
             icon: <TeamOutlined />,
             disabled:
-                userMine?.length === 0 &&
+                !userMine &&
                 statusThatDisableTeamButton.includes(
                     currentMineOwnerCabinState
                 ),
@@ -61,7 +64,7 @@ export const MineOwnerMenu: FC<Props> = ({ currentMineOwnerCabinState }) => {
             link: mineOwnerStatsAndInfo,
             icon: <ProjectOutlined />,
             disabled:
-                userMine?.length === 0 &&
+                !userMine &&
                 statusThatDisableStatsButton.includes(
                     currentMineOwnerCabinState
                 ),

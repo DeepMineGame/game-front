@@ -1,24 +1,23 @@
 import { createEffect, createStore, forward } from 'effector';
 import { createGate } from 'effector-react';
-import { getMinesEffect, MineDto, searchBy } from 'entities/smartcontract';
+import { getMinesTableData, MineDto, searchBy } from 'entities/smartcontract';
 
-export const MineConsumerGate = createGate<{ searchParam: string }>(
-    'MineConsumerGate'
-);
+export const UserMineGate = createGate<{ searchParam: string }>('UserMineGate');
+
 export const getMinesByOwnerEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
-        return getMinesEffect({
+        return getMinesTableData({
             searchIdentificationType: searchBy.owner,
             searchParam,
         });
     }
 );
-export const userMineStore = createStore<MineDto[] | null>(null).on(
+export const userMineStore = createStore<MineDto[]>([]).on(
     getMinesByOwnerEffect.doneData,
     (_, { rows }) => rows
 );
 
 forward({
-    from: MineConsumerGate.open,
+    from: UserMineGate.open,
     to: getMinesByOwnerEffect,
 });

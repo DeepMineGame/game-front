@@ -1,22 +1,22 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useStore } from 'effector-react';
+import { useGate, useStore } from 'effector-react';
 
-import { KeyValueTable, Title, useInitialStoreEnrich } from 'shared';
-import { AreaRarity, areasStore, minesStore } from 'entities/smartcontract';
+import { KeyValueTable, Title } from 'shared';
+import { AreaRarity, areasStore } from 'entities/smartcontract';
+import { UserMineGate, userMineStore } from '../../userMineModel';
 import styles from './styles.module.scss';
 
-export const MineAreaInfo = () => {
-    useInitialStoreEnrich();
+export const MineAreaInfo: FC<{ accountName: string }> = ({ accountName }) => {
+    useGate(UserMineGate, { searchParam: accountName });
     const { t } = useTranslation();
     const areas = useStore(areasStore);
-    const mines = useStore(minesStore);
+    const mines = useStore(userMineStore);
     const userMine = mines?.[0];
     const userArea = areas?.[0];
-
     const mineInfoData = {
         [t('components.common.mine.title')]: userMine
-            ? `ID ${userMine.area_id}`
+            ? `ID ${userMine.id}`
             : '-',
         [t('pages.contractorStatsAndInfo.mineArea.mineOwner')]:
             userMine?.owner ?? '-',
@@ -41,7 +41,7 @@ export const MineAreaInfo = () => {
     const areaInfoData = {
         [t('components.common.area')]: userArea ? `ID ${userArea.id}` : '-',
         [t('pages.contractorStatsAndInfo.mineArea.landlord')]:
-            'Foxelchanger324',
+            'FAKE USER REPLACE ME',
         [t('pages.contractorStatsAndInfo.mineArea.areaRarity')]: userArea
             ? AreaRarity[userArea.rarity]
             : '-',

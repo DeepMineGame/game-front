@@ -29,7 +29,12 @@ export const MineOwnerPage = () => {
             <div className={styles.overturnLayout}>
                 {chainAccountName && <Surface user={chainAccountName} />}
             </div>
-            <MineOwnerMenu currentMineOwnerCabinState={cabinState} />
+            {chainAccountName && (
+                <MineOwnerMenu
+                    currentMineOwnerCabinState={cabinState}
+                    accountName={chainAccountName}
+                />
+            )}
             {userInfo?.length && !inUserInMineOwnerLocation && (
                 <Travel
                     toLocationId={LOCATION_TO_ID.mine_deck}

@@ -1,6 +1,7 @@
 import {
     Button,
     greenGreen6,
+    Loader,
     sunsetOrange6,
     Title,
     useReloadPage,
@@ -17,10 +18,9 @@ import {
     activatemine,
     deactmine,
     getMinesByOwnerEffect,
-    minesStore,
     MineState,
 } from 'entities/smartcontract';
-import { MineManagementGate } from '../../../models/mineManagement';
+import { MineManagementGate, userMineStore } from '../../../models';
 import { ClaimDME } from '../ClaimDME';
 import { UnsetupMine } from '../UnsetupMine';
 import { activeMineOwnerExecutorContractStore } from '../../../models/unsetupMineModel';
@@ -39,8 +39,8 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
     const reloadPage = useReloadPage();
     const { t } = useTranslation();
     const isMinesLoading = useStore(getMinesByOwnerEffect.pending);
-    const mines = useStore(minesStore);
-    const mine = mines?.[0];
+    const mine = useStore(userMineStore)?.[0];
+    const isMineLoading = useStore(getMinesByOwnerEffect.pending);
     const isMineActive = mine?.state === MineState.activated;
     const statusText = isMineActive
         ? t('components.common.status.active')
@@ -60,7 +60,14 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
         await action();
         return reloadPage();
     };
-    if (mines?.length === 0) {
+    if (isMineLoading) {
+        return (
+            <div className={styles.background}>
+                <Loader centered />
+            </div>
+        );
+    }
+    if (!mine) {
         return (
             <div className={styles.background}>
                 <Title className={styles.title}>

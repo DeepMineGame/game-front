@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { MiningStats, MineAreaInfo } from 'features';
 import { Contract, PageWithTabs, useAccountName } from 'shared';
 import { useStore } from 'effector-react';
+import { Skeleton } from 'antd';
 import {
     contractStore,
     ContractType,
@@ -41,7 +42,9 @@ const useTabs = (userAccountName: string) => {
         },
         {
             id: StatsAndInfoTab.mineAreaInfo,
-            component: MineAreaInfo,
+            component: userAccountName
+                ? () => <MineAreaInfo accountName={userAccountName} />
+                : Skeleton,
             name: t(
                 `pages.contractorStatsAndInfo.${
                     StatsAndInfoTab[StatsAndInfoTab.mineAreaInfo]
