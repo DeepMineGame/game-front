@@ -1,14 +1,13 @@
 import { Page, useAccountName, KeyValueTable } from 'shared';
 import { useTranslation } from 'react-i18next';
 import React from 'react';
-import { Addons, MineControlPanel } from 'features';
+import { Addons, MineControlPanel, userMineStore } from 'features';
 import { useStore } from 'effector-react';
-import { minesStore } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
 export const MineManagementPage = () => {
     const { t } = useTranslation();
-    const mineStore = useStore(minesStore);
+    const mineStore = useStore(userMineStore);
     const mine = mineStore?.[0];
     const chainAccountName = useAccountName();
     return (

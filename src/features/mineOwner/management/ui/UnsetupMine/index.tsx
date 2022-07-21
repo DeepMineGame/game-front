@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import React, { FC } from 'react';
-import { Button } from 'shared';
+import { Button, useReloadPage } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { useNavigate } from 'react-router-dom';
 import { mineOwner } from 'app/router/paths';
@@ -27,6 +27,7 @@ export const UnsetupMine: FC<{
     const userMine = useStore(userMineStore);
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const reloadPage = useReloadPage();
     const terminateContractAction = useSmartContractAction(
         terminateContract(accountName, activeContract?.id!, 0)
     );
@@ -39,7 +40,7 @@ export const UnsetupMine: FC<{
     };
     const onClick = async () => {
         await terminateContractAction();
-        navigate(mineOwner);
+        reloadPage();
     };
 
     return activeContract ? (

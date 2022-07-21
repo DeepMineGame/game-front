@@ -2,7 +2,8 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { MiningStats, MineAreaInfo, MineCrew } from 'features';
-import { Contract, PageWithTabs } from 'shared';
+import { Contract, PageWithTabs, useAccountName } from 'shared';
+import { Skeleton } from 'antd';
 
 enum StatsAndInfoTab {
     miningStats,
@@ -13,6 +14,7 @@ enum StatsAndInfoTab {
 
 const useTabs = () => {
     const { t } = useTranslation();
+    const accountName = useAccountName();
 
     return [
         {
@@ -26,7 +28,7 @@ const useTabs = () => {
         },
         {
             id: StatsAndInfoTab.mineAreaInfo,
-            component: MineAreaInfo,
+            component: accountName ? MineAreaInfo : Skeleton,
             name: t(
                 `pages.contractorStatsAndInfo.${
                     StatsAndInfoTab[StatsAndInfoTab.mineAreaInfo]

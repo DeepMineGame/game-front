@@ -3,19 +3,15 @@ import { createGate } from 'effector-react';
 import compose from 'compose-function';
 import {
     actionsStore,
-    contractStore,
     getActionByUserEffect,
-    getContractEffect,
     getInventoriesEffect,
-    getMinesByOwnerEffect,
     getSmartContractUserEffect,
     inventoriesStore,
-    minesStore,
     smartContractUserStore,
 } from 'entities/smartcontract';
 import {
     checkIfMineSetupWillFinishedInFuture,
-    checkHasActiveContractWithLandlord,
+    checkIsContractInactive,
     checkIsUserLocationOutsideMineFilter,
     hasActiveMineContractFilter,
     hasMineNftFilter,
@@ -24,6 +20,11 @@ import {
     isMineActiveFilter,
     checkMineNotSetup,
 } from '../filters';
+import { getMinesByOwnerEffect, userMineStore } from './currentMine';
+import {
+    getContractEffectByExecutor,
+    mineOwnerLandlordContractForUserStore,
+} from './mineOwnerLandlordContractForUser';
 
 export const MineOwnerCabinGate = createGate<{ searchParam: string }>(
     'MineOwnerCabinGate'
@@ -80,7 +81,7 @@ forward({
         getSmartContractUserEffect,
         getMinesByOwnerEffect,
         getActionByUserEffect,
-        getContractEffect,
+        getContractEffectByExecutor,
     ],
 });
 
@@ -107,9 +108,16 @@ sample({
 
 // Check that has mine contract (contractsFree)
 sample({
-    source: { contract: contractStore, inventory: inventoriesStore },
+    source: {
+        contract: mineOwnerLandlordContractForUserStore,
+        inventory: inventoriesStore,
+    },
     target: setContractsFreeEvent,
-    clock: [setInitialStateEvent, contractStore, inventoriesStore],
+    clock: [
+        setInitialStateEvent,
+        mineOwnerLandlordContractForUserStore,
+        inventoriesStore,
+    ],
     filter: compose(
         ignoreIfInStatus($mineOwnerCabinState, [
             mineOwnerCabinState.hasNoMineNft,
@@ -124,28 +132,34 @@ sample({
 
 // Checks that a contract has been signed with the landlord
 sample({
-    source: contractStore,
+    source: mineOwnerLandlordContractForUserStore,
     target: setNeedSignContractWithLandLord,
-    clock: [setInitialStateEvent, contractStore],
+    clock: [setInitialStateEvent, mineOwnerLandlordContractForUserStore],
     filter: compose(
         ignoreIfInStatus($mineOwnerCabinState, [
             mineOwnerCabinState.hasNoMineNft,
             mineOwnerCabinState.isOutsideFromLocation,
         ]),
-        checkHasActiveContractWithLandlord
+        checkIsContractInactive
     ),
 });
 
 // Checks that mine not setup
 sample({
-    source: minesStore,
+    source: { mineOwnerLandlordContractForUserStore, userMineStore },
     target: needSetupMineEvent,
-    clock: [setInitialStateEvent, contractStore, minesStore],
+    clock: [
+        setInitialStateEvent,
+        mineOwnerLandlordContractForUserStore,
+        userMineStore,
+    ],
     filter: compose(
         ignoreIfInStatus($mineOwnerCabinState, [
             mineOwnerCabinState.hasNoMineNft,
             mineOwnerCabinState.isOutsideFromLocation,
             mineOwnerCabinState.needSignContractWithLandLord,
+            mineOwnerCabinState.isMineSet,
+            mineOwnerCabinState.isMineActive,
         ]),
         checkMineNotSetup
     ),
@@ -167,23 +181,22 @@ sample({
 
 // Check that mine setup finished
 sample({
-    source: minesStore,
+    source: userMineStore,
     target: setIsMineSetEvent,
-    clock: [setInitialStateEvent, minesStore, getMinesByOwnerEffect],
+    clock: [setInitialStateEvent, userMineStore, getMinesByOwnerEffect],
     filter: compose(
         ignoreIfInStatus($mineOwnerCabinState, [
             mineOwnerCabinState.hasNoMineNft,
             mineOwnerCabinState.isOutsideFromLocation,
             mineOwnerCabinState.isMineSetupInProgress,
             mineOwnerCabinState.needSignContractWithLandLord,
-            mineOwnerCabinState.needSetupMine,
         ]),
         hasMinesFilter
     ),
 });
 // Check that mine is active
 sample({
-    source: minesStore,
+    source: userMineStore,
     target: setMineActive,
     clock: [
         getMinesByOwnerEffect,
@@ -197,7 +210,6 @@ sample({
     filter: compose(
         ignoreIfInStatus($mineOwnerCabinState, [
             mineOwnerCabinState.needSignContractWithLandLord,
-            mineOwnerCabinState.needSetupMine,
         ]),
         isMineActiveFilter
     ),

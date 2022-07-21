@@ -3,7 +3,6 @@ import {
     ActionType,
     ContractDto,
     ContractStatus,
-    ContractType,
     LOCATION_TO_ID,
     mineAssetTemplateId,
     MineDto,
@@ -32,18 +31,23 @@ export const hasMineNftFilter = (inventories: UserInventoryType[] | null) => {
 export const checkIsUserLocationOutsideMineFilter = (user: UserDto[] | null) =>
     Boolean(user?.[0]?.location !== LOCATION_TO_ID.mine_deck);
 
-export const checkHasActiveContractWithLandlord = (
-    contracts: ContractDto[] | null
+export const checkIsContractInactive = (
+    contract: ContractDto | null | undefined
 ) => {
-    return !contracts?.filter(
-        ({ type, status }) =>
-            type === ContractType.landlord_mineowner &&
-            status === ContractStatus.active
-    )?.[0];
+    return contract?.status !== ContractStatus.active;
 };
 
-export const checkMineNotSetup = (mines: MineDto[] | null) => {
-    return !mines?.filter(({ state }) => state === MineState.setuped)?.[0];
+export const checkMineNotSetup = ({
+    userMineStore,
+    mineOwnerLandlordContractForUserStore,
+}: {
+    userMineStore: MineDto[] | null;
+    mineOwnerLandlordContractForUserStore: ContractDto | null | undefined;
+}) => {
+    return (
+        mineOwnerLandlordContractForUserStore?.status ===
+            ContractStatus.active && userMineStore === null
+    );
 };
 
 export const checkIfMineSetupWillFinishedInFuture = (
@@ -60,23 +64,14 @@ export const checkIfMineSetupWillFinishedInFuture = (
 
 export const hasActiveMineContractFilter = ({
     contract,
-    inventory,
 }: {
-    contract: ContractDto[] | null;
+    contract: ContractDto | null;
     inventory: UserInventoryType[] | null;
 }) => {
-    const mineAssetIdByTemplateId = inventory?.find(
-        ({ template_id }) => template_id === mineAssetTemplateId
-    )?.asset_id;
-
-    const mineContract = contract?.find(
-        ({ client_asset_id }) =>
-            String(client_asset_id) === mineAssetIdByTemplateId
-    );
-    if (!mineContract) {
+    if (!contract) {
         return false;
     }
-    return mineContract?.status !== ContractStatus.active;
+    return contract?.status !== ContractStatus.active;
 };
 
 export const hasMinesFilter = (mines: MineDto[] | null) =>

@@ -5,20 +5,17 @@ import {
     desktopS,
     useAccountName,
     useMediaQuery,
+    useReloadPage,
 } from 'shared';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createOrder, serviceMarket, warehouse } from 'app/router/paths';
 import { ATOMICHUB_URL } from 'app';
 import { useStore } from 'effector-react';
-import {
-    ContractStatus,
-    contractStore,
-    ContractType,
-    setupMine,
-} from 'entities/smartcontract';
+import { setupMine } from 'entities/smartcontract';
 import { mineOwnerCabinState } from '../../models/mineOwnerState';
 import { useSmartContractAction } from '../../../hooks';
+import { mineOwnerLandlordContractForUserStore } from '../../models';
 
 export function useActionsButton() {
     const [isSetupMineModalVisible, setSetupMineModalVisible] = useState(false);
@@ -27,18 +24,20 @@ export function useActionsButton() {
     const isDesktop = useMediaQuery(desktopS);
     const navigate = useNavigate();
     const accountName = useAccountName();
-    const contracts = useStore(contractStore);
-    const activeMinesContract = contracts?.filter(
-        ({ type, status }) =>
-            type === ContractType.landlord_mineowner &&
-            status === ContractStatus.active
-    );
+    const contract = useStore(mineOwnerLandlordContractForUserStore);
+    const reloadPage = useReloadPage();
+
     const setupMineAction = useSmartContractAction(
         setupMine({
             waxUser: accountName,
-            contractId: activeMinesContract?.[0]?.id || 0,
+            contractId: contract?.id!,
         })
     );
+
+    const setupSignAndReload = async () => {
+        await setupMineAction();
+        reloadPage();
+    };
     return {
         [mineOwnerCabinState.isOutsideFromLocation]: null,
         [mineOwnerCabinState.initial]: (
@@ -95,7 +94,7 @@ export function useActionsButton() {
                     submitText={t('components.common.button.activate')}
                     visible={isSetupMineModalVisible}
                     onCancel={() => setSetupMineModalVisible(false)}
-                    onSubmit={setupMineAction}
+                    onSubmit={setupSignAndReload}
                     title={t('pages.areaManagement.landActivation')}
                 />
                 <Button
