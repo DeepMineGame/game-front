@@ -65,7 +65,7 @@ export const checkIfMineSetupWillFinishedInFuture = (
 export const hasActiveMineContractFilter = ({
     contract,
 }: {
-    contract: ContractDto | null;
+    contract: ContractDto | null | undefined;
     inventory: UserInventoryType[] | null;
 }) => {
     if (!contract) {
