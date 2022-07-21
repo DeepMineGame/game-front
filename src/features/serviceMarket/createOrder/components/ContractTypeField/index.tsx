@@ -31,9 +31,7 @@ export const ContractTypeField: FC<{ form: FormInstance }> = ({ form }) => {
                     },
                     {
                         value: ContractType.mineowner_contractor,
-                        label: t(
-                            'pages.serviceMarket.createOrder.miningContract'
-                        ),
+                        label: t('pages.serviceMarket.miningContract'),
                     },
                 ]}
             />

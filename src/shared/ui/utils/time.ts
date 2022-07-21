@@ -3,6 +3,8 @@ export const MINUTE_IN_SECONDS = 60 * SECOND;
 export const HOUR_IN_SECONDS = 60 * MINUTE_IN_SECONDS;
 export const DAY_IN_SECONDS = 24 * HOUR_IN_SECONDS;
 
+export const msToSeconds = (seconds: number) => seconds / 1000;
+
 const getPadTime = (time: number) => (time > 9 ? time : `0${time}`);
 
 export const getTimeLeft = (seconds: number, showDays?: boolean) => {
@@ -39,6 +41,9 @@ export const secondsToDays = (seconds: number) =>
 
 export const secondsToHour = (seconds: number) =>
     Math.ceil(seconds / HOUR_IN_SECONDS);
+
+export const secondsToMinute = (seconds: number) =>
+    Math.ceil(seconds / MINUTE_IN_SECONDS);
 
 export const toLocaleDate = (
     date: number,

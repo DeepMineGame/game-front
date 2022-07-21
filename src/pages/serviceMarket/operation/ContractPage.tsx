@@ -9,13 +9,14 @@ type Props = { contract: ContractDto; accountName: string };
 export const ContractPage: FC<Props> = ({ contract, accountName }) => {
     const { t } = useTranslation();
 
-    const miningContract = contract.type === ContractType.mineowner_contractor;
+    const isMiningContract =
+        contract.type === ContractType.mineowner_contractor;
 
     return (
         <Page
             headerTitle={t(
-                miningContract
-                    ? 'pages.serviceMarket.miningOrder'
+                isMiningContract
+                    ? 'pages.serviceMarket.miningContract'
                     : 'pages.serviceMarket.mineOperationContract'
             ).toUpperCase()}
         >
