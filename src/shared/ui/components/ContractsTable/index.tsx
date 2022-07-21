@@ -71,7 +71,10 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
                     key: contract.id,
                     reputation: '-',
                     type: contractName[contract.type],
-                    date: toLocaleDate(contract.finishes_at * 1000),
+                    date:
+                        contract.finishes_at === 0
+                            ? '-'
+                            : toLocaleDate(contract.finishes_at * 1000),
                     penalty: contract.penalty_amount,
                     status: statusMap[contract.status],
                 };
