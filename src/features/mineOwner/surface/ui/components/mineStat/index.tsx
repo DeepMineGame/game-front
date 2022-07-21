@@ -15,10 +15,12 @@ export const MineStat = () => {
     const mineOwnerRole = userRoles?.filter(
         ({ role }) => role === UserRoles.mine_owner
     )?.[0];
+
     const feeToClaim = mineOwnerRole?.attrs?.find(
         ({ key }) => key === 'fee_to_claim'
     );
     const userMine = useStore(userMineStore);
+
     useEffect(() => {
         if (isFirstRender) {
             localStorage.setItem(IS_FIRST_VISIT_KEY, 'false');
@@ -31,8 +33,8 @@ export const MineStat = () => {
         <KeyValueTable
             className={styles.table}
             items={{
-                'DME to claim': feeToClaim?.value,
-                'Mine depth': userMine?.[0]?.layer_depth,
+                [t('pages.landLord.cabin.DMEToClaim')]: feeToClaim?.value,
+                [t('pages.mining.mineDepth')]: userMine?.[0]?.layer_depth,
             }}
         />
     );

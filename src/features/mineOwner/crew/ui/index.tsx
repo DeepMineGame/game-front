@@ -1,13 +1,12 @@
 import React, { FC } from 'react';
 import { MineCrewTable, useAccountName, AddItem } from 'shared';
 import { useGate, useStore } from 'effector-react';
-import { minesStore } from 'entities/smartcontract';
-import { MineConsumerGate } from '../../models/currentMine';
+import { MineConsumerGate, userMineStore } from '../../models';
 
 export const MineOwnerCrew: FC = () => {
     const accountName = useAccountName();
     useGate(MineConsumerGate, { searchParam: accountName });
-    const mines = useStore(minesStore);
+    const mines = useStore(userMineStore);
     const activeSlots = mines?.[0]?.contractor_slots.filter(
         (slot) => slot?.contractor
     );
@@ -22,6 +21,7 @@ export const MineOwnerCrew: FC = () => {
     }));
     const mapEmptySlotsToAddButton = mines?.[0]?.contractor_slots
         .filter((slot) => !slot?.contractor)
+        // eslint-disable-next-line react/no-array-index-key
         .map((_, i) => <AddItem key={i} />);
 
     return (

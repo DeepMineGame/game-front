@@ -10,6 +10,7 @@ import {
 import { LeftOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
+import { home } from 'app/router/paths';
 import { SettingMenu, UserAvatarAndDrawer } from 'entities/user';
 import styles from './styles.module.scss';
 
@@ -24,6 +25,7 @@ export const Header: FC<Props> = ({ withBackButton, title, hideLogo }) => {
     const navigate = useNavigate();
     const goToBack = () => navigate(-1);
     const isDesktop = useMediaQuery(desktopS);
+    const navigateToHome = () => navigate(home);
     return (
         <>
             <div className={styles.header}>
@@ -43,11 +45,13 @@ export const Header: FC<Props> = ({ withBackButton, title, hideLogo }) => {
                         </Title>
                     </div>
                 ) : (
-                    <DeepMineLogo
-                        className={classNames(styles.logo, {
-                            [styles.hideLogo]: hideLogo,
-                        })}
-                    />
+                    <div onClick={navigateToHome}>
+                        <DeepMineLogo
+                            className={classNames(styles.logo, {
+                                [styles.hideLogo]: hideLogo,
+                            })}
+                        />
+                    </div>
                 )}
                 {user ? (
                     <UserAvatarAndDrawer user={user} />
