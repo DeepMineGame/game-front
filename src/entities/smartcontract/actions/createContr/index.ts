@@ -1,7 +1,7 @@
+import { DAY_IN_SECONDS } from 'shared';
 import { deepminegame } from '../../constants';
 import { ContractType } from '../../tables';
 
-const SECONDS_IN_DAY = 86400;
 export const createContrFormFields = {
     contractType: 'contract_type' as const,
     isClient: 'is_client' as const,
@@ -52,10 +52,10 @@ export function createContr(data: CreateContrDto) {
                     penalty_amount: data[createContrFormFields.penaltyAmount],
                     deadline_duration:
                         data[createContrFormFields.deadlineDuration] *
-                        SECONDS_IN_DAY,
+                        DAY_IN_SECONDS,
                     contract_duration:
                         data[createContrFormFields.contractDuration] *
-                        SECONDS_IN_DAY,
+                        DAY_IN_SECONDS,
                 },
             },
         ],
