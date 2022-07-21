@@ -7,7 +7,7 @@ export const createContrFormFields = {
     isClient: 'is_client' as const,
     assetId: 'asset_id' as const,
     fee: 'fee_percent' as const,
-    deadlineTime: 'deadline_time' as const,
+    deadlineDuration: 'deadline_duration' as const,
     finishesAt: 'finishes_at' as const,
     daysForPenalty: 'days_for_penalty' as const,
     feeDailyMinAmount: 'fee_daily_min_amount' as const,
@@ -23,7 +23,7 @@ export type CreateContrDto = {
     fee_daily_min_amount: number;
     days_for_penalty: number;
     penalty_amount: number;
-    deadline_time: number;
+    deadline_duration: number;
     finishes_at: number;
 };
 
@@ -50,8 +50,8 @@ export function createContr(data: CreateContrDto) {
                     days_for_penalty:
                         data[createContrFormFields.daysForPenalty],
                     penalty_amount: data[createContrFormFields.penaltyAmount],
-                    deadline_time: addDaysToCurrentDateUnixTime(
-                        data[createContrFormFields.deadlineTime]
+                    deadline_duration: addDaysToCurrentDateUnixTime(
+                        data[createContrFormFields.deadlineDuration]
                     ),
                     finishes_at: addDaysToCurrentDateUnixTime(
                         data[createContrFormFields.finishesAt]
