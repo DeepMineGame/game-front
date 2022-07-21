@@ -8,7 +8,7 @@ export const createContrFormFields = {
     assetId: 'asset_id' as const,
     fee: 'fee_percent' as const,
     deadlineDuration: 'deadline_duration' as const,
-    finishesAt: 'finishes_at' as const,
+    contractDuration: 'contract_duration' as const,
     daysForPenalty: 'days_for_penalty' as const,
     feeDailyMinAmount: 'fee_daily_min_amount' as const,
     penaltyAmount: 'penalty_amount' as const,
@@ -24,7 +24,7 @@ export type CreateContrDto = {
     days_for_penalty: number;
     penalty_amount: number;
     deadline_duration: number;
-    finishes_at: number;
+    contract_duration: number;
 };
 
 export function createContr(data: CreateContrDto) {
@@ -53,8 +53,8 @@ export function createContr(data: CreateContrDto) {
                     deadline_duration: addDaysToCurrentDateUnixTime(
                         data[createContrFormFields.deadlineDuration]
                     ),
-                    finishes_at: addDaysToCurrentDateUnixTime(
-                        data[createContrFormFields.finishesAt]
+                    contract_duration: addDaysToCurrentDateUnixTime(
+                        data[createContrFormFields.contractDuration]
                     ),
                 },
             },
