@@ -1,9 +1,14 @@
 import React, { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { InfoCircleFilled } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 
-import { Button, ExclamationModal, SuccessModal, useAccountName } from 'shared';
+import {
+    Alert,
+    Button,
+    ExclamationModal,
+    SuccessModal,
+    useAccountName,
+} from 'shared';
 import { serviceMarket } from 'app/router/paths';
 import { terminateContract } from 'entities/smartcontract';
 import { useSmartContractAction } from '../../../hooks';
@@ -55,41 +60,44 @@ export const Penalty: FC<Props> = ({ isViolated, contractId, penalty }) => {
     };
 
     return (
-        <div className={styles.penalty}>
-            <InfoCircleFilled />
-            <div className={styles.content}>
-                <div className={styles.description}>
-                    {t(
-                        isViolated
-                            ? 'pages.serviceMarket.contract.penaltyViolatedDescription'
-                            : 'pages.serviceMarket.contract.penaltyTerminatedDescription'
-                    )}
-                </div>
-                <div className={styles.buttons}>
-                    <Button
-                        ghost
-                        className={styles.button}
-                        onClick={() => setIsCollectModalVisible(true)}
-                    >
-                        {t(
-                            isViolated
-                                ? 'pages.serviceMarket.contract.collectPenaltyAndBreak'
-                                : 'pages.serviceMarket.contract.collectPenalty'
-                        )}
-                    </Button>
-                    <Button
-                        ghost
-                        className={styles.button}
-                        onClick={() => setIsNoCollectModalVisible(true)}
-                    >
-                        {t(
-                            isViolated
-                                ? 'pages.serviceMarket.contract.noCollectPenaltyAndBreak'
-                                : 'pages.serviceMarket.contract.noCollectPenalty'
-                        )}
-                    </Button>
-                </div>
-            </div>
+        <>
+            <Alert
+                className={styles.penalty}
+                message={t(
+                    isViolated
+                        ? 'pages.serviceMarket.contract.penaltyViolatedDescription'
+                        : 'pages.serviceMarket.contract.penaltyTerminatedDescription'
+                )}
+                action={
+                    <div className={styles.buttons}>
+                        <Button
+                            ghost
+                            type="primary"
+                            onClick={() => setIsCollectModalVisible(true)}
+                        >
+                            {t(
+                                isViolated
+                                    ? 'pages.serviceMarket.contract.collectPenaltyAndBreak'
+                                    : 'pages.serviceMarket.contract.collectPenalty'
+                            )}
+                        </Button>
+                        <Button
+                            ghost
+                            type="primary"
+                            onClick={() => setIsNoCollectModalVisible(true)}
+                        >
+                            {t(
+                                isViolated
+                                    ? 'pages.serviceMarket.contract.noCollectPenaltyAndBreak'
+                                    : 'pages.serviceMarket.contract.noCollectPenalty'
+                            )}
+                        </Button>
+                    </div>
+                }
+                type="info"
+                showIcon
+            />
+
             <ExclamationModal
                 visible={isCollectModalVisible}
                 onSubmit={handlePenaltyClick}
@@ -121,6 +129,6 @@ export const Penalty: FC<Props> = ({ isViolated, contractId, penalty }) => {
                 )}
                 submitText={t('pages.serviceMarket.contract.noCollect')}
             />
-        </div>
+        </>
     );
 };

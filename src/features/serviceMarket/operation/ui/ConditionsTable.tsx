@@ -16,7 +16,7 @@ const ConditionTable: FC<Props> = ({ contract }) => {
         [t('pages.serviceMarket.contract.operationStart')]: contract.start_time
             ? `${Math.floor(
                   msToSeconds(workDuration) / DAY_IN_SECONDS
-              )}d ${secondsToTime(workDuration)}`
+              )}d ${secondsToTime(msToSeconds(workDuration))}`
             : '-',
         [t('pages.serviceMarket.contract.penalty')]: `${
             contract.penalty_amount
