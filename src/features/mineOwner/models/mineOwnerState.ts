@@ -190,6 +190,7 @@ sample({
             mineOwnerCabinState.isOutsideFromLocation,
             mineOwnerCabinState.isMineSetupInProgress,
             mineOwnerCabinState.needSignContractWithLandLord,
+            mineOwnerCabinState.needSetupMine,
         ]),
         hasMinesFilter
     ),

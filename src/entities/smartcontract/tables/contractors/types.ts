@@ -1,3 +1,5 @@
+import { RarityType } from '../inventories';
+
 export type ContractorDto = {
     owner: string;
     area_id: string;
@@ -10,5 +12,11 @@ export type ContractorDto = {
     real_amount_to_claim: number;
     mining_finish_time: number;
     mining_in_pr: number;
-    equip_slots: string[];
+    equip_slots: {
+        asset_id: string;
+        equip_type: number;
+        level: number;
+        rarity: RarityType;
+        equip_time: number;
+    }[];
 };
