@@ -15,11 +15,11 @@ export const GeneralConditionStep: FC<{
     const { t } = useTranslation();
     const feeFieldValue = useWatch(createContrFormFields.fee, form);
     const finishesAtFieldValue = useWatch(
-        createContrFormFields.finishesAt,
+        createContrFormFields.contractDuration,
         form
     );
     const deadlineTimeFieldValue = useWatch(
-        createContrFormFields.deadlineTime,
+        createContrFormFields.deadlineDuration,
         form
     );
     const hasAllValues =
@@ -44,7 +44,7 @@ export const GeneralConditionStep: FC<{
                     <Input placeholder="%" />
                 </Form.Item>
                 <Form.Item
-                    name={createContrFormFields.finishesAt}
+                    name={createContrFormFields.contractDuration}
                     label={t('components.common.duration')}
                     className={cn(localStyles.finisAtSelect, styles.formField)}
                 >
@@ -55,7 +55,7 @@ export const GeneralConditionStep: FC<{
                 </Form.Item>
             </InputA.Group>
             <Form.Item
-                name={createContrFormFields.deadlineTime}
+                name={createContrFormFields.deadlineDuration}
                 label={t('pages.serviceMarket.createOrder.startOfOperation')}
                 className={cn(localStyles.deadLineField, styles.formField)}
                 tooltip={

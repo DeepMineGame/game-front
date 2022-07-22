@@ -1,4 +1,4 @@
-import { addDaysToCurrentDateUnixTime } from 'shared';
+import { DAY_IN_SECONDS } from 'shared';
 import { deepminegame } from '../../constants';
 import { ContractType } from '../../tables';
 
@@ -7,8 +7,8 @@ export const createContrFormFields = {
     isClient: 'is_client' as const,
     assetId: 'asset_id' as const,
     fee: 'fee_percent' as const,
-    deadlineTime: 'deadline_time' as const,
-    finishesAt: 'finishes_at' as const,
+    deadlineDuration: 'deadline_duration' as const,
+    contractDuration: 'contract_duration' as const,
     daysForPenalty: 'days_for_penalty' as const,
     feeDailyMinAmount: 'fee_daily_min_amount' as const,
     penaltyAmount: 'penalty_amount' as const,
@@ -23,8 +23,8 @@ export type CreateContrDto = {
     fee_daily_min_amount: number;
     days_for_penalty: number;
     penalty_amount: number;
-    deadline_time: number;
-    finishes_at: number;
+    deadline_duration: number;
+    contract_duration: number;
 };
 
 export function createContr(data: CreateContrDto) {
@@ -50,12 +50,12 @@ export function createContr(data: CreateContrDto) {
                     days_for_penalty:
                         data[createContrFormFields.daysForPenalty],
                     penalty_amount: data[createContrFormFields.penaltyAmount],
-                    deadline_time: addDaysToCurrentDateUnixTime(
-                        data[createContrFormFields.deadlineTime]
-                    ),
-                    finishes_at: addDaysToCurrentDateUnixTime(
-                        data[createContrFormFields.finishesAt]
-                    ),
+                    deadline_duration:
+                        data[createContrFormFields.deadlineDuration] *
+                        DAY_IN_SECONDS,
+                    contract_duration:
+                        data[createContrFormFields.contractDuration] *
+                        DAY_IN_SECONDS,
                 },
             },
         ],

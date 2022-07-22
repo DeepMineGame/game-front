@@ -1,6 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { desktopS, useMediaQuery } from 'shared';
+import React from 'react';
 import { mineOwnerCabinState } from '../../models/mineOwnerState';
+import { MineStat } from '../ui/components/mineStat';
 
 export function useDescriptions() {
     const { t } = useTranslation();
@@ -31,8 +33,10 @@ export function useDescriptions() {
         [mineOwnerCabinState.isMineSetupInProgress]: t(
             'features.mineOwner.progress'
         ),
-        [mineOwnerCabinState.isMineActive]: isDesktop
-            ? t('features.mineOwner.mineIsActiveDescription')
-            : t('features.mineOwner.mineIsActiveDescriptionMobile'),
+        [mineOwnerCabinState.isMineActive]: isDesktop ? (
+            <MineStat />
+        ) : (
+            t('features.mineOwner.mineIsActiveDescriptionMobile')
+        ),
     };
 }
