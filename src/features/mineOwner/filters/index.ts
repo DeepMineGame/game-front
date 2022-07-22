@@ -34,6 +34,9 @@ export const checkIsUserLocationOutsideMineFilter = (user: UserDto[] | null) =>
 export const checkIsContractInactive = (
     contract: ContractDto | null | undefined
 ) => {
+    if (contract === null) {
+        return false;
+    }
     return contract?.status !== ContractStatus.active;
 };
 
