@@ -141,9 +141,7 @@ export const MiningAndClaimButton: FC<Props> = ({
                     >
                         <CheckCircleOutlined className={styles.icon} />
                         <Title level={3}>
-                            {t(
-                                'components.common.modals.yourDMEHasBeenClaimed'
-                            )}
+                            {t('components.common.yourDMEHasBeenClaimed')}
                         </Title>
                     </Space>
                 ) : (

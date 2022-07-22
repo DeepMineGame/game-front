@@ -46,7 +46,8 @@ export const checkMineNotSetup = ({
 }) => {
     return (
         mineOwnerLandlordContractForUserStore?.status ===
-            ContractStatus.active && userMineStore === null
+            ContractStatus.active &&
+        (userMineStore === null || userMineStore[0].state !== MineState.setuped)
     );
 };
 

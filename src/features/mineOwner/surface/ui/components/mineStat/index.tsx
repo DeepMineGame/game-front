@@ -37,7 +37,8 @@ export const MineStat = () => {
             items={{
                 [t('pages.landLord.cabin.DMEToClaim')]:
                     feeToClaim?.value ?? '-',
-                [t('pages.mining.mineDepth')]: userMine?.[0]?.layer_depth,
+                [t('pages.mining.mineDepth')]:
+                    userMine?.[0]?.layer_depth ?? '-',
             }}
         />
     );

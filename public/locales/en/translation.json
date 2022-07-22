@@ -456,7 +456,8 @@
         "petobot": "Petobot",
         "modules": "Modules",
         "unsetup": "Unsetup",
-        "abandon": "Abandon mine"
+        "abandon": "Abandon mine",
+        "terminateContractorsContract": "Terminate contract with contractors first"
       }
     },
     "actions": {

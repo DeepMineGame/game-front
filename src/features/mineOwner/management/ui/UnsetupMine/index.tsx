@@ -4,6 +4,7 @@ import { Button, useReloadPage } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { useNavigate } from 'react-router-dom';
 import { mineOwner } from 'app/router/paths';
+import { Tooltip } from 'antd';
 import {
     ContractDto,
     terminateContract,
@@ -54,14 +55,22 @@ export const UnsetupMine: FC<{
             {t('features.mineOwner.management.unsetup')}
         </Button>
     ) : (
-        <Button
-            disabled={Boolean(contractorsContracts?.length)}
-            ghost
-            danger
-            className={styles.wideButton}
-            onClick={onAbandonClick}
+        <Tooltip
+            overlay={t(
+                'features.mineOwner.management.terminateContractorsContract'
+            )}
         >
-            {t('features.mineOwner.management.abandon')}
-        </Button>
+            <div>
+                <Button
+                    disabled={Boolean(contractorsContracts?.length)}
+                    ghost
+                    danger
+                    className={styles.wideButton}
+                    onClick={onAbandonClick}
+                >
+                    {t('features.mineOwner.management.abandon')}
+                </Button>
+            </div>
+        </Tooltip>
     );
 };
