@@ -134,7 +134,11 @@ sample({
 sample({
     source: mineOwnerLandlordContractForUserStore,
     target: setNeedSignContractWithLandLord,
-    clock: [setInitialStateEvent, mineOwnerLandlordContractForUserStore],
+    clock: [
+        setInitialStateEvent,
+        mineOwnerLandlordContractForUserStore,
+        getContractEffectByExecutor,
+    ],
     filter: compose(
         ignoreIfInStatus($mineOwnerCabinState, [
             mineOwnerCabinState.hasNoMineNft,
