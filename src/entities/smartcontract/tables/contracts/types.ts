@@ -38,6 +38,8 @@ export type ContractDto = {
     start_time: number;
     deadline_time: number;
     term_time: number;
+    deadline_duration: number;
+    contract_duration: number;
     term_initiator: string;
     finishes_at: number;
     status: ContractStatus;

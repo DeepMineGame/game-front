@@ -1,12 +1,19 @@
 @import 'src/shared';
 
 .alert {
+    flex-wrap: wrap;
     padding: 11px 16px;
 
     :global {
         .ant-alert-icon {
             align-self: flex-start;
             padding-top: 5px;
+        }
+
+        .ant-alert-action {
+            width: 100%;
+            margin-top: 12px;
+            margin-left: 20px;
         }
     }
 }

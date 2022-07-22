@@ -391,6 +391,8 @@
         "terminateContract": "Terminate the contract",
         "youTerminated": "You terminated the contract prematurely.<br/> The counterparty might collect the penalty.",
         "youReceived": "You received {{amount}} DME",
+        "completeContract": "Complete the contract",
+        "completeContractDescription": "The contract has successfully completed. Please confirm this by clicking the button below.",
         "terminateModal": {
           "title": "Contract termination",
           "submit": "Terminate",

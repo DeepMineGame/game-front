@@ -37,7 +37,7 @@ const GeneralDataTable: FC<Props> = ({ contract }) => {
             contract.create_time * 1000
         ),
         [t('components.common.duration')]: `${secondsToDays(
-            contract.finishes_at - contract.create_time
+            contract.contract_duration
         )} ${t('components.common.days').toLowerCase()}`,
     };
 
