@@ -20,6 +20,7 @@ import {
     CreateOrderPage,
     LandlordStatsAndInfoPage,
     OperationPage,
+    NftPreviewPage,
 } from 'pages';
 
 import {
@@ -45,6 +46,7 @@ import {
     createOrder,
     serviceMarketOrder,
     landLordStats,
+    inventoryItemPreview,
 } from './paths';
 
 const IntroPage = React.lazy(async () => ({
@@ -207,6 +209,13 @@ export const routes: AppRoute[] = [
         forLoggedIn: true,
         forAdmin: false,
         titleTag: 'Create order — DeepMine',
+    },
+    {
+        path: inventoryItemPreview,
+        Component: NftPreviewPage,
+        forLoggedIn: true,
+        forAdmin: false,
+        titleTag: 'Card preview — DeepMine',
     },
 ];
 

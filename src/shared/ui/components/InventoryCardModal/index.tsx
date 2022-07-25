@@ -16,7 +16,7 @@ import styles from './styles.module.scss';
 
 type InventoryCardModalProps = ModalProps & {
     card: UserInventoryType;
-    onSelect: (card: UserInventoryType) => void;
+    onSelect?: (card: UserInventoryType) => void;
 };
 
 export const InventoryCardModal: FC<InventoryCardModalProps> = ({
@@ -31,7 +31,9 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     const isDesktop = useMediaQuery(desktopS);
 
     const handleSelect = (e: React.MouseEvent<HTMLElement>) => {
-        onSelect(card);
+        if (onSelect) {
+            onSelect(card);
+        }
         if (props.onCancel) {
             props.onCancel(e);
         }
@@ -62,9 +64,11 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                         src={getImagePath(card.template_id)}
                         alt="nft-equipment-card"
                     />
-                    <div className={styles.select} onClick={handleSelect}>
-                        {t('pages.equipmentSet.cardModal.select')}
-                    </div>
+                    {onSelect && (
+                        <div className={styles.select} onClick={handleSelect}>
+                            {t('pages.equipmentSet.cardModal.select')}
+                        </div>
+                    )}
                 </div>
                 <div className={styles.infoContainer}>
                     <div className={styles.title}>{cardData?.data.name}</div>
