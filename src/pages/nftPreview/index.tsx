@@ -12,7 +12,7 @@ import {
 export const NftPreviewPage = () => {
     const { assetId } = useParams();
     const navigate = useNavigate();
-    const [fetchedCard, serFetchedCard] = useState<UserInventoryType | null>(
+    const [fetchedCard, setFetchedCard] = useState<UserInventoryType | null>(
         null
     );
     const goBackButton = () => navigate(-1);
@@ -22,7 +22,7 @@ export const NftPreviewPage = () => {
             inventoryTableDataConfig({
                 searchParam: assetId,
                 searchIdentificationType: SEARCH_BY.inventoryId,
-            }).then(({ rows }) => serFetchedCard(rows?.[0]));
+            }).then(({ rows }) => setFetchedCard(rows?.[0]));
         }
     }, [assetId]);
 
