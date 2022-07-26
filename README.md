@@ -38,8 +38,15 @@ In the project directory, you can run:
 
 ### `npm start`
 
+For correct local development startup you should add host mapping in your system.
+
+At linux/mac add row to `/etc/hosts`:
+```
+127.0.0.1   local.deepmine.world
+```
+
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [https://local.deepmine.world:3000](https://local.deepmine.world:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
