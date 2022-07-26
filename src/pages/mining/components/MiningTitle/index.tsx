@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import {
     desktopS,
     getTimeLeftFromUtc,
-    isUtcDateExpired,
     Title,
     useMediaQuery,
     useTick,
@@ -30,7 +29,7 @@ export const MiningTitle: FC<Props> = memo(
             [ActionState.idle]: undefined,
         };
 
-        const isFinished = isUtcDateExpired(action.finishes_at);
+        const isFinished = Date.now() > action.finishes_at * 1000;
 
         useEffect(() => {
             setIsMiningFinished(isFinished);

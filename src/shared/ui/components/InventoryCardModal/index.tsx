@@ -31,9 +31,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     const isDesktop = useMediaQuery(desktopS);
 
     const handleSelect = (e: React.MouseEvent<HTMLElement>) => {
-        if (onSelect) {
-            onSelect(card);
-        }
+        onSelect?.(card);
         if (props.onCancel) {
             props.onCancel(e);
         }
