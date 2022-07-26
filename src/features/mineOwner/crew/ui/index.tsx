@@ -26,7 +26,9 @@ export const MineOwnerCrew: FC = () => {
 
     return (
         <>
-            <MineCrewTable data={mapSlotToTableDate} />
+            {Boolean(activeSlots?.length) && (
+                <MineCrewTable data={mapSlotToTableDate} />
+            )}
             {mapEmptySlotsToAddButton}
         </>
     );

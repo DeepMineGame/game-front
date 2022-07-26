@@ -29,6 +29,7 @@ export const UnsetupMine: FC<{
     const { t } = useTranslation();
     const navigate = useNavigate();
     const reloadPage = useReloadPage();
+    const isDisabled = Boolean(contractorsContracts?.length);
     const terminateContractAction = useSmartContractAction(
         terminateContract(accountName, activeContract?.id!, 0)
     );
@@ -56,13 +57,17 @@ export const UnsetupMine: FC<{
         </Button>
     ) : (
         <Tooltip
-            overlay={t(
-                'features.mineOwner.management.terminateContractorsContract'
-            )}
+            overlay={
+                isDisabled
+                    ? t(
+                          'features.mineOwner.management.terminateContractorsContract'
+                      )
+                    : ''
+            }
         >
             <div>
                 <Button
-                    disabled={Boolean(contractorsContracts?.length)}
+                    disabled={isDisabled}
                     ghost
                     danger
                     className={styles.wideButton}
