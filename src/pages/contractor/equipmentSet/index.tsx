@@ -5,6 +5,7 @@ import {
     useTableData,
     useAccountName,
     InventoryCardModal,
+    useReloadPage,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
@@ -15,7 +16,6 @@ import {
     getContractorsEffect,
     getContractsNameConfig,
     getInventoryConfig,
-    ID_TO_INVENTORY,
     installEquipment,
     InventoryNameType,
     miningEquipmentNames,
@@ -29,14 +29,12 @@ import { EquipmentCards } from './components/EquipmentCards';
 
 export const EquipmentSetPage: FC = () => {
     const { t } = useTranslation();
+    const reloadPage = useReloadPage();
     const accountName = useAccountName();
     const [isInventoryVisible, setIsInventoryVisible] = useState(false);
     const [isInventoryCardVisible, setIsInventoryCardVisible] = useState(false);
     const [selectedInventoryModalCard, setSelectedInventoryModalCard] =
         useState<UserInventoryType | undefined>(undefined);
-    const [needUpdate, setNeedUpdate] = useState<boolean | undefined>(
-        undefined
-    );
     const [selectedEquipment, setSelectedEquipment] = useState(
         {} as Record<InventoryNameType, UserInventoryType> | {}
     );
@@ -48,15 +46,13 @@ export const EquipmentSetPage: FC = () => {
 
     const contractors = useStore(contractorsStore);
     useEffect(() => {
-        if (accountName && needUpdate !== false) {
+        if (accountName) {
             getContractorsEffect({ searchParam: accountName });
         }
-    }, [accountName, needUpdate]);
+    }, [accountName]);
 
-    const { data: userInventory } = useTableData<UserInventoryType>(
-        getInventoryConfig,
-        needUpdate
-    );
+    const { data: userInventory } =
+        useTableData<UserInventoryType>(getInventoryConfig);
     const { data: userContracts } = useTableData<ContractDto>(
         getContractsNameConfig
     );
@@ -98,7 +94,6 @@ export const EquipmentSetPage: FC = () => {
         installedEquipment.length === miningEquipmentNames.length;
 
     const handleInstallEquipment = async () => {
-        setNeedUpdate(false);
         const notActivatedEquipmentIds = notInstalledEquipment
             .map(([, equipment]) => equipment?.asset_id)
             .filter((v) => v) as string[];
@@ -110,38 +105,28 @@ export const EquipmentSetPage: FC = () => {
                     items: notActivatedEquipmentIds,
                 })
             );
-            setNeedUpdate(true);
         }
+        return reloadPage();
     };
 
     const handleRemoveAllEquipment = async () => {
         await callAction(
             uninstallEquipment({
                 waxUser: accountName,
-                contractId,
                 items: assetIds,
             })
         );
-        setSelectedEquipment({});
+        reloadPage();
     };
 
     const handleRemoveEquipment = async (inventory: UserInventoryType) => {
-        setNeedUpdate(false);
         await callAction(
             uninstallEquipment({
                 waxUser: accountName,
-                contractId,
                 items: [inventory.asset_id],
             })
         );
-
-        const inventoryName = ID_TO_INVENTORY[inventory.template_id];
-
-        setSelectedEquipment({
-            ...selectedEquipment,
-            [inventoryName]: undefined,
-        });
-        setNeedUpdate(true);
+        reloadPage();
     };
 
     const openInventoryModal = (name: InventoryNameType) => {

@@ -4,6 +4,7 @@ import { useStore } from 'effector-react';
 import { Col, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { findEquipmentByName } from 'features';
+import { useNavigate } from 'react-router-dom';
 import { inventoriesStore, miningEquipmentNames } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
@@ -20,6 +21,7 @@ export const Equipment = () => {
     const subTitleLevel = isDesktop ? 3 : 4;
     const gutter = isDesktop ? 80 : 16;
     const { t } = useTranslation();
+    const navigate = useNavigate();
 
     return (
         <>
@@ -41,6 +43,11 @@ export const Equipment = () => {
                                 key={inventoryItem.template_id}
                                 templateId={inventoryItem.template_id}
                                 status="installed"
+                                onClick={() =>
+                                    navigate(
+                                        `/inventory/${inventoryItem.asset_id}`
+                                    )
+                                }
                             />
                         )
                 )}

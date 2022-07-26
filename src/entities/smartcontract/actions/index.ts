@@ -81,9 +81,11 @@ export const installEquipment = ({
 
 export const uninstallEquipment = ({
     waxUser,
-    contractId,
     items,
-}: InstallEquipmentArgsType) => {
+}: {
+    waxUser: string;
+    items: string[];
+}) => {
     return {
         actions: [
             {
@@ -97,7 +99,6 @@ export const uninstallEquipment = ({
                 ],
                 data: {
                     wax_user: waxUser,
-                    contract_id: contractId,
                     items,
                 },
             },

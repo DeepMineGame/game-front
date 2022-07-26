@@ -10,3 +10,4 @@ export * from './hive';
 export * from './pageNotFound';
 export * from './warehouse';
 export * from './serviceMarket';
+export * from './nftPreview';
