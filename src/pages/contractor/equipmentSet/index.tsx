@@ -113,7 +113,6 @@ export const EquipmentSetPage: FC = () => {
         await callAction(
             uninstallEquipment({
                 waxUser: accountName,
-                contractId,
                 items: assetIds,
             })
         );
@@ -124,7 +123,6 @@ export const EquipmentSetPage: FC = () => {
         await callAction(
             uninstallEquipment({
                 waxUser: accountName,
-                contractId,
                 items: [inventory.asset_id],
             })
         );
