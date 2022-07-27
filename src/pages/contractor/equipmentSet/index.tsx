@@ -13,11 +13,14 @@ import { useSmartContractActionDynamic, findEquipmentByName } from 'features';
 import {
     ContractDto,
     contractorsStore,
+    ContractStatus,
+    ContractType,
     getContractorsEffect,
     getContractsNameConfig,
     getInventoryConfig,
     installEquipment,
     InventoryNameType,
+    mapSearchParamForIndexPositionToFindContracts,
     miningEquipmentNames,
     uninstallEquipment,
     UserInventoryType,
@@ -53,10 +56,19 @@ export const EquipmentSetPage: FC = () => {
 
     const { data: userInventory } =
         useTableData<UserInventoryType>(getInventoryConfig);
-    const { data: userContracts } = useTableData<ContractDto>(
-        getContractsNameConfig
+    const { data: userContracts } = useTableData<ContractDto>(() =>
+        getContractsNameConfig(
+            accountName,
+            mapSearchParamForIndexPositionToFindContracts.executorId,
+            10000
+        )
     );
-    const contractId = userContracts?.[0]?.id ?? 0;
+    const contractId = userContracts.find(
+        ({ status, type, executor }) =>
+            type === ContractType.mineowner_contractor &&
+            executor === accountName &&
+            status === ContractStatus.active
+    )?.id;
 
     useEffect(() => {
         const equipmentSlots = contractors?.[0]?.equip_slots ?? [];
@@ -101,7 +113,7 @@ export const EquipmentSetPage: FC = () => {
             await callAction(
                 installEquipment({
                     waxUser: accountName,
-                    contractId,
+                    contractId: contractId!,
                     items: notActivatedEquipmentIds,
                 })
             );

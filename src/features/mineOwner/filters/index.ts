@@ -47,12 +47,12 @@ export const checkMineNotSetup = ({
     userMineStore: MineDto[] | null;
     mineOwnerLandlordContractForUserStore: ContractDto | null | undefined;
 }) => {
-    return (
-        mineOwnerLandlordContractForUserStore?.status ===
-            ContractStatus.active &&
-        (userMineStore === null ||
-            userMineStore?.[0]?.state !== MineState.setuped)
-    );
+    const hasActiveContract =
+        mineOwnerLandlordContractForUserStore?.status === ContractStatus.active;
+    const isMineEmpty = userMineStore === null;
+    const isMineNotSetuped = userMineStore?.[0]?.state !== MineState.setuped;
+
+    return hasActiveContract && (isMineEmpty || isMineNotSetuped);
 };
 
 export const checkIfMineSetupWillFinishedInFuture = (

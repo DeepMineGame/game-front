@@ -10,7 +10,12 @@ import {
 import { useNavigate } from 'react-router-dom';
 import * as PATHS from 'app/router/paths';
 import cn from 'classnames';
-import { ContractorMenu, ContractorMenuItems, Travel } from 'features';
+import {
+    ContractorMenu,
+    ContractorMenuItems,
+    findEquipmentByName,
+    Travel,
+} from 'features';
 import {
     ContractDto,
     ContractStatus,
@@ -19,7 +24,10 @@ import {
     getHistoryConfig,
     getInventoryConfig,
     getUserConfig,
+    InUseType,
     LOCATION_TO_ID,
+    mapSearchParamForIndexPositionToFindContracts,
+    miningEquipmentNames,
     UserHistoryType,
     UserInfoType,
     UserInventoryType,
@@ -39,13 +47,27 @@ export const ContractorCabin = () => {
     const isBgWidthHidden = width > height * bgRatio;
 
     const { data: userInfo } = useTableData<UserInfoType>(getUserConfig);
-    const { data: userContracts } = useTableData<ContractDto>(
-        getContractsNameConfig
+    const { data: userContracts } = useTableData<ContractDto>((accountName) =>
+        getContractsNameConfig(
+            accountName,
+            mapSearchParamForIndexPositionToFindContracts.executorId,
+            10000
+        )
     );
     const { data: userInventory } =
         useTableData<UserInventoryType>(getInventoryConfig);
     const { data: userHistory } =
         useTableData<UserHistoryType>(getHistoryConfig);
+
+    const installedMiningEquipment = Object.fromEntries(
+        miningEquipmentNames.map((name) => [
+            name,
+            findEquipmentByName(userInventory || [], name),
+        ])
+    );
+    const hasInstalledEquipment = Object.values(installedMiningEquipment)?.some(
+        (item) => item?.in_use === InUseType.inUse
+    );
 
     const mineOwnerContracts = userContracts.filter(
         ({ type, executor, status: contractStatus }) =>
@@ -53,7 +75,6 @@ export const ContractorCabin = () => {
             executor === userInfo[0]?.owner &&
             contractStatus === ContractStatus.active
     );
-
     const hasPhysicalShift =
         userInfo.length > 0 && userInfo[0].location === LOCATION_TO_ID.mine;
 
@@ -92,7 +113,6 @@ export const ContractorCabin = () => {
 
         return undefined;
     };
-
     return (
         <div
             className={cn(styles.cabinBackground, {
@@ -131,7 +151,9 @@ export const ContractorCabin = () => {
                         [ContractorMenuItems.MiningDeck]:
                             status < CABIN_STATUS.ready,
                         [ContractorMenuItems.Equipment]:
-                            status < CABIN_STATUS.setup || !hasPhysicalShift,
+                            (!hasInstalledEquipment &&
+                                status < CABIN_STATUS.setup) ||
+                            !hasPhysicalShift,
                     },
                     callbacks: {
                         [ContractorMenuItems.InfoPanel]: () =>

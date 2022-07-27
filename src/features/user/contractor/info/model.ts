@@ -5,7 +5,7 @@ import {
     AreasDto,
     ContractorDto,
     getAreasEffect,
-    getContractorsConfig,
+    getContractorsTableData,
     getContractorsEffect,
     getMinesEffect,
     inventoryTableDataConfig,
@@ -20,7 +20,7 @@ export const ContractorGate = createGate<{
 
 const getContractorDataEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) =>
-        getContractorsConfig({ searchParam })
+        getContractorsTableData({ searchParam })
 );
 const getMineEffect = createEffect(
     async (contractorDto: ContractorDto | null) =>

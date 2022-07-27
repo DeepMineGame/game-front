@@ -10,7 +10,7 @@ export enum ContractorsSearchType {
     mineId,
 }
 
-export const getContractorsConfig = ({
+export const getContractorsTableData = ({
     searchParam,
     searchType = ContractorsSearchType.owner,
 }: {
@@ -35,7 +35,7 @@ export const getContractorsEffect = createEffect(
     }: {
         searchParam: string;
         searchType?: ContractorsSearchType;
-    }) => getContractorsConfig({ searchParam, searchType })
+    }) => getContractorsTableData({ searchParam, searchType })
 );
 
 export const contractorsStore = createStore<ContractorDto[] | null>(null).on(

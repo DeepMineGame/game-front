@@ -1,64 +1,57 @@
-import React, { FC, useState } from 'react';
+import React, { FC, memo, useState } from 'react';
 import {
     Page,
     Title,
     Plugin,
     useMediaQuery,
     desktopS,
-    getTimeLeft,
     neutral4,
-    useInitialStoreEnrich,
+    useAccountName,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { Col, Row, Skeleton, Space, Tooltip } from 'antd';
 import { useStore } from 'effector-react';
 
 import {
+    getMineByAssetEffect,
+    MiningAndClaimButton,
+    currentMineStore,
     actionsStore,
-    getActionEffect,
-    ActionType,
-    getContractEffect,
-    minesStore,
-    getMinesEffect,
-} from 'entities/smartcontract';
+    getActionsForUserEffect,
+    getContractByUserEffect,
+    estimatesMiningTimeStore,
+} from 'features';
+import { ActionType } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 import { MiningTitle } from './components/MiningTitle';
-import { MiningAndClaimButton } from './components/MiningButton';
 import { MineStatus } from './components/MineStatus';
 import { Equipment } from './components/Equipment';
 
-export const MiningPage: FC = () => {
-    useInitialStoreEnrich();
+export const MiningPage: FC = memo(() => {
+    const [isMiningFinished, setIsMiningFinished] = useState(true);
+
+    const accountName = useAccountName();
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
     const subTitleLevel = isDesktop ? 3 : 4;
     const gutter = isDesktop ? 80 : 16;
 
     const actions = useStore(actionsStore);
+    const mineStore = useStore(currentMineStore);
+    const estTime = useStore(estimatesMiningTimeStore);
+
+    const isContractsLoading = useStore(getContractByUserEffect.pending);
+    const isActionsLoading = useStore(getActionsForUserEffect.pending);
+    const isMineStoreLoading = useStore(getMineByAssetEffect.pending);
+    const isLoading = isActionsLoading || isContractsLoading;
+
     const mineActions = actions?.filter(({ type }) => type === ActionType.mine);
-    const lastMineAction = mineActions && mineActions.reverse()?.[0];
-
-    const isContractsLoading = useStore(getContractEffect.pending);
-    const isActionsLoading = useStore(getActionEffect.pending);
-    const mineStore = useStore(minesStore);
-    const isMineStoreLoading = useStore(getMinesEffect.pending);
-    const [isMiningFinished, setIsMiningFinished] = useState(true);
-
-    const estMiningTime =
-        lastMineAction &&
-        lastMineAction?.attrs?.filter(
-            ({ key }) => key === 'est_mining_time'
-        )[0];
-
+    const lastMineAction = mineActions?.reverse()?.[0];
     const estDmeAmount =
         lastMineAction &&
-        lastMineAction?.attrs?.filter(({ key }) => key === 'est_dme_amount')[0]
+        lastMineAction?.attrs?.find(({ key }) => key === 'est_dme_amount')
             ?.value;
 
-    const formatEstimateMineTime =
-        estMiningTime && getTimeLeft(estMiningTime.value, true);
-
-    const isLoading = isActionsLoading || isContractsLoading;
     return (
         <Page headerTitle={t('pages.mining.mining')}>
             {lastMineAction ? (
@@ -87,27 +80,19 @@ export const MiningPage: FC = () => {
                                 <div>{mineStore[0]?.layer_depth}</div>
                             </div>
                         ) : null}
-                        {lastMineAction && (
-                            <>
-                                {formatEstimateMineTime && (
-                                    <div className={styles.line}>
-                                        <div>
-                                            {t(
-                                                'pages.mining.estimatesMiningTime'
-                                            )}
-                                        </div>
-                                        <div>{formatEstimateMineTime}</div>
-                                    </div>
-                                )}
-                                {estDmeAmount && (
-                                    <div className={styles.line}>
-                                        <div>
-                                            {t('pages.mining.estimatesDme')}
-                                        </div>
-                                        <div>{estDmeAmount}</div>
-                                    </div>
-                                )}
-                            </>
+                        {lastMineAction && estDmeAmount && (
+                            <div className={styles.line}>
+                                <div>{t('pages.mining.estimatesDme')}</div>
+                                <div>{estDmeAmount}</div>
+                            </div>
+                        )}
+                        {estTime && (
+                            <div className={styles.line}>
+                                <div>
+                                    {t('pages.mining.estimatesMiningTime')}
+                                </div>
+                                <div>{estTime}</div>
+                            </div>
                         )}
                     </div>
                 </Col>
@@ -130,16 +115,19 @@ export const MiningPage: FC = () => {
                                 <Plugin />
                             </Space>
                         </Tooltip>
-                        <MiningAndClaimButton
-                            action={lastMineAction}
-                            isMiningWillEndInFuture={
-                                !!lastMineAction && !isMiningFinished
-                            }
-                        />
+                        {accountName && (
+                            <MiningAndClaimButton
+                                accountName={accountName}
+                                action={lastMineAction}
+                                isMiningWillEndInFuture={
+                                    !!lastMineAction && !isMiningFinished
+                                }
+                            />
+                        )}
                     </Space>
                 </Col>
             </Row>
             <Equipment />
         </Page>
     );
-};
+});

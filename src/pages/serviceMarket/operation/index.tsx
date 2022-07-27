@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import { useGate, useStore } from 'effector-react';
 import { Empty, Skeleton } from 'antd';
 import { Page, useAccountName } from 'shared';
-import { ContractGate, contractStore, getContractEffect } from 'features';
+import { ContractGate, contractStore, getContractByUserEffect } from 'features';
 import { ContractStatus } from 'entities/smartcontract';
 import { ContractPage } from './ContractPage';
 import { OrderPage } from './OrderPage';
@@ -20,7 +20,7 @@ export const OperationPage = () => {
     useGate(ContractGate, { searchParam: `${contractId}` });
 
     const contracts = useStore(contractStore);
-    const isContractLoading = useStore(getContractEffect.pending);
+    const isContractLoading = useStore(getContractByUserEffect.pending);
     const contract = contracts?.[0];
     const isLoading = isContractLoading || !accountName;
 
