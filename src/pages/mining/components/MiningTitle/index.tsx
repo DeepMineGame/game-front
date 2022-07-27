@@ -29,7 +29,7 @@ export const MiningTitle: FC<Props> = memo(
             [ActionState.idle]: undefined,
         };
 
-        const isFinished = Date.now() > action.finishes_at * 1000;
+        const isFinished = new Date() > new Date(action.finishes_at * 1000);
 
         useEffect(() => {
             setIsMiningFinished(isFinished);

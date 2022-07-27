@@ -6,7 +6,6 @@ import {
     desktopS,
     Modal,
     Title,
-    useChainAuthContext,
     useMediaQuery,
     useReloadPage,
     warning,
@@ -38,7 +37,6 @@ export const MiningAndClaimButton: FC<Props> = memo(
         useGate(MiningPageGate, { searchParam: accountName });
         const [claimModalVisibility, setClaimModalVisibility] = useState(false);
         const reloadPage = useReloadPage();
-        const chainAccount = useChainAuthContext();
         const isDesktop = useMediaQuery(desktopS);
         const { t } = useTranslation();
         const isMining = action?.state === ActionState.active;
@@ -52,7 +50,7 @@ export const MiningAndClaimButton: FC<Props> = memo(
             contract_id: number;
         }>(
             toggleMining({
-                waxUser: chainAccount.activeUser?.accountName || '',
+                waxUser: accountName,
                 contractId: mineContract?.id!,
                 type: isMining ? 'stop' : 'start',
             })
@@ -60,7 +58,7 @@ export const MiningAndClaimButton: FC<Props> = memo(
 
         const [isClaimedState, setIsClaimedState] = useState(false);
         const claimDmeCallback = useSmartContractAction(
-            contrclaim({ waxUser: chainAccount.activeUser?.accountName || '' })
+            contrclaim({ waxUser: accountName })
         );
         const isContractsLoading = useStore(getContractEffect.pending);
         const isActionsLoading = useStore(getActionEffect.pending);
