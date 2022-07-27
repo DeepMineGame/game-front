@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useReloadPage } from 'shared';
 import { useSmartContractAction } from 'features/hooks';
 import { terminateContract } from 'entities/smartcontract';
 import { Alert, Button } from 'shared/ui';
@@ -12,6 +13,7 @@ type Props = {
 
 const Completed: FC<Props> = ({ accountName, contractId }) => {
     const { t } = useTranslation();
+    const reloadPage = useReloadPage();
 
     const terminateAction = useSmartContractAction(
         terminateContract(accountName, contractId, 0)
@@ -19,6 +21,7 @@ const Completed: FC<Props> = ({ accountName, contractId }) => {
 
     const handleComplete = async () => {
         await terminateAction();
+        reloadPage();
     };
 
     return (

@@ -3,7 +3,6 @@ import { getTableData } from 'shared';
 import { deepminegame, GetTableDataConfigType } from 'entities/smartcontract';
 import { ContractDto } from './types';
 
-export * from './types';
 export enum mapSearchParamForIndexPositionToFindContracts {
     undefined,
     contractId,
@@ -68,3 +67,4 @@ export const getContractsNameConfig = (
 };
 
 export * from './types';
+export * from './status';

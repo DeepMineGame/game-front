@@ -45,14 +45,24 @@ export const isContractTermNotFulfilled = (contract: ContractDto) => {
     return missedDays >= days_for_penalty;
 };
 
+export enum ContractStates {
+    openOrder = 'openOrder',
+    valid = 'validContract',
+    terminated = 'terminated',
+    completed = 'completed',
+    waitingForAction = 'waitingForAction',
+}
+
+export enum ContractStatesMeta {
+    deadlineViolation = 'deadlineViolation',
+    termViolation = 'termViolation',
+    earlyBreak = 'earlyBreak',
+    complete = 'complete',
+}
+
 export type Status = {
-    value:
-        | 'openOrder'
-        | 'validContract'
-        | 'waitingForAction'
-        | 'terminated'
-        | 'completed';
-    meta?: 'deadlineViolation' | 'termViolation' | 'earlyBreak' | 'complete';
+    value: ContractStates;
+    meta?: ContractStatesMeta;
 };
 
 const isStatusActive = (contract: ContractDto) =>
@@ -80,7 +90,8 @@ export const getContractStatus = (
     contract: ContractDto,
     account: string
 ): Status => {
-    if (!contract.client || !contract.executor) return { value: 'openOrder' };
+    if (!contract.client || !contract.executor)
+        return { value: ContractStates.openOrder };
 
     const isUserClient = contract.client === account;
 
@@ -89,32 +100,48 @@ export const getContractStatus = (
         isWorkInProgress(contract) &&
         !isTimeFinished(contract)
     ) {
-        return { value: 'validContract' };
+        return { value: ContractStates.valid };
     }
 
     // the executor logic here will be added in the future
     if (isDeadlineViolation(contract) && isUserClient) {
-        return { value: 'waitingForAction', meta: 'deadlineViolation' };
+        return {
+            value: ContractStates.waitingForAction,
+            meta: ContractStatesMeta.deadlineViolation,
+        };
     }
     // the executor logic here will be added in the future
     if (isContractTermNotFulfilled(contract) && isUserClient) {
-        return { value: 'waitingForAction', meta: 'termViolation' };
+        return {
+            value: ContractStates.waitingForAction,
+            meta: ContractStatesMeta.termViolation,
+        };
     }
     if (wasTerminatedBySomebody(contract) && wasTerminatedEarly(contract)) {
         if (contract.term_initiator !== account) {
-            return { value: 'waitingForAction', meta: 'earlyBreak' };
+            return {
+                value: ContractStates.waitingForAction,
+                meta: ContractStatesMeta.earlyBreak,
+            };
         }
-        return { value: 'terminated' };
+        return { value: ContractStates.terminated };
     }
 
     if (isTimeFinished(contract) && !isContractTermNotFulfilled(contract)) {
-        if (isStatusActive(contract)) {
-            return { value: 'waitingForAction', meta: 'complete' };
+        if (
+            isStatusActive(contract) ||
+            (isStatusTerminated(contract) &&
+                contract.term_initiator !== account)
+        ) {
+            return {
+                value: ContractStates.waitingForAction,
+                meta: ContractStatesMeta.complete,
+            };
         }
         if (isStatusTerminated(contract)) {
-            return { value: 'completed' };
+            return { value: ContractStates.completed };
         }
     }
 
-    return { value: 'validContract' };
+    return { value: ContractStates.valid };
 };

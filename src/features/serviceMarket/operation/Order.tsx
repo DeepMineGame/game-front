@@ -70,7 +70,10 @@ const Order: FC<Props> = ({ contract, accountName }) => {
         <div>
             <Row gutter={[32, 32]}>
                 <Col span={24}>
-                    <GeneralDataTable contract={contract} />
+                    <GeneralDataTable
+                        contract={contract}
+                        accountName={accountName}
+                    />
                 </Col>
                 <Col xs={24} md={12}>
                     {isLandlordMineOwnerOrder && isClientSigned && (

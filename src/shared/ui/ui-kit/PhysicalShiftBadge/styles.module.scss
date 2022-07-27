@@ -9,6 +9,7 @@
   align-items: center;
   width: fit-content;
   position: absolute;
+  padding-right: 16px;
   right: 14px;
   bottom: 90px;
 
@@ -19,7 +20,7 @@
 }
 
 .close {
-  padding: 9px 10px 9px 16px;
+  padding: 9px 10px 9px 0;
   color: $color-neutral-neutral-7;
 }
 
