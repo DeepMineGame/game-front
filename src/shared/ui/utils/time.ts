@@ -57,18 +57,10 @@ export const toLocaleDate = (
     });
 };
 
-export const getLocalDateFromUtc = (utcTimeInSeconds: number) => {
-    const date = new Date(utcTimeInSeconds * 1000);
-    const userTimezoneOffset = date.getTimezoneOffset() * 1000 * 60;
+export const isUtcDateExpired = (utcDateInSeconds: number) =>
+    Date.now() > utcDateInSeconds * 1000;
 
-    return new Date(date.getTime() - userTimezoneOffset);
-};
-
-export const isUtcDateExpired = (utcFinishesAt: number) =>
-    Date.now() > getLocalDateFromUtc(utcFinishesAt).getTime();
-
-export const getTimeLeftFromUtc = (utcFinishesAt: number, showDays = false) =>
-    getTimeLeft(
-        (getLocalDateFromUtc(utcFinishesAt).getTime() - Date.now()) / 1000,
-        showDays
-    );
+export const getTimeLeftFromUtc = (
+    utcDateInSeconds: number,
+    showDays = false
+) => getTimeLeft(utcDateInSeconds - Date.now() / 1000, showDays);
