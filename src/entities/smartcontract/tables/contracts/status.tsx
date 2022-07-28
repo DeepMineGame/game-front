@@ -92,11 +92,11 @@ export const getContractStatus = (
         return { value: 'validContract' };
     }
 
-    // в будущем для executor будет добавлено уловие
+    // the executor logic here will be added in the future
     if (isDeadlineViolation(contract) && isUserClient) {
         return { value: 'waitingForAction', meta: 'deadlineViolation' };
     }
-    // в будущем для executor будет добавлено уловие
+    // the executor logic here will be added in the future
     if (isContractTermNotFulfilled(contract) && isUserClient) {
         return { value: 'waitingForAction', meta: 'termViolation' };
     }
