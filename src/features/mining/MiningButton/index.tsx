@@ -88,7 +88,7 @@ export const MiningAndClaimButton: FC<Props> = memo(
                 return setClaimModalVisibility(true);
             }
 
-            if (!isMiningFinished && !isClaimed) {
+            if (!isMiningFinished && !isClaimed && isMiningWillEndInFuture) {
                 return warning({
                     title: t('pages.mining.doWantStopMining'),
                     content: t('pages.mining.consumablesWillBurnOut'),
@@ -97,7 +97,14 @@ export const MiningAndClaimButton: FC<Props> = memo(
             }
 
             return toggleMiningAndReinitializeStores();
-        }, [isClaimed, isMiningFinished, reloadPage, t, toggleMiningCallback]);
+        }, [
+            isClaimed,
+            isMiningFinished,
+            isMiningWillEndInFuture,
+            reloadPage,
+            t,
+            toggleMiningCallback,
+        ]);
 
         const buttonText = {
             [ActionState.claimed]: t('pages.mining.startMining'),

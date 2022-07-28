@@ -37,14 +37,17 @@ export const MiningTitle: FC<Props> = memo(
 
         useTick(!isFinished);
 
-        const state = isFinished ? ActionState.finished : action.state;
-
+        const state =
+            isFinished && action.state !== ActionState.interrupted
+                ? ActionState.finished
+                : action.state;
         return (
             <Title
                 level={isDesktop ? 2 : 4}
                 className={classNames(styles.miningStatusTitle, {
                     [styles.interrupted]: state === ActionState.interrupted,
-                    [styles.finished]: isFinished,
+                    [styles.finished]:
+                        isFinished && action.state !== ActionState.interrupted,
                 })}
                 fontFamily="orbitron"
             >
