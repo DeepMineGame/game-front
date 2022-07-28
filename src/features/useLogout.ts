@@ -1,16 +1,16 @@
 import { useContext } from 'react';
 import { UALContext } from 'ual-reactjs-renderer';
+import { useEvent } from 'effector-react';
 
-import { clearUserStoreEvent } from 'entities/user';
+import { logoutUserEffect } from 'entities/user';
 
-export function useLogout(onLogout?: () => void) {
+export function useLogout() {
     const { logout } = useContext(UALContext);
+    const logoutUser = useEvent(logoutUserEffect);
 
-    return () => {
-        clearUserStoreEvent();
+    return async () => {
+        await logoutUser();
         logout();
-        if (onLogout) {
-            onLogout();
-        }
+        window.location.reload();
     };
 }

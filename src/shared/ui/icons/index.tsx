@@ -9,5 +9,6 @@ export { ReactComponent as DMECoinIcon } from './dme-coin.svg';
 export { ReactComponent as WaxChainIcon } from './waxChain.svg';
 export { ReactComponent as WaxCoinIcon } from './waxCoin.svg';
 export { ReactComponent as Petobot } from './petobot.svg';
+export { ReactComponent as UserSwitch } from './user-switch.svg';
 // @ts-ignore
 export { DiscordIcon } from './DiscordIcon.tsx';

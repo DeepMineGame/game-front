@@ -2,7 +2,11 @@
   "intro": {
     "connect": "CONNECT WAX WALLET",
     "disconnect": "DISCONNECT WAX WALLET",
-    "only-members": "Only DeepMine team members are allowed access"
+    "only-members": "Only DeepMine team members are allowed access",
+    "signInGoogle": "SIGN IN WITH GOOGLE",
+    "loggedIn": "You are logged in",
+    "Logout": "Logout",
+    "waxAlreadyExists": "WAX wallet is already linked to another account"
   },
   "kit": {
     "back": "Back",
@@ -99,6 +103,10 @@
     }
   },
   "pages": {
+    "auth": {
+      "wait": "Wait please...",
+      "logAs": "You’re logged in as another user <b>{{email}}</b>"
+    },
     "info": {
       "share": "Share profile",
       "copied": "Copied to clipboard",

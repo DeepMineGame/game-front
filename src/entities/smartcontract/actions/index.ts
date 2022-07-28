@@ -105,3 +105,22 @@ export const uninstallEquipment = ({
         ],
     };
 };
+
+export const authorizeUser = (waxAddress: string, userId: string) => ({
+    actions: [
+        {
+            account: deepminegame,
+            name: 'authorize',
+            authorization: [
+                {
+                    actor: waxAddress,
+                    permission: 'active',
+                },
+            ],
+            data: {
+                wax_user: waxAddress,
+                key: userId,
+            },
+        },
+    ],
+});
