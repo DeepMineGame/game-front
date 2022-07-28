@@ -12,7 +12,11 @@ import { useNavigate } from 'react-router-dom';
 import { createOrder, serviceMarket, warehouse } from 'app/router/paths';
 import { ATOMICHUB_URL } from 'app';
 import { useStore } from 'effector-react';
-import { setupMine } from 'entities/smartcontract';
+import {
+    ContractType,
+    createContrFormFields,
+    setupMine,
+} from 'entities/smartcontract';
 import { mineOwnerCabinState } from '../../models/mineOwnerState';
 import { useSmartContractAction } from '../../../hooks';
 import { mineOwnerLandlordContractForUserStore } from '../../models';
@@ -81,7 +85,14 @@ export function useActionsButton() {
                         ? t('features.mineOwner.chooseContract')
                         : t('features.mineOwner.choose')}
                 </Button>
-                <Button type="link" onClick={() => navigate(createOrder)}>
+                <Button
+                    type="link"
+                    onClick={() =>
+                        navigate(
+                            `${createOrder}?${createContrFormFields.contractType}=${ContractType.landlord_mineowner}&${createContrFormFields.isClient}=0`
+                        )
+                    }
+                >
                     {isDesktop
                         ? t('features.mineOwner.createContract')
                         : t('features.mineOwner.create')}
