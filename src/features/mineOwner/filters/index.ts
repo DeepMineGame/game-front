@@ -74,7 +74,7 @@ export const hasActiveMineContractFilter = ({
     inventory: UserInventoryType[] | null;
 }) => {
     if (!contract) {
-        return false;
+        return true;
     }
     return contract?.status !== ContractStatus.active;
 };
