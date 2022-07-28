@@ -79,6 +79,7 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
                     status: statusMap[contract.status],
                 };
             })}
+            pagination={{ position: ['bottomCenter'], pageSize: 5 }}
         />
     );
 };

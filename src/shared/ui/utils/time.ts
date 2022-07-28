@@ -3,6 +3,8 @@ export const MINUTE_IN_SECONDS = 60 * SECOND;
 export const HOUR_IN_SECONDS = 60 * MINUTE_IN_SECONDS;
 export const DAY_IN_SECONDS = 24 * HOUR_IN_SECONDS;
 
+export const getNowInSeconds = () => Date.now() / 1000;
+
 export const msToSeconds = (seconds: number) => seconds / 1000;
 
 const getPadTime = (time: number) => (time > 9 ? time : `0${time}`);
