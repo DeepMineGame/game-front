@@ -11,12 +11,15 @@ import { ContractTypeAndRoleStep } from './components/ContractTypeAndRoleStep';
 import { GeneralConditionStep } from './components/GeneralConditionStep';
 import { TermsStep } from './components/TermsStep';
 import { CreateResult } from './components/CreateResult';
+import { useInitialValues } from './hooks/useInitialValues';
 
 export const CreateOrderForm = () => {
     const { t } = useTranslation();
+    const initialValues = useInitialValues();
     const [currentStep, setStep] = useState(0);
     const [form] = Form.useForm();
-    const [values, setValues] = useState<CreateContrDto>();
+    const [values, setValues] =
+        useState<Partial<CreateContrDto>>(initialValues);
     const callAction = useSmartContractActionDynamic();
     const accountName = useAccountName();
     const navigate = useNavigate();
@@ -29,17 +32,22 @@ export const CreateOrderForm = () => {
             />
         );
     }
+
     return (
         <Form
             className={styles.form}
             layout="vertical"
             form={form}
+            initialValues={initialValues}
             onValuesChange={(oldValues, currentValues) =>
                 setValues({ ...values, ...currentValues })
             }
             onFinish={() =>
                 callAction(
-                    createContr({ ...values!, wax_user: accountName })
+                    createContr({
+                        ...values,
+                        wax_user: accountName,
+                    } as CreateContrDto)
                 )?.then(() => {
                     setFormStatus('success');
                     setTimeout(() => navigate(serviceMarket), 3000);

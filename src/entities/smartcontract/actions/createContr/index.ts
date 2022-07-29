@@ -18,7 +18,7 @@ export type CreateContrDto = {
     wax_user: string;
     contract_type: ContractType;
     asset_id: number;
-    is_client: 0 | 1;
+    is_client: number;
     fee_percent: number;
     fee_daily_min_amount: number;
     days_for_penalty: number;
@@ -51,10 +51,10 @@ export function createContr(data: CreateContrDto) {
                         data[createContrFormFields.daysForPenalty],
                     penalty_amount: data[createContrFormFields.penaltyAmount],
                     deadline_duration:
-                        data[createContrFormFields.deadlineDuration] *
+                        data[createContrFormFields.deadlineDuration]! *
                         DAY_IN_SECONDS,
                     contract_duration:
-                        data[createContrFormFields.contractDuration] *
+                        data[createContrFormFields.contractDuration]! *
                         DAY_IN_SECONDS,
                 },
             },
