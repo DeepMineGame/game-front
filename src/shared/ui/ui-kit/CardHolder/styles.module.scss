@@ -16,11 +16,6 @@
   text-align: center;
   margin-top: 25px;
 
-  @media only screen and (min-width: $media-desktop-s)  {
-    height: 363px;
-    width: 198px;
-  }
-
   &::after {
     position: absolute;
     top: 0;
@@ -31,13 +26,6 @@
     background: url("../../icons/border.svg") left no-repeat;
     height: 265px;
     width: 154px;
-
-    @media only screen and (min-width: $media-desktop-s)  {
-      left: -8px;
-      height: 363px;
-      width: 213px;
-      background-size: 100%;
-    }
   }
 }
 
