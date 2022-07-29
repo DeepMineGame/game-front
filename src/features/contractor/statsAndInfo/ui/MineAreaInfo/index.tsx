@@ -3,14 +3,14 @@ import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
 
 import { KeyValueTable, Title } from 'shared';
-import { AreaRarity, areasStore } from 'entities/smartcontract';
-import { UserMineGate, userMineStore } from '../../userMineModel';
+import { AreaRarity } from 'entities/smartcontract';
+import { areaForMine, UserMineGate, userMineStore } from '../../userMineModel';
 import styles from './styles.module.scss';
 
 export const MineAreaInfo: FC<{ accountName: string }> = ({ accountName }) => {
     useGate(UserMineGate, { searchParam: accountName });
     const { t } = useTranslation();
-    const areas = useStore(areasStore);
+    const areas = useStore(areaForMine);
     const mines = useStore(userMineStore);
     const userMine = mines?.[0];
     const userArea = areas?.[0];
@@ -41,7 +41,7 @@ export const MineAreaInfo: FC<{ accountName: string }> = ({ accountName }) => {
     const areaInfoData = {
         [t('components.common.area')]: userArea ? `ID ${userArea.id}` : '-',
         [t('pages.contractorStatsAndInfo.mineArea.landlord')]:
-            'FAKE USER REPLACE ME',
+            userArea?.owner || '-',
         [t('pages.contractorStatsAndInfo.mineArea.areaRarity')]: userArea
             ? AreaRarity[userArea.rarity]
             : '-',
