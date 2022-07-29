@@ -35,10 +35,7 @@ export const MineOwnerMenu: FC<Props> = ({
     ];
     const statusThatDisableManagementButton = [...baseButtonDisableStates];
     const statusThatDisableTeamButton = [...baseButtonDisableStates];
-    const statusThatDisableStatsButton = [
-        ...baseButtonDisableStates,
-        mineOwnerCabinState.contractsFree,
-    ];
+    const statusThatDisableStatsButton = [...baseButtonDisableStates];
     const menuItems = [
         {
             link: mineManagement,

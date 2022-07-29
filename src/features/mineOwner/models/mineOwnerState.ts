@@ -13,7 +13,6 @@ import {
     checkIfMineSetupWillFinishedInFuture,
     checkIsContractInactive,
     checkIsUserLocationOutsideMineFilter,
-    hasActiveMineContractFilter,
     hasMineNftFilter,
     hasMinesFilter,
     ignoreIfInStatus,
@@ -38,7 +37,6 @@ export enum mineOwnerCabinState {
     needSetupMine,
     isMineSetupInProgress,
     isMineSet,
-    contractsFree,
     isMineActive,
 }
 
@@ -48,7 +46,6 @@ const setIsUserOutsideFromLocation = createEvent();
 const setNeedSignContractWithLandLord = createEvent();
 const setIsMineSetupInProgressEvent = createEvent();
 const setIsMineSetEvent = createEvent();
-const setContractsFreeEvent = createEvent();
 const setMineActive = createEvent();
 const needSetupMineEvent = createEvent();
 
@@ -71,7 +68,6 @@ export const $mineOwnerCabinState = createStore<mineOwnerCabinState>(
         () => mineOwnerCabinState.isMineSetupInProgress
     )
     .on(setIsMineSetEvent, () => mineOwnerCabinState.isMineSet)
-    .on(setContractsFreeEvent, () => mineOwnerCabinState.contractsFree)
     .on(setMineActive, () => mineOwnerCabinState.isMineActive);
 
 forward({
@@ -103,30 +99,6 @@ sample({
             mineOwnerCabinState.hasNoMineNft,
         ]),
         checkIsUserLocationOutsideMineFilter
-    ),
-});
-
-// Check that has mine contract (contractsFree)
-sample({
-    source: {
-        contract: mineOwnerLandlordContractForUserStore,
-        inventory: inventoriesStore,
-    },
-    target: setContractsFreeEvent,
-    clock: [
-        setInitialStateEvent,
-        mineOwnerLandlordContractForUserStore,
-        inventoriesStore,
-    ],
-    filter: compose(
-        ignoreIfInStatus($mineOwnerCabinState, [
-            mineOwnerCabinState.hasNoMineNft,
-            mineOwnerCabinState.isMineSet,
-            mineOwnerCabinState.isOutsideFromLocation,
-            mineOwnerCabinState.isMineSetupInProgress,
-            mineOwnerCabinState.needSignContractWithLandLord,
-        ]),
-        hasActiveMineContractFilter
     ),
 });
 
@@ -209,7 +181,6 @@ sample({
         setIsUserOutsideFromLocation,
         setHasNoMineNft,
         setNeedSignContractWithLandLord,
-        setContractsFreeEvent,
         setInitialStateEvent,
     ],
     filter: compose(

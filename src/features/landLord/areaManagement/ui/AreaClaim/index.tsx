@@ -10,6 +10,7 @@ import {
     sunsetOrange6,
     useAccountName,
     ExclamationModal,
+    useReloadPage,
 } from 'shared';
 import { engageArea, unEngageArea, claimArea } from 'entities/smartcontract';
 import { useSmartContractAction } from '../../../../hooks';
@@ -18,10 +19,9 @@ import styles from './styles.module.scss';
 type Props = {
     isActive: boolean;
     areaId?: number;
-    onUpdate?: () => void;
 };
 
-export const AreaClaim: FC<Props> = ({ isActive, areaId, onUpdate }) => {
+export const AreaClaim: FC<Props> = ({ isActive, areaId }) => {
     const { t } = useTranslation();
     const accountName = useAccountName();
     const [isModalActionVisible, setIsModalActionVisible] = useState(false);
@@ -32,24 +32,19 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, onUpdate }) => {
     const unEngageAreaAction = useSmartContractAction(
         unEngageArea({ waxUser: accountName, areaId })
     );
+    const reloadPage = useReloadPage();
     const claimAction = useSmartContractAction(
         claimArea({ waxUser: accountName, areaId })
     );
 
     const onEngage = async () => {
         await engageAreaAction();
-        if (onUpdate) {
-            onUpdate();
-        }
-        setIsModalActionVisible(false);
+        reloadPage();
     };
 
     const onUnengage = async () => {
         await unEngageAreaAction();
-        if (onUpdate) {
-            onUpdate();
-        }
-        setIsModalUnengageVisible(false);
+        reloadPage();
     };
 
     const handleClaim = async () => {

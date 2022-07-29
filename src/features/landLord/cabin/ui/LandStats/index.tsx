@@ -27,7 +27,7 @@ export const LandStats: FC<Props> = ({ className }) => {
                 className={styles.table}
                 items={{
                     [t('pages.landLord.cabin.DMEToClaim')]:
-                        contractors?.[0].real_amount_to_claim,
+                        contractors?.[0]?.real_amount_to_claim,
                     [t('pages.landLord.cabin.mines')]: mines?.length ?? 0,
                 }}
             />

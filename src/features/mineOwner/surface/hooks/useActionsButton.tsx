@@ -117,7 +117,6 @@ export function useActionsButton() {
             </>
         ),
         [mineOwnerCabinState.isMineSet]: null,
-        [mineOwnerCabinState.contractsFree]: null,
         [mineOwnerCabinState.isMineSetupInProgress]: null,
         [mineOwnerCabinState.isMineActive]: null,
     };

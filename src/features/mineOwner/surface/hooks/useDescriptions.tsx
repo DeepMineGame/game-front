@@ -24,9 +24,6 @@ export function useDescriptions() {
         [mineOwnerCabinState.hasNoMineNft]: isDesktop
             ? t('features.mineOwner.needMineCardDesktop')
             : t('features.mineOwner.needMineCardMobile'),
-        [mineOwnerCabinState.contractsFree]: t(
-            'features.mineOwner.needTeamDescription'
-        ),
         [mineOwnerCabinState.isMineSet]: t(
             'features.mineOwner.mineManagementDescription'
         ),

@@ -34,9 +34,10 @@ export const checkIsUserLocationOutsideMineFilter = (user: UserDto[] | null) =>
 export const checkIsContractInactive = (
     contract: ContractDto | null | undefined
 ) => {
-    if (!contract) {
-        return true;
+    if (contract === null) {
+        return false;
     }
+
     return contract?.status !== ContractStatus.active;
 };
 
@@ -52,6 +53,9 @@ export const checkMineNotSetup = ({
     const isMineEmpty = userMineStore === null;
     const isMineNotSetuped = userMineStore?.[0]?.state !== MineState.setuped;
 
+    if (userMineStore === null) {
+        return false;
+    }
     return hasActiveContract && (isMineEmpty || isMineNotSetuped);
 };
 
@@ -65,18 +69,6 @@ export const checkIfMineSetupWillFinishedInFuture = (
         mineSetupAction?.[0] &&
             new Date(mineSetupAction[0].finishes_at * 1000) > new Date()
     );
-};
-
-export const hasActiveMineContractFilter = ({
-    contract,
-}: {
-    contract: ContractDto | null | undefined;
-    inventory: UserInventoryType[] | null;
-}) => {
-    if (!contract) {
-        return false;
-    }
-    return contract?.status !== ContractStatus.active;
 };
 
 export const hasMinesFilter = (mines: MineDto[] | null) =>

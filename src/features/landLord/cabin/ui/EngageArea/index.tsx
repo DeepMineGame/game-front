@@ -2,7 +2,13 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 
-import { Button, desktopS, useAccountName, useMediaQuery } from 'shared';
+import {
+    Button,
+    desktopS,
+    useAccountName,
+    useMediaQuery,
+    useReloadPage,
+} from 'shared';
 import { useStore } from 'effector-react';
 import { useSmartContractAction } from 'features';
 import {
@@ -30,6 +36,12 @@ export const EngageArea: FC<Props> = ({ className, disabled = true }) => {
     const engageAreaAction = useSmartContractAction(
         engageArea({ waxUser: accountName, areaId })
     );
+    const reloadPage = useReloadPage();
+
+    const onEngageClick = async () => {
+        await engageAreaAction();
+        return reloadPage();
+    };
 
     return (
         <div className={cn(styles.engageArea, className)}>
@@ -43,11 +55,7 @@ export const EngageArea: FC<Props> = ({ className, disabled = true }) => {
                     {t('pages.landLord.cabin.engageDescription')}
                 </div>
             )}
-            <Button
-                type="primary"
-                disabled={disabled}
-                onClick={engageAreaAction}
-            >
+            <Button type="primary" disabled={disabled} onClick={onEngageClick}>
                 {t('pages.landLord.cabin.engageButton')}
             </Button>
         </div>

@@ -19,9 +19,6 @@ export function useTitles() {
         [mineOwnerCabinState.isMineSetupInProgress]: t(
             'features.mineOwner.progress'
         ),
-        [mineOwnerCabinState.contractsFree]: t(
-            'features.mineOwner.needTeamTitle'
-        ),
         [mineOwnerCabinState.isMineActive]: t(
             'features.mineOwner.mineIsActive'
         ),
