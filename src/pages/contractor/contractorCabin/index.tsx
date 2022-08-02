@@ -155,9 +155,7 @@ export const ContractorCabin = () => {
                         [ContractorMenuItems.MiningDeck]:
                             status < CABIN_STATUS.ready,
                         [ContractorMenuItems.Equipment]:
-                            (!hasInstalledEquipment &&
-                                status < CABIN_STATUS.setup) ||
-                            !hasPhysicalShift,
+                            !hasInstalledEquipment && !hasPhysicalShift,
                     },
                     callbacks: {
                         [ContractorMenuItems.InfoPanel]: () =>

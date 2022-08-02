@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useCallback } from 'react';
 import {
     Inventory,
     Page,
@@ -56,12 +56,19 @@ export const EquipmentSetPage: FC = () => {
 
     const { data: userInventory } =
         useTableData<UserInventoryType>(getInventoryConfig);
-    const { data: userContracts } = useTableData<ContractDto>(() =>
-        getContractsNameConfig(
-            accountName,
-            mapSearchParamForIndexPositionToFindContracts.executorId,
-            10000
-        )
+
+    const getConfigForContracts = useCallback(
+        () =>
+            getContractsNameConfig(
+                accountName,
+                mapSearchParamForIndexPositionToFindContracts.executorId,
+                10000
+            ),
+        []
+    );
+
+    const { data: userContracts } = useTableData<ContractDto>(
+        getConfigForContracts
     );
     const contractId = userContracts.find(
         ({ status, type, executor }) =>
