@@ -45,6 +45,7 @@ export const Travel: FC<Props> = ({
                 onClick={openTravelModal}
             />
             <TravelModal
+                locationId={toLocationId}
                 visible={isTravelModalVisible}
                 onClick={handleCallShift}
                 onClose={closeTravelModal}
