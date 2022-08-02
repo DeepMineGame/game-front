@@ -37,10 +37,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
 
     const onDrop: DragEventHandler<HTMLDivElement> = (e) => {
         e?.preventDefault();
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        });
+
         if (draggedElement && draggedElements.has(draggedElement)) {
             return setDraggedElements(
                 removeDraggedElementFromState(draggedElement)
