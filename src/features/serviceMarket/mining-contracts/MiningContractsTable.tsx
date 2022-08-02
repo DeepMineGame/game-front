@@ -1,17 +1,18 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Link, Table, toLocaleDate, DAY_IN_SECONDS } from 'shared';
+import { Link, Table, toLocaleDate } from 'shared';
 import { ContractDto } from 'entities/smartcontract';
 
 type Props = {
     contracts: ContractDto[];
+    calcDuration: (contract: ContractDto) => number;
 };
 
-const calcDuration = (contract: ContractDto) =>
-    Math.floor((contract.finishes_at - contract.create_time) / DAY_IN_SECONDS);
-
-export const MiningContractsTable: FC<Props> = ({ contracts }) => {
+export const MiningContractsTable: FC<Props> = ({
+    contracts,
+    calcDuration,
+}) => {
     const { t } = useTranslation();
 
     return (
