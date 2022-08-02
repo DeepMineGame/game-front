@@ -79,7 +79,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             </div>
                             <div className={styles.action}>
                                 <Tooltip
-                                    overlay="Coming soon"
+                                    overlay={t('components.common.comingSoon')}
                                     mouseEnterDelay={0}
                                     mouseLeaveDelay={0}
                                 >
@@ -96,7 +96,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             </div>
                             <div className={styles.action}>
                                 <Tooltip
-                                    overlay="Coming soon"
+                                    overlay={t('components.common.comingSoon')}
                                     mouseEnterDelay={0}
                                     mouseLeaveDelay={0}
                                 >
@@ -124,7 +124,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             </div>
                             <div className={styles.action}>
                                 <Tooltip
-                                    overlay="Coming soon"
+                                    overlay={t('components.common.comingSoon')}
                                     mouseEnterDelay={0}
                                     mouseLeaveDelay={0}
                                 >
@@ -141,7 +141,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             <div className={styles.value}>1</div>
                             <div className={styles.action}>
                                 <Tooltip
-                                    overlay="Coming soon"
+                                    overlay={t('components.common.comingSoon')}
                                     mouseEnterDelay={0}
                                     mouseLeaveDelay={0}
                                 >

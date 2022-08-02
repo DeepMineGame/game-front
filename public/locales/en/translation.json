@@ -95,7 +95,8 @@
       "mine": {
         "title": "Mine",
         "mineInfo": "Mine info"
-      }
+      },
+      "comingSoon": "Coming soon"
     },
     "user": {
       "accountSettings": "Account settings",
