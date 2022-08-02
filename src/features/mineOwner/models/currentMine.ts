@@ -5,6 +5,7 @@ import { getMinesEffect, MineDto, searchBy } from 'entities/smartcontract';
 export const MineConsumerGate = createGate<{ searchParam: string }>(
     'MineConsumerGate'
 );
+
 export const getMinesByOwnerEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
         return getMinesEffect({
@@ -13,6 +14,7 @@ export const getMinesByOwnerEffect = createEffect(
         });
     }
 );
+
 export const userMineStore = createStore<MineDto[] | null>(null).on(
     getMinesByOwnerEffect.doneData,
     (_, { rows }) => rows

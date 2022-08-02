@@ -41,7 +41,7 @@ export const MineOwnerMenu: FC<Props> = ({
             link: mineManagement,
             icon: <DesktopOutlined />,
             disabled:
-                !userMine &&
+                !userMine ||
                 statusThatDisableManagementButton.includes(
                     currentMineOwnerCabinState
                 ),
@@ -51,7 +51,7 @@ export const MineOwnerMenu: FC<Props> = ({
             link: mineOwnerMineCrew,
             icon: <TeamOutlined />,
             disabled:
-                !userMine &&
+                !userMine ||
                 statusThatDisableTeamButton.includes(
                     currentMineOwnerCabinState
                 ),
@@ -61,7 +61,7 @@ export const MineOwnerMenu: FC<Props> = ({
             link: mineOwnerStatsAndInfo,
             icon: <ProjectOutlined />,
             disabled:
-                !userMine &&
+                !userMine ||
                 statusThatDisableStatsButton.includes(
                     currentMineOwnerCabinState
                 ),
