@@ -12,7 +12,7 @@ import { atomicTransfer } from 'entities/atomicassets';
 import { userAtomicAssetsStore, WarehouseGate } from '../../model';
 import { useSmartContractAction } from '../../../hooks';
 import styles from './styles.module.scss';
-import { renderCards } from './utils/renderCards';
+import { useRenderCards } from './utils/useRenderCards';
 import { removeDraggedElementFromState } from './utils/removeDraggedElementFromState';
 
 export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
@@ -20,6 +20,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
 }) => {
     const { t } = useTranslation();
     useGate(WarehouseGate, { accountName });
+    const renderCards = useRenderCards();
     const userAtomicAssets = useStore(userAtomicAssetsStore);
     const { data: userInventory } =
         useTableData<UserInventoryType>(getInventoryConfig);

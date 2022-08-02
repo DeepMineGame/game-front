@@ -1,7 +1,7 @@
 import { InventoryCardModal, Page } from 'shared';
 import { useParams } from 'react-router';
 import React, { useEffect, useState } from 'react';
-import { Skeleton } from 'antd';
+import { Empty, Skeleton } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import {
     inventoryTableDataConfig,
@@ -25,6 +25,14 @@ export const NftPreviewPage = () => {
             }).then(({ rows }) => setFetchedCard(rows?.[0]));
         }
     }, [assetId]);
+
+    if (fetchedCard === undefined) {
+        return (
+            <Page>
+                <Empty description="There is no data in inventories table" />
+            </Page>
+        );
+    }
 
     return (
         <Page>
