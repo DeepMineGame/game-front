@@ -5,9 +5,8 @@ import { PlusOutlined } from '@ant-design/icons';
 import { useEvent, useGate, useStore } from 'effector-react';
 import { Empty, Skeleton } from 'antd';
 
-import { Button, secondsToDays, Segmented } from 'shared';
+import { Button, Segmented } from 'shared';
 import { createOrder } from 'app/router/paths';
-import { ContractDto } from 'entities/smartcontract';
 import { MiningContractsTable } from '../mining-contracts/MiningContractsTable';
 import styles from '../mining-contracts/styles.module.scss';
 import {
@@ -18,9 +17,6 @@ import {
     getMineOperationContractsEffect,
     MineOperationContractsGate,
 } from './model';
-
-const calcContractDuration = (contract: ContractDto) =>
-    secondsToDays(contract.contract_duration);
 
 export const MineOperationContracts = () => {
     useGate(MineOperationContractsGate);
@@ -71,10 +67,7 @@ export const MineOperationContracts = () => {
                 </Button>
             </nav>
             {contracts.length ? (
-                <MiningContractsTable
-                    contracts={contracts}
-                    calcDuration={calcContractDuration}
-                />
+                <MiningContractsTable contracts={contracts} />
             ) : (
                 <Empty />
             )}
