@@ -1,10 +1,10 @@
 @import "src/shared";
 
 .modal {
-  width: 100% !important;
-  max-width: none !important;
-  height: 100%;
+  max-width: 100%;
+  width: auto !important;
   background: $color-neutral-neutral-2 !important;
+  height: 100%;
 
   :global {
     .ant-modal-footer {
@@ -17,24 +17,18 @@
   }
 
   @media only screen and (min-width: $media-desktop-s)  {
-    width: calc(100% - 250px) !important;
-    height: 698px;
     overflow: auto;
+    height: auto;
   }
 }
 
 .container {
-  margin: 0 auto;
   display: flex;
+  gap: 35px;
   width: fit-content;
-
-  @media only screen and (min-width: $media-desktop-s)  {
-    padding: 70px;
-  }
 }
 
 .select {
-  width: 144px;
   height: 32px;
   margin-top: 32px;
   line-height: 32px;
@@ -43,27 +37,24 @@
   background: $color-primary-primary-6 !important;
   border-radius: 2px;
   text-align: center;
-
-  @media only screen and (min-width: $media-desktop-s)  {
-    width: 170px;
-  }
 }
 
 .infoContainer {
-  margin-left: 56px;
   color: $color-neutral-neutral-8 !important;
-  max-width: 512px;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    max-width: 512px;
+  }
 }
 
 .title {
-  margin-top: 20px;
   font-weight: 700;
   font-size: 24px;
   line-height: 32px;
   font-family: $orbitron;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  padding-bottom: 16px;
+  padding-bottom: 8px;
 }
 
 .description {

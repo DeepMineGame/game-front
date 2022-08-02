@@ -1,12 +1,6 @@
-import {
-    desktopS,
-    DMECoinIcon,
-    Modal,
-    useMediaQuery,
-    getImagePath,
-} from 'shared';
+import { DMECoinIcon, Modal, getImagePath } from 'shared';
 import React, { FC, useState, useEffect, useCallback } from 'react';
-import { ModalProps } from 'antd';
+import { ModalProps, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 import { AssetDataType, getAtomicAssetsDataById } from 'entities/atomicassets';
@@ -28,7 +22,6 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         undefined
     );
     const { t } = useTranslation();
-    const isDesktop = useMediaQuery(desktopS);
 
     const handleSelect = (e: React.MouseEvent<HTMLElement>) => {
         onSelect?.(card);
@@ -58,7 +51,10 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
             <div className={styles.container}>
                 <div>
                     <img
-                        width={isDesktop ? 170 : 144}
+                        height={200}
+                        style={{
+                            aspectRatio: '5/7',
+                        }}
                         src={getImagePath(card.template_id)}
                         alt="nft-equipment-card"
                     />
@@ -82,7 +78,13 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                 {cardData?.data.rarity}
                             </div>
                             <div className={styles.action}>
-                                {t('pages.equipmentSet.cardModal.upgrade')}
+                                <Tooltip
+                                    overlay="Coming soon"
+                                    mouseEnterDelay={0}
+                                    mouseLeaveDelay={0}
+                                >
+                                    {t('pages.equipmentSet.cardModal.upgrade')}
+                                </Tooltip>
                             </div>
                         </Line>
                         <Line className={styles.infoLine}>
@@ -93,12 +95,19 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                 {cardData?.data.level}
                             </div>
                             <div className={styles.action}>
-                                <NftProgressBar
-                                    initial={30}
-                                    current={30}
-                                    remained={120}
-                                    rightContent={<DMECoinIcon />}
-                                />
+                                <Tooltip
+                                    overlay="Coming soon"
+                                    mouseEnterDelay={0}
+                                    mouseLeaveDelay={0}
+                                >
+                                    <span />
+                                    <NftProgressBar
+                                        initial={30}
+                                        current={30}
+                                        remained={120}
+                                        rightContent={<DMECoinIcon />}
+                                    />
+                                </Tooltip>
                             </div>
                         </Line>
                         <Line className={styles.infoLine}>
@@ -114,7 +123,13 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                 />
                             </div>
                             <div className={styles.action}>
-                                {t('pages.equipmentSet.cardModal.repair')}
+                                <Tooltip
+                                    overlay="Coming soon"
+                                    mouseEnterDelay={0}
+                                    mouseLeaveDelay={0}
+                                >
+                                    {t('pages.equipmentSet.cardModal.repair')}
+                                </Tooltip>
                             </div>
                         </Line>
                         <Line className={styles.infoLine}>
@@ -125,7 +140,15 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             </div>
                             <div className={styles.value}>1</div>
                             <div className={styles.action}>
-                                {t('pages.equipmentSet.cardModal.refurbish')}
+                                <Tooltip
+                                    overlay="Coming soon"
+                                    mouseEnterDelay={0}
+                                    mouseLeaveDelay={0}
+                                >
+                                    {t(
+                                        'pages.equipmentSet.cardModal.refurbish'
+                                    )}
+                                </Tooltip>
                             </div>
                         </Line>
                     </div>
