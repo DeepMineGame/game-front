@@ -7,6 +7,7 @@ export type User = {
     email_confirmed: boolean;
     id: string;
     is_admin: boolean;
+    is_beta: boolean;
     language: string;
     referrer_code: string;
     timezone: string | null;
