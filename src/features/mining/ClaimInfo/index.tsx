@@ -1,5 +1,11 @@
 import React, { memo, useEffect } from 'react';
-import { Button, getTimeLeft, KeyValueTable, Loader } from 'shared';
+import {
+    Button,
+    getDmeAmount,
+    getTimeLeft,
+    KeyValueTable,
+    Loader,
+} from 'shared';
 import {
     contractorStore,
     getContractorEffect,
@@ -43,7 +49,8 @@ export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
                 [t('pages.mining.timeSpent')]: timeSpent
                     ? getTimeLeft(timeSpent)
                     : '-',
-                [t('pages.mining.dmeCollected')]: dmeToClaim || '-',
+                [t('pages.mining.dmeCollected')]:
+                    getDmeAmount(dmeToClaim) || '-',
             }}
         />
     ) : (

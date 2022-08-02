@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import { useStore } from 'effector-react';
 
-import { KeyValueTable } from 'shared';
+import { getDmeAmount, KeyValueTable } from 'shared';
 import { contractorsStore } from 'entities/smartcontract';
 import commonStyles from '../../styles/styles.module.scss';
 import { minesForAreaSlots } from '../../../areaManagement';
@@ -26,8 +26,9 @@ export const LandStats: FC<Props> = ({ className }) => {
             <KeyValueTable
                 className={styles.table}
                 items={{
-                    [t('pages.landLord.cabin.DMEToClaim')]:
-                        contractors?.[0]?.real_amount_to_claim,
+                    [t('pages.landLord.cabin.DMEToClaim')]: getDmeAmount(
+                        contractors?.[0]?.real_amount_to_claim ?? 0
+                    ),
                     [t('pages.landLord.cabin.mines')]: mines?.length ?? 0,
                 }}
             />
