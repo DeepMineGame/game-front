@@ -1,18 +1,14 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Link, Table, toLocaleDate } from 'shared';
+import { Link, secondsToDays, Table, toLocaleDate } from 'shared';
 import { ContractDto } from 'entities/smartcontract';
 
 type Props = {
     contracts: ContractDto[];
-    calcDuration: (contract: ContractDto) => number;
 };
 
-export const MiningContractsTable: FC<Props> = ({
-    contracts,
-    calcDuration,
-}) => {
+export const MiningContractsTable: FC<Props> = ({ contracts }) => {
     const { t } = useTranslation();
 
     return (
@@ -82,7 +78,7 @@ export const MiningContractsTable: FC<Props> = ({
                     contract.fee_daily_min_amount
                 } ${t('components.common.button.dme')}`,
                 startOf: contract.start_time,
-                duration: calcDuration(contract),
+                duration: secondsToDays(contract.contract_duration),
             }))}
             pagination={{ position: ['bottomCenter'], pageSize: 5 }}
         />
