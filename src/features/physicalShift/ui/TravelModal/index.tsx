@@ -52,7 +52,7 @@ export const TravelModal = ({
                     <div className={styles.contentTitle}>
                         {t('pages.contractor.travel.contentTitle')}
                     </div>
-                    <Timer timeSeconds={60 * 15} energy={30} />
+                    <Timer timeSeconds={1} energy={0} />
                 </div>
                 <div className={styles.actions}>
                     <div className={styles.buttons}>
