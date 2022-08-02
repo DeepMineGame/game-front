@@ -29,7 +29,9 @@ export const Surface: FC<Props> = ({ user }) => {
     return (
         <div className={styles.surface}>
             {isDesktop && (
-                <Title fontFamily="orbitron">{titles[cabinState]}</Title>
+                <Title fontFamily="orbitron" className={styles.title}>
+                    {titles[cabinState]}
+                </Title>
             )}
             {descriptions[cabinState]}
             {buttons[cabinState]}
