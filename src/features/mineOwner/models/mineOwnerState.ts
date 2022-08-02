@@ -104,12 +104,13 @@ sample({
 
 // Checks that a contract has been signed with the landlord
 sample({
-    source: mineOwnerLandlordContractForUserStore,
+    source: { mineOwnerLandlordContractForUserStore, inventoriesStore },
     target: setNeedSignContractWithLandLord,
     clock: [
         setInitialStateEvent,
         mineOwnerLandlordContractForUserStore,
         getContractEffectByExecutor,
+        inventoriesStore,
     ],
     filter: compose(
         ignoreIfInStatus($mineOwnerCabinState, [

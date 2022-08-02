@@ -31,11 +31,15 @@ export const hasMineNftFilter = (inventories: UserInventoryType[] | null) => {
 export const checkIsUserLocationOutsideMineFilter = (user: UserDto[] | null) =>
     Boolean(user?.[0]?.location !== LOCATION_TO_ID.mine_deck);
 
-export const checkIsContractInactive = (
-    contract: ContractDto | null | undefined
-) => {
-    if (contract === null) {
-        return false;
+export const checkIsContractInactive = ({
+    mineOwnerLandlordContractForUserStore: contract,
+    inventoriesStore,
+}: {
+    mineOwnerLandlordContractForUserStore: ContractDto | null | undefined;
+    inventoriesStore: UserInventoryType[] | null;
+}) => {
+    if (!contract && hasMineNftFilter(inventoriesStore)) {
+        return true;
     }
 
     return contract?.status !== ContractStatus.active;
