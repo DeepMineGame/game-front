@@ -38,7 +38,11 @@ export const checkIsContractInactive = ({
     mineOwnerLandlordContractForUserStore: ContractDto | null | undefined;
     inventoriesStore: UserInventoryType[] | null;
 }) => {
-    if (!contract && hasMineNftFilter(inventoriesStore)) {
+    if (contract === null) {
+        return false;
+    }
+
+    if (contract === undefined && hasMineNftFilter(inventoriesStore)) {
         return true;
     }
 
