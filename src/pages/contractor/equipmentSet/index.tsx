@@ -58,9 +58,9 @@ export const EquipmentSetPage: FC = () => {
         useTableData<UserInventoryType>(getInventoryConfig);
 
     const getConfigForContracts = useCallback(
-        () =>
+        (account: string) =>
             getContractsNameConfig(
-                accountName,
+                account,
                 mapSearchParamForIndexPositionToFindContracts.executorId,
                 10000
             ),
