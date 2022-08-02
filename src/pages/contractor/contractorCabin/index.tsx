@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
     desktopS,
     Header,
@@ -46,13 +46,17 @@ export const ContractorCabin = () => {
     const bgRatio = 1366 / 712;
     const isBgWidthHidden = width > height * bgRatio;
 
-    const { data: userInfo } = useTableData<UserInfoType>(getUserConfig);
-    const { data: userContracts } = useTableData<ContractDto>((accountName) =>
-        getContractsNameConfig(
+    const getConfigForContracts = useCallback((accountName: string) => {
+        return getContractsNameConfig(
             accountName,
             mapSearchParamForIndexPositionToFindContracts.executorId,
             10000
-        )
+        );
+    }, []);
+
+    const { data: userInfo } = useTableData<UserInfoType>(getUserConfig);
+    const { data: userContracts } = useTableData<ContractDto>(
+        getConfigForContracts
     );
     const { data: userInventory } =
         useTableData<UserInventoryType>(getInventoryConfig);

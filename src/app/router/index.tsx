@@ -10,7 +10,8 @@ import { DocumentTitle } from './components/DocumentTitle';
 const LogInWrapper: React.FC<{
     children: any;
     forAdmin?: boolean;
-}> = ({ children, forAdmin }) => {
+    forBetaUser?: boolean;
+}> = ({ children, forAdmin, forBetaUser }) => {
     const navigate = useNavigate();
     const { activeUser: chainUser, notLoggedIn } = useChainAuthContext();
     const user = useStore(userStore);
@@ -31,11 +32,19 @@ const LogInWrapper: React.FC<{
         if (
             notLoggedIn ||
             (forAdmin && user?.is_admin === false) ||
+            (forBetaUser && user?.is_beta === false) ||
             (!!user?.wax_address && user.wax_address !== chainUser?.accountName)
         ) {
             navigate('/', { replace: true });
         }
-    }, [notLoggedIn, forAdmin, user, navigate, chainUser?.accountName]);
+    }, [
+        notLoggedIn,
+        forAdmin,
+        forBetaUser,
+        user,
+        navigate,
+        chainUser?.accountName,
+    ]);
 
     if (isFetching || (!chainUser && !notLoggedIn))
         return <LoadingScreen key="loading" size="large" />;
