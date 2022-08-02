@@ -3,24 +3,14 @@ import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { ATOMICHUB_URL } from 'app/constants';
-import {
-    useTableData,
-    Button,
-    Result,
-    Text,
-    Select,
-    useReloadPage,
-} from 'shared';
-import { MinesGate } from 'features';
+import { Button, Result, Text, Select, useReloadPage } from 'shared';
+import { MinesGate, minesStore } from 'features';
 import { useSmartContractAction } from 'features/hooks';
 import {
     ContractDto,
     ContractorSlots,
-    getInventoryConfig,
-    minesStore,
     signOrder,
     SlotStatus,
-    UserInventoryType,
 } from 'entities/smartcontract';
 import { SignModal } from '../SignModal';
 import styles from './styles.module.scss';
@@ -50,10 +40,8 @@ const SignContractorOrder: FC<Props> = ({ contract, accountName }) => {
 
     useGate(MinesGate, { searchParam: accountName });
     const mines = useStore(minesStore);
-    const emptySlot = getEmptySlot(mines?.[0]?.contractor_slots ?? []);
 
-    const { data: userInventory } =
-        useTableData<UserInventoryType>(getInventoryConfig);
+    const emptySlot = getEmptySlot(mines[0]?.contractor_slots ?? []);
 
     const signContractAction = useSmartContractAction(
         signOrder({
@@ -69,7 +57,7 @@ const SignContractorOrder: FC<Props> = ({ contract, accountName }) => {
     };
 
     const handleSign = () => {
-        if (!userInventory.length) {
+        if (!mines.length) {
             setIsWarningModalVisible(true);
         } else {
             setIsModalVisible(true);
@@ -122,9 +110,9 @@ const SignContractorOrder: FC<Props> = ({ contract, accountName }) => {
                         onChange={setMineId}
                         className={styles.select}
                         placeholder={t('pages.serviceMarket.order.selectMine')}
-                        options={userInventory.map(({ asset_id }) => ({
-                            value: asset_id,
-                            label: `ID${asset_id}`,
+                        options={mines.map(({ id }) => ({
+                            value: id,
+                            label: `ID${id}`,
                         }))}
                     />
                 </div>
