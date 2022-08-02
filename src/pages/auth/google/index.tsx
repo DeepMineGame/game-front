@@ -75,7 +75,7 @@ export const GoogleAuthPage: React.FC<Props> = ({ onSuccess }) => {
         <div className={styles.wrapper}>
             <DeepMineLogo width={240} height={142} />
             <div className={styles.content}>
-                {user?.is_admin === false ? (
+                {user?.is_admin === false && user?.is_beta === false ? (
                     <Typography.Text
                         type="danger"
                         className={styles.warning}
