@@ -5,6 +5,7 @@ import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import {
     getInventoryConfig,
+    IN_GAME_NFT_IDS,
     UserInventoryType,
     withdrawAssets,
 } from 'entities/smartcontract';
@@ -26,6 +27,10 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
         useTableData<UserInventoryType>(getInventoryConfig);
     const userInventoryNotUse = userInventory.filter(({ in_use }) => !in_use);
 
+    const gameAssets = userAtomicAssets.filter((item) =>
+        IN_GAME_NFT_IDS.includes(item.template_id)
+    );
+
     const [draggedElement, setDraggedElement] =
         useState<null | UserInventoryType>(null);
     const reloadPage = useReloadPage();
@@ -33,8 +38,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
         new Set<UserInventoryType>()
     );
     const isAtomicIncludesDragged =
-        userAtomicAssets.filter((item) => draggedElements.has(item))?.length >
-        0;
+        gameAssets.filter((item) => draggedElements.has(item))?.length > 0;
 
     const onDrop: DragEventHandler<HTMLDivElement> = (e) => {
         e?.preventDefault();
@@ -123,7 +127,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                             {renderCards(draggedElements, setDraggedElement)}
                         </div>
                     ) : (
-                        renderCards(userAtomicAssets, setDraggedElement)
+                        renderCards(gameAssets, setDraggedElement)
                     )}
                 </div>
             </Col>
