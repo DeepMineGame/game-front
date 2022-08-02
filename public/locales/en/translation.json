@@ -202,7 +202,13 @@
         "title": "Travel to Contractor’s cabin",
         "contentTitle": "This action will take:",
         "cancel": "Cancel",
-        "travel": "Travel"
+        "travel": "Travel",
+        "to": {
+          "contractor": "Travel to Contractor’s cabin",
+          "mineOwner": "Travel to Mine owner cabin",
+          "landlord": "Travel to Landlord cabin",
+          "hive": "Travel to Hive"
+        }
       },
       "physicalShiftBadge": {
         "text": "Do you want to travel here?",

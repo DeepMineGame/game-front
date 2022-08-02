@@ -3,20 +3,32 @@ import { useTranslation } from 'react-i18next';
 import { CloseOutlined } from '@ant-design/icons';
 import { Modal } from 'antd';
 import { Timer } from 'shared';
+import { LOCATION_TO_ID } from 'entities/smartcontract';
+
 import styles from './styles.module.scss';
 
 interface SignContractProps {
+    locationId: LOCATION_TO_ID;
     onClose: () => void;
     onClick: () => void;
     visible: boolean;
 }
 
+const titlesMap: Record<number, string> = {
+    [LOCATION_TO_ID.mine]: 'contractor',
+    [LOCATION_TO_ID.hive]: 'hive',
+    [LOCATION_TO_ID.landlords_reception]: 'landlord',
+    [LOCATION_TO_ID.mine_deck]: 'mineOwner',
+};
+
 export const TravelModal = ({
     onClick,
     onClose,
     visible,
+    locationId,
 }: SignContractProps) => {
     const { t } = useTranslation();
+    const titleLocalesKey = titlesMap[locationId];
 
     return (
         <Modal
@@ -24,12 +36,15 @@ export const TravelModal = ({
             onCancel={onClose}
             footer={null}
             wrapClassName={styles.wrapper}
-            closable={false}
         >
             <div className={styles.container}>
                 <div className={styles.header}>
                     <div className={styles.title}>
-                        {t('pages.contractor.travel.title')}
+                        {t(
+                            titleLocalesKey
+                                ? `pages.contractor.travel.to.${titleLocalesKey}`
+                                : 'pages.contractor.travel.title'
+                        )}
                     </div>
                     <CloseOutlined className={styles.close} />
                 </div>
