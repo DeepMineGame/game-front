@@ -29,7 +29,7 @@ export const GoogleAuthPage: React.FC<Props> = ({ onSuccess }) => {
     const [isAuthLinkFetching, setIsAuthLinkFetching] = useState(false);
 
     useEffect(() => {
-        if (user?.is_admin) onSuccess();
+        if (user?.is_admin || user?.is_beta) onSuccess();
     }, [user]);
 
     useEffect(() => {
