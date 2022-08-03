@@ -21,6 +21,11 @@ export enum InUseType {
     inUse,
 }
 
+export enum StructType {
+    notMine,
+    mine,
+}
+
 export const rarityMap = {
     [RarityType.undefined]: '',
     [RarityType.common]: 'Common',
@@ -35,6 +40,7 @@ export type UserInventoryType = {
     template_id: InventoryIdType;
     owner: string;
     in_use: InUseType;
+    struct_type: StructType;
     rarity: RarityType;
     weight: number;
     inv_type: InventoryType;
