@@ -30,7 +30,7 @@ const LogInWrapper: React.FC<{
 
     useEffect(() => {
         const adminAccessDenied = forAdmin && user?.is_admin === false;
-        const betaAccessDenied = forBetaUser && user?.is_admin === false;
+        const betaAccessDenied = forBetaUser && user?.is_beta === false;
 
         if (
             notLoggedIn ||
