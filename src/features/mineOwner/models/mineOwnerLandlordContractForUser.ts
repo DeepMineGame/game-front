@@ -19,8 +19,8 @@ export const getContractEffectByExecutor = createEffect(
     }
 );
 export const mineOwnerLandlordContractForUserStore = createStore<
-    ContractDto | null | undefined
->(null).on(
+    ContractDto | 'empty' | 'init'
+>('init').on(
     getContractEffectByExecutor.doneData,
     (_, { rows }) =>
         rows
@@ -28,5 +28,5 @@ export const mineOwnerLandlordContractForUserStore = createStore<
                 ({ type }: ContractDto) =>
                     type === ContractType.landlord_mineowner
             )
-            ?.reverse()[0]
+            ?.reverse()[0] || 'empty'
 );
