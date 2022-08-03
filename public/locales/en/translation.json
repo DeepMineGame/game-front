@@ -177,7 +177,7 @@
       },
       "setup": {
         "title": "set up the Equipment",
-        "description": "To start mining you need to install the equipment \nand you need to perform a physical shit to this location.",
+        "description": "To start mining you need to install the equipment \nand you need to perform a physical shift to this location.",
         "descriptionShort": "To start mining we need to install the equipment"
       },
       "ready": {
@@ -312,7 +312,7 @@
         "storage": "Storage",
         "market": "Market",
         "engageTitle": "Engage the Area",
-        "engageDescription": "You need to perform a physical shit to this location",
+        "engageDescription": "You need to perform a physical shift to this location",
         "engageButton": "Engage the Area",
         "setupTitle": "Install a mine",
         "setupDescription": "You need to install a mine on your area to proceed",
