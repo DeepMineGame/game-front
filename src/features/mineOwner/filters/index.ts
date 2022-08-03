@@ -35,17 +35,15 @@ export const checkIsContractInactive = ({
     mineOwnerLandlordContractForUserStore: contract,
     inventoriesStore,
 }: {
-    mineOwnerLandlordContractForUserStore: ContractDto | null | undefined;
+    mineOwnerLandlordContractForUserStore: ContractDto | 'empty' | 'init';
     inventoriesStore: UserInventoryType[] | null;
 }) => {
-    if (contract === null) {
-        return false;
-    }
-
-    if (contract === undefined && hasMineNftFilter(inventoriesStore)) {
+    if (contract === 'empty' && !hasMineNftFilter(inventoriesStore)) {
         return true;
     }
-
+    if (contract === 'init' || contract === 'empty') {
+        return false;
+    }
     return contract?.status !== ContractStatus.active;
 };
 
@@ -54,9 +52,11 @@ export const checkMineNotSetup = ({
     mineOwnerLandlordContractForUserStore,
 }: {
     userMineStore: MineDto[] | null;
-    mineOwnerLandlordContractForUserStore: ContractDto | null | undefined;
+    mineOwnerLandlordContractForUserStore: ContractDto | 'empty' | 'init';
 }) => {
     const hasActiveContract =
+        mineOwnerLandlordContractForUserStore !== 'init' &&
+        mineOwnerLandlordContractForUserStore !== 'empty' &&
         mineOwnerLandlordContractForUserStore?.status === ContractStatus.active;
     const isMineEmpty = userMineStore === null;
     const isMineNotSetuped = userMineStore?.[0]?.state !== MineState.setuped;

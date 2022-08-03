@@ -34,6 +34,7 @@ export function useActionsButton() {
     const setupMineAction = useSmartContractAction(
         setupMine({
             waxUser: accountName,
+            // @ts-ignore
             contractId: contract?.id!,
         })
     );
