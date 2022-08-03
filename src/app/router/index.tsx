@@ -29,10 +29,12 @@ const LogInWrapper: React.FC<{
     }, [user, navigate, getUserFromSession]);
 
     useEffect(() => {
+        const adminAccessDenied = forAdmin && user?.is_admin === false;
+        const betaAccessDenied = forBetaUser && user?.is_admin === false;
+
         if (
             notLoggedIn ||
-            (forAdmin && user?.is_admin === false) ||
-            (forBetaUser && user?.is_beta === false) ||
+            (adminAccessDenied && betaAccessDenied) ||
             (!!user?.wax_address && user.wax_address !== chainUser?.accountName)
         ) {
             navigate('/', { replace: true });
