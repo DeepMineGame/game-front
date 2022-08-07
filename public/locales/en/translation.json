@@ -424,7 +424,7 @@
       "claim": "Claim DME",
       "engage": "Engage the Area",
       "unengage": "Unengage the Area",
-      "unengageDescription": "Deactivation will result in contractors not being able to start mining",
+      "unengageDescription": "Are you sure you want to stop operating the area?",
       "search": "Searching for Mine owner",
       "mineSlots": "Mine slots",
       "status": "Mine status",
