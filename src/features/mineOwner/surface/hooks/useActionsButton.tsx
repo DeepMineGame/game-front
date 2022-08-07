@@ -107,7 +107,7 @@ export function useActionsButton() {
                     visible={isSetupMineModalVisible}
                     onCancel={() => setSetupMineModalVisible(false)}
                     onSubmit={setupSignAndReload}
-                    title={t('pages.areaManagement.landActivation')}
+                    title={t('features.mineOwner.setupMine')}
                 />
                 <Button
                     type="link"
