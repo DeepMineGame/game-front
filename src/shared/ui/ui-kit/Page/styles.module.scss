@@ -1,6 +1,9 @@
 @import "src/shared";
 
 .wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
   background: $color-neutral-neutral-3;
   min-height: 100vh;
   font-family: $bai;
@@ -8,9 +11,14 @@
 }
 
 .content {
-  padding: 56px 16px;
+  flex-grow: 1;
+  overflow-y: auto;
 
-  @media only screen and (min-width: $media-desktop-s)  {
-    padding: 44px 56px;
+  &WithPaddings {
+    padding: 56px 16px;
+
+    @media only screen and (min-width: $media-desktop-s)  {
+      padding: 44px 56px;
+    }
   }
 }
