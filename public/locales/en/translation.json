@@ -143,7 +143,7 @@
       "estimatesDme": "Estimates amount of DME",
       "mineDepth": "Mine depth",
       "doWantStopMining": "Do you really want to stop mining?",
-      "consumablesWillBurnOut": "Your consumables will burn out and you won’t be able to use them anymore",
+      "consumablesWillBurnOut": "Your consumables will be burned, energy and time used mining will be lost and you won't receive DME",
       "timeSpent": "Time spent",
       "dmeCollected": "DME collected",
         "calculateMining": "Calculate mining"
