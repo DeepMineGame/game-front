@@ -1,17 +1,24 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { CopyOutlined } from '@ant-design/icons';
-import { ContractDto, ContractStatus } from 'entities/smartcontract';
+import { ShareAltOutlined } from '@ant-design/icons';
+import {
+    ContractDto,
+    ContractStatus,
+    getContractStatus,
+} from 'entities/smartcontract';
 import { secondsToDays, Text, toLocaleDate } from 'shared/ui';
-import { TableWithTitle } from '../../ui';
+import { TableWithTitle, ContractState } from '../../ui';
 import styles from '../styles.module.scss';
 
 type Props = {
     contract: ContractDto;
+    accountName: string;
 };
 
-const GeneralDataTable: FC<Props> = ({ contract }) => {
+const GeneralDataTable: FC<Props> = ({ contract, accountName }) => {
     const { t } = useTranslation();
+
+    const contractStatus = getContractStatus(contract, accountName);
 
     const isOrder =
         contract.status === ContractStatus.signed_by_client ||
@@ -23,16 +30,23 @@ const GeneralDataTable: FC<Props> = ({ contract }) => {
                 ? 'pages.serviceMarket.order.orderId'
                 : 'pages.serviceMarket.contract.contractId'
         )]: (
-            <>
-                <CopyOutlined
+            <div className={styles.contractId}>
+                <Text className={styles.contractNumber}>{contract.id}</Text>
+                <ShareAltOutlined
                     className={styles.copyIcon}
                     onClick={() =>
-                        navigator.clipboard.writeText(`${contract.id}`)
+                        navigator.clipboard.writeText(window.location.href)
                     }
                 />
-                <Text className={styles.accent}>{contract.id}</Text>
-            </>
+            </div>
         ),
+        ...(!isOrder && {
+            [t('pages.serviceMarket.status')]: (
+                <div className={styles.status}>
+                    <ContractState contractStatus={contractStatus} />
+                </div>
+            ),
+        }),
         [t('pages.serviceMarket.creationDate')]: toLocaleDate(
             contract.create_time * 1000
         ),

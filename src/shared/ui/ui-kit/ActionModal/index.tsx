@@ -39,7 +39,7 @@ export const ActionModal: FC<Props> = ({
                 0
             </Button>
             <div>
-                <Button type="ghost">
+                <Button type="ghost" onClick={onCancel}>
                     {t('components.common.button.cancel')}
                 </Button>
                 <Button type="primary" onClick={() => onSubmit(useDmp)}>
