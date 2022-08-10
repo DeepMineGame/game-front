@@ -114,7 +114,7 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId }) => {
                 visible={isModalActionVisible}
                 onCancel={() => setIsModalActionVisible(false)}
                 onSubmit={onEngage}
-                title={t('pages.areaManagement.landActivation')}
+                title={t('features.mineOwner.setupMine')}
             />
         </div>
     );
