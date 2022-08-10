@@ -150,10 +150,7 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                                 className={styles.location}
                                 items={{
                                     Location: (
-                                        <Title
-                                            level={5}
-                                            title={styles.locationTitle}
-                                        >
+                                        <Title level={5} style={{ margin: 0 }}>
                                             {
                                                 locationMap[
                                                     smartContractUserData
