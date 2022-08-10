@@ -1,29 +1,7 @@
 .monitor {
-    width: 96%;
-    height: 33.5%;
     position: absolute;
     top: 32%;
     color: white;
-    clip-path: polygon(
-        2.5% 0,
-        37.5% 0,
-        40.5% 5%,
-        61% 5%,
-        64% 0,
-        97.5% 0,
-        100% 5%,
-        100% 95%,
-        97.5% 100%,
-        64% 100%,
-        61% 95%,
-        40.5% 95%,
-        37.5% 100%,
-        2.5% 100%,
-        0 95%,
-        0 5%
-    );
-    background: #093d6c5c;
-    backdrop-filter: blur(3px);
 
     &Status {
         position: absolute;
@@ -62,4 +40,7 @@
     width: fit-content;
     position: absolute;
 }
-  
+
+.display {
+    filter: blur(1px);
+}

@@ -132,6 +132,10 @@ export const ContractorCabin = () => {
             })}
         >
             <Monitor
+                display={{
+                    className: styles.cabinDisplay,
+                    points: '5 25, 22 8, 255 8, 272 23, 400 23, 422 10, 645 10, 670 40, 670 310, 650 330, 650 330, 420 330, 400 320, 270 320, 250 335, 20 335, 5 320',
+                }}
                 classNameContainer={
                     isBgWidthHidden && isDesktop
                         ? styles.cabinMonitorContainerWidth
