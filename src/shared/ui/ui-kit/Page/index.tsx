@@ -18,7 +18,12 @@ export const Page: FC<Props> = ({
     return (
         <div className={cn(styles.wrapper, className)}>
             <Header title={headerTitle} />
-            <div className={removeContentPadding ? undefined : styles.content}>
+
+            <div
+                className={cn(styles.content, {
+                    [styles.contentWithPaddings]: !removeContentPadding,
+                })}
+            >
                 {children}
             </div>
         </div>
