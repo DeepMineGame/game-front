@@ -1,23 +1,25 @@
-@import "src/shared";
+@import 'src/shared';
 
 .container {
-  max-width: 360px;
-  padding: 15px 19px;
-  margin: 0 auto;
+    max-width: 560px;
+    padding: 15px 19px;
+    margin: 0 auto;
 }
 
 .title {
-  padding-top: 0;
+    padding-top: 0;
+    margin-bottom: 12px;
 
-  @media only screen and (min-width: $media-desktop-s)  {
-    padding-top: 56px;
-  }
+    @media only screen and (min-width: $media-desktop-s) {
+        padding-top: 16px;
+    }
 }
 
-.description, .descriptionCenter {
-  padding-top: 16px;
+.description,
+.descriptionCenter {
+    padding-top: 16px;
 }
 
 .descriptionCenter {
-  text-align: center;
+    text-align: center;
 }
