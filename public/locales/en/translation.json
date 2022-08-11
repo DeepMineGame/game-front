@@ -315,7 +315,7 @@
         "engageDescription": "You need to perform a physical shift to this location",
         "engageButton": "Engage the Area",
         "setupTitle": "Install a mine",
-        "setupDescription": "You need to install a mine on your area to proceed",
+        "setupDescription": "You need to sign a Mine Operation contract with a Mine Owner to setup a mine on your Area. Proceed to Area Management deck.",
         "searching": "Searching for a Mine owner",
         "mineIsSetTitle": "The Mine is set to the land",
         "mineIsSetDescription": "Now you can see the full stastistics",
