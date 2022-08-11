@@ -42,9 +42,7 @@ const GeneralDataTable: FC<Props> = ({ contract, accountName }) => {
         ),
         ...(!isOrder && {
             [t('pages.serviceMarket.status')]: (
-                <div className={styles.status}>
-                    <ContractState contractStatus={contractStatus} />
-                </div>
+                <ContractState contractStatus={contractStatus} />
             ),
         }),
         [t('pages.serviceMarket.creationDate')]: toLocaleDate(

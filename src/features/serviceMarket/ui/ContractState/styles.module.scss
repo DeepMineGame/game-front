@@ -20,3 +20,9 @@
 .checkIcon {
     color: $color-neutral-neutral-9;
 }
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

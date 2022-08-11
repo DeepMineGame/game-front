@@ -1,7 +1,12 @@
 import React, { FC } from 'react';
 import { serviceMarket } from 'app/router/paths';
 import { t } from 'i18next';
-import { ContractDto, contractName, statusMap } from 'entities/smartcontract';
+import { ContractState } from 'features';
+import {
+    ContractDto,
+    contractName,
+    getContractStatus,
+} from 'entities/smartcontract';
 import { getUserRoleInContract } from 'shared/lib/utils';
 import { Link, Table, Tag } from '../../ui-kit';
 import { toLocaleDate } from '../../utils';
@@ -51,6 +56,7 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
                 const role = !partnerNickname
                     ? null
                     : getUserRoleInContract(contract, partnerNickname);
+                const contractStatus = getContractStatus(contract, account);
 
                 return {
                     nickName: (
@@ -82,7 +88,7 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
                             ? '-'
                             : toLocaleDate(contract.finishes_at * 1000),
                     penalty: contract.penalty_amount,
-                    status: statusMap[contract.status],
+                    status: <ContractState contractStatus={contractStatus} />,
                 };
             })}
             pagination={{ position: ['bottomCenter'], pageSize: 5 }}

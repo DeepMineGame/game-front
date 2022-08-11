@@ -27,38 +27,38 @@ export const ContractState: FC<{ contractStatus: Status }> = ({
 
     if (contractStatus.value === ContractStates.completed) {
         return (
-            <>
+            <div className={styles.status}>
                 <CheckCircleOutlined className={styles.completedIcon} />{' '}
                 {t('pages.serviceMarket.contract.completed')}
-            </>
+            </div>
         );
     }
 
     if (contractStatus.meta === ContractStatesMeta.complete) {
         return (
-            <>
+            <div className={styles.status}>
                 <ClockCircleOutlined className={styles.waitIcon} />{' '}
                 {t('pages.serviceMarket.contract.waitingAction')}
-            </>
+            </div>
         );
     }
 
     if (contractStatus.value === ContractStates.terminated || showPenalty) {
         return (
-            <>
+            <div className={styles.status}>
                 <CloseCircleOutlined className={styles.terminateIcon} />{' '}
                 {t('pages.serviceMarket.contract.terminated')}
                 {showPenalty && (
                     <ExclamationCircleFilled className={styles.warningIcon} />
                 )}
-            </>
+            </div>
         );
     }
 
     return (
-        <>
+        <div className={styles.status}>
             <CheckOutlined className={styles.checkIcon} />{' '}
             {t('pages.serviceMarket.contract.valid')}
-        </>
+        </div>
     );
 };
