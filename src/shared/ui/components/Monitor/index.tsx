@@ -11,11 +11,12 @@ type Props = {
         points?: string;
         className?: string;
     };
+    frame?: boolean;
 };
 
 export const Monitor: FC<Props> = memo(
-    ({ className, classNameContainer, children, display }) => (
-        <div className={cn(styles.monitorBg, classNameContainer)}>
+    ({ className, classNameContainer, children, display, frame }) => (
+        <div className={cn(frame && styles.monitorBg, classNameContainer)}>
             <svg className={cn(display?.className, styles.display)}>
                 <polygon
                     fill={display?.color || '#093d6c5c'}

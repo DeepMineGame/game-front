@@ -37,14 +37,30 @@
   }
 }
 
+@mixin framePosition {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  position: absolute;  
+}
+
 .cabinMonitorContainerHeight {
+  @include framePosition;
   width: 71vh;
   left: 15.3vh;
 }
 
 .cabinMonitorContainerWidth {
+  @include framePosition;
   width: 71vh;
   left: 8vw;
+}
+
+.monitor {
+  position: absolute;
+  top: 32%;
 }
 
 .cabinDisplay {

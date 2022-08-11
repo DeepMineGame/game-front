@@ -1,5 +1,10 @@
-import React from 'react';
-import { Header, useAccountName, useReloadPage, useTableData } from 'shared';
+import {
+    Header,
+    ResponsiveMonitor,
+    useAccountName,
+    useReloadPage,
+    useTableData,
+} from 'shared';
 import { useStore } from 'effector-react';
 import {
     MineOwnerMenu,
@@ -26,9 +31,14 @@ export const MineOwnerPage = () => {
     return (
         <MineOwnerCabin state={cabinState}>
             <Header withBackButton />
-            <div className={styles.overturnLayout}>
+            <ResponsiveMonitor
+                display={{
+                    points: '100 8, 470 4, 575 145, 520 250, 50 250, 5 150',
+                    className: styles.display,
+                }}
+            >
                 {chainAccountName && <Surface user={chainAccountName} />}
-            </div>
+            </ResponsiveMonitor>
             {chainAccountName && (
                 <MineOwnerMenu
                     currentMineOwnerCabinState={cabinState}

@@ -3,29 +3,28 @@
 .surface {
   text-align: center;
   color: $color-neutral-neutral-9;
-  margin: 45vh auto;
   max-width: 70vw;
   font-size: 12px;
+  position: relative;
+  margin-top: 48vh;
 
   @media  (min-width: $media-mobile-oriental)  {
-    margin: 30vh auto;
     max-width: 27vw;
     font-size: 16px;
   }
   @media  (min-width: $media-tablet)  {
-    margin: 36vh auto;
     max-width: 27vw;
   }
   @media  (min-width: $media-desktop-s)  {
-    margin: 30vh auto;
+    left: 36vw;
     max-width: 27vw;
   }
   @media  (min-width: $media-desktop-l)  {
-    margin: 29vh auto;
-    max-width: 27vw;
+    left: 37vw;
+    max-width: 24vw;
   }
   @media  (min-width: $media-wide)  {
-    margin: 45vh auto;
+    left: 37vw;
     max-width: 27vw;
   }
 }

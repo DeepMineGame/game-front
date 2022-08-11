@@ -13,3 +13,18 @@
   margin-top: 20px;
   margin-left: 20px;
 }
+
+.cabinMonitorContainer {
+  display: flex;
+  flex-direction: column-reverse;
+  height: calc(100vh - 46px);
+  width: 100vw;
+}
+
+.display {
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 228px;
+}

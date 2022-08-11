@@ -9,3 +9,4 @@ export * from './MineCrewTable';
 export * from './ContractsTable';
 export * from './LoadingScreen';
 export * from './LogAs';
+export * from './ResponsiveMonitor';

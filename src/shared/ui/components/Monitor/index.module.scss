@@ -1,6 +1,4 @@
 .monitor {
-    position: absolute;
-    top: 32%;
     color: white;
 
     &Status {
@@ -31,14 +29,9 @@
 }
 
 .monitorBg {
-    background: url("../../images/contractor/Monitor.png") no-repeat;
-    height: 100vh;
+    background-image: url("../../images/contractor/Monitor.png");
+    background-repeat: no-repeat;
     background-size: cover, contain;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
-    position: absolute;
 }
 
 .display {
