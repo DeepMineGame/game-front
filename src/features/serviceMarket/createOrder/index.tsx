@@ -42,17 +42,16 @@ export const CreateOrderForm = () => {
             onValuesChange={(oldValues, currentValues) =>
                 setValues({ ...values, ...currentValues })
             }
-            onFinish={() =>
-                callAction(
+            onFinish={async () => {
+                await callAction(
                     createContr({
                         ...values,
                         wax_user: accountName,
                     } as CreateContrDto)
-                )?.then(() => {
-                    setFormStatus('success');
-                    setTimeout(() => navigate(serviceMarket), 3000);
-                })
-            }
+                );
+                setFormStatus('success');
+                setTimeout(() => navigate(serviceMarket), 3000);
+            }}
         >
             <Steps
                 className={styles.steps}

@@ -1,18 +1,19 @@
-import { DAY_IN_SECONDS } from 'shared';
+import { DAY_IN_SECONDS, HOUR_IN_SECONDS } from 'shared';
 import { deepminegame } from '../../constants';
 import { ContractType } from '../../tables';
 
 export const createContrFormFields = {
-    contractType: 'contract_type' as const,
-    isClient: 'is_client' as const,
-    assetId: 'asset_id' as const,
-    fee: 'fee_percent' as const,
-    deadlineDuration: 'deadline_duration' as const,
-    contractDuration: 'contract_duration' as const,
-    daysForPenalty: 'days_for_penalty' as const,
-    feeDailyMinAmount: 'fee_daily_min_amount' as const,
-    penaltyAmount: 'penalty_amount' as const,
-};
+    contractType: 'contract_type',
+    isClient: 'is_client',
+    assetId: 'asset_id',
+    fee: 'fee_percent',
+    deadlineDurationInDays: 'deadline_duration_in_days',
+    deadlineDurationInHours: 'deadline_duration_in_hours',
+    contractDuration: 'contract_duration',
+    daysForPenalty: 'days_for_penalty',
+    feeDailyMinAmount: 'fee_daily_min_amount',
+    penaltyAmount: 'penalty_amount',
+} as const;
 
 export type CreateContrDto = {
     wax_user: string;
@@ -23,7 +24,8 @@ export type CreateContrDto = {
     fee_daily_min_amount: number;
     days_for_penalty: number;
     penalty_amount: number;
-    deadline_duration: number;
+    deadline_duration_in_days: number;
+    deadline_duration_in_hours: number;
     contract_duration: number;
 };
 
@@ -51,8 +53,10 @@ export function createContr(data: CreateContrDto) {
                         data[createContrFormFields.daysForPenalty],
                     penalty_amount: data[createContrFormFields.penaltyAmount],
                     deadline_duration:
-                        data[createContrFormFields.deadlineDuration]! *
-                        DAY_IN_SECONDS,
+                        data[createContrFormFields.deadlineDurationInDays] *
+                            DAY_IN_SECONDS +
+                        data[createContrFormFields.deadlineDurationInHours] *
+                            HOUR_IN_SECONDS,
                     contract_duration:
                         data[createContrFormFields.contractDuration]! *
                         DAY_IN_SECONDS,

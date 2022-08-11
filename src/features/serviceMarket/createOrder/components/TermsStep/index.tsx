@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Card, Form, FormInstance, Space, Tooltip } from 'antd';
-import { Button, getDaysSelectItem, Input, Select, Title } from 'shared';
+import { Button, getLabelSelectItem, Input, Select, Title } from 'shared';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import { useWatch } from 'antd/es/form/Form';
@@ -64,8 +64,9 @@ export const TermsStep: FC<{
                         >
                             <Select
                                 placeholder={t('components.common.days')}
-                                options={getDaysSelectItem({
-                                    amountOfDays: 21,
+                                options={getLabelSelectItem({
+                                    amount: 21,
+                                    label: t('components.common.days'),
                                 })}
                             />
                         </Form.Item>
