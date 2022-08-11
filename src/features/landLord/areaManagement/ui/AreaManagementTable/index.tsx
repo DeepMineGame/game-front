@@ -51,7 +51,7 @@ export const AreaManagementTable: FC<Props> = ({ disabled, accountName }) => {
         <AddItem
             className={styles.emptySlot}
             onClick={() => setIsAddModalVisible(true)}
-            text={t('areaManagement.addMineOwner')}
+            text={t('pages.areaManagement.addMineOwner')}
         />
     );
     const discoverSlots = new Array(discoverSlotsCount).fill(
