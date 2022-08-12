@@ -44,7 +44,13 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
                 },
             ]}
             dataSource={contracts.map((contract) => {
-                const role = getUserRoleInContract(contract, account);
+                const partnerNickname =
+                    contract.client === account
+                        ? contract.executor
+                        : contract.client;
+                const role = !partnerNickname
+                    ? null
+                    : getUserRoleInContract(contract, partnerNickname);
 
                 return {
                     nickName: (
@@ -52,7 +58,7 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
                             <Link
                                 to={`${serviceMarket}/contract/${contract.id}`}
                             >
-                                {contract.executor || contract.client}
+                                {partnerNickname || '-'}
                             </Link>
                             {role && (
                                 <Tag kind="secondary">
