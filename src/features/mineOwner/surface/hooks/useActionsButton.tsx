@@ -107,7 +107,7 @@ export function useActionsButton() {
                     visible={isSetupMineModalVisible}
                     onCancel={() => setSetupMineModalVisible(false)}
                     onSubmit={setupSignAndReload}
-                    title={t('features.mineOwner.setupMine')}
+                    title={t('pages.features.mineOwner.setupMine')}
                 />
                 <Button
                     type="link"
