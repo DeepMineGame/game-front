@@ -65,16 +65,13 @@ export const GeneralConditionStep: FC<{
                 </Form.Item>
             </InputA.Group>
             <InputA.Group>
-                <Space direction="horizontal">
+                <Space direction="horizontal" align="end">
                     <Form.Item
                         name={createContrFormFields.deadlineDurationInDays}
                         label={t(
                             'pages.serviceMarket.createOrder.startOfOperation'
                         )}
-                        className={cn(
-                            localStyles.deadLineField,
-                            styles.formField
-                        )}
+                        className={cn(styles.formField)}
                         tooltip={
                             <Card
                                 title={t(
@@ -98,10 +95,7 @@ export const GeneralConditionStep: FC<{
                     </Form.Item>
                     <Form.Item
                         name={createContrFormFields.deadlineDurationInHours}
-                        className={cn(
-                            localStyles.deadLineField,
-                            styles.formField
-                        )}
+                        className={cn(styles.formField)}
                     >
                         <Select
                             placeholder={t('components.common.hours')}
