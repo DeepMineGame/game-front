@@ -65,7 +65,7 @@ export const GeneralConditionStep: FC<{
                 </Form.Item>
             </InputA.Group>
             <InputA.Group>
-                <Space direction="horizontal" align="end">
+                <div className={localStyles.deadlineInputsContainer}>
                     <Form.Item
                         name={createContrFormFields.deadlineDurationInDays}
                         label={t(
@@ -106,7 +106,7 @@ export const GeneralConditionStep: FC<{
                             })}
                         />
                     </Form.Item>
-                </Space>
+                </div>
             </InputA.Group>
             <Space direction="horizontal">
                 <Button onClick={() => setStep(0)} ghost>
