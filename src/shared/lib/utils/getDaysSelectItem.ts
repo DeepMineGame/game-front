@@ -23,4 +23,4 @@ export const getLabelSelectItem = ({
             label: `${Array.from(Array(amount).keys()).length} ${label}`,
             value: Array.from(Array(amount).keys()).length,
         },
-    ].filter(Boolean as any as ExcludesFalse);
+    ].filter(Boolean as unknown as ExcludesFalse);
