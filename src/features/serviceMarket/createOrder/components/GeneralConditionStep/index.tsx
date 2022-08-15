@@ -59,7 +59,7 @@ export const GeneralConditionStep: FC<{
                         placeholder={t('components.common.days')}
                         options={getLabelSelectItem({
                             amount: 21,
-                            label: 'Days',
+                            label: t('components.common.days'),
                         })}
                     />
                 </Form.Item>
@@ -89,7 +89,7 @@ export const GeneralConditionStep: FC<{
                             placeholder={t('components.common.days')}
                             options={getLabelSelectItem({
                                 amount: 3,
-                                label: 'Days',
+                                label: t('components.common.days'),
                             })}
                         />
                     </Form.Item>
@@ -101,7 +101,7 @@ export const GeneralConditionStep: FC<{
                             placeholder={t('components.common.hours')}
                             options={getLabelSelectItem({
                                 amount: 23,
-                                label: 'Hours',
+                                label: t('components.common.hours'),
                                 sinceZero: true,
                             })}
                         />
