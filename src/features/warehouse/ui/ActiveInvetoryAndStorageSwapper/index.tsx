@@ -1,5 +1,5 @@
 import { Col, Row } from 'antd';
-import React, { DragEventHandler, FC, useState } from 'react';
+import { DragEventHandler, FC, useState } from 'react';
 import { Button, Title, useReloadPage, useTableData } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';

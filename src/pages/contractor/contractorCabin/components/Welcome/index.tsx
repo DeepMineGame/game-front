@@ -1,18 +1,14 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
-import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import { desktopS, useMediaQuery, Line } from 'shared';
+import { desktopS, useMediaQuery } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import { warehouse } from 'app/router/paths';
 import { ATOMICHUB_URL } from 'app';
+import { EquipmentTable, equipmentType } from '../EquipmentTable';
 import contractorStyles from '../../styles.module.scss';
 import styles from './styles.module.scss';
 
-type equipmentType = {
-    name: string;
-    isAvailable: boolean;
-};
 interface SignContractProps {
     equipments: equipmentType[];
 }
@@ -54,24 +50,7 @@ export const Welcome = ({ equipments }: SignContractProps) => {
                         </div>
                     </div>
                 </div>
-                {isDesktop && (
-                    <div className={styles.equipments}>
-                        {equipments.map(({ name, isAvailable }) => (
-                            <Line className={styles.equipmentLine} key={name}>
-                                <div className={styles.equipmentName}>
-                                    {name}
-                                </div>
-                                <div className={styles.equipmentValue}>
-                                    {isAvailable ? (
-                                        <CheckOutlined />
-                                    ) : (
-                                        <CloseOutlined />
-                                    )}
-                                </div>
-                            </Line>
-                        ))}
-                    </div>
-                )}
+                {isDesktop && <EquipmentTable equipments={equipments} />}
             </div>
         </div>
     );

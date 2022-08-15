@@ -1,0 +1,25 @@
+@import 'src/shared';
+
+.equipments {
+    border: 1px solid $color-neutral-neutral-10;
+    border-bottom: none;
+    width: 192px;
+}
+
+.equipmentLine {
+    border-bottom: 1px solid $color-neutral-neutral-10;
+}
+
+.equipmentName {
+    flex: 1;
+    padding: 4px 8px;
+}
+
+.equipmentValue {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-left: 1px solid $color-neutral-neutral-10;
+}

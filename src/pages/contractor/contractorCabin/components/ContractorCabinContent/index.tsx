@@ -27,8 +27,17 @@ interface ContractorCabinContentProps {
 }
 
 const getInventoryNames = (arr: UserInventoryType[]) => {
-    const names = arr.map((v) => ID_TO_INVENTORY[v.template_id]);
+    const names = arr
+        .map((v) => ID_TO_INVENTORY[v.template_id])
+        .filter(Boolean);
     return [...new Set(names)];
+};
+
+const getEquipments = (inventoryNames: string[]) => {
+    return INVENTORY_NAMES.map((name) => ({
+        name,
+        isAvailable: inventoryNames.includes(name),
+    })).filter((v) => v.name);
 };
 
 export const ContractorCabinContent = ({
@@ -55,16 +64,14 @@ export const ContractorCabinContent = ({
 
     if (inventoryNames.length < INVENTORY_NAMES.length) {
         setStatus(CABIN_STATUS.welcome);
-        const equipments = INVENTORY_NAMES.map((name) => ({
-            name,
-            isAvailable: inventoryNames.includes(name),
-        })).filter((v) => v.name);
+        const equipments = getEquipments(inventoryNames);
         return <Welcome equipments={equipments} />;
     }
 
     if (activeInventoryNames.length < INVENTORY_NAMES.length) {
         setStatus(CABIN_STATUS.setup);
-        return <Setup hasShift={hasPhysicalShift} />;
+        const equipments = getEquipments(activeInventoryNames);
+        return <Setup hasShift={hasPhysicalShift} equipments={equipments} />;
     }
 
     if (activeMining.length === 0) {
