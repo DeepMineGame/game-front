@@ -4,8 +4,6 @@ type GetLabelSelectItemParams = {
     sinceZero?: boolean;
 };
 
-type ExcludesFalse = <T>(x: T | false) => x is T;
-
 /**
  * Create options for select from number
  */
@@ -13,14 +11,18 @@ export const getLabelSelectItem = ({
     amount,
     label,
     sinceZero = false,
-}: GetLabelSelectItemParams) =>
-    [
-        ...Array.from(Array(amount).keys()).map((_, index) => ({
-            label: `${index + (sinceZero ? 0 : 1)} ${label}`,
-            value: index + (sinceZero ? 0 : 1),
-        })),
-        sinceZero && {
+}: GetLabelSelectItemParams) => {
+    const labels = Array.from(Array(amount).keys()).map((_, index) => ({
+        label: `${index + (sinceZero ? 0 : 1)} ${label}`,
+        value: index + (sinceZero ? 0 : 1),
+    }));
+
+    if (sinceZero) {
+        labels.push({
             label: `${amount} ${label}`,
             value: amount,
-        },
-    ].filter(Boolean as unknown as ExcludesFalse);
+        });
+    }
+
+    return labels;
+};
