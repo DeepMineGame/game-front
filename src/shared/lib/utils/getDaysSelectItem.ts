@@ -17,12 +17,13 @@ export const getLabelSelectItem = ({
         value: index + (sinceZero ? 0 : 1),
     }));
 
-    if (sinceZero) {
-        labels.push({
-            label: `${amount} ${label}`,
-            value: amount,
-        });
-    }
-
-    return labels;
+    return sinceZero
+        ? [
+              ...labels,
+              {
+                  label: `${amount} ${label}`,
+                  value: amount,
+              },
+          ]
+        : labels;
 };
