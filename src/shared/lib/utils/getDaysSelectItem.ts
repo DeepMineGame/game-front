@@ -20,7 +20,7 @@ export const getLabelSelectItem = ({
             value: index + (sinceZero ? 0 : 1),
         })),
         sinceZero && {
-            label: `${Array.from(Array(amount).keys()).length} ${label}`,
-            value: Array.from(Array(amount).keys()).length,
+            label: `${amount} ${label}`,
+            value: amount,
         },
     ].filter(Boolean as unknown as ExcludesFalse);
