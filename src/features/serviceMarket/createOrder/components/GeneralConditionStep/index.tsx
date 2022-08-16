@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Card, Form, FormInstance, Input as InputA, Space } from 'antd';
-import { Button, Input, Select, getDaysSelectItem } from 'shared';
+import { Button, Input, Select, getLabelSelectItem } from 'shared';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import { useWatch } from 'antd/es/form/Form';
@@ -18,12 +18,19 @@ export const GeneralConditionStep: FC<{
         createContrFormFields.contractDuration,
         form
     );
-    const deadlineTimeFieldValue = useWatch(
-        createContrFormFields.deadlineDuration,
+    const deadlineTimeInDaysFieldValue = useWatch(
+        createContrFormFields.deadlineDurationInDays,
+        form
+    );
+    const deadlineTimeInHoursFieldValue = useWatch(
+        createContrFormFields.deadlineDurationInHours,
         form
     );
     const hasAllValues =
-        feeFieldValue && deadlineTimeFieldValue && finishesAtFieldValue;
+        feeFieldValue &&
+        deadlineTimeInDaysFieldValue &&
+        finishesAtFieldValue &&
+        deadlineTimeInHoursFieldValue;
 
     return (
         <Form.Item>
@@ -50,32 +57,57 @@ export const GeneralConditionStep: FC<{
                 >
                     <Select
                         placeholder={t('components.common.days')}
-                        options={getDaysSelectItem({ amountOfDays: 21 })}
+                        options={getLabelSelectItem({
+                            amount: 21,
+                            label: t('components.common.days'),
+                        })}
                     />
                 </Form.Item>
             </InputA.Group>
-            <Form.Item
-                name={createContrFormFields.deadlineDuration}
-                label={t('pages.serviceMarket.createOrder.startOfOperation')}
-                className={cn(localStyles.deadLineField, styles.formField)}
-                tooltip={
-                    <Card
-                        title={t(
+            <InputA.Group>
+                <div className={localStyles.deadlineInputsContainer}>
+                    <Form.Item
+                        name={createContrFormFields.deadlineDurationInDays}
+                        label={t(
                             'pages.serviceMarket.createOrder.startOfOperation'
                         )}
-                        className={styles.tooltipCard}
+                        className={cn(styles.formField)}
+                        tooltip={
+                            <Card
+                                title={t(
+                                    'pages.serviceMarket.createOrder.startOfOperation'
+                                )}
+                                className={styles.tooltipCard}
+                            >
+                                {t(
+                                    'pages.serviceMarket.createOrder.startOfOperationTooltip'
+                                )}
+                            </Card>
+                        }
                     >
-                        {t(
-                            'pages.serviceMarket.createOrder.startOfOperationTooltip'
-                        )}
-                    </Card>
-                }
-            >
-                <Select
-                    placeholder={t('components.common.days')}
-                    options={getDaysSelectItem({ amountOfDays: 3 })}
-                />
-            </Form.Item>
+                        <Select
+                            placeholder={t('components.common.days')}
+                            options={getLabelSelectItem({
+                                amount: 3,
+                                label: t('components.common.days'),
+                            })}
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        name={createContrFormFields.deadlineDurationInHours}
+                        className={cn(styles.formField)}
+                    >
+                        <Select
+                            placeholder={t('components.common.hours')}
+                            options={getLabelSelectItem({
+                                amount: 23,
+                                label: t('components.common.hours'),
+                                sinceZero: true,
+                            })}
+                        />
+                    </Form.Item>
+                </div>
+            </InputA.Group>
             <Space direction="horizontal">
                 <Button onClick={() => setStep(0)} ghost>
                     {t('kit.back')}
