@@ -70,7 +70,7 @@ export const MineOwnerMenu: FC<Props> = ({
     ];
     return (
         <Menu>
-            <Space>
+            <Space size="middle">
                 {menuItems.map(({ tooltip, link, icon, disabled }) => (
                     <Tooltip overlay={tooltip} key={tooltip}>
                         <div>

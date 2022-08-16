@@ -1,13 +1,18 @@
+@import "src/shared";
+
 .menu {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 56px;
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(2px);
   text-align: center;
-  padding: 12px 224px;
+  padding: 12px;
   justify-content: center;
   display: flex;
+
+  @media only screen and (min-width: $media-desktop-s) {
+    padding: 24px;
+  }
 }
