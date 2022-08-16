@@ -7,10 +7,17 @@
 }
 
 .logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   width: 48px;
   height: 28px;
-  margin-top: 6px;
   cursor: pointer;
+}
+
+.logoContainer {
+  height: 28px;
+  margin-top: 6px;
 }
 
 .hideLogo {

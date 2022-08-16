@@ -46,7 +46,10 @@ export const Header: FC<Props> = ({ withBackButton, title, hideLogo }) => {
                         </Title>
                     </div>
                 ) : (
-                    <div onClick={navigateToHome}>
+                    <div
+                        className={styles.logoContainer}
+                        onClick={navigateToHome}
+                    >
                         <DeepMineLogo
                             className={classNames(styles.logo, {
                                 [styles.hideLogo]: hideLogo,
