@@ -12,6 +12,11 @@ function devServerConfig(config) {
                 changeOrigin: true,
                 withCredentials: true,
             },
+            '/statistic': {
+                target: 'https://rc.deepmine.world',
+                changeOrigin: true,
+                withCredentials: true,
+            },
         },
     };
 }

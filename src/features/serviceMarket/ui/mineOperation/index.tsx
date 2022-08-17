@@ -7,8 +7,8 @@ import { Empty, Skeleton } from 'antd';
 
 import { Button, Segmented } from 'shared';
 import { createOrder } from 'app/router/paths';
-import { MiningContractsTable } from '../mining-contracts/MiningContractsTable';
-import styles from '../mining-contracts/styles.module.scss';
+import { MiningContractsTable } from '../miningContracts/MiningContractsTable';
+import styles from '../miningContracts/styles.module.scss';
 import {
     changeFilterEvent,
     Filter,
