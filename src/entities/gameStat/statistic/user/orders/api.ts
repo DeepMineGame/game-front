@@ -15,10 +15,10 @@ export const getOrders = async ({
     status: FilterOrderStatus;
     user: string;
 }) => {
-    const { data } = await axios.get<ContractDto[]>(
+    const { data = [] } = await axios.get<ContractDto[]>(
         `${ENDPOINT}/statistic/user/orders?user=${user}&status=${status}`,
         defaultConfig
     );
 
-    return data || [];
+    return data;
 };
