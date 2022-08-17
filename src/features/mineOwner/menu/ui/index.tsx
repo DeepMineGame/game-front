@@ -29,10 +29,7 @@ export const MineOwnerMenu: FC<Props> = ({
     const navigate = useNavigate();
     const { t } = useTranslation();
     const userMine = useStore(userMineStore)?.[0];
-    const baseButtonDisableStates = [
-        mineOwnerCabinState.hasNoMineNft,
-        mineOwnerCabinState.needSignContractWithLandLord,
-    ];
+    const baseButtonDisableStates = [mineOwnerCabinState.hasNoMineNft];
     const statusThatDisableManagementButton = [...baseButtonDisableStates];
     const statusThatDisableTeamButton = [...baseButtonDisableStates];
     const statusThatDisableStatsButton = [...baseButtonDisableStates];
