@@ -15,6 +15,12 @@ import styles from './styles.module.scss';
 export * from './order';
 export * from './operation';
 
+enum tabsId {
+    myContracts,
+    miningContracts,
+    mineOperation,
+}
+
 export const ServiceMarketPage = () => {
     const accountName = useAccountName();
     const { t } = useTranslation();
@@ -26,7 +32,7 @@ export const ServiceMarketPage = () => {
             title={t('pages.serviceMarket.serviceMarket')}
             tabs={[
                 {
-                    id: 1,
+                    id: tabsId.myContracts,
                     component: accountName
                         ? memo(() => (
                               <>
@@ -50,12 +56,12 @@ export const ServiceMarketPage = () => {
                     name: t('pages.serviceMarket.myContracts'),
                 },
                 {
-                    id: 2,
+                    id: tabsId.miningContracts,
                     component: MiningContracts,
                     name: t('pages.serviceMarket.miningContracts'),
                 },
                 {
-                    id: 3,
+                    id: tabsId.mineOperation,
                     component: MineOperationContracts,
                     name: t('pages.serviceMarket.mineOperation'),
                 },

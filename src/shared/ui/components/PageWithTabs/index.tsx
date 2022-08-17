@@ -1,7 +1,9 @@
-import React, { FC, useState, JSXElementConstructor } from 'react';
+import { FC, JSXElementConstructor, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DocumentTitle } from 'app/router/components/DocumentTitle';
 import { Empty } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { useQuery } from 'shared';
 import { Navbar, Page } from '../../ui-kit';
 
 export type Tab = {
@@ -16,6 +18,7 @@ type Props = {
     className?: string;
     defaultDocTitle?: boolean;
 };
+
 export const PageWithTabs: FC<Props> = ({
     tabs,
     documentTitleScope,
@@ -24,13 +27,18 @@ export const PageWithTabs: FC<Props> = ({
     defaultDocTitle,
 }) => {
     const { t } = useTranslation();
-    const [selectedTab, setSelectedTab] = useState(tabs?.[0]?.id);
+    const query = useQuery();
+    const tabId = Number(query.get('tabId'));
+    const navigate = useNavigate();
 
-    const handleTabSelect = (id: number) => {
-        setSelectedTab(id);
-    };
+    const handleTabSelect = useCallback(
+        (id: number) => {
+            navigate(`/service-market/?tabId=${id}`);
+        },
+        [navigate]
+    );
 
-    const selectedTabData = tabs.find((tab) => tab.id === selectedTab);
+    const selectedTabData = tabs.find((tab) => tab.id === tabId);
     const ContentComponent = (selectedTabData?.component ?? (() => null)) as FC;
 
     const navbarTabs = tabs.map((tab) => ({
@@ -57,7 +65,7 @@ export const PageWithTabs: FC<Props> = ({
             {tabs?.length ? (
                 <>
                     <Navbar
-                        selectedTabId={selectedTab}
+                        selectedTabId={tabId}
                         tabs={navbarTabs}
                         onTabSelect={handleTabSelect}
                     />
