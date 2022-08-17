@@ -6,16 +6,11 @@ import {
     MyContractsTab,
 } from 'features';
 import { Skeleton } from 'antd';
+import { ServiceMarketTabIds } from 'app/router/constants';
 import styles from './styles.module.scss';
 
 export * from './order';
 export * from './operation';
-
-enum tabsId {
-    myContracts,
-    miningContracts,
-    mineOperation,
-}
 
 export const ServiceMarketPage = () => {
     const accountName = useAccountName();
@@ -27,17 +22,17 @@ export const ServiceMarketPage = () => {
             title={t('pages.serviceMarket.serviceMarket')}
             tabs={[
                 {
-                    id: tabsId.myContracts,
+                    id: ServiceMarketTabIds.myContracts,
                     component: accountName ? MyContractsTab : Skeleton,
                     name: t('pages.serviceMarket.myContracts'),
                 },
                 {
-                    id: tabsId.miningContracts,
+                    id: ServiceMarketTabIds.miningContracts,
                     component: MiningContracts,
                     name: t('pages.serviceMarket.miningContracts'),
                 },
                 {
-                    id: tabsId.mineOperation,
+                    id: ServiceMarketTabIds.mineOperation,
                     component: MineOperationContracts,
                     name: t('pages.serviceMarket.mineOperation'),
                 },

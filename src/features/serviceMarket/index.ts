@@ -7,4 +7,3 @@ export * from './contracts';
 export * from './ui';
 export * from './contracts/model';
 export * from './operation/model';
-export { CreateResult } from './createOrder/components/CreateResult';

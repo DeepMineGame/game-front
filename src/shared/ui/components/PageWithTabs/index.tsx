@@ -4,6 +4,7 @@ import { DocumentTitle } from 'app/router/components/DocumentTitle';
 import { Empty } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'shared';
+import { useLocation } from 'react-router';
 import { Navbar, Page } from '../../ui-kit';
 
 export type Tab = {
@@ -30,12 +31,13 @@ export const PageWithTabs: FC<Props> = ({
     const query = useQuery();
     const tabId = Number(query.get('tabId'));
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleTabSelect = useCallback(
         (id: number) => {
-            navigate(`/service-market/?tabId=${id}`);
+            navigate(`${location.pathname}?tabId=${id}`);
         },
-        [navigate]
+        [location.pathname, navigate]
     );
 
     const selectedTabData = tabs.find((tab) => tab.id === tabId);
