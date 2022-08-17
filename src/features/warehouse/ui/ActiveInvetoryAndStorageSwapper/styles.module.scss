@@ -55,6 +55,20 @@
   }
 }
 
+.cardColumnDisabled::before {
+  z-index: 10;
+  cursor: no-drop;
+  user-select: none;
+}
+
+.cardColumnTooltip {
+  max-width: 465px;
+
+  :global(.ant-tooltip-inner) {
+      color: $color-neutral-neutral-1;
+  }
+}
+
 .cardsWrapper {
   display: flex;
   flex-wrap: wrap;
