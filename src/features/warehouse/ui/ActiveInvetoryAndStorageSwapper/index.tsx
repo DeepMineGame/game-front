@@ -20,7 +20,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     accountName,
 }) => {
     const { t } = useTranslation();
-    useGate(WarehouseGate, { accountName });
+    useGate(WarehouseGate, { searchParam: accountName });
     const renderCards = useRenderCards();
     const userAtomicAssets = useStore(userAtomicAssetsStore);
     const { data: userInventory } =
