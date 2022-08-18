@@ -10,11 +10,12 @@ type Props = {
     className?: string;
     text: string;
     onClick?: () => void;
+    link?: string;
 };
 
-export const AddItem: FC<Props> = ({ text, onClick, className }) => {
+export const AddItem: FC<Props> = ({ text, onClick, className, link }) => {
     const navigate = useNavigate();
-    const navigateToServiceMarket = () => navigate(serviceMarket);
+    const navigateToServiceMarket = () => navigate(link || serviceMarket);
     return (
         <div
             onClick={onClick || navigateToServiceMarket}

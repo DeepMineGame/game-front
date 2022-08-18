@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { createOrder, serviceMarket, warehouse } from 'app/router/paths';
 import { ATOMICHUB_URL } from 'app';
 import { useStore } from 'effector-react';
+import { ServiceMarketTabIds } from 'app/router/constants';
 import {
     ContractType,
     createContrFormFields,
@@ -81,7 +82,14 @@ export function useActionsButton() {
         ),
         [mineOwnerCabinState.needSignContractWithLandLord]: (
             <div>
-                <Button type="link" onClick={() => navigate(serviceMarket)}>
+                <Button
+                    type="link"
+                    onClick={() =>
+                        navigate(
+                            `${serviceMarket}?tabId=${ServiceMarketTabIds.mineOperation}`
+                        )
+                    }
+                >
                     {isDesktop
                         ? t('features.mineOwner.chooseContract')
                         : t('features.mineOwner.choose')}
@@ -107,7 +115,7 @@ export function useActionsButton() {
                     visible={isSetupMineModalVisible}
                     onCancel={() => setSetupMineModalVisible(false)}
                     onSubmit={setupSignAndReload}
-                    title={t('pages.features.mineOwner.setupMine')}
+                    title={t('features.mineOwner.setupMine')}
                 />
                 <Button
                     type="link"

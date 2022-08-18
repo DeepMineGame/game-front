@@ -54,32 +54,52 @@ export const TermsStep: FC<{
                             <QuestionCircleOutlined />
                         </Tooltip>
                     </Title>
-                    <div>
-                        <div>
-                            {t('pages.serviceMarket.createOrder.ifDuring')}
+                    <Space direction="vertical">
+                        <div className={localStyles.inlineInput}>
+                            <div>
+                                {t('pages.serviceMarket.createOrder.ifDuring')}
+                            </div>
+                            <div>
+                                <Form.Item
+                                    name={createContrFormFields.daysForPenalty}
+                                    className={cn(
+                                        styles.formField,
+                                        localStyles.field
+                                    )}
+                                >
+                                    <Select
+                                        options={getLabelSelectItem({
+                                            amount: 21,
+                                            label: t('components.common.days'),
+                                        })}
+                                        placeholder={t(
+                                            'components.common.days'
+                                        )}
+                                    />
+                                </Form.Item>
+                            </div>
                         </div>
-                        <Form.Item
-                            name={createContrFormFields.daysForPenalty}
-                            className={cn(styles.formField, localStyles.field)}
-                        >
-                            <Select
-                                placeholder={t('components.common.days')}
-                                options={getLabelSelectItem({
-                                    amount: 21,
-                                    label: t('components.common.days'),
-                                })}
-                            />
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <div>will extract less than</div>
-                        <Form.Item
-                            name={createContrFormFields.feeDailyMinAmount}
-                            className={cn(styles.formField, localStyles.field)}
-                        >
-                            <Input placeholder="DME" />
-                        </Form.Item>
-                    </div>
+                        <div className={localStyles.inlineInput}>
+                            <div>
+                                {t(
+                                    'pages.serviceMarket.createOrder.willExtractLessThan'
+                                )}
+                            </div>
+                            <Form.Item
+                                name={createContrFormFields.feeDailyMinAmount}
+                                className={cn(
+                                    styles.formField,
+                                    localStyles.field
+                                )}
+                            >
+                                <Input
+                                    placeholder={t(
+                                        'components.common.button.dme'
+                                    )}
+                                />
+                            </Form.Item>
+                        </div>
+                    </Space>
                 </div>
                 <div>
                     {t('pages.serviceMarket.createOrder.contractorFined')}

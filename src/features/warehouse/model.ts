@@ -3,7 +3,7 @@ import { createEffect, createStore, forward } from 'effector';
 import { getAtomicAssetsByUser } from 'entities/atomicassets';
 import { UserInventoryType } from 'entities/smartcontract';
 
-export const WarehouseGate = createGate<{ accountName: string }>(
+export const WarehouseGate = createGate<{ searchParam: string }>(
     'warehouseGate'
 );
 export const getAtomicAssetsEffect = createEffect(getAtomicAssetsByUser);

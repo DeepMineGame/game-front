@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { Button, Modal } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import { createOrder, serviceMarket } from 'app/router/paths';
+import { ServiceMarketTabIds } from 'app/router/constants';
+import { ContractType, createContrFormFields } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -28,7 +30,11 @@ export const AddMineOwnerModal: FC<Props> = ({ visible, onCancel }) => {
                 className={styles.button}
                 block
                 type="ghost"
-                onClick={() => navigate(serviceMarket)}
+                onClick={() =>
+                    navigate(
+                        `${serviceMarket}?tabId=${ServiceMarketTabIds.mineOperation}`
+                    )
+                }
             >
                 {t('pages.areaManagement.findMineOwner')}
             </Button>
@@ -36,7 +42,11 @@ export const AddMineOwnerModal: FC<Props> = ({ visible, onCancel }) => {
                 className={styles.button}
                 block
                 type="ghost"
-                onClick={() => navigate(createOrder)}
+                onClick={() =>
+                    navigate(
+                        `${createOrder}?${createContrFormFields.contractType}=${ContractType.landlord_mineowner}&${createContrFormFields.isClient}=1`
+                    )
+                }
             >
                 {t('pages.areaManagement.createOrder')}
             </Button>

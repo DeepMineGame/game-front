@@ -12,7 +12,7 @@ import {
 import styles from '../../styles.module.scss';
 import { ContractTypeField } from '../ContractTypeField';
 import { RoleField } from '../RoleField';
-import { AssetSelectField } from '../AreaSelectField';
+import { AssetSelectField } from '../AssetSelectField';
 
 export const ContractTypeAndRoleStep: FC<{
     form: FormInstance;

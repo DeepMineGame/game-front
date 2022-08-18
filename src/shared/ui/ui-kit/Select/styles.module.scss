@@ -19,17 +19,21 @@
 }
 
 .dropDownSelect {
-    background: $color-neutral-neutral-1 !important;
+    background: $color-neutral-neutral-2 !important;
 
     :global {
         .ant-select-item {
             color: $color-neutral-neutral-9 !important;
-            background: $color-neutral-neutral-1 !important;
+            background: $color-neutral-neutral-2 !important;
         }
 
         .ant-select-item-option-active {
-            background: $color-neutral-neutral-1 !important;
+            background: $color-neutral-neutral-2 !important;
             color: $color-neutral-neutral-9 !important;
+        }
+
+        .ant-select-item-option-disabled {
+            color: $color-neutral-neutral-6 !important;
         }
     }
 }

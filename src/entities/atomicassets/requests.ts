@@ -13,14 +13,14 @@ export const getAtomicAssetsDataById = async (id: string | number) => {
 };
 
 export const getAtomicAssetsByUser = async ({
-    accountName,
+    searchParam,
 }: {
-    accountName: string;
+    searchParam: string;
 }) => {
     const { data } = await axios.post(`${WAX_GET_TABLE_ENDPOINT}`, {
         json: true,
         code: 'atomicassets',
-        scope: accountName,
+        scope: searchParam,
         table: 'assets',
         index_position: 1,
         limit: 500,

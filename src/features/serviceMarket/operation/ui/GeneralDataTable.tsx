@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ShareAltOutlined } from '@ant-design/icons';
+import { Tooltip } from 'antd';
 import {
     ContractDto,
     ContractStatus,
@@ -30,15 +31,17 @@ const GeneralDataTable: FC<Props> = ({ contract, accountName }) => {
                 ? 'pages.serviceMarket.order.orderId'
                 : 'pages.serviceMarket.contract.contractId'
         )]: (
-            <div className={styles.contractId}>
-                <Text className={styles.contractNumber}>{contract.id}</Text>
-                <ShareAltOutlined
-                    className={styles.copyIcon}
-                    onClick={() =>
-                        navigator.clipboard.writeText(window.location.href)
-                    }
-                />
-            </div>
+            <Tooltip trigger="click" overlay={t('pages.info.copied')}>
+                <div className={styles.contractId}>
+                    <Text className={styles.contractNumber}>{contract.id}</Text>
+                    <ShareAltOutlined
+                        className={styles.copyIcon}
+                        onClick={() =>
+                            navigator.clipboard.writeText(window.location.href)
+                        }
+                    />
+                </div>
+            </Tooltip>
         ),
         ...(!isOrder && {
             [t('pages.serviceMarket.status')]: (

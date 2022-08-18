@@ -1,10 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router';
 import { useGate, useStore } from 'effector-react';
-import { Empty, Skeleton } from 'antd';
+import { Skeleton } from 'antd';
 import { Page, useAccountName } from 'shared';
 import { ContractGate, contractStore, getContractEffect } from 'features';
 import { ContractStatus } from 'entities/smartcontract';
+import { PageNotFound } from '../../pageNotFound';
 import { ContractPage } from './ContractPage';
 import { OrderPage } from './OrderPage';
 
@@ -33,11 +34,7 @@ export const OperationPage = () => {
     }
 
     if (!contract) {
-        return (
-            <Page>
-                <Empty />
-            </Page>
-        );
+        return <PageNotFound />;
     }
 
     if (ORDER_STATUS.includes(contract.status)) {
