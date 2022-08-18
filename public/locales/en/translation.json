@@ -33,7 +33,8 @@
       "warehouse": "Warehouse",
       "activeInventory": "Active inventory",
       "confirmTransfer": "Confirm transfer",
-      "storage": "Storage"
+      "storage": "Storage",
+      "YouHaveToPhysicalToManageInventory": "You have to perform a physical shift to manage the active inventory"
     },
     "common": {
       "button": {

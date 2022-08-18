@@ -1,11 +1,15 @@
-import { Col, Row } from 'antd';
 import { DragEventHandler, FC, useState } from 'react';
-import { Button, Title, useReloadPage, useTableData } from 'shared';
+import { Col, Row, Tooltip } from 'antd';
+import cn from 'classnames';
+import { Button, primary5, Title, useReloadPage, useTableData } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
+import { isUserInHive } from 'features/hive';
+import { Travel } from 'features/physicalShift';
 import {
     getInventoryConfig,
     IN_GAME_NFT_IDS,
+    LOCATION_TO_ID,
     UserInventoryType,
     withdrawAssets,
 } from 'entities/smartcontract';
@@ -21,6 +25,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
 }) => {
     const { t } = useTranslation();
     useGate(WarehouseGate, { searchParam: accountName });
+    const isInHive = useStore(isUserInHive);
     const renderCards = useRenderCards();
     const userAtomicAssets = useStore(userAtomicAssetsStore);
     const { data: userInventory } =
@@ -76,33 +81,57 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
         }
         return reloadPage();
     };
+
+    const handleDragCard = (element: UserInventoryType) => {
+        if (isInHive) {
+            setDraggedElement(element);
+        }
+    };
+
     return (
         <Row>
-            <Col
-                span={11}
-                className={styles.cardColumn}
-                onDrop={onDrop}
-                // https://stackoverflow.com/questions/32084053/why-is-ondrop-not-working
-                onDragOver={(e) => e.preventDefault()}
+            {!isInHive && (
+                <Travel
+                    toLocationId={LOCATION_TO_ID.hive}
+                    onSuccess={reloadPage}
+                />
+            )}
+            <Tooltip
+                overlayClassName={styles.cardColumnTooltip}
+                visible={!isInHive}
+                color={primary5}
+                overlay={t(
+                    'components.hive.YouHaveToPhysicalToManageInventory'
+                )}
             >
-                <Title className={styles.title} level={5}>
-                    {t('components.hive.activeInventory')}
-                </Title>
-                <div>
-                    {isAtomicIncludesDragged && draggedElements.size ? (
-                        <div className={styles.draggedElements}>
-                            {renderCards(draggedElements, setDraggedElement)}
-                        </div>
-                    ) : (
-                        <div className={styles.cardsWrapper}>
-                            {renderCards(
-                                userInventoryNotUse,
-                                setDraggedElement
-                            )}
-                        </div>
-                    )}
-                </div>
-            </Col>
+                <Col
+                    span={11}
+                    className={cn(styles.cardColumn, {
+                        [styles.cardColumnDisabled]: !isInHive,
+                    })}
+                    onDrop={onDrop}
+                    // https://stackoverflow.com/questions/32084053/why-is-ondrop-not-working
+                    onDragOver={(e) => e.preventDefault()}
+                >
+                    <Title className={styles.title} level={5}>
+                        {t('components.hive.activeInventory')}
+                    </Title>
+                    <div>
+                        {isAtomicIncludesDragged && draggedElements.size ? (
+                            <div className={styles.draggedElements}>
+                                {renderCards(draggedElements, handleDragCard)}
+                            </div>
+                        ) : (
+                            <div className={styles.cardsWrapper}>
+                                {renderCards(
+                                    userInventoryNotUse,
+                                    handleDragCard
+                                )}
+                            </div>
+                        )}
+                    </div>
+                </Col>
+            </Tooltip>
             <Col
                 offset={1}
                 span={11}
@@ -114,7 +143,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                     <span>{t('components.hive.storage')}</span>
                     <Button
                         type="primary"
-                        disabled={draggedElements?.size === 0}
+                        disabled={!draggedElements?.size || !isInHive}
                         size="large"
                         onClick={onTransferClick}
                     >
@@ -124,10 +153,10 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                 <div className={styles.cardsWrapper}>
                     {!isAtomicIncludesDragged && draggedElements?.size ? (
                         <div className={styles.draggedElements}>
-                            {renderCards(draggedElements, setDraggedElement)}
+                            {renderCards(draggedElements, handleDragCard)}
                         </div>
                     ) : (
-                        renderCards(gameAssets, setDraggedElement)
+                        renderCards(gameAssets, handleDragCard)
                     )}
                 </div>
             </Col>
