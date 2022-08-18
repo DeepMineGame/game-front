@@ -14,7 +14,7 @@ export const LandLordMenu: FC = () => {
 
     return (
         <Menu>
-            <Space>
+            <Space size="middle">
                 <Tooltip overlay={t('pages.landLord.menu.goLandActivate')}>
                     {/* TODO: Remove div wrapper after figure out why it doesn't work without it */}
                     <div>

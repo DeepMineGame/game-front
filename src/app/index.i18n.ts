@@ -22,7 +22,7 @@ i18n
         },
         react: {
             transSupportBasicHtmlNodes: true,
-            transKeepBasicHtmlNodesFor: ['br'],
+            transKeepBasicHtmlNodesFor: ['br', 'b'],
         },
     });
 

@@ -8,7 +8,7 @@ export * from './types';
 export const ContractorMenu: FC<Props> = ({ config }) => {
     return (
         <Menu>
-            <Space>
+            <Space size="middle">
                 <ContractorMenuItem
                     config={config}
                     item={ContractorMenuItems.InfoPanel}

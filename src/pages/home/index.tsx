@@ -18,7 +18,7 @@ export const HomePage: FC = () => {
     const { t } = useTranslation();
     return (
         <div className={styles.homeScreen}>
-            <Header hideLogo />
+            <Header />
             <div
                 onClick={() => navigate(mineOwner)}
                 className={classNames(styles.mineOwnerLink, styles.enterLink)}

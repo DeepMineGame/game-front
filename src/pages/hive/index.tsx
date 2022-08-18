@@ -29,7 +29,7 @@ export const HivePage: FC = () => {
                 />
             )}
             <Menu>
-                <Space>
+                <Space size="middle">
                     <Tooltip overlay={t('components.hive.info&Actions')}>
                         {/* TODO: Remove div wrapper after figure out why it doesn't work without it */}
                         <div>
