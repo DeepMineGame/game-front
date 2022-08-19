@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Config, ContractorMenuItems } from './types';
 
-export const useTooltipText = (config: Config) => {
+export function useTooltipText(config: Config) {
     const { t } = useTranslation();
 
     const tooltipText = {
@@ -22,4 +22,4 @@ export const useTooltipText = (config: Config) => {
         }
         return undefined;
     };
-};
+}

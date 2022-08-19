@@ -1,19 +1,21 @@
 import { deepminegame } from '../constants';
 
-export const contrclaim = ({ waxUser }: { waxUser: string }) => ({
-    actions: [
-        {
-            account: deepminegame,
-            name: 'contrclaim',
-            authorization: [
-                {
-                    actor: waxUser,
-                    permission: 'active',
+export function contrclaim({ waxUser }: { waxUser: string }) {
+    return {
+        actions: [
+            {
+                account: deepminegame,
+                name: 'contrclaim',
+                authorization: [
+                    {
+                        actor: waxUser,
+                        permission: 'active',
+                    },
+                ],
+                data: {
+                    wax_user: waxUser,
                 },
-            ],
-            data: {
-                wax_user: waxUser,
             },
-        },
-    ],
-});
+        ],
+    };
+}

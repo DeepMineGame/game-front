@@ -7,10 +7,10 @@ import {
 } from 'entities/smartcontract';
 import { useAccountName } from './useAccountName';
 
-export const useTableData = <T>(
+export function useTableData<T>(
     getConfig: (accountName: string) => GetTableDataConfigType,
     needUpdate?: boolean
-) => {
+) {
     const accountName = useAccountName();
     const [result, setResult] = useState<
         GetTableDataResponseType<T> | undefined
@@ -33,4 +33,4 @@ export const useTableData = <T>(
     }, [accountName, getConfig, needUpdate]);
 
     return { data: result?.rows ?? [], isLoading };
-};
+}

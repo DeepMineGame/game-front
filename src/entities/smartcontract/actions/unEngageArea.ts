@@ -1,26 +1,28 @@
 import { deepminegame } from '../constants';
 
-export const unEngageArea = ({
+export function unEngageArea({
     waxUser,
     areaId,
 }: {
     waxUser: string;
     areaId?: number;
-}) => ({
-    actions: [
-        {
-            account: deepminegame,
-            name: 'unengagearea',
-            authorization: [
-                {
-                    actor: waxUser,
-                    permission: 'active',
+}) {
+    return {
+        actions: [
+            {
+                account: deepminegame,
+                name: 'unengagearea',
+                authorization: [
+                    {
+                        actor: waxUser,
+                        permission: 'active',
+                    },
+                ],
+                data: {
+                    wax_user: waxUser,
+                    area_id: areaId,
                 },
-            ],
-            data: {
-                wax_user: waxUser,
-                area_id: areaId,
             },
-        },
-    ],
-});
+        ],
+    };
+}

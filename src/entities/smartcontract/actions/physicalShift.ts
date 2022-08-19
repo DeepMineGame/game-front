@@ -1,25 +1,27 @@
 import { deepminegame } from '../index';
 
-export const physicalShift = (
+export function physicalShift(
     waxUser: string,
     newLocation: number,
     duration = 0
-) => ({
-    actions: [
-        {
-            account: deepminegame,
-            name: 'changelocn',
-            authorization: [
-                {
-                    actor: waxUser,
-                    permission: 'active',
+) {
+    return {
+        actions: [
+            {
+                account: deepminegame,
+                name: 'changelocn',
+                authorization: [
+                    {
+                        actor: waxUser,
+                        permission: 'active',
+                    },
+                ],
+                data: {
+                    wax_user: waxUser,
+                    new_location: newLocation,
+                    duration,
                 },
-            ],
-            data: {
-                wax_user: waxUser,
-                new_location: newLocation,
-                duration,
             },
-        },
-    ],
-});
+        ],
+    };
+}

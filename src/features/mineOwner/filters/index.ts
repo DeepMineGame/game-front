@@ -15,13 +15,13 @@ import {
     mineOwnerCabinState,
 } from '../models/mineOwnerState';
 
-export const ignoreIfInStatus = (
+export function ignoreIfInStatus(
     $currentStatus: typeof $mineOwnerCabinState,
     targetStatuses: mineOwnerCabinState[]
-) => {
+) {
     return (param: boolean) =>
         !targetStatuses.includes($currentStatus.getState()) && param;
-};
+}
 export const hasMineNftFilter = (inventories: UserInventoryType[] | null) => {
     return !inventories?.filter(
         ({ template_id }) => template_id === mineAssetTemplateId

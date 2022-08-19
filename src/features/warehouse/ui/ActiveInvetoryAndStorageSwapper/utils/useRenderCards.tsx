@@ -1,9 +1,10 @@
+import React from 'react';
 import { Card } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import { UserInventoryType } from 'entities/smartcontract';
 import styles from '../styles.module.scss';
 
-export const useRenderCards = () => {
+export function useRenderCards() {
     const navigate = useNavigate();
 
     return (
@@ -27,4 +28,4 @@ export const useRenderCards = () => {
             </div>
         ));
     };
-};
+}

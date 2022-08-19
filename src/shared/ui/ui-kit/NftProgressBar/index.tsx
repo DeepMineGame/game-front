@@ -1,26 +1,26 @@
 import { Progress } from 'antd';
-import { ReactNode } from 'react';
+import React from 'react';
 import cn from 'classnames';
 import styles from './styles.module.scss';
 
-const getPercentage = (value: number, total: number) => {
+function getPercentage(value: number, total: number) {
     return (value / total) * 100;
-};
+}
 export type ProgressProps = {
     initial?: number;
     current?: number;
     remained?: number;
-    rightContent?: ReactNode;
+    rightContent?: React.ReactNode;
     className?: string;
 };
 
-export const NftProgressBar = ({
+export function NftProgressBar({
     current = 0,
     remained = 0,
     initial = 0,
     rightContent,
     className,
-}: ProgressProps) => {
+}: ProgressProps) {
     const currentProgress = getPercentage(current, remained);
     const disabledProgress = getPercentage(remained, initial);
     const info = () => (
@@ -43,4 +43,4 @@ export const NftProgressBar = ({
             format={info}
         />
     );
-};
+}

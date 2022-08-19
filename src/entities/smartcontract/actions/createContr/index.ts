@@ -29,36 +29,39 @@ export type CreateContrDto = {
     contract_duration: number;
 };
 
-export const createContr = (data: CreateContrDto) => ({
-    actions: [
-        {
-            account: deepminegame,
-            name: 'createcontr',
-            authorization: [
-                {
-                    actor: data.wax_user,
-                    permission: 'active',
+export function createContr(data: CreateContrDto) {
+    return {
+        actions: [
+            {
+                account: deepminegame,
+                name: 'createcontr',
+                authorization: [
+                    {
+                        actor: data.wax_user,
+                        permission: 'active',
+                    },
+                ],
+                data: {
+                    wax_user: data.wax_user,
+                    contract_type: data[createContrFormFields.contractType],
+                    opt_asset_id: data[createContrFormFields.assetId],
+                    is_client: Boolean(data[createContrFormFields.isClient]),
+                    fee_percent: data[createContrFormFields.fee],
+                    fee_daily_min_amount:
+                        data[createContrFormFields.feeDailyMinAmount],
+                    days_for_penalty:
+                        data[createContrFormFields.daysForPenalty],
+                    penalty_amount: data[createContrFormFields.penaltyAmount],
+                    deadline_duration:
+                        data[createContrFormFields.deadlineDurationInDays] *
+                            DAY_IN_SECONDS +
+                        data[createContrFormFields.deadlineDurationInHours] *
+                            HOUR_IN_SECONDS,
+                    contract_duration:
+                        data[createContrFormFields.contractDuration]! *
+                        DAY_IN_SECONDS,
                 },
-            ],
-            data: {
-                wax_user: data.wax_user,
-                contract_type: data[createContrFormFields.contractType],
-                opt_asset_id: data[createContrFormFields.assetId],
-                is_client: Boolean(data[createContrFormFields.isClient]),
-                fee_percent: data[createContrFormFields.fee],
-                fee_daily_min_amount:
-                    data[createContrFormFields.feeDailyMinAmount],
-                days_for_penalty: data[createContrFormFields.daysForPenalty],
-                penalty_amount: data[createContrFormFields.penaltyAmount],
-                deadline_duration:
-                    data[createContrFormFields.deadlineDurationInDays] *
-                        DAY_IN_SECONDS +
-                    data[createContrFormFields.deadlineDurationInHours] *
-                        HOUR_IN_SECONDS,
-                contract_duration:
-                    data[createContrFormFields.contractDuration]! *
-                    DAY_IN_SECONDS,
             },
-        },
-    ],
-});
+        ],
+    };
+}
