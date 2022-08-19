@@ -1,0 +1,45 @@
+@import "src/shared";
+
+.surface {
+  text-align: center;
+  color: $color-neutral-neutral-9;
+  font-size: 12px;
+  position: relative;
+  z-index: 1;
+  margin: 5vh auto;
+  display: inline-block;
+
+  &::after {
+    background: $color-cyan-cyan-5;
+    content: '';
+    position: absolute;
+    left: -10%;
+    right: -10%;
+    top: -10%;
+    bottom: -10%;
+    filter: blur(15px);
+    border-radius: 15px;
+    z-index: -1;
+    opacity: 0.25;
+  }
+
+  @media  (min-width: $media-mobile-oriental)  {
+    font-size: 16px;
+  }
+
+  @media  (min-width: $media-tablet)  {
+    margin: 10vh auto;
+  }
+
+  @media  (min-width: $media-desktop-s)  {
+    margin: 20vh auto;
+  }
+
+  @media  (min-width: $media-desktop-l)  {
+    margin: 10vh auto;
+  }
+}
+
+.title {
+  text-transform: uppercase;
+}

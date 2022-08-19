@@ -15,7 +15,7 @@ type Props = {
     user: string;
 };
 
-export const Surface: FC<Props> = ({ user }) => {
+export const Hologram: FC<Props> = ({ user }) => {
     useGate(MineOwnerCabinGate, {
         searchParam: user,
     });
