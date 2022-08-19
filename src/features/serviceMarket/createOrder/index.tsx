@@ -86,7 +86,11 @@ export const CreateOrderForm = () => {
                 ]}
             />
             {currentStep === 0 && (
-                <ContractTypeAndRoleStep form={form} setStep={setStep} />
+                <ContractTypeAndRoleStep
+                    accountName={accountName}
+                    form={form}
+                    setStep={setStep}
+                />
             )}
             {currentStep === 1 && (
                 <GeneralConditionStep setStep={setStep} form={form} />

@@ -2,18 +2,19 @@ import { Form, FormInstance } from 'antd';
 import React, { FC } from 'react';
 import { Select } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { ContractType, createContrFormFields } from 'entities/smartcontract';
+import { createContrFormFields } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
 
 const { useWatch } = Form;
+const CLIENT = 1;
+const NOT_CLIENT = 0;
 
-export const RoleField: FC<{ form: FormInstance }> = ({ form }) => {
+export const MineOwnerContractorRoleField: FC<{ form: FormInstance }> = ({
+    form,
+}) => {
     const { t } = useTranslation();
-
     const contractType = useWatch(createContrFormFields.contractType, form);
     const isDisabled = contractType === undefined;
-    const isMineSetupContractTypeSelected =
-        contractType === ContractType.landlord_mineowner;
 
     return (
         <Form.Item
@@ -31,14 +32,12 @@ export const RoleField: FC<{ form: FormInstance }> = ({ form }) => {
                 }
                 options={[
                     {
-                        value: isMineSetupContractTypeSelected ? 1 : 0,
-                        label: isMineSetupContractTypeSelected
-                            ? t('roles.landlord')
-                            : t('roles.contractor'),
+                        value: CLIENT,
+                        label: t('roles.mineOwner'),
                     },
                     {
-                        value: isMineSetupContractTypeSelected ? 0 : 1,
-                        label: t('roles.mineOwner'),
+                        value: NOT_CLIENT,
+                        label: t('roles.contractor'),
                     },
                 ]}
             />

@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { Form, FormInstance } from 'antd';
-import { Button, useAccountName } from 'shared';
+import { Button } from 'shared';
 import { useTranslation } from 'react-i18next';
+import { useGate } from 'effector-react';
 import {
     areasAssetTemplateId,
     ContractType,
@@ -10,19 +11,21 @@ import {
 } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
 import { ContractTypeField } from '../ContractTypeField';
-import { RoleField } from '../RoleField';
+import { LandLordMineOwnerRoleField } from '../LandLordMineOwnerRoleField';
 import { AssetSelectField } from '../AssetSelectField';
+import { CreateOrderGate } from '../../models';
+import { MineOwnerContractorRoleField } from '../MineOwnerContractorRoleField';
 
 const { useWatch } = Form;
 
 export const ContractTypeAndRoleStep: FC<{
     form: FormInstance;
     setStep: React.Dispatch<React.SetStateAction<number>>;
-}> = ({ form, setStep }) => {
-    const accountName = useAccountName();
+    accountName: string;
+}> = ({ form, setStep, accountName }) => {
+    useGate(CreateOrderGate, { searchParam: accountName });
     const { t } = useTranslation();
     const isClientField = useWatch(createContrFormFields.isClient, form);
-
     const contractType = useWatch(createContrFormFields.contractType, form);
     const isMiningContract = contractType === ContractType.mineowner_contractor;
 
@@ -46,10 +49,12 @@ export const ContractTypeAndRoleStep: FC<{
     ) : null;
     return (
         <div className={styles.rightSection}>
-            {accountName && (
-                <ContractTypeField form={form} accountName={accountName} />
+            <ContractTypeField form={form} />
+            {contractType === ContractType.landlord_mineowner ? (
+                <LandLordMineOwnerRoleField form={form} />
+            ) : (
+                <MineOwnerContractorRoleField form={form} />
             )}
-            <RoleField form={form} />
             {assetSelect}
             <Button
                 disabled={!hasValueToGoNextStep}

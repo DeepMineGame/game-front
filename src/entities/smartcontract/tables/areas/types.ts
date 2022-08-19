@@ -15,7 +15,7 @@ export type MineSlots = { reserved: SlotStatus; mine_id: number }[];
 
 export type AreasDto = {
     id: string;
-    engaged: number;
+    engaged: 0 | 1;
     init_id: number;
     fee_to_claim: number;
     initialized: boolean;

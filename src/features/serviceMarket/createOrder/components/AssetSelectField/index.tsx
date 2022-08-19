@@ -13,7 +13,7 @@ import {
     InventoryGate,
     userAtomicAssetsStore,
     activeUserInventoryStore,
-} from './model';
+} from '../../models';
 
 const { useWatch } = Form;
 

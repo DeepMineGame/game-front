@@ -368,7 +368,8 @@
         "haveNoNftAlert": {
           "haveNo": "You don’t have an NFT to create this order. Please visit the Marketplace"
         },
-        "setMineOrArea": "You must set up mine or engage area first"
+        "setMineOrArea": "You must set up mine or engage area first",
+        "youHaveNoAreaOrFreeSlots": "You have no engaged area or have no empty mine slots"
       },
       "lookingForMineOwner": "Looking for Mine owner",
       "lookingForContractor": "Looking for Contractor",

@@ -1,0 +1,58 @@
+import { Form, FormInstance, Tooltip } from 'antd';
+import React, { FC } from 'react';
+import { Select } from 'shared';
+import { useTranslation } from 'react-i18next';
+import { useStore } from 'effector-react';
+import { createContrFormFields } from 'entities/smartcontract';
+import styles from '../../styles.module.scss';
+import { hasEngagedAreaStore, hasAreaEmptySlotsStore } from '../../models';
+
+const { useWatch } = Form;
+const CLIENT = 1;
+const NOT_CLIENT = 0;
+
+export const LandLordMineOwnerRoleField: FC<{ form: FormInstance }> = ({
+    form,
+}) => {
+    const { t } = useTranslation();
+    const contractType = useWatch(createContrFormFields.contractType, form);
+    const isDisabled = contractType === undefined;
+    const hasEngagedArea = useStore(hasEngagedAreaStore);
+    const hasAreaEmptySlots = useStore(hasAreaEmptySlotsStore);
+    const hasNoAreaTooltipText =
+        (!hasEngagedArea || !hasAreaEmptySlots) &&
+        t('pages.serviceMarket.createOrder.youHaveNoAreaOrFreeSlots');
+
+    return (
+        <Form.Item
+            className={styles.formField}
+            label={t('pages.serviceMarket.createOrder.yourRole')}
+            name={createContrFormFields.isClient}
+            dependencies={[createContrFormFields.contractType]}
+        >
+            <Select
+                disabled={isDisabled}
+                placeholder={
+                    isDisabled
+                        ? t('pages.serviceMarket.createOrder.selectToDisable')
+                        : t('pages.serviceMarket.createOrder.selectRole')
+                }
+                options={[
+                    {
+                        value: CLIENT,
+                        label: (
+                            <Tooltip overlay={hasNoAreaTooltipText}>
+                                {t('roles.landlord')}
+                            </Tooltip>
+                        ),
+                        disabled: !hasEngagedArea || !hasAreaEmptySlots,
+                    },
+                    {
+                        value: NOT_CLIENT,
+                        label: t('roles.mineOwner'),
+                    },
+                ]}
+            />
+        </Form.Item>
+    );
+};

@@ -1,18 +1,16 @@
 import { Form, FormInstance, Tooltip } from 'antd';
 import { Select } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { useGate, useStore } from 'effector-react';
+import { useStore } from 'effector-react';
 import { FC } from 'react';
 import { ContractType, createContrFormFields } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
-import { HasAreaOrMineGate, hasAreaOrMineStore } from '../../models';
+import { hasAreaOrMineStore } from '../../models';
 
 export const ContractTypeField: FC<{
     form: FormInstance;
-    accountName: string;
-}> = ({ form, accountName }) => {
+}> = ({ form }) => {
     const { t } = useTranslation();
-    useGate(HasAreaOrMineGate, { searchParam: accountName });
     const hasAreaOrMine = useStore(hasAreaOrMineStore);
     const infoForMineSetupContractTypeDisable = !hasAreaOrMine
         ? t('pages.serviceMarket.createOrder.setMineOrArea')
