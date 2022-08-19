@@ -114,6 +114,5 @@ module.exports = {
                 patterns: DENIED_PATH_GROUPS,
             },
         ],
-        'func-style': ['error', 'expression'],
     },
 };
