@@ -28,7 +28,13 @@ export const AreaManagementPage = () => {
 
     return (
         <Page headerTitle={t('pages.areaManagement.title')}>
-            <AreaClaim isActive={isActive} areaId={areaId} />
+            {accountName && (
+                <AreaClaim
+                    isActive={isActive}
+                    areaId={areaId}
+                    accountName={accountName}
+                />
+            )}
             <div className={styles.miningSlots}>
                 {t('pages.areaManagement.mineSlots')}{' '}
                 <span>

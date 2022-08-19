@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useGate, useStore } from 'effector-react';
 import { Badge } from 'antd';
 
 import {
@@ -8,22 +9,26 @@ import {
     ActionModal,
     greenGreen6,
     sunsetOrange6,
-    useAccountName,
     ExclamationModal,
     useReloadPage,
 } from 'shared';
+import { useSmartContractAction } from 'features/hooks';
 import { engageArea, unEngageArea, claimArea } from 'entities/smartcontract';
-import { useSmartContractAction } from '../../../../hooks';
+import { ClaimDmeGate, claimDmeStore, getRolesEffect } from '../../model';
 import styles from './styles.module.scss';
 
 type Props = {
     isActive: boolean;
     areaId?: number;
+    accountName: string;
 };
 
-export const AreaClaim: FC<Props> = ({ isActive, areaId }) => {
+export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
+    useGate(ClaimDmeGate, { searchParam: accountName });
     const { t } = useTranslation();
-    const accountName = useAccountName();
+    const claimDme = useStore(claimDmeStore);
+    const isLoading = useStore(getRolesEffect.pending);
+
     const [isModalActionVisible, setIsModalActionVisible] = useState(false);
     const [isModalUnengageVisible, setIsModalUnengageVisible] = useState(false);
     const engageAreaAction = useSmartContractAction(
@@ -75,7 +80,7 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId }) => {
                 <Button
                     onClick={handleClaim}
                     type={isActive ? 'primary' : 'ghost'}
-                    disabled={!isActive}
+                    disabled={isLoading || !claimDme || !isActive}
                     block
                     className={styles.claimButton}
                 >
