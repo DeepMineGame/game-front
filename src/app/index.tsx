@@ -1,4 +1,3 @@
-import React from 'react';
 // import i18n (needs to be bundled ;))
 import './index.i18n';
 import 'antd/dist/antd.min.css';

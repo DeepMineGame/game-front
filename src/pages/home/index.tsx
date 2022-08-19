@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import classNames from 'classnames';
 import { Header, Title } from 'shared';
 import { DownOutlined } from '@ant-design/icons';
