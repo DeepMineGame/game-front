@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
-import { FormInstance } from 'antd';
+import { Form, FormInstance } from 'antd';
 import { Button, useAccountName } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { useWatch } from 'antd/es/form/Form';
 import {
     areasAssetTemplateId,
     ContractType,
@@ -13,6 +12,8 @@ import styles from '../../styles.module.scss';
 import { ContractTypeField } from '../ContractTypeField';
 import { RoleField } from '../RoleField';
 import { AssetSelectField } from '../AssetSelectField';
+
+const { useWatch } = Form;
 
 export const ContractTypeAndRoleStep: FC<{
     form: FormInstance;
@@ -45,7 +46,9 @@ export const ContractTypeAndRoleStep: FC<{
     ) : null;
     return (
         <div className={styles.rightSection}>
-            <ContractTypeField form={form} />
+            {accountName && (
+                <ContractTypeField form={form} accountName={accountName} />
+            )}
             <RoleField form={form} />
             {assetSelect}
             <Button

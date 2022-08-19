@@ -367,7 +367,8 @@
         "redirected": "You will be automatically redirected to the main page of the service market",
         "haveNoNftAlert": {
           "haveNo": "You don’t have an NFT to create this order. Please visit the Marketplace"
-        }
+        },
+        "setMineOrArea": "You must set up mine or engage area first"
       },
       "lookingForMineOwner": "Looking for Mine owner",
       "lookingForContractor": "Looking for Contractor",
