@@ -15,7 +15,7 @@ type Props = {
     user: string;
 };
 
-export const Surface: FC<Props> = ({ user }) => {
+export const Hologram: FC<Props> = ({ user }) => {
     useGate(MineOwnerCabinGate, {
         searchParam: user,
     });
@@ -27,7 +27,7 @@ export const Surface: FC<Props> = ({ user }) => {
     const buttons = useActionsButton();
 
     return (
-        <div className={styles.surface}>
+        <div className={styles.hologram}>
             {isDesktop && (
                 <Title fontFamily="orbitron" className={styles.title}>
                     {titles[cabinState]}

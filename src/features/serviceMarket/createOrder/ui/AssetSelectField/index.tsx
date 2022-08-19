@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { useWatch } from 'antd/es/form/Form';
 import { FormInstance, Form, Alert } from 'antd';
 import { useGate, useStore } from 'effector-react';
 import { Select } from 'shared';
@@ -14,7 +13,9 @@ import {
     InventoryGate,
     userAtomicAssetsStore,
     activeUserInventoryStore,
-} from './model';
+} from '../../models';
+
+const { useWatch } = Form;
 
 export const AssetSelectField: FC<{
     form: FormInstance;

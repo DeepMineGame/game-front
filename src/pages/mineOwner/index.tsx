@@ -5,7 +5,7 @@ import {
     MineOwnerMenu,
     $mineOwnerCabinState,
     MineOwnerCabin,
-    Surface,
+    Hologram,
     Travel,
 } from 'features';
 import {
@@ -26,9 +26,11 @@ export const MineOwnerPage = () => {
     return (
         <MineOwnerCabin state={cabinState}>
             <Header withBackButton />
-            <div className={styles.overturnLayout}>
-                {chainAccountName && <Surface user={chainAccountName} />}
-            </div>
+            {chainAccountName && (
+                <div className={styles.hologramWrapper}>
+                    <Hologram user={chainAccountName} />
+                </div>
+            )}
             {chainAccountName && (
                 <MineOwnerMenu
                     currentMineOwnerCabinState={cabinState}

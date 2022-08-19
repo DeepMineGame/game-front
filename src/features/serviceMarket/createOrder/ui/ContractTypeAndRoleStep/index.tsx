@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import { FormInstance } from 'antd';
-import { Button, useAccountName } from 'shared';
+import { Form, FormInstance } from 'antd';
+import { Button } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { useWatch } from 'antd/es/form/Form';
+import { useGate } from 'effector-react';
 import {
     areasAssetTemplateId,
     ContractType,
@@ -11,18 +11,27 @@ import {
 } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
 import { ContractTypeField } from '../ContractTypeField';
-import { RoleField } from '../RoleField';
+import { LandLordMineOwnerRoleField } from '../LandLordMineOwnerRoleField';
 import { AssetSelectField } from '../AssetSelectField';
+import { CreateOrderGate } from '../../models';
+import { MineOwnerContractorRoleField } from '../MineOwnerContractorRoleField';
+
+const { useWatch } = Form;
 
 export const ContractTypeAndRoleStep: FC<{
     form: FormInstance;
     setStep: React.Dispatch<React.SetStateAction<number>>;
-}> = ({ form, setStep }) => {
-    const accountName = useAccountName();
+    accountName: string;
+}> = ({ form, setStep, accountName }) => {
+    useGate(CreateOrderGate, { searchParam: accountName });
     const { t } = useTranslation();
     const isClientField = useWatch(createContrFormFields.isClient, form);
-
-    const contractType = useWatch(createContrFormFields.contractType, form);
+    const contractType:
+        | ContractType.landlord_mineowner
+        | ContractType.mineowner_contractor = useWatch(
+        createContrFormFields.contractType,
+        form
+    );
     const isMiningContract = contractType === ContractType.mineowner_contractor;
 
     const hasValueToGoNextStep = contractType && isClientField !== undefined;
@@ -43,10 +52,19 @@ export const ContractTypeAndRoleStep: FC<{
             )}
         </div>
     ) : null;
+
+    const roleFieldMap = {
+        [ContractType.landlord_mineowner]: (
+            <LandLordMineOwnerRoleField form={form} />
+        ),
+        [ContractType.mineowner_contractor]: (
+            <MineOwnerContractorRoleField form={form} />
+        ),
+    };
     return (
         <div className={styles.rightSection}>
             <ContractTypeField form={form} />
-            <RoleField form={form} />
+            {roleFieldMap[contractType]}
             {assetSelect}
             <Button
                 disabled={!hasValueToGoNextStep}
