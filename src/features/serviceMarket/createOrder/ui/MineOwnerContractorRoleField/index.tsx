@@ -1,13 +1,14 @@
-import { Form, FormInstance } from 'antd';
+import { Form, FormInstance, Tooltip } from 'antd';
 import React, { FC } from 'react';
 import { Select } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { createContrFormFields } from 'entities/smartcontract';
+import { useStore } from 'effector-react';
+import { createContrFormFields, IsClient } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
+import { hasActiveMineOwnerContractorContractAsExecutor } from '../../models/hasActiveMineOwnerContractorContractAsExecutor';
+import { hasMineEmptySlotsStore } from '../../models/hasMineEmptySlots';
 
 const { useWatch } = Form;
-const CLIENT = 1;
-const NOT_CLIENT = 0;
 
 export const MineOwnerContractorRoleField: FC<{ form: FormInstance }> = ({
     form,
@@ -15,6 +16,16 @@ export const MineOwnerContractorRoleField: FC<{ form: FormInstance }> = ({
     const { t } = useTranslation();
     const contractType = useWatch(createContrFormFields.contractType, form);
     const isDisabled = contractType === undefined;
+    const hasActiveContract = useStore(
+        hasActiveMineOwnerContractorContractAsExecutor
+    );
+    const hasMineEmptySlots = useStore(hasMineEmptySlotsStore);
+    const hasActiveContractTooltipText =
+        hasActiveContract &&
+        t('pages.serviceMarket.createOrder.youHaveSignedContract');
+    const hasMineEmptySlotsTooltipText =
+        !hasMineEmptySlots &&
+        t('pages.serviceMarket.createOrder.yourMineIsFull');
 
     return (
         <Form.Item
@@ -32,12 +43,22 @@ export const MineOwnerContractorRoleField: FC<{ form: FormInstance }> = ({
                 }
                 options={[
                     {
-                        value: CLIENT,
-                        label: t('roles.mineOwner'),
+                        value: IsClient.client,
+                        label: (
+                            <Tooltip overlay={hasMineEmptySlotsTooltipText}>
+                                {t('roles.mineOwner')}
+                            </Tooltip>
+                        ),
+                        disabled: !hasMineEmptySlots,
                     },
                     {
-                        value: NOT_CLIENT,
-                        label: t('roles.contractor'),
+                        value: IsClient.noClient,
+                        label: (
+                            <Tooltip overlay={hasActiveContractTooltipText}>
+                                {t('roles.contractor')}
+                            </Tooltip>
+                        ),
+                        disabled: hasActiveContract,
                     },
                 ]}
             />

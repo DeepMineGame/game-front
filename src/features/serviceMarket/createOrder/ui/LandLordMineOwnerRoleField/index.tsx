@@ -1,9 +1,9 @@
 import { Form, FormInstance, Tooltip } from 'antd';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Select } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
-import { createContrFormFields } from 'entities/smartcontract';
+import { createContrFormFields, IsClient } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
 import {
     hasEngagedAreaStore,
@@ -12,8 +12,6 @@ import {
 } from '../../models';
 
 const { useWatch } = Form;
-const CLIENT = 1;
-const NOT_CLIENT = 0;
 
 export const LandLordMineOwnerRoleField: FC<{ form: FormInstance }> = ({
     form,
@@ -49,7 +47,7 @@ export const LandLordMineOwnerRoleField: FC<{ form: FormInstance }> = ({
                 }
                 options={[
                     {
-                        value: CLIENT,
+                        value: IsClient.client,
                         label: (
                             <Tooltip overlay={hasNoAreaTooltipText}>
                                 {t('roles.landlord')}
@@ -58,7 +56,7 @@ export const LandLordMineOwnerRoleField: FC<{ form: FormInstance }> = ({
                         disabled: !hasEngagedArea || !hasAreaEmptySlots,
                     },
                     {
-                        value: NOT_CLIENT,
+                        value: IsClient.client,
                         label: (
                             <Tooltip overlay={hasSignedContractTooltipText}>
                                 {t('roles.mineOwner')}

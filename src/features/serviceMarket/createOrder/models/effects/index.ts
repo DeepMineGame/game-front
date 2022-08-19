@@ -23,7 +23,7 @@ export const getMinesByOwnerEffect = createEffect(
     }
 );
 
-export const getContractByUserEffect = createEffect(
+export const getContractByExecutorEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
         return getTableData(
             getContractConfig({

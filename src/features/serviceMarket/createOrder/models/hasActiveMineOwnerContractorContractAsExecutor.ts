@@ -6,14 +6,14 @@ import {
 } from 'entities/smartcontract';
 import { getContractByExecutorEffect } from './effects';
 
-export const hasActiveLandLordMineOwnerContractAsExecutor =
+export const hasActiveMineOwnerContractorContractAsExecutor =
     createStore<boolean>(false).on(
         getContractByExecutorEffect.doneData,
         (_, { rows }: { rows?: ContractDto[] }) =>
             Boolean(
                 rows?.find(
                     ({ status, type }: ContractDto) =>
-                        type === ContractType.landlord_mineowner &&
+                        type === ContractType.mineowner_contractor &&
                         (status === ContractStatus.active ||
                             status === ContractStatus.signed_by_executor)
                 )

@@ -370,7 +370,8 @@
         },
         "setMineOrArea": "You must set up mine or engage area first",
         "youHaveNoAreaOrFreeSlots": "You have no engaged area or have no empty mine slots",
-        "youHaveSignedContract": "You already have the contract"
+        "youHaveSignedContract": "You already have the contract",
+        "yourMineIsFull": "You have no the mine or your mine has no more free slots"
       },
       "lookingForMineOwner": "Looking for Mine owner",
       "lookingForContractor": "Looking for Contractor",

@@ -26,7 +26,12 @@ export const ContractTypeAndRoleStep: FC<{
     useGate(CreateOrderGate, { searchParam: accountName });
     const { t } = useTranslation();
     const isClientField = useWatch(createContrFormFields.isClient, form);
-    const contractType = useWatch(createContrFormFields.contractType, form);
+    const contractType:
+        | ContractType.landlord_mineowner
+        | ContractType.mineowner_contractor = useWatch(
+        createContrFormFields.contractType,
+        form
+    );
     const isMiningContract = contractType === ContractType.mineowner_contractor;
 
     const hasValueToGoNextStep = contractType && isClientField !== undefined;
@@ -47,14 +52,19 @@ export const ContractTypeAndRoleStep: FC<{
             )}
         </div>
     ) : null;
+
+    const roleFieldMap = {
+        [ContractType.landlord_mineowner]: (
+            <LandLordMineOwnerRoleField form={form} />
+        ),
+        [ContractType.mineowner_contractor]: (
+            <MineOwnerContractorRoleField form={form} />
+        ),
+    };
     return (
         <div className={styles.rightSection}>
             <ContractTypeField form={form} />
-            {contractType === ContractType.landlord_mineowner ? (
-                <LandLordMineOwnerRoleField form={form} />
-            ) : (
-                <MineOwnerContractorRoleField form={form} />
-            )}
+            {roleFieldMap[contractType]}
             {assetSelect}
             <Button
                 disabled={!hasValueToGoNextStep}

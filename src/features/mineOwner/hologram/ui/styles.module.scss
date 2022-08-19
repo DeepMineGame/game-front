@@ -23,19 +23,19 @@
     opacity: 0.25;
   }
 
-  @media  (min-width: $media-mobile-oriental)  {
+  @media (min-width: $media-mobile-oriental)  {
     font-size: 16px;
   }
 
-  @media  (min-width: $media-tablet)  {
+  @media (min-width: $media-tablet)  {
     margin: 10vh auto;
   }
 
-  @media  (min-width: $media-desktop-s)  {
+  @media (min-width: $media-desktop-s)  {
     margin: 20vh auto;
   }
 
-  @media  (min-width: $media-desktop-l)  {
+  @media (min-width: $media-desktop-l)  {
     margin: 10vh auto;
   }
 }

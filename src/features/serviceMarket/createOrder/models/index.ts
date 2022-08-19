@@ -2,7 +2,7 @@ import { createGate } from 'effector-react';
 import { forward } from 'effector';
 import {
     getAreaByOwnerEffect,
-    getContractByUserEffect,
+    getContractByExecutorEffect,
     getMinesByOwnerEffect,
 } from './effects';
 
@@ -19,5 +19,9 @@ export const CreateOrderGate = createGate<{ searchParam: string }>(
 
 forward({
     from: CreateOrderGate.open,
-    to: [getMinesByOwnerEffect, getAreaByOwnerEffect, getContractByUserEffect],
+    to: [
+        getMinesByOwnerEffect,
+        getAreaByOwnerEffect,
+        getContractByExecutorEffect,
+    ],
 });
