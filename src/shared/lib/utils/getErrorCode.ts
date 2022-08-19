@@ -1,1 +1,2 @@
-export const getErrorCode = (error: string) => /\[([^)]+)\]/.exec(error)![1];
+export const getErrorCode = (error: string): string | 'fallback' =>
+    /\[([^)]+)\]/.exec(error) ? /\[([^)]+)\]/.exec(error)![1] : 'fallback';

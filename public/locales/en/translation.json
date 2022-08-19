@@ -503,6 +503,7 @@
     "landLord": "Land lord"
   },
   "blockchainErrors": {
+    "fallback": "Error has no code. Unknown error",
     "00001": "wrong input data. Must be less than 51 assets and more than 0",
     "00002": "can't find asset for asset_id",
     "00003": "wrong number of assets",

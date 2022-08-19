@@ -102,7 +102,7 @@ export const MiningStats = () => {
                 },
             },
         }),
-        [t]
+        [dataChart]
     );
 
     return (
