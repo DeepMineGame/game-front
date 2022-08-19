@@ -23,7 +23,7 @@ export const MenuItem: FC<Props> = ({
     const button = (
         <Button
             type={type}
-            size="middle"
+            size="large"
             onClick={onClick}
             icon={icon}
             disabled={disabled}

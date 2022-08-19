@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { UserSwitchOutlined } from '@ant-design/icons';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import cn from 'classnames';
 
 import { useLogout } from 'features';
@@ -27,7 +27,11 @@ export const LogAs = () => {
             onClick={handleClick}
         >
             <UserSwitchOutlined className={styles.logAsIcon} />
-            <span>{t('pages.auth.logAs', { email: user?.email })}</span>
+            <Trans
+                parent="span"
+                i18nKey="pages.auth.logAs"
+                values={{ email: user?.email }}
+            />
             <Button type="link" onClick={logout}>
                 {t('intro.Logout')}
             </Button>

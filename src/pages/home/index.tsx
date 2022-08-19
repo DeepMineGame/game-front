@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import classNames from 'classnames';
 import { Header, Title } from 'shared';
 import { DownOutlined } from '@ant-design/icons';
@@ -18,7 +18,7 @@ export const HomePage: FC = () => {
     const { t } = useTranslation();
     return (
         <div className={styles.homeScreen}>
-            <Header hideLogo />
+            <Header />
             <div
                 onClick={() => navigate(mineOwner)}
                 className={classNames(styles.mineOwnerLink, styles.enterLink)}

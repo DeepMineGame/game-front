@@ -31,7 +31,7 @@ export const GeneralConditionStep: FC<{
         feeFieldValue &&
         deadlineTimeInDaysFieldValue &&
         finishesAtFieldValue &&
-        deadlineTimeInHoursFieldValue;
+        (deadlineTimeInHoursFieldValue || deadlineTimeInHoursFieldValue === 0);
 
     return (
         <Form.Item>
