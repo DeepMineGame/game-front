@@ -2,7 +2,9 @@ import { createEffect } from 'effector';
 import { getTableData } from 'shared';
 import {
     getAreaConfig,
+    getContractConfig,
     getMinesEffect,
+    mapSearchParamForIndexPositionToFindContracts,
     searchBy,
 } from 'entities/smartcontract';
 
@@ -18,5 +20,18 @@ export const getMinesByOwnerEffect = createEffect(
             searchIdentificationType: searchBy.owner,
             searchParam,
         });
+    }
+);
+
+export const getContractByUserEffect = createEffect(
+    async ({ searchParam }: { searchParam: string }) => {
+        return getTableData(
+            getContractConfig({
+                searchParam,
+                searchIdentification:
+                    mapSearchParamForIndexPositionToFindContracts.executorId,
+                limit: 10000,
+            })
+        );
     }
 );

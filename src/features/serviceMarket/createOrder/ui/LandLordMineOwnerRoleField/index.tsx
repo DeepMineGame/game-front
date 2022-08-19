@@ -5,7 +5,11 @@ import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 import { createContrFormFields } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
-import { hasEngagedAreaStore, hasAreaEmptySlotsStore } from '../../models';
+import {
+    hasEngagedAreaStore,
+    hasAreaEmptySlotsStore,
+    hasActiveLandLordMineOwnerContractAsExecutor,
+} from '../../models';
 
 const { useWatch } = Form;
 const CLIENT = 1;
@@ -19,9 +23,15 @@ export const LandLordMineOwnerRoleField: FC<{ form: FormInstance }> = ({
     const isDisabled = contractType === undefined;
     const hasEngagedArea = useStore(hasEngagedAreaStore);
     const hasAreaEmptySlots = useStore(hasAreaEmptySlotsStore);
+    const hasSignedContract = useStore(
+        hasActiveLandLordMineOwnerContractAsExecutor
+    );
     const hasNoAreaTooltipText =
         (!hasEngagedArea || !hasAreaEmptySlots) &&
         t('pages.serviceMarket.createOrder.youHaveNoAreaOrFreeSlots');
+    const hasSignedContractTooltipText =
+        hasSignedContract &&
+        t('pages.serviceMarket.createOrder.youHaveSignedContract');
 
     return (
         <Form.Item
@@ -49,7 +59,12 @@ export const LandLordMineOwnerRoleField: FC<{ form: FormInstance }> = ({
                     },
                     {
                         value: NOT_CLIENT,
-                        label: t('roles.mineOwner'),
+                        label: (
+                            <Tooltip overlay={hasSignedContractTooltipText}>
+                                {t('roles.mineOwner')}
+                            </Tooltip>
+                        ),
+                        disabled: hasSignedContract,
                     },
                 ]}
             />

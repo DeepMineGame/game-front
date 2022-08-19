@@ -27,7 +27,7 @@ export const Hologram: FC<Props> = ({ user }) => {
     const buttons = useActionsButton();
 
     return (
-        <div className={styles.surface}>
+        <div className={styles.hologram}>
             {isDesktop && (
                 <Title fontFamily="orbitron" className={styles.title}>
                     {titles[cabinState]}
