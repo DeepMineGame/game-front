@@ -1,10 +1,11 @@
 import { Form, FormInstance } from 'antd';
 import React, { FC } from 'react';
 import { Select } from 'shared';
-import { useWatch } from 'antd/es/form/Form';
 import { useTranslation } from 'react-i18next';
 import { ContractType, createContrFormFields } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
+
+const { useWatch } = Form;
 
 export const RoleField: FC<{ form: FormInstance }> = ({ form }) => {
     const { t } = useTranslation();

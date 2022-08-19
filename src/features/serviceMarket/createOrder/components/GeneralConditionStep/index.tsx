@@ -1,12 +1,13 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Card, Form, FormInstance, Input as InputA, Space } from 'antd';
 import { Button, Input, Select, getLabelSelectItem } from 'shared';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
-import { useWatch } from 'antd/es/form/Form';
 import { createContrFormFields } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
 import localStyles from './styles.module.scss';
+
+const { useWatch } = Form;
 
 export const GeneralConditionStep: FC<{
     setStep: React.Dispatch<React.SetStateAction<number>>;

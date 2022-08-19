@@ -3,11 +3,12 @@ import { Card, Form, FormInstance, Space, Tooltip } from 'antd';
 import { Button, getLabelSelectItem, Input, Select, Title } from 'shared';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
-import { useWatch } from 'antd/es/form/Form';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { createContrFormFields } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
 import localStyles from './styles.module.scss';
+
+const { useWatch } = Form;
 
 export const TermsStep: FC<{
     setStep: React.Dispatch<React.SetStateAction<number>>;
