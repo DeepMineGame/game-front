@@ -1,6 +1,5 @@
 import { useGate, useStore } from 'effector-react';
 import { Col, Empty, Row } from 'antd';
-import React, { FC } from 'react';
 import { KeyValueTable } from 'shared';
 import { locationMap, smartContractUserStore } from 'entities/smartcontract';
 import { balancesStore, UserGate } from 'entities/user';

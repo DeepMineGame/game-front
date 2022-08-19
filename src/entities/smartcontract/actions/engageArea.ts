@@ -1,12 +1,12 @@
 import { deepminegame } from '../constants';
 
-export const engageArea = ({
+export function engageArea({
     waxUser,
     areaId,
 }: {
     waxUser: string;
     areaId?: number;
-}) => {
+}) {
     return {
         actions: [
             {
@@ -25,4 +25,4 @@ export const engageArea = ({
             },
         ],
     };
-};
+}
