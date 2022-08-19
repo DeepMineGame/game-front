@@ -7,7 +7,7 @@ import {
     useMediaQuery,
     useReloadPage,
 } from 'shared';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createOrder, serviceMarket, warehouse } from 'app/router/paths';
 import { ATOMICHUB_URL } from 'app';
@@ -21,7 +21,7 @@ import { mineOwnerCabinState } from '../../models/mineOwnerState';
 import { useSmartContractAction } from '../../../hooks';
 import { mineOwnerLandlordContractForUserStore } from '../../models';
 
-export function useActionsButton() {
+export const useActionsButton = () => {
     const [isSetupMineModalVisible, setSetupMineModalVisible] = useState(false);
 
     const { t } = useTranslation();
@@ -121,4 +121,4 @@ export function useActionsButton() {
         [mineOwnerCabinState.isMineSetupInProgress]: null,
         [mineOwnerCabinState.isMineActive]: null,
     };
-}
+};

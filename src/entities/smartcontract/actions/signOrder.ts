@@ -1,6 +1,6 @@
 import { deepminegame } from '../constants';
 
-export function signOrder({
+export const signOrder = ({
     waxUser,
     contractId,
     assetId,
@@ -8,24 +8,22 @@ export function signOrder({
     waxUser: string;
     contractId: number;
     assetId: string;
-}) {
-    return {
-        actions: [
-            {
-                account: deepminegame,
-                name: 'signcontr',
-                authorization: [
-                    {
-                        actor: waxUser,
-                        permission: 'active',
-                    },
-                ],
-                data: {
-                    wax_user: waxUser,
-                    contract_id: contractId,
-                    asset_id: assetId,
+}) => ({
+    actions: [
+        {
+            account: deepminegame,
+            name: 'signcontr',
+            authorization: [
+                {
+                    actor: waxUser,
+                    permission: 'active',
                 },
+            ],
+            data: {
+                wax_user: waxUser,
+                contract_id: contractId,
+                asset_id: assetId,
             },
-        ],
-    };
-}
+        },
+    ],
+});

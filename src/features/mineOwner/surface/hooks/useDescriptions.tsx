@@ -1,10 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import { desktopS, useMediaQuery } from 'shared';
-import React from 'react';
 import { mineOwnerCabinState } from '../../models/mineOwnerState';
 import { MineStat } from '../ui/components/mineStat';
 
-export function useDescriptions() {
+export const useDescriptions = () => {
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
 
@@ -36,4 +35,4 @@ export function useDescriptions() {
             t('features.mineOwner.mineIsActiveDescriptionMobile')
         ),
     };
-}
+};

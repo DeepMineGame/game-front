@@ -1,5 +1,4 @@
 import { Avatar, Badge, Progress } from 'antd';
-import React from 'react';
 import { AvatarIcon, neutral3Color, primary6, Text } from 'shared';
 import { useStore } from 'effector-react';
 import { UserDto } from 'entities/smartcontract';
@@ -11,7 +10,7 @@ type Props = {
     smartContractUserData: UserDto;
 };
 
-export function AvatarWithLvl(props: Props) {
+export const AvatarWithLvl = (props: Props) => {
     const user = useStore(userStore);
 
     const avatar = () => <Avatar src={user?.avatar} icon={<AvatarIcon />} />;
@@ -40,4 +39,4 @@ export function AvatarWithLvl(props: Props) {
             </Badge>
         </Text>
     );
-}
+};

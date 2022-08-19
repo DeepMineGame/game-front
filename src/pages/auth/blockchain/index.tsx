@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import { useEvent, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { Typography } from 'antd';
@@ -27,7 +27,7 @@ type Props = {
     onSuccess: () => void;
 };
 
-export const BlockchainAuthPage: React.FC<Props> = ({ onSuccess }) => {
+export const BlockchainAuthPage: FC<Props> = ({ onSuccess }) => {
     const { t } = useTranslation();
     const { activeUser, showModal, logout, notLoggedIn } =
         useChainAuthContext();

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
     MiningStatsTable,
@@ -102,7 +102,7 @@ export const MiningStats = () => {
                 },
             },
         }),
-        [dataChart]
+        [t]
     );
 
     return (

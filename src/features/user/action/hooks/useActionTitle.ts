@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { ActionType } from 'entities/smartcontract';
 
-export function useActionTitle() {
+export const useActionTitle = () => {
     const { t } = useTranslation();
 
     return {
@@ -13,4 +13,4 @@ export function useActionTitle() {
         [ActionType.physical_shift]: t('features.actions.physicalShift'),
         [ActionType.undefined]: null,
     };
-}
+};

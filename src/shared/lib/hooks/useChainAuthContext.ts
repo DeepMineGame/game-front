@@ -6,10 +6,10 @@ const getLoggedInAuthType = () => localStorage.getItem('UALLoggedInAuthType');
 const getLoggedInAuthExpiredAt = () =>
     new Date(localStorage.getItem('UALInvalidateAt') ?? '');
 
-export function useChainAuthContext() {
+export const useChainAuthContext = () => {
     return {
         ...useContext(UALContext),
         notLoggedIn:
             !getLoggedInAuthType() || new Date() > getLoggedInAuthExpiredAt(),
     };
-}
+};

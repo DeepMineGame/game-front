@@ -1,6 +1,6 @@
 import { deepminegame } from '../constants';
 
-export function activatemine({
+export const activatemine = ({
     waxUser,
     mineId,
     duration = 0,
@@ -8,24 +8,22 @@ export function activatemine({
     waxUser: string;
     mineId?: number;
     duration?: number;
-}) {
-    return {
-        actions: [
-            {
-                account: deepminegame,
-                name: 'activatemine',
-                authorization: [
-                    {
-                        actor: waxUser,
-                        permission: 'active',
-                    },
-                ],
-                data: {
-                    wax_user: waxUser,
-                    mine_id: mineId,
-                    duration,
+}) => ({
+    actions: [
+        {
+            account: deepminegame,
+            name: 'activatemine',
+            authorization: [
+                {
+                    actor: waxUser,
+                    permission: 'active',
                 },
+            ],
+            data: {
+                wax_user: waxUser,
+                mine_id: mineId,
+                duration,
             },
-        ],
-    };
-}
+        },
+    ],
+});

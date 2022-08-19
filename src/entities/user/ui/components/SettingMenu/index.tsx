@@ -1,13 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { SettingOutlined } from '@ant-design/icons';
-import React from 'react';
 import { useLogout } from 'features';
 import { Dropdown, useAccountName } from 'shared';
 import { hive } from 'app/router/paths';
 import { useTranslation } from 'react-i18next';
 import styles from '../../styles.module.scss';
 
-export function SettingMenu() {
+export const SettingMenu = () => {
     const navigate = useNavigate();
     const accountName = useAccountName();
     const logout = useLogout();
@@ -41,4 +40,4 @@ export function SettingMenu() {
             </div>
         </Dropdown>
     );
-}
+};

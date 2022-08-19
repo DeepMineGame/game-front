@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { DropdownProps, Dropdown as DropdownAnt, Menu } from 'antd';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import styles from './styles.module.scss';
@@ -8,7 +8,7 @@ type Props = {
     overlay?: DropdownProps['overlay'];
 } & Omit<DropdownProps, 'overlay'>;
 
-function enrichItemsWithDefaultCssSelector(items: ItemType[]): ItemType[] {
+const enrichItemsWithDefaultCssSelector = (items: ItemType[]): ItemType[] => {
     return items.map(
         (item) =>
             ({
@@ -16,7 +16,7 @@ function enrichItemsWithDefaultCssSelector(items: ItemType[]): ItemType[] {
                 className: styles.dropdownItem,
             } as ItemType)
     );
-}
+};
 
 export const Dropdown: FC<Props> = ({ children, items = [], ...props }) => {
     const menu = (

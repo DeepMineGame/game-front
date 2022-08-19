@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { mineOwnerCabinState } from '../../models/mineOwnerState';
 
-export function useTitles() {
+export const useTitles = () => {
     const { t } = useTranslation();
 
     return {
@@ -23,4 +23,4 @@ export function useTitles() {
             'features.mineOwner.mineIsActive'
         ),
     };
-}
+};

@@ -1,7 +1,7 @@
 import { useQuery } from 'shared';
 import { createContrFormFields } from 'entities/smartcontract';
 
-export function useInitialValues() {
+export const useInitialValues = () => {
     const query = useQuery();
     const preFilledContractType = query.get(createContrFormFields.contractType);
     const preFilledIsClient = query.get(createContrFormFields.isClient);
@@ -14,4 +14,4 @@ export function useInitialValues() {
             [createContrFormFields.isClient]: Number(preFilledIsClient),
         }),
     };
-}
+};

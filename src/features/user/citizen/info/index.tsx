@@ -1,6 +1,5 @@
 import { useGate, useStore } from 'effector-react';
 import { Col, Empty, Row } from 'antd';
-import React from 'react';
 import { KeyValueTable } from 'shared';
 import { locationMap, smartContractUserStore } from 'entities/smartcontract';
 import { balancesStore, UserGate } from 'entities/user';
@@ -11,7 +10,7 @@ type Props = {
     accountName: string;
 };
 
-export function CitizenInfo({ accountName }: Props) {
+export const CitizenInfo = ({ accountName }: Props) => {
     useGate(UserGate, { searchParam: accountName });
     const { waxBalance, dmeBalance } = useStore(balancesStore);
     const smartContractUsers = useStore(smartContractUserStore);
@@ -49,4 +48,4 @@ export function CitizenInfo({ accountName }: Props) {
     ) : (
         <Empty />
     );
-}
+};

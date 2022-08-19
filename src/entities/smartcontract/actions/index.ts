@@ -17,7 +17,7 @@ export * from './setupMine';
 export * from './terminateContract';
 export * from './abandonMine';
 
-export function toggleMining({
+export const toggleMining = ({
     waxUser,
     contractId,
     type,
@@ -25,28 +25,26 @@ export function toggleMining({
     waxUser: string;
     contractId: number;
     type: 'start' | 'stop';
-}) {
-    return {
-        actions: [
-            {
-                account: deepminegame,
-                name: type === 'start' ? 'startmining' : 'stopmining',
-                authorization: [
-                    {
-                        actor: waxUser,
-                        permission: 'active',
-                    },
-                ],
-                data: {
-                    wax_user: waxUser,
-                    contract_id: contractId,
-                    duration: 30,
-                    real_mined_amount: 100000,
+}) => ({
+    actions: [
+        {
+            account: deepminegame,
+            name: type === 'start' ? 'startmining' : 'stopmining',
+            authorization: [
+                {
+                    actor: waxUser,
+                    permission: 'active',
                 },
+            ],
+            data: {
+                wax_user: waxUser,
+                contract_id: contractId,
+                duration: 30,
+                real_mined_amount: 100000,
             },
-        ],
-    };
-}
+        },
+    ],
+});
 
 interface InstallEquipmentArgsType {
     waxUser: string;

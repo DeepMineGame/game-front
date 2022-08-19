@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import { useEvent, useStore } from 'effector-react';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
@@ -17,7 +17,7 @@ type Props = {
     onSuccess: () => void;
 };
 
-export const GoogleAuthPage: React.FC<Props> = ({ onSuccess }) => {
+export const GoogleAuthPage: FC<Props> = ({ onSuccess }) => {
     const { t } = useTranslation();
     const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ export const GoogleAuthPage: React.FC<Props> = ({ onSuccess }) => {
 
     useEffect(() => {
         if (user?.is_admin || user?.is_beta) onSuccess();
-    }, [user]);
+    }, [onSuccess, user]);
 
     useEffect(() => {
         const request = async () => {
