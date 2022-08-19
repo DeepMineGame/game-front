@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { Select } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
-import { createContrFormFields, IsClient } from 'entities/smartcontract';
+import { createContrFormFields, ContractRole } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
 import { hasActiveMineOwnerContractorContractAsExecutor } from '../../models/hasActiveMineOwnerContractorContractAsExecutor';
 import { hasMineEmptySlotsStore } from '../../models/hasMineEmptySlots';
@@ -43,7 +43,7 @@ export const MineOwnerContractorRoleField: FC<{ form: FormInstance }> = ({
                 }
                 options={[
                     {
-                        value: IsClient.client,
+                        value: ContractRole.client,
                         label: (
                             <Tooltip overlay={hasMineEmptySlotsTooltipText}>
                                 {t('roles.mineOwner')}
@@ -52,7 +52,7 @@ export const MineOwnerContractorRoleField: FC<{ form: FormInstance }> = ({
                         disabled: !hasMineEmptySlots,
                     },
                     {
-                        value: IsClient.noClient,
+                        value: ContractRole.executor,
                         label: (
                             <Tooltip overlay={hasActiveContractTooltipText}>
                                 {t('roles.contractor')}

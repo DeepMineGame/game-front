@@ -15,15 +15,15 @@ export const createContrFormFields = {
     penaltyAmount: 'penalty_amount',
 } as const;
 
-export enum IsClient {
-    noClient,
+export enum ContractRole {
+    executor,
     client,
 }
 export type CreateContrDto = {
     wax_user: string;
     contract_type: ContractType;
     asset_id: number;
-    is_client: IsClient;
+    is_client: ContractRole;
     fee_percent: number;
     fee_daily_min_amount: number;
     days_for_penalty: number;

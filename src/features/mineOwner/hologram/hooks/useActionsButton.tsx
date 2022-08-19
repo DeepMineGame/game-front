@@ -16,6 +16,7 @@ import { ServiceMarketTabIds } from 'app/router/constants';
 import {
     ContractType,
     createContrFormFields,
+    ContractRole,
     setupMine,
 } from 'entities/smartcontract';
 import { mineOwnerCabinState } from '../../models/mineOwnerState';
@@ -98,7 +99,7 @@ export function useActionsButton() {
                     type="link"
                     onClick={() =>
                         navigate(
-                            `${createOrder}?${createContrFormFields.contractType}=${ContractType.landlord_mineowner}&${createContrFormFields.isClient}=0`
+                            `${createOrder}?${createContrFormFields.contractType}=${ContractType.landlord_mineowner}&${createContrFormFields.isClient}=${ContractRole.executor}`
                         )
                     }
                 >

@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { Select } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
-import { createContrFormFields, IsClient } from 'entities/smartcontract';
+import { createContrFormFields, ContractRole } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
 import {
     hasEngagedAreaStore,
@@ -47,7 +47,7 @@ export const LandLordMineOwnerRoleField: FC<{ form: FormInstance }> = ({
                 }
                 options={[
                     {
-                        value: IsClient.client,
+                        value: ContractRole.client,
                         label: (
                             <Tooltip overlay={hasNoAreaTooltipText}>
                                 {t('roles.landlord')}
@@ -56,7 +56,7 @@ export const LandLordMineOwnerRoleField: FC<{ form: FormInstance }> = ({
                         disabled: !hasEngagedArea || !hasAreaEmptySlots,
                     },
                     {
-                        value: IsClient.client,
+                        value: ContractRole.executor,
                         label: (
                             <Tooltip overlay={hasSignedContractTooltipText}>
                                 {t('roles.mineOwner')}

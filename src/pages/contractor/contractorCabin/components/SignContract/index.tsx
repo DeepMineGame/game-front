@@ -4,7 +4,11 @@ import cn from 'classnames';
 import { Button } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import { createOrder, serviceMarket } from 'app/router/paths';
-import { ContractType, createContrFormFields } from 'entities/smartcontract';
+import {
+    ContractRole,
+    ContractType,
+    createContrFormFields,
+} from 'entities/smartcontract';
 import contractorStyles from '../../styles.module.scss';
 import styles from './styles.module.scss';
 
@@ -37,7 +41,7 @@ export const SignContract = () => {
                     type="primary"
                     onClick={() =>
                         navigate(
-                            `${createOrder}?${createContrFormFields.contractType}=${ContractType.mineowner_contractor}&${createContrFormFields.isClient}=0`
+                            `${createOrder}?${createContrFormFields.contractType}=${ContractType.mineowner_contractor}&${createContrFormFields.isClient}=${ContractRole.executor}`
                         )
                     }
                 >
