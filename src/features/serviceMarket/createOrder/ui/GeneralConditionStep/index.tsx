@@ -80,9 +80,11 @@ export const GeneralConditionStep: FC<{
                                 )}
                                 className={styles.tooltipCard}
                             >
-                                {t(
+                                {`${t(
                                     'pages.serviceMarket.createOrder.startOfOperationTooltip'
-                                )}
+                                )} ${t(
+                                    'pages.serviceMarket.createOrder.contractorShouldStartMiningWithin24Hours'
+                                )}`}
                             </Card>
                         }
                     >
