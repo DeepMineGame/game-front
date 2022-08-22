@@ -8,6 +8,9 @@ import {
     SEARCH_BY,
     searchBy,
     UserInventoryType,
+    RoleDto,
+    getRolesTableData,
+    UserRoles,
 } from 'entities/smartcontract';
 
 export const AreaGate = createGate<{ searchParam: string }>('AreaGate');
@@ -50,6 +53,44 @@ export const minesForAreaSlots = createStore<MineDto[] | null>(null).on(
     getMinesByAreaId.doneData,
     (_, { rows }) => rows
 );
+
+export const ClaimDmeGate = createGate<{ searchParam: string }>('ClaimDmeGate');
+
+export const getRolesEffect = createEffect(
+    async ({ searchParam }: { searchParam: string }) => {
+        return getRolesTableData({ searchParam });
+    }
+);
+
+export const rolesStore = createStore<RoleDto[] | null>(null).on(
+    getRolesEffect.doneData,
+    (_, { rows }) => rows
+);
+
+export const claimDmeStore = createStore(0);
+
+forward({
+    from: ClaimDmeGate.open,
+    to: getRolesEffect,
+});
+
+sample({
+    source: rolesStore,
+    target: claimDmeStore,
+    fn: (roles) => {
+        const landlordRole = roles?.find(
+            ({ role }) => role === UserRoles.landlord
+        );
+
+        const dmeToClaim =
+            Number(
+                landlordRole?.attrs?.find(({ key }) => key === 'fee_to_claim')
+                    ?.value
+            ) || 0;
+
+        return dmeToClaim;
+    },
+});
 
 forward({
     from: AreaGate.open,
