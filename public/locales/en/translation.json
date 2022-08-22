@@ -226,6 +226,8 @@
         "installation": "Equipment installation",
         "install": "Install the Equipment set",
         "uninstall": "Uninstall the Equipment set",
+        "installed": "Your equipment has been installed",
+        "removed": "Your equipment has been removed",
         "remove": "Remove"
       },
       "cardModal": {

@@ -1,26 +1,26 @@
-import React, { FC, useState, useEffect, useCallback } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import {
     Inventory,
-    Page,
-    useTableData,
-    useAccountName,
     InventoryCardModal,
+    Page,
+    success,
+    useAccountName,
     useReloadPage,
+    useTableData,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { useStore } from 'effector-react';
-import { useSmartContractActionDynamic, findEquipmentByName } from 'features';
+import { useGate, useStore } from 'effector-react';
 import {
-    ContractDto,
+    getSelectedEquipmentBySlots,
+    useSmartContractActionDynamic,
+    contractorContractIdStore,
+    EquipmentSetGate,
     contractorsStore,
-    ContractStatus,
-    ContractType,
-    getContractorsEffect,
-    getContractsNameConfig,
+} from 'features';
+import {
     getInventoryConfig,
     installEquipment,
     InventoryNameType,
-    mapSearchParamForIndexPositionToFindContracts,
     miningEquipmentNames,
     uninstallEquipment,
     UserInventoryType,
@@ -31,9 +31,13 @@ import { Characteristics } from './components/Characteristics';
 import { EquipmentCards } from './components/EquipmentCards';
 
 export const EquipmentSetPage: FC = () => {
+    const accountName = useAccountName();
+    useGate(EquipmentSetGate, { searchParam: accountName });
+
     const { t } = useTranslation();
     const reloadPage = useReloadPage();
-    const accountName = useAccountName();
+    const contractors = useStore(contractorsStore);
+
     const [isInventoryVisible, setIsInventoryVisible] = useState(false);
     const [isInventoryCardVisible, setIsInventoryCardVisible] = useState(false);
     const [selectedInventoryModalCard, setSelectedInventoryModalCard] =
@@ -47,53 +51,19 @@ export const EquipmentSetPage: FC = () => {
 
     const callAction = useSmartContractActionDynamic();
 
-    const contractors = useStore(contractorsStore);
-    useEffect(() => {
-        if (accountName) {
-            getContractorsEffect({ searchParam: accountName });
-        }
-    }, [accountName]);
-
     const { data: userInventory } =
         useTableData<UserInventoryType>(getInventoryConfig);
 
-    const getConfigForContracts = useCallback(
-        (account: string) =>
-            getContractsNameConfig(
-                account,
-                mapSearchParamForIndexPositionToFindContracts.executorId,
-                10000
-            ),
-        []
-    );
-
-    const { data: userContracts } = useTableData<ContractDto>(
-        getConfigForContracts
-    );
-    const contractId = userContracts.find(
-        ({ status, type, executor }) =>
-            type === ContractType.mineowner_contractor &&
-            executor === accountName &&
-            status === ContractStatus.active
-    )?.id;
+    const contractId = useStore(contractorContractIdStore);
 
     useEffect(() => {
         const equipmentSlots = contractors?.[0]?.equip_slots ?? [];
         if (equipmentSlots) {
-            const equipment = equipmentSlots
-                .map(({ asset_id }) =>
-                    userInventory.find((v) => v.asset_id === asset_id)
-                )
-                .filter((v) => v) as UserInventoryType[];
-
-            const newSelectedEquipment = Object.fromEntries(
-                miningEquipmentNames.map((name) => [
-                    name,
-                    findEquipmentByName(equipment, name),
-                ])
-            ) as Record<InventoryNameType, UserInventoryType>;
-
-            setSelectedEquipment(newSelectedEquipment);
+            const equipment = getSelectedEquipmentBySlots(
+                equipmentSlots,
+                userInventory
+            );
+            setSelectedEquipment(equipment);
         }
     }, [contractors, userInventory]);
 
@@ -125,7 +95,11 @@ export const EquipmentSetPage: FC = () => {
                 })
             );
         }
-        return reloadPage();
+        return success({
+            title: t('pages.equipmentSet.main.title'),
+            content: t('pages.equipmentSet.main.installed'),
+            onOk: reloadPage,
+        });
     };
 
     const handleRemoveAllEquipment = async () => {
@@ -135,7 +109,11 @@ export const EquipmentSetPage: FC = () => {
                 items: assetIds,
             })
         );
-        reloadPage();
+        return success({
+            title: t('pages.equipmentSet.main.uninstall'),
+            content: t('pages.equipmentSet.main.removed'),
+            onOk: reloadPage,
+        });
     };
 
     const handleRemoveEquipment = async (inventory: UserInventoryType) => {
@@ -145,7 +123,11 @@ export const EquipmentSetPage: FC = () => {
                 items: [inventory.asset_id],
             })
         );
-        reloadPage();
+        return success({
+            title: t('pages.equipmentSet.main.uninstall'),
+            content: t('pages.equipmentSet.main.removed'),
+            onOk: reloadPage,
+        });
     };
 
     const openInventoryModal = (name: InventoryNameType) => {

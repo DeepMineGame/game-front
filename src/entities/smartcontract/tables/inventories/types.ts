@@ -42,6 +42,8 @@ export type UserInventoryType = {
     in_use: InUseType;
     struct_type: StructType;
     rarity: RarityType;
-    weight: number;
+    weight?: number;
     inv_type: InventoryType;
+    level: number;
+    equip_type: number;
 };
