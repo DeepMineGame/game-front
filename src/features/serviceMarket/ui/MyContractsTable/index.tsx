@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 import { useNavigate } from 'react-router-dom';
 import { PlusOutlined } from '@ant-design/icons';
-import React from 'react';
+import { FC } from 'react';
 import { Button, Segmented, useAccountName } from 'shared';
 import { createOrder } from 'app/router/paths';
 import { FilterOrderStatus } from 'entities/gameStat';
@@ -13,7 +13,7 @@ import {
 import { ServiceMarketContractsTable } from '../../contracts';
 import styles from './styles.module.scss';
 
-export const MyContractsTab = () => {
+export const MyContractsTab: FC = () => {
     const { t } = useTranslation();
     const filterValue = useStore(orderStatusFilterStore);
     const navigate = useNavigate();

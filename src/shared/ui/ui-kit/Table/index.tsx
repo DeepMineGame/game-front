@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import cn from 'classnames';
 import { Table as AntTable } from 'antd';
 import type { TableProps } from 'antd/lib/table';
