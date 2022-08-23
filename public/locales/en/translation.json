@@ -386,6 +386,7 @@
       "order": {
         "orderId": "Order ID",
         "signOrder": "Sign the order",
+        "orderCreated": "Your order was signed",
         "deleteOrder": "Delete the order",
         "selectMine": "Select the mine",
         "selectMineAndSign": "Select mine and sign the order",

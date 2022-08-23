@@ -1,9 +1,9 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { ATOMICHUB_URL } from 'app/constants';
-import { Button, Result, Text, Select, useReloadPage } from 'shared';
+import { Button, Result, Text, Select, useReloadPage, success } from 'shared';
 import { MinesGate, minesStore } from 'features';
 import { useSmartContractAction } from 'features/hooks';
 import {
@@ -51,10 +51,14 @@ const SignContractorOrder: FC<Props> = ({ contract, accountName }) => {
         })
     );
 
-    const handleSignOrder = async () => {
+    const handleSignOrder = useCallback(async () => {
         await signContractAction();
-        reloadPage();
-    };
+        success({
+            title: t('pages.serviceMarket.order.signOrder'),
+            content: t('pages.serviceMarket.order.orderCreated'),
+            onOk: reloadPage,
+        });
+    }, [reloadPage, signContractAction, t]);
 
     const handleSign = () => {
         if (!mines.length) {
