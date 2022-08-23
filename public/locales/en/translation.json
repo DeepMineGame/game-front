@@ -226,6 +226,8 @@
         "installation": "Equipment installation",
         "install": "Install the Equipment set",
         "uninstall": "Uninstall the Equipment set",
+        "installed": "Your equipment has been installed",
+        "removed": "Your equipment has been removed",
         "remove": "Remove"
       },
       "cardModal": {
@@ -371,7 +373,8 @@
         "setMineOrArea": "You must set up mine or engage area first",
         "youHaveNoAreaOrFreeSlots": "You have no engaged area or have no empty mine slots",
         "youHaveSignedContract": "You already have the contract",
-        "yourMineIsFull": "You have no the mine or your mine has no more free slots"
+        "yourMineIsFull": "You have no the mine or your mine has no more free slots",
+          "removeEquipFirst": "You need to remove installed equipment in contractor's cabin to proceed"
       },
       "lookingForMineOwner": "Looking for Mine owner",
       "lookingForContractor": "Looking for Contractor",
@@ -383,6 +386,7 @@
       "order": {
         "orderId": "Order ID",
         "signOrder": "Sign the order",
+        "orderCreated": "Your order was signed",
         "deleteOrder": "Delete the order",
         "selectMine": "Select the mine",
         "selectMineAndSign": "Select mine and sign the order",

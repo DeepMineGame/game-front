@@ -1,5 +1,4 @@
 import { notification } from 'antd';
-import React from 'react';
 import styles from './styles.module.scss';
 
 export const errorNotify = (error: Error) => {
