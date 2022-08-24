@@ -80,9 +80,11 @@ export const GeneralConditionStep: FC<{
                                 )}
                                 className={styles.tooltipCard}
                             >
-                                {t(
+                                {`${t(
                                     'pages.serviceMarket.createOrder.startOfOperationTooltip'
-                                )}
+                                )} ${t(
+                                    'pages.serviceMarket.createOrder.contractorShouldStartMiningWithin24Hours'
+                                )}`}
                             </Card>
                         }
                     >
@@ -92,6 +94,11 @@ export const GeneralConditionStep: FC<{
                                 amount: 3,
                                 label: t('components.common.days'),
                             })}
+                            disabled
+                            defaultValue={{
+                                value: 1,
+                                label: `1 ${t('components.common.days')}`,
+                            }}
                         />
                     </Form.Item>
                     <Form.Item
@@ -105,6 +112,11 @@ export const GeneralConditionStep: FC<{
                                 label: t('components.common.hours'),
                                 sinceZero: true,
                             })}
+                            disabled
+                            defaultValue={{
+                                value: 0,
+                                label: `0 ${t('components.common.hours')}`,
+                            }}
                         />
                     </Form.Item>
                 </div>

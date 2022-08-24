@@ -48,5 +48,5 @@ export const getDmeAmount = (value: number) => {
 export * from './getNftImagePath';
 export * from './uniqBy';
 export * from './addDaysToCurrentDateUnixTime';
-export * from './getDaysSelectItem';
+export * from './getLabelSelectItem';
 export { getErrorCode } from './getErrorCode';

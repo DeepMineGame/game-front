@@ -5,7 +5,9 @@ type GetLabelSelectItemParams = {
 };
 
 /**
- * Create options for select from number
+ * Function return array of options with asc numeric value and custom label
+ * @param param0 Amount of options. Label for option. sinceZero if we wanna get options since 0 value
+ * @returns Array of options for Select component
  */
 export const getLabelSelectItem = ({
     amount,

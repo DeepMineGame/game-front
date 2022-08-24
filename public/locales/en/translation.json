@@ -375,7 +375,8 @@
         "youHaveNoAreaOrFreeSlots": "You have no engaged area or have no empty mine slots",
         "youHaveSignedContract": "You already have the contract",
         "yourMineIsFull": "You have no the mine or your mine has no more free slots",
-          "removeEquipFirst": "You need to remove installed equipment in contractor's cabin to proceed"
+        "removeEquipFirst": "You need to remove installed equipment in contractor's cabin to proceed",
+        "contractorShouldStartMiningWithin24Hours": "The Contractor should start mining within 24 hours in order not to receive a fine"
       },
       "lookingForMineOwner": "Looking for Mine owner",
       "lookingForContractor": "Looking for Contractor",
