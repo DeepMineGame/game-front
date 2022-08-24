@@ -2,8 +2,6 @@ import { FC, useMemo } from 'react';
 import { serviceMarket } from 'app/router/paths';
 import { t } from 'i18next';
 import { ContractState } from 'features';
-import { DiscordIcon } from 'shared';
-import { Space, Tooltip } from 'antd';
 import {
     ContractDto,
     contractName,
@@ -30,33 +28,25 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
 
                 return {
                     nickName: (
-                        <Space align="start" size="large">
-                            <Tooltip
-                                overlay={t('components.common.comingSoon')}
+                        <>
+                            <Link
+                                to={`${serviceMarket}/contract/${contract.id}`}
                             >
-                                <DiscordIcon cursor="pointer" />
-                            </Tooltip>
-                            <Space align="center" size={0}>
-                                <Link
-                                    to={`${serviceMarket}/contract/${contract.id}`}
-                                >
-                                    {partnerNickname || '-'}
-                                </Link>
-                                {role && (
-                                    <Tag kind="secondary">
-                                        {t(
-                                            `roles.${
-                                                role ===
-                                                    'mineOwnerContractor' ||
-                                                role === 'mineOwnerLandlord'
-                                                    ? 'mineOwner'
-                                                    : role
-                                            }`
-                                        )}
-                                    </Tag>
-                                )}
-                            </Space>
-                        </Space>
+                                {partnerNickname || '-'}
+                            </Link>
+                            {role && (
+                                <Tag kind="secondary">
+                                    {t(
+                                        `roles.${
+                                            role === 'mineOwnerContractor' ||
+                                            role === 'mineOwnerLandlord'
+                                                ? 'mineOwner'
+                                                : role
+                                        }`
+                                    )}
+                                </Tag>
+                            )}
+                        </>
                     ),
                     key: contract.id,
                     reputation: '-',
