@@ -2,9 +2,10 @@ import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 import { useNavigate } from 'react-router-dom';
 import { PlusOutlined } from '@ant-design/icons';
-import React from 'react';
-import { Button, Segmented, useAccountName } from 'shared';
+import { FC } from 'react';
+import { Button, Segmented, Select, useAccountName } from 'shared';
 import { createOrder } from 'app/router/paths';
+import { Space } from 'antd';
 import { FilterOrderStatus } from 'entities/gameStat';
 import {
     changeFilterEvent,
@@ -13,7 +14,13 @@ import {
 import { ServiceMarketContractsTable } from '../../contracts';
 import styles from './styles.module.scss';
 
-export const MyContractsTab = () => {
+enum Role {
+    all = 'all',
+    contractor = 'contractor',
+    mineowner = 'mineowner',
+}
+
+export const MyContractsTab: FC = () => {
     const { t } = useTranslation();
     const filterValue = useStore(orderStatusFilterStore);
     const navigate = useNavigate();
@@ -42,13 +49,35 @@ export const MyContractsTab = () => {
                     }
                     value={filterValue || ''}
                 />
-                <Button
-                    type="primary"
-                    onClick={() => navigate(createOrder)}
-                    icon={<PlusOutlined />}
-                >
-                    {t('pages.serviceMarket.createOrder.createOrder')}
-                </Button>
+                <Space>
+                    <Select
+                        className={styles.select}
+                        dropdownMatchSelectWidth
+                        placeholder={t('pages.serviceMarket.yourRole')}
+                        options={[
+                            {
+                                label: t('pages.serviceMarket.all'),
+                                value: Role.all,
+                            },
+                            {
+                                label: t('roles.contractor'),
+                                value: Role.contractor,
+                            },
+                            {
+                                label: t('roles.mineOwner'),
+                                value: Role.mineowner,
+                            },
+                        ]}
+                        bordered={false}
+                    />
+                    <Button
+                        type="primary"
+                        onClick={() => navigate(createOrder)}
+                        icon={<PlusOutlined />}
+                    >
+                        {t('pages.serviceMarket.createOrder.createOrder')}
+                    </Button>
+                </Space>
             </div>
             {accountName && (
                 <ServiceMarketContractsTable accountName={accountName} />

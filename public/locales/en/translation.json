@@ -226,6 +226,8 @@
         "installation": "Equipment installation",
         "install": "Install the Equipment set",
         "uninstall": "Uninstall the Equipment set",
+        "installed": "Your equipment has been installed",
+        "removed": "Your equipment has been removed",
         "remove": "Remove"
       },
       "cardModal": {
@@ -342,13 +344,14 @@
       "miningContract": "Mining contract",
       "mineOperationOrder": "Mine operation order",
       "mineOperationContract": "Mine operation contract",
+      "yourRole": "Your role",
+      "all": "All",
       "createOrder": {
         "createOrder": "Create order",
         "contractType": "Contract type",
         "generalCondition": "General condition",
         "terms": "Terms",
         "selectContractType": "Select contract type",
-        "yourRole": "Your role",
         "selectToDisable": "Select contract type to disable",
         "selectRole": "Select role",
         "fee": "Fee",
@@ -372,6 +375,7 @@
         "youHaveNoAreaOrFreeSlots": "You have no engaged area or have no empty mine slots",
         "youHaveSignedContract": "You already have the contract",
         "yourMineIsFull": "You have no the mine or your mine has no more free slots",
+        "removeEquipFirst": "You need to remove installed equipment in contractor's cabin to proceed",
         "contractorShouldStartMiningWithin24Hours": "The Contractor should start mining within 24 hours in order not to receive a fine"
       },
       "lookingForMineOwner": "Looking for Mine owner",
@@ -384,6 +388,7 @@
       "order": {
         "orderId": "Order ID",
         "signOrder": "Sign the order",
+        "orderCreated": "Your order was signed",
         "deleteOrder": "Delete the order",
         "selectMine": "Select the mine",
         "selectMineAndSign": "Select mine and sign the order",
@@ -433,6 +438,14 @@
         "valid": "Valid Contract",
         "waitingAction": "Waiting for action",
         "terminated": "Terminated"
+      },
+      "myContractsTab": {
+        "nickname": "Nickname",
+        "reputation": "Reputation",
+        "contractType": "Contract type",
+        "completionDate": "Completion date",
+        "penalty": "Penalty, DME",
+        "status": "Status"
       }
     },
     "areaManagement": {

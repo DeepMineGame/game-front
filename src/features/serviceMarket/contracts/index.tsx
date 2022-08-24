@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { ContractsTable } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { Empty, Skeleton } from 'antd';

@@ -34,7 +34,7 @@ export const LandLordMineOwnerRoleField: FC<{ form: FormInstance }> = ({
     return (
         <Form.Item
             className={styles.formField}
-            label={t('pages.serviceMarket.createOrder.yourRole')}
+            label={t('pages.serviceMarket.yourRole')}
             name={createContrFormFields.isClient}
             dependencies={[createContrFormFields.contractType]}
         >

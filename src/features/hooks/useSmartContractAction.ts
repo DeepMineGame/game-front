@@ -14,16 +14,18 @@ export const useSmartContractAction = <T>(
     const chainAccount = useChainAuthContext();
     const { t } = useTranslation();
 
-    return () =>
-        chainAccount?.activeUser
-            ?.signTransaction(action, options)
-            .catch((e) => {
-                errorNotify(e);
-                error({
-                    title: t('components.common.status.error'),
-                    content: t(`blockchainErrors.${getErrorCode(e)}`),
-                });
+    return async () => {
+        try {
+            await chainAccount?.activeUser?.signTransaction(action, options);
+        } catch (e) {
+            errorNotify(e as Error);
+            error({
+                title: t('components.common.status.error'),
+                content: t(`blockchainErrors.${getErrorCode(e as string)}`),
             });
+            throw e;
+        }
+    };
 };
 
 export const useSmartContractActionDynamic = () => {

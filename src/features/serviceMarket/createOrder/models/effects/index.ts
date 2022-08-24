@@ -3,6 +3,7 @@ import { getTableData } from 'shared';
 import {
     getAreaConfig,
     getContractConfig,
+    getInventoryConfig,
     getMinesEffect,
     mapSearchParamForIndexPositionToFindContracts,
     searchBy,
@@ -34,4 +35,9 @@ export const getContractByExecutorEffect = createEffect(
             })
         );
     }
+);
+
+export const getInventoryEffect = createEffect(
+    async ({ searchParam }: { searchParam: string }) =>
+        getTableData(getInventoryConfig(searchParam))
 );

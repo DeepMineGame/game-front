@@ -5,8 +5,11 @@ import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 import { createContrFormFields, ContractRole } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
-import { hasActiveMineOwnerContractorContractAsExecutor } from '../../models/hasActiveMineOwnerContractorContractAsExecutor';
-import { hasMineEmptySlotsStore } from '../../models/hasMineEmptySlots';
+import {
+    hasActiveMineOwnerContractorContractAsExecutor,
+    hasInstalledEquipmentStore,
+    hasMineEmptySlotsStore,
+} from '../../models';
 
 const { useWatch } = Form;
 
@@ -20,6 +23,8 @@ export const MineOwnerContractorRoleField: FC<{ form: FormInstance }> = ({
         hasActiveMineOwnerContractorContractAsExecutor
     );
     const hasMineEmptySlots = useStore(hasMineEmptySlotsStore);
+    const hasInstalledEquipment = useStore(hasInstalledEquipmentStore);
+
     const hasActiveContractTooltipText =
         hasActiveContract &&
         t('pages.serviceMarket.createOrder.youHaveSignedContract');
@@ -27,10 +32,14 @@ export const MineOwnerContractorRoleField: FC<{ form: FormInstance }> = ({
         !hasMineEmptySlots &&
         t('pages.serviceMarket.createOrder.yourMineIsFull');
 
+    const hasInstalledEquipmentTooltipText =
+        hasInstalledEquipment &&
+        t('pages.serviceMarket.createOrder.removeEquipFirst');
+
     return (
         <Form.Item
             className={styles.formField}
-            label={t('pages.serviceMarket.createOrder.yourRole')}
+            label={t('pages.serviceMarket.yourRole')}
             name={createContrFormFields.isClient}
             dependencies={[createContrFormFields.contractType]}
         >
@@ -54,11 +63,17 @@ export const MineOwnerContractorRoleField: FC<{ form: FormInstance }> = ({
                     {
                         value: ContractRole.executor,
                         label: (
-                            <Tooltip overlay={hasActiveContractTooltipText}>
+                            <Tooltip
+                                overlay={
+                                    hasActiveContract
+                                        ? hasActiveContractTooltipText
+                                        : hasInstalledEquipmentTooltipText
+                                }
+                            >
                                 {t('roles.contractor')}
                             </Tooltip>
                         ),
-                        disabled: hasActiveContract,
+                        disabled: hasActiveContract || hasInstalledEquipment,
                     },
                 ]}
             />

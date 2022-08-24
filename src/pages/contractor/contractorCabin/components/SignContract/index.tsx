@@ -4,6 +4,7 @@ import cn from 'classnames';
 import { Button } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import { createOrder, serviceMarket } from 'app/router/paths';
+import { ServiceMarketTabIds } from 'app/router/constants';
 import {
     ContractRole,
     ContractType,
@@ -31,7 +32,11 @@ export const SignContract = () => {
                     type="primary"
                     ghost
                     className={cn(contractorStyles.coloredText)}
-                    onClick={() => navigate(serviceMarket)}
+                    onClick={() =>
+                        navigate(
+                            `${serviceMarket}?tabId=${ServiceMarketTabIds.miningContracts}`
+                        )
+                    }
                 >
                     {t('pages.contractor.signingContract.findButton')}
                 </Button>
