@@ -40,13 +40,19 @@
 
 .selectBorderless {
     :global {
-        .ant-select-open .ant-select-selection-item {
+        .ant-select-selection-item {
             color: $color-primary-primary-6;
         }
-        
-        .ant-select-selection-item,
-        .ant-select-selection-placeholder,
+
+        .ant-select-selection-placeholder {
+            color: $color-primary-primary-6;
+        }
+
         .ant-select-arrow {
+            color: $color-primary-primary-6;
+        }
+
+        .ant-select-open .ant-select-selection-item {
             color: $color-primary-primary-6;
         }
     }
