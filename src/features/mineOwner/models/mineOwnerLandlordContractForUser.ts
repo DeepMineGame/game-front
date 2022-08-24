@@ -2,6 +2,7 @@ import { createEffect, createStore } from 'effector';
 import { getTableData } from 'shared';
 import {
     ContractDto,
+    ContractStatus,
     ContractType,
     getContractsNameConfig,
     mapSearchParamForIndexPositionToFindContracts,
@@ -18,15 +19,17 @@ export const getContractEffectByExecutor = createEffect(
         );
     }
 );
-export const mineOwnerLandlordContractForUserStore = createStore<
-    ContractDto | 'empty' | 'init'
->('init').on(
-    getContractEffectByExecutor.doneData,
-    (_, { rows }) =>
-        rows
-            ?.filter(
-                ({ type }: ContractDto) =>
-                    type === ContractType.landlord_mineowner
-            )
-            ?.reverse()[0] || 'empty'
-);
+export const mineOwnerLandlordContractForUserStore =
+    createStore<ContractDto | null>(null).on(
+        getContractEffectByExecutor.doneData,
+        (_, { rows }) =>
+            rows
+                ?.filter(
+                    ({ type }: ContractDto) =>
+                        type === ContractType.landlord_mineowner
+                )
+                ?.find(
+                    ({ status }: ContractDto) =>
+                        status === ContractStatus.active
+                )
+    );

@@ -3,6 +3,7 @@ import {
     ActionModal,
     Button,
     desktopS,
+    success,
     useAccountName,
     useMediaQuery,
     useReloadPage,
@@ -19,9 +20,11 @@ import {
     ContractRole,
     setupMine,
 } from 'entities/smartcontract';
-import { mineOwnerCabinState } from '../../models/mineOwnerState';
+import {
+    mineOwnerCabinState,
+    mineOwnerLandlordContractForUserStore,
+} from '../../models';
 import { useSmartContractAction } from '../../../hooks';
-import { mineOwnerLandlordContractForUserStore } from '../../models';
 
 export function useActionsButton() {
     const [isSetupMineModalVisible, setSetupMineModalVisible] = useState(false);
@@ -43,10 +46,14 @@ export function useActionsButton() {
 
     const setupSignAndReload = async () => {
         await setupMineAction();
-        reloadPage();
+        success({
+            title: t('features.mineOwner.setupMine'),
+            content: t('features.mineOwner.mineIsSet'),
+            onOk: reloadPage,
+        });
     };
     return {
-        [mineOwnerCabinState.isOutsideFromLocation]: null,
+        [mineOwnerCabinState.needPhysicalShift]: null,
         [mineOwnerCabinState.initial]: (
             <div>
                 <Button type="link" onClick={() => navigate(warehouse)}>
@@ -64,7 +71,7 @@ export function useActionsButton() {
                 </Button>
             </div>
         ),
-        [mineOwnerCabinState.hasNoMineNft]: (
+        [mineOwnerCabinState.needMineNft]: (
             <div>
                 <Button type="link" onClick={() => navigate(warehouse)}>
                     {isDesktop
@@ -81,7 +88,7 @@ export function useActionsButton() {
                 </Button>
             </div>
         ),
-        [mineOwnerCabinState.needSignContractWithLandLord]: (
+        [mineOwnerCabinState.needContractWithLandlord]: (
             <div>
                 <Button
                     type="link"
@@ -126,8 +133,8 @@ export function useActionsButton() {
                 </Button>
             </>
         ),
-        [mineOwnerCabinState.isMineSet]: null,
-        [mineOwnerCabinState.isMineSetupInProgress]: null,
-        [mineOwnerCabinState.isMineActive]: null,
+        [mineOwnerCabinState.everythingIsDone]: null,
+        [mineOwnerCabinState.needActivateMine]: null,
+        [mineOwnerCabinState.needCrew]: null,
     };
 }

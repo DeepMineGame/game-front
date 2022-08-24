@@ -69,7 +69,7 @@ export const ActionModal: FC<Props> = ({
                 )}
             </Title>
             <div>
-                {!useDmp && <Timer className={styles.timer} timeSeconds={0} />}
+                {!useDmp && <Timer className={styles.timer} timeSeconds={1} />}
                 {useDmp && (
                     <div className={styles.infoCard}>
                         <div className={styles.infoCardText}>

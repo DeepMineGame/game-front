@@ -31,7 +31,7 @@ export const MineOwnerCrew: FC = () => {
             <AddItem
                 key={i}
                 text={t('components.common.table.addNewContractor')}
-                link={`${serviceMarket}&tabId=${ServiceMarketTabIds.miningContracts}`}
+                link={`${serviceMarket}/?tabId=${ServiceMarketTabIds.miningContracts}`}
             />
         ));
 

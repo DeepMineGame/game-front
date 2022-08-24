@@ -1,7 +1,7 @@
 import { createGate } from 'effector-react';
 import { createEffect, createStore, forward } from 'effector';
 import {
-    inventoryTableDataConfig,
+    getInventoryTableData,
     UserInventoryType,
 } from 'entities/smartcontract';
 import { getAtomicAssetsByUser } from 'entities/atomicassets';
@@ -11,7 +11,7 @@ export const InventoryGate = createGate<{ searchParam: string }>(
 );
 const getActiveInventory = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
-        return inventoryTableDataConfig({ searchParam });
+        return getInventoryTableData({ searchParam });
     }
 );
 export const activeUserInventoryStore = createStore<UserInventoryType[] | null>(

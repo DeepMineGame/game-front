@@ -11,7 +11,7 @@ export enum SEARCH_BY {
 }
 export * from './types';
 
-export const inventoryTableDataConfig = ({
+export const getInventoryTableData = ({
     searchIdentificationType = SEARCH_BY.ownerNickname,
     searchParam,
 }: {
@@ -40,7 +40,7 @@ export const getInventoriesEffect = createEffect(
         searchIdentificationType?: SEARCH_BY;
         searchParam: string;
     }) => {
-        return inventoryTableDataConfig({
+        return getInventoryTableData({
             searchIdentificationType,
             searchParam,
         });

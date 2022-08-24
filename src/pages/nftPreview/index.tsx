@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Empty, Skeleton } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import {
-    inventoryTableDataConfig,
+    getInventoryTableData,
     SEARCH_BY,
     UserInventoryType,
 } from 'entities/smartcontract';
@@ -19,7 +19,7 @@ export const NftPreviewPage = () => {
 
     useEffect(() => {
         if (assetId) {
-            inventoryTableDataConfig({
+            getInventoryTableData({
                 searchParam: assetId,
                 searchIdentificationType: SEARCH_BY.inventoryId,
             }).then(({ rows }) => setFetchedCard(rows?.[0]));
