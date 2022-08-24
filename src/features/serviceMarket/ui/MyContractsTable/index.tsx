@@ -14,6 +14,12 @@ import {
 import { ServiceMarketContractsTable } from '../../contracts';
 import styles from './styles.module.scss';
 
+enum Role {
+    all = 'all',
+    contractor = 'contractor',
+    mineowner = 'mineowner',
+}
+
 export const MyContractsTab: FC = () => {
     const { t } = useTranslation();
     const filterValue = useStore(orderStatusFilterStore);
@@ -51,15 +57,15 @@ export const MyContractsTab: FC = () => {
                         options={[
                             {
                                 label: t('pages.serviceMarket.all'),
-                                value: 'all',
+                                value: Role.all,
                             },
                             {
                                 label: t('roles.contractor'),
-                                value: 'contractor',
+                                value: Role.contractor,
                             },
                             {
                                 label: t('roles.mineOwner'),
-                                value: 'landlord',
+                                value: Role.mineowner,
                             },
                         ]}
                         bordered={false}

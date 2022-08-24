@@ -433,6 +433,14 @@
         "valid": "Valid Contract",
         "waitingAction": "Waiting for action",
         "terminated": "Terminated"
+      },
+      "myContractsTab": {
+        "nickname": "Nickname",
+        "reputation": "Reputation",
+        "contractType": "Contract type",
+        "completionDate": "Completion date",
+        "penalty": "Penalty, DME",
+        "status": "Status"
       }
     },
     "areaManagement": {

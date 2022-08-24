@@ -66,37 +66,39 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
         <Table
             columns={[
                 {
-                    title: 'Nickname',
+                    title: t('pages.serviceMarket.myContractsTab.nickname'),
                     dataIndex: 'nickName',
                     key: 'nickName',
                 },
                 {
-                    title: 'Reputation',
+                    title: t('pages.serviceMarket.myContractsTab.reputation'),
                     dataIndex: 'reputation',
                     key: 'reputation',
                     sorter: (a, b) => a.reputation - b.reputation,
                 },
                 {
-                    title: 'Contract type',
+                    title: t('pages.serviceMarket.myContractsTab.contractType'),
                     dataIndex: 'type',
                     key: 'type',
                     sorter: (a, b) => a.type.length - b.type.length,
                 },
                 {
-                    title: 'Completion date',
+                    title: t(
+                        'pages.serviceMarket.myContractsTab.completionDate'
+                    ),
                     dataIndex: 'date',
                     key: 'date',
                     sorter: (a, b) =>
                         new Date(a.date).getTime() - new Date(b.date).getTime(),
                 },
                 {
-                    title: 'Penalty, DME',
+                    title: t('pages.serviceMarket.myContractsTab.penalty'),
                     dataIndex: 'penalty',
                     key: 'penalty',
                     sorter: (a, b) => a.penalty - b.penalty,
                 },
                 {
-                    title: 'Status',
+                    title: t('pages.serviceMarket.myContractsTab.status'),
                     dataIndex: 'status',
                     key: 'status',
                     sorter: (a, b) =>
