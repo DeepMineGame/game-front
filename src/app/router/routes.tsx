@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 
 import {
     ContractorCabin,
@@ -53,7 +53,7 @@ import {
 export type AppRoute = {
     titleTag: string;
     path: string;
-    Component: React.FC;
+    Component: FC;
     forLoggedIn?: boolean;
     forAdmin?: boolean;
     forBetaUser?: boolean;
