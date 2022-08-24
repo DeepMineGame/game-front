@@ -344,13 +344,14 @@
       "miningContract": "Mining contract",
       "mineOperationOrder": "Mine operation order",
       "mineOperationContract": "Mine operation contract",
+      "yourRole": "Your role",
+      "all": "All",
       "createOrder": {
         "createOrder": "Create order",
         "contractType": "Contract type",
         "generalCondition": "General condition",
         "terms": "Terms",
         "selectContractType": "Select contract type",
-        "yourRole": "Your role",
         "selectToDisable": "Select contract type to disable",
         "selectRole": "Select role",
         "fee": "Fee",
@@ -436,6 +437,14 @@
         "valid": "Valid Contract",
         "waitingAction": "Waiting for action",
         "terminated": "Terminated"
+      },
+      "myContractsTab": {
+        "nickname": "Nickname",
+        "reputation": "Reputation",
+        "contractType": "Contract type",
+        "completionDate": "Completion date",
+        "penalty": "Penalty, DME",
+        "status": "Status"
       }
     },
     "areaManagement": {
