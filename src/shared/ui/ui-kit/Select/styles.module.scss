@@ -1,5 +1,13 @@
 @import 'src/shared';
 
+.selectBorderless {
+    :global {
+        .ant-select-selection-placeholder {
+            color: $color-primary-primary-6;
+        }
+    }
+}
+
 .select {
     :global {
         .ant-select-selector {
@@ -40,14 +48,7 @@
 
 .selectBorderless {
     :global {
-        .ant-select-selection-item {
-            color: $color-primary-primary-6;
-        }
-
-        .ant-select-selection-placeholder {
-            color: $color-primary-primary-6;
-        }
-
+        .ant-select-selection-item, 
         .ant-select-arrow {
             color: $color-primary-primary-6;
         }
