@@ -25,5 +25,8 @@ export function useDescriptions() {
             'features.mineOwner.needTeamDescription'
         ),
         [mineOwnerCabinState.everythingIsDone]: <MineStat />,
+        [mineOwnerCabinState.contractWithLandlordWasTerminated]: t(
+            'features.mineOwner.mineNotInArea'
+        ),
     };
 }

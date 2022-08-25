@@ -1,5 +1,10 @@
 import { createEffect } from 'effector';
-import { getMinesTableData, MineDto, searchBy } from 'entities/smartcontract';
+import {
+    getMinesTableData,
+    MineDto,
+    MineState,
+    searchBy,
+} from 'entities/smartcontract';
 import { mineOwnerCabinStateResolver } from '../mineOwnerCabinState';
 import { checkHasCrewEffect } from './checkHasCrewEffect';
 
@@ -11,9 +16,13 @@ export const checkIsMineSetEffect = createEffect(
         });
         const userMine: MineDto | undefined = mines?.[0];
 
-        if (userMine) {
+        if (
+            userMine?.state === MineState.setuped ||
+            userMine?.state === MineState.activated
+        ) {
             return checkHasCrewEffect({ searchParam });
         }
+
         return mineOwnerCabinStateResolver.needSetupMineState();
     }
 );

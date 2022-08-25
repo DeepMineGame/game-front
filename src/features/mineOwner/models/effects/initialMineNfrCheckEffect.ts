@@ -5,7 +5,7 @@ import {
     UserInventoryType,
 } from 'entities/smartcontract';
 import { mineOwnerCabinStateResolver } from '../mineOwnerCabinState';
-import { checkContractEffect } from './checkContractEffect';
+import { checkLandLordContractMineOwnerActiveContractEffect } from './checkLandLordContractMineOwnerActiveContractEffect';
 
 export const hasMineNftFilter = (inventories: UserInventoryType[] | null) => {
     return inventories?.find(
@@ -13,14 +13,16 @@ export const hasMineNftFilter = (inventories: UserInventoryType[] | null) => {
     );
 };
 
-export const initialEffect = createEffect(
+export const initialMineNfrCheckEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
         const { rows: inventory } = await getInventoryTableData({
             searchParam,
         });
 
         if (hasMineNftFilter(inventory)) {
-            return await checkContractEffect({ searchParam });
+            return await checkLandLordContractMineOwnerActiveContractEffect({
+                searchParam,
+            });
         }
 
         return mineOwnerCabinStateResolver.setNeedMineNftState();

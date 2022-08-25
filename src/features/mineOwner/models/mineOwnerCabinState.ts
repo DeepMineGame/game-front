@@ -2,7 +2,7 @@ import { attach, createApi, createStore, forward } from 'effector';
 import { createGate } from 'effector-react';
 
 import { userStore } from 'entities/user';
-import { initialEffect } from './effects';
+import { initialMineNfrCheckEffect } from './effects';
 import { getContractEffectByExecutor } from './mineOwnerLandlordContractForUser';
 
 export const MineOwnerCabinGate = createGate<{ searchParam: string }>(
@@ -13,6 +13,7 @@ export enum mineOwnerCabinState {
     initial,
     needMineNft,
     needContractWithLandlord,
+    contractWithLandlordWasTerminated,
     needPhysicalShift,
     needSetupMine,
     needCrew,
@@ -20,19 +21,21 @@ export enum mineOwnerCabinState {
     everythingIsDone,
 }
 
-export const mineOwnerCabinStateStore = createStore<mineOwnerCabinState>(
+export const $mineOwnerCabinState = createStore<mineOwnerCabinState>(
     mineOwnerCabinState.initial
 );
 
 forward({
     from: MineOwnerCabinGate.open,
-    to: initialEffect,
+    to: initialMineNfrCheckEffect,
 });
 
-export const mineOwnerCabinStateResolver = createApi(mineOwnerCabinStateStore, {
+export const mineOwnerCabinStateResolver = createApi($mineOwnerCabinState, {
     setNeedMineNftState: () => mineOwnerCabinState.needMineNft,
     setNeedContractWithLandlordState: () =>
         mineOwnerCabinState.needContractWithLandlord,
+    setContractWithLandlordWasTerminated: () =>
+        mineOwnerCabinState.contractWithLandlordWasTerminated,
     needPhysicalShiftState: () => mineOwnerCabinState.needPhysicalShift,
     needSetupMineState: () => mineOwnerCabinState.needSetupMine,
     needCrewState: () => mineOwnerCabinState.needCrew,

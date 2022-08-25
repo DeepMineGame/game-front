@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import classNames from 'classnames';
 import { mineOwnerCabinState } from '../../models';
 import styles from './styles.module.scss';
@@ -12,6 +12,9 @@ export const MineOwnerCabin: FC<Props> = ({ children, state = 'default' }) => {
             className={classNames(styles.cabinWrapper, {
                 [styles.progress]:
                     state === mineOwnerCabinState.everythingIsDone,
+                [styles.incident]:
+                    state ===
+                    mineOwnerCabinState.contractWithLandlordWasTerminated,
             })}
         >
             {children}

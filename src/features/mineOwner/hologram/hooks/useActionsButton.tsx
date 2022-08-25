@@ -35,6 +35,34 @@ export function useActionsButton() {
     const accountName = useAccountName();
     const contract = useStore(mineOwnerLandlordContractForUserStore);
     const reloadPage = useReloadPage();
+    const contractButton = (
+        <div>
+            <Button
+                type="link"
+                onClick={() =>
+                    navigate(
+                        `${serviceMarket}?tabId=${ServiceMarketTabIds.mineOperation}`
+                    )
+                }
+            >
+                {isDesktop
+                    ? t('features.mineOwner.chooseContract')
+                    : t('features.mineOwner.choose')}
+            </Button>
+            <Button
+                type="link"
+                onClick={() =>
+                    navigate(
+                        `${createOrder}?${createContrFormFields.contractType}=${ContractType.landlord_mineowner}&${createContrFormFields.isClient}=${ContractRole.executor}`
+                    )
+                }
+            >
+                {isDesktop
+                    ? t('features.mineOwner.createContract')
+                    : t('features.mineOwner.create')}
+            </Button>
+        </div>
+    );
 
     const setupMineAction = useSmartContractAction(
         setupMine({
@@ -88,34 +116,7 @@ export function useActionsButton() {
                 </Button>
             </div>
         ),
-        [mineOwnerCabinState.needContractWithLandlord]: (
-            <div>
-                <Button
-                    type="link"
-                    onClick={() =>
-                        navigate(
-                            `${serviceMarket}?tabId=${ServiceMarketTabIds.mineOperation}`
-                        )
-                    }
-                >
-                    {isDesktop
-                        ? t('features.mineOwner.chooseContract')
-                        : t('features.mineOwner.choose')}
-                </Button>
-                <Button
-                    type="link"
-                    onClick={() =>
-                        navigate(
-                            `${createOrder}?${createContrFormFields.contractType}=${ContractType.landlord_mineowner}&${createContrFormFields.isClient}=${ContractRole.executor}`
-                        )
-                    }
-                >
-                    {isDesktop
-                        ? t('features.mineOwner.createContract')
-                        : t('features.mineOwner.create')}
-                </Button>
-            </div>
-        ),
+        [mineOwnerCabinState.needContractWithLandlord]: contractButton,
         [mineOwnerCabinState.needSetupMine]: (
             <>
                 <ActionModal
@@ -136,5 +137,6 @@ export function useActionsButton() {
         [mineOwnerCabinState.everythingIsDone]: null,
         [mineOwnerCabinState.needActivateMine]: null,
         [mineOwnerCabinState.needCrew]: null,
+        [mineOwnerCabinState.contractWithLandlordWasTerminated]: contractButton,
     };
 }

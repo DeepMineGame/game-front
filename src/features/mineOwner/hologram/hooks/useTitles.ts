@@ -23,5 +23,8 @@ export function useTitles() {
         [mineOwnerCabinState.everythingIsDone]: t(
             'features.mineOwner.mineIsActive'
         ),
+        [mineOwnerCabinState.contractWithLandlordWasTerminated]: t(
+            'features.mineOwner.contractWasTerminated'
+        ),
     };
 }

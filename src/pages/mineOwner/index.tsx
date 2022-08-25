@@ -6,7 +6,7 @@ import {
     MineOwnerCabin,
     Hologram,
     Travel,
-    mineOwnerCabinStateStore,
+    $mineOwnerCabinState,
     mineOwnerCabinState,
 } from 'features';
 
@@ -17,7 +17,7 @@ export const MineOwnerPage = () => {
     const chainAccountName = useAccountName();
     const reloadPage = useReloadPage();
 
-    const cabinState = useStore(mineOwnerCabinStateStore);
+    const cabinState = useStore($mineOwnerCabinState);
 
     return (
         <MineOwnerCabin state={cabinState}>

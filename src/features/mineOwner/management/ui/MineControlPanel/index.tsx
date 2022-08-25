@@ -9,7 +9,7 @@ import {
     useTableData,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Badge, Space } from 'antd';
 import { useGate, useStore } from 'effector-react';
 import { Travel, useSmartContractAction } from 'features';

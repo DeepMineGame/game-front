@@ -487,10 +487,12 @@
       "create": "Create",
       "createTeam": "Create a team",
       "needTeamDescription": "You are ready to gather your ultimate mine crew. \nSign the Mining Contract with a contractor to be able to activate your Mine",
+      "mineNotInArea": "Mine is not set up on the Area",
       "needTeamTitle": "Time to form a team",
       "mineManagement": "Mine Management",
       "mineManagementDescription": "Go to Mine Management unit to activate the Mine",
       "mineIsActive": "Mine is Active",
+      "contractWasTerminated": "Mine Operation Contract was Terminated",
       "mineIsActiveDescription": "Everything is fine, Mine is running. Now you can see the information about the mining process and efficiency",
       "mineIsActiveDescriptionMobile": "Now you can see the statistics of the mining process and efficiency",
       "management": {

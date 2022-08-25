@@ -23,7 +23,7 @@ export const checkHasCrewEffect = createEffect(
             ({ type }: ContractDto) =>
                 type === ContractType.mineowner_contractor
         );
-        const hasActiveContractorContract = contractorsContracts?.find(
+        const hasActiveContractorContract = contractorsContracts?.some(
             ({ status }: ContractDto) => ContractStatus.active === status
         );
 

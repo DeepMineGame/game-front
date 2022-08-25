@@ -17,7 +17,7 @@ import { useGate, useStore } from 'effector-react';
 import {
     MineConsumerGate,
     mineOwnerCabinState,
-    mineOwnerCabinStateStore,
+    $mineOwnerCabinState,
     userMineStore,
 } from '../../models';
 
@@ -33,7 +33,7 @@ export const MineOwnerMenu: FC<Props> = ({
     const navigate = useNavigate();
     const { t } = useTranslation();
     const userMine = useStore(userMineStore)?.[0];
-    const cabinState = useStore(mineOwnerCabinStateStore);
+    const cabinState = useStore($mineOwnerCabinState);
     const baseButtonDisableStates = [mineOwnerCabinState.needMineNft];
     const statusThatDisableManagementButton = [...baseButtonDisableStates];
     const statusThatDisableTeamButton = [...baseButtonDisableStates];

@@ -23,13 +23,9 @@ export const mineOwnerLandlordContractForUserStore =
     createStore<ContractDto | null>(null).on(
         getContractEffectByExecutor.doneData,
         (_, { rows }) =>
-            rows
-                ?.filter(
-                    ({ type }: ContractDto) =>
-                        type === ContractType.landlord_mineowner
-                )
-                ?.find(
-                    ({ status }: ContractDto) =>
-                        status === ContractStatus.active
-                )
+            rows?.filter(
+                ({ type, status }: ContractDto) =>
+                    type === ContractType.landlord_mineowner &&
+                    status === ContractStatus.active
+            )?.[0]
     );

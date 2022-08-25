@@ -7,7 +7,7 @@ export const MineOwnerMiningCrewPage = () => {
     const accountName = useAccountName();
     const tabs: Tab[] = [
         {
-            id: 1,
+            id: 0,
             component: accountName ? MineOwnerCrew : () => <div>No data</div>,
             name: 'Mine crew',
         },
