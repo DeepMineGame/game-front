@@ -18,7 +18,7 @@ import {
     ActionState,
     contrclaim,
     getActionEffect,
-    getContractEffect,
+    getContractByExecutorEffect,
     mapSearchParamForIndexPositionToFindContracts,
     toggleMining,
 } from 'entities/smartcontract';
@@ -60,7 +60,9 @@ export const MiningAndClaimButton: FC<Props> = memo(
         const claimDmeCallback = useSmartContractAction(
             contrclaim({ waxUser: accountName })
         );
-        const isContractsLoading = useStore(getContractEffect.pending);
+        const isContractsLoading = useStore(
+            getContractByExecutorEffect.pending
+        );
         const isActionsLoading = useStore(getActionEffect.pending);
 
         const hideClaimModal = useCallback(
@@ -69,7 +71,7 @@ export const MiningAndClaimButton: FC<Props> = memo(
         );
         const onClaimButtonClick = useCallback(async () => {
             const updateContract = () =>
-                getContractEffect({
+                getContractByExecutorEffect({
                     searchIdentification:
                         mapSearchParamForIndexPositionToFindContracts.executorId,
                     searchParam: accountName,

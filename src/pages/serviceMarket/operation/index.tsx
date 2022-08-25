@@ -1,9 +1,9 @@
-import React from 'react';
 import { useParams } from 'react-router';
 import { useGate, useStore } from 'effector-react';
 import { Skeleton } from 'antd';
 import { Page, useAccountName } from 'shared';
 import { ContractGate, contractStore, getContractEffect } from 'features';
+import { useEffect } from 'react';
 import { ContractStatus } from 'entities/smartcontract';
 import { PageNotFound } from '../../pageNotFound';
 import { ContractPage } from './ContractPage';
@@ -18,12 +18,15 @@ export const OperationPage = () => {
     const accountName = useAccountName();
     const { contractId = -1 } = useParams();
 
-    useGate(ContractGate, { searchParam: `${contractId}` });
+    useGate(ContractGate, { id: `${contractId}` });
 
-    const contracts = useStore(contractStore);
+    const contract = useStore(contractStore);
     const isContractLoading = useStore(getContractEffect.pending);
-    const contract = contracts?.[0];
     const isLoading = isContractLoading || !accountName;
+
+    useEffect(() => {
+        getContractEffect({ id: `${contractId}` });
+    }, [contractId]);
 
     if (isLoading) {
         return (
