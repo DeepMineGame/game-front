@@ -3,7 +3,6 @@ import { useGate, useStore } from 'effector-react';
 import { Skeleton } from 'antd';
 import { Page, useAccountName } from 'shared';
 import { ContractGate, contractStore, getContractEffect } from 'features';
-import { useEffect } from 'react';
 import { ContractStatus } from 'entities/smartcontract';
 import { PageNotFound } from '../../pageNotFound';
 import { ContractPage } from './ContractPage';
@@ -23,10 +22,6 @@ export const OperationPage = () => {
     const contract = useStore(contractStore);
     const isContractLoading = useStore(getContractEffect.pending);
     const isLoading = isContractLoading || !accountName;
-
-    useEffect(() => {
-        getContractEffect({ id: `${contractId}` });
-    }, [contractId]);
 
     if (isLoading) {
         return (
