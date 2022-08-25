@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams } from 'react-router';
 import { useGate, useStore } from 'effector-react';
 import { Skeleton } from 'antd';
@@ -18,11 +17,10 @@ export const OperationPage = () => {
     const accountName = useAccountName();
     const { contractId = -1 } = useParams();
 
-    useGate(ContractGate, { searchParam: `${contractId}` });
+    useGate(ContractGate, { id: `${contractId}` });
 
-    const contracts = useStore(contractStore);
+    const contract = useStore(contractStore);
     const isContractLoading = useStore(getContractEffect.pending);
-    const contract = contracts?.[0];
     const isLoading = isContractLoading || !accountName;
 
     if (isLoading) {

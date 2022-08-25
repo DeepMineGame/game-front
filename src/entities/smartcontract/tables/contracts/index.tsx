@@ -30,7 +30,7 @@ export const getContractConfig = ({
     limit,
 });
 
-export const getContractEffect = createEffect(
+export const getContractByExecutorEffect = createEffect(
     async ({
         searchIdentification = mapSearchParamForIndexPositionToFindContracts.executorId,
         searchParam,
@@ -45,7 +45,7 @@ export const getContractEffect = createEffect(
 );
 
 export const contractStore = createStore<ContractDto[] | null>(null).on(
-    getContractEffect.doneData,
+    getContractByExecutorEffect.doneData,
     (_, { rows }) => rows
 );
 

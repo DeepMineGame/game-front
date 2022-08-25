@@ -22,7 +22,7 @@ export const MiningPageGate = createGate<{ searchParam: string }>(
     'MiningPageGate'
 );
 
-export const getContractByUserEffect = createEffect(
+export const getContractByExecutorEffect = createEffect(
     async ({
         searchParam,
     }: {
@@ -61,7 +61,7 @@ export const getActionsForUserEffect = createEffect(
 );
 export const miningContractStore = createStore<ContractDto | null | undefined>(
     null
-).on(getContractByUserEffect.doneData, (_, { rows }) =>
+).on(getContractByExecutorEffect.doneData, (_, { rows }) =>
     rows?.find(
         ({ status, type }: ContractDto) =>
             type === ContractType.mineowner_contractor &&
@@ -103,7 +103,11 @@ export const estimatesMiningTimeStore = createStore('').on(
 
 forward({
     from: MiningPageGate.open,
-    to: [getContractByUserEffect, getActionsForUserEffect, getContractorEffect],
+    to: [
+        getContractByExecutorEffect,
+        getActionsForUserEffect,
+        getContractorEffect,
+    ],
 });
 
 forward({

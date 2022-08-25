@@ -8,7 +8,7 @@ import { Skeleton } from 'antd';
 import {
     contractStore,
     ContractType,
-    getContractEffect,
+    getContractByExecutorEffect,
 } from 'entities/smartcontract';
 
 enum StatsAndInfoTab {
@@ -23,7 +23,7 @@ const useTabs = (userAccountName: string) => {
 
     useEffect(() => {
         if (userAccountName)
-            getContractEffect({ searchParam: userAccountName });
+            getContractByExecutorEffect({ searchParam: userAccountName });
     }, [userAccountName]);
 
     const landLordMineOwnerContract = contracts?.filter(

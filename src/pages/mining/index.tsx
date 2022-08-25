@@ -18,7 +18,7 @@ import {
     currentMineStore,
     actionsStore,
     getActionsForUserEffect,
-    getContractByUserEffect,
+    getContractByExecutorEffect,
     estimatesMiningTimeStore,
 } from 'features';
 import { ActionType } from 'entities/smartcontract';
@@ -40,7 +40,7 @@ export const MiningPage: FC = memo(() => {
     const mineStore = useStore(currentMineStore);
     const estTime = useStore(estimatesMiningTimeStore);
 
-    const isContractsLoading = useStore(getContractByUserEffect.pending);
+    const isContractsLoading = useStore(getContractByExecutorEffect.pending);
     const isActionsLoading = useStore(getActionsForUserEffect.pending);
     const isMineStoreLoading = useStore(getMineByAssetEffect.pending);
     const isLoading = isActionsLoading || isContractsLoading;
