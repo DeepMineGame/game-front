@@ -7,14 +7,11 @@ import { Button, Segmented, Select, useAccountName } from 'shared';
 import { createOrder } from 'app/router/paths';
 import { Space } from 'antd';
 import { FilterOrderStatus } from 'entities/gameStat';
-import {
-    changeFilterEvent,
-    orderStatusFilterStore,
-} from '../../contracts/model';
+import { changeFilterEvent, filterStore } from '../../contracts/model';
 import { ServiceMarketContractsTable } from '../../contracts';
 import styles from './styles.module.scss';
 
-enum Role {
+export enum Role {
     all = 'all',
     contractor = 'contractor',
     mineowner = 'mineowner',
@@ -22,7 +19,7 @@ enum Role {
 
 export const MyContractsTab: FC = () => {
     const { t } = useTranslation();
-    const filterValue = useStore(orderStatusFilterStore);
+    const filter = useStore(filterStore);
     const navigate = useNavigate();
     const accountName = useAccountName();
 
@@ -44,15 +41,17 @@ export const MyContractsTab: FC = () => {
                             label: t('components.common.completed'),
                         },
                     ]}
-                    onChange={(value) =>
-                        changeFilterEvent(value as FilterOrderStatus)
+                    onChange={(status) =>
+                        changeFilterEvent({
+                            ...filter,
+                            status: status as FilterOrderStatus,
+                        })
                     }
-                    value={filterValue || ''}
+                    value={filter?.status}
                 />
                 <Space>
                     <Select
-                        className={styles.select}
-                        dropdownMatchSelectWidth
+                        dropdownMatchSelectWidth={false}
                         placeholder={t('pages.serviceMarket.yourRole')}
                         options={[
                             {
@@ -68,6 +67,13 @@ export const MyContractsTab: FC = () => {
                                 value: Role.mineowner,
                             },
                         ]}
+                        value={filter?.userRole}
+                        onChange={(userRole) => {
+                            changeFilterEvent({
+                                ...filter,
+                                userRole,
+                            });
+                        }}
                         bordered={false}
                     />
                     <Button
