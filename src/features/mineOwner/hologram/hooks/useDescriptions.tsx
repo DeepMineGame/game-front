@@ -1,39 +1,32 @@
 import { useTranslation } from 'react-i18next';
-import { desktopS, useMediaQuery } from 'shared';
 import React from 'react';
-import { mineOwnerCabinState } from '../../models/mineOwnerState';
 import { MineStat } from '../ui/components/mineStat';
+import { mineOwnerCabinState } from '../../models';
 
 export function useDescriptions() {
     const { t } = useTranslation();
-    const isDesktop = useMediaQuery(desktopS);
 
     return {
-        [mineOwnerCabinState.initial]: isDesktop
-            ? t('features.mineOwner.needMineCardDesktop')
-            : t('features.mineOwner.needMineCardMobile'),
-        [mineOwnerCabinState.isOutsideFromLocation]: t(
+        [mineOwnerCabinState.initial]: t('features.mineOwner.needMineCard'),
+        [mineOwnerCabinState.needPhysicalShift]: t(
             'features.mineOwner.needShift'
         ),
-        [mineOwnerCabinState.needSignContractWithLandLord]: t(
+        [mineOwnerCabinState.needContractWithLandlord]: t(
             'features.mineOwner.needLandLord'
         ),
         [mineOwnerCabinState.needSetupMine]: t(
             'features.mineOwner.needSetupMine'
         ),
-        [mineOwnerCabinState.hasNoMineNft]: isDesktop
-            ? t('features.mineOwner.needMineCardDesktop')
-            : t('features.mineOwner.needMineCardMobile'),
-        [mineOwnerCabinState.isMineSet]: t(
+        [mineOwnerCabinState.needMineNft]: t('features.mineOwner.needMineCard'),
+        [mineOwnerCabinState.needActivateMine]: t(
             'features.mineOwner.mineManagementDescription'
         ),
-        [mineOwnerCabinState.isMineSetupInProgress]: t(
-            'features.mineOwner.progress'
+        [mineOwnerCabinState.needCrew]: t(
+            'features.mineOwner.needTeamDescription'
         ),
-        [mineOwnerCabinState.isMineActive]: isDesktop ? (
-            <MineStat />
-        ) : (
-            t('features.mineOwner.mineIsActiveDescriptionMobile')
+        [mineOwnerCabinState.everythingIsDone]: <MineStat />,
+        [mineOwnerCabinState.contractWithLandlordWasTerminated]: t(
+            'features.mineOwner.mineNotInArea'
         ),
     };
 }

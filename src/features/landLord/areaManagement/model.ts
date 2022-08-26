@@ -2,7 +2,7 @@ import { createGate } from 'effector-react';
 import { createEffect, createStore, forward, sample } from 'effector';
 import {
     getMinesTableData,
-    inventoryTableDataConfig,
+    getInventoryTableData,
     InventoryType,
     MineDto,
     SEARCH_BY,
@@ -23,7 +23,7 @@ export const getInventoriesEffect = createEffect(
         searchIdentificationType?: SEARCH_BY;
         searchParam: string;
     }) => {
-        return inventoryTableDataConfig({
+        return getInventoryTableData({
             searchIdentificationType,
             searchParam,
         });

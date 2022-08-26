@@ -3,6 +3,7 @@ import {
     ActionModal,
     Button,
     desktopS,
+    success,
     useAccountName,
     useMediaQuery,
     useReloadPage,
@@ -19,9 +20,11 @@ import {
     ContractRole,
     setupMine,
 } from 'entities/smartcontract';
-import { mineOwnerCabinState } from '../../models/mineOwnerState';
+import {
+    mineOwnerCabinState,
+    mineOwnerLandlordContractForUserStore,
+} from '../../models';
 import { useSmartContractAction } from '../../../hooks';
-import { mineOwnerLandlordContractForUserStore } from '../../models';
 
 export function useActionsButton() {
     const [isSetupMineModalVisible, setSetupMineModalVisible] = useState(false);
@@ -32,6 +35,34 @@ export function useActionsButton() {
     const accountName = useAccountName();
     const contract = useStore(mineOwnerLandlordContractForUserStore);
     const reloadPage = useReloadPage();
+    const contractButton = (
+        <div>
+            <Button
+                type="link"
+                onClick={() =>
+                    navigate(
+                        `${serviceMarket}?tabId=${ServiceMarketTabIds.mineOperation}`
+                    )
+                }
+            >
+                {isDesktop
+                    ? t('features.mineOwner.chooseContract')
+                    : t('features.mineOwner.choose')}
+            </Button>
+            <Button
+                type="link"
+                onClick={() =>
+                    navigate(
+                        `${createOrder}?${createContrFormFields.contractType}=${ContractType.landlord_mineowner}&${createContrFormFields.isClient}=${ContractRole.executor}`
+                    )
+                }
+            >
+                {isDesktop
+                    ? t('features.mineOwner.createContract')
+                    : t('features.mineOwner.create')}
+            </Button>
+        </div>
+    );
 
     const setupMineAction = useSmartContractAction(
         setupMine({
@@ -43,10 +74,14 @@ export function useActionsButton() {
 
     const setupSignAndReload = async () => {
         await setupMineAction();
-        reloadPage();
+        success({
+            title: t('features.mineOwner.setupMine'),
+            content: t('features.mineOwner.mineIsSet'),
+            onOk: reloadPage,
+        });
     };
     return {
-        [mineOwnerCabinState.isOutsideFromLocation]: null,
+        [mineOwnerCabinState.needPhysicalShift]: null,
         [mineOwnerCabinState.initial]: (
             <div>
                 <Button type="link" onClick={() => navigate(warehouse)}>
@@ -64,7 +99,7 @@ export function useActionsButton() {
                 </Button>
             </div>
         ),
-        [mineOwnerCabinState.hasNoMineNft]: (
+        [mineOwnerCabinState.needMineNft]: (
             <div>
                 <Button type="link" onClick={() => navigate(warehouse)}>
                     {isDesktop
@@ -81,34 +116,7 @@ export function useActionsButton() {
                 </Button>
             </div>
         ),
-        [mineOwnerCabinState.needSignContractWithLandLord]: (
-            <div>
-                <Button
-                    type="link"
-                    onClick={() =>
-                        navigate(
-                            `${serviceMarket}?tabId=${ServiceMarketTabIds.mineOperation}`
-                        )
-                    }
-                >
-                    {isDesktop
-                        ? t('features.mineOwner.chooseContract')
-                        : t('features.mineOwner.choose')}
-                </Button>
-                <Button
-                    type="link"
-                    onClick={() =>
-                        navigate(
-                            `${createOrder}?${createContrFormFields.contractType}=${ContractType.landlord_mineowner}&${createContrFormFields.isClient}=${ContractRole.executor}`
-                        )
-                    }
-                >
-                    {isDesktop
-                        ? t('features.mineOwner.createContract')
-                        : t('features.mineOwner.create')}
-                </Button>
-            </div>
-        ),
+        [mineOwnerCabinState.needContractWithLandlord]: contractButton,
         [mineOwnerCabinState.needSetupMine]: (
             <>
                 <ActionModal
@@ -126,8 +134,9 @@ export function useActionsButton() {
                 </Button>
             </>
         ),
-        [mineOwnerCabinState.isMineSet]: null,
-        [mineOwnerCabinState.isMineSetupInProgress]: null,
-        [mineOwnerCabinState.isMineActive]: null,
+        [mineOwnerCabinState.everythingIsDone]: null,
+        [mineOwnerCabinState.needActivateMine]: null,
+        [mineOwnerCabinState.needCrew]: null,
+        [mineOwnerCabinState.contractWithLandlordWasTerminated]: contractButton,
     };
 }

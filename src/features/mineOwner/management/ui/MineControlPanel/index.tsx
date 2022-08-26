@@ -2,15 +2,17 @@ import {
     Button,
     greenGreen6,
     Loader,
+    success,
     sunsetOrange6,
     Title,
     useReloadPage,
+    useTableData,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Badge, Space } from 'antd';
 import { useGate, useStore } from 'effector-react';
-import { useSmartContractAction } from 'features';
+import { Travel, useSmartContractAction } from 'features';
 import { FrownOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { serviceMarket } from 'app/router/paths';
@@ -18,7 +20,10 @@ import {
     activatemine,
     deactmine,
     getMinesByOwnerEffect,
+    getUserConfig,
+    LOCATION_TO_ID,
     MineState,
+    UserInfoType,
 } from 'entities/smartcontract';
 import { MineManagementGate, userMineStore } from '../../../models';
 import { ClaimDME } from '../ClaimDME';
@@ -34,6 +39,9 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
     useGate(MineManagementGate, {
         searchParam: chainAccountName,
     });
+    const { data: userInfo } = useTableData<UserInfoType>(getUserConfig);
+    const inUserInMineOwnerLocation =
+        userInfo?.[0]?.location === LOCATION_TO_ID.mine_deck;
     const contract = useStore(activeMineOwnerExecutorContractStore);
     const navigate = useNavigate();
     const reloadPage = useReloadPage();
@@ -58,7 +66,11 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
         }
         const action = isMineActive ? deactivateMine : activateMine;
         await action();
-        return reloadPage();
+        return success({
+            title: t('features.mineOwner.mineActivation'),
+            content: t('features.mineOwner.mineOperationSucceed'),
+            onOk: reloadPage,
+        });
     };
     if (isMineLoading) {
         return (
@@ -120,6 +132,12 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
                     )}
                 </Space>
             </div>
+            {userInfo?.length && !inUserInMineOwnerLocation && (
+                <Travel
+                    toLocationId={LOCATION_TO_ID.mine_deck}
+                    onSuccess={reloadPage}
+                />
+            )}
         </div>
     );
 };

@@ -1,14 +1,12 @@
-import React, { FC } from 'react';
-import { desktopS, Title, useMediaQuery } from 'shared';
+import { FC } from 'react';
+import { desktopS, Loader, Title, useMediaQuery } from 'shared';
 import { useGate, useStore } from 'effector-react';
 
-import {
-    $mineOwnerCabinState,
-    MineOwnerCabinGate,
-} from '../../models/mineOwnerState';
+import { MineOwnerCabinGate, $mineOwnerCabinState } from '../../models';
 import { useTitles } from '../hooks/useTitles';
 import { useDescriptions } from '../hooks/useDescriptions';
 import { useActionsButton } from '../hooks/useActionsButton';
+import { isCabinStateEffectLoading$ } from '../../models/isCabinStateEffectLoading';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -25,6 +23,15 @@ export const Hologram: FC<Props> = ({ user }) => {
     const titles = useTitles();
     const descriptions = useDescriptions();
     const buttons = useActionsButton();
+    const isLoading = useStore(isCabinStateEffectLoading$);
+
+    if (isLoading) {
+        return (
+            <div className={styles.hologram}>
+                <Loader />
+            </div>
+        );
+    }
 
     return (
         <div className={styles.hologram}>

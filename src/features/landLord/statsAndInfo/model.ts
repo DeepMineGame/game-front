@@ -5,7 +5,7 @@ import {
     areasAssetTemplateId,
     AreasDto,
     getAreaConfig,
-    inventoryTableDataConfig,
+    getInventoryTableData,
     SEARCH_BY,
     searchBy,
     UserInventoryType,
@@ -21,7 +21,7 @@ export const getInventoriesEffect = createEffect(
         searchIdentificationType?: SEARCH_BY;
         searchParam: string;
     }) => {
-        return inventoryTableDataConfig({
+        return getInventoryTableData({
             searchIdentificationType,
             searchParam,
         });

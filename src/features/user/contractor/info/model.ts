@@ -8,7 +8,7 @@ import {
     getContractorsTableData,
     getContractorsEffect,
     getMinesEffect,
-    inventoryTableDataConfig,
+    getInventoryTableData,
     MineDto,
     SEARCH_BY,
     UserInventoryType,
@@ -33,7 +33,7 @@ const getAreaEffect = createEffect(
 );
 export const getInventoryByIdEffect = createEffect(
     async ({ searchParam }: { searchParam: number }) =>
-        inventoryTableDataConfig({
+        getInventoryTableData({
             searchIdentificationType: SEARCH_BY.inventoryId,
             searchParam,
         })

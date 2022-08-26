@@ -1,26 +1,30 @@
 import { useTranslation } from 'react-i18next';
-import { mineOwnerCabinState } from '../../models/mineOwnerState';
+import { mineOwnerCabinState } from '../../models';
 
 export function useTitles() {
     const { t } = useTranslation();
 
     return {
         [mineOwnerCabinState.initial]: t('features.mineOwner.welcome'),
+        [mineOwnerCabinState.needContractWithLandlord]: t(
+            'features.mineOwner.mineNotSet'
+        ),
+        [mineOwnerCabinState.needMineNft]: t('features.mineOwner.welcome'),
+        [mineOwnerCabinState.needPhysicalShift]: t(
+            'features.mineOwner.mineNotSet'
+        ),
 
-        [mineOwnerCabinState.hasNoMineNft]: t('features.mineOwner.welcome'),
-        [mineOwnerCabinState.isOutsideFromLocation]: t(
-            'features.mineOwner.mineNotSet'
-        ),
-        [mineOwnerCabinState.needSignContractWithLandLord]: t(
-            'features.mineOwner.mineNotSet'
-        ),
         [mineOwnerCabinState.needSetupMine]: t('features.mineOwner.mineNotSet'),
-        [mineOwnerCabinState.isMineSet]: t('features.mineOwner.mineManagement'),
-        [mineOwnerCabinState.isMineSetupInProgress]: t(
-            'features.mineOwner.progress'
+        [mineOwnerCabinState.needCrew]: t('features.mineOwner.createTeam'),
+
+        [mineOwnerCabinState.needActivateMine]: t(
+            'features.mineOwner.mineManagement'
         ),
-        [mineOwnerCabinState.isMineActive]: t(
+        [mineOwnerCabinState.everythingIsDone]: t(
             'features.mineOwner.mineIsActive'
+        ),
+        [mineOwnerCabinState.contractWithLandlordWasTerminated]: t(
+            'features.mineOwner.contractWasTerminated'
         ),
     };
 }

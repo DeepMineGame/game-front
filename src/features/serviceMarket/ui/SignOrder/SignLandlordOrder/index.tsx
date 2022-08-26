@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from 'react';
-import { useGate } from 'effector-react';
+import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { ATOMICHUB_URL } from 'app/constants';
@@ -21,7 +21,7 @@ import {
     StructType,
     UserInventoryType,
 } from 'entities/smartcontract';
-import { MinesGate } from '../../../operation/model';
+import { MinesGate, minesStore } from '../../../operation/model';
 import { SignModal } from '../SignModal';
 import styles from './styles.module.scss';
 
@@ -31,12 +31,14 @@ type Props = {
 };
 
 const SignLandlordOrder: FC<Props> = ({ contract, accountName }) => {
+    useGate(MinesGate, { searchParam: accountName });
+
     const { t } = useTranslation();
     const reloadPage = useReloadPage();
     const [isWarningModalVisible, setIsWarningModalVisible] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [mineId, setMineId] = useState('');
-
+    const userMine = useStore(minesStore);
     const { data: userInventory } =
         useTableData<UserInventoryType>(getInventoryConfig);
 
@@ -45,8 +47,6 @@ const SignLandlordOrder: FC<Props> = ({ contract, accountName }) => {
             inventory.struct_type === StructType.mine &&
             inventory.in_use === InUseType.notInUse
     );
-
-    useGate(MinesGate, { searchParam: accountName });
 
     const signContractAction = useSmartContractAction(
         signOrder({
@@ -65,8 +65,9 @@ const SignLandlordOrder: FC<Props> = ({ contract, accountName }) => {
         });
     }, [reloadPage, signContractAction, t]);
 
+    console.log(userMine);
     const handleSign = () => {
-        if (!allowedMine.length) {
+        if (!allowedMine.length && !userMine?.length) {
             setIsWarningModalVisible(true);
         } else {
             setIsModalVisible(true);
@@ -115,10 +116,16 @@ const SignLandlordOrder: FC<Props> = ({ contract, accountName }) => {
                         onChange={setMineId}
                         className={styles.select}
                         placeholder={t('pages.serviceMarket.order.selectMine')}
-                        options={allowedMine.map(({ asset_id }) => ({
-                            value: asset_id,
-                            label: `ID${asset_id}`,
-                        }))}
+                        options={[
+                            ...userMine.map(({ id }) => ({
+                                value: id,
+                                label: `ID ${id}`,
+                            })),
+                            ...allowedMine.map(({ asset_id }) => ({
+                                value: asset_id,
+                                label: `ID ${asset_id}`,
+                            })),
+                        ]}
                     />
                 </div>
             </SignModal>
