@@ -1,52 +1,25 @@
 import { Button, Modal, Dropdown, Card } from 'shared';
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { ModalProps, Space } from 'antd';
 import { SortAscendingOutlined, FilterOutlined } from '@ant-design/icons';
 import cn from 'classnames';
 
 import { filterEquipmentByName } from 'features';
-import { InventoryNameType, UserInventoryType } from 'entities/smartcontract';
+import {
+    InventoryNameType,
+    InventoryTab,
+    UserInventoryType,
+} from 'entities/smartcontract';
 import styles from './styles.module.scss';
-
-const sortConfig = [
-    {
-        label: 'Rarity',
-        key: 0,
-    },
-    {
-        label: 'Level',
-        key: 1,
-    },
-    {
-        label: 'Deprecation',
-        key: 2,
-    },
-    {
-        label: 'DME Claimed',
-        key: 3,
-    },
-    {
-        label: 'Repairs',
-        key: 4,
-    },
-];
+import { sortConfig, tabList, tabsNameMap } from './constants';
 
 type InventoryProps = ModalProps & {
     name?: InventoryNameType;
     userInventory: UserInventoryType[];
     onSelect: (card: UserInventoryType) => void;
     onOpenCard: (card: UserInventoryType) => void;
+    selectedTab?: InventoryTab;
 };
-
-const TABS = [
-    'Areas',
-    'Structures',
-    'Equipment',
-    'Petobots',
-    'Consumables',
-    'Modules',
-    'Bages',
-];
 
 export const Inventory: FC<InventoryProps> = ({
     name,
@@ -55,7 +28,16 @@ export const Inventory: FC<InventoryProps> = ({
     onOpenCard,
     ...props
 }) => {
-    const [selectedTab, setSelectedTab] = useState('Equipment');
+    const [selectedTab, setSelectedTab] = useState(
+        props.selectedTab ?? InventoryTab.equipment
+    );
+
+    useEffect(() => {
+        if (props.selectedTab) {
+            setSelectedTab(props.selectedTab);
+        }
+    }, [props.selectedTab]);
+
     const cards = name
         ? filterEquipmentByName(userInventory, name)
         : userInventory;
@@ -95,7 +77,7 @@ export const Inventory: FC<InventoryProps> = ({
                     <div className={styles.size}>Size: 500/1000</div>
                 </div>
                 <div className={styles.navbar}>
-                    {TABS.map((tab) => (
+                    {tabList.map((tab) => (
                         <div
                             key={tab}
                             onClick={() => setSelectedTab(tab)}
@@ -103,7 +85,7 @@ export const Inventory: FC<InventoryProps> = ({
                                 [styles.tabSelected]: tab === selectedTab,
                             })}
                         >
-                            {tab}
+                            {tabsNameMap[tab]}
                         </div>
                     ))}
                 </div>

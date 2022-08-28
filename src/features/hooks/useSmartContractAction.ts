@@ -18,10 +18,11 @@ export const useSmartContractAction = <T>(
         try {
             await chainAccount?.activeUser?.signTransaction(action, options);
         } catch (e) {
-            errorNotify(e as Error);
+            const err = e as Error;
+            errorNotify(err);
             error({
                 title: t('components.common.status.error'),
-                content: t(`blockchainErrors.${getErrorCode(e as string)}`),
+                content: t(`blockchainErrors.${getErrorCode(err.message)}`),
             });
             throw e;
         }
@@ -39,10 +40,12 @@ export const useSmartContractActionDynamic = () => {
         chainAccount?.activeUser
             ?.signTransaction(action, options)
             .catch((e) => {
-                errorNotify(e);
+                const err = e as Error;
+                errorNotify(err);
                 error({
                     title: t('components.common.status.error'),
-                    content: t(`blockchainErrors.${getErrorCode(e)}`),
+                    content: t(`blockchainErrors.${getErrorCode(err.message)}`),
                 });
+                throw e;
             });
 };

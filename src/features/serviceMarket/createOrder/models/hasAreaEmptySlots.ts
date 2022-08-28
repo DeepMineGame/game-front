@@ -4,9 +4,12 @@ import { getAreaByOwnerEffect } from './effects';
 
 export const hasAreaEmptySlotsStore = createStore<boolean>(false).on(
     getAreaByOwnerEffect.doneData,
-    (hasAreaOrMine, { rows }: { rows?: AreasDto[] }) =>
-        Boolean(
-            rows?.[0]?.mine_slots?.filter(({ reserved }) => reserved)
-                ?.length !== rows?.[0]?.mine_slots?.length
-        )
+    (_hasAreaOrMine, { rows }: { rows?: AreasDto[] }) => {
+        return Boolean(
+            rows?.[0]?.mine_slots?.some(
+                ({ reserved, mine_id, available_from }) =>
+                    !reserved && !mine_id && Date.now() >= available_from * 1000
+            )
+        );
+    }
 );

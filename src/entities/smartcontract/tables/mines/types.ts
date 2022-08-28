@@ -8,7 +8,8 @@ export enum MineState {
     depth_changing,
 }
 
-export type ContractorSlots = { reserved: number; contractor: string }[];
+export type ContractorSlot = { reserved: number; contractor: string };
+export type ContractorSlots = ContractorSlot[];
 
 export type MineDto = {
     id: number;

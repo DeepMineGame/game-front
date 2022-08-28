@@ -1,26 +1,31 @@
-import { Form, FormInstance, Tooltip } from 'antd';
-import React, { FC } from 'react';
-import { Select } from 'shared';
+import { Form, Tooltip } from 'antd';
+import { FC } from 'react';
+import { Button, Select } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
-import { createContrFormFields, ContractRole } from 'entities/smartcontract';
-import styles from '../../styles.module.scss';
+import { ContractRole, mineAssetTemplateId } from 'entities/smartcontract';
+import { orderFields } from 'entities/order';
 import {
     hasActiveMineOwnerContractorContractAsExecutor,
     hasInstalledEquipmentStore,
     hasMineEmptySlotsStore,
 } from '../../models';
+import { AssetSelectField } from '../AssetSelectField';
 import { PersonalizedOrderCheckbox } from '../PersonalizedOrderCheckbox';
+
+import styles from '../../styles.module.scss';
+import { TypeStepProps } from './interface';
 
 const { useWatch } = Form;
 
-export const MineOwnerContractorRoleField: FC<{ form: FormInstance }> = ({
+export const MineOwnerContractor: FC<TypeStepProps> = ({
     form,
+    accountName,
+    goToNextStep,
 }) => {
-    const isClient = useWatch(createContrFormFields.isClient, form);
-
     const { t } = useTranslation();
-    const contractType = useWatch(createContrFormFields.contractType, form);
+    const contractType = useWatch(orderFields.contractType, form);
+    const isClient = useWatch(orderFields.isClient, form);
     const isDisabled = contractType === undefined;
     const hasActiveContract = useStore(
         hasActiveMineOwnerContractorContractAsExecutor
@@ -39,13 +44,15 @@ export const MineOwnerContractorRoleField: FC<{ form: FormInstance }> = ({
         hasInstalledEquipment &&
         t('pages.serviceMarket.createOrder.removeEquipFirst');
 
+    const canGoNext = contractType && isClient !== undefined;
+
     return (
         <>
             <Form.Item
                 className={styles.formField}
                 label={t('pages.serviceMarket.yourRole')}
-                name={createContrFormFields.isClient}
-                dependencies={[createContrFormFields.contractType]}
+                name={orderFields.isClient}
+                dependencies={[orderFields.contractType]}
             >
                 <Select
                     disabled={isDisabled}
@@ -85,7 +92,20 @@ export const MineOwnerContractorRoleField: FC<{ form: FormInstance }> = ({
                     ]}
                 />
             </Form.Item>
-            <PersonalizedOrderCheckbox isSelfClient={isClient} form={form} />
+            <PersonalizedOrderCheckbox isSelfClient={!isClient} form={form} />
+            <AssetSelectField
+                templatesId={[mineAssetTemplateId]}
+                form={form}
+                accountName={accountName}
+            />
+            <Button
+                disabled={!canGoNext}
+                type="primary"
+                onClick={goToNextStep}
+                block
+            >
+                {t('components.common.button.next')}
+            </Button>
         </>
     );
 };

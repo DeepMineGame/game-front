@@ -11,7 +11,11 @@ export enum SlotStatus {
     reserved,
 }
 
-export type MineSlots = { reserved: SlotStatus; mine_id: number }[];
+export type MineSlots = {
+    reserved: SlotStatus;
+    mine_id: number;
+    available_from: number;
+}[];
 
 export type AreasDto = {
     id: string;

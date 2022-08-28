@@ -5,6 +5,7 @@ import {
     UserInventoryType,
 } from 'entities/smartcontract';
 import { getAtomicAssetsByUser } from 'entities/atomicassets';
+import { getCertificate } from 'entities/engineer';
 
 export const InventoryGate = createGate<{ searchParam: string }>(
     'InventoryGate'
@@ -23,6 +24,14 @@ export const getAtomicAssetsEffect = createEffect(getAtomicAssetsByUser);
 export const userAtomicAssetsStore = createStore<UserInventoryType[]>([]).on(
     getAtomicAssetsEffect.doneData,
     (state, payload) => payload
+);
+
+export const $hasActiveInventory = activeUserInventoryStore.map(
+    (activeInventory) => !!activeInventory?.length
+);
+
+export const $hasEngineerCertificate = activeUserInventoryStore.map(
+    (activeInventory) => !!getCertificate(activeInventory || [])
 );
 
 forward({
