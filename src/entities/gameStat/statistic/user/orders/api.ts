@@ -34,7 +34,7 @@ export const getOrders = async ({
         `${ENDPOINT}/statistic/user/orders`,
         {
             params:
-                userRole === 'all'
+                userRole === Role.all
                     ? paramsWithoutRole
                     : { ...paramsWithoutRole, user_role: userRole },
             ...defaultConfig,

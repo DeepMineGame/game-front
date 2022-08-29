@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 import { useNavigate } from 'react-router-dom';
 import { PlusOutlined } from '@ant-design/icons';
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { Button, Segmented, Select, useAccountName } from 'shared';
 import { createOrder } from 'app/router/paths';
 import { Space } from 'antd';
@@ -22,6 +22,23 @@ export const MyContractsTab: FC = () => {
     const filter = useStore(filterStore);
     const navigate = useNavigate();
     const accountName = useAccountName();
+    const onChangeRole = useCallback(
+        (userRole) => {
+            changeFilterEvent({
+                ...filter,
+                userRole,
+            });
+        },
+        [filter]
+    );
+    const onChangeStatus = useCallback(
+        (status) =>
+            changeFilterEvent({
+                ...filter,
+                status: status as FilterOrderStatus,
+            }),
+        [filter]
+    );
 
     return (
         <>
@@ -41,12 +58,7 @@ export const MyContractsTab: FC = () => {
                             label: t('components.common.completed'),
                         },
                     ]}
-                    onChange={(status) =>
-                        changeFilterEvent({
-                            ...filter,
-                            status: status as FilterOrderStatus,
-                        })
-                    }
+                    onChange={onChangeStatus}
                     value={filter?.status}
                 />
                 <Space>
@@ -68,12 +80,7 @@ export const MyContractsTab: FC = () => {
                             },
                         ]}
                         value={filter?.userRole}
-                        onChange={(userRole) => {
-                            changeFilterEvent({
-                                ...filter,
-                                userRole,
-                            });
-                        }}
+                        onChange={onChangeRole}
                         bordered={false}
                     />
                     <Button
