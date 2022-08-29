@@ -13,5 +13,7 @@ export function useInitialValues() {
         ...(preFilledIsClient && {
             [createContrFormFields.isClient]: Number(preFilledIsClient),
         }),
+        [createContrFormFields.deadlineDurationInDays]: 1,
+        [createContrFormFields.deadlineDurationInHours]: 0,
     };
 }
