@@ -39,7 +39,7 @@ export const CreateOrderForm = () => {
             layout="vertical"
             form={form}
             initialValues={initialValues}
-            onValuesChange={(oldValues, currentValues) =>
+            onValuesChange={(_, currentValues) =>
                 setValues({ ...values, ...currentValues })
             }
             onFinish={async () => {

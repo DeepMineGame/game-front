@@ -95,10 +95,6 @@ export const GeneralConditionStep: FC<{
                                 label: t('components.common.days'),
                             })}
                             disabled
-                            defaultValue={{
-                                value: 1,
-                                label: `1 ${t('components.common.days')}`,
-                            }}
                         />
                     </Form.Item>
                     <Form.Item
@@ -113,10 +109,6 @@ export const GeneralConditionStep: FC<{
                                 sinceZero: true,
                             })}
                             disabled
-                            defaultValue={{
-                                value: 0,
-                                label: `0 ${t('components.common.hours')}`,
-                            }}
                         />
                     </Form.Item>
                 </div>
