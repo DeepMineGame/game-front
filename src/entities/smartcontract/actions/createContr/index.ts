@@ -13,6 +13,8 @@ export const createContrFormFields = {
     daysForPenalty: 'days_for_penalty',
     feeDailyMinAmount: 'fee_daily_min_amount',
     penaltyAmount: 'penalty_amount',
+    optClient: 'opt_client',
+    optExecutor: 'opt_executor',
 } as const;
 
 export enum ContractRole {
@@ -31,6 +33,8 @@ export type CreateContrDto = {
     deadline_duration_in_days: number;
     deadline_duration_in_hours: number;
     contract_duration: number;
+    opt_client?: string;
+    opt_executor?: string;
 };
 
 export function createContr(data: CreateContrDto) {
@@ -64,6 +68,8 @@ export function createContr(data: CreateContrDto) {
                     contract_duration:
                         data[createContrFormFields.contractDuration]! *
                         DAY_IN_SECONDS,
+                    opt_executor: data[createContrFormFields.optExecutor],
+                    opt_client: data[createContrFormFields.optClient],
                 },
             },
         ],
