@@ -10,12 +10,15 @@ import {
     hasInstalledEquipmentStore,
     hasMineEmptySlotsStore,
 } from '../../models';
+import { PersonalizedOrderCheckbox } from '../PersonalizedOrderCheckbox';
 
 const { useWatch } = Form;
 
 export const MineOwnerContractorRoleField: FC<{ form: FormInstance }> = ({
     form,
 }) => {
+    const isClient = useWatch(createContrFormFields.isClient, form);
+
     const { t } = useTranslation();
     const contractType = useWatch(createContrFormFields.contractType, form);
     const isDisabled = contractType === undefined;
@@ -37,46 +40,52 @@ export const MineOwnerContractorRoleField: FC<{ form: FormInstance }> = ({
         t('pages.serviceMarket.createOrder.removeEquipFirst');
 
     return (
-        <Form.Item
-            className={styles.formField}
-            label={t('pages.serviceMarket.yourRole')}
-            name={createContrFormFields.isClient}
-            dependencies={[createContrFormFields.contractType]}
-        >
-            <Select
-                disabled={isDisabled}
-                placeholder={
-                    isDisabled
-                        ? t('pages.serviceMarket.createOrder.selectToDisable')
-                        : t('pages.serviceMarket.createOrder.selectRole')
-                }
-                options={[
-                    {
-                        value: ContractRole.client,
-                        label: (
-                            <Tooltip overlay={hasMineEmptySlotsTooltipText}>
-                                {t('roles.mineOwner')}
-                            </Tooltip>
-                        ),
-                        disabled: !hasMineEmptySlots,
-                    },
-                    {
-                        value: ContractRole.executor,
-                        label: (
-                            <Tooltip
-                                overlay={
-                                    hasActiveContract
-                                        ? hasActiveContractTooltipText
-                                        : hasInstalledEquipmentTooltipText
-                                }
-                            >
-                                {t('roles.contractor')}
-                            </Tooltip>
-                        ),
-                        disabled: hasActiveContract || hasInstalledEquipment,
-                    },
-                ]}
-            />
-        </Form.Item>
+        <>
+            <Form.Item
+                className={styles.formField}
+                label={t('pages.serviceMarket.yourRole')}
+                name={createContrFormFields.isClient}
+                dependencies={[createContrFormFields.contractType]}
+            >
+                <Select
+                    disabled={isDisabled}
+                    placeholder={
+                        isDisabled
+                            ? t(
+                                  'pages.serviceMarket.createOrder.selectToDisable'
+                              )
+                            : t('pages.serviceMarket.createOrder.selectRole')
+                    }
+                    options={[
+                        {
+                            value: ContractRole.client,
+                            label: (
+                                <Tooltip overlay={hasMineEmptySlotsTooltipText}>
+                                    {t('roles.mineOwner')}
+                                </Tooltip>
+                            ),
+                            disabled: !hasMineEmptySlots,
+                        },
+                        {
+                            value: ContractRole.executor,
+                            label: (
+                                <Tooltip
+                                    overlay={
+                                        hasActiveContract
+                                            ? hasActiveContractTooltipText
+                                            : hasInstalledEquipmentTooltipText
+                                    }
+                                >
+                                    {t('roles.contractor')}
+                                </Tooltip>
+                            ),
+                            disabled:
+                                hasActiveContract || hasInstalledEquipment,
+                        },
+                    ]}
+                />
+            </Form.Item>
+            <PersonalizedOrderCheckbox isSelfClient={isClient} form={form} />
+        </>
     );
 };

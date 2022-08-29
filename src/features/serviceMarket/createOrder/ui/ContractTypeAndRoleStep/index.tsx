@@ -15,7 +15,6 @@ import { LandLordMineOwnerRoleField } from '../LandLordMineOwnerRoleField';
 import { AssetSelectField } from '../AssetSelectField';
 import { CreateOrderGate } from '../../models';
 import { MineOwnerContractorRoleField } from '../MineOwnerContractorRoleField';
-import { PersonalizedOrderCheckbox } from '../PersonalizedOrderCheckbox';
 
 const { useWatch } = Form;
 
@@ -67,7 +66,6 @@ export const ContractTypeAndRoleStep: FC<{
             <ContractTypeField form={form} />
             {roleFieldMap[contractType]}
             {assetSelect}
-            <PersonalizedOrderCheckbox form={form} />
             <Button
                 disabled={!hasValueToGoNextStep}
                 block

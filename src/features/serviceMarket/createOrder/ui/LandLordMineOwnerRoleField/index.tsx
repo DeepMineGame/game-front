@@ -1,5 +1,5 @@
 import { Form, FormInstance, Tooltip } from 'antd';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { Select } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
@@ -10,6 +10,7 @@ import {
     hasAreaEmptySlotsStore,
     hasActiveLandLordMineOwnerContractAsExecutor,
 } from '../../models';
+import { PersonalizedOrderCheckbox } from '../PersonalizedOrderCheckbox';
 
 const { useWatch } = Form;
 
@@ -18,6 +19,7 @@ export const LandLordMineOwnerRoleField: FC<{ form: FormInstance }> = ({
 }) => {
     const { t } = useTranslation();
     const contractType = useWatch(createContrFormFields.contractType, form);
+    const isClient = useWatch(createContrFormFields.isClient, form);
     const isDisabled = contractType === undefined;
     const hasEngagedArea = useStore(hasEngagedAreaStore);
     const hasAreaEmptySlots = useStore(hasAreaEmptySlotsStore);
@@ -32,40 +34,45 @@ export const LandLordMineOwnerRoleField: FC<{ form: FormInstance }> = ({
         t('pages.serviceMarket.createOrder.youHaveSignedContract');
 
     return (
-        <Form.Item
-            className={styles.formField}
-            label={t('pages.serviceMarket.yourRole')}
-            name={createContrFormFields.isClient}
-            dependencies={[createContrFormFields.contractType]}
-        >
-            <Select
-                disabled={isDisabled}
-                placeholder={
-                    isDisabled
-                        ? t('pages.serviceMarket.createOrder.selectToDisable')
-                        : t('pages.serviceMarket.createOrder.selectRole')
-                }
-                options={[
-                    {
-                        value: ContractRole.client,
-                        label: (
-                            <Tooltip overlay={hasNoAreaTooltipText}>
-                                {t('roles.landlord')}
-                            </Tooltip>
-                        ),
-                        disabled: !hasEngagedArea || !hasAreaEmptySlots,
-                    },
-                    {
-                        value: ContractRole.executor,
-                        label: (
-                            <Tooltip overlay={hasSignedContractTooltipText}>
-                                {t('roles.mineOwner')}
-                            </Tooltip>
-                        ),
-                        disabled: hasSignedContract,
-                    },
-                ]}
-            />
-        </Form.Item>
+        <>
+            <Form.Item
+                className={styles.formField}
+                label={t('pages.serviceMarket.yourRole')}
+                name={createContrFormFields.isClient}
+                dependencies={[createContrFormFields.contractType]}
+            >
+                <Select
+                    disabled={isDisabled}
+                    placeholder={
+                        isDisabled
+                            ? t(
+                                  'pages.serviceMarket.createOrder.selectToDisable'
+                              )
+                            : t('pages.serviceMarket.createOrder.selectRole')
+                    }
+                    options={[
+                        {
+                            value: ContractRole.client,
+                            label: (
+                                <Tooltip overlay={hasNoAreaTooltipText}>
+                                    {t('roles.landlord')}
+                                </Tooltip>
+                            ),
+                            disabled: !hasEngagedArea || !hasAreaEmptySlots,
+                        },
+                        {
+                            value: ContractRole.executor,
+                            label: (
+                                <Tooltip overlay={hasSignedContractTooltipText}>
+                                    {t('roles.mineOwner')}
+                                </Tooltip>
+                            ),
+                            disabled: hasSignedContract,
+                        },
+                    ]}
+                />
+            </Form.Item>
+            <PersonalizedOrderCheckbox isSelfClient={!isClient} form={form} />
+        </>
     );
 };

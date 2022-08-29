@@ -5,11 +5,11 @@ import { useTranslation } from 'react-i18next';
 import { createContrFormFields } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
 
-export const PersonalizedOrderCheckbox: FC<{ form: FormInstance }> = ({
-    form,
-}) => {
+export const PersonalizedOrderCheckbox: FC<{
+    form: FormInstance;
+    isSelfClient: boolean;
+}> = ({ form, isSelfClient }) => {
     const [isPersonalizedOrder, setIsPersonalizedOrder] = useState(false);
-    const isClientField = Form.useWatch(createContrFormFields.isClient, form);
     const { t } = useTranslation();
     const onChange = useCallback(
         (e) => {
@@ -20,7 +20,7 @@ export const PersonalizedOrderCheckbox: FC<{ form: FormInstance }> = ({
                     [createContrFormFields.optExecutor]: null,
                 });
             }
-            return setIsPersonalizedOrder(e.target.checked);
+            setIsPersonalizedOrder(e.target.checked);
         },
         [form]
     );
@@ -32,13 +32,13 @@ export const PersonalizedOrderCheckbox: FC<{ form: FormInstance }> = ({
             {isPersonalizedOrder ? (
                 <Form.Item
                     label={
-                        isClientField
+                        isSelfClient
                             ? t('components.common.client')
                             : t('components.common.executor')
                     }
                     className={styles.formField}
                     name={
-                        isClientField
+                        isSelfClient
                             ? createContrFormFields.optClient
                             : createContrFormFields.optExecutor
                     }
