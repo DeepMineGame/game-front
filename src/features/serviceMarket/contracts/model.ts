@@ -12,17 +12,21 @@ import {
     getContractsNameConfig,
     mapSearchParamForIndexPositionToFindContracts,
 } from 'entities/smartcontract';
-import { FilterOrderStatus, getOrders } from 'entities/gameStat';
+import {
+    FilterOrderStatus,
+    getOrders,
+    GetOrdersParams,
+} from 'entities/gameStat';
 import { userStore } from 'entities/user';
 
 export const ContractsGate = createGate<{ searchParam: string }>(
     'ContractsGate'
 );
-export const changeFilterEvent = createEvent<FilterOrderStatus>();
+export const changeFilterEvent = createEvent<GetOrdersParams>();
 
-export const orderStatusFilterStore = createStore<FilterOrderStatus | null>(
-    null
-).on(changeFilterEvent, (_state, filter) => filter);
+export const filterStore = createStore<GetOrdersParams>({
+    status: FilterOrderStatus.Current,
+}).on(changeFilterEvent, (_state, filter) => filter);
 
 export const getContractsEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) =>
@@ -44,11 +48,7 @@ export const getContractsEffect = createEffect(
         ])
 );
 
-export const getContractsByFilterEffect = createEffect(
-    async ({ status, user }: { status: FilterOrderStatus; user: string }) => {
-        return getOrders({ status, user });
-    }
-);
+export const getContractsByFilterEffect = createEffect(getOrders);
 
 export const contractsStore = createStore<null | ContractDto[]>(null)
     .on(getContractsEffect.doneData, (_, [ownerContracts, clientContracts]) =>
@@ -66,8 +66,6 @@ forward({
     to: attach({
         effect: getContractsByFilterEffect,
         source: userStore,
-        mapParams: (status, user) => {
-            return { status, user: user?.wax_address! };
-        },
+        mapParams: (params, user) => ({ ...params, user: user?.wax_address! }),
     }),
 });

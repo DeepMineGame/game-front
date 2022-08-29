@@ -2,19 +2,16 @@ import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 import { useNavigate } from 'react-router-dom';
 import { PlusOutlined } from '@ant-design/icons';
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { Button, Segmented, Select, useAccountName } from 'shared';
 import { createOrder } from 'app/router/paths';
 import { Space } from 'antd';
 import { FilterOrderStatus } from 'entities/gameStat';
-import {
-    changeFilterEvent,
-    orderStatusFilterStore,
-} from '../../contracts/model';
+import { changeFilterEvent, filterStore } from '../../contracts/model';
 import { ServiceMarketContractsTable } from '../../contracts';
 import styles from './styles.module.scss';
 
-enum Role {
+export enum Role {
     all = 'all',
     contractor = 'contractor',
     mineowner = 'mineowner',
@@ -22,9 +19,26 @@ enum Role {
 
 export const MyContractsTab: FC = () => {
     const { t } = useTranslation();
-    const filterValue = useStore(orderStatusFilterStore);
+    const filter = useStore(filterStore);
     const navigate = useNavigate();
     const accountName = useAccountName();
+    const onChangeRole = useCallback(
+        (userRole) => {
+            changeFilterEvent({
+                ...filter,
+                userRole,
+            });
+        },
+        [filter]
+    );
+    const onChangeStatus = useCallback(
+        (status) =>
+            changeFilterEvent({
+                ...filter,
+                status: status as FilterOrderStatus,
+            }),
+        [filter]
+    );
 
     return (
         <>
@@ -44,15 +58,12 @@ export const MyContractsTab: FC = () => {
                             label: t('components.common.completed'),
                         },
                     ]}
-                    onChange={(value) =>
-                        changeFilterEvent(value as FilterOrderStatus)
-                    }
-                    value={filterValue || ''}
+                    onChange={onChangeStatus}
+                    value={filter?.status}
                 />
                 <Space>
                     <Select
-                        className={styles.select}
-                        dropdownMatchSelectWidth
+                        dropdownMatchSelectWidth={false}
                         placeholder={t('pages.serviceMarket.yourRole')}
                         options={[
                             {
@@ -68,6 +79,8 @@ export const MyContractsTab: FC = () => {
                                 value: Role.mineowner,
                             },
                         ]}
+                        value={filter?.userRole}
+                        onChange={onChangeRole}
                         bordered={false}
                     />
                     <Button
