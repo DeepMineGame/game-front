@@ -161,7 +161,7 @@ export const routes: AppRoute[] = [
     {
         path: serviceMarket,
         Component: ServiceMarketPage,
-        forLoggedIn: false,
+        forLoggedIn: true,
         forAdmin: true,
         forBetaUser: true,
         titleTag: 'Service-market — DeepMine',
