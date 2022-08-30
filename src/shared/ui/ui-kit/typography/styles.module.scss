@@ -1,17 +1,37 @@
-@import "src/shared";
+@import 'src/shared';
 
-h1.title,h2.title,h3.title,h4.title,h5.title {
-  color: inherit;
+h1.title,
+h2.title,
+h3.title,
+h4.title,
+h5.title {
+    color: inherit;
 }
 
-h1.thin,h2.thin,h3.thin,h4.thin,h5.thin {
-  font-weight: 400;
+h1.thin,
+h2.thin,
+h3.thin,
+h4.thin,
+h5.thin {
+    font-weight: 400;
 }
 
 .fontFamilyBai {
-  font-family: $bai;
+    font-family: $bai;
 }
 
 .fontFamilyOrbitron {
-  font-family: $orbitron;
+    font-family: $orbitron;
+}
+
+:global {
+    .ant-typography {
+        &-primary {
+            color: $color-primary-primary-6;
+        }
+
+        &-white {
+            color: $color-neutral-neutral-9;
+        }
+    }
 }
