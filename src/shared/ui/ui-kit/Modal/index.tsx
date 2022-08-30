@@ -1,5 +1,5 @@
 import { Modal as ModalAnt, ModalProps } from 'antd';
-import React, { FC, ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 import { Button } from '../Button';

@@ -115,11 +115,14 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
                 submitText={t('pages.areaManagement.unengage')}
             />
             <ActionModal
-                submitText={t('components.common.button.activate')}
+                texts={{
+                    submit: t('components.common.button.activate'),
+                    title: t('features.mineOwner.setupMine'),
+                }}
+                costs={{ timeSeconds: 1 }}
                 visible={isModalActionVisible}
                 onCancel={() => setIsModalActionVisible(false)}
                 onSubmit={onEngage}
-                title={t('features.mineOwner.setupMine')}
             />
         </div>
     );
