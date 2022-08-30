@@ -2,16 +2,20 @@ import { DMECoinIcon, Modal, getImagePath } from 'shared';
 import React, { FC, useState, useEffect, useCallback } from 'react';
 import { ModalProps, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
-
 import { AssetDataType, getAtomicAssetsDataById } from 'entities/atomicassets';
 import { UserInventoryType } from 'entities/smartcontract';
-import { Line, NftProgressBar } from 'shared/ui/ui-kit';
+import { ActionModal, Line, NftProgressBar } from 'shared/ui/ui-kit';
 import styles from './styles.module.scss';
 
 type InventoryCardModalProps = ModalProps & {
     card: UserInventoryType;
     onSelect?: (card: UserInventoryType) => void;
 };
+
+enum ModalType {
+    repair = 'repair',
+    refurbish = 'refurbish',
+}
 
 export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     card,
@@ -21,6 +25,16 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     const [cardData, setCardData] = useState<AssetDataType | undefined>(
         undefined
     );
+    const [modalData, setModalData] = useState<{
+        type?: ModalType;
+        costs: {
+            timeSeconds: number;
+            coinAmount: number;
+            energy: number;
+        };
+    }>({ costs: { timeSeconds: 0, coinAmount: 0, energy: 0 } });
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
     const { t } = useTranslation();
 
     const handleSelect = (e: React.MouseEvent<HTMLElement>) => {
@@ -122,14 +136,21 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                     rightContent={<DMECoinIcon />}
                                 />
                             </div>
-                            <div className={styles.action}>
-                                <Tooltip
-                                    overlay={t('components.common.comingSoon')}
-                                    mouseEnterDelay={0}
-                                    mouseLeaveDelay={0}
-                                >
-                                    {t('pages.equipmentSet.cardModal.repair')}
-                                </Tooltip>
+                            <div
+                                onClick={() => {
+                                    setModalData({
+                                        type: ModalType.repair,
+                                        costs: {
+                                            timeSeconds: 1,
+                                            coinAmount: 1,
+                                            energy: 150,
+                                        },
+                                    });
+                                    setIsModalVisible(true);
+                                }}
+                                className={styles.action}
+                            >
+                                {t('pages.equipmentSet.cardModal.repair')}
                             </div>
                         </Line>
                         <Line className={styles.infoLine}>
@@ -139,21 +160,41 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                 )}
                             </div>
                             <div className={styles.value}>1</div>
-                            <div className={styles.action}>
-                                <Tooltip
-                                    overlay={t('components.common.comingSoon')}
-                                    mouseEnterDelay={0}
-                                    mouseLeaveDelay={0}
-                                >
-                                    {t(
-                                        'pages.equipmentSet.cardModal.refurbish'
-                                    )}
-                                </Tooltip>
+                            <div
+                                onClick={() => {
+                                    setModalData({
+                                        type: ModalType.refurbish,
+                                        costs: {
+                                            timeSeconds: 120,
+                                            coinAmount: 1,
+                                            energy: 150,
+                                        },
+                                    });
+                                    setIsModalVisible(true);
+                                }}
+                                className={styles.action}
+                            >
+                                {t('pages.equipmentSet.cardModal.refurbish')}
                             </div>
                         </Line>
                     </div>
                 </div>
             </div>
+            <ActionModal
+                visible={isModalVisible}
+                texts={{
+                    title:
+                        modalData?.type === ModalType.repair
+                            ? t('features.actions.equipmentRepair')
+                            : t('features.actions.equipmentRefurbish'),
+                    submit: t(
+                        `pages.equipmentSet.cardModal.${modalData?.type}`
+                    ),
+                }}
+                onSubmit={() => setIsModalVisible(false)}
+                onCancel={() => setIsModalVisible(false)}
+                costs={modalData?.costs}
+            />
         </Modal>
     );
 };

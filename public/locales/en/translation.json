@@ -523,7 +523,9 @@
       "mineActivation": "Mine activation",
       "mineSetup": "Mine setup",
       "mineUnsetup": "Mine unsetup",
-      "physicalShift": "Physical shift"
+      "physicalShift": "Physical shift",
+      "equipmentRepair": "Equipment repair",
+      "equipmentRefurbish": "Equipment refurbish"
     }
   },
   "roles": {

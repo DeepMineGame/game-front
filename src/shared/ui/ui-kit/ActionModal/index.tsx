@@ -1,20 +1,25 @@
-import React, { FC, useState } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import Icon from '@ant-design/icons';
-
+import { Space } from 'antd';
 import { Button } from '../Button';
 import { Title } from '../typography/Title';
-import { Timer } from '../Timer';
-import { DmpIcon } from '../../icons';
 import { Modal } from '../Modal';
+import { CostsTable } from '../CostsTable';
 import styles from './styles.module.scss';
 
 type Props = {
-    visible?: boolean;
+    visible: boolean;
     onCancel: () => void;
-    onSubmit: (useDmp: boolean) => void;
-    submitText?: string;
-    title: string;
+    onSubmit: () => void;
+    texts: {
+        submit: string;
+        title?: string;
+    };
+    costs?: {
+        timeSeconds?: number;
+        energy?: number;
+        coinAmount?: number;
+    };
 };
 
 // TODO: remove EquipmentInstallationModal and TravelModal
@@ -22,32 +27,10 @@ export const ActionModal: FC<Props> = ({
     visible,
     onCancel,
     onSubmit,
-    submitText,
-    title,
+    texts,
+    costs,
 }) => {
     const { t } = useTranslation();
-    const [useDmp, setUseDmp] = useState(false);
-
-    const footer = (
-        <div className={styles.modalFooter}>
-            <Button
-                type="ghost"
-                icon={<Icon component={DmpIcon} />}
-                className={styles.dmpButton}
-                onClick={() => setUseDmp(!useDmp)}
-            >
-                0
-            </Button>
-            <div>
-                <Button type="ghost" onClick={onCancel}>
-                    {t('components.common.button.cancel')}
-                </Button>
-                <Button type="primary" onClick={() => onSubmit(useDmp)}>
-                    {submitText ?? t('components.common.button.uninstall')}
-                </Button>
-            </div>
-        </div>
-    );
 
     return (
         <Modal
@@ -55,31 +38,25 @@ export const ActionModal: FC<Props> = ({
             visible={visible}
             title={
                 <Title fontFamily="bai" level={5}>
-                    {title}
+                    {texts?.title}
                 </Title>
             }
             onCancel={onCancel}
-            footer={footer}
+            footer={
+                <Space align="end">
+                    <Button type="ghost" onClick={onCancel}>
+                        {t('components.common.button.cancel')}
+                    </Button>
+                    <Button type="primary" onClick={onSubmit}>
+                        {texts?.submit}
+                    </Button>
+                </Space>
+            }
         >
             <Title level={5} fontFamily="bai" thin>
-                {t(
-                    useDmp
-                        ? 'components.common.actionModal.descriptionDMP'
-                        : 'components.common.actionModal.descriptionTime'
-                )}
+                {t('components.common.actionModal.descriptionTime')}
             </Title>
-            <div>
-                {!useDmp && <Timer className={styles.timer} timeSeconds={1} />}
-                {useDmp && (
-                    <div className={styles.infoCard}>
-                        <div className={styles.infoCardText}>
-                            <Icon component={DmpIcon} />
-                            <div>{t('components.common.button.dmp')}</div>
-                        </div>
-                        <div className={styles.infoCardValue}>0</div>
-                    </div>
-                )}
-            </div>
+            <CostsTable {...costs} />
         </Modal>
     );
 };

@@ -8,11 +8,6 @@
   }
 }
 
-.modalFooter {
-  display: flex;
-  justify-content: space-between;
-}
-
 .infoCard {
   display: flex;
   align-items: center;
@@ -25,10 +20,6 @@
   &:last-child {
     border-bottom: 1px solid $color-neutral-neutral-4;
   }
-}
-
-.timer div {
-  background: $color-neutral-neutral-1 !important;
 }
 
 .infoCardText {

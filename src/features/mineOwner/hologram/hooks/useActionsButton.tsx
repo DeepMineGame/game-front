@@ -120,11 +120,14 @@ export function useActionsButton() {
         [mineOwnerCabinState.needSetupMine]: (
             <>
                 <ActionModal
-                    submitText={t('components.common.button.activate')}
+                    texts={{
+                        submit: t('components.common.button.activate'),
+                        title: t('features.mineOwner.setupMine'),
+                    }}
+                    costs={{ timeSeconds: 1 }}
                     visible={isSetupMineModalVisible}
                     onCancel={() => setSetupMineModalVisible(false)}
                     onSubmit={setupSignAndReload}
-                    title={t('features.mineOwner.setupMine')}
                 />
                 <Button
                     type="link"
