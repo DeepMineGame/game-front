@@ -8,11 +8,6 @@
   }
 }
 
-.modalFooter {
-  display: flex;
-  justify-content: space-between;
-}
-
 .infoCard {
   display: flex;
   align-items: center;
@@ -39,4 +34,8 @@
 
 .infoCardValue {
   text-align: right;
+}
+
+.primaryButton span::first-letter {
+  text-transform: capitalize;
 }

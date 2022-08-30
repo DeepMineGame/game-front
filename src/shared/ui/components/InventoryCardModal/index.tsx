@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { AssetDataType, getAtomicAssetsDataById } from 'entities/atomicassets';
 import { UserInventoryType } from 'entities/smartcontract';
-import { Line, NftProgressBar } from 'shared/ui/ui-kit';
+import { Line, NftProgressBar, RepairModal } from 'shared/ui/ui-kit';
 import styles from './styles.module.scss';
 
 type InventoryCardModalProps = ModalProps & {
@@ -21,6 +21,15 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     const [cardData, setCardData] = useState<AssetDataType | undefined>(
         undefined
     );
+    const [repairModal, setRepairModal] = useState<{
+        visible?: boolean;
+        type?: 'repair' | 'refurbish';
+        costs?: {
+            timeSeconds: number;
+            coinAmount: number;
+            energy: number;
+        };
+    }>({ costs: { timeSeconds: 0, coinAmount: 0, energy: 0 } });
     const { t } = useTranslation();
 
     const handleSelect = (e: React.MouseEvent<HTMLElement>) => {
@@ -122,14 +131,21 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                     rightContent={<DMECoinIcon />}
                                 />
                             </div>
-                            <div className={styles.action}>
-                                <Tooltip
-                                    overlay={t('components.common.comingSoon')}
-                                    mouseEnterDelay={0}
-                                    mouseLeaveDelay={0}
-                                >
-                                    {t('pages.equipmentSet.cardModal.repair')}
-                                </Tooltip>
+                            <div
+                                onClick={() =>
+                                    setRepairModal({
+                                        type: 'repair',
+                                        visible: true,
+                                        costs: {
+                                            timeSeconds: 1,
+                                            coinAmount: 1,
+                                            energy: 150,
+                                        },
+                                    })
+                                }
+                                className={styles.action}
+                            >
+                                {t('pages.equipmentSet.cardModal.repair')}
                             </div>
                         </Line>
                         <Line className={styles.infoLine}>
@@ -139,21 +155,37 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                 )}
                             </div>
                             <div className={styles.value}>1</div>
-                            <div className={styles.action}>
-                                <Tooltip
-                                    overlay={t('components.common.comingSoon')}
-                                    mouseEnterDelay={0}
-                                    mouseLeaveDelay={0}
-                                >
-                                    {t(
-                                        'pages.equipmentSet.cardModal.refurbish'
-                                    )}
-                                </Tooltip>
+                            <div
+                                onClick={() =>
+                                    setRepairModal({
+                                        type: 'refurbish',
+                                        visible: true,
+                                        costs: {
+                                            timeSeconds: 120,
+                                            coinAmount: 1,
+                                            energy: 150,
+                                        },
+                                    })
+                                }
+                                className={styles.action}
+                            >
+                                {t('pages.equipmentSet.cardModal.refurbish')}
                             </div>
                         </Line>
                     </div>
                 </div>
             </div>
+            <RepairModal
+                visible={repairModal?.visible}
+                actionText={t(`features.actions.${repairModal?.type}`)}
+                onSubmit={() =>
+                    setRepairModal({ ...repairModal, visible: false })
+                }
+                onCancel={() =>
+                    setRepairModal({ ...repairModal, visible: false })
+                }
+                costs={repairModal?.costs!}
+            />
         </Modal>
     );
 };

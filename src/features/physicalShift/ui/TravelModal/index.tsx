@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { CloseOutlined } from '@ant-design/icons';
 import { Modal } from 'antd';
-import { Timer } from 'shared';
+import { CostBlock } from 'shared';
 import { LOCATION_TO_ID } from 'entities/smartcontract';
 
 import styles from './styles.module.scss';
@@ -52,7 +52,8 @@ export const TravelModal = ({
                     <div className={styles.contentTitle}>
                         {t('pages.contractor.travel.contentTitle')}
                     </div>
-                    <Timer timeSeconds={1} energy={0} />
+                    <CostBlock timeSeconds={1} />
+                    <CostBlock energy={0} />
                 </div>
                 <div className={styles.actions}>
                     <div className={styles.buttons}>

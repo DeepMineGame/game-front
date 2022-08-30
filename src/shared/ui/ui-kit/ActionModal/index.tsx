@@ -4,7 +4,7 @@ import Icon from '@ant-design/icons';
 
 import { Button } from '../Button';
 import { Title } from '../typography/Title';
-import { Timer } from '../Timer';
+import { CostBlock } from '../CostBlock';
 import { DmpIcon } from '../../icons';
 import { Modal } from '../Modal';
 import styles from './styles.module.scss';
@@ -69,7 +69,7 @@ export const ActionModal: FC<Props> = ({
                 )}
             </Title>
             <div>
-                {!useDmp && <Timer className={styles.timer} timeSeconds={1} />}
+                {!useDmp && <CostBlock timeSeconds={1} />}
                 {useDmp && (
                     <div className={styles.infoCard}>
                         <div className={styles.infoCardText}>

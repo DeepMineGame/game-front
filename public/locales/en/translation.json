@@ -472,7 +472,8 @@
     "mining": {
       "mineLevel": "Mine Level",
       "mineSublevel": "Mine Sublevel",
-      "depthLevel": "Depth level"
+      "depthLevel": "Depth level",
+      "equipment": "Equipment"
     },
     "mineOwner": {
       "needMineCard": "To start playing as a Mine Owner you need to place a Mine NFT card in your active inventory\nand sign the Mine Operation Contract with the Landlord.\nCheck your warehouse or go to Market to buy Mine NFT",
@@ -520,7 +521,9 @@
       "mineActivation": "Mine activation",
       "mineSetup": "Mine setup",
       "mineUnsetup": "Mine unsetup",
-      "physicalShift": "Physical shift"
+      "physicalShift": "Physical shift",
+      "repair": "repair",
+      "refurbish": "refurbish"
     }
   },
   "roles": {
