@@ -35,5 +35,4 @@ export * from './SuccessModal';
 export * from './WarningModal';
 export * from './Tag';
 export * from './Alert';
-export * from './RepairModal';
 export * from './Checkbox';

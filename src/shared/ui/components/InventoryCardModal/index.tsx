@@ -2,10 +2,9 @@ import { DMECoinIcon, Modal, getImagePath } from 'shared';
 import React, { FC, useState, useEffect, useCallback } from 'react';
 import { ModalProps, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
-
 import { AssetDataType, getAtomicAssetsDataById } from 'entities/atomicassets';
 import { UserInventoryType } from 'entities/smartcontract';
-import { Line, NftProgressBar, RepairModal } from 'shared/ui/ui-kit';
+import { ActionModal, Line, NftProgressBar } from 'shared/ui/ui-kit';
 import styles from './styles.module.scss';
 
 type InventoryCardModalProps = ModalProps & {
@@ -181,9 +180,17 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                     </div>
                 </div>
             </div>
-            <RepairModal
+            <ActionModal
                 visible={isModalVisible}
-                actionText={t(`features.actions.${modalData?.type}`)}
+                texts={{
+                    title:
+                        modalData?.type === ModalType.repair
+                            ? t('features.actions.equipmentRepair')
+                            : t('features.actions.equipmentRefurbish'),
+                    submit: t(
+                        `pages.equipmentSet.cardModal.${modalData?.type}`
+                    ),
+                }}
                 onSubmit={() => setIsModalVisible(false)}
                 onCancel={() => setIsModalVisible(false)}
                 costs={modalData?.costs}
