@@ -36,3 +36,4 @@ export * from './WarningModal';
 export * from './Tag';
 export * from './Alert';
 export * from './Checkbox';
+export * from './CostsTable';

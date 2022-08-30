@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, DmpIcon, Modal, CostBlock, Title } from 'shared';
+import { Button, DmpIcon, Modal, Title, CostsTable } from 'shared';
 import Icon from '@ant-design/icons';
 import styles from './styles.module.scss';
 
@@ -85,12 +85,7 @@ export const EquipmentInstallationModal = ({
                     {t('pages.contractor.travel.contentTitle')}
                 </Title>
                 <div>
-                    {!useDmp && (
-                        <>
-                            <CostBlock timeSeconds={100} />
-                            <CostBlock energy={500} />
-                        </>
-                    )}
+                    {!useDmp && <CostsTable timeSeconds={100} energy={500} />}
                     {useDmp && (
                         <div className={styles.infoCard}>
                             <Icon component={DmpIcon} />

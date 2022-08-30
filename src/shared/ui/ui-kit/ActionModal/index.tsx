@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { Space } from 'antd';
 import { Button } from '../Button';
 import { Title } from '../typography/Title';
-import { CostBlock } from '../CostBlock';
 import { Modal } from '../Modal';
+import { CostsTable } from '../CostsTable';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -56,11 +56,7 @@ export const ActionModal: FC<Props> = ({
             <Title level={5} fontFamily="bai" thin>
                 {t('components.common.actionModal.descriptionTime')}
             </Title>
-            {costs?.timeSeconds && (
-                <CostBlock timeSeconds={costs?.timeSeconds} />
-            )}
-            {costs?.energy && <CostBlock energy={costs?.energy} />}
-            {costs?.coinAmount && <CostBlock coinAmount={costs?.coinAmount} />}
+            <CostsTable {...costs} />
         </Modal>
     );
 };
