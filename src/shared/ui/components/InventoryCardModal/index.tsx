@@ -13,6 +13,11 @@ type InventoryCardModalProps = ModalProps & {
     onSelect?: (card: UserInventoryType) => void;
 };
 
+enum ModalType {
+    repair = 'repair',
+    refurbish = 'refurbish',
+}
+
 export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     card,
     onSelect,
@@ -21,15 +26,16 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     const [cardData, setCardData] = useState<AssetDataType | undefined>(
         undefined
     );
-    const [repairModal, setRepairModal] = useState<{
-        visible?: boolean;
-        type?: 'repair' | 'refurbish';
-        costs?: {
+    const [modalData, setModalData] = useState<{
+        type?: ModalType;
+        costs: {
             timeSeconds: number;
             coinAmount: number;
             energy: number;
         };
     }>({ costs: { timeSeconds: 0, coinAmount: 0, energy: 0 } });
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
     const { t } = useTranslation();
 
     const handleSelect = (e: React.MouseEvent<HTMLElement>) => {
@@ -132,17 +138,17 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                 />
                             </div>
                             <div
-                                onClick={() =>
-                                    setRepairModal({
-                                        type: 'repair',
-                                        visible: true,
+                                onClick={() => {
+                                    setModalData({
+                                        type: ModalType.repair,
                                         costs: {
                                             timeSeconds: 1,
                                             coinAmount: 1,
                                             energy: 150,
                                         },
-                                    })
-                                }
+                                    });
+                                    setIsModalVisible(true);
+                                }}
                                 className={styles.action}
                             >
                                 {t('pages.equipmentSet.cardModal.repair')}
@@ -156,17 +162,17 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             </div>
                             <div className={styles.value}>1</div>
                             <div
-                                onClick={() =>
-                                    setRepairModal({
-                                        type: 'refurbish',
-                                        visible: true,
+                                onClick={() => {
+                                    setModalData({
+                                        type: ModalType.refurbish,
                                         costs: {
                                             timeSeconds: 120,
                                             coinAmount: 1,
                                             energy: 150,
                                         },
-                                    })
-                                }
+                                    });
+                                    setIsModalVisible(true);
+                                }}
                                 className={styles.action}
                             >
                                 {t('pages.equipmentSet.cardModal.refurbish')}
@@ -176,15 +182,11 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                 </div>
             </div>
             <RepairModal
-                visible={repairModal?.visible}
-                actionText={t(`features.actions.${repairModal?.type}`)}
-                onSubmit={() =>
-                    setRepairModal({ ...repairModal, visible: false })
-                }
-                onCancel={() =>
-                    setRepairModal({ ...repairModal, visible: false })
-                }
-                costs={repairModal?.costs!}
+                visible={isModalVisible}
+                actionText={t(`features.actions.${modalData?.type}`)}
+                onSubmit={() => setIsModalVisible(false)}
+                onCancel={() => setIsModalVisible(false)}
+                costs={modalData?.costs}
             />
         </Modal>
     );
