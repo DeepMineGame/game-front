@@ -1,4 +1,4 @@
-import { home } from 'app/router/paths';
+import { city } from 'app/router/paths';
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { BlockchainAuthPage } from './blockchain';
@@ -13,7 +13,7 @@ export const AuthPage = () => {
     }, []);
 
     const handleBlockchainAuthSuccess = useCallback(() => {
-        navigate(home, { replace: true });
+        navigate(city, { replace: true });
     }, [navigate]);
 
     return section === 'google' ? (
