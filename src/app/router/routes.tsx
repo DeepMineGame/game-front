@@ -3,7 +3,7 @@ import { FC } from 'react';
 import {
     ContractorCabin,
     EquipmentSetPage,
-    HomePage,
+    CityPage,
     MiningPage,
     ContractorStatsAndInfoPage,
     MineOwnerStatAndInfoPage,
@@ -27,7 +27,7 @@ import {
 import {
     contractorCabin,
     equipmentSet,
-    home,
+    city,
     intro,
     mineManagement,
     mineOwner,
@@ -87,12 +87,12 @@ export const routes: AppRoute[] = [
         titleTag: 'Equipment set — DeepMine',
     },
     {
-        path: home,
-        Component: HomePage,
+        path: city,
+        Component: CityPage,
         forLoggedIn: true,
         forAdmin: true,
         forBetaUser: true,
-        titleTag: 'Hometown — DeepMine',
+        titleTag: 'City — DeepMine',
     },
     {
         path: mining,

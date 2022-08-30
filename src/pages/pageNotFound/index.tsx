@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Button, Page, Title } from 'shared';
 import { useNavigate } from 'react-router-dom';
-import { home } from 'app/router/paths';
+import { city } from 'app/router/paths';
 import { Space } from 'antd';
 import { useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
@@ -43,7 +43,7 @@ export const PageNotFound: FC<Props> = ({ title = '404', type = 'lost' }) => {
                     size="large"
                     ghost
                     type="primary"
-                    onClick={() => navigate(home)}
+                    onClick={() => navigate(city)}
                 >
                     {t('pages.pageNotFound.goToCity')}
                 </Button>

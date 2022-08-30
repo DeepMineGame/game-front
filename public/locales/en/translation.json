@@ -163,10 +163,10 @@
       "goToCity": "Go to the city"
     },
     "home": {
-      "mineOwnerCabin": "MINE OWNER CABIN",
+      "mineOwnerCabin": "GO TO MINE",
       "contractorCabin": "CONTRACTOR'S CABIN",
       "hive": "HIVE",
-      "landlordCabin":"LANDLORD CABIN"
+      "landlordCabin":"LANDLORDS LOUNGE"
     },
     "contractor": {
       "signingContract": {
