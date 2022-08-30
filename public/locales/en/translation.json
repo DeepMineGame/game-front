@@ -101,7 +101,9 @@
         "title": "Mine",
         "mineInfo": "Mine info"
       },
-      "comingSoon": "Coming soon"
+      "comingSoon": "Coming soon",
+      "client": "Client",
+      "executor": "Executor"
     },
     "user": {
       "accountSettings": "Account settings",
@@ -376,7 +378,8 @@
         "youHaveSignedContract": "You already have the contract",
         "yourMineIsFull": "You have no the mine or your mine has no more free slots",
         "removeEquipFirst": "You need to remove installed equipment in contractor's cabin to proceed",
-        "contractorShouldStartMiningWithin24Hours": "The Contractor should start mining within 24 hours in order not to receive a fine"
+        "contractorShouldStartMiningWithin24Hours": "The Contractor should start mining within 24 hours in order not to receive a fine",
+        "personalOrder": "Personalized order"
       },
       "lookingForMineOwner": "Looking for Mine owner",
       "lookingForContractor": "Looking for Contractor",
