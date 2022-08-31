@@ -104,12 +104,11 @@ $glow: drop-shadow(0 0 20px $color-neutral-neutral-10);
 
   @media (min-width: $media-tablet)  {
     filter: initial;
-    background-position: left;
+    background-position: center;
   }
 
   &:hover {
     filter: $glow;
-    background-position: left;
   }
 }
 
