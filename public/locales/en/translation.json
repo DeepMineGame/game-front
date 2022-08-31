@@ -166,7 +166,8 @@
       "mineOwnerCabin": "GO TO MINE",
       "contractorCabin": "CONTRACTOR'S CABIN",
       "hive": "HIVE",
-      "landlordCabin":"LANDLORDS LOUNGE"
+      "landlordCabin":"LANDLORDS LOUNGE",
+      "engineers": "ENGINEERS WORKSHOP"
     },
     "contractor": {
       "signingContract": {

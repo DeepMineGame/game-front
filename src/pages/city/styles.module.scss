@@ -1,7 +1,11 @@
 @import "src/shared";
 
+$glow: drop-shadow(0 0 20px $color-neutral-neutral-10);
+
 .homeScreen {
-  background: url("../../shared/ui/images/city/hometown.png") no-repeat;
+  background-color: $color-cyan-cyan-1;
+  background-image: url("../../shared/ui/images/city/hometown.png");
+  background-repeat: no-repeat;
   height: 100vh;
   max-width: 100vw;
   font-family: $orbitron;
@@ -26,18 +30,19 @@
   height: 50vh;
   width: 15vw;
   float: right;
-  background-image: url("../../shared/ui/images/city/mineGlow.png");
+  background-image: url("../../shared/ui/images/city/mine.png");
+  filter: $glow;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: right;
   cursor: pointer;
 
   @media (min-width: $media-tablet)  {
-    background-image: url("../../shared/ui/images/city/mine.png");
+    filter: initial;
   }
 
   &:hover {
-    background-image: url("../../shared/ui/images/city/mineGlow.png");
+    filter: $glow;
   }
 }
 
@@ -46,21 +51,21 @@
   margin-top: 5vh;
   height: 50vh;
   width: 20vw;
-  background-image: url("../../shared/ui/images/city/hiveGlow.png");
+  background-image: url("../../shared/ui/images/city/hiveBuilding.png");
   background-size: contain;
   cursor: pointer;
   background-repeat: no-repeat;
   background-position: center bottom;
+  filter: $glow;
 
   @media (min-width: $media-tablet)  {
-    background-image: url("../../shared/ui/images/city/hiveBuilding.png");
     background-position: center bottom;
-
+    filter: initial;
   }
 
   &:hover {
-    background-image: url("../../shared/ui/images/city/hiveGlow.png");
     background-position: center bottom;
+    filter: $glow;
   }
 }
 
@@ -69,39 +74,63 @@
   margin-top: 10vh;
   height: 50vh;
   width: 20vw;
-  background-image: url("../../shared/ui/images/city/marketGlow.png");
+  background-image: url("../../shared/ui/images/city/market.png");
+  filter: $glow;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   cursor: pointer;
 
   &:hover {
-    background-image: url("../../shared/ui/images/city/marketGlow.png");
+    filter: $glow;
   }
 
   @media (min-width: $media-tablet)  {
-    background-image: url("../../shared/ui/images/city/market.png");
+    filter: initial;
     background-position: left;
   }
 
 }
 
-.landlordCabin {
+.landlordLounge {
   height: 65vh;
   width: 20vw;
-  background-image: url("../../shared/ui/images/city/scyscraperGlow.png");
+  background-image: url("../../shared/ui/images/city/scyscraper.png");
+  filter: $glow;
   background-size: contain !important;
   cursor: pointer;
   background-repeat: no-repeat;
   background-position: right;
 
   @media (min-width: $media-tablet)  {
-    background-image: url("../../shared/ui/images/city/scyscraper.png");
-    background-position: center right;
+    filter: initial;
+    background-position: left;
   }
 
   &:hover {
-    background-image: url("../../shared/ui/images/city/scyscraperGlow.png");
-    background-position: right;
+    filter: $glow;
+    background-position: left;
+  }
+}
+
+.engineer {
+  height: 20vh;
+  width: 20vw;
+  margin-left: 35%;
+  background-image: url("../../shared/ui/images/city/specialists.png");
+  filter: $glow;
+  background-size: contain !important;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: left;
+
+  @media (min-width: $media-tablet)  {
+    filter: initial;
+    background-position: left;
+  }
+
+  &:hover {
+    filter: $glow;
+    background-position: left;
   }
 }

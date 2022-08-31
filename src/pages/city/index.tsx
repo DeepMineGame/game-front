@@ -40,7 +40,7 @@ export const CityPage: FC = () => {
                     </Title>
                 </div>
                 <div
-                    className={styles.landlordCabin}
+                    className={styles.landlordLounge}
                     onClick={() => navigate(landLord)}
                 >
                     <Title className={styles.enterLink} level={5}>
@@ -56,6 +56,14 @@ export const CityPage: FC = () => {
                     </Title>
                 </div>
             </Space>
+            <div
+                className={styles.engineer}
+                onClick={() => navigate('/TODO_LINK_TO_ENGINEER')}
+            >
+                <Title level={5} className={styles.enterLink}>
+                    {t('pages.home.engineers')}
+                </Title>
+            </div>
         </div>
     );
 };
