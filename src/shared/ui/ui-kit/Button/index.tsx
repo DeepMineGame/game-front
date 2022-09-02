@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler } from 'react';
+import { FC, MouseEventHandler } from 'react';
 import classNames from 'classnames';
 import { Button as ButtonAnt, ButtonProps } from 'antd';
 import styles from './styles.module.scss';

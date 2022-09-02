@@ -15,7 +15,9 @@ export enum ActionType {
     mine_activation,
     mine_deactivation,
     mine_unsetup,
+    mine_change_layer_depth,
 }
+
 export type ActionDto = {
     contract_id: number;
     finishes_at: number;

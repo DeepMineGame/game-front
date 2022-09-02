@@ -1,0 +1,15 @@
+@import 'src/shared';
+
+.contractId {
+    display: flex;
+    align-items: center;
+}
+
+.contractNumber {
+    color: $color-neutral-neutral-9;
+}
+
+.copyIcon {
+    margin-left: 10px;
+    font-size: 20px;
+}

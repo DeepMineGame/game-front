@@ -75,6 +75,7 @@ export enum ACTION_STATE_TO_ID {
     active,
     interrupted,
     finished,
+    claimed,
 }
 
 export enum INDEX_POSITION_CONTRACT {
