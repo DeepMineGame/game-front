@@ -3,12 +3,12 @@ import { Tooltip } from 'antd';
 import cn from 'classnames';
 import {
     Button,
-    DMECoinIcon,
     Logo,
     getImagePath,
     TemplateIdType,
+    DepreciationProgressBar,
 } from 'shared';
-import { NftProgressBar, ProgressProps } from '../NftProgressBar';
+import { ProgressProps } from '../ProgressBar/NftProgressBar';
 import styles from './styles.module.scss';
 import { CardBadge } from './components/CardBadge';
 
@@ -56,7 +56,7 @@ export const Card: FC<Props> = ({
             color={neutral4}
         >
             <div className={cn(styles.wrapper, className)}>
-                <div className={styles.content} onClick={onClick}>
+                <div onClick={onClick}>
                     <CardBadge status={status} />
                     <div className={styles.image}>
                         <img
@@ -68,20 +68,12 @@ export const Card: FC<Props> = ({
                             alt="nft-equipment-card"
                         />
                     </div>
-                    {hasProgress && (
-                        <NftProgressBar
-                            className={styles.progress}
-                            initial={initial}
-                            current={current}
-                            remained={remained}
-                        />
-                    )}
-                    <NftProgressBar
-                        className={styles.progress}
-                        initial={30}
-                        current={30}
-                        remained={120}
-                        rightContent={<DMECoinIcon />}
+                    <DepreciationProgressBar
+                        className={styles.depreciationBar}
+                        totalMining={25}
+                        completedMining={4}
+                        serviceLife={13}
+                        totalServiceLife={20}
                     />
                 </div>
 
