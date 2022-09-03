@@ -17,7 +17,6 @@
     "axios": "^0.26.1",
     "classnames": "^2.3.1",
     "compose-function": "^3.0.3",
-    "customize-cra": "^1.0.0",
     "effector": "^22.3.0",
     "effector-react": "^22.0.6",
     "eslint-config-airbnb": "^19.0.4",
@@ -39,10 +38,10 @@
     "ual-reactjs-renderer": "^0.3.1"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
     "lint": "eslint --ext .tsx,.ts .",
     "lint:fix": "eslint --ext .tsx,.ts . --fix",
     "stylelint": "stylelint **/*.{css,scss,sass} --cache",
@@ -67,12 +66,13 @@
     ]
   },
   "devDependencies": {
+    "@craco/craco": "^7.0.0-alpha.7",
     "@types/compose-function": "^0.0.30",
     "@types/react-router": "^5.1.18",
     "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "^5.21.0",
     "@typescript-eslint/parser": "^5.17.0",
-    "react-app-rewired": "^2.2.1",
+    "craco-less": "^2.1.0-alpha.0",
     "stylelint": "^14.9.1",
     "stylelint-config-prettier-scss": "^0.0.1",
     "stylelint-config-standard-scss": "^4.0.0",
