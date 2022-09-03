@@ -1,12 +1,11 @@
 // import i18n (needs to be bundled ;))
 import './index.i18n';
-import 'antd/dist/antd.min.css';
+import './app.less';
 import axios, { AxiosError } from 'axios';
 
 import { errorNotify } from 'shared';
 import { withProviders } from './providers';
 import { Router } from './router';
-
 import './index.module.scss';
 
 axios.interceptors.response.use(

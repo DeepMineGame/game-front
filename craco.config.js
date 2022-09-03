@@ -1,4 +1,6 @@
-const { overrideDevServer, watchAll, override } = require('customize-cra');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const CracoLessPlugin = require('craco-less');
+const theme = require('./src/theme');
 
 function devServerConfig(config) {
     return {
@@ -27,6 +29,23 @@ function ignoreSourceMapWarnings(config) {
 }
 
 module.exports = {
-    devServer: overrideDevServer(devServerConfig, watchAll()),
-    webpack: override(ignoreSourceMapWarnings),
+    plugins: [
+        {
+            plugin: CracoLessPlugin,
+            options: {
+                lessLoaderOptions: {
+                    lessOptions: {
+                        modifyVars: theme,
+                        javascriptEnabled: true,
+                    },
+                },
+            },
+        },
+    ],
+    devServer: (config) => devServerConfig(config),
+    webpack: {
+        configure: {
+            ignoreWarnings: [ignoreSourceMapWarnings],
+        },
+    },
 };
