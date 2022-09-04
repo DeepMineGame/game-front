@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Tooltip } from 'antd';
 import cn from 'classnames';
 import {
@@ -69,7 +69,6 @@ export const Card: FC<Props> = ({
                         />
                     </div>
                     <DepreciationProgressBar
-                        className={styles.depreciationBar}
                         totalMining={25}
                         completedMining={4}
                         serviceLife={13}

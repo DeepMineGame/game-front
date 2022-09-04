@@ -1,6 +1,6 @@
 @import "src/shared";
 
-$deprecationBarColor: linear-gradient(90deg, #6EC005 0%, #A9E301 24.84%, #F1CE18 50.31%, #FF7A00 75.77%, #E70000 100.31%);
+$deprecation-bar-color: linear-gradient(90deg, #6EC005 0%, #A9E301 24.84%, #F1CE18 50.31%, #FF7A00 75.77%, #E70000 100.31%);
 
 .progress > div > div {
   background-color: $color-neutral-neutral-6;
@@ -44,7 +44,7 @@ $deprecationBarColor: linear-gradient(90deg, #6EC005 0%, #A9E301 24.84%, #F1CE18
   :global {
     .ant-progress-inner {
       overflow: initial;
-      background: $deprecationBarColor;
+      background: $deprecation-bar-color;
     }
 
     .ant-progress-bg {
