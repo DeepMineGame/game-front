@@ -20,3 +20,5 @@ export const useUserRoles = (roles: RoleDto[]) => {
 
     return roleStatus;
 };
+
+export type UserRoleState = ReturnType<typeof useUserRoles>;

@@ -2,6 +2,7 @@ export enum ContractType {
     undefined,
     landlord_mineowner,
     mineowner_contractor,
+    engineer, // todo! change
 }
 
 export enum ContractStatus {
@@ -61,4 +62,5 @@ export const contractName = {
     [ContractType.undefined]: null,
     [ContractType.landlord_mineowner]: 'Mine setup',
     [ContractType.mineowner_contractor]: 'Mining contract',
+    [ContractType.engineer]: 'Level Upgrade Order', // todo: replace
 };

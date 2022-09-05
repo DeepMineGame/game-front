@@ -173,7 +173,9 @@
       "contractorCabin": "CONTRACTOR'S CABIN",
       "hive": "HIVE",
       "landlordCabin":"LANDLORDS LOUNGE",
-      "engineers": "ENGINEERS WORKSHOP"
+      "engineers": "ENGINEERS WORKSHOP",
+      "mineDeck": "MINE DECK",
+      "goToCity": "GO TO CITY"
     },
     "contractor": {
       "signingContract": {
@@ -349,10 +351,12 @@
       "myContracts": "My contracts",
       "miningContracts": "Mining contracts",
       "mineOperation": "Mine operation",
+      "levelUpgradeOrder": "Level upgrade order",
       "miningOrder": "Mining order",
       "miningContract": "Mining contract",
       "mineOperationOrder": "Mine operation order",
       "mineOperationContract": "Mine operation contract",
+      "levelUpgradeContract": "Level upgrade contract",
       "yourRole": "Your role",
       "all": "All",
       "createOrder": {
@@ -395,6 +399,14 @@
       "creationDate": "Creation date",
       "Penalty&DME": "Penalty, DME",
       "status": "Status",
+      "nftId": "NFT ID",
+      "reputation": "Reputation",
+      "successProbability": "Success Probability",
+      "startOperations": "Start of operations",
+      "upgrade": "Upgrade",
+      "costOfExecution": "Cost of execution",
+      "insurance": "Insurance",
+      "duration": "Duration",
       "order": {
         "orderId": "Order ID",
         "signOrder": "Sign the order",
@@ -573,7 +585,8 @@
     "mineOwner": "Mine owner",
     "contractor": "Contractor",
     "landLord": "Land lord",
-    "geologists": "Geologists"
+    "geologists": "Geologists",
+    "engineer": "Engineer"
   },
   "blockchainErrors": {
     "fallback": "Error has no code. Unknown error",

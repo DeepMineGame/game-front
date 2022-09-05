@@ -23,6 +23,7 @@ import {
     NftPreviewPage,
     AuthPage,
     FaqPage,
+    Wasteland,
 } from 'pages';
 
 import {
@@ -50,6 +51,7 @@ import {
     landLordStats,
     inventoryItemPreview,
     faq,
+    wasteland,
 } from './paths';
 
 export type AppRoute = {
@@ -95,6 +97,14 @@ export const routes: AppRoute[] = [
         forAdmin: true,
         forBetaUser: true,
         titleTag: 'City — DeepMine',
+    },
+    {
+        path: wasteland,
+        Component: Wasteland,
+        forLoggedIn: true,
+        forAdmin: true,
+        forBetaUser: true,
+        titleTag: 'Wasteland — DeepMine',
     },
     {
         path: mining,

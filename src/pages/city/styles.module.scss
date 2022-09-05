@@ -1,15 +1,18 @@
 @import "src/shared";
 
-$glow: drop-shadow(0 0 20px $color-neutral-neutral-10);
-
 .homeScreen {
   background-color: $color-cyan-cyan-1;
-  background-image: url("../../shared/ui/images/city/hometown.png");
+  background-image: url("../../shared/ui/images/city/hometown.jpg");
   background-repeat: no-repeat;
   height: 100vh;
   max-width: 100vw;
   font-family: $orbitron;
   background-size: cover;
+
+  @media (min-width: $media-desktop-l)  {
+    background-image: url("../../shared/ui/images/city/hometown.png");
+  }
+
 }
 
 .enterLink {

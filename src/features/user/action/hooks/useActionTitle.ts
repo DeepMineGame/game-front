@@ -11,6 +11,7 @@ export function useActionTitle() {
         [ActionType.mine_setup]: t('features.actions.mineSetup'),
         [ActionType.mine_unsetup]: t('features.actions.mineUnsetup'),
         [ActionType.physical_shift]: t('features.actions.physicalShift'),
+        [ActionType.mine_change_layer_depth]: null,
         [ActionType.undefined]: null,
     };
 }

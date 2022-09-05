@@ -5,6 +5,7 @@ export enum MineState {
     deactivated,
     unsetuped,
     abandoned,
+    depth_changing,
 }
 
 export type ContractorSlots = { reserved: number; contractor: string }[];
