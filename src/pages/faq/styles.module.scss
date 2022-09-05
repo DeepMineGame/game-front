@@ -6,6 +6,16 @@
   font-family: $orbitron;
   color: $color-neutral-neutral-9;
   padding: 20px;
+
+  @media (min-width: $media-tablet)  {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  @media (min-width: $media-desktop-s)  {
+    padding-left: 120px;
+    padding-right: 120px;
+  }
 }
 
 .logo {
@@ -21,4 +31,5 @@ h1.title {
 
 .text {
   font-family: $bai;
+  white-space: pre-line;
 }

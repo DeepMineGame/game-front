@@ -251,14 +251,6 @@ export const routes: AppRoute[] = [
         titleTag: 'Card preview — DeepMine',
     },
     {
-        path: createOrder,
-        Component: CreateOrderPage,
-        forLoggedIn: true,
-        forAdmin: true,
-        forBetaUser: true,
-        titleTag: 'Create order — DeepMine',
-    },
-    {
         path: faq,
         titleTag: 'FAQ — DeepMine',
         Component: FaqPage,
