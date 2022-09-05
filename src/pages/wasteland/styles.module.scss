@@ -1,0 +1,111 @@
+@import "src/shared";
+
+@mixin background-shared-style {
+  background-size: contain;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  filter: $glow;
+  cursor: pointer;
+}
+
+.wasteland {
+  background-repeat: no-repeat;
+  background-color: $color-lime-lime-4;
+  background-image: url("../../shared/ui/images/wasteland/wastelands.jpg");
+  height: 100vh;
+  max-width: 100vw;
+  font-family: $orbitron;
+  background-size: cover;
+}
+
+h5.enterLink {
+  padding: 4px 12px;
+  display: inline-block;
+  color: $color-neutral-neutral-10;
+  cursor: pointer;
+  background: rgba(20, 20, 20, 0.4);
+  border-bottom: 1px solid $color-neutral-neutral-1;
+}
+
+.city {
+  @include background-shared-style;
+
+  background-image: url("../../shared/ui/images/wasteland/city.png");
+  height: 30vh;
+  width: 20vw;
+  margin: auto;
+
+  @media (min-width: $media-tablet)  {
+    filter: initial;
+  }
+
+  &:hover {
+    filter: $glow
+  }
+}
+
+.cityTitle {
+  margin-top: 15%;
+  margin-left: -35%;
+}
+
+.hub {
+  position: absolute;
+  height: 40vh;
+  width: 30vw;
+  background-image: url("../../shared/ui/images/wasteland/hub.png");
+  background-size: contain;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  left: 0;
+}
+
+.mineDeck {
+  @include background-shared-style;
+
+  position: absolute;
+  right: 0;
+  top: 20vh;
+  background-image: url("../../shared/ui/images/wasteland/deck.png");
+  height: 50vh;
+  width: 50vw;
+
+  @media (min-width: $media-tablet)  {
+    filter: initial;
+  }
+
+  &:hover {
+    filter: $glow
+  }
+}
+
+.mineDeckLink {
+  float: right;
+  margin-top: 10%;
+  margin-right: 10%;
+}
+
+.mine {
+  @include background-shared-style;
+
+  position: absolute;
+  bottom: 0;
+  right: 15vh;
+  left: 0;
+  margin: auto;
+  background-image: url("../../shared/ui/images/wasteland/mine.png");
+  height: 50vh;
+  width: 50vw;
+
+  @media (min-width: $media-tablet)  {
+    filter: initial;
+  }
+
+  &:hover {
+    filter: $glow
+  }
+}
+
+.mineTitle {
+  margin: 15%;
+}
