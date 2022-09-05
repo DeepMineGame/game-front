@@ -11,21 +11,23 @@ export const Button: FC<Props> = ({
     children,
     onClick,
     className,
+    type = 'primary',
     ...props
-}) => {
-    return (
-        <ButtonAnt
-            onClick={onClick}
-            className={classNames(className, styles.button, {
-                [styles.disabled]: props?.disabled,
-                [styles.primary]: props?.type === 'primary',
-                [styles.ghost]: props?.ghost,
-                [styles.link]: props?.type === 'link',
-                [styles.danger]: props.danger,
-            })}
-            {...props}
-        >
-            {children}
-        </ButtonAnt>
-    );
-};
+}) => (
+    <ButtonAnt
+        onClick={onClick}
+        className={classNames(className, styles.root, {
+            [styles.primary]: type === 'primary',
+            [styles.default]: type === 'default',
+            [styles.link]: type === 'link',
+            [styles.danger]: props.danger,
+            [styles.ghost]: props.ghost,
+            [styles.loading]: props.loading,
+            [styles.disabled]: props.disabled,
+        })}
+        type={type}
+        {...props}
+    >
+        {children}
+    </ButtonAnt>
+);

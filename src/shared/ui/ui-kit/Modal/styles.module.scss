@@ -39,16 +39,16 @@
   }
 }
 
-.modalButton {
-  composes: primary;
-  composes: button;
-}
+// .modalButton {
+//   composes: primary;
+//   composes: button;
+// }
 
-.ghostButton {
-  composes: button;
-  composes: ghost;
+// .ghostButton {
+//   composes: button;
+//   composes: ghost;
 
-}
+// }
 
 .simpleModal {
   div, .simpleModalTitle {

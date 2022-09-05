@@ -1,96 +1,219 @@
 @import 'src/shared';
 
-.button.button {
-    border-radius: 2px;
-    border: 1px solid $color-neutral-neutral-5;
-    color: $color-neutral-neutral-9;
+$ghost-loading-bg: rgba(0, 0, 0, 0.35);
+
+@mixin danger-active {
+    color: $color-red-red-6;
+    border-color: $color-red-red-6;
+}
+
+@mixin danger-disabled {
+    color: $color-neutral-neutral-6;
+    background-color: $color-neutral-neutral-3;
+    border-color: $color-neutral-neutral-5;
+}
+
+@mixin ghost-disabled {
+    background-color: transparent;
+    color: $color-neutral-neutral-6;
+    border-color: $color-neutral-neutral-5;
+}
+
+.root {
+    font-family: $bai;
+}
+
+.primary {
+    border-color: transparent;
 
     &:hover,
     &:focus {
-        border: 1px solid $color-primary-primary-5;
-        color: $color-primary-primary-5;
+        border-color: transparent;
+        background-color: $color-primary-primary-5;
     }
 
     &:active {
-        border: 1px solid $color-primary-primary-7;
+        background-color: $color-primary-primary-7;
+    }
+
+    &.loading:not(.ghost) {
+        background-color: $color-primary-primary-6;
+    }
+
+    &.danger:hover,
+    &.danger:focus {
+        border-color: transparent;
+        background-color: $color-red-red-4;
+    }
+    
+    &.danger:active {
+        background-color: $color-red-red-6;
+    }
+
+    &.danger.loading:not(.ghost) {
+        background-color: $color-red-red-5;
+    }
+
+    &.ghost:hover,
+    &.ghost:focus {
+        color: $color-primary-primary-5;
+        border-color: $color-primary-primary-5;
+    }
+
+    &.ghost:active {
         color: $color-primary-primary-7;
-    }
-}
-
-.primary.button {
-    border: 1px solid $color-primary-primary-6;
-    color: $color-neutral-neutral-1;
-    background: $color-primary-primary-6;
-
-    &:hover,
-    &:focus,
-    &:active {
-        color: $color-neutral-neutral-1;
-        background: $color-primary-primary-5;
-    }
-}
-
-.primary.ghost {
-    background: none !important;
-    color: $color-primary-primary-6;
-
-    &:hover,
-    &:focus,
-    &:active {
-        color: $color-primary-primary-5;
-        background: none;
-    }
-}
-
-.button.link {
-    color: $color-primary-primary-6;
-    border: none;
-
-    &:hover,
-    &:focus {
-        border: none;
-        color: $color-primary-primary-5;
+        border-color: $color-primary-primary-7;
     }
 
-    &:active {
-        color: $color-primary-primary-7;
-    }
-}
+    &.ghost.loading {
+        &::before {
+            background-color: $ghost-loading-bg;
+        }
 
-.disabled {
-    &[disabled] {
-        &,
         &:hover,
-        &:focus,
-        &:active {
-            background: $color-neutral-neutral-3;
-            border: 1px solid $color-neutral-neutral-5;
-            color: $color-neutral-neutral-5;
+        &:focus {
+            color: $color-primary-primary-6;
+            border-color: $color-primary-primary-6;
         }
     }
-}
 
-.ghost.disabled {
-    &,
-    &:hover,
-    &:focus,
-    &:active {
-        color: $color-neutral-neutral-5 !important;
-        background-color: initial;
-        border: 1px solid $color-neutral-neutral-5 !important;
+    &.ghost.danger {
+        &:hover,
+        &:focus {
+            background-color: transparent;
+            color: $color-red-red-4;
+            border-color: $color-red-red-4;
+        }
+
+        &.loading {
+            &:hover,
+            &:focus {
+                color: $color-red-red-5;
+                border-color: $color-red-red-5;
+            }
+        }
+    }
+
+    &.ghost.disabled,
+    &.ghost.danger.disabled {
+        @include ghost-disabled;
+
+        &:hover,
+        &:focus {
+            @include ghost-disabled;
+        }
+    }
+
+    &.disabled,
+    &.disabled:hover,
+    &.disabled:focus,
+    &.disabled.danger,
+    &.disabled.danger:hover,
+    &.disabled.danger:focus {
+        @include danger-disabled;
     }
 }
 
-.button.ghost.danger {
-    background: none;
-    color: $color-red-red-5;
-    border: 1px solid $color-red-red-5;
+.default {
+    &:hover,
+    &:focus {
+        color: $color-primary-primary-5;
+        border-color: $color-neutral-neutral-5;
+    }
+
+    &:active {
+        color: $color-primary-primary-7;
+        border-color: $color-primary-primary-7;
+    }
+
+    &.loading {
+        &::before {
+            background-color: transparent;
+        }
+
+        &:hover,
+        &:focus {
+            color: $color-neutral-neutral-9;
+            border-color: $color-neutral-neutral-5;
+        }
+    }
+
+    &.danger {
+        &:hover,
+        &:focus {
+            color: $color-red-red-4;
+            border-color: $color-red-red-5;
+        }
+
+        &:active {
+            @include danger-active;
+        }
+
+        &.loading {
+            &:hover,
+            &:focus {
+                color: $color-red-red-5;
+                border-color: $color-red-red-5;
+            }
+        }
+    }
+
+    &.disabled,
+    &.disabled:hover,
+    &.disabled:focus,
+    &.disabled.danger,
+    &.disabled.danger:hover,
+    &.disabled.danger:focus {
+        @include danger-disabled;
+    }
+}
+
+.link {
+    height: auto;
+    border: 0;
+    padding: 0;
 
     &:hover,
-    &:focus,
+    &:focus {
+        color: $color-primary-primary-5;
+    }
+
     &:active {
-        color: $color-red-red-4;
-        background: none;
-        border: 1px solid $color-red-red-4;
+        color: $color-primary-primary-7;
+    }
+
+    &.loading {
+        &::before {
+            background-color: transparent;
+        }
+
+        &:hover,
+        &:focus {
+            color: $color-primary-primary-6;
+        }   
+    }
+
+    &.danger {
+        &:hover,
+        &:focus {
+            color: $color-red-red-4;
+        }
+
+        &:active {
+            color: $color-red-red-6;
+        }
+
+        &.loading {
+            &:hover,
+            &:focus {
+                color: $color-red-red-5;
+            }
+        }
+    }
+
+    &.disabled,
+    &.disabled:hover,
+    &.disabled:focus {
+        color: $color-neutral-neutral-6;
     }
 }
