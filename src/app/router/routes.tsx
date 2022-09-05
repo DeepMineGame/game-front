@@ -97,14 +97,6 @@ export const routes: AppRoute[] = [
         titleTag: 'City — DeepMine',
     },
     {
-        path: wasteland,
-        Component: Wasteland,
-        forLoggedIn: true,
-        forAdmin: true,
-        forBetaUser: true,
-        titleTag: 'Wasteland — DeepMine',
-    },
-    {
         path: mining,
         Component: MiningPage,
         forLoggedIn: true,
@@ -247,6 +239,22 @@ export const routes: AppRoute[] = [
         forAdmin: true,
         forBetaUser: true,
         titleTag: 'Card preview — DeepMine',
+    },
+    {
+        path: createOrder,
+        Component: CreateOrderPage,
+        forLoggedIn: true,
+        forAdmin: true,
+        forBetaUser: true,
+        titleTag: 'Create order — DeepMine',
+    },
+    {
+        path: faq,
+        titleTag: 'FAQ — DeepMine',
+        Component: FaqPage,
+        forLoggedIn: false,
+        forAdmin: true,
+        forBetaUser: true,
     },
 ];
 

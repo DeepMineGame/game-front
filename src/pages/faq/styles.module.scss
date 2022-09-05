@@ -22,16 +22,3 @@ h1.title {
 .text {
   font-family: $bai;
 }
-
-.link {
-  color: $color-primary-primary-6;
-
-  &:hover,
-  &:focus {
-    color: $color-primary-primary-5;
-  }
-
-  &:active {
-    color: $color-primary-primary-7;
-  }
-}

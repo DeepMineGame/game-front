@@ -99,11 +99,17 @@
       },
       "mine": {
         "title": "Mine",
-        "mineInfo": "Mine info"
+        "mineInfo": "Mine info",
+        "mines": "mines"
       },
       "comingSoon": "Coming soon",
       "client": "Client",
-      "executor": "Executor"
+      "executor": "Executor",
+      "social": {
+        "medium": "Medium",
+        "atomicHub": "Atomic Hub"
+      },
+      "shelter": "Shelter"
     },
     "user": {
       "accountSettings": "Account settings",
@@ -470,6 +476,38 @@
       "addMineOwner": "Add new Mine owner",
       "findMineOwner": "Find a Mine owner on the servicemarket",
       "createOrder": "Create an order for a Mine owner"
+    },
+    "faq": {
+      "watIs": "What is DeepMine?",
+      "deepMineDescription": "DeepMine is a Play-and-Earn social economy strategy in the Sci-Fi-themed metaverse. DeepMine is about cooperation, free market economy and this simple mundane thing called saving humanity.",
+      "wasRelease": "Is the game released yet? How do I start playing DeepMine?",
+      "closeAlpha": "Closed alpha version is scheduled for the end of July but you can buy the in-game equipment to get ready for the upcoming\n                start. Open beta is scheduled for the first half of fall 2022. You’ll first need to create a Wallet on the Wax Blockchain — it’s easier than you think. Read the guide on our",
+      "needNft": "You’ll then need to buy at least 5 DeepMine NFTs on",
+      "more": "(1 for each type of equipment). Find more info",
+      "here": "here",
+      "explore": "Make sure to explore the",
+      "stake": "where you can stake DeepMine NFTs, grab some stuff at auctions and invite your friends to join your team, getting a reward in the process.",
+      "whatHappened": "Elea what? What happened here?",
+      "distantFuture": "A very-very distant future. All the stars in the universe have collapsed — Eleazar is the only planet left where humankind still exists. Life there is extremely challenging as Eleazar’s vital resources are coming to an end. Citizens went deep underground in a desperate attempt to preserve whatever energy was left. The future was doom and gloom until scientists of Eleazar found out that the energy can be harvested from the radiation emitted by the Core of the planet in the form of Ejections. Everyone has to work together and dig deep to reach the Core. That’s the only way to save the planet and life on it. Here, we made a",
+      "coolVideo": "cool video",
+      "showCase": "to showcase life on Eleazar. Citizens should build",
+      "ofElezar": "of Eleazar. Miners work with different types of equipment, which affects their productivity and the amount of DME they’re digging.",
+      "areasMinesEquipment": "Areas, mines, equipment — what’s going on and where do I start?",
+      "thePlanet": "The planet Eleazar is divided into 1000 areas with five different rarity types. Most of these 1000 areas are the Rock Fields (common rarity) while the rarest areas are DME Springs (legendary rarity) with the highest expectations from those who mine there. Only up to 100 mines can be established in each area, and only 10 mine slots are revealed at the beginning with the remaining oneson the",
+      "toDiscover": "to discover. In a nutshell, it’s 1000 areas—> up to 100 mines in each area — 9 mine levels + surface—> divided into 5 sublevels each. Each mine has 3 slots for the mine modules which improve mine characteristics. Sounds a bit too complex? Mining’s not the easiest thing in the world! However, once you start playing, you’ll start digging into things much faster (in all senses). Read our fullest blueprint",
+      "whatRoles": "What are the game roles?",
+      "thereRole": "For a start, the player is free to pick out of 3 main game roles",
+      "and": "and",
+      "moreRoles": "More roles will be added later on to the game",
+      "rolesPoint": "What’s the point of the game roles and the game in general?",
+      "miningDme": "Mining DME token is the key in-game mechanism that allows for advancement in the DeepMine. Unlike in most other P2E games, the best progress in DeepMine implies cooperation between players with different roles.",
+      "seeLanding": "We have our entire team doxxed for you — see deepmine.world",
+      "eugen": "Deepmine’s Head of operations Eugene is a frequent guest at Web3 conferences including AIBC World, CGC and Hyper Games conferences",
+      "community": "DeepMine team keeps the community up to date on all the projects news in our Telegram and Discord groups (links). We’ve recently held an AMA session with our acting CEO, and we intend to make these regular.",
+      "whyLegit": "Why is DeepMine legit?",
+      "weAreChampions": "We are winners of the AIBC GameFi Pitch Competition 2022.",
+      "weAreChampionsMyFriend": "We are winners of the AIBC GameFi Pitch Competition 2022.",
+      "weAreChampionsOfTheWorld": "We’ve got credible partners: YARD [Hub] venture studio, DApplica, AtomicHub."
     }
   },
   "features": {
@@ -534,7 +572,8 @@
     "landlord": "Landlord",
     "mineOwner": "Mine owner",
     "contractor": "Contractor",
-    "landLord": "Land lord"
+    "landLord": "Land lord",
+    "geologists": "Geologists"
   },
   "blockchainErrors": {
     "fallback": "Error has no code. Unknown error",
