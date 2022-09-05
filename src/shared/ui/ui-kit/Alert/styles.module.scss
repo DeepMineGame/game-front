@@ -1,34 +1,9 @@
 @import 'src/shared';
 
-.alert {
-    flex-wrap: wrap;
-    padding: 11px 16px;
-
+.root {
     :global {
-        .ant-alert-icon {
-            align-self: flex-start;
-            padding-top: 5px;
-        }
-
-        .ant-alert-action {
-            width: 100%;
-            margin-top: 12px;
-            margin-left: 20px;
-        }
-    }
-}
-
-.alert:global(.ant-alert-info) {
-    background: $color-primary-primary-1;
-    border: 1px solid $color-primary-primary-3;
-
-    :global {
-        .ant-alert-message {
+        .ant-alert-description {
             color: $color-neutral-neutral-9;
-        }
-
-        .ant-alert-icon {
-            color: $color-primary-primary-6;
         }
     }
 }

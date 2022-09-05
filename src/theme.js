@@ -135,7 +135,7 @@ module.exports = {
 
     '@primary-color': '#F5C913',
 
-    // buttons
+    // button
     '@btn-danger-bg': '#A61D24',
     '@btn-danger-color': '#FFFFFF',
     '@btn-text-shadow': 'none',
@@ -157,4 +157,14 @@ module.exports = {
     '@btn-padding-horizontal-base': '16px',
     '@btn-padding-horizontal-lg': '16px',
     '@btn-padding-horizontal-sm': '8px',
+
+    // allert
+    '@alert-info-border-color': '#7B6300',
+    '@alert-info-bg-color': '#3D3100',
+    '@alert-warning-border-color': '#594214',
+    '@alert-warning-bg-color': '#2B2111',
+    '@alert-warning-icon-color': '#D89614',
+    '@alert-message-color': '#DBDBDB',
+    '@alert-with-description-padding': '16px',
+    '@alert-with-description-icon-size': '21px',
 };
