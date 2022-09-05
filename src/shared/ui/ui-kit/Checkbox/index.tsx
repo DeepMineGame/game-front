@@ -1,12 +1,8 @@
-import { Checkbox as CheckboxA, CheckboxProps } from 'antd';
+import { Checkbox as CheckboxAnt, CheckboxProps } from 'antd';
 import cn from 'classnames';
+import { FC } from 'react';
 import styles from './styles.module.scss';
 
-export const Checkbox = (props: CheckboxProps) => {
-    return (
-        <CheckboxA
-            {...props}
-            className={cn(styles.checkbox, props.className)}
-        />
-    );
-};
+export const Checkbox: FC<CheckboxProps> = (props) => (
+    <CheckboxAnt className={cn(styles.root, props.className)} {...props} />
+);

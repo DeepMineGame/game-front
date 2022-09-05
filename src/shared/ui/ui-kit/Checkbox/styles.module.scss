@@ -1,28 +1,35 @@
-@import "src/shared";
+@import 'src/shared';
 
-.checkbox {
-  color: $color-neutral-neutral-8 !important;
+.root {
+    :global {
+        .ant-checkbox-inner {
+            border: 1px solid $color-neutral-neutral-5;
+        }
 
-  :global {
-    .ant-checkbox-inner {
-      background-color: $color-neutral-neutral-1;
-      border: 1px solid $color-neutral-neutral-5;
+        .ant-checkbox + span {
+            color: $color-neutral-neutral-9;
+        }
+
+        .ant-checkbox-disabled {
+            & .ant-checkbox-inner {
+                background-color: $color-neutral-neutral-3;
+            }
+
+            & .ant-checkbox-inner {
+                border: 1px solid $color-neutral-neutral-5 !important;
+            }
+
+            &.ant-checkbox-indeterminate .ant-checkbox-inner::after {
+                background-color: $color-neutral-neutral-6;
+            }
+
+            &.ant-checkbox-checked .ant-checkbox-inner::after {
+                border-color: $color-neutral-neutral-6;
+            }
+
+            & + span {
+                color: $color-neutral-neutral-6;
+            }
+        }
     }
-
-    .ant-checkbox-checked .ant-checkbox-inner {
-      background-color: $color-primary-primary-6;
-    }
-
-    // mark icon
-    .ant-checkbox-checked .ant-checkbox-inner::after {
-      border: 1px solid $color-neutral-neutral-1;
-      border-top: 0;
-      border-left: 0;
-    }
-
-    // hover border
-    .ant-checkbox-input:focus + .ant-checkbox-inner, .ant-checkbox-wrapper:hover .ant-checkbox-inner, .ant-checkbox:hover .ant-checkbox-inner {
-      border-color: $color-primary-primary-6 !important;
-    }
-  }
 }

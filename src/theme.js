@@ -169,4 +169,7 @@ module.exports = {
     '@alert-message-color': '#DBDBDB',
     '@alert-with-description-padding': '16px',
     '@alert-with-description-icon-size': '21px',
+
+    // checkbox
+    '@checkbox-check-color': '#141414',
 };
