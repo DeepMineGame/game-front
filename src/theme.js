@@ -145,6 +145,8 @@ module.exports = {
     '@btn-default-bg': 'transparent',
     '@btn-default-border': '#434343',
 
+    '@btn-text-hover-bg': '#1D1D1D',
+
     '@btn-border-radius-base': '2px',
     '@btn-border-radius-sm': '2px',
 

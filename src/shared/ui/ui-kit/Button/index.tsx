@@ -19,6 +19,7 @@ export const Button: FC<Props> = ({
         className={classNames(className, {
             [styles.primary]: type === 'primary',
             [styles.default]: type === 'default',
+            [styles.text]: type === 'text',
             [styles.link]: type === 'link',
             [styles.danger]: props.danger,
             [styles.ghost]: props.ghost,

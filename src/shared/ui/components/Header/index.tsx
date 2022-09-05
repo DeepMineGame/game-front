@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import {
-    BackButton,
+    Button,
     DeepMineLogo,
     desktopS,
     Title,
@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import { city } from 'app/router/paths';
 
+import { useTranslation } from 'react-i18next';
 import { SettingMenu, UserAvatarAndDrawer } from 'entities/user';
 import styles from './styles.module.scss';
 
@@ -27,10 +28,18 @@ export const Header: FC<Props> = ({ withBackButton, title, hideLogo }) => {
     const goToBack = () => navigate(-1);
     const isDesktop = useMediaQuery(desktopS);
     const navigateToHome = () => navigate(city);
+    const { t } = useTranslation();
+
+    const backButton = (
+        <Button type="text" icon={<LeftOutlined />} onClick={goToBack}>
+            {t('kit.back')}
+        </Button>
+    );
+
     return (
         <>
             <div className={styles.header}>
-                {withBackButton ? <BackButton onClick={goToBack} /> : <div />}
+                {withBackButton ? backButton : <div />}
                 {title && !isDesktop ? (
                     <div
                         className={styles.iconAndTitleWrapper}
@@ -67,7 +76,7 @@ export const Header: FC<Props> = ({ withBackButton, title, hideLogo }) => {
             </div>
             {title && (
                 <div className={styles.backButtonAndTitleWrapper}>
-                    <BackButton onClick={goToBack} />
+                    {backButton}
                     <Title className={styles.title} fontFamily="orbitron">
                         {title}
                     </Title>

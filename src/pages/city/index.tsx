@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Alert, Header, Title } from 'shared';
+import { Header, Title } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import {
     // contractorCabin,
@@ -32,15 +32,6 @@ export const CityPage: FC = () => {
             {/* > */}
             {/*    <Title level={5}>{t('pages.home.contractorCabin')}</Title> */}
             {/* </div> */}
-
-            <Alert
-                message={t('components.common.warning')}
-                description={t(
-                    'pages.serviceMarket.createOrder.haveNoNftAlert.haveNo'
-                )}
-                type="warning"
-                showIcon
-            />
 
             <Space>
                 <div className={styles.hive} onClick={() => navigate(hive)}>

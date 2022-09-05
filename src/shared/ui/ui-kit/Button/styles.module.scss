@@ -213,3 +213,16 @@ $ghost-loading-bg: rgba(0, 0, 0, 0.35);
         color: $color-neutral-neutral-6;
     }
 }
+
+.text {
+    color: $color-neutral-neutral-9;
+
+    &:hover,
+    &:focus {
+        color: $color-neutral-neutral-9;
+    }
+
+    &:active {
+       background-color: $color-neutral-neutral-3;
+    }
+}
