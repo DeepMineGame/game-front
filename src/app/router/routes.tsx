@@ -22,6 +22,7 @@ import {
     OperationPage,
     NftPreviewPage,
     AuthPage,
+    FaqPage,
 } from 'pages';
 
 import {
@@ -48,6 +49,7 @@ import {
     serviceMarketOrder,
     landLordStats,
     inventoryItemPreview,
+    faq,
 } from './paths';
 
 export type AppRoute = {
@@ -93,6 +95,14 @@ export const routes: AppRoute[] = [
         forAdmin: true,
         forBetaUser: true,
         titleTag: 'City — DeepMine',
+    },
+    {
+        path: wasteland,
+        Component: Wasteland,
+        forLoggedIn: true,
+        forAdmin: true,
+        forBetaUser: true,
+        titleTag: 'Wasteland — DeepMine',
     },
     {
         path: mining,

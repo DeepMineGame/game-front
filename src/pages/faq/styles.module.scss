@@ -1,0 +1,37 @@
+@import "src/shared";
+
+.wrapper {
+  background-color: $color-neutral-neutral-2;
+  min-height: 100vh;
+  font-family: $orbitron;
+  color: $color-neutral-neutral-9;
+  padding: 20px;
+}
+
+.logo {
+  margin: auto;
+  display: block;
+  padding-top: 8px;
+}
+
+h1.title {
+  text-align: center;
+  margin-bottom: 64px
+}
+
+.text {
+  font-family: $bai;
+}
+
+.link {
+  color: $color-primary-primary-6;
+
+  &:hover,
+  &:focus {
+    color: $color-primary-primary-5;
+  }
+
+  &:active {
+    color: $color-primary-primary-7;
+  }
+}
