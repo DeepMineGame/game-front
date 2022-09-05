@@ -1,7 +1,6 @@
 @import "src/shared";
 
 .cabinBackground {
-  font-family: $bai;
   height: 100vh;
   width: 100vw;
   position: absolute;
@@ -48,7 +47,6 @@
 }
 
 .title {
-  font-family: $orbitron;
   font-weight: 700;
   font-size: 12px;
   line-height: 20px;

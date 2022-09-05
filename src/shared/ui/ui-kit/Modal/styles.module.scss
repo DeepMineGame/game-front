@@ -3,7 +3,6 @@
 @import "src/shared/ui/ui-kit/Button/styles.module";
 
 .modal {
-  font-family: $bai;
   padding: 0;
 }
 
@@ -52,7 +51,6 @@
 
 .simpleModal {
   div, .simpleModalTitle {
-    font-family: $bai;
     background: $color-neutral-neutral-2;
     color: $color-neutral-neutral-9 !important;
   }

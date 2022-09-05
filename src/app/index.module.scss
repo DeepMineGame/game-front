@@ -1,1 +1,6 @@
 @import 'styles/index';
+@import 'src/shared';
+
+body {
+    font-family: $bai;
+}

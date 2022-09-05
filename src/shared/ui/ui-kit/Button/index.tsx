@@ -16,7 +16,7 @@ export const Button: FC<Props> = ({
 }) => (
     <ButtonAnt
         onClick={onClick}
-        className={classNames(className, styles.root, {
+        className={classNames(className, {
             [styles.primary]: type === 'primary',
             [styles.default]: type === 'default',
             [styles.link]: type === 'link',
