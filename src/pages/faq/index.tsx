@@ -1,6 +1,6 @@
 import { DeepMineLogo, ExternalLink, Title } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { Space } from 'antd';
+import { Space, Typography } from 'antd';
 import styles from './styles.module.scss';
 
 export const FaqPage = () => {
@@ -13,14 +13,14 @@ export const FaqPage = () => {
 
             <Space direction="vertical">
                 <Title level={5}>{t('pages.faq.watIs')}</Title>
-                <p className={styles.text}>
+                <Typography.Paragraph className={styles.text}>
                     {t('pages.faq.deepMineDescription')}
-                </p>
+                </Typography.Paragraph>
             </Space>
 
             <Space direction="vertical">
                 <Title level={5}>{t('pages.faq.wasRelease')}</Title>
-                <p className={styles.text}>
+                <Typography.Paragraph className={styles.text}>
                     {t('pages.faq.closeAlpha')}
                     <ExternalLink href="https://medium.com/@deepmineworld/how-to-create-a-wallet-on-the-wax-blockchain-ae556388a2b5">
                         {' '}
@@ -40,12 +40,12 @@ export const FaqPage = () => {
                         {t('components.common.shelter')}
                     </ExternalLink>{' '}
                     {t('pages.faq.stake')}
-                </p>
+                </Typography.Paragraph>
             </Space>
 
             <Space direction="vertical">
                 <Title level={5}>{t('pages.faq.whatHappened')}</Title>
-                <p className={styles.text}>
+                <Typography.Paragraph className={styles.text}>
                     {t('pages.faq.distantFuture')}
                     <ExternalLink href="https://www.youtube.com/watch?v=t_kFHtf_Mvk">
                         {' '}
@@ -62,12 +62,12 @@ export const FaqPage = () => {
                         {t('pages.faq.areas')}
                     </ExternalLink>{' '}
                     {t('pages.faq.ofElezar')}
-                </p>
+                </Typography.Paragraph>
             </Space>
 
             <Space direction="vertical">
                 <Title level={5}>{t('pages.faq.areasMinesEquipment')}</Title>
-                <p className={styles.text}>
+                <Typography.Paragraph className={styles.text}>
                     {t('pages.faq.thePlanet')}{' '}
                     <ExternalLink href="https://docs.deepmine.world/deepmine/deepmine-entities/game-roles/specialist/geologist">
                         {t('roles.geologists')}
@@ -77,12 +77,12 @@ export const FaqPage = () => {
                         {' '}
                         {t('pages.faq.here')}
                     </ExternalLink>
-                </p>
+                </Typography.Paragraph>
             </Space>
 
             <Space direction="vertical">
                 <Title level={5}>{t('pages.faq.whatRoles')}</Title>
-                <p className={styles.text}>
+                <Typography.Paragraph className={styles.text}>
                     {t('pages.faq.thereRole')}
                     {' - '}
                     <ExternalLink href="https://docs.deepmine.world/deepmine/deepmine-entities/game-roles/landlord">
@@ -97,12 +97,14 @@ export const FaqPage = () => {
                         {t('roles.contractor')}
                     </ExternalLink>
                     . {t('pages.faq.moreRoles')}.{' '}
-                </p>
+                </Typography.Paragraph>
             </Space>
 
             <Space direction="vertical">
                 <Title level={5}>{t('pages.faq.rolesPoint')}</Title>
-                <p className={styles.text}>{t('pages.faq.miningDme')}</p>
+                <Typography.Paragraph className={styles.text}>
+                    {t('pages.faq.miningDme')}
+                </Typography.Paragraph>
             </Space>
 
             <Space direction="vertical">
