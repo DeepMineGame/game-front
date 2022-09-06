@@ -4,7 +4,7 @@
   background-color: $color-cyan-cyan-1;
   background-image: url("../../shared/ui/images/city/hometown.jpg");
   background-repeat: no-repeat;
-  height: 100vh;
+  min-height: 100vh;
   max-width: 100vw;
   background-size: cover;
 
@@ -21,6 +21,10 @@
   cursor: pointer;
   background: rgba(20, 20, 20, 0.4);
   border-bottom: 1px solid $color-neutral-neutral-1;
+
+  &:hover {
+    background-color: $color-primary-primary-6;
+  }
 }
 
 .mineOwnerTitle {
@@ -29,7 +33,7 @@
 }
 
 .mineOwner {
-  height: 50vh;
+  height: 85vh;
   width: 15vw;
   float: right;
   background-image: url("../../shared/ui/images/city/mine.png");
@@ -73,7 +77,6 @@
 
 .serviceMarket {
   display: inline-block;
-  margin-top: 10vh;
   height: 50vh;
   width: 20vw;
   background-image: url("../../shared/ui/images/city/market.png");
@@ -94,9 +97,13 @@
 
 }
 
+.serviceMarketTitle {
+  margin-top: 45vh;
+}
+
 .landlordLounge {
   height: 65vh;
-  width: 20vw;
+  width: 14vw;
   background-image: url("../../shared/ui/images/city/scyscraper.png");
   filter: $glow;
   background-size: contain !important;
