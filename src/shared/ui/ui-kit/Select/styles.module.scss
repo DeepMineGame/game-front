@@ -5,6 +5,16 @@
         color: $color-neutral-neutral-9;
     }
 
+    .ant-select-arrow {
+        transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+
+        
+    .ant-select:not(.ant-select-disabled):hover .ant-select-arrow {
+        transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+        color: $color-neutral-neutral-9;
+    }
+
     .ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) {
         .ant-select-selector {
             @include input-default-glow;
@@ -13,15 +23,6 @@
         .ant-select-arrow {
             color: $color-neutral-neutral-9;
         }
-    }
-
-    .ant-select-arrow {
-        transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-    }
-    
-    .ant-select:not(.ant-select-disabled):hover .ant-select-arrow {
-        transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-        color: $color-neutral-neutral-9;
     }
 
     .ant-select-disabled.ant-select:not(.ant-select-customize-input) .ant-select-selection-placeholder {
