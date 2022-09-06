@@ -7,15 +7,8 @@ $ghost-loading-bg: rgba(0, 0, 0, 0.35);
     border-color: $color-red-red-6;
 }
 
-@mixin danger-disabled {
-    color: $color-neutral-neutral-6;
-    background-color: $color-neutral-neutral-3;
-    border-color: $color-neutral-neutral-5;
-}
-
 @mixin ghost-disabled {
     background-color: transparent;
-    color: $color-neutral-neutral-6;
     border-color: $color-neutral-neutral-5;
 }
 
@@ -106,7 +99,7 @@ $ghost-loading-bg: rgba(0, 0, 0, 0.35);
     &.disabled.danger,
     &.disabled.danger:hover,
     &.disabled.danger:focus {
-        @include danger-disabled;
+        border-color: $color-neutral-neutral-5;
     }
 }
 
@@ -129,7 +122,6 @@ $ghost-loading-bg: rgba(0, 0, 0, 0.35);
 
         &:hover,
         &:focus {
-            color: $color-neutral-neutral-9;
             border-color: $color-neutral-neutral-5;
         }
     }
@@ -160,7 +152,7 @@ $ghost-loading-bg: rgba(0, 0, 0, 0.35);
     &.disabled.danger,
     &.disabled.danger:hover,
     &.disabled.danger:focus {
-        @include danger-disabled;
+        border-color: $color-neutral-neutral-5;
     }
 }
 
@@ -206,23 +198,8 @@ $ghost-loading-bg: rgba(0, 0, 0, 0.35);
             }
         }
     }
-
-    &.disabled,
-    &.disabled:hover,
-    &.disabled:focus {
-        color: $color-neutral-neutral-6;
-    }
 }
 
-.text {
-    color: $color-neutral-neutral-9;
-
-    &:hover,
-    &:focus {
-        color: $color-neutral-neutral-9;
-    }
-
-    &:active {
-       background-color: $color-neutral-neutral-3;
-    }
+.text:active {
+    background-color: $color-neutral-neutral-3;
 }

@@ -6,13 +6,8 @@
             border: 1px solid $color-neutral-neutral-5;
         }
 
-        .ant-checkbox + span {
-            color: $color-neutral-neutral-9;
-        }
-
         .ant-checkbox-disabled {
             & .ant-checkbox-inner {
-                background-color: $color-neutral-neutral-3;
                 border: 1px solid $color-neutral-neutral-5 !important;
             }
 
@@ -22,10 +17,6 @@
 
             &.ant-checkbox-checked .ant-checkbox-inner::after {
                 border-color: $color-neutral-neutral-6;
-            }
-
-            & + span {
-                color: $color-neutral-neutral-6;
             }
         }
     }

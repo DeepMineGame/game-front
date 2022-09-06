@@ -1,11 +1,40 @@
-@import "src/shared";
+@import 'src/shared';
 
-.input {
-  background: $color-neutral-neutral-1;
-  border-color: $color-neutral-neutral-5;
-  color: $color-neutral-neutral-9;
+$default-glow: 0px 0px 4px 0px rgba(24, 144, 255, 0.5);
+$error-glow: 0px 0px 4px 0px rgba(245, 34, 45, 0.5);
+$warning-glow: 0px 0px 4px 0px rgba(250, 173, 20, 0.5);
 
-  &:focus, &:hover {
-    border-color: $color-neutral-neutral-7;
-  }
+:global {
+    .ant-input:focus,
+    .ant-input-focused,
+    .ant-input-affix-wrapper:focus,
+    .ant-input-affix-wrapper-focused {
+        box-shadow: $default-glow;
+    }
+
+    .ant-input[disabled]::placeholder {
+        color: $color-neutral-neutral-6;
+    }
+
+    .ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless).ant-input:hover,
+    .ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover {
+        border-color: $color-red-red-5;
+    }
+
+    .ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless).ant-input:focus,
+    .ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:focus,
+    .ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper-focused {
+        box-shadow: $error-glow;
+    }
+
+    .ant-input-status-warning:not(.ant-input-disabled):not(.ant-input-borderless).ant-input:hover,
+    .ant-input-affix-wrapper-status-warning:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover {
+        border-color: $color-calendula-gold-gold-5;
+    }
+
+    .ant-input-status-warning:not(.ant-input-disabled):not(.ant-input-borderless).ant-input:focus,
+    .ant-input-affix-wrapper-status-warning:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:focus,
+    .ant-input-affix-wrapper-status-warning:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper-focused {
+        box-shadow: $warning-glow;
+    }
 }

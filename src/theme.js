@@ -135,6 +135,17 @@ module.exports = {
 
     '@primary-color': '#F5C913',
 
+    // base
+    '@height-base': '32px',
+    '@height-lg': '40px',
+    '@height-sm': '24px',
+    '@component-background': '#141414',
+    '@border-color-base': '#434343',
+    '@text-color': '#DBDBDB',
+    '@disabled-bg': '#262626',
+    '@disabled-color': '#5A5A5A',
+    '@error-color': '#D32029',
+
     // button
     '@btn-danger-bg': '#A61D24',
     '@btn-danger-color': '#FFFFFF',
@@ -149,10 +160,6 @@ module.exports = {
 
     '@btn-border-radius-base': '2px',
     '@btn-border-radius-sm': '2px',
-
-    '@btn-height-base': '32px',
-    '@btn-height-lg': '40px',
-    '@btn-height-sm': '24px',
 
     '@btn-font-size-lg': '16px',
     '@btn-font-size-sm': '14px',
@@ -172,4 +179,7 @@ module.exports = {
 
     // checkbox
     '@checkbox-check-color': '#141414',
+
+    // input
+    '@input-placeholder-color': '#7D7D7D',
 };

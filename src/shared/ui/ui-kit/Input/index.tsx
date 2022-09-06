@@ -1,7 +1,5 @@
-import { Input as InputA, InputProps } from 'antd';
-import React, { FC } from 'react';
-import styles from './styles.module.scss';
+import { FC, memo } from 'react';
+import { Input as InputAnt, InputProps } from 'antd';
+import './styles.module.scss';
 
-export const Input: FC<InputProps> = (props) => (
-    <InputA className={styles.input} {...props} />
-);
+export const Input: FC<InputProps> = memo((props) => <InputAnt {...props} />);
