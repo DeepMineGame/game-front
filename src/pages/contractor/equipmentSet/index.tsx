@@ -7,6 +7,7 @@ import {
     useAccountName,
     useReloadPage,
     useTableData,
+    warning,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
@@ -86,6 +87,12 @@ export const EquipmentSetPage: FC = () => {
         const notActivatedEquipmentIds = notInstalledEquipment
             .map(([, equipment]) => equipment?.asset_id)
             .filter((v) => v) as string[];
+        if (!contractId) {
+            warning({
+                title: t('pages.equipmentSet.main.haveNoContract'),
+                content: t('pages.equipmentSet.main.haveNoContract'),
+            });
+        }
         if (notActivatedEquipmentIds.length) {
             await callAction(
                 installEquipment({

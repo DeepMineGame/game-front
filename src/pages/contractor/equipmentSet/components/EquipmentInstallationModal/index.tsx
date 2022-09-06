@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, DmpIcon, Modal, Title, CostsTable } from 'shared';
-import Icon from '@ant-design/icons';
+import { Button, ActionModal } from 'shared';
 import styles from './styles.module.scss';
 
 interface Props {
@@ -19,7 +18,6 @@ export const EquipmentInstallationModal = ({
     const { t } = useTranslation();
     const [infoModalVisibility, setInfoModalVisibility] = useState(false);
     const toggleModal = () => setInfoModalVisibility(!infoModalVisibility);
-    const [useDmp, setUseDmp] = useState(false);
 
     const handleInstall = async () => {
         if (onInstall) {
@@ -35,29 +33,6 @@ export const EquipmentInstallationModal = ({
         }
     };
 
-    const footer = (
-        <div className={styles.modalFooter}>
-            <Button
-                type="ghost"
-                icon={<Icon component={DmpIcon} />}
-                className={styles.dmpButton}
-                onClick={() => setUseDmp(!useDmp)}
-            >
-                22
-            </Button>
-            <Button type="ghost">{t('components.common.button.cancel')}</Button>
-            {isInstall ? (
-                <Button type="primary" onClick={handleInstall}>
-                    {t('components.common.button.install')}
-                </Button>
-            ) : (
-                <Button type="primary" onClick={handleUninstall}>
-                    {t('components.common.button.uninstall')}
-                </Button>
-            )}
-        </div>
-    );
-
     return (
         <>
             <Button
@@ -71,30 +46,18 @@ export const EquipmentInstallationModal = ({
                     ? t('pages.equipmentSet.main.install')
                     : t('pages.equipmentSet.main.uninstall')}
             </Button>
-            <Modal
+            <ActionModal
                 visible={infoModalVisibility}
-                title={
-                    <Title fontFamily="bai" level={5}>
-                        {t('pages.equipmentSet.main.installation')}
-                    </Title>
-                }
                 onCancel={toggleModal}
-                footer={footer}
-            >
-                <Title level={5} fontFamily="bai" thin>
-                    {t('pages.contractor.travel.contentTitle')}
-                </Title>
-                <div>
-                    {!useDmp && <CostsTable timeSeconds={100} energy={500} />}
-                    {useDmp && (
-                        <div className={styles.infoCard}>
-                            <Icon component={DmpIcon} />
-                            <div>{t('components.common.button.dmp')}</div>
-                            <div className={styles.infoCardValue}>22</div>
-                        </div>
-                    )}
-                </div>
-            </Modal>
+                onSubmit={isInstall ? handleInstall : handleUninstall}
+                costs={{ timeSeconds: 1, energy: 0 }}
+                texts={{
+                    title: t('pages.equipmentSet.main.installation'),
+                    onOk: isInstall
+                        ? t('components.common.button.install')
+                        : t('components.common.button.uninstall'),
+                }}
+            />
         </>
     );
 };

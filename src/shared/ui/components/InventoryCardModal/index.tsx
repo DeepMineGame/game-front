@@ -60,7 +60,6 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
             {...props}
             title="Active inventory"
             className={styles.modal}
-            removeFooter
         >
             <div className={styles.container}>
                 <div>
@@ -187,9 +186,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                         modalData?.type === ModalType.repair
                             ? t('features.actions.equipmentRepair')
                             : t('features.actions.equipmentRefurbish'),
-                    submit: t(
-                        `pages.equipmentSet.cardModal.${modalData?.type}`
-                    ),
+                    onOk: t(`pages.equipmentSet.cardModal.${modalData?.type}`),
                 }}
                 onSubmit={() => setIsModalVisible(false)}
                 onCancel={() => setIsModalVisible(false)}
