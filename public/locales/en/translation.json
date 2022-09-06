@@ -216,7 +216,6 @@
       },
       "travel": {
         "title": "Travel to Contractor’s cabin",
-        "contentTitle": "This action will take:",
         "cancel": "Cancel",
         "travel": "Travel",
         "to": {
@@ -239,7 +238,9 @@
         "uninstall": "Uninstall the Equipment set",
         "installed": "Your equipment has been installed",
         "removed": "Your equipment has been removed",
-        "remove": "Remove"
+        "remove": "Remove",
+        "haveNoContract": "You have no contracts",
+        "signMineOwnerContract": "Sign contract with mine owner first"
       },
       "cardModal": {
         "select": "Select",

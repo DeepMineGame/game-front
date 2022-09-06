@@ -116,7 +116,7 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
             />
             <ActionModal
                 texts={{
-                    submit: t('components.common.button.activate'),
+                    onOk: t('components.common.button.activate'),
                     title: t('features.mineOwner.setupMine'),
                 }}
                 costs={{ timeSeconds: 1 }}

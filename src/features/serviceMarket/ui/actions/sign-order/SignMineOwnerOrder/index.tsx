@@ -90,15 +90,8 @@ const SignMineOwnerOrder: FC<Props> = React.memo(
                 <SignModal
                     isVisible={isModalVisible}
                     onCancel={() => setIsModalVisible(false)}
-                    footer={[
-                        <Button
-                            key="submit"
-                            type="primary"
-                            onClick={() => window.open(ATOMICHUB_URL, '_blank')}
-                        >
-                            {t('components.common.button.visitMarketplace')}
-                        </Button>,
-                    ]}
+                    okText={t('components.common.button.visitMarketplace')}
+                    onOk={() => window.open(ATOMICHUB_URL, '_blank')}
                 >
                     <Result
                         className={styles.info}

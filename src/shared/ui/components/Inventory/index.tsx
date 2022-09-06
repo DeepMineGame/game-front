@@ -74,7 +74,6 @@ export const Inventory: FC<InventoryProps> = ({
             {...props}
             title="Active inventory"
             className={styles.modal}
-            removeFooter
         >
             <div className={styles.container}>
                 <div className={styles.filterHeader}>

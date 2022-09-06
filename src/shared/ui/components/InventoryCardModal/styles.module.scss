@@ -6,16 +6,6 @@
   background: $color-neutral-neutral-2 !important;
   height: 100%;
 
-  :global {
-    .ant-modal-footer {
-      display: none;
-    }
-
-    .ant-modal-content {
-      box-shadow: none;
-    }
-  }
-
   @media only screen and (min-width: $media-desktop-s)  {
     overflow: auto;
     height: auto;

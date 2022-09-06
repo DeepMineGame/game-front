@@ -12,7 +12,7 @@ type Props = {
     onCancel: () => void;
     onSubmit: () => void;
     texts: {
-        submit: string;
+        onOk: string;
         title?: string;
     };
     costs?: {
@@ -22,7 +22,7 @@ type Props = {
     };
 };
 
-// TODO: remove EquipmentInstallationModal and TravelModal
+// TODO: remove EquipmentInstallationModal
 export const ActionModal: FC<Props> = ({
     visible,
     onCancel,
@@ -48,7 +48,7 @@ export const ActionModal: FC<Props> = ({
                         {t('components.common.button.cancel')}
                     </Button>
                     <Button type="primary" onClick={onSubmit}>
-                        {texts?.submit}
+                        {texts?.onOk}
                     </Button>
                 </Space>
             }
