@@ -22,6 +22,7 @@ import {
     OperationPage,
     NftPreviewPage,
     AuthPage,
+    FaqPage,
     Wasteland,
 } from 'pages';
 
@@ -49,6 +50,7 @@ import {
     serviceMarketOrder,
     landLordStats,
     inventoryItemPreview,
+    faq,
     wasteland,
 } from './paths';
 
@@ -247,6 +249,14 @@ export const routes: AppRoute[] = [
         forAdmin: true,
         forBetaUser: true,
         titleTag: 'Card preview — DeepMine',
+    },
+    {
+        path: faq,
+        titleTag: 'FAQ — DeepMine',
+        Component: FaqPage,
+        forLoggedIn: false,
+        forAdmin: true,
+        forBetaUser: true,
     },
 ];
 

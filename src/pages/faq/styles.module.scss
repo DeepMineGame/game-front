@@ -1,0 +1,36 @@
+@import "src/shared";
+
+.wrapper {
+  background-color: $color-neutral-neutral-2;
+  min-height: 100vh;
+  font-family: $orbitron;
+  color: $color-neutral-neutral-9;
+  padding: 20px;
+
+  @media (min-width: $media-tablet)  {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  @media (min-width: $media-desktop-s)  {
+    padding-left: 120px;
+    padding-right: 120px;
+  }
+}
+
+.logo {
+  margin: auto;
+  display: block;
+  padding-top: 8px;
+}
+
+h1.title {
+  text-align: center;
+  margin-bottom: 64px
+}
+
+.text {
+  font-family: $bai;
+  white-space: pre-line;
+  color: $color-neutral-neutral-9;
+}

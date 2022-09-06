@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { hive, landLord, serviceMarket, wasteland } from 'app/router/paths';
 import { useTranslation } from 'react-i18next';
 import { Space } from 'antd';
+import cn from 'classnames';
 import styles from './styles.module.scss';
 
 export const CityPage: FC = () => {
@@ -38,7 +39,13 @@ export const CityPage: FC = () => {
                     className={styles.serviceMarket}
                     onClick={() => navigate(serviceMarket)}
                 >
-                    <Title level={5} className={styles.enterLink}>
+                    <Title
+                        level={5}
+                        className={cn(
+                            styles.enterLink,
+                            styles.serviceMarketTitle
+                        )}
+                    >
                         {t('pages.serviceMarket.serviceMarket')}
                     </Title>
                 </div>
