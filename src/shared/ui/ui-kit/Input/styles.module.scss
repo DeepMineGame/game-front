@@ -1,15 +1,11 @@
 @import 'src/shared';
 
-$default-glow: 0 0 4px 0 rgba(24, 144, 255, 0.5);
-$error-glow: 0 0 4px 0 rgba(245, 34, 45, 0.5);
-$warning-glow: 0 0 4px 0 rgba(250, 173, 20, 0.5);
-
 :global {
     .ant-input:focus,
     .ant-input-focused,
     .ant-input-affix-wrapper:focus,
     .ant-input-affix-wrapper-focused {
-        box-shadow: $default-glow;
+        @include input-default-glow;
     }
 
     .ant-input[disabled]::placeholder {
@@ -24,7 +20,7 @@ $warning-glow: 0 0 4px 0 rgba(250, 173, 20, 0.5);
     .ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless).ant-input:focus,
     .ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:focus,
     .ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper-focused {
-        box-shadow: $error-glow;
+        @include input-error-glow;
     }
 
     .ant-input-status-warning:not(.ant-input-disabled):not(.ant-input-borderless).ant-input:hover,
@@ -35,6 +31,6 @@ $warning-glow: 0 0 4px 0 rgba(250, 173, 20, 0.5);
     .ant-input-status-warning:not(.ant-input-disabled):not(.ant-input-borderless).ant-input:focus,
     .ant-input-affix-wrapper-status-warning:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:focus,
     .ant-input-affix-wrapper-status-warning:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper-focused {
-        box-shadow: $warning-glow;
+        @include input-warning-glow;
     }
 }

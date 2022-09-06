@@ -4,15 +4,15 @@
   box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12);
 }
 
-@mixin effect-style-input-default-focus {
+@mixin input-default-glow {
   box-shadow: 0 0 4px rgba(24, 144, 255, 0.5);
 }
 
-@mixin effect-style-input-error-focus {
+@mixin input-error-glow {
   box-shadow: 0 0 4px rgba(245, 34, 45, 0.5);
 }
 
-@mixin effect-style-input-warning-focus {
+@mixin input-warning-glow {
   box-shadow: 0 0 4px rgba(250, 173, 20, 0.5);
 }
 

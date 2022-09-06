@@ -145,6 +145,7 @@ module.exports = {
     '@disabled-bg': '#262626',
     '@disabled-color': '#5A5A5A',
     '@error-color': '#D32029',
+    '@item-hover-bg': '#3D3100',
 
     // button
     '@btn-danger-bg': '#A61D24',
