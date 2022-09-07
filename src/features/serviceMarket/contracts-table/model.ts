@@ -6,12 +6,7 @@ import {
     createStore,
     forward,
 } from 'effector';
-import { getTableData, uniqBy } from 'shared';
-import {
-    ContractDto,
-    getContractsNameConfig,
-    mapSearchParamForIndexPositionToFindContracts,
-} from 'entities/smartcontract';
+import { ContractDto } from 'entities/smartcontract';
 import {
     FilterOrderStatus,
     getOrders,
@@ -28,37 +23,23 @@ export const filterStore = createStore<GetOrdersParams>({
     status: FilterOrderStatus.Current,
 }).on(changeFilterEvent, (_state, filter) => filter);
 
-export const getContractsEffect = createEffect(
-    async ({ searchParam }: { searchParam: string }) =>
-        Promise.all([
-            getTableData(
-                getContractsNameConfig(
-                    searchParam,
-                    mapSearchParamForIndexPositionToFindContracts.executorId,
-                    150
-                )
-            ),
-            getTableData(
-                getContractsNameConfig(
-                    searchParam,
-                    mapSearchParamForIndexPositionToFindContracts.clientId,
-                    150
-                )
-            ),
-        ])
-);
-
 export const getContractsByFilterEffect = createEffect(getOrders);
 
-export const contractsStore = createStore<null | ContractDto[]>(null)
-    .on(getContractsEffect.doneData, (_, [ownerContracts, clientContracts]) =>
-        uniqBy([...ownerContracts.rows, ...clientContracts.rows], 'id')
-    )
-    .on(getContractsByFilterEffect.doneData, (_, data) => data);
+export const contractsStore = createStore<null | ContractDto[]>(null).on(
+    getContractsByFilterEffect.doneData,
+    (_, data) => data
+);
 
 forward({
     from: ContractsGate.open,
-    to: getContractsEffect,
+    to: attach({
+        effect: getContractsByFilterEffect,
+        source: [filterStore, userStore],
+        mapParams: (params, [filters, user]) => ({
+            ...filters,
+            user: user?.wax_address,
+        }),
+    }),
 });
 
 forward({

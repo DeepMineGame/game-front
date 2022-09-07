@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Modal, Result } from 'antd';
 
-import { Button } from 'shared';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -30,11 +29,8 @@ export const SuccessModal: FC<Props> = ({
             visible={visible}
             onCancel={onCancel}
             title={title}
-            footer={
-                <Button type="primary" onClick={onSubmit}>
-                    {t('components.common.button.okay')}
-                </Button>
-            }
+            onOk={onSubmit}
+            okText={t('components.common.button.okay')}
         >
             <Result
                 status="success"

@@ -1,22 +1,22 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, Modal } from 'shared/ui';
+import { Modal } from 'shared/ui';
 
 type Props = {
     isVisible: boolean;
     title?: string;
     onCancel: () => void;
-    onSubmit?: () => void;
-    footer?: React.ReactNode[];
+    onOk?: () => void;
+    okText?: string;
 };
 
 const SignModal: FC<Props> = ({
     isVisible,
     title,
     onCancel,
-    onSubmit,
-    footer,
+    onOk,
     children,
+    okText,
 }) => {
     const { t } = useTranslation();
 
@@ -25,16 +25,8 @@ const SignModal: FC<Props> = ({
             visible={isVisible}
             title={title || t('pages.serviceMarket.order.selectMine')}
             onCancel={onCancel}
-            footer={
-                footer || [
-                    <Button key="back" type="ghost" onClick={onCancel}>
-                        {t('components.common.button.cancel')}
-                    </Button>,
-                    <Button key="submit" type="primary" onClick={onSubmit}>
-                        {t('components.common.button.sign')}
-                    </Button>,
-                ]
-            }
+            onOk={onOk}
+            okText={okText || t('components.common.button.sign')}
         >
             {children}
         </Modal>

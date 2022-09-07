@@ -77,16 +77,8 @@ const SignContractorOrder: FC<Props> = ({ contract, accountName }) => {
             <SignModal
                 isVisible={isWarningModalVisible}
                 onCancel={() => setIsWarningModalVisible(false)}
-                onSubmit={() => window.open(ATOMICHUB_URL, '_blank')}
-                footer={[
-                    <Button
-                        key="submit"
-                        type="primary"
-                        onClick={() => window.open(ATOMICHUB_URL, '_blank')}
-                    >
-                        {t('components.common.button.visitMarketplace')}
-                    </Button>,
-                ]}
+                onOk={() => window.open(ATOMICHUB_URL, '_blank')}
+                okText={t('components.common.button.visitMarketplace')}
             >
                 <Result
                     className={styles.info}
@@ -104,7 +96,7 @@ const SignContractorOrder: FC<Props> = ({ contract, accountName }) => {
             <SignModal
                 isVisible={isModalVisible}
                 onCancel={() => setIsModalVisible(false)}
-                onSubmit={handleSignOrder}
+                onOk={handleSignOrder}
             >
                 <div className={styles.selectWrapper}>
                     <Text className={styles.selectTitle}>
