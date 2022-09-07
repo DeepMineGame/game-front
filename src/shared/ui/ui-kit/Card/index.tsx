@@ -28,9 +28,6 @@ type Props = {
 
 export const Card: FC<Props> = ({
     imageSrc,
-    initial,
-    current,
-    remained,
     status,
     needTooltip,
     buttonText,
@@ -47,7 +44,6 @@ export const Card: FC<Props> = ({
         </div>
     );
     const neutral4 = '#303030';
-    const hasProgress = initial || current || remained;
 
     return (
         <Tooltip
