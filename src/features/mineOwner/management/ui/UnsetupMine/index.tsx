@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next';
-import React, { FC } from 'react';
-import { Button, useReloadPage } from 'shared';
+import { FC } from 'react';
+import { Button, Tooltip, useReloadPage } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { useNavigate } from 'react-router-dom';
 import { mineOwner } from 'app/router/paths';
-import { Tooltip } from 'antd';
+import { useSmartContractAction } from 'features/hooks';
 import {
     ContractDto,
     terminateContract,
@@ -16,7 +16,6 @@ import {
     UnsetupMineGate,
     userMineStore,
 } from '../../../models/unsetupMineModel';
-import { useSmartContractAction } from '../../../../hooks';
 
 export const UnsetupMine: FC<{
     accountName: string;

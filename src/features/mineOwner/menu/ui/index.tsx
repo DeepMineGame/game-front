@@ -1,6 +1,6 @@
-import { Space, Tooltip } from 'antd';
-import React, { FC } from 'react';
-import { Menu, MenuItem } from 'shared';
+import { Space } from 'antd';
+import { FC } from 'react';
+import { Menu, MenuItem, Tooltip } from 'shared';
 import {
     DesktopOutlined,
     ProjectOutlined,

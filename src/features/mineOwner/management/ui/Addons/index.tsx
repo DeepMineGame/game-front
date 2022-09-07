@@ -1,6 +1,6 @@
-import { Button, Petobot, Title } from 'shared';
+import { Button, Petobot, Title, Tooltip } from 'shared';
 import { FC } from 'react';
-import { Space, Tooltip } from 'antd';
+import { Space } from 'antd';
 import { useTranslation } from 'react-i18next';
 import Icon, { GroupOutlined } from '@ant-design/icons';
 import styles from './styles.module.scss';

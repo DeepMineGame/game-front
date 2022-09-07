@@ -3,10 +3,10 @@ import { serviceMarket } from 'app/router/paths';
 import { t } from 'i18next';
 import { ContractState } from 'features';
 import { DiscordIcon } from 'shared';
-import { Space, Tooltip } from 'antd';
+import { Space } from 'antd';
 import { ContractDto, contractName } from 'entities/smartcontract';
 import { getUserRoleInContract } from 'shared/lib/utils';
-import { Link, Table, Tag } from '../../ui-kit';
+import { Link, Table, Tag, Tooltip } from '../../ui-kit';
 import { toLocaleDate } from '../../utils';
 
 type Props = { contracts: ContractDto[]; account: string };

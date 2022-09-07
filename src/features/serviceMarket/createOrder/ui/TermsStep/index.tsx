@@ -1,6 +1,13 @@
 import React, { FC } from 'react';
-import { Card, Form, FormInstance, Space, Tooltip } from 'antd';
-import { Button, getLabelSelectItem, Input, Select, Title } from 'shared';
+import { Card, Form, FormInstance, Space } from 'antd';
+import {
+    Button,
+    getLabelSelectItem,
+    Input,
+    Select,
+    Title,
+    Tooltip,
+} from 'shared';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import { QuestionCircleOutlined } from '@ant-design/icons';

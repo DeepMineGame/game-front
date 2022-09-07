@@ -1,9 +1,8 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ShareAltOutlined } from '@ant-design/icons';
-import { Tooltip } from 'antd';
 import { useContractType } from 'entities/contract';
-import { secondsToDays, Text, toLocaleDate } from 'shared/ui';
+import { secondsToDays, Text, toLocaleDate, Tooltip } from 'shared/ui';
 import { ContractState, TableWithTitle } from '..';
 import { ContractProps } from '../../types';
 import styles from './styles.module.scss';

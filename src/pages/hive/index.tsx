@@ -1,8 +1,15 @@
-import React, { FC } from 'react';
-import { Menu, MenuItem, Page, useAccountName, useReloadPage } from 'shared';
+import { FC } from 'react';
+import {
+    Menu,
+    MenuItem,
+    Page,
+    Tooltip,
+    useAccountName,
+    useReloadPage,
+} from 'shared';
 import { useStore } from 'effector-react';
 import { Travel } from 'features';
-import { Space, Tooltip } from 'antd';
+import { Space } from 'antd';
 import { AreaChartOutlined, HddOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';

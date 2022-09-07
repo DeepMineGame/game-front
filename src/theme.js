@@ -50,4 +50,10 @@ module.exports = {
 
     // input
     '@input-placeholder-color': '#7D7D7D',
+
+    // tooltip
+    '@tooltip-bg': '#434343',
+
+    // select
+    '@select-item-selected-bg': '#3D3100',
 };

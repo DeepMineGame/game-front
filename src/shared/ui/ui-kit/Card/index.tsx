@@ -1,5 +1,4 @@
-import React, { FC } from 'react';
-import { Tooltip } from 'antd';
+import { FC } from 'react';
 import cn from 'classnames';
 import {
     Button,
@@ -7,6 +6,7 @@ import {
     Logo,
     getImagePath,
     TemplateIdType,
+    Tooltip,
 } from 'shared';
 import { NftProgressBar, ProgressProps } from '../NftProgressBar';
 import styles from './styles.module.scss';

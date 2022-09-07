@@ -1,6 +1,6 @@
-import { Form, FormInstance, Tooltip } from 'antd';
+import { Form, FormInstance } from 'antd';
 import React, { FC } from 'react';
-import { Select } from 'shared';
+import { Select, Tooltip } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 import { createContrFormFields, ContractRole } from 'entities/smartcontract';

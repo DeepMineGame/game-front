@@ -1,7 +1,14 @@
 import { DragEventHandler, FC, useState } from 'react';
-import { Col, Row, Tooltip } from 'antd';
+import { Col, Row } from 'antd';
 import cn from 'classnames';
-import { Button, primary5, Title, useReloadPage, useTableData } from 'shared';
+import {
+    Button,
+    primary5,
+    Title,
+    Tooltip,
+    useReloadPage,
+    useTableData,
+} from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { isUserInHive } from 'features/hive';

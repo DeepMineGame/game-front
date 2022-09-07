@@ -1,10 +1,10 @@
 import { DMECoinIcon, Modal, getImagePath } from 'shared';
 import React, { FC, useState, useEffect, useCallback } from 'react';
-import { ModalProps, Tooltip } from 'antd';
+import { ModalProps } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { AssetDataType, getAtomicAssetsDataById } from 'entities/atomicassets';
 import { UserInventoryType } from 'entities/smartcontract';
-import { ActionModal, Line, NftProgressBar } from 'shared/ui/ui-kit';
+import { ActionModal, Line, NftProgressBar, Tooltip } from 'shared/ui/ui-kit';
 import styles from './styles.module.scss';
 
 type InventoryCardModalProps = ModalProps & {

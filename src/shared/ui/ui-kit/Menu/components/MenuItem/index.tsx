@@ -1,6 +1,5 @@
-import { Tooltip } from 'antd';
-import React, { FC, MouseEventHandler, ReactNode } from 'react';
-import { Button } from 'shared';
+import { FC, MouseEventHandler, ReactNode } from 'react';
+import { Button, Tooltip } from 'shared';
 import { ButtonType } from 'antd/lib/button/button';
 
 type Props = {

@@ -1,4 +1,4 @@
-import React, { FC, memo, useState } from 'react';
+import { FC, memo, useState } from 'react';
 import {
     Page,
     Title,
@@ -7,9 +7,10 @@ import {
     desktopS,
     neutral4,
     useAccountName,
+    Tooltip,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { Col, Row, Skeleton, Space, Tooltip } from 'antd';
+import { Col, Row, Skeleton, Space } from 'antd';
 import { useStore } from 'effector-react';
 
 import {

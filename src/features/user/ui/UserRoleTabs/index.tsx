@@ -1,13 +1,14 @@
 import { FC } from 'react';
 import { useStore, useGate } from 'effector-react';
 import { useTranslation } from 'react-i18next';
-import { Empty, Space, Tooltip } from 'antd';
+import { Empty, Space } from 'antd';
 import { ShareAltOutlined } from '@ant-design/icons';
 import {
     Button,
     desktopS,
     Tabs,
     Title,
+    Tooltip,
     useMediaQuery,
     useUserRoles,
 } from 'shared';
