@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const CracoLessPlugin = require('craco-less');
-const theme = require('./src/theme');
+const { darkTheme } = require('@ant-design/dark-theme');
+const customTheme = require('./src/theme');
 
 function devServerConfig(config) {
     return {
@@ -35,7 +36,7 @@ module.exports = {
             options: {
                 lessLoaderOptions: {
                     lessOptions: {
-                        modifyVars: theme,
+                        modifyVars: { ...darkTheme, ...customTheme },
                         javascriptEnabled: true,
                     },
                 },
