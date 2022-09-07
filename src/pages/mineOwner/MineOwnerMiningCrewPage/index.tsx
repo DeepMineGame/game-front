@@ -1,16 +1,24 @@
-import { PageWithTabs, Tab, useAccountName } from 'shared';
-import React from 'react';
-
+import { PageWithTabs, useAccountName } from 'shared';
 import { MineOwnerCrew } from 'features';
+import { FC } from 'react';
 
-export const MineOwnerMiningCrewPage = () => {
+export const MineOwnerMiningCrewPage: FC = () => {
     const accountName = useAccountName();
-    const tabs: Tab[] = [
-        {
-            id: 0,
-            component: accountName ? MineOwnerCrew : () => <div>No data</div>,
-            name: 'Mine crew',
-        },
-    ];
-    return <PageWithTabs title="MINE CREW" tabs={tabs} />;
+
+    return (
+        <PageWithTabs
+            title="MINE CREW"
+            tabs={[
+                {
+                    key: 0,
+                    children: accountName ? (
+                        <MineOwnerCrew />
+                    ) : (
+                        <div>No data</div>
+                    ),
+                    tab: 'Mine crew',
+                },
+            ]}
+        />
+    );
 };

@@ -115,4 +115,5 @@ module.exports = {
     '@outline-width': '0',
     '@primary-color-outline': 'rgba(24, 144, 255, 0.5)',
     '@theme': 'variable',
+    '@border-color-split': 'transparent',
 };
