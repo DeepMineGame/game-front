@@ -1,8 +1,8 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Col, Row } from 'antd';
 import { useStore } from 'effector-react';
 import { desktopS, Tabs, useMediaQuery } from 'shared';
+import { FC } from 'react';
 import {
     contractorsStore,
     rolesStore,
@@ -53,7 +53,7 @@ for (let i = 4; i < 33; i++) {
     });
 }
 
-const UserActions = () => {
+const UserActions: FC = () => {
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
 
@@ -71,25 +71,29 @@ const UserActions = () => {
             <Col span={24}>
                 <Tabs
                     tabPosition={isDesktop ? 'right' : 'top'}
-                    config={[
+                    items={[
                         {
-                            tabName: t('roles.citizen'),
-                            tabContent: <ActionsTable data={data} />,
+                            tab: t('roles.citizen'),
+                            key: UserRoles.citizen,
+                            children: <ActionsTable data={data} />,
                         },
                         {
-                            tabName: t('roles.landlord'),
+                            tab: t('roles.landlord'),
+                            key: UserRoles.landlord,
                             disabled: !hasLandlordRole,
-                            tabContent: <ActionsTable data={data} />,
+                            children: <ActionsTable data={data} />,
                         },
                         {
-                            tabName: t('roles.mineOwner'),
+                            tab: t('roles.mineOwner'),
+                            key: UserRoles.mine_owner,
                             disabled: !hasMineOwnerRole,
-                            tabContent: <ActionsTable data={data} />,
+                            children: <ActionsTable data={data} />,
                         },
                         {
-                            tabName: t('roles.contractor'),
+                            tab: t('roles.contractor'),
+                            key: UserRoles.contractor,
                             disabled: Boolean(!contractors?.length),
-                            tabContent: contractors && (
+                            children: contractors && (
                                 <ActionsTable data={data} />
                             ),
                         },

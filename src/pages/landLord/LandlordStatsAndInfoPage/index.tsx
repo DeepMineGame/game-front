@@ -1,10 +1,10 @@
 import { PageWithTabs, useAccountName } from 'shared';
-import React, { memo } from 'react';
+import { FC } from 'react';
 import { AreaStats } from 'features';
 import { Skeleton } from 'antd';
 import { useTranslation } from 'react-i18next';
 
-export const LandlordStatsAndInfoPage = () => {
+export const LandlordStatsAndInfoPage: FC = () => {
     const accountName = useAccountName();
     const { t } = useTranslation();
 
@@ -12,11 +12,13 @@ export const LandlordStatsAndInfoPage = () => {
         <PageWithTabs
             tabs={[
                 {
-                    id: 1,
-                    name: t('components.common.areaInfo'),
-                    component: accountName
-                        ? memo(() => <AreaStats accountName={accountName} />)
-                        : Skeleton,
+                    key: 1,
+                    tab: t('components.common.areaInfo'),
+                    children: accountName ? (
+                        <AreaStats accountName={accountName} />
+                    ) : (
+                        <Skeleton />
+                    ),
                 },
             ]}
         />

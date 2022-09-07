@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useStore, useGate } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { Empty, Space, Tooltip } from 'antd';
@@ -11,7 +11,11 @@ import {
     useMediaQuery,
     useUserRoles,
 } from 'shared';
-import { rolesStore, smartContractUserStore } from 'entities/smartcontract';
+import {
+    rolesStore,
+    smartContractUserStore,
+    UserRoles,
+} from 'entities/smartcontract';
 import { AvatarWithLvl, UserGate } from 'entities/user';
 
 import { CitizenInfo } from '../../citizen';
@@ -60,10 +64,11 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
     return accountName ? (
         <Tabs
             tabPosition={isDesktop ? 'right' : 'top'}
-            config={[
+            items={[
                 {
-                    tabName: t('roles.citizen'),
-                    tabContent: (
+                    tab: t('roles.citizen'),
+                    key: UserRoles.citizen,
+                    children: (
                         <>
                             {userLine}
                             <CitizenInfo accountName={accountName} />
@@ -71,9 +76,10 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
                     ),
                 },
                 {
-                    tabName: t('roles.landlord'),
+                    tab: t('roles.landlord'),
+                    key: UserRoles.landlord,
                     disabled: !userRoles.isLandlord,
-                    tabContent: (
+                    children: (
                         <>
                             {userLine}
                             <LandlordInfo />
@@ -81,9 +87,10 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
                     ),
                 },
                 {
-                    tabName: t('roles.mineOwner'),
+                    tab: t('roles.mineOwner'),
+                    key: UserRoles.mine_owner,
                     disabled: !userRoles.isMineOwner,
-                    tabContent: (
+                    children: (
                         <>
                             {userLine}
                             <MineOwnerInfo accountName={accountName} />
@@ -91,9 +98,10 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
                     ),
                 },
                 {
-                    tabName: t('roles.contractor'),
+                    tab: t('roles.contractor'),
+                    key: UserRoles.contractor,
                     disabled: !userRoles.isContractor,
-                    tabContent: (
+                    children: (
                         <>
                             {userLine}
                             <Contractor accountName={accountName} />

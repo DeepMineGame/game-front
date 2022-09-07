@@ -7,3 +7,4 @@ export * from './useReloadPage';
 export * from './useUserRole';
 export * from './useTick';
 export * from './useQuery';
+export * from './useTabs';

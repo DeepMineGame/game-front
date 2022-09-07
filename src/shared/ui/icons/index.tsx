@@ -1,5 +1,5 @@
 export { ReactComponent as DeepMineLogo } from './deepMinelogo.svg';
-export { ReactComponent as DrillBit } from './drillBit.svg';
+export { ReactComponent as DrillBitOutlined } from './drill-bit-outlined.svg';
 export { ReactComponent as AvatarIcon } from './avatar.svg';
 export { ReactComponent as Logo } from './logo.svg';
 export { ReactComponent as EnergyIcon } from './energy.svg';
@@ -11,3 +11,4 @@ export { ReactComponent as WaxCoinIcon } from './waxCoin.svg';
 export { ReactComponent as Petobot } from './petobot.svg';
 export { ReactComponent as UserSwitch } from './user-switch.svg';
 export { ReactComponent as DiscordIcon } from './discordIcon.svg';
+export { ReactComponent as MineOutlined } from './mine-outlined.svg';

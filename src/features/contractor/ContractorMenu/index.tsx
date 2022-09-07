@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Space } from 'antd';
 import { Menu } from 'shared';
 import { ContractorMenuItems, Props } from './types';

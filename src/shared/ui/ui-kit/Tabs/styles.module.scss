@@ -1,25 +1,15 @@
-@import "src/shared";
+@import 'src/shared';
 
-.tabs {
-  :global {
-    .ant-tabs-ink-bar {
-      background: $color-primary-primary-6;
-    }
-
-    .ant-tabs-content-holder {
-      border: none;
-    }
-
+:global {
     .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
-      color: $color-primary-primary-6 !important;
+        font-weight: 600;
     }
 
-    .ant-tabs-tab {
-      color: $color-neutral-neutral-9;
+    .ant-tabs-top > .ant-tabs-nav::before {
+        border-bottom: 0;
     }
 
-    .ant-tabs-tab-disabled {
-      color: $color-neutral-neutral-6;
+    .ant-tabs-right > .ant-tabs-content-holder {
+        border-right: 0;
     }
-  }
 }
