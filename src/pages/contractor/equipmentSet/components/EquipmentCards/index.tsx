@@ -26,9 +26,6 @@ export const EquipmentCards = ({
                     <Card
                         templateId={inventory.template_id}
                         key={name}
-                        initial={10}
-                        current={3}
-                        remained={7}
                         buttonText={
                             inventory.in_use
                                 ? t('pages.equipmentSet.main.remove')

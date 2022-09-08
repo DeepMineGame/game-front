@@ -4,7 +4,12 @@ import { ModalProps, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { AssetDataType, getAtomicAssetsDataById } from 'entities/atomicassets';
 import { UserInventoryType } from 'entities/smartcontract';
-import { ActionModal, Line, NftProgressBar } from 'shared/ui/ui-kit';
+import {
+    ActionModal,
+    DepreciationProgressBar,
+    Line,
+    NftProgressBar,
+} from 'shared/ui/ui-kit';
 import styles from './styles.module.scss';
 
 type InventoryCardModalProps = ModalProps & {
@@ -128,11 +133,11 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                 {t('pages.equipmentSet.cardModal.depreciation')}
                             </div>
                             <div className={styles.value}>
-                                <NftProgressBar
-                                    initial={1}
-                                    current={1}
-                                    remained={20}
-                                    rightContent={<DMECoinIcon />}
+                                <DepreciationProgressBar
+                                    totalMining={25}
+                                    completedMining={4}
+                                    serviceLife={13}
+                                    totalServiceLife={20}
                                 />
                             </div>
                             <div

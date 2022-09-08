@@ -1,7 +1,7 @@
 import { Progress } from 'antd';
 import React from 'react';
 import cn from 'classnames';
-import styles from './styles.module.scss';
+import styles from '../styles.module.scss';
 
 function getPercentage(value: number, total: number) {
     return (value / total) * 100;
