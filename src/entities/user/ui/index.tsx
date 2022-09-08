@@ -19,12 +19,14 @@ import { smartContractUserStore } from 'entities/smartcontract';
 import { locationMap } from '../../smartcontract';
 import { balancesStore, UserGate } from '../model';
 import styles from './styles.module.scss';
-import { AvatarWithLvl } from './components/Avatar';
+import { AvatarWithLvl } from './components/AvatarWithLvl';
 import { SettingMenu } from './components/SettingMenu';
 
 type Props = {
     user: string;
 };
+
+export * from './components/UserLocator';
 
 export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
     useGate(UserGate, { searchParam: user });

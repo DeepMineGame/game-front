@@ -1,28 +1,32 @@
 import { FC } from 'react';
-import { Header, Title } from 'shared';
+import { Header, Title, useUserLocation } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import { hive, landLord, serviceMarket, wasteland } from 'app/router/paths';
 import { useTranslation } from 'react-i18next';
 import { Space } from 'antd';
 import cn from 'classnames';
+import { UserLocator } from 'entities/user';
 import styles from './styles.module.scss';
 
 export const CityPage: FC = () => {
     const navigate = useNavigate();
     const { t } = useTranslation();
+    const isUserLocation = useUserLocation();
+
     return (
         <div className={styles.homeScreen}>
             <Header />
-            <div
-                onClick={() => navigate(wasteland)}
-                className={styles.mineOwner}
-            >
+            <div onClick={() => navigate(wasteland)} className={styles.mine}>
                 <Title level={5} className={styles.mineOwnerTitle}>
                     {t('pages.home.mineOwnerCabin')}
                 </Title>
+                {(isUserLocation.mine || isUserLocation.mineDeck) && (
+                    <UserLocator />
+                )}
             </div>
             <Space>
                 <div className={styles.hive} onClick={() => navigate(hive)}>
+                    {isUserLocation.hive && <UserLocator />}
                     <Title className={styles.enterLink} level={5}>
                         {t('pages.home.hive')}
                     </Title>
@@ -31,6 +35,7 @@ export const CityPage: FC = () => {
                     className={styles.landlordLounge}
                     onClick={() => navigate(landLord)}
                 >
+                    {isUserLocation.landlordReception && <UserLocator />}
                     <Title className={styles.enterLink} level={5}>
                         {t('pages.home.landlordCabin')}
                     </Title>
@@ -54,6 +59,7 @@ export const CityPage: FC = () => {
                 className={styles.engineer}
                 onClick={() => navigate('/TODO_LINK_TO_ENGINEER')}
             >
+                {isUserLocation.engineersWorkshop && <UserLocator />}
                 <Title level={5} className={styles.enterLink}>
                     {t('pages.home.engineers')}
                 </Title>
