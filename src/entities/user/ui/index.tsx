@@ -2,10 +2,8 @@ import { FC, useState } from 'react';
 import { Space } from 'antd';
 import {
     Button,
-    Divider,
     Drawer,
     KeyValueTable,
-    neutral3Color,
     Text,
     Title,
     WaxCoinIcon,
@@ -79,44 +77,44 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                 visible={visible}
                 closable={false}
                 width={292}
-                bodyStyle={{
-                    background: neutral3Color,
-                    padding: 0,
-                    position: 'relative',
-                }}
+                title={
+                    <>
+                        <Space>
+                            {avatar}
+                            <div className={styles.userMenuHeader}>
+                                <Title
+                                    className={styles.name}
+                                    level={5}
+                                    fontFamily="orbitron"
+                                >
+                                    {smartContractUserData?.owner}
+                                </Title>
+                                <div>
+                                    {t('components.common.level')}{' '}
+                                    {smartContractUserData?.level}
+                                </div>
+                                <div>
+                                    {t('components.common.exp')}{' '}
+                                    {smartContractUserData?.experience}
+                                </div>
+                            </div>
+                        </Space>
+                        <div className={styles.attrs}>
+                            {user}
+                            {waxBalance && (
+                                <Title
+                                    level={5}
+                                    className={styles.dataUnitTitle}
+                                >
+                                    <Icon component={WaxCoinIcon} />{' '}
+                                    {waxBalance}
+                                </Title>
+                            )}
+                        </div>
+                    </>
+                }
             >
                 <SettingMenu />
-                <div className={styles.item}>
-                    <Space>
-                        {avatar}
-                        <div className={styles.userMenuHeader}>
-                            <Title
-                                className={styles.name}
-                                level={5}
-                                fontFamily="orbitron"
-                            >
-                                {smartContractUserData?.owner}
-                            </Title>
-                            <div>
-                                {t('components.common.level')}{' '}
-                                {smartContractUserData?.level}
-                            </div>
-                            <div>
-                                {t('components.common.exp')}{' '}
-                                {smartContractUserData?.experience}
-                            </div>
-                        </div>
-                    </Space>
-                    <div className={styles.attrs}>
-                        {user && <div>{user}</div>}
-                        {waxBalance && (
-                            <Title level={5} className={styles.dataUnitTitle}>
-                                <Icon component={WaxCoinIcon} /> {waxBalance}
-                            </Title>
-                        )}
-                    </div>
-                </div>
-                <Divider />
                 <div className={styles.grid}>
                     <div>
                         <div>{t('kit.timer.energy')}</div>
@@ -170,11 +168,11 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                 </div>
                 <div className={styles.buttonWrapper}>
                     <Button
-                        className={styles.button}
                         ghost
+                        block
+                        type="default"
                         icon={<DatabaseOutlined />}
                         onClick={() => navigate(warehouse)}
-                        size="large"
                     >
                         {t('components.common.inventory')}
                     </Button>

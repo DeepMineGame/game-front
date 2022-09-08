@@ -1,5 +1,7 @@
-@import "src/shared";
+:global(.ant-drawer-header) {
+    border-bottom: 0;
+}
 
-.drawer {
-  background: $color-neutral-neutral-3;
+:global(.ant-divider-horizontal) {
+    margin: 16px 0;
 }

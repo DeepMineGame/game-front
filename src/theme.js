@@ -1,19 +1,6 @@
 // see default theme - https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
 
 module.exports = {
-    // base
-    '@primary-color': '#F5C913',
-    '@height-base': '32px',
-    '@height-lg': '40px',
-    '@height-sm': '24px',
-    '@component-background': '#141414',
-    '@border-color-base': '#434343',
-    '@text-color': '#DBDBDB',
-    '@disabled-bg': '#262626',
-    '@disabled-color': '#5A5A5A',
-    '@error-color': '#D32029',
-    '@item-hover-bg': '#3D3100',
-
     // button
     '@btn-danger-bg': '#A61D24',
     '@btn-danger-color': '#FFFFFF',
@@ -23,6 +10,9 @@ module.exports = {
     '@btn-default-color': '#DBDBDB',
     '@btn-default-bg': 'transparent',
     '@btn-default-border': '#434343',
+
+    '@btn-default-ghost-color': '#FFFFFF',
+    '@btn-default-ghost-border': '#434343',
 
     '@btn-text-hover-bg': '#1D1D1D',
 
@@ -59,4 +49,22 @@ module.exports = {
 
     // divider
     '@divider-color': '#434343',
+
+    // drawer
+    '@drawer-header-padding': '12px 16px 0 16px',
+    '@drawer-body-padding': '0',
+    '@drawer-bg': '#262626',
+
+    // base
+    '@primary-color': '#F5C913',
+    '@height-base': '32px',
+    '@height-lg': '40px',
+    '@height-sm': '24px',
+    '@component-background': '#141414',
+    '@border-color-base': '#434343',
+    '@text-color': '#DBDBDB',
+    '@disabled-bg': '#262626',
+    '@disabled-color': '#5A5A5A',
+    '@error-color': '#D32029',
+    '@item-hover-bg': '#3D3100',
 };

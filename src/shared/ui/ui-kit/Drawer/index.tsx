@@ -1,16 +1,11 @@
-import { Drawer as DrawerA, DrawerProps } from 'antd';
-import React, { FC } from 'react';
-import { neutral3Color } from '../../variables';
+import { Drawer as DrawerAnt, DrawerProps } from 'antd';
+import { FC } from 'react';
+import { Divider } from '../Divider';
+import './styles.module.scss';
 
-const drawerBodyStyle = { background: neutral3Color };
-const contentWrapperStyle = { background: neutral3Color };
-
-export const Drawer: FC<DrawerProps> = (props) => {
-    return (
-        <DrawerA
-            contentWrapperStyle={contentWrapperStyle}
-            bodyStyle={drawerBodyStyle}
-            {...props}
-        />
-    );
-};
+export const Drawer: FC<DrawerProps> = ({ children, ...props }) => (
+    <DrawerAnt {...props}>
+        {props.title && <Divider />}
+        {children}
+    </DrawerAnt>
+);
