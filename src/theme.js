@@ -73,4 +73,11 @@ module.exports = {
 
     // badge
     '@badge-text-color': '#FFFFFF',
+
+    // segmented
+    '@segmented-bg': '#303030',
+    '@segmented-selected-bg': '#1D1D1D',
+    '@segmented-label-color': '#DBDBDB',
+    '@segmented-hover-bg': '#303030',
+    '@segmented-label-hover-color': '#DBDBDB',
 };

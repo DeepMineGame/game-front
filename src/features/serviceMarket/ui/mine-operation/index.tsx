@@ -1,10 +1,8 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { PlusOutlined } from '@ant-design/icons';
 import { useEvent, useGate, useStore } from 'effector-react';
 import { Empty, Skeleton } from 'antd';
-
 import { Button, Segmented } from 'shared';
 import { createOrder } from 'app/router/paths';
 import { MiningContractsTable } from '../mining-contracts/MiningContractsTable';
