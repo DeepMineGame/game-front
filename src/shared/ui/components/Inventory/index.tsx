@@ -115,9 +115,6 @@ export const Inventory: FC<InventoryProps> = ({
                                 className={styles.card}
                                 onClick={handleCardSelect(card)}
                                 key={card.asset_id}
-                                initial={10}
-                                current={3}
-                                remained={7}
                                 buttonText="Details"
                                 onButtonClick={handleDetailsClick(card)}
                             />

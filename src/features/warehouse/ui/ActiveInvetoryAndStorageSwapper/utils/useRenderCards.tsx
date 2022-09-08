@@ -17,9 +17,6 @@ export function useRenderCards() {
                     templateId={card.template_id}
                     className={styles.card}
                     key={card.asset_id}
-                    initial={10}
-                    current={3}
-                    remained={7}
                     buttonText="Details"
                     onButtonClick={() =>
                         navigate(`/inventory/${card.asset_id}`)
