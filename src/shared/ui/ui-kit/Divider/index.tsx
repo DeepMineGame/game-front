@@ -1,7 +1,4 @@
-import { Divider as DividerA } from 'antd';
-import React from 'react';
-import styles from './styles.module.scss';
+import { Divider as DividerAnt, DividerProps } from 'antd';
+import { FC } from 'react';
 
-export const Divider = () => {
-    return <DividerA className={styles.divider} />;
-};
+export const Divider: FC<DividerProps> = (props) => <DividerAnt {...props} />;

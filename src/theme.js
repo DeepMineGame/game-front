@@ -56,4 +56,7 @@ module.exports = {
 
     // select
     '@select-item-selected-bg': '#3D3100',
+
+    // divider
+    '@divider-color': '#434343',
 };
