@@ -1,4 +1,5 @@
 import {
+    Badge,
     Button,
     greenGreen6,
     Loader,
@@ -10,7 +11,7 @@ import {
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { FC } from 'react';
-import { Badge, Space } from 'antd';
+import { Space } from 'antd';
 import { useGate, useStore } from 'effector-react';
 import { Travel, useSmartContractAction } from 'features';
 import { FrownOutlined } from '@ant-design/icons';

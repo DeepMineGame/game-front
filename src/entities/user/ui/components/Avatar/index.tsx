@@ -1,6 +1,5 @@
-import { Avatar, Badge, Progress } from 'antd';
-import React from 'react';
-import { AvatarIcon, neutral3Color, primary6, Text } from 'shared';
+import { Avatar, Progress } from 'antd';
+import { AvatarIcon, Badge, neutral3Color, primary6, Text } from 'shared';
 import { useStore } from 'effector-react';
 import { UserDto } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';

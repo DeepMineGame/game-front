@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Badge } from 'antd';
 import styles from '../styles.module.scss';
 import { Status } from '..';
+import { Badge } from '../../Badge';
 
 type Props = {
     status?: Status;

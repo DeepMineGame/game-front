@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Badge } from 'antd';
 import type { ColumnsType } from 'antd/lib/table';
 import { useTranslation } from 'react-i18next';
 import {
@@ -9,6 +8,7 @@ import {
     green6,
     gold6,
     neutral3Color,
+    Badge,
 } from 'shared';
 import { MineState } from 'entities/smartcontract';
 import { Activity, MineCrewDataType } from '../../types';

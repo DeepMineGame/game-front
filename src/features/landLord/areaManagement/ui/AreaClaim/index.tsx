@@ -1,7 +1,6 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
-import { Badge } from 'antd';
 
 import {
     Button,
@@ -11,6 +10,7 @@ import {
     sunsetOrange6,
     ExclamationModal,
     useReloadPage,
+    Badge,
 } from 'shared';
 import { useSmartContractAction } from 'features/hooks';
 import { engageArea, unEngageArea, claimArea } from 'entities/smartcontract';

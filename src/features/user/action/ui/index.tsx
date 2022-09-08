@@ -1,7 +1,6 @@
-import React, { FC } from 'react';
-import { Badge } from 'antd';
+import { FC } from 'react';
 import { useGate, useStore } from 'effector-react';
-import { getTimeLeftFromUtc, isUtcDateExpired, useTick } from 'shared';
+import { Badge, getTimeLeftFromUtc, isUtcDateExpired, useTick } from 'shared';
 import { actionsStore, ActionState, UserDto } from 'entities/smartcontract';
 import { UserActionGate } from '../model';
 import { useActionTitle } from '../hooks/useActionTitle';

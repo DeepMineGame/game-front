@@ -70,4 +70,7 @@ module.exports = {
 
     // steps
     '@process-tail-color': '#303030',
+
+    // badge
+    '@badge-text-color': '#FFFFFF',
 };

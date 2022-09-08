@@ -1,8 +1,8 @@
-import React, { FC, memo } from 'react';
-import { Badge } from 'antd';
+import { FC, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 import { currentMineStore } from 'features';
+import { Badge } from 'shared';
 import { MineState } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 

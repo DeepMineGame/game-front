@@ -1,8 +1,16 @@
-import React, { FC } from 'react';
-import { Tag, Badge } from 'antd';
+import { FC, Key } from 'react';
+import { Tag } from 'antd';
 import type { ColumnsType } from 'antd/lib/table';
 import { useTranslation } from 'react-i18next';
-import { Table, DiscordIcon, neutral2, neutral1, green6, gold6 } from 'shared';
+import {
+    Table,
+    DiscordIcon,
+    neutral2,
+    neutral1,
+    green6,
+    gold6,
+    Badge,
+} from 'shared';
 import styles from './styles.module.scss';
 
 enum Status {
@@ -18,7 +26,7 @@ enum Activity {
 }
 
 export interface MineCrewDataType {
-    key: React.Key;
+    key: Key;
     discord: string;
     contractor: string;
     status: Status;
