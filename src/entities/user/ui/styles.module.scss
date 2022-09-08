@@ -67,12 +67,8 @@
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(138px, 1fr));
   gap: 12px 0;
-  grid-template-areas:
-    ". ."
-    ". .";
   color: $color-neutral-neutral-7;
   padding-left: 16px;
   margin-bottom: 16px;
