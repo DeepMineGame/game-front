@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { DropdownProps, Dropdown as DropdownAnt, Menu } from 'antd';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import styles from './styles.module.scss';

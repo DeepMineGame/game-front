@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Steps, useAccountName } from 'shared';
 import { Form } from 'antd';
 import { useTranslation } from 'react-i18next';
@@ -54,7 +54,6 @@ export const CreateOrderForm = () => {
             }}
         >
             <Steps
-                className={styles.steps}
                 direction="vertical"
                 current={currentStep}
                 steps={[
@@ -65,16 +64,19 @@ export const CreateOrderForm = () => {
                         description:
                             currentStep === 0
                                 ? t('components.common.inProgress')
-                                : '',
+                                : t('components.common.completed'),
                     },
                     {
                         title: t(
                             'pages.serviceMarket.createOrder.generalCondition'
                         ),
-                        description:
-                            currentStep === 1
-                                ? t('components.common.inProgress')
-                                : '',
+                        description: (() => {
+                            if (currentStep === 1)
+                                return t('components.common.inProgress');
+                            if (currentStep > 1)
+                                return t('components.common.completed');
+                            return '';
+                        })(),
                     },
                     {
                         title: t('pages.serviceMarket.createOrder.terms'),
