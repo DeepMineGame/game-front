@@ -7,6 +7,7 @@ import {
     getImagePath,
     TemplateIdType,
     DepreciationProgressBar,
+    neutral4,
 } from 'shared';
 import { ProgressProps } from '../ProgressBar/NftProgressBar';
 import styles from './styles.module.scss';
@@ -43,7 +44,6 @@ export const Card: FC<Props> = ({
             <div>120/9999</div>
         </div>
     );
-    const neutral4 = '#303030';
 
     return (
         <Tooltip
