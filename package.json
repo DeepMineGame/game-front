@@ -6,6 +6,7 @@
     "@ant-design/icons": "^4.7.0",
     "@ant-design/plots": "^1.0.9",
     "@eosdacio/ual-wax": "^1.5.1",
+    "@rive-app/react-canvas": "^3.0.23",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
     "@types/jest": "^27.5.2",

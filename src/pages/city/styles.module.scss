@@ -33,7 +33,7 @@
   margin-top: 100%;
 }
 
-.mineOwner {
+.mine {
   height: 85vh;
   width: 15vw;
   float: right;
@@ -86,6 +86,7 @@
   background-position: center;
   background-size: contain;
   cursor: pointer;
+  position: relative;
 
   &:hover {
     filter: $glow;
@@ -95,7 +96,6 @@
     filter: initial;
     background-position: left;
   }
-
 }
 
 .serviceMarketTitle {
