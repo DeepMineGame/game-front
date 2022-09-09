@@ -54,6 +54,7 @@ module.exports = {
     '@drawer-header-padding': '12px 16px 0 16px',
     '@drawer-body-padding': '0',
     '@drawer-bg': '#262626',
+    '@drawer-title-font-size': 'inherit',
 
     // steps
     '@process-tail-color': '#303030',

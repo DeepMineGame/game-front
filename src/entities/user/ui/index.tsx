@@ -85,12 +85,12 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                                 <Title level={5}>
                                     {smartContractUserData?.owner}
                                 </Title>
-                                <Text variant="body2">
+                                <Text variant="body1">
                                     {`${t('components.common.level')} ${
                                         smartContractUserData?.level
                                     }`}
                                 </Text>
-                                <Text variant="body2">
+                                <Text variant="body1">
                                     {`${t('components.common.exp')} ${
                                         smartContractUserData?.experience
                                     }`}
@@ -99,9 +99,9 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                         </Space>
 
                         <Row justify="space-between">
-                            <Text variant="body1">{user}</Text>
+                            <Text>{user}</Text>
                             {waxBalance && (
-                                <Text variant="body1" strong>
+                                <Text strong>
                                     <Icon component={WaxCoinIcon} />
                                     {` ${waxBalance}`}
                                 </Text>
@@ -113,41 +113,37 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                 <SettingMenu />
                 <div className={styles.grid}>
                     <div>
-                        <Text variant="body2">{t('kit.timer.energy')}</Text>
+                        <Text variant="body1">{t('kit.timer.energy')}</Text>
                         <div>
-                            <Text variant="body1" strong>
+                            <Text strong>
                                 {smartContractUserData?.stamina || '-'}
                             </Text>
                         </div>
                     </div>
                     <div>
-                        <Text variant="body2">
+                        <Text variant="body1">
                             {t('components.common.reputation')}
                         </Text>
                         <div>
-                            <Text variant="body1" strong>
+                            <Text strong>
                                 {smartContractUserData?.reputation || '-'}
                             </Text>
                         </div>
                     </div>
                     <div>
-                        <Text variant="body2">
+                        <Text variant="body1">
                             {t('components.common.button.dme')}
                         </Text>
                         <div>
-                            <Text variant="body1" strong>
-                                {dmeBalance}
-                            </Text>
+                            <Text strong>{dmeBalance}</Text>
                         </div>
                     </div>
                     <div>
-                        <Text variant="body2">
+                        <Text variant="body1">
                             {t('components.common.button.dmp')}
                         </Text>
                         <div>
-                            <Text variant="body1" strong>
-                                -
-                            </Text>
+                            <Text strong>-</Text>
                         </div>
                     </div>
                 </div>
