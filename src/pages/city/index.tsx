@@ -17,9 +17,9 @@ export const CityPage: FC = () => {
         <div className={styles.homeScreen}>
             <Header />
             <div onClick={() => navigate(wasteland)} className={styles.mine}>
-                <Title level={5} className={styles.mineOwnerTitle}>
-                    {t('pages.home.mineOwnerCabin')}
-                </Title>
+                <div className={styles.mineOwnerTitle}>
+                    <Title level={5}>{t('pages.home.mineOwnerCabin')}</Title>
+                </div>
                 {(isUserLocation.mine || isUserLocation.mineDeck) && (
                     <UserLocator />
                 )}
@@ -27,32 +27,33 @@ export const CityPage: FC = () => {
             <Space>
                 <div className={styles.hive} onClick={() => navigate(hive)}>
                     {isUserLocation.hive && <UserLocator />}
-                    <Title className={styles.enterLink} level={5}>
-                        {t('pages.home.hive')}
-                    </Title>
+                    <div className={styles.enterLink}>
+                        <Title level={5}>{t('pages.home.hive')}</Title>
+                    </div>
                 </div>
                 <div
                     className={styles.landlordLounge}
                     onClick={() => navigate(landLord)}
                 >
                     {isUserLocation.landlordReception && <UserLocator />}
-                    <Title className={styles.enterLink} level={5}>
-                        {t('pages.home.landlordCabin')}
-                    </Title>
+                    <div className={styles.enterLink}>
+                        <Title level={5}>{t('pages.home.landlordCabin')}</Title>
+                    </div>
                 </div>
                 <div
                     className={styles.serviceMarket}
                     onClick={() => navigate(serviceMarket)}
                 >
-                    <Title
-                        level={5}
+                    <div
                         className={cn(
                             styles.enterLink,
                             styles.serviceMarketTitle
                         )}
                     >
-                        {t('pages.serviceMarket.serviceMarket')}
-                    </Title>
+                        <Title level={5}>
+                            {t('pages.serviceMarket.serviceMarket')}
+                        </Title>
+                    </div>
                 </div>
             </Space>
             <div
@@ -60,9 +61,9 @@ export const CityPage: FC = () => {
                 onClick={() => navigate('/TODO_LINK_TO_ENGINEER')}
             >
                 {isUserLocation.engineersWorkshop && <UserLocator />}
-                <Title level={5} className={styles.enterLink}>
-                    {t('pages.home.engineers')}
-                </Title>
+                <div className={styles.enterLink}>
+                    <Title level={5}>{t('pages.home.engineers')}</Title>
+                </div>
             </div>
         </div>
     );

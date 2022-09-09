@@ -55,19 +55,6 @@ module.exports = {
     '@drawer-body-padding': '0',
     '@drawer-bg': '#262626',
 
-    // base
-    '@primary-color': '#F5C913',
-    '@height-base': '32px',
-    '@height-lg': '40px',
-    '@height-sm': '24px',
-    '@component-background': '#141414',
-    '@border-color-base': '#434343',
-    '@text-color': '#DBDBDB',
-    '@disabled-bg': '#262626',
-    '@disabled-color': '#5A5A5A',
-    '@error-color': '#D32029',
-    '@item-hover-bg': '#3D3100',
-
     // steps
     '@process-tail-color': '#303030',
 
@@ -80,4 +67,30 @@ module.exports = {
     '@segmented-label-color': '#DBDBDB',
     '@segmented-hover-bg': '#303030',
     '@segmented-label-hover-color': '#DBDBDB',
+
+    // typography
+    '@typography-title-margin-top': '0',
+    '@typography-title-margin-bottom': '0',
+    '@heading-1-size': '46px',
+    '@heading-2-size': '24px',
+    '@heading-3-size': '20px',
+    '@heading-4-size': '16px',
+    '@heading-5-size': '12px',
+    '@heading-color': '#FFFFFF',
+    '@font-family': '"Bai Jamjuree", sans-serif',
+
+    // should be in the end
+    // base
+    '@primary-color': '#F5C913',
+    '@height-base': '32px',
+    '@height-lg': '40px',
+    '@height-sm': '24px',
+    '@component-background': '#141414',
+    '@border-color-base': '#434343',
+    '@text-color': '#DBDBDB',
+    '@text-color-secondary': '#FFFFFF',
+    '@disabled-bg': '#262626',
+    '@disabled-color': '#5A5A5A',
+    '@error-color': '#D32029',
+    '@item-hover-bg': '#3D3100',
 };

@@ -1,7 +1,6 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
-
 import { KeyValueTable, Title } from 'shared';
 import { AreaRarity } from 'entities/smartcontract';
 import { areaForMine, UserMineGate, userMineStore } from '../../userMineModel';
@@ -62,11 +61,7 @@ export const MineAreaInfo: FC<{ accountName: string }> = ({ accountName }) => {
         <div className={styles.mineAreaInfo}>
             <div className={styles.info}>
                 <div className={styles.initialInfo}>
-                    <Title
-                        fontFamily="orbitron"
-                        level={5}
-                        className={styles.title}
-                    >
+                    <Title level={5}>
                         {t('components.common.mine.mineInfo')}
                     </Title>
                     <KeyValueTable
@@ -81,13 +76,7 @@ export const MineAreaInfo: FC<{ accountName: string }> = ({ accountName }) => {
             </div>
             <div className={styles.info}>
                 <div className={styles.initialInfo}>
-                    <Title
-                        fontFamily="orbitron"
-                        level={5}
-                        className={styles.title}
-                    >
-                        {t('components.common.areaInfo')}
-                    </Title>
+                    <Title level={5}>{t('components.common.areaInfo')}</Title>
                     <KeyValueTable
                         items={areaInfoData}
                         coloredItems={Object.keys(areaInfoData).slice(0, 2)}

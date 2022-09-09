@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 
-import { Button, desktopS, useMediaQuery } from 'shared';
+import { Button, desktopS, Title, useMediaQuery } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import { warehouse } from 'app/router/paths';
 import { ATOMICHUB_URL } from 'app';
@@ -20,9 +20,9 @@ export const NoArea: FC<Props> = ({ className }) => {
 
     return (
         <div className={cn(styles.noArea, className)}>
-            <div className={cn(commonStyles.title, styles.title)}>
+            <Title level={3} className={cn(commonStyles.title, styles.title)}>
                 {t('pages.landLord.cabin.noAreaTitle')}
-            </div>
+            </Title>
             {isDesktop && (
                 <div
                     className={cn(commonStyles.description, styles.description)}

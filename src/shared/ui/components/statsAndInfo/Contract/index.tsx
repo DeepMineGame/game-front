@@ -14,7 +14,7 @@ export const Contract: FC<Props> = ({ contract }) => {
     return (
         <>
             <div>
-                <Title level={5} fontFamily="orbitron">
+                <Title level={5}>
                     {t('components.common.statsAndInfo.contractInfo')}
                 </Title>
             </div>

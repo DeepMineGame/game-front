@@ -27,7 +27,7 @@ export const Equipment = () => {
         <>
             <Row gutter={gutter}>
                 <Col sm={17} xs={24}>
-                    <Title fontFamily="orbitron" level={subTitleLevel}>
+                    <Title level={subTitleLevel}>
                         {t('pages.mining.myEquipment')}
                     </Title>
                 </Col>

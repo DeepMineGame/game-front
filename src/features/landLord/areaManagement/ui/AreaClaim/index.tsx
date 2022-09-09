@@ -60,13 +60,7 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
         <div className={styles.areaClaim}>
             <div className={styles.claimContainer}>
                 <div className={styles.statusContainer}>
-                    <Title
-                        fontFamily="orbitron"
-                        level={4}
-                        className={styles.title}
-                    >
-                        {t('components.common.area')}
-                    </Title>
+                    <Title level={4}>{t('components.common.area')}</Title>
                     <Badge
                         className={styles.status}
                         color={isActive ? greenGreen6 : sunsetOrange6}

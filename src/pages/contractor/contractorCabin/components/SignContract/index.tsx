@@ -1,10 +1,10 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
-import { Button } from 'shared';
+import { Button, Title } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import { createOrder, serviceMarket } from 'app/router/paths';
 import { ServiceMarketTabIds } from 'app/router/constants';
+import { FC } from 'react';
 import {
     ContractRole,
     ContractType,
@@ -13,15 +13,18 @@ import {
 import contractorStyles from '../../styles.module.scss';
 import styles from './styles.module.scss';
 
-export const SignContract = () => {
+export const SignContract: FC = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
 
     return (
         <div className={styles.container}>
-            <div className={cn(contractorStyles.title, styles.title)}>
+            <Title
+                level={3}
+                className={cn(contractorStyles.title, styles.title)}
+            >
                 {t('pages.contractor.signingContract.title')}
-            </div>
+            </Title>
             <div
                 className={cn(contractorStyles.description, styles.description)}
             >

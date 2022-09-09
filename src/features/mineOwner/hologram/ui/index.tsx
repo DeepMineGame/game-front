@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { desktopS, Loader, Title, useMediaQuery } from 'shared';
 import { useGate, useStore } from 'effector-react';
-
 import { MineOwnerCabinGate, $mineOwnerCabinState } from '../../models';
 import { useTitles } from '../hooks/useTitles';
 import { useDescriptions } from '../hooks/useDescriptions';
@@ -35,11 +34,7 @@ export const Hologram: FC<Props> = ({ user }) => {
 
     return (
         <div className={styles.hologram}>
-            {isDesktop && (
-                <Title fontFamily="orbitron" className={styles.title}>
-                    {titles[cabinState]}
-                </Title>
-            )}
+            {isDesktop && <Title>{titles[cabinState]}</Title>}
             {descriptions[cabinState]}
             {buttons[cabinState]}
         </div>

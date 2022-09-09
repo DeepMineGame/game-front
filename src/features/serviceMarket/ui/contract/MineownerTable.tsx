@@ -21,11 +21,11 @@ const MineOwnerTable: FC<ContractProps> = ({ contract, accountName }) => {
                 {accountName === executor && (
                     <Tag>{t('components.common.you')}</Tag>
                 )}
-                <Text type="primary">{executor || '-'}</Text>
+                <Text>{executor || '-'}</Text>
             </>
         ),
         [t('pages.serviceMarket.contract.mine')]: assetId ? (
-            <Text type="primary">{`ID${assetId}`}</Text>
+            <Text>{`ID${assetId}`}</Text>
         ) : (
             '-'
         ),

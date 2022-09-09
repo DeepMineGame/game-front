@@ -1,8 +1,7 @@
 import { Avatar, Progress } from 'antd';
-import { AvatarIcon, Badge, neutral3Color, primary6, Text } from 'shared';
+import { AvatarIcon, Badge, Button, neutral3Color, primary6 } from 'shared';
 import { useStore } from 'effector-react';
 import { UserDto } from 'entities/smartcontract';
-import styles from '../../styles.module.scss';
 import { userStore } from '../../../model';
 
 type Props = {
@@ -16,11 +15,7 @@ export function AvatarWithLvl(props: Props) {
     const avatar = () => <Avatar src={user?.avatar} icon={<AvatarIcon />} />;
 
     return (
-        <Text
-            fontFamily="bai"
-            onClick={props.onClick}
-            className={styles.avatar}
-        >
+        <Button type="link" onClick={props.onClick}>
             <Badge
                 count={props.smartContractUserData?.level}
                 showZero
@@ -37,6 +32,6 @@ export function AvatarWithLvl(props: Props) {
                     strokeColor={primary6}
                 />
             </Badge>
-        </Text>
+        </Button>
     );
 }

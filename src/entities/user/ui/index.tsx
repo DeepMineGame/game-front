@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { Space } from 'antd';
+import { Row, Space } from 'antd';
 import {
     Button,
     Drawer,
@@ -15,7 +15,6 @@ import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { warehouse } from 'app/router/paths';
 import { smartContractUserStore } from 'entities/smartcontract';
-
 import { locationMap } from '../../smartcontract';
 import { balancesStore, UserGate } from '../model';
 import styles from './styles.module.scss';
@@ -57,22 +56,21 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
     );
     return (
         <>
-            <div className={styles.wrapper}>
-                {smartContractUserData && (
-                    <div>
-                        <ThunderboltOutlined />
-                        <span>
-                            <Text
-                                className={styles.energyCount}
-                                fontFamily="orbitron"
-                            >
-                                {smartContractUserData?.stamina}
-                            </Text>
-                        </span>
-                    </div>
-                )}
-                {avatar}
-            </div>
+            <Row>
+                <Space size={12}>
+                    {smartContractUserData && (
+                        <Row align="middle">
+                            <Space size={8}>
+                                <ThunderboltOutlined />
+                                <Title level={5}>
+                                    {smartContractUserData?.stamina}
+                                </Title>
+                            </Space>
+                        </Row>
+                    )}
+                    {avatar}
+                </Space>
+            </Row>
             <Drawer
                 placement="right"
                 onClose={onClose}
@@ -81,66 +79,76 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                 width={292}
                 title={
                     <>
-                        <Space>
+                        <Space align="start" size={12}>
                             {avatar}
-                            <div className={styles.userMenuHeader}>
-                                <Title
-                                    className={styles.name}
-                                    level={5}
-                                    fontFamily="orbitron"
-                                >
+                            <Space direction="vertical" size={0}>
+                                <Title level={5}>
                                     {smartContractUserData?.owner}
                                 </Title>
-                                <div>
-                                    {t('components.common.level')}{' '}
-                                    {smartContractUserData?.level}
-                                </div>
-                                <div>
-                                    {t('components.common.exp')}{' '}
-                                    {smartContractUserData?.experience}
-                                </div>
-                            </div>
+                                <Text variant="body2">
+                                    {`${t('components.common.level')} ${
+                                        smartContractUserData?.level
+                                    }`}
+                                </Text>
+                                <Text variant="body2">
+                                    {`${t('components.common.exp')} ${
+                                        smartContractUserData?.experience
+                                    }`}
+                                </Text>
+                            </Space>
                         </Space>
-                        <div className={styles.attrs}>
-                            {user}
+
+                        <Row justify="space-between">
+                            <Text variant="body1">{user}</Text>
                             {waxBalance && (
-                                <Title
-                                    level={5}
-                                    className={styles.dataUnitTitle}
-                                >
-                                    <Icon component={WaxCoinIcon} />{' '}
-                                    {waxBalance}
-                                </Title>
+                                <Text variant="body1" strong>
+                                    <Icon component={WaxCoinIcon} />
+                                    {` ${waxBalance}`}
+                                </Text>
                             )}
-                        </div>
+                        </Row>
                     </>
                 }
             >
                 <SettingMenu />
                 <div className={styles.grid}>
                     <div>
-                        <div>{t('kit.timer.energy')}</div>
-                        <Title className={styles.dataUnitTitle} level={5}>
-                            {smartContractUserData?.stamina || '-'}
-                        </Title>
+                        <Text variant="body2">{t('kit.timer.energy')}</Text>
+                        <div>
+                            <Text variant="body1" strong>
+                                {smartContractUserData?.stamina || '-'}
+                            </Text>
+                        </div>
                     </div>
                     <div>
-                        <div>{t('components.common.reputation')}</div>
-                        <Title className={styles.dataUnitTitle} level={5}>
-                            {smartContractUserData?.reputation || '-'}
-                        </Title>
+                        <Text variant="body2">
+                            {t('components.common.reputation')}
+                        </Text>
+                        <div>
+                            <Text variant="body1" strong>
+                                {smartContractUserData?.reputation || '-'}
+                            </Text>
+                        </div>
                     </div>
                     <div>
-                        <div>{t('components.common.button.dme')}</div>
-                        <Title className={styles.dataUnitTitle} level={5}>
-                            {dmeBalance}
-                        </Title>
+                        <Text variant="body2">
+                            {t('components.common.button.dme')}
+                        </Text>
+                        <div>
+                            <Text variant="body1" strong>
+                                {dmeBalance}
+                            </Text>
+                        </div>
                     </div>
                     <div>
-                        <div>{t('components.common.button.dmp')}</div>
-                        <Title className={styles.dataUnitTitle} level={5}>
-                            -
-                        </Title>
+                        <Text variant="body2">
+                            {t('components.common.button.dmp')}
+                        </Text>
+                        <div>
+                            <Text variant="body1" strong>
+                                -
+                            </Text>
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -150,14 +158,14 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                                 className={styles.location}
                                 items={{
                                     Location: (
-                                        <Title level={5} style={{ margin: 0 }}>
+                                        <Text variant="body1" strong>
                                             {
                                                 locationMap[
                                                     smartContractUserData
                                                         .location
                                                 ]
                                             }
-                                        </Title>
+                                        </Text>
                                     ),
                                 }}
                             />

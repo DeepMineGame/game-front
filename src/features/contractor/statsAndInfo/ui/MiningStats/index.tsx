@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
     MiningStatsTable,
@@ -137,12 +137,7 @@ export const MiningStats = () => {
                     }
                     key="2"
                 >
-                    <Title
-                        className={styles.title}
-                        fontFamily="bai"
-                        level={5}
-                        thin
-                    >
+                    <Title level={5}>
                         {t('pages.contractorMiningStats.miningEvents')}
                     </Title>
                     <AreaChart options={chartOptions} />

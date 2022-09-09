@@ -83,7 +83,7 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
     if (!mine) {
         return (
             <div className={styles.background}>
-                <Title className={styles.title}>
+                <Title>
                     <Space direction="vertical" align="center">
                         <FrownOutlined />
                         <div>There is no mine</div>
@@ -99,13 +99,7 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
         <div className={styles.background}>
             <Space direction="vertical">
                 <Space size="large">
-                    <Title
-                        className={styles.title}
-                        fontFamily="orbitron"
-                        level={4}
-                    >
-                        {t('pages.mineManagement.mine')}
-                    </Title>
+                    <Title level={4}>{t('pages.mineManagement.mine')}</Title>
                     <Badge
                         className={styles.badgeText}
                         color={isMineActive ? greenGreen6 : sunsetOrange6}

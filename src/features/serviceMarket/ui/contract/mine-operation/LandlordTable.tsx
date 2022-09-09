@@ -14,11 +14,11 @@ const LandlordTable: FC<ContractProps> = ({ contract, accountName }) => {
                 {accountName === contract.client && (
                     <Tag>{t('components.common.you')}</Tag>
                 )}
-                <Text type="primary">{contract.client || '-'}</Text>
+                <Text>{contract.client || '-'}</Text>
             </>
         ),
         [t('pages.serviceMarket.contract.area')]: (
-            <Text type="primary">{`ID${contract.client_asset_id}`}</Text>
+            <Text>{`ID${contract.client_asset_id}`}</Text>
         ),
     };
 

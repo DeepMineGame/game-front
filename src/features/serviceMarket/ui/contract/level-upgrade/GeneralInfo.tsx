@@ -27,7 +27,7 @@ const GeneralInfo: FC<Props> = ({ contract, accountName, isOrder = false }) => {
             <Tooltip trigger="click" overlay={t('pages.info.copied')}>
                 <div>
                     <Space size={10}>
-                        <Text type="white">{contract.id}</Text>
+                        <Text>{contract.id}</Text>
                         <ShareAltOutlined
                             onClick={() =>
                                 navigator.clipboard.writeText(
@@ -51,9 +51,7 @@ const GeneralInfo: FC<Props> = ({ contract, accountName, isOrder = false }) => {
             contract.contract_duration
         )} ${t('components.common.days').toLowerCase()}`,
         ...(showNft && {
-            [t('pages.serviceMarket.nftId')]: (
-                <Text type="primary">345663</Text>
-            ),
+            [t('pages.serviceMarket.nftId')]: <Text>345663</Text>,
         }),
     };
 

@@ -47,18 +47,7 @@
 }
 
 .title {
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 20px;
-  color: $color-neutral-neutral-9;
-  letter-spacing: 0.04em;
   text-align: center;
-  text-transform: uppercase;
-
-  @media only screen and (min-width: $media-desktop-s) {
-    font-size: 20px;
-    line-height: 28px;
-  }
 }
 
 .description {

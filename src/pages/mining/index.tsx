@@ -67,7 +67,7 @@ export const MiningPage: FC = memo(() => {
                 <Col sm={17} xs={24} className={styles.firsColumn}>
                     <div className={styles.wrapperForTittleWithRightSection}>
                         {!isLoading && (
-                            <Title level={subTitleLevel} fontFamily="orbitron">
+                            <Title level={subTitleLevel}>
                                 {t('pages.mining.miningStats')}
                             </Title>
                         )}
@@ -98,9 +98,7 @@ export const MiningPage: FC = memo(() => {
                     </div>
                 </Col>
                 <Col sm={7} xs={24}>
-                    <Title level={4} fontFamily="orbitron">
-                        {t('pages.mining.consumables')}
-                    </Title>
+                    <Title level={4}>{t('pages.mining.consumables')}</Title>
                     <Space size="large" direction="vertical">
                         <Tooltip
                             placement="left"

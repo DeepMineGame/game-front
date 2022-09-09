@@ -1,6 +1,5 @@
 import { Page, useAccountName, KeyValueTable } from 'shared';
 import { useTranslation } from 'react-i18next';
-import React from 'react';
 import { Addons, MineControlPanel, userMineStore } from 'features';
 import { useStore } from 'effector-react';
 import styles from './styles.module.scss';

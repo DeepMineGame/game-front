@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Tag, Text } from 'shared/ui';
 import { TableWithTitle } from '../..';
@@ -16,7 +16,7 @@ const Engineer: FC<ContractProps> = ({ contract, accountName }) => {
                 {accountName === member && (
                     <Tag>{t('components.common.you')}</Tag>
                 )}
-                <Text type="primary">{member || '-'}</Text>
+                <Text>{member || '-'}</Text>
             </>
         ),
         [t('pages.serviceMarket.reputation')]: '123',

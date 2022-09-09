@@ -1,4 +1,4 @@
-import React, { FC, memo, useEffect } from 'react';
+import { FC, memo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
     desktopS,
@@ -49,7 +49,6 @@ export const MiningTitle: FC<Props> = memo(
                     [styles.finished]:
                         isFinished && action.state !== ActionState.interrupted,
                 })}
-                fontFamily="orbitron"
             >
                 {miningTitleMap[state]}{' '}
                 {!isFinished && getTimeLeftFromUtc(action.finishes_at, true)}

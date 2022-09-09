@@ -25,7 +25,7 @@ export const PageNotFound: FC<Props> = ({ title = '404', type = 'lost' }) => {
                 {type === 'lost' ? (
                     <Space direction="vertical" size="large">
                         <img src={noConnection} alt="no-connection" />
-                        <Title fontFamily="orbitron" level={3}>
+                        <Title level={3}>
                             {t('pages.pageNotFound.weLost')}
                         </Title>
                         <div>{t('pages.pageNotFound.itSeem')}</div>
@@ -33,9 +33,7 @@ export const PageNotFound: FC<Props> = ({ title = '404', type = 'lost' }) => {
                 ) : (
                     <Space direction="vertical" size="large">
                         <img src={hourGlass} alt="cooming soon" />
-                        <Title fontFamily="orbitron" level={3}>
-                            {t('pages.pageNotFound.soon')}
-                        </Title>
+                        <Title level={3}>{t('pages.pageNotFound.soon')}</Title>
                         <div>{t('pages.pageNotFound.weWork')}</div>
                     </Space>
                 )}

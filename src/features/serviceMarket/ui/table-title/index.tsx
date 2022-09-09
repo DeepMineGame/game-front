@@ -10,9 +10,7 @@ interface Props {
 const TableWithTitle: FC<Props> = ({ title, data }) => {
     return (
         <>
-            <Title fontFamily="orbitron" level={5} className={styles.title}>
-                {title.toUpperCase()}
-            </Title>
+            <Title level={5}>{title.toUpperCase()}</Title>
             <KeyValueTable items={data} className={styles.table} />
         </>
     );

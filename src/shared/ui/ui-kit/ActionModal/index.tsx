@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Space } from 'antd';
 import { Button } from '../Button';
-import { Title } from '../typography/Title';
+import { Title } from '../Typography/Title';
 import { Modal } from '../Modal';
 import { CostsTable } from '../CostsTable';
 import styles from './styles.module.scss';
@@ -36,11 +36,7 @@ export const ActionModal: FC<Props> = ({
         <Modal
             className={styles.modal}
             visible={visible}
-            title={
-                <Title fontFamily="bai" level={5}>
-                    {texts?.title}
-                </Title>
-            }
+            title={<Title level={5}>{texts?.title}</Title>}
             onCancel={onCancel}
             footer={
                 <Space align="end">
@@ -53,7 +49,7 @@ export const ActionModal: FC<Props> = ({
                 </Space>
             }
         >
-            <Title level={5} fontFamily="bai" thin>
+            <Title level={5}>
                 {t('components.common.actionModal.descriptionTime')}
             </Title>
             <CostsTable {...costs} />

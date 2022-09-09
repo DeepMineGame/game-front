@@ -1,10 +1,9 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Col, Empty, Row } from 'antd';
 import { Area, Button, KeyValueTable, Title } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { rarityMap } from 'entities/smartcontract';
-import styles from '../../styles.module.scss';
 import {
     areaNftStore,
     contractorAreaStore,
@@ -30,7 +29,7 @@ export const Contractor: FC<Props> = ({ accountName }) => {
     return (
         <Row gutter={16}>
             <Col span={12}>
-                <Title level={5} fontFamily="orbitron" className={styles.title}>
+                <Title level={5}>
                     {t('components.common.mine.mineInfo').toUpperCase()}
                 </Title>
                 {mine ? (
@@ -48,7 +47,7 @@ export const Contractor: FC<Props> = ({ accountName }) => {
             </Col>
 
             <Col span={12}>
-                <Title level={5} fontFamily="orbitron" className={styles.title}>
+                <Title level={5}>
                     {t('components.common.areaInfo').toUpperCase()}
                 </Title>
                 {area ? (

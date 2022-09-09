@@ -11,24 +11,11 @@ export const Addons: FC = () => {
     return (
         <Tooltip overlay="Coming soon...">
             <div className={styles.background}>
-                <Title
-                    level={4}
-                    className={styles.disabled}
-                    fontFamily="orbitron"
-                >
+                <Title level={4}>
                     {t('features.mineOwner.management.addons')}
                 </Title>
                 <Space>
-                    <Button
-                        disabled
-                        ghost
-                        icon={
-                            <Icon
-                                className={styles.disabledIcon}
-                                component={Petobot}
-                            />
-                        }
-                    >
+                    <Button disabled ghost icon={<Icon component={Petobot} />}>
                         {t('features.mineOwner.management.petobot')}
                     </Button>
                     <Button disabled ghost icon={<GroupOutlined />}>

@@ -1,6 +1,6 @@
 import { PlusOutlined } from '@ant-design/icons';
-import React, { FC, MouseEventHandler } from 'react';
-import { Title } from '../typography/Title';
+import { FC, MouseEventHandler } from 'react';
+import { Title } from '../Typography/Title';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -12,7 +12,7 @@ export const CardHolder: FC<Props> = ({ name, onClick }) => {
     return (
         <div className={styles.cardHolder} onClick={onClick}>
             <PlusOutlined className={styles.icon} />
-            <Title className={styles.title} level={5} fontFamily="orbitron">
+            <Title level={5}>
                 ADD
                 <br />
                 {name}

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import {
     Button,
     DeepMineLogo,
@@ -11,7 +11,6 @@ import { LeftOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import { city } from 'app/router/paths';
-
 import { useTranslation } from 'react-i18next';
 import { SettingMenu, UserAvatarAndDrawer } from 'entities/user';
 import styles from './styles.module.scss';
@@ -46,13 +45,7 @@ export const Header: FC<Props> = ({ withBackButton, title, hideLogo }) => {
                         onClick={goToBack}
                     >
                         <LeftOutlined className={styles.backArrow} />
-                        <Title
-                            level={4}
-                            className={styles.title}
-                            fontFamily="orbitron"
-                        >
-                            {title}
-                        </Title>
+                        <Title level={4}>{title}</Title>
                     </div>
                 ) : (
                     <div
@@ -77,9 +70,7 @@ export const Header: FC<Props> = ({ withBackButton, title, hideLogo }) => {
             {title && (
                 <div className={styles.backButtonAndTitleWrapper}>
                     {backButton}
-                    <Title className={styles.title} fontFamily="orbitron">
-                        {title}
-                    </Title>
+                    <Title>{title}</Title>
                     <div />
                 </div>
             )}

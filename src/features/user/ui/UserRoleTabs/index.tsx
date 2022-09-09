@@ -42,9 +42,7 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
         <div className={styles.userLine}>
             <Space>
                 <AvatarWithLvl smartContractUserData={smartContractUserData} />
-                <Title className={styles.title} level={5} fontFamily="orbitron">
-                    {smartContractUserData?.owner}
-                </Title>
+                <Title level={5}>{smartContractUserData?.owner}</Title>
             </Space>
             <div>
                 <Tooltip trigger="click" overlay={t('pages.info.copied')}>

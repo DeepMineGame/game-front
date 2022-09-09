@@ -16,7 +16,7 @@ const ContractorTable: FC<Props> = ({ contract, accountName }) => {
                 {accountName === contract.executor && (
                     <Tag>{t('components.common.you')}</Tag>
                 )}
-                <Text type="primary">{contract.executor || '-'}</Text>
+                <Text>{contract.executor || '-'}</Text>
             </>
         ),
     };
