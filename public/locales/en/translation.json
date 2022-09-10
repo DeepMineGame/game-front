@@ -109,7 +109,13 @@
         "medium": "Medium",
         "atomicHub": "Atomic Hub"
       },
-      "shelter": "Shelter"
+      "shelter": "Shelter",
+      "goToMarket": "Go to Market",
+      "createContract": "Create a contract",
+      "findContract": "Find a contract",
+      "travel": "Travel",
+      "market": "Market",
+      "storage": "Storage"
     },
     "user": {
       "accountSettings": "Account settings",
@@ -222,6 +228,7 @@
           "contractor": "Travel to Contractor’s cabin",
           "mineOwner": "Travel to Mine owner cabin",
           "landlord": "Travel to Landlord cabin",
+          "engineers": "Travel to Engineers cabin",
           "hive": "Travel to Hive"
         }
       },
@@ -523,6 +530,38 @@
       "weAreChampionsMyFriend": "We are winners of the AIBC GameFi Pitch Competition 2022.",
       "weAreChampionsOfTheWorld": "We’ve got credible partners: YARD [Hub] venture studio, DApplica, AtomicHub.",
       "areas": "areas"
+    },
+    "engineer": {
+      "noCertificateDetected": "Engineer certificate is not detected",
+      "youNeedCertificate": "You need an Engineer Certificate in your active inventory. Pick it from Storage or go to Market to buy one.",
+      "pickFromStorage": "Pick up from Storage",
+      "engineersInauguration": "Engineers Inauguration",
+      "youNeedToAttendInauguration": "You need to attend Engineers Inauguration to start working as an engineer",
+      "attendInauguration": "Attend Inauguration",
+      "buyAnUpgradeKit": "Buy an Upgrade kit",
+      "youNeedAnUpgradeKit": "You need an upgrade kit to perform the upgrade",
+      "FindWorkToDo": "Find a work to do",
+      "youNeedAnActiveEquipmentUpgradeContract": "you need an active equipment upgrade contract to work and earn DME",
+      "getStatsInfo": "Get stats & info",
+      "nowCanSeeStats": "Now you can see your updates stats & info",
+      "engineersTraining": "Engineers training",
+      "engineersLevel": "Engineers level",
+      "upgradesUnlocked": "Upgrades unlocked",
+      "getTraining": "Get an Engineers training",
+      "nowYouNeedTraining": "Engineers Inauguration is completed, now you need to get an Engineers training",
+      "engineersStats": "Engineers stats",
+      "dmePerUpgrade": "DME per upgrade",
+      "dmeTotal": "DME total",
+      "travelHere": "Travel Here",
+      "youShouldTravelToContinue": "You should travel to this location to continue",
+      "getReport": "Get the report",
+      "upgradeCompleted": "Upgrade: Completed",
+      "upgradeInProgress": "Upgrade: in progress",
+      "status": {
+        "notInaugurated": "Not Inaugurated",
+        "active": "Active",
+        "work": "Working"
+      }
     }
   },
   "features": {
@@ -716,6 +755,7 @@
     "00122": "can't uninstall Equipment - you're in mining process yet",
     "00123": "can't find Equipment Item in slots",
     "00124": "wrong asset ID",
-    "00125": "you must terminate the Contract with Landlord first"
+    "00125": "you must terminate the Contract with Landlord first",
+    "00127": "wrong Location for Engineer role"
   }
 }

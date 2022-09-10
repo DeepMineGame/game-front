@@ -12,12 +12,14 @@ type Props = {
     toLocationId: LOCATION_TO_ID;
     onBadgeCrossClick?: () => void;
     onSuccess: () => void;
+    trigger?: React.ReactElement<{ onClose: () => void; onClick: () => void }>;
 };
 
 export const Travel: FC<Props> = ({
     toLocationId,
     onBadgeCrossClick,
     onSuccess,
+    trigger,
 }) => {
     const [isTravelModalVisible, setIsTravelModalVisible] = useState(false);
 
@@ -40,10 +42,17 @@ export const Travel: FC<Props> = ({
 
     return (
         <>
-            <PhysicalShiftBadge
-                onClose={onBadgeCrossClick}
-                onClick={openTravelModal}
-            />
+            {trigger ? (
+                React.cloneElement(trigger, {
+                    onClose: onBadgeCrossClick,
+                    onClick: openTravelModal,
+                })
+            ) : (
+                <PhysicalShiftBadge
+                    onClose={onBadgeCrossClick}
+                    onClick={openTravelModal}
+                />
+            )}
             <TravelModal
                 locationId={toLocationId}
                 visible={isTravelModalVisible}

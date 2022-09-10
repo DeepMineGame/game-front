@@ -15,6 +15,7 @@ export * from '../tables/inventories';
 export * from '../tables/users';
 export * from './types';
 export * from './roles';
+export * from './engineer';
 
 export const getUserConfig = (account: string): GetTableDataConfigType => {
     return {

@@ -10,6 +10,10 @@ import DarkGreenBg from './landlord/Green_Dark.jpg';
 import DarkVioletBg from './landlord/Violet_Dark.jpg';
 import DarkYellowBg from './landlord/Yellow_Dark.jpg';
 
+import EngineerRoomYellow from './engineer/engineers-room-yellow.jpg';
+import EngineerRoomDark from './engineer/engineers-room-dark.jpg';
+import EngineerRoomLight from './engineer/engineers-room-light.jpg';
+
 export {
     LightBlueBg,
     LightGrayBg,
@@ -21,4 +25,7 @@ export {
     DarkBlueBg,
     DarkGrayBg,
     DarkGreenBg,
+    EngineerRoomYellow,
+    EngineerRoomDark,
+    EngineerRoomLight,
 };

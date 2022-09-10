@@ -14,6 +14,7 @@ const titlesMap: Record<number, string> = {
     [LOCATION_TO_ID.hive]: 'hive',
     [LOCATION_TO_ID.landlords_reception]: 'landlord',
     [LOCATION_TO_ID.mine_deck]: 'mineOwner',
+    [LOCATION_TO_ID.engineers_workshop]: 'engineers',
 };
 
 export const TravelModal = ({
