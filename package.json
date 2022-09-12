@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/dark-theme": "^2.0.2",
     "@ant-design/icons": "^4.7.0",
     "@ant-design/plots": "^1.0.9",
     "@eosdacio/ual-wax": "^1.5.1",
