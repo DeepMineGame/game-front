@@ -3,9 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { Page, useAccountName, TabsCard, TabsCardPane } from 'shared';
 import { Col, Row, Skeleton } from 'antd';
 import { BarChartOutlined, InteractionOutlined } from '@ant-design/icons';
-import { UserRoleTabs } from 'features';
+import { UserActions, UserRoleTabs } from 'features';
 import { useParams } from 'react-router';
-import { UserActions } from '../actions';
 
 const iconTabStyle = { fontSize: '16px' };
 

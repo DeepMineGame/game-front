@@ -1,30 +1,33 @@
 import { FC } from 'react';
-import { Col, Empty, Row } from 'antd';
+import { Col, Empty, Row, Skeleton } from 'antd';
 import { Area, Button, KeyValueTable, Title } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { rarityMap } from 'entities/smartcontract';
 import {
+    areaForMineStore,
     areaNftStore,
-    contractorAreaStore,
-    ContractorGate,
-    contractorMineStore,
-} from './model';
+    getAreasEffect,
+    getMinesEffect,
+    MineOwnerInfoGate,
+    minesStore,
+} from '../model';
 
-type Props = {
-    accountName: string;
-};
-
-export const Contractor: FC<Props> = ({ accountName }) => {
-    useGate(ContractorGate, {
-        searchParam: accountName,
-    });
-    const mine = useStore(contractorMineStore);
-    const area = useStore(contractorAreaStore);
+export const MineOwnerInfo: FC<{ accountName: string }> = ({ accountName }) => {
+    useGate(MineOwnerInfoGate, { searchParam: accountName });
+    const { t } = useTranslation();
+    const mines = useStore(minesStore);
+    const area = useStore(areaForMineStore);
     const areaNft = useStore(areaNftStore);
+    const mine = mines?.[0];
     const areaReservedSlotCount =
         area?.mine_slots?.filter(({ reserved }) => reserved)?.length || 0;
-    const { t } = useTranslation();
+    const isMineLoading = useStore(getMinesEffect.pending);
+    const isAreaLoading = useStore(getAreasEffect.pending);
+
+    if (isAreaLoading || isMineLoading) {
+        return <Skeleton />;
+    }
 
     return (
         <Row gutter={16}>
