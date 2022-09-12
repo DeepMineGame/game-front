@@ -3,7 +3,7 @@ import { Col, Empty, Row } from 'antd';
 import { KeyValueTable } from 'shared';
 import { locationMap, smartContractUserStore } from 'entities/smartcontract';
 import { balancesStore, UserGate } from 'entities/user';
-import { UserAction } from '../../action/ui';
+import { UserAction } from '../../../action/ui';
 import styles from './styles.module.scss';
 
 type Props = {

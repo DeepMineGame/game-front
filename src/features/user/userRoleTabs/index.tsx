@@ -14,11 +14,11 @@ import {
 import { rolesStore, smartContractUserStore } from 'entities/smartcontract';
 import { AvatarWithLvl, UserGate } from 'entities/user';
 
-import { CitizenInfo } from '../../citizen';
-import { LandlordInfo } from '../../landlord';
-import { MineOwnerInfo } from '../../mineOwner';
-import { Contractor } from '../../contractor';
 import styles from './styles.module.scss';
+import { CitizenInfo } from './citizenInfo';
+import { LandlordInfo } from './landlordInfo';
+import { MineOwnerInfo } from './mineOwnerInfo';
+import { ContractorInfo } from './contractorInfo';
 
 type Props = {
     accountName: string;
@@ -96,7 +96,7 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
                     tabContent: (
                         <>
                             {userLine}
-                            <Contractor accountName={accountName} />
+                            <ContractorInfo accountName={accountName} />
                         </>
                     ),
                 },
