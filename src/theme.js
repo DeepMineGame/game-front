@@ -41,6 +41,7 @@ module.exports = {
 
     // input
     '@input-placeholder-color': '#7D7D7D',
+    '@input-hover-border-color': '#CCA500',
 
     // tooltip
     '@tooltip-bg': '#434343',
@@ -97,7 +98,14 @@ module.exports = {
     '@disabled-color': '#5A5A5A',
     '@error-color': '#D32029',
     '@item-hover-bg': '#3D3100',
-    '@error-color-hover': '#791A1F',
+    '@error-color-hover': '#A61D24',
     '@error-color-active': '#D32029',
+    '@error-color-outline': 'rgba(245, 34, 45, 0.5)',
+    '@warning-color-hover': '#D89614',
+    '@warning-color-active': '#AA7714',
+    '@warning-color-outline': 'rgba(250, 173, 20, 0.5)',
+    '@outline-blur-size': '4px',
+    '@outline-width': '0',
+    '@primary-color-outline': 'rgba(24, 144, 255, 0.5)',
     '@theme': 'variable',
 };

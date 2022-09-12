@@ -1,36 +1,7 @@
 @import 'src/shared';
 
 :global {
-    .ant-input:focus,
-    .ant-input-focused,
-    .ant-input-affix-wrapper:focus,
-    .ant-input-affix-wrapper-focused {
-        @include input-default-glow;
-    }
-
     .ant-input[disabled]::placeholder {
         color: $color-neutral-neutral-6;
-    }
-
-    .ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless).ant-input:hover,
-    .ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover {
-        border-color: $color-red-red-5;
-    }
-
-    .ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless).ant-input:focus,
-    .ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:focus,
-    .ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper-focused {
-        @include input-error-glow;
-    }
-
-    .ant-input-status-warning:not(.ant-input-disabled):not(.ant-input-borderless).ant-input:hover,
-    .ant-input-affix-wrapper-status-warning:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover {
-        border-color: $color-calendula-gold-gold-5;
-    }
-
-    .ant-input-status-warning:not(.ant-input-disabled):not(.ant-input-borderless).ant-input:focus,
-    .ant-input-affix-wrapper-status-warning:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:focus,
-    .ant-input-affix-wrapper-status-warning:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper-focused {
-        @include input-warning-glow;
     }
 }
