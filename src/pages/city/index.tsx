@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Button, Header, Title, useUserLocation } from 'shared';
+import { Header, Title, useUserLocation } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import { hive, landLord, serviceMarket, wasteland } from 'app/router/paths';
 import { useTranslation } from 'react-i18next';
@@ -16,9 +16,6 @@ export const CityPage: FC = () => {
     return (
         <div className={styles.homeScreen}>
             <Header />
-            <Button type="primary" danger>
-                asdasd
-            </Button>
             <div onClick={() => navigate(wasteland)} className={styles.mine}>
                 <div className={styles.mineOwnerTitle}>
                     <Title level={5}>{t('pages.home.mineOwnerCabin')}</Title>

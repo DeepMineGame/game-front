@@ -5,7 +5,8 @@ module.exports = {
     '@btn-danger-bg': '#A61D24',
     '@btn-danger-color': '#FFFFFF',
     '@btn-text-shadow': 'none',
-    // '@btn-primary-color': '#141414',
+    '@btn-primary-color': '#141414',
+    '@btn-primary-bg': '#F5C913',
 
     '@btn-default-color': '#DBDBDB',
     '@btn-default-bg': 'transparent',
@@ -83,6 +84,8 @@ module.exports = {
     // should be in the end
     // base
     '@primary-color': '#F5C913',
+    '@primary-color-hover': '#CCA500',
+    '@primary-color-active': '#FFD93E',
     '@height-base': '32px',
     '@height-lg': '40px',
     '@height-sm': '24px',
@@ -94,24 +97,7 @@ module.exports = {
     '@disabled-color': '#5A5A5A',
     '@error-color': '#D32029',
     '@item-hover-bg': '#3D3100',
-
-    //
-    '@btn-primary-color': '#141414',
-    '@btn-primary-bg': '#F5C913',
-    '@primary-color-hover': '#CCA500',
-    '@primary-color-active': '#CCA500',
     '@error-color-hover': '#791A1F',
     '@error-color-active': '#D32029',
     '@theme': 'variable',
-
-    '@primary-1': '#3D3100',
-    '@primary-2': '#524200',
-    '@primary-3': '#7B6300',
-    '@primary-4': '#A38400',
-    '@primary-5': '#CCA500',
-    '@primary-6': '#F5C913',
-    '@primary-7': '#FFD93E',
-    '@primary-8': '#FFE168',
-    '@primary-9': '#FFEA93',
-    '@primary-10': '#FFF2BD',
 };

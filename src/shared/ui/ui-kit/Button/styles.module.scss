@@ -2,204 +2,27 @@
 
 $ghost-loading-bg: rgba(0, 0, 0, 0.35);
 
-@mixin danger-active {
-    color: $color-red-red-6;
-    border-color: $color-red-red-6;
+:global {
+    .ant-btn-default:not(.ant-btn-dangerous):not(.ant-btn-background-ghost):not([disabled]) {
+        &:hover,
+        &:focus {
+            border-color: $color-neutral-neutral-5;
+        }
+
+        &:active {
+            border-color: $color-primary-primary-7;
+        }
+    }
+
+    .ant-btn-text:active {
+        background-color: $color-neutral-neutral-3;
+    }
+
+    .ant-btn-loading {
+        pointer-events: none;
+
+        &.ant-btn-background-ghost {
+            background-color: $ghost-loading-bg;
+        }
+    }
 }
-
-@mixin ghost-disabled {
-    background-color: transparent;
-    border-color: $color-neutral-neutral-5;
-}
-
-// .primary {
-//     border-color: transparent;
-
-//     &:hover,
-//     &:focus {
-//         border-color: transparent;
-//         background-color: $color-primary-primary-5;
-//     }
-
-//     &:active {
-//         background-color: $color-primary-primary-7;
-//     }
-
-//     &.loading:not(.ghost) {
-//         background-color: $color-primary-primary-6;
-//     }
-
-//     &.danger:hover,
-//     &.danger:focus {
-//         border-color: transparent;
-//         background-color: $color-red-red-4;
-//     }
-    
-//     &.danger:active {
-//         background-color: $color-red-red-6;
-//     }
-
-//     &.danger.loading:not(.ghost) {
-//         background-color: $color-red-red-5;
-//     }
-
-//     &.ghost:hover,
-//     &.ghost:focus {
-//         color: $color-primary-primary-5;
-//         border-color: $color-primary-primary-5;
-//     }
-
-//     &.ghost:active {
-//         color: $color-primary-primary-7;
-//         border-color: $color-primary-primary-7;
-//     }
-
-//     &.ghost.loading {
-//         &::before {
-//             background-color: $ghost-loading-bg;
-//         }
-
-//         &:hover,
-//         &:focus {
-//             color: $color-primary-primary-6;
-//             border-color: $color-primary-primary-6;
-//         }
-//     }
-
-//     &.ghost.danger {
-//         &:hover,
-//         &:focus {
-//             background-color: transparent;
-//             color: $color-red-red-4;
-//             border-color: $color-red-red-4;
-//         }
-
-//         &.loading {
-//             &:hover,
-//             &:focus {
-//                 color: $color-red-red-5;
-//                 border-color: $color-red-red-5;
-//             }
-//         }
-//     }
-
-//     &.ghost.disabled,
-//     &.ghost.danger.disabled {
-//         @include ghost-disabled;
-
-//         &:hover,
-//         &:focus {
-//             @include ghost-disabled;
-//         }
-//     }
-
-//     &.disabled,
-//     &.disabled:hover,
-//     &.disabled:focus,
-//     &.disabled.danger,
-//     &.disabled.danger:hover,
-//     &.disabled.danger:focus {
-//         border-color: $color-neutral-neutral-5;
-//     }
-// }
-
-// .default {
-//     &:hover,
-//     &:focus {
-//         color: $color-primary-primary-5;
-//         border-color: $color-neutral-neutral-5;
-//     }
-
-//     &:active {
-//         color: $color-primary-primary-7;
-//         border-color: $color-primary-primary-7;
-//     }
-
-//     &.loading {
-//         &::before {
-//             background-color: transparent;
-//         }
-
-//         &:hover,
-//         &:focus {
-//             border-color: $color-neutral-neutral-5;
-//         }
-//     }
-
-//     &.danger {
-//         &:hover,
-//         &:focus {
-//             color: $color-red-red-4;
-//             border-color: $color-red-red-5;
-//         }
-
-//         &:active {
-//             @include danger-active;
-//         }
-
-//         &.loading {
-//             &:hover,
-//             &:focus {
-//                 color: $color-red-red-5;
-//                 border-color: $color-red-red-5;
-//             }
-//         }
-//     }
-
-//     &.disabled,
-//     &.disabled:hover,
-//     &.disabled:focus,
-//     &.disabled.danger,
-//     &.disabled.danger:hover,
-//     &.disabled.danger:focus {
-//         border-color: $color-neutral-neutral-5;
-//     }
-// }
-
-// .link {
-//     height: auto;
-//     border: 0;
-//     padding: 0;
-
-//     &:hover,
-//     &:focus {
-//         color: $color-primary-primary-5;
-//     }
-
-//     &:active {
-//         color: $color-primary-primary-7;
-//     }
-
-//     &.loading {
-//         &::before {
-//             background-color: transparent;
-//         }
-
-//         &:hover,
-//         &:focus {
-//             color: $color-primary-primary-6;
-//         }   
-//     }
-
-//     &.danger {
-//         &:hover,
-//         &:focus {
-//             color: $color-red-red-4;
-//         }
-
-//         &:active {
-//             color: $color-red-red-6;
-//         }
-
-//         &.loading {
-//             &:hover,
-//             &:focus {
-//                 color: $color-red-red-5;
-//             }
-//         }
-//     }
-// }
-
-// .text:active {
-//     background-color: $color-neutral-neutral-3;
-// }
