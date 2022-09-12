@@ -50,18 +50,22 @@ const UserActions: FC = () => {
     );
     const tabs = [
         {
-            tabName: 'roles.citizen',
+            tab: t('roles.citizen'),
+            key: UserRoles.citizen,
         },
         {
-            tabName: 'roles.landlord',
+            tab: t('roles.landlord'),
+            key: UserRoles.landlord,
             disabled: !userRoles.isLandlord,
         },
         {
-            tabName: 'roles.mineOwner',
+            tab: t('roles.mineOwner'),
+            key: UserRoles.mine_owner,
             disabled: !userRoles.isMineOwner,
         },
         {
-            tabName: 'roles.contractor',
+            tab: t('roles.contractor'),
+            key: UserRoles.contractor,
             disabled: !userRoles.isContractor,
         },
     ];
@@ -72,10 +76,9 @@ const UserActions: FC = () => {
                 <Tabs
                     tabPosition={isDesktop ? 'right' : 'top'}
                     onChange={getActionsByRole}
-                    config={tabs.map((tab) => ({
-                        tabName: t(tab.tabName),
-                        tabContent: tableOrLoader,
-                        disabled: tab.disabled,
+                    items={tabs.map((tab) => ({
+                        ...tab,
+                        children: tableOrLoader,
                     }))}
                 />
             </Col>
