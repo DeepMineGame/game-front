@@ -1,5 +1,5 @@
 import { DAY_IN_SECONDS, HOUR_IN_SECONDS } from 'shared';
-import { deepminegame } from '../../constants';
+import { deepminesmrt } from '../../constants';
 import { ContractType } from '../../tables';
 
 export const createContrFormFields = {
@@ -41,7 +41,7 @@ export function createContr(data: CreateContrDto) {
     return {
         actions: [
             {
-                account: deepminegame,
+                account: deepminesmrt,
                 name: 'createcontr',
                 authorization: [
                     {

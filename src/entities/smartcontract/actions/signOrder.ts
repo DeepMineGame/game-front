@@ -1,4 +1,4 @@
-import { deepminegame } from '../constants';
+import { deepminesmrt } from '../constants';
 
 export function signOrder({
     waxUser,
@@ -12,7 +12,7 @@ export function signOrder({
     return {
         actions: [
             {
-                account: deepminegame,
+                account: deepminesmrt,
                 name: 'signcontr',
                 authorization: [
                     {

@@ -1,4 +1,4 @@
-import { deepminegame } from '../index';
+import { deepminesmrt } from '../index';
 
 export function terminateContract(
     waxUser: string,
@@ -8,7 +8,7 @@ export function terminateContract(
     return {
         actions: [
             {
-                account: deepminegame,
+                account: deepminesmrt,
                 name: 'termcontract',
                 authorization: [
                     {
