@@ -17,18 +17,3 @@
         }
     }
 }
-
-.alert:global(.ant-alert-info) {
-    background: $color-primary-primary-1;
-    border: 1px solid $color-primary-primary-3;
-
-    :global {
-        .ant-alert-message {
-            color: $color-neutral-neutral-9;
-        }
-
-        .ant-alert-icon {
-            color: $color-primary-primary-6;
-        }
-    }
-}
