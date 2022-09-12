@@ -1,6 +1,5 @@
 // stylelint-disable scss/at-import-partial-extension
 @import "src/shared";
-@import "src/shared/ui/ui-kit/Button/styles.module";
 
 .modal {
   font-family: $bai;
@@ -25,17 +24,6 @@
     border-color: $color-neutral-neutral-4;
     color: $color-neutral-neutral-9
   }
-}
-
-.modalButton {
-  composes: primary;
-  composes: button;
-}
-
-.ghostButton {
-  composes: button;
-  composes: ghost;
-
 }
 
 .simpleModal {
