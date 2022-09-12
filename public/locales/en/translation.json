@@ -128,7 +128,7 @@
       "information": "Information"
     },
     "actions": {
-      "number": "Number",
+      "id": "id",
       "action": "Action",
       "started": "Started",
       "finished": "Finished",

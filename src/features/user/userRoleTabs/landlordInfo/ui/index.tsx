@@ -3,8 +3,8 @@ import { useStore } from 'effector-react';
 import { Empty } from 'antd';
 import { Button, KeyValueTable } from 'shared';
 import { areasStore, rarityMap } from 'entities/smartcontract';
+import { areaNftStore } from '../model';
 import styles from './styles.module.scss';
-import { areaNftStore } from './model';
 
 export const LandlordInfo = () => {
     const areaNft = useStore(areaNftStore);
