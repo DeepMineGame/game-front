@@ -12,7 +12,7 @@ export const Button: FC<Props> = memo(
         <ButtonAnt
             onClick={onClick}
             className={classNames(className, {
-                [styles.primary]: type === 'primary',
+                // [styles.primary]: type === 'primary',
                 [styles.default]: type === 'default',
                 [styles.text]: type === 'text',
                 [styles.link]: type === 'link',
