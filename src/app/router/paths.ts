@@ -23,3 +23,4 @@ export const serviceMarketOrder = '/service-market/contract/:contractId';
 export const inventoryItemPreview = '/inventory/:assetId';
 export const faq = '/faq';
 export const wasteland = '/wasteland';
+export const engineer = '/engineer';

@@ -24,6 +24,7 @@ import {
     AuthPage,
     FaqPage,
     Wasteland,
+    EngineerPage,
 } from 'pages';
 
 import {
@@ -52,6 +53,7 @@ import {
     inventoryItemPreview,
     faq,
     wasteland,
+    engineer,
 } from './paths';
 
 export type AppRoute = {
@@ -257,6 +259,14 @@ export const routes: AppRoute[] = [
         forLoggedIn: false,
         forAdmin: true,
         forBetaUser: true,
+    },
+    {
+        path: engineer,
+        Component: EngineerPage,
+        forLoggedIn: true,
+        forAdmin: true,
+        forBetaUser: true,
+        titleTag: 'Engineer Workshop — DeepMine',
     },
 ];
 

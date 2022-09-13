@@ -1,9 +1,9 @@
 import {
     Button,
-    greenGreen6,
+    green6,
     Loader,
     success,
-    sunsetOrange6,
+    orange6,
     Title,
     useReloadPage,
     useTableData,
@@ -107,7 +107,7 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
                     </Title>
                     <Badge
                         className={styles.badgeText}
-                        color={isMineActive ? greenGreen6 : sunsetOrange6}
+                        color={isMineActive ? green6 : orange6}
                         text={statusText}
                     />
                 </Space>

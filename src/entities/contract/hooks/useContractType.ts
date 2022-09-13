@@ -13,11 +13,14 @@ export const useContractType = (contract: ContractDto) => {
         contract.type === ContractType.mineowner_contractor;
     const isMineOperationContract =
         contract.type === ContractType.landlord_mineowner;
+    const isLevelUpgradeContract =
+        contract.type === ContractType.citizen_engineer;
 
     return {
         isExecutorSigned,
         isClientSigned,
         isMiningContract,
         isMineOperationContract,
+        isLevelUpgradeContract,
     };
 };

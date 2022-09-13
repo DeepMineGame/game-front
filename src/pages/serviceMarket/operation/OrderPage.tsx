@@ -7,14 +7,14 @@ import { ContractDto, ContractType } from 'entities/smartcontract';
 type Props = { contract: ContractDto; accountName: string };
 
 const orders = {
-    [ContractType.engineer]: LevelUpgradeOrder,
+    [ContractType.citizen_engineer]: LevelUpgradeOrder,
     [ContractType.mineowner_contractor]: MiningOrder,
     [ContractType.landlord_mineowner]: MineOperationOrder,
     [ContractType.undefined]: MiningOrder,
 };
 
 const pageTitle = {
-    [ContractType.engineer]: 'pages.serviceMarket.levelUpgradeOrder',
+    [ContractType.citizen_engineer]: 'pages.serviceMarket.levelUpgradeOrder',
     [ContractType.mineowner_contractor]: 'pages.serviceMarket.miningOrder',
     [ContractType.landlord_mineowner]: 'pages.serviceMarket.mineOperationOrder',
     [ContractType.undefined]: '',

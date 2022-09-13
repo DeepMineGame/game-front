@@ -1,3 +1,5 @@
+import { ENGINEER_CERTIFICATE_ID } from 'entities/smartcontract';
+
 const GIF_IMAGES = [
     314105, 314134, 314712, 314721, 314749, 314748, 314747, 314744, 314743,
     314738, 492749, 314739,
@@ -40,6 +42,7 @@ export const TEST_NET_ASSETS_ID_MAP = {
     411110: 492745,
     411109: 492803,
     176451: 314739,
+    [ENGINEER_CERTIFICATE_ID]: ENGINEER_CERTIFICATE_ID, // todo: remove after testing
     0: undefined,
 };
 
