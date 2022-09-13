@@ -1,0 +1,21 @@
+@import 'src/shared';
+
+.root {
+    position: absolute;
+    width: 186px;
+    height: 123px;
+    display: flex;
+    flex-direction: column;
+    left: 7vw;
+    top: 33vh;
+    padding: 24px 8px;
+    text-align: center;
+    background: rgba(0, 71, 133, 0.29);
+    backdrop-filter: blur(4px);
+
+    @media only screen and (min-width: $media-tablet) {
+        width: 395px;
+        min-height: 262px;
+        padding: 24px;
+    }
+}

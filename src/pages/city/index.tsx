@@ -1,7 +1,13 @@
 import { FC } from 'react';
 import { Header, Title, useUserLocation } from 'shared';
 import { useNavigate } from 'react-router-dom';
-import { hive, landLord, serviceMarket, wasteland } from 'app/router/paths';
+import {
+    hive,
+    landLord,
+    serviceMarket,
+    wasteland,
+    engineer,
+} from 'app/router/paths';
 import { useTranslation } from 'react-i18next';
 import { Space } from 'antd';
 import cn from 'classnames';
@@ -55,10 +61,7 @@ export const CityPage: FC = () => {
                     </Title>
                 </div>
             </Space>
-            <div
-                className={styles.engineer}
-                onClick={() => navigate('/TODO_LINK_TO_ENGINEER')}
-            >
+            <div className={styles.engineer} onClick={() => navigate(engineer)}>
                 {isUserLocation.engineersWorkshop && <UserLocator />}
                 <Title level={5} className={styles.enterLink}>
                     {t('pages.home.engineers')}

@@ -7,8 +7,8 @@ import {
     Button,
     Title,
     ActionModal,
-    greenGreen6,
-    sunsetOrange6,
+    green6,
+    orange6,
     ExclamationModal,
     useReloadPage,
 } from 'shared';
@@ -69,7 +69,7 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
                     </Title>
                     <Badge
                         className={styles.status}
-                        color={isActive ? greenGreen6 : sunsetOrange6}
+                        color={isActive ? green6 : orange6}
                         text={t(
                             isActive
                                 ? 'components.common.status.active'

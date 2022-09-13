@@ -10,7 +10,6 @@ type Props = {
 const Conditions: FC<Props> = ({ contract }) => {
     const { t } = useTranslation();
 
-    const isEngineer = true;
     const isCitizen = false;
 
     // todo: use dynamic values
@@ -23,11 +22,6 @@ const Conditions: FC<Props> = ({ contract }) => {
         [t('pages.serviceMarket.contract.penalty')]: `${
             contract.penalty_amount
         } ${t('components.common.button.dme')}`,
-        ...(isEngineer && {
-            [t('pages.serviceMarket.duration')]: `2 ${t(
-                'components.common.days'
-            ).toLowerCase()}`,
-        }),
         // todo: fix
         // @ts-ignore
         ...(isCitizen && {

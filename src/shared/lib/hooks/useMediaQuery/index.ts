@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+export const tablet = '(min-width: 769px)'; // sync with $media-tablet
 export const desktopS = '(min-width: 1024px)';
 
 // adopted from https://usehooks-ts.com/react-hook/use-media-query

@@ -4,6 +4,7 @@ export { ContractorStatsAndInfoPage } from './contractor/contractorStatAndInfo';
 export { MiningPage } from './mining';
 export { CityPage } from './city';
 export { AuthPage } from './auth';
+export { EngineerPage } from './engineer';
 
 export * from './mineOwner';
 export * from './landLord';
