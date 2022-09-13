@@ -1,4 +1,4 @@
-import { FC, JSXElementConstructor, useCallback } from 'react';
+import { FC, ReactNode, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DocumentTitle } from 'app/router/components/DocumentTitle';
 import { Empty } from 'antd';
@@ -9,7 +9,7 @@ import { Navbar, Page } from '../../ui-kit';
 
 export type Tab = {
     id: number;
-    component: JSXElementConstructor<any>;
+    component: ReactNode;
     name: string;
 };
 type Props = {

@@ -7,6 +7,7 @@ import {
 } from 'features';
 import { Skeleton } from 'antd';
 import { ServiceMarketTabIds } from 'app/router/constants';
+import { LevelUpgrade } from 'features/serviceMarket';
 import styles from './styles.module.scss';
 
 export * from './order';
@@ -35,6 +36,11 @@ export const ServiceMarketPage = () => {
                     id: ServiceMarketTabIds.mineOperation,
                     component: MineOperationContracts,
                     name: t('pages.serviceMarket.mineOperation'),
+                },
+                {
+                    id: ServiceMarketTabIds.levelUpgrade,
+                    component: LevelUpgrade,
+                    name: t('pages.serviceMarket.levelUpgrade'),
                 },
             ]}
         />
