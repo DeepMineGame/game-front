@@ -2,7 +2,7 @@
 
 .homeScreen {
   background-color: $color-cyan-cyan-1;
-  background-image: url("../../shared/ui/images/city/hometown.jpg");
+  background-image: url("../../shared/ui/images/city/hometown.webp");
   background-repeat: no-repeat;
   min-height: 100vh;
   max-width: 100vw;
@@ -37,7 +37,7 @@
   height: 85vh;
   width: 15vw;
   float: right;
-  background-image: url("../../shared/ui/images/city/mine.png");
+  background-image: url("../../shared/ui/images/city/mine.webp");
   filter: $glow;
   background-repeat: no-repeat;
   background-size: contain;
@@ -58,7 +58,7 @@
   margin-top: 5vh;
   height: 50vh;
   width: 20vw;
-  background-image: url("../../shared/ui/images/city/hiveBuilding.png");
+  background-image: url("../../shared/ui/images/city/hiveBuilding.webp");
   background-size: contain;
   cursor: pointer;
   background-repeat: no-repeat;
@@ -80,7 +80,7 @@
   display: inline-block;
   height: 50vh;
   width: 20vw;
-  background-image: url("../../shared/ui/images/city/market.png");
+  background-image: url("../../shared/ui/images/city/market.webp");
   filter: $glow;
   background-repeat: no-repeat;
   background-position: center;
@@ -105,7 +105,7 @@
 .landlordLounge {
   height: 65vh;
   width: 14vw;
-  background-image: url("../../shared/ui/images/city/scyscraper.png");
+  background-image: url("../../shared/ui/images/city/scyscraper.webp");
   filter: $glow;
   background-size: contain !important;
   cursor: pointer;
@@ -126,7 +126,7 @@
   height: 20vh;
   width: 20vw;
   margin-left: 35%;
-  background-image: url("../../shared/ui/images/city/specialists.png");
+  background-image: url("../../shared/ui/images/city/specialists.webp");
   filter: $glow;
   background-size: contain !important;
   cursor: pointer;
