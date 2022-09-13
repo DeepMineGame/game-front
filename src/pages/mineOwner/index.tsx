@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, useAccountName, useReloadPage } from 'shared';
+import { Header, useAccountName, useReloadPage, useUserLocation } from 'shared';
 import { useStore } from 'effector-react';
 import {
     MineOwnerMenu,
@@ -7,7 +7,6 @@ import {
     Hologram,
     Travel,
     $mineOwnerCabinState,
-    mineOwnerCabinState,
 } from 'features';
 
 import { LOCATION_TO_ID } from 'entities/smartcontract';
@@ -16,6 +15,7 @@ import styles from './styles.module.scss';
 export const MineOwnerPage = () => {
     const chainAccountName = useAccountName();
     const reloadPage = useReloadPage();
+    const inLocation = useUserLocation();
 
     const cabinState = useStore($mineOwnerCabinState);
 
@@ -33,7 +33,7 @@ export const MineOwnerPage = () => {
                     accountName={chainAccountName}
                 />
             )}
-            {cabinState === mineOwnerCabinState.needPhysicalShift && (
+            {!inLocation.mineDeck && (
                 <Travel
                     toLocationId={LOCATION_TO_ID.mine_deck}
                     onSuccess={reloadPage}
