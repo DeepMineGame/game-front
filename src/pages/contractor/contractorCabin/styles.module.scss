@@ -7,27 +7,27 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: url("../../../shared/ui/images/contractor/Dark_Gray.jpg") no-repeat right center fixed;
+  background: url("../../../shared/ui/images/contractor/dark-gray.webp") no-repeat right center fixed;
   background-color: $color-extra-background-3;
   background-size: cover;
 
   &DarkRed {
-    background: url("../../../shared/ui/images/contractor/Dark_Red.jpg") no-repeat right center fixed;
+    background: url("../../../shared/ui/images/contractor/dark-red.webp") no-repeat right center fixed;
     background-size: cover;
   }
 
   &LightGreen {
-    background: url("../../../shared/ui/images/contractor/Light_Green.jpg") no-repeat right center fixed;
+    background: url("../../../shared/ui/images/contractor/light-green.webp") no-repeat right center fixed;
     background-size: cover;
   }
 
   &LightRed {
-    background: url("../../../shared/ui/images/contractor/Light_Red.jpg") no-repeat right center fixed;
+    background: url("../../../shared/ui/images/contractor/light-red.webp") no-repeat right center fixed;
     background-size: cover;
   }
 
   &LightYellow {
-    background: url("../../../shared/ui/images/contractor/Light_Yellow.jpg") no-repeat right center fixed;
+    background: url("../../../shared/ui/images/contractor/light-yellow.webp") no-repeat right center fixed;
     background-size: cover;
   }
 

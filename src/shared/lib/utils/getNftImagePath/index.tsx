@@ -51,7 +51,7 @@ export type TemplateIdType = keyof typeof TEST_NET_ASSETS_ID_MAP;
 export const getImagePath = (templateId: TemplateIdType) => {
     const ID = TEST_NET_ASSETS_ID_MAP[templateId] || templateId;
     const isGif = GIF_IMAGES.some((gifId) => gifId === ID);
-    const ext = isGif ? 'gif' : 'png';
+    const ext = isGif ? 'gif' : 'webp';
 
     return `/img/cards/${ID}.${ext}`;
 };
