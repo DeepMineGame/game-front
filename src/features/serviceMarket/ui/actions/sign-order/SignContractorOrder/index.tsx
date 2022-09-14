@@ -5,7 +5,11 @@ import { ExclamationCircleFilled } from '@ant-design/icons';
 import { ATOMICHUB_URL } from 'app/constants';
 import { Button, Result, Text, Select, useReloadPage, success } from 'shared';
 import { useSmartContractAction } from 'features/hooks';
-import { MinesGate, minesStore } from 'entities/contract';
+import {
+    MinesGate,
+    minesStore,
+    userAtomicAssetsMinesStore,
+} from 'entities/contract';
 import {
     ContractDto,
     ContractorSlots,
@@ -40,6 +44,7 @@ const SignContractorOrder: FC<Props> = ({ contract, accountName }) => {
 
     useGate(MinesGate, { searchParam: accountName });
     const mines = useStore(minesStore);
+    const atomicMines = useStore(userAtomicAssetsMinesStore);
 
     const emptySlot = getEmptySlot(mines[0]?.contractor_slots ?? []);
 
@@ -106,10 +111,16 @@ const SignContractorOrder: FC<Props> = ({ contract, accountName }) => {
                         onChange={setMineId}
                         className={styles.select}
                         placeholder={t('pages.serviceMarket.order.selectMine')}
-                        options={mines.map(({ id }) => ({
-                            value: id,
-                            label: `ID${id}`,
-                        }))}
+                        options={[
+                            ...mines.map(({ id }) => ({
+                                value: id,
+                                label: `ID ${id}`,
+                            })),
+                            ...atomicMines.map(({ asset_id }) => ({
+                                value: asset_id,
+                                label: `ID ${asset_id}`,
+                            })),
+                        ]}
                     />
                 </div>
             </SignModal>

@@ -1,6 +1,13 @@
 import { createEffect, createStore, forward } from 'effector';
 import { createGate } from 'effector-react';
-import { getMinesEffect, MineDto, searchBy } from 'entities/smartcontract';
+import { getAtomicAssetsByUser } from 'entities/atomicassets';
+import {
+    getMinesEffect,
+    mineAssetTemplateId,
+    MineDto,
+    searchBy,
+    UserInventoryType,
+} from 'entities/smartcontract';
 
 const getMinesByOwnerEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
@@ -18,7 +25,15 @@ export const minesStore = createStore<MineDto[]>([]).on(
     (_, { rows }) => rows
 );
 
+export const getAtomicAssetsEffect = createEffect(getAtomicAssetsByUser);
+
+export const userAtomicAssetsMinesStore = createStore<UserInventoryType[]>(
+    []
+).on(getAtomicAssetsEffect.doneData, (_, payload) =>
+    payload?.filter(({ template_id }) => template_id === mineAssetTemplateId)
+);
+
 forward({
     from: MinesGate.open,
-    to: getMinesByOwnerEffect,
+    to: [getMinesByOwnerEffect, getAtomicAssetsEffect],
 });
