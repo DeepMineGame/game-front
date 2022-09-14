@@ -4,7 +4,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import { FC } from 'react';
 import { Button, Segmented, useAccountName } from 'shared';
 import { createOrder } from 'app/router/paths';
-import { Col, Row, Space } from 'antd';
+import { Col, Row } from 'antd';
 import { LevelUpgradeContractsTable } from 'shared/ui';
 import { FilterByRole } from './model';
 
@@ -35,15 +35,13 @@ export const LevelUpgrade: FC = () => {
                         onChange={() => {}}
                         value={undefined}
                     />
-                    <Space>
-                        <Button
-                            type="primary"
-                            onClick={() => navigate(createOrder)}
-                            icon={<PlusOutlined />}
-                        >
-                            {t('pages.serviceMarket.createOrder.createOrder')}
-                        </Button>
-                    </Space>
+                    <Button
+                        type="primary"
+                        onClick={() => navigate(createOrder)}
+                        icon={<PlusOutlined />}
+                    >
+                        {t('pages.serviceMarket.createOrder.createOrder')}
+                    </Button>
                 </Row>
             </Col>
             <Col span={24}>
