@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
-import { t } from 'i18next';
-import { ContractDto, contractName } from 'entities/smartcontract';
+import { useTranslation } from 'react-i18next';
+import { ContractDto, EngineerSchema } from 'entities/smartcontract';
 import { Link, Table } from '../../ui-kit';
 import { toLocaleDate } from '../../utils';
 
@@ -8,20 +8,37 @@ type Props = {
     contracts: ContractDto[];
 };
 
+const upgradeType = {
+    [EngineerSchema.mine]: 'mine',
+    // eslint-disable-next-line no-underscore-dangle
+    [EngineerSchema.module_]: 'mineModule',
+    [EngineerSchema.equipment]: 'equipment',
+};
+
 export const LevelUpgradeContractsTable: FC<Props> = ({ contracts }) => {
+    const { t } = useTranslation();
+
     const dataSource = useMemo(
         () =>
             contracts.map((contract) => ({
                 nickName: contract.client || contract.executor || '-',
                 key: contract.id,
                 reputation: '-',
-                type: contractName[contract.type],
+                type: t(
+                    `pages.serviceMarket.levelUpgradeTab.type.${
+                        upgradeType[
+                            Number(
+                                contract.attrs[2].value
+                            ) as keyof typeof upgradeType
+                        ]
+                    }`
+                ),
                 creationDate: contract.create_time,
                 cost: contract.cost_of_execution,
                 startOf: contract.start_time,
                 penalty: contract.penalty_amount,
             })),
-        [contracts]
+        [t, contracts]
     );
 
     return (

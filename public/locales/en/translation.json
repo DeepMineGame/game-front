@@ -487,7 +487,12 @@
         "upgradeType": "Upgrade type",
         "startOfOperations": "Start of operations",
         "lookingForEngineer": "Looking for Engineer",
-        "lookingForCitizen": "Looking for Citizen"
+        "lookingForCitizen": "Looking for Citizen",
+        "type": {
+          "mine": "Mine",
+          "mineModule": "Mine module",
+          "equipment": "Equipment"
+        }
       }
     },
     "areaManagement": {
