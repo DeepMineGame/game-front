@@ -6,6 +6,7 @@ import {
     ContractDto,
     ID_TO_INVENTORY,
     INVENTORY_NAMES,
+    miningEquipmentNames,
     UserHistoryType,
     UserInventoryType,
 } from 'entities/smartcontract';
@@ -37,7 +38,7 @@ const getEquipments = (inventoryNames: string[]) => {
     return INVENTORY_NAMES.map((name) => ({
         name,
         isAvailable: inventoryNames.includes(name),
-    })).filter((v) => v.name);
+    })).filter((v) => miningEquipmentNames.includes(v.name));
 };
 
 export const ContractorCabinContent = ({
@@ -62,13 +63,13 @@ export const ContractorCabinContent = ({
         return <SignContract />;
     }
 
-    if (inventoryNames.length < INVENTORY_NAMES.length) {
+    if (inventoryNames.length < miningEquipmentNames.length) {
         setStatus(CABIN_STATUS.welcome);
         const equipments = getEquipments(inventoryNames);
         return <Welcome equipments={equipments} />;
     }
 
-    if (activeInventoryNames.length < INVENTORY_NAMES.length) {
+    if (activeInventoryNames.length < miningEquipmentNames.length) {
         setStatus(CABIN_STATUS.setup);
         const equipments = getEquipments(activeInventoryNames);
         return <Setup hasShift={hasPhysicalShift} equipments={equipments} />;
