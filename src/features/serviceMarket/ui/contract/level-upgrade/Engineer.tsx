@@ -7,8 +7,7 @@ import { ContractProps } from '../../../types';
 const Engineer: FC<ContractProps> = ({ contract, accountName }) => {
     const { t } = useTranslation();
 
-    const member = contract.client;
-    // todo: use dynamic values
+    const member = contract.executor;
     const mineOwnerData = {
         [t('pages.serviceMarket.contract.wallet')]: member || '-',
         [t('roles.engineer')]: (
@@ -19,8 +18,8 @@ const Engineer: FC<ContractProps> = ({ contract, accountName }) => {
                 <Text type="primary">{member || '-'}</Text>
             </>
         ),
-        [t('pages.serviceMarket.reputation')]: '123',
-        [t('pages.serviceMarket.successProbability')]: '95%',
+        [t('pages.serviceMarket.reputation')]: '-',
+        [t('pages.serviceMarket.successProbability')]: '-',
     };
 
     return <TableWithTitle title={t('roles.engineer')} data={mineOwnerData} />;

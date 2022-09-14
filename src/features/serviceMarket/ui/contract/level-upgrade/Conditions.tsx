@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ContractDto } from 'entities/smartcontract';
 import { TableWithTitle } from '../..';
@@ -10,20 +10,21 @@ type Props = {
 const Conditions: FC<Props> = ({ contract }) => {
     const { t } = useTranslation();
 
-    const isCitizen = false;
+    const isCitizen = !!contract.client && !contract.executor;
+    const [level, rarity, schema] = contract.attrs;
 
     // todo: use dynamic values
     const conditionData = {
-        [t('pages.serviceMarket.upgrade')]: 'Mine, rare, level 3',
+        [t(
+            'pages.serviceMarket.upgrade'
+        )]: `${schema?.value}, ${rarity?.value}, level ${level?.value}`,
         [t('pages.serviceMarket.startOperations')]: '12h',
-        [t('pages.serviceMarket.costOfExecution')]: `1 ${t(
-            'components.common.button.dme'
-        )}`,
+        [t('pages.serviceMarket.costOfExecution')]: `${
+            contract.cost_of_execution
+        } ${t('components.common.button.dme')}`,
         [t('pages.serviceMarket.contract.penalty')]: `${
             contract.penalty_amount
         } ${t('components.common.button.dme')}`,
-        // todo: fix
-        // @ts-ignore
         ...(isCitizen && {
             [t('pages.serviceMarket.insurance')]: `0.2 ${t(
                 'components.common.button.dme'

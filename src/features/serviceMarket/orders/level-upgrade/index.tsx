@@ -21,8 +21,7 @@ const LevelUpgradeOrder: FC<ContractProps> = ({ contract, accountName }) => {
     const { t } = useTranslation();
     const { canDeleteOrder } = useOrderDelete(contract, accountName);
 
-    // todo: check role
-    const creatorRole = 'engineer';
+    const creatorRole = contract.executor ? 'engineer' : 'citizen';
     const Creator = creators[creatorRole];
 
     return (
