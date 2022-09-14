@@ -1,14 +1,9 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { PlusOutlined } from '@ant-design/icons';
 import { useEvent, useGate, useStore } from 'effector-react';
-import { Empty, Skeleton } from 'antd';
-
-import { Button, Segmented } from 'shared';
-import { createOrder } from 'app/router/paths';
+import { Skeleton } from 'antd';
+import { Segmented } from 'shared';
 import { MiningContractsTable } from '../mining-contracts/MiningContractsTable';
-import styles from '../mining-contracts/styles.module.scss';
+import { TabHeader } from '../tab-header';
 import {
     changeFilterEvent,
     Filter,
@@ -20,7 +15,6 @@ import {
 
 export const MineOperationContracts = () => {
     useGate(MineOperationContractsGate);
-    const navigate = useNavigate();
     const { t } = useTranslation();
 
     const contracts = useStore(filteredMineOperationContractsStore);
@@ -33,17 +27,13 @@ export const MineOperationContracts = () => {
         changeFilter(newFilter as Filter);
     };
 
-    const handleCreateOrder = () => {
-        navigate(createOrder);
-    };
-
     if (isLoading) {
         return <Skeleton />;
     }
 
     return (
-        <div>
-            <nav className={styles.nav}>
+        <TabHeader
+            filters={
                 <Segmented
                     options={[
                         {
@@ -58,19 +48,8 @@ export const MineOperationContracts = () => {
                     onChange={handleFilterChange}
                     value={filter}
                 />
-                <Button
-                    type="primary"
-                    onClick={handleCreateOrder}
-                    icon={<PlusOutlined />}
-                >
-                    {t('pages.serviceMarket.createOrder.createOrder')}
-                </Button>
-            </nav>
-            {contracts.length ? (
-                <MiningContractsTable contracts={contracts} />
-            ) : (
-                <Empty />
-            )}
-        </div>
+            }
+            table={<MiningContractsTable contracts={contracts} />}
+        />
     );
 };
