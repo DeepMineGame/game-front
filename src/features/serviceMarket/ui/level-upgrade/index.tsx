@@ -2,16 +2,38 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { PlusOutlined } from '@ant-design/icons';
 import { FC } from 'react';
-import { Button, Segmented, useAccountName } from 'shared';
+import { Button, Segmented } from 'shared';
 import { createOrder } from 'app/router/paths';
-import { Col, Row } from 'antd';
+import { Col, Row, Skeleton } from 'antd';
+import { useEvent, useGate, useStore } from 'effector-react';
 import { LevelUpgradeContractsTable } from 'shared/ui';
-import { FilterByRole } from './model';
+import {
+    changeFilterEvent,
+    Filter,
+    filteredLevelUpgradeContractsStore,
+    filterStore,
+    getLevelUpgradeContractsEffect,
+    LevelUpgradeContractsGate,
+} from './model';
 
 export const LevelUpgrade: FC = () => {
+    useGate(LevelUpgradeContractsGate);
     const { t } = useTranslation();
     const navigate = useNavigate();
-    const accountName = useAccountName();
+
+    const contracts = useStore(filteredLevelUpgradeContractsStore);
+    const isLoading = useStore(getLevelUpgradeContractsEffect.pending);
+    const filter = useStore(filterStore);
+
+    const changeFilter = useEvent(changeFilterEvent);
+
+    const handleFilterChange = (newFilter: string | number) => {
+        changeFilter(newFilter as Filter);
+    };
+
+    if (isLoading) {
+        return <Skeleton />;
+    }
 
     return (
         <Row gutter={[0, 18]}>
@@ -20,20 +42,20 @@ export const LevelUpgrade: FC = () => {
                     <Segmented
                         options={[
                             {
-                                value: FilterByRole.LookingForEngineer,
+                                value: Filter.LookingForEngineer,
                                 label: t(
                                     'pages.serviceMarket.levelUpgradeTab.lookingForEngineer'
                                 ),
                             },
                             {
-                                value: FilterByRole.LookingForCitizen,
+                                value: Filter.LookingForCitizen,
                                 label: t(
                                     'pages.serviceMarket.levelUpgradeTab.lookingForCitizen'
                                 ),
                             },
                         ]}
-                        onChange={() => {}}
-                        value={undefined}
+                        onChange={handleFilterChange}
+                        value={filter}
                     />
                     <Button
                         type="primary"
@@ -45,12 +67,7 @@ export const LevelUpgrade: FC = () => {
                 </Row>
             </Col>
             <Col span={24}>
-                {accountName && (
-                    <LevelUpgradeContractsTable
-                        contracts={[]}
-                        accountName={accountName}
-                    />
-                )}
+                <LevelUpgradeContractsTable contracts={contracts} />
             </Col>
         </Row>
     );

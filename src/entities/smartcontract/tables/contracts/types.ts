@@ -56,6 +56,7 @@ export type ContractDto = {
     ];
     signed_by_client: number;
     signed_by_executor: number;
+    cost_of_execution: number;
 };
 
 export const contractName = {

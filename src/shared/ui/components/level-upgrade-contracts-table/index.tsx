@@ -1,81 +1,27 @@
 import { FC, useMemo } from 'react';
-import { serviceMarket } from 'app/router/paths';
 import { t } from 'i18next';
-import { ContractState } from 'features';
-import { DiscordIcon } from 'shared';
-import { Space, Tooltip } from 'antd';
 import { ContractDto, contractName } from 'entities/smartcontract';
-import { getUserRoleInContract } from 'shared/lib/utils';
-import { Link, Table, Tag } from '../../ui-kit';
+import { Link, Table } from '../../ui-kit';
 import { toLocaleDate } from '../../utils';
 
 type Props = {
     contracts: ContractDto[];
-    accountName: string;
 };
 
-export const LevelUpgradeContractsTable: FC<Props> = ({
-    contracts,
-    accountName,
-}) => {
+export const LevelUpgradeContractsTable: FC<Props> = ({ contracts }) => {
     const dataSource = useMemo(
         () =>
-            contracts.map((contract) => {
-                const partnerNickname =
-                    contract.client === accountName
-                        ? contract.executor
-                        : contract.client;
-                const role = !partnerNickname
-                    ? null
-                    : getUserRoleInContract(contract, partnerNickname);
-
-                return {
-                    nickName: (
-                        <Space align="start" size="large">
-                            <Tooltip
-                                overlay={t('components.common.comingSoon')}
-                            >
-                                <DiscordIcon cursor="pointer" />
-                            </Tooltip>
-                            <Space align="center" size={0}>
-                                <Link
-                                    to={`${serviceMarket}/contract/${contract.id}`}
-                                >
-                                    {partnerNickname || '-'}
-                                </Link>
-                                {role && (
-                                    <Tag kind="secondary">
-                                        {t(
-                                            `roles.${
-                                                role ===
-                                                    'mineOwnerContractor' ||
-                                                role === 'mineOwnerLandlord'
-                                                    ? 'mineOwner'
-                                                    : role
-                                            }`
-                                        )}
-                                    </Tag>
-                                )}
-                            </Space>
-                        </Space>
-                    ),
-                    key: contract.id,
-                    reputation: '-',
-                    type: contractName[contract.type],
-                    date:
-                        contract.finishes_at === 0
-                            ? '-'
-                            : toLocaleDate(contract.finishes_at * 1000),
-                    penalty: contract.penalty_amount,
-                    status: (
-                        <ContractState
-                            contract={contract}
-                            accountName={accountName}
-                        />
-                    ),
-                };
-            }),
-        [accountName, contracts]
+            contracts.map((contract) => ({
+                nickName: contract.client || contract.executor || '-',
+                key: contract.id,
+                reputation: '-',
+                type: contractName[contract.type],
+                creationDate: contract.create_time,
+                cost: contract.cost_of_execution,
+                startOf: contract.start_time,
+                penalty: contract.penalty_amount,
+            })),
+        [contracts]
     );
 
     return (
@@ -85,6 +31,11 @@ export const LevelUpgradeContractsTable: FC<Props> = ({
                     title: t('pages.serviceMarket.levelUpgradeTab.nickname'),
                     dataIndex: 'nickName',
                     key: 'nickName',
+                    render: (value, props) => (
+                        <Link to={`/service-market/contract/${props.key}`}>
+                            {value}
+                        </Link>
+                    ),
                 },
                 {
                     title: t('pages.serviceMarket.levelUpgradeTab.reputation'),
@@ -97,28 +48,36 @@ export const LevelUpgradeContractsTable: FC<Props> = ({
                     ),
                     dataIndex: 'creationDate',
                     key: 'creationDate',
+                    render: (value) => toLocaleDate(value * 1000),
+                    sorter: (a, b) => a.creationDate - b.creationDate,
                 },
                 {
                     title: t('pages.serviceMarket.levelUpgradeTab.cost'),
                     dataIndex: 'cost',
                     key: 'cost',
+                    sorter: (a, b) => a.cost - b.cost,
                 },
                 {
                     title: t('pages.serviceMarket.levelUpgradeTab.penalty'),
                     dataIndex: 'penalty',
                     key: 'penalty',
+                    sorter: (a, b) => a.penalty - b.penalty,
                 },
                 {
                     title: t('pages.serviceMarket.levelUpgradeTab.upgradeType'),
                     dataIndex: 'type',
                     key: 'type',
+                    sorter: (a, b) => a.type.length - b.type.length,
                 },
                 {
                     title: t(
                         'pages.serviceMarket.levelUpgradeTab.startOfOperations'
                     ),
-                    dataIndex: 'startOfOperations',
-                    key: 'startOfOperations',
+                    dataIndex: 'startOf',
+                    key: 'startOf',
+                    sorter: (a, b) => a.startOf - b.startOf,
+                    render: (value) =>
+                        value ? toLocaleDate(value * 1000) : '-',
                 },
             ]}
             dataSource={dataSource}
