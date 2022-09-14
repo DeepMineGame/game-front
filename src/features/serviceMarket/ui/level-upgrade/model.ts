@@ -27,7 +27,7 @@ export const getLevelUpgradeContractsEffect = createEffect(() =>
         getContractsNameConfig(
             ContractType.citizen_engineer,
             mapSearchParamForIndexPositionToFindContracts.contractType,
-            150
+            1000
         )
     )
 );
