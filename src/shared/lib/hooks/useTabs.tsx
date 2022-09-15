@@ -1,12 +1,11 @@
 import { Skeleton } from 'antd';
-import { useStore } from 'effector-react';
+import { useGate, useStore } from 'effector-react';
 import { MineAreaInfo, MineCrew, MiningStats } from 'features';
-import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
+    ContractsGate,
     contractStore,
     ContractType,
-    getContractByExecutorEffect,
 } from 'entities/smartcontract';
 import { Contract, Tab } from 'shared/ui';
 import { useAccountName } from './useAccountName';
@@ -19,14 +18,10 @@ enum StatsAndInfoTab {
 }
 
 export const useTabs = (as: ContractType): Tab[] => {
+    useGate(ContractsGate);
     const { t } = useTranslation();
     const contracts = useStore(contractStore);
     const userAccountName = useAccountName();
-
-    useEffect(() => {
-        if (userAccountName)
-            getContractByExecutorEffect({ searchParam: userAccountName });
-    }, [userAccountName]);
 
     const contract = contracts?.filter(({ type }) => type === as)?.[0];
 
