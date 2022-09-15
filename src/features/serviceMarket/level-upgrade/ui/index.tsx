@@ -3,16 +3,16 @@ import { FC } from 'react';
 import { Segmented } from 'shared';
 import { Skeleton } from 'antd';
 import { useEvent, useGate, useStore } from 'effector-react';
+import { TabHeader } from 'features/serviceMarket';
 import { LevelUpgradeContractsTable } from 'shared/ui';
-import { TabHeader } from '../tab-header';
 import {
-    changeFilterEvent,
-    Filter,
+    levelUpgradeChangeFilterEvent,
+    LevelUpgradeFilter,
     filteredLevelUpgradeContractsStore,
-    filterStore,
+    levelUpgradeFilterStore,
     getLevelUpgradeContractsEffect,
     LevelUpgradeContractsGate,
-} from './model';
+} from '../model';
 
 export const LevelUpgrade: FC = () => {
     useGate(LevelUpgradeContractsGate);
@@ -20,12 +20,12 @@ export const LevelUpgrade: FC = () => {
 
     const contracts = useStore(filteredLevelUpgradeContractsStore);
     const isLoading = useStore(getLevelUpgradeContractsEffect.pending);
-    const filter = useStore(filterStore);
+    const filter = useStore(levelUpgradeFilterStore);
 
-    const changeFilter = useEvent(changeFilterEvent);
+    const changeFilter = useEvent(levelUpgradeChangeFilterEvent);
 
     const handleFilterChange = (newFilter: string | number) => {
-        changeFilter(newFilter as Filter);
+        changeFilter(newFilter as LevelUpgradeFilter);
     };
 
     if (isLoading) {
@@ -38,13 +38,13 @@ export const LevelUpgrade: FC = () => {
                 <Segmented
                     options={[
                         {
-                            value: Filter.LookingForEngineer,
+                            value: LevelUpgradeFilter.LookingForEngineer,
                             label: t(
                                 'pages.serviceMarket.levelUpgradeTab.lookingForEngineer'
                             ),
                         },
                         {
-                            value: Filter.LookingForCitizen,
+                            value: LevelUpgradeFilter.LookingForCitizen,
                             label: t(
                                 'pages.serviceMarket.levelUpgradeTab.lookingForCitizen'
                             ),

@@ -14,13 +14,13 @@ import {
     mapSearchParamForIndexPositionToFindContracts,
 } from 'entities/smartcontract';
 
-export enum Filter {
+export enum LevelUpgradeFilter {
     LookingForEngineer,
     LookingForCitizen,
 }
 
 export const LevelUpgradeContractsGate = createGate();
-export const changeFilterEvent = createEvent<Filter>();
+export const levelUpgradeChangeFilterEvent = createEvent<LevelUpgradeFilter>();
 
 export const getLevelUpgradeContractsEffect = createEffect(() =>
     getTableData(
@@ -40,16 +40,15 @@ export const levelUpgradeContractsStore = createStore<ContractDto[]>([]).on(
         ) ?? []
 );
 
-export const filterStore = createStore<Filter>(Filter.LookingForCitizen).on(
-    changeFilterEvent,
-    (_state, filter) => filter
-);
+export const levelUpgradeFilterStore = createStore<LevelUpgradeFilter>(
+    LevelUpgradeFilter.LookingForCitizen
+).on(levelUpgradeChangeFilterEvent, (_state, filter) => filter);
 
 export const filteredLevelUpgradeContractsStore = combine(
     levelUpgradeContractsStore,
-    filterStore,
+    levelUpgradeFilterStore,
     (contracts, filter) => {
-        if (filter === Filter.LookingForCitizen) {
+        if (filter === LevelUpgradeFilter.LookingForCitizen) {
             return contracts.filter((contract) => !contract.client);
         }
 

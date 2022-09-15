@@ -6,3 +6,4 @@ export * from './contracts-table/model';
 export * from './ui';
 export * from './orders';
 export * from './contracts';
+export * from './level-upgrade';
