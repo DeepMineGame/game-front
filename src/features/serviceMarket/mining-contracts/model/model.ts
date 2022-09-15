@@ -14,13 +14,15 @@ import {
     mapSearchParamForIndexPositionToFindContracts,
 } from 'entities/smartcontract';
 
-export enum Filter {
+export enum MiningContractsFilter {
     LookingForMineOwner,
     LookingForContractor,
 }
 
+// TODO: use common contracts gate
 export const MiningContractsGate = createGate();
-export const changeFilterEvent = createEvent<Filter>();
+export const miningContractsChangeFilterEvent =
+    createEvent<MiningContractsFilter>();
 
 export const getMiningContractsEffect = createEffect(() =>
     getTableData(
@@ -40,16 +42,15 @@ export const miningContractsStore = createStore<ContractDto[]>([]).on(
         ) ?? []
 );
 
-export const filterStore = createStore<Filter>(Filter.LookingForMineOwner).on(
-    changeFilterEvent,
-    (_state, filter) => filter
-);
+export const miningContractsFilterStore = createStore<MiningContractsFilter>(
+    MiningContractsFilter.LookingForMineOwner
+).on(miningContractsChangeFilterEvent, (_state, filter) => filter);
 
 export const filteredMiningContractsStore = combine(
     miningContractsStore,
-    filterStore,
+    miningContractsFilterStore,
     (contracts, filter) => {
-        if (filter === Filter.LookingForMineOwner) {
+        if (filter === MiningContractsFilter.LookingForMineOwner) {
             return contracts.filter((contract) => !contract.client);
         }
 

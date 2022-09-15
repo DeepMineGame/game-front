@@ -1,5 +1,6 @@
-import { createEffect, createStore } from 'effector';
+import { createEffect, createStore, forward } from 'effector';
 import { getTableData } from 'shared';
+import { createGate } from 'effector-react';
 import { deepminesmrt, GetTableDataConfigType } from 'entities/smartcontract';
 import { ContractDto } from './types';
 
@@ -10,6 +11,10 @@ export enum mapSearchParamForIndexPositionToFindContracts {
     clientId,
     executorId,
 }
+
+export const ContractsGate = createGate<{ searchParam: string }>(
+    'ContractsGate'
+);
 
 export const getContractConfig = ({
     searchParam,
@@ -65,6 +70,8 @@ export const getContractsNameConfig = (
         limit,
     } as GetTableDataConfigType;
 };
+
+forward({ from: ContractsGate.open, to: getContractByExecutorEffect });
 
 export * from './types';
 export * from './status';

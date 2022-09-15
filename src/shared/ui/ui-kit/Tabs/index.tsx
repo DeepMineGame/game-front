@@ -1,19 +1,21 @@
-import React, { FC, ReactNode } from 'react';
-import { Tabs as TabsA } from 'antd';
-import { TabsProps } from 'antd/lib/tabs';
+import { FC, Key, memo, ReactNode } from 'react';
+import { Tabs as TabsAnt, TabsProps } from 'antd';
+
+export type Tab = {
+    tab: ReactNode;
+    key: Key;
+    children: ReactNode;
+    disabled?: boolean;
+};
 
 type Props = {
-    config: { tabName: string; tabContent: ReactNode; disabled?: boolean }[];
+    items: Tab[];
 } & TabsProps;
 
-export const Tabs: FC<Props> = ({ config, ...props }) => {
-    return (
-        <TabsA {...props}>
-            {config.map(({ tabName, tabContent, disabled }) => (
-                <TabsA.TabPane tab={tabName} key={tabName} disabled={disabled}>
-                    {tabContent}
-                </TabsA.TabPane>
-            ))}
-        </TabsA>
-    );
-};
+export const Tabs: FC<Props> = memo(({ items, ...props }) => (
+    <TabsAnt {...props}>
+        {items.map(({ children, ...tabProps }) => (
+            <TabsAnt.TabPane {...tabProps}>{children}</TabsAnt.TabPane>
+        ))}
+    </TabsAnt>
+));

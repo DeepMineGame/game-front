@@ -1,16 +1,26 @@
-import { PageWithTabs, Tab, useAccountName } from 'shared';
-import React from 'react';
-
+import { PageWithTabs, useAccountName } from 'shared';
 import { MineOwnerCrew } from 'features';
+import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
-export const MineOwnerMiningCrewPage = () => {
+export const MineOwnerMiningCrewPage: FC = () => {
     const accountName = useAccountName();
-    const tabs: Tab[] = [
-        {
-            id: 0,
-            component: accountName ? MineOwnerCrew : () => <div>No data</div>,
-            name: 'Mine crew',
-        },
-    ];
-    return <PageWithTabs title="MINE CREW" tabs={tabs} />;
+    const { t } = useTranslation();
+
+    return (
+        <PageWithTabs
+            title="MINE CREW"
+            tabs={[
+                {
+                    key: 0,
+                    children: accountName ? (
+                        <MineOwnerCrew />
+                    ) : (
+                        <div>{t('components.common.noData')}</div>
+                    ),
+                    tab: 'Mine crew',
+                },
+            ]}
+        />
+    );
 };

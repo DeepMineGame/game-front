@@ -1,6 +1,6 @@
-import Icon, { DesktopOutlined, ToolOutlined } from '@ant-design/icons';
-import React, { FC } from 'react';
-import { DrillBit, MenuItem } from 'shared';
+import { DesktopOutlined, ToolOutlined } from '@ant-design/icons';
+import { FC } from 'react';
+import { DrillBitOutlined, MenuItem } from 'shared';
 import { Config, ContractorMenuItems } from '../../types';
 import { useTooltipText } from '../../hooks';
 
@@ -11,7 +11,7 @@ type Props = {
 
 const icons = {
     [ContractorMenuItems.InfoPanel]: () => <DesktopOutlined />,
-    [ContractorMenuItems.MiningDeck]: () => <Icon component={DrillBit} />,
+    [ContractorMenuItems.MiningDeck]: () => <DrillBitOutlined />,
     [ContractorMenuItems.Equipment]: () => <ToolOutlined />,
 };
 

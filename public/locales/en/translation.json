@@ -360,6 +360,7 @@
       "miningContracts": "Mining contracts",
       "mineOperation": "Mine operation",
       "levelUpgradeOrder": "Level upgrade order",
+      "levelUpgrade": "Level upgrade",
       "miningOrder": "Mining order",
       "miningContract": "Mining contract",
       "mineOperationOrder": "Mine operation order",
@@ -476,6 +477,22 @@
         "completionDate": "Completion date",
         "penalty": "Penalty, DME",
         "status": "Status"
+      },
+      "levelUpgradeTab": {
+        "nickname": "Nickname",
+        "reputation": "Reputation",
+        "creationDate": "Creation date",
+        "cost": "Cost",
+        "penalty": "Penalty, DME",
+        "upgradeType": "Upgrade type",
+        "startOfOperations": "Start of operations",
+        "lookingForEngineer": "Looking for Engineer",
+        "lookingForCitizen": "Looking for Citizen",
+        "type": {
+          "mine": "Mine",
+          "mineModule": "Mine module",
+          "equipment": "Equipment"
+        }
       }
     },
     "areaManagement": {

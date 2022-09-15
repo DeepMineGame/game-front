@@ -18,7 +18,6 @@ export * from './Line';
 export * from './ProgressBar/NftProgressBar';
 export * from './ProgressBar/DepreciationProgressBar';
 export * from './KeyValueTable';
-export * from './Navbar';
 export * from './Table';
 export * from './Drawer';
 export * from './Tabs';
