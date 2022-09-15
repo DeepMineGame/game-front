@@ -3,13 +3,19 @@ export enum EngineerSchema {
     mine,
     equipment,
     factory,
-    module_,
+    module,
+}
+
+export enum EngineerSkillKey {
+    schema_type = 'schema_type',
+    level = 'level',
+    rarity = 'rarity',
 }
 
 export type EngineerSkill = {
-    schema_type: EngineerSchema;
-    level: number;
-    rarity: number;
+    [EngineerSkillKey.schema_type]: EngineerSchema;
+    [EngineerSkillKey.level]: number;
+    [EngineerSkillKey.rarity]: number;
 };
 
 export type EngineerType = {

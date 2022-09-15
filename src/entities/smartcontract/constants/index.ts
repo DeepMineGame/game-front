@@ -77,12 +77,12 @@ export const ID_TO_INVENTORY = {
     176873: 'Wandering Reactor',
     176872: 'Wandering Reactor',
     176871: 'Wandering Reactor',
-    176451: '',
+    176451: 'Mine',
+    314739: 'Mine',
     [ENGINEER_CERTIFICATE_ID]: 'Engineer Certificate', // todo: replace for actual
-    0: '',
 } as const;
 
-export const mineAssetTemplateId = isMainNet ? 0 : 176451;
+export const mineAssetTemplateId = isMainNet ? 314739 : 176451;
 export const areasAssetTemplateId = isMainNet
     ? [314749, 314748, 314747, 314744, 314743]
     : [176450, 176449, 176448, 176447, 176446];

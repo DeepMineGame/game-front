@@ -5,10 +5,10 @@ import {
     Button,
     Logo,
     getImagePath,
-    TemplateIdType,
     DepreciationProgressBar,
     neutral4,
 } from 'shared';
+import { InventoryIdType } from 'entities/smartcontract';
 import { ProgressProps } from '../ProgressBar/NftProgressBar';
 import styles from './styles.module.scss';
 import { CardBadge } from './components/CardBadge';
@@ -24,7 +24,7 @@ type Props = {
     buttonClassName?: string;
     onClick?: (e: any) => void;
     className?: string;
-    templateId?: TemplateIdType;
+    templateId?: InventoryIdType;
 } & ProgressProps;
 
 export const Card: FC<Props> = ({

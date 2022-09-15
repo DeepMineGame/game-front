@@ -2,12 +2,15 @@ import { DMECoinIcon, Modal, getImagePath } from 'shared';
 import React, { FC, useState, useEffect, useCallback } from 'react';
 import { ModalProps, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { serviceMarket } from 'app/router/paths';
+import { ServiceMarketTabIds } from 'app/router/constants';
 import { AssetDataType, getAtomicAssetsDataById } from 'entities/atomicassets';
 import { UserInventoryType } from 'entities/smartcontract';
 import {
     ActionModal,
     DepreciationProgressBar,
     Line,
+    Link,
     NftProgressBar,
 } from 'shared/ui/ui-kit';
 import styles from './styles.module.scss';
@@ -95,15 +98,11 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             <div className={styles.value}>
                                 {cardData?.data.rarity}
                             </div>
-                            <div className={styles.action}>
-                                <Tooltip
-                                    overlay={t('components.common.comingSoon')}
-                                    mouseEnterDelay={0}
-                                    mouseLeaveDelay={0}
-                                >
-                                    {t('pages.equipmentSet.cardModal.upgrade')}
-                                </Tooltip>
-                            </div>
+                            <Link
+                                to={`${serviceMarket}?tabId=${ServiceMarketTabIds.levelUpgrade}`}
+                            >
+                                {t('pages.equipmentSet.cardModal.upgrade')}
+                            </Link>
                         </Line>
                         <Line className={styles.infoLine}>
                             <div className={styles.key}>

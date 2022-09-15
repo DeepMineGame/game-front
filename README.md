@@ -32,8 +32,6 @@ Some routes and API calls need developer-VPN access, so some pages will not open
 
 In this project we use [Feature-Sliced Design architect](https://feature-sliced.design/en/).
 
-For quick development, we store the ui-kit inside the application, but in future it will be in separate npm package.
-
 In the project directory, you can run:
 
 ### `npm start`
