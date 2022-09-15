@@ -2,16 +2,16 @@ import { useTranslation } from 'react-i18next';
 import { useEvent, useGate, useStore } from 'effector-react';
 import { Skeleton } from 'antd';
 import { Segmented } from 'shared';
-import { MiningContractsTable } from '../mining-contracts/MiningContractsTable';
-import { TabHeader } from '../tab-header';
+import { MiningContractsTable } from '../../mining-contracts/ui/MiningContractsTable';
+import { TabGrid } from '../../ui/tab-grid';
 import {
-    changeFilterEvent,
-    Filter,
+    mineOperationChangeFilterEvent,
+    MineOperationFilter,
     filteredMineOperationContractsStore,
-    filterStore,
+    mineOperationFilterStore,
     getMineOperationContractsEffect,
     MineOperationContractsGate,
-} from './model';
+} from '../model/model';
 
 export const MineOperationContracts = () => {
     useGate(MineOperationContractsGate);
@@ -19,12 +19,12 @@ export const MineOperationContracts = () => {
 
     const contracts = useStore(filteredMineOperationContractsStore);
     const isLoading = useStore(getMineOperationContractsEffect.pending);
-    const filter = useStore(filterStore);
+    const filter = useStore(mineOperationFilterStore);
 
-    const changeFilter = useEvent(changeFilterEvent);
+    const changeFilter = useEvent(mineOperationChangeFilterEvent);
 
     const handleFilterChange = (newFilter: string | number) => {
-        changeFilter(newFilter as Filter);
+        changeFilter(newFilter as MineOperationFilter);
     };
 
     if (isLoading) {
@@ -32,16 +32,16 @@ export const MineOperationContracts = () => {
     }
 
     return (
-        <TabHeader
+        <TabGrid
             filters={
                 <Segmented
                     options={[
                         {
-                            value: Filter.LookingForMineOwner,
+                            value: MineOperationFilter.LookingForMineOwner,
                             label: t('pages.serviceMarket.lookingForMineOwner'),
                         },
                         {
-                            value: Filter.LookingForLandlord,
+                            value: MineOperationFilter.LookingForLandlord,
                             label: t('pages.serviceMarket.lookingForLandlord'),
                         },
                     ]}

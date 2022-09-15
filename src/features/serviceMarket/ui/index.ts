@@ -2,4 +2,4 @@ export * from './penalty';
 export * from './contract-state';
 export * from './my-contracts-table';
 export * from './table-title';
-export * from './tab-header';
+export * from './tab-grid';

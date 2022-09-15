@@ -19,6 +19,7 @@ export enum LevelUpgradeFilter {
     LookingForCitizen,
 }
 
+// TODO: use common contracts gate
 export const LevelUpgradeContractsGate = createGate();
 export const levelUpgradeChangeFilterEvent = createEvent<LevelUpgradeFilter>();
 

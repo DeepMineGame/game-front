@@ -5,7 +5,7 @@ import { FC, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 
-export const TabHeader: FC<{ filters: ReactNode; table: ReactNode }> = ({
+export const TabGrid: FC<{ filters: ReactNode; table: ReactNode }> = ({
     filters,
     table,
 }) => {

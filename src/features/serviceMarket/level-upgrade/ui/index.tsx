@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { Segmented } from 'shared';
 import { Skeleton } from 'antd';
 import { useEvent, useGate, useStore } from 'effector-react';
-import { TabHeader } from 'features/serviceMarket';
+import { TabGrid } from 'features/serviceMarket';
 import { LevelUpgradeContractsTable } from 'shared/ui';
 import {
     levelUpgradeChangeFilterEvent,
@@ -33,7 +33,7 @@ export const LevelUpgrade: FC = () => {
     }
 
     return (
-        <TabHeader
+        <TabGrid
             filters={
                 <Segmented
                     options={[

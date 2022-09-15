@@ -1,6 +1,10 @@
 import { FC, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ContractDto, EngineerSchema } from 'entities/smartcontract';
+import {
+    ContractDto,
+    EngineerSchema,
+    EngineerSkillKey,
+} from 'entities/smartcontract';
 import { Link, Table } from '../../ui-kit';
 import { toLocaleDate } from '../../utils';
 
@@ -10,10 +14,15 @@ type Props = {
 
 const upgradeType = {
     [EngineerSchema.mine]: 'mine',
-    // eslint-disable-next-line no-underscore-dangle
-    [EngineerSchema.module_]: 'mineModule',
+    [EngineerSchema.module]: 'mineModule',
     [EngineerSchema.equipment]: 'equipment',
 };
+
+const getUpgradeType = (contract: ContractDto) =>
+    Number(
+        contract.attrs.find((a) => a.key === EngineerSkillKey.schema_type)
+            ?.value
+    );
 
 export const LevelUpgradeContractsTable: FC<Props> = ({ contracts }) => {
     const { t } = useTranslation();
@@ -24,15 +33,18 @@ export const LevelUpgradeContractsTable: FC<Props> = ({ contracts }) => {
                 nickName: contract.client || contract.executor || '-',
                 key: contract.id,
                 reputation: '-',
-                type: t(
-                    `pages.serviceMarket.levelUpgradeTab.type.${
-                        upgradeType[
-                            Number(
-                                contract.attrs[2].value
-                            ) as keyof typeof upgradeType
-                        ]
-                    }`
-                ),
+                type:
+                    getUpgradeType(contract) === EngineerSchema.undefined
+                        ? '-'
+                        : t(
+                              `pages.serviceMarket.levelUpgradeTab.type.${
+                                  upgradeType[
+                                      getUpgradeType(
+                                          contract
+                                      ) as keyof typeof upgradeType
+                                  ]
+                              }`
+                          ),
                 creationDate: contract.create_time,
                 cost: contract.cost_of_execution,
                 startOf: contract.start_time,

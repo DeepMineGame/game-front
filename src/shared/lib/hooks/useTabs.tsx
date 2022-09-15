@@ -53,7 +53,7 @@ export const useTabs = (as: ContractType): Tab[] => {
             children: contract ? (
                 <Contract contract={contract} />
             ) : (
-                <div>No data</div>
+                <div>{t('components.common.noData')}</div>
             ),
             tab: t(
                 `pages.contractorStatsAndInfo.${

@@ -2,16 +2,16 @@ import { useTranslation } from 'react-i18next';
 import { useEvent, useGate, useStore } from 'effector-react';
 import { Skeleton } from 'antd';
 import { Segmented } from 'shared';
-import { TabHeader } from '../tab-header';
-import { MiningContractsTable } from './MiningContractsTable';
+import { TabGrid } from '../../ui/tab-grid';
 import {
-    changeFilterEvent,
-    Filter,
+    miningContractsChangeFilterEvent,
+    MiningContractsFilter,
     filteredMiningContractsStore,
-    filterStore,
+    miningContractsFilterStore,
     getMiningContractsEffect,
     MiningContractsGate,
-} from './model';
+} from '../model/model';
+import { MiningContractsTable } from './MiningContractsTable';
 
 export const MiningContracts = () => {
     useGate(MiningContractsGate);
@@ -19,12 +19,12 @@ export const MiningContracts = () => {
 
     const contracts = useStore(filteredMiningContractsStore);
     const isLoading = useStore(getMiningContractsEffect.pending);
-    const filter = useStore(filterStore);
+    const filter = useStore(miningContractsFilterStore);
 
-    const changeFilter = useEvent(changeFilterEvent);
+    const changeFilter = useEvent(miningContractsChangeFilterEvent);
 
     const handleFilterChange = (newFilter: string | number) => {
-        changeFilter(newFilter as Filter);
+        changeFilter(newFilter as MiningContractsFilter);
     };
 
     if (isLoading) {
@@ -32,16 +32,16 @@ export const MiningContracts = () => {
     }
 
     return (
-        <TabHeader
+        <TabGrid
             filters={
                 <Segmented
                     options={[
                         {
-                            value: Filter.LookingForMineOwner,
+                            value: MiningContractsFilter.LookingForMineOwner,
                             label: t('pages.serviceMarket.lookingForMineOwner'),
                         },
                         {
-                            value: Filter.LookingForContractor,
+                            value: MiningContractsFilter.LookingForContractor,
                             label: t(
                                 'pages.serviceMarket.lookingForContractor'
                             ),
