@@ -30,6 +30,7 @@ export const LevelUpgradeContractsTable: FC<Props> = ({ contracts }) => {
     const dataSource = useMemo(
         () =>
             contracts.map((contract) => ({
+                // TODO: what should display first?
                 nickName: contract.client || contract.executor || '-',
                 key: contract.id,
                 reputation: '-',
