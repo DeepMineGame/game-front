@@ -19,7 +19,7 @@ export const PageWithTabs: FC<Props> = memo(
     ({ tabs, documentTitleScope, title, className, defaultDocTitle }) => {
         const { t } = useTranslation();
         const query = useQuery();
-        const tabId = Number(query.get('tabId'));
+        const tabId = query.get('tabId');
         const navigate = useNavigate();
         const location = useLocation();
 
@@ -30,7 +30,7 @@ export const PageWithTabs: FC<Props> = memo(
             [location.pathname, navigate]
         );
 
-        const selectedTabData = tabs.find((tab) => tab.key === tabId);
+        const selectedTabData = tabs.find((tab) => tab.key === Number(tabId));
 
         return (
             <Page
@@ -50,7 +50,11 @@ export const PageWithTabs: FC<Props> = memo(
                     />
                 )}
                 {tabs?.length ? (
-                    <Tabs onChange={handleTabSelect} items={tabs} />
+                    <Tabs
+                        activeKey={tabId!}
+                        onChange={handleTabSelect}
+                        items={tabs}
+                    />
                 ) : (
                     <Empty />
                 )}

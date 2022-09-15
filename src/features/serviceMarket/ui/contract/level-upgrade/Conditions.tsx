@@ -1,5 +1,12 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import {
+    getUpgradeType,
+    getUpgradeRarity,
+    parseAttrs,
+    toLocaleDate,
+    secondsToDays,
+} from 'shared';
 import { ContractDto } from 'entities/smartcontract';
 import { TableWithTitle } from '../..';
 
@@ -11,14 +18,18 @@ const Conditions: FC<Props> = ({ contract }) => {
     const { t } = useTranslation();
 
     const isCitizen = !!contract.client && !contract.executor;
-    const [level, rarity, schema] = contract.attrs;
 
-    // todo: use dynamic values
     const conditionData = {
-        [t(
-            'pages.serviceMarket.upgrade'
-        )]: `${schema?.value}, ${rarity?.value}, level ${level?.value}`,
-        [t('pages.serviceMarket.startOperations')]: '12h',
+        [t('pages.serviceMarket.upgrade')]: `${t(
+            `pages.serviceMarket.levelUpgradeTab.type.${getUpgradeType(
+                contract
+            )}`
+        )}, ${getUpgradeRarity(contract)}, level ${
+            parseAttrs(contract)?.level
+        }`,
+        [t('pages.serviceMarket.startOperations')]: toLocaleDate(
+            contract.start_time * 1000
+        ),
         [t('pages.serviceMarket.costOfExecution')]: `${
             contract.cost_of_execution
         } ${t('components.common.button.dme')}`,
@@ -26,12 +37,9 @@ const Conditions: FC<Props> = ({ contract }) => {
             contract.penalty_amount
         } ${t('components.common.button.dme')}`,
         ...(isCitizen && {
-            [t('pages.serviceMarket.insurance')]: `0.2 ${t(
-                'components.common.button.dme'
-            )}`,
-            [t('pages.serviceMarket.duration')]: `2 ${t(
-                'components.common.days'
-            ).toLowerCase()}`,
+            [t('pages.serviceMarket.duration')]: `${secondsToDays(
+                contract.contract_duration
+            )} ${t('components.common.days').toLowerCase()}`,
         }),
     };
 
