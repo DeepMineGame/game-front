@@ -14,6 +14,7 @@ import {
     Stats,
 } from './ui';
 import { EquipmentHallImageLink } from './ui/equipment-hall-image-link';
+import { Chair } from './ui/chair';
 
 const states = {
     [CabinStatus.NeedCertificate]: NoCertificate,
@@ -43,6 +44,7 @@ const MainCabin: FC<Props> = ({ status, header }) => {
                 <State />
             </Monitor>
             <EquipmentHallImageLink />
+            <Chair />
         </>
     );
 };
