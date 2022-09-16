@@ -468,7 +468,9 @@
         "completed": "Completed",
         "valid": "Valid Contract",
         "waitingAction": "Waiting for action",
-        "terminated": "Terminated"
+        "terminated": "Terminated",
+        "orderWasDeleted": "Order was deleted",
+        "documentWasDestroyedOn": "This document was destroyed on"
       },
       "myContractsTab": {
         "nickname": "Nickname",
