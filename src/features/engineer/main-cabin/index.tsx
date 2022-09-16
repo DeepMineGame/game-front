@@ -13,6 +13,7 @@ import {
     UpgradeCompleted,
     Stats,
 } from './ui';
+import { EquipmentHallImageLink } from './ui/equipment-hall-image-link';
 
 const states = {
     [CabinStatus.NeedCertificate]: NoCertificate,
@@ -36,10 +37,13 @@ const MainCabin: FC<Props> = ({ status, header }) => {
     const State = states[status];
 
     return (
-        <Monitor>
-            {header}
-            <State />
-        </Monitor>
+        <>
+            <Monitor>
+                {header}
+                <State />
+            </Monitor>
+            <EquipmentHallImageLink />
+        </>
     );
 };
 

@@ -7,7 +7,7 @@
     text-align: center;
     background-image: url("../../../../../shared/ui/images/engineer/main-display.webp");
     background-size: contain;
-    z-index: 1;
+    z-index: 2;
     background-repeat: no-repeat;
     background-position: center top;
     padding: 5px 20px;
@@ -27,9 +27,6 @@
         width: 420px;
         height: 412px;
         padding: 160px 50px 50px;
-        background-size: cover;
-        background-position: bottom center;
-        left: 7vh;
         display: flex;
         flex-direction: column;
         gap: 28px;
