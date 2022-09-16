@@ -12,9 +12,11 @@ import {
     UpgradeInProgress,
     UpgradeCompleted,
     Stats,
+    EquipmentHallImageLink,
+    EngineerMenu,
+    Chair,
+    StatScreen,
 } from './ui';
-import { EquipmentHallImageLink } from './ui/equipment-hall-image-link';
-import { Chair } from './ui/chair';
 
 const states = {
     [CabinStatus.NeedCertificate]: NoCertificate,
@@ -45,6 +47,8 @@ const MainCabin: FC<Props> = ({ status, header }) => {
             </Monitor>
             <EquipmentHallImageLink />
             <Chair />
+            <StatScreen />
+            <EngineerMenu />
         </>
     );
 };

@@ -11,11 +11,13 @@ type Props = {
 const State: FC<Props> = ({ title, content, bottom }) => {
     return (
         <div className={styles.state}>
-            {bottom && <div className={styles.bottom}>{bottom}</div>}
-            {content && <div className={styles.content}>{content}</div>}
-            <Title fontFamily="orbitron" level={3} className={styles.title}>
-                {title}
-            </Title>
+            <div>
+                <Title fontFamily="orbitron" level={3} className={styles.title}>
+                    {title}
+                </Title>
+                {content && <div className={styles.content}>{content}</div>}
+                {bottom && <div className={styles.bottom}>{bottom}</div>}
+            </div>
         </div>
     );
 };
