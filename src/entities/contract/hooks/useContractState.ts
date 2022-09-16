@@ -21,6 +21,7 @@ export const useContractState = (
         accountName
     );
 
+    const isDeleted = !!contract.deleted_at;
     const isClient = contract.client === accountName;
     const isExecutor = contract.executor === accountName;
     const isContractMember = isClient || isExecutor;
@@ -42,6 +43,7 @@ export const useContractState = (
     const showCompleted = isNeedComplete && isContractMember;
 
     return {
+        isDeleted,
         isClient,
         isExecutor,
         isContractMember,
