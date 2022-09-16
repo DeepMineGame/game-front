@@ -1,21 +1,37 @@
 @import 'src/shared';
 
-.root {
-    position: absolute;
-    width: 186px;
-    height: 123px;
-    display: flex;
-    flex-direction: column;
-    left: 7vw;
-    top: 33vh;
-    padding: 24px 8px;
+.monitor {
+    position: fixed;
+    height: 207px;
+    width: 185px;
     text-align: center;
-    background: rgba(0, 71, 133, 0.29);
-    backdrop-filter: blur(4px);
+    background-image: url("../../../../../shared/ui/images/engineer/main-display.webp");
+    background-size: contain;
+    z-index: 1;
+    background-repeat: no-repeat;
+    background-position: center top;
+    padding: 5px 20px;
+    display: flex;
 
-    @media only screen and (min-width: $media-tablet) {
-        width: 395px;
-        min-height: 262px;
-        padding: 24px;
+    @media (min-width: $media-tablet) {
+        width: 380px;
+        height: 320px;
+        padding: 120px 50px 50px;
+        background-size: cover;
+        background-position: bottom center;
+        left: 7vh;
+        display: block;
+    }
+
+    @media (min-width: $media-desktop-s) {
+        width: 420px;
+        height: 412px;
+        padding: 160px 50px 50px;
+        background-size: cover;
+        background-position: bottom center;
+        left: 7vh;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
     }
 }

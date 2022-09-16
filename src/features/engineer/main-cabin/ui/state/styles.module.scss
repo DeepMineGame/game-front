@@ -1,20 +1,18 @@
 @import 'src/shared';
 
 .state {
-    height: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     text-align: center;
 }
 
 .title.title {
-    margin-bottom: 8px;
     font-weight: 700;
     font-size: 12px;
     line-height: 20px;
     text-transform: uppercase;
 
-    @media only screen and (min-width: $media-tablet) {
+    @media only screen and (min-width: $media-desktop-s) {
         font-size: 20px;
         line-height: 28px;
     }
@@ -23,7 +21,6 @@
 .content {
     display: none;
     color: $color-neutral-neutral-9;
-    margin-bottom: auto;
 
     @media only screen and (min-width: $media-tablet) {
         display: block;

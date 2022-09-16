@@ -16,7 +16,7 @@ export const NoCertificate: FC = () => {
     return (
         <State
             title={t('pages.engineer.noCertificateDetected')}
-            content={t('pages.engineer.youNeedCertificate')}
+            content={isTablet ? t('pages.engineer.youNeedCertificate') : ''}
             bottom={
                 <Space size={20}>
                     <Button
