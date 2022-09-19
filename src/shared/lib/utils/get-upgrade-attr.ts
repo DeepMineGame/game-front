@@ -7,8 +7,8 @@ import {
 
 export const parseAttrs = (contract: ContractDto) => {
     try {
-        if (Array.isArray(contract?.attrs))
-            return contract?.attrs.reduce(
+        if (Array.isArray(contract.attrs))
+            return contract.attrs.reduce(
                 (prev, it) => ({ ...prev, [it.key]: Number(it.value) }),
                 {
                     [EngineerSkillKey.schema_type]: 0,

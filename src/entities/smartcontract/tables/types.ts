@@ -5,7 +5,6 @@ export type UserInfoType = {
     stamina: number;
     experience: number;
     level: number;
-    reputation: number;
     register_datetime: number;
 };
 

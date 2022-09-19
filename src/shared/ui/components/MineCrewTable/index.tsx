@@ -23,7 +23,6 @@ export interface MineCrewDataType {
     contractor: string;
     status: Status;
     ejection: number;
-    reputation: number;
     activity: Activity;
 }
 
@@ -110,16 +109,6 @@ export const MineCrewTable: FC<{ data?: MineCrewDataType[] }> = ({ data }) => {
                 compare: (a: MineCrewDataType, b: MineCrewDataType) =>
                     a.ejection - b.ejection,
                 multiple: 2,
-            },
-        },
-        {
-            title: t('pages.contractorMineCrew.reputation'),
-            dataIndex: 'reputation',
-            key: 'reputation',
-            sorter: {
-                compare: (a: MineCrewDataType, b: MineCrewDataType) =>
-                    a.reputation - b.reputation,
-                multiple: 3,
             },
         },
         {

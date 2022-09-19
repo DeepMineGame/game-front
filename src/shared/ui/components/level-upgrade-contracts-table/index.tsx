@@ -18,7 +18,6 @@ export const LevelUpgradeContractsTable: FC<Props> = ({ contracts }) => {
                 // TODO: what should display first?
                 nickName: contract.client || contract.executor || '-',
                 key: contract.id,
-                reputation: '-',
                 type:
                     parseAttrs(contract)?.schema_type ===
                     EngineerSchema.undefined
@@ -48,11 +47,6 @@ export const LevelUpgradeContractsTable: FC<Props> = ({ contracts }) => {
                             {value}
                         </Link>
                     ),
-                },
-                {
-                    title: t('pages.serviceMarket.levelUpgradeTab.reputation'),
-                    dataIndex: 'reputation',
-                    key: 'reputation',
                 },
                 {
                     title: t(
