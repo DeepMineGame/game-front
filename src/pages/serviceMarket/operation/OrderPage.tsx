@@ -1,8 +1,10 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Page } from 'shared';
+import { Basket, Page, Title, Text, toLocaleDate } from 'shared';
 import { LevelUpgradeOrder, MiningOrder, MineOperationOrder } from 'features';
+import { Col, Row } from 'antd';
 import { ContractDto, ContractType } from 'entities/smartcontract';
+import { useContractState, useContractType } from 'entities/contract';
 
 type Props = { contract: ContractDto; accountName: string };
 
@@ -22,12 +24,46 @@ const pageTitle = {
 
 export const OrderPage: FC<Props> = ({ contract, accountName }) => {
     const { t } = useTranslation();
+    const { isDeleted } = useContractState(contract, accountName);
+    const { isOrder } = useContractType(contract);
+
+    const orderWasDeleted = isDeleted && isOrder;
 
     const Order = orders[contract.type];
 
+    const deletedOrderStub = (
+        <Row gutter={[32, 32]}>
+            <Col span={24}>
+                <Row justify="center" gutter={[0, 24]}>
+                    <Basket />
+                    <Col span={24}>
+                        <Row justify="center">
+                            <Title level={3}>
+                                {t(
+                                    'pages.serviceMarket.contract.orderWasDeleted'
+                                )}
+                            </Title>
+                        </Row>
+                        <Row justify="center">
+                            <Text>
+                                {`${t(
+                                    'pages.serviceMarket.contract.documentWasDestroyedOn'
+                                )} ${toLocaleDate(contract.deleted_at * 1000)}`}
+                            </Text>
+                        </Row>
+                    </Col>
+                </Row>
+            </Col>
+        </Row>
+    );
+
     return (
         <Page headerTitle={t(pageTitle[contract.type]).toUpperCase()}>
-            <Order contract={contract} accountName={accountName} />
+            {orderWasDeleted ? (
+                deletedOrderStub
+            ) : (
+                <Order contract={contract} accountName={accountName} />
+            )}
         </Page>
     );
 };
