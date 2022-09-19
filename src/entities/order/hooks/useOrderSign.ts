@@ -16,6 +16,7 @@ export const useOrderSign = (
     } = useContractType(contract);
 
     const isUserNotClient = contract.client !== accountName;
+    const isUserClient = contract.client === accountName;
     const isUserNotExecutor = contract.executor !== accountName;
 
     const canSignMiningMineOwnerOrder =
@@ -33,7 +34,8 @@ export const useOrderSign = (
         isUserNotExecutor &&
         userRoles?.isLandlord;
 
-    const canSignLevelUpgradeOrder = isLevelUpgradeOrder && isUserNotClient;
+    const canSignLevelUpgradeOrder =
+        isLevelUpgradeOrder && (isUserNotClient || isUserClient);
 
     const signState = {
         canSignMiningContractorOrder,
