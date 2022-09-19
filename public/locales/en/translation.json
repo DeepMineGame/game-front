@@ -470,7 +470,11 @@
         "waitingAction": "Waiting for action",
         "terminated": "Terminated",
         "orderWasDeleted": "Order was deleted",
-        "documentWasDestroyedOn": "This document was destroyed on"
+        "documentWasDestroyedOn": "This document was destroyed on",
+        "isCurrentUserDemandPenalty": "The contracts was terminated prematurely by the counterparty.<br/> You’ve collected a penalty of {{amount}} DME from the counterparty.",
+        "isCurrentUserDoesntDemandPenalty": "The contracts was terminated prematurely by the contrparty.<br/> You haven’t collected a penalty from the counterparty.",
+        "isSomebodyDemandPenalty": "You terminated the contract prematurely and you’ve been charged a penalty of {{amount}} DME by the counterparty.",
+        "isSomebodyDoesntDemandPenalty": "You terminated the contract prematurely, but you haven’t been charged a penalty by the counterparty."
       },
       "myContractsTab": {
         "nickname": "Nickname",

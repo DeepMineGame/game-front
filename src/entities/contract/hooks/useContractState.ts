@@ -21,11 +21,10 @@ export const useContractState = (
         accountName
     );
 
-    const isDeleted = !!contract.deleted_at;
-    const isClient = contract.client === accountName;
-    const isExecutor = contract.executor === accountName;
-    const isContractMember = isClient || isExecutor;
-
+    const isEarlyBreakBySomebody =
+        state === ContractStates.waitingForAction &&
+        stateMeta === ContractStatesMeta.earlyBreak;
+    const isEarlyBreakByCurrentUser = state === ContractStates.terminated;
     const isCompleted = state === ContractStates.completed;
     const isNeedComplete = stateMeta === ContractStatesMeta.complete;
     const isActive = contract.status === ContractStatus.active;
@@ -35,10 +34,27 @@ export const useContractState = (
         stateMeta as ContractStatesMeta
     );
 
+    const isDeleted = !!contract.deleted_at;
+    const isClient = contract.client === accountName;
+    const isExecutor = contract.executor === accountName;
+    const isContractMember = isClient || isExecutor;
+    const isDemandPenaltyByClient = !!contract.demand_penalty_by_client;
+    const isCurrentUserDemandPenalty = isClient && isDemandPenaltyByClient;
+    const isSomebodyDemandPenalty = !isClient && isDemandPenaltyByClient;
+    const isCurrentUserDoesntDemandPenalty =
+        isClient && !isDemandPenaltyByClient;
+    const isSomebodyDoesntDemandPenalty = !isClient && !isDemandPenaltyByClient;
+
     const canTerminate =
         isContractMember && isActive && !isNeedComplete && !isTermViolation;
 
-    const showPenalty = isTermViolation && isContractMember;
+    const showPenaltyActions = isTermViolation && isContractMember;
+    const showPenaltyMessage =
+        (isEarlyBreakBySomebody || isEarlyBreakByCurrentUser) &&
+        (isCurrentUserDemandPenalty ||
+            isCurrentUserDoesntDemandPenalty ||
+            isSomebodyDemandPenalty ||
+            isSomebodyDoesntDemandPenalty);
     const showTerminatedAlert = isTerminated && isContractMember;
     const showCompleted = isNeedComplete && isContractMember;
 
@@ -56,7 +72,12 @@ export const useContractState = (
         stateMeta,
         canTerminate,
         showTerminatedAlert,
-        showPenalty,
+        showPenaltyActions,
         showCompleted,
+        showPenaltyMessage,
+        isCurrentUserDemandPenalty,
+        isCurrentUserDoesntDemandPenalty,
+        isSomebodyDemandPenalty,
+        isSomebodyDoesntDemandPenalty,
     };
 };

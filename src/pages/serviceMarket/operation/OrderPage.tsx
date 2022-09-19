@@ -1,13 +1,18 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Page } from 'shared';
-import { LevelUpgradeOrder, MiningOrder, MineOperationOrder } from 'features';
+import {
+    LevelUpgradeOrder,
+    MiningOrder,
+    MineOperationOrder,
+    LevelUpgradeContract,
+} from 'features';
 import { ContractDto, ContractType } from 'entities/smartcontract';
 
 type Props = { contract: ContractDto; accountName: string };
 
 const orders = {
-    [ContractType.citizen_engineer]: LevelUpgradeOrder,
+    [ContractType.citizen_engineer]: LevelUpgradeContract,
     [ContractType.mineowner_contractor]: MiningOrder,
     [ContractType.landlord_mineowner]: MineOperationOrder,
     [ContractType.undefined]: MiningOrder,

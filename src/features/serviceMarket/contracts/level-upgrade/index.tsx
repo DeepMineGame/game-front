@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Row, Col } from 'antd';
 import { Alert } from 'shared';
 import { Trans } from 'react-i18next';
-import { Penalty } from 'features';
+import { PenaltyActions, PenaltyMessage } from 'features';
 import { ContractStatesMeta } from 'entities/smartcontract';
 import { useContractState } from 'entities/contract';
 import {
@@ -19,9 +19,21 @@ const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
         canTerminate,
         showCompleted,
         showTerminatedAlert,
-        showPenalty,
+        showPenaltyActions,
+        showPenaltyMessage,
         stateMeta,
+        isCurrentUserDemandPenalty,
+        isCurrentUserDoesntDemandPenalty,
+        isSomebodyDemandPenalty,
+        isSomebodyDoesntDemandPenalty,
     } = useContractState(contract, accountName);
+
+    const penaltyMessageProps = {
+        isCurrentUserDemandPenalty,
+        isCurrentUserDoesntDemandPenalty,
+        isSomebodyDemandPenalty,
+        isSomebodyDoesntDemandPenalty,
+    };
 
     return (
         <Row gutter={[32, 32]}>
@@ -50,16 +62,22 @@ const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
                                 showIcon
                             />
                         )}
-                        {showPenalty && (
-                            <Penalty
+                        {showPenaltyActions && (
+                            <PenaltyActions
                                 isViolated={
                                     stateMeta ===
                                         ContractStatesMeta.termViolation ||
                                     stateMeta ===
                                         ContractStatesMeta.deadlineViolation
                                 }
-                                penalty={contract.penalty_amount}
+                                amount={contract.penalty_amount}
                                 contractId={contract.id}
+                            />
+                        )}
+                        {showPenaltyMessage && (
+                            <PenaltyMessage
+                                amount={contract.penalty_amount}
+                                {...penaltyMessageProps}
                             />
                         )}
                     </Col>
@@ -71,7 +89,6 @@ const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
             <Col xs={24} md={12}>
                 <Engineer contract={contract} accountName={accountName} />
             </Col>
-
             <Col xs={24} md={12}>
                 <Row gutter={[32, 32]}>
                     <Col span={24}>
