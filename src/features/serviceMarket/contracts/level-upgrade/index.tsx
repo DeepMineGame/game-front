@@ -22,17 +22,17 @@ const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
         showPenaltyActions,
         showPenaltyMessage,
         stateMeta,
-        isCurrentUserDemandPenalty,
-        isCurrentUserDoesntDemandPenalty,
-        isExecutorDemandPenalty,
-        isExecutorDoesntDemandPenalty,
+        isClientDemandPenalty,
+        isClientDoesntDemandPenalty,
+        isExecutorAndClientDemandPenalty,
+        isExecutorAndClientDoesntDemandPenalty,
     } = useContractState(contract, accountName);
 
     const penaltyMessageProps = {
-        isCurrentUserDemandPenalty,
-        isCurrentUserDoesntDemandPenalty,
-        isExecutorDemandPenalty,
-        isExecutorDoesntDemandPenalty,
+        isClientDemandPenalty,
+        isClientDoesntDemandPenalty,
+        isExecutorAndClientDemandPenalty,
+        isExecutorAndClientDoesntDemandPenalty,
     };
 
     return (

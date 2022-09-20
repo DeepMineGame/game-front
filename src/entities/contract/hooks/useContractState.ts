@@ -36,11 +36,12 @@ export const useContractState = (
     const isExecutor = contract.executor === accountName;
     const isContractMember = isClient || isExecutor;
     const isDemandPenaltyByClient = !!contract.demand_penalty_by_client;
-    const isCurrentUserDemandPenalty = isClient && isDemandPenaltyByClient;
-    const isExecutorDemandPenalty = !isClient && isDemandPenaltyByClient;
-    const isCurrentUserDoesntDemandPenalty =
-        isClient && !isDemandPenaltyByClient;
-    const isExecutorDoesntDemandPenalty = !isClient && !isDemandPenaltyByClient;
+    const isClientDemandPenalty = isClient && isDemandPenaltyByClient;
+    const isExecutorAndClientDemandPenalty =
+        isExecutor && isDemandPenaltyByClient;
+    const isClientDoesntDemandPenalty = isClient && !isDemandPenaltyByClient;
+    const isExecutorAndClientDoesntDemandPenalty =
+        isExecutor && !isDemandPenaltyByClient;
 
     const canTerminate =
         isContractMember && isActive && !isNeedComplete && !isTermViolation;
@@ -48,10 +49,10 @@ export const useContractState = (
     const showPenaltyActions = isTermViolation && isContractMember;
     const showPenaltyMessage =
         (isEarlyBreakByExecutor || isTerminated) &&
-        (isCurrentUserDemandPenalty ||
-            isCurrentUserDoesntDemandPenalty ||
-            isExecutorDemandPenalty ||
-            isExecutorDoesntDemandPenalty);
+        (isClientDemandPenalty ||
+            isClientDoesntDemandPenalty ||
+            isExecutorAndClientDemandPenalty ||
+            isExecutorAndClientDoesntDemandPenalty);
     const showTerminatedAlert = isTerminated && isContractMember;
     const showCompleted = isNeedComplete && isContractMember;
 
@@ -72,9 +73,9 @@ export const useContractState = (
         showPenaltyActions,
         showCompleted,
         showPenaltyMessage,
-        isCurrentUserDemandPenalty,
-        isCurrentUserDoesntDemandPenalty,
-        isExecutorDemandPenalty,
-        isExecutorDoesntDemandPenalty,
+        isClientDemandPenalty,
+        isClientDoesntDemandPenalty,
+        isExecutorAndClientDemandPenalty,
+        isExecutorAndClientDoesntDemandPenalty,
     };
 };

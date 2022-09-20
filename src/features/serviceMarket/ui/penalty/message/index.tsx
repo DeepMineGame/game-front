@@ -4,10 +4,10 @@ import { Alert } from 'shared';
 
 type Props = {
     amount: number;
-    isCurrentUserDemandPenalty: boolean;
-    isCurrentUserDoesntDemandPenalty: boolean;
-    isExecutorDemandPenalty: boolean;
-    isExecutorDoesntDemandPenalty: boolean;
+    isClientDemandPenalty: boolean;
+    isClientDoesntDemandPenalty: boolean;
+    isExecutorAndClientDemandPenalty: boolean;
+    isExecutorAndClientDoesntDemandPenalty: boolean;
 };
 
 export const PenaltyMessage: FC<Props> = ({

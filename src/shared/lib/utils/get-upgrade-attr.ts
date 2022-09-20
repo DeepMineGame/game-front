@@ -21,6 +21,7 @@ export const parseAttrs = (contract: ContractDto) => {
             'Cannot parse attrs field from contract caused attrs are not array.'
         );
     } catch (e) {
+        // TODO: add sentry logging instead console.error
         // eslint-disable-next-line no-console
         console.error(e);
         return undefined;
