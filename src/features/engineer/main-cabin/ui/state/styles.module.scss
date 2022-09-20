@@ -2,8 +2,13 @@
 
 .state {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     text-align: center;
+    margin-top: auto;
+
+    @media only screen and (min-width: $media-desktop-s) {
+        height: 100%;
+    }
 }
 
 .title.title {
@@ -11,6 +16,8 @@
     font-size: 12px;
     line-height: 20px;
     text-transform: uppercase;
+    margin-bottom: 8px;
+
 
     @media only screen and (min-width: $media-desktop-s) {
         font-size: 20px;
@@ -21,6 +28,7 @@
 .content {
     display: none;
     color: $color-neutral-neutral-9;
+    margin-bottom: 8px;
 
     @media only screen and (min-width: $media-tablet) {
         display: block;
@@ -28,5 +36,5 @@
 }
 
 .bottom {
-    margin-top: 14px;
+    margin-top: auto;
 }

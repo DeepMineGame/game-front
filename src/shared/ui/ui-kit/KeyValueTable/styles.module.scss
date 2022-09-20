@@ -7,16 +7,6 @@
   color: $color-neutral-neutral-9;
 }
 
-.transparent {
-  background: none;
-  border: none;
-  border-bottom: 1px solid $color-neutral-neutral-10;
-
-  & .unit {
-    border-bottom: 1px solid $color-neutral-neutral-10;
-  }
-}
-
 .unit {
   display: flex;
   justify-content: space-between;
@@ -30,6 +20,16 @@
 
   &:last-child {
     border-bottom: none;
+  }
+}
+
+.transparent {
+  background: none;
+  border: none;
+  border-bottom: 1px solid $color-neutral-neutral-10;
+
+  & .unit {
+    border-bottom: 1px solid $color-neutral-neutral-10;
   }
 }
 
