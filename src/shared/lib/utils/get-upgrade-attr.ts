@@ -3,6 +3,7 @@ import {
     EngineerSchema,
     EngineerSkillKey,
     rarityMap,
+    UserInventoryType,
 } from 'entities/smartcontract';
 
 export const parseAttrs = (contract: ContractDto) => {
@@ -28,14 +29,38 @@ export const parseAttrs = (contract: ContractDto) => {
     }
 };
 
-export const upgradeType = {
+export const upgradeTypeMap = {
     [EngineerSchema.mine]: 'mine',
     [EngineerSchema.module]: 'mineModule',
     [EngineerSchema.equipment]: 'equipment',
 };
 
-export const getUpgradeType = (contract: ContractDto) =>
-    upgradeType[parseAttrs(contract)?.schema_type as keyof typeof upgradeType];
+export const getUpgradeType = ({
+    contract,
+    item,
+}: {
+    contract?: ContractDto;
+    item?: UserInventoryType;
+}) => {
+    if (contract)
+        return upgradeTypeMap[
+            parseAttrs(contract)?.schema_type as keyof typeof upgradeTypeMap
+        ];
 
-export const getUpgradeRarity = (contract: ContractDto) =>
-    rarityMap[parseAttrs(contract)?.rarity as keyof typeof rarityMap];
+    return upgradeTypeMap[item?.schema_type as keyof typeof upgradeTypeMap];
+};
+
+export const getUpgradeRarity = ({
+    contract,
+    item,
+}: {
+    contract?: ContractDto;
+    item?: UserInventoryType;
+}) => {
+    if (contract)
+        return rarityMap[
+            parseAttrs(contract)?.rarity as keyof typeof rarityMap
+        ];
+
+    return rarityMap[item?.rarity as keyof typeof rarityMap];
+};

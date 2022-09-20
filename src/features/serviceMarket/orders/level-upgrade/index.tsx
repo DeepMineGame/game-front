@@ -52,12 +52,12 @@ const LevelUpgradeOrder: FC<ContractProps> = ({ contract, accountName }) => {
                     </Col>
                     <Col span={24}>
                         <Row justify="end">
-                            {canSignLevelUpgradeOrder && (
-                                <SignLevelUpgradeOrder
-                                    contract={contract}
-                                    accountName={accountName}
-                                />
-                            )}
+                            {/* {canSignLevelUpgradeOrder && ( */}
+                            <SignLevelUpgradeOrder
+                                contract={contract}
+                                accountName={accountName}
+                            />
+                            {/* )} */}
                             {canDeleteOrder && (
                                 <DeleteOrder
                                     accountName={accountName}

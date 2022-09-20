@@ -50,7 +50,8 @@
         "okay": "Okay",
         "create": "Create",
         "sign": "Sign",
-        "visitMarketplace": "Visit Marketplace"
+        "visitMarketplace": "Visit Marketplace",
+        "selectItem": "Select item"
       },
       "actionModal": {
         "descriptionTime": "This action will take:",

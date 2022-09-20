@@ -24,7 +24,7 @@ export const LevelUpgradeContractsTable: FC<Props> = ({ contracts }) => {
                         ? '-'
                         : t(
                               `pages.serviceMarket.levelUpgradeTab.type.${getUpgradeType(
-                                  contract
+                                  { contract }
                               )}`
                           ),
                 creationDate: contract.create_time,

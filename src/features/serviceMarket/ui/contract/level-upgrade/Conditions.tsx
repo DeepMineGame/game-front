@@ -21,10 +21,10 @@ const Conditions: FC<Props> = ({ contract }) => {
 
     const conditionData = {
         [t('pages.serviceMarket.upgrade')]: `${t(
-            `pages.serviceMarket.levelUpgradeTab.type.${getUpgradeType(
-                contract
-            )}`
-        )}, ${getUpgradeRarity(contract)}, level ${
+            `pages.serviceMarket.levelUpgradeTab.type.${getUpgradeType({
+                contract,
+            })}`
+        )}, ${getUpgradeRarity({ contract })}, level ${
             parseAttrs(contract)?.level
         }`,
         [t('pages.serviceMarket.startOperations')]: toLocaleDate(
