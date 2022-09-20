@@ -1,9 +1,9 @@
 import { FC, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link, Table } from 'shared';
 import { ContractDto, EngineerSchema } from 'entities/smartcontract';
 import { parseAttrs, getUpgradeType } from 'shared/lib/utils';
-import { Link, Table } from '../../ui-kit';
-import { toLocaleDate } from '../../utils';
+import { toLocaleDate } from 'shared/ui/utils';
 
 type Props = {
     contracts: ContractDto[];

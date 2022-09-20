@@ -21,10 +21,7 @@ export const useContractState = (
         accountName
     );
 
-    const isEarlyBreakBySomebody =
-        state === ContractStates.waitingForAction &&
-        stateMeta === ContractStatesMeta.earlyBreak;
-    const isEarlyBreakByCurrentUser = state === ContractStates.terminated;
+    const isEarlyBreakByExecutor = stateMeta === ContractStatesMeta.earlyBreak;
     const isCompleted = state === ContractStates.completed;
     const isNeedComplete = stateMeta === ContractStatesMeta.complete;
     const isActive = contract.status === ContractStatus.active;
@@ -40,21 +37,21 @@ export const useContractState = (
     const isContractMember = isClient || isExecutor;
     const isDemandPenaltyByClient = !!contract.demand_penalty_by_client;
     const isCurrentUserDemandPenalty = isClient && isDemandPenaltyByClient;
-    const isSomebodyDemandPenalty = !isClient && isDemandPenaltyByClient;
+    const isExecutorDemandPenalty = !isClient && isDemandPenaltyByClient;
     const isCurrentUserDoesntDemandPenalty =
         isClient && !isDemandPenaltyByClient;
-    const isSomebodyDoesntDemandPenalty = !isClient && !isDemandPenaltyByClient;
+    const isExecutorDoesntDemandPenalty = !isClient && !isDemandPenaltyByClient;
 
     const canTerminate =
         isContractMember && isActive && !isNeedComplete && !isTermViolation;
 
     const showPenaltyActions = isTermViolation && isContractMember;
     const showPenaltyMessage =
-        (isEarlyBreakBySomebody || isEarlyBreakByCurrentUser) &&
+        (isEarlyBreakByExecutor || isTerminated) &&
         (isCurrentUserDemandPenalty ||
             isCurrentUserDoesntDemandPenalty ||
-            isSomebodyDemandPenalty ||
-            isSomebodyDoesntDemandPenalty);
+            isExecutorDemandPenalty ||
+            isExecutorDoesntDemandPenalty);
     const showTerminatedAlert = isTerminated && isContractMember;
     const showCompleted = isNeedComplete && isContractMember;
 
@@ -77,7 +74,7 @@ export const useContractState = (
         showPenaltyMessage,
         isCurrentUserDemandPenalty,
         isCurrentUserDoesntDemandPenalty,
-        isSomebodyDemandPenalty,
-        isSomebodyDoesntDemandPenalty,
+        isExecutorDemandPenalty,
+        isExecutorDoesntDemandPenalty,
     };
 };

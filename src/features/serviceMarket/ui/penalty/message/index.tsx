@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert } from 'shared';
 
@@ -6,34 +6,30 @@ type Props = {
     amount: number;
     isCurrentUserDemandPenalty: boolean;
     isCurrentUserDoesntDemandPenalty: boolean;
-    isSomebodyDemandPenalty: boolean;
-    isSomebodyDoesntDemandPenalty: boolean;
+    isExecutorDemandPenalty: boolean;
+    isExecutorDoesntDemandPenalty: boolean;
 };
 
 export const PenaltyMessage: FC<Props> = ({
     amount,
-    isCurrentUserDemandPenalty,
-    isCurrentUserDoesntDemandPenalty,
-    isSomebodyDemandPenalty,
-    isSomebodyDoesntDemandPenalty,
+    ...penaltyMessageConditions
 }) => {
     const { t } = useTranslation();
 
-    const message =
-        (isCurrentUserDemandPenalty &&
-            t('pages.serviceMarket.contract.isCurrentUserDemandPenalty', {
+    const message = useMemo(() => {
+        const currentCondition = Object.entries(penaltyMessageConditions).find(
+            ([, value]) => value
+        )?.[0];
+
+        const messageByCurrentCondition = t(
+            `pages.serviceMarket.contract.${currentCondition}`,
+            {
                 amount,
-            })) ||
-        (isCurrentUserDoesntDemandPenalty &&
-            t(
-                'pages.serviceMarket.contract.isCurrentUserDoesntDemandPenalty'
-            )) ||
-        (isSomebodyDemandPenalty &&
-            t('pages.serviceMarket.contract.isSomebodyDemandPenalty', {
-                amount,
-            })) ||
-        (isSomebodyDoesntDemandPenalty &&
-            t('pages.serviceMarket.contract.isSomebodyDoesntDemandPenalty'));
+            }
+        );
+
+        return messageByCurrentCondition;
+    }, [amount, penaltyMessageConditions, t]);
 
     return <Alert message={message} type="info" showIcon />;
 };
