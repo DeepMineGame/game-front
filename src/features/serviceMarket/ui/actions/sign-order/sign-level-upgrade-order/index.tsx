@@ -62,9 +62,7 @@ export const SignLevelUpgradeOrder: FC<Props> = ({ contract, accountName }) => {
             </Button>
             <Inventory
                 onOpenCard={setSelectedInventoryCard}
-                onSelect={(item) => {
-                    handleItemSelect(item);
-                }}
+                onSelect={handleItemSelect}
                 userInventory={userInventory}
                 visible={isInventoryOpen}
                 onCancel={() => setIsInventoryOpen(false)}
