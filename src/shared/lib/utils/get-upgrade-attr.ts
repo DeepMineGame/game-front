@@ -6,6 +6,8 @@ import {
     UserInventoryType,
 } from 'entities/smartcontract';
 
+type UpgradeRarity = keyof typeof rarityMap;
+
 export const parseAttrs = (contract: ContractDto) => {
     try {
         if (Array.isArray(contract.attrs))
@@ -35,32 +37,30 @@ export const upgradeTypeMap = {
     [EngineerSchema.equipment]: 'equipment',
 };
 
+type UpgradeType = keyof typeof upgradeTypeMap;
+
 export const getUpgradeType = ({
     contract,
-    item,
+    asset,
 }: {
     contract?: ContractDto;
-    item?: UserInventoryType;
+    asset?: UserInventoryType;
 }) => {
     if (contract)
-        return upgradeTypeMap[
-            parseAttrs(contract)?.schema_type as keyof typeof upgradeTypeMap
-        ];
+        return upgradeTypeMap[parseAttrs(contract)?.schema_type as UpgradeType];
 
-    return upgradeTypeMap[item?.schema_type as keyof typeof upgradeTypeMap];
+    return upgradeTypeMap[asset?.schema_type as UpgradeType];
 };
 
 export const getUpgradeRarity = ({
     contract,
-    item,
+    asset,
 }: {
     contract?: ContractDto;
-    item?: UserInventoryType;
+    asset?: UserInventoryType;
 }) => {
     if (contract)
-        return rarityMap[
-            parseAttrs(contract)?.rarity as keyof typeof rarityMap
-        ];
+        return rarityMap[parseAttrs(contract)?.rarity as UpgradeRarity];
 
-    return rarityMap[item?.rarity as keyof typeof rarityMap];
+    return rarityMap[asset?.rarity as UpgradeRarity];
 };

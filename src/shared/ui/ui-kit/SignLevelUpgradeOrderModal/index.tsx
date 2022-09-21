@@ -53,8 +53,8 @@ export const SignLevelUpgradeOrderModal: FC<Props> = ({
         })
     );
 
-    const handleItemSelect = async (item: UserInventoryType) => {
-        setSelectedAsset(item);
+    const handleAssetSelect = (asset: UserInventoryType) => {
+        setSelectedAsset(asset);
         setIsInventoryOpen(false);
     };
 
@@ -86,11 +86,11 @@ export const SignLevelUpgradeOrderModal: FC<Props> = ({
                         <Text>{`${t(
                             `pages.serviceMarket.levelUpgradeTab.type.${getUpgradeType(
                                 {
-                                    item: selectedAsset,
+                                    asset: selectedAsset,
                                 }
                             )}`
                         )}, ${getUpgradeRarity({
-                            item: selectedAsset,
+                            asset: selectedAsset,
                         })}, level ${selectedAsset?.level}`}</Text>
                     </div>
                     <Button onClick={() => setSelectedAsset(undefined)}>
@@ -100,14 +100,14 @@ export const SignLevelUpgradeOrderModal: FC<Props> = ({
             )}
             <Inventory
                 onOpenCard={setSelectedInventoryCard}
-                onSelect={handleItemSelect}
+                onSelect={handleAssetSelect}
                 userInventory={userInventory}
                 visible={isInventoryOpen}
                 onCancel={() => setIsInventoryOpen(false)}
             />
             {selectedInventoryCard && (
                 <InventoryCardModal
-                    onSelect={handleItemSelect}
+                    onSelect={handleAssetSelect}
                     card={selectedInventoryCard as UserInventoryType}
                     visible={!!selectedInventoryCard}
                     onCancel={() => setSelectedInventoryCard(undefined)}
