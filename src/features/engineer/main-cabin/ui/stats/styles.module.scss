@@ -1,0 +1,13 @@
+@import "src/shared";
+
+.table {
+  font-size: 12px;
+
+  @media (min-width: $media-tablet) {
+    font-size: initial;
+  }
+}
+
+.smallFont {
+  font-size: 12px;
+}

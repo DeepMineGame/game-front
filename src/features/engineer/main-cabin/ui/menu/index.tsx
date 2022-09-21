@@ -4,7 +4,8 @@ import {
     ToolOutlined,
     ProjectOutlined,
 } from '@ant-design/icons';
-import { MenuItem } from 'shared/ui';
+import { Menu, MenuItem } from 'shared/ui';
+import styles from './styles.module.scss';
 
 const menuItems = [
     { icon: <ScheduleOutlined />, disabled: true },
@@ -14,11 +15,13 @@ const menuItems = [
 
 const EngineerMenu = () => {
     return (
-        <Space size="middle">
-            {menuItems.map(({ icon, disabled }, idx) => (
-                <MenuItem key={idx} icon={icon} disabled={disabled} />
-            ))}
-        </Space>
+        <Menu className={styles.menu}>
+            <Space size="middle">
+                {menuItems.map(({ icon, disabled }, idx) => (
+                    <MenuItem key={idx} icon={icon} disabled={disabled} />
+                ))}
+            </Space>
+        </Menu>
     );
 };
 

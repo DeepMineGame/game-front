@@ -574,6 +574,9 @@
       "getReport": "Get the report",
       "upgradeCompleted": "Upgrade: Completed",
       "upgradeInProgress": "Upgrade: in progress",
+      "equipmentHallTooltip": "Your equipment hall is located here",
+      "trainingTooltip": "Your training room is located here",
+      "statTooltip": "Your stats & info is located here",
       "status": {
         "notInaugurated": "Not Inaugurated",
         "active": "Active",

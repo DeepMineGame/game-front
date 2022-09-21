@@ -12,6 +12,10 @@ import {
     UpgradeInProgress,
     UpgradeCompleted,
     Stats,
+    EquipmentHallImageLink,
+    EngineerMenu,
+    Chair,
+    StatScreen,
 } from './ui';
 
 const states = {
@@ -36,10 +40,16 @@ const MainCabin: FC<Props> = ({ status, header }) => {
     const State = states[status];
 
     return (
-        <Monitor>
-            {header}
-            <State />
-        </Monitor>
+        <>
+            <Monitor>
+                {header}
+                <State />
+            </Monitor>
+            <EquipmentHallImageLink />
+            <Chair />
+            <StatScreen />
+            <EngineerMenu />
+        </>
     );
 };
 

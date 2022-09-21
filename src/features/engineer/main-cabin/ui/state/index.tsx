@@ -14,7 +14,6 @@ const State: FC<Props> = ({ title, content, bottom }) => {
             <Title fontFamily="orbitron" level={3} className={styles.title}>
                 {title}
             </Title>
-
             {content && <div className={styles.content}>{content}</div>}
             {bottom && <div className={styles.bottom}>{bottom}</div>}
         </div>

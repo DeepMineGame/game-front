@@ -37,6 +37,12 @@ const CabinPage: FC<Props> = ({ accountName }) => {
     const isTablet = useMediaQuery(tablet);
     const engineerStore = useStore(engineerCabinStore);
     const isLoading = useStore(isEngineerCabinLoading);
+    const status = getStatus(engineerStore);
+    const state = getState(status);
+
+    const isNeedDisplayTravel =
+        status === CabinStatus.NeedTravel ||
+        (state !== CabinState.Idle && !inLocation.engineersWorkshop);
 
     if (isLoading) {
         return (
@@ -46,9 +52,6 @@ const CabinPage: FC<Props> = ({ accountName }) => {
         );
     }
 
-    const status = getStatus(engineerStore);
-    const state = getState(status);
-
     return (
         <>
             <MainCabin
@@ -56,9 +59,7 @@ const CabinPage: FC<Props> = ({ accountName }) => {
                 header={isTablet ? <EngineerStateBadge state={state} /> : null}
             />
 
-            {(status === CabinStatus.NeedTravel ||
-                (state !== CabinState.Idle &&
-                    !inLocation.engineersWorkshop)) && <TravelToWorkshop />}
+            {isNeedDisplayTravel && <TravelToWorkshop />}
             <FullScreenBackground src={roomBackgrounds[state]} />
         </>
     );
