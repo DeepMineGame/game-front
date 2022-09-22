@@ -20,6 +20,7 @@ import {
     $mineOwnerCabinState,
     userMineStore,
 } from '../../models';
+import styles from './styles.module.scss';
 
 type Props = {
     currentMineOwnerCabinState: mineOwnerCabinState;
@@ -72,7 +73,7 @@ export const MineOwnerMenu: FC<Props> = ({
         },
     ];
     return (
-        <Menu>
+        <Menu className={styles.mineOwnerMenu}>
             <Space size="middle">
                 {menuItems.map(
                     ({ tooltip, link, icon, disabled, showTooltip }) => (

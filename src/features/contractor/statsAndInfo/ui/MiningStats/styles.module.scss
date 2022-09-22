@@ -9,7 +9,7 @@
     margin-right: -16px;
     overflow-x: auto;
 
-    @media only screen and (min-width: $media-desktop-s) {
+    @media (min-width: $media-desktop-s) {
         // .content padding size
         margin-right: -56px;
     }
