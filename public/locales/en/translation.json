@@ -59,7 +59,7 @@
       "table": {
         "table": "Table",
         "addNewContractor": "Add new contractor",
-        "discoverNewLand": "Discover new land"
+        "openNewMine": "Open new mine spot"
       },
       "graph": "Graph",
       "current": "Current",
@@ -509,7 +509,6 @@
       "activity": "Mine activity",
       "add": "Add new mine",
       "searching": "Searching for Mine owner",
-      "discover": "Discover new land",
       "addMineOwner": "Add new Mine owner",
       "findMineOwner": "Find a Mine owner on the servicemarket",
       "createOrder": "Create an order for a Mine owner"
@@ -600,7 +599,7 @@
       "mineNotSet": "Mine is not set",
       "needShift": "You need to travel here to set a Mine",
       "needLandLord": "Sign a contract with a landlord to set a Mine",
-      "needSetupMine": "Congratulations on your first Mine Operation Contract, Citizen\nIt's time to set up your Mine",
+      "needSetupMine": "Set up the Mine to continue",
       "needCrew": "You are ready to gather your ultimate mine crew. Sign the Mining Contract with a contractor to be able to activate your Mine.",
       "progress": "Setup in progress",
       "chooseContract": "Choose a contract",
