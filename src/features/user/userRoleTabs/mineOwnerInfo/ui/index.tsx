@@ -39,10 +39,15 @@ export const MineOwnerInfo: FC<{ accountName: string }> = ({ accountName }) => {
                 {mine ? (
                     <KeyValueTable
                         items={{
-                            Mine: <Button type="link">ID {mine.id}</Button>,
-                            Level: mine.level,
-                            SubLevel: mine.sub_level,
-                            Depth: mine.layer_depth,
+                            [t('features.actions.mine')]: (
+                                <Button type="link">ID {mine.id}</Button>
+                            ),
+                            [t('components.common.level')]: mine.level,
+                            [t(
+                                'pages.contractorStatsAndInfo.mineArea.sublevel'
+                            )]: mine.sub_level,
+                            [t('pages.contractorStatsAndInfo.mineArea.depth')]:
+                                mine.layer_depth,
                         }}
                     />
                 ) : (
