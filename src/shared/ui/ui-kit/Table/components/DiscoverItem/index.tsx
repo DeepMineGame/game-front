@@ -16,7 +16,7 @@ export const DiscoverItem: FC<Props> = ({ text, onClick, className }) => {
     return (
         <div onClick={onClick} className={cn(styles.item, className)}>
             <UnlockOutlined />{' '}
-            {text || t('components.common.table.discoverNewLand')}
+            {text || t('components.common.table.openNewMine')}
         </div>
     );
 };
