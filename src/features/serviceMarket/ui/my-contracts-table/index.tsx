@@ -2,11 +2,10 @@ import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 import { useNavigate } from 'react-router-dom';
 import { DownOutlined, PlusOutlined } from '@ant-design/icons';
-import { FC, useCallback, useEffect } from 'react';
-import { Button, Dropdown, Segmented, useAccountName, useQuery } from 'shared';
+import { FC, useCallback } from 'react';
+import { Button, Dropdown, Segmented, useAccountName } from 'shared';
 import { createOrder } from 'app/router/paths';
 import { Space } from 'antd';
-import { useLocation } from 'react-router';
 import { FilterOrderStatus } from 'entities/gameStat';
 import { changeFilterEvent, filterStore } from '../../contracts-table/model';
 import { ServiceMarketContractsTable } from '../../contracts-table';
@@ -23,9 +22,6 @@ export const MyContractsTab: FC = () => {
     const filter = useStore(filterStore);
     const navigate = useNavigate();
     const accountName = useAccountName();
-    const location = useLocation();
-    const query = useQuery();
-    const role = query.get('role');
 
     const onChangeRole = useCallback(
         (userRole) => {
@@ -45,10 +41,6 @@ export const MyContractsTab: FC = () => {
             }),
         [filter]
     );
-
-    useEffect(() => {
-        onChangeRole(role);
-    }, [role]);
 
     return (
         <>
@@ -77,26 +69,17 @@ export const MyContractsTab: FC = () => {
                             {
                                 label: t('roles.all'),
                                 key: Role.all,
-                                onClick: () =>
-                                    navigate(
-                                        `${location.pathname}?tab=0&role=${Role.all}`
-                                    ),
+                                onClick: () => onChangeRole(Role.all),
                             },
                             {
                                 label: t('roles.contractor'),
                                 key: Role.contractor,
-                                onClick: () =>
-                                    navigate(
-                                        `${location.pathname}?tab=0&role=${Role.contractor}`
-                                    ),
+                                onClick: () => onChangeRole(Role.contractor),
                             },
                             {
                                 label: t('roles.mineowner'),
                                 key: Role.mineowner,
-                                onClick: () =>
-                                    navigate(
-                                        `${location.pathname}?tab=0&role=${Role.mineowner}`
-                                    ),
+                                onClick: () => onChangeRole(Role.mineowner),
                             },
                         ]}
                     >
