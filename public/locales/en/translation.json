@@ -643,11 +643,12 @@
   "roles": {
     "citizen": "Citizen",
     "landlord": "Landlord",
-    "mineOwner": "Mine owner",
+    "mineowner": "Mine owner",
     "contractor": "Contractor",
     "landLord": "Land lord",
     "geologists": "Geologists",
-    "engineer": "Engineer"
+    "engineer": "Engineer",
+    "all": "All"
   },
   "blockchainErrors": {
     "fallback": "Error has no code. Unknown error",

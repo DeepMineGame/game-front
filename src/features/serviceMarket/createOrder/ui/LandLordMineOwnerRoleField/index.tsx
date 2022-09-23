@@ -64,7 +64,7 @@ export const LandLordMineOwnerRoleField: FC<{ form: FormInstance }> = ({
                             value: ContractRole.executor,
                             label: (
                                 <Tooltip overlay={hasSignedContractTooltipText}>
-                                    {t('roles.mineOwner')}
+                                    {t('roles.mineowner')}
                                 </Tooltip>
                             ),
                             disabled: hasSignedContract,
