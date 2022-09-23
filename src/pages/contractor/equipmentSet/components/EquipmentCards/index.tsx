@@ -1,7 +1,6 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { CardHolder, Card } from 'shared';
+import { CardHolder, Card, Status } from 'shared';
 import { InventoryNameType, UserInventoryType } from 'entities/smartcontract';
 
 import styles from './styles.module.scss';
@@ -11,6 +10,13 @@ interface Props {
     onCardButtonClick: (inventory: UserInventoryType) => void;
     onCardHolderClick: (name: InventoryNameType) => void;
 }
+
+const getCardStatus = (inventory: UserInventoryType): Status => {
+    if (inventory.broken) return 'broken';
+    if (inventory.in_use) return 'installed';
+
+    return 'notInstalled';
+};
 
 export const EquipmentCards = ({
     selectedEquipment,
@@ -32,7 +38,8 @@ export const EquipmentCards = ({
                                 : undefined
                         }
                         onButtonClick={() => onCardButtonClick(inventory)}
-                        status={inventory.in_use ? 'installed' : 'notInstalled'}
+                        status="broken"
+                        repairing
                     />
                 ) : (
                     <CardHolder

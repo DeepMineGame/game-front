@@ -46,4 +46,5 @@ export type UserInventoryType = {
     inv_type: InventoryType;
     level: number;
     equip_type: number;
+    broken: number;
 };

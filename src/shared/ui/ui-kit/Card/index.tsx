@@ -12,6 +12,7 @@ import { InventoryIdType } from 'entities/smartcontract';
 import { ProgressProps } from '../ProgressBar/NftProgressBar';
 import styles from './styles.module.scss';
 import { CardBadge } from './components/CardBadge';
+import { CardState } from './components/CardState';
 
 export type Status = 'installed' | 'broken' | 'notInstalled';
 
@@ -25,6 +26,7 @@ type Props = {
     onClick?: (e: any) => void;
     className?: string;
     templateId?: InventoryIdType;
+    repairing?: boolean;
 } & ProgressProps;
 
 export const Card: FC<Props> = ({
@@ -37,6 +39,7 @@ export const Card: FC<Props> = ({
     onClick,
     className,
     templateId,
+    repairing,
 }) => {
     const lvlTooltip = () => (
         <div className={styles.lvlTooltipContent}>
@@ -54,24 +57,39 @@ export const Card: FC<Props> = ({
             <div className={cn(styles.wrapper, className)}>
                 <div onClick={onClick}>
                     <CardBadge status={status} />
-                    <div className={styles.image}>
-                        <img
-                            height="100%"
-                            width="100%"
-                            src={
-                                templateId ? getImagePath(templateId) : imageSrc
-                            }
-                            alt="nft-equipment-card"
+                    {status === 'broken' && (
+                        <CardState
+                            status={status}
+                            templateId={templateId}
+                            repairing={repairing}
+                        />
+                    )}
+                    <div className={styles.stateWrapper}>
+                        <div
+                            className={cn(styles.image, {
+                                [styles.broken]: status === 'broken',
+                                [styles.repairing]: repairing,
+                            })}
+                        >
+                            <img
+                                height="100%"
+                                width="100%"
+                                src={
+                                    templateId
+                                        ? getImagePath(templateId)
+                                        : imageSrc
+                                }
+                                alt="nft-equipment-card"
+                            />
+                        </div>
+                        <DepreciationProgressBar
+                            totalMining={25}
+                            completedMining={4}
+                            serviceLife={13}
+                            totalServiceLife={20}
                         />
                     </div>
-                    <DepreciationProgressBar
-                        totalMining={25}
-                        completedMining={4}
-                        serviceLife={13}
-                        totalServiceLife={20}
-                    />
                 </div>
-
                 {buttonText && (
                     <Button
                         className={cn(styles.button, buttonClassName)}

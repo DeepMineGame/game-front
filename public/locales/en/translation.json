@@ -13,13 +13,17 @@
     "addConsumable": "add consumable",
     "statuses": {
       "installed": "Installed",
-      "broken": "Broken",
+      "broken": "Damaged",
       "notInstalled": "Not installed",
       "default": "Status unavailable"
     },
     "timer": {
       "time": "Time",
       "energy": "Energy"
+    },
+    "cardStates": {
+      "damaged": "is damaged",
+      "repairing": "repairing"
     }
   },
   "components": {
