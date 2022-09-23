@@ -73,7 +73,11 @@ export const Card: FC<Props> = ({
                             repairing={repairing}
                         />
                     )}
-                    <div className={styles.stateWrapper}>
+                    <div
+                        className={cn({
+                            [styles.stateWrapper]: status === 'broken',
+                        })}
+                    >
                         <div
                             className={cn(styles.image, {
                                 [styles.broken]: status === 'broken',
@@ -92,9 +96,11 @@ export const Card: FC<Props> = ({
                             />
                         </div>
                         <DepreciationProgressBar
-                            completedMining={cardData?.depreciation}
-                            serviceLife={cardData?.current_capacity}
-                            totalServiceLife={cardData?.maximal_capacity}
+                            completedMining={cardData?.data.depreciation}
+                            serviceLife={cardData?.data['current capacity']}
+                            totalServiceLife={
+                                cardData?.data['maximal capacity']
+                            }
                         />
                     </div>
                 </div>

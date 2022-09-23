@@ -64,6 +64,9 @@ export type AssetDataType = {
         name: string;
         rarity: string;
         type: string;
+        depreciation: string;
+        'current capacity': string;
+        'maximal capacity': string;
     };
     burned_by_account: string;
     burned_at_block: string;
@@ -74,7 +77,4 @@ export type AssetDataType = {
     transferred_at_time: string;
     minted_at_block: string;
     minted_at_time: string;
-    depreciation: number;
-    current_capacity: number;
-    maximal_capacity: number;
 };
