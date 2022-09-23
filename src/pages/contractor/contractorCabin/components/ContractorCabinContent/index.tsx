@@ -53,19 +53,20 @@ export const ContractorCabinContent = ({
             item.type === ActionType.mine &&
             item.state === ACTION_STATE_TO_ID.active
     );
-    const inventoryNames = getInventoryNames(userInventory);
+    const equipmentInventoryNames = getInventoryNames(userInventory).filter(
+        (item) => miningEquipmentNames.includes(item)
+    );
     const activeInventoryNames = getInventoryNames(
         userInventory.filter((v) => v.in_use)
-    );
-
+    ).filter((item) => miningEquipmentNames.includes(item));
     if (userContracts.length === 0) {
         setStatus(CABIN_STATUS.sign_contract);
         return <SignContract />;
     }
 
-    if (inventoryNames.length < miningEquipmentNames.length) {
+    if (equipmentInventoryNames.length < miningEquipmentNames.length) {
         setStatus(CABIN_STATUS.welcome);
-        const equipments = getEquipments(inventoryNames);
+        const equipments = getEquipments(equipmentInventoryNames);
         return <Welcome equipments={equipments} />;
     }
 
