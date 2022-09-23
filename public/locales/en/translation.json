@@ -226,15 +226,15 @@
         "travel": "Travel",
         "to": {
           "contractor": "Travel to Contractor’s cabin",
-          "mineOwner": "Travel to Mine owner cabin",
-          "landlord": "Travel to Landlord cabin",
-          "engineers": "Travel to Engineers cabin",
+          "mineOwner": "Travel to Mine owner’s cabin",
+          "landlord": "Travel to Landlord’s cabin",
+          "engineers": "Travel to Engineer’s cabin",
           "hive": "Travel to Hive"
         }
       },
       "physicalShiftBadge": {
         "text": "Do you want to travel here?",
-        "button": "Physical Shift"
+        "button": "Travel"
       }
     },
     "equipmentSet": {
@@ -386,7 +386,8 @@
         "miningTerms": "Mining terms",
         "miningTermsHint": "If during the entire period of the contract, within the specified number of days, less than the specified amount of DME was extracted, the other party has the right to terminate the contract and collect a penalty",
         "startOfOperation": "Start of operation",
-        "startOfOperationTooltip": "Time when parties begin performing their obligations upon the contract.",
+        "effectiveDate": "Effective date",
+        "startOfOperationTooltip": "The date when agreement or transaction becomes binding",
         "goToServiceMarket": "To the Service Market",
         "orderCreated": "Your order was successfully created",
         "redirected": "You will be automatically redirected to the main page of the service market",
@@ -398,7 +399,6 @@
         "youHaveSignedContract": "You already have the contract",
         "yourMineIsFull": "You have no the mine or your mine has no more free slots",
         "removeEquipFirst": "You need to remove installed equipment in contractor's cabin to proceed",
-        "contractorShouldStartMiningWithin24Hours": "The Contractor should start mining within 24 hours in order not to receive a fine",
         "personalOrder": "Personalized order"
       },
       "lookingForMineOwner": "Looking for Mine owner",
@@ -509,8 +509,7 @@
       "activity": "Mine activity",
       "add": "Add new mine",
       "searching": "Searching for Mine owner",
-      "addMineOwner": "Add new Mine owner",
-      "findMineOwner": "Find a Mine owner on the servicemarket",
+      "findMineOwner": "Find a Mine owner on the Service Market",
       "createOrder": "Create an order for a Mine owner"
     },
     "faq": {

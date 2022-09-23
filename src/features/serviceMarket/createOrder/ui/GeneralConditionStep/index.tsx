@@ -76,15 +76,13 @@ export const GeneralConditionStep: FC<{
                         tooltip={
                             <Card
                                 title={t(
-                                    'pages.serviceMarket.createOrder.startOfOperation'
+                                    'pages.serviceMarket.createOrder.effectiveDate'
                                 )}
                                 className={styles.tooltipCard}
                             >
-                                {`${t(
+                                {t(
                                     'pages.serviceMarket.createOrder.startOfOperationTooltip'
-                                )} ${t(
-                                    'pages.serviceMarket.createOrder.contractorShouldStartMiningWithin24Hours'
-                                )}`}
+                                )}
                             </Card>
                         }
                     >

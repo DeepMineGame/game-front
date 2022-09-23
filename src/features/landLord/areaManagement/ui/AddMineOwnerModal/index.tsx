@@ -27,7 +27,7 @@ export const AddMineOwnerModal: FC<Props> = ({ visible, onCancel }) => {
             width={458}
             visible={visible}
             onCancel={onCancel}
-            title={t('pages.areaManagement.addMineOwner')}
+            title={t('pages.areaManagement.add')}
         >
             <Button
                 className={styles.button}
