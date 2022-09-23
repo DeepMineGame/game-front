@@ -92,7 +92,10 @@ export const LevelUpgradeTerms: FC<TermsStepProps> = ({
                         </Card>
                     }
                 >
-                    <Input placeholder="DME" type="number" />
+                    <Input
+                        placeholder={t('components.common.button.dme')}
+                        type="number"
+                    />
                 </Form.Item>
                 <Form.Item
                     name={orderFields.penaltyAmount}
@@ -109,7 +112,10 @@ export const LevelUpgradeTerms: FC<TermsStepProps> = ({
                         </Card>
                     }
                 >
-                    <Input placeholder="DME" type="number" />
+                    <Input
+                        placeholder={t('components.common.button.dme')}
+                        type="number"
+                    />
                 </Form.Item>
             </div>
             <div className={localStyles.space}>

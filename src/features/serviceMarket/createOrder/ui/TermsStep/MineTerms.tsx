@@ -114,7 +114,7 @@ export const MineTerms: FC<TermsStepProps> = ({ goToPreviousStep, form }) => {
                         </Card>
                     }
                 >
-                    <Input placeholder="DME" />
+                    <Input placeholder={t('components.common.button.dme')} />
                 </Form.Item>
             </div>
 
