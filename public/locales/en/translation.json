@@ -226,15 +226,15 @@
         "travel": "Travel",
         "to": {
           "contractor": "Travel to Contractor’s cabin",
-          "mineOwner": "Travel to Mine owner cabin",
-          "landlord": "Travel to Landlord cabin",
-          "engineers": "Travel to Engineers cabin",
+          "mineOwner": "Travel to Mine owner’s cabin",
+          "landlord": "Travel to Landlord’s cabin",
+          "engineers": "Travel to Engineer’s cabin",
           "hive": "Travel to Hive"
         }
       },
       "physicalShiftBadge": {
         "text": "Do you want to travel here?",
-        "button": "Physical Shift"
+        "button": "Travel"
       }
     },
     "equipmentSet": {
