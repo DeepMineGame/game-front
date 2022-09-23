@@ -21,7 +21,9 @@ export const MineOwnerPage = () => {
 
     return (
         <MineOwnerCabin state={cabinState}>
-            <Header withBackButton />
+            <div className={styles.header}>
+                <Header withBackButton />
+            </div>
             {chainAccountName && (
                 <div className={styles.hologramWrapper}>
                     <Hologram user={chainAccountName} />

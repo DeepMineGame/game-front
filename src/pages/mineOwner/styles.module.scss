@@ -1,10 +1,9 @@
+
 .hologramWrapper {
   text-align: center;
 }
 
-.backButton {
-  display: inline-flex;
-  position: absolute;
-  margin-top: 20px;
-  margin-left: 20px;
+.header {
+  z-index: 3;
+  position: relative;
 }

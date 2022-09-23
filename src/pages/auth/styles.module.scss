@@ -21,7 +21,7 @@
   max-width: 310px;
   font-family: $orbitron;
 
-  @media only screen and (min-width: $media-desktop-s)  {
+  @media (min-width: $media-desktop-s)  {
     margin-top: 80px;
   }
 }
