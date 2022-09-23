@@ -4,7 +4,11 @@ import { t } from 'i18next';
 import { ContractState } from 'features';
 import { DiscordIcon } from 'shared';
 import { Space, Tooltip } from 'antd';
-import { ContractDto, contractName } from 'entities/smartcontract';
+import {
+    ContractDto,
+    contractName,
+    getContractStatus,
+} from 'entities/smartcontract';
 import { getUserRoleInContract } from 'shared/lib/utils';
 import { Link, Table, Tag } from '../../ui-kit';
 import { toLocaleDate } from '../../utils';
@@ -22,6 +26,7 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
                 const role = !partnerNickname
                     ? null
                     : getUserRoleInContract(contract, partnerNickname);
+                const contractStatus = getContractStatus(contract, account);
 
                 return {
                     nickName: (
@@ -61,12 +66,15 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
                             ? '-'
                             : toLocaleDate(contract.finishes_at * 1000),
                     penalty: contract.penalty_amount,
-                    status: (
-                        <ContractState
-                            contract={contract}
-                            accountName={account}
-                        />
-                    ),
+                    status: {
+                        label: (
+                            <ContractState
+                                contract={contract}
+                                accountName={account}
+                            />
+                        ),
+                        value: contractStatus,
+                    },
                 };
             }),
         [account, contracts]
@@ -112,8 +120,9 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
                     dataIndex: 'status',
                     key: 'status',
                     sorter: (a, b) =>
-                        a.status.props.contractStatus.value.length -
-                        b.status.props.contractStatus.value.length,
+                        a.status.value.value.length -
+                        b.status.value.value.length,
+                    render: ({ label }) => label,
                 },
             ]}
             dataSource={dataSource}
