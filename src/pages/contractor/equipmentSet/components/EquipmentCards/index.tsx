@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next';
 
 import { CardHolder, Card, Status } from 'shared';
 import { InventoryNameType, UserInventoryType } from 'entities/smartcontract';
-
 import styles from './styles.module.scss';
 
 interface Props {
@@ -30,7 +29,7 @@ export const EquipmentCards = ({
             {Object.entries(selectedEquipment).map(([name, inventory]) =>
                 inventory ? (
                     <Card
-                        templateId={inventory.template_id}
+                        inventory={inventory}
                         key={name}
                         buttonText={
                             inventory.in_use
@@ -38,7 +37,7 @@ export const EquipmentCards = ({
                                 : undefined
                         }
                         onButtonClick={() => onCardButtonClick(inventory)}
-                        status="broken"
+                        status={getCardStatus(inventory)}
                         repairing
                     />
                 ) : (

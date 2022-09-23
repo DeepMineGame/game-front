@@ -74,4 +74,7 @@ export type AssetDataType = {
     transferred_at_time: string;
     minted_at_block: string;
     minted_at_time: string;
+    depreciation: number;
+    current_capacity: number;
+    maximal_capacity: number;
 };

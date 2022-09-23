@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Tooltip } from 'antd';
 import cn from 'classnames';
 import {
@@ -8,7 +8,8 @@ import {
     DepreciationProgressBar,
     neutral4,
 } from 'shared';
-import { InventoryIdType } from 'entities/smartcontract';
+import { UserInventoryType } from 'entities/smartcontract';
+import { AssetDataType, getAtomicAssetsDataById } from 'entities/atomicassets';
 import { ProgressProps } from '../ProgressBar/NftProgressBar';
 import styles from './styles.module.scss';
 import { CardBadge } from './components/CardBadge';
@@ -25,7 +26,7 @@ type Props = {
     buttonClassName?: string;
     onClick?: (e: any) => void;
     className?: string;
-    templateId?: InventoryIdType;
+    inventory?: UserInventoryType;
     repairing?: boolean;
 } & ProgressProps;
 
@@ -38,7 +39,7 @@ export const Card: FC<Props> = ({
     buttonClassName,
     onClick,
     className,
-    templateId,
+    inventory,
     repairing,
 }) => {
     const lvlTooltip = () => (
@@ -47,6 +48,14 @@ export const Card: FC<Props> = ({
             <div>120/9999</div>
         </div>
     );
+
+    const [cardData, setCardData] = useState<AssetDataType | undefined>();
+
+    useEffect(() => {
+        (async () => {
+            setCardData(await getAtomicAssetsDataById(inventory?.asset_id!));
+        })();
+    }, []);
 
     return (
         <Tooltip
@@ -60,7 +69,7 @@ export const Card: FC<Props> = ({
                     {status === 'broken' && (
                         <CardState
                             status={status}
-                            templateId={templateId}
+                            templateId={inventory?.template_id}
                             repairing={repairing}
                         />
                     )}
@@ -75,18 +84,17 @@ export const Card: FC<Props> = ({
                                 height="100%"
                                 width="100%"
                                 src={
-                                    templateId
-                                        ? getImagePath(templateId)
+                                    inventory?.template_id
+                                        ? getImagePath(inventory?.template_id)
                                         : imageSrc
                                 }
                                 alt="nft-equipment-card"
                             />
                         </div>
                         <DepreciationProgressBar
-                            totalMining={25}
-                            completedMining={4}
-                            serviceLife={13}
-                            totalServiceLife={20}
+                            completedMining={cardData?.depreciation}
+                            serviceLife={cardData?.current_capacity}
+                            totalServiceLife={cardData?.maximal_capacity}
                         />
                     </div>
                 </div>

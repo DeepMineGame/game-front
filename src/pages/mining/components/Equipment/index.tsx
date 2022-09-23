@@ -41,7 +41,7 @@ export const Equipment = () => {
                         inventoryItem && (
                             <Card
                                 key={inventoryItem.template_id}
-                                templateId={inventoryItem.template_id}
+                                inventory={inventoryItem}
                                 status="installed"
                                 onClick={() =>
                                     navigate(

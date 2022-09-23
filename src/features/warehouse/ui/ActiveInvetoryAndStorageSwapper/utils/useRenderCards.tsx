@@ -14,7 +14,7 @@ export function useRenderCards() {
         return Array.from(items)?.map((card) => (
             <div onDragStart={() => onDragStart(card)} key={card.template_id}>
                 <Card
-                    templateId={card.template_id}
+                    inventory={card}
                     className={styles.card}
                     key={card.asset_id}
                     buttonText="Details"
