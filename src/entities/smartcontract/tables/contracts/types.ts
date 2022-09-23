@@ -2,7 +2,12 @@ export enum ContractType {
     undefined,
     landlord_mineowner,
     mineowner_contractor,
-    citizen_engineer,
+    level_upgrade,
+}
+
+export enum ContractRole {
+    executor,
+    client,
 }
 
 export enum ContractStatus {
@@ -38,6 +43,7 @@ export type ContractDto = {
     activation_time: number;
     start_time: number;
     deadline_time: number;
+    deleted_at: number;
     term_time: number;
     deadline_duration: number;
     contract_duration: number;
@@ -61,5 +67,5 @@ export const contractName = {
     [ContractType.undefined]: null,
     [ContractType.landlord_mineowner]: 'Mine setup',
     [ContractType.mineowner_contractor]: 'Mining contract',
-    [ContractType.citizen_engineer]: 'Level Upgrade',
+    [ContractType.level_upgrade]: 'Level Upgrade',
 };

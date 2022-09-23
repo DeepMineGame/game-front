@@ -17,6 +17,11 @@ export * from './hasActiveLandLordMineOwnerContractAsExecutor';
 export * from './hasInstalledEquipmentStore';
 export * from './hasActiveMineOwnerContractorContractAsExecutor';
 
+export enum Role {
+    engineer,
+    citizen,
+}
+
 export const CreateOrderGate = createGate<{ searchParam: string }>(
     'CreateOrderGate'
 );

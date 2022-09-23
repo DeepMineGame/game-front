@@ -49,4 +49,5 @@ export * from './getNftImagePath';
 export * from './uniqBy';
 export * from './addDaysToCurrentDateUnixTime';
 export * from './getLabelSelectItem';
+export * from './isEmptyContractorSlot';
 export { getErrorCode } from './getErrorCode';

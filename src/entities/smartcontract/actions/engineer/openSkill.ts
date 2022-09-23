@@ -14,7 +14,7 @@ export function openSkill(waxUser: string, assetId: string) {
                 ],
                 data: {
                     wax_user: waxUser,
-                    template_id: assetId,
+                    skill_template_id: assetId,
                 },
             },
         ],

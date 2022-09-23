@@ -5,6 +5,7 @@ import { ResultProps } from 'antd';
 import styles from '../styles.module.scss';
 
 type Props = {
+    icon?: React.ReactElement;
     title?: string;
     subTitle?: string;
     status?: ResultProps['status'];
@@ -20,6 +21,7 @@ export const CreateResult: FC<Props> = (props) => {
         <div className={styles.backPlate}>
             <div className={styles.backPlateInner}>
                 <Result
+                    icon={props.icon}
                     status={props.status}
                     title={
                         props.title ||

@@ -1,30 +1,30 @@
 import { FC } from 'react';
-import { Card, Form, FormInstance, Input as InputA, Space } from 'antd';
+import { Card, Form, Input as InputA, Space } from 'antd';
 import { Button, Input, Select, getLabelSelectItem } from 'shared';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
-import { createContrFormFields } from 'entities/smartcontract';
+import { orderFields } from 'entities/order';
+
 import styles from '../../styles.module.scss';
 import localStyles from './styles.module.scss';
+import { GeneralInformationStepProps } from './interface';
 
 const { useWatch } = Form;
 
-export const GeneralConditionStep: FC<{
-    setStep: React.Dispatch<React.SetStateAction<number>>;
-    form: FormInstance;
-}> = ({ setStep, form }) => {
+export const MineInformation: FC<GeneralInformationStepProps> = ({
+    goToNextStep,
+    goToPreviousStep,
+    form,
+}) => {
     const { t } = useTranslation();
-    const feeFieldValue = useWatch(createContrFormFields.fee, form);
-    const finishesAtFieldValue = useWatch(
-        createContrFormFields.contractDuration,
-        form
-    );
+    const feeFieldValue = useWatch(orderFields.feePercent, form);
+    const finishesAtFieldValue = useWatch(orderFields.contractDuration, form);
     const deadlineTimeInDaysFieldValue = useWatch(
-        createContrFormFields.deadlineDurationInDays,
+        orderFields.deadlineDurationInDays,
         form
     );
     const deadlineTimeInHoursFieldValue = useWatch(
-        createContrFormFields.deadlineDurationInHours,
+        orderFields.deadlineDurationInHours,
         form
     );
     const hasAllValues =
@@ -37,7 +37,7 @@ export const GeneralConditionStep: FC<{
         <Form.Item>
             <InputA.Group compact>
                 <Form.Item
-                    name={createContrFormFields.fee}
+                    name={orderFields.feePercent}
                     label={t('pages.serviceMarket.createOrder.fee')}
                     className={cn(styles.formField, localStyles.feeInput)}
                     tooltip={
@@ -52,7 +52,7 @@ export const GeneralConditionStep: FC<{
                     <Input placeholder="%" />
                 </Form.Item>
                 <Form.Item
-                    name={createContrFormFields.contractDuration}
+                    name={orderFields.contractDuration}
                     label={t('components.common.duration')}
                     className={cn(localStyles.finisAtSelect, styles.formField)}
                 >
@@ -68,7 +68,7 @@ export const GeneralConditionStep: FC<{
             <InputA.Group>
                 <div className={localStyles.deadlineInputsContainer}>
                     <Form.Item
-                        name={createContrFormFields.deadlineDurationInDays}
+                        name={orderFields.deadlineDurationInDays}
                         label={t(
                             'pages.serviceMarket.createOrder.startOfOperation'
                         )}
@@ -96,7 +96,7 @@ export const GeneralConditionStep: FC<{
                         />
                     </Form.Item>
                     <Form.Item
-                        name={createContrFormFields.deadlineDurationInHours}
+                        name={orderFields.deadlineDurationInHours}
                         className={cn(styles.formField)}
                     >
                         <Select
@@ -112,12 +112,12 @@ export const GeneralConditionStep: FC<{
                 </div>
             </InputA.Group>
             <Space direction="horizontal">
-                <Button onClick={() => setStep(0)} ghost>
+                <Button onClick={goToPreviousStep} ghost>
                     {t('kit.back')}
                 </Button>
                 <Button
                     disabled={!hasAllValues}
-                    onClick={() => setStep(2)}
+                    onClick={goToNextStep}
                     type="primary"
                 >
                     {t('components.common.button.next')}

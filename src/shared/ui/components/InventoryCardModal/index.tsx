@@ -76,7 +76,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                         style={{
                             aspectRatio: '5/7',
                         }}
-                        src={getImagePath(card.template_id)}
+                        src={getImagePath(card?.template_id)}
                         alt="nft-equipment-card"
                     />
                     {onSelect && (

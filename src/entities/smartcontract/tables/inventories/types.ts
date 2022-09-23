@@ -47,3 +47,14 @@ export type UserInventoryType = {
     level: number;
     equip_type: number;
 };
+
+export enum InventoryTab {
+    areas,
+    structures,
+    equipment,
+    petobots,
+    consumables,
+    modules,
+    bages,
+    mines,
+}

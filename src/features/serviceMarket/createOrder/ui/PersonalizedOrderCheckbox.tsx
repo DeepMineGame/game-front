@@ -2,8 +2,9 @@ import { Checkbox, Input } from 'shared';
 import { Form, FormInstance, Space } from 'antd';
 import { FC, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { createContrFormFields } from 'entities/smartcontract';
-import styles from '../../styles.module.scss';
+import { orderFields } from 'entities/order';
+
+import styles from '../styles.module.scss';
 
 export const PersonalizedOrderCheckbox: FC<{
     form: FormInstance;
@@ -11,22 +12,24 @@ export const PersonalizedOrderCheckbox: FC<{
 }> = ({ form, isSelfClient }) => {
     const [isPersonalizedOrder, setIsPersonalizedOrder] = useState(false);
     const { t } = useTranslation();
-    const onChange = useCallback(
-        (e) => {
-            if (!e.target.checked) {
+
+    const handleChange = useCallback(
+        (event) => {
+            if (!event.target.checked) {
                 form.setFieldsValue({
                     ...form.getFieldsValue(),
-                    [createContrFormFields.optClient]: null,
-                    [createContrFormFields.optExecutor]: null,
+                    [orderFields.optClient]: null,
+                    [orderFields.optExecutor]: null,
                 });
             }
-            setIsPersonalizedOrder(e.target.checked);
+            setIsPersonalizedOrder(event.target.checked);
         },
         [form]
     );
+
     return (
         <Space direction="vertical" size="large">
-            <Checkbox onChange={onChange}>
+            <Checkbox onChange={handleChange}>
                 {t('pages.serviceMarket.createOrder.personalOrder')}
             </Checkbox>
             {isPersonalizedOrder ? (
@@ -39,8 +42,8 @@ export const PersonalizedOrderCheckbox: FC<{
                     className={styles.formField}
                     name={
                         isSelfClient
-                            ? createContrFormFields.optClient
-                            : createContrFormFields.optExecutor
+                            ? orderFields.optClient
+                            : orderFields.optExecutor
                     }
                 >
                     <Input />

@@ -26,7 +26,7 @@ export const levelUpgradeChangeFilterEvent = createEvent<LevelUpgradeFilter>();
 export const getLevelUpgradeContractsEffect = createEffect(() =>
     getTableData(
         getContractsNameConfig(
-            ContractType.citizen_engineer,
+            ContractType.level_upgrade,
             mapSearchParamForIndexPositionToFindContracts.contractType,
             1000
         )

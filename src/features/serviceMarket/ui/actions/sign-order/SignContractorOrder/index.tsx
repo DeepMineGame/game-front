@@ -3,14 +3,21 @@ import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { ATOMICHUB_URL } from 'app/constants';
-import { Button, Result, Text, Select, useReloadPage, success } from 'shared';
+import {
+    Button,
+    Result,
+    Text,
+    Select,
+    useReloadPage,
+    success,
+    isEmptyContractorSlot,
+} from 'shared';
 import { useSmartContractAction } from 'features/hooks';
 import { MinesGate, minesStore } from 'entities/contract';
 import {
-    ContractDto,
     ContractorSlots,
+    ContractDto,
     signOrder,
-    SlotStatus,
 } from 'entities/smartcontract';
 import { SignModal } from '../SignModal';
 import styles from './styles.module.scss';
@@ -20,16 +27,8 @@ type Props = {
     accountName: string;
 };
 
-const getEmptySlot = (slots: ContractorSlots) => {
-    return (
-        slots.findIndex((slot) => {
-            return (
-                slot.reserved === SlotStatus.unreserved &&
-                slot.contractor === ''
-            );
-        }) ?? -1
-    );
-};
+const getEmptySlot = (slots: ContractorSlots) =>
+    slots.findIndex(isEmptyContractorSlot) ?? -1;
 
 const SignContractorOrder: FC<Props> = ({ contract, accountName }) => {
     const { t } = useTranslation();
