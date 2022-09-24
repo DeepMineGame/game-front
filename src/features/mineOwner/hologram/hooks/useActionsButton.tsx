@@ -14,12 +14,8 @@ import { createOrder, serviceMarket, warehouse } from 'app/router/paths';
 import { ATOMICHUB_URL } from 'app';
 import { useStore } from 'effector-react';
 import { ServiceMarketTabIds } from 'app/router/constants';
-import {
-    ContractType,
-    createContrFormFields,
-    ContractRole,
-    setupMine,
-} from 'entities/smartcontract';
+import { ContractType, ContractRole, setupMine } from 'entities/smartcontract';
+import { orderFields } from 'entities/order';
 import {
     mineOwnerCabinState,
     mineOwnerLandlordContractForUserStore,
@@ -53,7 +49,7 @@ export function useActionsButton() {
                 type="link"
                 onClick={() =>
                     navigate(
-                        `${createOrder}?${createContrFormFields.contractType}=${ContractType.landlord_mineowner}&${createContrFormFields.isClient}=${ContractRole.executor}`
+                        `${createOrder}?${orderFields.contractType}=${ContractType.landlord_mineowner}&${orderFields.isClient}=${ContractRole.executor}`
                     )
                 }
             >

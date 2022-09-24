@@ -18,3 +18,13 @@
     align-items: end;
   }
 }
+
+.flexSection {
+  display: flex;
+  gap: 15px;
+
+  & > * {
+    flex-grow: 1;
+    width: 100%;
+  }
+}

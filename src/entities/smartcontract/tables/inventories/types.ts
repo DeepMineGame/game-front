@@ -49,3 +49,14 @@ export type UserInventoryType = {
     broken: number;
     available_from: number;
 };
+
+export enum InventoryTab {
+    areas,
+    structures,
+    equipment,
+    petobots,
+    consumables,
+    modules,
+    bages,
+    mines,
+}

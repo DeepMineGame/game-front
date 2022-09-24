@@ -119,7 +119,21 @@
       "findContract": "Find a contract",
       "travel": "Travel",
       "market": "Market",
-      "storage": "Storage"
+      "storage": "Storage",
+      "rarity": "Rarity",
+      "rarities": {
+        "common": "Common",
+        "uncommon": "Uncommon",
+        "rare": "Rare",
+        "epic": "Epic",
+        "legendary": "Legendary"
+      },
+      "inventoryTypes": {
+        "undefined": "Undefined",
+        "area": "Area",
+        "equipment": "Equipment",
+        "structure": "Structure"
+      }
     },
     "user": {
       "accountSettings": "Account settings",
@@ -169,7 +183,7 @@
       "consumablesWillBurnOut": "Your consumables will be burned, energy and time used mining will be lost and you won't receive DME",
       "timeSpent": "Time spent",
       "dmeCollected": "DME collected",
-        "calculateMining": "Calculate mining"
+      "calculateMining": "Calculate mining"
     },
     "pageNotFound": {
       "weLost": "WE GOT LOST",
@@ -182,7 +196,7 @@
       "mineOwnerCabin": "GO TO MINE",
       "contractorCabin": "CONTRACTOR'S CABIN",
       "hive": "HIVE",
-      "landlordCabin":"LANDLORDS LOUNGE",
+      "landlordCabin": "LANDLORDS LOUNGE",
       "engineers": "ENGINEERS WORKSHOP",
       "mineDeck": "MINE DECK",
       "goToCity": "GO TO CITY"
@@ -376,11 +390,12 @@
       "createOrder": {
         "createOrder": "Create order",
         "contractType": "Contract type",
-        "generalCondition": "General condition",
+        "generalInformation": "General information",
         "terms": "Terms",
         "selectContractType": "Select contract type",
         "selectToDisable": "Select contract type to disable",
         "selectRole": "Select role",
+        "selectItem": "Select item",
         "fee": "Fee",
         "feeTooltip": "% of DME charged on each dig at the mine.",
         "penalty": "Penalty",
@@ -395,6 +410,9 @@
         "startOfOperationTooltip": "The date when agreement or transaction becomes binding",
         "goToServiceMarket": "To the Service Market",
         "orderCreated": "Your order was successfully created",
+        "orderFailed": "Failed to create your order",
+        "pleaseReCreate": "Something went wrong please try to re-create the order",
+        "reCreateOrder": "Re-create order",
         "redirected": "You will be automatically redirected to the main page of the service market",
         "haveNoNftAlert": {
           "haveNo": "You don’t have an NFT to create this order. Please visit the Marketplace"
@@ -404,7 +422,38 @@
         "youHaveSignedContract": "You already have the contract",
         "yourMineIsFull": "You have no the mine or your mine has no more free slots",
         "removeEquipFirst": "You need to remove installed equipment in contractor's cabin to proceed",
-        "personalOrder": "Personalized order"
+        "personalOrder": "Personalized order",
+        "levelUpgrade": "Level upgrade",
+        "selectType": "Select type",
+        "upgradeType": "Upgrade type",
+        "upgradeTypeList": [
+          "",
+          "Mine upgrade",
+          "Equipment upgrade",
+          "",
+          "Mine module upgrade"
+        ],
+        "itemType": "Item type",
+        "itemTypes": {
+          "cutter": "Cutter",
+          "delaminator": "Delaminator",
+          "dmeWire": "DME wire",
+          "mine": "Mine",
+          "plungingBlocks": "Plunging blocks"
+        },
+        "upgradeToLevel": "Upgrade to level",
+        "costOfExecution": "Cost of execution",
+        "levelUpgradeTerms": {
+          "penalty": "If the performing party violates the terms of the contract or terminates the contract prematurely, the counterparty may charge a fine",
+          "engineer": {
+            "startOfOperation": "The period of time during which you are required to start performing the upgrade",
+            "costOfExecution": "The amount of DME you receives for performing the upgrade"
+          },
+          "citizen": {
+            "startOfOperation": "The period of time during which the engineer is required to start performing the upgrade",
+            "costOfExecution": "The amount of DME the engineer receives for performing the upgrade"
+          }
+        }
       },
       "lookingForMineOwner": "Looking for Mine owner",
       "lookingForContractor": "Looking for Contractor",
@@ -656,6 +705,7 @@
   },
   "blockchainErrors": {
     "fallback": "Error has no code. Unknown error",
+    "notEnoughDme": "Your DME balance is insufficient to fulfill the contract condition",
     "00001": "wrong input data. Must be less than 51 assets and more than 0",
     "00002": "can't find asset for asset_id",
     "00003": "wrong number of assets",

@@ -3,9 +3,11 @@ import { Select } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 import { FC } from 'react';
-import { ContractType, createContrFormFields } from 'entities/smartcontract';
-import styles from '../../styles.module.scss';
-import { hasAreaOrMineStore } from '../../models';
+import { ContractType } from 'entities/smartcontract';
+import { orderFields } from 'entities/order';
+import { hasAreaOrMineStore } from '../models';
+
+import styles from '../styles.module.scss';
 
 export const ContractTypeField: FC<{
     form: FormInstance;
@@ -20,18 +22,18 @@ export const ContractTypeField: FC<{
         <Form.Item
             className={styles.formField}
             label={t('pages.serviceMarket.createOrder.contractType')}
-            name={createContrFormFields.contractType}
+            name={orderFields.contractType}
         >
             <Select
                 placeholder={t(
                     'pages.serviceMarket.createOrder.selectContractType'
                 )}
-                onSelect={(value: ContractType) =>
-                    // reset form and set only current field
+                onSelect={(value: ContractType) => {
+                    form.resetFields();
                     form.setFieldsValue({
-                        [createContrFormFields.contractType]: value,
-                    })
-                }
+                        [orderFields.contractType]: value,
+                    });
+                }}
                 options={[
                     {
                         value: ContractType.landlord_mineowner,
@@ -47,6 +49,12 @@ export const ContractTypeField: FC<{
                     {
                         value: ContractType.mineowner_contractor,
                         label: t('pages.serviceMarket.miningContract'),
+                    },
+                    {
+                        value: ContractType.level_upgrade,
+                        label: t(
+                            'pages.serviceMarket.createOrder.levelUpgrade'
+                        ),
                     },
                 ]}
             />

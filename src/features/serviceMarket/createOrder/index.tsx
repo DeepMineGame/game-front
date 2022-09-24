@@ -1,31 +1,68 @@
-import React, { useState } from 'react';
+import { useState, FC } from 'react';
 import { Steps, useAccountName } from 'shared';
 import { Form } from 'antd';
+import { FrownOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { serviceMarket } from 'app/router/paths';
-import { createContr, CreateContrDto } from 'entities/smartcontract';
+import { ContractType } from 'entities/smartcontract';
 import { useSmartContractActionDynamic } from '../../hooks';
 import styles from './styles.module.scss';
-import { ContractTypeAndRoleStep } from './ui/ContractTypeAndRoleStep';
-import { GeneralConditionStep } from './ui/GeneralConditionStep';
+import { TypeStep } from './ui/TypeStep';
+import { GeneralInformationStep } from './ui/GeneralInformationStep';
 import { TermsStep } from './ui/TermsStep';
 import { CreateResult } from './ui/CreateResult';
 import { useInitialValues } from './hooks/useInitialValues';
+import { createMineOrder, createLevelUpgradeOrder } from './createOrder';
+
+enum Step {
+    first,
+    second,
+    third,
+}
+
+enum Status {
+    idle,
+    success,
+    error,
+}
+
+const StepContent: FC<{ step: Step; currentStep: Step }> = ({
+    step,
+    currentStep,
+    children,
+}) => (
+    <div
+        className={styles.rightSection}
+        style={{
+            display: step === currentStep ? 'block' : 'none',
+        }}
+    >
+        {children}
+    </div>
+);
+
+const createOrderActionsMap: Record<
+    ContractType,
+    ((orderData: any) => any) | undefined
+> = {
+    [ContractType.undefined]: undefined,
+    [ContractType.landlord_mineowner]: createMineOrder,
+    [ContractType.mineowner_contractor]: createMineOrder,
+    [ContractType.level_upgrade]: createLevelUpgradeOrder,
+};
 
 export const CreateOrderForm = () => {
     const { t } = useTranslation();
     const initialValues = useInitialValues();
-    const [currentStep, setStep] = useState(0);
+    const [currentStep, setStep] = useState(Step.first);
     const [form] = Form.useForm();
-    const [values, setValues] =
-        useState<Partial<CreateContrDto>>(initialValues);
     const callAction = useSmartContractActionDynamic();
     const accountName = useAccountName();
     const navigate = useNavigate();
-    const [formStatus, setFormStatus] = useState<'init' | 'success'>('init');
+    const [formStatus, setFormStatus] = useState<Status>(Status.idle);
 
-    if (formStatus === 'success') {
+    if (formStatus === Status.success) {
         return (
             <CreateResult
                 button={{ callback: () => navigate(serviceMarket) }}
@@ -33,25 +70,48 @@ export const CreateOrderForm = () => {
         );
     }
 
+    if (formStatus === Status.error) {
+        return (
+            <CreateResult
+                status="warning"
+                icon={<FrownOutlined style={{ color: '#F5C913' }} />}
+                title={t('pages.serviceMarket.createOrder.orderFailed')}
+                subTitle={t('pages.serviceMarket.createOrder.pleaseReCreate')}
+                button={{
+                    text: t('pages.serviceMarket.createOrder.reCreateOrder'),
+                    callback: () => {
+                        setStep(Step.first);
+                        setFormStatus(Status.idle);
+                    },
+                }}
+            />
+        );
+    }
+
+    const handleCreate = async () => {
+        const orderData = form.getFieldsValue();
+        const createOrder =
+            createOrderActionsMap[orderData.contract_type as ContractType];
+
+        if (createOrder) {
+            try {
+                await callAction(
+                    createOrder({ ...orderData, wax_user: accountName })
+                );
+                setFormStatus(Status.success);
+            } catch (error) {
+                setFormStatus(Status.error);
+            }
+        }
+    };
+
     return (
         <Form
             className={styles.form}
             layout="vertical"
             form={form}
             initialValues={initialValues}
-            onValuesChange={(_, currentValues) =>
-                setValues({ ...values, ...currentValues })
-            }
-            onFinish={async () => {
-                await callAction(
-                    createContr({
-                        ...values,
-                        wax_user: accountName,
-                    } as CreateContrDto)
-                );
-                setFormStatus('success');
-                setTimeout(() => navigate(serviceMarket), 3000);
-            }}
+            onFinish={handleCreate}
         >
             <Steps
                 className={styles.steps}
@@ -63,39 +123,45 @@ export const CreateOrderForm = () => {
                             'pages.serviceMarket.createOrder.contractType'
                         ),
                         description:
-                            currentStep === 0
-                                ? t('components.common.inProgress')
-                                : '',
+                            currentStep === Step.first &&
+                            t('components.common.inProgress'),
                     },
                     {
                         title: t(
-                            'pages.serviceMarket.createOrder.generalCondition'
+                            'pages.serviceMarket.createOrder.generalInformation'
                         ),
                         description:
-                            currentStep === 1
-                                ? t('components.common.inProgress')
-                                : '',
+                            currentStep === Step.second &&
+                            t('components.common.inProgress'),
                     },
                     {
                         title: t('pages.serviceMarket.createOrder.terms'),
                         description:
-                            currentStep === 2
-                                ? t('components.common.inProgress')
-                                : '',
+                            currentStep === Step.third &&
+                            t('components.common.inProgress'),
                     },
                 ]}
             />
-            {currentStep === 0 && (
-                <ContractTypeAndRoleStep
+            <StepContent step={Step.first} currentStep={currentStep}>
+                <TypeStep
                     accountName={accountName}
                     form={form}
-                    setStep={setStep}
+                    goToNextStep={() => setStep(Step.second)}
                 />
-            )}
-            {currentStep === 1 && (
-                <GeneralConditionStep setStep={setStep} form={form} />
-            )}
-            {currentStep === 2 && <TermsStep form={form} setStep={setStep} />}
+            </StepContent>
+            <StepContent step={Step.second} currentStep={currentStep}>
+                <GeneralInformationStep
+                    form={form}
+                    goToPreviousStep={() => setStep(Step.first)}
+                    goToNextStep={() => setStep(Step.third)}
+                />
+            </StepContent>
+            <StepContent step={Step.third} currentStep={currentStep}>
+                <TermsStep
+                    form={form}
+                    goToPreviousStep={() => setStep(Step.second)}
+                />
+            </StepContent>
         </Form>
     );
 };

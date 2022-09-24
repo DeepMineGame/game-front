@@ -1,21 +1,17 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { FormInstance, Form, Alert } from 'antd';
 import { useGate, useStore } from 'effector-react';
 import { Select } from 'shared';
 import { useTranslation } from 'react-i18next';
-import {
-    ContractType,
-    createContrFormFields,
-    rarityMap,
-} from 'entities/smartcontract';
-import styles from '../../styles.module.scss';
+import { ContractType, rarityMap } from 'entities/smartcontract';
+import { orderFields } from 'entities/order';
 import {
     InventoryGate,
     userAtomicAssetsStore,
     activeUserInventoryStore,
-} from '../../models';
+} from '../models';
 
-const { useWatch } = Form;
+import styles from '../styles.module.scss';
 
 export const AssetSelectField: FC<{
     form: FormInstance;
@@ -32,9 +28,9 @@ export const AssetSelectField: FC<{
     const atomicAssetsFilteredByTemplates = atomicInventory?.filter(
         ({ template_id }) => templatesId.includes(template_id)
     );
-    const isClientField = useWatch(createContrFormFields.isClient, form);
+    const isClientField = Form.useWatch(orderFields.isClient, form);
 
-    const contractType = useWatch(createContrFormFields.contractType, form);
+    const contractType = Form.useWatch(orderFields.contractType, form);
 
     const isMineSetupContractTypeSelected =
         contractType === ContractType.landlord_mineowner;
@@ -55,7 +51,7 @@ export const AssetSelectField: FC<{
                         ? t('components.common.area')
                         : t('features.actions.mine')
                 }
-                name={createContrFormFields.assetId}
+                name={orderFields.assetId}
             >
                 <Select
                     placeholder={
