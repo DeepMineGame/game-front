@@ -1,24 +1,36 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Status, Title } from 'shared';
+import {
+    getTimeLeftFromUtc,
+    isUtcDateExpired,
+    Status,
+    Title,
+    useTick,
+} from 'shared';
 import { ID_TO_INVENTORY, InventoryIdType } from 'entities/smartcontract';
 import styles from '../styles.module.scss';
 
 export const CardState: FC<{
     templateId?: InventoryIdType;
     status?: Status;
-    repairing?: boolean;
-}> = ({ templateId, status, repairing }) => {
+    finishesAt?: number;
+    onFinish?: () => void;
+}> = ({ templateId, status, finishesAt, onFinish }) => {
     const { t } = useTranslation();
+    useTick();
+
+    if (finishesAt && onFinish && isUtcDateExpired(finishesAt)) onFinish();
 
     return (
         <div className={styles.cardState}>
             <Title level={4}>
-                {status === 'broken' && !repairing
+                {status === 'broken' && !finishesAt
                     ? `${ID_TO_INVENTORY[templateId!]} ${t(
                           'kit.cardStates.damaged'
                       )}`
-                    : t('kit.cardStates.repairing')}
+                    : `${t('kit.cardStates.repairing')} ${getTimeLeftFromUtc(
+                          finishesAt!
+                      )}`}
             </Title>
         </div>
     );

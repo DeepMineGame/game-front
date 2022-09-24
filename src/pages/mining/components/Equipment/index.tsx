@@ -42,12 +42,12 @@ export const Equipment = () => {
                             <Card
                                 key={inventoryItem.template_id}
                                 inventory={inventoryItem}
-                                status="installed"
                                 onClick={() =>
                                     navigate(
                                         `/inventory/${inventoryItem.asset_id}`
                                     )
                                 }
+                                withStatus
                             />
                         )
                 )}

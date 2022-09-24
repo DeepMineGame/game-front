@@ -17,9 +17,15 @@ import { CardState } from './components/CardState';
 
 export type Status = 'installed' | 'broken' | 'notInstalled';
 
+export const getCardStatus = (inventory?: UserInventoryType): Status => {
+    if (inventory?.broken) return 'broken';
+    if (inventory?.in_use) return 'installed';
+
+    return 'notInstalled';
+};
+
 type Props = {
     imageSrc?: string;
-    status?: Status;
     needTooltip?: boolean;
     buttonText?: string;
     onButtonClick?: () => void;
@@ -27,12 +33,14 @@ type Props = {
     onClick?: (e: any) => void;
     className?: string;
     inventory?: UserInventoryType;
-    repairing?: boolean;
+    repairFinishesAt?: number;
+    onRepairFinish?: () => void;
+    withDepreciationBar?: boolean;
+    withStatus: boolean;
 } & ProgressProps;
 
 export const Card: FC<Props> = ({
     imageSrc,
-    status,
     needTooltip,
     buttonText,
     onButtonClick,
@@ -40,7 +48,10 @@ export const Card: FC<Props> = ({
     onClick,
     className,
     inventory,
-    repairing,
+    repairFinishesAt,
+    onRepairFinish,
+    withStatus,
+    withDepreciationBar = true,
 }) => {
     const lvlTooltip = () => (
         <div className={styles.lvlTooltipContent}>
@@ -57,6 +68,8 @@ export const Card: FC<Props> = ({
         })();
     }, []);
 
+    const status = getCardStatus(inventory);
+
     return (
         <Tooltip
             overlay={needTooltip ? lvlTooltip : undefined}
@@ -65,12 +78,13 @@ export const Card: FC<Props> = ({
         >
             <div className={cn(styles.wrapper, className)}>
                 <div onClick={onClick}>
-                    <CardBadge status={status} />
+                    {withStatus && <CardBadge status={status} />}
                     {status === 'broken' && (
                         <CardState
                             status={status}
                             templateId={inventory?.template_id}
-                            repairing={repairing}
+                            finishesAt={repairFinishesAt}
+                            onFinish={onRepairFinish}
                         />
                     )}
                     <div
@@ -81,7 +95,7 @@ export const Card: FC<Props> = ({
                         <div
                             className={cn(styles.image, {
                                 [styles.broken]: status === 'broken',
-                                [styles.repairing]: repairing,
+                                [styles.repairing]: !!repairFinishesAt,
                             })}
                         >
                             <img
@@ -95,13 +109,15 @@ export const Card: FC<Props> = ({
                                 alt="nft-equipment-card"
                             />
                         </div>
-                        <DepreciationProgressBar
-                            completedMining={cardData?.data.depreciation}
-                            serviceLife={cardData?.data['current capacity']}
-                            totalServiceLife={
-                                cardData?.data['maximal capacity']
-                            }
-                        />
+                        {withDepreciationBar && (
+                            <DepreciationProgressBar
+                                completedMining={cardData?.data.depreciation}
+                                serviceLife={cardData?.data['current capacity']}
+                                totalServiceLife={
+                                    cardData?.data['maximal capacity']
+                                }
+                            />
+                        )}
                     </div>
                 </div>
                 {buttonText && (

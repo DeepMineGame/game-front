@@ -12,7 +12,10 @@ export function useRenderCards() {
         onDragStart: (element: UserInventoryType) => void
     ) => {
         return Array.from(items)?.map((card) => (
-            <div onDragStart={() => onDragStart(card)} key={card.template_id}>
+            <div
+                onDragStart={() => !card.available_from && onDragStart(card)}
+                key={card.template_id}
+            >
                 <Card
                     inventory={card}
                     className={styles.card}
@@ -21,6 +24,7 @@ export function useRenderCards() {
                     onButtonClick={() =>
                         navigate(`/inventory/${card.asset_id}`)
                     }
+                    withStatus={false}
                 />
             </div>
         ));

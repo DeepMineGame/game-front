@@ -1,6 +1,12 @@
 import { useTranslation } from 'react-i18next';
-
-import { CardHolder, Card, Status } from 'shared';
+import {
+    CardHolder,
+    Card,
+    useReloadPage,
+    useRepair,
+    getCardStatus,
+} from 'shared';
+import { Tooltip } from 'antd';
 import { InventoryNameType, UserInventoryType } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
@@ -10,36 +16,43 @@ interface Props {
     onCardHolderClick: (name: InventoryNameType) => void;
 }
 
-const getCardStatus = (inventory: UserInventoryType): Status => {
-    if (inventory.broken) return 'broken';
-    if (inventory.in_use) return 'installed';
-
-    return 'notInstalled';
-};
-
 export const EquipmentCards = ({
     selectedEquipment,
     onCardButtonClick,
     onCardHolderClick,
 }: Props) => {
     const { t } = useTranslation();
+    const reload = useReloadPage();
+    const { getFinishesAtTime } = useRepair();
 
     return (
         <div className={styles.cards}>
             {Object.entries(selectedEquipment).map(([name, inventory]) =>
                 inventory ? (
-                    <Card
-                        inventory={inventory}
-                        key={name}
-                        buttonText={
-                            inventory.in_use
-                                ? t('pages.equipmentSet.main.remove')
-                                : undefined
+                    <Tooltip
+                        overlay={
+                            getCardStatus(inventory) === 'broken' &&
+                            t('pages.equipmentSet.main.tooltipForDamagedEquip')
                         }
-                        onButtonClick={() => onCardButtonClick(inventory)}
-                        status={getCardStatus(inventory)}
-                        repairing
-                    />
+                    >
+                        <div>
+                            <Card
+                                inventory={inventory}
+                                key={name}
+                                buttonText={
+                                    inventory.in_use
+                                        ? t('pages.equipmentSet.main.remove')
+                                        : undefined
+                                }
+                                onButtonClick={() =>
+                                    onCardButtonClick(inventory)
+                                }
+                                onRepairFinish={reload}
+                                repairFinishesAt={getFinishesAtTime(inventory)}
+                                withStatus
+                            />
+                        </div>
+                    </Tooltip>
                 ) : (
                     <CardHolder
                         key={name}

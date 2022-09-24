@@ -1,14 +1,24 @@
-import { DMECoinIcon, Modal, getImagePath } from 'shared';
+import {
+    DMECoinIcon,
+    Modal,
+    useAccountName,
+    useReloadPage,
+    useRepair,
+} from 'shared';
 import React, { FC, useState, useEffect, useCallback } from 'react';
 import { ModalProps, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { serviceMarket } from 'app/router/paths';
 import { ServiceMarketTabIds } from 'app/router/constants';
+import { useSmartContractAction } from 'features';
 import { AssetDataType, getAtomicAssetsDataById } from 'entities/atomicassets';
-import { UserInventoryType } from 'entities/smartcontract';
+import { repairEquipment, UserInventoryType } from 'entities/smartcontract';
 import {
     ActionModal,
+    Button,
+    Card,
     DepreciationProgressBar,
+    getCardStatus,
     Line,
     Link,
     NftProgressBar,
@@ -30,6 +40,8 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     onSelect,
     ...props
 }) => {
+    const reload = useReloadPage();
+    const { getFinishesAtTime } = useRepair();
     const [cardData, setCardData] = useState<AssetDataType | undefined>(
         undefined
     );
@@ -44,6 +56,8 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const { t } = useTranslation();
+
+    const accountName = useAccountName();
 
     const handleSelect = (e: React.MouseEvent<HTMLElement>) => {
         onSelect?.(card);
@@ -62,6 +76,14 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         updateData();
     }, [updateData]);
 
+    const repairAction = useSmartContractAction(
+        repairEquipment(accountName, Number(cardData?.asset_id))
+    );
+
+    const refurbishAction = useSmartContractAction(
+        repairEquipment(accountName, Number(cardData?.asset_id), true)
+    );
+
     return (
         <Modal
             wideOnMobile
@@ -71,18 +93,22 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         >
             <div className={styles.container}>
                 <div>
-                    <img
-                        height={200}
-                        style={{
-                            aspectRatio: '5/7',
-                        }}
-                        src={getImagePath(card.template_id)}
-                        alt="nft-equipment-card"
+                    <Card
+                        inventory={card}
+                        onRepairFinish={reload}
+                        repairFinishesAt={getFinishesAtTime(card)}
+                        withStatus={getCardStatus(card) === 'broken'}
+                        withDepreciationBar={false}
                     />
                     {onSelect && (
-                        <div className={styles.select} onClick={handleSelect}>
+                        <Button
+                            disabled={!!card.available_from}
+                            onClick={handleSelect}
+                            block
+                            type="primary"
+                        >
                             {t('pages.equipmentSet.cardModal.select')}
-                        </div>
+                        </Button>
                     )}
                 </div>
                 <div className={styles.infoContainer}>
@@ -197,7 +223,11 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             : t('features.actions.equipmentRefurbish'),
                     onOk: t(`pages.equipmentSet.cardModal.${modalData?.type}`),
                 }}
-                onSubmit={() => setIsModalVisible(false)}
+                onSubmit={() => {
+                    if (modalData?.type === ModalType.repair) repairAction();
+                    if (modalData?.type === ModalType.refurbish)
+                        refurbishAction();
+                }}
                 onCancel={() => setIsModalVisible(false)}
                 costs={modalData?.costs}
             />

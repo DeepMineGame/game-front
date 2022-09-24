@@ -1,4 +1,11 @@
-import { Button, Modal, Dropdown, Card } from 'shared';
+import {
+    Button,
+    Modal,
+    Dropdown,
+    Card,
+    useRepair,
+    useReloadPage,
+} from 'shared';
 import React, { FC, useState } from 'react';
 import { ModalProps, Space } from 'antd';
 import { SortAscendingOutlined, FilterOutlined } from '@ant-design/icons';
@@ -55,6 +62,8 @@ export const Inventory: FC<InventoryProps> = ({
     onOpenCard,
     ...props
 }) => {
+    const reload = useReloadPage();
+    const { getFinishesAtTime } = useRepair();
     const [selectedTab, setSelectedTab] = useState('Equipment');
     const cards = name
         ? filterEquipmentByName(userInventory, name)
@@ -117,6 +126,9 @@ export const Inventory: FC<InventoryProps> = ({
                                 key={card.asset_id}
                                 buttonText="Details"
                                 onButtonClick={handleDetailsClick(card)}
+                                onRepairFinish={reload}
+                                repairFinishesAt={getFinishesAtTime(card)}
+                                withStatus={false}
                             />
                         ))}
                     </div>

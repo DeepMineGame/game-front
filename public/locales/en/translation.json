@@ -251,7 +251,8 @@
         "removed": "Your equipment has been removed",
         "remove": "Remove",
         "haveNoContract": "You have no contracts",
-        "signMineOwnerContract": "Sign contract with mine owner first"
+        "signMineOwnerContract": "Sign contract with mine owner first",
+        "tooltipForDamagedEquip": "Place the equipment into active inventory to repair"
       },
       "cardModal": {
         "select": "Select",
