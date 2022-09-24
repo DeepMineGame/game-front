@@ -5,6 +5,7 @@ import {
     useReloadPage,
     useRepair,
     getCardStatus,
+    Status,
 } from 'shared';
 import { InventoryNameType, UserInventoryType } from 'entities/smartcontract';
 import styles from './styles.module.scss';
@@ -30,7 +31,7 @@ export const EquipmentCards = ({
                 inventory ? (
                     <Card
                         tooltipOverlay={
-                            getCardStatus(inventory) === 'broken'
+                            getCardStatus(inventory) === Status.broken
                                 ? t(
                                       'pages.equipmentSet.main.tooltipForDamagedEquip'
                                   )

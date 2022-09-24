@@ -22,6 +22,7 @@ import {
     Line,
     Link,
     NftProgressBar,
+    Status,
 } from 'shared/ui/ui-kit';
 import styles from './styles.module.scss';
 
@@ -97,7 +98,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                         inventory={card}
                         onRepairFinish={reload}
                         repairFinishesAt={getFinishesAtTime(card)}
-                        withStatus={getCardStatus(card) === 'broken'}
+                        withStatus={getCardStatus(card) === Status.broken}
                         withDepreciationBar={false}
                     />
                     {onSelect && (
