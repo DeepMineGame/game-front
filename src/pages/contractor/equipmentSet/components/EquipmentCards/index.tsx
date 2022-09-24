@@ -6,7 +6,6 @@ import {
     useRepair,
     getCardStatus,
 } from 'shared';
-import { Tooltip } from 'antd';
 import { InventoryNameType, UserInventoryType } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
@@ -29,30 +28,26 @@ export const EquipmentCards = ({
         <div className={styles.cards}>
             {Object.entries(selectedEquipment).map(([name, inventory]) =>
                 inventory ? (
-                    <Tooltip
-                        overlay={
-                            getCardStatus(inventory) === 'broken' &&
-                            t('pages.equipmentSet.main.tooltipForDamagedEquip')
+                    <Card
+                        tooltipOverlay={
+                            getCardStatus(inventory) === 'broken'
+                                ? t(
+                                      'pages.equipmentSet.main.tooltipForDamagedEquip'
+                                  )
+                                : undefined
                         }
-                    >
-                        <div>
-                            <Card
-                                inventory={inventory}
-                                key={name}
-                                buttonText={
-                                    inventory.in_use
-                                        ? t('pages.equipmentSet.main.remove')
-                                        : undefined
-                                }
-                                onButtonClick={() =>
-                                    onCardButtonClick(inventory)
-                                }
-                                onRepairFinish={reload}
-                                repairFinishesAt={getFinishesAtTime(inventory)}
-                                withStatus
-                            />
-                        </div>
-                    </Tooltip>
+                        inventory={inventory}
+                        key={name}
+                        buttonText={
+                            inventory.in_use
+                                ? t('pages.equipmentSet.main.remove')
+                                : undefined
+                        }
+                        onButtonClick={() => onCardButtonClick(inventory)}
+                        onRepairFinish={reload}
+                        repairFinishesAt={getFinishesAtTime(inventory)}
+                        withStatus
+                    />
                 ) : (
                     <CardHolder
                         key={name}

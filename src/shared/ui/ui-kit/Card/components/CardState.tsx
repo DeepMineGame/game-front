@@ -17,14 +17,14 @@ export const CardState: FC<{
     onFinish?: () => void;
 }> = ({ templateId, status, finishesAt, onFinish }) => {
     const { t } = useTranslation();
-    useTick();
+    useTick(status === Status.broken);
 
     if (finishesAt && onFinish && isUtcDateExpired(finishesAt)) onFinish();
 
     return (
         <div className={styles.cardState}>
             <Title level={4}>
-                {status === 'broken' && !finishesAt
+                {status === Status.broken && !finishesAt
                     ? `${ID_TO_INVENTORY[templateId!]} ${t(
                           'kit.cardStates.damaged'
                       )}`

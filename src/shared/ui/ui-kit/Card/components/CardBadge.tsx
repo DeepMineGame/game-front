@@ -12,7 +12,7 @@ export const CardBadge: FC<Props> = ({ status }) => {
     const { t } = useTranslation();
 
     switch (status) {
-        case 'installed':
+        case Status.installed:
             return (
                 <Badge
                     className={styles.status}
@@ -20,7 +20,7 @@ export const CardBadge: FC<Props> = ({ status }) => {
                     text={t('kit.statuses.installed')}
                 />
             );
-        case 'broken':
+        case Status.broken:
             return (
                 <Badge
                     className={styles.status}
@@ -28,7 +28,7 @@ export const CardBadge: FC<Props> = ({ status }) => {
                     text={t('kit.statuses.broken')}
                 />
             );
-        case 'notInstalled':
+        case Status.notInstalled:
             return (
                 <Badge
                     className={styles.status}

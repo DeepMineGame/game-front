@@ -1,13 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { Tooltip } from 'antd';
 import cn from 'classnames';
-import {
-    Button,
-    Logo,
-    getImagePath,
-    DepreciationProgressBar,
-    neutral4,
-} from 'shared';
+import { Button, getImagePath, DepreciationProgressBar } from 'shared';
 import { UserInventoryType } from 'entities/smartcontract';
 import { AssetDataType, getAtomicAssetsDataById } from 'entities/atomicassets';
 import { ProgressProps } from '../ProgressBar/NftProgressBar';
@@ -15,18 +9,22 @@ import styles from './styles.module.scss';
 import { CardBadge } from './components/CardBadge';
 import { CardState } from './components/CardState';
 
-export type Status = 'installed' | 'broken' | 'notInstalled';
+export enum Status {
+    installed = 'installed',
+    broken = 'broken',
+    notInstalled = 'notInstalled',
+}
 
 export const getCardStatus = (inventory?: UserInventoryType): Status => {
-    if (inventory?.broken) return 'broken';
-    if (inventory?.in_use) return 'installed';
+    if (inventory?.broken) return Status.broken;
+    if (inventory?.in_use) return Status.installed;
 
-    return 'notInstalled';
+    return Status.notInstalled;
 };
 
 type Props = {
     imageSrc?: string;
-    needTooltip?: boolean;
+    tooltipOverlay?: string;
     buttonText?: string;
     onButtonClick?: () => void;
     buttonClassName?: string;
@@ -41,7 +39,7 @@ type Props = {
 
 export const Card: FC<Props> = ({
     imageSrc,
-    needTooltip,
+    tooltipOverlay,
     buttonText,
     onButtonClick,
     buttonClassName,
@@ -53,13 +51,6 @@ export const Card: FC<Props> = ({
     withStatus,
     withDepreciationBar = true,
 }) => {
-    const lvlTooltip = () => (
-        <div className={styles.lvlTooltipContent}>
-            <Logo />
-            <div>120/9999</div>
-        </div>
-    );
-
     const [cardData, setCardData] = useState<AssetDataType | undefined>();
 
     useEffect(() => {
@@ -71,15 +62,11 @@ export const Card: FC<Props> = ({
     const status = getCardStatus(inventory);
 
     return (
-        <Tooltip
-            overlay={needTooltip ? lvlTooltip : undefined}
-            placement="rightTop"
-            color={neutral4}
-        >
+        <Tooltip overlay={tooltipOverlay}>
             <div className={cn(styles.wrapper, className)}>
                 <div onClick={onClick}>
                     {withStatus && <CardBadge status={status} />}
-                    {status === 'broken' && (
+                    {status === Status.broken && (
                         <CardState
                             status={status}
                             templateId={inventory?.template_id}
@@ -89,12 +76,12 @@ export const Card: FC<Props> = ({
                     )}
                     <div
                         className={cn({
-                            [styles.stateWrapper]: status === 'broken',
+                            [styles.stateWrapper]: status === Status.broken,
                         })}
                     >
                         <div
                             className={cn(styles.image, {
-                                [styles.broken]: status === 'broken',
+                                [styles.broken]: status === Status.broken,
                                 [styles.repairing]: !!repairFinishesAt,
                             })}
                         >
