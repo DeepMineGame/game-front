@@ -17,5 +17,5 @@
 }
 
 $glow: drop-shadow(0 0 20px $color-neutral-neutral-10);
-$damaged-glow: drop-shadow(0px 0px 9px rgba(189, 0, 0, 1));
-$repairing-glow: drop-shadow(0px 0px 9px rgba(255, 193, 48, 1));
+$damaged-glow: drop-shadow(0 0 9px rgba(189, 0, 0, 1));
+$repairing-glow: drop-shadow(0 0 9px rgba(255, 193, 48, 1));
