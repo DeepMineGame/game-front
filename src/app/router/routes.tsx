@@ -26,6 +26,7 @@ import {
     Wasteland,
     EngineerPage,
     EquipmentHallPage,
+    EngineersTraining,
 } from 'pages';
 
 import * as paths from './paths';
@@ -249,6 +250,14 @@ export const routes: AppRoute[] = [
         forAdmin: true,
         forBetaUser: true,
         titleTag: 'Engineer Equipment Hall — DeepMine',
+    },
+    {
+        path: paths.engineersTraining,
+        Component: EngineersTraining,
+        forLoggedIn: true,
+        forAdmin: true,
+        forBetaUser: true,
+        titleTag: 'Engineers Training — DeepMine',
     },
 ];
 

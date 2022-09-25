@@ -9,6 +9,7 @@ const neutral2 = '#1D1D1D';
 const gold6 = '#D89614';
 const primary6 = '#F5C913';
 const primary5 = '#CCA500';
+const neutral7 = '#7D7D7D';
 
 module.exports = {
     // button
@@ -50,7 +51,7 @@ module.exports = {
     '@checkbox-check-color': neutral1,
 
     // input
-    '@input-placeholder-color': '#7D7D7D',
+    '@input-placeholder-color': neutral7,
     '@input-hover-border-color': primary5,
 
     // tooltip
@@ -95,6 +96,11 @@ module.exports = {
     '@heading-5-size': '12px',
     '@heading-color': '#FFFFFF',
     '@font-family': '"Bai Jamjuree", sans-serif',
+
+    // modal
+    '@modal-close-color': neutral7,
+    '@modal-header-border-color-split': neutral4,
+    '@icon-color-hover': primary5,
 
     // should be in the end
     // base

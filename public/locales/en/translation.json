@@ -712,6 +712,25 @@
         "content": "Action is only possible if you travel to this location and do not have any active Level Upgrade contracts.",
         "dismiss": "Dismiss Role"
       }
+    },
+    "engineersTraining": {
+      "equipment": "Equipment",
+      "mineModules": "Mine modules",
+      "mine": "Mine",
+      "factory": "Factory",
+      "xp": "xp",
+      "upgradeToLevel": "Upgrade to level {{level}}",
+      "trainingSlotName": "Training slot name",
+      "willBeAvailableToLearn": "Will be available to learn at level\u00a0{{level}}",
+      "availableToLearn": "Available to learn",
+      "alreadyLearned": "Already learned",
+      "forLearning": "To learn this ability, you will need a scheme. Please visit marketplace",
+      "forLearningNeedSchema": "To learn this ability, you will need a scheme in your active inventory. Please visit Hive",
+      "visitHive": "Visit Hive",
+      "upgradeLevel": "Upgrade level",
+      "upgrade": "Upgrade",
+      "scheme": "Scheme",
+      "learningSkill": "Learning skill"
     }
   },
   "features": {

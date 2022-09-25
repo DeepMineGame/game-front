@@ -37,12 +37,12 @@ export const actionMap = {
     [ActionType.equipment_repair]: 'Engineer level up',
 };
 
-export type ActionDto = {
+export type ActionDto<TAttrs extends any = any> = {
     contract_id: number;
     finishes_at: number;
     id: number;
     owner_user_id: string;
-    attrs: { key: string; value: number }[];
+    attrs: TAttrs[];
     state: ActionState;
     type: ActionType;
 };
