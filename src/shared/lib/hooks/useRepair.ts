@@ -25,8 +25,9 @@ export const useRepair = () => {
     );
 
     const getFinishesAtTime = (asset: UserInventoryType) =>
-        repairActions?.find((rA) => rA.assetId === Number(asset.asset_id))
-            ?.finishesAt;
+        repairActions?.find(
+            (action) => action.assetId === Number(asset.asset_id)
+        )?.finishesAt;
 
     return { getFinishesAtTime };
 };
