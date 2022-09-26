@@ -10,9 +10,7 @@ import styles from './styles.module.scss';
 
 const GeneralDataTable: FC<ContractProps> = ({ contract, accountName }) => {
     const { t } = useTranslation();
-    const { isExecutorSigned, isClientSigned } = useContractType(contract);
-
-    const isOrder = isClientSigned || isExecutorSigned;
+    const { isOrder } = useContractType(contract);
 
     const generalData = {
         [t(

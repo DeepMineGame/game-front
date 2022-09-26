@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { Page } from 'shared';
 import { LevelUpgradeOrder, MiningOrder, MineOperationOrder } from 'features';
 import { ContractDto, ContractType } from 'entities/smartcontract';
+import { useContractState, useContractType } from 'entities/contract';
+import { DeletedOrderStub } from './components';
 
 type Props = { contract: ContractDto; accountName: string };
 
@@ -22,12 +24,20 @@ const pageTitle = {
 
 export const OrderPage: FC<Props> = ({ contract, accountName }) => {
     const { t } = useTranslation();
+    const { isDeleted } = useContractState(contract, accountName);
+    const { isOrder } = useContractType(contract);
+
+    const orderWasDeleted = isDeleted && isOrder;
 
     const Order = orders[contract.type];
 
     return (
         <Page headerTitle={t(pageTitle[contract.type]).toUpperCase()}>
-            <Order contract={contract} accountName={accountName} />
+            {orderWasDeleted ? (
+                <DeletedOrderStub contract={contract} />
+            ) : (
+                <Order contract={contract} accountName={accountName} />
+            )}
         </Page>
     );
 };

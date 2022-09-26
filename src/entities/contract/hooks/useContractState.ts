@@ -5,6 +5,7 @@ import {
     ContractStatus,
     getContractStatus,
 } from 'entities/smartcontract';
+import { useContractType } from './useContractType';
 
 const VIOLATION_STATES = [
     ContractStatesMeta.deadlineViolation,
@@ -20,12 +21,15 @@ export const useContractState = (
         contract,
         accountName
     );
+    const { isContract } = useContractType(contract);
 
+    const isDeleted = !!contract.deleted_at;
     const isClient = contract.client === accountName;
     const isExecutor = contract.executor === accountName;
     const isContractMember = isClient || isExecutor;
 
-    const isCompleted = state === ContractStates.completed;
+    const isCompleted =
+        state === ContractStates.completed || (isDeleted && isContract);
     const isNeedComplete = stateMeta === ContractStatesMeta.complete;
     const isActive = contract.status === ContractStatus.active;
     const isTerminated = state === ContractStates.terminated;
@@ -42,6 +46,7 @@ export const useContractState = (
     const showCompleted = isNeedComplete && isContractMember;
 
     return {
+        isDeleted,
         isClient,
         isExecutor,
         isContractMember,
