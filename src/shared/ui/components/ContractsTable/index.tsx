@@ -49,7 +49,7 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
                                                 role ===
                                                     'mineOwnerContractor' ||
                                                 role === 'mineOwnerLandlord'
-                                                    ? 'mineOwner'
+                                                    ? 'mineowner'
                                                     : role
                                             }`
                                         )}
