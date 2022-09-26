@@ -1,4 +1,4 @@
-import { FC, memo, useCallback } from 'react';
+import { FC, memo, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DocumentTitle } from 'app/router/components/DocumentTitle';
 import { Empty } from 'antd';
@@ -19,18 +19,25 @@ export const PageWithTabs: FC<Props> = memo(
     ({ tabs, documentTitleScope, title, className, defaultDocTitle }) => {
         const { t } = useTranslation();
         const query = useQuery();
-        const tabId = Number(query.get('tabId'));
+        const tabId = query.get('tabId');
         const navigate = useNavigate();
         const location = useLocation();
 
-        const handleTabSelect = useCallback(
-            (id: string) => {
-                navigate(`${location.pathname}?tabId=${id}`);
-            },
-            [location.pathname, navigate]
-        );
+        const navigateToTab = (id: string) => {
+            navigate(`${location.pathname}?tabId=${id}`);
+        };
 
-        const selectedTabData = tabs.find((tab) => tab.key === tabId);
+        const handleTabSelect = useCallback(navigateToTab, [
+            location.pathname,
+            navigate,
+        ]);
+
+        const selectedTabData = tabs.find((tab) => tab.key === Number(tabId));
+
+        useEffect(() => {
+            navigateToTab(tabId || '0');
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, []);
 
         return (
             <Page
@@ -50,7 +57,11 @@ export const PageWithTabs: FC<Props> = memo(
                     />
                 )}
                 {tabs?.length ? (
-                    <Tabs onChange={handleTabSelect} items={tabs} />
+                    <Tabs
+                        activeKey={tabId!}
+                        onChange={handleTabSelect}
+                        items={tabs}
+                    />
                 ) : (
                     <Empty />
                 )}
