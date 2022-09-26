@@ -1,17 +1,10 @@
-import {
-    Button,
-    Modal,
-    Dropdown,
-    Card,
-    useRepair,
-    useReloadPage,
-} from 'shared';
+import { Button, Modal, Dropdown, useRepair, useReloadPage } from 'shared';
 import React, { FC, useEffect, useState } from 'react';
 import { ModalProps, Space } from 'antd';
 import { SortAscendingOutlined, FilterOutlined } from '@ant-design/icons';
 import cn from 'classnames';
 
-import { filterEquipmentByName } from 'features';
+import { AssetCard, filterEquipmentByName } from 'features';
 import {
     InventoryNameType,
     InventoryTab,
@@ -101,7 +94,7 @@ export const Inventory: FC<InventoryProps> = ({
                 {cards && (
                     <div className={styles.content}>
                         {cards.map((card) => (
-                            <Card
+                            <AssetCard
                                 inventory={card}
                                 className={styles.card}
                                 onClick={handleCardSelect(card)}
@@ -110,7 +103,7 @@ export const Inventory: FC<InventoryProps> = ({
                                 onButtonClick={handleDetailsClick(card)}
                                 onRepairFinish={reload}
                                 repairFinishesAt={getFinishesAtTime(card)}
-                                withStatus={false}
+                                showCardBadgeStatus={false}
                             />
                         ))}
                     </div>

@@ -1,12 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import {
-    CardHolder,
-    Card,
-    useReloadPage,
-    useRepair,
-    getCardStatus,
-    Status,
-} from 'shared';
+import { CardHolder, useReloadPage, useRepair, Status } from 'shared';
+import { AssetCard, getCardStatus } from 'features';
 import { InventoryNameType, UserInventoryType } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
@@ -29,7 +23,7 @@ export const EquipmentCards = ({
         <div className={styles.cards}>
             {Object.entries(selectedEquipment).map(([name, inventory]) =>
                 inventory ? (
-                    <Card
+                    <AssetCard
                         tooltipOverlay={
                             getCardStatus(inventory) === Status.broken
                                 ? t(
@@ -47,7 +41,7 @@ export const EquipmentCards = ({
                         onButtonClick={() => onCardButtonClick(inventory)}
                         onRepairFinish={reload}
                         repairFinishesAt={getFinishesAtTime(inventory)}
-                        withStatus
+                        showCardBadgeStatus
                     />
                 ) : (
                     <CardHolder

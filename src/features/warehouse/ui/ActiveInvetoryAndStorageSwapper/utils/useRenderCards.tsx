@@ -1,6 +1,5 @@
-import React from 'react';
-import { Card } from 'shared';
 import { useNavigate } from 'react-router-dom';
+import { AssetCard } from 'features';
 import { UserInventoryType } from 'entities/smartcontract';
 import styles from '../styles.module.scss';
 
@@ -16,7 +15,7 @@ export function useRenderCards() {
                 onDragStart={() => !card.available_from && onDragStart(card)}
                 key={card.template_id}
             >
-                <Card
+                <AssetCard
                     inventory={card}
                     className={styles.card}
                     key={card.asset_id}
@@ -24,7 +23,7 @@ export function useRenderCards() {
                     onButtonClick={() =>
                         navigate(`/inventory/${card.asset_id}`)
                     }
-                    withStatus={false}
+                    showCardBadgeStatus={false}
                 />
             </div>
         ));

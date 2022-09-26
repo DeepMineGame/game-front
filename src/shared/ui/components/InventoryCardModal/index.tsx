@@ -10,15 +10,13 @@ import { ModalProps, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { serviceMarket } from 'app/router/paths';
 import { ServiceMarketTabIds } from 'app/router/constants';
-import { useSmartContractAction } from 'features';
+import { AssetCard, getCardStatus, useSmartContractAction } from 'features';
 import { AssetDataType, getAtomicAssetsDataById } from 'entities/atomicassets';
 import { repairEquipment, UserInventoryType } from 'entities/smartcontract';
 import {
     ActionModal,
     Button,
-    Card,
     DepreciationProgressBar,
-    getCardStatus,
     Line,
     Link,
     NftProgressBar,
@@ -94,11 +92,13 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         >
             <div className={styles.container}>
                 <div>
-                    <Card
+                    <AssetCard
                         inventory={card}
                         onRepairFinish={reload}
                         repairFinishesAt={getFinishesAtTime(card)}
-                        withStatus={getCardStatus(card) === Status.broken}
+                        showCardBadgeStatus={
+                            getCardStatus(card) === Status.broken
+                        }
                         withDepreciationBar={false}
                     />
                     {onSelect && (
