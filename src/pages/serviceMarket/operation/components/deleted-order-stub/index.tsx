@@ -1,8 +1,10 @@
 import { Col, Row } from 'antd';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Basket, Title, toLocaleDate, Text } from 'shared';
+import { Title, toLocaleDate, Text } from 'shared';
+import { DeleteFilled } from '@ant-design/icons';
 import { ContractDto } from 'entities/smartcontract';
+import styles from './index.module.scss';
 
 export const DeletedOrderStub: FC<{
     contract: ContractDto;
@@ -13,7 +15,7 @@ export const DeletedOrderStub: FC<{
         <Row gutter={[32, 32]}>
             <Col span={24}>
                 <Row justify="center" gutter={[0, 24]}>
-                    <Basket />
+                    <DeleteFilled className={styles.deletedIcon} />
                     <Col span={24}>
                         <Row justify="center">
                             <Title level={3}>

@@ -12,4 +12,3 @@ export { ReactComponent as Petobot } from './petobot.svg';
 export { ReactComponent as UserSwitch } from './user-switch.svg';
 export { ReactComponent as DiscordIcon } from './discordIcon.svg';
 export { ReactComponent as MineOutlined } from './mine-outlined.svg';
-export { ReactComponent as Basket } from './basket.svg';
