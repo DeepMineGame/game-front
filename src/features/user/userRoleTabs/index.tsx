@@ -87,7 +87,7 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
                     ),
                 },
                 {
-                    tab: t('roles.mineOwner'),
+                    tab: t('roles.mineowner'),
                     key: UserRoles.mine_owner,
                     disabled: !userRoles.isMineOwner,
                     children: (

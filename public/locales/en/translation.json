@@ -13,13 +13,17 @@
     "addConsumable": "add consumable",
     "statuses": {
       "installed": "Installed",
-      "broken": "Broken",
+      "broken": "Damaged",
       "notInstalled": "Not installed",
       "default": "Status unavailable"
     },
     "timer": {
       "time": "Time",
       "energy": "Energy"
+    },
+    "cardStates": {
+      "damaged": "is damaged",
+      "repairing": "repairing"
     }
   },
   "components": {
@@ -60,7 +64,7 @@
       "table": {
         "table": "Table",
         "addNewContractor": "Add new contractor",
-        "discoverNewLand": "Discover new land"
+        "openNewMine": "Open new mine spot"
       },
       "graph": "Graph",
       "current": "Current",
@@ -116,7 +120,21 @@
       "findContract": "Find a contract",
       "travel": "Travel",
       "market": "Market",
-      "storage": "Storage"
+      "storage": "Storage",
+      "rarity": "Rarity",
+      "rarities": {
+        "common": "Common",
+        "uncommon": "Uncommon",
+        "rare": "Rare",
+        "epic": "Epic",
+        "legendary": "Legendary"
+      },
+      "inventoryTypes": {
+        "undefined": "Undefined",
+        "area": "Area",
+        "equipment": "Equipment",
+        "structure": "Structure"
+      }
     },
     "user": {
       "accountSettings": "Account settings",
@@ -166,7 +184,7 @@
       "consumablesWillBurnOut": "Your consumables will be burned, energy and time used mining will be lost and you won't receive DME",
       "timeSpent": "Time spent",
       "dmeCollected": "DME collected",
-        "calculateMining": "Calculate mining"
+      "calculateMining": "Calculate mining"
     },
     "pageNotFound": {
       "weLost": "WE GOT LOST",
@@ -179,7 +197,7 @@
       "mineOwnerCabin": "GO TO MINE",
       "contractorCabin": "CONTRACTOR'S CABIN",
       "hive": "HIVE",
-      "landlordCabin":"LANDLORDS LOUNGE",
+      "landlordCabin": "LANDLORDS LOUNGE",
       "engineers": "ENGINEERS WORKSHOP",
       "mineDeck": "MINE DECK",
       "goToCity": "GO TO CITY"
@@ -227,15 +245,15 @@
         "travel": "Travel",
         "to": {
           "contractor": "Travel to Contractor’s cabin",
-          "mineOwner": "Travel to Mine owner cabin",
-          "landlord": "Travel to Landlord cabin",
-          "engineers": "Travel to Engineers cabin",
+          "mineOwner": "Travel to Mine owner’s cabin",
+          "landlord": "Travel to Landlord’s cabin",
+          "engineers": "Travel to Engineer’s cabin",
           "hive": "Travel to Hive"
         }
       },
       "physicalShiftBadge": {
         "text": "Do you want to travel here?",
-        "button": "Physical Shift"
+        "button": "Travel"
       }
     },
     "equipmentSet": {
@@ -248,7 +266,8 @@
         "removed": "Your equipment has been removed",
         "remove": "Remove",
         "haveNoContract": "You have no contracts",
-        "signMineOwnerContract": "Sign contract with mine owner first"
+        "signMineOwnerContract": "Sign contract with mine owner first",
+        "tooltipForDamagedEquip": "Place the equipment into active inventory to repair"
       },
       "cardModal": {
         "select": "Select",
@@ -372,11 +391,12 @@
       "createOrder": {
         "createOrder": "Create order",
         "contractType": "Contract type",
-        "generalCondition": "General condition",
+        "generalInformation": "General information",
         "terms": "Terms",
         "selectContractType": "Select contract type",
         "selectToDisable": "Select contract type to disable",
         "selectRole": "Select role",
+        "selectItem": "Select item",
         "fee": "Fee",
         "feeTooltip": "% of DME charged on each dig at the mine.",
         "penalty": "Penalty",
@@ -387,9 +407,13 @@
         "miningTerms": "Mining terms",
         "miningTermsHint": "If during the entire period of the contract, within the specified number of days, less than the specified amount of DME was extracted, the other party has the right to terminate the contract and collect a penalty",
         "startOfOperation": "Start of operation",
-        "startOfOperationTooltip": "Time when parties begin performing their obligations upon the contract.",
+        "effectiveDate": "Effective date",
+        "startOfOperationTooltip": "The date when agreement or transaction becomes binding",
         "goToServiceMarket": "To the Service Market",
         "orderCreated": "Your order was successfully created",
+        "orderFailed": "Failed to create your order",
+        "pleaseReCreate": "Something went wrong please try to re-create the order",
+        "reCreateOrder": "Re-create order",
         "redirected": "You will be automatically redirected to the main page of the service market",
         "haveNoNftAlert": {
           "haveNo": "You don’t have an NFT to create this order. Please visit the Marketplace"
@@ -399,8 +423,38 @@
         "youHaveSignedContract": "You already have the contract",
         "yourMineIsFull": "You have no the mine or your mine has no more free slots",
         "removeEquipFirst": "You need to remove installed equipment in contractor's cabin to proceed",
-        "contractorShouldStartMiningWithin24Hours": "The Contractor should start mining within 24 hours in order not to receive a fine",
-        "personalOrder": "Personalized order"
+        "personalOrder": "Personalized order",
+        "levelUpgrade": "Level upgrade",
+        "selectType": "Select type",
+        "upgradeType": "Upgrade type",
+        "upgradeTypeList": [
+          "",
+          "Mine upgrade",
+          "Equipment upgrade",
+          "",
+          "Mine module upgrade"
+        ],
+        "itemType": "Item type",
+        "itemTypes": {
+          "cutter": "Cutter",
+          "delaminator": "Delaminator",
+          "dmeWire": "DME wire",
+          "mine": "Mine",
+          "plungingBlocks": "Plunging blocks"
+        },
+        "upgradeToLevel": "Upgrade to level",
+        "costOfExecution": "Cost of execution",
+        "levelUpgradeTerms": {
+          "penalty": "If the performing party violates the terms of the contract or terminates the contract prematurely, the counterparty may charge a fine",
+          "engineer": {
+            "startOfOperation": "The period of time during which you are required to start performing the upgrade",
+            "costOfExecution": "The amount of DME you receives for performing the upgrade"
+          },
+          "citizen": {
+            "startOfOperation": "The period of time during which the engineer is required to start performing the upgrade",
+            "costOfExecution": "The amount of DME the engineer receives for performing the upgrade"
+          }
+        }
       },
       "lookingForMineOwner": "Looking for Mine owner",
       "lookingForContractor": "Looking for Contractor",
@@ -516,9 +570,7 @@
       "activity": "Mine activity",
       "add": "Add new mine",
       "searching": "Searching for Mine owner",
-      "discover": "Discover new land",
-      "addMineOwner": "Add new Mine owner",
-      "findMineOwner": "Find a Mine owner on the servicemarket",
+      "findMineOwner": "Find a Mine owner on the Service Market",
       "createOrder": "Create an order for a Mine owner"
     },
     "faq": {
@@ -581,6 +633,9 @@
       "getReport": "Get the report",
       "upgradeCompleted": "Upgrade: Completed",
       "upgradeInProgress": "Upgrade: in progress",
+      "equipmentHallTooltip": "Your equipment hall is located here",
+      "trainingTooltip": "Your training room is located here",
+      "statTooltip": "Your stats & info is located here",
       "status": {
         "notInaugurated": "Not Inaugurated",
         "active": "Active",
@@ -604,7 +659,7 @@
       "mineNotSet": "Mine is not set",
       "needShift": "You need to travel here to set a Mine",
       "needLandLord": "Sign a contract with a landlord to set a Mine",
-      "needSetupMine": "Congratulations on your first Mine Operation Contract, Citizen\nIt's time to set up your Mine",
+      "needSetupMine": "Set up the Mine to continue",
       "needCrew": "You are ready to gather your ultimate mine crew. Sign the Mining Contract with a contractor to be able to activate your Mine.",
       "progress": "Setup in progress",
       "chooseContract": "Choose a contract",
@@ -648,14 +703,16 @@
   "roles": {
     "citizen": "Citizen",
     "landlord": "Landlord",
-    "mineOwner": "Mine owner",
+    "mineowner": "Mine owner",
     "contractor": "Contractor",
     "landLord": "Land lord",
     "geologists": "Geologists",
-    "engineer": "Engineer"
+    "engineer": "Engineer",
+    "all": "All"
   },
   "blockchainErrors": {
     "fallback": "Error has no code. Unknown error",
+    "notEnoughDme": "Your DME balance is insufficient to fulfill the contract condition",
     "00001": "wrong input data. Must be less than 51 assets and more than 0",
     "00002": "can't find asset for asset_id",
     "00003": "wrong number of assets",

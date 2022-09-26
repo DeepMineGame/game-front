@@ -1,0 +1,28 @@
+@import "src/shared";
+
+.statScreen {
+  position: absolute;
+  right: 0;
+  background-image: url("../../../../../shared/ui/images/engineer/display.webp");
+  height: 50vh;
+  width: 15vw;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  z-index: 1;
+  cursor: pointer;
+  filter: $glow;
+
+  @media (min-width: $media-tablet)  {
+    filter: initial;
+    background-position: center;
+
+    &:hover {
+      filter: $glow;
+    }
+  }
+}
+
+.tooltip {
+  z-index: 1;
+}

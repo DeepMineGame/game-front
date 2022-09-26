@@ -1,88 +1,100 @@
 import { FC } from 'react';
 import { Tooltip } from 'antd';
 import cn from 'classnames';
-import {
-    Button,
-    Logo,
-    getImagePath,
-    DepreciationProgressBar,
-    neutral4,
-} from 'shared';
-import { InventoryIdType } from 'entities/smartcontract';
+import { Button, getImagePath, DepreciationProgressBar } from 'shared';
+import { UserInventoryType } from 'entities/smartcontract';
+import { AssetDataType } from 'entities/atomicassets';
 import { ProgressProps } from '../ProgressBar/NftProgressBar';
 import styles from './styles.module.scss';
 import { CardBadge } from './components/CardBadge';
+import { CardState } from './components/CardState';
 
-export type Status = 'installed' | 'broken' | 'notInstalled';
+export enum Status {
+    installed = 'installed',
+    broken = 'broken',
+    notInstalled = 'notInstalled',
+}
 
-type Props = {
-    imageSrc?: string;
-    status?: Status;
-    needTooltip?: boolean;
+export type CardProps = {
+    tooltipOverlay?: string;
     buttonText?: string;
     onButtonClick?: () => void;
-    buttonClassName?: string;
     onClick?: (e: any) => void;
     className?: string;
-    templateId?: InventoryIdType;
+    inventory?: UserInventoryType;
+    repairFinishesAt?: number;
+    onRepairFinish?: () => void;
+    withDepreciationBar?: boolean;
+    showCardBadgeStatus: boolean;
+    cardData?: AssetDataType | null;
+    status?: Status;
 } & ProgressProps;
 
-export const Card: FC<Props> = ({
-    imageSrc,
-    status,
-    needTooltip,
+export const Card: FC<CardProps> = ({
+    tooltipOverlay,
     buttonText,
     onButtonClick,
-    buttonClassName,
     onClick,
     className,
-    templateId,
-}) => {
-    const lvlTooltip = () => (
-        <div className={styles.lvlTooltipContent}>
-            <Logo />
-            <div>120/9999</div>
-        </div>
-    );
-
-    return (
-        <Tooltip
-            overlay={needTooltip ? lvlTooltip : undefined}
-            placement="rightTop"
-            color={neutral4}
-        >
-            <div className={cn(styles.wrapper, className)}>
-                <div onClick={onClick}>
-                    <CardBadge status={status} />
-                    <div className={styles.image}>
+    inventory,
+    repairFinishesAt,
+    onRepairFinish,
+    showCardBadgeStatus,
+    withDepreciationBar = true,
+    cardData,
+    status,
+}) => (
+    <Tooltip overlay={tooltipOverlay}>
+        <div className={cn(styles.wrapper, className)}>
+            <div onClick={onClick}>
+                {showCardBadgeStatus && <CardBadge status={status} />}
+                {status === Status.broken && (
+                    <CardState
+                        status={status}
+                        templateId={inventory?.template_id}
+                        finishesAt={repairFinishesAt}
+                        onFinish={onRepairFinish}
+                    />
+                )}
+                <div
+                    className={cn({
+                        [styles.stateWrapper]: status === Status.broken,
+                    })}
+                >
+                    <div
+                        className={cn(styles.image, {
+                            [styles.broken]: status === Status.broken,
+                            [styles.repairing]: !!repairFinishesAt,
+                        })}
+                    >
                         <img
                             height="100%"
                             width="100%"
-                            src={
-                                templateId ? getImagePath(templateId) : imageSrc
-                            }
+                            src={getImagePath(inventory?.template_id!)}
                             alt="nft-equipment-card"
                         />
                     </div>
-                    <DepreciationProgressBar
-                        totalMining={25}
-                        completedMining={4}
-                        serviceLife={13}
-                        totalServiceLife={20}
-                    />
+                    {withDepreciationBar && (
+                        <DepreciationProgressBar
+                            completedMining={cardData?.data.depreciation}
+                            serviceLife={cardData?.data['current capacity']}
+                            totalServiceLife={
+                                cardData?.data['maximal capacity']
+                            }
+                        />
+                    )}
                 </div>
-
-                {buttonText && (
-                    <Button
-                        className={cn(styles.button, buttonClassName)}
-                        size="large"
-                        type="link"
-                        onClick={onButtonClick}
-                    >
-                        {buttonText}
-                    </Button>
-                )}
             </div>
-        </Tooltip>
-    );
-};
+            {buttonText && (
+                <Button
+                    className={styles.button}
+                    size="large"
+                    type="link"
+                    onClick={onButtonClick}
+                >
+                    {buttonText}
+                </Button>
+            )}
+        </div>
+    </Tooltip>
+);

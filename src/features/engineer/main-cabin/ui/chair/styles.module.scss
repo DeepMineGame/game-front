@@ -1,0 +1,31 @@
+@import "src/shared";
+
+.chair {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background-image: url("../../../../../shared/ui/images/engineer/chair.webp");
+  height: 30vh;
+  width: 60vw;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  margin: auto;
+  z-index: 2;
+  cursor: pointer;
+  filter: $glow;
+
+  @media (min-width: $media-tablet)  {
+    filter: initial;
+    height: 50vh;
+    width: 30vw;
+
+    &:hover {
+      filter: $glow;
+    }
+  }
+}
+
+.tooltip {
+  z-index: 1;
+}

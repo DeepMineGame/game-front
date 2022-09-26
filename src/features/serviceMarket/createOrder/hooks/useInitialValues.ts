@@ -1,19 +1,23 @@
+import { useMemo } from 'react';
 import { useQuery } from 'shared';
-import { createContrFormFields } from 'entities/smartcontract';
+import { orderFields } from 'entities/order';
 
 export function useInitialValues() {
     const query = useQuery();
-    const preFilledContractType = query.get(createContrFormFields.contractType);
-    const preFilledIsClient = query.get(createContrFormFields.isClient);
 
-    return {
-        ...(preFilledContractType && {
-            [createContrFormFields.contractType]: Number(preFilledContractType),
-        }),
-        ...(preFilledIsClient && {
-            [createContrFormFields.isClient]: Number(preFilledIsClient),
-        }),
-        [createContrFormFields.deadlineDurationInDays]: 1,
-        [createContrFormFields.deadlineDurationInHours]: 0,
-    };
+    return useMemo(() => {
+        const preFilledContractType = query.get(orderFields.contractType);
+        const preFilledIsClient = query.get(orderFields.isClient);
+
+        return {
+            is_client: preFilledContractType
+                ? Number(preFilledContractType)
+                : undefined,
+            contract_type: preFilledIsClient
+                ? Number(preFilledIsClient)
+                : undefined,
+            [orderFields.deadlineDurationInDays]: 1,
+            [orderFields.deadlineDurationInHours]: 0,
+        };
+    }, [query]);
 }

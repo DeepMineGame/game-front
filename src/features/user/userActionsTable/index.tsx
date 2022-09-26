@@ -31,7 +31,7 @@ const UserActions: FC = () => {
             const mapTabNameToRole = new Map([
                 [t('roles.citizen'), UserRoles.citizen],
                 [t('roles.landlord'), UserRoles.landlord],
-                [t('roles.mineOwner'), UserRoles.mine_owner],
+                [t('roles.mineowner'), UserRoles.mine_owner],
                 [t('roles.contractor'), UserRoles.contractor],
             ]);
             return getUserAction({
@@ -59,7 +59,7 @@ const UserActions: FC = () => {
             key: UserRoles.landlord,
         },
         {
-            tab: t('roles.mineOwner'),
+            tab: t('roles.mineowner'),
             disabled: !userRoles.isMineOwner,
             key: UserRoles.mine_owner,
         },

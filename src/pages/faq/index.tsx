@@ -90,7 +90,7 @@ export const FaqPage = () => {
                     </ExternalLink>
                     ,{' '}
                     <ExternalLink href="https://docs.deepmine.world/deepmine/deepmine-entities/game-roles/mine-owner">
-                        {t('roles.mineOwner')}
+                        {t('roles.mineowner')}
                     </ExternalLink>{' '}
                     {t('pages.faq.and')}{' '}
                     <ExternalLink href="https://docs.deepmine.world/deepmine/deepmine-entities/game-roles/contractor">

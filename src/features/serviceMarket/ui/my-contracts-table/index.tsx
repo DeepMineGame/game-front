@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 import { useNavigate } from 'react-router-dom';
-import { PlusOutlined } from '@ant-design/icons';
+import { DownOutlined, PlusOutlined } from '@ant-design/icons';
 import { FC, useCallback } from 'react';
-import { Button, Segmented, Select, useAccountName } from 'shared';
+import { Button, Dropdown, Segmented, useAccountName } from 'shared';
 import { createOrder } from 'app/router/paths';
 import { Space } from 'antd';
 import { FilterOrderStatus } from 'entities/gameStat';
@@ -22,6 +22,7 @@ export const MyContractsTab: FC = () => {
     const filter = useStore(filterStore);
     const navigate = useNavigate();
     const accountName = useAccountName();
+
     const onChangeRole = useCallback(
         (userRole) => {
             changeFilterEvent({
@@ -31,6 +32,7 @@ export const MyContractsTab: FC = () => {
         },
         [filter]
     );
+
     const onChangeStatus = useCallback(
         (status) =>
             changeFilterEvent({
@@ -62,27 +64,34 @@ export const MyContractsTab: FC = () => {
                     value={filter?.status}
                 />
                 <Space>
-                    <Select
-                        dropdownMatchSelectWidth={false}
-                        placeholder={t('pages.serviceMarket.yourRole')}
-                        options={[
+                    <Dropdown
+                        items={[
                             {
-                                label: t('pages.serviceMarket.all'),
-                                value: Role.all,
+                                label: t('roles.all'),
+                                key: Role.all,
+                                onClick: () => onChangeRole(Role.all),
                             },
                             {
                                 label: t('roles.contractor'),
-                                value: Role.contractor,
+                                key: Role.contractor,
+                                onClick: () => onChangeRole(Role.contractor),
                             },
                             {
-                                label: t('roles.mineOwner'),
-                                value: Role.mineowner,
+                                label: t('roles.mineowner'),
+                                key: Role.mineowner,
+                                onClick: () => onChangeRole(Role.mineowner),
                             },
                         ]}
-                        value={filter?.userRole}
-                        onChange={onChangeRole}
-                        bordered={false}
-                    />
+                    >
+                        <Button type="link">
+                            {t(
+                                filter?.userRole
+                                    ? `roles.${filter?.userRole}`
+                                    : 'pages.serviceMarket.yourRole'
+                            )}
+                            <DownOutlined style={{ fontSize: 12 }} />
+                        </Button>
+                    </Dropdown>
                     <Button
                         type="primary"
                         onClick={() => navigate(createOrder)}

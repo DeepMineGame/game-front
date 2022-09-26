@@ -26,36 +26,44 @@ const MiningContract: FC<ContractProps> = ({ contract, accountName }) => {
     return (
         <Row gutter={[32, 32]}>
             <Col xs={24} md={12}>
-                <GeneralDataTable
-                    contract={contract}
-                    accountName={accountName}
-                />
+                <Row gutter={[24, 24]}>
+                    <Col span={24}>
+                        <GeneralDataTable
+                            contract={contract}
+                            accountName={accountName}
+                        />
+                    </Col>
 
-                {showCompleted && (
-                    <Completed
-                        accountName={accountName}
-                        contractId={contract.id}
-                    />
-                )}
-                {showTerminatedAlert && (
-                    <Alert
-                        message={
-                            <Trans i18nKey="pages.serviceMarket.contract.youTerminated" />
-                        }
-                        type="info"
-                        showIcon
-                    />
-                )}
-                {showPenaltyActions && (
-                    <PenaltyActions
-                        isViolated={
-                            stateMeta === ContractStatesMeta.termViolation ||
-                            stateMeta === ContractStatesMeta.deadlineViolation
-                        }
-                        amount={contract.penalty_amount}
-                        contractId={contract.id}
-                    />
-                )}
+                    <Col span={24}>
+                        {showCompleted && (
+                            <Completed
+                                accountName={accountName}
+                                contractId={contract.id}
+                            />
+                        )}
+                        {showTerminatedAlert && (
+                            <Alert
+                                message={
+                                    <Trans i18nKey="pages.serviceMarket.contract.youTerminated" />
+                                }
+                                type="info"
+                                showIcon
+                            />
+                        )}
+                        {showPenaltyActions && (
+                            <PenaltyActions
+                                isViolated={
+                                    stateMeta ===
+                                        ContractStatesMeta.termViolation ||
+                                    stateMeta ===
+                                        ContractStatesMeta.deadlineViolation
+                                }
+                                amount={contract.penalty_amount}
+                                contractId={contract.id}
+                            />
+                        )}
+                    </Col>
+                </Row>
             </Col>
             <Col xs={24} md={12}>
                 <ConditionTable contract={contract} />

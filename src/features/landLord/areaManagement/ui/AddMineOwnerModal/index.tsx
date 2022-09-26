@@ -5,11 +5,8 @@ import { Button, Modal } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import { createOrder, serviceMarket } from 'app/router/paths';
 import { ServiceMarketTabIds } from 'app/router/constants';
-import {
-    ContractRole,
-    ContractType,
-    createContrFormFields,
-} from 'entities/smartcontract';
+import { ContractRole, ContractType } from 'entities/smartcontract';
+import { orderFields } from 'entities/order';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -27,7 +24,7 @@ export const AddMineOwnerModal: FC<Props> = ({ visible, onCancel }) => {
             width={458}
             visible={visible}
             onCancel={onCancel}
-            title={t('pages.areaManagement.addMineOwner')}
+            title={t('pages.areaManagement.add')}
         >
             <Button
                 className={styles.button}
@@ -47,7 +44,7 @@ export const AddMineOwnerModal: FC<Props> = ({ visible, onCancel }) => {
                 type="ghost"
                 onClick={() =>
                     navigate(
-                        `${createOrder}?${createContrFormFields.contractType}=${ContractType.landlord_mineowner}&${createContrFormFields.isClient}=${ContractRole.client}`
+                        `${createOrder}?${orderFields.contractType}=${ContractType.landlord_mineowner}&${orderFields.isClient}=${ContractRole.client}`
                     )
                 }
             >

@@ -9,14 +9,14 @@ import { DeletedOrderStub } from './components';
 type Props = { contract: ContractDto; accountName: string };
 
 const orders = {
-    [ContractType.citizen_engineer]: LevelUpgradeOrder,
+    [ContractType.level_upgrade]: LevelUpgradeOrder,
     [ContractType.mineowner_contractor]: MiningOrder,
     [ContractType.landlord_mineowner]: MineOperationOrder,
     [ContractType.undefined]: MiningOrder,
 };
 
 const pageTitle = {
-    [ContractType.citizen_engineer]: 'pages.serviceMarket.levelUpgradeOrder',
+    [ContractType.level_upgrade]: 'pages.serviceMarket.levelUpgradeOrder',
     [ContractType.mineowner_contractor]: 'pages.serviceMarket.miningOrder',
     [ContractType.landlord_mineowner]: 'pages.serviceMarket.mineOperationOrder',
     [ContractType.undefined]: '',

@@ -18,3 +18,13 @@
   display: flex;
   justify-content: space-between;
 }
+
+.formField {
+  width: 50%;
+}
+
+.space {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 15px;
+}

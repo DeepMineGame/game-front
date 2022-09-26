@@ -1,22 +1,21 @@
 import { FC, memo } from 'react';
 import { Progress } from 'antd';
 import cn from 'classnames';
+import { AssetDataType } from 'entities/atomicassets';
 import styles from '../styles.module.scss';
 
 type DepreciationProgressBarProps = {
-    completedMining: number;
-    totalMining: number;
-    serviceLife: number;
-    totalServiceLife: number;
+    completedMining?: AssetDataType['data']['depreciation'];
+    serviceLife?: AssetDataType['data']['current capacity'];
+    totalServiceLife?: AssetDataType['data']['maximal capacity'];
     className?: string;
 };
 
 export const DepreciationProgressBar: FC<DepreciationProgressBarProps> = memo(
     ({
-        serviceLife,
-        completedMining,
-        totalMining,
-        totalServiceLife,
+        serviceLife = 0,
+        completedMining = 0,
+        totalServiceLife = 0,
         className,
     }) => {
         const format = () => (
@@ -28,8 +27,13 @@ export const DepreciationProgressBar: FC<DepreciationProgressBarProps> = memo(
         return (
             <Progress
                 className={cn(styles.rootDeprecation, className)}
-                percent={(completedMining / totalMining) * 100}
-                success={{ percent: (serviceLife / totalServiceLife) * 100 }}
+                percent={
+                    (Number(completedMining) / Number(totalServiceLife)) * 100
+                }
+                success={{
+                    percent:
+                        (Number(serviceLife) / Number(totalServiceLife)) * 100,
+                }}
                 format={format}
             />
         );

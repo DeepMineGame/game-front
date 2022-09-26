@@ -9,3 +9,4 @@ export * from './useTick';
 export * from './useQuery';
 export * from './useTabs';
 export * from './useUserLocation';
+export * from './useRepair';

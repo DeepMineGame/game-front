@@ -1,9 +1,7 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
-
-import { CardHolder, Card } from 'shared';
+import { CardHolder, useReloadPage, useRepair, Status } from 'shared';
+import { AssetCard, getCardStatus } from 'features';
 import { InventoryNameType, UserInventoryType } from 'entities/smartcontract';
-
 import styles from './styles.module.scss';
 
 interface Props {
@@ -18,13 +16,22 @@ export const EquipmentCards = ({
     onCardHolderClick,
 }: Props) => {
     const { t } = useTranslation();
+    const reload = useReloadPage();
+    const { getFinishesAtTime } = useRepair();
 
     return (
         <div className={styles.cards}>
             {Object.entries(selectedEquipment).map(([name, inventory]) =>
                 inventory ? (
-                    <Card
-                        templateId={inventory.template_id}
+                    <AssetCard
+                        tooltipOverlay={
+                            getCardStatus(inventory) === Status.broken
+                                ? t(
+                                      'pages.equipmentSet.main.tooltipForDamagedEquip'
+                                  )
+                                : undefined
+                        }
+                        inventory={inventory}
                         key={name}
                         buttonText={
                             inventory.in_use
@@ -32,7 +39,9 @@ export const EquipmentCards = ({
                                 : undefined
                         }
                         onButtonClick={() => onCardButtonClick(inventory)}
-                        status={inventory.in_use ? 'installed' : 'notInstalled'}
+                        onRepairFinish={reload}
+                        repairFinishesAt={getFinishesAtTime(inventory)}
+                        showCardBadgeStatus
                     />
                 ) : (
                     <CardHolder

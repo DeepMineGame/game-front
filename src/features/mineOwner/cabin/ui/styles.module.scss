@@ -3,31 +3,58 @@
 .cabinWrapper {
   min-height: 100vh;
   min-width: 100vw;
-  background: url('images/mineOwnerCabinDefaultMobile.png') no-repeat bottom center;
   background-size: cover;
-
-  @media (min-width: $media-desktop-s)  {
-    background: url('images/mineOwnerCabinDefault.jpg') no-repeat bottom center fixed;
-    background-size: cover;
-  }
+  background-image: url('../../../../shared/ui/images/mineowner/mine-owner-cabin-default.webp');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: $color-cyan-cyan-3;
 }
 
-.progress {
-  background: url('images/mineOwnerCabinProgressMobile.png') no-repeat bottom center;
-  background-size: cover;
-
-  @media (min-width: $media-desktop-s)  {
-    background: url('images/mineOwnerCabinProgress.jpg') no-repeat bottom center fixed;
-    background-size: cover;
-  }
+.cabinDefaultInside {
+  background-image: url('../../../../shared/ui/images/mineowner/mine-owner-cabin-default-light.webp');
 }
 
 .incident {
-  background: url('images/mineOwnerCabinIncidentMobile.jpg') no-repeat bottom center;
-  background-size: cover;
+  background-image: url('../../../../shared/ui/images/mineowner/mine-owner-cabin-incident.webp');
+}
 
-  @media (min-width: $media-desktop-s)  {
-    background: url('images/mineOwnerCabinIncident.jpg') no-repeat bottom center fixed;
-    background-size: cover;
+.glass {
+  &::before {
+    content: '';
+    height: 100vh;
+    width: 100vw;
+    background: url('../../../../shared/ui/images/mineowner/glass.webp') no-repeat center;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    z-index: 1;
   }
+}
+
+.panel {
+    height: 50vh;
+    background: url('../../../../shared/ui/images/mineowner/panel.webp') no-repeat bottom;
+    background-size: contain;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    cursor: pointer;
+
+    &:hover {
+      filter: $glow;
+    }
+
+    @media (min-width: $media-desktop-s) {
+      left: 20vh;
+      right: 20vh;
+    }
+}
+
+.progress {
+  background: url('../../../../shared/ui/images/mineowner/mine-owner-cabin-progress.webp') no-repeat bottom center;
+  background-size: cover;
 }
