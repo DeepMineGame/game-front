@@ -524,7 +524,8 @@
         "waitingAction": "Waiting for action",
         "terminated": "Terminated",
         "orderWasDeleted": "Order was deleted",
-        "documentWasDestroyedOn": "This document was destroyed on"
+        "documentWasDestroyedOn": "This document was destroyed on",
+        "deleted": "Deleted"
       },
       "myContractsTab": {
         "nickname": "Nickname",
