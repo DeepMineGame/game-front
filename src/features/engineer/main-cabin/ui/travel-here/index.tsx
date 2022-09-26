@@ -12,7 +12,7 @@ const TravelHere: FC = () => {
 
     return (
         <State
-            title={t('pages.engineer.travelHere')}
+            title={t('pages.travel.travelHere')}
             content={t('pages.engineer.youShouldTravelToContinue')}
             bottom={
                 <Travel

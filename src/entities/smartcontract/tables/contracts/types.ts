@@ -61,7 +61,10 @@ export type ContractDto = {
     signed_by_client: number;
     signed_by_executor: number;
     cost_of_execution: number;
+    client_discord: string;
+    executor_discord: string;
     demand_penalty_by_client: number;
+    penalty_by_fee_days_available: number;
 };
 
 export const contractName = {

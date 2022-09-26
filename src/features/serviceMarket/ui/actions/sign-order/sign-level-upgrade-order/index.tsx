@@ -4,7 +4,6 @@ import { Button, SignLevelUpgradeOrderModal } from 'shared';
 import { useSmartContractAction } from 'features';
 import { message } from 'antd';
 import { ContractDto, signOrder } from 'entities/smartcontract';
-import { useContractState } from 'entities/contract';
 
 type Props = {
     contract: ContractDto;
@@ -13,9 +12,10 @@ type Props = {
 
 export const SignLevelUpgradeOrder: FC<Props> = ({ contract, accountName }) => {
     const { t } = useTranslation();
-    const { isExecutor } = useContractState(contract, accountName);
     const [signLevelUpgradeOrderModalOpen, setSignLevelUpgradeOrderModalOpen] =
         useState(false);
+
+    const isEngineerOrder = !contract.client;
 
     const signOrderAction = useSmartContractAction({
         action: signOrder({
@@ -29,12 +29,14 @@ export const SignLevelUpgradeOrder: FC<Props> = ({ contract, accountName }) => {
     });
 
     const onSign = async () => {
-        if (isExecutor) {
+        if (!isEngineerOrder) {
             await signOrderAction();
             return;
         }
 
-        setSignLevelUpgradeOrderModalOpen(true);
+        if (isEngineerOrder) {
+            setSignLevelUpgradeOrderModalOpen(true);
+        }
     };
 
     return (

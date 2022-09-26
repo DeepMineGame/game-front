@@ -1,6 +1,6 @@
 import React, { FC, useMemo } from 'react';
 import { Area, AreaConfig } from '@ant-design/plots';
-import { neutral1, neutral2, neutral4, primary6 } from 'shared/ui/variables';
+import { neutral8, neutral2, neutral4, primary6 } from 'shared/ui/variables';
 import { mergeDeep } from 'shared/ui/utils';
 
 type BaseConfig = Omit<AreaConfig, 'data' | 'xField' | 'yField'>;
@@ -11,7 +11,7 @@ const defaultConfig: BaseConfig = {
     height: 335,
     padding: [10, 5, 35, 30],
     xAxis: {
-        label: { offsetY: 8, style: { fill: neutral1 } },
+        label: { offsetY: 8, style: { fill: neutral8 } },
         tickLine: {
             length: 8,
             style: {
@@ -55,7 +55,7 @@ const defaultConfig: BaseConfig = {
             'g2-tooltip': {
                 background: neutral4,
                 boxShadow: '0 2px 6px rgba(0, 0, 0, 0.25)',
-                color: neutral1,
+                color: neutral8,
                 opacity: 1,
                 padding: '4px 12px',
             },

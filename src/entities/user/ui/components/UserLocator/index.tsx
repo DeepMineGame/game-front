@@ -18,7 +18,7 @@ export const UserLocator = ({ center = false }) => {
             <Avatar
                 className={styles.avatar}
                 src={user?.avatar}
-                icon={<AvatarIcon />}
+                icon={<AvatarIcon width={41} height={41} />}
             />
             <Rive src="/animations/location_indicator.riv" />
         </div>

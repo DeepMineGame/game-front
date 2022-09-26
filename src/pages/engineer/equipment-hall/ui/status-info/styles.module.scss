@@ -1,0 +1,28 @@
+@import 'src/shared';
+
+.statusInfo {
+    min-height: 136px;
+    margin-bottom: 36px;
+    padding: 24px 28px;
+    border-radius: 4px;
+    background: $color-neutral-neutral-3 url('./stats-info-bg.png') center
+        center no-repeat;
+}
+
+.title {
+    text-transform: uppercase;
+}
+
+.statusTitle {
+    display: block;
+    font-size: 30px;
+    margin-bottom: 18px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.line {
+    width: 100%;
+    justify-content: space-between;
+}

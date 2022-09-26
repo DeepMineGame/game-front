@@ -3,8 +3,10 @@ export enum CabinStatus {
     NeedTravel,
     NeedInauguration,
     NeedTraining,
-    NeedWork,
-    NeedUpgradeKit,
+    UnlockingSkill,
+    NeedContract,
+    NeedCitizen,
+    NeedUpgrade,
     UpgradeInProgress,
     UpgradeCompleted,
     CanSeeStats,
@@ -12,6 +14,7 @@ export enum CabinStatus {
 }
 
 export enum CabinState {
+    NotInaugurated = 'notInaugurated',
     Idle = 'idle',
     Active = 'active',
     Work = 'work',

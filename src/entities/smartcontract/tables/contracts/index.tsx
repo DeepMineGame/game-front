@@ -12,6 +12,12 @@ export enum mapSearchParamForIndexPositionToFindContracts {
     executorId,
 }
 
+export type ContractConfigType = {
+    searchParam: string;
+    searchIdentification?: mapSearchParamForIndexPositionToFindContracts;
+    limit?: number;
+};
+
 export const ContractsGate = createGate<{ searchParam: string }>(
     'ContractsGate'
 );
@@ -20,11 +26,7 @@ export const getContractConfig = ({
     searchParam,
     searchIdentification = mapSearchParamForIndexPositionToFindContracts.executorId,
     limit = 100,
-}: {
-    searchParam: string;
-    searchIdentification?: mapSearchParamForIndexPositionToFindContracts;
-    limit?: number;
-}): GetTableDataConfigType => ({
+}: ContractConfigType): GetTableDataConfigType => ({
     code: deepminesmrt,
     scope: deepminesmrt,
     table: 'contracts',
@@ -35,6 +37,9 @@ export const getContractConfig = ({
     limit,
 });
 
+export const getContractDataTable = (params: ContractConfigType) =>
+    getTableData(getContractConfig(params));
+
 export const getContractByExecutorEffect = createEffect(
     async ({
         searchIdentification = mapSearchParamForIndexPositionToFindContracts.executorId,
@@ -43,9 +48,7 @@ export const getContractByExecutorEffect = createEffect(
         searchIdentification?: mapSearchParamForIndexPositionToFindContracts;
         searchParam: string;
     }) => {
-        return getTableData(
-            getContractConfig({ searchParam, searchIdentification })
-        );
+        return getContractDataTable({ searchParam, searchIdentification });
     }
 );
 

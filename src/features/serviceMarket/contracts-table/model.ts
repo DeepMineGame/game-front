@@ -20,7 +20,7 @@ export const ContractsGate = createGate<{ searchParam: string }>(
 export const changeFilterEvent = createEvent<GetOrdersParams>();
 
 export const filterStore = createStore<GetOrdersParams>({
-    status: FilterOrderStatus.Current,
+    status: FilterOrderStatus.current,
 }).on(changeFilterEvent, (_state, filter) => filter);
 
 export const getContractsByFilterEffect = createEffect(getOrders);

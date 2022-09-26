@@ -23,8 +23,8 @@ export const PageWithTabs: FC<Props> = memo(
         const navigate = useNavigate();
         const location = useLocation();
 
-        const navigateToTab = (id: string) => {
-            navigate(`${location.pathname}?tabId=${id}`);
+        const navigateToTab = (id: string, replace = false) => {
+            navigate(`${location.pathname}?tabId=${id}`, { replace });
         };
 
         const handleTabSelect = useCallback(navigateToTab, [
@@ -35,7 +35,7 @@ export const PageWithTabs: FC<Props> = memo(
         const selectedTabData = tabs.find((tab) => tab.key === Number(tabId));
 
         useEffect(() => {
-            navigateToTab(tabId || '0');
+            navigateToTab(tabId || '0', true);
             // eslint-disable-next-line react-hooks/exhaustive-deps
         }, []);
 

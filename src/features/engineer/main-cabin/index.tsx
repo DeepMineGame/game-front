@@ -7,7 +7,6 @@ import {
     GetTraining,
     TravelHere,
     FindWork,
-    BuyUpgradeKit,
     GetStatsInfo,
     UpgradeInProgress,
     UpgradeCompleted,
@@ -16,6 +15,9 @@ import {
     EngineerMenu,
     Chair,
     StatScreen,
+    WaitCitizen,
+    ContractSigned,
+    UnlockingSkill,
 } from './ui';
 
 const states = {
@@ -23,8 +25,10 @@ const states = {
     [CabinStatus.NeedTravel]: TravelHere,
     [CabinStatus.NeedInauguration]: AttendInauguration,
     [CabinStatus.NeedTraining]: GetTraining,
-    [CabinStatus.NeedWork]: FindWork,
-    [CabinStatus.NeedUpgradeKit]: BuyUpgradeKit,
+    [CabinStatus.UnlockingSkill]: UnlockingSkill,
+    [CabinStatus.NeedContract]: FindWork,
+    [CabinStatus.NeedCitizen]: WaitCitizen,
+    [CabinStatus.NeedUpgrade]: ContractSigned,
     [CabinStatus.UpgradeInProgress]: UpgradeInProgress,
     [CabinStatus.UpgradeCompleted]: UpgradeCompleted,
     [CabinStatus.CanSeeStats]: GetStatsInfo,
@@ -45,10 +49,10 @@ const MainCabin: FC<Props> = ({ status, header }) => {
                 {header}
                 <State />
             </Monitor>
-            <EquipmentHallImageLink />
+            <EquipmentHallImageLink status={status} />
             <Chair />
             <StatScreen />
-            <EngineerMenu />
+            <EngineerMenu status={status} />
         </>
     );
 };

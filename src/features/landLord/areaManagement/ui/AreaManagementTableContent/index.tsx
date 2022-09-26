@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import {
     Table,
     DiscordIcon,
-    neutral1,
+    neutral8,
     green6,
     gold6,
     neutral3Color,
@@ -19,7 +19,7 @@ const getStatusColor = (status: MineState) => {
         case MineState.setuped:
             return gold6;
         case MineState.deactivated:
-            return neutral1;
+            return neutral8;
         case MineState.activated:
             return green6;
         case MineState.unsetuped:
