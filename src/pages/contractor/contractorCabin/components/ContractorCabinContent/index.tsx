@@ -4,6 +4,7 @@ import {
     ACTION_STATE_TO_ID,
     ActionType,
     ContractDto,
+    EquipmentType,
     ID_TO_INVENTORY,
     INVENTORY_NAMES,
     miningEquipmentNames,
@@ -57,8 +58,8 @@ export const ContractorCabinContent = ({
         (item) => miningEquipmentNames.includes(item)
     );
     const activeInventoryNames = getInventoryNames(
-        userInventory.filter((v) => v.in_use)
-    ).filter((item) => miningEquipmentNames.includes(item));
+        userInventory.filter((v) => v.inv_type in EquipmentType)
+    );
     if (userContracts.length === 0) {
         setStatus(CABIN_STATUS.sign_contract);
         return <SignContract />;

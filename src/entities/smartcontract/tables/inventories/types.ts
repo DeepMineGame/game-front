@@ -35,6 +35,15 @@ export const rarityMap = {
     [RarityType.legendary]: 'Legendary',
 };
 
+export enum EquipmentType {
+    undefined,
+    cutter,
+    wandering_reactor,
+    plunging_blocks,
+    delaminator,
+    dme_wire,
+}
+
 export type UserInventoryType = {
     asset_id: string;
     template_id: InventoryIdType;
@@ -45,7 +54,7 @@ export type UserInventoryType = {
     weight?: number;
     inv_type: InventoryType;
     level: number;
-    equip_type: number;
+    equip_type: EquipmentType;
     broken: number;
     available_from: number;
 };
