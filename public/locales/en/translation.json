@@ -38,7 +38,7 @@
       "activeInventory": "Active inventory",
       "confirmTransfer": "Confirm transfer",
       "storage": "Storage",
-      "YouHaveToPhysicalToManageInventory": "You have to perform a physical shift to manage the active inventory"
+      "YouHaveToPhysicalToManageInventory": "You have to travel to manage the active inventory"
     },
     "common": {
       "button": {
@@ -218,7 +218,7 @@
       },
       "setup": {
         "title": "set up the Equipment",
-        "description": "To start mining you need to install the equipment \nand you need to perform a physical shift to this location.",
+        "description": "To start mining you need to install the equipment \nand you need to travel to this location.",
         "descriptionShort": "To start mining we need to install the equipment"
       },
       "ready": {
