@@ -1,9 +1,8 @@
-import React from 'react';
-import { Card, desktopS, Title, useMediaQuery } from 'shared';
+import { desktopS, Title, useMediaQuery } from 'shared';
 import { useStore } from 'effector-react';
 import { Col, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { findEquipmentByName } from 'features';
+import { AssetCard, findEquipmentByName } from 'features';
 import { useNavigate } from 'react-router-dom';
 import { inventoriesStore, miningEquipmentNames } from 'entities/smartcontract';
 import styles from './styles.module.scss';
@@ -39,15 +38,15 @@ export const Equipment = () => {
                 {Object.values(installedMiningEquipment).map(
                     (inventoryItem) =>
                         inventoryItem && (
-                            <Card
-                                key={inventoryItem.template_id}
-                                templateId={inventoryItem.template_id}
-                                status="installed"
+                            <AssetCard
+                                key={inventoryItem.asset_id}
+                                inventory={inventoryItem}
                                 onClick={() =>
                                     navigate(
                                         `/inventory/${inventoryItem.asset_id}`
                                     )
                                 }
+                                showCardBadgeStatus
                             />
                         )
                 )}

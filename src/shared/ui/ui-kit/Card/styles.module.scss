@@ -15,6 +15,7 @@
 }
 
 .wrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -42,4 +43,26 @@
 
 .button {
   margin: 0 auto;
+}
+
+.stateWrapper {
+  opacity: 0.2;
+
+  & .broken {
+    filter: $damaged-glow;
+  }
+
+  & .repairing {
+    filter: $repairing-glow;
+  }
+}
+
+.cardState {
+  height: 202px;
+  position: absolute;
+  width: 100%;
+  color: $color-neutral-neutral-10;
+  text-transform: uppercase;
+  align-items: center;
+  display: grid;
 }

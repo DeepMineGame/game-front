@@ -16,6 +16,7 @@ export enum ActionType {
     mine_deactivation,
     mine_unsetup,
     mine_change_layer_depth,
+    equipment_repair,
 }
 
 export type ActionDto = {

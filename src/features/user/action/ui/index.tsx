@@ -39,7 +39,11 @@ export const UserAction: FC<Props> = ({ smartContractUserData, className }) => {
             <div className={className}>
                 <Badge
                     status={actionsStateToBadgeStatusMap[status]}
-                    text={mapActionText[lastAction.type]}
+                    text={
+                        mapActionText[
+                            lastAction.type as keyof typeof mapActionText
+                        ]
+                    }
                 />
                 {!isActionFinished && (
                     <b>{getTimeLeftFromUtc(lastAction.finishes_at)}</b>

@@ -13,13 +13,17 @@
     "addConsumable": "add consumable",
     "statuses": {
       "installed": "Installed",
-      "broken": "Broken",
+      "broken": "Damaged",
       "notInstalled": "Not installed",
       "default": "Status unavailable"
     },
     "timer": {
       "time": "Time",
       "energy": "Energy"
+    },
+    "cardStates": {
+      "damaged": "is damaged",
+      "repairing": "repairing"
     }
   },
   "components": {
@@ -261,7 +265,8 @@
         "removed": "Your equipment has been removed",
         "remove": "Remove",
         "haveNoContract": "You have no contracts",
-        "signMineOwnerContract": "Sign contract with mine owner first"
+        "signMineOwnerContract": "Sign contract with mine owner first",
+        "tooltipForDamagedEquip": "Place the equipment into active inventory to repair"
       },
       "cardModal": {
         "select": "Select",

@@ -3,7 +3,7 @@ import { PhysicalShiftBadge, useAccountName } from 'shared';
 import {
     LOCATION_TO_ID,
     physicalShift,
-    PhysicalShiftArgs,
+    PhysicalShiftParams,
 } from 'entities/smartcontract';
 import { useSmartContractAction } from '../hooks';
 import { TravelModal } from './ui/TravelModal';
@@ -31,7 +31,7 @@ export const Travel: FC<Props> = ({
         setIsTravelModalVisible(false);
     };
 
-    const physicalShiftCallback = useSmartContractAction<PhysicalShiftArgs>(
+    const physicalShiftCallback = useSmartContractAction<PhysicalShiftParams>(
         physicalShift(accountName, toLocationId)
     );
     const handleCallShift = async () => {

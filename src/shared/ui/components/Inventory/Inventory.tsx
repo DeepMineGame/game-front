@@ -1,10 +1,10 @@
-import { Button, Modal, Dropdown, Card } from 'shared';
+import { Button, Modal, Dropdown, useRepair, useReloadPage } from 'shared';
 import React, { FC, useEffect, useState } from 'react';
 import { ModalProps, Space } from 'antd';
 import { SortAscendingOutlined, FilterOutlined } from '@ant-design/icons';
 import cn from 'classnames';
 
-import { filterEquipmentByName } from 'features';
+import { AssetCard, filterEquipmentByName } from 'features';
 import {
     InventoryNameType,
     InventoryTab,
@@ -28,6 +28,8 @@ export const Inventory: FC<InventoryProps> = ({
     onOpenCard,
     ...props
 }) => {
+    const reload = useReloadPage();
+    const { getFinishesAtTime } = useRepair();
     const [selectedTab, setSelectedTab] = useState(
         props.selectedTab ?? InventoryTab.equipment
     );
@@ -92,13 +94,16 @@ export const Inventory: FC<InventoryProps> = ({
                 {cards && (
                     <div className={styles.content}>
                         {cards.map((card) => (
-                            <Card
-                                templateId={card.template_id}
+                            <AssetCard
+                                inventory={card}
                                 className={styles.card}
                                 onClick={handleCardSelect(card)}
                                 key={card.asset_id}
                                 buttonText="Details"
                                 onButtonClick={handleDetailsClick(card)}
+                                onRepairFinish={reload}
+                                repairFinishesAt={getFinishesAtTime(card)}
+                                showCardBadgeStatus={false}
                             />
                         ))}
                     </div>
