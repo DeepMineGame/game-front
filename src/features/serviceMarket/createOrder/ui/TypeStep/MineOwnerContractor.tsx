@@ -44,7 +44,9 @@ export const MineOwnerContractor: FC<TypeStepProps> = ({
         hasInstalledEquipment &&
         t('pages.serviceMarket.createOrder.removeEquipFirst');
 
-    const canGoNext = contractType && isClient !== undefined;
+    const selectedAssetId = useWatch(orderFields.assetId, form);
+
+    const canGoNext = contractType && selectedAssetId && isClient !== undefined;
 
     return (
         <>
