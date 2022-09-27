@@ -103,7 +103,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                     />
                     {onSelect && (
                         <Button
-                            disabled={!!card.available_from}
+                            disabled={!!card?.available_from}
                             onClick={handleSelect}
                             block
                             type="primary"
