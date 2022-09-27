@@ -54,12 +54,12 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
         ? t('components.common.status.active')
         : t('components.common.status.inactive');
 
-    const deactivateMine = useSmartContractAction(
-        deactmine({ waxUser: chainAccountName, mineId: mine?.id })
-    );
-    const activateMine = useSmartContractAction(
-        activatemine({ waxUser: chainAccountName, mineId: mine?.id })
-    );
+    const deactivateMine = useSmartContractAction({
+        action: deactmine({ waxUser: chainAccountName, mineId: mine?.id }),
+    });
+    const activateMine = useSmartContractAction({
+        action: activatemine({ waxUser: chainAccountName, mineId: mine?.id }),
+    });
     const onActivationButtonClick = async () => {
         if (!contract) {
             return navigate(serviceMarket);

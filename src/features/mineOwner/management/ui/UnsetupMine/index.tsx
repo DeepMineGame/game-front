@@ -30,12 +30,12 @@ export const UnsetupMine: FC<{
     const navigate = useNavigate();
     const reloadPage = useReloadPage();
     const isDisabled = Boolean(contractorsContracts?.length);
-    const terminateContractAction = useSmartContractAction(
-        terminateContract(accountName, activeContract?.id!, 0)
-    );
-    const abandonMineAction = useSmartContractAction(
-        abandonMine(accountName, userMine?.id!)
-    );
+    const terminateContractAction = useSmartContractAction({
+        action: terminateContract(accountName, activeContract?.id!, 0),
+    });
+    const abandonMineAction = useSmartContractAction({
+        action: abandonMine(accountName, userMine?.id!),
+    });
     const onAbandonClick = async () => {
         await abandonMineAction();
         return navigate(mineOwner);

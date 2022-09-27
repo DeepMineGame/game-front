@@ -60,13 +60,13 @@ export function useActionsButton() {
         </div>
     );
 
-    const setupMineAction = useSmartContractAction(
-        setupMine({
+    const setupMineAction = useSmartContractAction({
+        action: setupMine({
             waxUser: accountName,
             // @ts-ignore
             contractId: contract?.id!,
-        })
-    );
+        }),
+    });
 
     const setupSignAndReload = async () => {
         await setupMineAction();

@@ -34,12 +34,12 @@ export const PenaltyActions: FC<Props> = ({
     const [isNoCollectModalVisible, setIsNoCollectModalVisible] =
         useState(false);
 
-    const getPenaltyAction = useSmartContractAction(
-        terminateContract(accountName, contractId, 1)
-    );
-    const getNoPenaltyAction = useSmartContractAction(
-        terminateContract(accountName, contractId, 0)
-    );
+    const getPenaltyAction = useSmartContractAction({
+        action: terminateContract(accountName, contractId, 1),
+    });
+    const getNoPenaltyAction = useSmartContractAction({
+        action: terminateContract(accountName, contractId, 0),
+    });
 
     const closeSuccessModal = () => {
         setIsSuccessModalVisible(false);

@@ -7,16 +7,24 @@ const defaultTransactionOptions = {
     expireSeconds: 30,
 };
 
-export const useSmartContractAction = <T>(
-    action: { actions: Action<T> },
-    options = defaultTransactionOptions
-) => {
+type UseSmartContractActionParams<T> = {
+    action: { actions: Action<T> };
+    options?: typeof defaultTransactionOptions;
+    onSignSuccess?: () => void;
+};
+
+export const useSmartContractAction = <T>({
+    action,
+    options = defaultTransactionOptions,
+    onSignSuccess = () => {},
+}: UseSmartContractActionParams<T>) => {
     const chainAccount = useChainAuthContext();
     const { t } = useTranslation();
 
     return async () => {
         try {
             await chainAccount?.activeUser?.signTransaction(action, options);
+            onSignSuccess();
         } catch (e) {
             const err = e as Error;
             errorNotify(err);

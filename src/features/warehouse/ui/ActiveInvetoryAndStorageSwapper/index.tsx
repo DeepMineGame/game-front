@@ -65,13 +65,17 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
         ({ asset_id }) => asset_id
     );
     const transferFromAtomicStorageToDeepMineInventory = useSmartContractAction(
-        atomicTransfer({
-            accountName,
-            ids: draggedElementsIds,
-        })
+        {
+            action: atomicTransfer({
+                accountName,
+                ids: draggedElementsIds,
+            }),
+        }
     );
     const transferFromDeepMineInventoryToAtomicStorage = useSmartContractAction(
-        withdrawAssets(accountName, draggedElementsIds)
+        {
+            action: withdrawAssets(accountName, draggedElementsIds),
+        }
     );
     const onTransferClick = async () => {
         if (!isAtomicIncludesDragged) {

@@ -48,13 +48,13 @@ const SignLandlordOrder: FC<Props> = ({ contract, accountName }) => {
             inventory.in_use === InUseType.notInUse
     );
 
-    const signContractAction = useSmartContractAction(
-        signOrder({
+    const signContractAction = useSmartContractAction({
+        action: signOrder({
             waxUser: accountName,
             assetId: mineId,
             contractId: contract.id,
-        })
-    );
+        }),
+    });
 
     const handleSignOrder = useCallback(async () => {
         await signContractAction();

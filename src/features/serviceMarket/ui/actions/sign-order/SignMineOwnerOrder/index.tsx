@@ -51,13 +51,13 @@ const SignMineOwnerOrder: FC<Props> = React.memo(
             searchIdentificationType: searchBy.owner,
         });
 
-        const signContractAction = useSmartContractAction(
-            signOrder({
+        const signContractAction = useSmartContractAction({
+            action: signOrder({
                 waxUser: accountName,
                 assetId: activeArea?.id,
                 contractId: contract.id,
-            })
-        );
+            }),
+        });
 
         const handleSignOrder = useCallback(async () => {
             await signContractAction();

@@ -32,9 +32,9 @@ const TerminateContract: FC<Props> = ({ accountName, contractId, penalty }) => {
         reloadPage();
     };
 
-    const getTerminate = useSmartContractAction(
-        terminateContract(accountName, contractId, 0)
-    );
+    const getTerminate = useSmartContractAction({
+        action: terminateContract(accountName, contractId, 0),
+    });
 
     const handleTerminate = async () => {
         await getTerminate();

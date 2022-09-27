@@ -12,25 +12,25 @@ type Props = {
 
 export const SignLevelUpgradeOrder: FC<Props> = ({ contract, accountName }) => {
     const { t } = useTranslation();
-    const { isClient, isExecutor } = useContractState(contract, accountName);
+    const { isExecutor } = useContractState(contract, accountName);
     const [signLevelUpgradeOrderModalOpen, setSignLevelUpgradeOrderModalOpen] =
         useState(false);
 
-    const signOrderAction = useSmartContractAction(
-        signOrder({
+    const signOrderAction = useSmartContractAction({
+        action: signOrder({
             waxUser: accountName,
             contractId: contract.id,
-        })
-    );
+        }),
+    });
 
     const onSign = async () => {
-        if (isClient) {
-            setSignLevelUpgradeOrderModalOpen(true);
-        }
-
         if (isExecutor) {
             await signOrderAction();
+            console.log('ADD SHOWING MESSAGE COMPONENT');
+            return;
         }
+
+        setSignLevelUpgradeOrderModalOpen(true);
     };
 
     return (
@@ -43,6 +43,10 @@ export const SignLevelUpgradeOrder: FC<Props> = ({ contract, accountName }) => {
                 contract={contract}
                 onCancel={() => setSignLevelUpgradeOrderModalOpen(false)}
                 title={t('pages.serviceMarket.order.signOrder')}
+                onSignSuccess={() => {
+                    setSignLevelUpgradeOrderModalOpen(false);
+                    console.log('ADD SHOWING MESSAGE COMPONENT');
+                }}
             />
         </>
     );

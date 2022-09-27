@@ -35,7 +35,6 @@ export const useContractState = (
         stateMeta as ContractStatesMeta
     );
 
-    const isDeleted = !!contract.deleted_at;
     const isClient = contract.client === accountName;
     const isExecutor = contract.executor === accountName;
     const isContractMember = isClient || isExecutor;

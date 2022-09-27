@@ -24,6 +24,7 @@ type Props = {
     onCancel: () => void;
     contract: ContractDto;
     title: string;
+    onSignSuccess: () => void;
 };
 
 export const SignLevelUpgradeOrderModal: FC<Props> = ({
@@ -31,6 +32,7 @@ export const SignLevelUpgradeOrderModal: FC<Props> = ({
     onCancel,
     title,
     contract,
+    onSignSuccess,
 }) => {
     const { t } = useTranslation();
     const accountName = useAccountName();
@@ -45,13 +47,14 @@ export const SignLevelUpgradeOrderModal: FC<Props> = ({
     >();
     const [isInventoryOpen, setIsInventoryOpen] = useState(false);
 
-    const signContractAction = useSmartContractAction(
-        signOrder({
+    const signContractAction = useSmartContractAction({
+        action: signOrder({
             waxUser: accountName,
             contractId: contract.id,
             assetId: selectedAsset?.asset_id,
-        })
-    );
+        }),
+        onSignSuccess,
+    });
 
     const handleAssetSelect = (asset: UserInventoryType) => {
         setSelectedAsset(asset);

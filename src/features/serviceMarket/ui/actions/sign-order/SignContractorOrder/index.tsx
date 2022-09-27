@@ -42,13 +42,13 @@ const SignContractorOrder: FC<Props> = ({ contract, accountName }) => {
 
     const emptySlot = getEmptySlot(mines[0]?.contractor_slots ?? []);
 
-    const signContractAction = useSmartContractAction(
-        signOrder({
+    const signContractAction = useSmartContractAction({
+        action: signOrder({
             waxUser: accountName,
             assetId: mineId,
             contractId: contract.id,
-        })
-    );
+        }),
+    });
 
     const handleSignOrder = useCallback(async () => {
         await signContractAction();

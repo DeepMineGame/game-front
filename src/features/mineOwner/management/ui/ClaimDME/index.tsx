@@ -24,7 +24,7 @@ export const ClaimDME: FC = () => {
         : null;
 
     const dmeMoreThenZero = Number(dmeToClaim) > 0;
-    const claimDme = useSmartContractAction(moclaim({ waxUser }));
+    const claimDme = useSmartContractAction({ action: moclaim({ waxUser }) });
     const onDmeClick = async () => {
         await claimDme();
         await getRolesEffect({ searchParam: waxUser });

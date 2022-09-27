@@ -48,18 +48,18 @@ export const MiningAndClaimButton: FC<Props> = memo(
         const toggleMiningCallback = useSmartContractAction<{
             wax_user: string;
             contract_id: number;
-        }>(
-            toggleMining({
+        }>({
+            action: toggleMining({
                 waxUser: accountName,
                 contractId: mineContract?.id!,
                 type: isMining ? 'stop' : 'start',
-            })
-        );
+            }),
+        });
 
         const [isClaimedState, setIsClaimedState] = useState(false);
-        const claimDmeCallback = useSmartContractAction(
-            contrclaim({ waxUser: accountName })
-        );
+        const claimDmeCallback = useSmartContractAction({
+            action: contrclaim({ waxUser: accountName }),
+        });
         const isContractsLoading = useStore(
             getContractByExecutorEffect.pending
         );

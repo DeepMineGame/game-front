@@ -14,13 +14,13 @@ const SignMineOwnerContractorOrder: FC<Props> = React.memo(
         const { t } = useTranslation();
         const reloadPage = useReloadPage();
 
-        const signContractAction = useSmartContractAction(
-            signOrder({
+        const signContractAction = useSmartContractAction({
+            action: signOrder({
                 waxUser: accountName,
                 assetId: contract.client_asset_id,
                 contractId: contract.id,
-            })
-        );
+            }),
+        });
 
         const handleSignOrder = useCallback(async () => {
             await signContractAction();
