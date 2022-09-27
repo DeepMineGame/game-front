@@ -10,11 +10,11 @@ export function useInitialValues() {
         const preFilledIsClient = query.get(orderFields.isClient);
 
         return {
-            is_client: preFilledContractType
-                ? Number(preFilledContractType)
-                : undefined,
-            contract_type: preFilledIsClient
+            is_client: preFilledIsClient
                 ? Number(preFilledIsClient)
+                : undefined,
+            contract_type: preFilledContractType
+                ? Number(preFilledContractType)
                 : undefined,
             [orderFields.deadlineDurationInDays]: 1,
             [orderFields.deadlineDurationInHours]: 0,
