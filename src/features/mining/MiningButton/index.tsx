@@ -8,7 +8,7 @@ import {
     Title,
     useMediaQuery,
     useReloadPage,
-    warning,
+    showWarningModal,
 } from 'shared';
 import { CheckCircleOutlined } from '@ant-design/icons';
 import { Space } from 'antd';
@@ -91,7 +91,7 @@ export const MiningAndClaimButton: FC<Props> = memo(
             }
 
             if (!isMiningFinished && !isClaimed && isMiningWillEndInFuture) {
-                return warning({
+                return showWarningModal({
                     title: t('pages.mining.doWantStopMining'),
                     content: t('pages.mining.consumablesWillBurnOut'),
                     onOk: toggleMiningAndReinitializeStores,

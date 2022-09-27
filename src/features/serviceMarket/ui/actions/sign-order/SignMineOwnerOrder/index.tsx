@@ -2,7 +2,7 @@ import React, { FC, useCallback, useState } from 'react';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { ExclamationCircleFilled } from '@ant-design/icons';
-import { Button, Result, success, useReloadPage } from 'shared';
+import { Button, Result, showSuccessModal, useReloadPage } from 'shared';
 import { ATOMICHUB_URL } from 'app/constants';
 import { useSmartContractAction } from 'features/hooks';
 import {
@@ -61,7 +61,7 @@ const SignMineOwnerOrder: FC<Props> = React.memo(
 
         const handleSignOrder = useCallback(async () => {
             await signContractAction();
-            success({
+            showSuccessModal({
                 title: t('pages.serviceMarket.order.signOrder'),
                 content: t('pages.serviceMarket.order.orderCreated'),
                 onOk: reloadPage,

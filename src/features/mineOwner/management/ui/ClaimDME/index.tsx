@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Button, success, useAccountName } from 'shared';
+import { Button, showSuccessModal, useAccountName } from 'shared';
 import { useStore } from 'effector-react';
 import { useSmartContractAction } from 'features';
 import { useTranslation } from 'react-i18next';
@@ -28,7 +28,7 @@ export const ClaimDME: FC = () => {
     const onDmeClick = async () => {
         await claimDme();
         await getRolesEffect({ searchParam: waxUser });
-        success({
+        showSuccessModal({
             title: t('components.common.button.claim'),
             content: t('components.common.yourDMEHasBeenClaimed'),
         });

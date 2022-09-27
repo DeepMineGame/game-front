@@ -2,7 +2,7 @@ import {
     Button,
     green6,
     Loader,
-    success,
+    showSuccessModal,
     orange6,
     Title,
     useReloadPage,
@@ -66,7 +66,7 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
         }
         const action = isMineActive ? deactivateMine : activateMine;
         await action();
-        return success({
+        return showSuccessModal({
             title: t('features.mineOwner.mineActivation'),
             content: t('features.mineOwner.mineOperationSucceed'),
             onOk: reloadPage,

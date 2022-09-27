@@ -1,7 +1,7 @@
 import { notification } from 'antd';
 import styles from './styles.module.scss';
 
-export const errorNotify = (error: Error) => {
+export const showErrorNotification = (error: Error) => {
     notification.error({
         description: error.message,
         message: <span className={styles.errorNotificator}>Error</span>,

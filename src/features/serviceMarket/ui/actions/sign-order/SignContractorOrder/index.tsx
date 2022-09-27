@@ -9,7 +9,7 @@ import {
     Text,
     Select,
     useReloadPage,
-    success,
+    showSuccessModal,
     isEmptyContractorSlot,
 } from 'shared';
 import { useSmartContractAction } from 'features/hooks';
@@ -52,7 +52,7 @@ const SignContractorOrder: FC<Props> = ({ contract, accountName }) => {
 
     const handleSignOrder = useCallback(async () => {
         await signContractAction();
-        success({
+        showSuccessModal({
             title: t('pages.serviceMarket.order.signOrder'),
             content: t('pages.serviceMarket.order.orderCreated'),
             onOk: reloadPage,

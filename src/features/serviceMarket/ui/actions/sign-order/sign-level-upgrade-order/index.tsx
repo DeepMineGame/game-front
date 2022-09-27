@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, SignLevelUpgradeOrderModal } from 'shared';
+import { Button, showSuccessMessage, SignLevelUpgradeOrderModal } from 'shared';
 import { useSmartContractAction } from 'features';
 import { ContractDto, signOrder } from 'entities/smartcontract';
 import { useContractState } from 'entities/contract';
@@ -21,12 +21,15 @@ export const SignLevelUpgradeOrder: FC<Props> = ({ contract, accountName }) => {
             waxUser: accountName,
             contractId: contract.id,
         }),
+        onSignSuccess: () =>
+            showSuccessMessage(
+                t('pages.serviceMarket.contract.successfullySigned')
+            ),
     });
 
     const onSign = async () => {
         if (isExecutor) {
             await signOrderAction();
-            console.log('ADD SHOWING MESSAGE COMPONENT');
             return;
         }
 
@@ -45,7 +48,9 @@ export const SignLevelUpgradeOrder: FC<Props> = ({ contract, accountName }) => {
                 title={t('pages.serviceMarket.order.signOrder')}
                 onSignSuccess={() => {
                     setSignLevelUpgradeOrderModalOpen(false);
-                    console.log('ADD SHOWING MESSAGE COMPONENT');
+                    showSuccessMessage(
+                        t('pages.serviceMarket.contract.successfullySigned')
+                    );
                 }}
             />
         </>

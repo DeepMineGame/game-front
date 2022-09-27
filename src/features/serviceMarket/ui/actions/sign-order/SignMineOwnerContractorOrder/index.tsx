@@ -1,6 +1,6 @@
 import React, { FC, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, success, useReloadPage } from 'shared';
+import { Button, showSuccessModal, useReloadPage } from 'shared';
 import { useSmartContractAction } from 'features/hooks';
 import { ContractDto, signOrder } from 'entities/smartcontract';
 
@@ -24,7 +24,7 @@ const SignMineOwnerContractorOrder: FC<Props> = React.memo(
 
         const handleSignOrder = useCallback(async () => {
             await signContractAction();
-            success({
+            showSuccessModal({
                 title: t('pages.serviceMarket.order.signOrder'),
                 content: t('pages.serviceMarket.order.orderCreated'),
                 onOk: reloadPage,

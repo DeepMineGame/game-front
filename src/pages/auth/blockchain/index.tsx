@@ -9,7 +9,7 @@ import {
     Button,
     useChainAuthContext,
     LoadingScreen,
-    errorNotify,
+    showErrorNotification,
     getTableData,
 } from 'shared';
 import { authorizeUser, getUserConfig } from 'entities/smartcontract';
@@ -54,7 +54,7 @@ export const BlockchainAuthPage: React.FC<Props> = ({ onSuccess }) => {
             });
             setIsWaitingForConnectWax(false);
         } catch (error) {
-            errorNotify(error as Error);
+            showErrorNotification(error as Error);
             throw error;
         }
     };

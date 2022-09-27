@@ -1,4 +1,9 @@
-import { error, errorNotify, getErrorCode, useChainAuthContext } from 'shared';
+import {
+    showErrorModal,
+    showErrorNotification,
+    getErrorCode,
+    useChainAuthContext,
+} from 'shared';
 import { useTranslation } from 'react-i18next';
 import { Action } from 'entities/smartcontract';
 
@@ -27,8 +32,8 @@ export const useSmartContractAction = <T>({
             onSignSuccess();
         } catch (e) {
             const err = e as Error;
-            errorNotify(err);
-            error({
+            showErrorNotification(err);
+            showErrorModal({
                 title: t('components.common.status.error'),
                 content: t(`blockchainErrors.${getErrorCode(err.message)}`),
             });
@@ -49,8 +54,8 @@ export const useSmartContractActionDynamic = () => {
             ?.signTransaction(action, options)
             .catch((e) => {
                 const err = e as Error;
-                errorNotify(err);
-                error({
+                showErrorNotification(err);
+                showErrorModal({
                     title: t('components.common.status.error'),
                     content: t(`blockchainErrors.${getErrorCode(err.message)}`),
                 });

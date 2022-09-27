@@ -10,7 +10,7 @@ import {
     Select,
     useReloadPage,
     useTableData,
-    success,
+    showSuccessModal,
 } from 'shared';
 import { useSmartContractAction } from 'features/hooks';
 import {
@@ -58,7 +58,7 @@ const SignLandlordOrder: FC<Props> = ({ contract, accountName }) => {
 
     const handleSignOrder = useCallback(async () => {
         await signContractAction();
-        success({
+        showSuccessModal({
             title: t('pages.serviceMarket.order.signOrder'),
             content: t('pages.serviceMarket.order.orderCreated'),
             onOk: reloadPage,

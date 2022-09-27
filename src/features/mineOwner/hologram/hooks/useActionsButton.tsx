@@ -3,7 +3,7 @@ import {
     ActionModal,
     Button,
     desktopS,
-    success,
+    showSuccessModal,
     useAccountName,
     useMediaQuery,
     useReloadPage,
@@ -70,7 +70,7 @@ export function useActionsButton() {
 
     const setupSignAndReload = async () => {
         await setupMineAction();
-        success({
+        showSuccessModal({
             title: t('features.mineOwner.setupMine'),
             content: t('features.mineOwner.mineIsSet'),
             onOk: reloadPage,
