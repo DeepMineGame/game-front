@@ -6,15 +6,22 @@ import {
     ClockCircleOutlined,
     CloseCircleOutlined,
     ExclamationCircleFilled,
+    DeleteOutlined,
 } from '@ant-design/icons';
-import { useContractState } from 'entities/contract';
+import { useContractState, useContractType } from 'entities/contract';
 import { ContractProps } from '../../types';
 import styles from './styles.module.scss';
 
 export const ContractState: FC<ContractProps> = ({ contract, accountName }) => {
     const { t } = useTranslation();
-    const { isTermViolation, isNeedComplete, isCompleted, isTerminated } =
-        useContractState(contract, accountName);
+    const {
+        isTermViolation,
+        isNeedComplete,
+        isCompleted,
+        isTerminated,
+        isDeleted,
+    } = useContractState(contract, accountName);
+    const { isOrder } = useContractType(contract);
 
     if (isCompleted) {
         return (
@@ -45,6 +52,13 @@ export const ContractState: FC<ContractProps> = ({ contract, accountName }) => {
             </div>
         );
     }
+
+    if (isDeleted && isOrder)
+        return (
+            <div className={styles.status}>
+                <DeleteOutlined /> {t('pages.serviceMarket.contract.deleted')}
+            </div>
+        );
 
     return (
         <div className={styles.status}>

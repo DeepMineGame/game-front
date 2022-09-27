@@ -17,6 +17,7 @@ import { ContractProps } from '../../types';
 const MineOperationContract: FC<ContractProps> = ({
     contract,
     accountName,
+    isDeleted,
 }) => {
     const {
         stateMeta,
@@ -37,35 +38,37 @@ const MineOperationContract: FC<ContractProps> = ({
                         />
                     </Col>
 
-                    <Col span={24}>
-                        {showCompleted && (
-                            <Completed
-                                accountName={accountName}
-                                contractId={contract.id}
-                            />
-                        )}
-                        {showTerminatedAlert && (
-                            <Alert
-                                message={
-                                    <Trans i18nKey="pages.serviceMarket.contract.youTerminated" />
-                                }
-                                type="info"
-                                showIcon
-                            />
-                        )}
-                        {showPenaltyActions && (
-                            <PenaltyActions
-                                isViolated={
-                                    stateMeta ===
-                                        ContractStatesMeta.termViolation ||
-                                    stateMeta ===
-                                        ContractStatesMeta.deadlineViolation
-                                }
-                                amount={contract.penalty_amount}
-                                contractId={contract.id}
-                            />
-                        )}
-                    </Col>
+                    {!isDeleted && (
+                        <Col span={24}>
+                            {showCompleted && (
+                                <Completed
+                                    accountName={accountName}
+                                    contractId={contract.id}
+                                />
+                            )}
+                            {showTerminatedAlert && (
+                                <Alert
+                                    message={
+                                        <Trans i18nKey="pages.serviceMarket.contract.youTerminated" />
+                                    }
+                                    type="info"
+                                    showIcon
+                                />
+                            )}
+                            {showPenaltyActions && (
+                                <PenaltyActions
+                                    isViolated={
+                                        stateMeta ===
+                                            ContractStatesMeta.termViolation ||
+                                        stateMeta ===
+                                            ContractStatesMeta.deadlineViolation
+                                    }
+                                    amount={contract.penalty_amount}
+                                    contractId={contract.id}
+                                />
+                            )}
+                        </Col>
+                    )}
                 </Row>
             </Col>
             <Col xs={24} md={12}>
