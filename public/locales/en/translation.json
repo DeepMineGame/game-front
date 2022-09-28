@@ -54,7 +54,8 @@
         "okay": "Okay",
         "create": "Create",
         "sign": "Sign",
-        "visitMarketplace": "Visit Marketplace"
+        "visitMarketplace": "Visit Marketplace",
+        "miningDeck": "Mining Deck"
       },
       "actionModal": {
         "descriptionTime": "This action will take:",
