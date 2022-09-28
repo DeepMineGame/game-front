@@ -12,12 +12,14 @@ import { useTranslation } from 'react-i18next';
 import { serviceMarket } from 'app/router/paths';
 import { ServiceMarketTabIds } from 'app/router/constants';
 import { AssetCard, getCardStatus, useSmartContractAction } from 'features';
+import { useStore } from 'effector-react';
 import { AssetDataType, getAtomicAssetsDataById } from 'entities/atomicassets';
 import {
     rarityMap,
     repairEquipment,
     UserInventoryType,
 } from 'entities/smartcontract';
+import { balancesStore } from 'entities/user';
 import {
     ActionModal,
     Button,
@@ -59,6 +61,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     }>({ costs: { timeSeconds: 0, coinAmount: 0, energy: 0 } });
     const [isModalVisible, setIsModalVisible] = useState(false);
     const { getCost } = useRepair();
+    const { dmeBalance } = useStore(balancesStore);
 
     const { t } = useTranslation();
 
@@ -243,6 +246,10 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                     onOk: t(`pages.equipmentSet.cardModal.${modalData?.type}`),
                 }}
                 onSubmit={() => {
+                    if (Number(dmeBalance) < modalData.costs.coinAmount) {
+                        // showWarningMessage()
+                        return;
+                    }
                     if (modalData?.type === ModalType.repair) repairAction();
                     if (modalData?.type === ModalType.refurbish)
                         refurbishAction();
