@@ -24,7 +24,10 @@ export const useContractState = (
     const { isContract } = useContractType(contract);
 
     const isDeleted = !!contract.deleted_at;
-    const isEarlyBreakByExecutor = stateMeta === ContractStatesMeta.earlyBreak;
+    const isClient = contract.client === accountName;
+    const isExecutor = contract.executor === accountName;
+    const isContractMember = isClient || isExecutor;
+
     const isCompleted =
         state === ContractStates.completed || (isDeleted && isContract);
     const isNeedComplete = stateMeta === ContractStatesMeta.complete;
@@ -35,27 +38,10 @@ export const useContractState = (
         stateMeta as ContractStatesMeta
     );
 
-    const isClient = contract.client === accountName;
-    const isExecutor = contract.executor === accountName;
-    const isContractMember = isClient || isExecutor;
-    const isDemandPenaltyByClient = !!contract.demand_penalty_by_client;
-    const isClientDemandPenalty = isClient && isDemandPenaltyByClient;
-    const isExecutorAndClientDemandPenalty =
-        isExecutor && isDemandPenaltyByClient;
-    const isClientDoesntDemandPenalty = isClient && !isDemandPenaltyByClient;
-    const isExecutorAndClientDoesntDemandPenalty =
-        isExecutor && !isDemandPenaltyByClient;
-
     const canTerminate =
         isContractMember && isActive && !isNeedComplete && !isTermViolation;
 
-    const showPenaltyActions = isTermViolation && isContractMember;
-    const showPenaltyMessage =
-        (isEarlyBreakByExecutor || isTerminated) &&
-        (isClientDemandPenalty ||
-            isClientDoesntDemandPenalty ||
-            isExecutorAndClientDemandPenalty ||
-            isExecutorAndClientDoesntDemandPenalty);
+    const showPenalty = isTermViolation && isContractMember;
     const showTerminatedAlert = isTerminated && isContractMember;
     const showCompleted = isNeedComplete && isContractMember;
 
@@ -73,12 +59,7 @@ export const useContractState = (
         stateMeta,
         canTerminate,
         showTerminatedAlert,
-        showPenaltyActions,
+        showPenalty,
         showCompleted,
-        showPenaltyMessage,
-        isClientDemandPenalty,
-        isClientDoesntDemandPenalty,
-        isExecutorAndClientDemandPenalty,
-        isExecutorAndClientDoesntDemandPenalty,
     };
 };
