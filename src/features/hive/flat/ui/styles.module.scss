@@ -1,10 +1,11 @@
 .flat {
   height: 100vh;
   width: 100vw;
-  background: url("../../../../shared/ui/images/hive/hive-art-dark.webp") center center;
+  background: url("../../../../shared/ui/images/hive/hive-art-dark.webp") center center no-repeat;
   background-size: cover;
 }
 
 .insideFlat {
-  background: url("../../../../shared/ui/images/hive/hive-art.webp") center center;
+  background: url("../../../../shared/ui/images/hive/hive-art.webp") center center no-repeat;
+  background-size: cover;
 }
