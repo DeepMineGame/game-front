@@ -527,11 +527,7 @@
         "orderWasDeleted": "Order was deleted",
         "documentWasDestroyedOn": "This document was destroyed on",
         "deleted": "Deleted",
-        "successfullySigned": "Сontract successfully signed",
-        "isClientDemandPenalty": "The contracts was terminated prematurely by the counterparty. You’ve collected a penalty of {{amount}} DME from the counterparty.",
-        "isClientDoesntDemandPenalty": "The contracts was terminated prematurely by the contrparty. You haven’t collected a penalty from the counterparty.",
-        "isExecutorAndClientDemandPenalty": "You terminated the contract prematurely and you’ve been charged a penalty of {{amount}} DME by the counterparty.",
-        "isExecutorAndClientDoesntDemandPenalty": "You terminated the contract prematurely, but you haven’t been charged a penalty by the counterparty."
+        "successfullySigned": "Сontract successfully signed"
       },
       "myContractsTab": {
         "nickname": "Nickname",
