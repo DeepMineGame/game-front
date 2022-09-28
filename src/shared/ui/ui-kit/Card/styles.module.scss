@@ -45,24 +45,28 @@
   margin: 0 auto;
 }
 
-.stateWrapper {
-  opacity: 0.2;
-
-  & .broken {
-    filter: $damaged-glow;
-  }
-
-  & .repairing {
-    filter: $repairing-glow;
-  }
+.cardState {
+  //FIXME: REMOVE IMPORTANT AT THIS PLACE AFTER FIX MODAL STYLES
+  background-color: rgba($color-neutral-neutral-1, 0.7) !important;
+  width: 100%;
+  padding: 6px 0;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  align-self: center;
 }
 
-.cardState {
-  height: 202px;
-  position: absolute;
-  width: 100%;
-  color: $color-neutral-neutral-10;
-  text-transform: uppercase;
-  align-items: center;
-  display: grid;
+.stateWrapper {
+    height: 204px;
+    position: absolute;
+    width: 100%;
+    display: grid;
+    //FIXME: REMOVE IMPORTANT AT THIS PLACE AFTER FIX MODAL STYLES
+    background-color: transparent !important;
+}
+
+.iconTool {
+  font-size: 14px;
 }
