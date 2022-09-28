@@ -1,5 +1,6 @@
 import {
     DMECoinIcon,
+    GetCostParams,
     Modal,
     useAccountName,
     useReloadPage,
@@ -12,7 +13,11 @@ import { serviceMarket } from 'app/router/paths';
 import { ServiceMarketTabIds } from 'app/router/constants';
 import { AssetCard, getCardStatus, useSmartContractAction } from 'features';
 import { AssetDataType, getAtomicAssetsDataById } from 'entities/atomicassets';
-import { repairEquipment, UserInventoryType } from 'entities/smartcontract';
+import {
+    rarityMap,
+    repairEquipment,
+    UserInventoryType,
+} from 'entities/smartcontract';
 import {
     ActionModal,
     Button,
@@ -53,6 +58,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         };
     }>({ costs: { timeSeconds: 0, coinAmount: 0, energy: 0 } });
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const { getCost } = useRepair();
 
     const { t } = useTranslation();
 
@@ -177,7 +183,13 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                         type: ModalType.repair,
                                         costs: {
                                             timeSeconds: 1,
-                                            coinAmount: 1,
+                                            coinAmount: getCost({
+                                                level: card.level as GetCostParams['level'],
+                                                rarity: rarityMap[
+                                                    card.rarity
+                                                ] as GetCostParams['rarity'],
+                                                isRefurbish: false,
+                                            }),
                                             energy: 150,
                                         },
                                     });
@@ -201,7 +213,13 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                         type: ModalType.refurbish,
                                         costs: {
                                             timeSeconds: 120,
-                                            coinAmount: 1,
+                                            coinAmount: getCost({
+                                                level: card.level as GetCostParams['level'],
+                                                rarity: rarityMap[
+                                                    card.rarity
+                                                ] as GetCostParams['rarity'],
+                                                isRefurbish: true,
+                                            }),
                                             energy: 150,
                                         },
                                     });
