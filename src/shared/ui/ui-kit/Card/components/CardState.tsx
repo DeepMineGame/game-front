@@ -15,7 +15,7 @@ export const CardState: FC<{
     status?: Status;
     finishesAt?: number;
     onFinish?: () => void;
-}> = ({ status, finishesAt = 1664501982, onFinish }) => {
+}> = ({ status, finishesAt, onFinish }) => {
     const { t } = useTranslation();
     useTick(status === Status.broken);
 
