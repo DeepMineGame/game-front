@@ -57,6 +57,7 @@ export type UserInventoryType = {
     equip_type: EquipmentType;
     broken: number;
     available_from: number;
+    schema_type: number;
 };
 
 export enum InventoryTab {

@@ -7,5 +7,4 @@ export type UserDto = {
     stamina: number;
     experience: number;
     level: number;
-    reputation: number;
 };

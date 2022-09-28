@@ -10,4 +10,3 @@ export * from './ContractsTable';
 export * from './LoadingScreen';
 export * from './LogAs';
 export * from './full-screen-background';
-export * from './level-upgrade-contracts-table';

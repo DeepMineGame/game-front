@@ -84,13 +84,13 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         updateData();
     }, [updateData]);
 
-    const repairAction = useSmartContractAction(
-        repairEquipment(accountName, Number(cardData?.asset_id))
-    );
+    const repairAction = useSmartContractAction({
+        action: repairEquipment(accountName, Number(cardData?.asset_id)),
+    });
 
-    const refurbishAction = useSmartContractAction(
-        repairEquipment(accountName, Number(cardData?.asset_id), true)
-    );
+    const refurbishAction = useSmartContractAction({
+        action: repairEquipment(accountName, Number(cardData?.asset_id), true),
+    });
 
     return (
         <Modal

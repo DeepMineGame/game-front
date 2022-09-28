@@ -1,28 +1,13 @@
 import { FC, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-    ContractDto,
-    EngineerSchema,
-    EngineerSkillKey,
-} from 'entities/smartcontract';
-import { Link, Table } from '../../ui-kit';
-import { toLocaleDate } from '../../utils';
+import { Link, Table } from 'shared';
+import { ContractDto, EngineerSchema } from 'entities/smartcontract';
+import { parseAttrs, getUpgradeType } from 'shared/lib/utils';
+import { toLocaleDate } from 'shared/ui/utils';
 
 type Props = {
     contracts: ContractDto[];
 };
-
-const upgradeType = {
-    [EngineerSchema.mine]: 'mine',
-    [EngineerSchema.module]: 'mineModule',
-    [EngineerSchema.equipment]: 'equipment',
-};
-
-const getUpgradeType = (contract: ContractDto) =>
-    Number(
-        contract.attrs.find((a) => a.key === EngineerSkillKey.schema_type)
-            ?.value
-    );
 
 export const LevelUpgradeContractsTable: FC<Props> = ({ contracts }) => {
     const { t } = useTranslation();
@@ -33,18 +18,14 @@ export const LevelUpgradeContractsTable: FC<Props> = ({ contracts }) => {
                 // TODO: what should display first?
                 nickName: contract.client || contract.executor || '-',
                 key: contract.id,
-                reputation: '-',
                 type:
-                    getUpgradeType(contract) === EngineerSchema.undefined
+                    parseAttrs(contract)?.schema_type ===
+                    EngineerSchema.undefined
                         ? '-'
                         : t(
-                              `pages.serviceMarket.levelUpgradeTab.type.${
-                                  upgradeType[
-                                      getUpgradeType(
-                                          contract
-                                      ) as keyof typeof upgradeType
-                                  ]
-                              }`
+                              `pages.serviceMarket.levelUpgradeTab.type.${getUpgradeType(
+                                  { contract }
+                              )}`
                           ),
                 creationDate: contract.create_time,
                 cost: contract.cost_of_execution,
@@ -66,11 +47,6 @@ export const LevelUpgradeContractsTable: FC<Props> = ({ contracts }) => {
                             {value}
                         </Link>
                     ),
-                },
-                {
-                    title: t('pages.serviceMarket.levelUpgradeTab.reputation'),
-                    dataIndex: 'reputation',
-                    key: 'reputation',
                 },
                 {
                     title: t(

@@ -41,7 +41,7 @@ export const useContractState = (
     const canTerminate =
         isContractMember && isActive && !isNeedComplete && !isTermViolation;
 
-    const showPenalty = isTermViolation && isContractMember;
+    const showPenaltyActions = isTermViolation && isContractMember;
     const showTerminatedAlert = isTerminated && isContractMember;
     const showCompleted = isNeedComplete && isContractMember;
 
@@ -59,7 +59,7 @@ export const useContractState = (
         stateMeta,
         canTerminate,
         showTerminatedAlert,
-        showPenalty,
+        showPenaltyActions,
         showCompleted,
     };
 };

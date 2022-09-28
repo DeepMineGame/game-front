@@ -3,7 +3,7 @@ import {
     ActionModal,
     Button,
     desktopS,
-    success,
+    showSuccessModal,
     useAccountName,
     useMediaQuery,
     useReloadPage,
@@ -60,17 +60,17 @@ export function useActionsButton() {
         </div>
     );
 
-    const setupMineAction = useSmartContractAction(
-        setupMine({
+    const setupMineAction = useSmartContractAction({
+        action: setupMine({
             waxUser: accountName,
             // @ts-ignore
             contractId: contract?.id!,
-        })
-    );
+        }),
+    });
 
     const setupSignAndReload = async () => {
         await setupMineAction();
-        success({
+        showSuccessModal({
             title: t('features.mineOwner.setupMine'),
             content: t('features.mineOwner.mineIsSet'),
             onOk: reloadPage,

@@ -2,10 +2,10 @@ import { FC } from 'react';
 import { Row, Col } from 'antd';
 import { useContractState } from 'entities/contract';
 import {
-    GeneralInfo,
     Conditions,
     Citizen,
     Engineer,
+    GeneralInfo,
 } from '../../ui/contract/level-upgrade';
 import { TerminateContract } from '../../ui/actions';
 import { ContractProps } from '../../types';
@@ -15,12 +15,15 @@ const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
 
     return (
         <Row gutter={[32, 32]}>
-            <Col span={12}>
-                <GeneralInfo
-                    isOrder={false}
-                    contract={contract}
-                    accountName={accountName}
-                />
+            <Col xs={24} md={12}>
+                <Row gutter={[24, 24]}>
+                    <Col span={24}>
+                        <GeneralInfo
+                            contract={contract}
+                            accountName={accountName}
+                        />
+                    </Col>
+                </Row>
             </Col>
             <Col xs={24} md={12}>
                 <Conditions contract={contract} />
@@ -28,7 +31,6 @@ const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
             <Col xs={24} md={12}>
                 <Engineer contract={contract} accountName={accountName} />
             </Col>
-
             <Col xs={24} md={12}>
                 <Row gutter={[32, 32]}>
                     <Col span={24}>
@@ -37,7 +39,6 @@ const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
                             accountName={accountName}
                         />
                     </Col>
-
                     <Col span={24}>
                         <Row justify="end">
                             {canTerminate && (

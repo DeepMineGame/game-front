@@ -13,7 +13,6 @@ const data: MineCrewDataType[] = [
         contractor: 'Username8458',
         status: 0,
         ejection: 346,
-        reputation: 235,
         activity: 2,
     },
     {
@@ -22,7 +21,6 @@ const data: MineCrewDataType[] = [
         contractor: 'OrangeboxPlayer',
         status: 1,
         ejection: 6588,
-        reputation: 87,
         activity: 1,
     },
     {
@@ -31,7 +29,6 @@ const data: MineCrewDataType[] = [
         contractor: 'Startalk',
         status: 2,
         ejection: 346,
-        reputation: 235,
         activity: 2,
     },
     {
@@ -40,7 +37,6 @@ const data: MineCrewDataType[] = [
         contractor: 'Skyslayer',
         status: 2,
         ejection: 875,
-        reputation: 875,
         activity: 1,
     },
     {
@@ -49,7 +45,6 @@ const data: MineCrewDataType[] = [
         contractor: 'WhenIPewYouQQ',
         status: 2,
         ejection: 7642,
-        reputation: 345,
         activity: 0,
     },
     {
@@ -58,7 +53,6 @@ const data: MineCrewDataType[] = [
         contractor: 'streamer256',
         status: 2,
         ejection: 1487,
-        reputation: 649,
         activity: 1,
     },
 ];

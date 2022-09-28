@@ -1,15 +1,13 @@
 import { FC } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Row, Col } from 'antd';
 import { useOrderDelete } from 'entities/order';
-import { Button } from 'shared/ui/ui-kit';
 import {
     GeneralInfo,
     Conditions,
     Citizen,
     Engineer,
 } from '../../ui/contract/level-upgrade';
-import { DeleteOrder } from '../../ui/actions';
+import { DeleteOrder, SignLevelUpgradeOrder } from '../../ui/actions';
 import { ContractProps } from '../../types';
 
 const creators = {
@@ -18,11 +16,8 @@ const creators = {
 } as const;
 
 const LevelUpgradeOrder: FC<ContractProps> = ({ contract, accountName }) => {
-    const { t } = useTranslation();
     const { canDeleteOrder } = useOrderDelete(contract, accountName);
-
-    // todo: check role
-    const creatorRole = 'engineer';
+    const creatorRole = contract.executor ? 'engineer' : 'citizen';
     const Creator = creators[creatorRole];
 
     return (
@@ -47,11 +42,12 @@ const LevelUpgradeOrder: FC<ContractProps> = ({ contract, accountName }) => {
                     </Col>
                     <Col span={24}>
                         <Row justify="end">
-                            {/* todo: sign order */}
-                            <Button type="primary" size="large" block>
-                                {t('pages.serviceMarket.order.signOrder')}
-                            </Button>
-
+                            {/* {canSignLevelUpgradeOrder && ( */}
+                            <SignLevelUpgradeOrder
+                                contract={contract}
+                                accountName={accountName}
+                            />
+                            {/* )} */}
                             {canDeleteOrder && (
                                 <DeleteOrder
                                     accountName={accountName}

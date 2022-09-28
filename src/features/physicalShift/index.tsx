@@ -31,9 +31,9 @@ export const Travel: FC<Props> = ({
         setIsTravelModalVisible(false);
     };
 
-    const physicalShiftCallback = useSmartContractAction<PhysicalShiftParams>(
-        physicalShift(accountName, toLocationId)
-    );
+    const physicalShiftCallback = useSmartContractAction<PhysicalShiftParams>({
+        action: physicalShift(accountName, toLocationId),
+    });
     const handleCallShift = async () => {
         await physicalShiftCallback();
         await onSuccess();

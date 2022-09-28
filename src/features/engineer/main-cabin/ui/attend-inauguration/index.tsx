@@ -20,9 +20,9 @@ const AttendInauguration: FC = () => {
     const accountName = useAccountName();
     const { certificate } = useStore(engineerCabinStore);
 
-    const handleInaugurate = useSmartContractAction(
-        createEngineer(accountName, certificate?.asset_id!)
-    );
+    const handleInaugurate = useSmartContractAction({
+        action: createEngineer(accountName, certificate?.asset_id!),
+    });
 
     const onInaugurate = async () => {
         await handleInaugurate();

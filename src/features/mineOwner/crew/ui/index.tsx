@@ -22,7 +22,6 @@ export const MineOwnerCrew: FC = () => {
         contractor: slot.contractor,
         status: 2,
         ejection: 0,
-        reputation: 0,
         activity: 0,
     }));
     const mapEmptySlotsToAddButton = mines?.[0]?.contractor_slots

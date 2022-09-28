@@ -22,9 +22,9 @@ export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
 
     const contractor = useStore(contractorStore);
     const isContractorLoading = useStore(getContractorEffect.pending);
-    const calcMining = useSmartContractAction(
-        calcmining({ waxUser: accountName })
-    );
+    const calcMining = useSmartContractAction({
+        action: calcmining({ waxUser: accountName }),
+    });
     const timeSpent =
         contractor && contractor.finishes_at - contractor.starts_at;
     const dmeToClaim = (contractor && contractor.params?.amount_to_claim) || 0;

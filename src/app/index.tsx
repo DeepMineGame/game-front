@@ -3,7 +3,7 @@ import './index.i18n';
 import './app.less';
 import axios, { AxiosError } from 'axios';
 
-import { errorNotify } from 'shared';
+import { showErrorNotification } from 'shared';
 import { withProviders } from './providers';
 import { Router } from './router';
 import './index.module.scss';
@@ -11,7 +11,8 @@ import './index.module.scss';
 axios.interceptors.response.use(
     (response) => response,
     (error: AxiosError) => {
-        if (!error.config.url?.includes('/ubs/auth/me')) errorNotify(error);
+        if (!error.config.url?.includes('/ubs/auth/me'))
+            showErrorNotification(error);
     }
 );
 

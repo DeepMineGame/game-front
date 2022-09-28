@@ -20,8 +20,6 @@ const Citizen: FC<ContractProps> = ({ contract, accountName }) => {
                 <Text type="primary">{member || '-'}</Text>
             </>
         ),
-        [t('pages.serviceMarket.reputation')]: '123',
-        [t('pages.serviceMarket.successProbability')]: '95%',
     };
 
     return <TableWithTitle title={t('roles.citizen')} data={mineOwnerData} />;

@@ -53,7 +53,8 @@
         "okay": "Okay",
         "create": "Create",
         "sign": "Sign",
-        "visitMarketplace": "Visit Marketplace"
+        "visitMarketplace": "Visit Marketplace",
+        "selectItem": "Select item"
       },
       "actionModal": {
         "descriptionTime": "This action will take:",
@@ -525,7 +526,8 @@
         "terminated": "Terminated",
         "orderWasDeleted": "Order was deleted",
         "documentWasDestroyedOn": "This document was destroyed on",
-        "deleted": "Deleted"
+        "deleted": "Deleted",
+        "successfullySigned": "Сontract successfully signed"
       },
       "myContractsTab": {
         "nickname": "Nickname",

@@ -51,3 +51,8 @@ export * from './addDaysToCurrentDateUnixTime';
 export * from './getLabelSelectItem';
 export * from './isEmptyContractorSlot';
 export { getErrorCode } from './getErrorCode';
+export {
+    getUpgradeRarity,
+    getUpgradeType,
+    parseAttrs,
+} from './get-upgrade-attr';

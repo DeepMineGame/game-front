@@ -3,11 +3,11 @@ import {
     Inventory,
     InventoryCardModal,
     Page,
-    success,
+    showSuccessModal,
     useAccountName,
     useReloadPage,
     useTableData,
-    warning,
+    showWarningModal,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
@@ -88,7 +88,7 @@ export const EquipmentSetPage: FC = () => {
             .map(([, equipment]) => equipment?.asset_id)
             .filter((v) => v) as string[];
         if (!contractId) {
-            warning({
+            showWarningModal({
                 title: t('pages.equipmentSet.main.haveNoContract'),
                 content: t('pages.equipmentSet.main.haveNoContract'),
             });
@@ -102,7 +102,7 @@ export const EquipmentSetPage: FC = () => {
                 })
             );
         }
-        return success({
+        return showSuccessModal({
             title: t('pages.equipmentSet.main.title'),
             content: t('pages.equipmentSet.main.installed'),
             onOk: reloadPage,
@@ -116,7 +116,7 @@ export const EquipmentSetPage: FC = () => {
                 items: assetIds,
             })
         );
-        return success({
+        return showSuccessModal({
             title: t('pages.equipmentSet.main.uninstall'),
             content: t('pages.equipmentSet.main.removed'),
             onOk: reloadPage,
@@ -130,7 +130,7 @@ export const EquipmentSetPage: FC = () => {
                 items: [inventory.asset_id],
             })
         );
-        return success({
+        return showSuccessModal({
             title: t('pages.equipmentSet.main.uninstall'),
             content: t('pages.equipmentSet.main.removed'),
             onOk: reloadPage,

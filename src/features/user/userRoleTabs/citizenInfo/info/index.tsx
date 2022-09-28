@@ -30,7 +30,6 @@ export function CitizenInfo({ accountName }: Props) {
                 <KeyValueTable
                     items={{
                         Energy: smartContractUserData.stamina,
-                        Reputation: smartContractUserData.reputation,
                     }}
                 />
             </Col>

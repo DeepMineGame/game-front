@@ -7,7 +7,7 @@ export function signOrder({
 }: {
     waxUser: string;
     contractId: number;
-    assetId: string;
+    assetId?: string;
 }) {
     return {
         actions: [
@@ -23,7 +23,7 @@ export function signOrder({
                 data: {
                     wax_user: waxUser,
                     contract_id: contractId,
-                    opt_asset_id: assetId,
+                    ...(assetId && { opt_asset_id: assetId }),
                 },
             },
         ],

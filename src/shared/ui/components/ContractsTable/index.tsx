@@ -59,7 +59,6 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
                         </Space>
                     ),
                     key: contract.id,
-                    reputation: '-',
                     type: contractName[contract.type],
                     date:
                         contract.finishes_at === 0
@@ -87,12 +86,6 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
                     title: t('pages.serviceMarket.myContractsTab.nickname'),
                     dataIndex: 'nickName',
                     key: 'nickName',
-                },
-                {
-                    title: t('pages.serviceMarket.myContractsTab.reputation'),
-                    dataIndex: 'reputation',
-                    key: 'reputation',
-                    sorter: (a, b) => a.reputation - b.reputation,
                 },
                 {
                     title: t('pages.serviceMarket.myContractsTab.contractType'),

@@ -9,7 +9,7 @@ import {
     Text,
     Select,
     useReloadPage,
-    success,
+    showSuccessModal,
     isEmptyContractorSlot,
 } from 'shared';
 import { useSmartContractAction } from 'features/hooks';
@@ -42,17 +42,17 @@ const SignContractorOrder: FC<Props> = ({ contract, accountName }) => {
 
     const emptySlot = getEmptySlot(mines[0]?.contractor_slots ?? []);
 
-    const signContractAction = useSmartContractAction(
-        signOrder({
+    const signContractAction = useSmartContractAction({
+        action: signOrder({
             waxUser: accountName,
             assetId: mineId,
             contractId: contract.id,
-        })
-    );
+        }),
+    });
 
     const handleSignOrder = useCallback(async () => {
         await signContractAction();
-        success({
+        showSuccessModal({
             title: t('pages.serviceMarket.order.signOrder'),
             content: t('pages.serviceMarket.order.orderCreated'),
             onOk: reloadPage,
