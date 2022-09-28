@@ -47,7 +47,7 @@ export const useRepair = () => {
         )?.finishesAt;
 
     const getCost = ({ level, rarity, isRefurbish }: GetCostParams) => {
-        const percent = !isRefurbish ? 150 + level * 100 : 3000 + level * 100;
+        const percent = isRefurbish ? 3000 + level * 100 : 150 + level * 100;
         const amount = dmeToUpgrade[rarity][level];
 
         return getAmountByPercent({ amount, percent });
