@@ -277,7 +277,8 @@
         "mineSublevel": "Mine sublevel",
         "upgrade": "Upgrade",
         "repair": "Repair",
-        "refurbish": "Refurbish"
+        "refurbish": "Refurbish",
+        "insufficientFunds": "Insufficient funds for {{action}}"
       },
       "characteristics": {
         "title": "Characteristics",

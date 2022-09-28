@@ -7,7 +7,7 @@ import {
     useRepair,
 } from 'shared';
 import React, { FC, useState, useEffect, useCallback } from 'react';
-import { ModalProps, Tooltip } from 'antd';
+import { message, ModalProps, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { serviceMarket } from 'app/router/paths';
 import { ServiceMarketTabIds } from 'app/router/constants';
@@ -247,7 +247,12 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                 }}
                 onSubmit={() => {
                     if (Number(dmeBalance) < modalData.costs.coinAmount) {
-                        // showWarningMessage()
+                        message.warning(
+                            t(
+                                'pages.equipmentSet.cardModal.insufficientFunds',
+                                { action: modalData?.type }
+                            )
+                        );
                         return;
                     }
                     if (modalData?.type === ModalType.repair) repairAction();
