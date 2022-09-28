@@ -13,7 +13,7 @@
     "addConsumable": "add consumable",
     "statuses": {
       "installed": "Installed",
-      "broken": "Damaged",
+      "broken": "Broken",
       "notInstalled": "Not installed",
       "default": "Status unavailable"
     },
@@ -22,8 +22,7 @@
       "energy": "Energy"
     },
     "cardStates": {
-      "damaged": "is damaged",
-      "repairing": "repairing"
+      "broken": "Broken"
     }
   },
   "components": {
