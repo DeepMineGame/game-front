@@ -46,7 +46,7 @@
 }
 
 .cardState {
-  //FIXME: REMOVE IMPORTANT AT THIS PLACE AFTER FIX MODAL STYLES
+  // FIXME: REMOVE IMPORTANT AT THIS PLACE AFTER FIX MODAL STYLES
   background-color: rgba($color-neutral-neutral-1, 0.7) !important;
   width: 100%;
   padding: 6px 0;
@@ -63,7 +63,8 @@
     position: absolute;
     width: 100%;
     display: grid;
-    //FIXME: REMOVE IMPORTANT AT THIS PLACE AFTER FIX MODAL STYLES
+
+    // FIXME: REMOVE IMPORTANT AT THIS PLACE AFTER FIX MODAL STYLES
     background-color: transparent !important;
 }
 
