@@ -4,15 +4,15 @@ import { UserActionGate } from 'features/user';
 import {
     actionsStore,
     ActionType,
+    dmeToUpgrade,
     rarityMap,
     RarityType,
     UserInventoryType,
 } from 'entities/smartcontract';
 import { useAccountName } from './useAccountName';
-import { dmeToUpgradeValues } from './constants';
 
 export type GetCostParams = {
-    level: keyof typeof dmeToUpgradeValues['Common'];
+    level: keyof typeof dmeToUpgrade['Common'];
     rarity: Exclude<typeof rarityMap[RarityType], ''>;
     isRefurbish: boolean;
 };
@@ -47,30 +47,10 @@ export const useRepair = () => {
         )?.finishesAt;
 
     const getCost = ({ level, rarity, isRefurbish }: GetCostParams) => {
-        let percent = !isRefurbish ? 150 : 3000;
-        const dmeToUpgrade = dmeToUpgradeValues[rarity][level];
+        const percent = !isRefurbish ? 150 + level * 100 : 3000 + level * 100;
+        const amount = dmeToUpgrade[rarity][level];
 
-        if (level === 1) {
-            percent = !isRefurbish ? 250 : 3100;
-        } else if (level === 2) {
-            percent = !isRefurbish ? 350 : 3200;
-        } else if (level === 3) {
-            percent = !isRefurbish ? 450 : 3300;
-        } else if (level === 4) {
-            percent = !isRefurbish ? 550 : 3400;
-        } else if (level === 5) {
-            percent = !isRefurbish ? 650 : 3500;
-        } else if (level === 6) {
-            percent = !isRefurbish ? 750 : 3600;
-        } else if (level === 7) {
-            percent = !isRefurbish ? 850 : 3700;
-        } else if (level === 8) {
-            percent = !isRefurbish ? 950 : 3800;
-        } else if (level === 9) {
-            percent = !isRefurbish ? 1050 : 3900;
-        }
-
-        return getAmountByPercent({ amount: dmeToUpgrade, percent });
+        return getAmountByPercent({ amount, percent });
     };
 
     return { getFinishesAtTime, getCost };
