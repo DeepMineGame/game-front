@@ -33,7 +33,7 @@ export const rarityMap = {
     [RarityType.rare]: 'Rare',
     [RarityType.epic]: 'Epic',
     [RarityType.legendary]: 'Legendary',
-};
+} as const;
 
 export enum EquipmentType {
     undefined,

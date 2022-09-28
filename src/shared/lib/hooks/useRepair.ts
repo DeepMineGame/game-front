@@ -4,9 +4,18 @@ import { UserActionGate } from 'features/user';
 import {
     actionsStore,
     ActionType,
+    dmeToUpgrade,
+    rarityMap,
+    RarityType,
     UserInventoryType,
 } from 'entities/smartcontract';
 import { useAccountName } from './useAccountName';
+
+export type GetCostParams = {
+    level: keyof typeof dmeToUpgrade['Common'];
+    rarity: Exclude<typeof rarityMap[RarityType], ''>;
+    isRefurbish: boolean;
+};
 
 export const useRepair = () => {
     const accountName = useAccountName();
@@ -29,5 +38,12 @@ export const useRepair = () => {
             (action) => action.assetId === Number(asset.asset_id)
         )?.finishesAt;
 
-    return { getFinishesAtTime };
+    const getCost = ({ level, rarity, isRefurbish }: GetCostParams) => {
+        const percent = isRefurbish ? 3000 + level * 100 : 150 + level * 100;
+        const amount = dmeToUpgrade[rarity][level];
+
+        return amount * percent;
+    };
+
+    return { getFinishesAtTime, getCost };
 };

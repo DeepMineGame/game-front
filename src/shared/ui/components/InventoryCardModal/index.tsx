@@ -1,18 +1,25 @@
 import {
     DMECoinIcon,
+    GetCostParams,
     Modal,
     useAccountName,
     useReloadPage,
     useRepair,
 } from 'shared';
 import React, { FC, useState, useEffect, useCallback } from 'react';
-import { ModalProps, Tooltip } from 'antd';
+import { message, ModalProps, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { serviceMarket } from 'app/router/paths';
 import { ServiceMarketTabIds } from 'app/router/constants';
 import { AssetCard, getCardStatus, useSmartContractAction } from 'features';
+import { useStore } from 'effector-react';
 import { AssetDataType, getAtomicAssetsDataById } from 'entities/atomicassets';
-import { repairEquipment, UserInventoryType } from 'entities/smartcontract';
+import {
+    rarityMap,
+    repairEquipment,
+    UserInventoryType,
+} from 'entities/smartcontract';
+import { balancesStore } from 'entities/user';
 import {
     ActionModal,
     Button,
@@ -53,6 +60,8 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         };
     }>({ costs: { timeSeconds: 0, coinAmount: 0, energy: 0 } });
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const { getCost } = useRepair();
+    const { dmeBalance } = useStore(balancesStore);
 
     const { t } = useTranslation();
 
@@ -177,7 +186,13 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                         type: ModalType.repair,
                                         costs: {
                                             timeSeconds: 1,
-                                            coinAmount: 1,
+                                            coinAmount: getCost({
+                                                level: card.level as GetCostParams['level'],
+                                                rarity: rarityMap[
+                                                    card.rarity
+                                                ] as GetCostParams['rarity'],
+                                                isRefurbish: false,
+                                            }),
                                             energy: 150,
                                         },
                                     });
@@ -201,7 +216,13 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                         type: ModalType.refurbish,
                                         costs: {
                                             timeSeconds: 120,
-                                            coinAmount: 1,
+                                            coinAmount: getCost({
+                                                level: card.level as GetCostParams['level'],
+                                                rarity: rarityMap[
+                                                    card.rarity
+                                                ] as GetCostParams['rarity'],
+                                                isRefurbish: true,
+                                            }),
                                             energy: 150,
                                         },
                                     });
@@ -225,6 +246,15 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                     onOk: t(`pages.equipmentSet.cardModal.${modalData?.type}`),
                 }}
                 onSubmit={() => {
+                    if (Number(dmeBalance) < modalData.costs.coinAmount) {
+                        message.warning(
+                            t(
+                                'pages.equipmentSet.cardModal.insufficientFunds',
+                                { action: modalData?.type }
+                            )
+                        );
+                        return;
+                    }
                     if (modalData?.type === ModalType.repair) repairAction();
                     if (modalData?.type === ModalType.refurbish)
                         refurbishAction();
