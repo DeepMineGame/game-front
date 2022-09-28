@@ -1,7 +1,8 @@
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, showSuccessMessage, SignLevelUpgradeOrderModal } from 'shared';
+import { Button, SignLevelUpgradeOrderModal } from 'shared';
 import { useSmartContractAction } from 'features';
+import { message } from 'antd';
 import { ContractDto, signOrder } from 'entities/smartcontract';
 import { useContractState } from 'entities/contract';
 
@@ -22,7 +23,7 @@ export const SignLevelUpgradeOrder: FC<Props> = ({ contract, accountName }) => {
             contractId: contract.id,
         }),
         onSignSuccess: () =>
-            showSuccessMessage(
+            message.success(
                 t('pages.serviceMarket.contract.successfullySigned')
             ),
     });
@@ -48,7 +49,7 @@ export const SignLevelUpgradeOrder: FC<Props> = ({ contract, accountName }) => {
                 title={t('pages.serviceMarket.order.signOrder')}
                 onSignSuccess={() => {
                     setSignLevelUpgradeOrderModalOpen(false);
-                    showSuccessMessage(
+                    message.success(
                         t('pages.serviceMarket.contract.successfullySigned')
                     );
                 }}
