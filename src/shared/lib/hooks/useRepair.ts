@@ -17,14 +17,6 @@ export type GetCostParams = {
     isRefurbish: boolean;
 };
 
-const getAmountByPercent = ({
-    amount,
-    percent,
-}: {
-    amount: number;
-    percent: number;
-}) => (amount * percent) / 10000;
-
 export const useRepair = () => {
     const accountName = useAccountName();
     useGate(UserActionGate, { searchParam: accountName });
@@ -50,7 +42,7 @@ export const useRepair = () => {
         const percent = isRefurbish ? 3000 + level * 100 : 150 + level * 100;
         const amount = dmeToUpgrade[rarity][level];
 
-        return getAmountByPercent({ amount, percent });
+        return amount * percent;
     };
 
     return { getFinishesAtTime, getCost };
