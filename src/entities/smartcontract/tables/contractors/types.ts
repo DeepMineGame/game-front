@@ -12,6 +12,7 @@ export type ContractorDto = {
     mining_in_pr: number;
     starts_at: number;
     finishes_at: number;
+    finished: 1 | 0;
     params: {
         mineowner: string;
         est_time_min: number;
