@@ -3,8 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
 
 import { MineCrewTable, useAccountName, AddItem } from 'shared';
-import { serviceMarket } from 'app/router/paths';
-import { ServiceMarketTabIds } from 'app/router/constants';
+import { createOrder } from 'app/router/paths';
+import { orderFields } from 'entities/order';
+import { ContractRole, ContractType } from 'entities/smartcontract';
 import { MineConsumerGate, userMineStore } from '../../models';
 
 export const MineOwnerCrew: FC = () => {
@@ -30,7 +31,7 @@ export const MineOwnerCrew: FC = () => {
             <AddItem
                 key={i}
                 text={t('components.common.table.addNewContractor')}
-                link={`${serviceMarket}/?tabId=${ServiceMarketTabIds.miningContracts}`}
+                link={`${createOrder}?${orderFields.contractType}=${ContractType.mineowner_contractor}&${orderFields.isClient}=${ContractRole.client}`}
             />
         ));
 
