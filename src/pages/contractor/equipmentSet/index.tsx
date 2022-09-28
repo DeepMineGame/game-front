@@ -157,12 +157,20 @@ export const EquipmentSetPage: FC = () => {
         setSelectedInventoryModalCard(card);
     };
 
+    const removeSelectedCard = (name: InventoryNameType) => {
+        setSelectedEquipment({
+            ...selectedEquipment,
+            [name]: undefined,
+        });
+    };
+
     return (
         <Page headerTitle={t('pages.equipmentSet.main.title')}>
             <EquipmentCards
                 selectedEquipment={selectedEquipment}
-                onCardButtonClick={handleRemoveEquipment}
+                onCardInUseRemove={handleRemoveEquipment}
                 onCardHolderClick={openInventoryModal}
+                onCardNotInUseRemove={removeSelectedCard}
             />
             <div className={styles.characteristics}>
                 <Characteristics contractors={contractors} />
