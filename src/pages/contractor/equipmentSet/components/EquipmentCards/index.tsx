@@ -6,14 +6,16 @@ import styles from './styles.module.scss';
 
 interface Props {
     selectedEquipment: Record<InventoryNameType, UserInventoryType> | {};
-    onCardButtonClick: (inventory: UserInventoryType) => void;
+    onCardInUseRemove: (inventory: UserInventoryType) => void;
     onCardHolderClick: (name: InventoryNameType) => void;
+    onCardNotInUseRemove: (name: InventoryNameType) => void;
 }
 
 export const EquipmentCards = ({
     selectedEquipment,
-    onCardButtonClick,
+    onCardInUseRemove,
     onCardHolderClick,
+    onCardNotInUseRemove,
 }: Props) => {
     const { t } = useTranslation();
     const reload = useReloadPage();
@@ -33,12 +35,15 @@ export const EquipmentCards = ({
                         }
                         inventory={inventory}
                         key={name}
-                        buttonText={
+                        buttonText={t('pages.equipmentSet.main.remove')}
+                        onButtonClick={
                             inventory.in_use
-                                ? t('pages.equipmentSet.main.remove')
-                                : undefined
+                                ? () => onCardInUseRemove(inventory)
+                                : () =>
+                                      onCardNotInUseRemove(
+                                          name as InventoryNameType
+                                      )
                         }
-                        onButtonClick={() => onCardButtonClick(inventory)}
                         onRepairFinish={reload}
                         repairFinishesAt={getFinishesAtTime(inventory)}
                         showCardBadgeStatus

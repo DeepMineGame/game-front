@@ -2,7 +2,7 @@ import {
     Button,
     green6,
     Loader,
-    success,
+    showSuccessModal,
     orange6,
     Title,
     useReloadPage,
@@ -54,19 +54,19 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
         ? t('components.common.status.active')
         : t('components.common.status.inactive');
 
-    const deactivateMine = useSmartContractAction(
-        deactmine({ waxUser: chainAccountName, mineId: mine?.id })
-    );
-    const activateMine = useSmartContractAction(
-        activatemine({ waxUser: chainAccountName, mineId: mine?.id })
-    );
+    const deactivateMine = useSmartContractAction({
+        action: deactmine({ waxUser: chainAccountName, mineId: mine?.id }),
+    });
+    const activateMine = useSmartContractAction({
+        action: activatemine({ waxUser: chainAccountName, mineId: mine?.id }),
+    });
     const onActivationButtonClick = async () => {
         if (!contract) {
             return navigate(serviceMarket);
         }
         const action = isMineActive ? deactivateMine : activateMine;
         await action();
-        return success({
+        return showSuccessModal({
             title: t('features.mineOwner.mineActivation'),
             content: t('features.mineOwner.mineOperationSucceed'),
             onOk: reloadPage,

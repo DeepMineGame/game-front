@@ -8,7 +8,7 @@ import {
     Title,
     useMediaQuery,
     useReloadPage,
-    warning,
+    showWarningModal,
 } from 'shared';
 import { CheckCircleOutlined } from '@ant-design/icons';
 import { Space } from 'antd';
@@ -48,18 +48,18 @@ export const MiningAndClaimButton: FC<Props> = memo(
         const toggleMiningCallback = useSmartContractAction<{
             wax_user: string;
             contract_id: number;
-        }>(
-            toggleMining({
+        }>({
+            action: toggleMining({
                 waxUser: accountName,
                 contractId: mineContract?.id!,
                 type: isMining ? 'stop' : 'start',
-            })
-        );
+            }),
+        });
 
         const [isClaimedState, setIsClaimedState] = useState(false);
-        const claimDmeCallback = useSmartContractAction(
-            contrclaim({ waxUser: accountName })
-        );
+        const claimDmeCallback = useSmartContractAction({
+            action: contrclaim({ waxUser: accountName }),
+        });
         const isContractsLoading = useStore(
             getContractByExecutorEffect.pending
         );
@@ -91,7 +91,7 @@ export const MiningAndClaimButton: FC<Props> = memo(
             }
 
             if (!isMiningFinished && !isClaimed && isMiningWillEndInFuture) {
-                return warning({
+                return showWarningModal({
                     title: t('pages.mining.doWantStopMining'),
                     content: t('pages.mining.consumablesWillBurnOut'),
                     onOk: toggleMiningAndReinitializeStores,

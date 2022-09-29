@@ -1,4 +1,9 @@
-import { error, errorNotify, getErrorCode, useChainAuthContext } from 'shared';
+import {
+    showErrorModal,
+    showErrorNotification,
+    getErrorCode,
+    useChainAuthContext,
+} from 'shared';
 import { useTranslation } from 'react-i18next';
 import { Action } from 'entities/smartcontract';
 
@@ -7,20 +12,28 @@ const defaultTransactionOptions = {
     expireSeconds: 30,
 };
 
-export const useSmartContractAction = <T>(
-    action: { actions: Action<T> },
-    options = defaultTransactionOptions
-) => {
+type UseSmartContractActionParams<T> = {
+    action: { actions: Action<T> };
+    options?: typeof defaultTransactionOptions;
+    onSignSuccess?: () => void;
+};
+
+export const useSmartContractAction = <T>({
+    action,
+    options = defaultTransactionOptions,
+    onSignSuccess = () => {},
+}: UseSmartContractActionParams<T>) => {
     const chainAccount = useChainAuthContext();
     const { t } = useTranslation();
 
     return async () => {
         try {
             await chainAccount?.activeUser?.signTransaction(action, options);
+            onSignSuccess();
         } catch (e) {
             const err = e as Error;
-            errorNotify(err);
-            error({
+            showErrorNotification(err);
+            showErrorModal({
                 title: t('components.common.status.error'),
                 content: t(`blockchainErrors.${getErrorCode(err.message)}`),
             });
@@ -41,8 +54,8 @@ export const useSmartContractActionDynamic = () => {
             ?.signTransaction(action, options)
             .catch((e) => {
                 const err = e as Error;
-                errorNotify(err);
-                error({
+                showErrorNotification(err);
+                showErrorModal({
                     title: t('components.common.status.error'),
                     content: t(`blockchainErrors.${getErrorCode(err.message)}`),
                 });

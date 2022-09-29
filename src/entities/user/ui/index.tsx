@@ -127,12 +127,6 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                         </Title>
                     </div>
                     <div>
-                        <div>{t('components.common.reputation')}</div>
-                        <Title className={styles.dataUnitTitle} level={5}>
-                            {smartContractUserData?.reputation || '-'}
-                        </Title>
-                    </div>
-                    <div>
                         <div>{t('components.common.button.dme')}</div>
                         <Title className={styles.dataUnitTitle} level={5}>
                             {dmeBalance}

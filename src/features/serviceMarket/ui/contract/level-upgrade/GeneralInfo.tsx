@@ -48,7 +48,7 @@ const GeneralInfo: FC<Props> = ({ contract, accountName, isOrder = false }) => {
             contract.create_time * 1000
         ),
         [t('components.common.duration')]: `${secondsToDays(
-            contract.contract_duration
+            contract.contract_duration * 1000
         )} ${t('components.common.days').toLowerCase()}`,
         ...(showNft && {
             [t('pages.serviceMarket.nftId')]: (

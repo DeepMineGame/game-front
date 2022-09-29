@@ -51,39 +51,25 @@ export const Card: FC<CardProps> = ({
                 {status === Status.broken && (
                     <CardState
                         status={status}
-                        templateId={inventory?.template_id}
                         finishesAt={repairFinishesAt}
                         onFinish={onRepairFinish}
                     />
                 )}
-                <div
-                    className={cn({
-                        [styles.stateWrapper]: status === Status.broken,
-                    })}
-                >
-                    <div
-                        className={cn(styles.image, {
-                            [styles.broken]: status === Status.broken,
-                            [styles.repairing]: !!repairFinishesAt,
-                        })}
-                    >
-                        <img
-                            height="100%"
-                            width="100%"
-                            src={getImagePath(inventory?.template_id!)}
-                            alt="nft-equipment-card"
-                        />
-                    </div>
-                    {withDepreciationBar && (
-                        <DepreciationProgressBar
-                            completedMining={cardData?.data.depreciation}
-                            serviceLife={cardData?.data['current capacity']}
-                            totalServiceLife={
-                                cardData?.data['maximal capacity']
-                            }
-                        />
-                    )}
+                <div className={styles.image}>
+                    <img
+                        height="100%"
+                        width="100%"
+                        src={getImagePath(inventory?.template_id!)}
+                        alt="nft-equipment-card"
+                    />
                 </div>
+                {withDepreciationBar && (
+                    <DepreciationProgressBar
+                        completedMining={cardData?.data.depreciation}
+                        serviceLife={cardData?.data['current capacity']}
+                        totalServiceLife={cardData?.data['maximal capacity']}
+                    />
+                )}
             </div>
             {buttonText && (
                 <Button

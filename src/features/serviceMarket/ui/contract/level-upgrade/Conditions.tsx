@@ -1,5 +1,12 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import {
+    getUpgradeType,
+    getUpgradeRarity,
+    parseAttrs,
+    toLocaleDate,
+    secondsToDays,
+} from 'shared';
 import { ContractDto } from 'entities/smartcontract';
 import { TableWithTitle } from '../..';
 
@@ -10,27 +17,29 @@ type Props = {
 const Conditions: FC<Props> = ({ contract }) => {
     const { t } = useTranslation();
 
-    const isCitizen = false;
+    const isCitizen = !!contract.client && !contract.executor;
 
-    // todo: use dynamic values
     const conditionData = {
-        [t('pages.serviceMarket.upgrade')]: 'Mine, rare, level 3',
-        [t('pages.serviceMarket.startOperations')]: '12h',
-        [t('pages.serviceMarket.costOfExecution')]: `1 ${t(
-            'components.common.button.dme'
-        )}`,
+        [t('pages.serviceMarket.upgrade')]: `${t(
+            `pages.serviceMarket.levelUpgradeTab.type.${getUpgradeType({
+                contract,
+            })}`
+        )}, ${getUpgradeRarity({ contract })}, level ${
+            parseAttrs(contract)?.level
+        }`,
+        [t('pages.serviceMarket.startOperations')]: toLocaleDate(
+            contract.start_time * 1000
+        ),
+        [t('pages.serviceMarket.costOfExecution')]: `${
+            contract.cost_of_execution
+        } ${t('components.common.button.dme')}`,
         [t('pages.serviceMarket.contract.penalty')]: `${
             contract.penalty_amount
         } ${t('components.common.button.dme')}`,
-        // todo: fix
-        // @ts-ignore
         ...(isCitizen && {
-            [t('pages.serviceMarket.insurance')]: `0.2 ${t(
-                'components.common.button.dme'
-            )}`,
-            [t('pages.serviceMarket.duration')]: `2 ${t(
-                'components.common.days'
-            ).toLowerCase()}`,
+            [t('pages.serviceMarket.duration')]: `${secondsToDays(
+                contract.contract_duration
+            )} ${t('components.common.days').toLowerCase()}`,
         }),
     };
 

@@ -31,16 +31,16 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
 
     const [isModalActionVisible, setIsModalActionVisible] = useState(false);
     const [isModalUnengageVisible, setIsModalUnengageVisible] = useState(false);
-    const engageAreaAction = useSmartContractAction(
-        engageArea({ waxUser: accountName, areaId })
-    );
-    const unEngageAreaAction = useSmartContractAction(
-        unEngageArea({ waxUser: accountName, areaId })
-    );
+    const engageAreaAction = useSmartContractAction({
+        action: engageArea({ waxUser: accountName, areaId }),
+    });
+    const unEngageAreaAction = useSmartContractAction({
+        action: unEngageArea({ waxUser: accountName, areaId }),
+    });
     const reloadPage = useReloadPage();
-    const claimAction = useSmartContractAction(
-        claimArea({ waxUser: accountName, areaId })
-    );
+    const claimAction = useSmartContractAction({
+        action: claimArea({ waxUser: accountName, areaId }),
+    });
 
     const onEngage = async () => {
         await engageAreaAction();

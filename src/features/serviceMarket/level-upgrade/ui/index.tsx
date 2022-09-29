@@ -4,7 +4,6 @@ import { Segmented } from 'shared';
 import { Skeleton } from 'antd';
 import { useEvent, useGate, useStore } from 'effector-react';
 import { TabGrid } from 'features/serviceMarket';
-import { LevelUpgradeContractsTable } from 'shared/ui';
 import {
     levelUpgradeChangeFilterEvent,
     LevelUpgradeFilter,
@@ -13,6 +12,7 @@ import {
     getLevelUpgradeContractsEffect,
     LevelUpgradeContractsGate,
 } from '../model';
+import { LevelUpgradeContractsTable } from './table';
 
 export const LevelUpgrade: FC = () => {
     useGate(LevelUpgradeContractsGate);

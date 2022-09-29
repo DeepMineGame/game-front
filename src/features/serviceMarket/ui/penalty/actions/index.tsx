@@ -10,17 +10,21 @@ import {
     useAccountName,
 } from 'shared';
 import { serviceMarket } from 'app/router/paths';
+import { useSmartContractAction } from 'features/hooks';
 import { terminateContract } from 'entities/smartcontract';
-import { useSmartContractAction } from '../../../hooks';
-import styles from './styles.module.scss';
+import styles from '../styles.module.scss';
 
 type Props = {
-    penalty: number;
+    amount: number;
     contractId: number;
     isViolated: boolean;
 };
 
-export const Penalty: FC<Props> = ({ isViolated, contractId, penalty }) => {
+export const PenaltyActions: FC<Props> = ({
+    isViolated,
+    contractId,
+    amount,
+}) => {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const accountName = useAccountName();
@@ -30,12 +34,12 @@ export const Penalty: FC<Props> = ({ isViolated, contractId, penalty }) => {
     const [isNoCollectModalVisible, setIsNoCollectModalVisible] =
         useState(false);
 
-    const getPenaltyAction = useSmartContractAction(
-        terminateContract(accountName, contractId, 1)
-    );
-    const getNoPenaltyAction = useSmartContractAction(
-        terminateContract(accountName, contractId, 0)
-    );
+    const getPenaltyAction = useSmartContractAction({
+        action: terminateContract(accountName, contractId, 1),
+    });
+    const getNoPenaltyAction = useSmartContractAction({
+        action: terminateContract(accountName, contractId, 0),
+    });
 
     const closeSuccessModal = () => {
         setIsSuccessModalVisible(false);
@@ -104,7 +108,7 @@ export const Penalty: FC<Props> = ({ isViolated, contractId, penalty }) => {
                 title={t('pages.serviceMarket.contract.collectPenalty')}
                 description={t(
                     'pages.serviceMarket.contract.collectDescription',
-                    { amount: penalty * 2 }
+                    { amount: amount * 2 }
                 )}
                 submitText={t('pages.serviceMarket.contract.collect')}
             />
@@ -114,7 +118,7 @@ export const Penalty: FC<Props> = ({ isViolated, contractId, penalty }) => {
                 onSubmit={submitSuccessModal}
                 title={t('pages.serviceMarket.contract.termination')}
                 description={t('pages.serviceMarket.contract.youReceived', {
-                    amount: penalty * 2,
+                    amount: amount * 2,
                 })}
             />
             <ExclamationModal
@@ -124,7 +128,7 @@ export const Penalty: FC<Props> = ({ isViolated, contractId, penalty }) => {
                 title={t('pages.serviceMarket.contract.noCollectPenalty')}
                 description={t(
                     'pages.serviceMarket.contract.noCollectDescription',
-                    { amount: penalty * 2 }
+                    { amount: amount * 2 }
                 )}
                 submitText={t('pages.serviceMarket.contract.noCollect')}
             />

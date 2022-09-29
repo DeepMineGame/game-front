@@ -16,9 +16,9 @@ const DeleteOrder: FC<Props> = ({ accountName, contractId }) => {
     const { t } = useTranslation();
     const navigate = useNavigate();
 
-    const terminateAction = useSmartContractAction(
-        terminateContract(accountName, contractId, 0)
-    );
+    const terminateAction = useSmartContractAction({
+        action: terminateContract(accountName, contractId, 0),
+    });
     const handleDeleteOrder = async () => {
         await terminateAction();
         navigate(serviceMarket);

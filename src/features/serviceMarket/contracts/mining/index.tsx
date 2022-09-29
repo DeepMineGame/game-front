@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Trans } from 'react-i18next';
 import { Col, Row } from 'antd';
-import { Penalty } from 'features';
+import { PenaltyActions } from 'features';
 import { ContractStatesMeta } from 'entities/smartcontract';
 import { useContractState } from 'entities/contract';
 import { Alert } from 'shared/ui';
@@ -24,7 +24,7 @@ const MiningContract: FC<ContractProps> = ({
         canTerminate,
         showCompleted,
         showTerminatedAlert,
-        showPenalty,
+        showPenaltyActions,
     } = useContractState(contract, accountName);
 
     return (
@@ -55,15 +55,15 @@ const MiningContract: FC<ContractProps> = ({
                                     showIcon
                                 />
                             )}
-                            {showPenalty && (
-                                <Penalty
+                            {showPenaltyActions && (
+                                <PenaltyActions
                                     isViolated={
                                         stateMeta ===
                                             ContractStatesMeta.termViolation ||
                                         stateMeta ===
                                             ContractStatesMeta.deadlineViolation
                                     }
-                                    penalty={contract.penalty_amount}
+                                    amount={contract.penalty_amount}
                                     contractId={contract.id}
                                 />
                             )}

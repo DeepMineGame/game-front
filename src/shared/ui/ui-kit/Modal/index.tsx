@@ -46,7 +46,7 @@ export const Modal: FC<Props> = (props) => {
     );
 };
 
-export const warning = ({
+export const showWarningModal = ({
     title,
     content,
     ...props
@@ -65,7 +65,7 @@ export const warning = ({
     });
 };
 
-export const success = ({
+export const showSuccessModal = ({
     title,
     content,
     ...props
@@ -83,7 +83,7 @@ export const success = ({
     });
 };
 
-export const error = ({
+export const showErrorModal = ({
     title,
     content,
     ...props

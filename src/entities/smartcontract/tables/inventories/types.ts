@@ -33,7 +33,7 @@ export const rarityMap = {
     [RarityType.rare]: 'Rare',
     [RarityType.epic]: 'Epic',
     [RarityType.legendary]: 'Legendary',
-};
+} as const;
 
 export enum EquipmentType {
     undefined,
@@ -57,6 +57,7 @@ export type UserInventoryType = {
     equip_type: EquipmentType;
     broken: number;
     available_from: number;
+    schema_type: number;
 };
 
 export enum InventoryTab {

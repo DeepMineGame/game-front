@@ -13,7 +13,7 @@
     "addConsumable": "add consumable",
     "statuses": {
       "installed": "Installed",
-      "broken": "Damaged",
+      "broken": "Broken",
       "notInstalled": "Not installed",
       "default": "Status unavailable"
     },
@@ -22,8 +22,7 @@
       "energy": "Energy"
     },
     "cardStates": {
-      "damaged": "is damaged",
-      "repairing": "repairing"
+      "broken": "Broken"
     }
   },
   "components": {
@@ -55,7 +54,8 @@
         "create": "Create",
         "sign": "Sign",
         "visitMarketplace": "Visit Marketplace",
-        "miningDeck": "Mining Deck"
+        "miningDeck": "Mining Deck",
+        "selectItem": "Select item"
       },
       "actionModal": {
         "descriptionTime": "This action will take:",
@@ -279,7 +279,8 @@
         "mineSublevel": "Mine sublevel",
         "upgrade": "Upgrade",
         "repair": "Repair",
-        "refurbish": "Refurbish"
+        "refurbish": "Refurbish",
+        "insufficientFunds": "Insufficient funds for {{action}}"
       },
       "characteristics": {
         "title": "Characteristics",
@@ -526,7 +527,8 @@
         "terminated": "Terminated",
         "orderWasDeleted": "Order was deleted",
         "documentWasDestroyedOn": "This document was destroyed on",
-        "deleted": "Deleted"
+        "deleted": "Deleted",
+        "successfullySigned": "Сontract successfully signed"
       },
       "myContractsTab": {
         "nickname": "Nickname",

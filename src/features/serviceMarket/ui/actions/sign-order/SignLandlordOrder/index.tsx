@@ -10,7 +10,7 @@ import {
     Select,
     useReloadPage,
     useTableData,
-    success,
+    showSuccessModal,
 } from 'shared';
 import { useSmartContractAction } from 'features/hooks';
 import {
@@ -48,17 +48,17 @@ const SignLandlordOrder: FC<Props> = ({ contract, accountName }) => {
             inventory.in_use === InUseType.notInUse
     );
 
-    const signContractAction = useSmartContractAction(
-        signOrder({
+    const signContractAction = useSmartContractAction({
+        action: signOrder({
             waxUser: accountName,
             assetId: mineId,
             contractId: contract.id,
-        })
-    );
+        }),
+    });
 
     const handleSignOrder = useCallback(async () => {
         await signContractAction();
-        success({
+        showSuccessModal({
             title: t('pages.serviceMarket.order.signOrder'),
             content: t('pages.serviceMarket.order.orderCreated'),
             onOk: reloadPage,

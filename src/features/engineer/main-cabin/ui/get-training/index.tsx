@@ -15,13 +15,13 @@ const GetTraining: FC = () => {
     const accountName = useAccountName();
     const { certificate } = useStore(engineerCabinStore);
 
-    const handleDelete = useSmartContractAction(
-        clearEngineer(accountName, certificate?.asset_id!)
-    );
+    const handleDelete = useSmartContractAction({
+        action: clearEngineer(accountName, certificate?.asset_id!),
+    });
 
-    const handleOpenSkill = useSmartContractAction(
-        openSkill(accountName, '505658')
-    );
+    const handleOpenSkill = useSmartContractAction({
+        action: openSkill(accountName, '505658'),
+    });
 
     const onDelete = async () => {
         await handleDelete();

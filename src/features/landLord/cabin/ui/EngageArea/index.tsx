@@ -33,9 +33,9 @@ export const EngageArea: FC<Props> = ({ className, disabled = true }) => {
         ({ inv_type }) => inv_type === InventoryType.areas
     );
     const areaId = areaItem ? +areaItem.asset_id : undefined;
-    const engageAreaAction = useSmartContractAction(
-        engageArea({ waxUser: accountName, areaId })
-    );
+    const engageAreaAction = useSmartContractAction({
+        action: engageArea({ waxUser: accountName, areaId }),
+    });
     const reloadPage = useReloadPage();
 
     const onEngageClick = async () => {

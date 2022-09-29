@@ -14,9 +14,9 @@ const Completed: FC<Props> = ({ accountName, contractId }) => {
     const { t } = useTranslation();
     const reloadPage = useReloadPage();
 
-    const terminateAction = useSmartContractAction(
-        terminateContract(accountName, contractId, 0)
-    );
+    const terminateAction = useSmartContractAction({
+        action: terminateContract(accountName, contractId, 0),
+    });
 
     const handleComplete = async () => {
         await terminateAction();
