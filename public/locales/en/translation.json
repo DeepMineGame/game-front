@@ -372,7 +372,7 @@
         "mines": "Mines"
       },
       "menu": {
-        "goLandActivate": "Go here activate the land",
+        "goLandActivate": "Go here activate the area",
         "statsAndInfo": "Go here to see stats & info"
       }
     },
