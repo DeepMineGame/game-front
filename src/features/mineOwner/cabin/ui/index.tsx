@@ -15,7 +15,7 @@ export const MineOwnerCabin: FC<Props> = ({ children, state = 'default' }) => {
 
     return (
         <div
-            className={classNames(styles.cabinWrapper, styles.glass, {
+            className={classNames(styles.cabinWrapper, {
                 [styles.cabinDefaultInside]: inLocation.mineDeck,
                 [styles.progress]:
                     state === mineOwnerCabinState.everythingIsDone,
