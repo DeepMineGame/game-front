@@ -8,6 +8,7 @@ import {
     useReloadPage,
     useTableData,
     showWarningModal,
+    useActions,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
@@ -19,6 +20,8 @@ import {
     contractorsStore,
 } from 'features';
 import {
+    ActionState,
+    ActionType,
     getInventoryConfig,
     installEquipment,
     InventoryNameType,
@@ -38,6 +41,8 @@ export const EquipmentSetPage: FC = () => {
     const { t } = useTranslation();
     const reloadPage = useReloadPage();
     const contractors = useStore(contractorsStore);
+    const { lastAction: lastMineAction } = useActions(ActionType.mine);
+    const isMining = lastMineAction?.state === ActionState.active;
 
     const [isInventoryVisible, setIsInventoryVisible] = useState(false);
     const [isInventoryCardVisible, setIsInventoryCardVisible] = useState(false);
@@ -167,6 +172,7 @@ export const EquipmentSetPage: FC = () => {
     return (
         <Page headerTitle={t('pages.equipmentSet.main.title')}>
             <EquipmentCards
+                isMining={isMining}
                 selectedEquipment={selectedEquipment}
                 onCardInUseRemove={handleRemoveEquipment}
                 onCardHolderClick={openInventoryModal}
@@ -179,7 +185,7 @@ export const EquipmentSetPage: FC = () => {
                 <EquipmentInstallationModal
                     onUninstall={handleRemoveAllEquipment}
                     onInstall={handleInstallEquipment}
-                    disabled={!hasAllEquipment}
+                    disabled={!hasAllEquipment || isMining}
                     isInstall={!hasAllEquipmentActive}
                 />
             </div>
