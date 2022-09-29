@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { CardHolder, useReloadPage, useRepair, Status } from 'shared';
 import { AssetCard, getCardStatus } from 'features';
+import { FC } from 'react';
 import { InventoryNameType, UserInventoryType } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
@@ -9,14 +10,16 @@ interface Props {
     onCardInUseRemove: (inventory: UserInventoryType) => void;
     onCardHolderClick: (name: InventoryNameType) => void;
     onCardNotInUseRemove: (name: InventoryNameType) => void;
+    isMining?: boolean;
 }
 
-export const EquipmentCards = ({
+export const EquipmentCards: FC<Props> = ({
     selectedEquipment,
     onCardInUseRemove,
     onCardHolderClick,
     onCardNotInUseRemove,
-}: Props) => {
+    isMining,
+}) => {
     const { t } = useTranslation();
     const reload = useReloadPage();
     const { getFinishesAtTime } = useRepair();
@@ -35,7 +38,11 @@ export const EquipmentCards = ({
                         }
                         inventory={inventory}
                         key={name}
-                        buttonText={t('pages.equipmentSet.main.remove')}
+                        buttonText={
+                            isMining
+                                ? undefined
+                                : t('pages.equipmentSet.main.remove')
+                        }
                         onButtonClick={
                             inventory.in_use
                                 ? () => onCardInUseRemove(inventory)
