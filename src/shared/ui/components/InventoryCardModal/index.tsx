@@ -96,6 +96,9 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         onSignSuccess: reload,
     });
 
+    const isNotCardBroken =
+        getCardStatus(card) !== Status.broken || !!card.available_from;
+
     return (
         <Modal
             wideOnMobile
@@ -200,10 +203,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             </Col>
                             <Col span={10}>
                                 <Button
-                                    disabled={
-                                        getCardStatus(card) !== Status.broken ||
-                                        !!card.available_from
-                                    }
+                                    disabled={isNotCardBroken}
                                     size="large"
                                     type="link"
                                     onClick={() => {
@@ -243,10 +243,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             </Col>
                             <Col span={10}>
                                 <Button
-                                    disabled={
-                                        getCardStatus(card) !== Status.broken ||
-                                        !!card.available_from
-                                    }
+                                    disabled={isNotCardBroken}
                                     type="link"
                                     size="large"
                                     onClick={() => {
