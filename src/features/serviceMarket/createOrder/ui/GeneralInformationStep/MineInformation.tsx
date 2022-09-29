@@ -57,11 +57,12 @@ export const MineInformation: FC<GeneralInformationStepProps> = ({
                     className={cn(localStyles.finisAtSelect, styles.formField)}
                 >
                     <Select
-                        placeholder={t('components.common.days')}
+                        placeholder={t('components.common.day')}
                         options={getLabelSelectItem({
                             amount: 21,
-                            label: t('components.common.days'),
-                        })}
+                            label: t('components.common.day'),
+                            // temporary solution because contract for 1 day isn't possible yet
+                        }).filter((_, idx) => idx !== 0)}
                     />
                 </Form.Item>
             </InputA.Group>
@@ -87,10 +88,10 @@ export const MineInformation: FC<GeneralInformationStepProps> = ({
                         }
                     >
                         <Select
-                            placeholder={t('components.common.days')}
+                            placeholder={t('components.common.day')}
                             options={getLabelSelectItem({
                                 amount: 3,
-                                label: t('components.common.days'),
+                                label: t('components.common.day'),
                             })}
                             disabled
                         />
@@ -100,10 +101,10 @@ export const MineInformation: FC<GeneralInformationStepProps> = ({
                         className={cn(styles.formField)}
                     >
                         <Select
-                            placeholder={t('components.common.hours')}
+                            placeholder={t('components.common.hour')}
                             options={getLabelSelectItem({
                                 amount: 23,
-                                label: t('components.common.hours'),
+                                label: t('components.common.hour'),
                                 sinceZero: true,
                             })}
                             disabled
