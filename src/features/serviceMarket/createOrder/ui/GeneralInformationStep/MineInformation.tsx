@@ -57,7 +57,7 @@ export const MineInformation: FC<GeneralInformationStepProps> = ({
                     className={cn(localStyles.finisAtSelect, styles.formField)}
                 >
                     <Select
-                        placeholder={t('components.common.day')}
+                        placeholder={t('components.common.days')}
                         options={getLabelSelectItem({
                             amount: 21,
                             label: t('components.common.day'),
@@ -88,7 +88,7 @@ export const MineInformation: FC<GeneralInformationStepProps> = ({
                         }
                     >
                         <Select
-                            placeholder={t('components.common.day')}
+                            placeholder={t('components.common.days')}
                             options={getLabelSelectItem({
                                 amount: 3,
                                 label: t('components.common.day'),

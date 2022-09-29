@@ -69,7 +69,9 @@ export const MineTerms: FC<TermsStepProps> = ({ goToPreviousStep, form }) => {
                                             ),
                                             label: t('components.common.day'),
                                         })}
-                                        placeholder={t('components.common.day')}
+                                        placeholder={t(
+                                            'components.common.days'
+                                        )}
                                     />
                                 </Form.Item>
                             </div>
