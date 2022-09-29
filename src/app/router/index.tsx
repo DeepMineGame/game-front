@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useEvent, useStore } from 'effector-react';
 
 import { useChainAuthContext, LoadingScreen, LogAs } from 'shared';
+import { useLogout } from 'features';
 import { userStore, getUserFromSessionEffect } from 'entities/user';
 import { routes, fallbackRoute, AppRoute } from './routes';
 import { DocumentTitle } from './components/DocumentTitle';
@@ -16,6 +17,7 @@ const LogInWrapper: React.FC<{
     const { activeUser: chainUser, notLoggedIn } = useChainAuthContext();
     const user = useStore(userStore);
     const getUserFromSession = useEvent(getUserFromSessionEffect);
+    const logout = useLogout();
 
     const [isFetching, setIsFetching] = useState(false);
 
@@ -32,21 +34,16 @@ const LogInWrapper: React.FC<{
         const adminAccessDenied = forAdmin && user?.is_admin === false;
         const betaAccessDenied = forBetaUser && user?.is_beta === false;
 
-        if (
-            notLoggedIn ||
-            (adminAccessDenied && betaAccessDenied) ||
-            (!!user?.wax_address && user.wax_address !== chainUser?.accountName)
-        ) {
+        if (notLoggedIn || (adminAccessDenied && betaAccessDenied)) {
             navigate('/', { replace: true });
         }
-    }, [
-        notLoggedIn,
-        forAdmin,
-        forBetaUser,
-        user,
-        navigate,
-        chainUser?.accountName,
-    ]);
+    }, [notLoggedIn, forAdmin, forBetaUser, user, navigate]);
+
+    useEffect(() => {
+        if (user?.wax_address && chainUser?.accountName) {
+            if (user.wax_address !== chainUser.accountName) logout();
+        }
+    }, [user?.wax_address, chainUser?.accountName]);
 
     if (isFetching || (!chainUser && !notLoggedIn))
         return <LoadingScreen key="loading" size="large" />;
