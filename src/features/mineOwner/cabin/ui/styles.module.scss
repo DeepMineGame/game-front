@@ -18,24 +18,8 @@
   background-image: url('../../../../shared/ui/images/mineowner/mine-owner-cabin-incident.webp');
 }
 
-.glass {
-  &::before {
-    content: '';
-    height: 100vh;
-    width: 100vw;
-    background: url('../../../../shared/ui/images/mineowner/glass.webp') no-repeat center;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    top: 0;
-    z-index: 1;
-    background-size: cover;
-  }
-}
-
 .panel {
-    height: 50vh;
+    height: 40vh;
     background: url('../../../../shared/ui/images/mineowner/panel.webp') no-repeat bottom;
     background-size: contain;
     position: absolute;

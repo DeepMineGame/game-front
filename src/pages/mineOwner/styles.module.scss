@@ -1,6 +1,17 @@
 
 .hologramWrapper {
-  text-align: center;
+    text-align: center;
+    content: '';
+    height: 100vh;
+    width: 100vw;
+    background: url('../../shared/ui/images/mineowner/glass.webp') no-repeat center;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    background-size: cover;
 }
 
 .header {

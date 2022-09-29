@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
     desktopS,
     Header,
@@ -7,6 +7,7 @@ import {
     useMediaQuery,
     useReloadPage,
     useTableData,
+    useUserLocation,
 } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import * as PATHS from 'app/router/paths';
@@ -42,11 +43,11 @@ export const ContractorCabin = () => {
     const reloadPage = useReloadPage();
     const { width, height } = useDimensions();
     const isDesktop = useMediaQuery(desktopS);
-    const [needShiftBadge, setNeedShiftBadge] = useState(false);
     const [status, setStatus] = useState<CABIN_STATUS>(0);
     const navigate = useNavigate();
     const bgRatio = 1366 / 712;
     const isBgWidthHidden = width > height * bgRatio;
+    const inLocation = useUserLocation();
 
     const getConfigForContracts = useCallback((accountName: string) => {
         return getContractsNameConfig(
@@ -83,26 +84,6 @@ export const ContractorCabin = () => {
     );
     const hasPhysicalShift =
         userInfo.length > 0 && userInfo[0].location === LOCATION_TO_ID.mine;
-
-    const openShiftBadge = () => {
-        setNeedShiftBadge(true);
-    };
-    const closeShiftBadge = () => {
-        setNeedShiftBadge(false);
-    };
-
-    useEffect(() => {
-        if (
-            status >= CABIN_STATUS.setup &&
-            !hasPhysicalShift &&
-            !needShiftBadge
-        ) {
-            openShiftBadge();
-        } else if (needShiftBadge) {
-            closeShiftBadge();
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [status, hasPhysicalShift]);
 
     const getActiveTooltip = () => {
         if (status === CABIN_STATUS.setup && hasPhysicalShift) {
@@ -170,9 +151,8 @@ export const ContractorCabin = () => {
                     activeTooltip: getActiveTooltip(),
                 }}
             />
-            {needShiftBadge && (
+            {!inLocation.mine && (
                 <Travel
-                    onBadgeCrossClick={closeShiftBadge}
                     toLocationId={LOCATION_TO_ID.mine}
                     onSuccess={reloadPage}
                 />
