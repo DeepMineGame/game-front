@@ -53,7 +53,7 @@ export const LevelUpgradeTerms: FC<TermsStepProps> = ({
                         placeholder={t('components.common.days')}
                         options={getLabelSelectItem({
                             amount: 3,
-                            label: t('components.common.days'),
+                            label: t('components.common.day'),
                         })}
                         disabled
                     />
@@ -67,7 +67,7 @@ export const LevelUpgradeTerms: FC<TermsStepProps> = ({
                         placeholder={t('components.common.hours')}
                         options={getLabelSelectItem({
                             amount: 23,
-                            label: t('components.common.hours'),
+                            label: t('components.common.hour'),
                             sinceZero: true,
                         })}
                         disabled

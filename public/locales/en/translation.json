@@ -86,7 +86,9 @@
       "areaInfo": "Area info",
       "warning": "Warning",
       "duration": "Duration",
+      "day": "Day",
       "days": "Days",
+      "hour": "Hour",
       "hours": "Hours",
       "inProgress": "In progress",
       "you": "You",
@@ -371,7 +373,7 @@
         "mines": "Mines"
       },
       "menu": {
-        "goLandActivate": "Go here activate the land",
+        "goLandActivate": "Go here activate the area",
         "statsAndInfo": "Go here to see stats & info"
       }
     },
