@@ -1,9 +1,10 @@
-import { desktopS, Title, useMediaQuery } from 'shared';
+import { CardHolder, desktopS, Title, useMediaQuery } from 'shared';
 import { useStore } from 'effector-react';
 import { Col, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { AssetCard, findEquipmentByName } from 'features';
 import { useNavigate } from 'react-router-dom';
+import { equipmentSet } from 'app/router/paths';
 import { inventoriesStore, miningEquipmentNames } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
@@ -30,25 +31,21 @@ export const Equipment = () => {
                         {t('pages.mining.myEquipment')}
                     </Title>
                 </Col>
-                {/* <Col sm={7} xs={24}> */}
-                {/*    <Button type="link">{t('pages.mining.configure')}</Button> */}
-                {/* </Col> */}
             </Row>
             <div className={styles.cards}>
-                {Object.values(installedMiningEquipment).map(
-                    (inventoryItem) =>
-                        inventoryItem && (
-                            <AssetCard
-                                key={inventoryItem.asset_id}
-                                inventory={inventoryItem}
-                                onClick={() =>
-                                    navigate(
-                                        `/inventory/${inventoryItem.asset_id}`
-                                    )
-                                }
-                                showCardBadgeStatus
-                            />
-                        )
+                {Object.values(installedMiningEquipment).map((inventoryItem) =>
+                    inventoryItem ? (
+                        <AssetCard
+                            key={inventoryItem.asset_id}
+                            inventory={inventoryItem}
+                            onClick={() =>
+                                navigate(`/inventory/${inventoryItem.asset_id}`)
+                            }
+                            showCardBadgeStatus
+                        />
+                    ) : (
+                        <CardHolder onClick={() => navigate(equipmentSet)} />
+                    )
                 )}
             </div>
         </>

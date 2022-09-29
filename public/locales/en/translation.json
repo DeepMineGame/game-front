@@ -54,6 +54,7 @@
         "create": "Create",
         "sign": "Sign",
         "visitMarketplace": "Visit Marketplace",
+        "miningDeck": "Mining Deck",
         "selectItem": "Select item"
       },
       "actionModal": {

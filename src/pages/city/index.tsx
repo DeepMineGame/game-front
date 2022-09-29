@@ -27,7 +27,7 @@ export const CityPage: FC = () => {
                     {t('pages.home.mineOwnerCabin')}
                 </Title>
                 {(isUserLocation.mine || isUserLocation.mineDeck) && (
-                    <UserLocator />
+                    <UserLocator center />
                 )}
             </div>
             <Space>
