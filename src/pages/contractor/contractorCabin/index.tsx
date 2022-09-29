@@ -5,6 +5,7 @@ import {
     Monitor,
     useDimensions,
     useMediaQuery,
+    useReloadPage,
     useTableData,
 } from 'shared';
 import { useNavigate } from 'react-router-dom';
@@ -38,6 +39,7 @@ import styles from './styles.module.scss';
 import { ContractorCabinContent } from './components/ContractorCabinContent';
 
 export const ContractorCabin = () => {
+    const reloadPage = useReloadPage();
     const { width, height } = useDimensions();
     const isDesktop = useMediaQuery(desktopS);
     const [needShiftBadge, setNeedShiftBadge] = useState(false);
@@ -172,7 +174,7 @@ export const ContractorCabin = () => {
                 <Travel
                     onBadgeCrossClick={closeShiftBadge}
                     toLocationId={LOCATION_TO_ID.mine}
-                    onSuccess={closeShiftBadge}
+                    onSuccess={reloadPage}
                 />
             )}
         </div>
