@@ -1,7 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
     desktopS,
+    DrillBitOutlined,
     Header,
+    Menu,
+    MenuItem,
     Monitor,
     useDimensions,
     useMediaQuery,
@@ -9,14 +12,12 @@ import {
     useTableData,
 } from 'shared';
 import { useNavigate } from 'react-router-dom';
-import * as PATHS from 'app/router/paths';
+import * as paths from 'app/router/paths';
 import cn from 'classnames';
-import {
-    ContractorMenu,
-    ContractorMenuItems,
-    findEquipmentByName,
-    Travel,
-} from 'features';
+import { findEquipmentByName, Travel } from 'features';
+import { Space } from 'antd';
+import { useTranslation } from 'react-i18next';
+import { DesktopOutlined, ToolOutlined } from '@ant-design/icons';
 import {
     ContractDto,
     ContractStatus,
@@ -104,21 +105,29 @@ export const ContractorCabin = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [status, hasPhysicalShift]);
 
-    const getActiveTooltip = () => {
-        if (status === CABIN_STATUS.setup && hasPhysicalShift) {
-            return ContractorMenuItems.Equipment;
-        }
+    const { t } = useTranslation();
 
-        if (status === CABIN_STATUS.ready) {
-            return ContractorMenuItems.MiningDeck;
-        }
+    const contractorMenuItems = [
+        {
+            disabled: status <= CABIN_STATUS.mining_over,
+            onClick: () => navigate(paths.contractorStatsAndInfo),
+            icon: <DesktopOutlined />,
+            tooltipOverlay: t('components.contractorMenu.infoPanelTooltip'),
+        },
+        {
+            disabled: status < CABIN_STATUS.ready,
+            onClick: () => navigate(paths.mining),
+            icon: <DrillBitOutlined />,
+            tooltipOverlay: t('components.contractorMenu.miningDeskTooltip'),
+        },
+        {
+            disabled: !hasInstalledEquipment && !hasPhysicalShift,
+            onClick: () => navigate(paths.equipmentSet),
+            icon: <ToolOutlined />,
+            tooltipOverlay: t('components.contractorMenu.equipmentTooltip'),
+        },
+    ];
 
-        if (status === CABIN_STATUS.last_results) {
-            return ContractorMenuItems.InfoPanel;
-        }
-
-        return undefined;
-    };
     return (
         <div
             className={cn(styles.cabinBackground, {
@@ -149,27 +158,13 @@ export const ContractorCabin = () => {
                 />
             </Monitor>
             <Header withBackButton />
-            <ContractorMenu
-                config={{
-                    disabledItems: {
-                        [ContractorMenuItems.InfoPanel]:
-                            status <= CABIN_STATUS.mining_over,
-                        [ContractorMenuItems.MiningDeck]:
-                            status < CABIN_STATUS.ready,
-                        [ContractorMenuItems.Equipment]:
-                            !hasInstalledEquipment && !hasPhysicalShift,
-                    },
-                    callbacks: {
-                        [ContractorMenuItems.InfoPanel]: () =>
-                            navigate(PATHS.contractorStatsAndInfo),
-                        [ContractorMenuItems.MiningDeck]: () =>
-                            navigate(PATHS.mining),
-                        [ContractorMenuItems.Equipment]: () =>
-                            navigate(PATHS.equipmentSet),
-                    },
-                    activeTooltip: getActiveTooltip(),
-                }}
-            />
+            <Menu>
+                <Space size="middle">
+                    {contractorMenuItems.map((item) => (
+                        <MenuItem {...item} />
+                    ))}
+                </Space>
+            </Menu>
             {needShiftBadge && (
                 <Travel
                     onBadgeCrossClick={closeShiftBadge}

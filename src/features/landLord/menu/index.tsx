@@ -1,4 +1,4 @@
-import { Space, Tooltip } from 'antd';
+import { Space } from 'antd';
 import React, { FC } from 'react';
 import { Menu, MenuItem } from 'shared';
 import { BuildOutlined, ProjectOutlined } from '@ant-design/icons';
@@ -15,25 +15,18 @@ export const LandLordMenu: FC = () => {
     return (
         <Menu>
             <Space size="middle">
-                <Tooltip overlay={t('pages.landLord.menu.goLandActivate')}>
-                    {/* TODO: Remove div wrapper after figure out why it doesn't work without it */}
-                    <div>
-                        <MenuItem
-                            onClick={() => navigate(areaManagement)}
-                            icon={<BuildOutlined />}
-                            disabled={status < CABIN_STATUS.setup}
-                        />
-                    </div>
-                </Tooltip>
-                <Tooltip overlay={t('pages.landLord.menu.statsAndInfo')}>
-                    <div>
-                        <MenuItem
-                            onClick={() => navigate(landLordStats)}
-                            icon={<ProjectOutlined />}
-                            disabled={status < CABIN_STATUS.searching}
-                        />
-                    </div>
-                </Tooltip>
+                <MenuItem
+                    onClick={() => navigate(areaManagement)}
+                    icon={<BuildOutlined />}
+                    disabled={status < CABIN_STATUS.setup}
+                    tooltipOverlay={t('pages.landLord.menu.goLandActivate')}
+                />
+                <MenuItem
+                    onClick={() => navigate(landLordStats)}
+                    icon={<ProjectOutlined />}
+                    disabled={status < CABIN_STATUS.searching}
+                    tooltipOverlay={t('pages.landLord.menu.statsAndInfo')}
+                />
             </Space>
         </Menu>
     );

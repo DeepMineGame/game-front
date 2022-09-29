@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Menu, MenuItem, Page, useAccountName, useReloadPage } from 'shared';
 import { useStore } from 'effector-react';
 import { Travel } from 'features';
-import { Space, Tooltip } from 'antd';
+import { Space } from 'antd';
 import { AreaChartOutlined, HddOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -30,23 +30,16 @@ export const HivePage: FC = () => {
             )}
             <Menu>
                 <Space size="middle">
-                    <Tooltip overlay={t('components.hive.info&Actions')}>
-                        {/* TODO: Remove div wrapper after figure out why it doesn't work without it */}
-                        <div>
-                            <MenuItem
-                                onClick={() => navigate(`/user/${accountName}`)}
-                                icon={<AreaChartOutlined />}
-                            />
-                        </div>
-                    </Tooltip>
-                    <Tooltip overlay={t('components.hive.warehouse')}>
-                        <div>
-                            <MenuItem
-                                onClick={() => navigate(warehouse)}
-                                icon={<HddOutlined />}
-                            />
-                        </div>
-                    </Tooltip>
+                    <MenuItem
+                        onClick={() => navigate(`/user/${accountName}`)}
+                        icon={<AreaChartOutlined />}
+                        tooltipOverlay={t('components.hive.info&Actions')}
+                    />
+                    <MenuItem
+                        onClick={() => navigate(warehouse)}
+                        icon={<HddOutlined />}
+                        tooltipOverlay={t('components.hive.warehouse')}
+                    />
                 </Space>
             </Menu>
         </Flat>
