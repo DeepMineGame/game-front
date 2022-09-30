@@ -5,6 +5,9 @@ import styles from '../styles.module.scss';
 
 export function useRenderCards() {
     const navigate = useNavigate();
+    const isCardAvailable = (card: UserInventoryType) =>
+        card.available_from === undefined ||
+        (card.available_from !== undefined && card.available_from < Date.now());
 
     return (
         items: Set<UserInventoryType> | UserInventoryType[],
@@ -12,7 +15,7 @@ export function useRenderCards() {
     ) => {
         return Array.from(items)?.map((card) => (
             <div
-                onDragStart={() => !card.available_from && onDragStart(card)}
+                onDragStart={() => isCardAvailable(card) && onDragStart(card)}
                 key={card.template_id}
             >
                 <AssetCard
