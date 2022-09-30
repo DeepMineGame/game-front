@@ -96,8 +96,10 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         onSignSuccess: reload,
     });
 
+    const isNotAvailable = card.available_from > new Date().getTime();
+
     const isNotCardBroken =
-        getCardStatus(card) !== Status.broken || !!card.available_from;
+        getCardStatus(card) !== Status.broken || isNotAvailable;
 
     return (
         <Modal
@@ -119,7 +121,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                     />
                     {onSelect && (
                         <Button
-                            disabled={!!card?.available_from}
+                            disabled={isNotAvailable}
                             onClick={handleSelect}
                             block
                             type="primary"
@@ -181,15 +183,18 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                         </Row>
                         <Divider verticalMargin={Margin.small} />
                         <Row align="middle">
-                            <Col span={9}>
+                            <Col span={7}>
                                 <Text>
                                     {t(
                                         'pages.equipmentSet.cardModal.depreciation'
                                     )}
                                 </Text>
                             </Col>
-                            <Col span={5}>
+                            <Col span={7}>
                                 <DepreciationProgressBar
+                                    className={
+                                        styles.depreciationProgressBarWidth
+                                    }
                                     completedMining={
                                         cardData?.data.depreciation
                                     }
