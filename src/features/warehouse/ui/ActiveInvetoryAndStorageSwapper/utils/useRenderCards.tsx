@@ -7,8 +7,7 @@ export function useRenderCards() {
     const navigate = useNavigate();
     const isCardAvailable = (card: UserInventoryType) =>
         card.available_from === undefined ||
-        (card.available_from !== undefined &&
-            card.available_from < new Date().getTime());
+        (card.available_from !== undefined && card.available_from < Date.now());
 
     return (
         items: Set<UserInventoryType> | UserInventoryType[],
