@@ -47,41 +47,34 @@ export const Characteristics = ({ contractors }: Props) => {
                     name={t(
                         'pages.equipmentSet.characteristics.estimatesMiningTime'
                     )}
-                    value="-"
                 />
                 <CharacteristicsLine
                     name={t(
                         'pages.equipmentSet.characteristics.estimatesAmountDME'
                     )}
-                    value="9999.99900000 - 9999.99999999"
                 />
                 <CharacteristicsLine
                     name={t(
                         'pages.equipmentSet.characteristics.estimateMiningEfficiency'
                     )}
-                    value={9988}
                 />
                 <CharacteristicsLine
                     name={t(
                         'pages.equipmentSet.characteristics.estimateMiningPower'
                     )}
-                    value="1242.99900000 - 3349.99999999"
                 />
                 <CharacteristicsLine
                     name={t(
                         'pages.equipmentSet.characteristics.sublevelEfficiensy'
                     )}
-                    value="90% - 100%"
                 />
                 <CharacteristicsLine
                     name={t(
                         'pages.equipmentSet.characteristics.equipmentBreakageProbabillity'
                     )}
-                    value="20%"
                 />
                 <CharacteristicsLine
                     name={t('pages.equipmentSet.characteristics.fossilChance')}
-                    value="10%"
                 />
             </div>
         </div>
