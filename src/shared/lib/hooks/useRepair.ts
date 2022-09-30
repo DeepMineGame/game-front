@@ -35,14 +35,14 @@ export const useRepair = () => {
 
     const getFinishesAtTime = (asset: UserInventoryType) =>
         repairActions?.find(
-            (action) => action.assetId === Number(asset.asset_id)
+            (action) => action.assetId === Number(asset?.asset_id)
         )?.finishesAt;
 
     const getCost = ({ level, rarity, isRefurbish }: GetCostParams) => {
         const percent = isRefurbish ? 3000 + level * 100 : 150 + level * 100;
         const amount = dmeToUpgrade[rarity][level];
 
-        return amount * percent;
+        return (amount * percent) / 10 ** 8;
     };
 
     return { getFinishesAtTime, getCost };

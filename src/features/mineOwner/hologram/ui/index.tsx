@@ -36,7 +36,7 @@ export const Hologram: FC<Props> = ({ user }) => {
     return (
         <div className={styles.hologram}>
             {isDesktop && (
-                <Title fontFamily="orbitron" className={styles.title}>
+                <Title fontFamily="orbitron" level={2} className={styles.title}>
                     {titles[cabinState]}
                 </Title>
             )}

@@ -32,6 +32,7 @@ export const DepreciationProgressBar: FC<DepreciationProgressBarProps> = memo(
                 }
                 success={{
                     percent:
+                        100 -
                         (Number(serviceLife) / Number(totalServiceLife)) * 100,
                 }}
                 format={format}

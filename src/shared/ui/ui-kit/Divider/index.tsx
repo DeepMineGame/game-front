@@ -1,6 +1,18 @@
-import { Divider as DividerA } from 'antd';
-import React from 'react';
+import { Divider as DividerAnt, DividerProps } from 'antd';
+import cn from 'classnames';
+import styles from './index.module.scss';
 
-export const Divider = () => {
-    return <DividerA />;
-};
+export enum Margin {
+    small = 'small',
+}
+
+type Props = { verticalMargin?: Margin } & DividerProps;
+
+export const Divider = ({ verticalMargin, ...props }: Props) => (
+    <DividerAnt
+        className={cn({
+            [styles.verticalMarginSmall]: verticalMargin === Margin.small,
+        })}
+        {...props}
+    />
+);

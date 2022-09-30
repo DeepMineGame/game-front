@@ -15,7 +15,9 @@ export const getLabelSelectItem = ({
     sinceZero = false,
 }: GetLabelSelectItemParams) => {
     const labels = Array.from(Array(amount).keys()).map((_, index) => ({
-        label: `${index + (sinceZero ? 0 : 1)} ${label}`,
+        label: `${index + (sinceZero ? 0 : 1)} ${label}${
+            index !== 0 && label ? 's' : ''
+        }`,
         value: index + (sinceZero ? 0 : 1),
     }));
 
