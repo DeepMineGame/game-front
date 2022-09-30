@@ -1,5 +1,5 @@
 import { Tooltip } from 'antd';
-import { FC, MouseEventHandler, ReactNode } from 'react';
+import React, { FC, MouseEventHandler, ReactNode } from 'react';
 import { Button } from 'shared';
 import { ButtonType } from 'antd/lib/button/button';
 
@@ -9,7 +9,7 @@ type Props = {
     onClick?: MouseEventHandler;
     type?: ButtonType;
     ghost?: boolean;
-    tooltipOverlay?: string;
+    tooltipText?: string;
 };
 
 export const MenuItem: FC<Props> = ({
@@ -18,9 +18,9 @@ export const MenuItem: FC<Props> = ({
     icon,
     disabled,
     onClick,
-    tooltipOverlay,
-}) => (
-    <Tooltip overlay={tooltipOverlay || undefined}>
+    tooltipText,
+}) => {
+    const button = (
         <Button
             type={type}
             size="large"
@@ -29,5 +29,13 @@ export const MenuItem: FC<Props> = ({
             disabled={disabled}
             ghost={ghost}
         />
-    </Tooltip>
-);
+    );
+    if (tooltipText) {
+        return (
+            <Tooltip title={tooltipText} visible>
+                {button}
+            </Tooltip>
+        );
+    }
+    return button;
+};

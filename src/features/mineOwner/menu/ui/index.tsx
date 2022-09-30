@@ -1,5 +1,5 @@
-import { Space } from 'antd';
-import { FC } from 'react';
+import { Space, Tooltip } from 'antd';
+import React, { FC } from 'react';
 import { Menu, MenuItem } from 'shared';
 import {
     DesktopOutlined,
@@ -37,45 +37,54 @@ export const MineOwnerMenu: FC<Props> = ({
     const statusThatDisableManagementButton = [...baseButtonDisableStates];
     const statusThatDisableTeamButton = [...baseButtonDisableStates];
     const statusThatDisableStatsButton = [...baseButtonDisableStates];
-
     const menuItems = [
         {
-            onClick: () => navigate(mineManagement),
+            link: mineManagement,
             icon: <DesktopOutlined />,
             disabled:
                 !userMine ||
                 statusThatDisableManagementButton.includes(
                     currentMineOwnerCabinState
                 ),
-            tooltipOverlay: t('pages.mineOwner.menu.manageMine'),
+            tooltip: t('pages.mineOwner.menu.manageMine'),
         },
         {
-            onClick: () => navigate(mineOwnerMineCrew),
+            link: mineOwnerMineCrew,
             icon: <TeamOutlined />,
             disabled:
                 !userMine ||
                 statusThatDisableTeamButton.includes(
                     currentMineOwnerCabinState
                 ),
-            tooltipOverlay: t('pages.mineOwner.menu.team'),
+            tooltip: t('pages.mineOwner.menu.team'),
         },
         {
-            onClick: () => navigate(mineOwnerStatsAndInfo),
+            link: mineOwnerStatsAndInfo,
             icon: <ProjectOutlined />,
             disabled:
                 !userMine ||
                 statusThatDisableStatsButton.includes(
                     currentMineOwnerCabinState
                 ),
-            tooltipOverlay: t('pages.mineOwner.menu.stats'),
+            tooltip: t('pages.mineOwner.menu.stats'),
         },
     ];
-
     return (
         <Menu className={styles.mineOwnerMenu}>
             <Space size="middle">
-                {menuItems.map((item) => (
-                    <MenuItem {...item} />
+                {menuItems.map(({ tooltip, link, icon, disabled }) => (
+                    <Tooltip
+                        overlay={disabled ? undefined : tooltip}
+                        key={tooltip}
+                    >
+                        <div>
+                            <MenuItem
+                                onClick={() => navigate(link)}
+                                icon={icon}
+                                disabled={disabled}
+                            />
+                        </div>
+                    </Tooltip>
                 ))}
             </Space>
         </Menu>
