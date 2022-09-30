@@ -17,6 +17,7 @@ import { useGate, useStore } from 'effector-react';
 import {
     MineConsumerGate,
     mineOwnerCabinState,
+    $mineOwnerCabinState,
     userMineStore,
 } from '../../models';
 import styles from './styles.module.scss';
@@ -33,6 +34,7 @@ export const MineOwnerMenu: FC<Props> = ({
     const navigate = useNavigate();
     const { t } = useTranslation();
     const userMine = useStore(userMineStore)?.[0];
+    const cabinState = useStore($mineOwnerCabinState);
     const baseButtonDisableStates = [mineOwnerCabinState.needMineNft];
     const statusThatDisableManagementButton = [...baseButtonDisableStates];
     const statusThatDisableTeamButton = [...baseButtonDisableStates];
@@ -57,6 +59,7 @@ export const MineOwnerMenu: FC<Props> = ({
                     currentMineOwnerCabinState
                 ),
             tooltip: t('pages.mineOwner.menu.team'),
+            showTooltip: cabinState === mineOwnerCabinState.needCrew,
         },
         {
             link: mineOwnerStatsAndInfo,
@@ -72,20 +75,23 @@ export const MineOwnerMenu: FC<Props> = ({
     return (
         <Menu className={styles.mineOwnerMenu}>
             <Space size="middle">
-                {menuItems.map(({ tooltip, link, icon, disabled }) => (
-                    <Tooltip
-                        overlay={disabled ? undefined : tooltip}
-                        key={tooltip}
-                    >
-                        <div>
-                            <MenuItem
-                                onClick={() => navigate(link)}
-                                icon={icon}
-                                disabled={disabled}
-                            />
-                        </div>
-                    </Tooltip>
-                ))}
+                {menuItems.map(
+                    ({ tooltip, link, icon, disabled, showTooltip }) => (
+                        <Tooltip
+                            overlay={tooltip}
+                            key={tooltip}
+                            visible={showTooltip}
+                        >
+                            <div>
+                                <MenuItem
+                                    onClick={() => navigate(link)}
+                                    icon={icon}
+                                    disabled={disabled}
+                                />
+                            </div>
+                        </Tooltip>
+                    )
+                )}
             </Space>
         </Menu>
     );
