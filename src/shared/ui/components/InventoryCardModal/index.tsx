@@ -7,7 +7,7 @@ import {
     useRepair,
 } from 'shared';
 import React, { FC, useState, useEffect, useCallback } from 'react';
-import { message, ModalProps, Tooltip } from 'antd';
+import { Col, message, ModalProps, Row, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { serviceMarket } from 'app/router/paths';
 import { ServiceMarketTabIds } from 'app/router/constants';
@@ -24,10 +24,12 @@ import {
     ActionModal,
     Button,
     DepreciationProgressBar,
-    Line,
     Link,
     NftProgressBar,
     Status,
+    Text,
+    Divider,
+    Margin,
 } from 'shared/ui/ui-kit';
 import styles from './styles.module.scss';
 
@@ -86,11 +88,16 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
 
     const repairAction = useSmartContractAction({
         action: repairEquipment(accountName, Number(cardData?.asset_id)),
+        onSignSuccess: reload,
     });
 
     const refurbishAction = useSmartContractAction({
         action: repairEquipment(accountName, Number(cardData?.asset_id), true),
+        onSignSuccess: reload,
     });
+
+    const isNotCardBroken =
+        getCardStatus(card) !== Status.broken || !!card.available_from;
 
     return (
         <Modal
@@ -122,32 +129,41 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                     )}
                 </div>
                 <div className={styles.infoContainer}>
-                    <div className={styles.title}>{cardData?.data.name}</div>
+                    <div className={styles.title}>
+                        <Text>{cardData?.data.name}</Text>
+                    </div>
                     <div className={styles.description}>
-                        {cardData?.data.description}
+                        <Text>{cardData?.data.description}</Text>
                     </div>
                     <div className={styles.info}>
-                        <Line className={styles.infoLine}>
-                            <div className={styles.key}>
-                                {t('pages.equipmentSet.cardModal.rarity')}
-                            </div>
-                            <div className={styles.value}>
-                                {cardData?.data.rarity}
-                            </div>
-                            <Link
-                                to={`${serviceMarket}?tabId=${ServiceMarketTabIds.levelUpgrade}`}
-                            >
-                                {t('pages.equipmentSet.cardModal.upgrade')}
-                            </Link>
-                        </Line>
-                        <Line className={styles.infoLine}>
-                            <div className={styles.key}>
-                                {t('pages.equipmentSet.cardModal.level')}
-                            </div>
-                            <div className={styles.value}>
-                                {cardData?.data.level}
-                            </div>
-                            <div className={styles.action}>
+                        <Row align="middle">
+                            <Col span={7}>
+                                <Text>
+                                    {t('pages.equipmentSet.cardModal.rarity')}
+                                </Text>
+                            </Col>
+                            <Col span={7} className={styles.alignRight}>
+                                <Text>{cardData?.data.rarity}</Text>
+                            </Col>
+                            <Col span={10} className={styles.rightCol}>
+                                <Link
+                                    to={`${serviceMarket}?tabId=${ServiceMarketTabIds.levelUpgrade}`}
+                                >
+                                    {t('pages.equipmentSet.cardModal.upgrade')}
+                                </Link>
+                            </Col>
+                        </Row>
+                        <Divider verticalMargin={Margin.small} />
+                        <Row align="middle">
+                            <Col span={7}>
+                                <Text>
+                                    {t('pages.equipmentSet.cardModal.level')}
+                                </Text>
+                            </Col>
+                            <Col span={7} className={styles.alignRight}>
+                                <Text>{cardData?.data.level}</Text>
+                            </Col>
+                            <Col span={10} className={styles.rightCol}>
                                 <Tooltip
                                     overlay={t('components.common.comingSoon')}
                                     mouseEnterDelay={0}
@@ -161,13 +177,18 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                         rightContent={<DMECoinIcon />}
                                     />
                                 </Tooltip>
-                            </div>
-                        </Line>
-                        <Line className={styles.infoLine}>
-                            <div className={styles.key}>
-                                {t('pages.equipmentSet.cardModal.depreciation')}
-                            </div>
-                            <div className={styles.value}>
+                            </Col>
+                        </Row>
+                        <Divider verticalMargin={Margin.small} />
+                        <Row align="middle">
+                            <Col span={9}>
+                                <Text>
+                                    {t(
+                                        'pages.equipmentSet.cardModal.depreciation'
+                                    )}
+                                </Text>
+                            </Col>
+                            <Col span={5}>
                                 <DepreciationProgressBar
                                     completedMining={
                                         cardData?.data.depreciation
@@ -179,60 +200,77 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                         cardData?.data['maximal capacity']
                                     }
                                 />
-                            </div>
-                            <div
-                                onClick={() => {
-                                    setModalData({
-                                        type: ModalType.repair,
-                                        costs: {
-                                            timeSeconds: 1,
-                                            coinAmount: getCost({
-                                                level: card.level as GetCostParams['level'],
-                                                rarity: rarityMap[
-                                                    card.rarity
-                                                ] as GetCostParams['rarity'],
-                                                isRefurbish: false,
-                                            }),
-                                            energy: 150,
-                                        },
-                                    });
-                                    setIsModalVisible(true);
-                                }}
-                                className={styles.action}
-                            >
-                                {t('pages.equipmentSet.cardModal.repair')}
-                            </div>
-                        </Line>
-                        <Line className={styles.infoLine}>
-                            <div className={styles.key}>
-                                {t(
-                                    'pages.equipmentSet.cardModal.breakageProbability'
-                                )}
-                            </div>
-                            <div className={styles.value}>1</div>
-                            <div
-                                onClick={() => {
-                                    setModalData({
-                                        type: ModalType.refurbish,
-                                        costs: {
-                                            timeSeconds: 120,
-                                            coinAmount: getCost({
-                                                level: card.level as GetCostParams['level'],
-                                                rarity: rarityMap[
-                                                    card.rarity
-                                                ] as GetCostParams['rarity'],
-                                                isRefurbish: true,
-                                            }),
-                                            energy: 150,
-                                        },
-                                    });
-                                    setIsModalVisible(true);
-                                }}
-                                className={styles.action}
-                            >
-                                {t('pages.equipmentSet.cardModal.refurbish')}
-                            </div>
-                        </Line>
+                            </Col>
+                            <Col span={10}>
+                                <Button
+                                    disabled={isNotCardBroken}
+                                    size="large"
+                                    type="link"
+                                    onClick={() => {
+                                        setModalData({
+                                            type: ModalType.repair,
+                                            costs: {
+                                                timeSeconds: 1,
+                                                coinAmount: getCost({
+                                                    level: card.level as GetCostParams['level'],
+                                                    rarity: rarityMap[
+                                                        card.rarity
+                                                    ] as GetCostParams['rarity'],
+                                                    isRefurbish: false,
+                                                }),
+                                                energy: 150,
+                                            },
+                                        });
+                                        setIsModalVisible(true);
+                                    }}
+                                    className={styles.button}
+                                >
+                                    {t('pages.equipmentSet.cardModal.repair')}
+                                </Button>
+                            </Col>
+                        </Row>
+                        <Divider verticalMargin={Margin.small} />
+                        <Row align="middle">
+                            <Col span={10}>
+                                <Text>
+                                    {t(
+                                        'pages.equipmentSet.cardModal.breakageProbability'
+                                    )}
+                                </Text>
+                            </Col>
+                            <Col span={4} className={styles.alignRight}>
+                                <Text>1</Text>
+                            </Col>
+                            <Col span={10}>
+                                <Button
+                                    disabled={isNotCardBroken}
+                                    type="link"
+                                    size="large"
+                                    onClick={() => {
+                                        setModalData({
+                                            type: ModalType.refurbish,
+                                            costs: {
+                                                timeSeconds: 120,
+                                                coinAmount: getCost({
+                                                    level: card.level as GetCostParams['level'],
+                                                    rarity: rarityMap[
+                                                        card.rarity
+                                                    ] as GetCostParams['rarity'],
+                                                    isRefurbish: true,
+                                                }),
+                                                energy: 150,
+                                            },
+                                        });
+                                        setIsModalVisible(true);
+                                    }}
+                                    className={styles.button}
+                                >
+                                    {t(
+                                        'pages.equipmentSet.cardModal.refurbish'
+                                    )}
+                                </Button>
+                            </Col>
+                        </Row>
                     </div>
                 </div>
             </div>

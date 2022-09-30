@@ -42,7 +42,7 @@ export const useRepair = () => {
         const percent = isRefurbish ? 3000 + level * 100 : 150 + level * 100;
         const amount = dmeToUpgrade[rarity][level];
 
-        return amount * percent;
+        return (amount * percent) / 10 ** 8;
     };
 
     return { getFinishesAtTime, getCost };

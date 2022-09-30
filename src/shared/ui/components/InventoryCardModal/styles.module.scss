@@ -14,7 +14,7 @@
 
 .container {
   display: flex;
-  gap: 35px;
+  gap: 32px;
   width: fit-content;
 }
 
@@ -43,31 +43,23 @@
   color: $color-neutral-neutral-8 !important;
 }
 
-.infoLine {
-  padding-bottom: 9px;
-  padding-top: 11px;
-}
-
 .info {
-  font-weight: 400;
   font-size: 16px;
   line-height: 24px;
 }
 
-.key {
-  width: 160px;
-  text-align: left;
-  color: $color-neutral-neutral-8 !important;
-}
-
-.value {
-  width: 175px;
+.alignRight {
   text-align: right;
-  padding-right: 44px;
 }
 
-.action {
-  color: $color-primary-primary-6 !important;
-  cursor: pointer;
-  width: 180px;
+.rightCol {
+  padding-left: 44px;
+}
+
+.button {
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 30px;
+  border: 0;
+  padding-left: 44px;
 }
