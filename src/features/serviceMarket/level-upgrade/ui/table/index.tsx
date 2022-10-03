@@ -18,6 +18,7 @@ export const LevelUpgradeContractsTable: FC<Props> = ({ contracts }) => {
                 // TODO: what should display first?
                 nickName: contract.client || contract.executor || '-',
                 key: contract.id,
+                id: contract.id,
                 type:
                     parseAttrs(contract)?.schema_type ===
                     EngineerSchema.undefined
@@ -39,9 +40,17 @@ export const LevelUpgradeContractsTable: FC<Props> = ({ contracts }) => {
         <Table
             columns={[
                 {
-                    title: t('pages.serviceMarket.levelUpgradeTab.nickname'),
+                    title: t('pages.serviceMarket.nickname'),
                     dataIndex: 'nickName',
                     key: 'nickName',
+                    render: (value) => (
+                        <Link to={`/user/${value}`}>{value}</Link>
+                    ),
+                },
+                {
+                    title: t('pages.serviceMarket.id'),
+                    dataIndex: 'id',
+                    key: 'id',
                     render: (value, props) => (
                         <Link to={`/service-market/contract/${props.key}`}>
                             {value}
