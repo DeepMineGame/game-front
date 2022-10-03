@@ -24,14 +24,15 @@ export const MineOwnerContractor: FC<TypeStepProps> = ({
     goToNextStep,
 }) => {
     const { t } = useTranslation();
-    const contractType = useWatch(orderFields.contractType, form);
     const isClient = useWatch(orderFields.isClient, form);
-    const isDisabled = contractType === undefined;
     const hasActiveContract = useStore(
         hasActiveMineOwnerContractorContractAsExecutor
     );
     const hasMineEmptySlots = useStore(hasMineEmptySlotsStore);
     const hasInstalledEquipment = useStore(hasInstalledEquipmentStore);
+
+    const isMineOwnerRoleSelected = isClient === ContractRole.client;
+    const isContractorRoleSelected = isClient === ContractRole.executor;
 
     const hasActiveContractTooltipText =
         hasActiveContract &&
@@ -46,7 +47,9 @@ export const MineOwnerContractor: FC<TypeStepProps> = ({
 
     const selectedAssetId = useWatch(orderFields.assetId, form);
 
-    const canGoNext = contractType && selectedAssetId && isClient !== undefined;
+    const canGoNext = isMineOwnerRoleSelected
+        ? !!selectedAssetId
+        : isContractorRoleSelected;
 
     return (
         <>
@@ -57,14 +60,9 @@ export const MineOwnerContractor: FC<TypeStepProps> = ({
                 dependencies={[orderFields.contractType]}
             >
                 <Select
-                    disabled={isDisabled}
-                    placeholder={
-                        isDisabled
-                            ? t(
-                                  'pages.serviceMarket.createOrder.selectToDisable'
-                              )
-                            : t('pages.serviceMarket.createOrder.selectRole')
-                    }
+                    placeholder={t(
+                        'pages.serviceMarket.createOrder.selectRole'
+                    )}
                     options={[
                         {
                             value: ContractRole.client,
