@@ -24,9 +24,8 @@ export const LandLordMineOwner: FC<TypeStepProps> = ({
     goToNextStep,
 }) => {
     const { t } = useTranslation();
-    const contractType = useWatch(orderFields.contractType, form);
     const isClient = useWatch(orderFields.isClient, form);
-    const isDisabled = contractType === undefined;
+    const selectedAssetId = useWatch(orderFields.assetId, form);
     const hasEngagedArea = useStore(hasEngagedAreaStore);
     const hasAreaEmptySlots = useStore(hasAreaEmptySlotsStore);
     const hasSignedContract = useStore(
@@ -39,7 +38,12 @@ export const LandLordMineOwner: FC<TypeStepProps> = ({
         hasSignedContract &&
         t('pages.serviceMarket.createOrder.youHaveSignedContract');
 
-    const canGoNext = contractType && isClient !== undefined;
+    const isLandlordRoleSelected = isClient === ContractRole.client;
+    const isMineOwnerRoleSelected = isClient === ContractRole.executor;
+
+    const canGoNext =
+        (isLandlordRoleSelected || isMineOwnerRoleSelected) &&
+        !!selectedAssetId;
 
     return (
         <>
@@ -50,14 +54,9 @@ export const LandLordMineOwner: FC<TypeStepProps> = ({
                 dependencies={[orderFields.contractType]}
             >
                 <Select
-                    disabled={isDisabled}
-                    placeholder={
-                        isDisabled
-                            ? t(
-                                  'pages.serviceMarket.createOrder.selectToDisable'
-                              )
-                            : t('pages.serviceMarket.createOrder.selectRole')
-                    }
+                    placeholder={t(
+                        'pages.serviceMarket.createOrder.selectRole'
+                    )}
                     options={[
                         {
                             value: ContractRole.client,
