@@ -40,7 +40,7 @@ export const LevelUpgradeContractsTable: FC<Props> = ({ contracts }) => {
         <Table
             columns={[
                 {
-                    title: t('pages.serviceMarket.nickname'),
+                    title: t('pages.serviceMarket.levelUpgradeTab.nickname'),
                     dataIndex: 'nickName',
                     key: 'nickName',
                     render: (value) => (

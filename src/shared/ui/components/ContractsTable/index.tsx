@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { serviceMarket } from 'app/router/paths';
 import { t } from 'i18next';
 import { ContractState } from 'features';
 import { DiscordIcon } from 'shared';
@@ -24,7 +23,6 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
                     nickName: contract.client || contract.executor || '-',
                     key: contract.id,
                     id: contract.id,
-                    reputation: '-',
                     type: contractName[contract.type],
                     date:
                         contract.finishes_at === 0
@@ -50,7 +48,7 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
         <Table
             columns={[
                 {
-                    title: t('pages.serviceMarket.nickname'),
+                    title: t('pages.serviceMarket.myContractsTab.nickname'),
                     dataIndex: 'nickName',
                     key: 'nickName',
                     render: (value, { contract }) => {
