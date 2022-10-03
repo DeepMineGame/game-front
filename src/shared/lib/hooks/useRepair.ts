@@ -1,13 +1,13 @@
 import { useGate, useStore } from 'effector-react';
 import { useMemo } from 'react';
 import { UserActionGate } from 'features/user';
+import { InventoriedAssets } from 'entities/atomicassets';
 import {
     actionsStore,
     ActionType,
     dmeToUpgrade,
     rarityMap,
     RarityType,
-    UserInventoryType,
 } from 'entities/smartcontract';
 import { useAccountName } from './useAccountName';
 
@@ -33,7 +33,7 @@ export const useRepair = () => {
         [actions]
     );
 
-    const getFinishesAtTime = (asset: UserInventoryType) =>
+    const getFinishesAtTime = (asset: InventoriedAssets[number]) =>
         repairActions?.find(
             (action) => action.assetId === Number(asset?.asset_id)
         )?.finishesAt;

@@ -6,7 +6,6 @@ import {
     showSuccessModal,
     useAccountName,
     useReloadPage,
-    useTableData,
     showWarningModal,
     useActions,
 } from 'shared';
@@ -22,13 +21,13 @@ import {
 import {
     ActionState,
     ActionType,
-    getInventoryConfig,
     installEquipment,
     InventoryNameType,
     miningEquipmentNames,
     uninstallEquipment,
     UserInventoryType,
 } from 'entities/smartcontract';
+import { $inventoriedAssets, InventoriedAssets } from 'entities/atomicassets';
 import styles from './styles.module.scss';
 import { EquipmentInstallationModal } from './components/EquipmentInstallationModal';
 import { Characteristics } from './components/Characteristics';
@@ -47,18 +46,17 @@ export const EquipmentSetPage: FC = () => {
     const [isInventoryVisible, setIsInventoryVisible] = useState(false);
     const [isInventoryCardVisible, setIsInventoryCardVisible] = useState(false);
     const [selectedInventoryModalCard, setSelectedInventoryModalCard] =
-        useState<UserInventoryType | undefined>(undefined);
+        useState<InventoriedAssets[number] | undefined>();
     const [selectedEquipment, setSelectedEquipment] = useState(
         {} as Record<InventoryNameType, UserInventoryType> | {}
     );
     const [selectedEquipmentName, setSelectedEquipmentName] = useState<
         InventoryNameType | undefined
-    >(undefined);
+    >();
 
     const callAction = useSmartContractActionDynamic();
 
-    const { data: userInventory } =
-        useTableData<UserInventoryType>(getInventoryConfig);
+    const userInventory = useStore($inventoriedAssets);
 
     const contractId = useStore(contractorContractIdStore);
 
@@ -128,7 +126,9 @@ export const EquipmentSetPage: FC = () => {
         });
     };
 
-    const handleRemoveEquipment = async (inventory: UserInventoryType) => {
+    const handleRemoveEquipment = async (
+        inventory: InventoriedAssets[number]
+    ) => {
         await callAction(
             uninstallEquipment({
                 waxUser: accountName,
@@ -147,7 +147,7 @@ export const EquipmentSetPage: FC = () => {
         setIsInventoryVisible(true);
     };
 
-    const handleCardSelect = (card: UserInventoryType) => {
+    const handleCardSelect = (card: InventoriedAssets[number]) => {
         if (selectedEquipmentName) {
             setSelectedEquipment({
                 ...selectedEquipment,
@@ -157,7 +157,7 @@ export const EquipmentSetPage: FC = () => {
         }
     };
 
-    const handleOpenCard = (card: UserInventoryType) => {
+    const handleOpenCard = (card: InventoriedAssets[number]) => {
         setIsInventoryCardVisible(true);
         setSelectedInventoryModalCard(card);
     };
