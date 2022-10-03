@@ -18,6 +18,14 @@ export const MiningContractsTable: FC<Props> = ({ contracts }) => {
                     title: t('pages.serviceMarket.nickname'),
                     dataIndex: 'nickName',
                     key: 'nickName',
+                    render: (value) => (
+                        <Link to={`/user/${value}`}>{value}</Link>
+                    ),
+                },
+                {
+                    title: t('pages.serviceMarket.id'),
+                    dataIndex: 'id',
+                    key: 'id',
                     render: (value, props) => (
                         <Link to={`/service-market/contract/${props.key}`}>
                             {value}
@@ -71,6 +79,7 @@ export const MiningContractsTable: FC<Props> = ({ contracts }) => {
             dataSource={contracts.map((contract) => ({
                 key: contract.id,
                 nickName: contract.client || contract.executor || '-',
+                id: contract.id,
                 creationDate: contract.create_time,
                 fee: contract.fee_percent,
                 penaltyDme: contract.penalty_amount,
