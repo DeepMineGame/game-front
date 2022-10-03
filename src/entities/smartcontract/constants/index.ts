@@ -35,6 +35,7 @@ const TEST_NET_IN_GAME_IDS = [
     176871,
     176451,
     ENGINEER_CERTIFICATE_ID,
+    522137,
 ];
 
 const MAIN_NET_IN_GAME_IDS = [

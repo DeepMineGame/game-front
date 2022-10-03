@@ -7,7 +7,7 @@ import { ContractTypeField } from '../ContractTypeField';
 import { CreateOrderGate } from '../../models';
 import { LandLordMineOwner } from './LandLordMineOwner';
 import { MineOwnerContractor } from './MineOwnerContractor';
-import { LevelUpgrade } from './LevelUpgrade';
+// import { LevelUpgrade } from './LevelUpgrade';
 import { TypeStepProps } from './interface';
 
 const { useWatch } = Form;
@@ -16,7 +16,7 @@ const ContentMap: Record<ContractType, FC<TypeStepProps>> = {
     [ContractType.undefined]: () => null,
     [ContractType.landlord_mineowner]: LandLordMineOwner,
     [ContractType.mineowner_contractor]: MineOwnerContractor,
-    [ContractType.level_upgrade]: LevelUpgrade,
+    [ContractType.level_upgrade]: () => null, // LevelUpgrade,
 };
 
 export const TypeStep: FC<TypeStepProps> = ({

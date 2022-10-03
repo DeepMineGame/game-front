@@ -1,3 +1,4 @@
+import { UpgradeKitType } from 'features/engineer';
 import {
     ENGINEER_CERTIFICATE_ID,
     InventoryIdType,
@@ -57,3 +58,6 @@ export const getImagePath = (templateId: InventoryIdType) => {
 
     return `/img/cards/${ID}.${ext}`;
 };
+
+export const getKitImage = (type: UpgradeKitType) =>
+    `/img/upgrade-kit/mine/repair-${type}.webp`;

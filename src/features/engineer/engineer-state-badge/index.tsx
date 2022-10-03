@@ -2,19 +2,21 @@ import { FC } from 'react';
 import { Badge } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { CabinState } from 'entities/engineer';
-import { Text, green6, neutral1, orange6 } from 'shared/ui';
+import { Text, green6, neutral8, orange6 } from 'shared/ui';
 import styles from './styles.module.scss';
 
 const colors = {
-    [CabinState.Idle]: neutral1,
+    [CabinState.Idle]: neutral8,
+    [CabinState.NotInaugurated]: neutral8,
     [CabinState.Active]: green6,
     [CabinState.Work]: orange6,
 };
 
 const texts = {
-    [CabinState.Idle]: 'notInaugurated',
+    [CabinState.NotInaugurated]: 'notInaugurated',
+    [CabinState.Idle]: 'idle',
     [CabinState.Active]: 'active',
-    [CabinState.Work]: 'working',
+    [CabinState.Work]: 'work',
 };
 
 type Props = {

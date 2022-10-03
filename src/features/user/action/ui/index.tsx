@@ -13,12 +13,12 @@ type Props = {
 
 const actionsStateToBadgeStatusMap = {
     [ActionState.undefined]: undefined,
-    [ActionState.active]: 'processing' as const,
-    [ActionState.interrupted]: 'default' as const,
-    [ActionState.finished]: 'success' as const,
-    [ActionState.claimed]: 'success' as const,
-    [ActionState.idle]: 'default' as const,
-};
+    [ActionState.active]: 'processing',
+    [ActionState.interrupted]: 'default',
+    [ActionState.finished]: 'success',
+    [ActionState.claimed]: 'success',
+    [ActionState.idle]: 'default',
+} as const;
 
 export const UserAction: FC<Props> = ({ smartContractUserData, className }) => {
     useGate(UserActionGate, { searchParam: smartContractUserData.owner });
@@ -30,15 +30,11 @@ export const UserAction: FC<Props> = ({ smartContractUserData, className }) => {
 
     useTick(!!lastAction && !isActionFinished);
 
-    if (lastAction) {
-        const status = isActionFinished
-            ? ActionState.finished
-            : lastAction.state;
-
+    if (lastAction && !isActionFinished) {
         return (
             <div className={className}>
                 <Badge
-                    status={actionsStateToBadgeStatusMap[status]}
+                    status={actionsStateToBadgeStatusMap[lastAction.state]}
                     text={
                         mapActionText[
                             lastAction.type as keyof typeof mapActionText

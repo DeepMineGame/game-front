@@ -6,16 +6,10 @@ import { FC, useCallback } from 'react';
 import { Button, Dropdown, Segmented, useAccountName } from 'shared';
 import { createOrder } from 'app/router/paths';
 import { Space } from 'antd';
-import { FilterOrderStatus } from 'entities/gameStat';
+import { FilterOrderStatus, Role } from 'entities/gameStat';
 import { changeFilterEvent, filterStore } from '../../contracts-table/model';
 import { ServiceMarketContractsTable } from '../../contracts-table';
 import styles from './styles.module.scss';
-
-export enum Role {
-    all = 'all',
-    contractor = 'contractor',
-    mineowner = 'mineowner',
-}
 
 export const MyContractsTab: FC = () => {
     const { t } = useTranslation();
@@ -48,15 +42,15 @@ export const MyContractsTab: FC = () => {
                 <Segmented
                     options={[
                         {
-                            value: FilterOrderStatus.Current,
+                            value: FilterOrderStatus.current,
                             label: t('components.common.current'),
                         },
                         {
-                            value: FilterOrderStatus.New,
+                            value: FilterOrderStatus.new,
                             label: t('components.common.new'),
                         },
                         {
-                            value: FilterOrderStatus.Completed,
+                            value: FilterOrderStatus.completed,
                             label: t('components.common.completed'),
                         },
                     ]}

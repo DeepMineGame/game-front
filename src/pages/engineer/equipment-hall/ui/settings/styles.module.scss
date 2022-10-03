@@ -1,0 +1,9 @@
+@import 'src/shared';
+
+.icon {
+    color: $color-neutral-neutral-9 !important;
+
+    &.disabled {
+        color: $color-neutral-neutral-7 !important;
+    }
+}

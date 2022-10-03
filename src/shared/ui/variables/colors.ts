@@ -1,8 +1,10 @@
 export const neutral3Color = '#262626';
 export const orange6 = '#D87A16';
 export const neutral4 = '#303030';
+export const neutral1 = '#141414';
 export const neutral2 = '#1D1D1D';
-export const neutral1 = '#ACACAC';
+export const neutral8 = '#ACACAC';
+export const neutral9 = '#DBDBDB';
 export const gold6 = '#D89614';
 export const green6 = '#47FF40';
 export const primary6 = '#F5C913';

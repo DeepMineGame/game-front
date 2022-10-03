@@ -3,7 +3,7 @@ import { useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { useSmartContractAction } from 'features/hooks';
 import { createEngineer } from 'entities/smartcontract';
-import { engineerCabinStore } from 'entities/engineer';
+import { $engineerCabinStore } from 'entities/engineer';
 import {
     tablet,
     useAccountName,
@@ -18,7 +18,7 @@ const AttendInauguration: FC = () => {
     const { t } = useTranslation();
     const isTablet = useMediaQuery(tablet);
     const accountName = useAccountName();
-    const { certificate } = useStore(engineerCabinStore);
+    const { certificate } = useStore($engineerCabinStore);
 
     const handleInaugurate = useSmartContractAction({
         action: createEngineer(accountName, certificate?.asset_id!),

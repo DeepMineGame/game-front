@@ -38,3 +38,4 @@ export * from './Alert';
 export * from './Checkbox';
 export * from './CostsTable';
 export * from './SignLevelUpgradeOrderModal';
+export * from './LoadingSpin';

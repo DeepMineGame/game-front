@@ -25,36 +25,10 @@ import {
     FaqPage,
     Wasteland,
     EngineerPage,
+    EquipmentHallPage,
 } from 'pages';
 
-import {
-    contractorCabin,
-    equipmentSet,
-    city,
-    intro,
-    mineManagement,
-    mineOwner,
-    mining,
-    pageNotFound,
-    root,
-    wipPage,
-    contractorStatsAndInfo,
-    mineOwnerStatsAndInfo,
-    mineOwnerMineCrew,
-    landLord,
-    serviceMarket,
-    hive,
-    user,
-    warehouse,
-    areaManagement,
-    createOrder,
-    serviceMarketOrder,
-    landLordStats,
-    inventoryItemPreview,
-    faq,
-    wasteland,
-    engineer,
-} from './paths';
+import * as paths from './paths';
 
 export type AppRoute = {
     titleTag: string;
@@ -67,17 +41,17 @@ export type AppRoute = {
 
 export const routes: AppRoute[] = [
     {
-        path: root,
+        path: paths.root,
         Component: AuthPage,
         titleTag: 'Intro - Deepmine',
     },
     {
-        path: intro,
+        path: paths.intro,
         Component: AuthPage,
         titleTag: 'Intro - Deepmine',
     },
     {
-        path: contractorCabin,
+        path: paths.contractorCabin,
         Component: ContractorCabin,
         forLoggedIn: true,
         forAdmin: true,
@@ -85,7 +59,7 @@ export const routes: AppRoute[] = [
         titleTag: 'Contractor — DeepMine',
     },
     {
-        path: equipmentSet,
+        path: paths.equipmentSet,
         Component: EquipmentSetPage,
         forLoggedIn: true,
         forAdmin: true,
@@ -93,7 +67,7 @@ export const routes: AppRoute[] = [
         titleTag: 'Equipment set — DeepMine',
     },
     {
-        path: city,
+        path: paths.city,
         Component: CityPage,
         forLoggedIn: true,
         forAdmin: true,
@@ -101,7 +75,7 @@ export const routes: AppRoute[] = [
         titleTag: 'City — DeepMine',
     },
     {
-        path: wasteland,
+        path: paths.wasteland,
         Component: Wasteland,
         forLoggedIn: true,
         forAdmin: true,
@@ -109,7 +83,7 @@ export const routes: AppRoute[] = [
         titleTag: 'Wasteland — DeepMine',
     },
     {
-        path: mining,
+        path: paths.mining,
         Component: MiningPage,
         forLoggedIn: true,
         forAdmin: true,
@@ -117,7 +91,7 @@ export const routes: AppRoute[] = [
         titleTag: 'Mining — DeepMine',
     },
     {
-        path: mineOwner,
+        path: paths.mineOwner,
         Component: MineOwnerPage,
         forLoggedIn: true,
         forAdmin: true,
@@ -125,7 +99,7 @@ export const routes: AppRoute[] = [
         titleTag: 'Mine owner cabin — DeepMine',
     },
     {
-        path: mineManagement,
+        path: paths.mineManagement,
         Component: MineManagementPage,
         forLoggedIn: true,
         forAdmin: true,
@@ -133,7 +107,7 @@ export const routes: AppRoute[] = [
         titleTag: 'Mine management — DeepMine',
     },
     {
-        path: contractorStatsAndInfo,
+        path: paths.contractorStatsAndInfo,
         Component: ContractorStatsAndInfoPage,
         forLoggedIn: true,
         forAdmin: true,
@@ -141,7 +115,7 @@ export const routes: AppRoute[] = [
         titleTag: 'Contractor / Stats and Info',
     },
     {
-        path: mineOwnerStatsAndInfo,
+        path: paths.mineOwnerStatsAndInfo,
         Component: MineOwnerStatAndInfoPage,
         forLoggedIn: true,
         forAdmin: true,
@@ -149,7 +123,7 @@ export const routes: AppRoute[] = [
         titleTag: 'Mine owner / Stats and Info',
     },
     {
-        path: mineOwnerMineCrew,
+        path: paths.mineOwnerMineCrew,
         Component: MineOwnerMiningCrewPage,
         forLoggedIn: true,
         forAdmin: true,
@@ -157,7 +131,7 @@ export const routes: AppRoute[] = [
         titleTag: 'Mine owner / Mine crew',
     },
     {
-        path: pageNotFound,
+        path: paths.pageNotFound,
         Component: PageNotFound,
         forLoggedIn: false,
         forAdmin: true,
@@ -165,7 +139,7 @@ export const routes: AppRoute[] = [
         titleTag: 'Badlands — DeepMine',
     },
     {
-        path: wipPage,
+        path: paths.wipPage,
         Component: () => <PageNotFound type="wip" />,
         forLoggedIn: false,
         forAdmin: true,
@@ -173,7 +147,7 @@ export const routes: AppRoute[] = [
         titleTag: 'Badlands — DeepMine',
     },
     {
-        path: serviceMarket,
+        path: paths.serviceMarket,
         Component: ServiceMarketPage,
         forLoggedIn: true,
         forAdmin: true,
@@ -181,7 +155,7 @@ export const routes: AppRoute[] = [
         titleTag: 'Service-market — DeepMine',
     },
     {
-        path: serviceMarketOrder,
+        path: paths.serviceMarketOrder,
         Component: OperationPage,
         forLoggedIn: true,
         forAdmin: true,
@@ -189,7 +163,7 @@ export const routes: AppRoute[] = [
         titleTag: 'Service-market — DeepMine',
     },
     {
-        path: landLord,
+        path: paths.landLord,
         Component: LandLordPage,
         forLoggedIn: false,
         forAdmin: true,
@@ -197,7 +171,7 @@ export const routes: AppRoute[] = [
         titleTag: 'Landlord — DeepMine',
     },
     {
-        path: landLordStats,
+        path: paths.landLordStats,
         Component: LandlordStatsAndInfoPage,
         forLoggedIn: false,
         forAdmin: true,
@@ -205,7 +179,7 @@ export const routes: AppRoute[] = [
         titleTag: 'Landlord — DeepMine',
     },
     {
-        path: areaManagement,
+        path: paths.areaManagement,
         Component: AreaManagementPage,
         forLoggedIn: false,
         forAdmin: true,
@@ -213,7 +187,7 @@ export const routes: AppRoute[] = [
         titleTag: 'Landlord — Area management',
     },
     {
-        path: hive,
+        path: paths.hive,
         Component: HivePage,
         forLoggedIn: true,
         forAdmin: true,
@@ -221,7 +195,7 @@ export const routes: AppRoute[] = [
         titleTag: 'Hive — DeepMine',
     },
     {
-        path: user,
+        path: paths.user,
         Component: InfoPage,
         forLoggedIn: false,
         forAdmin: true,
@@ -229,7 +203,7 @@ export const routes: AppRoute[] = [
         titleTag: 'Hive — DeepMine',
     },
     {
-        path: warehouse,
+        path: paths.warehouse,
         Component: Warehouse,
         forLoggedIn: true,
         forAdmin: true,
@@ -237,7 +211,7 @@ export const routes: AppRoute[] = [
         titleTag: 'Warehouse — DeepMine',
     },
     {
-        path: createOrder,
+        path: paths.createOrder,
         Component: CreateOrderPage,
         forLoggedIn: true,
         forAdmin: true,
@@ -245,7 +219,7 @@ export const routes: AppRoute[] = [
         titleTag: 'Create order — DeepMine',
     },
     {
-        path: inventoryItemPreview,
+        path: paths.inventoryItemPreview,
         Component: NftPreviewPage,
         forLoggedIn: true,
         forAdmin: true,
@@ -253,7 +227,7 @@ export const routes: AppRoute[] = [
         titleTag: 'Card preview — DeepMine',
     },
     {
-        path: faq,
+        path: paths.faq,
         titleTag: 'FAQ — DeepMine',
         Component: FaqPage,
         forLoggedIn: false,
@@ -261,12 +235,20 @@ export const routes: AppRoute[] = [
         forBetaUser: true,
     },
     {
-        path: engineer,
+        path: paths.engineer,
         Component: EngineerPage,
         forLoggedIn: true,
         forAdmin: true,
         forBetaUser: true,
         titleTag: 'Engineer Workshop — DeepMine',
+    },
+    {
+        path: paths.engineerEquipmentHall,
+        Component: EquipmentHallPage,
+        forLoggedIn: true,
+        forAdmin: true,
+        forBetaUser: true,
+        titleTag: 'Engineer Equipment Hall — DeepMine',
     },
 ];
 

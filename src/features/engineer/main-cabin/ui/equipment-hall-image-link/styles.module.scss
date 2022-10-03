@@ -1,28 +1,32 @@
-@import "src/shared";
+@import 'src/shared';
 
 .equipmentHall {
-  background-image: url("../../../../../shared/ui/images/engineer/center.webp");
-  height: 50vh;
-  width: 70vw;
-  background-size: contain;
-  background-repeat: no-repeat;
-  margin: auto;
-  z-index: 1;
-  cursor: pointer;
-  filter: $glow;
+    background-image: url('../../../../../shared/ui/images/engineer/center.webp');
+    height: 50vh;
+    width: 70vw;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: auto;
+    z-index: 1;
+    cursor: pointer;
+    filter: $glow;
 
-  @media (min-width: $media-tablet)  {
-    filter: initial;
-    height: 70vh;
-    width: 50vw;
-    background-position: center;
+    @media (min-width: $media-tablet) {
+        filter: initial;
+        height: 70vh;
+        width: 50vw;
+        background-position: center;
 
-    &:hover {
-      filter: $glow;
+        &:hover {
+            filter: $glow;
+        }
     }
-  }
+
+    &.disabled {
+        filter: initial;
+    }
 }
 
 .tooltip {
-  z-index: 1;
+    z-index: 1;
 }
