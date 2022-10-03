@@ -2,7 +2,13 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
 import { Loader, Page, useAccountName, useUserLocation } from 'shared';
-import { EquipmentUpgrade } from 'features/engineer';
+import {
+    $engineerContracts,
+    EquipmentUpgrade,
+    getEngineerActiveContract,
+    setupKit,
+    getUpgradeKitType,
+} from 'features/engineer';
 import {
     EngineerCabinGate,
     $engineerCabinStore,
@@ -25,8 +31,21 @@ const EquipmentHallPage: FC = () => {
     const status = getStatus(engineerStore);
     const state = getState(status, inLocation.engineersWorkshop);
 
-    const activeContract = engineerStore.contracts.find(
-        (contract) => !contract.deleted_at && contract.executor === accountName
+    $engineerContracts.watch((contracts) => {
+        const activeContract = getEngineerActiveContract(
+            accountName,
+            contracts
+        );
+        const upgradeKitType = getUpgradeKitType(activeContract);
+
+        if (upgradeKitType) {
+            setupKit(upgradeKitType);
+        }
+    });
+
+    const activeContract = getEngineerActiveContract(
+        accountName,
+        engineerStore.contracts
     );
 
     return (
