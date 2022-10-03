@@ -59,6 +59,7 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
                         </Space>
                     ),
                     key: contract.id,
+                    id: contract.id,
                     reputation: '-',
                     type: contractName[contract.type],
                     date:
@@ -84,9 +85,22 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
         <Table
             columns={[
                 {
-                    title: t('pages.serviceMarket.myContractsTab.nickname'),
+                    title: t('pages.serviceMarket.nickname'),
                     dataIndex: 'nickName',
                     key: 'nickName',
+                    render: (value) => (
+                        <Link to={`/user/${value}`}>{value}</Link>
+                    ),
+                },
+                {
+                    title: t('pages.serviceMarket.id'),
+                    dataIndex: 'id',
+                    key: 'id',
+                    render: (value, props) => (
+                        <Link to={`/service-market/contract/${props.key}`}>
+                            {value}
+                        </Link>
+                    ),
                 },
                 {
                     title: t('pages.serviceMarket.myContractsTab.reputation'),
