@@ -21,7 +21,7 @@ type UseSmartContractActionParams<T> = {
 export const useSmartContractAction = <T>({
     action,
     options = defaultTransactionOptions,
-    onSignSuccess = () => {},
+    onSignSuccess,
 }: UseSmartContractActionParams<T>) => {
     const chainAccount = useChainAuthContext();
     const { t } = useTranslation();
@@ -29,7 +29,7 @@ export const useSmartContractAction = <T>({
     return async () => {
         try {
             await chainAccount?.activeUser?.signTransaction(action, options);
-            onSignSuccess();
+            onSignSuccess?.();
         } catch (e) {
             const err = e as Error;
             showErrorNotification(err);

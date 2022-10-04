@@ -1,41 +1,70 @@
 import { combine, createEffect, createStore, forward, sample } from 'effector';
 import { createGate } from 'effector-react';
+import {
+    $engineerContracts,
+    getContractsExecutorEffect,
+} from 'features/engineer';
 import { getCertificate } from 'entities/engineer';
 import {
+    ActionDto,
+    ActionType,
     EngineerType,
+    getActionEffect,
     getEngineerTableData,
     getInventoryTableData,
     getSmartContractUserEffect,
+    mapSearchParamForIndexPosition,
     smartContractUserStore,
     UserInventoryType,
 } from 'entities/smartcontract';
 
-export const EngineerCabinGate = createGate<{ searchParam: string }>(
+const EngineerCabinGate = createGate<{ searchParam: string }>(
     'EngineerCabinGate'
 );
 
-export const getActiveInventoryEffect = createEffect(
+const getActiveInventoryEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
         return getInventoryTableData({ searchParam });
     }
 );
 
-const userActiveInventoryStore = createStore<UserInventoryType[]>([]).on(
+const $userActiveInventory = createStore<UserInventoryType[]>([]).on(
     getActiveInventoryEffect.doneData,
     (_, { rows }) => rows
 );
 
-const engineerCertificateStore = createStore<UserInventoryType | null>(null);
+const $certificate = createStore<UserInventoryType | null>(null);
 
-export const getEngineerByExecutorEffect = createEffect(
+const getEngineerByExecutorEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
         return getEngineerTableData({ searchParam });
     }
 );
 
-export const engineerStore = createStore<EngineerType | null>(null).on(
+const $engineer = createStore<EngineerType | null>(null).on(
     getEngineerByExecutorEffect.doneData,
     (_, { rows }) => rows?.[0] || null
+);
+
+const getActionByUserEffect = createEffect(
+    async ({ searchParam }: { searchParam: string }) =>
+        getActionEffect({
+            searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
+            searchParam,
+        })
+);
+
+const $openSkillAction = createStore<ActionDto | null>(null).on(
+    getActionEffect.doneData,
+    (_, { rows }) => {
+        const activeAction = rows?.find(
+            ({ type, finishes_at }) =>
+                type === ActionType.engineer_open_skill &&
+                finishes_at * 1000 > Date.now()
+        );
+
+        return activeAction;
+    }
 );
 
 forward({
@@ -44,29 +73,45 @@ forward({
         getActiveInventoryEffect,
         getEngineerByExecutorEffect,
         getSmartContractUserEffect,
+        getContractsExecutorEffect,
+        getActionByUserEffect,
     ],
 });
 
 sample({
-    source: userActiveInventoryStore,
-    target: engineerCertificateStore,
+    source: $userActiveInventory,
+    target: $certificate,
     fn: (inventory) => getCertificate(inventory),
 });
 
-export const engineerCabinStore = combine(
-    engineerStore,
+const $engineerCabinStore = combine(
+    $engineer,
     smartContractUserStore,
-    engineerCertificateStore,
-    (engineer, user, certificate) => ({
+    $certificate,
+    $engineerContracts,
+    $openSkillAction,
+    (engineer, user, certificate, contracts, openSkillAction) => ({
         user: user?.[0] || null,
         engineer,
         certificate,
+        contracts,
+        openSkillAction,
     })
 );
 
-export const isEngineerCabinLoading = combine(
+const $isEngineerCabinLoading = combine(
     getActiveInventoryEffect.pending,
     getEngineerByExecutorEffect.pending,
     getSmartContractUserEffect.pending,
-    (...states) => states.some(Boolean)
+    getContractsExecutorEffect.pending,
+    getActionByUserEffect.pending,
+    (...loadings) => loadings.some(Boolean)
 );
+
+export {
+    EngineerCabinGate,
+    getActiveInventoryEffect,
+    getEngineerByExecutorEffect,
+    $engineerCabinStore,
+    $isEngineerCabinLoading,
+};

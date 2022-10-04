@@ -5,8 +5,8 @@ import {
     EngineerCabinGate,
     CabinStatus,
     getStatus,
-    engineerCabinStore,
-    isEngineerCabinLoading,
+    $engineerCabinStore,
+    $isEngineerCabinLoading,
     getState,
     CabinState,
 } from 'entities/engineer';
@@ -25,6 +25,7 @@ type Props = {
 };
 
 const roomBackgrounds = {
+    [CabinState.NotInaugurated]: EngineerRoomDark,
     [CabinState.Idle]: EngineerRoomDark,
     [CabinState.Active]: EngineerRoomLight,
     [CabinState.Work]: EngineerRoomYellow,
@@ -35,16 +36,17 @@ const CabinPage: FC<Props> = ({ accountName }) => {
 
     const inLocation = useUserLocation();
     const isTablet = useMediaQuery(tablet);
-    const engineerStore = useStore(engineerCabinStore);
-    const isLoading = useStore(isEngineerCabinLoading);
+    const engineerStore = useStore($engineerCabinStore);
+    const isCabinLoading = useStore($isEngineerCabinLoading);
+
     const status = getStatus(engineerStore);
-    const state = getState(status);
+    const state = getState(status, inLocation.engineersWorkshop);
 
     const isNeedDisplayTravel =
         status === CabinStatus.NeedTravel ||
-        (state !== CabinState.Idle && !inLocation.engineersWorkshop);
+        (state !== CabinState.NotInaugurated && !inLocation.engineersWorkshop);
 
-    if (isLoading) {
+    if (isCabinLoading) {
         return (
             <Monitor>
                 <Loader centered />

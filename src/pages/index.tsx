@@ -5,6 +5,7 @@ export { MiningPage } from './mining';
 export { CityPage } from './city';
 export { AuthPage } from './auth';
 export { EngineerPage } from './engineer';
+export { EquipmentHallPage } from './engineer/equipment-hall';
 
 export * from './mineOwner';
 export * from './landLord';

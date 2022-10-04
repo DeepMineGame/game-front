@@ -7,9 +7,8 @@ import { ContractProps } from '../../../types';
 const Citizen: FC<ContractProps> = ({ contract, accountName }) => {
     const { t } = useTranslation();
 
-    const member = contract.executor;
+    const member = contract.client;
 
-    // todo: use dynamic values
     const mineOwnerData = {
         [t('pages.serviceMarket.contract.wallet')]: member || '-',
         [t('roles.citizen')]: (

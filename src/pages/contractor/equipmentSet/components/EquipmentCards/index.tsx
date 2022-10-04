@@ -1,12 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import {
-    CardHolder,
-    useReloadPage,
-    useRepair,
-    Status,
-    getCardStatus,
-    Card,
-} from 'shared';
+import { CardHolder, useReloadPage, Status, getCardStatus, Card } from 'shared';
 import { FC } from 'react';
 import { InventoryNameType } from 'entities/smartcontract';
 import { InventoriedAssets } from 'entities/atomicassets';
@@ -31,7 +24,6 @@ export const EquipmentCards: FC<Props> = ({
 }) => {
     const { t } = useTranslation();
     const reload = useReloadPage();
-    const { getFinishesAtTime } = useRepair();
 
     return (
         <div className={styles.cards}>
@@ -61,7 +53,6 @@ export const EquipmentCards: FC<Props> = ({
                                       )
                         }
                         onRepairFinish={reload}
-                        repairFinishesAt={getFinishesAtTime(inventory)}
                         showCardBadgeStatus
                     />
                 ) : (

@@ -35,7 +35,7 @@ export const getActionEffect = createEffect(
     }: {
         searchIdentification: mapSearchParamForIndexPosition;
         searchParam: number | string;
-    }) =>
+    }): Promise<{ rows: ActionDto[] }> =>
         getActionsTable({
             searchIdentification,
             searchParam,

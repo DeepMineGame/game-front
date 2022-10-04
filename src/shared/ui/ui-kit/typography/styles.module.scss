@@ -24,6 +24,26 @@ h5.thin {
     font-family: $orbitron;
 }
 
+.xs {
+    font-size: 12px;
+}
+
+.sm {
+    font-size: 14px;
+}
+
+.md {
+    font-size: 16px;
+}
+
+.lg {
+    font-size: 18px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
 :global {
     .ant-typography {
         &-primary {
@@ -32,6 +52,10 @@ h5.thin {
 
         &-white {
             color: $color-neutral-neutral-9;
+        }
+
+        &-neutral {
+            color: $color-neutral-neutral-1;
         }
     }
 }

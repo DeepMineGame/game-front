@@ -12,6 +12,14 @@ export function useActionTitle() {
         [ActionType.mine_unsetup]: t('features.actions.mineUnsetup'),
         [ActionType.physical_shift]: t('features.actions.physicalShift'),
         [ActionType.mine_change_layer_depth]: null,
+        [ActionType.engineer_open_skill]: t(
+            'features.actions.engineerUnlockSkill'
+        ),
+        [ActionType.engineer_upgrade_item]: t(
+            'features.actions.engineerUpgradeItem'
+        ),
+        [ActionType.engineer_level_up]: t('features.actions.engineerLevelUp'),
+        [ActionType.equipment_repair]: null,
         [ActionType.undefined]: null,
     };
 }

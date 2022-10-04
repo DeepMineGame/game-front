@@ -16,6 +16,9 @@ export enum ActionType {
     mine_deactivation,
     mine_unsetup,
     mine_change_layer_depth,
+    engineer_open_skill,
+    engineer_upgrade_item,
+    engineer_level_up,
     equipment_repair,
 }
 

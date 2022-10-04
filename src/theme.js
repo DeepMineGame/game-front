@@ -2,6 +2,7 @@
 
 const neutral3Color = '#262626';
 const neutral4 = '#303030';
+const neutral1 = '#141414';
 const neutral2 = '#1D1D1D';
 const gold6 = '#D89614';
 const primary6 = '#F5C913';
@@ -12,7 +13,7 @@ module.exports = {
     '@btn-danger-bg': '#A61D24',
     '@btn-danger-color': '#FFFFFF',
     '@btn-text-shadow': 'none',
-    '@btn-primary-color': '#141414',
+    '@btn-primary-color': neutral1,
     '@btn-primary-bg': primary6,
 
     '@btn-default-color': '#DBDBDB',
@@ -44,7 +45,7 @@ module.exports = {
     '@alert-with-description-icon-size': '21px',
 
     // checkbox
-    '@checkbox-check-color': '#141414',
+    '@checkbox-check-color': neutral1,
 
     // input
     '@input-placeholder-color': '#7D7D7D',
@@ -97,7 +98,7 @@ module.exports = {
     '@height-base': '32px',
     '@height-lg': '40px',
     '@height-sm': '24px',
-    '@component-background': '#141414',
+    '@component-background': neutral1,
     '@border-color-base': '#434343',
     '@text-color': '#DBDBDB',
     '@text-color-secondary': '#FFFFFF',

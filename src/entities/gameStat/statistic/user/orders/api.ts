@@ -1,18 +1,25 @@
 import axios from 'axios';
 import { defaultConfig, ENDPOINT } from 'app';
-import { Role } from 'features';
 import { ContractDto } from 'entities/smartcontract';
 
 export enum FilterOrderStatus {
-    Current = 'current',
-    New = 'new',
-    Completed = 'completed',
+    current = 'current',
+    new = 'new',
+    completed = 'completed',
+}
+
+export enum Role {
+    all = 'all',
+    contractor = 'contractor',
+    mineowner = 'mineowner',
+    citizen = 'citizen',
+    engineer = 'engineer',
 }
 
 export type GetOrdersParams = {
     user?: string;
     userRole?: Role;
-    status?: FilterOrderStatus;
+    status: FilterOrderStatus;
     order?: string;
     orderBy?: string;
 };

@@ -1,0 +1,10 @@
+{
+  "mine": {
+    "common": 100,
+    "uncommon": 80
+  },
+  "equipment": {
+    "common": 100,
+    "uncommon": 80
+  }
+}

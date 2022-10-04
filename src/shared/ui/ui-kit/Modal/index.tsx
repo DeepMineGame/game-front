@@ -1,5 +1,5 @@
-import { Modal as ModalAnt, ModalProps } from 'antd';
 import { FC, ReactNode } from 'react';
+import { Modal as ModalAnt, ModalFuncProps, ModalProps } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 import { Button } from '../Button';
@@ -30,12 +30,20 @@ export const Modal: FC<Props> = (props) => {
                 props?.footer || (
                     <div>
                         {props.onCancel && (
-                            <Button onClick={props.onCancel} ghost>
+                            <Button
+                                ghost
+                                onClick={props.onCancel}
+                                {...props.cancelButtonProps}
+                            >
                                 {props.cancelText || 'Cancel'}
                             </Button>
                         )}
                         {props.onOk && (
-                            <Button onClick={props.onOk} type="primary">
+                            <Button
+                                type="primary"
+                                onClick={props.onOk}
+                                {...props.okButtonProps}
+                            >
                                 {props.okText || 'Ok'}
                             </Button>
                         )}
@@ -59,9 +67,16 @@ export const showWarningModal = ({
         title: <span className={styles.simpleModalTitle}>{title}</span>,
         content,
         className: styles.simpleModal,
-        okButtonProps: { className: styles.modalButton, type: 'primary' },
         okCancel: true,
-        cancelButtonProps: { className: styles.ghostButton, ghost: true },
+    });
+};
+
+export const confirm = ({ title, ...props }: ModalFuncProps) => {
+    ModalAnt.confirm({
+        ...props,
+        title: <b className={styles.simpleModalTitle}>{title}</b>,
+        className: styles.simpleModal,
+        okCancel: true,
     });
 };
 
@@ -78,8 +93,6 @@ export const showSuccessModal = ({
         title: <span className={styles.simpleModalTitle}>{title}</span>,
         content,
         className: styles.simpleModal,
-        okButtonProps: { className: styles.modalButton, type: 'primary' },
-        cancelButtonProps: { className: styles.ghostButton, ghost: true },
     });
 };
 
@@ -96,7 +109,5 @@ export const showErrorModal = ({
         title: <span className={styles.simpleModalTitle}>{title}</span>,
         content,
         className: styles.simpleModal,
-        okButtonProps: { className: styles.modalButton, type: 'primary' },
-        cancelButtonProps: { className: styles.ghostButton, ghost: true },
     });
 };

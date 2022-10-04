@@ -40,6 +40,7 @@
       "YouHaveToPhysicalToManageInventory": "You have to travel to manage the active inventory"
     },
     "common": {
+      "free": "Free",
       "button": {
         "cancel": "Cancel",
         "install": "Install",
@@ -136,7 +137,9 @@
         "area": "Area",
         "equipment": "Equipment",
         "structure": "Structure"
-      }
+      },
+      "price": "Price",
+      "myStatus": "My Status"
     },
     "user": {
       "accountSettings": "Account settings",
@@ -463,6 +466,7 @@
       "lookingForContractor": "Looking for Contractor",
       "lookingForLandlord": "Looking for Landlord",
       "nickname": "Nickname",
+      "id": "ID",
       "creationDate": "Creation date",
       "Penalty&DME": "Penalty, DME",
       "status": "Status",
@@ -530,7 +534,7 @@
         "orderWasDeleted": "Order was deleted",
         "documentWasDestroyedOn": "This document was destroyed on",
         "deleted": "Deleted",
-        "successfullySigned": "Сontract successfully signed"
+        "successfullySigned": "Contract successfully signed"
       },
       "myContractsTab": {
         "nickname": "Nickname",
@@ -615,10 +619,8 @@
       "engineersInauguration": "Engineers Inauguration",
       "youNeedToAttendInauguration": "You need to attend Engineers Inauguration to start working as an engineer",
       "attendInauguration": "Attend Inauguration",
-      "buyAnUpgradeKit": "Buy an Upgrade kit",
-      "youNeedAnUpgradeKit": "You need an upgrade kit to perform the upgrade",
       "FindWorkToDo": "Find a work to do",
-      "youNeedAnActiveEquipmentUpgradeContract": "you need an active equipment upgrade contract to work and earn DME",
+      "youNeedAnActiveEquipmentUpgradeContract": "You need an active equipment upgrade contract to work and earn DME",
       "getStatsInfo": "Get stats & info",
       "nowCanSeeStats": "Now you can see your updates stats & info",
       "engineersTraining": "Engineers training",
@@ -626,21 +628,55 @@
       "upgradesUnlocked": "Upgrades unlocked",
       "getTraining": "Get an Engineers training",
       "nowYouNeedTraining": "Engineers Inauguration is completed, now you need to get an Engineers training",
+      "unlockingTrainingSlot": "Unlocking training slot",
       "engineersStats": "Engineers stats",
       "dmePerUpgrade": "DME per upgrade",
       "dmeTotal": "DME total",
       "travelHere": "Travel Here",
       "youShouldTravelToContinue": "You should travel to this location to continue",
-      "getReport": "Get the report",
+      "getReport": "Get report",
+      "performUpgrade": "Perform upgrade",
+      "areYouSureToPerformUpgrade": "Are you sure you want to perform upgrade?",
       "upgradeCompleted": "Upgrade: Completed",
       "upgradeInProgress": "Upgrade: in progress",
+      "upgradeHasFinished": "Upgrade has finished",
       "equipmentHallTooltip": "Your equipment hall is located here",
       "trainingTooltip": "Your training room is located here",
       "statTooltip": "Your stats & info is located here",
+      "orderCreated": "Order created",
+      "waitCitizenAcceptContract": "Pending acceptance of a contract by a citizen",
+      "contractIsSigned": "Contract is signed",
+      "goToEquipmentHallToMakeUpgrade": "Go to the equipment hall to perform the upgrade",
+      "signOrCreateContract": "Sign or create Level Upgrade Contract to start operation",
+      "waitForCitizenWhoSignOrder": "Wait for a citizen who will sign your order",
+      "upgradesPossibleAfterOrderCreated": "Upgrades and repairs are only possible after an order has been created",
+      "visitServiceMarket": "Visit Service Market",
+      "upgradeKit": "Upgrade Kit",
+      "selectUpgradeKit": "Select upgrade kit",
+      "CommonKit": "Common kit",
+      "UncommonKit": "Uncommon kit",
+      "noTimeReduction": "No time reduction",
+      "timeReduction": "Time reduction -{{percent}}%",
+      "slotWillBeAvailableAfterEquipmentSlotFilled": "This slot will be available after the equipment slot is filled",
+      "equipment": "Equipment",
+      "boosters": "Boosters",
       "status": {
         "notInaugurated": "Not Inaugurated",
+        "idle": "Idle",
         "active": "Active",
         "work": "Working"
+      },
+      "equipmentHall": {
+        "title": "Equipment hall",
+        "estimateTime": "Estimate upgrade time",
+        "successProbability": "Success Probability",
+        "lookingCitizen": "Looking for a citizen who will sign your order",
+        "upgradeInProgress": "Upgrade in progress:"
+      },
+      "dismissRole": {
+        "title": "Warning this action will cause you to stop acting as an Engineer",
+        "content": "Action is only possible if you travel to this location and do not have any active Level Upgrade contracts.",
+        "dismiss": "Dismiss Role"
       }
     }
   },
@@ -698,7 +734,10 @@
       "mineUnsetup": "Mine unsetup",
       "physicalShift": "Travel",
       "equipmentRepair": "Equipment repair",
-      "equipmentRefurbish": "Equipment refurbish"
+      "equipmentRefurbish": "Equipment refurbish",
+      "engineerUnlockSkill": "Engineer Open Skill",
+      "engineerUpgradeItem": "Engineer Upgrade Item",
+      "engineerLevelUp": "Engineer Level Up"
     }
   },
   "roles": {
@@ -710,6 +749,13 @@
     "geologists": "Geologists",
     "engineer": "Engineer",
     "all": "All"
+  },
+  "travel": {
+    "travelHere": "Travel here",
+    "confirm": {
+      "title": "Travel is necessary",
+      "content": "To perform this action you need to move to this location"
+    }
   },
   "blockchainErrors": {
     "fallback": "Error has no code. Unknown error",
