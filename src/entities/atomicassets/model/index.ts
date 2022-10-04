@@ -17,7 +17,8 @@ export const $inventoriedAssets = combine(
         assets.map((asset) => ({
             ...asset,
             ...inventories?.find(
-                (inventory) => asset.asset_id === inventory.asset_id
+                (inventory) =>
+                    String(asset.asset_id) === String(inventory.asset_id)
             ),
         }))
 );
@@ -29,5 +30,6 @@ export type InventoriedAssets = ReturnType<
 sample({
     source: inventoriesStore,
     target: getAssetsEffect,
-    fn: (inventories) => inventories?.map((inventory) => inventory.asset_id),
+    fn: (inventories) =>
+        inventories?.map((inventory) => String(inventory.asset_id)),
 });
