@@ -15,14 +15,6 @@ export const MiningContractsTable: FC<Props> = ({ contracts }) => {
         <Table
             columns={[
                 {
-                    title: t('pages.serviceMarket.nickname'),
-                    dataIndex: 'nickName',
-                    key: 'nickName',
-                    render: (value) => (
-                        <Link to={`/user/${value}`}>{value}</Link>
-                    ),
-                },
-                {
                     title: t('pages.serviceMarket.id'),
                     dataIndex: 'id',
                     key: 'id',
@@ -32,6 +24,15 @@ export const MiningContractsTable: FC<Props> = ({ contracts }) => {
                         </Link>
                     ),
                 },
+                {
+                    title: t('pages.serviceMarket.nickname'),
+                    dataIndex: 'nickName',
+                    key: 'nickName',
+                    render: (value) => (
+                        <Link to={`/user/${value}`}>{value}</Link>
+                    ),
+                },
+
                 {
                     title: t('pages.serviceMarket.creationDate'),
                     dataIndex: 'creationDate',

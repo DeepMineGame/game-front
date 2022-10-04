@@ -40,14 +40,6 @@ export const LevelUpgradeContractsTable: FC<Props> = ({ contracts }) => {
         <Table
             columns={[
                 {
-                    title: t('pages.serviceMarket.levelUpgradeTab.nickname'),
-                    dataIndex: 'nickName',
-                    key: 'nickName',
-                    render: (value) => (
-                        <Link to={`/user/${value}`}>{value}</Link>
-                    ),
-                },
-                {
                     title: t('pages.serviceMarket.id'),
                     dataIndex: 'id',
                     key: 'id',
@@ -55,6 +47,14 @@ export const LevelUpgradeContractsTable: FC<Props> = ({ contracts }) => {
                         <Link to={`/service-market/contract/${props.key}`}>
                             {value}
                         </Link>
+                    ),
+                },
+                {
+                    title: t('pages.serviceMarket.levelUpgradeTab.nickname'),
+                    dataIndex: 'nickName',
+                    key: 'nickName',
+                    render: (value) => (
+                        <Link to={`/user/${value}`}>{value}</Link>
                     ),
                 },
                 {
