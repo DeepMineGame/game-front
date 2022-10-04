@@ -54,7 +54,7 @@ const getActionByUserEffect = createEffect(
         })
 );
 
-const actionsStore = createStore<ActionDto | null>(null).on(
+const $openSkillAction = createStore<ActionDto | null>(null).on(
     getActionEffect.doneData,
     (_, { rows }) => {
         const activeAction = rows?.find(
@@ -89,7 +89,7 @@ const $engineerCabinStore = combine(
     smartContractUserStore,
     $certificate,
     $engineerContracts,
-    actionsStore,
+    $openSkillAction,
     (engineer, user, certificate, contracts, openSkillAction) => ({
         user: user?.[0] || null,
         engineer,

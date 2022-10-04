@@ -8,8 +8,11 @@
     background-repeat: no-repeat;
     margin: auto;
     z-index: 1;
-    cursor: pointer;
     filter: $glow;
+
+    &:not(.disabled) {
+        cursor: pointer;
+    }
 
     @media (min-width: $media-tablet) {
         filter: initial;

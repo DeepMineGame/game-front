@@ -534,7 +534,7 @@
         "orderWasDeleted": "Order was deleted",
         "documentWasDestroyedOn": "This document was destroyed on",
         "deleted": "Deleted",
-        "successfullySigned": "Сontract successfully signed"
+        "successfullySigned": "Contract successfully signed"
       },
       "myContractsTab": {
         "nickname": "Nickname",
@@ -639,7 +639,6 @@
       "areYouSureToPerformUpgrade": "Are you sure you want to perform upgrade?",
       "upgradeCompleted": "Upgrade: Completed",
       "upgradeInProgress": "Upgrade: in progress",
-      "upgradeInProgress:": "Upgrade in progress:",
       "upgradeHasFinished": "Upgrade has finished",
       "equipmentHallTooltip": "Your equipment hall is located here",
       "trainingTooltip": "Your training room is located here",
@@ -657,6 +656,7 @@
       "CommonKit": "Common kit",
       "UncommonKit": "Uncommon kit",
       "noTimeReduction": "No time reduction",
+      "timeReduction": "Time reduction -{{percent}}%",
       "slotWillBeAvailableAfterEquipmentSlotFilled": "This slot will be available after the equipment slot is filled",
       "equipment": "Equipment",
       "boosters": "Boosters",
@@ -670,7 +670,8 @@
         "title": "Equipment hall",
         "estimateTime": "Estimate upgrade time",
         "successProbability": "Success Probability",
-        "lookingCitizen": "Looking for a citizen who will sign your order"
+        "lookingCitizen": "Looking for a citizen who will sign your order",
+        "upgradeInProgress": "Upgrade in progress:"
       },
       "dismissRole": {
         "title": "Warning this action will cause you to stop acting as an Engineer",

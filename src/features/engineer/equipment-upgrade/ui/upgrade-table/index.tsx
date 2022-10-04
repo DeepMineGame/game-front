@@ -3,12 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { AssetDataType } from 'entities/atomicassets';
 import { getTimeLeft } from 'shared/ui/utils';
 import { KeyValueTable } from 'shared/ui/ui-kit';
-import {
-    getMinMaxUpgradeTime,
-    getTimeModifier,
-    getPriceModifier,
-} from '../../lib';
 import { UpgradeKitType } from '../../model/upgrade-kit';
+import { useUpgradeModifiers } from '../../lib/useUpgradeModifier';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -22,24 +18,20 @@ const UpgradeTable: FC<Props> = ({ equipment, isWaitCitizen, upgradeKit }) => {
 
     const showData = !!upgradeKit && !isWaitCitizen && equipment;
 
-    const timeModifier = getTimeModifier(upgradeKit) / 100;
-    const priceModifier = getPriceModifier(upgradeKit) / 100;
-    const { min: minTime, max: maxTime } = getMinMaxUpgradeTime(equipment);
+    const { price, minTime, maxTime } = useUpgradeModifiers(
+        upgradeKit,
+        equipment
+    );
 
     return (
         <KeyValueTable
             className={styles.table}
             items={{
                 [t('pages.engineer.equipmentHall.estimateTime')]: showData
-                    ? `${getTimeLeft(minTime * timeModifier)} - ${getTimeLeft(
-                          maxTime * timeModifier
-                      )}`
+                    ? `${getTimeLeft(minTime)} - ${getTimeLeft(maxTime)}`
                     : '-',
                 [t('components.common.price')]: showData
-                    ? `${
-                          priceModifier *
-                          Number(equipment.data?.['DME to upgrade'] || 0)
-                      } ${t('components.common.button.dme')}`
+                    ? `${price} ${t('components.common.button.dme')}`
                     : '-',
             }}
         />

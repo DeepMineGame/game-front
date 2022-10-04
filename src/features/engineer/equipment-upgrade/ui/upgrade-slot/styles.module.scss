@@ -12,13 +12,13 @@
     cursor: pointer;
 }
 
+.card.disabled {
+    cursor: default;
+}
+
 .card.notAllowed {
     user-select: none;
     cursor: not-allowed;
-}
-
-.card.disabled {
-    cursor: default;
 }
 
 .icon.notAllowed {
