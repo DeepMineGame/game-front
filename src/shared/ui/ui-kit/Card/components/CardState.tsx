@@ -28,10 +28,10 @@ export const CardState: FC<{
     return (
         <div className={styles.stateWrapper}>
             <div className={styles.cardState}>
-                {!isBrokenAndNotInRepair ? (
-                    <ToolOutlined className={styles.iconTool} />
-                ) : (
+                {isBrokenAndNotInRepair ? (
                     <BrokenOutlined />
+                ) : (
+                    <ToolOutlined className={styles.iconTool} />
                 )}
                 <Text type="secondary">
                     {isBrokenAndNotInRepair
