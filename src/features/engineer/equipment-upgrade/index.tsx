@@ -3,7 +3,7 @@ import { Space } from 'antd';
 import { useStore } from 'effector-react';
 import { ContractDto } from 'entities/smartcontract';
 import { CabinStatus } from 'entities/engineer';
-import { useAccountName } from 'shared/lib/hooks';
+import { tablet, useAccountName, useMediaQuery } from 'shared/lib/hooks';
 import { EquipmentSetup, UpgradeTable, PerformUpgrade, GetUpgrade } from './ui';
 import { $equipment, getEquipmentByIdEffect } from './model';
 import { $upgradeKit, UpgradeKitType } from './model/upgrade-kit';
@@ -15,12 +15,17 @@ type Props = {
 
 const EquipmentUpgrade: FC<Props> = ({ contract, status }) => {
     const accountName = useAccountName();
+    const isTablet = useMediaQuery(tablet);
     const equipment = useStore($equipment);
     const upgradeKit = useStore($upgradeKit);
     const equipmentLoading = useStore(getEquipmentByIdEffect.pending);
 
     return (
-        <Space size={42} align="start">
+        <Space
+            direction={isTablet ? 'horizontal' : 'vertical'}
+            size={isTablet ? 42 : 0}
+            align="start"
+        >
             <EquipmentSetup
                 status={status}
                 equipment={equipment}

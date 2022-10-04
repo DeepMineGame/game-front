@@ -54,6 +54,7 @@ const UpgradeKit: FC<Props> = ({ equipment, disabled, isWaitCitizen }) => {
             </UpgradeSlot>
 
             <UpgradeKitModal
+                equipment={equipment}
                 value={selectedKit}
                 onSelect={selectKit}
                 visible={showKitModal}

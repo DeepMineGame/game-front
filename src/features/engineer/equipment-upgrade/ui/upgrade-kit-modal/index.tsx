@@ -2,13 +2,15 @@ import { FC, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import { ModalProps } from 'antd';
+import { AssetDataType } from 'entities/atomicassets';
 import { getKitImage } from 'shared/lib/utils';
 import { Modal, Text } from 'shared/ui/ui-kit';
-import { getTimeModifier } from '../../lib';
 import { UpgradeKitType } from '../../model/upgrade-kit';
+import { useUpgradeModifiers } from '../../lib/useUpgradeModifier';
 import styles from './styles.module.scss';
 
 type Props = ModalProps & {
+    equipment: AssetDataType | null;
     onSelect: (value: UpgradeKitType) => void;
     value: string;
 };
@@ -42,8 +44,22 @@ const KitCard: FC<KitProps> = ({ title, name, selected, bottom, onClick }) => {
     );
 };
 
-const UpgradeKitModal: FC<Props> = ({ onSelect, value, ...props }) => {
+const UpgradeKitModal: FC<Props> = ({
+    onSelect,
+    value,
+    equipment,
+    ...props
+}) => {
     const { t } = useTranslation();
+    const { price: commonPrice } = useUpgradeModifiers(
+        UpgradeKitType.common,
+        equipment
+    );
+
+    const { price: uncommonPrice, timeModifier } = useUpgradeModifiers(
+        UpgradeKitType.uncommon,
+        equipment
+    );
 
     return (
         <Modal
@@ -59,7 +75,10 @@ const UpgradeKitModal: FC<Props> = ({ onSelect, value, ...props }) => {
                     onClick={onSelect}
                     bottom={
                         <>
-                            <Text strong>{t('components.common.free')}</Text>
+                            <Text strong>
+                                {commonPrice}{' '}
+                                {t('components.common.button.dme')}
+                            </Text>
                             <Text>{t('pages.engineer.noTimeReduction')}</Text>
                         </>
                     }
@@ -72,13 +91,14 @@ const UpgradeKitModal: FC<Props> = ({ onSelect, value, ...props }) => {
                     onClick={onSelect}
                     bottom={
                         <>
-                            {/* todo! */}
-                            <Text strong>200 DME</Text>
+                            <Text strong>
+                                {uncommonPrice}{' '}
+                                {t('components.common.button.dme')}
+                            </Text>
                             <Text>
-                                {`Time reduction -${
-                                    100 -
-                                    getTimeModifier(UpgradeKitType.uncommon)
-                                }%`}
+                                {t('pages.engineer.timeReduction', {
+                                    percent: 100 - timeModifier,
+                                })}
                             </Text>
                         </>
                     }
