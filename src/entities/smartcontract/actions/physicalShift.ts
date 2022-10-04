@@ -1,10 +1,6 @@
 import { deepminegame } from '../index';
 
-export function physicalShift(
-    waxUser: string,
-    newLocation: number,
-    duration = 0
-) {
+export function physicalShift(waxUser: string, newLocation: number) {
     return {
         actions: [
             {
@@ -19,7 +15,6 @@ export function physicalShift(
                 data: {
                     wax_user: waxUser,
                     new_location: newLocation,
-                    duration,
                 },
             },
         ],

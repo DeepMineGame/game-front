@@ -96,7 +96,10 @@ export const FaqPage = () => {
                     <ExternalLink href="https://docs.deepmine.world/deepmine/deepmine-entities/game-roles/contractor">
                         {t('roles.contractor')}
                     </ExternalLink>
-                    . {t('pages.faq.moreRoles')}.{' '}
+                    . {t('pages.faq.moreRoles')}{' '}
+                    <ExternalLink href="/img/roles.webp">
+                        {t('pages.faq.here')}
+                    </ExternalLink>
                 </Typography.Paragraph>
             </Space>
 
