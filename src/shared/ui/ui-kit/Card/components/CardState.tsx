@@ -13,23 +13,28 @@ import styles from '../styles.module.scss';
 
 export const CardState: FC<{
     status?: Status;
-    finishesAt?: number;
+    finishesAt: number;
     onFinish?: () => void;
 }> = ({ status, finishesAt, onFinish }) => {
     const { t } = useTranslation();
-    useTick(status === Status.broken);
+    useTick(!isUtcDateExpired(finishesAt));
 
-    if (finishesAt && onFinish && isUtcDateExpired(finishesAt)) onFinish();
+    const isBrokenAndNotInRepair =
+        isUtcDateExpired(finishesAt) && status === Status.broken;
+
+    if (onFinish && status !== Status.broken && isUtcDateExpired(finishesAt))
+        onFinish();
 
     return (
         <div className={styles.stateWrapper}>
             <div className={styles.cardState}>
-                {status === Status.broken && !finishesAt && <BrokenOutlined />}
-                {status === Status.broken && finishesAt && (
+                {!isBrokenAndNotInRepair ? (
                     <ToolOutlined className={styles.iconTool} />
+                ) : (
+                    <BrokenOutlined />
                 )}
                 <Text type="secondary">
-                    {status === Status.broken && !finishesAt
+                    {isBrokenAndNotInRepair
                         ? t('kit.cardStates.broken')
                         : getTimeLeftFromUtc(finishesAt!)}
                 </Text>
