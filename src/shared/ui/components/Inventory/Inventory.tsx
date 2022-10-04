@@ -1,4 +1,4 @@
-import { Button, Modal, Dropdown, useRepair, useReloadPage } from 'shared';
+import { Button, Modal, Dropdown, useReloadPage } from 'shared';
 import React, { FC, useEffect, useState } from 'react';
 import { ModalProps, Space } from 'antd';
 import { SortAscendingOutlined, FilterOutlined } from '@ant-design/icons';
@@ -29,7 +29,6 @@ export const Inventory: FC<InventoryProps> = ({
     ...props
 }) => {
     const reload = useReloadPage();
-    const { getFinishesAtTime } = useRepair();
     const [selectedTab, setSelectedTab] = useState(
         props.selectedTab ?? InventoryTab.equipment
     );
@@ -102,7 +101,6 @@ export const Inventory: FC<InventoryProps> = ({
                                 buttonText="Details"
                                 onButtonClick={handleDetailsClick(card)}
                                 onRepairFinish={reload}
-                                repairFinishesAt={getFinishesAtTime(card)}
                                 showCardBadgeStatus={false}
                             />
                         ))}

@@ -49,7 +49,6 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     ...props
 }) => {
     const reload = useReloadPage();
-    const { getFinishesAtTime } = useRepair();
     const [cardData, setCardData] = useState<AssetDataType | undefined>(
         undefined
     );
@@ -113,7 +112,6 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                     <AssetCard
                         inventory={card}
                         onRepairFinish={reload}
-                        repairFinishesAt={getFinishesAtTime(card)}
                         showCardBadgeStatus={
                             getCardStatus(card) === Status.broken
                         }
