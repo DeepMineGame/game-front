@@ -58,7 +58,8 @@ export const Card: FC<CardProps> = ({
                 <div onClick={onClick}>
                     {showCardBadgeStatus && <CardBadge status={status} />}
                     {(status === Status.broken ||
-                        !isUtcDateExpired(inventory?.available_from!)) && (
+                        (!!inventory?.available_from &&
+                            !isUtcDateExpired(inventory?.available_from))) && (
                         <CardState
                             status={status}
                             finishesAt={inventory?.available_from!}
