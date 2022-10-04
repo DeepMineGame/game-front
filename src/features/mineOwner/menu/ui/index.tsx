@@ -59,7 +59,9 @@ export const MineOwnerMenu: FC<Props> = ({
                     currentMineOwnerCabinState
                 ),
             tooltip: t('pages.mineOwner.menu.team'),
-            showTooltip: cabinState === mineOwnerCabinState.needCrew,
+            ...(cabinState === mineOwnerCabinState.needCrew && {
+                showTooltip: true,
+            }),
         },
         {
             link: mineOwnerStatsAndInfo,
