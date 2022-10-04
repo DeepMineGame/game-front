@@ -56,3 +56,4 @@ export {
     getUpgradeType,
     parseAttrs,
 } from './get-upgrade-attr';
+export { mergeAssets } from './merge-assets';

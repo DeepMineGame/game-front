@@ -9,10 +9,12 @@ export const $assets = createStore<AssetDataType[]>([]).on(
     (_, data) => data
 );
 
-// merge invetories with assets
+// merge invetories with assets from atomic
 export const $inventoriedAssets = combine(
     inventoriesStore,
     $assets,
+    // mergeAssets
+    // TODO: use mergeAssets after fix export/import conflict
     (inventories, assets) =>
         assets.map((asset) => ({
             ...asset,
