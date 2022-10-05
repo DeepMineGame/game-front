@@ -408,7 +408,7 @@
         "penalty": "Penalty",
         "penaltyHint": "If the performing party violates the terms of the contract or terminates the contract prematurely, the counterparty may charge a fine.",
         "ifDuring": "If during the entire contract, the executor within",
-        "contractorFined": "contractor can be fined and the contract can be terminated with",
+        "contractorFined": "executor can be fined and the contract can be terminated with",
         "willExtractLessThan": "will extract less than",
         "miningTerms": "Mining terms",
         "miningTermsHint": "If during the entire period of the contract, within the specified number of days, less than the specified amount of DME was extracted, the other party has the right to terminate the contract and collect a penalty",
