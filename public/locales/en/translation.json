@@ -407,7 +407,7 @@
         "feeTooltip": "% of DME charged on each dig at the mine.",
         "penalty": "Penalty",
         "penaltyHint": "If the performing party violates the terms of the contract or terminates the contract prematurely, the counterparty may charge a fine.",
-        "ifDuring": "If during the entire contract, the contractor within",
+        "ifDuring": "If during the entire contract, the executor within",
         "contractorFined": "contractor can be fined and the contract can be terminated with",
         "willExtractLessThan": "will extract less than",
         "miningTerms": "Mining terms",
