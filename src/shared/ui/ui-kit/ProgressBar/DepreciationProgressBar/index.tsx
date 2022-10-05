@@ -24,15 +24,18 @@ export const DepreciationProgressBar: FC<DepreciationProgressBarProps> = memo(
             </div>
         );
 
+        const amountOfMiningPercentage =
+            100 - (Number(currentCapacity) / Number(maximalCapacity)) * 100;
+
+        const step = 100 / Number(maximalCapacity);
+        const amountOfStep = Number(depreciation);
+
         return (
             <Progress
                 className={cn(styles.rootDeprecation, className)}
-                percent={(Number(depreciation) / Number(maximalCapacity)) * 100}
+                percent={amountOfMiningPercentage}
                 success={{
-                    percent:
-                        100 -
-                        (Number(currentCapacity) / Number(maximalCapacity)) *
-                            100,
+                    percent: amountOfMiningPercentage + step * amountOfStep,
                 }}
                 format={format}
             />
