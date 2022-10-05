@@ -76,15 +76,15 @@ export const Card: FC<CardProps> = ({
                     </div>
                     {withDepreciationBar && (
                         <DepreciationProgressBar
-                            completedMining={
+                            depreciation={
                                 (inventory as InventoriedAssets[number])?.data
                                     ?.depreciation
                             }
-                            serviceLife={
+                            currentCapacity={
                                 (inventory as InventoriedAssets[number])
                                     ?.data?.['current capacity']
                             }
-                            totalServiceLife={
+                            maximalCapacity={
                                 (inventory as InventoriedAssets[number])
                                     ?.data?.['maximal capacity']
                             }

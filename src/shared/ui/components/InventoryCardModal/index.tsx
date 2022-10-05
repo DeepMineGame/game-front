@@ -195,13 +195,11 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                     className={
                                         styles.depreciationProgressBarWidth
                                     }
-                                    completedMining={
-                                        cardData?.data.depreciation
-                                    }
-                                    serviceLife={
+                                    depreciation={cardData?.data.depreciation}
+                                    currentCapacity={
                                         cardData?.data['current capacity']
                                     }
-                                    totalServiceLife={
+                                    maximalCapacity={
                                         cardData?.data['maximal capacity']
                                     }
                                 />
