@@ -4,12 +4,13 @@ import { BaseOrder, LevelUpgradeOrder, MineOrder } from 'entities/order';
 
 const getBaseFields = (orderData: BaseOrder) => {
     const isClient = Boolean(orderData.is_client);
+    const assetId = Number(orderData.opt_asset_id);
 
     return {
         wax_user: orderData.wax_user,
         opt_client: orderData.opt_client,
         opt_executor: orderData.opt_executor,
-        opt_asset_id: isClient && Number(orderData.opt_asset_id),
+        opt_asset_id: Number.isNaN(assetId) ? undefined : assetId,
         is_client: isClient,
         penalty_amount: Number(orderData.penalty_amount),
         deadline_duration:
