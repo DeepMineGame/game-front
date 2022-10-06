@@ -3,7 +3,11 @@ import { FC } from 'react';
 import { Button, Select } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
-import { ContractRole, areasAssetTemplateId } from 'entities/smartcontract';
+import {
+    ContractRole,
+    areasAssetTemplateId,
+    mineAssetTemplateId,
+} from 'entities/smartcontract';
 import { orderFields } from 'entities/order';
 import {
     hasEngagedAreaStore,
@@ -81,7 +85,11 @@ export const LandLordMineOwner: FC<TypeStepProps> = ({
             </Form.Item>
             <PersonalizedOrderCheckbox isSelfClient={!isClient} form={form} />
             <AssetSelectField
-                templatesId={areasAssetTemplateId}
+                templatesId={
+                    isLandlordRoleSelected
+                        ? areasAssetTemplateId
+                        : [mineAssetTemplateId]
+                }
                 form={form}
                 accountName={accountName}
             />
