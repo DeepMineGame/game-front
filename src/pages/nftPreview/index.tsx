@@ -32,7 +32,7 @@ export const NftPreviewPage: FC = () => {
             {card ? (
                 <InventoryCardModal
                     visible
-                    card={card!}
+                    card={card}
                     onCancel={goBackButton}
                 />
             ) : (
