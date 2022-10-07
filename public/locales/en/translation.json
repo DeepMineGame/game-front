@@ -37,7 +37,7 @@
       "activeInventory": "Active inventory",
       "confirmTransfer": "Confirm transfer",
       "storage": "Storage",
-      "YouHaveToPhysicalToManageInventory": "You have to travel to manage the active inventory"
+      "YouHaveToPhysicalToManageInventory": "Travel to Hive to have the ability to load active inventory from the warehouse"
     },
     "common": {
       "free": "Free",
@@ -414,7 +414,7 @@
         "miningTermsHint": "If during the entire period of the contract, within the specified number of days, less than the specified amount of DME was extracted, the other party has the right to terminate the contract and collect a penalty",
         "startOfOperation": "Start of operation",
         "effectiveDate": "Effective date",
-        "startOfOperationTooltip": "Time when parties begin performing their obligations upon the contract.",
+        "startOfOperationTooltip": "The date when agreement or transaction becomes binding",
         "goToServiceMarket": "To the Service Market",
         "orderCreated": "Your order was successfully created",
         "orderFailed": "Failed to create your order",
