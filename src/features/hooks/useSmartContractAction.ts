@@ -35,7 +35,9 @@ export const useSmartContractAction = <T>({
             showErrorNotification(err);
             showErrorModal({
                 title: t('components.common.status.error'),
-                content: t(`blockchainErrors.${getErrorCode(err.message)}`),
+                content: getErrorCode(err.message)
+                    ? t(`blockchainErrors.${getErrorCode(err.message)}`)
+                    : err.message,
             });
             throw e;
         }
@@ -57,7 +59,9 @@ export const useSmartContractActionDynamic = () => {
                 showErrorNotification(err);
                 showErrorModal({
                     title: t('components.common.status.error'),
-                    content: t(`blockchainErrors.${getErrorCode(err.message)}`),
+                    content: getErrorCode(err.message)
+                        ? t(`blockchainErrors.${getErrorCode(err.message)}`)
+                        : err.message,
                 });
                 throw e;
             });

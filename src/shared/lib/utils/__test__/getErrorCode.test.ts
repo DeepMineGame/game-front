@@ -15,31 +15,31 @@ describe('getErrorCode', () => {
             getErrorCode(
                 '[00125 you must terminate the Contract with Landlord first'
             )
-        ).toBe('fallback');
+        ).toBe(undefined);
         expect(
             getErrorCode(
                 '00125 you must terminate the Contract with Landlord first'
             )
-        ).toBe('fallback');
+        ).toBe(undefined);
         expect(
             getErrorCode(
                 '00125] you must terminate the Contract with Landlord first'
             )
-        ).toBe('fallback');
+        ).toBe(undefined);
         expect(
             getErrorCode(
                 '[] you must terminate the Contract with Landlord first'
             )
-        ).toBe('fallback');
+        ).toBe(undefined);
         expect(
             getErrorCode(
                 '] you must terminate the Contract with Landlord first'
             )
-        ).toBe('fallback');
+        ).toBe(undefined);
         expect(
             getErrorCode(
                 '[ you must terminate the Contract with Landlord first'
             )
-        ).toBe('fallback');
+        ).toBe(undefined);
     });
 });
