@@ -1,5 +1,9 @@
 import { Nullable } from 'global';
 import {
+    getEngineerActiveContract,
+    getEngineerCompletedContracts,
+} from 'features/engineer';
+import {
     ActionDto,
     ContractDto,
     EngineerType,
@@ -33,12 +37,11 @@ export const getStatus = ({
     const inLocation = user?.location === LOCATION_TO_ID.engineers_workshop;
     const hasSkills = !!engineer?.skills?.length;
 
-    const completedContracts = (contracts || []).filter(
-        (contract) => !!contract.deleted_at && contract.executor === user?.owner
+    const completedContracts = getEngineerCompletedContracts(
+        user?.owner,
+        contracts
     );
-    const activeContract = contracts?.find(
-        (contract) => !contract.deleted_at && contract.executor === user?.owner
-    );
+    const activeContract = getEngineerActiveContract(user?.owner, contracts);
 
     const signedByCitizen = !!activeContract?.client;
     const upgradeStarted = !!activeContract?.start_time;

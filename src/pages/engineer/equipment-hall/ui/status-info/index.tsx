@@ -31,7 +31,7 @@ const StatusInfo: FC<Props> = ({ state, status, contract }) => {
                     fontFamily="orbitron"
                     className={styles.statusTitle}
                 >
-                    {t('pages.engineer.upgradeInProgress:')}{' '}
+                    {t('pages.engineer.equipmentHall.upgradeInProgress')}{' '}
                     <CountDown
                         onFinish={reloadPage}
                         finishesAt={contract?.finishes_at}
@@ -96,7 +96,8 @@ const StatusInfo: FC<Props> = ({ state, status, contract }) => {
                 <EngineerSettings
                     disabled={
                         state === CabinState.Work ||
-                        status === CabinStatus.UpgradeCompleted
+                        status === CabinStatus.UpgradeCompleted ||
+                        status < CabinStatus.NeedContract
                     }
                 />
             </Space>

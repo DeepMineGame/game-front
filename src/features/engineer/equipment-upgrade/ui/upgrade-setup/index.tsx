@@ -20,6 +20,8 @@ type Props = {
 };
 
 const tooltipText = {
+    // TODO: remove NeedCertificate
+    [CabinStatus.NeedCertificate]: 'components.common.comingSoon',
     [CabinStatus.NeedContract]: 'pages.engineer.signOrCreateContract',
     [CabinStatus.NeedCitizen]: 'pages.engineer.waitForCitizenWhoSignOrder',
 };
@@ -72,6 +74,9 @@ const EquipmentSetup: FC<Props> = ({
     const navigate = useNavigate();
     const upgradeKitDisabled = disabledStatuses.includes(status);
 
+    // TODO: remove after close tests
+    const statusForTest = CabinStatus.NeedCertificate;
+
     return (
         <div>
             <Space size={26}>
@@ -85,13 +90,16 @@ const EquipmentSetup: FC<Props> = ({
                                 : undefined
                         }
                         visible={
-                            status === CabinStatus.NeedContract
+                            // TODO: status === NeedContract
+                            statusForTest === CabinStatus.NeedCertificate
                                 ? true
                                 : undefined
                         }
-                        placement="bottom"
+                        placement="top"
                         tooltipText={t(
-                            tooltipText[status as keyof typeof tooltipText]
+                            tooltipText[
+                                statusForTest as keyof typeof tooltipText
+                            ]
                         )}
                     >
                         <EquipmentContent
@@ -103,7 +111,7 @@ const EquipmentSetup: FC<Props> = ({
                 </Space>
 
                 <UpgradeKit
-                    disabled={upgradeKitDisabled}
+                    disabled={upgradeKitDisabled || !equipment || isWaitCitizen}
                     equipment={equipment}
                     isWaitCitizen={isWaitCitizen}
                 />

@@ -1,7 +1,12 @@
 import { FC } from 'react';
 import { Tooltip } from 'antd';
 import cn from 'classnames';
-import { Button, getImagePath, DepreciationProgressBar } from 'shared';
+import {
+    Button,
+    getImagePath,
+    DepreciationProgressBar,
+    isUtcDateExpired,
+} from 'shared';
 import { UserInventoryType } from 'entities/smartcontract';
 import { AssetDataType } from 'entities/atomicassets';
 import { ProgressProps } from '../ProgressBar/NftProgressBar';
@@ -22,7 +27,6 @@ export type CardProps = {
     onClick?: (e: any) => void;
     className?: string;
     inventory?: UserInventoryType;
-    repairFinishesAt?: number;
     onRepairFinish?: () => void;
     withDepreciationBar?: boolean;
     showCardBadgeStatus: boolean;
@@ -37,7 +41,6 @@ export const Card: FC<CardProps> = ({
     onClick,
     className,
     inventory,
-    repairFinishesAt,
     onRepairFinish,
     showCardBadgeStatus,
     withDepreciationBar = true,
@@ -48,10 +51,12 @@ export const Card: FC<CardProps> = ({
         <div className={cn(styles.wrapper, className)}>
             <div onClick={onClick}>
                 {showCardBadgeStatus && <CardBadge status={status} />}
-                {status === Status.broken && (
+                {(status === Status.broken ||
+                    (!!inventory?.available_from &&
+                        !isUtcDateExpired(inventory?.available_from))) && (
                     <CardState
                         status={status}
-                        finishesAt={repairFinishesAt}
+                        finishesAt={inventory?.available_from!}
                         onFinish={onRepairFinish}
                     />
                 )}
