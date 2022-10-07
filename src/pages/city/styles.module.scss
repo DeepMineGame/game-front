@@ -12,7 +12,6 @@
   @media (min-width: $media-desktop-l)  {
     background-image: url("../../shared/ui/images/city/hometown4k.webp");
   }
-
 }
 
 .enterLink {
@@ -22,10 +21,6 @@
   cursor: pointer;
   background: rgba(20, 20, 20, 0.4);
   border-bottom: 1px solid $color-neutral-neutral-1;
-
-  &:hover {
-    background-color: $color-primary-primary-6;
-  }
 }
 
 .mineOwnerTitle {
@@ -34,6 +29,8 @@
 }
 
 .mine {
+  @include enter-hover;
+
   height: 85vh;
   width: 15vw;
   float: right;
@@ -48,13 +45,11 @@
   @media (min-width: $media-tablet)  {
     filter: initial;
   }
-
-  &:hover {
-    filter: $glow;
-  }
 }
 
 .hive {
+  @include enter-hover;
+
   margin-left: 10vw;
   margin-top: 5vh;
   height: 50vh;
@@ -70,14 +65,11 @@
     background-position: center bottom;
     filter: initial;
   }
-
-  &:hover {
-    background-position: center bottom;
-    filter: $glow;
-  }
 }
 
 .serviceMarket {
+  @include enter-hover;
+
   display: inline-block;
   height: 50vh;
   width: 20vw;
@@ -88,10 +80,6 @@
   background-size: contain;
   cursor: pointer;
   position: relative;
-
-  &:hover {
-    filter: $glow;
-  }
 
   @media (min-width: $media-tablet)  {
     filter: initial;
@@ -104,6 +92,8 @@
 }
 
 .landlordLounge {
+  @include enter-hover;
+
   height: 65vh;
   width: 14vw;
   background-image: url("../../shared/ui/images/city/scyscraper.webp");
@@ -117,13 +107,11 @@
     filter: initial;
     background-position: center;
   }
-
-  &:hover {
-    filter: $glow;
-  }
 }
 
 .engineer {
+  @include enter-hover;
+
   height: 20vh;
   width: 20vw;
   margin-left: 35%;
@@ -136,11 +124,6 @@
 
   @media (min-width: $media-tablet)  {
     filter: initial;
-    background-position: left;
-  }
-
-  &:hover {
-    filter: $glow;
     background-position: left;
   }
 }
