@@ -13,5 +13,22 @@ export const getErrorCode = (error: string) => {
 
     const match = /\[([0-9]+)\]/gm.exec(error);
 
-    return match ? match[1] : undefined;
+    return match?.[1];
+};
+
+export const createErrorMessage = <T1 extends (text: string) => string>(
+    error: Error,
+    t: T1
+) => {
+    let errorMessage = error.message;
+    const errorCode = getErrorCode(error.message);
+    const isCodeExistInTranslate =
+        t(`blockchainErrors.${getErrorCode(errorMessage)}`).split('.')[0] !==
+        'blockchainErrors';
+
+    if (errorCode && isCodeExistInTranslate) {
+        errorMessage = t(`blockchainErrors.${getErrorCode(errorMessage)}`);
+    }
+
+    return errorMessage;
 };

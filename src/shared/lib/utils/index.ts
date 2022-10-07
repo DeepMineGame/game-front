@@ -50,7 +50,7 @@ export * from './uniqBy';
 export * from './addDaysToCurrentDateUnixTime';
 export * from './getLabelSelectItem';
 export * from './isEmptyContractorSlot';
-export { getErrorCode } from './getErrorCode';
+export { getErrorCode, createErrorMessage } from './getErrorCode';
 export {
     getUpgradeRarity,
     getUpgradeType,
