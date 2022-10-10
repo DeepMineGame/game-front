@@ -95,7 +95,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         onSignSuccess: reload,
     });
 
-    const isNotAvailable = card.available_from > Date.now();
+    const isNotAvailable = card.available_from * 1000 > Date.now();
 
     const isNotCardBroken =
         getCardStatus(card) !== Status.broken || isNotAvailable;
