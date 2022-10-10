@@ -1,10 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import React, { FC } from 'react';
-import { Button, useReloadPage } from 'shared';
+import { useReloadPage } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { useNavigate } from 'react-router-dom';
 import { mineOwner } from 'app/router/paths';
-import { Tooltip } from 'antd';
+import { Dropdown, Menu, Tooltip } from 'antd';
+import { SettingOutlined } from '@ant-design/icons';
 import {
     ContractDto,
     terminateContract,
@@ -45,37 +46,40 @@ export const UnsetupMine: FC<{
         reloadPage();
     };
 
-    return activeContract ? (
-        <Button
-            ghost
-            danger
-            disabled={isMineActive}
-            className={styles.wideButton}
-            onClick={onClick}
-        >
-            {t('features.mineOwner.management.unsetup')}
-        </Button>
-    ) : (
-        <Tooltip
+    return (
+        <Dropdown
             overlay={
-                isDisabled
-                    ? t(
-                          'features.mineOwner.management.terminateContractorsContract'
-                      )
-                    : ''
+                <Menu
+                    items={[
+                        {
+                            key: 'button',
+                            onClick: activeContract ? onClick : onAbandonClick,
+                            disabled: activeContract
+                                ? isMineActive
+                                : isDisabled,
+                            label: activeContract ? (
+                                t('features.mineOwner.management.unsetup')
+                            ) : (
+                                <Tooltip
+                                    overlay={
+                                        isDisabled
+                                            ? t(
+                                                  'features.mineOwner.management.terminateContractorsContract'
+                                              )
+                                            : ''
+                                    }
+                                >
+                                    {t('features.mineOwner.management.abandon')}
+                                </Tooltip>
+                            ),
+                        },
+                    ]}
+                />
             }
         >
             <div>
-                <Button
-                    disabled={isDisabled}
-                    ghost
-                    danger
-                    className={styles.wideButton}
-                    onClick={onAbandonClick}
-                >
-                    {t('features.mineOwner.management.abandon')}
-                </Button>
+                <SettingOutlined className={styles.dropDownIcon} />
             </div>
-        </Tooltip>
+        </Dropdown>
     );
 };
