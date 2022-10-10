@@ -1,30 +1,22 @@
 import { FC } from 'react';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { Line } from 'shared';
+import { UserInventoryType } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
-export type equipmentType = {
-    name: string;
-    isAvailable: boolean;
+type EquipmentTableProps = {
+    equipments: Record<string, UserInventoryType | undefined>;
 };
 
-type Props = {
-    equipments: equipmentType[];
-};
-
-const EquipmentTable: FC<Props> = ({ equipments }) => {
-    return (
-        <div className={styles.equipments}>
-            {equipments.map(({ name, isAvailable }) => (
-                <Line className={styles.equipmentLine} key={name}>
-                    <div className={styles.equipmentName}>{name}</div>
-                    <div className={styles.equipmentValue}>
-                        {isAvailable ? <CheckOutlined /> : <CloseOutlined />}
-                    </div>
-                </Line>
-            ))}
-        </div>
-    );
-};
-
-export { EquipmentTable };
+export const EquipmentTable: FC<EquipmentTableProps> = ({ equipments }) => (
+    <div className={styles.equipments}>
+        {Object.entries(equipments!)?.map(([name, value]) => (
+            <Line className={styles.equipmentLine} key={name}>
+                <div className={styles.equipmentName}>{name}</div>
+                <div className={styles.equipmentValue}>
+                    {value ? <CheckOutlined /> : <CloseOutlined />}
+                </div>
+            </Line>
+        ))}
+    </div>
+);

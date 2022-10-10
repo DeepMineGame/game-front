@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import {
     desktopS,
     Header,
@@ -86,7 +86,7 @@ export const ContractorCabin = () => {
         userInfo.length > 0 && userInfo[0].location === LOCATION_TO_ID.mine;
 
     const getActiveTooltip = () => {
-        if (status === CABIN_STATUS.setup && hasPhysicalShift) {
+        if (status === CABIN_STATUS.no_equipments && hasPhysicalShift) {
             return ContractorMenuItems.Equipment;
         }
 
@@ -108,7 +108,7 @@ export const ContractorCabin = () => {
                 [styles.cabinBackgroundLightGreen]:
                     status > CABIN_STATUS.mining_over ||
                     status === CABIN_STATUS.ready ||
-                    status === CABIN_STATUS.setup,
+                    status === CABIN_STATUS.no_equipments,
                 [styles.cabinBackgroundLightYellow]:
                     status === CABIN_STATUS.mining_over ||
                     status === CABIN_STATUS.mining_progress,
