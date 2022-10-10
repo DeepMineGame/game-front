@@ -56,4 +56,5 @@ export {
     getUpgradeType,
     parseAttrs,
 } from './get-upgrade-attr';
+export { createErrorMessage } from './create-error-message';
 export { mergeAssets } from './merge-assets';

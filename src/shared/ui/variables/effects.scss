@@ -17,3 +17,14 @@
 }
 
 $glow: drop-shadow(0 0 20px $color-neutral-neutral-10);
+
+@mixin enter-hover {
+  &:hover {
+    filter: $glow;
+  }
+
+  &:hover .enterLink {
+    background-color: $color-primary-primary-6;
+  }
+}
+
