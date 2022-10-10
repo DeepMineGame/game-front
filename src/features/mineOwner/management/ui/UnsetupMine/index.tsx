@@ -51,28 +51,35 @@ export const UnsetupMine: FC<{
             overlay={
                 <Menu
                     items={[
-                        {
-                            key: 'button',
-                            onClick: activeContract ? onClick : onAbandonClick,
-                            disabled: activeContract
-                                ? isMineActive
-                                : isDisabled,
-                            label: activeContract ? (
-                                t('features.mineOwner.management.unsetup')
-                            ) : (
-                                <Tooltip
-                                    overlay={
-                                        isDisabled
-                                            ? t(
-                                                  'features.mineOwner.management.terminateContractorsContract'
-                                              )
-                                            : ''
-                                    }
-                                >
-                                    {t('features.mineOwner.management.abandon')}
-                                </Tooltip>
-                            ),
-                        },
+                        activeContract
+                            ? {
+                                  key: 'unsetup',
+                                  onClick,
+                                  disabled: isMineActive,
+                                  label: t(
+                                      'features.mineOwner.management.unsetup'
+                                  ),
+                              }
+                            : {
+                                  key: 'abandon',
+                                  onClick: onAbandonClick,
+                                  disabled: isDisabled,
+                                  label: (
+                                      <Tooltip
+                                          overlay={
+                                              isDisabled
+                                                  ? t(
+                                                        'features.mineOwner.management.terminateContractorsContract'
+                                                    )
+                                                  : ''
+                                          }
+                                      >
+                                          {t(
+                                              'features.mineOwner.management.abandon'
+                                          )}
+                                      </Tooltip>
+                                  ),
+                              },
                     ]}
                 />
             }
