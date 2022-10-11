@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import {
     desktopS,
     Header,
@@ -13,11 +13,13 @@ import { useNavigate } from 'react-router-dom';
 import * as PATHS from 'app/router/paths';
 import cn from 'classnames';
 import {
+    $contractorStatus,
     ContractorMenu,
     ContractorMenuItems,
     findEquipmentByName,
     Travel,
 } from 'features';
+import { useStore } from 'effector-react';
 import {
     ContractDto,
     ContractStatus,
@@ -43,7 +45,7 @@ export const ContractorCabin = () => {
     const reloadPage = useReloadPage();
     const { width, height } = useDimensions();
     const isDesktop = useMediaQuery(desktopS);
-    const [status, setStatus] = useState<CABIN_STATUS>(0);
+    const status = useStore($contractorStatus);
     const navigate = useNavigate();
     const bgRatio = 1366 / 712;
     const isBgWidthHidden = width > height * bgRatio;
@@ -123,7 +125,6 @@ export const ContractorCabin = () => {
             >
                 <ContractorCabinContent
                     hasPhysicalShift={hasPhysicalShift}
-                    setStatus={setStatus}
                     userContracts={mineOwnerContracts}
                     userInventory={userInventory}
                     userHistory={userHistory}

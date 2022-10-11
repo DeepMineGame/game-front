@@ -10,7 +10,7 @@ type EquipmentTableProps = {
 
 export const EquipmentTable: FC<EquipmentTableProps> = ({ equipments }) => (
     <div className={styles.equipments}>
-        {Object.entries(equipments!)?.map(([name, value]) => (
+        {Object.entries(equipments).map(([name, value]) => (
             <Line className={styles.equipmentLine} key={name}>
                 <div className={styles.equipmentName}>{name}</div>
                 <div className={styles.equipmentValue}>

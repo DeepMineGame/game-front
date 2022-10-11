@@ -1,5 +1,6 @@
-import { Dispatch, FC, SetStateAction } from 'react';
-import { findEquipmentByName } from 'features';
+import { FC } from 'react';
+import { findEquipmentByName, setContractorStatusEvent } from 'features';
+import { useEvent } from 'effector-react';
 import {
     ACTION_STATE_TO_ID,
     ActionType,
@@ -22,7 +23,6 @@ interface ContractorCabinContentProps {
     userInventory: UserInventoryType[];
     userHistory: UserHistoryType[];
     hasPhysicalShift: boolean;
-    setStatus: Dispatch<SetStateAction<number>>;
 }
 
 export const ContractorCabinContent: FC<ContractorCabinContentProps> = ({
@@ -30,8 +30,8 @@ export const ContractorCabinContent: FC<ContractorCabinContentProps> = ({
     userInventory,
     userHistory,
     hasPhysicalShift,
-    setStatus,
 }) => {
+    const setContractorStatus = useEvent(setContractorStatusEvent);
     const activeMining = userHistory.filter(
         (item) =>
             item.type === ActionType.mine &&
@@ -40,12 +40,13 @@ export const ContractorCabinContent: FC<ContractorCabinContentProps> = ({
 
     const installedItems = userInventory.filter(({ in_use }) => in_use);
 
-    const miningEquipments = Object.fromEntries(
-        miningEquipmentNames.map((name) => [
-            name,
-            findEquipmentByName(installedItems || [], name),
-        ])
-    );
+    const miningEquipments = miningEquipmentNames.reduce<{
+        [k: string]: UserInventoryType | undefined;
+    }>((acc, name) => {
+        acc[name] = findEquipmentByName(installedItems || [], name);
+
+        return acc;
+    }, {});
 
     const installedMiningEquipments = Object.values(miningEquipments).filter(
         (miningEquipment) => miningEquipment
@@ -60,42 +61,34 @@ export const ContractorCabinContent: FC<ContractorCabinContentProps> = ({
     );
 
     if (userContracts.length === 0) {
-        setStatus(CABIN_STATUS.sign_contract);
         return <SignContract />;
     }
 
     if (!installedMiningEquipments.length) {
-        setStatus(CABIN_STATUS.no_equipments);
         return <NoEquipments hasShift={hasPhysicalShift} />;
     }
 
     if (isNotFullEquipmentsSet) {
-        setStatus(CABIN_STATUS.not_full_equipments_set);
         return <NotFullEquipmentsSet equipments={miningEquipments} />;
     }
 
     if (activeMining.length === 0) {
-        setStatus(CABIN_STATUS.ready);
         return <Ready />;
     }
 
     if (activeMining.length !== 0) {
-        setStatus(CABIN_STATUS.mining_progress);
+        setContractorStatus(CABIN_STATUS.mining_progress);
         return (
             <MiningProgress
                 finishesAt={activeMining[0].finishes_at}
-                onFinish={() => setStatus(CABIN_STATUS.mining_over)}
+                onFinish={() => setContractorStatus(CABIN_STATUS.mining_over)}
             />
         );
     }
 
     if (interruptedMining.length !== 0) {
-        setStatus(CABIN_STATUS.mining_interrupted);
         return <MiningError />;
     }
-
-    // FIXME: Bad practice. Throws error in console!
-    setStatus(CABIN_STATUS.mining_over);
 
     return <MiningOver />;
 };
