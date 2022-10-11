@@ -21,7 +21,7 @@ import {
     NoArea,
     Searching,
     Setup,
-    Travel,
+    CallToTravelNotification,
     CABIN_STATUS,
     useLandLordStatus,
     AreaGate,
@@ -88,7 +88,7 @@ export const LandLordCabin: FC<{ accountName: string }> = ({ accountName }) => {
                 {status === CABIN_STATUS.stats && <LandStats />}
             </div>
             {userInfo?.length && !inUserInLandlordLocation && (
-                <Travel
+                <CallToTravelNotification
                     toLocationId={LOCATION_TO_ID.landlords_reception}
                     onSuccess={reloadPage}
                 />

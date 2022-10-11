@@ -5,7 +5,7 @@ import {
     MineOwnerMenu,
     MineOwnerCabin,
     Hologram,
-    Travel,
+    CallToTravelNotification,
     $mineOwnerCabinState,
 } from 'features';
 
@@ -36,7 +36,7 @@ export const MineOwnerPage = () => {
                 />
             )}
             {!inLocation.mineDeck && (
-                <Travel
+                <CallToTravelNotification
                     toLocationId={LOCATION_TO_ID.mine_deck}
                     onSuccess={reloadPage}
                 />

@@ -16,7 +16,7 @@ import {
     ContractorMenu,
     ContractorMenuItems,
     findEquipmentByName,
-    Travel,
+    CallToTravelNotification,
 } from 'features';
 import {
     ContractDto,
@@ -152,7 +152,7 @@ export const ContractorCabin = () => {
                 }}
             />
             {!inLocation.mine && (
-                <Travel
+                <CallToTravelNotification
                     toLocationId={LOCATION_TO_ID.mine}
                     onSuccess={reloadPage}
                 />
