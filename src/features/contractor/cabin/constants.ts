@@ -1,4 +1,4 @@
-export enum CABIN_STATUS {
+export enum ContractorCabinStatus {
     undefined,
     sign_contract,
     not_full_equipments_set,

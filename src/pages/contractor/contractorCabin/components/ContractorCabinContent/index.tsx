@@ -1,5 +1,9 @@
 import { FC } from 'react';
-import { findEquipmentByName, setContractorStatusEvent } from 'features';
+import {
+    ContractorCabinStatus,
+    findEquipmentByName,
+    setContractorStatusEvent,
+} from 'features';
 import { useEvent } from 'effector-react';
 import {
     ACTION_STATE_TO_ID,
@@ -16,7 +20,6 @@ import { Ready } from '../Ready';
 import { MiningProgress } from '../MiningProgress';
 import { MiningError } from '../MiningError';
 import { MiningOver } from '../MiningOver';
-import { CABIN_STATUS } from '../../constants';
 
 interface ContractorCabinContentProps {
     userContracts: ContractDto[];
@@ -77,11 +80,13 @@ export const ContractorCabinContent: FC<ContractorCabinContentProps> = ({
     }
 
     if (activeMining.length !== 0) {
-        setContractorStatus(CABIN_STATUS.mining_progress);
+        setContractorStatus(ContractorCabinStatus.mining_progress);
         return (
             <MiningProgress
                 finishesAt={activeMining[0].finishes_at}
-                onFinish={() => setContractorStatus(CABIN_STATUS.mining_over)}
+                onFinish={() =>
+                    setContractorStatus(ContractorCabinStatus.mining_over)
+                }
             />
         );
     }

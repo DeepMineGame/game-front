@@ -6,11 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import { createOrder, serviceMarket } from 'app/router/paths';
 import { ServiceMarketTabIds } from 'app/router/constants';
 import { useEvent } from 'effector-react';
-import { setContractorStatusEvent } from 'features/contractor';
+import {
+    ContractorCabinStatus,
+    setContractorStatusEvent,
+} from 'features/contractor';
 import { ContractRole, ContractType } from 'entities/smartcontract';
 import { orderFields } from 'entities/order';
 import contractorStyles from '../../styles.module.scss';
-import { CABIN_STATUS } from '../../constants';
 import styles from './styles.module.scss';
 
 export const SignContract = () => {
@@ -19,7 +21,7 @@ export const SignContract = () => {
     const setContractorStatus = useEvent(setContractorStatusEvent);
 
     useEffect(() => {
-        setContractorStatus(CABIN_STATUS.sign_contract);
+        setContractorStatus(ContractorCabinStatus.sign_contract);
     }, [setContractorStatus]);
 
     return (

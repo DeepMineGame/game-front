@@ -7,11 +7,13 @@ import { warehouse } from 'app/router/paths';
 import { ATOMICHUB_URL } from 'app';
 import { Col, Row } from 'antd';
 import { useEvent } from 'effector-react';
-import { setContractorStatusEvent } from 'features/contractor';
+import {
+    ContractorCabinStatus,
+    setContractorStatusEvent,
+} from 'features/contractor';
 import { UserInventoryType } from 'entities/smartcontract';
 import { EquipmentTable } from '../EquipmentTable';
 import contractorStyles from '../../styles.module.scss';
-import { CABIN_STATUS } from '../../constants';
 import styles from './styles.module.scss';
 
 export type NotFullEquipmentsSetProps = {
@@ -27,7 +29,7 @@ export const NotFullEquipmentsSet: FC<NotFullEquipmentsSetProps> = ({
     const setContractorStatus = useEvent(setContractorStatusEvent);
 
     useEffect(() => {
-        setContractorStatus(CABIN_STATUS.not_full_equipments_set);
+        setContractorStatus(ContractorCabinStatus.not_full_equipments_set);
     }, [setContractorStatus]);
 
     return (

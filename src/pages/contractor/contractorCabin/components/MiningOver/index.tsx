@@ -6,9 +6,11 @@ import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { mining } from 'app/router/paths';
 import { useEvent } from 'effector-react';
-import { setContractorStatusEvent } from 'features/contractor';
+import {
+    ContractorCabinStatus,
+    setContractorStatusEvent,
+} from 'features/contractor';
 import contractorStyles from '../../styles.module.scss';
-import { CABIN_STATUS } from '../../constants';
 import styles from './styles.module.scss';
 
 export const MiningOver: FC = () => {
@@ -17,7 +19,7 @@ export const MiningOver: FC = () => {
     const setContractorStatus = useEvent(setContractorStatusEvent);
 
     useEffect(() => {
-        setContractorStatus(CABIN_STATUS.mining_over);
+        setContractorStatus(ContractorCabinStatus.mining_over);
     }, [setContractorStatus]);
 
     return (

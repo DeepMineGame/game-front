@@ -14,6 +14,7 @@ import * as PATHS from 'app/router/paths';
 import cn from 'classnames';
 import {
     $contractorStatus,
+    ContractorCabinStatus,
     ContractorMenu,
     ContractorMenuItems,
     findEquipmentByName,
@@ -36,8 +37,6 @@ import {
     UserInfoType,
     UserInventoryType,
 } from 'entities/smartcontract';
-
-import { CABIN_STATUS } from './constants';
 import styles from './styles.module.scss';
 import { ContractorCabinContent } from './components/ContractorCabinContent';
 
@@ -50,6 +49,8 @@ export const ContractorCabin = () => {
     const bgRatio = 1366 / 712;
     const isBgWidthHidden = width > height * bgRatio;
     const inLocation = useUserLocation();
+
+    // FIXME: Move logic to contractor/cabin/model
 
     const getConfigForContracts = useCallback((accountName: string) => {
         return getContractsNameConfig(
@@ -88,15 +89,18 @@ export const ContractorCabin = () => {
         userInfo.length > 0 && userInfo[0].location === LOCATION_TO_ID.mine;
 
     const getActiveTooltip = () => {
-        if (status === CABIN_STATUS.no_equipments && hasPhysicalShift) {
+        if (
+            status === ContractorCabinStatus.no_equipments &&
+            hasPhysicalShift
+        ) {
             return ContractorMenuItems.Equipment;
         }
 
-        if (status === CABIN_STATUS.ready) {
+        if (status === ContractorCabinStatus.ready) {
             return ContractorMenuItems.MiningDeck;
         }
 
-        if (status === CABIN_STATUS.last_results) {
+        if (status === ContractorCabinStatus.last_results) {
             return ContractorMenuItems.InfoPanel;
         }
 
@@ -106,14 +110,14 @@ export const ContractorCabin = () => {
         <div
             className={cn(styles.cabinBackground, {
                 [styles.cabinBackgroundLightRed]:
-                    status === CABIN_STATUS.mining_interrupted,
+                    status === ContractorCabinStatus.mining_interrupted,
                 [styles.cabinBackgroundLightGreen]:
-                    status > CABIN_STATUS.mining_over ||
-                    status === CABIN_STATUS.ready ||
-                    status === CABIN_STATUS.no_equipments,
+                    status > ContractorCabinStatus.mining_over ||
+                    status === ContractorCabinStatus.ready ||
+                    status === ContractorCabinStatus.no_equipments,
                 [styles.cabinBackgroundLightYellow]:
-                    status === CABIN_STATUS.mining_over ||
-                    status === CABIN_STATUS.mining_progress,
+                    status === ContractorCabinStatus.mining_over ||
+                    status === ContractorCabinStatus.mining_progress,
             })}
         >
             <Monitor
@@ -135,9 +139,9 @@ export const ContractorCabin = () => {
                 config={{
                     disabledItems: {
                         [ContractorMenuItems.InfoPanel]:
-                            status <= CABIN_STATUS.mining_over,
+                            status <= ContractorCabinStatus.mining_over,
                         [ContractorMenuItems.MiningDeck]:
-                            status < CABIN_STATUS.ready,
+                            status < ContractorCabinStatus.ready,
                         [ContractorMenuItems.Equipment]:
                             !hasInstalledEquipment && !hasPhysicalShift,
                     },

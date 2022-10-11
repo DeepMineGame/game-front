@@ -1,9 +1,8 @@
 import { createEvent, createStore } from 'effector';
-// eslint-disable-next-line no-restricted-imports
-import { CABIN_STATUS } from 'pages/contractor/contractorCabin/constants';
+import { ContractorCabinStatus } from '../constants';
 
-export const setContractorStatusEvent = createEvent<CABIN_STATUS>();
+export const setContractorStatusEvent = createEvent<ContractorCabinStatus>();
 
-export const $contractorStatus = createStore<CABIN_STATUS>(
-    CABIN_STATUS.undefined
+export const $contractorStatus = createStore<ContractorCabinStatus>(
+    ContractorCabinStatus.undefined
 ).on(setContractorStatusEvent, (_, status) => status);
