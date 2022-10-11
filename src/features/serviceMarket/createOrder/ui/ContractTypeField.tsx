@@ -52,16 +52,9 @@ export const ContractTypeField: FC<{
                     },
                     {
                         value: ContractType.level_upgrade,
-                        label: (
-                            <Tooltip
-                                overlay={t('components.common.comingSoon')}
-                            >
-                                {t(
-                                    'pages.serviceMarket.createOrder.levelUpgrade'
-                                )}
-                            </Tooltip>
+                        label: t(
+                            'pages.serviceMarket.createOrder.levelUpgrade'
                         ),
-                        disabled: true,
                     },
                 ]}
             />
