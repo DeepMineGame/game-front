@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useSmartContractAction } from 'features/hooks';
-import { upgradeStart } from 'entities/smartcontract';
+import { LOCATION_TO_ID, upgradeStart } from 'entities/smartcontract';
 import { Button, confirm } from 'shared/ui/ui-kit';
 import { neutral9 } from 'shared/ui/variables';
 import {
@@ -26,7 +26,9 @@ const PerformUpgrade: FC<Props> = ({
 }) => {
     const { t } = useTranslation();
     const inLocation = useUserLocation();
-    const { travelConfirm } = useTravelConfirm();
+    const { travelConfirm } = useTravelConfirm(
+        LOCATION_TO_ID.engineers_workshop
+    );
     const reloadPage = useReloadPage();
 
     const handleUpgradeStart = useSmartContractAction({

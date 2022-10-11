@@ -1,7 +1,7 @@
 import { DragEventHandler, FC, useState } from 'react';
-import { Col, Row, Tooltip } from 'antd';
+import { Col, Row } from 'antd';
 import cn from 'classnames';
-import { Button, primary5, Title, useReloadPage } from 'shared';
+import { Button, Title, useReloadPage, useTravelConfirm } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { isUserInHive } from 'features/hive';
@@ -28,6 +28,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     const { t } = useTranslation();
     useGate(WarehouseGate, { searchParam: accountName });
     const isInHive = useStore(isUserInHive);
+    const { travelConfirm } = useTravelConfirm(LOCATION_TO_ID.hive);
     const renderCards = useRenderCards();
     const userAtomicAssets = useStore($inventoriedUserAssets);
     const userInventory = useStore($userInventory);
@@ -49,6 +50,10 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
 
     const onDrop: DragEventHandler<HTMLDivElement> = (e) => {
         e?.preventDefault();
+
+        if (!isInHive) {
+            return travelConfirm();
+        }
 
         if (draggedElement && draggedElements.has(draggedElement)) {
             return setDraggedElements(
@@ -102,42 +107,30 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                     onSuccess={reloadPage}
                 />
             )}
-            <Tooltip
-                overlayClassName={styles.cardColumnTooltip}
-                visible={!isInHive}
-                color={primary5}
-                overlay={t(
-                    'components.hive.YouHaveToPhysicalToManageInventory'
-                )}
+            <Col
+                span={11}
+                className={cn(styles.cardColumn, {
+                    [styles.cardColumnDisabled]: !isInHive,
+                })}
+                onDrop={onDrop}
+                // https://stackoverflow.com/questions/32084053/why-is-ondrop-not-working
+                onDragOver={(e) => e.preventDefault()}
             >
-                <Col
-                    span={11}
-                    className={cn(styles.cardColumn, {
-                        [styles.cardColumnDisabled]: !isInHive,
-                    })}
-                    onDrop={onDrop}
-                    // https://stackoverflow.com/questions/32084053/why-is-ondrop-not-working
-                    onDragOver={(e) => e.preventDefault()}
-                >
-                    <Title className={styles.title} level={5}>
-                        {t('components.hive.activeInventory')}
-                    </Title>
-                    <div>
-                        {isAtomicIncludesDragged && draggedElements.size ? (
-                            <div className={styles.draggedElements}>
-                                {renderCards(draggedElements, handleDragCard)}
-                            </div>
-                        ) : (
-                            <div className={styles.cardsWrapper}>
-                                {renderCards(
-                                    userInventoryNotUse,
-                                    handleDragCard
-                                )}
-                            </div>
-                        )}
-                    </div>
-                </Col>
-            </Tooltip>
+                <Title className={styles.title} level={5}>
+                    {t('components.hive.activeInventory')}
+                </Title>
+                <div>
+                    {isAtomicIncludesDragged && draggedElements.size ? (
+                        <div className={styles.draggedElements}>
+                            {renderCards(draggedElements, handleDragCard)}
+                        </div>
+                    ) : (
+                        <div className={styles.cardsWrapper}>
+                            {renderCards(userInventoryNotUse, handleDragCard)}
+                        </div>
+                    )}
+                </div>
+            </Col>
             <Col
                 offset={1}
                 span={11}

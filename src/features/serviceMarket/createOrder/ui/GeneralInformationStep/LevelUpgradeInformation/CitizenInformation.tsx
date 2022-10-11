@@ -112,12 +112,14 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
                 onCancel={() => setIsInventoryOpen(false)}
                 selectedTab={inventoriesTabMap[type]}
             />
-            <InventoryCardModal
-                onSelect={handleItemSelect}
-                card={selectedInventoryCard as InventoriedAssets[number]}
-                visible={!!selectedInventoryCard}
-                onCancel={() => setSelectedInventoryCard(undefined)}
-            />
+            {selectedInventoryCard && (
+                <InventoryCardModal
+                    onSelect={handleItemSelect}
+                    card={selectedInventoryCard as InventoriedAssets[number]}
+                    visible={!!selectedInventoryCard}
+                    onCancel={() => setSelectedInventoryCard(undefined)}
+                />
+            )}
         </>
     );
 };

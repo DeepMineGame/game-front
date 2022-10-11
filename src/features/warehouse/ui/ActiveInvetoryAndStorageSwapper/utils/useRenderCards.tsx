@@ -7,7 +7,8 @@ export function useRenderCards() {
     const navigate = useNavigate();
     const isCardAvailable = (card: InventoriedAssets[number]) =>
         card.available_from === undefined ||
-        (card.available_from !== undefined && card.available_from < Date.now());
+        (card.available_from !== undefined &&
+            card.available_from * 1000 <= Date.now());
 
     return (
         items: Set<InventoriedAssets[number]> | InventoriedAssets,
