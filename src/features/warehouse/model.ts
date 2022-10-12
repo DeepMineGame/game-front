@@ -1,6 +1,6 @@
 import { createGate } from 'effector-react';
 import { createEffect, createStore, forward, sample, combine } from 'effector';
-import { getTableData, mergeAssets } from 'shared';
+import { getTableData } from 'shared';
 import {
     AssetDataType,
     getAssets,
@@ -38,7 +38,16 @@ export const $userInventory = createStore([]).on(
 export const $inventoriedUserAssets = combine(
     userAtomicAssetsStore,
     $assets,
-    mergeAssets
+    // mergeAssets
+    // TODO: use mergeAssets after fix export/import conflict
+    (inventories, assets) =>
+        assets.map((asset) => ({
+            ...asset,
+            ...inventories?.find(
+                (inventory) =>
+                    String(asset.asset_id) === String(inventory.asset_id)
+            ),
+        }))
 );
 
 sample({
