@@ -115,7 +115,7 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
             </Space>
 
             <div>
-                <Space direction="vertical">
+                <Space size="large">
                     <Button
                         type={isMineActive ? 'ghost' : 'primary'}
                         onClick={onActivationButtonClick}

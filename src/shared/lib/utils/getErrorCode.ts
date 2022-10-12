@@ -13,5 +13,5 @@ export const getErrorCode = (error: string) => {
 
     const match = /\[([0-9]+)\]/gm.exec(error);
 
-    return match ? match[1] : undefined;
+    return match?.[1];
 };

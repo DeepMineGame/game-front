@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { FC, useCallback } from 'react';
 import {
     desktopS,
     Header,
@@ -27,7 +27,6 @@ import {
     ContractType,
     getContractsNameConfig,
     getHistoryConfig,
-    getInventoryConfig,
     getUserConfig,
     InUseType,
     LOCATION_TO_ID,
@@ -35,12 +34,12 @@ import {
     miningEquipmentNames,
     UserHistoryType,
     UserInfoType,
-    UserInventoryType,
 } from 'entities/smartcontract';
+import { $inventoriedAssets } from 'entities/atomicassets';
 import styles from './styles.module.scss';
 import { ContractorCabinContent } from './components/ContractorCabinContent';
 
-export const ContractorCabin = () => {
+export const ContractorCabin: FC = () => {
     const reloadPage = useReloadPage();
     const { width, height } = useDimensions();
     const isDesktop = useMediaQuery(desktopS);
@@ -64,8 +63,7 @@ export const ContractorCabin = () => {
     const { data: userContracts } = useTableData<ContractDto>(
         getConfigForContracts
     );
-    const { data: userInventory } =
-        useTableData<UserInventoryType>(getInventoryConfig);
+    const userInventory = useStore($inventoriedAssets);
     const { data: userHistory } =
         useTableData<UserHistoryType>(getHistoryConfig);
 

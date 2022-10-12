@@ -13,6 +13,7 @@ import {
     UserHistoryType,
     UserInventoryType,
 } from 'entities/smartcontract';
+import { InventoriedAssets } from 'entities/atomicassets';
 import { SignContract } from '../SignContract';
 import { NoEquipments } from '../NoEquipments';
 import { NotFullEquipmentsSet } from '../NotFullEquipmentsSet';
@@ -23,7 +24,7 @@ import { MiningOver } from '../MiningOver';
 
 interface ContractorCabinContentProps {
     userContracts: ContractDto[];
-    userInventory: UserInventoryType[];
+    userInventory: InventoriedAssets;
     userHistory: UserHistoryType[];
     hasPhysicalShift: boolean;
 }
