@@ -1,23 +1,20 @@
-import { Button, Modal, Dropdown, useReloadPage } from 'shared';
+import { Button, Modal, Dropdown, useReloadPage, Card } from 'shared';
 import React, { FC, useEffect, useState } from 'react';
 import { ModalProps, Space } from 'antd';
 import { SortAscendingOutlined, FilterOutlined } from '@ant-design/icons';
 import cn from 'classnames';
 
-import { AssetCard, filterEquipmentByName } from 'features';
-import {
-    InventoryNameType,
-    InventoryTab,
-    UserInventoryType,
-} from 'entities/smartcontract';
+import { filterEquipmentByName } from 'features';
+import { InventoryNameType, InventoryTab } from 'entities/smartcontract';
+import { InventoriedAssets } from 'entities/atomicassets';
 import styles from './styles.module.scss';
 import { sortConfig, tabList, tabsNameMap } from './constants';
 
 type InventoryProps = ModalProps & {
     name?: InventoryNameType;
-    userInventory: UserInventoryType[];
-    onSelect: (card: UserInventoryType) => void;
-    onOpenCard: (card: UserInventoryType) => void;
+    userInventory: InventoriedAssets;
+    onSelect: (card: InventoriedAssets[number]) => void;
+    onOpenCard: (card: InventoriedAssets[number]) => void;
     selectedTab?: InventoryTab;
 };
 
@@ -43,11 +40,11 @@ export const Inventory: FC<InventoryProps> = ({
         ? filterEquipmentByName(userInventory, name)
         : userInventory;
 
-    const handleCardSelect = (card: UserInventoryType) => () => {
+    const handleCardSelect = (card: InventoriedAssets[number]) => () => {
         onSelect(card);
     };
 
-    const handleDetailsClick = (card: UserInventoryType) => () => {
+    const handleDetailsClick = (card: InventoriedAssets[number]) => () => {
         onOpenCard(card);
     };
 
@@ -93,7 +90,7 @@ export const Inventory: FC<InventoryProps> = ({
                 {cards && (
                     <div className={styles.content}>
                         {cards.map((card) => (
-                            <AssetCard
+                            <Card
                                 inventory={card}
                                 className={styles.card}
                                 onClick={handleCardSelect(card)}

@@ -11,14 +11,14 @@ import { Col, message, ModalProps, Row, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { serviceMarket } from 'app/router/paths';
 import { ServiceMarketTabIds } from 'app/router/constants';
-import { AssetCard, getCardStatus, useSmartContractAction } from 'features';
+import { useSmartContractAction } from 'features';
 import { useStore } from 'effector-react';
-import { AssetDataType, getAtomicAssetsDataById } from 'entities/atomicassets';
 import {
-    rarityMap,
-    repairEquipment,
-    UserInventoryType,
-} from 'entities/smartcontract';
+    AssetDataType,
+    getAtomicAssetsDataById,
+    InventoriedAssets,
+} from 'entities/atomicassets';
+import { rarityMap, repairEquipment } from 'entities/smartcontract';
 import { balancesStore } from 'entities/user';
 import {
     ActionModal,
@@ -30,12 +30,14 @@ import {
     Text,
     Divider,
     Margin,
+    getCardStatus,
+    Card,
 } from 'shared/ui/ui-kit';
 import styles from './styles.module.scss';
 
 type InventoryCardModalProps = ModalProps & {
-    card: UserInventoryType;
-    onSelect?: (card: UserInventoryType) => void;
+    card: InventoriedAssets[number];
+    onSelect?: (card: InventoriedAssets[number]) => void;
 };
 
 enum ModalType {
@@ -95,7 +97,9 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         onSignSuccess: reload,
     });
 
-    const isNotAvailable = card.available_from * 1000 > Date.now();
+    const isNotAvailable =
+        card.available_from !== undefined &&
+        card.available_from * 1000 > Date.now();
 
     const isNotCardBroken =
         getCardStatus(card) !== Status.broken || isNotAvailable;
@@ -109,7 +113,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         >
             <div className={styles.container}>
                 <div>
-                    <AssetCard
+                    <Card
                         inventory={card}
                         onRepairFinish={reload}
                         showCardBadgeStatus={
@@ -193,13 +197,11 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                     className={
                                         styles.depreciationProgressBarWidth
                                     }
-                                    completedMining={
-                                        cardData?.data.depreciation
-                                    }
-                                    serviceLife={
+                                    depreciation={cardData?.data.depreciation}
+                                    currentCapacity={
                                         cardData?.data['current capacity']
                                     }
-                                    totalServiceLife={
+                                    maximalCapacity={
                                         cardData?.data['maximal capacity']
                                     }
                                 />

@@ -12,6 +12,16 @@ export const getAtomicAssetsDataById = async (id: string | number) => {
     return data?.data as AssetDataType | undefined;
 };
 
+export const getAssets = async (ids: string[]) => {
+    const { data = [] } = await axios.get(
+        `${ATOMIC_ASSETS_ENDPOINT}/atomicassets/v1/assets?ids=${ids
+            .filter((i) => i)
+            .join(',')}`
+    );
+
+    return data?.data as AssetDataType[];
+};
+
 export const getAtomicAssetsByUser = async ({
     searchParam,
 }: {

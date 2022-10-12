@@ -1,13 +1,12 @@
-import { Button, Inventory, InventoryCardModal, useTableData } from 'shared';
+import { Button, Inventory, InventoryCardModal } from 'shared';
 import { FC, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
-
 import { Form } from 'antd';
-import { getInventoryConfig, UserInventoryType } from 'entities/smartcontract';
+import { useStore } from 'effector-react';
+import { $inventoriedAssets, InventoriedAssets } from 'entities/atomicassets';
 import { orderFields } from 'entities/order';
 import { GeneralInformationStepProps } from '../interface';
-
 import localStyles from '../styles.module.scss';
 import {
     UpgradeTypeFormItem,
@@ -26,18 +25,17 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
 }) => {
     const { t } = useTranslation();
     const { hasValue, type } = useWatchUpgradeType(form);
-    const [asset, setAsset] = useState<UserInventoryType | undefined>();
+    const [asset, setAsset] = useState<InventoriedAssets[number] | undefined>();
 
     const [isInventoryOpen, setIsInventoryOpen] = useState(false);
     const [selectedInventoryCard, setSelectedInventoryCard] = useState<
-        UserInventoryType | undefined
+        InventoriedAssets[number] | undefined
     >();
-    const { data: userInventory } =
-        useTableData<UserInventoryType>(getInventoryConfig);
+    const userInventory = useStore($inventoriedAssets);
 
     const hasAllValues = hasValue && !!asset;
 
-    const handleItemSelect = (item: UserInventoryType) => {
+    const handleItemSelect = (item: InventoriedAssets[number]) => {
         setAsset(item);
         setIsInventoryOpen(false);
         setSelectedInventoryCard(undefined);
@@ -117,7 +115,7 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
             {selectedInventoryCard && (
                 <InventoryCardModal
                     onSelect={handleItemSelect}
-                    card={selectedInventoryCard as UserInventoryType}
+                    card={selectedInventoryCard as InventoriedAssets[number]}
                     visible={!!selectedInventoryCard}
                     onCancel={() => setSelectedInventoryCard(undefined)}
                 />
