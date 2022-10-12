@@ -35,7 +35,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     const userInventoryNotUse = userInventory.filter(({ in_use }) => !in_use);
 
     const gameAssets = userAtomicAssets.filter((item) =>
-        IN_GAME_NFT_IDS.includes(item.template_id!)
+        IN_GAME_NFT_IDS.includes(item.template_id)
     );
 
     const [draggedElement, setDraggedElement] = useState<

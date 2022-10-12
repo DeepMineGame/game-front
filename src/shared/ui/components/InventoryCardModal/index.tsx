@@ -219,7 +219,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                                 coinAmount: getCost({
                                                     level: card.level as GetCostParams['level'],
                                                     rarity: rarityMap[
-                                                        card.rarity!
+                                                        card.rarity
                                                     ] as GetCostParams['rarity'],
                                                     isRefurbish: false,
                                                 }),
@@ -259,7 +259,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                                 coinAmount: getCost({
                                                     level: card.level as GetCostParams['level'],
                                                     rarity: rarityMap[
-                                                        card.rarity!
+                                                        card.rarity
                                                     ] as GetCostParams['rarity'],
                                                     isRefurbish: true,
                                                 }),

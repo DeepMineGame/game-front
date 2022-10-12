@@ -7,7 +7,7 @@ import {
 } from 'entities/smartcontract';
 
 export const getEquipmentName = (equipment: InventoriedAssets[number]) =>
-    ID_TO_INVENTORY[equipment.template_id!];
+    ID_TO_INVENTORY[equipment.template_id];
 
 export const findEquipmentByName = (
     inventory: InventoriedAssets,

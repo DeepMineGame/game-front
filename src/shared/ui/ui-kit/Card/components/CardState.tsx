@@ -13,16 +13,23 @@ import styles from '../styles.module.scss';
 
 export const CardState: FC<{
     status?: Status;
-    finishesAt: number;
+    finishesAt?: number;
     onFinish?: () => void;
 }> = ({ status, finishesAt, onFinish }) => {
     const { t } = useTranslation();
-    useTick(!isUtcDateExpired(finishesAt));
+    useTick(finishesAt !== undefined && !isUtcDateExpired(finishesAt));
 
     const isBrokenAndNotInRepair =
-        isUtcDateExpired(finishesAt) && status === Status.broken;
+        finishesAt !== undefined &&
+        isUtcDateExpired(finishesAt) &&
+        status === Status.broken;
 
-    if (onFinish && status !== Status.broken && isUtcDateExpired(finishesAt))
+    if (
+        onFinish &&
+        finishesAt !== undefined &&
+        status !== Status.broken &&
+        isUtcDateExpired(finishesAt)
+    )
         onFinish();
 
     return (

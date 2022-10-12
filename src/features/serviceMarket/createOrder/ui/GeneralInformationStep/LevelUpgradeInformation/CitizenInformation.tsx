@@ -70,11 +70,11 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
                             {asset
                                 ? `${t(
                                       `components.common.inventoryTypes.${
-                                          inventoriesTypeMap[asset.inv_type!]
+                                          inventoriesTypeMap[asset.inv_type]
                                       }`
                                   )}, ${t(
                                       `components.common.rarities.${
-                                          raritiesTranslationMap[asset.rarity!]
+                                          raritiesTranslationMap[asset.rarity]
                                       }`
                                   )}, Level ${asset.level}`
                                 : t(

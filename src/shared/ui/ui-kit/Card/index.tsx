@@ -70,7 +70,11 @@ export const Card: FC<CardProps> = ({
                         <img
                             height="100%"
                             width="100%"
-                            src={getImagePath(inventory?.template_id!)}
+                            src={
+                                inventory?.template_id
+                                    ? getImagePath(inventory?.template_id)
+                                    : ''
+                            }
                             alt="nft-equipment-card"
                         />
                     </div>

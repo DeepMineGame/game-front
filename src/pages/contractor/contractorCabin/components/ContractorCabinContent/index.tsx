@@ -30,7 +30,7 @@ interface ContractorCabinContentProps {
 
 const getInventoryNames = (arr: InventoriedAssets) => {
     const names = arr
-        .map((v) => ID_TO_INVENTORY[v.template_id!])
+        .map((v) => ID_TO_INVENTORY[v.template_id])
         .filter(Boolean);
     return [...new Set(names)];
 };
