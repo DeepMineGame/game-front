@@ -1,6 +1,8 @@
 // see default theme - https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
 
 const neutral3Color = '#262626';
+const neutral6Color = '#5A5A5A';
+
 const neutral4 = '#303030';
 const neutral1 = '#141414';
 const neutral2 = '#1D1D1D';
@@ -78,6 +80,10 @@ module.exports = {
     '@segmented-label-color': '#DBDBDB',
     '@segmented-hover-bg': neutral4,
     '@segmented-label-hover-color': '#DBDBDB',
+
+    // progress
+    '@progress-default-color': primary6,
+    '@progress-remaining-color': neutral6Color,
 
     // typography
     '@typography-title-margin-top': '0',
