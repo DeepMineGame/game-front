@@ -7,6 +7,7 @@ import {
     getAtomicAssetsByUser,
 } from 'entities/atomicassets';
 import { getInventoryConfig, UserInventoryType } from 'entities/smartcontract';
+import { mergeAssets } from 'shared/lib/utils';
 
 export const WarehouseGate = createGate<{ searchParam: string }>(
     'warehouseGate'
@@ -38,16 +39,7 @@ export const $userInventory = createStore([]).on(
 export const $inventoriedUserAssets = combine(
     userAtomicAssetsStore,
     $assets,
-    // mergeAssets
-    // TODO: use mergeAssets after fix export/import conflict
-    (inventories, assets) =>
-        assets.map((asset) => ({
-            ...asset,
-            ...(inventories?.find(
-                (inventory) =>
-                    String(asset.asset_id) === String(inventory.asset_id)
-            ) as UserInventoryType),
-        }))
+    mergeAssets
 );
 
 sample({
