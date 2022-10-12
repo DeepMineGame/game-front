@@ -58,7 +58,7 @@ export const ContractorCabinContent = ({
         (item) => miningEquipmentNames.includes(item)
     );
     const activeInventoryNames = getInventoryNames(
-        userInventory.filter((v) => v.inv_type! in EquipmentType)
+        userInventory.filter((v) => v.inv_type in EquipmentType)
     );
     if (userContracts.length === 0) {
         setStatus(CABIN_STATUS.sign_contract);
