@@ -43,10 +43,10 @@ export const $inventoriedUserAssets = combine(
     (inventories, assets) =>
         assets.map((asset) => ({
             ...asset,
-            ...inventories?.find(
+            ...(inventories?.find(
                 (inventory) =>
                     String(asset.asset_id) === String(inventory.asset_id)
-            ),
+            ) as UserInventoryType),
         }))
 );
 

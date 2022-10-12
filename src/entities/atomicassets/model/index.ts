@@ -1,6 +1,6 @@
 import { combine, createEffect, createStore, sample } from 'effector';
 import { AssetDataType, getAssets } from 'entities/atomicassets';
-import { inventoriesStore } from 'entities/smartcontract';
+import { inventoriesStore, UserInventoryType } from 'entities/smartcontract';
 
 export const getAssetsEffect = createEffect(getAssets);
 
@@ -18,10 +18,10 @@ export const $inventoriedAssets = combine(
     (inventories, assets) =>
         assets.map((asset) => ({
             ...asset,
-            ...inventories?.find(
+            ...(inventories?.find(
                 (inventory) =>
                     String(asset.asset_id) === String(inventory.asset_id)
-            ),
+            ) as UserInventoryType),
         }))
 );
 
