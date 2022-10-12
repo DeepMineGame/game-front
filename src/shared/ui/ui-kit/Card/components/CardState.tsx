@@ -17,16 +17,17 @@ export const CardState: FC<{
     onFinish?: () => void;
 }> = ({ status, finishesAt, onFinish }) => {
     const { t } = useTranslation();
-    useTick(finishesAt !== undefined && !isUtcDateExpired(finishesAt));
+    const isFinishesAtExist = finishesAt !== undefined;
+    useTick(isFinishesAtExist && !isUtcDateExpired(finishesAt));
 
     const isBrokenAndNotInRepair =
-        finishesAt !== undefined &&
+        isFinishesAtExist &&
         isUtcDateExpired(finishesAt) &&
         status === Status.broken;
 
     if (
         onFinish &&
-        finishesAt !== undefined &&
+        isFinishesAtExist &&
         status !== Status.broken &&
         isUtcDateExpired(finishesAt)
     )
