@@ -20,9 +20,15 @@ export const userAtomicAssetsStore = createStore<UserInventoryType[]>([]).on(
 );
 
 const getAssetsEffect = createEffect(getAssets);
+const getInvetoryAssetsEffect = createEffect(getAssets);
 
 const $assets = createStore<AssetDataType[]>([]).on(
     getAssetsEffect.doneData,
+    (_, data) => data
+);
+
+const $invetoryAssets = createStore<AssetDataType[]>([]).on(
+    getInvetoryAssetsEffect.doneData,
     (_, data) => data
 );
 
@@ -31,9 +37,15 @@ const getInventoryEffect = createEffect(
         getTableData(getInventoryConfig(searchParam))
 );
 
-export const $userInventory = createStore([]).on(
+const $userInventory = createStore<UserInventoryType[]>([]).on(
     getInventoryEffect.doneData,
     (_, { rows }) => rows
+);
+
+export const $inventoriedUserInventory = combine(
+    $userInventory,
+    $invetoryAssets,
+    (...assets) => mergeAssets(...assets).filter(({ in_use }) => !in_use)
 );
 
 export const $inventoriedUserAssets = combine(
@@ -45,6 +57,13 @@ export const $inventoriedUserAssets = combine(
 sample({
     source: userAtomicAssetsStore,
     target: getAssetsEffect,
+    fn: (notInventoriedAssets) =>
+        notInventoriedAssets?.map((asset) => String(asset.asset_id)),
+});
+
+sample({
+    source: $userInventory,
+    target: getInvetoryAssetsEffect,
     fn: (notInventoriedAssets) =>
         notInventoriedAssets?.map((asset) => String(asset.asset_id)),
 });

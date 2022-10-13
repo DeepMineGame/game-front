@@ -14,7 +14,7 @@ import {
 import { atomicTransfer, InventoriedAssets } from 'entities/atomicassets';
 import {
     $inventoriedUserAssets,
-    $userInventory,
+    $inventoriedUserInventory,
     WarehouseGate,
 } from '../../model';
 import { useSmartContractAction } from '../../../hooks';
@@ -30,11 +30,10 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     const isInHive = useStore(isUserInHive);
     const { travelConfirm } = useTravelConfirm(LOCATION_TO_ID.hive);
     const renderCards = useRenderCards();
-    const userAtomicAssets = useStore($inventoriedUserAssets);
-    const userInventory = useStore($userInventory);
-    const userInventoryNotUse = userInventory.filter(({ in_use }) => !in_use);
+    const inventoriedUserAssets = useStore($inventoriedUserAssets);
+    const inventoriedUserInventory = useStore($inventoriedUserInventory);
 
-    const gameAssets = userAtomicAssets.filter((item) =>
+    const gameAssets = inventoriedUserAssets.filter((item) =>
         IN_GAME_NFT_IDS.includes(item.template_id)
     );
 
@@ -126,7 +125,10 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                         </div>
                     ) : (
                         <div className={styles.cardsWrapper}>
-                            {renderCards(userInventoryNotUse, handleDragCard)}
+                            {renderCards(
+                                inventoriedUserInventory,
+                                handleDragCard
+                            )}
                         </div>
                     )}
                 </div>
