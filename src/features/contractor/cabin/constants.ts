@@ -7,5 +7,4 @@ export enum ContractorCabinStatus {
     mining_progress,
     mining_interrupted,
     mining_over,
-    last_results,
 }
