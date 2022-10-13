@@ -32,7 +32,7 @@ type MiningEquipments = Record<string, UserInventoryType | undefined>;
 const setMiningOverEvent = createEvent<boolean>();
 
 const ContractorCabinGate = createGate<{ searchParam: string }>(
-    'MineOwnerContractsGate'
+    'ContractorCabinGate'
 );
 
 const getUserContractsEffect = createEffect(
