@@ -5,7 +5,7 @@ import { Button, Title, useReloadPage, useTravelConfirm } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { isUserInHive } from 'features/hive';
-import { Travel } from 'features/physicalShift';
+import { CallToTravelNotification } from 'features/physicalShift';
 import {
     IN_GAME_NFT_IDS,
     LOCATION_TO_ID,
@@ -102,7 +102,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     return (
         <Row>
             {!isInHive && (
-                <Travel
+                <CallToTravelNotification
                     toLocationId={LOCATION_TO_ID.hive}
                     onSuccess={reloadPage}
                 />

@@ -19,7 +19,7 @@ import {
     ContractorMenu,
     ContractorMenuItems,
     getStatus,
-    Travel,
+    CallToTravelNotification,
 } from 'features';
 import { useGate, useStore } from 'effector-react';
 import { InUseType, LOCATION_TO_ID } from 'entities/smartcontract';
@@ -122,7 +122,7 @@ export const ContractorCabin: FC = () => {
                 }}
             />
             {!inLocation && (
-                <Travel
+                <CallToTravelNotification
                     toLocationId={LOCATION_TO_ID.mine}
                     onSuccess={reloadPage}
                 />

@@ -22,7 +22,6 @@ export const Text: FC<Props> = ({
 }) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('typography');
-
     return (
         <Typography.Text
             className={classNames(className, styles[size], {
