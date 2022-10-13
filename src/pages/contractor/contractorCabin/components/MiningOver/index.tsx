@@ -1,31 +1,22 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import { CheckOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { mining } from 'app/router/paths';
-import { useEvent } from 'effector-react';
-import {
-    ContractorCabinStatus,
-    setContractorStatusEvent,
-} from 'features/contractor';
+import { green6 } from 'shared';
 import contractorStyles from '../../styles.module.scss';
 import styles from './styles.module.scss';
 
 export const MiningOver: FC = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
-    const setContractorStatus = useEvent(setContractorStatusEvent);
-
-    useEffect(() => {
-        setContractorStatus(ContractorCabinStatus.mining_over);
-    }, [setContractorStatus]);
 
     return (
         <div className={styles.container}>
             <div className={cn(contractorStyles.title, styles.title)}>
-                <CheckOutlined style={{ color: '#47FF40' }} />
+                <CheckOutlined style={{ color: green6 }} />
                 <div>{t('pages.contractor.miningOver.title')}</div>
             </div>
             <div

@@ -1,21 +1,11 @@
-import { useEffect } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
-import { useEvent } from 'effector-react';
-import {
-    ContractorCabinStatus,
-    setContractorStatusEvent,
-} from 'features/contractor';
 import contractorStyles from '../../styles.module.scss';
 import styles from './styles.module.scss';
 
-export const Ready = () => {
+export const Ready: FC = () => {
     const { t } = useTranslation();
-    const setContractorStatus = useEvent(setContractorStatusEvent);
-
-    useEffect(() => {
-        setContractorStatus(ContractorCabinStatus.ready);
-    }, [setContractorStatus]);
 
     return (
         <div className={styles.container}>

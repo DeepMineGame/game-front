@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import { Button, desktopS, useMediaQuery } from 'shared';
@@ -6,31 +6,17 @@ import { useNavigate } from 'react-router-dom';
 import { warehouse } from 'app/router/paths';
 import { ATOMICHUB_URL } from 'app';
 import { Col, Row } from 'antd';
-import { useEvent } from 'effector-react';
-import {
-    ContractorCabinStatus,
-    setContractorStatusEvent,
-} from 'features/contractor';
-import { UserInventoryType } from 'entities/smartcontract';
+import { useStore } from 'effector-react';
+import { $miningEquipments } from 'features/contractor';
 import { EquipmentTable } from '../EquipmentTable';
 import contractorStyles from '../../styles.module.scss';
 import styles from './styles.module.scss';
 
-export type NotFullEquipmentsSetProps = {
-    equipments: Record<string, UserInventoryType | undefined>;
-};
-
-export const NotFullEquipmentsSet: FC<NotFullEquipmentsSetProps> = ({
-    equipments,
-}) => {
+export const NotFullEquipmentsSet: FC = () => {
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
     const navigate = useNavigate();
-    const setContractorStatus = useEvent(setContractorStatusEvent);
-
-    useEffect(() => {
-        setContractorStatus(ContractorCabinStatus.not_full_equipments_set);
-    }, [setContractorStatus]);
+    const miningEquipments = useStore($miningEquipments);
 
     return (
         <div className={styles.container}>
@@ -78,7 +64,7 @@ export const NotFullEquipmentsSet: FC<NotFullEquipmentsSetProps> = ({
                         </Col>
                     </Row>
                 </div>
-                {isDesktop && <EquipmentTable equipments={equipments} />}
+                {isDesktop && <EquipmentTable equipments={miningEquipments} />}
             </div>
         </div>
     );

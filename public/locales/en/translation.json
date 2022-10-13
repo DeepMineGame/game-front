@@ -883,6 +883,6 @@
     "00123": "can't find Equipment Item in slots",
     "00124": "wrong asset ID",
     "00125": "you must terminate the Contract with Landlord first",
-    "00127": "wrong Location for Engineer role"
+    "00127": "wrong Location for Contractor role"
   }
 }

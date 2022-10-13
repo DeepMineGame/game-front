@@ -1,25 +1,14 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
-import { useEvent } from 'effector-react';
-import {
-    ContractorCabinStatus,
-    setContractorStatusEvent,
-} from 'features/contractor';
+import { useStore } from 'effector-react';
+import { $inLocation } from 'features/contractor';
 import contractorStyles from '../../styles.module.scss';
 import styles from './styles.module.scss';
 
-interface Props {
-    hasShift?: boolean;
-}
-
-export const NoEquipments: FC<Props> = ({ hasShift }) => {
+export const NoEquipments: FC = () => {
     const { t } = useTranslation();
-    const setContractorStatus = useEvent(setContractorStatusEvent);
-
-    useEffect(() => {
-        setContractorStatus(ContractorCabinStatus.no_equipments);
-    }, [setContractorStatus]);
+    const inLocation = useStore($inLocation);
 
     return (
         <div className={styles.container}>
@@ -28,13 +17,13 @@ export const NoEquipments: FC<Props> = ({ hasShift }) => {
             </div>
             <div
                 className={cn(contractorStyles.description, {
-                    [styles.descriptionCenter]: hasShift,
-                    [styles.description]: !hasShift,
+                    [styles.descriptionCenter]: inLocation,
+                    [styles.description]: !inLocation,
                 })}
             >
                 {t(
                     `pages.contractor.noEquipments.${
-                        hasShift ? 'descriptionShort' : 'description'
+                        inLocation ? 'descriptionShort' : 'description'
                     }`
                 )}
             </div>

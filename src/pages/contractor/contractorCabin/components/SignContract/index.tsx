@@ -1,28 +1,18 @@
-import { useEffect } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import { Button } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import { createOrder, serviceMarket } from 'app/router/paths';
 import { ServiceMarketTabIds } from 'app/router/constants';
-import { useEvent } from 'effector-react';
-import {
-    ContractorCabinStatus,
-    setContractorStatusEvent,
-} from 'features/contractor';
 import { ContractRole, ContractType } from 'entities/smartcontract';
 import { orderFields } from 'entities/order';
 import contractorStyles from '../../styles.module.scss';
 import styles from './styles.module.scss';
 
-export const SignContract = () => {
+export const SignContract: FC = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
-    const setContractorStatus = useEvent(setContractorStatusEvent);
-
-    useEffect(() => {
-        setContractorStatus(ContractorCabinStatus.sign_contract);
-    }, [setContractorStatus]);
 
     return (
         <div className={styles.container}>
