@@ -69,10 +69,6 @@ export const ContractorCabin: FC = () => {
             return ContractorMenuItems.MiningDeck;
         }
 
-        // if (status === ContractorCabinStatus.last_results) {
-        //     return ContractorMenuItems.InfoPanel;
-        // }
-
         return undefined;
     };
 
