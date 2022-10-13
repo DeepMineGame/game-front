@@ -121,7 +121,7 @@ sample({
     target: $installedMiningEquipments,
     fn: (miningEquipments) => {
         const installedMiningEquipments = Object.values(
-            miningEquipments!
+            miningEquipments || {}
         ).filter((miningEquipment) => miningEquipment);
 
         return installedMiningEquipments as InventoriedAssets;
