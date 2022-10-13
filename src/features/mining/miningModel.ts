@@ -1,4 +1,4 @@
-import { createEffect, createStore, forward } from 'effector';
+import { combine, createEffect, createStore, forward } from 'effector';
 import { getTableData, getTimeLeft } from 'shared';
 import { createGate } from 'effector-react';
 import {
@@ -11,15 +11,22 @@ import {
     getActionsTable,
     getContractConfig,
     getContractorsTableData,
+    getContractsNameConfig,
     getMinesTableData,
+    getUserConfig,
     mapSearchParamForIndexPosition,
     mapSearchParamForIndexPositionToFindContracts,
     MineDto,
     searchBy,
+    UserInfoType,
 } from 'entities/smartcontract';
 
 export const MiningPageGate = createGate<{ searchParam: string }>(
     'MiningPageGate'
+);
+
+export const MineOwnerContractsGate = createGate<{ searchParam: string }>(
+    'MineOwnerContractsGate'
 );
 
 export const getContractByExecutorEffect = createEffect(
@@ -100,6 +107,49 @@ export const estimatesMiningTimeStore = createStore('').on(
               )} - ${getTimeLeft(contractorDto?.params?.est_time_max)}`
             : ''
 );
+
+const getUserContractsEffect = createEffect(
+    ({ searchParam }: { searchParam: string }) =>
+        getTableData(
+            getContractsNameConfig(
+                searchParam,
+                mapSearchParamForIndexPositionToFindContracts.executorId,
+                1000
+            )
+        )
+);
+
+const getUserInfoEffect = createEffect(
+    ({ searchParam }: { searchParam: string }) =>
+        getTableData(getUserConfig(searchParam))
+);
+
+const $userContracts = createStore<ContractDto[]>([]).on(
+    getUserContractsEffect.doneData,
+    (_, { rows }) => rows
+);
+
+const $userInfo = createStore<UserInfoType | null>(null).on(
+    getUserInfoEffect.doneData,
+    (_, { rows }) => rows?.[0]
+);
+
+export const $mineOwnerContracts = combine(
+    $userContracts,
+    $userInfo,
+    (userContracts, userInfo) =>
+        userContracts.filter(
+            ({ type, executor, status: contractStatus }) =>
+                type === ContractType.mineowner_contractor &&
+                executor === userInfo?.owner &&
+                contractStatus === ContractStatus.active
+        )
+);
+
+forward({
+    from: MineOwnerContractsGate.open,
+    to: [getUserContractsEffect, getUserInfoEffect],
+});
 
 forward({
     from: MiningPageGate.open,
