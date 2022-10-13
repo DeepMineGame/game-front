@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { FC } from 'react';
 import { Badge, Space } from 'antd';
 import { useGate, useStore } from 'effector-react';
-import { Travel, useSmartContractAction } from 'features';
+import { CallToTravelNotification, useSmartContractAction } from 'features';
 import { FrownOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { serviceMarket } from 'app/router/paths';
@@ -115,7 +115,7 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
             </Space>
 
             <div>
-                <Space direction="vertical">
+                <Space size="large">
                     <Button
                         type={isMineActive ? 'ghost' : 'primary'}
                         onClick={onActivationButtonClick}
@@ -133,7 +133,7 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
                 </Space>
             </div>
             {userInfo?.length && !inUserInMineOwnerLocation && (
-                <Travel
+                <CallToTravelNotification
                     toLocationId={LOCATION_TO_ID.mine_deck}
                     onSuccess={reloadPage}
                 />

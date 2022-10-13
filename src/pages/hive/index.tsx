@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Menu, MenuItem, Page, useAccountName, useReloadPage } from 'shared';
 import { useStore } from 'effector-react';
-import { Travel } from 'features';
+import { CallToTravelNotification } from 'features';
 import { Space, Tooltip } from 'antd';
 import { AreaChartOutlined, HddOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
@@ -23,7 +23,7 @@ export const HivePage: FC = () => {
         <Flat>
             <Page className={styles.page} headerTitle="Hive" />
             {!isUserInFlat && (
-                <Travel
+                <CallToTravelNotification
                     toLocationId={LOCATION_TO_ID.hive}
                     onSuccess={reloadPage}
                 />

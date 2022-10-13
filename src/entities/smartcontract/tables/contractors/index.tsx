@@ -38,7 +38,7 @@ export const getContractorsEffect = createEffect(
     }) => getContractorsTableData({ searchParam, searchType })
 );
 
-export const contractorsStore = createStore<ContractorDto[] | null>(null).on(
+export const contractorsStore = createStore<ContractorDto[]>([]).on(
     getContractorsEffect.doneData,
     (_, { rows }) => rows
 );

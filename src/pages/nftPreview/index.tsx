@@ -1,32 +1,25 @@
 import { InventoryCardModal, Page } from 'shared';
 import { useParams } from 'react-router';
-import React, { useEffect, useState } from 'react';
+import { FC, useMemo } from 'react';
 import { Empty, Skeleton } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import {
-    getInventoryTableData,
-    SEARCH_BY,
-    UserInventoryType,
-} from 'entities/smartcontract';
+import { useStore } from 'effector-react';
+import { $inventoriedAssets } from 'entities/atomicassets';
 
-export const NftPreviewPage = () => {
+export const NftPreviewPage: FC = () => {
     const { assetId } = useParams();
     const navigate = useNavigate();
-    const [fetchedCard, setFetchedCard] = useState<UserInventoryType | null>(
-        null
-    );
     const goBackButton = () => navigate(-1);
+    const inventoriedAssets = useStore($inventoriedAssets);
+    const card = useMemo(
+        () =>
+            inventoriedAssets.find(
+                (inventoriedAsset) => inventoriedAsset.asset_id === assetId
+            ),
+        [assetId, inventoriedAssets]
+    );
 
-    useEffect(() => {
-        if (assetId) {
-            getInventoryTableData({
-                searchParam: assetId,
-                searchIdentificationType: SEARCH_BY.inventoryId,
-            }).then(({ rows }) => setFetchedCard(rows?.[0]));
-        }
-    }, [assetId]);
-
-    if (fetchedCard === undefined) {
+    if (card === undefined) {
         return (
             <Page>
                 <Empty description="There is no data in inventories table" />
@@ -36,10 +29,10 @@ export const NftPreviewPage = () => {
 
     return (
         <Page>
-            {fetchedCard ? (
+            {card ? (
                 <InventoryCardModal
                     visible
-                    card={fetchedCard}
+                    card={card}
                     onCancel={goBackButton}
                 />
             ) : (

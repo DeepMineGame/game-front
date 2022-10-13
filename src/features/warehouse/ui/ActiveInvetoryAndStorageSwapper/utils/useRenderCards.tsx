@@ -1,25 +1,25 @@
 import { useNavigate } from 'react-router-dom';
-import { AssetCard } from 'features';
-import { UserInventoryType } from 'entities/smartcontract';
+import { Card } from 'shared';
+import { InventoriedAssets } from 'entities/atomicassets';
 import styles from '../styles.module.scss';
 
 export function useRenderCards() {
     const navigate = useNavigate();
-    const isCardAvailable = (card: UserInventoryType) =>
+    const isCardAvailable = (card: InventoriedAssets[number]) =>
         card.available_from === undefined ||
         (card.available_from !== undefined &&
             card.available_from * 1000 <= Date.now());
 
     return (
-        items: Set<UserInventoryType> | UserInventoryType[],
-        onDragStart: (element: UserInventoryType) => void
+        items: Set<InventoriedAssets[number]> | InventoriedAssets,
+        onDragStart: (element: InventoriedAssets[number]) => void
     ) => {
         return Array.from(items)?.map((card) => (
             <div
                 onDragStart={() => isCardAvailable(card) && onDragStart(card)}
                 key={card.template_id}
             >
-                <AssetCard
+                <Card
                     inventory={card}
                     className={styles.card}
                     key={card.asset_id}

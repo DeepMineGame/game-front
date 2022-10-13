@@ -9,8 +9,8 @@ import {
     INVENTORY_NAMES,
     miningEquipmentNames,
     UserHistoryType,
-    UserInventoryType,
 } from 'entities/smartcontract';
+import { InventoriedAssets } from 'entities/atomicassets';
 import { SignContract } from '../SignContract';
 import { Setup } from '../Setup';
 import { Welcome } from '../Welcome';
@@ -22,13 +22,13 @@ import { CABIN_STATUS } from '../../constants';
 
 interface ContractorCabinContentProps {
     userContracts: ContractDto[];
-    userInventory: UserInventoryType[];
+    userInventory: InventoriedAssets;
     userHistory: UserHistoryType[];
     hasPhysicalShift: boolean;
     setStatus: Dispatch<React.SetStateAction<number>>;
 }
 
-const getInventoryNames = (arr: UserInventoryType[]) => {
+const getInventoryNames = (arr: InventoriedAssets) => {
     const names = arr
         .map((v) => ID_TO_INVENTORY[v.template_id])
         .filter(Boolean);

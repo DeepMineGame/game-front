@@ -6,16 +6,16 @@ import { useAccountName } from 'shared/lib/hooks';
 import { confirm } from 'shared/ui/ui-kit';
 import { neutral9 } from 'shared/ui/variables';
 
-const useTravelConfirm = () => {
+const useTravelConfirm = (locationId: LOCATION_TO_ID) => {
     const { t } = useTranslation();
     const accountName = useAccountName();
 
-    const travelToWorkshop = useSmartContractAction({
-        action: physicalShift(accountName, LOCATION_TO_ID.engineers_workshop),
+    const travelAction = useSmartContractAction({
+        action: physicalShift(accountName, locationId),
     });
 
     const handleTravel = async (onSuccess?: () => void) => {
-        await travelToWorkshop();
+        await travelAction();
         onSuccess?.();
     };
 

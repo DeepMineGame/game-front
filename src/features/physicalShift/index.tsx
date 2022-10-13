@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
 import { PhysicalShiftBadge, useAccountName } from 'shared';
+import { useStore } from 'effector-react';
 import {
     LOCATION_TO_ID,
     physicalShift,
@@ -7,6 +8,7 @@ import {
 } from 'entities/smartcontract';
 import { useSmartContractAction } from '../hooks';
 import { TravelModal } from './ui/TravelModal';
+import { $travelStatus } from './model';
 
 type Props = {
     toLocationId: LOCATION_TO_ID;
@@ -14,13 +16,16 @@ type Props = {
     onSuccess: () => void;
     trigger?: React.ReactElement<{ onClose: () => void; onClick: () => void }>;
 };
+export * from './ui';
 
-export const Travel: FC<Props> = ({
+export const CallToTravelNotification: FC<Props> = ({
     toLocationId,
     onBadgeCrossClick,
     onSuccess,
     trigger,
 }) => {
+    const travelStatus = useStore($travelStatus);
+
     const [isTravelModalVisible, setIsTravelModalVisible] = useState(false);
 
     const accountName = useAccountName();
@@ -39,6 +44,8 @@ export const Travel: FC<Props> = ({
         await onSuccess();
         closeTravelModal();
     };
+
+    if (travelStatus.initialAmountOfSeconds > 0) return null;
 
     return (
         <>

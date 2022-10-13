@@ -165,7 +165,7 @@ export const routes: AppRoute[] = [
     {
         path: paths.landLord,
         Component: LandLordPage,
-        forLoggedIn: false,
+        forLoggedIn: true,
         forAdmin: true,
         forBetaUser: true,
         titleTag: 'Landlord — DeepMine',
