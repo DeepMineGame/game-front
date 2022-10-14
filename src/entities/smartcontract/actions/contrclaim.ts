@@ -1,10 +1,10 @@
-import { deepminegame } from '../constants';
+import { deepmineming } from '../constants';
 
 export function contrclaim({ waxUser }: { waxUser: string }) {
     return {
         actions: [
             {
-                account: deepminegame,
+                account: deepmineming,
                 name: 'contrclaim',
                 authorization: [
                     {
