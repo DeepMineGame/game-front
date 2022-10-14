@@ -116,6 +116,13 @@ const $contractorCabinStore = combine(
     })
 );
 
+const $isContractorCabinLoading = combine(
+    getUserContractsEffect.pending,
+    getUserHistoryEffect.pending,
+    getUserInfoEffect.pending,
+    (...loadings) => loadings.some(Boolean)
+);
+
 sample({
     source: $miningEquipments,
     target: $installedMiningEquipments,
@@ -210,6 +217,7 @@ export {
     $miningEquipments,
     $contractorCabinStore,
     $inLocation,
+    $isContractorCabinLoading,
 };
 
 export type ContractorCabinStore = ReturnType<

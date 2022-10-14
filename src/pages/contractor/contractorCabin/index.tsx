@@ -2,6 +2,7 @@ import { FC } from 'react';
 import {
     desktopS,
     Header,
+    Loader,
     Monitor,
     useAccountName,
     useDimensions,
@@ -20,6 +21,7 @@ import {
     ContractorMenuItems,
     getStatus,
     CallToTravelNotification,
+    $isContractorCabinLoading,
 } from 'features';
 import { useGate, useStore } from 'effector-react';
 import { InUseType, LOCATION_TO_ID } from 'entities/smartcontract';
@@ -57,6 +59,7 @@ export const ContractorCabin: FC = () => {
     const hasInstalledEquipment = Object.values(
         contractorCabinStore.installedMiningEquipments
     )?.some((item) => item?.in_use === InUseType.inUse);
+    const isContractorCabinLoading = useStore($isContractorCabinLoading);
 
     const State = states[status];
 
@@ -93,7 +96,11 @@ export const ContractorCabin: FC = () => {
                         : styles.cabinMonitorContainerHeight
                 }
             >
-                <State />
+                {isContractorCabinLoading ? (
+                    <Loader className={styles.loader} />
+                ) : (
+                    <State />
+                )}
             </Monitor>
             <Header withBackButton />
             <ContractorMenu
