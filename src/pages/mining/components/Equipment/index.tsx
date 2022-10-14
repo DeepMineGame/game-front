@@ -1,16 +1,20 @@
-import { CardHolder, desktopS, Title, useMediaQuery } from 'shared';
+import { Card, CardHolder, desktopS, Title, useMediaQuery } from 'shared';
 import { useStore } from 'effector-react';
 import { Col, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { AssetCard, findEquipmentByName } from 'features';
+import { findEquipmentByName } from 'features';
 import { useNavigate } from 'react-router-dom';
 import { equipmentSet } from 'app/router/paths';
-import { inventoriesStore, miningEquipmentNames } from 'entities/smartcontract';
+import {
+    miningEquipmentNames,
+    UserInventoryType,
+} from 'entities/smartcontract';
+import { $inventoriedAssets, AssetDataType } from 'entities/atomicassets';
 import styles from './styles.module.scss';
 
 export const Equipment = () => {
-    const inventories = useStore(inventoriesStore);
-    const installedItems = inventories?.filter(({ in_use }) => in_use);
+    const inventoriedAssets = useStore($inventoriedAssets);
+    const installedItems = inventoriedAssets?.filter(({ in_use }) => in_use);
     const installedMiningEquipment = Object.fromEntries(
         miningEquipmentNames.map((name) => [
             name,
@@ -35,9 +39,12 @@ export const Equipment = () => {
             <div className={styles.cards}>
                 {Object.values(installedMiningEquipment).map((inventoryItem) =>
                     inventoryItem ? (
-                        <AssetCard
+                        <Card
                             key={inventoryItem.asset_id}
-                            inventory={inventoryItem}
+                            inventory={
+                                inventoryItem as UserInventoryType &
+                                    AssetDataType
+                            }
                             onClick={() =>
                                 navigate(`/inventory/${inventoryItem.asset_id}`)
                             }

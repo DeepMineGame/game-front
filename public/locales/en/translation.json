@@ -758,7 +758,6 @@
     }
   },
   "blockchainErrors": {
-    "fallback": "Error has no code. Unknown error",
     "notEnoughDme": "Your DME balance is insufficient to fulfill the contract condition",
     "00001": "wrong input data. Must be less than 51 assets and more than 0",
     "00002": "can't find asset for asset_id",

@@ -1,4 +1,4 @@
-import { deepminegame } from '../constants';
+import { deepminegame, deepmineming } from '../constants';
 
 export * from './type';
 export * from './calcmining';
@@ -30,7 +30,7 @@ export function toggleMining({
     return {
         actions: [
             {
-                account: deepminegame,
+                account: deepmineming,
                 name: type === 'start' ? 'startmining' : 'stopmining',
                 authorization: [
                     {
@@ -62,7 +62,7 @@ export const installEquipment = ({
     return {
         actions: [
             {
-                account: deepminegame,
+                account: deepmineming,
                 name: 'instequip',
                 authorization: [
                     {
@@ -90,7 +90,7 @@ export const uninstallEquipment = ({
     return {
         actions: [
             {
-                account: deepminegame,
+                account: deepmineming,
                 name: 'uninstequip',
                 authorization: [
                     {

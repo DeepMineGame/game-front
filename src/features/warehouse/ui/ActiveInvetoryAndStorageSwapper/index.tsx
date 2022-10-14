@@ -1,26 +1,22 @@
 import { DragEventHandler, FC, useState } from 'react';
 import { Col, Row } from 'antd';
 import cn from 'classnames';
-import {
-    Button,
-    Title,
-    useReloadPage,
-    useTableData,
-    useTravelConfirm,
-} from 'shared';
+import { Button, Title, useReloadPage, useTravelConfirm } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { isUserInHive } from 'features/hive';
 import { CallToTravelNotification } from 'features/physicalShift';
 import {
-    getInventoryConfig,
     IN_GAME_NFT_IDS,
     LOCATION_TO_ID,
-    UserInventoryType,
     withdrawAssets,
 } from 'entities/smartcontract';
-import { atomicTransfer } from 'entities/atomicassets';
-import { userAtomicAssetsStore, WarehouseGate } from '../../model';
+import { atomicTransfer, InventoriedAssets } from 'entities/atomicassets';
+import {
+    $inventoriedUserAssets,
+    $userInventory,
+    WarehouseGate,
+} from '../../model';
 import { useSmartContractAction } from '../../../hooks';
 import styles from './styles.module.scss';
 import { useRenderCards } from './utils/useRenderCards';
@@ -34,20 +30,20 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     const isInHive = useStore(isUserInHive);
     const { travelConfirm } = useTravelConfirm(LOCATION_TO_ID.hive);
     const renderCards = useRenderCards();
-    const userAtomicAssets = useStore(userAtomicAssetsStore);
-    const { data: userInventory } =
-        useTableData<UserInventoryType>(getInventoryConfig);
+    const userAtomicAssets = useStore($inventoriedUserAssets);
+    const userInventory = useStore($userInventory);
     const userInventoryNotUse = userInventory.filter(({ in_use }) => !in_use);
 
     const gameAssets = userAtomicAssets.filter((item) =>
         IN_GAME_NFT_IDS.includes(item.template_id)
     );
 
-    const [draggedElement, setDraggedElement] =
-        useState<null | UserInventoryType>(null);
+    const [draggedElement, setDraggedElement] = useState<
+        null | InventoriedAssets[number]
+    >(null);
     const reloadPage = useReloadPage();
     const [draggedElements, setDraggedElements] = useState(
-        new Set<UserInventoryType>()
+        new Set<InventoriedAssets[number]>()
     );
     const isAtomicIncludesDragged =
         gameAssets.filter((item) => draggedElements.has(item))?.length > 0;
@@ -97,7 +93,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
         return reloadPage();
     };
 
-    const handleDragCard = (element: UserInventoryType) => {
+    const handleDragCard = (element: InventoriedAssets[number]) => {
         if (isInHive) {
             setDraggedElement(element);
         }
