@@ -1,4 +1,4 @@
-import { combine, createEffect, createStore, forward } from 'effector';
+import { combine, createEffect, createStore, forward, sample } from 'effector';
 import { getTableData, getTimeLeft } from 'shared';
 import { createGate } from 'effector-react';
 import {
@@ -57,6 +57,23 @@ export const getMineByAssetEffect = createEffect(
             })
         );
     }
+);
+
+const getLandlordContractsEffect = createEffect(
+    ({ searchParam }: { searchParam: string }) =>
+        getTableData(
+            getContractConfig({
+                searchParam,
+                searchIdentification:
+                    mapSearchParamForIndexPositionToFindContracts.clientId,
+                limit: 10000,
+            })
+        )
+);
+
+export const $landlordContracts = createStore<ContractDto[]>([]).on(
+    getLandlordContractsEffect.doneData,
+    (_, { rows }) => rows
 );
 
 export const getActionsForUserEffect = createEffect(
@@ -146,6 +163,18 @@ export const $mineOwnerContracts = combine(
         )
 );
 
+export const $landlordContract = combine(
+    $landlordContracts,
+    $mineOwnerContracts,
+    (landlordContracts, mineOwnerContracts) =>
+        landlordContracts.filter(
+            ({ type, client, status: contractStatus }) =>
+                type === ContractType.landlord_mineowner &&
+                client === mineOwnerContracts[0].client &&
+                contractStatus === ContractStatus.active
+        )[0]
+);
+
 forward({
     from: MineOwnerContractsGate.open,
     to: [getUserContractsEffect, getUserInfoEffect],
@@ -163,4 +192,10 @@ forward({
 forward({
     from: miningContractStore,
     to: getMineByAssetEffect,
+});
+
+sample({
+    source: $mineOwnerContracts,
+    target: getLandlordContractsEffect,
+    fn: (mineOwnerContracts) => ({ searchParam: mineOwnerContracts[0].client }),
 });
