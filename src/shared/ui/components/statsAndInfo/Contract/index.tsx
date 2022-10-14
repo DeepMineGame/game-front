@@ -18,6 +18,7 @@ export const Contract: FC<Props> = ({ contract }) => {
                     {t('components.common.statsAndInfo.contractInfo')}
                 </Title>
             </div>
+            <br />
             <KeyValueTable
                 items={{
                     Area: contract?.client_asset_id || '-',
