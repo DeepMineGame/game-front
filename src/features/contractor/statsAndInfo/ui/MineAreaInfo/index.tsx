@@ -2,12 +2,14 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
 
-import { KeyValueTable, Title } from 'shared';
+import { KeyValueTable, Title, useAccountName } from 'shared';
 import { AreaRarity } from 'entities/smartcontract';
 import { areaForMine, UserMineGate, userMineStore } from '../../userMineModel';
 import styles from './styles.module.scss';
 
-export const MineAreaInfo: FC<{ accountName: string }> = ({ accountName }) => {
+export const MineAreaInfo: FC = () => {
+    const accountName = useAccountName();
+
     useGate(UserMineGate, { searchParam: accountName });
     const { t } = useTranslation();
     const areas = useStore(areaForMine);

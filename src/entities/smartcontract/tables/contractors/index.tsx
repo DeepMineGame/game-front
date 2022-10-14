@@ -1,6 +1,6 @@
 import { createEffect, createStore } from 'effector';
 import { getTableData } from 'shared';
-import { deepminegame } from '../../constants';
+import { deepmineming } from '../../constants';
 import { ContractorDto } from './types';
 
 export enum ContractorsSearchType {
@@ -18,8 +18,8 @@ export const getContractorsTableData = ({
     searchType?: ContractorsSearchType;
 }) =>
     getTableData({
-        code: deepminegame,
-        scope: deepminegame,
+        code: deepmineming,
+        scope: deepmineming,
         table: 'contractors',
         index_position: searchType,
         key_type: searchType === ContractorsSearchType.owner ? 'name' : 'i64',
