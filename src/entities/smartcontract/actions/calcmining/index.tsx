@@ -1,10 +1,10 @@
-import { deepminegame } from '../../constants';
+import { deepmineming } from '../../constants';
 
 export function calcmining({ waxUser }: { waxUser: string }) {
     return {
         actions: [
             {
-                account: deepminegame,
+                account: deepmineming,
                 name: 'calcmining',
                 authorization: [
                     {
