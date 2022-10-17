@@ -1,7 +1,8 @@
 import { combine, createEffect, createStore, sample } from 'effector';
+import compose from 'compose-function';
 import { AssetDataType, getAssets } from 'entities/atomicassets';
-import { inventoriesStore } from 'entities/smartcontract';
-import { mergeAssets } from 'shared/lib/utils';
+import { inventoriesStore, UserInventoryType } from 'entities/smartcontract';
+import { mergeAssets, pickGameAssets } from 'shared/lib/utils';
 
 export const getAssetsEffect = createEffect(getAssets);
 
@@ -10,12 +11,12 @@ export const $assets = createStore<AssetDataType[]>([]).on(
     (_, data) => data
 );
 
-// merge invetories with assets from atomic
-export const $inventoriedAssets = combine(
-    inventoriesStore,
-    $assets,
-    mergeAssets
-);
+// merge invetories with assets from atomic & pick game assets
+export const $inventoriedAssets = combine<
+    UserInventoryType[],
+    AssetDataType[],
+    (UserInventoryType & AssetDataType)[]
+>(inventoriesStore, $assets, compose(pickGameAssets, mergeAssets));
 
 export type InventoriedAssets = ReturnType<
     typeof $inventoriedAssets['getState']

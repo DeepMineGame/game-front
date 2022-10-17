@@ -34,10 +34,6 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     const userInventory = useStore($userInventory);
     const userInventoryNotUse = userInventory.filter(({ in_use }) => !in_use);
 
-    const gameAssets = userAtomicAssets.filter((item) =>
-        IN_GAME_NFT_IDS.includes(item.template_id)
-    );
-
     const [draggedElement, setDraggedElement] = useState<
         null | InventoriedAssets[number]
     >(null);
@@ -46,7 +42,8 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
         new Set<InventoriedAssets[number]>()
     );
     const isAtomicIncludesDragged =
-        gameAssets.filter((item) => draggedElements.has(item))?.length > 0;
+        userAtomicAssets.filter((item) => draggedElements.has(item))?.length >
+        0;
 
     const onDrop: DragEventHandler<HTMLDivElement> = (e) => {
         e?.preventDefault();
@@ -155,7 +152,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                             {renderCards(draggedElements, handleDragCard)}
                         </div>
                     ) : (
-                        renderCards(gameAssets, handleDragCard)
+                        renderCards(userAtomicAssets, handleDragCard)
                     )}
                 </div>
             </Col>

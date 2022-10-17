@@ -1,13 +1,14 @@
 import { createGate } from 'effector-react';
 import { createEffect, createStore, forward, sample, combine } from 'effector';
 import { getTableData } from 'shared';
+import compose from 'compose-function';
 import {
     AssetDataType,
     getAssets,
     getAtomicAssetsByUser,
 } from 'entities/atomicassets';
 import { getInventoryConfig, UserInventoryType } from 'entities/smartcontract';
-import { mergeAssets } from 'shared/lib/utils';
+import { mergeAssets, pickGameAssets } from 'shared/lib/utils';
 
 export const WarehouseGate = createGate<{ searchParam: string }>(
     'warehouseGate'
@@ -36,11 +37,12 @@ export const $userInventory = createStore([]).on(
     (_, { rows }) => rows
 );
 
-export const $inventoriedUserAssets = combine(
-    userAtomicAssetsStore,
-    $assets,
-    mergeAssets
-);
+// merge invetories with assets from atomic & pick game assets
+export const $inventoriedUserAssets = combine<
+    UserInventoryType[],
+    AssetDataType[],
+    (UserInventoryType & AssetDataType)[]
+>(userAtomicAssetsStore, $assets, compose(pickGameAssets, mergeAssets));
 
 sample({
     source: userAtomicAssetsStore,

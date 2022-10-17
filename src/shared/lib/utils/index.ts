@@ -58,3 +58,4 @@ export {
 } from './get-upgrade-attr';
 export { createErrorMessage } from './create-error-message';
 export * from './merge-assets';
+export { pickGameAssets } from './pick-game-assets';
