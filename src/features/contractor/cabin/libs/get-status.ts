@@ -14,11 +14,11 @@ export const getStatus = (store: ContractorCabinStore) => {
         return ContractorCabinStatus.not_full_equipments_set;
     }
 
-    if (store.activeMining.length === 0) {
+    if (!store.activeMining) {
         return ContractorCabinStatus.ready;
     }
 
-    if (store.activeMining.length !== 0) {
+    if (store.activeMining) {
         return ContractorCabinStatus.mining_progress;
     }
 

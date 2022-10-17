@@ -22,9 +22,10 @@ import {
     getStatus,
     CallToTravelNotification,
     $isContractorCabinLoading,
+    $hasInstalledEquipment,
 } from 'features';
 import { useGate, useStore } from 'effector-react';
-import { InUseType, LOCATION_TO_ID } from 'entities/smartcontract';
+import { LOCATION_TO_ID } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 import { SignContract } from './components/SignContract';
 import { NoEquipments } from './components/NoEquipments';
@@ -56,9 +57,7 @@ export const ContractorCabin: FC = () => {
     const bgRatio = 1366 / 712;
     const isBgWidthHidden = width > height * bgRatio;
     const inLocation = useStore($inLocation);
-    const hasInstalledEquipment = Object.values(
-        contractorCabinStore.installedMiningEquipments
-    )?.some((item) => item?.in_use === InUseType.inUse);
+    const hasInstalledEquipment = useStore($hasInstalledEquipment);
     const isContractorCabinLoading = useStore($isContractorCabinLoading);
 
     const State = states[status];

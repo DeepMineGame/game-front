@@ -12,9 +12,9 @@ export const MiningProgress: FC = memo(() => {
     const { t } = useTranslation();
     const setMiningOver = useEvent(setMiningOverEvent);
     const activeMining = useStore($activeMining);
-    const finishesAt = activeMining[0].finishes_at;
+    const finishesAt = activeMining?.finishes_at;
 
-    if (isUtcDateExpired(finishesAt)) setMiningOver(true);
+    if (finishesAt && isUtcDateExpired(finishesAt)) setMiningOver(true);
 
     return (
         <div className={styles.container}>
@@ -24,7 +24,7 @@ export const MiningProgress: FC = memo(() => {
             <div className={styles.timerContainer}>
                 <Loader size="small" />
                 <div className={styles.timer}>
-                    {getTimeLeftFromUtc(finishesAt)}
+                    {finishesAt && getTimeLeftFromUtc(finishesAt)}
                 </div>
             </div>
         </div>

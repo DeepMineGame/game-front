@@ -17,6 +17,7 @@ import {
     getContractsNameConfig,
     getHistoryConfig,
     getUserConfig,
+    InUseType,
     LOCATION_TO_ID,
     mapSearchParamForIndexPositionToFindContracts,
     miningEquipmentNames,
@@ -86,7 +87,7 @@ const $userHistory = createStore<UserHistoryType[]>([]).on(
 const $hasMineOwnerContracts = createStore<boolean | null>(null);
 const $installedMiningEquipments = createStore<InventoriedAssets>([]);
 const $isNotFullEquipmentsSet = createStore<boolean | null>(null);
-const $activeMining = createStore<UserHistoryType[]>([]);
+const $activeMining = createStore<UserHistoryType | null>(null);
 const $interruptedMining = createStore<UserHistoryType[]>([]);
 const $miningOver = createStore<boolean | null>(null);
 const $miningEquipments = createStore<MiningEquipments | null>(null);
@@ -122,6 +123,17 @@ const $isContractorCabinLoading = combine(
     getUserInfoEffect.pending,
     (...loadings) => loadings.some(Boolean)
 );
+
+const $hasInstalledEquipment = createStore<boolean | null>(null);
+
+sample({
+    source: $installedMiningEquipments,
+    target: $hasInstalledEquipment,
+    fn: (installedMiningEquipments) =>
+        Object.values(installedMiningEquipments)?.some(
+            (item) => item?.in_use === InUseType.inUse
+        ),
+});
 
 sample({
     source: $miningEquipments,
@@ -171,11 +183,11 @@ sample({
     source: $userHistory,
     target: $activeMining,
     fn: (userHistory) =>
-        userHistory.filter(
+        userHistory.find(
             (item) =>
                 item.type === ActionType.mine &&
                 item.state === ACTION_STATE_TO_ID.active
-        ),
+        ) || null,
 });
 
 sample({
@@ -190,7 +202,7 @@ sample({
 sample({
     source: $mineOwnerContracts,
     target: $hasMineOwnerContracts,
-    fn: (source) => source.length !== 0,
+    fn: (mineOwnerContracts) => mineOwnerContracts.length !== 0,
 });
 
 sample({
@@ -218,6 +230,7 @@ export {
     $contractorCabinStore,
     $inLocation,
     $isContractorCabinLoading,
+    $hasInstalledEquipment,
 };
 
 export type ContractorCabinStore = ReturnType<
