@@ -8,7 +8,7 @@ import {
     getAtomicAssetsByUser,
 } from 'entities/atomicassets';
 import { getInventoryConfig, UserInventoryType } from 'entities/smartcontract';
-import { mergeAssets, pickGameAssets } from 'shared/lib/utils';
+import { mergeAssets, getGameAssets } from 'shared/lib/utils';
 
 export const WarehouseGate = createGate<{ searchParam: string }>(
     'warehouseGate'
@@ -37,12 +37,12 @@ export const $userInventory = createStore([]).on(
     (_, { rows }) => rows
 );
 
-// merge invetories with assets from atomic & pick game assets
+// merge inventories with assets from atomic & pick game assets
 export const $inventoriedUserAssets = combine<
     UserInventoryType[],
     AssetDataType[],
     (UserInventoryType & AssetDataType)[]
->(userAtomicAssetsStore, $assets, compose(pickGameAssets, mergeAssets));
+>(userAtomicAssetsStore, $assets, compose(getGameAssets, mergeAssets));
 
 sample({
     source: userAtomicAssetsStore,
