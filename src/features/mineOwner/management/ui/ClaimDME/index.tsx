@@ -34,10 +34,10 @@ export const ClaimDME: FC = () => {
         });
     };
 
-    return dmeMoreThenZero ? (
-        <Button type="primary" onClick={onDmeClick}>
+    return (
+        <Button type="primary" onClick={onDmeClick} disabled={!dmeMoreThenZero}>
             {t('components.common.button.claim')} {dmeToClaim}{' '}
             {t('components.common.button.dme')}
         </Button>
-    ) : null;
+    );
 };
