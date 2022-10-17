@@ -22,7 +22,7 @@ export const getStatus = (store: ContractorCabinStore) => {
         return ContractorCabinStatus.mining_progress;
     }
 
-    if (store.interruptedMining.length !== 0) {
+    if (store.interruptedMining.length) {
         return ContractorCabinStatus.mining_interrupted;
     }
 
