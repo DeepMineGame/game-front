@@ -124,7 +124,7 @@ const $isContractorCabinLoading = combine(
     (...loadings) => loadings.some(Boolean)
 );
 
-const $hasInstalledEquipment = createStore<boolean | null>(null);
+const $hasInstalledEquipment = createStore<boolean>(false);
 
 sample({
     source: $installedMiningEquipments,
