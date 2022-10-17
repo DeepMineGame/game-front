@@ -6,11 +6,7 @@ import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { isUserInHive } from 'features/hive';
 import { CallToTravelNotification } from 'features/physicalShift';
-import {
-    IN_GAME_NFT_IDS,
-    LOCATION_TO_ID,
-    withdrawAssets,
-} from 'entities/smartcontract';
+import { LOCATION_TO_ID, withdrawAssets } from 'entities/smartcontract';
 import { atomicTransfer, InventoriedAssets } from 'entities/atomicassets';
 import {
     $inventoriedUserAssets,
