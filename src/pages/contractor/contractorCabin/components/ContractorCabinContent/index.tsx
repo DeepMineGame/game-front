@@ -18,7 +18,7 @@ import { Ready } from '../Ready';
 import { MiningProgress } from '../MiningProgress';
 import { MiningError } from '../MiningError';
 import { MiningOver } from '../MiningOver';
-import { CABIN_STATUS } from '../../constants';
+import { ContractorCabinStatus } from '../../constants';
 
 interface ContractorCabinContentProps {
     userContracts: ContractDto[];
@@ -61,33 +61,33 @@ export const ContractorCabinContent = ({
         userInventory.filter((v) => v.inv_type in EquipmentType)
     );
     if (userContracts.length === 0) {
-        setStatus(CABIN_STATUS.sign_contract);
+        setStatus(ContractorCabinStatus.sign_contract);
         return <SignContract />;
     }
 
     if (equipmentInventoryNames.length < miningEquipmentNames.length) {
-        setStatus(CABIN_STATUS.welcome);
+        setStatus(ContractorCabinStatus.welcome);
         const equipments = getEquipments(equipmentInventoryNames);
         return <Welcome equipments={equipments} />;
     }
 
     if (activeInventoryNames.length < miningEquipmentNames.length) {
-        setStatus(CABIN_STATUS.setup);
+        setStatus(ContractorCabinStatus.setup);
         const equipments = getEquipments(activeInventoryNames);
         return <Setup hasShift={hasPhysicalShift} equipments={equipments} />;
     }
 
     if (activeMining.length === 0) {
-        setStatus(CABIN_STATUS.ready);
+        setStatus(ContractorCabinStatus.ready);
         return <Ready />;
     }
 
     if (activeMining.length !== 0) {
-        setStatus(CABIN_STATUS.mining_progress);
+        setStatus(ContractorCabinStatus.mining_progress);
         return (
             <MiningProgress
                 finishesAt={activeMining[0].finishes_at}
-                onFinish={() => setStatus(CABIN_STATUS.mining_over)}
+                onFinish={() => setStatus(ContractorCabinStatus.mining_over)}
             />
         );
     }
@@ -96,10 +96,10 @@ export const ContractorCabinContent = ({
         (item) => item.state === ACTION_STATE_TO_ID.interrupted
     );
     if (interruptedMining.length !== 0) {
-        setStatus(CABIN_STATUS.mining_interrupted);
+        setStatus(ContractorCabinStatus.mining_interrupted);
         return <MiningError />;
     }
 
-    setStatus(CABIN_STATUS.mining_over);
+    setStatus(ContractorCabinStatus.mining_over);
     return <MiningOver />;
 };

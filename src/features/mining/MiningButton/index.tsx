@@ -122,7 +122,7 @@ export const MiningAndClaimButton: FC<Props> = memo(
             ? t('pages.mining.cool')
             : t('components.common.button.claim');
 
-        const disabled = useDisabledState(accountName);
+        const { disabledMiningButton } = useDisabledState(accountName);
 
         return (
             <>
@@ -133,7 +133,7 @@ export const MiningAndClaimButton: FC<Props> = memo(
                     size={isDesktop ? 'large' : 'middle'}
                     onClick={onMiningButtonClick}
                     ghost={isMining}
-                    disabled={disabled}
+                    disabled={disabledMiningButton}
                 >
                     {isMiningFinished
                         ? buttonText[ActionState.finished]

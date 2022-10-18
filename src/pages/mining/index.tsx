@@ -21,6 +21,8 @@ import {
     getContractByExecutorEffect,
     estimatesMiningTimeStore,
 } from 'features';
+// eslint-disable-next-line no-restricted-imports
+import { useDisabledState } from 'features/mining/hooks';
 import { ActionType } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 import { MiningTitle } from './components/MiningTitle';
@@ -52,6 +54,8 @@ export const MiningPage: FC = memo(() => {
         lastMineAction?.attrs?.find(({ key }) => key === 'est_dme_amount')
             ?.value;
 
+    const { alert } = useDisabledState(accountName);
+
     return (
         <Page headerTitle={t('pages.mining.mining')}>
             {lastMineAction ? (
@@ -62,6 +66,9 @@ export const MiningPage: FC = memo(() => {
             ) : (
                 <Skeleton title={false} loading={isActionsLoading} />
             )}
+            <Row justify="center">
+                <Col span={10}>{alert}</Col>
+            </Row>
             <Row justify="center" gutter={gutter} className={styles.grid}>
                 <Col sm={17} xs={24} className={styles.firsColumn}>
                     <div className={styles.wrapperForTittleWithRightSection}>
