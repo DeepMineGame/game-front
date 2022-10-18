@@ -64,7 +64,9 @@ export const NotFullEquipmentsSet: FC = () => {
                         </Col>
                     </Row>
                 </div>
-                {isDesktop && <EquipmentTable equipments={miningEquipments} />}
+                {isDesktop && miningEquipments && (
+                    <EquipmentTable equipments={miningEquipments} />
+                )}
             </div>
         </div>
     );
