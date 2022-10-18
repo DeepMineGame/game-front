@@ -4,7 +4,7 @@ import { useStore } from 'effector-react';
 import { useSmartContractAction } from 'features';
 import { useTranslation } from 'react-i18next';
 import {
-    extractDmeToClaimAttr,
+    extractFeeToClaimAttr,
     rolesStore,
     UserRoles,
     moclaim,
@@ -20,7 +20,7 @@ export const ClaimDME: FC = () => {
         ({ role }) => role === UserRoles.mine_owner
     );
     const dmeToClaim = mineOwnerRole?.length
-        ? extractDmeToClaimAttr(mineOwnerRole[0])?.value
+        ? extractFeeToClaimAttr(mineOwnerRole[0])?.value
         : null;
 
     const dmeMoreThenZero = Number(dmeToClaim) > 0;

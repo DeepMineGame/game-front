@@ -5,7 +5,7 @@ import { RoleDto } from './types';
 
 export * from './types';
 
-export const extractDmeToClaimAttr = (role: RoleDto) =>
+export const extractFeeToClaimAttr = (role: RoleDto) =>
     role?.attrs?.filter(({ key }) => key === 'fee_to_claim')?.[0];
 
 export const getRolesTableData = ({ searchParam }: { searchParam: string }) => {
