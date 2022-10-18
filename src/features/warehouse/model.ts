@@ -1,7 +1,13 @@
 import { createGate } from 'effector-react';
-import { createEffect, createStore, forward, sample, combine } from 'effector';
+import {
+    createEffect,
+    createStore,
+    forward,
+    sample,
+    combine,
+    guard,
+} from 'effector';
 import { getTableData } from 'shared';
-import compose from 'compose-function';
 import {
     AssetDataType,
     getAssets,
@@ -22,6 +28,8 @@ export const userAtomicAssetsStore = createStore<UserInventoryType[]>([]).on(
 
 const getAssetsEffect = createEffect(getAssets);
 
+const $inventoryAssetIds = createStore<string[]>([]);
+
 const $assets = createStore<AssetDataType[]>([]).on(
     getAssetsEffect.doneData,
     (_, data) => data
@@ -37,21 +45,29 @@ export const $userInventory = createStore([]).on(
     (_, { rows }) => rows
 );
 
-// merge inventories with assets from atomic & pick game assets
-export const $inventoriedUserAssets = combine<
-    UserInventoryType[],
-    AssetDataType[],
-    (UserInventoryType & AssetDataType)[]
->(userAtomicAssetsStore, $assets, compose(getGameAssets, mergeAssets));
+// merge inventories with assets from atomic
+export const $inventoriedUserAssets = combine(
+    userAtomicAssetsStore,
+    $assets,
+    mergeAssets
+);
 
 sample({
     source: userAtomicAssetsStore,
-    target: getAssetsEffect,
-    fn: (notInventoriedAssets) =>
-        notInventoriedAssets?.map((asset) => String(asset.asset_id)),
+    target: $inventoryAssetIds,
+    fn: (inventories) =>
+        getGameAssets(inventories)?.map((inventory) =>
+            String(inventory.asset_id)
+        ),
 });
 
 forward({
     from: WarehouseGate.open,
     to: [getAtomicAssetsByUserEffect, getInventoryEffect],
+});
+
+guard({
+    source: $inventoryAssetIds,
+    filter: (inventories) => !!inventories.length,
+    target: getAssetsEffect,
 });
