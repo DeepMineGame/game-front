@@ -13,7 +13,7 @@ export type MineStatUnit = {
     }[];
 };
 
-export const getMineOwnerStats = async ({
+export const getMineStats = async ({
     searchParam: user,
     role,
 }: {
