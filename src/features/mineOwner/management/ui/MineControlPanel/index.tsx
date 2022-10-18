@@ -7,6 +7,8 @@ import {
     Title,
     useReloadPage,
     useTableData,
+    useUserLocation,
+    useTravelConfirm,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { FC } from 'react';
@@ -39,6 +41,8 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
     useGate(MineManagementGate, {
         searchParam: chainAccountName,
     });
+    const inLocation = useUserLocation();
+    const { travelConfirm } = useTravelConfirm(LOCATION_TO_ID.mine_deck);
     const { data: userInfo } = useTableData<UserInfoType>(getUserConfig);
     const inUserInMineOwnerLocation =
         userInfo?.[0]?.location === LOCATION_TO_ID.mine_deck;
@@ -61,6 +65,9 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
         action: activatemine({ waxUser: chainAccountName, mineId: mine?.id }),
     });
     const onActivationButtonClick = async () => {
+        if (!inLocation.mineDeck) {
+            return travelConfirm(reloadPage);
+        }
         if (!contract) {
             return navigate(serviceMarket);
         }
