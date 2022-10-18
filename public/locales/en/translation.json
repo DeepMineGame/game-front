@@ -223,14 +223,14 @@
         "findButton": "Find a contract",
         "createButton": "Create a contract"
       },
-      "welcome": {
+      "notFullEquipmentsSet": {
         "title": "Welcome, Citizen",
         "description": "You need full equipment set in your active inventory. Check your storage or go to Market to buy.",
         "descriptionMobile": "You need full equipment set in your active inventory.",
         "check": "Check my Storage",
         "goToMarket": "Go to Market"
       },
-      "setup": {
+      "noEquipments": {
         "title": "set up the Equipment",
         "description": "To start mining you need to install the equipment \nand you need to travel to this location.",
         "descriptionShort": "To start mining we need to install the equipment"
@@ -375,10 +375,10 @@
         "engageTitle": "Operate the area",
         "engageDescription": "You need to travel to this location",
         "engageButton": "Operate the area",
-        "setupTitle": "Install a mine",
+        "setupTitle": "Find a mine",
         "setupDescription": "You need to install a mine on your area to proceed",
         "searching": "Searching for a Mine owner",
-        "mineIsSetTitle": "The Mine is set to the land",
+        "mineIsSetTitle": "The Mine is installed",
         "mineIsSetDescription": "Now you can see the full stastistics",
         "landStats": "Land stats",
         "DMEToClaim": "DME to claim",
@@ -892,6 +892,6 @@
     "00123": "can't find Equipment Item in slots",
     "00124": "wrong asset ID",
     "00125": "you must terminate the Contract with Landlord first",
-    "00127": "wrong Location for Engineer role"
+    "00127": "wrong Location for Contractor role"
   }
 }

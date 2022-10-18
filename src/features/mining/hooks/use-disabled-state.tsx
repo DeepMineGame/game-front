@@ -2,8 +2,7 @@ import { useGate, useStore } from 'effector-react';
 import { Trans } from 'react-i18next';
 import { Alert, Link } from 'shared';
 import { createOrder, equipmentSet } from 'app/router/paths';
-// eslint-disable-next-line no-restricted-imports
-import { ContractorCabinStatus } from 'pages/contractor/contractorCabin/constants';
+import { ContractorCabinStatus } from 'features/contractor';
 import { ContractDto } from 'entities/smartcontract';
 import {
     $landlordContract,

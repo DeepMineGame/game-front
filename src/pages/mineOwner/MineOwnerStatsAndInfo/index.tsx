@@ -1,11 +1,6 @@
 import { FC } from 'react';
 import { Contract, PageWithTabs, useAccountName } from 'shared';
-import {
-    $mineOwnerStats,
-    MineAreaInfo,
-    MineOwnerStatsGate,
-    MiningStats,
-} from 'features';
+import { $mineStats, MineAreaInfo, MineStatsGate, MiningStats } from 'features';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
 import {
@@ -25,7 +20,7 @@ export const MineOwnerStatAndInfoPage: FC = () => {
     const { t } = useTranslation();
     const accountName = useAccountName();
     useGate(ContractsGate);
-    useGate(MineOwnerStatsGate, {
+    useGate(MineStatsGate, {
         searchParam: accountName,
         role: Role.mineowner,
     });
@@ -34,7 +29,7 @@ export const MineOwnerStatAndInfoPage: FC = () => {
     const contract = contracts?.filter(
         ({ type }) => type === ContractType.landlord_mineowner
     )?.[0];
-    const mineOwnerStats = useStore($mineOwnerStats);
+    const mineOwnerStats = useStore($mineStats);
 
     return (
         <PageWithTabs

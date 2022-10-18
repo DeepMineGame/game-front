@@ -1,11 +1,10 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
-
+import { FC } from 'react';
 import contractorStyles from '../../styles.module.scss';
 import styles from './styles.module.scss';
 
-export const MiningError = () => {
+export const MiningError: FC = () => {
     const { t } = useTranslation();
 
     return (

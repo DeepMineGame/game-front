@@ -1,8 +1,6 @@
 export enum ContractorCabinStatus {
     undefined,
     sign_contract,
-    welcome,
-    setup,
     not_full_equipments_set,
     no_equipments,
     ready,
