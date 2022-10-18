@@ -1,12 +1,5 @@
 import { createGate } from 'effector-react';
-import {
-    createEffect,
-    createStore,
-    forward,
-    sample,
-    combine,
-    guard,
-} from 'effector';
+import { createEffect, createStore, forward, sample, combine } from 'effector';
 import { getTableData } from 'shared';
 import {
     AssetDataType,
@@ -66,7 +59,7 @@ forward({
     to: [getAtomicAssetsByUserEffect, getInventoryEffect],
 });
 
-guard({
+sample({
     source: $inventoryAssetIds,
     filter: (inventories) => !!inventories.length,
     target: getAssetsEffect,

@@ -1,4 +1,4 @@
-import { combine, createEffect, createStore, guard, sample } from 'effector';
+import { combine, createEffect, createStore, sample } from 'effector';
 import { AssetDataType, getAssets } from 'entities/atomicassets';
 import { inventoriesStore } from 'entities/smartcontract';
 import { mergeAssets, getGameAssets } from 'shared/lib/utils';
@@ -32,7 +32,7 @@ sample({
         ),
 });
 
-guard({
+sample({
     source: $inventoryAssetIds,
     filter: (inventories) => !!inventories.length,
     target: getAssetsEffect,
