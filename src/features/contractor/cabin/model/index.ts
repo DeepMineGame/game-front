@@ -93,7 +93,7 @@ const $miningOver = createStore<boolean | null>(null);
 const $miningEquipments = createStore<MiningEquipments | null>(null);
 const $inLocation = createStore<boolean | null>(null);
 
-const $contractorCabinStore = combine(
+const $contractorCabin = combine(
     $hasMineOwnerContracts,
     $installedMiningEquipments,
     $isNotFullEquipmentsSet,
@@ -227,12 +227,12 @@ export {
     $userInfo,
     $activeMining,
     $miningEquipments,
-    $contractorCabinStore,
+    $contractorCabin,
     $inLocation,
     $isContractorCabinLoading,
     $hasInstalledEquipment,
 };
 
 export type ContractorCabinStore = ReturnType<
-    typeof $contractorCabinStore['getState']
+    typeof $contractorCabin['getState']
 >;

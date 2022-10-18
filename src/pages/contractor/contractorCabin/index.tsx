@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import * as PATHS from 'app/router/paths';
 import cn from 'classnames';
 import {
-    $contractorCabinStore,
+    $contractorCabin,
     $inLocation,
     ContractorCabinGate,
     ContractorCabinStatus,
@@ -51,7 +51,7 @@ export const ContractorCabin: FC = () => {
     const reloadPage = useReloadPage();
     const { width, height } = useDimensions();
     const isDesktop = useMediaQuery(desktopS);
-    const contractorCabinStore = useStore($contractorCabinStore);
+    const contractorCabinStore = useStore($contractorCabin);
     const status = getStatus(contractorCabinStore);
     const navigate = useNavigate();
     const bgRatio = 1366 / 712;
