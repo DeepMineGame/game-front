@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import { Button } from 'shared';
@@ -10,7 +10,7 @@ import { orderFields } from 'entities/order';
 import contractorStyles from '../../styles.module.scss';
 import styles from './styles.module.scss';
 
-export const SignContract = () => {
+export const SignContract: FC = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
 

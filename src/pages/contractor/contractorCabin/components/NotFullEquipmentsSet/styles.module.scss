@@ -16,7 +16,6 @@
 
 .info {
   padding: 0;
-  max-width: 237px;
   margin: 0 auto;
 
   @media only screen and (min-width: $media-desktop-s) {
@@ -65,4 +64,12 @@
   @media only screen and (min-width: $media-desktop-s) {
     padding-top: 24px;
   }
+}
+
+.button {
+  padding: 0;
+}
+
+.secondButton {
+  text-align: right;
 }

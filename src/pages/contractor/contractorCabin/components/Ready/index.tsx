@@ -1,11 +1,10 @@
-import React from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
-
 import contractorStyles from '../../styles.module.scss';
 import styles from './styles.module.scss';
 
-export const Ready = () => {
+export const Ready: FC = () => {
     const { t } = useTranslation();
 
     return (
