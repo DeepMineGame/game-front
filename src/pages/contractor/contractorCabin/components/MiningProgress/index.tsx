@@ -8,13 +8,15 @@ import contractorStyles from '../../styles.module.scss';
 import styles from './styles.module.scss';
 
 export const MiningProgress: FC = memo(() => {
-    useTick();
     const { t } = useTranslation();
     const setMiningOver = useEvent(setMiningOverEvent);
     const activeMining = useStore($activeMining);
     const finishesAt = activeMining?.finishes_at;
+    const isExpired = finishesAt && isUtcDateExpired(finishesAt);
 
-    if (finishesAt && isUtcDateExpired(finishesAt)) setMiningOver(true);
+    useTick(!isExpired);
+
+    if (isExpired) setMiningOver(true);
 
     return (
         <div className={styles.container}>
