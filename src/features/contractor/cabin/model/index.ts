@@ -84,14 +84,14 @@ const $userHistory = createStore<UserHistoryType[]>([]).on(
     (_, { rows }) => rows
 );
 
-const $hasMineOwnerContracts = createStore<boolean | null>(null);
+const $hasMineOwnerContracts = createStore<boolean>(false);
 const $installedMiningEquipments = createStore<InventoriedAssets>([]);
-const $isNotFullEquipmentsSet = createStore<boolean | null>(null);
+const $isNotFullEquipmentsSet = createStore<boolean>(false);
 const $activeMining = createStore<UserHistoryType | null>(null);
 const $interruptedMining = createStore<UserHistoryType[]>([]);
-const $miningOver = createStore<boolean | null>(null);
+const $miningOver = createStore<boolean>(false);
 const $miningEquipments = createStore<MiningEquipments | null>(null);
-const $inLocation = createStore<boolean | null>(null);
+const $inLocation = createStore<boolean>(false);
 
 const $contractorCabin = combine(
     $hasMineOwnerContracts,
@@ -175,7 +175,7 @@ sample({
                 (miningEquipment) => !miningEquipment
             );
 
-        return isNotFullEquipmentsSet;
+        return Boolean(isNotFullEquipmentsSet);
     },
 });
 
