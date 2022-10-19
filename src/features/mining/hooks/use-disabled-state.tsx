@@ -14,6 +14,7 @@ import { ContractDto } from 'entities/smartcontract';
 enum DisabledState {
     NotDisabled,
     NeedFinishMineownerContract,
+    MiningContractIsntActive,
     EquipmentIsBroken,
     LandlordContractFinished,
 }
@@ -24,18 +25,7 @@ const States = ({
 }: Record<'landlordContract' | 'mineOwnerContract', ContractDto>) => ({
     [DisabledState.NotDisabled]: {
         disabledMiningButton: false,
-        alert: (
-            <Alert
-                message={
-                    <Trans i18nKey="pages.mining.contractBetweenMineownerAndLandlordIsntValid" />
-                }
-                action={
-                    <Link to={`/user/${landlordContract?.executor}`}>
-                        <Trans i18nKey="pages.mining.openContract" />
-                    </Link>
-                }
-            />
-        ),
+        alert: undefined,
     },
     [ContractorCabinStatus.sign_contract]: {
         disabledMiningButton: true,
@@ -77,6 +67,21 @@ const States = ({
                         to={`/service-market/contract/${mineOwnerContract?.id}`}
                     >
                         <Trans i18nKey="pages.mining.openContract" />
+                    </Link>
+                }
+            />
+        ),
+    },
+    [DisabledState.MiningContractIsntActive]: {
+        disabledMiningButton: true,
+        alert: (
+            <Alert
+                message={
+                    <Trans i18nKey="pages.mining.miningContractIsntActive" />
+                }
+                action={
+                    <Link to={equipmentSet}>
+                        <Trans i18nKey="pages.mining.configureButton" />
                     </Link>
                 }
             />
@@ -125,6 +130,10 @@ const getState = (store: ContractorCabinStore) => {
 
     if (store.needFinishMineownerContract) {
         return DisabledState.NeedFinishMineownerContract;
+    }
+
+    if (store.miningContractIsntActive) {
+        return DisabledState.MiningContractIsntActive;
     }
 
     if (store.equipmentIsBroken) {

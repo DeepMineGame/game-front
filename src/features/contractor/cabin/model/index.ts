@@ -33,6 +33,11 @@ import {
 } from 'entities/atomicassets';
 import { getTableData, isAssetAvailable } from 'shared/lib/utils';
 
+const contractIsExpired = (contract: ContractDto) =>
+    contract.finishes_at * 1000 < Date.now();
+const contractWasTerminated = (contract: ContractDto) =>
+    Boolean(contract.term_time);
+
 type MiningEquipments = Record<string, UserInventoryType | undefined>;
 
 const setMiningOverEvent = createEvent<boolean>();
@@ -120,6 +125,7 @@ const $hasInstalledEquipment = createStore(false);
 const $needFinishMineownerContract = createStore(false);
 const $equipmentIsBroken = createStore(false);
 const $landlordContractFinished = createStore(false);
+const $miningContractIsntActive = createStore(false);
 
 const $landlordContract = combine(
     $landlordContracts,
@@ -143,6 +149,7 @@ const $contractorCabin = combine(
     $needFinishMineownerContract,
     $equipmentIsBroken,
     $landlordContractFinished,
+    $miningContractIsntActive,
     (
         hasMineOwnerContracts,
         installedMiningEquipments,
@@ -152,7 +159,8 @@ const $contractorCabin = combine(
         miningOver,
         needFinishMineownerContract,
         equipmentIsBroken,
-        landlordContractFinished
+        landlordContractFinished,
+        miningContractIsntActive
     ) => ({
         hasMineOwnerContracts,
         installedMiningEquipments,
@@ -163,6 +171,7 @@ const $contractorCabin = combine(
         needFinishMineownerContract,
         equipmentIsBroken,
         landlordContractFinished,
+        miningContractIsntActive,
     })
 );
 
@@ -173,14 +182,21 @@ const $isContractorCabinLoading = combine(
     (...loadings) => loadings.some(Boolean)
 );
 
-// ---
-
-const contractIsExpired = (contract: ContractDto) =>
-    contract.finishes_at * 1000 < Date.now();
-const contractWasTerminated = (contract: ContractDto) =>
-    Boolean(contract.term_time);
-
-// ---
+sample({
+    source: [
+        $needFinishMineownerContract,
+        $landlordContractFinished,
+        $hasInstalledEquipment,
+    ],
+    target: $miningContractIsntActive,
+    fn: ([
+        needFinishMineownerContract,
+        landlordContractFinished,
+        hasInstalledEquipment,
+    ]) =>
+        (needFinishMineownerContract || landlordContractFinished) &&
+        hasInstalledEquipment,
+});
 
 sample({
     source: $mineOwnerContracts,
