@@ -9,11 +9,14 @@ import {
     miningEquipmentNames,
     UserInventoryType,
 } from 'entities/smartcontract';
-import { $inventoriedAssets, AssetDataType } from 'entities/atomicassets';
+import {
+    $mergedInventoryWithAtomicAssets,
+    AssetDataType,
+} from 'entities/atomicassets';
 import styles from './styles.module.scss';
 
 export const Equipment = () => {
-    const inventoriedAssets = useStore($inventoriedAssets);
+    const inventoriedAssets = useStore($mergedInventoryWithAtomicAssets);
     const installedItems = inventoriedAssets?.filter(({ in_use }) => in_use);
     const installedMiningEquipment = Object.fromEntries(
         miningEquipmentNames.map((name) => [

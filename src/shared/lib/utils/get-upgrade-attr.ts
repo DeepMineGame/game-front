@@ -1,4 +1,4 @@
-import { InventoriedAssets } from 'entities/atomicassets';
+import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
 import {
     ContractDto,
     EngineerSchema,
@@ -44,7 +44,7 @@ export const getUpgradeType = ({
     asset,
 }: {
     contract?: ContractDto;
-    asset?: InventoriedAssets[number];
+    asset?: MergedInventoryWithAtomicAssets[number];
 }) => {
     if (contract)
         return upgradeTypeMap[parseAttrs(contract)?.schema_type as UpgradeType];
@@ -57,7 +57,7 @@ export const getUpgradeRarity = ({
     asset,
 }: {
     contract?: ContractDto;
-    asset?: InventoriedAssets[number];
+    asset?: MergedInventoryWithAtomicAssets[number];
 }) => {
     if (contract)
         return rarityMap[parseAttrs(contract)?.rarity as UpgradeRarity];

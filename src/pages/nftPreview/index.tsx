@@ -4,13 +4,13 @@ import { FC, useMemo } from 'react';
 import { Empty, Skeleton } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from 'effector-react';
-import { $inventoriedAssets } from 'entities/atomicassets';
+import { $mergedInventoryWithAtomicAssets } from 'entities/atomicassets';
 
 export const NftPreviewPage: FC = () => {
     const { assetId } = useParams();
     const navigate = useNavigate();
     const goBackButton = () => navigate(-1);
-    const inventoriedAssets = useStore($inventoriedAssets);
+    const inventoriedAssets = useStore($mergedInventoryWithAtomicAssets);
     const card = useMemo(
         () =>
             inventoriedAssets.find(

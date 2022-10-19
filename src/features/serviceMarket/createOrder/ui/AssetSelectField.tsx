@@ -5,11 +5,7 @@ import { Select } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { ContractType, rarityMap } from 'entities/smartcontract';
 import { orderFields } from 'entities/order';
-import {
-    InventoryGate,
-    userAtomicAssetsStore,
-    activeUserInventoryStore,
-} from '../models';
+import { InventoryGate, $storage, activeUserInventoryStore } from '../models';
 
 import styles from '../styles.module.scss';
 
@@ -20,7 +16,7 @@ export const AssetSelectField: FC<{
 }> = ({ form, accountName, templatesId }) => {
     useGate(InventoryGate, { searchParam: accountName });
     const activeUserInventory = useStore(activeUserInventoryStore);
-    const atomicInventory = useStore(userAtomicAssetsStore);
+    const atomicInventory = useStore($storage);
     const activeInventoryAssetsFilteredByTemplates =
         activeUserInventory?.filter(({ template_id }) =>
             templatesId.includes(template_id)

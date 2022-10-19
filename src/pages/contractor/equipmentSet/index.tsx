@@ -27,7 +27,10 @@ import {
     uninstallEquipment,
     UserInventoryType,
 } from 'entities/smartcontract';
-import { $inventoriedAssets, InventoriedAssets } from 'entities/atomicassets';
+import {
+    $mergedInventoryWithAtomicAssets,
+    MergedInventoryWithAtomicAssets,
+} from 'entities/atomicassets';
 import styles from './styles.module.scss';
 import { EquipmentInstallationModal } from './components/EquipmentInstallationModal';
 import { Characteristics } from './components/Characteristics';
@@ -46,7 +49,7 @@ export const EquipmentSetPage: FC = () => {
     const [isInventoryVisible, setIsInventoryVisible] = useState(false);
     const [isInventoryCardVisible, setIsInventoryCardVisible] = useState(false);
     const [selectedInventoryModalCard, setSelectedInventoryModalCard] =
-        useState<InventoriedAssets[number] | undefined>();
+        useState<MergedInventoryWithAtomicAssets[number] | undefined>();
     const [selectedEquipment, setSelectedEquipment] = useState(
         {} as Record<InventoryNameType, UserInventoryType> | {}
     );
@@ -56,7 +59,7 @@ export const EquipmentSetPage: FC = () => {
 
     const callAction = useSmartContractActionDynamic();
 
-    const userInventory = useStore($inventoriedAssets);
+    const userInventory = useStore($mergedInventoryWithAtomicAssets);
 
     const contractId = useStore(contractorContractIdStore);
 
@@ -127,7 +130,7 @@ export const EquipmentSetPage: FC = () => {
     };
 
     const handleRemoveEquipment = async (
-        inventory: InventoriedAssets[number]
+        inventory: MergedInventoryWithAtomicAssets[number]
     ) => {
         await callAction(
             uninstallEquipment({
@@ -147,7 +150,9 @@ export const EquipmentSetPage: FC = () => {
         setIsInventoryVisible(true);
     };
 
-    const handleCardSelect = (card: InventoriedAssets[number]) => {
+    const handleCardSelect = (
+        card: MergedInventoryWithAtomicAssets[number]
+    ) => {
         if (selectedEquipmentName) {
             setSelectedEquipment({
                 ...selectedEquipment,
@@ -157,7 +162,7 @@ export const EquipmentSetPage: FC = () => {
         }
     };
 
-    const handleOpenCard = (card: InventoriedAssets[number]) => {
+    const handleOpenCard = (card: MergedInventoryWithAtomicAssets[number]) => {
         setIsInventoryCardVisible(true);
         setSelectedInventoryModalCard(card);
     };

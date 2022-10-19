@@ -4,7 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Form } from 'antd';
 import { useStore } from 'effector-react';
-import { $inventoriedAssets, InventoriedAssets } from 'entities/atomicassets';
+import {
+    $mergedInventoryWithAtomicAssets,
+    MergedInventoryWithAtomicAssets,
+} from 'entities/atomicassets';
 import { orderFields } from 'entities/order';
 import { GeneralInformationStepProps } from '../interface';
 import localStyles from '../styles.module.scss';
@@ -25,17 +28,21 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
 }) => {
     const { t } = useTranslation();
     const { hasValue, type } = useWatchUpgradeType(form);
-    const [asset, setAsset] = useState<InventoriedAssets[number] | undefined>();
+    const [asset, setAsset] = useState<
+        MergedInventoryWithAtomicAssets[number] | undefined
+    >();
 
     const [isInventoryOpen, setIsInventoryOpen] = useState(false);
     const [selectedInventoryCard, setSelectedInventoryCard] = useState<
-        InventoriedAssets[number] | undefined
+        MergedInventoryWithAtomicAssets[number] | undefined
     >();
-    const userInventory = useStore($inventoriedAssets);
+    const userInventory = useStore($mergedInventoryWithAtomicAssets);
 
     const hasAllValues = hasValue && !!asset;
 
-    const handleItemSelect = (item: InventoriedAssets[number]) => {
+    const handleItemSelect = (
+        item: MergedInventoryWithAtomicAssets[number]
+    ) => {
         setAsset(item);
         setIsInventoryOpen(false);
         setSelectedInventoryCard(undefined);
@@ -115,7 +122,9 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
             {selectedInventoryCard && (
                 <InventoryCardModal
                     onSelect={handleItemSelect}
-                    card={selectedInventoryCard as InventoriedAssets[number]}
+                    card={
+                        selectedInventoryCard as MergedInventoryWithAtomicAssets[number]
+                    }
                     visible={!!selectedInventoryCard}
                     onCancel={() => setSelectedInventoryCard(undefined)}
                 />
