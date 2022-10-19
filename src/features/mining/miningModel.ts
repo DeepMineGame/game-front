@@ -1,4 +1,4 @@
-import { combine, createEffect, createStore, forward, sample } from 'effector';
+import { createEffect, createStore, forward } from 'effector';
 import { getTableData, getTimeLeft } from 'shared';
 import { createGate } from 'effector-react';
 import {
@@ -11,22 +11,15 @@ import {
     getActionsTable,
     getContractConfig,
     getContractorsTableData,
-    getContractsNameConfig,
     getMinesTableData,
-    getUserConfig,
     mapSearchParamForIndexPosition,
     mapSearchParamForIndexPositionToFindContracts,
     MineDto,
     searchBy,
-    UserInfoType,
 } from 'entities/smartcontract';
 
 export const MiningPageGate = createGate<{ searchParam: string }>(
     'MiningPageGate'
-);
-
-export const MineOwnerContractsGate = createGate<{ searchParam: string }>(
-    'MineOwnerContractsGate'
 );
 
 export const getContractByExecutorEffect = createEffect(
@@ -57,23 +50,6 @@ export const getMineByAssetEffect = createEffect(
             })
         );
     }
-);
-
-const getLandlordContractsEffect = createEffect(
-    ({ searchParam }: { searchParam: string }) =>
-        getTableData(
-            getContractConfig({
-                searchParam,
-                searchIdentification:
-                    mapSearchParamForIndexPositionToFindContracts.clientId,
-                limit: 10000,
-            })
-        )
-);
-
-export const $landlordContracts = createStore<ContractDto[]>([]).on(
-    getLandlordContractsEffect.doneData,
-    (_, { rows }) => rows
 );
 
 export const getActionsForUserEffect = createEffect(
@@ -125,61 +101,6 @@ export const estimatesMiningTimeStore = createStore('').on(
             : ''
 );
 
-const getUserContractsEffect = createEffect(
-    ({ searchParam }: { searchParam: string }) =>
-        getTableData(
-            getContractsNameConfig(
-                searchParam,
-                mapSearchParamForIndexPositionToFindContracts.executorId,
-                1000
-            )
-        )
-);
-
-const getUserInfoEffect = createEffect(
-    ({ searchParam }: { searchParam: string }) =>
-        getTableData(getUserConfig(searchParam))
-);
-
-const $userContracts = createStore<ContractDto[]>([]).on(
-    getUserContractsEffect.doneData,
-    (_, { rows }) => rows
-);
-
-const $userInfo = createStore<UserInfoType | null>(null).on(
-    getUserInfoEffect.doneData,
-    (_, { rows }) => rows?.[0]
-);
-
-export const $mineOwnerContracts = combine(
-    $userContracts,
-    $userInfo,
-    (userContracts, userInfo) =>
-        userContracts.filter(
-            ({ type, executor, status: contractStatus }) =>
-                type === ContractType.mineowner_contractor &&
-                executor === userInfo?.owner &&
-                contractStatus === ContractStatus.active
-        )
-);
-
-export const $landlordContract = combine(
-    $landlordContracts,
-    $mineOwnerContracts,
-    (landlordContracts, mineOwnerContracts) =>
-        landlordContracts.filter(
-            ({ type, client, status: contractStatus }) =>
-                type === ContractType.landlord_mineowner &&
-                client === mineOwnerContracts[0].client &&
-                contractStatus === ContractStatus.active
-        )[0]
-);
-
-forward({
-    from: MineOwnerContractsGate.open,
-    to: [getUserContractsEffect, getUserInfoEffect],
-});
-
 forward({
     from: MiningPageGate.open,
     to: [
@@ -192,10 +113,4 @@ forward({
 forward({
     from: miningContractStore,
     to: getMineByAssetEffect,
-});
-
-sample({
-    source: $mineOwnerContracts,
-    target: getLandlordContractsEffect,
-    fn: (mineOwnerContracts) => ({ searchParam: mineOwnerContracts[0].client }),
 });

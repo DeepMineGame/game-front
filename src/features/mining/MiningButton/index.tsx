@@ -122,7 +122,7 @@ export const MiningAndClaimButton: FC<Props> = memo(
             ? t('pages.mining.cool')
             : t('components.common.button.claim');
 
-        const { disabledMiningButton } = useDisabledState(accountName);
+        const { disabledMiningButton } = useDisabledState();
 
         return (
             <>

@@ -1,23 +1,19 @@
-import { useGate, useStore } from 'effector-react';
+import { useStore } from 'effector-react';
 import { Trans } from 'react-i18next';
 import { Alert, Link } from 'shared';
 import { createOrder, equipmentSet } from 'app/router/paths';
-import { ContractorCabinStatus } from 'features/contractor';
-import { ContractDto } from 'entities/smartcontract';
 import {
+    $contractorCabin,
     $landlordContract,
     $mineOwnerContracts,
-    MineOwnerContractsGate,
-} from '../miningModel';
-
-const contractIsExpired = (contract: ContractDto) =>
-    contract.finishes_at * 1000 < Date.now();
-const contractWasTerminated = (contract: ContractDto) =>
-    Boolean(contract.term_time);
+    ContractorCabinStatus,
+    ContractorCabinStore,
+} from 'features/contractor';
+import { ContractDto } from 'entities/smartcontract';
 
 enum DisabledState {
     NotDisabled,
-    RequiresAction,
+    NeedFinishMineownerContract,
     EquipmentIsBroken,
     LandlordContractFinished,
 }
@@ -69,7 +65,7 @@ const States = ({
             />
         ),
     },
-    [DisabledState.RequiresAction]: {
+    [DisabledState.NeedFinishMineownerContract]: {
         disabledMiningButton: true,
         alert: (
             <Alert
@@ -118,55 +114,40 @@ const States = ({
     },
 });
 
-const getState = (store: any) => {
-    if (store.hasNoMineOwnerContracts) {
+const getState = (store: ContractorCabinStore) => {
+    if (!store.hasMineOwnerContracts) {
         return ContractorCabinStatus.sign_contract;
     }
 
-    // if (store.noEquipments) {
-    //     return ContractorCabinStatus.no_equipments;
-    // }
-
-    if (store.needFinishMineownerContract) {
-        return DisabledState.RequiresAction;
+    if (!store.installedMiningEquipments.length) {
+        return ContractorCabinStatus.no_equipments;
     }
 
-    // if (store.equipmentIsbroken) {
-    //     return DisabledState.EquipmentIsBroken
-    // }
+    if (store.needFinishMineownerContract) {
+        return DisabledState.NeedFinishMineownerContract;
+    }
 
-    if (store.isLandlordContractFinished) {
+    if (store.equipmentIsBroken) {
+        return DisabledState.EquipmentIsBroken;
+    }
+
+    if (store.landlordContractFinished) {
         return DisabledState.LandlordContractFinished;
     }
 
     return DisabledState.NotDisabled;
 };
 
-export const useDisabledState = (accountName: string) => {
-    useGate(MineOwnerContractsGate, { searchParam: accountName });
+export const useDisabledState = () => {
     const mineOwnerContracts = useStore($mineOwnerContracts);
     const landlordContract = useStore($landlordContract);
-    const store = useStore;
-    const state = getState(store);
+    const contractorCabin = useStore($contractorCabin);
+    const state = getState(contractorCabin);
 
     const { disabledMiningButton, alert } = States({
         mineOwnerContract: mineOwnerContracts[0],
         landlordContract,
     })[state];
-
-    const hasNoMineOwnerContracts = mineOwnerContracts.length === 0;
-
-    const needFinishMineownerContract =
-        mineOwnerContracts[0] &&
-        (contractWasTerminated(mineOwnerContracts[0]) ||
-            contractIsExpired(mineOwnerContracts[0]));
-
-    const isLandlordContractFinished =
-        landlordContract &&
-        (contractWasTerminated(landlordContract) ||
-            contractIsExpired(landlordContract));
-
-    //--
 
     return { disabledMiningButton, alert };
 };

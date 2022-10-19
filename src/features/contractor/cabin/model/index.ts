@@ -7,6 +7,7 @@ import {
     forward,
 } from 'effector';
 import { createGate } from 'effector-react';
+import { getAssetStatus, Status } from 'shared';
 import { findEquipmentByName } from 'features/equipmentSet';
 import {
     ActionType,
@@ -14,6 +15,7 @@ import {
     ContractDto,
     ContractStatus,
     ContractType,
+    getContractConfig,
     getContractsNameConfig,
     getHistoryConfig,
     getUserConfig,
@@ -26,7 +28,7 @@ import {
     UserInventoryType,
 } from 'entities/smartcontract';
 import { $inventoriedAssets, InventoriedAssets } from 'entities/atomicassets';
-import { getTableData } from 'shared/lib/utils';
+import { getTableData, isAssetAvailable } from 'shared/lib/utils';
 
 type MiningEquipments = Record<string, UserInventoryType | undefined>;
 
@@ -34,6 +36,18 @@ const setMiningOverEvent = createEvent<boolean>();
 
 const ContractorCabinGate = createGate<{ searchParam: string }>(
     'ContractorCabinGate'
+);
+
+const getLandlordContractsEffect = createEffect(
+    ({ searchParam }: { searchParam: string }) =>
+        getTableData(
+            getContractConfig({
+                searchParam,
+                searchIdentification:
+                    mapSearchParamForIndexPositionToFindContracts.clientId,
+                limit: 10000,
+            })
+        )
 );
 
 const getUserContractsEffect = createEffect(
@@ -55,6 +69,11 @@ const getUserHistoryEffect = createEffect(
 const getUserInfoEffect = createEffect(
     ({ searchParam }: { searchParam: string }) =>
         getTableData(getUserConfig(searchParam))
+);
+
+const $landlordContracts = createStore<ContractDto[]>([]).on(
+    getLandlordContractsEffect.doneData,
+    (_, { rows }) => rows
 );
 
 const $userContracts = createStore<ContractDto[]>([]).on(
@@ -84,14 +103,30 @@ const $userHistory = createStore<UserHistoryType[]>([]).on(
     (_, { rows }) => rows
 );
 
-const $hasMineOwnerContracts = createStore<boolean>(false);
+const $hasMineOwnerContracts = createStore(false);
 const $installedMiningEquipments = createStore<InventoriedAssets>([]);
-const $isNotFullEquipmentsSet = createStore<boolean>(false);
+const $isNotFullEquipmentsSet = createStore(false);
 const $activeMining = createStore<UserHistoryType | null>(null);
 const $interruptedMining = createStore<UserHistoryType[]>([]);
-const $miningOver = createStore<boolean>(false);
+const $miningOver = createStore(false);
 const $miningEquipments = createStore<MiningEquipments | null>(null);
-const $inLocation = createStore<boolean>(false);
+const $inLocation = createStore(false);
+const $hasInstalledEquipment = createStore(false);
+const $needFinishMineownerContract = createStore(false);
+const $equipmentIsBroken = createStore(false);
+const $landlordContractFinished = createStore(false);
+
+const $landlordContract = combine(
+    $landlordContracts,
+    $mineOwnerContracts,
+    (landlordContracts, mineOwnerContracts) =>
+        landlordContracts.filter(
+            ({ type, client, status: contractStatus }) =>
+                type === ContractType.landlord_mineowner &&
+                client === mineOwnerContracts[0].client &&
+                contractStatus === ContractStatus.active
+        )[0]
+);
 
 const $contractorCabin = combine(
     $hasMineOwnerContracts,
@@ -100,13 +135,19 @@ const $contractorCabin = combine(
     $activeMining,
     $interruptedMining,
     $miningOver,
+    $needFinishMineownerContract,
+    $equipmentIsBroken,
+    $landlordContractFinished,
     (
         hasMineOwnerContracts,
         installedMiningEquipments,
         isNotFullEquipmentsSet,
         activeMining,
         interruptedMining,
-        miningOver
+        miningOver,
+        needFinishMineownerContract,
+        equipmentIsBroken,
+        landlordContractFinished
     ) => ({
         hasMineOwnerContracts,
         installedMiningEquipments,
@@ -114,6 +155,9 @@ const $contractorCabin = combine(
         activeMining,
         interruptedMining,
         miningOver,
+        needFinishMineownerContract,
+        equipmentIsBroken,
+        landlordContractFinished,
     })
 );
 
@@ -124,7 +168,41 @@ const $isContractorCabinLoading = combine(
     (...loadings) => loadings.some(Boolean)
 );
 
-const $hasInstalledEquipment = createStore<boolean>(false);
+// ---
+
+const contractIsExpired = (contract: ContractDto) =>
+    contract.finishes_at * 1000 < Date.now();
+const contractWasTerminated = (contract: ContractDto) =>
+    Boolean(contract.term_time);
+
+// ---
+
+sample({
+    source: $mineOwnerContracts,
+    target: $needFinishMineownerContract,
+    fn: (mineOwnerContracts) =>
+        contractWasTerminated(mineOwnerContracts[0]) ||
+        contractIsExpired(mineOwnerContracts[0]),
+});
+
+sample({
+    source: $installedMiningEquipments,
+    target: $equipmentIsBroken,
+    fn: (installedMiningEquipments) =>
+        installedMiningEquipments.some(
+            (asset) =>
+                getAssetStatus(asset) === Status.broken ||
+                !isAssetAvailable(asset)
+        ),
+});
+
+sample({
+    source: $landlordContract,
+    target: $landlordContractFinished,
+    fn: (landlordContract) =>
+        contractWasTerminated(landlordContract) ||
+        contractIsExpired(landlordContract),
+});
 
 sample({
     source: $installedMiningEquipments,
@@ -231,6 +309,8 @@ export {
     $inLocation,
     $isContractorCabinLoading,
     $hasInstalledEquipment,
+    $mineOwnerContracts,
+    $landlordContract,
 };
 
 export type ContractorCabinStore = ReturnType<

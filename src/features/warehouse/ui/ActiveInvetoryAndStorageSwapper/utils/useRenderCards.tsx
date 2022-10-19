@@ -1,14 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { Card } from 'shared';
 import { InventoriedAssets } from 'entities/atomicassets';
+import { isAssetAvailable } from 'shared/lib/utils';
 import styles from '../styles.module.scss';
 
 export function useRenderCards() {
     const navigate = useNavigate();
-    const isCardAvailable = (card: InventoriedAssets[number]) =>
-        card.available_from === undefined ||
-        (card.available_from !== undefined &&
-            card.available_from * 1000 <= Date.now());
 
     return (
         items: Set<InventoriedAssets[number]> | InventoriedAssets,
@@ -16,7 +13,7 @@ export function useRenderCards() {
     ) => {
         return Array.from(items)?.map((card) => (
             <div
-                onDragStart={() => isCardAvailable(card) && onDragStart(card)}
+                onDragStart={() => isAssetAvailable(card) && onDragStart(card)}
                 key={card.template_id}
             >
                 <Card

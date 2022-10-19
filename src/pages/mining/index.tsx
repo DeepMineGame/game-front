@@ -54,7 +54,7 @@ export const MiningPage: FC = memo(() => {
         lastMineAction?.attrs?.find(({ key }) => key === 'est_dme_amount')
             ?.value;
 
-    const { alert } = useDisabledState(accountName);
+    const { alert } = useDisabledState();
 
     return (
         <Page headerTitle={t('pages.mining.mining')}>
