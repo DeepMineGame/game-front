@@ -49,12 +49,11 @@ const ContractorCabinGate = createGate<{ searchParam: string }>(
 const getLandlordContractsEffect = createEffect(
     ({ searchParam }: { searchParam: string }) =>
         getTableData(
-            getContractConfig({
+            getContractsNameConfig(
                 searchParam,
-                searchIdentification:
-                    mapSearchParamForIndexPositionToFindContracts.clientId,
-                limit: 10000,
-            })
+                mapSearchParamForIndexPositionToFindContracts.executorId,
+                1000
+            )
         )
 );
 
@@ -81,7 +80,11 @@ const getUserInfoEffect = createEffect(
 
 const $landlordContracts = createStore<ContractDto[]>([]).on(
     getLandlordContractsEffect.doneData,
-    (_, { rows }) => rows
+    (_, { rows }) => {
+        console.log('rows', rows);
+
+        return rows;
+    }
 );
 
 const $userContracts = createStore<ContractDto[]>([]).on(
@@ -130,13 +133,17 @@ const $miningContractIsntActive = createStore(false);
 const $landlordContract = combine(
     $landlordContracts,
     $mineOwnerContracts,
-    (landlordContracts, mineOwnerContracts) =>
-        landlordContracts.filter(
+    (landlordContracts, mineOwnerContracts) => {
+        // console.log('mineOwnerContracts[0]', mineOwnerContracts[0]);
+        // console.log('landlordContracts', landlordContracts);
+
+        return landlordContracts.filter(
             ({ type, client, status: contractStatus }) =>
                 type === ContractType.landlord_mineowner &&
                 client === mineOwnerContracts[0].client &&
                 contractStatus === ContractStatus.active
-        )[0]
+        )[0];
+    }
 );
 
 const $contractorCabin = combine(
@@ -317,7 +324,12 @@ forward({
 
 forward({
     from: ContractorCabinGate.open,
-    to: [getUserContractsEffect, getUserInfoEffect, getUserHistoryEffect],
+    to: [
+        getUserContractsEffect,
+        getUserInfoEffect,
+        getUserHistoryEffect,
+        getLandlordContractsEffect,
+    ],
 });
 
 export {

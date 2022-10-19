@@ -6,13 +6,14 @@ import {
     $contractorCabin,
     $landlordContract,
     $mineOwnerContracts,
-    ContractorCabinStatus,
     ContractorCabinStore,
 } from 'features/contractor';
 import { ContractDto } from 'entities/smartcontract';
 
 enum DisabledState {
     NotDisabled,
+    NeedSignContract,
+    NotFullEquipmentSet,
     NeedFinishMineownerContract,
     MiningContractIsntActive,
     EquipmentIsBroken,
@@ -27,7 +28,7 @@ const States = ({
         disabledMiningButton: false,
         alert: undefined,
     },
-    [ContractorCabinStatus.sign_contract]: {
+    [DisabledState.NeedSignContract]: {
         disabledMiningButton: true,
         alert: (
             <Alert
@@ -42,7 +43,7 @@ const States = ({
             />
         ),
     },
-    [ContractorCabinStatus.no_equipments]: {
+    [DisabledState.NotFullEquipmentSet]: {
         disabledMiningButton: true,
         alert: (
             <Alert
@@ -121,11 +122,11 @@ const States = ({
 
 const getState = (store: ContractorCabinStore) => {
     if (!store.hasMineOwnerContracts) {
-        return ContractorCabinStatus.sign_contract;
+        return DisabledState.NeedSignContract;
     }
 
-    if (!store.installedMiningEquipments.length) {
-        return ContractorCabinStatus.no_equipments;
+    if (store.isNotFullEquipmentsSet) {
+        return DisabledState.NotFullEquipmentSet;
     }
 
     if (store.needFinishMineownerContract) {
