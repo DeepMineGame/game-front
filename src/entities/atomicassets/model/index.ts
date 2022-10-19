@@ -1,29 +1,37 @@
 import { combine, createEffect, createStore, sample } from 'effector';
 import { AssetDataType, getAssets } from 'entities/atomicassets';
-import { inventoriesStore } from 'entities/smartcontract';
-import { mergeAssets } from 'shared/lib/utils';
+import { $inventory } from 'entities/smartcontract';
+import { mergeAssets, getGameAssets } from 'shared/lib/utils';
 
-export const getAssetsEffect = createEffect(getAssets);
+export const getAtomicAssetsEffect = createEffect(getAssets);
 
-export const $assets = createStore<AssetDataType[]>([]).on(
-    getAssetsEffect.doneData,
+export const $inventoryAtomicAssets = createStore<AssetDataType[]>([]).on(
+    getAtomicAssetsEffect.doneData,
     (_, data) => data
 );
 
-// merge invetories with assets from atomic
-export const $inventoriedAssets = combine(
-    inventoriesStore,
-    $assets,
+const $inventoryAssetsIds = createStore<string[]>([]);
+
+// merge assets from inventory with assets from atomic
+export const $mergedInventoryWithAtomicAssets = combine(
+    $inventory,
+    $inventoryAtomicAssets,
     mergeAssets
 );
 
-export type InventoriedAssets = ReturnType<
-    typeof $inventoriedAssets['getState']
+export type MergedInventoryWithAtomicAssets = ReturnType<
+    typeof $mergedInventoryWithAtomicAssets['getState']
 >;
 
 sample({
-    source: inventoriesStore,
-    target: getAssetsEffect,
-    fn: (inventories) =>
-        inventories?.map((inventory) => String(inventory.asset_id)),
+    source: $inventory,
+    target: $inventoryAssetsIds,
+    fn: (assets) =>
+        getGameAssets(assets)?.map((asset) => String(asset.asset_id)),
+});
+
+sample({
+    source: $inventoryAssetsIds,
+    filter: (ids) => !!ids.length,
+    target: getAtomicAssetsEffect,
 });

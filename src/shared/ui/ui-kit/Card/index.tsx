@@ -8,7 +8,7 @@ import {
     isUtcDateExpired,
 } from 'shared';
 import { UserInventoryType } from 'entities/smartcontract';
-import { InventoriedAssets } from 'entities/atomicassets';
+import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
 import { ProgressProps } from '../ProgressBar/NftProgressBar';
 import styles from './styles.module.scss';
 import { CardBadge } from './components/CardBadge';
@@ -33,7 +33,7 @@ export type CardProps = {
     onButtonClick?: () => void;
     onClick?: (e: any) => void;
     className?: string;
-    inventory?: InventoriedAssets[number] | UserInventoryType;
+    inventory?: MergedInventoryWithAtomicAssets[number] | UserInventoryType;
     onRepairFinish?: () => void;
     withDepreciationBar?: boolean;
     showCardBadgeStatus: boolean;
@@ -81,16 +81,19 @@ export const Card: FC<CardProps> = ({
                     {withDepreciationBar && (
                         <DepreciationProgressBar
                             depreciation={
-                                (inventory as InventoriedAssets[number])?.data
-                                    ?.depreciation
+                                (
+                                    inventory as MergedInventoryWithAtomicAssets[number]
+                                )?.data?.depreciation
                             }
                             currentCapacity={
-                                (inventory as InventoriedAssets[number])
-                                    ?.data?.['current capacity']
+                                (
+                                    inventory as MergedInventoryWithAtomicAssets[number]
+                                )?.data?.['current capacity']
                             }
                             maximalCapacity={
-                                (inventory as InventoriedAssets[number])
-                                    ?.data?.['maximal capacity']
+                                (
+                                    inventory as MergedInventoryWithAtomicAssets[number]
+                                )?.data?.['maximal capacity']
                             }
                         />
                     )}

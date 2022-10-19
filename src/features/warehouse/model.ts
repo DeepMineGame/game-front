@@ -7,49 +7,96 @@ import {
     getAtomicAssetsByUser,
 } from 'entities/atomicassets';
 import { getInventoryConfig, UserInventoryType } from 'entities/smartcontract';
-import { mergeAssets } from 'shared/lib/utils';
+import { mergeAssets, getGameAssets } from 'shared/lib/utils';
 
-export const WarehouseGate = createGate<{ searchParam: string }>(
-    'warehouseGate'
-);
-export const getAtomicAssetsByUserEffect = createEffect(getAtomicAssetsByUser);
+const WarehouseGate = createGate<{ searchParam: string }>('warehouseGate');
 
-export const userAtomicAssetsStore = createStore<UserInventoryType[]>([]).on(
-    getAtomicAssetsByUserEffect.doneData,
-    (state, payload) => payload
-);
-
-const getAssetsEffect = createEffect(getAssets);
-
-const $assets = createStore<AssetDataType[]>([]).on(
-    getAssetsEffect.doneData,
-    (_, data) => data
-);
+const getAtomicAssetsByUserEffect = createEffect(getAtomicAssetsByUser);
 
 const getInventoryEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) =>
         getTableData(getInventoryConfig(searchParam))
 );
 
-export const $userInventory = createStore([]).on(
+const $storage = createStore<UserInventoryType[]>([]).on(
+    getAtomicAssetsByUserEffect.doneData,
+    (_, payload) => payload
+);
+
+const $inventory = createStore<UserInventoryType[]>([]).on(
     getInventoryEffect.doneData,
     (_, { rows }) => rows
 );
 
-export const $inventoriedUserAssets = combine(
-    userAtomicAssetsStore,
-    $assets,
+const getStorageAtomicAssetsEffect = createEffect(getAssets);
+const getInventoryAtomicAssetsEffect = createEffect(getAssets);
+
+const $storageAssetsIds = createStore<string[]>([]);
+const $inventoryAssetsIds = createStore<string[]>([]);
+
+const $storageAtomicAssets = createStore<AssetDataType[]>([]).on(
+    getStorageAtomicAssetsEffect.doneData,
+    (_, data) => data
+);
+
+const $inventoryAtomicAssets = createStore<AssetDataType[]>([]).on(
+    getInventoryAtomicAssetsEffect.doneData,
+    (_, data) => data
+);
+
+const $mergedInventoryWithAtomicAssets = combine(
+    $inventory,
+    $inventoryAtomicAssets,
+    (...assets) => mergeAssets(...assets).filter(({ in_use }) => !in_use)
+);
+
+const $mergedStorageWithAtomicAssets = combine(
+    $storage,
+    $storageAtomicAssets,
     mergeAssets
 );
 
 sample({
-    source: userAtomicAssetsStore,
-    target: getAssetsEffect,
-    fn: (notInventoriedAssets) =>
-        notInventoriedAssets?.map((asset) => String(asset.asset_id)),
+    source: $inventory,
+    target: $inventoryAssetsIds,
+    fn: (assets) =>
+        getGameAssets(assets)?.map((asset) => String(asset.asset_id)),
+});
+
+sample({
+    source: $storage,
+    target: $storageAssetsIds,
+    fn: (assets) =>
+        getGameAssets(assets)?.map((asset) => String(asset.asset_id)),
+});
+
+sample({
+    source: $inventory,
+    target: getInventoryAtomicAssetsEffect,
+    fn: (assets) => assets?.map((asset) => String(asset.asset_id)),
+});
+
+sample({
+    source: $storageAssetsIds,
+    filter: (ids) => !!ids.length,
+    target: getStorageAtomicAssetsEffect,
+});
+
+sample({
+    source: $inventoryAssetsIds,
+    filter: (ids) => !!ids.length,
+    target: getInventoryAtomicAssetsEffect,
 });
 
 forward({
     from: WarehouseGate.open,
     to: [getAtomicAssetsByUserEffect, getInventoryEffect],
 });
+
+export {
+    WarehouseGate,
+    getAtomicAssetsByUserEffect,
+    $storage,
+    $mergedInventoryWithAtomicAssets,
+    $mergedStorageWithAtomicAssets,
+};

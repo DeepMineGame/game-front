@@ -6,15 +6,14 @@ import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { isUserInHive } from 'features/hive';
 import { CallToTravelNotification } from 'features/physicalShift';
+import { LOCATION_TO_ID, withdrawAssets } from 'entities/smartcontract';
 import {
-    IN_GAME_NFT_IDS,
-    LOCATION_TO_ID,
-    withdrawAssets,
-} from 'entities/smartcontract';
-import { atomicTransfer, InventoriedAssets } from 'entities/atomicassets';
+    atomicTransfer,
+    MergedInventoryWithAtomicAssets,
+} from 'entities/atomicassets';
 import {
-    $inventoriedUserAssets,
-    $userInventory,
+    $mergedStorageWithAtomicAssets,
+    $mergedInventoryWithAtomicAssets,
     WarehouseGate,
 } from '../../model';
 import { useSmartContractAction } from '../../../hooks';
@@ -30,23 +29,21 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     const isInHive = useStore(isUserInHive);
     const { travelConfirm } = useTravelConfirm(LOCATION_TO_ID.hive);
     const renderCards = useRenderCards();
-    const userAtomicAssets = useStore($inventoriedUserAssets);
-    const userInventory = useStore($userInventory);
-    const userInventoryNotUse = userInventory.filter(({ in_use }) => !in_use);
-
-    const gameAssets = userAtomicAssets.filter((item) =>
-        IN_GAME_NFT_IDS.includes(item.template_id)
+    const inventoriedUserAssets = useStore($mergedStorageWithAtomicAssets);
+    const mergedInventoryWithAtomicAssets = useStore(
+        $mergedInventoryWithAtomicAssets
     );
 
     const [draggedElement, setDraggedElement] = useState<
-        null | InventoriedAssets[number]
+        null | MergedInventoryWithAtomicAssets[number]
     >(null);
     const reloadPage = useReloadPage();
     const [draggedElements, setDraggedElements] = useState(
-        new Set<InventoriedAssets[number]>()
+        new Set<MergedInventoryWithAtomicAssets[number]>()
     );
     const isAtomicIncludesDragged =
-        gameAssets.filter((item) => draggedElements.has(item))?.length > 0;
+        inventoriedUserAssets.filter((item) => draggedElements.has(item))
+            ?.length > 0;
 
     const onDrop: DragEventHandler<HTMLDivElement> = (e) => {
         e?.preventDefault();
@@ -93,7 +90,9 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
         return reloadPage();
     };
 
-    const handleDragCard = (element: InventoriedAssets[number]) => {
+    const handleDragCard = (
+        element: MergedInventoryWithAtomicAssets[number]
+    ) => {
         if (isInHive) {
             setDraggedElement(element);
         }
@@ -126,7 +125,10 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                         </div>
                     ) : (
                         <div className={styles.cardsWrapper}>
-                            {renderCards(userInventoryNotUse, handleDragCard)}
+                            {renderCards(
+                                mergedInventoryWithAtomicAssets,
+                                handleDragCard
+                            )}
                         </div>
                     )}
                 </div>
@@ -155,7 +157,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                             {renderCards(draggedElements, handleDragCard)}
                         </div>
                     ) : (
-                        renderCards(gameAssets, handleDragCard)
+                        renderCards(inventoriedUserAssets, handleDragCard)
                     )}
                 </div>
             </Col>

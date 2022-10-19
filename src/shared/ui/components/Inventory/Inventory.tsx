@@ -6,15 +6,15 @@ import cn from 'classnames';
 
 import { filterEquipmentByName } from 'features';
 import { InventoryNameType, InventoryTab } from 'entities/smartcontract';
-import { InventoriedAssets } from 'entities/atomicassets';
+import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
 import styles from './styles.module.scss';
 import { sortConfig, tabList, tabsNameMap } from './constants';
 
 type InventoryProps = ModalProps & {
     name?: InventoryNameType;
-    userInventory: InventoriedAssets;
-    onSelect: (card: InventoriedAssets[number]) => void;
-    onOpenCard: (card: InventoriedAssets[number]) => void;
+    userInventory: MergedInventoryWithAtomicAssets;
+    onSelect: (card: MergedInventoryWithAtomicAssets[number]) => void;
+    onOpenCard: (card: MergedInventoryWithAtomicAssets[number]) => void;
     selectedTab?: InventoryTab;
 };
 
@@ -40,13 +40,15 @@ export const Inventory: FC<InventoryProps> = ({
         ? filterEquipmentByName(userInventory, name)
         : userInventory;
 
-    const handleCardSelect = (card: InventoriedAssets[number]) => () => {
-        onSelect(card);
-    };
+    const handleCardSelect =
+        (card: MergedInventoryWithAtomicAssets[number]) => () => {
+            onSelect(card);
+        };
 
-    const handleDetailsClick = (card: InventoriedAssets[number]) => () => {
-        onOpenCard(card);
-    };
+    const handleDetailsClick =
+        (card: MergedInventoryWithAtomicAssets[number]) => () => {
+            onOpenCard(card);
+        };
 
     return (
         <Modal

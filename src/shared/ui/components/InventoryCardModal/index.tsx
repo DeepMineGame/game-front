@@ -17,7 +17,7 @@ import { useStore } from 'effector-react';
 import {
     AssetDataType,
     getAtomicAssetsDataById,
-    InventoriedAssets,
+    MergedInventoryWithAtomicAssets,
 } from 'entities/atomicassets';
 import { rarityMap, repairEquipment } from 'entities/smartcontract';
 import { balancesStore } from 'entities/user';
@@ -37,8 +37,8 @@ import {
 import styles from './styles.module.scss';
 
 type InventoryCardModalProps = ModalProps & {
-    card: InventoriedAssets[number];
-    onSelect?: (card: InventoriedAssets[number]) => void;
+    card: MergedInventoryWithAtomicAssets[number];
+    onSelect?: (card: MergedInventoryWithAtomicAssets[number]) => void;
 };
 
 enum ModalType {

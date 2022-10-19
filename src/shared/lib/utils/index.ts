@@ -59,3 +59,4 @@ export {
 export { createErrorMessage } from './create-error-message';
 export * from './merge-assets';
 export { isAssetAvailable } from './is-asset-available';
+export { getGameAssets } from './get-game-assets';

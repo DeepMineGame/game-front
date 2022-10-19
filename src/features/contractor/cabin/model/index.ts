@@ -27,7 +27,10 @@ import {
     UserInfoType,
     UserInventoryType,
 } from 'entities/smartcontract';
-import { $inventoriedAssets, InventoriedAssets } from 'entities/atomicassets';
+import {
+    $mergedInventoryWithAtomicAssets,
+    MergedInventoryWithAtomicAssets,
+} from 'entities/atomicassets';
 import { getTableData, isAssetAvailable } from 'shared/lib/utils';
 
 type MiningEquipments = Record<string, UserInventoryType | undefined>;
@@ -104,7 +107,9 @@ const $userHistory = createStore<UserHistoryType[]>([]).on(
 );
 
 const $hasMineOwnerContracts = createStore(false);
-const $installedMiningEquipments = createStore<InventoriedAssets>([]);
+const $installedMiningEquipments = createStore<MergedInventoryWithAtomicAssets>(
+    []
+);
 const $isNotFullEquipmentsSet = createStore(false);
 const $activeMining = createStore<UserHistoryType | null>(null);
 const $interruptedMining = createStore<UserHistoryType[]>([]);
@@ -221,12 +226,12 @@ sample({
             miningEquipments || {}
         ).filter((miningEquipment) => miningEquipment);
 
-        return installedMiningEquipments as InventoriedAssets;
+        return installedMiningEquipments as MergedInventoryWithAtomicAssets;
     },
 });
 
 sample({
-    source: $inventoriedAssets,
+    source: $mergedInventoryWithAtomicAssets,
     target: $miningEquipments,
     fn: (inventoriedAssets) => {
         const installedItems = inventoriedAssets.filter(({ in_use }) => in_use);
