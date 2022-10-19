@@ -259,6 +259,10 @@
       "physicalShiftBadge": {
         "text": "Do you want to travel here?",
         "button": "Travel"
+      },
+      "tooltips": {
+        "notReadyMineDesk": "Install the equipment and sign the contract if you haven't done it yet to visit mine",
+        "unableGetStatAccess": "Complete mining first to visit Stats & info desk"
       }
     },
     "equipmentSet": {

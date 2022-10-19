@@ -25,6 +25,8 @@ import {
     $hasInstalledEquipment,
 } from 'features';
 import { useGate, useStore } from 'effector-react';
+import { Tooltip } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { LOCATION_TO_ID } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 import { SignContract } from './components/SignContract';
@@ -47,6 +49,8 @@ const states = {
 
 export const ContractorCabin: FC = () => {
     const accountName = useAccountName();
+    const { t } = useTranslation();
+
     useGate(ContractorCabinGate, { searchParam: accountName });
     const reloadPage = useReloadPage();
     const { width, height } = useDimensions();
@@ -59,7 +63,9 @@ export const ContractorCabin: FC = () => {
     const inLocation = useStore($inLocation);
     const hasInstalledEquipment = useStore($hasInstalledEquipment);
     const isContractorCabinLoading = useStore($isContractorCabinLoading);
-
+    const unableToVisitMiningDesk = status < ContractorCabinStatus.ready;
+    const unableToVisitStats = status <= ContractorCabinStatus.mining_over;
+    const unableToVisitEquipment = !hasInstalledEquipment && !inLocation;
     const State = states[status];
 
     const getActiveTooltip = () => {
@@ -101,16 +107,51 @@ export const ContractorCabin: FC = () => {
                     <State />
                 )}
             </Monitor>
+            <Tooltip
+                overlay={
+                    unableToVisitMiningDesk
+                        ? t('pages.contractor.tooltips.notReadyMineDesk')
+                        : t('components.common.button.miningDeck')
+                }
+            >
+                <div
+                    className={styles.chair}
+                    onClick={() =>
+                        !unableToVisitMiningDesk && navigate(PATHS.mining)
+                    }
+                />
+            </Tooltip>
+            <Tooltip
+                overlay={
+                    unableToVisitStats
+                        ? t('pages.contractor.tooltips.unableGetStatAccess')
+                        : t('components.common.statsAndInfo.title')
+                }
+            >
+                <div
+                    className={styles.monitors}
+                    onClick={() =>
+                        !unableToVisitStats &&
+                        navigate(PATHS.contractorStatsAndInfo)
+                    }
+                />
+            </Tooltip>
+            <Tooltip overlay={t('components.contractorMenu.equipmentTooltip')}>
+                <div
+                    className={styles.stuff}
+                    onClick={() =>
+                        !unableToVisitEquipment && navigate(PATHS.equipmentSet)
+                    }
+                />
+            </Tooltip>
             <Header withBackButton />
             <ContractorMenu
                 config={{
                     disabledItems: {
-                        [ContractorMenuItems.InfoPanel]:
-                            status <= ContractorCabinStatus.mining_over,
+                        [ContractorMenuItems.InfoPanel]: unableToVisitStats,
                         [ContractorMenuItems.MiningDeck]:
-                            status < ContractorCabinStatus.ready,
-                        [ContractorMenuItems.Equipment]:
-                            !hasInstalledEquipment && !inLocation,
+                            unableToVisitMiningDesk,
+                        [ContractorMenuItems.Equipment]: unableToVisitEquipment,
                     },
                     callbacks: {
                         [ContractorMenuItems.InfoPanel]: () =>

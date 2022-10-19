@@ -81,3 +81,51 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.chair {
+
+  @media only screen and (min-width: $media-desktop-s) {
+    @include enter-hover;
+
+    background: url('../../../shared/ui/images/contractor/chair.webp') no-repeat;
+    background-size: contain;
+    height: 49vh;
+    width: 14vw;
+    position: absolute;
+    bottom: 20vh;
+    right: 30vw;
+    cursor: pointer;
+  }
+}
+
+.monitors {
+
+  @media only screen and (min-width: $media-desktop-s) {
+    @include enter-hover;
+
+    background: url('../../../shared/ui/images/contractor/monitors.webp') no-repeat;
+    background-size: contain;
+    height: 40vh;
+    width: 12vw;
+    position: absolute;
+    bottom: 18vh;
+    right: 20vw;
+    cursor: pointer;
+  }
+}
+
+.stuff {
+
+  @media only screen and (min-width: $media-desktop-s) {
+    @include enter-hover;
+
+    background: url('../../../shared/ui/images/contractor/stuff.webp') no-repeat;
+    background-size: contain;
+    height: 22vh;
+    width: 23vw;
+    position: absolute;
+    bottom: 0;
+    right: 30vw;
+    cursor: pointer;
+  }
+}
