@@ -1,7 +1,7 @@
 import { combine, createEffect, createStore, sample } from 'effector';
 import { AssetDataType, getAssets } from 'entities/atomicassets';
 import { inventoriesStore } from 'entities/smartcontract';
-import { mergeAssets } from 'shared/lib/utils';
+import { mergeAssets, getGameAssets } from 'shared/lib/utils';
 
 export const getAssetsEffect = createEffect(getAssets);
 
@@ -10,7 +10,9 @@ export const $assets = createStore<AssetDataType[]>([]).on(
     (_, data) => data
 );
 
-// merge invetories with assets from atomic
+const $inventoryAssetIds = createStore<string[]>([]);
+
+// merge inventories with assets from atomic
 export const $inventoriedAssets = combine(
     inventoriesStore,
     $assets,
@@ -23,7 +25,15 @@ export type InventoriedAssets = ReturnType<
 
 sample({
     source: inventoriesStore,
-    target: getAssetsEffect,
+    target: $inventoryAssetIds,
     fn: (inventories) =>
-        inventories?.map((inventory) => String(inventory.asset_id)),
+        getGameAssets(inventories)?.map((inventory) =>
+            String(inventory.asset_id)
+        ),
+});
+
+sample({
+    source: $inventoryAssetIds,
+    filter: (inventories) => !!inventories.length,
+    target: getAssetsEffect,
 });

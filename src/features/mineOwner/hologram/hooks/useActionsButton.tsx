@@ -7,6 +7,8 @@ import {
     useAccountName,
     useMediaQuery,
     useReloadPage,
+    useTravelConfirm,
+    useUserLocation,
 } from 'shared';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +16,12 @@ import { createOrder, serviceMarket, warehouse } from 'app/router/paths';
 import { ATOMICHUB_URL } from 'app';
 import { useStore } from 'effector-react';
 import { ServiceMarketTabIds } from 'app/router/constants';
-import { ContractType, ContractRole, setupMine } from 'entities/smartcontract';
+import {
+    ContractType,
+    ContractRole,
+    setupMine,
+    LOCATION_TO_ID,
+} from 'entities/smartcontract';
 import { orderFields } from 'entities/order';
 import {
     mineOwnerCabinState,
@@ -31,6 +38,9 @@ export function useActionsButton() {
     const accountName = useAccountName();
     const contract = useStore(mineOwnerLandlordContractForUserStore);
     const reloadPage = useReloadPage();
+    const inLocation = useUserLocation();
+    const { travelConfirm } = useTravelConfirm(LOCATION_TO_ID.mine_deck);
+
     const contractButton = (
         <div>
             <Button
@@ -123,7 +133,11 @@ export function useActionsButton() {
                     costs={{ timeSeconds: 1 }}
                     visible={isSetupMineModalVisible}
                     onCancel={() => setSetupMineModalVisible(false)}
-                    onSubmit={setupSignAndReload}
+                    onSubmit={
+                        inLocation.mineDeck
+                            ? setupSignAndReload
+                            : () => travelConfirm(reloadPage)
+                    }
                 />
                 <Button
                     type="link"

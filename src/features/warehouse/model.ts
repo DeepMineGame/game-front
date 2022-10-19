@@ -7,7 +7,7 @@ import {
     getAtomicAssetsByUser,
 } from 'entities/atomicassets';
 import { getInventoryConfig, UserInventoryType } from 'entities/smartcontract';
-import { mergeAssets } from 'shared/lib/utils';
+import { mergeAssets, getGameAssets } from 'shared/lib/utils';
 
 export const WarehouseGate = createGate<{ searchParam: string }>(
     'warehouseGate'
@@ -21,6 +21,9 @@ export const userAtomicAssetsStore = createStore<UserInventoryType[]>([]).on(
 
 const getAssetsEffect = createEffect(getAssets);
 const getInvetoryAssetsEffect = createEffect(getAssets);
+
+const $inventoryAssetIds = createStore<string[]>([]);
+const $inventoryUserInventoryIds = createStore<string[]>([]);
 
 const $assets = createStore<AssetDataType[]>([]).on(
     getAssetsEffect.doneData,
@@ -55,10 +58,21 @@ export const $inventoriedUserAssets = combine(
 );
 
 sample({
+    source: $userInventory,
+    target: $inventoryUserInventoryIds,
+    fn: (inventories) =>
+        getGameAssets(inventories)?.map((inventory) =>
+            String(inventory.asset_id)
+        ),
+});
+
+sample({
     source: userAtomicAssetsStore,
-    target: getAssetsEffect,
-    fn: (notInventoriedAssets) =>
-        notInventoriedAssets?.map((asset) => String(asset.asset_id)),
+    target: $inventoryAssetIds,
+    fn: (inventories) =>
+        getGameAssets(inventories)?.map((inventory) =>
+            String(inventory.asset_id)
+        ),
 });
 
 sample({
@@ -71,4 +85,16 @@ sample({
 forward({
     from: WarehouseGate.open,
     to: [getAtomicAssetsByUserEffect, getInventoryEffect],
+});
+
+sample({
+    source: $inventoryAssetIds,
+    filter: (inventories) => !!inventories.length,
+    target: getAssetsEffect,
+});
+
+sample({
+    source: $inventoryUserInventoryIds,
+    filter: (inventories) => !!inventories.length,
+    target: getInvetoryAssetsEffect,
 });

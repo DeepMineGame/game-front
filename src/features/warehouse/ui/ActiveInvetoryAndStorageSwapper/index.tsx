@@ -6,11 +6,7 @@ import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { isUserInHive } from 'features/hive';
 import { CallToTravelNotification } from 'features/physicalShift';
-import {
-    IN_GAME_NFT_IDS,
-    LOCATION_TO_ID,
-    withdrawAssets,
-} from 'entities/smartcontract';
+import { LOCATION_TO_ID, withdrawAssets } from 'entities/smartcontract';
 import { atomicTransfer, InventoriedAssets } from 'entities/atomicassets';
 import {
     $inventoriedUserAssets,
@@ -33,10 +29,6 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     const inventoriedUserAssets = useStore($inventoriedUserAssets);
     const inventoriedUserInventory = useStore($inventoriedUserInventory);
 
-    const gameAssets = inventoriedUserAssets.filter((item) =>
-        IN_GAME_NFT_IDS.includes(item.template_id)
-    );
-
     const [draggedElement, setDraggedElement] = useState<
         null | InventoriedAssets[number]
     >(null);
@@ -45,7 +37,8 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
         new Set<InventoriedAssets[number]>()
     );
     const isAtomicIncludesDragged =
-        gameAssets.filter((item) => draggedElements.has(item))?.length > 0;
+        inventoriedUserAssets.filter((item) => draggedElements.has(item))
+            ?.length > 0;
 
     const onDrop: DragEventHandler<HTMLDivElement> = (e) => {
         e?.preventDefault();
@@ -157,7 +150,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                             {renderCards(draggedElements, handleDragCard)}
                         </div>
                     ) : (
-                        renderCards(gameAssets, handleDragCard)
+                        renderCards(inventoriedUserAssets, handleDragCard)
                     )}
                 </div>
             </Col>
