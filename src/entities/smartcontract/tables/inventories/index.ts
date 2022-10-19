@@ -47,7 +47,7 @@ export const getInventoriesEffect = createEffect(
     }
 );
 
-export const inventoriesStore = createStore<UserInventoryType[]>([]).on(
+export const $inventory = createStore<UserInventoryType[]>([]).on(
     getInventoriesEffect.doneData,
     (_, { rows }) => rows
 );

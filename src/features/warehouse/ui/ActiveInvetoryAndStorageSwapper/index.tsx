@@ -7,10 +7,13 @@ import { useTranslation } from 'react-i18next';
 import { isUserInHive } from 'features/hive';
 import { CallToTravelNotification } from 'features/physicalShift';
 import { LOCATION_TO_ID, withdrawAssets } from 'entities/smartcontract';
-import { atomicTransfer, InventoriedAssets } from 'entities/atomicassets';
 import {
-    $inventoriedUserAssets,
-    $inventoriedUserInventory,
+    atomicTransfer,
+    MergedInventoryWithAtomicAssets,
+} from 'entities/atomicassets';
+import {
+    $mergedStorageWithAtomicAssets,
+    $mergedInventoryWithAtomicAssets,
     WarehouseGate,
 } from '../../model';
 import { useSmartContractAction } from '../../../hooks';
@@ -26,15 +29,17 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     const isInHive = useStore(isUserInHive);
     const { travelConfirm } = useTravelConfirm(LOCATION_TO_ID.hive);
     const renderCards = useRenderCards();
-    const inventoriedUserAssets = useStore($inventoriedUserAssets);
-    const inventoriedUserInventory = useStore($inventoriedUserInventory);
+    const inventoriedUserAssets = useStore($mergedStorageWithAtomicAssets);
+    const mergedInventoryWithAtomicAssets = useStore(
+        $mergedInventoryWithAtomicAssets
+    );
 
     const [draggedElement, setDraggedElement] = useState<
-        null | InventoriedAssets[number]
+        null | MergedInventoryWithAtomicAssets[number]
     >(null);
     const reloadPage = useReloadPage();
     const [draggedElements, setDraggedElements] = useState(
-        new Set<InventoriedAssets[number]>()
+        new Set<MergedInventoryWithAtomicAssets[number]>()
     );
     const isAtomicIncludesDragged =
         inventoriedUserAssets.filter((item) => draggedElements.has(item))
@@ -85,7 +90,9 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
         return reloadPage();
     };
 
-    const handleDragCard = (element: InventoriedAssets[number]) => {
+    const handleDragCard = (
+        element: MergedInventoryWithAtomicAssets[number]
+    ) => {
         if (isInHive) {
             setDraggedElement(element);
         }
@@ -119,7 +126,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                     ) : (
                         <div className={styles.cardsWrapper}>
                             {renderCards(
-                                inventoriedUserInventory,
+                                mergedInventoryWithAtomicAssets,
                                 handleDragCard
                             )}
                         </div>

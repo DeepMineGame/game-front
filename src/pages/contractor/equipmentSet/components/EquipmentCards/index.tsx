@@ -2,14 +2,16 @@ import { useTranslation } from 'react-i18next';
 import { CardHolder, useReloadPage, Status, getCardStatus, Card } from 'shared';
 import { FC } from 'react';
 import { InventoryNameType } from 'entities/smartcontract';
-import { InventoriedAssets } from 'entities/atomicassets';
+import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
 import styles from './styles.module.scss';
 
 interface Props {
     selectedEquipment:
-        | Record<InventoryNameType, InventoriedAssets[number]>
+        | Record<InventoryNameType, MergedInventoryWithAtomicAssets[number]>
         | {};
-    onCardInUseRemove: (inventory: InventoriedAssets[number]) => void;
+    onCardInUseRemove: (
+        inventory: MergedInventoryWithAtomicAssets[number]
+    ) => void;
     onCardHolderClick: (name: InventoryNameType) => void;
     onCardNotInUseRemove: (name: InventoryNameType) => void;
     isMining?: boolean;

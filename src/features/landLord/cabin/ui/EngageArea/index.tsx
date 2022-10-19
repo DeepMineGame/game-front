@@ -15,7 +15,7 @@ import { useStore } from 'effector-react';
 import { useSmartContractAction } from 'features';
 import {
     engageArea,
-    inventoriesStore,
+    $inventory,
     InventoryType,
     LOCATION_TO_ID,
 } from 'entities/smartcontract';
@@ -31,7 +31,7 @@ export const EngageArea: FC<Props> = ({ className, disabled = true }) => {
     const accountName = useAccountName();
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
-    const inventories = useStore(inventoriesStore);
+    const inventories = useStore($inventory);
     const areaItem = inventories?.find(
         ({ inv_type }) => inv_type === InventoryType.areas
     );

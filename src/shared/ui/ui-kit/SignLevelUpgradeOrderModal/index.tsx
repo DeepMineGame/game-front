@@ -11,7 +11,10 @@ import {
 } from 'shared';
 import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { useStore } from 'effector-react';
-import { $inventoriedAssets, InventoriedAssets } from 'entities/atomicassets';
+import {
+    $mergedInventoryWithAtomicAssets,
+    MergedInventoryWithAtomicAssets,
+} from 'entities/atomicassets';
 import { signOrder, ContractDto } from 'entities/smartcontract';
 import { useAccountName } from 'shared/lib/hooks';
 import styles from './index.module.scss';
@@ -33,13 +36,13 @@ export const SignLevelUpgradeOrderModal: FC<Props> = ({
 }) => {
     const { t } = useTranslation();
     const accountName = useAccountName();
-    const userInventory = useStore($inventoriedAssets);
+    const userInventory = useStore($mergedInventoryWithAtomicAssets);
 
     const [selectedInventoryCard, setSelectedInventoryCard] = useState<
-        InventoriedAssets[number] | undefined
+        MergedInventoryWithAtomicAssets[number] | undefined
     >();
     const [selectedAsset, setSelectedAsset] = useState<
-        InventoriedAssets[number] | undefined
+        MergedInventoryWithAtomicAssets[number] | undefined
     >();
     const [isInventoryOpen, setIsInventoryOpen] = useState(false);
 
@@ -52,7 +55,9 @@ export const SignLevelUpgradeOrderModal: FC<Props> = ({
         onSignSuccess,
     });
 
-    const handleAssetSelect = (asset: InventoriedAssets[number]) => {
+    const handleAssetSelect = (
+        asset: MergedInventoryWithAtomicAssets[number]
+    ) => {
         setSelectedAsset(asset);
         setIsInventoryOpen(false);
     };
@@ -107,7 +112,9 @@ export const SignLevelUpgradeOrderModal: FC<Props> = ({
             {selectedInventoryCard && (
                 <InventoryCardModal
                     onSelect={handleAssetSelect}
-                    card={selectedInventoryCard as InventoriedAssets[number]}
+                    card={
+                        selectedInventoryCard as MergedInventoryWithAtomicAssets[number]
+                    }
                     visible={!!selectedInventoryCard}
                     onCancel={() => setSelectedInventoryCard(undefined)}
                 />

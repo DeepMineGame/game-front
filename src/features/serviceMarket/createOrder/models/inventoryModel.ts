@@ -21,7 +21,7 @@ export const activeUserInventoryStore = createStore<UserInventoryType[] | null>(
 
 export const getAtomicAssetsByUserEffect = createEffect(getAtomicAssetsByUser);
 
-export const userAtomicAssetsStore = createStore<UserInventoryType[]>([]).on(
+export const $storage = createStore<UserInventoryType[]>([]).on(
     getAtomicAssetsByUserEffect.doneData,
     (state, payload) => payload
 );
