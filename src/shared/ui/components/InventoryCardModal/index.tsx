@@ -98,8 +98,8 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         onSignSuccess: reload,
     });
 
-    const isNotAssetBroken =
-        getAssetStatus(card) !== Status.broken || !isAssetAvailable(card);
+    const assetBrokenOrInRepair =
+        getAssetStatus(card) === Status.broken || !isAssetAvailable(card);
 
     return (
         <Modal
@@ -120,7 +120,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                     />
                     {onSelect && (
                         <Button
-                            disabled={isNotAssetBroken}
+                            disabled={assetBrokenOrInRepair}
                             onClick={handleSelect}
                             block
                             type="primary"
@@ -205,7 +205,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             </Col>
                             <Col span={10}>
                                 <Button
-                                    disabled={isNotAssetBroken}
+                                    disabled={!assetBrokenOrInRepair}
                                     size="large"
                                     type="link"
                                     onClick={() => {
@@ -245,7 +245,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             </Col>
                             <Col span={10}>
                                 <Button
-                                    disabled={isNotAssetBroken}
+                                    disabled={!assetBrokenOrInRepair}
                                     type="link"
                                     size="large"
                                     onClick={() => {
