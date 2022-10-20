@@ -1,11 +1,4 @@
-import {
-    combine,
-    createEffect,
-    createEvent,
-    createStore,
-    sample,
-    forward,
-} from 'effector';
+import { sample, forward } from 'effector';
 import { createGate } from 'effector-react';
 import { getAssetStatus, Status } from 'shared';
 import { findEquipmentByName } from 'features/equipmentSet';
@@ -13,170 +6,50 @@ import {
     ActionType,
     ACTION_STATE_TO_ID,
     ContractDto,
-    ContractStatus,
-    ContractType,
-    getContractsNameConfig,
-    getHistoryConfig,
-    getUserConfig,
     InUseType,
     LOCATION_TO_ID,
-    mapSearchParamForIndexPositionToFindContracts,
     miningEquipmentNames,
-    UserHistoryType,
-    UserInfoType,
     UserInventoryType,
 } from 'entities/smartcontract';
 import {
     $mergedInventoryWithAtomicAssets,
     MergedInventoryWithAtomicAssets,
 } from 'entities/atomicassets';
-import { getTableData, isAssetAvailable } from 'shared/lib/utils';
+import { isAssetAvailable } from 'shared/lib/utils';
+import {
+    getLandlordContractsEffect,
+    getUserContractsEffect,
+    getUserHistoryEffect,
+    getUserInfoEffect,
+    setMiningOverEvent,
+} from './effects';
+import {
+    $activeMining,
+    $equipmentIsBroken,
+    $hasInstalledEquipment,
+    $hasMineOwnerContracts,
+    $inLocation,
+    $installedMiningEquipments,
+    $interruptedMining,
+    $isNotFullEquipmentsSet,
+    $landlordContract,
+    $landlordContractFinished,
+    $mineOwnerContracts,
+    $miningContractIsntActive,
+    $miningEquipments,
+    $miningOver,
+    $needFinishMineownerContract,
+    $userHistory,
+    $userInfo,
+} from './stores';
 
 const contractIsExpired = (contract: ContractDto) =>
     contract.finishes_at * 1000 < Date.now();
 const contractWasTerminated = (contract: ContractDto) =>
     Boolean(contract.term_time);
 
-type MiningEquipments = Record<string, UserInventoryType | undefined>;
-
-const setMiningOverEvent = createEvent<boolean>();
-
-const ContractorCabinGate = createGate<{ searchParam: string }>(
+export const ContractorCabinGate = createGate<{ searchParam: string }>(
     'ContractorCabinGate'
-);
-
-const getLandlordContractsEffect = createEffect<
-    { searchParam: string },
-    { rows: ContractDto[] },
-    Error
->(({ searchParam }) =>
-    getTableData(
-        getContractsNameConfig(
-            searchParam,
-            mapSearchParamForIndexPositionToFindContracts.executorId,
-            1000
-        )
-    )
-);
-
-const getUserContractsEffect = createEffect(
-    ({ searchParam }: { searchParam: string }) =>
-        getTableData(
-            getContractsNameConfig(
-                searchParam,
-                mapSearchParamForIndexPositionToFindContracts.executorId,
-                1000
-            )
-        )
-);
-
-const getUserHistoryEffect = createEffect(
-    ({ searchParam }: { searchParam: string }) =>
-        getTableData(getHistoryConfig(searchParam))
-);
-
-const getUserInfoEffect = createEffect(
-    ({ searchParam }: { searchParam: string }) =>
-        getTableData(getUserConfig(searchParam))
-);
-
-const $landlordContract = createStore<ContractDto | null>(null).on(
-    getLandlordContractsEffect.doneData,
-    (_, { rows }) =>
-        rows.find(
-            ({ type, status }) =>
-                type === ContractType.landlord_mineowner &&
-                status === ContractStatus.active
-        ) || null
-);
-
-const $userContracts = createStore<ContractDto[]>([]).on(
-    getUserContractsEffect.doneData,
-    (_, { rows }) => rows
-);
-
-const $userInfo = createStore<UserInfoType | null>(null).on(
-    getUserInfoEffect.doneData,
-    (_, { rows }) => rows?.[0]
-);
-
-const $mineOwnerContracts = combine(
-    $userContracts,
-    $userInfo,
-    (userContracts, userInfo) =>
-        userContracts.filter(
-            ({ type, executor, status: contractStatus }) =>
-                type === ContractType.mineowner_contractor &&
-                executor === userInfo?.owner &&
-                contractStatus === ContractStatus.active
-        )
-);
-
-const $userHistory = createStore<UserHistoryType[]>([]).on(
-    getUserHistoryEffect.doneData,
-    (_, { rows }) => rows
-);
-
-const $hasMineOwnerContracts = createStore(false);
-const $installedMiningEquipments = createStore<MergedInventoryWithAtomicAssets>(
-    []
-);
-const $isNotFullEquipmentsSet = createStore(false);
-const $activeMining = createStore<UserHistoryType | null>(null);
-const $interruptedMining = createStore<UserHistoryType[]>([]);
-const $miningOver = createStore(false);
-const $miningEquipments = createStore<MiningEquipments | null>(null);
-const $inLocation = createStore(false);
-const $hasInstalledEquipment = createStore(false);
-const $needFinishMineownerContract = createStore(false);
-const $equipmentIsBroken = createStore(false);
-const $landlordContractFinished = createStore(false);
-const $miningContractIsntActive = createStore(false);
-
-const $contractorCabin = combine(
-    $hasMineOwnerContracts,
-    $installedMiningEquipments,
-    $isNotFullEquipmentsSet,
-    $activeMining,
-    $interruptedMining,
-    $miningOver,
-    $needFinishMineownerContract,
-    $equipmentIsBroken,
-    $landlordContractFinished,
-    $miningContractIsntActive,
-    $landlordContract,
-    (
-        hasMineOwnerContracts,
-        installedMiningEquipments,
-        isNotFullEquipmentsSet,
-        activeMining,
-        interruptedMining,
-        miningOver,
-        needFinishMineownerContract,
-        equipmentIsBroken,
-        landlordContractFinished,
-        miningContractIsntActive,
-        landlordContract
-    ) => ({
-        hasMineOwnerContracts,
-        installedMiningEquipments,
-        isNotFullEquipmentsSet,
-        activeMining,
-        interruptedMining,
-        miningOver,
-        needFinishMineownerContract,
-        equipmentIsBroken,
-        landlordContractFinished,
-        miningContractIsntActive,
-        landlordContract,
-    })
-);
-
-const $isContractorCabinLoading = combine(
-    getUserContractsEffect.pending,
-    getUserHistoryEffect.pending,
-    getUserInfoEffect.pending,
-    (...loadings) => loadings.some(Boolean)
 );
 
 sample({
@@ -327,20 +200,5 @@ forward({
     to: [getUserContractsEffect, getUserInfoEffect, getUserHistoryEffect],
 });
 
-export {
-    setMiningOverEvent,
-    ContractorCabinGate,
-    $userInfo,
-    $activeMining,
-    $miningEquipments,
-    $contractorCabin,
-    $inLocation,
-    $isContractorCabinLoading,
-    $hasInstalledEquipment,
-    $mineOwnerContracts,
-    $landlordContract,
-};
-
-export type ContractorCabinStore = ReturnType<
-    typeof $contractorCabin['getState']
->;
+export * from './stores';
+export { setMiningOverEvent } from './effects';
