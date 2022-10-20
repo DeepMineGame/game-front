@@ -73,7 +73,7 @@ export const MiningPage: FC = memo(() => {
             {!isContractorCabinLoading && disabled && (
                 <Row justify="center">
                     <Col span={10}>
-                        <Alert {...alertProps} />
+                        <Alert direction="horizontal" {...alertProps} />
                     </Col>
                 </Row>
             )}
