@@ -1,10 +1,23 @@
-import React, { FC } from 'react';
+import { FC, memo } from 'react';
 import cn from 'classnames';
-import { Alert as AlertA, AlertProps } from 'antd';
+import { Alert as AlertAnt, AlertProps } from 'antd';
 import styles from './styles.module.scss';
 
-const Alert: FC<AlertProps> = ({ className, ...props }) => {
-    return <AlertA className={cn(styles.alert, className)} {...props} />;
+type Direction = 'horizontal' | 'vertical';
+
+type Props = AlertProps & {
+    direction?: Direction;
 };
 
-export { Alert };
+export const Alert: FC<Props> = memo(
+    ({ className, direction = 'vertical', ...props }) => (
+        <AlertAnt
+            className={cn(
+                { [styles.vertical]: direction === 'vertical' },
+                styles.alert,
+                className
+            )}
+            {...props}
+        />
+    )
+);

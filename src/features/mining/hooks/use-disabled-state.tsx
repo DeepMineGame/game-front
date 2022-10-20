@@ -28,6 +28,7 @@ const States = (mineOwnerContract: ContractDto) => ({
         disabledMiningButton: true,
         alert: (
             <Alert
+                direction="horizontal"
                 message={
                     <Trans i18nKey="pages.mining.hasNoMineOwnerContracts" />
                 }
@@ -43,6 +44,7 @@ const States = (mineOwnerContract: ContractDto) => ({
         disabledMiningButton: true,
         alert: (
             <Alert
+                direction="horizontal"
                 message={<Trans i18nKey="pages.mining.installEquipSet" />}
                 action={
                     <Link to={equipmentSet}>
@@ -56,6 +58,7 @@ const States = (mineOwnerContract: ContractDto) => ({
         disabledMiningButton: true,
         alert: (
             <Alert
+                direction="horizontal"
                 message={
                     <Trans i18nKey="pages.mining.contractRequiresAction" />
                 }
@@ -73,6 +76,7 @@ const States = (mineOwnerContract: ContractDto) => ({
         disabledMiningButton: true,
         alert: (
             <Alert
+                direction="horizontal"
                 message={
                     <Trans i18nKey="pages.mining.miningContractIsntActive" />
                 }
@@ -88,6 +92,7 @@ const States = (mineOwnerContract: ContractDto) => ({
         disabledMiningButton: true,
         alert: (
             <Alert
+                direction="horizontal"
                 message={
                     <Trans i18nKey="pages.mining.somePiecesOfEquipmentIsBroken" />
                 }
