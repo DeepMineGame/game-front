@@ -199,8 +199,9 @@ sample({
     source: $mineOwnerContracts,
     target: $needFinishMineownerContract,
     fn: (mineOwnerContracts) =>
-        contractWasTerminated(mineOwnerContracts[0]) ||
-        contractIsExpired(mineOwnerContracts[0]),
+        mineOwnerContracts[0] &&
+        (contractWasTerminated(mineOwnerContracts[0]) ||
+            contractIsExpired(mineOwnerContracts[0])),
 });
 
 sample({
