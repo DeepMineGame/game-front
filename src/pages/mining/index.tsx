@@ -22,9 +22,8 @@ import {
     estimatesMiningTimeStore,
     ContractorCabinGate,
     $isContractorCabinLoading,
+    useDisabledState,
 } from 'features';
-// eslint-disable-next-line no-restricted-imports
-import { useDisabledState } from 'features/mining/hooks';
 import { ActionType } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 import { MiningTitle } from './components/MiningTitle';
