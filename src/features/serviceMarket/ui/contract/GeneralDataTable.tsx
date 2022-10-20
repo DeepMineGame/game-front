@@ -18,17 +18,17 @@ const GeneralDataTable: FC<ContractProps> = ({ contract, accountName }) => {
                 ? 'pages.serviceMarket.order.orderId'
                 : 'pages.serviceMarket.contract.contractId'
         )]: (
-            <Tooltip trigger="click" overlay={t('pages.info.copied')}>
-                <div className={styles.contractId}>
-                    <Text className={styles.contractNumber}>{contract.id}</Text>
+            <div className={styles.contractId}>
+                <Text>{contract.id}</Text>
+                <Tooltip trigger="click" overlay={t('pages.info.copied')}>
                     <ShareAltOutlined
                         className={styles.copyIcon}
                         onClick={() =>
                             navigator.clipboard.writeText(window.location.href)
                         }
                     />
-                </div>
-            </Tooltip>
+                </Tooltip>
+            </div>
         ),
         ...(!isOrder && {
             [t('pages.serviceMarket.status')]: (

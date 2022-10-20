@@ -3,7 +3,7 @@ import { deepminesmrt } from '../index';
 export function terminateContract(
     waxUser: string,
     contractId: number,
-    demandPenalty: 0 | 1
+    demandPenalty: boolean
 ) {
     return {
         actions: [

@@ -54,7 +54,7 @@ const StatusInfo: FC<Props> = ({ state, status, contract }) => {
                     direction="vertical"
                     size={status === CabinStatus.NeedCitizen ? 16 : 0}
                 >
-                    <Space align="center" size={40}>
+                    <Space align="center" size={24}>
                         <Title
                             className={styles.title}
                             fontFamily="orbitron"
@@ -63,6 +63,18 @@ const StatusInfo: FC<Props> = ({ state, status, contract }) => {
                             {t('components.common.myStatus')}
                         </Title>
                         <EngineerStateBadge state={state} />
+
+                        {contract && (
+                            <Button
+                                onClick={() =>
+                                    navigate(
+                                        `/service-market/contract/${contract.id}`
+                                    )
+                                }
+                            >
+                                {t('components.common.openContract')}
+                            </Button>
+                        )}
                     </Space>
 
                     {status === CabinStatus.NeedCitizen && (
@@ -95,6 +107,7 @@ const StatusInfo: FC<Props> = ({ state, status, contract }) => {
 
                 <EngineerSettings
                     disabled={
+                        !!contract ||
                         state === CabinState.Work ||
                         status === CabinStatus.UpgradeCompleted ||
                         status < CabinStatus.NeedContract

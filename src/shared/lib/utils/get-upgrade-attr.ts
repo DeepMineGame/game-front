@@ -32,6 +32,7 @@ export const parseAttrs = (contract: ContractDto) => {
 };
 
 export const upgradeTypeMap = {
+    [EngineerSchema.undefined]: 'undefined',
     [EngineerSchema.mine]: 'mine',
     [EngineerSchema.module]: 'mineModule',
     [EngineerSchema.equipment]: 'equipment',

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Link, secondsToDays, Table, toLocaleDate } from 'shared';
+import { getDmeAmount, Link, secondsToDays, Table, toLocaleDate } from 'shared';
 import { ContractDto } from 'entities/smartcontract';
 
 type Props = {
@@ -83,7 +83,7 @@ export const MiningContractsTable: FC<Props> = ({ contracts }) => {
                 id: contract.id,
                 creationDate: contract.create_time,
                 fee: contract.fee_percent,
-                penaltyDme: contract.penalty_amount,
+                penaltyDme: getDmeAmount(contract.penalty_amount),
                 miningTerms: `${contract.days_for_penalty}/${
                     contract.fee_daily_min_amount
                 } ${t('components.common.button.dme')}`,

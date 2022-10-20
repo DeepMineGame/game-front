@@ -33,7 +33,7 @@ export const UnsetupMine: FC<{
     const reloadPage = useReloadPage();
     const isDisabled = Boolean(contractorsContracts?.length);
     const terminateContractAction = useSmartContractAction({
-        action: terminateContract(accountName, activeContract?.id!, 0),
+        action: terminateContract(accountName, activeContract?.id!, false),
     });
     const abandonMineAction = useSmartContractAction({
         action: abandonMine(accountName, userMine?.id!),
