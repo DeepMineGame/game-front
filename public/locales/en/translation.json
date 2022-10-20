@@ -47,6 +47,7 @@
         "uninstall": "Uninstall",
         "deactivate": "Deactivate",
         "activate": "Activate",
+        "setup": "Set up",
         "claim": "Claim",
         "dme": "DME",
         "dmp": "DMP",
@@ -350,7 +351,8 @@
     },
     "mineManagement": {
       "title": "MINE MANAGEMENT",
-      "mine": "MINE"
+      "mine": "MINE",
+      "signNewContract": "Sign new contract"
     },
     "mineOwner": {
       "menu": {

@@ -10,6 +10,7 @@ import {
     ContractDto,
     terminateContract,
     abandonMine,
+    deactmine,
 } from 'entities/smartcontract';
 import styles from '../MineControlPanel/styles.module.scss';
 import {
@@ -45,6 +46,13 @@ export const UnsetupMine: FC<{
         await terminateContractAction();
         reloadPage();
     };
+    const deactivateMine = useSmartContractAction({
+        action: deactmine({
+            waxUser: accountName,
+            mineId: activeContract?.executor_asset_id,
+        }),
+        onSignSuccess: reloadPage,
+    });
 
     return (
         <Dropdown
@@ -80,6 +88,12 @@ export const UnsetupMine: FC<{
                                       </Tooltip>
                                   ),
                               },
+                        {
+                            key: 'deactivate',
+                            onClick: deactivateMine,
+                            disabled: !isMineActive,
+                            label: t('components.common.button.deactivate'),
+                        },
                     ]}
                 />
             }
