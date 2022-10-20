@@ -4,7 +4,6 @@ import { Alert, Link } from 'shared';
 import { createOrder, equipmentSet } from 'app/router/paths';
 import {
     $contractorCabin,
-    $landlordContract,
     $mineOwnerContracts,
     ContractorCabinStore,
 } from 'features/contractor';
@@ -20,10 +19,7 @@ enum DisabledState {
     LandlordContractFinished,
 }
 
-const States = ({
-    mineOwnerContract,
-    landlordContract,
-}: Record<'landlordContract' | 'mineOwnerContract', ContractDto | null>) => ({
+const States = (mineOwnerContract: ContractDto) => ({
     [DisabledState.NotDisabled]: {
         disabledMiningButton: false,
         alert: undefined,
@@ -110,11 +106,6 @@ const States = ({
                 message={
                     <Trans i18nKey="pages.mining.contractBetweenMineownerAndLandlordIsntValid" />
                 }
-                action={
-                    <Link to={`/user/${landlordContract?.client}`}>
-                        <Trans i18nKey="pages.mining.openContract" />
-                    </Link>
-                }
             />
         ),
     },
@@ -141,7 +132,7 @@ const getState = (store: ContractorCabinStore) => {
         return DisabledState.EquipmentIsBroken;
     }
 
-    if (store.landlordContractFinished) {
+    if (store.landlordContractFinished || !store.landlordContract) {
         return DisabledState.LandlordContractFinished;
     }
 
@@ -149,15 +140,11 @@ const getState = (store: ContractorCabinStore) => {
 };
 
 export const useDisabledState = () => {
-    const mineOwnerContracts = useStore($mineOwnerContracts);
-    const landlordContract = useStore($landlordContract);
+    const [mineOwnerContract] = useStore($mineOwnerContracts);
     const contractorCabin = useStore($contractorCabin);
     const state = getState(contractorCabin);
 
-    const { disabledMiningButton, alert } = States({
-        mineOwnerContract: mineOwnerContracts[0],
-        landlordContract,
-    })[state];
+    const { disabledMiningButton, alert } = States(mineOwnerContract)[state];
 
     return { disabledMiningButton, alert };
 };

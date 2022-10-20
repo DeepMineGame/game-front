@@ -144,6 +144,7 @@ const $contractorCabin = combine(
     $equipmentIsBroken,
     $landlordContractFinished,
     $miningContractIsntActive,
+    $landlordContract,
     (
         hasMineOwnerContracts,
         installedMiningEquipments,
@@ -154,7 +155,8 @@ const $contractorCabin = combine(
         needFinishMineownerContract,
         equipmentIsBroken,
         landlordContractFinished,
-        miningContractIsntActive
+        miningContractIsntActive,
+        landlordContract
     ) => ({
         hasMineOwnerContracts,
         installedMiningEquipments,
@@ -166,6 +168,7 @@ const $contractorCabin = combine(
         equipmentIsBroken,
         landlordContractFinished,
         miningContractIsntActive,
+        landlordContract,
     })
 );
 
