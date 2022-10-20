@@ -7,6 +7,7 @@ import {
     desktopS,
     neutral4,
     useAccountName,
+    Alert,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { Col, Row, Skeleton, Space, Tooltip } from 'antd';
@@ -57,7 +58,7 @@ export const MiningPage: FC = memo(() => {
         lastMineAction?.attrs?.find(({ key }) => key === 'est_dme_amount')
             ?.value;
 
-    const { alert } = useDisabledState();
+    const { disabled, ...alertProps } = useDisabledState();
 
     return (
         <Page headerTitle={t('pages.mining.mining')}>
@@ -69,9 +70,11 @@ export const MiningPage: FC = memo(() => {
             ) : (
                 <Skeleton title={false} loading={isActionsLoading} />
             )}
-            {!isContractorCabinLoading && (
+            {!isContractorCabinLoading && disabled && (
                 <Row justify="center">
-                    <Col span={10}>{alert}</Col>
+                    <Col span={10}>
+                        <Alert {...alertProps} />
+                    </Col>
                 </Row>
             )}
             <Row justify="center" gutter={gutter} className={styles.grid}>
