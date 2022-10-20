@@ -98,9 +98,6 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         onSignSuccess: reload,
     });
 
-    const assetBrokenOrInRepair =
-        getAssetStatus(card) === Status.broken || !isAssetAvailable(card);
-
     return (
         <Modal
             wideOnMobile
@@ -120,7 +117,10 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                     />
                     {onSelect && (
                         <Button
-                            disabled={assetBrokenOrInRepair}
+                            disabled={
+                                getAssetStatus(card) === Status.broken ||
+                                !isAssetAvailable(card)
+                            }
                             onClick={handleSelect}
                             block
                             type="primary"
@@ -205,7 +205,9 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             </Col>
                             <Col span={10}>
                                 <Button
-                                    disabled={!assetBrokenOrInRepair}
+                                    disabled={
+                                        getAssetStatus(card) !== Status.broken
+                                    }
                                     size="large"
                                     type="link"
                                     onClick={() => {
@@ -245,7 +247,9 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             </Col>
                             <Col span={10}>
                                 <Button
-                                    disabled={!assetBrokenOrInRepair}
+                                    disabled={
+                                        getAssetStatus(card) !== Status.broken
+                                    }
                                     type="link"
                                     size="large"
                                     onClick={() => {
