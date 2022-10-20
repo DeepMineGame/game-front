@@ -1,6 +1,8 @@
 @import "src/shared";
 
 .statScreen {
+  @include enter-hover;
+
   position: absolute;
   right: 0;
   background-image: url("../../../../../shared/ui/images/engineer/display.webp");
@@ -11,15 +13,10 @@
   background-position: bottom;
   z-index: 1;
   cursor: pointer;
-  filter: $glow;
 
   @media (min-width: $media-tablet)  {
     filter: initial;
     background-position: center;
-
-    &:hover {
-      filter: $glow;
-    }
   }
 }
 
