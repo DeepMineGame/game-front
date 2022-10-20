@@ -15,7 +15,6 @@ import {
     ContractDto,
     ContractStatus,
     ContractType,
-    getContractConfig,
     getContractsNameConfig,
     getHistoryConfig,
     getUserConfig,
@@ -46,15 +45,18 @@ const ContractorCabinGate = createGate<{ searchParam: string }>(
     'ContractorCabinGate'
 );
 
-const getLandlordContractsEffect = createEffect(
-    ({ searchParam }: { searchParam: string }) =>
-        getTableData(
-            getContractsNameConfig(
-                searchParam,
-                mapSearchParamForIndexPositionToFindContracts.executorId,
-                1000
-            )
+const getLandlordContractsEffect = createEffect<
+    { searchParam: string },
+    { rows: ContractDto[] },
+    Error
+>(({ searchParam }) =>
+    getTableData(
+        getContractsNameConfig(
+            searchParam,
+            mapSearchParamForIndexPositionToFindContracts.executorId,
+            1000
         )
+    )
 );
 
 const getUserContractsEffect = createEffect(
@@ -78,13 +80,14 @@ const getUserInfoEffect = createEffect(
         getTableData(getUserConfig(searchParam))
 );
 
-const $landlordContracts = createStore<ContractDto[]>([]).on(
+const $landlordContract = createStore<ContractDto | null>(null).on(
     getLandlordContractsEffect.doneData,
-    (_, { rows }) => {
-        console.log('rows', rows);
-
-        return rows;
-    }
+    (_, { rows }) =>
+        rows.find(
+            ({ type, status }) =>
+                type === ContractType.landlord_mineowner &&
+                status === ContractStatus.active
+        ) || null
 );
 
 const $userContracts = createStore<ContractDto[]>([]).on(
@@ -129,22 +132,6 @@ const $needFinishMineownerContract = createStore(false);
 const $equipmentIsBroken = createStore(false);
 const $landlordContractFinished = createStore(false);
 const $miningContractIsntActive = createStore(false);
-
-const $landlordContract = combine(
-    $landlordContracts,
-    $mineOwnerContracts,
-    (landlordContracts, mineOwnerContracts) => {
-        // console.log('mineOwnerContracts[0]', mineOwnerContracts[0]);
-        // console.log('landlordContracts', landlordContracts);
-
-        return landlordContracts.filter(
-            ({ type, client, status: contractStatus }) =>
-                type === ContractType.landlord_mineowner &&
-                client === mineOwnerContracts[0].client &&
-                contractStatus === ContractStatus.active
-        )[0];
-    }
-);
 
 const $contractorCabin = combine(
     $hasMineOwnerContracts,
@@ -228,8 +215,10 @@ sample({
     source: $landlordContract,
     target: $landlordContractFinished,
     fn: (landlordContract) =>
-        contractWasTerminated(landlordContract) ||
-        contractIsExpired(landlordContract),
+        !!landlordContract &&
+        (contractWasTerminated(landlordContract) ||
+            contractIsExpired(landlordContract)),
+    filter: (landlordContract) => !!landlordContract,
 });
 
 sample({
@@ -317,6 +306,13 @@ sample({
     fn: (userInfo) => userInfo?.location === LOCATION_TO_ID.mine,
 });
 
+sample({
+    source: $mineOwnerContracts,
+    target: getLandlordContractsEffect,
+    fn: (mineOwnerContracts) => ({ searchParam: mineOwnerContracts[0].client }),
+    filter: (mineOwnerContracts) => !!mineOwnerContracts.length,
+});
+
 forward({
     from: setMiningOverEvent,
     to: $miningOver,
@@ -324,12 +320,7 @@ forward({
 
 forward({
     from: ContractorCabinGate.open,
-    to: [
-        getUserContractsEffect,
-        getUserInfoEffect,
-        getUserHistoryEffect,
-        getLandlordContractsEffect,
-    ],
+    to: [getUserContractsEffect, getUserInfoEffect, getUserHistoryEffect],
 });
 
 export {

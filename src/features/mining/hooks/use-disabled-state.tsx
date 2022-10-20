@@ -23,7 +23,7 @@ enum DisabledState {
 const States = ({
     mineOwnerContract,
     landlordContract,
-}: Record<'landlordContract' | 'mineOwnerContract', ContractDto>) => ({
+}: Record<'landlordContract' | 'mineOwnerContract', ContractDto | null>) => ({
     [DisabledState.NotDisabled]: {
         disabledMiningButton: false,
         alert: undefined,
