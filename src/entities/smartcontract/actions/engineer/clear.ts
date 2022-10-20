@@ -1,10 +1,10 @@
-import { deepmineengr } from '../../index';
+import { deepminegame } from '../../index';
 
 export function clearEngineer(waxUser: string, certificateId: string) {
     return {
         actions: [
             {
-                account: deepmineengr,
+                account: deepminegame,
                 name: 'cleareng',
                 authorization: [
                     {

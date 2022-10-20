@@ -1,10 +1,10 @@
-import { deepmineengr } from '../../index';
+import { deepminegame } from '../../index';
 
 export function upgradeFinish(waxUser: string, contractId: number) {
     return {
         actions: [
             {
-                account: deepmineengr,
+                account: deepminegame,
                 name: 'engupgfinish',
                 authorization: [
                     {

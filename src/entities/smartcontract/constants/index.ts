@@ -138,7 +138,6 @@ export enum INDEX_POSITION_USER {
 export const deepminegame = 'deepmineappg';
 export const deepminesmrt = 'deepminesrmt';
 export const deepmineming = 'deepmineming';
-export const deepmineengr = 'deepmineengr';
 
 export const dmeToUpgrade = {
     Common: {
