@@ -35,16 +35,11 @@
   width: 15vw;
   float: right;
   background-image: url("../../shared/ui/images/city/mine.webp");
-  filter: $glow;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: right;
   cursor: pointer;
   position: relative;
-
-  @media (min-width: $media-tablet)  {
-    filter: initial;
-  }
 }
 
 .hive {
@@ -59,11 +54,9 @@
   cursor: pointer;
   background-repeat: no-repeat;
   background-position: center bottom;
-  filter: $glow;
 
   @media (min-width: $media-tablet)  {
     background-position: center bottom;
-    filter: initial;
   }
 }
 
@@ -74,7 +67,6 @@
   height: 50vh;
   width: 20vw;
   background-image: url("../../shared/ui/images/city/market.webp");
-  filter: $glow;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -82,7 +74,6 @@
   position: relative;
 
   @media (min-width: $media-tablet)  {
-    filter: initial;
     background-position: left;
   }
 }
@@ -97,14 +88,12 @@
   height: 65vh;
   width: 14vw;
   background-image: url("../../shared/ui/images/city/scyscraper.webp");
-  filter: $glow;
   background-size: contain !important;
   cursor: pointer;
   background-repeat: no-repeat;
   background-position: right;
 
   @media (min-width: $media-tablet)  {
-    filter: initial;
     background-position: center;
   }
 }
@@ -116,14 +105,12 @@
   width: 20vw;
   margin-left: 35%;
   background-image: url("../../shared/ui/images/city/specialists.webp");
-  filter: $glow;
   background-size: contain !important;
   cursor: pointer;
   background-repeat: no-repeat;
   background-position: left;
 
   @media (min-width: $media-tablet)  {
-    filter: initial;
     background-position: left;
   }
 }

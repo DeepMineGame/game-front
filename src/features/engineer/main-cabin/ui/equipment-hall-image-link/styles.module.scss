@@ -1,6 +1,8 @@
 @import 'src/shared';
 
 .equipmentHall {
+    @include enter-hover;
+
     background-image: url('../../../../../shared/ui/images/engineer/center.webp');
     height: 50vh;
     width: 70vw;
@@ -8,7 +10,6 @@
     background-repeat: no-repeat;
     margin: auto;
     z-index: 1;
-    filter: $glow;
 
     &:not(.disabled) {
         cursor: pointer;
@@ -19,10 +20,6 @@
         height: 70vh;
         width: 50vw;
         background-position: center;
-
-        &:hover {
-            filter: $glow;
-        }
     }
 
     &.disabled {
