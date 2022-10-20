@@ -1,4 +1,4 @@
-import { deepminegame } from '../../index';
+import { deepmineengr } from '../../index';
 
 export function upgradeStart(
     waxUser: string,
@@ -8,7 +8,7 @@ export function upgradeStart(
     return {
         actions: [
             {
-                account: deepminegame,
+                account: deepmineengr,
                 name: 'engupgstart',
                 authorization: [
                     {

@@ -1,10 +1,10 @@
-import { deepminegame } from '../../index';
+import { deepmineengr } from '../../index';
 
 export function openSkill(waxUser: string, assetId: string) {
     return {
         actions: [
             {
-                account: deepminegame,
+                account: deepmineengr,
                 name: 'openskill',
                 authorization: [
                     {
