@@ -29,7 +29,9 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     const isInHive = useStore(isUserInHive);
     const { travelConfirm } = useTravelConfirm(LOCATION_TO_ID.hive);
     const renderCards = useRenderCards();
-    const inventoriedUserAssets = useStore($mergedStorageWithAtomicAssets);
+    const mergedStorageWithAtomicAssets = useStore(
+        $mergedStorageWithAtomicAssets
+    );
     const mergedInventoryWithAtomicAssets = useStore(
         $mergedInventoryWithAtomicAssets
     );
@@ -37,13 +39,21 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     const [draggedElement, setDraggedElement] = useState<
         null | MergedInventoryWithAtomicAssets[number]
     >(null);
+
     const reloadPage = useReloadPage();
     const [draggedElements, setDraggedElements] = useState(
         new Set<MergedInventoryWithAtomicAssets[number]>()
     );
+    const removeDraggedElements = (
+        asset: MergedInventoryWithAtomicAssets[number]
+    ) =>
+        ![...draggedElements].some(
+            (element) => element.asset_id === asset.asset_id
+        );
     const isAtomicIncludesDragged =
-        inventoriedUserAssets.filter((item) => draggedElements.has(item))
-            ?.length > 0;
+        mergedStorageWithAtomicAssets.filter((item) =>
+            draggedElements.has(item)
+        )?.length > 0;
 
     const onDrop: DragEventHandler<HTMLDivElement> = (e) => {
         e?.preventDefault();
@@ -126,7 +136,9 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                     ) : (
                         <div className={styles.cardsWrapper}>
                             {renderCards(
-                                mergedInventoryWithAtomicAssets,
+                                mergedInventoryWithAtomicAssets.filter(
+                                    removeDraggedElements
+                                ),
                                 handleDragCard
                             )}
                         </div>
@@ -157,7 +169,12 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                             {renderCards(draggedElements, handleDragCard)}
                         </div>
                     ) : (
-                        renderCards(inventoriedUserAssets, handleDragCard)
+                        renderCards(
+                            mergedStorageWithAtomicAssets.filter(
+                                removeDraggedElements
+                            ),
+                            handleDragCard
+                        )
                     )}
                 </div>
             </Col>
