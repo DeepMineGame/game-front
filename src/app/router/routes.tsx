@@ -131,22 +131,6 @@ export const routes: AppRoute[] = [
         titleTag: 'Mine owner / Mine crew',
     },
     {
-        path: paths.pageNotFound,
-        Component: PageNotFound,
-        forLoggedIn: false,
-        forAdmin: true,
-        forBetaUser: true,
-        titleTag: 'Badlands — DeepMine',
-    },
-    {
-        path: paths.wipPage,
-        Component: () => <PageNotFound type="wip" />,
-        forLoggedIn: false,
-        forAdmin: true,
-        forBetaUser: true,
-        titleTag: 'Badlands — DeepMine',
-    },
-    {
         path: paths.serviceMarket,
         Component: ServiceMarketPage,
         forLoggedIn: true,
