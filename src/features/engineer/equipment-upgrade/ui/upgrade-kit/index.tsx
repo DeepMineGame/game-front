@@ -48,7 +48,7 @@ const UpgradeKit: FC<Props> = ({ equipment, disabled, isWaitCitizen }) => {
                     <img
                         src={getKitImage(upgradeKit)}
                         alt={`upgrade kit ${upgradeKit}`}
-                        style={{ transform: 'scale(1.15)' }}
+                        style={{ transform: 'scale(1.12)' }}
                     />
                 )}
             </UpgradeSlot>

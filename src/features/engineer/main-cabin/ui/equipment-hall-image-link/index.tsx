@@ -13,8 +13,7 @@ export const EquipmentHallImageLink: FC<{ status: CabinStatus }> = ({
     const { t } = useTranslation();
     const navigate = useNavigate();
 
-    // TODO: CabinStatus.NeedContract > status
-    const disabled = status > 0;
+    const disabled = CabinStatus.NeedContract > status;
 
     const handleClick = () => {
         if (!disabled) {

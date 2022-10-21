@@ -2,7 +2,7 @@ import { FC, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, Table } from 'shared';
 import { ContractDto, EngineerSchema } from 'entities/smartcontract';
-import { parseAttrs, getUpgradeType } from 'shared/lib/utils';
+import { parseAttrs, getUpgradeType, getDmeAmount } from 'shared/lib/utils';
 import { toLocaleDate } from 'shared/ui/utils';
 
 type Props = {
@@ -31,7 +31,7 @@ export const LevelUpgradeContractsTable: FC<Props> = ({ contracts }) => {
                 creationDate: contract.create_time,
                 cost: contract.cost_of_execution,
                 startOf: contract.start_time,
-                penalty: contract.penalty_amount,
+                penalty: getDmeAmount(contract.penalty_amount),
             })),
         [t, contracts]
     );

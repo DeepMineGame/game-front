@@ -27,12 +27,13 @@ export const CreateResult: FC<Props> = (props) => {
                         props.title ||
                         t('pages.serviceMarket.createOrder.orderCreated')
                     }
-                    subTitle={
-                        props.subTitle ||
-                        t('pages.serviceMarket.createOrder.orderCreated')
-                    }
+                    subTitle={props.subTitle}
                     extra={[
-                        <Button type="primary" onClick={props.button?.callback}>
+                        <Button
+                            key="toMarket"
+                            type="primary"
+                            onClick={props.button?.callback}
+                        >
                             {props.button?.text ||
                                 t(
                                     'pages.serviceMarket.createOrder.goToServiceMarket'

@@ -31,7 +31,7 @@ const roomBackgrounds = {
     [CabinState.Work]: EngineerRoomYellow,
 };
 
-const CabinPage: FC<Props> = ({ accountName }) => {
+const EngineerCabinPage: FC<Props> = ({ accountName }) => {
     useGate(EngineerCabinGate, { searchParam: accountName });
 
     const inLocation = useUserLocation();
@@ -67,4 +67,4 @@ const CabinPage: FC<Props> = ({ accountName }) => {
     );
 };
 
-export { CabinPage };
+export { EngineerCabinPage };
