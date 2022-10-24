@@ -11,14 +11,14 @@ export const FaqPage = () => {
             <DeepMineLogo className={styles.logo} />
             <Title className={styles.title}>FAQ</Title>
 
-            <Space direction="vertical">
+            <Space className={styles.space} direction="vertical">
                 <Title level={5}>{t('pages.faq.watIs')}</Title>
                 <Typography.Paragraph className={styles.text}>
                     {t('pages.faq.deepMineDescription')}
                 </Typography.Paragraph>
             </Space>
 
-            <Space direction="vertical">
+            <Space className={styles.space} direction="vertical">
                 <Title level={5}>{t('pages.faq.wasRelease')}</Title>
                 <Typography.Paragraph className={styles.text}>
                     {t('pages.faq.closeAlpha')}
@@ -43,7 +43,7 @@ export const FaqPage = () => {
                 </Typography.Paragraph>
             </Space>
 
-            <Space direction="vertical">
+            <Space className={styles.space} direction="vertical">
                 <Title level={5}>{t('pages.faq.whatHappened')}</Title>
                 <Typography.Paragraph className={styles.text}>
                     {t('pages.faq.distantFuture')}
@@ -65,7 +65,7 @@ export const FaqPage = () => {
                 </Typography.Paragraph>
             </Space>
 
-            <Space direction="vertical">
+            <Space className={styles.space} direction="vertical">
                 <Title level={5}>{t('pages.faq.areasMinesEquipment')}</Title>
                 <Typography.Paragraph className={styles.text}>
                     {t('pages.faq.thePlanet')}{' '}
@@ -80,7 +80,7 @@ export const FaqPage = () => {
                 </Typography.Paragraph>
             </Space>
 
-            <Space direction="vertical">
+            <Space className={styles.space} direction="vertical">
                 <Title level={5}>{t('pages.faq.whatRoles')}</Title>
                 <Typography.Paragraph className={styles.text}>
                     {t('pages.faq.thereRole')}
@@ -103,14 +103,14 @@ export const FaqPage = () => {
                 </Typography.Paragraph>
             </Space>
 
-            <Space direction="vertical">
+            <Space className={styles.space} direction="vertical">
                 <Title level={5}>{t('pages.faq.rolesPoint')}</Title>
                 <Typography.Paragraph className={styles.text}>
                     {t('pages.faq.miningDme')}
                 </Typography.Paragraph>
             </Space>
 
-            <Space direction="vertical">
+            <Space className={styles.space} direction="vertical">
                 <Title level={5}>{t('pages.faq.whyLegit')}</Title>
                 <ul className={styles.text}>
                     <li>{t('pages.faq.seeLanding')}</li>
