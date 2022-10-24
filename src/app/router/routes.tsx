@@ -9,7 +9,7 @@ import {
     MineOwnerStatAndInfoPage,
     LandLordPage,
     HivePage,
-    PageNotFound,
+    NotFoundPage,
     MineManagementPage,
     MineOwnerPage,
     MineOwnerMiningCrewPage,
@@ -238,6 +238,6 @@ export const routes: AppRoute[] = [
 
 export const fallbackRoute: AppRoute = {
     path: '*',
-    Component: PageNotFound,
+    Component: NotFoundPage,
     titleTag: 'Intro - Deepmine',
 };
