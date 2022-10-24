@@ -59,23 +59,11 @@ export const MyContractsTab: FC = () => {
                 />
                 <Space>
                     <Dropdown
-                        items={[
-                            {
-                                label: t('roles.all'),
-                                key: Role.all,
-                                onClick: () => onChangeRole(Role.all),
-                            },
-                            {
-                                label: t('roles.contractor'),
-                                key: Role.contractor,
-                                onClick: () => onChangeRole(Role.contractor),
-                            },
-                            {
-                                label: t('roles.mineowner'),
-                                key: Role.mineowner,
-                                onClick: () => onChangeRole(Role.mineowner),
-                            },
-                        ]}
+                        items={Object.values(Role).map((role) => ({
+                            key: role,
+                            label: t(`roles.${role}`),
+                            onClick: () => onChangeRole(role),
+                        }))}
                     >
                         <Button type="link">
                             {t(

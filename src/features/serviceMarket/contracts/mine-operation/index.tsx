@@ -5,6 +5,7 @@ import { PenaltyActions } from 'features';
 import { ContractStatesMeta } from 'entities/smartcontract';
 import { useContractState } from 'entities/contract';
 import { Alert } from 'shared/ui';
+import { getDmeAmount } from 'shared/lib/utils';
 import { Completed, TerminateContract } from '../../ui/actions';
 import {
     GeneralDataTable,
@@ -63,7 +64,9 @@ const MineOperationContract: FC<ContractProps> = ({
                                         stateMeta ===
                                             ContractStatesMeta.deadlineViolation
                                     }
-                                    amount={contract.penalty_amount}
+                                    amount={getDmeAmount(
+                                        contract.penalty_amount
+                                    )}
                                     contractId={contract.id}
                                 />
                             )}

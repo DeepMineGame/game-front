@@ -20,8 +20,7 @@ const menuItems = [
     {
         icon: <ToolOutlined />,
         path: engineerEquipmentHall,
-        // TODO: CabinStatus.NeedContract
-        unlockedAt: CabinStatus.NeedCertificate,
+        unlockedAt: CabinStatus.NeedContract,
     },
     {
         icon: <ProjectOutlined />,

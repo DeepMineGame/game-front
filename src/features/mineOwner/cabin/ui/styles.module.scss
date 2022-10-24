@@ -19,6 +19,8 @@
 }
 
 .panel {
+    @include enter-hover;
+
     height: 34vh;
     background: url('../../../../shared/ui/images/mineowner/panel.webp') no-repeat bottom;
     background-size: contain;
@@ -28,10 +30,6 @@
     left: 0;
     z-index: 2;
     cursor: pointer;
-
-    &:hover {
-      filter: $glow;
-    }
 
     @media (min-width: $media-desktop-s) {
       left: 20vh;

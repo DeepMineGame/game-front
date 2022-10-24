@@ -1,5 +1,5 @@
 import { getTableData } from 'shared';
-import { deepminegame, GetTableDataConfigType } from 'entities/smartcontract';
+import { deepmineengr, GetTableDataConfigType } from 'entities/smartcontract';
 
 export * from './types';
 
@@ -10,8 +10,8 @@ export const getEngineerConfig = ({
     searchParam: string;
     limit?: number;
 }): GetTableDataConfigType => ({
-    code: deepminegame,
-    scope: deepminegame,
+    code: deepmineengr,
+    scope: deepmineengr,
     table: 'engineers',
     index_position: 1,
     key_type: 'name',

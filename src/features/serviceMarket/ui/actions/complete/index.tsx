@@ -8,19 +8,24 @@ import { Alert, Button } from 'shared/ui';
 type Props = {
     accountName: string;
     contractId: number;
+    onComplete?: () => Promise<void>;
 };
 
-const Completed: FC<Props> = ({ accountName, contractId }) => {
+const Completed: FC<Props> = ({ accountName, contractId, onComplete }) => {
     const { t } = useTranslation();
     const reloadPage = useReloadPage();
 
     const terminateAction = useSmartContractAction({
-        action: terminateContract(accountName, contractId, 0),
+        action: terminateContract(accountName, contractId, false),
+        onSignSuccess: reloadPage,
     });
 
     const handleComplete = async () => {
-        await terminateAction();
-        reloadPage();
+        if (onComplete) {
+            await onComplete();
+        } else {
+            await terminateAction();
+        }
     };
 
     return (

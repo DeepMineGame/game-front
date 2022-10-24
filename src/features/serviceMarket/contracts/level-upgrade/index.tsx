@@ -1,17 +1,19 @@
 import { FC } from 'react';
 import { Row, Col } from 'antd';
-import { useContractState } from 'entities/contract';
+import { getDmeAmount } from 'shared/lib/utils';
 import {
     Conditions,
     Citizen,
     Engineer,
     GeneralInfo,
 } from '../../ui/contract/level-upgrade';
-import { TerminateContract } from '../../ui/actions';
 import { ContractProps } from '../../types';
+import { TerminateContract } from '../../ui/actions';
+import { ContractAlerts } from './components/ContractAlerts';
+import { useLevelUpgradeContract } from './constants';
 
 const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
-    const { canTerminate } = useContractState(contract, accountName);
+    const { canTerminate } = useLevelUpgradeContract(contract, accountName);
 
     return (
         <Row gutter={[32, 32]}>
@@ -19,6 +21,13 @@ const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
                 <Row gutter={[24, 24]}>
                     <Col span={24}>
                         <GeneralInfo
+                            contract={contract}
+                            accountName={accountName}
+                        />
+                    </Col>
+
+                    <Col span={24}>
+                        <ContractAlerts
                             contract={contract}
                             accountName={accountName}
                         />
@@ -43,11 +52,19 @@ const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
                         <Row justify="end">
                             {canTerminate && (
                                 <TerminateContract
-                                    penalty={contract.penalty_amount}
+                                    penalty={getDmeAmount(
+                                        contract.penalty_amount
+                                    )}
                                     contractId={contract.id}
                                     accountName={accountName}
                                 />
                             )}
+                            {/* {canGetReport && (
+                                <GetReport
+                                    accountName={accountName}
+                                    contractId={contract.id}
+                                />
+                            )} */}
                         </Row>
                     </Col>
                 </Row>

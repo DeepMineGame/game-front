@@ -1,0 +1,28 @@
+@import 'src/shared';
+
+.terminateIcon {
+    color: $color-red-red-6;
+}
+
+.waitIcon {
+    color: $color-primary-primary-6;
+}
+
+.warningIcon {
+    margin-left: 2px;
+    color: $color-primary-primary-6;
+}
+
+.completedIcon {
+    color: $color-green-green-6;
+}
+
+.checkIcon {
+    color: $color-neutral-neutral-9;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

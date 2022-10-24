@@ -40,6 +40,8 @@
       "YouHaveToPhysicalToManageInventory": "You have to travel to manage the active inventory"
     },
     "common": {
+      "item": "Item",
+      "openContract": "Open Contract",
       "free": "Free",
       "button": {
         "cancel": "Cancel",
@@ -47,6 +49,7 @@
         "uninstall": "Uninstall",
         "deactivate": "Deactivate",
         "activate": "Activate",
+        "setup": "Set up",
         "claim": "Claim",
         "dme": "DME",
         "dmp": "DMP",
@@ -268,6 +271,10 @@
       "physicalShiftBadge": {
         "text": "Do you want to travel here?",
         "button": "Travel"
+      },
+      "tooltips": {
+        "notReadyMineDesk": "Install the equipment and sign the contract if you haven't done it yet to visit mine",
+        "unableGetStatAccess": "Complete mining first to visit Stats & info desk"
       }
     },
     "equipmentSet": {
@@ -355,7 +362,8 @@
     },
     "mineManagement": {
       "title": "MINE MANAGEMENT",
-      "mine": "MINE"
+      "mine": "MINE",
+      "signNewContract": "Sign new contract"
     },
     "mineOwner": {
       "menu": {
@@ -516,10 +524,16 @@
         "mine": "Mine",
         "penaltyTerminatedDescription": "Counterparty has terminated the contract prematurely and you can collect a penalty for it.",
         "penaltyViolatedDescription": "Counterparty violated the terms of the contract. The contract can be terminated without forfeit and you can collect a penalty",
+        "terminatedByYouNotCollectPenalty": "Counterparty violated the terms of the contract. The contract was terminated prematurely by you. You did not collect the penalty.",
+        "terminatedByYouWithCollectPenalty": "Counterparty violated the terms of the contract. The contract was terminated prematurely by you. You’ve collected a penalty of {{amount}} DME from the counterparty.",
+        "terminatedByCounterpartyYouCollectedPenalty": "The contracts was terminated prematurely by the counterparty. You’ve collected a penalty of {{amount}} DME from the counterparty.",
+        "terminatedByCounterpartyYouNotCollectedPenalty": "The contracts was terminated prematurely by the counterparty. You haven’t collected a penalty from the counterparty.",
+        "terminatedByYouAndChargedPenalty": "You terminated the contract prematurely and you’ve been charged a penalty of {{amount}} DME by the counterparty.",
+        "terminatedByYouAndNotChargedPenalty": "You terminated the contract prematurely, but you haven’t been charged a penalty by the counterparty.",
         "collectPenalty": "Collect a penalty",
         "noCollectPenalty": "Don’t collect a penalty",
-        "collectPenaltyAndBreak": "Collect and break the contract",
-        "noCollectPenaltyAndBreak": "Don’t collect and break the contract",
+        "collectPenaltyAndBreak": "Collect and terminate the contract",
+        "noCollectPenaltyAndBreak": "Don’t collect and terminate the contract",
         "collect": "Collect",
         "collectDescription": "Are you sure you want to collect a penalty of {{amount}} DME from the Mine owner?",
         "noCollectDescription": "Are you sure you don’t want to collect a penalty of {{amount}} DME from the Mine owner?",
@@ -527,6 +541,10 @@
         "termination": "Contract termination",
         "terminateContract": "Terminate the contract",
         "youTerminated": "You terminated the contract prematurely.<br/> The counterparty might collect the penalty.",
+        "deadlinePassedMayCollectPenalty": "The deadline for start of operations has passed. The contract is terminated by you. The counterparty might collect the penalty.",
+        "deadlinePassedMightCollectPenalty": "The deadline for start of operations has passed. The counterparty might terminate the contract and collect the penalty.",
+        "deadlinePassedNoCollectPenalty": "The deadline for start of operations has passed. Counterparty terminated the contract with no penalty charge from you.",
+        "deadlinePassedWithCollectPenalty": "The deadline for start of operations has passed. Counterparty terminated the contract with {{amount}} DME penalty charge from you.",
         "youReceived": "You received {{amount}} DME",
         "completeContract": "Complete the contract",
         "completeContractDescription": "The contract has successfully completed. Please confirm this by clicking the button below.",
@@ -543,7 +561,8 @@
         "orderWasDeleted": "Order was deleted",
         "documentWasDestroyedOn": "This document was destroyed on",
         "deleted": "Deleted",
-        "successfullySigned": "Contract successfully signed"
+        "successfullySigned": "Contract successfully signed",
+        "selectItemToLinkToContract": "Select item to link it to the contract you are signing"
       },
       "myContractsTab": {
         "nickname": "Nickname",
@@ -564,6 +583,7 @@
         "lookingForEngineer": "Looking for Engineer",
         "lookingForCitizen": "Looking for Citizen",
         "type": {
+          "undefined": "No Schema Type",
           "mine": "Mine",
           "mineModule": "Mine module",
           "equipment": "Equipment"

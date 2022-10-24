@@ -86,7 +86,9 @@ const EngineerSettings: FC<{ disabled: boolean }> = ({ disabled }) => {
             ]}
         >
             <SettingOutlined
-                className={cn(styles.icon, { [styles.disabled]: disabled })}
+                className={cn(styles.icon, styles.settingsIcon, {
+                    [styles.disabled]: disabled,
+                })}
             />
         </Dropdown>
     );

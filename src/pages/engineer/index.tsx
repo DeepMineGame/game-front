@@ -1,7 +1,7 @@
 import { Layout } from 'antd';
 import { useAccountName } from 'shared/lib/hooks';
 import { Header } from 'shared/ui';
-import { CabinPage } from './cabin';
+import { EngineerCabinPage } from './cabin';
 import styles from './styles.module.scss';
 
 const { Header: HeaderAnt } = Layout;
@@ -14,7 +14,7 @@ const EngineerPage = () => {
             <HeaderAnt className={styles.header}>
                 <Header withBackButton />
             </HeaderAnt>
-            <CabinPage accountName={accountName} />
+            <EngineerCabinPage accountName={accountName} />
         </Layout>
     );
 };

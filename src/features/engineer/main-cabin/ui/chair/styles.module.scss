@@ -1,6 +1,8 @@
 @import "src/shared";
 
 .chair {
+  @include enter-hover;
+
   position: absolute;
   right: 0;
   bottom: 0;
@@ -13,16 +15,11 @@
   margin: auto;
   z-index: 2;
   cursor: pointer;
-  filter: $glow;
 
   @media (min-width: $media-tablet)  {
     filter: initial;
     height: 50vh;
     width: 30vw;
-
-    &:hover {
-      filter: $glow;
-    }
   }
 }
 

@@ -1,4 +1,4 @@
-import { deepminegame } from '../index';
+import { deepmineengr } from '../index';
 
 export const repairEquipment = (
     waxUser: string,
@@ -7,7 +7,7 @@ export const repairEquipment = (
 ) => ({
     actions: [
         {
-            account: deepminegame,
+            account: deepmineengr,
             name: 'equiprepair',
             authorization: [
                 {
