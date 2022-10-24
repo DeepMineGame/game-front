@@ -63,7 +63,7 @@ export type ContractDto = {
     cost_of_execution: number;
     client_discord: string;
     executor_discord: string;
-    demand_penalty_by_client: number;
+    penalty_demanded_by: string;
     penalty_by_fee_days_available: number;
 };
 

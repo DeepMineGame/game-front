@@ -2,7 +2,8 @@ import { FC } from 'react';
 import { Badge } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { CabinState } from 'entities/engineer';
-import { Text, green6, neutral8, orange6 } from 'shared/ui';
+import { Text } from 'shared/ui';
+import { green6, neutral8, orange6 } from 'shared/ui/variables';
 import styles from './styles.module.scss';
 
 const colors = {

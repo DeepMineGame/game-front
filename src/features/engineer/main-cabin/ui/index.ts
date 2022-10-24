@@ -6,6 +6,7 @@ export * from './get-stats-info';
 export * from './stats';
 export * from './training';
 export * from './find-work';
+export * from './upgrade-info';
 export * from './upgrade-complete';
 export * from './upgrade-in-progress';
 export * from './unlocking-skill';

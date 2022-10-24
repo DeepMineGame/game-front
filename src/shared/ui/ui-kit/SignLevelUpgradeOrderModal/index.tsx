@@ -1,12 +1,13 @@
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, Modal } from 'antd';
+import { Button, Col, Modal, Row, Space } from 'antd';
 import { useSmartContractAction } from 'features';
 import {
     getUpgradeRarity,
     getUpgradeType,
     Inventory,
     InventoryCardModal,
+    parseAttrs,
     Text,
 } from 'shared';
 import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
@@ -15,7 +16,9 @@ import {
     $mergedInventoryWithAtomicAssets,
     MergedInventoryWithAtomicAssets,
 } from 'entities/atomicassets';
-import { signOrder, ContractDto } from 'entities/smartcontract';
+import { signOrder, ContractDto, EngineerSchema } from 'entities/smartcontract';
+import { inventoriesTabMap } from 'entities/engineer';
+import { neutral8 } from 'shared/ui/variables';
 import { useAccountName } from 'shared/lib/hooks';
 import styles from './index.module.scss';
 
@@ -73,41 +76,65 @@ export const SignLevelUpgradeOrderModal: FC<Props> = ({
             okButtonProps={{ disabled: !selectedAsset }}
             okText={t('components.common.button.sign')}
         >
-            {!selectedAsset && (
-                <Button
-                    onClick={() => setIsInventoryOpen(true)}
-                    type="primary"
-                    ghost
-                    block
-                >
-                    <PlusOutlined />
-                    {t('components.common.button.selectItem')}
-                </Button>
-            )}
-            {selectedAsset && (
-                <div className={styles.selectedItemWrapper}>
-                    <div className={styles.selectedItem}>
-                        <Text>{`${t(
-                            `pages.serviceMarket.levelUpgradeTab.type.${getUpgradeType(
-                                {
-                                    asset: selectedAsset,
-                                }
-                            )}`
-                        )}, ${getUpgradeRarity({
-                            asset: selectedAsset,
-                        })}, level ${selectedAsset?.level}`}</Text>
-                    </div>
-                    <Button onClick={() => setSelectedAsset(undefined)}>
-                        <DeleteOutlined />
-                    </Button>
-                </div>
-            )}
+            <Row gutter={[24, 24]}>
+                <Col span={24}>
+                    <Text block>
+                        {t(
+                            'pages.serviceMarket.contract.selectItemToLinkToContract'
+                        )}
+                    </Text>
+                </Col>
+                <Col span={24}>
+                    <Space direction="vertical" style={{ width: '100%' }}>
+                        <Text block style={{ color: neutral8 }}>
+                            {t('components.common.item')}
+                        </Text>
+                        {!selectedAsset && (
+                            <Button
+                                onClick={() => setIsInventoryOpen(true)}
+                                type="primary"
+                                ghost
+                                block
+                            >
+                                <PlusOutlined />
+                                {t('components.common.button.selectItem')}
+                            </Button>
+                        )}
+                        {selectedAsset && (
+                            <div className={styles.selectedItemWrapper}>
+                                <div className={styles.selectedItem}>
+                                    <Text>{`${t(
+                                        `pages.serviceMarket.levelUpgradeTab.type.${getUpgradeType(
+                                            {
+                                                asset: selectedAsset,
+                                            }
+                                        )}`
+                                    )}, ${getUpgradeRarity({
+                                        asset: selectedAsset,
+                                    })}, level ${selectedAsset?.level}`}</Text>
+                                </div>
+                                <Button
+                                    onClick={() => setSelectedAsset(undefined)}
+                                >
+                                    <DeleteOutlined />
+                                </Button>
+                            </div>
+                        )}
+                    </Space>
+                </Col>
+            </Row>
+
             <Inventory
                 onOpenCard={setSelectedInventoryCard}
                 onSelect={handleAssetSelect}
                 userInventory={userInventory}
                 visible={isInventoryOpen}
                 onCancel={() => setIsInventoryOpen(false)}
+                selectedTab={
+                    inventoriesTabMap[
+                        parseAttrs(contract)?.schema_type as EngineerSchema
+                    ]
+                }
             />
             {selectedInventoryCard && (
                 <InventoryCardModal

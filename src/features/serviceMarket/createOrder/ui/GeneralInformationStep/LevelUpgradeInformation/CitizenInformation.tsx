@@ -9,17 +9,14 @@ import {
     MergedInventoryWithAtomicAssets,
 } from 'entities/atomicassets';
 import { orderFields } from 'entities/order';
+import { inventoriesTabMap } from 'entities/engineer';
 import { GeneralInformationStepProps } from '../interface';
 import localStyles from '../styles.module.scss';
 import {
     UpgradeTypeFormItem,
     useWatchUpgradeType,
 } from '../../UpgradeTypeFormItem';
-import {
-    raritiesTranslationMap,
-    inventoriesTypeMap,
-    inventoriesTabMap,
-} from './constants';
+import { raritiesTranslationMap, inventoriesTypeMap } from './constants';
 
 export const CitizenInformation: FC<GeneralInformationStepProps> = ({
     goToPreviousStep,

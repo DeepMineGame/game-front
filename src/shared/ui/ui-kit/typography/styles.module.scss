@@ -44,6 +44,10 @@ h5.thin {
     font-weight: bold;
 }
 
+.block {
+    display: block;
+}
+
 :global {
     .ant-typography {
         &-primary {

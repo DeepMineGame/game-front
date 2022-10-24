@@ -1,24 +1,34 @@
 import { FC, useMemo } from 'react';
 import { t } from 'i18next';
-import { ContractState } from 'features';
 import { DiscordIcon } from 'shared';
 import { Space, Tooltip } from 'antd';
+import { ContractState, UpgradeContractState } from 'features/serviceMarket';
 import {
     ContractDto,
     contractName,
+    ContractType,
     getContractStatus,
 } from 'entities/smartcontract';
-import { getUserRoleInContract } from 'shared/lib/utils';
+import { getDmeAmount, getUserRoleInContract } from 'shared/lib/utils';
 import { Link, Table, Tag } from '../../ui-kit';
 import { toLocaleDate } from '../../utils';
 
 type Props = { contracts: ContractDto[]; account: string };
+
+const contractStateMap = {
+    [ContractType.undefined]: () => null,
+    [ContractType.landlord_mineowner]: ContractState,
+    [ContractType.mineowner_contractor]: ContractState,
+    [ContractType.level_upgrade]: UpgradeContractState,
+};
 
 export const ContractsTable: FC<Props> = ({ contracts, account }) => {
     const dataSource = useMemo(
         () =>
             contracts.map((contract) => {
                 const contractStatus = getContractStatus(contract, account);
+                const Status = contractStateMap[contract.type];
+
                 return {
                     nickName: contract.client || contract.executor || '-',
                     key: contract.id,
@@ -28,13 +38,10 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
                         contract.finishes_at === 0
                             ? '-'
                             : toLocaleDate(contract.finishes_at * 1000),
-                    penalty: contract.penalty_amount,
+                    penalty: getDmeAmount(contract.penalty_amount),
                     status: {
                         label: (
-                            <ContractState
-                                contract={contract}
-                                accountName={account}
-                            />
+                            <Status contract={contract} accountName={account} />
                         ),
                         value: contractStatus,
                     },

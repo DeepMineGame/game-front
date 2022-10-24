@@ -12,7 +12,7 @@ const getBaseFields = (orderData: BaseOrder) => {
         opt_executor: orderData.opt_executor,
         opt_asset_id: Number.isNaN(assetId) ? undefined : assetId,
         is_client: isClient,
-        penalty_amount: Number(orderData.penalty_amount),
+        penalty_amount: Number(orderData.penalty_amount || 0) * 10 ** 8,
         deadline_duration:
             orderData.deadline_duration_in_days * DAY_IN_SECONDS +
             orderData.deadline_duration_in_hours * HOUR_IN_SECONDS,

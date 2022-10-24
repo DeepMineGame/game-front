@@ -55,7 +55,7 @@ const PerformUpgrade: FC<Props> = ({
         if (inLocation.engineersWorkshop) {
             performConfirm();
         } else {
-            travelConfirm(performConfirm);
+            travelConfirm();
         }
     };
 
