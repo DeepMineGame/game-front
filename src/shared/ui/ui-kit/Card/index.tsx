@@ -20,7 +20,7 @@ export enum Status {
     notInstalled = 'notInstalled',
 }
 
-export const getAssetStatus = (inventory?: UserInventoryType | any): Status => {
+export const getAssetStatus = (inventory?: UserInventoryType): Status => {
     if (inventory?.broken) return Status.broken;
     if (inventory?.in_use) return Status.installed;
 

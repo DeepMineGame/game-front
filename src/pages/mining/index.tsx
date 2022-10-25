@@ -7,10 +7,9 @@ import {
     desktopS,
     neutral4,
     useAccountName,
-    Alert,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { Col, Row, Skeleton, Space, Tooltip } from 'antd';
+import { Alert, Col, Row, Skeleton, Space, Tooltip } from 'antd';
 import { useGate, useStore } from 'effector-react';
 
 import {
@@ -73,7 +72,7 @@ export const MiningPage: FC = memo(() => {
             {!isContractorCabinLoading && disabled && (
                 <Row justify="center">
                     <Col span={10}>
-                        <Alert direction="horizontal" {...alertProps} />
+                        <Alert {...alertProps} />
                     </Col>
                 </Row>
             )}

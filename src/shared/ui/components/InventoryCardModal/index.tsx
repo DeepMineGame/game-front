@@ -98,6 +98,8 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         onSignSuccess: reload,
     });
 
+    const assetIsBroken = getAssetStatus(card) === Status.broken;
+
     return (
         <Modal
             wideOnMobile
@@ -110,17 +112,12 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                     <Card
                         inventory={card}
                         onRepairFinish={reload}
-                        showCardBadgeStatus={
-                            getAssetStatus(card) === Status.broken
-                        }
+                        showCardBadgeStatus={assetIsBroken}
                         withDepreciationBar={false}
                     />
                     {onSelect && (
                         <Button
-                            disabled={
-                                getAssetStatus(card) === Status.broken ||
-                                !isAssetAvailable(card)
-                            }
+                            disabled={assetIsBroken || !isAssetAvailable(card)}
                             onClick={handleSelect}
                             block
                             type="primary"
@@ -205,9 +202,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             </Col>
                             <Col span={10}>
                                 <Button
-                                    disabled={
-                                        getAssetStatus(card) !== Status.broken
-                                    }
+                                    disabled={!assetIsBroken}
                                     size="large"
                                     type="link"
                                     onClick={() => {
@@ -247,9 +242,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             </Col>
                             <Col span={10}>
                                 <Button
-                                    disabled={
-                                        getAssetStatus(card) !== Status.broken
-                                    }
+                                    disabled={!assetIsBroken}
                                     type="link"
                                     size="large"
                                     onClick={() => {

@@ -5,8 +5,9 @@ import { findEquipmentByName } from 'features/equipmentSet';
 import {
     ActionType,
     ACTION_STATE_TO_ID,
-    ContractDto,
     InUseType,
+    isStatusTerminated,
+    isTimeFinished,
     LOCATION_TO_ID,
     miningEquipmentNames,
     UserInventoryType,
@@ -43,11 +44,6 @@ import {
     $userInfo,
 } from './stores';
 
-const contractIsExpired = (contract: ContractDto) =>
-    contract.finishes_at * 1000 < Date.now();
-const contractWasTerminated = (contract: ContractDto) =>
-    Boolean(contract.term_time);
-
 export const ContractorCabinGate = createGate<{ searchParam: string }>(
     'ContractorCabinGate'
 );
@@ -73,8 +69,8 @@ sample({
     target: $needFinishMineownerContract,
     fn: (mineOwnerContracts) =>
         mineOwnerContracts[0] &&
-        (contractWasTerminated(mineOwnerContracts[0]) ||
-            contractIsExpired(mineOwnerContracts[0])),
+        (isStatusTerminated(mineOwnerContracts[0]) ||
+            isTimeFinished(mineOwnerContracts[0])),
 });
 
 sample({
@@ -93,8 +89,8 @@ sample({
     target: $landlordContractFinished,
     fn: (landlordContract) =>
         !!landlordContract &&
-        (contractWasTerminated(landlordContract) ||
-            contractIsExpired(landlordContract)),
+        (isStatusTerminated(landlordContract) ||
+            isTimeFinished(landlordContract)),
     filter: (landlordContract) => !!landlordContract,
 });
 

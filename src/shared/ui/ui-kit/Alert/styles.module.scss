@@ -2,18 +2,13 @@
 
 .alert {
     flex-wrap: wrap;
-    align-items: baseline;
 
     :global {
         .ant-alert-icon {
             align-self: flex-start;
             padding-top: 5px;
         }
-    }
-}
 
-.vertical {
-    :global {
         .ant-alert-action {
             width: 100%;
             margin-top: 12px;
