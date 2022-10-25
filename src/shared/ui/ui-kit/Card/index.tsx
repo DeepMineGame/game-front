@@ -20,7 +20,7 @@ export enum Status {
     notInstalled = 'notInstalled',
 }
 
-export const getCardStatus = (inventory?: UserInventoryType | any): Status => {
+export const getAssetStatus = (inventory?: UserInventoryType): Status => {
     if (inventory?.broken) return Status.broken;
     if (inventory?.in_use) return Status.installed;
 
@@ -50,7 +50,7 @@ export const Card: FC<CardProps> = ({
     showCardBadgeStatus,
     withDepreciationBar = true,
 }) => {
-    const status = getCardStatus(inventory);
+    const status = getAssetStatus(inventory);
 
     return (
         <Tooltip overlay={tooltipOverlay}>

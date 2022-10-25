@@ -1,5 +1,11 @@
 import { useTranslation } from 'react-i18next';
-import { CardHolder, useReloadPage, Status, getCardStatus, Card } from 'shared';
+import {
+    CardHolder,
+    useReloadPage,
+    Status,
+    getAssetStatus,
+    Card,
+} from 'shared';
 import { FC } from 'react';
 import { InventoryNameType } from 'entities/smartcontract';
 import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
@@ -33,7 +39,7 @@ export const EquipmentCards: FC<Props> = ({
                 inventory ? (
                     <Card
                         tooltipOverlay={
-                            getCardStatus(inventory) === Status.broken
+                            getAssetStatus(inventory) === Status.broken
                                 ? t(
                                       'pages.equipmentSet.main.tooltipForDamagedEquip'
                                   )

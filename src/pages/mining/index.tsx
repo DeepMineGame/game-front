@@ -9,8 +9,8 @@ import {
     useAccountName,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { Col, Row, Skeleton, Space, Tooltip } from 'antd';
-import { useStore } from 'effector-react';
+import { Alert, Col, Row, Skeleton, Space, Tooltip } from 'antd';
+import { useGate, useStore } from 'effector-react';
 
 import {
     getMineByAssetEffect,
@@ -20,6 +20,9 @@ import {
     getActionsForUserEffect,
     getContractByExecutorEffect,
     estimatesMiningTimeStore,
+    ContractorCabinGate,
+    $isContractorCabinLoading,
+    useDisabledState,
 } from 'features';
 import { ActionType } from 'entities/smartcontract';
 import styles from './styles.module.scss';
@@ -31,6 +34,7 @@ export const MiningPage: FC = memo(() => {
     const [isMiningFinished, setIsMiningFinished] = useState(true);
 
     const accountName = useAccountName();
+    useGate(ContractorCabinGate, { searchParam: accountName });
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
     const subTitleLevel = isDesktop ? 3 : 4;
@@ -44,6 +48,7 @@ export const MiningPage: FC = memo(() => {
     const isActionsLoading = useStore(getActionsForUserEffect.pending);
     const isMineStoreLoading = useStore(getMineByAssetEffect.pending);
     const isLoading = isActionsLoading || isContractsLoading;
+    const isContractorCabinLoading = useStore($isContractorCabinLoading);
 
     const mineActions = actions?.filter(({ type }) => type === ActionType.mine);
     const lastMineAction = mineActions?.reverse()?.[0];
@@ -51,6 +56,8 @@ export const MiningPage: FC = memo(() => {
         lastMineAction &&
         lastMineAction?.attrs?.find(({ key }) => key === 'est_dme_amount')
             ?.value;
+
+    const { disabled, ...alertProps } = useDisabledState();
 
     return (
         <Page headerTitle={t('pages.mining.mining')}>
@@ -61,6 +68,13 @@ export const MiningPage: FC = memo(() => {
                 />
             ) : (
                 <Skeleton title={false} loading={isActionsLoading} />
+            )}
+            {!isContractorCabinLoading && disabled && (
+                <Row justify="center">
+                    <Col span={10}>
+                        <Alert {...alertProps} />
+                    </Col>
+                </Row>
             )}
             <Row justify="center" gutter={gutter} className={styles.grid}>
                 <Col sm={17} xs={24} className={styles.firsColumn}>

@@ -192,7 +192,16 @@
       "consumablesWillBurnOut": "Your consumables will be burned, energy and time used mining will be lost and you won't receive DME",
       "timeSpent": "Time spent",
       "dmeCollected": "DME collected",
-      "calculateMining": "Calculate mining"
+      "calculateMining": "Calculate mining",
+      "hasNoMineOwnerContracts": "To start mining, you need to <b>sign a Mining Contract</b> with a Mine owner and <b>then install equipment set</b>",
+      "visitServiceMarket": "Visit Service Market",
+      "installEquipSet": "<b>Install the equipment set</b> to start mining",
+      "contractRequiresAction": "The <b>contract requires an action</b> from you",
+      "miningContractIsntActive": "<b>Your Mining Contract is not active.</b> Please <b>uninstall the equipment set</b> to be able to sign the new contract",
+      "somePiecesOfEquipmentIsBroken": "One or more pieces of <b>equipment is broken</b>. Replacement or repair required",
+      "contractBetweenMineownerAndLandlordIsntValid": "<b>Mine operation contract</b> between a Mine Owner and a Landlord <b>is not valid</b>. Please contact the Mine owner to resolve the issue.",
+      "openContract": "Open contract",
+      "configureButton": "Configure"
     },
     "pageNotFound": {
       "weLost": "WE GOT LOST",
