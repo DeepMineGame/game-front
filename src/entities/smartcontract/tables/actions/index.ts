@@ -13,9 +13,11 @@ export enum mapSearchParamForIndexPosition {
 export const getActionsTable = async ({
     searchIdentification,
     searchParam,
+    limit = 1000,
 }: {
     searchIdentification: mapSearchParamForIndexPosition;
     searchParam: number | string;
+    limit?: number;
 }) => {
     return getTableData({
         code: deepminegame,
@@ -25,7 +27,7 @@ export const getActionsTable = async ({
         key_type: 'i64',
         lower_bound: searchParam,
         upper_bound: searchParam,
-        limit: 1000,
+        limit,
     });
 };
 export const getActionEffect = createEffect(
