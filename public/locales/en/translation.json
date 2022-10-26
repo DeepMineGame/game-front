@@ -26,6 +26,11 @@
     }
   },
   "components": {
+    "actionModal": {
+      "actionNotPossible": "Action is not possible",
+      "busy": "You cannot perform this action because you are busy with",
+      "willEnd": "which will end in"
+    },
     "contractorMenu": {
       "infoPanelTooltip": "Info panel is located here",
       "miningDeskTooltip": "Mining deck is located here",
