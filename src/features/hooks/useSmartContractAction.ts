@@ -43,8 +43,8 @@ export const useSmartContractAction = <T>({
             });
             const lastAction: ActionDto | null = rows?.[0];
             const lastActionInProgress =
-                (lastAction?.finishes_at || 0) * 1000 > Date.now();
-            if (lastActionInProgress && lastAction) {
+                lastAction && (lastAction.finishes_at || 0) * 1000 > Date.now();
+            if (lastActionInProgress) {
                 return Modal.warn({
                     title: t('components.actionModal.actionNotPossible'),
                     content: `${t('components.actionModal.busy')} ${
