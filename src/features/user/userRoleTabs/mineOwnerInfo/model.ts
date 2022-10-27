@@ -15,49 +15,55 @@ import {
 export const MineOwnerInfoGate = createGate<{ searchParam: string }>(
     'MineOwnerInfoGate'
 );
-export const getMinesEffect = createEffect(
-    async ({
-        searchParam,
-        searchIdentificationType = searchBy.owner,
-    }: {
+
+export const getMinesEffect = createEffect<
+    {
         searchParam: string;
         searchIdentificationType?: searchBy;
-    }) => getMinesTableData({ searchParam, searchIdentificationType })
-);
-export const getAreasEffect = createEffect(
-    async ({
-        searchParam,
-        searchIdentificationType = searchBy.assetId,
-    }: {
-        searchParam: string;
-        searchIdentificationType?: searchBy;
-    }) => {
-        return getTableData(
-            getAreaConfig(searchParam, searchIdentificationType)
-        );
-    }
+    },
+    MineDto[],
+    Error
+>(({ searchParam, searchIdentificationType = searchBy.owner }) =>
+    getMinesTableData({ searchParam, searchIdentificationType })
 );
 
-export const getInventoryByIdEffect = createEffect(
-    async ({ searchParam }: { searchParam: number }) =>
-        getInventoryTableData({
-            searchIdentificationType: SEARCH_BY.inventoryId,
-            searchParam,
-        })
+export const getAreasEffect = createEffect<
+    {
+        searchParam: string;
+        searchIdentificationType?: searchBy;
+    },
+    AreasDto[],
+    Error
+>(({ searchParam, searchIdentificationType = searchBy.assetId }) =>
+    getTableData(getAreaConfig(searchParam, searchIdentificationType))
+);
+
+export const getInventoryByIdEffect = createEffect<
+    {
+        searchParam: number;
+    },
+    UserInventoryType[],
+    Error
+>(({ searchParam }) =>
+    getInventoryTableData({
+        searchIdentificationType: SEARCH_BY.inventoryId,
+        searchParam,
+    })
 );
 
 export const minesStore = createStore<MineDto[] | null>(null).on(
     getMinesEffect.doneData,
-    (_, { rows }) => rows
+    (_, rows) => rows
 );
+
 export const areaForMineStore = createStore<null | AreasDto>(null).on(
     getAreasEffect.doneData,
-    (_, { rows }) => rows?.[0]
+    (_, [areaForMine]) => areaForMine || null
 );
 
 export const areaNftStore = createStore<UserInventoryType | null>(null).on(
     getInventoryByIdEffect.doneData,
-    (_, { rows }) => rows?.[0]
+    (_, [areaNft]) => areaNft || null
 );
 
 forward({ from: MineOwnerInfoGate.open, to: getMinesEffect });

@@ -11,25 +11,32 @@ import {
 
 export const UserMineGate = createGate<{ searchParam: string }>('UserMineGate');
 
-export const getMinesByOwnerEffect = createEffect(
-    async ({ searchParam }: { searchParam: string }) => {
-        return getMinesTableData({
-            searchIdentificationType: searchBy.owner,
-            searchParam,
-        });
-    }
+export const getMinesByOwnerEffect = createEffect<
+    {
+        searchParam: string;
+    },
+    MineDto[],
+    Error
+>(({ searchParam }) =>
+    getMinesTableData({
+        searchIdentificationType: searchBy.owner,
+        searchParam,
+    })
 );
-export const getAreaByAssetEffect = createEffect(async (mine: MineDto[]) => {
-    return getTableData(getAreaConfig(mine[0]?.area_id, searchBy.assetId));
-});
+
+export const getAreaByAssetEffect = createEffect<MineDto[], AreasDto[], Error>(
+    (mine: MineDto[]) =>
+        getTableData(getAreaConfig(mine[0]?.area_id, searchBy.assetId))
+);
+
 export const userMineStore = createStore<MineDto[]>([]).on(
     getMinesByOwnerEffect.doneData,
-    (_, { rows }) => rows
+    (_, rows) => rows
 );
 
 export const areaForMine = createStore<AreasDto[] | null>(null).on(
     getAreaByAssetEffect.doneData,
-    (_, { rows }) => rows
+    (_, rows) => rows
 );
 
 forward({

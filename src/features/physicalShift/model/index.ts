@@ -7,20 +7,19 @@ import {
     mapSearchParamForIndexPosition,
 } from 'entities/smartcontract';
 
-export const getShiftActionsForUserEffect = createEffect(
-    async ({
-        searchParam,
-    }: {
+export const getShiftActionsForUserEffect = createEffect<
+    {
         searchParam: string;
-    }): Promise<ActionDto[] | undefined> =>
-        getActionsTable({
-            searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
-            searchParam,
-        }).then(({ rows }) =>
-            rows?.filter(
-                ({ type }: ActionDto) => type === ActionType.physical_shift
-            )
-        )
+    },
+    ActionDto[],
+    Error
+>(({ searchParam }) =>
+    getActionsTable<ActionDto>({
+        searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
+        searchParam,
+    }).then((rows) =>
+        rows?.filter(({ type }) => type === ActionType.physical_shift)
+    )
 );
 
 export const $travelStatus = createStore({

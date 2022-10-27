@@ -12,7 +12,7 @@ import { checkIfNeedPhysicalShiftEffect } from './checkIfNeedPhysicalShiftEeffec
 
 export const checkLandLordContractMineOwnerActiveContractEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
-        const { rows: contracts } = await getTableData(
+        const contracts = await getTableData<ContractDto>(
             getContractsNameConfig(
                 searchParam,
                 mapSearchParamForIndexPositionToFindContracts.executorId,

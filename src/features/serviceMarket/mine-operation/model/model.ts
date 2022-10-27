@@ -24,7 +24,11 @@ export const MineOperationContractsGate = createGate();
 export const mineOperationChangeFilterEvent =
     createEvent<MineOperationFilter>();
 
-export const getMineOperationContractsEffect = createEffect(() =>
+export const getMineOperationContractsEffect = createEffect<
+    void,
+    ContractDto[],
+    Error
+>(() =>
     getTableData(
         getContractsNameConfig(
             ContractType.landlord_mineowner,
@@ -37,7 +41,7 @@ export const getMineOperationContractsEffect = createEffect(() =>
 export const mineOperationContractsStore = createStore<ContractDto[]>([]).on(
     getMineOperationContractsEffect.doneData,
     (_, contracts) =>
-        contracts.rows?.filter(
+        contracts?.filter(
             (contract: ContractDto) => !contract.client || !contract.executor
         ) ?? []
 );

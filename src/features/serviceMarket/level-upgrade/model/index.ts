@@ -23,7 +23,11 @@ export enum LevelUpgradeFilter {
 export const LevelUpgradeContractsGate = createGate();
 export const levelUpgradeChangeFilterEvent = createEvent<LevelUpgradeFilter>();
 
-export const getLevelUpgradeContractsEffect = createEffect(() =>
+export const getLevelUpgradeContractsEffect = createEffect<
+    void,
+    ContractDto[],
+    Error
+>(() =>
     getTableData(
         getContractsNameConfig(
             ContractType.level_upgrade,
@@ -36,7 +40,7 @@ export const getLevelUpgradeContractsEffect = createEffect(() =>
 export const levelUpgradeContractsStore = createStore<ContractDto[]>([]).on(
     getLevelUpgradeContractsEffect.doneData,
     (_, contracts) =>
-        contracts.rows?.filter(
+        contracts?.filter(
             (contract: ContractDto) => !contract.client || !contract.executor
         ) ?? []
 );

@@ -6,17 +6,18 @@ import {
     LOCATION_TO_ID,
     MineDto,
     searchBy,
+    UserDto,
 } from 'entities/smartcontract';
 import { mineOwnerCabinStateResolver } from '../mineOwnerCabinState';
 import { checkIsMineSetEffect } from './checkIsMineSetEffect';
 
 export const checkIfNeedPhysicalShiftEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
-        const { rows: user } = await getTableData(getUserConfig(searchParam));
+        const [user] = await getTableData<UserDto>(getUserConfig(searchParam));
         const isUserOutsideFromMineDeckLocation =
-            user?.[0]?.location !== LOCATION_TO_ID.mine_deck;
+            user?.location !== LOCATION_TO_ID.mine_deck;
 
-        const { rows: mines } = await getMinesTableData({
+        const mines = await getMinesTableData<MineDto>({
             searchParam,
             searchIdentificationType: searchBy.owner,
         });

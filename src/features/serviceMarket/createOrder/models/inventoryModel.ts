@@ -10,14 +10,18 @@ import { getCertificate } from 'entities/engineer';
 export const InventoryGate = createGate<{ searchParam: string }>(
     'InventoryGate'
 );
-const getActiveInventory = createEffect(
-    async ({ searchParam }: { searchParam: string }) => {
-        return getInventoryTableData({ searchParam });
-    }
-);
+
+const getActiveInventory = createEffect<
+    {
+        searchParam: string;
+    },
+    UserInventoryType[],
+    Error
+>(({ searchParam }) => getInventoryTableData({ searchParam }));
+
 export const activeUserInventoryStore = createStore<UserInventoryType[] | null>(
     null
-).on(getActiveInventory.doneData, (_, { rows }) => rows);
+).on(getActiveInventory.doneData, (_, rows) => rows || null);
 
 export const getAtomicAssetsByUserEffect = createEffect(getAtomicAssetsByUser);
 

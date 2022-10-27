@@ -15,57 +15,59 @@ import {
 
 export const AreaGate = createGate<{ searchParam: string }>('AreaGate');
 
-export const getInventoriesEffect = createEffect(
-    async ({
-        searchIdentificationType = SEARCH_BY.ownerNickname,
-        searchParam,
-    }: {
+export const getInventoriesEffect = createEffect<
+    {
         searchIdentificationType?: SEARCH_BY;
         searchParam: string;
-    }) => {
-        return getInventoryTableData({
-            searchIdentificationType,
-            searchParam,
-        });
-    }
+    },
+    UserInventoryType[],
+    Error
+>(({ searchIdentificationType = SEARCH_BY.ownerNickname, searchParam }) =>
+    getInventoryTableData({
+        searchIdentificationType,
+        searchParam,
+    })
 );
 
-export const getMinesByAreaId = createEffect(
-    async (areaNft: UserInventoryType[] | null) => {
-        return (
-            areaNft?.length &&
-            getMinesTableData({
-                searchIdentificationType: searchBy.areaId,
-                searchParam: areaNft[0]?.asset_id,
-                limit: 30,
-            })
-        );
-    }
+export const getMinesByAreaId = createEffect<
+    UserInventoryType[] | null,
+    MineDto[] | undefined,
+    Error
+>((areaNft: UserInventoryType[] | null) =>
+    areaNft?.length
+        ? getMinesTableData({
+              searchIdentificationType: searchBy.areaId,
+              searchParam: areaNft[0]?.asset_id,
+              limit: 30,
+          })
+        : undefined
 );
 
 export const $inventory = createStore<UserInventoryType[] | null>(null).on(
     getInventoriesEffect.doneData,
-    (_, { rows }) => rows
+    (_, rows) => rows
 );
 
 export const userAreaNftStore = createStore<UserInventoryType[] | null>(null);
 
 export const minesForAreaSlots = createStore<MineDto[] | null>(null).on(
     getMinesByAreaId.doneData,
-    (_, { rows }) => rows
+    (_, rows) => rows
 );
 
 export const ClaimDmeGate = createGate<{ searchParam: string }>('ClaimDmeGate');
 
-export const getRolesEffect = createEffect(
-    async ({ searchParam }: { searchParam: string }) => {
-        return getRolesTableData({ searchParam });
-    }
-);
+export const getRolesEffect = createEffect<
+    {
+        searchParam: string;
+    },
+    RoleDto[],
+    Error
+>(({ searchParam }) => getRolesTableData({ searchParam }));
 
 export const rolesStore = createStore<RoleDto[] | null>(null).on(
     getRolesEffect.doneData,
-    (_, { rows }) => rows
+    (_, rows) => rows
 );
 
 export const claimDmeStore = createStore(0);

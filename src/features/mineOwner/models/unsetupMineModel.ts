@@ -15,62 +15,76 @@ import {
 export const UnsetupMineGate = createGate<{ searchParams: string }>(
     'UnsetupMineGate'
 );
-const getExecutorContractsEffect = createEffect(
-    async ({ searchParams }: { searchParams: string }) => {
-        return getTableData(
-            getContractsNameConfig(
-                searchParams,
-                mapSearchParamForIndexPositionToFindContracts.executorId,
-                200
-            )
-        );
-    }
+
+const getExecutorContractsEffect = createEffect<
+    {
+        searchParams: string;
+    },
+    ContractDto[],
+    Error
+>(({ searchParams }) =>
+    getTableData(
+        getContractsNameConfig(
+            searchParams,
+            mapSearchParamForIndexPositionToFindContracts.executorId,
+            200
+        )
+    )
 );
 
-const getContractorsContractsEffect = createEffect(
-    async ({ searchParams }: { searchParams: string }) => {
-        return getTableData(
-            getContractsNameConfig(
-                searchParams,
-                mapSearchParamForIndexPositionToFindContracts.clientId,
-                200
-            )
-        );
-    }
+const getContractorsContractsEffect = createEffect<
+    {
+        searchParams: string;
+    },
+    ContractDto[],
+    Error
+>(({ searchParams }) =>
+    getTableData(
+        getContractsNameConfig(
+            searchParams,
+            mapSearchParamForIndexPositionToFindContracts.clientId,
+            200
+        )
+    )
 );
-const getUserMine = createEffect(
-    async ({ searchParams }: { searchParams: string }) => {
-        return getMinesTableData({
-            searchParam: searchParams,
-            searchIdentificationType: searchBy.owner,
-        });
-    }
+
+const getUserMine = createEffect<
+    {
+        searchParams: string;
+    },
+    MineDto[],
+    Error
+>(({ searchParams }) =>
+    getMinesTableData({
+        searchParam: searchParams,
+        searchIdentificationType: searchBy.owner,
+    })
 );
+
 export const activeMineOwnerExecutorContractStore =
     createStore<ContractDto | null>(null).on(
         getExecutorContractsEffect.doneData,
-        (_, { rows }) => {
-            return rows?.filter(
+        (_, rows) =>
+            rows?.find(
                 ({ type, status }: ContractDto) =>
                     type === ContractType.landlord_mineowner &&
                     status === ContractStatus.active
-            )?.[0];
-        }
+            ) || null
     );
 
 export const activeContractorsContractsStore = createStore<
     ContractDto[] | null
->(null).on(getContractorsContractsEffect.doneData, (_, { rows }) => {
-    return rows?.filter(
+>(null).on(getContractorsContractsEffect.doneData, (_, rows) =>
+    rows?.filter(
         ({ type, status }: ContractDto) =>
             type === ContractType.mineowner_contractor &&
             status === ContractStatus.active
-    );
-});
+    )
+);
 
 export const userMineStore = createStore<MineDto | null>(null).on(
     getUserMine.doneData,
-    (_, { rows }) => rows?.[0]
+    (_, [mine]) => mine || null
 );
 
 forward({

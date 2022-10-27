@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ENDPOINT } from 'app';
+import { ENDPOINT } from 'app/constants';
 import { Role } from '../user';
 
 export type MineStatUnit = {

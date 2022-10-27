@@ -1,24 +1,53 @@
-import axios from 'axios';
-import { WAX_GET_TABLE_ENDPOINT } from 'app';
+import {
+    ConnectionCountLimit,
+    endpoints,
+    getNextEndpoint,
+} from 'app/constants';
+import { JsonRpc } from 'eosjs';
+import { wait } from 'shared';
+
+const jsonRpc = new JsonRpc(endpoints.wax[0], { fetch });
 
 export const fetchDmeBalance = async ({
     searchParam,
+    connectionCount = 0,
 }: {
     searchParam: string;
-}) => {
-    const {
-        data: { rows },
-    } = await axios.post(WAX_GET_TABLE_ENDPOINT, {
-        code: 'deepminedmet',
-        index_position: 1,
-        json: true,
-        limit: '1',
-        scope: searchParam,
-        table: 'accounts',
-    });
+    connectionCount?: number;
+}): Promise<string> => {
+    try {
+        connectionCount++;
 
-    const balance = rows?.[0]?.balance;
-    const [value] = balance ? balance.split(' ') : [0];
+        const { rows } = await jsonRpc.get_table_rows({
+            code: 'deepminedmet',
+            index_position: 1,
+            json: true,
+            limit: '1',
+            scope: searchParam,
+            table: 'accounts',
+        });
 
-    return Number(value).toFixed(4);
+        const balance = rows?.[0]?.balance;
+        const [value] = balance ? balance.split(' ') : [0];
+
+        return Number(value).toFixed(4);
+    } catch (error) {
+        if (!(error as Error)?.message.includes('assertion failure')) {
+            if (connectionCount >= ConnectionCountLimit.wax)
+                throw new Error('Network Error', error as Error);
+
+            jsonRpc.endpoint = getNextEndpoint({
+                endpointsList: endpoints.wax,
+                currentEndpoint: jsonRpc.endpoint,
+            });
+
+            await wait(1);
+            return await fetchDmeBalance({
+                searchParam,
+                connectionCount,
+            });
+        }
+
+        throw new Error((error as Error).message);
+    }
 };

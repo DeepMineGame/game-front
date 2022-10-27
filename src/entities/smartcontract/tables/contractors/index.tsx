@@ -10,14 +10,14 @@ export enum ContractorsSearchType {
     mineId,
 }
 
-export const getContractorsTableData = ({
+export const getContractorsTableData = <T,>({
     searchParam,
     searchType = ContractorsSearchType.owner,
 }: {
     searchParam: string;
     searchType?: ContractorsSearchType;
 }) =>
-    getTableData({
+    getTableData<T>({
         code: deepmineming,
         scope: deepmineming,
         table: 'contractors',
@@ -28,19 +28,20 @@ export const getContractorsTableData = ({
         limit: 100,
     });
 
-export const getContractorsEffect = createEffect(
-    async ({
-        searchParam,
-        searchType = ContractorsSearchType.owner,
-    }: {
+export const getContractorsEffect = createEffect<
+    {
         searchParam: string;
         searchType?: ContractorsSearchType;
-    }) => getContractorsTableData({ searchParam, searchType })
+    },
+    ContractorDto[],
+    Error
+>(({ searchParam, searchType = ContractorsSearchType.owner }) =>
+    getContractorsTableData({ searchParam, searchType })
 );
 
 export const contractorsStore = createStore<ContractorDto[]>([]).on(
     getContractorsEffect.doneData,
-    (_, { rows }) => rows
+    (_, rows) => rows
 );
 
 export * from './types';

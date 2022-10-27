@@ -8,23 +8,20 @@ export const AreasGate = createGate<{
     searchIdentificationType?: searchBy.owner;
 }>('AreasGate');
 
-export const getAreasEffect = createEffect(
-    async ({
-        searchParam,
-        searchIdentificationType,
-    }: {
+export const getAreasEffect = createEffect<
+    {
         searchParam: string;
         searchIdentificationType?: searchBy.owner;
-    }) => {
-        return getTableData(
-            getAreaConfig(searchParam, searchIdentificationType)
-        );
-    }
+    },
+    AreasDto[],
+    Error
+>(({ searchParam, searchIdentificationType }) =>
+    getTableData(getAreaConfig(searchParam, searchIdentificationType))
 );
 
 export const areasStore = createStore<AreasDto[] | null>(null).on(
     getAreasEffect.doneData,
-    (_, { rows }) => rows
+    (_, rows) => rows
 );
 
 forward({

@@ -6,13 +6,15 @@ import {
     getHistoryConfig,
     getUserConfig,
     mapSearchParamForIndexPositionToFindContracts,
+    UserHistoryType,
+    UserInfoType,
 } from 'entities/smartcontract';
 
 export const setMiningOverEvent = createEvent<boolean>();
 
 export const getLandlordContractsEffect = createEffect<
     { searchParam: string },
-    { rows: ContractDto[] },
+    ContractDto[],
     Error
 >(({ searchParam }) =>
     getTableData(
@@ -24,23 +26,34 @@ export const getLandlordContractsEffect = createEffect<
     )
 );
 
-export const getUserContractsEffect = createEffect(
-    ({ searchParam }: { searchParam: string }) =>
-        getTableData(
-            getContractsNameConfig(
-                searchParam,
-                mapSearchParamForIndexPositionToFindContracts.executorId,
-                1000
-            )
+export const getUserContractsEffect = createEffect<
+    {
+        searchParam: string;
+    },
+    ContractDto[],
+    Error
+>(({ searchParam }) =>
+    getTableData(
+        getContractsNameConfig(
+            searchParam,
+            mapSearchParamForIndexPositionToFindContracts.executorId,
+            1000
         )
+    )
 );
 
-export const getUserHistoryEffect = createEffect(
-    ({ searchParam }: { searchParam: string }) =>
-        getTableData(getHistoryConfig(searchParam))
-);
+export const getUserHistoryEffect = createEffect<
+    {
+        searchParam: string;
+    },
+    UserHistoryType[],
+    Error
+>(({ searchParam }) => getTableData(getHistoryConfig(searchParam)));
 
-export const getUserInfoEffect = createEffect(
-    ({ searchParam }: { searchParam: string }) =>
-        getTableData(getUserConfig(searchParam))
-);
+export const getUserInfoEffect = createEffect<
+    {
+        searchParam: string;
+    },
+    UserInfoType[],
+    Error
+>(({ searchParam }) => getTableData(getUserConfig(searchParam)));

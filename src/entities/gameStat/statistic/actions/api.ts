@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ENDPOINT } from 'app';
+import { ENDPOINT } from 'app/constants';
 import { UserRoles } from 'entities/smartcontract';
 
 export enum ActionStatus {

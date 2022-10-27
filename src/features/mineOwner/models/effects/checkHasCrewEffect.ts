@@ -12,7 +12,7 @@ import { checkIsMineActiveEffect } from './checkIsMineActiveEffect';
 
 export const checkHasCrewEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
-        const { rows: contracts } = await getTableData(
+        const contracts = await getTableData<ContractDto>(
             getContractsNameConfig(
                 searchParam,
                 mapSearchParamForIndexPositionToFindContracts.clientId,

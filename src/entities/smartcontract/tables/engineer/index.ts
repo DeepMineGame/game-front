@@ -20,10 +20,10 @@ export const getEngineerConfig = ({
     limit,
 });
 
-export const getEngineerTableData = ({
+export const getEngineerTableData = <T>({
     searchParam,
     limit = 1,
 }: {
     searchParam: string;
     limit?: number;
-}) => getTableData(getEngineerConfig({ searchParam, limit }));
+}) => getTableData<T>(getEngineerConfig({ searchParam, limit }));

@@ -22,46 +22,52 @@ export const MiningPageGate = createGate<{ searchParam: string }>(
     'MiningPageGate'
 );
 
-export const getContractByExecutorEffect = createEffect(
-    async ({
-        searchParam,
-    }: {
-        searchIdentification?: mapSearchParamForIndexPositionToFindContracts;
+export const getContractByExecutorEffect = createEffect<
+    {
         searchParam: string;
-    }) => {
-        return getTableData(
-            getContractConfig({
-                searchParam,
-                searchIdentification:
-                    mapSearchParamForIndexPositionToFindContracts.executorId,
-                limit: 10000,
-            })
-        );
-    }
-);
-
-export const getMineByAssetEffect = createEffect(
-    async (contract: ContractDto | null | undefined) => {
-        return (
-            contract &&
-            getMinesTableData({
-                searchParam: contract.client_asset_id,
-                searchIdentificationType: searchBy.assetId,
-            })
-        );
-    }
-);
-
-export const getActionsForUserEffect = createEffect(
-    async ({ searchParam }: { searchParam: number | string }) =>
-        getActionsTable({
-            searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
+    },
+    ContractDto[],
+    Error
+>(({ searchParam }) =>
+    getTableData(
+        getContractConfig({
             searchParam,
+            searchIdentification:
+                mapSearchParamForIndexPositionToFindContracts.executorId,
+            limit: 10000,
+        })
+    )
+);
+
+export const getMineByAssetEffect = createEffect<
+    ContractDto | null | undefined,
+    MineDto[] | null | undefined,
+    Error
+>(
+    (contract: ContractDto | null | undefined) =>
+        contract &&
+        getMinesTableData({
+            searchParam: contract.client_asset_id,
+            searchIdentificationType: searchBy.assetId,
         })
 );
+
+export const getActionsForUserEffect = createEffect<
+    {
+        searchParam: number | string;
+    },
+    ActionDto[],
+    Error
+>(({ searchParam }) =>
+    getActionsTable({
+        searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
+        searchParam,
+    })
+);
+
 export const miningContractStore = createStore<ContractDto | null | undefined>(
     null
-).on(getContractByExecutorEffect.doneData, (_, { rows }) =>
+).on(getContractByExecutorEffect.doneData, (_, rows) =>
     rows?.find(
         ({ status, type }: ContractDto) =>
             type === ContractType.mineowner_contractor &&
@@ -71,24 +77,30 @@ export const miningContractStore = createStore<ContractDto | null | undefined>(
 
 export const currentMineStore = createStore<MineDto[] | null>(null).on(
     getMineByAssetEffect.doneData,
-    (_, { rows }) => rows
+    (_, rows) => rows
 );
 
 export const actionsStore = createStore<ActionDto[] | null | undefined>(
     null
-).on(getActionsForUserEffect.doneData, (_, { rows }) => rows);
+).on(getActionsForUserEffect.doneData, (_, rows) => rows);
 
-export const getContractorEffect = createEffect(
-    async ({ searchParam }: { searchParam: string }) =>
-        getContractorsTableData({
-            searchParam,
-            searchType: ContractorsSearchType.owner,
-        })
+export const getContractorEffect = createEffect<
+    {
+        searchParam: string;
+    },
+    ContractorDto[],
+    Error
+>(({ searchParam }) =>
+    getContractorsTableData({
+        searchParam,
+        searchType: ContractorsSearchType.owner,
+    })
 );
 
-export const contractorStore = createStore<ContractorDto | null | undefined>(
-    null
-).on(getContractorEffect.doneData, (_, { rows }) => rows?.[0]);
+export const contractorStore = createStore<ContractorDto | null>(null).on(
+    getContractorEffect.doneData,
+    (_, [contractor]) => contractor || null
+);
 
 export const estimatesMiningTimeStore = createStore('').on(
     contractorStore,

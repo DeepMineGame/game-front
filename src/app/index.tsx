@@ -32,4 +32,3 @@ const App = () => {
 };
 
 export default withProviders(App);
-export * from './constants';

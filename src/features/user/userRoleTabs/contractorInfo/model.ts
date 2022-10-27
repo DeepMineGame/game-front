@@ -31,39 +31,50 @@ const getAreaEffect = createEffect(
     async (contractorDto: ContractorDto | null) =>
         contractorDto && getAreasEffect({ searchParam: contractorDto.area_id })
 );
-export const getInventoryByIdEffect = createEffect(
-    async ({ searchParam }: { searchParam: number }) =>
-        getInventoryTableData({
-            searchIdentificationType: SEARCH_BY.inventoryId,
-            searchParam,
-        })
+
+export const getInventoryByIdEffect = createEffect<
+    {
+        searchParam: number;
+    },
+    UserInventoryType[],
+    Error
+>(async ({ searchParam }) =>
+    getInventoryTableData({
+        searchIdentificationType: SEARCH_BY.inventoryId,
+        searchParam,
+    })
 );
 
 export const contractorMineStore = createStore<null | MineDto>(null).on(
     getMinesEffect.doneData,
-    (_, { rows }) => rows?.[0]
+    (_, [contractorMine]) => contractorMine || null
 );
+
 export const contractorDataStore = createStore<ContractorDto | null>(null).on(
     getContractorsEffect.doneData,
-    (_, { rows }) => rows?.[0]
+    (_, [contractorData]) => contractorData || null
 );
+
 export const contractorAreaStore = createStore<null | AreasDto>(null).on(
     getAreasEffect.doneData,
-    (_, { rows }) => rows?.[0]
+    (_, [contractorArea]) => contractorArea || null
 );
+
 export const areaNftStore = createStore<UserInventoryType | null>(null).on(
     getInventoryByIdEffect.doneData,
-    (_, { rows }) => rows?.[0]
+    (_, [areaNft]) => areaNft || null
 );
 
 forward({
     from: ContractorGate.open,
     to: getContractorDataEffect,
 });
+
 sample({
     source: contractorDataStore,
     target: [getMineEffect, getAreaEffect],
 });
+
 // fetch area nft from inventory
 sample({
     source: contractorAreaStore,

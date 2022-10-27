@@ -37,24 +37,26 @@ export const getContractConfig = ({
     limit,
 });
 
-export const getContractDataTable = (params: ContractConfigType) =>
-    getTableData(getContractConfig(params));
+export const getContractDataTable = <T,>(params: ContractConfigType) =>
+    getTableData<T>(getContractConfig(params));
 
-export const getContractByExecutorEffect = createEffect(
-    async ({
-        searchIdentification = mapSearchParamForIndexPositionToFindContracts.executorId,
-        searchParam,
-    }: {
+export const getContractByExecutorEffect = createEffect<
+    {
         searchIdentification?: mapSearchParamForIndexPositionToFindContracts;
         searchParam: string;
-    }) => {
-        return getContractDataTable({ searchParam, searchIdentification });
-    }
+    },
+    ContractDto[],
+    Error
+>(
+    ({
+        searchIdentification = mapSearchParamForIndexPositionToFindContracts.executorId,
+        searchParam,
+    }) => getContractDataTable({ searchParam, searchIdentification })
 );
 
 export const contractStore = createStore<ContractDto[] | null>(null).on(
     getContractByExecutorEffect.doneData,
-    (_, { rows }) => rows
+    (_, rows) => rows
 );
 
 export const getContractsNameConfig = (

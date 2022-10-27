@@ -9,7 +9,7 @@ import { mineOwnerCabinStateResolver } from '../mineOwnerCabinState';
 
 export const checkIsMineActiveEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
-        const { rows: mines } = await getMinesTableData({
+        const mines = await getMinesTableData<MineDto>({
             searchParam,
             searchIdentificationType: searchBy.owner,
         });

@@ -15,7 +15,7 @@ const keyType = {
     [searchBy.owner]: 'name' as const,
     [searchBy.areaId]: 'i64' as const,
 };
-export const getMinesTableData = ({
+export const getMinesTableData = <T>({
     searchParam,
     searchIdentificationType = searchBy.assetId,
     limit = 1,
@@ -23,8 +23,8 @@ export const getMinesTableData = ({
     searchParam: string;
     searchIdentificationType?: searchBy;
     limit?: number;
-}) => {
-    return getTableData({
+}) =>
+    getTableData<T>({
         code: deepminegame,
         scope: deepminegame,
         table: 'mines',
@@ -34,16 +34,16 @@ export const getMinesTableData = ({
         upper_bound: searchParam,
         limit,
     });
-};
 
-export const getMinesEffect = createEffect(
-    async ({
-        searchParam,
-        searchIdentificationType = searchBy.assetId,
-    }: {
+export const getMinesEffect = createEffect<
+    {
         searchParam: string;
-        searchIdentificationType?: searchBy;
-    }) => getMinesTableData({ searchParam, searchIdentificationType })
+        searchIdentificationType?: searchBy | undefined;
+    },
+    MineDto[],
+    Error
+>(({ searchParam, searchIdentificationType = searchBy.assetId }) =>
+    getMinesTableData({ searchParam, searchIdentificationType })
 );
 
 export const getMinesByOwnerEffect = createEffect(
@@ -57,7 +57,7 @@ export const getMinesByOwnerEffect = createEffect(
 
 export const minesStore = createStore<MineDto[] | null>(null).on(
     getMinesEffect.doneData,
-    (_, { rows }) => rows
+    (_, rows) => rows
 );
 
 export * from './types';

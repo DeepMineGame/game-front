@@ -13,7 +13,7 @@ import {
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createOrder, serviceMarket, warehouse } from 'app/router/paths';
-import { ATOMICHUB_URL } from 'app';
+import { ATOMICHUB_URL } from 'app/constants';
 import { useStore } from 'effector-react';
 import { ServiceMarketTabIds } from 'app/router/constants';
 import {

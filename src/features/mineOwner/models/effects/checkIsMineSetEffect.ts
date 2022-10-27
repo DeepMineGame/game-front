@@ -10,7 +10,7 @@ import { checkHasCrewEffect } from './checkHasCrewEffect';
 
 export const checkIsMineSetEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
-        const { rows: mines } = await getMinesTableData({
+        const mines = await getMinesTableData<MineDto>({
             searchParam,
             searchIdentificationType: searchBy.owner,
         });
