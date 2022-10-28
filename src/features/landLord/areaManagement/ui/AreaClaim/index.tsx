@@ -11,6 +11,7 @@ import {
     orange6,
     ExclamationModal,
     useReloadPage,
+    showSuccessModal,
 } from 'shared';
 import { useSmartContractAction } from 'features/hooks';
 import { engageArea, unEngageArea, claimArea } from 'entities/smartcontract';
@@ -44,16 +45,29 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
 
     const onEngage = async () => {
         await engageAreaAction();
-        reloadPage();
+        return showSuccessModal({
+            title: t('pages.areaManagement.engage'),
+            content: t('pages.areaManagement.areaActionSucceed'),
+            onOk: reloadPage,
+        });
     };
 
     const onUnengage = async () => {
         await unEngageAreaAction();
-        reloadPage();
+        return showSuccessModal({
+            title: t('pages.areaManagement.unengage'),
+            content: t('pages.areaManagement.areaActionSucceed'),
+            onOk: reloadPage,
+        });
     };
 
     const handleClaim = async () => {
         await claimAction();
+        return showSuccessModal({
+            title: t('pages.areaManagement.claim'),
+            content: t('pages.areaManagement.areaActionSucceed'),
+            onOk: reloadPage,
+        });
     };
 
     return (

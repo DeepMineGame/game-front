@@ -28,7 +28,7 @@ export const Setup: FC<Props> = ({ className }) => {
             </div>
             <div className={styles.links}>
                 <Link
-                    to={`${serviceMarket}/tabId=${ServiceMarketTabIds.mineOperation}`}
+                    to={`${serviceMarket}?tabId=${ServiceMarketTabIds.mineOperation}`}
                 >
                     {isDesktop
                         ? t('features.mineOwner.chooseContract')

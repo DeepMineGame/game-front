@@ -600,6 +600,7 @@
       "claim": "Claim DME",
       "engage": "Engage the Area",
       "unengage": "Unengage the Area",
+      "areaActionSucceed": "Area's action is succeed",
       "unengageDescription": "Are you sure you want to stop operating the area?",
       "search": "Searching for Mine owner",
       "mineSlots": "Mine slots",

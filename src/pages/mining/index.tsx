@@ -7,6 +7,8 @@ import {
     desktopS,
     neutral4,
     useAccountName,
+    useUserLocation,
+    useReloadPage,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { Alert, Col, Row, Skeleton, Space, Tooltip } from 'antd';
@@ -23,8 +25,9 @@ import {
     ContractorCabinGate,
     $isContractorCabinLoading,
     useDisabledState,
+    CallToTravelNotification,
 } from 'features';
-import { ActionType } from 'entities/smartcontract';
+import { ActionType, LOCATION_TO_ID } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 import { MiningTitle } from './components/MiningTitle';
 import { MineStatus } from './components/MineStatus';
@@ -32,14 +35,14 @@ import { Equipment } from './components/Equipment';
 
 export const MiningPage: FC = memo(() => {
     const [isMiningFinished, setIsMiningFinished] = useState(true);
-
+    const userLocation = useUserLocation();
     const accountName = useAccountName();
     useGate(ContractorCabinGate, { searchParam: accountName });
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
     const subTitleLevel = isDesktop ? 3 : 4;
     const gutter = isDesktop ? 80 : 16;
-
+    const reloadPage = useReloadPage();
     const actions = useStore(actionsStore);
     const mineStore = useStore(currentMineStore);
     const estTime = useStore(estimatesMiningTimeStore);
@@ -142,6 +145,12 @@ export const MiningPage: FC = memo(() => {
                 </Col>
             </Row>
             <Equipment />
+            {!userLocation.mine && (
+                <CallToTravelNotification
+                    toLocationId={LOCATION_TO_ID.mine}
+                    onSuccess={reloadPage}
+                />
+            )}
         </Page>
     );
 });
