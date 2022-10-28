@@ -5,13 +5,12 @@ import {
     ConnectionCountLimit,
 } from 'app/constants';
 import { wait } from 'shared';
-import { JsonRpc } from 'eosjs';
 import { UserInventoryType } from '../smartcontract';
 import { AssetDataType } from './types';
 
 let currentAtomicEndpoint = endpoints.atomic[0];
 
-const jsonRpc = new JsonRpc(endpoints.wax[0], { fetch });
+let currentWaxEndpoint = endpoints.wax[0];
 
 export const getAtomicAssetsDataById = async (
     id: string | number,
@@ -92,26 +91,33 @@ export const getAtomicAssetsByUser = async ({
     try {
         connectionCount++;
 
-        const { rows } = await jsonRpc.get_table_rows({
-            json: true,
-            code: 'atomicassets',
-            scope: searchParam,
-            table: 'assets',
-            index_position: 1,
-            limit: 500,
-            reverse: false,
-            show_payer: false,
-        });
+        const { data } = await axios.post<{ rows: UserInventoryType[] }>(
+            `${currentWaxEndpoint}/v1/chain/get_table_rows`,
+            {
+                json: true,
+                code: 'atomicassets',
+                scope: searchParam,
+                table: 'assets',
+                index_position: 1,
+                limit: 500,
+                reverse: false,
+                show_payer: false,
+            }
+        );
 
-        return rows;
+        return data.rows;
     } catch (error) {
-        if (!(error as Error)?.message.includes('assertion failure')) {
+        if (
+            (error as Error).message === 'Network Error' ||
+            ((error as any).response &&
+                Number((error as any)?.response.status) >= 500)
+        ) {
             if (connectionCount >= ConnectionCountLimit.wax)
                 throw new Error('Network Error', error as Error);
 
-            jsonRpc.endpoint = getNextEndpoint({
+            currentWaxEndpoint = getNextEndpoint({
                 endpointsList: endpoints.wax,
-                currentEndpoint: jsonRpc.endpoint,
+                currentEndpoint: currentWaxEndpoint,
             });
 
             await wait(1);

@@ -1,9 +1,9 @@
-import { JsonRpc } from 'eosjs';
 import {
     ConnectionCountLimit,
     endpoints,
     getNextEndpoint,
 } from 'app/constants';
+import axios from 'axios';
 import {
     ContractDto,
     ContractType,
@@ -11,7 +11,7 @@ import {
 } from 'entities/smartcontract';
 import { wait } from './wait';
 
-const jsonRpc = new JsonRpc(endpoints.wax[0], { fetch });
+let currentWaxEndpoint = endpoints.wax[0];
 
 export const getTableData = async <T>(
     config: GetTableDataConfigType,
@@ -20,22 +20,29 @@ export const getTableData = async <T>(
     try {
         connectionCount++;
 
-        const { rows } = await jsonRpc.get_table_rows({
-            json: 'true',
-            reverse: false,
-            show_payer: false,
-            ...config,
-        });
+        const { data } = await axios.post<{ rows: T[] }>(
+            `${currentWaxEndpoint}/v1/chain/get_table_rows`,
+            {
+                json: 'true',
+                reverse: false,
+                show_payer: false,
+                ...config,
+            }
+        );
 
-        return rows;
+        return data.rows;
     } catch (error) {
-        if (!(error as Error)?.message.includes('assertion failure')) {
+        if (
+            (error as Error).message === 'Network Error' ||
+            ((error as any).response &&
+                Number((error as any)?.response.status) >= 500)
+        ) {
             if (connectionCount >= ConnectionCountLimit.wax)
                 throw new Error('Network Error', error as Error);
 
-            jsonRpc.endpoint = getNextEndpoint({
+            currentWaxEndpoint = getNextEndpoint({
                 endpointsList: endpoints.wax,
-                currentEndpoint: jsonRpc.endpoint,
+                currentEndpoint: currentWaxEndpoint,
             });
 
             await wait(1);

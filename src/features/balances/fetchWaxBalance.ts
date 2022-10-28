@@ -3,10 +3,10 @@ import {
     endpoints,
     getNextEndpoint,
 } from 'app/constants';
+import axios from 'axios';
 import { wait } from 'shared';
-import { JsonRpc } from 'eosjs';
 
-const jsonRpc = new JsonRpc(endpoints.wax[0], { fetch });
+let currentWaxEndpoint = endpoints.wax[0];
 
 export const fetchWaxBalance = async ({
     searchParam,
@@ -18,23 +18,30 @@ export const fetchWaxBalance = async ({
     try {
         connectionCount++;
 
-        const rows = await jsonRpc.get_currency_balance(
-            'eosio.token',
-            searchParam,
-            'WAX'
+        const { data = [] } = await axios.post(
+            `${currentWaxEndpoint}/v1/chain/get_currency_balance`,
+            {
+                code: 'eosio.token',
+                account: searchParam,
+                symbol: 'WAX',
+            }
         );
 
-        const [value] = rows.length ? rows[0].split(' ') : [0];
+        const [value] = data.length ? data[0].split(' ') : [0];
 
         return Number(value).toFixed(1);
     } catch (error) {
-        if (!(error as Error)?.message.includes('assertion failure')) {
+        if (
+            (error as Error).message === 'Network Error' ||
+            ((error as any).response &&
+                Number((error as any)?.response.status) >= 500)
+        ) {
             if (connectionCount >= ConnectionCountLimit.wax)
                 throw new Error('Network Error', error as Error);
 
-            jsonRpc.endpoint = getNextEndpoint({
+            currentWaxEndpoint = getNextEndpoint({
                 endpointsList: endpoints.wax,
-                currentEndpoint: jsonRpc.endpoint,
+                currentEndpoint: currentWaxEndpoint,
             });
 
             await wait(1);

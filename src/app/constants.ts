@@ -42,9 +42,9 @@ const defaultEndpoints = {
               'https://wax.pink.gg',
           ]
         : [
+              'https://testnet-wax.3dkrender.com',
               'https://waxtestnet.greymass.com',
               'https://wax-test.blokcrafters.io',
-              'https://testnet-wax.3dkrender.com',
               'https://testnet.wax.blacklusion.io',
               'https://wax-testnet.eosphere.io',
               'https://api-testnet-wax.eosarabia.net',
