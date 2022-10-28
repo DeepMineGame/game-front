@@ -1,4 +1,4 @@
-import { sample, forward } from 'effector';
+import { sample, forward, combine } from 'effector';
 import { createGate } from 'effector-react';
 import { getAssetStatus, Status } from 'shared';
 import { findEquipmentByName } from 'features/equipmentSet';
@@ -49,19 +49,17 @@ export const ContractorCabinGate = createGate<{ searchParam: string }>(
 );
 
 sample({
-    source: [
-        $needFinishMineownerContract,
-        $landlordContractFinished,
+    source: combine(
+        $mineOwnerContracts,
         $hasInstalledEquipment,
-    ],
+        (mineOwnerContracts, hasInstalledEquipment) => ({
+            mineOwnerContract: mineOwnerContracts[0],
+            hasInstalledEquipment,
+        })
+    ),
     target: $miningContractIsntActive,
-    fn: ([
-        needFinishMineownerContract,
-        landlordContractFinished,
-        hasInstalledEquipment,
-    ]) =>
-        (needFinishMineownerContract || landlordContractFinished) &&
-        hasInstalledEquipment,
+    fn: ({ mineOwnerContract, hasInstalledEquipment }) =>
+        Boolean(mineOwnerContract?.term_time) && hasInstalledEquipment,
 });
 
 sample({
