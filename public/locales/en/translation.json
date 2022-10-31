@@ -722,6 +722,7 @@
       "depthLevel": "Depth level"
     },
     "mineOwner": {
+      "placeNft": "Place a Mine NFT card in your active inventory",
       "needMineCard": "To start playing as a Mine Owner you need to place a Mine NFT card in your active inventory\nand sign the Mine Operation Contract with the Landlord.\nCheck your warehouse or go to Market to buy Mine NFT",
       "pickUpFromStorage": "Go to Storage",
       "storage": "Storage",
