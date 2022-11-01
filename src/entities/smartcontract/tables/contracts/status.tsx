@@ -28,7 +28,7 @@ export const isContractTermNotFulfilled = (contract: ContractDto) => {
         finishes_at,
     } = contract;
     if (!start_time) return false;
-    if (!penalty_amount) return false;
+    if (!Number(penalty_amount)) return false;
     if (!days_for_penalty) return false;
 
     const currentTime = Date.now();

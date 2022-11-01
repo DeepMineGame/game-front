@@ -74,10 +74,10 @@ export const getUserRoleInContract = (
     return null;
 };
 
-export const getDmeAmount = (value: number) => {
+export const getDmeAmount = (value: number | string) => {
     if (Number.isNaN(value)) return 0;
 
-    return value / 10 ** 8;
+    return Number(value) / 10 ** 8;
 };
 
 export * from './getNftImagePath';
