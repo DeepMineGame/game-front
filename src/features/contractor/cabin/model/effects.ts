@@ -14,7 +14,7 @@ export const setMiningOverEvent = createEvent<boolean>();
 
 export const getLandlordContractsEffect = createEffect<
     { searchParam: string },
-    ContractDto[],
+    { rows: ContractDto[] },
     Error
 >(({ searchParam }) =>
     getTableData(
@@ -30,7 +30,7 @@ export const getUserContractsEffect = createEffect<
     {
         searchParam: string;
     },
-    ContractDto[],
+    { rows: ContractDto[] },
     Error
 >(({ searchParam }) =>
     getTableData(
@@ -46,7 +46,7 @@ export const getUserHistoryEffect = createEffect<
     {
         searchParam: string;
     },
-    UserHistoryType[],
+    { rows: UserHistoryType[] },
     Error
 >(({ searchParam }) => getTableData(getHistoryConfig(searchParam)));
 
@@ -54,6 +54,6 @@ export const getUserInfoEffect = createEffect<
     {
         searchParam: string;
     },
-    UserInfoType[],
+    { rows: UserInfoType[] },
     Error
 >(({ searchParam }) => getTableData(getUserConfig(searchParam)));

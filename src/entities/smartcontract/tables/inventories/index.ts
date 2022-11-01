@@ -37,7 +37,7 @@ export const getInventoriesEffect = createEffect<
         searchIdentificationType?: SEARCH_BY;
         searchParam: string;
     },
-    UserInventoryType[],
+    { rows: UserInventoryType[] },
     Error
 >(({ searchIdentificationType = SEARCH_BY.ownerNickname, searchParam }) =>
     getInventoryTableData({
@@ -48,5 +48,5 @@ export const getInventoriesEffect = createEffect<
 
 export const $inventory = createStore<UserInventoryType[]>([]).on(
     getInventoriesEffect.doneData,
-    (_, rows) => rows
+    (_, { rows }) => rows
 );

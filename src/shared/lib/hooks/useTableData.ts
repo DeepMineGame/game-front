@@ -9,7 +9,7 @@ export function useTableData<T>(
     needUpdate?: boolean
 ) {
     const accountName = useAccountName();
-    const [result, setResult] = useState<T[]>();
+    const [result, setResult] = useState<{ rows: T[] }>();
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -27,5 +27,5 @@ export function useTableData<T>(
         }
     }, [accountName, getConfig, needUpdate]);
 
-    return { data: result ?? [], isLoading };
+    return { data: result?.rows ?? [], isLoading };
 }

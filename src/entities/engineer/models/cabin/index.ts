@@ -26,13 +26,13 @@ const getActiveInventoryEffect = createEffect<
     {
         searchParam: string;
     },
-    UserInventoryType[],
+    { rows: UserInventoryType[] },
     Error
 >(({ searchParam }) => getInventoryTableData({ searchParam }));
 
 const $userActiveInventory = createStore<UserInventoryType[]>([]).on(
     getActiveInventoryEffect.doneData,
-    (_, rows) => rows
+    (_, { rows }) => rows
 );
 
 const $certificate = createStore<UserInventoryType | null>(null);
@@ -41,13 +41,13 @@ const getEngineerByExecutorEffect = createEffect<
     {
         searchParam: string;
     },
-    EngineerType[],
+    { rows: EngineerType[] },
     Error
 >(({ searchParam }) => getEngineerTableData({ searchParam }));
 
 const $engineer = createStore<EngineerType | null>(null).on(
     getEngineerByExecutorEffect.doneData,
-    (_, [engineer]) => engineer || null
+    (_, { rows }) => rows?.[0] || null
 );
 
 const getActionByUserEffect = createEffect(
@@ -60,7 +60,7 @@ const getActionByUserEffect = createEffect(
 
 const $openSkillAction = createStore<ActionDto | null>(null).on(
     getActionEffect.doneData,
-    (_, rows) => {
+    (_, { rows }) => {
         const activeAction = rows?.find(
             ({ type, finishes_at }) =>
                 type === ActionType.engineer_open_skill &&

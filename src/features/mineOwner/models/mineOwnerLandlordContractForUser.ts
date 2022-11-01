@@ -12,7 +12,7 @@ export const getContractEffectByExecutor = createEffect<
     {
         searchParam: string;
     },
-    ContractDto[],
+    { rows: ContractDto[] },
     Error
 >(({ searchParam }) =>
     getTableData(
@@ -27,7 +27,7 @@ export const getContractEffectByExecutor = createEffect<
 export const mineOwnerLandlordContractForUserStore =
     createStore<ContractDto | null>(null).on(
         getContractEffectByExecutor.doneData,
-        (_, rows) =>
+        (_, { rows }) =>
             rows?.find(
                 ({ type, status }: ContractDto) =>
                     type === ContractType.landlord_mineowner &&

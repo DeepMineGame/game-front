@@ -15,13 +15,13 @@ const getActiveInventory = createEffect<
     {
         searchParam: string;
     },
-    UserInventoryType[],
+    { rows: UserInventoryType[] },
     Error
 >(({ searchParam }) => getInventoryTableData({ searchParam }));
 
 export const activeUserInventoryStore = createStore<UserInventoryType[] | null>(
     null
-).on(getActiveInventory.doneData, (_, rows) => rows || null);
+).on(getActiveInventory.doneData, (_, { rows }) => rows);
 
 export const getAtomicAssetsByUserEffect = createEffect(getAtomicAssetsByUser);
 

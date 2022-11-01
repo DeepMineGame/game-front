@@ -20,7 +20,7 @@ const getContractsEffect = createEffect<
     {
         searchParam: string;
     },
-    ContractDto[],
+    { rows: ContractDto[] },
     Error
 >(({ searchParam }) =>
     getTableData(
@@ -36,7 +36,7 @@ export const getContractorsEffect = createEffect<
     {
         searchParam: string;
     },
-    ContractorDto[],
+    { rows: ContractorDto[] },
     Error
 >(({ searchParam }) =>
     getContractorsTableData({
@@ -46,9 +46,9 @@ export const getContractorsEffect = createEffect<
 
 export const contractorContractIdStore = createStore<null | number>(null).on(
     getContractsEffect.doneData,
-    (_, userContracts) =>
+    (_, { rows: userContracts }) =>
         userContracts.find(
-            ({ status, type }) =>
+            ({ status, type }: ContractDto) =>
                 type === ContractType.mineowner_contractor &&
                 status === ContractStatus.active
         )?.id
@@ -56,7 +56,7 @@ export const contractorContractIdStore = createStore<null | number>(null).on(
 
 export const contractorsStore = createStore<ContractorDto[] | null>(null).on(
     getContractorsEffect.doneData,
-    (_, rows) => rows
+    (_, { rows }) => rows
 );
 
 forward({

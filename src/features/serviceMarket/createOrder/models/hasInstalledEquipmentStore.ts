@@ -3,9 +3,9 @@ import { InUseType, miningEquipmentNames } from 'entities/smartcontract';
 import { findEquipmentByName } from '../../../equipmentSet';
 import { getInventoryEffect } from './effects';
 
-export const hasInstalledEquipmentStore = createStore(false).on(
+export const hasInstalledEquipmentStore = createStore<boolean>(false).on(
     getInventoryEffect.doneData,
-    (_, userInventory) => {
+    (_, { rows: userInventory }) => {
         const installedMiningEquipment = Object.fromEntries(
             miningEquipmentNames.map((name) => [
                 name,

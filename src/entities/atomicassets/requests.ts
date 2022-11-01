@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import {
     endpoints,
     getNextEndpoint,
@@ -8,9 +8,9 @@ import { wait } from 'shared';
 import { UserInventoryType } from '../smartcontract';
 import { AssetDataType } from './types';
 
-let currentAtomicEndpoint = endpoints.atomic[0];
+let [currentAtomicEndpoint] = endpoints.atomic;
 
-let currentWaxEndpoint = endpoints.wax[0];
+let [currentWaxEndpoint] = endpoints.wax;
 
 export const getAtomicAssetsDataById = async (
     id: string | number,
@@ -23,14 +23,15 @@ export const getAtomicAssetsDataById = async (
         );
 
         return data?.data;
-    } catch (error) {
+    } catch (e) {
+        const error = e as AxiosError;
+
         if (
-            (error as Error).message === 'Network Error' ||
-            ((error as any).response &&
-                Number((error as any)?.response.status) >= 500)
+            error.message === 'Network Error' ||
+            (error.response && Number(error?.response.status) >= 500)
         ) {
             if (connectionCount >= ConnectionCountLimit.atomic)
-                throw new Error('Network Error', error as Error);
+                throw new Error('Network Error', error);
 
             currentAtomicEndpoint = getNextEndpoint({
                 endpointsList: endpoints.atomic,
@@ -41,7 +42,7 @@ export const getAtomicAssetsDataById = async (
             return await getAtomicAssetsDataById(id, connectionCount);
         }
 
-        throw new Error((error as any).message);
+        throw new Error(error.message);
     }
 };
 
@@ -59,14 +60,15 @@ export const getAssets = async (
         );
 
         return data?.data as AssetDataType[];
-    } catch (error) {
+    } catch (e) {
+        const error = e as AxiosError;
+
         if (
-            (error as Error).message === 'Network Error' ||
-            ((error as any).response &&
-                Number((error as any)?.response.status) >= 500)
+            error.message === 'Network Error' ||
+            (error.response && Number(error?.response.status) >= 500)
         ) {
             if (connectionCount >= ConnectionCountLimit.atomic)
-                throw new Error('Network Error', error as Error);
+                throw new Error('Network Error', error);
 
             currentAtomicEndpoint = getNextEndpoint({
                 endpointsList: endpoints.atomic,
@@ -77,7 +79,7 @@ export const getAssets = async (
             return await getAssets(ids, connectionCount);
         }
 
-        throw new Error((error as any).message);
+        throw new Error(error.message);
     }
 };
 
@@ -87,7 +89,7 @@ export const getAtomicAssetsByUser = async ({
 }: {
     searchParam: string;
     connectionCount?: number;
-}): Promise<UserInventoryType[]> => {
+}): Promise<UserInventoryType[] | undefined> => {
     try {
         connectionCount++;
 
@@ -105,15 +107,16 @@ export const getAtomicAssetsByUser = async ({
             }
         );
 
-        return data.rows;
-    } catch (error) {
+        return data?.rows as UserInventoryType[] | undefined;
+    } catch (e) {
+        const error = e as AxiosError;
+
         if (
-            (error as Error).message === 'Network Error' ||
-            ((error as any).response &&
-                Number((error as any)?.response.status) >= 500)
+            error.message === 'Network Error' ||
+            (error.response && Number(error?.response.status) >= 500)
         ) {
             if (connectionCount >= ConnectionCountLimit.wax)
-                throw new Error('Network Error', error as Error);
+                throw new Error('Network Error', error);
 
             currentWaxEndpoint = getNextEndpoint({
                 endpointsList: endpoints.wax,
@@ -127,6 +130,6 @@ export const getAtomicAssetsByUser = async ({
             });
         }
 
-        throw new Error((error as Error).message);
+        throw new Error(error.message);
     }
 };

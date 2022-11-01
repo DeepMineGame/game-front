@@ -17,7 +17,7 @@ export const getShiftActionsForUserEffect = createEffect<
     getActionsTable<ActionDto>({
         searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
         searchParam,
-    }).then((rows) =>
+    }).then(({ rows }) =>
         rows?.filter(({ type }) => type === ActionType.physical_shift)
     )
 );

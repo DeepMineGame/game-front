@@ -26,7 +26,7 @@ export const mineOperationChangeFilterEvent =
 
 export const getMineOperationContractsEffect = createEffect<
     void,
-    ContractDto[],
+    { rows: ContractDto[] },
     Error
 >(() =>
     getTableData(
@@ -41,7 +41,7 @@ export const getMineOperationContractsEffect = createEffect<
 export const mineOperationContractsStore = createStore<ContractDto[]>([]).on(
     getMineOperationContractsEffect.doneData,
     (_, contracts) =>
-        contracts?.filter(
+        contracts.rows?.filter(
             (contract: ContractDto) => !contract.client || !contract.executor
         ) ?? []
 );

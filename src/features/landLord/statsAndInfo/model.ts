@@ -18,7 +18,7 @@ export const getInventoriesEffect = createEffect<
         searchIdentificationType?: SEARCH_BY;
         searchParam: string;
     },
-    UserInventoryType[],
+    { rows: UserInventoryType[] },
     Error
 >(({ searchIdentificationType = SEARCH_BY.ownerNickname, searchParam }) =>
     getInventoryTableData({
@@ -29,7 +29,7 @@ export const getInventoriesEffect = createEffect<
 
 export const getAreasEffect = createEffect<
     UserInventoryType | null,
-    AreasDto[],
+    { rows: AreasDto[] },
     Error
 >((areaNft: UserInventoryType | null) =>
     getTableData(getAreaConfig(areaNft?.asset_id!, searchBy.assetId))
@@ -39,7 +39,7 @@ export const landlordAreaNftStore = createStore<UserInventoryType | null>(
     null
 ).on(
     getInventoriesEffect.doneData,
-    (_, rows) =>
+    (_, { rows }) =>
         rows?.find(({ template_id }) =>
             areasAssetTemplateId.includes(template_id)
         ) || null
@@ -47,7 +47,7 @@ export const landlordAreaNftStore = createStore<UserInventoryType | null>(
 
 export const landlordAreaTableStore = createStore<AreasDto | null>(null).on(
     getAreasEffect.doneData,
-    (_, [area]) => area || null
+    (_, { rows }) => rows?.[0]
 );
 
 export const reservedSlotsCountStore = createStore(0).on(

@@ -40,7 +40,7 @@ export const getMinesEffect = createEffect<
         searchParam: string;
         searchIdentificationType?: searchBy | undefined;
     },
-    MineDto[],
+    { rows: MineDto[] },
     Error
 >(({ searchParam, searchIdentificationType = searchBy.assetId }) =>
     getMinesTableData({ searchParam, searchIdentificationType })
@@ -57,7 +57,7 @@ export const getMinesByOwnerEffect = createEffect(
 
 export const minesStore = createStore<MineDto[] | null>(null).on(
     getMinesEffect.doneData,
-    (_, rows) => rows
+    (_, { rows }) => rows
 );
 
 export * from './types';

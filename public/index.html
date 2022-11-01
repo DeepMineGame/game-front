@@ -40,23 +40,22 @@
       })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
     </script>
     <script>
-      // It doesn't ready on backend yet
-      // const loadEndpoints = async (isMainNet) => {
-      //   try {
-      //     const urlPath = isMainNet === 'true' ? 'https://api.deepmine.world/config/blockchain/endpoints' : 'https://rc.deepmine.world/config/blockchain/endpoints';
-      //     const timeout = 2000;
-      //     const abortController = new AbortController();
-      //     const timerId = setTimeout(() => abortController.abort(), timeout);
-      //     const response = await fetch(urlPath, { signal: abortController.signal });
-      //     clearTimeout(timerId);
+      const loadEndpoints = async (isMainNet) => {
+        try {
+          const urlPath = isMainNet === 'true' ? 'https://api.deepmine.world/config/blockchain/endpoints' : 'https://rc.deepmine.world/config/blockchain/endpoints';
+          const timeout = 2000;
+          const abortController = new AbortController();
+          const timerId = setTimeout(() => abortController.abort(), timeout);
+          const response = await fetch(urlPath, { signal: abortController.signal });
+          clearTimeout(timerId);
 
-      //     window.ENDPOINTS = await response.json();
-      //   } catch (error) {
-      //     console.error('loadEndpoints error', error)
-      //   }
-      // }
+          window.ENDPOINTS = await response.json();
+        } catch (error) {
+          console.error('loadEndpoints error', error)
+        }
+      }
 
-      // loadEndpoints('%REACT_APP_MAINNET%');
+      loadEndpoints('%REACT_APP_MAINNET%');
     </script>
   </head>
   <body>

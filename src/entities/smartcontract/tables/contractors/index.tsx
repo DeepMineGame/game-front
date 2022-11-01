@@ -33,7 +33,7 @@ export const getContractorsEffect = createEffect<
         searchParam: string;
         searchType?: ContractorsSearchType;
     },
-    ContractorDto[],
+    { rows: ContractorDto[] },
     Error
 >(({ searchParam, searchType = ContractorsSearchType.owner }) =>
     getContractorsTableData({ searchParam, searchType })
@@ -41,7 +41,7 @@ export const getContractorsEffect = createEffect<
 
 export const contractorsStore = createStore<ContractorDto[]>([]).on(
     getContractorsEffect.doneData,
-    (_, rows) => rows
+    (_, { rows }) => rows
 );
 
 export * from './types';

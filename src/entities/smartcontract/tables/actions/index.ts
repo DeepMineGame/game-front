@@ -35,7 +35,7 @@ export const getActionEffect = createEffect<
         searchIdentification: mapSearchParamForIndexPosition;
         searchParam: number | string;
     },
-    ActionDto[],
+    { rows: ActionDto[] },
     Error
 >(({ searchIdentification, searchParam }) =>
     getActionsTable({
@@ -54,7 +54,7 @@ export const getActionByUserEffect = createEffect(
 
 export const actionsStore = createStore<ActionDto[] | null>(null).on(
     getActionEffect.doneData,
-    (_, rows) => rows
+    (_, { rows }) => rows
 );
 
 export * from './types';

@@ -7,7 +7,7 @@ export const getSmartContractUserEffect = createEffect<
     {
         searchParam: string;
     },
-    UserDto[],
+    { rows: UserDto[] },
     Error
 >(({ searchParam }: { searchParam: string }) =>
     getTableData({
@@ -24,7 +24,7 @@ export const getSmartContractUserEffect = createEffect<
 
 export const smartContractUserStore = createStore<UserDto[] | null>(null).on(
     getSmartContractUserEffect.doneData,
-    (_, rows) => rows
+    (_, { rows }) => rows
 );
 
 export * from './types';

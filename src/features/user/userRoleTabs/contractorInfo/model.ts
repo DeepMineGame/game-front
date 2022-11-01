@@ -36,9 +36,9 @@ export const getInventoryByIdEffect = createEffect<
     {
         searchParam: number;
     },
-    UserInventoryType[],
+    { rows: UserInventoryType[] },
     Error
->(async ({ searchParam }) =>
+>(({ searchParam }) =>
     getInventoryTableData({
         searchIdentificationType: SEARCH_BY.inventoryId,
         searchParam,
@@ -47,34 +47,32 @@ export const getInventoryByIdEffect = createEffect<
 
 export const contractorMineStore = createStore<null | MineDto>(null).on(
     getMinesEffect.doneData,
-    (_, [contractorMine]) => contractorMine || null
+    (_, { rows }) => rows?.[0]
 );
 
 export const contractorDataStore = createStore<ContractorDto | null>(null).on(
     getContractorsEffect.doneData,
-    (_, [contractorData]) => contractorData || null
+    (_, { rows }) => rows?.[0]
 );
 
 export const contractorAreaStore = createStore<null | AreasDto>(null).on(
     getAreasEffect.doneData,
-    (_, [contractorArea]) => contractorArea || null
+    (_, { rows }) => rows?.[0]
 );
 
 export const areaNftStore = createStore<UserInventoryType | null>(null).on(
     getInventoryByIdEffect.doneData,
-    (_, [areaNft]) => areaNft || null
+    (_, { rows }) => rows?.[0]
 );
 
 forward({
     from: ContractorGate.open,
     to: getContractorDataEffect,
 });
-
 sample({
     source: contractorDataStore,
     target: [getMineEffect, getAreaEffect],
 });
-
 // fetch area nft from inventory
 sample({
     source: contractorAreaStore,

@@ -3,7 +3,7 @@ import {
     endpoints,
     getNextEndpoint,
 } from 'app/constants';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import {
     ContractDto,
     ContractType,
@@ -11,12 +11,12 @@ import {
 } from 'entities/smartcontract';
 import { wait } from './wait';
 
-let currentWaxEndpoint = endpoints.wax[0];
+let [currentWaxEndpoint] = endpoints.wax;
 
 export const getTableData = async <T>(
     config: GetTableDataConfigType,
     connectionCount = 0
-): Promise<T[]> => {
+): Promise<{ rows: T[] }> => {
     try {
         connectionCount++;
 
@@ -30,15 +30,16 @@ export const getTableData = async <T>(
             }
         );
 
-        return data.rows;
-    } catch (error) {
+        return data;
+    } catch (e) {
+        const error = e as AxiosError;
+
         if (
-            (error as Error).message === 'Network Error' ||
-            ((error as any).response &&
-                Number((error as any)?.response.status) >= 500)
+            error.message === 'Network Error' ||
+            (error.response && Number(error?.response.status) >= 500)
         ) {
             if (connectionCount >= ConnectionCountLimit.wax)
-                throw new Error('Network Error', error as Error);
+                throw new Error('Network Error', error);
 
             currentWaxEndpoint = getNextEndpoint({
                 endpointsList: endpoints.wax,
@@ -49,7 +50,7 @@ export const getTableData = async <T>(
             return await getTableData(config, connectionCount);
         }
 
-        throw new Error((error as Error).message);
+        throw new Error(error.message);
     }
 };
 

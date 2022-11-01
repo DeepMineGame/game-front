@@ -45,7 +45,7 @@ export const getContractByExecutorEffect = createEffect<
         searchIdentification?: mapSearchParamForIndexPositionToFindContracts;
         searchParam: string;
     },
-    ContractDto[],
+    { rows: ContractDto[] },
     Error
 >(
     ({
@@ -56,7 +56,7 @@ export const getContractByExecutorEffect = createEffect<
 
 export const contractStore = createStore<ContractDto[] | null>(null).on(
     getContractByExecutorEffect.doneData,
-    (_, rows) => rows
+    (_, { rows }) => rows
 );
 
 export const getContractsNameConfig = (

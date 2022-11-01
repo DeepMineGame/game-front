@@ -15,9 +15,10 @@ export const hasMineNftFilter = (inventories: UserInventoryType[] | null) => {
 
 export const initialMineNfrCheckEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
-        const inventory = await getInventoryTableData<UserInventoryType>({
-            searchParam,
-        });
+        const { rows: inventory } =
+            await getInventoryTableData<UserInventoryType>({
+                searchParam,
+            });
 
         if (hasMineNftFilter(inventory)) {
             return await checkLandLordContractMineOwnerActiveContractEffect({

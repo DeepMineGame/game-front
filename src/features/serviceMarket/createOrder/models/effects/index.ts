@@ -17,7 +17,7 @@ export const getAreaByOwnerEffect = createEffect<
     {
         searchParam: string;
     },
-    AreasDto[],
+    { rows: AreasDto[] },
     Error
 >(({ searchParam }) =>
     getTableData(getAreaConfig(searchParam, searchBy.owner))
@@ -27,7 +27,7 @@ export const getMinesByOwnerEffect = createEffect<
     {
         searchParam: string;
     },
-    MineDto[],
+    { rows: MineDto[] },
     Error
 >(({ searchParam }) =>
     getMinesEffect({
@@ -40,7 +40,7 @@ export const getContractByExecutorEffect = createEffect<
     {
         searchParam: string;
     },
-    ContractDto[],
+    { rows: ContractDto[] },
     Error
 >(({ searchParam }) =>
     getTableData(
@@ -57,6 +57,6 @@ export const getInventoryEffect = createEffect<
     {
         searchParam: string;
     },
-    MergedInventoryWithAtomicAssets,
+    { rows: MergedInventoryWithAtomicAssets },
     Error
 >(({ searchParam }) => getTableData(getInventoryConfig(searchParam)));

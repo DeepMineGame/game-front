@@ -13,7 +13,7 @@ export const getAreasEffect = createEffect<
         searchParam: string;
         searchIdentificationType?: searchBy.owner;
     },
-    AreasDto[],
+    { rows: AreasDto[] },
     Error
 >(({ searchParam, searchIdentificationType }) =>
     getTableData(getAreaConfig(searchParam, searchIdentificationType))
@@ -21,7 +21,7 @@ export const getAreasEffect = createEffect<
 
 export const areasStore = createStore<AreasDto[] | null>(null).on(
     getAreasEffect.doneData,
-    (_, rows) => rows
+    (_, { rows }) => rows
 );
 
 forward({

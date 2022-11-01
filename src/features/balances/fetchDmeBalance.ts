@@ -3,10 +3,10 @@ import {
     endpoints,
     getNextEndpoint,
 } from 'app/constants';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { wait } from 'shared';
 
-let currentWaxEndpoint = endpoints.wax[0];
+let [currentWaxEndpoint] = endpoints.wax;
 
 export const fetchDmeBalance = async ({
     searchParam,
@@ -34,14 +34,15 @@ export const fetchDmeBalance = async ({
         const [value] = balance ? balance.split(' ') : [0];
 
         return Number(value).toFixed(4);
-    } catch (error) {
+    } catch (e) {
+        const error = e as AxiosError;
+
         if (
-            (error as Error).message === 'Network Error' ||
-            ((error as any).response &&
-                Number((error as any)?.response.status) >= 500)
+            error.message === 'Network Error' ||
+            (error.response && Number(error?.response.status) >= 500)
         ) {
             if (connectionCount >= ConnectionCountLimit.wax)
-                throw new Error('Network Error', error as Error);
+                throw new Error('Network Error', error);
 
             currentWaxEndpoint = getNextEndpoint({
                 endpointsList: endpoints.wax,
@@ -55,6 +56,6 @@ export const fetchDmeBalance = async ({
             });
         }
 
-        throw new Error((error as Error).message);
+        throw new Error(error.message);
     }
 };

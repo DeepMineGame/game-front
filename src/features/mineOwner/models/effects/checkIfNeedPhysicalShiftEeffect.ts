@@ -13,11 +13,14 @@ import { checkIsMineSetEffect } from './checkIsMineSetEffect';
 
 export const checkIfNeedPhysicalShiftEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
-        const [user] = await getTableData<UserDto>(getUserConfig(searchParam));
-        const isUserOutsideFromMineDeckLocation =
-            user?.location !== LOCATION_TO_ID.mine_deck;
+        const { rows: user } = await getTableData<UserDto>(
+            getUserConfig(searchParam)
+        );
 
-        const mines = await getMinesTableData<MineDto>({
+        const isUserOutsideFromMineDeckLocation =
+            user?.[0]?.location !== LOCATION_TO_ID.mine_deck;
+
+        const { rows: mines } = await getMinesTableData<MineDto>({
             searchParam,
             searchIdentificationType: searchBy.owner,
         });

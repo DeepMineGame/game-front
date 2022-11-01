@@ -30,7 +30,7 @@ export const getRolesEffect = createEffect<
     {
         searchParam: string;
     },
-    RoleDto[],
+    { rows: RoleDto[] },
     Error
 >(({ searchParam }: { searchParam: string }) =>
     getRolesTableData({ searchParam })
@@ -38,5 +38,5 @@ export const getRolesEffect = createEffect<
 
 export const rolesStore = createStore<RoleDto[] | null>(null).on(
     getRolesEffect.doneData,
-    (_, rows) => rows
+    (_, { rows }) => rows
 );

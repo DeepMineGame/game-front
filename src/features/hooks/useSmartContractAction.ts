@@ -35,7 +35,7 @@ export const useSmartContractAction = <T>({
 
     return async () => {
         try {
-            const rows = await getActionsTable<ActionDto>({
+            const { rows } = await getActionsTable<ActionDto>({
                 searchIdentification:
                     mapSearchParamForIndexPosition.ownerUserId,
                 searchParam: chainAccount.activeUser?.accountName!,
