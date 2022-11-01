@@ -18,7 +18,9 @@ export const fetchDmeBalance = async ({
     try {
         connectionCount++;
 
-        const { data } = await axios.post<{ rows: { balance: string }[] }>(
+        const {
+            data: { rows },
+        } = await axios.post<{ rows: { balance: string }[] }>(
             `${currentWaxEndpoint}/v1/chain/get_table_rows`,
             {
                 code: 'deepminedmet',
@@ -30,7 +32,7 @@ export const fetchDmeBalance = async ({
             }
         );
 
-        const balance = data.rows?.[0]?.balance;
+        const balance = rows?.[0]?.balance;
         const [value] = balance ? balance.split(' ') : [0];
 
         return Number(value).toFixed(4);

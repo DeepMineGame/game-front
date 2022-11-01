@@ -49,17 +49,14 @@ export const contractorMineStore = createStore<null | MineDto>(null).on(
     getMinesEffect.doneData,
     (_, { rows }) => rows?.[0]
 );
-
 export const contractorDataStore = createStore<ContractorDto | null>(null).on(
     getContractorsEffect.doneData,
     (_, { rows }) => rows?.[0]
 );
-
 export const contractorAreaStore = createStore<null | AreasDto>(null).on(
     getAreasEffect.doneData,
     (_, { rows }) => rows?.[0]
 );
-
 export const areaNftStore = createStore<UserInventoryType | null>(null).on(
     getInventoryByIdEffect.doneData,
     (_, { rows }) => rows?.[0]

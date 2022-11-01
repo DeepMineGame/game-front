@@ -55,7 +55,6 @@ export const minesStore = createStore<MineDto[] | null>(null).on(
     getMinesEffect.doneData,
     (_, { rows }) => rows
 );
-
 export const areaForMineStore = createStore<null | AreasDto>(null).on(
     getAreasEffect.doneData,
     (_, { rows }) => rows?.[0]

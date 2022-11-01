@@ -5,6 +5,7 @@ import { getInventoryEffect } from './effects';
 
 export const hasInstalledEquipmentStore = createStore<boolean>(false).on(
     getInventoryEffect.doneData,
+
     (_, { rows: userInventory }) => {
         const installedMiningEquipment = Object.fromEntries(
             miningEquipmentNames.map((name) => [
