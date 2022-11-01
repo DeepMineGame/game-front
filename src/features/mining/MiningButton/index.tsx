@@ -133,7 +133,7 @@ export const MiningAndClaimButton: FC<Props> = memo(
                     size={isDesktop ? 'large' : 'middle'}
                     onClick={onMiningButtonClick}
                     ghost={isMining}
-                    disabled={disabled}
+                    disabled={!isMiningFinished && disabled}
                 >
                     {isMiningFinished
                         ? buttonText[ActionState.finished]
