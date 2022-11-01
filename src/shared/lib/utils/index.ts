@@ -9,6 +9,7 @@ import {
     ContractType,
     GetTableDataConfigType,
 } from 'entities/smartcontract';
+import { isServerError } from './is-server-error';
 import { wait } from './wait';
 
 let [currentWaxEndpoint] = endpoints.wax;
@@ -34,10 +35,7 @@ export const getTableData = async <T>(
     } catch (e) {
         const error = e as AxiosError;
 
-        if (
-            error.message === 'Network Error' ||
-            (error.response && Number(error?.response.status) >= 500)
-        ) {
+        if (isServerError(error)) {
             if (connectionCount >= ConnectionCountLimit.wax)
                 throw new Error('Network Error', error);
 
@@ -97,3 +95,4 @@ export * from './merge-assets';
 export { isAssetAvailable } from './is-asset-available';
 export { getGameAssets } from './get-game-assets';
 export { wait } from './wait';
+export { isServerError } from './is-server-error';

@@ -4,7 +4,7 @@ import {
     getNextEndpoint,
     ConnectionCountLimit,
 } from 'app/constants';
-import { wait } from 'shared';
+import { isServerError, wait } from 'shared';
 import { UserInventoryType } from '../smartcontract';
 import { AssetDataType } from './types';
 
@@ -26,10 +26,7 @@ export const getAtomicAssetsDataById = async (
     } catch (e) {
         const error = e as AxiosError;
 
-        if (
-            error.message === 'Network Error' ||
-            (error.response && Number(error?.response.status) >= 500)
-        ) {
+        if (isServerError(error)) {
             if (connectionCount >= ConnectionCountLimit.atomic)
                 throw new Error('Network Error', error);
 
@@ -63,10 +60,7 @@ export const getAssets = async (
     } catch (e) {
         const error = e as AxiosError;
 
-        if (
-            error.message === 'Network Error' ||
-            (error.response && Number(error?.response.status) >= 500)
-        ) {
+        if (isServerError(error)) {
             if (connectionCount >= ConnectionCountLimit.atomic)
                 throw new Error('Network Error', error);
 
@@ -111,10 +105,7 @@ export const getAtomicAssetsByUser = async ({
     } catch (e) {
         const error = e as AxiosError;
 
-        if (
-            error.message === 'Network Error' ||
-            (error.response && Number(error?.response.status) >= 500)
-        ) {
+        if (isServerError(error)) {
             if (connectionCount >= ConnectionCountLimit.wax)
                 throw new Error('Network Error', error);
 

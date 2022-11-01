@@ -4,7 +4,7 @@ import {
     getNextEndpoint,
 } from 'app/constants';
 import axios, { AxiosError } from 'axios';
-import { wait } from 'shared';
+import { isServerError, wait } from 'shared';
 
 let [currentWaxEndpoint] = endpoints.wax;
 
@@ -39,10 +39,7 @@ export const fetchDmeBalance = async ({
     } catch (e) {
         const error = e as AxiosError;
 
-        if (
-            error.message === 'Network Error' ||
-            (error.response && Number(error?.response.status) >= 500)
-        ) {
+        if (isServerError(error)) {
             if (connectionCount >= ConnectionCountLimit.wax)
                 throw new Error('Network Error', error);
 
