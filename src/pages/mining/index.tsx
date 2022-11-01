@@ -80,7 +80,7 @@ export const MiningPage: FC = memo(() => {
 
     const isMiningInProgress =
         lastMineAction?.state === ActionState.active &&
-        new Date() <= new Date(lastMineAction.finishes_at * 1000);
+        lastMineAction.finishes_at * 1000 > Date.now();
 
     return (
         <Page headerTitle={t('pages.mining.mining')}>

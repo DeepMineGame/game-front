@@ -20,7 +20,7 @@ export const MiningInProgressTitle: FC<Props> = memo(
         const { t } = useTranslation();
         const isDesktop = useMediaQuery(desktopS);
 
-        const isFinished = new Date() > new Date(action.finishes_at * 1000);
+        const isFinished = Date.now() > action.finishes_at * 1000;
 
         useEffect(() => {
             setIsMiningFinished(isFinished);
