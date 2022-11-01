@@ -8,8 +8,10 @@ import {
     UserInfoType,
     UserInventoryType,
 } from 'entities/smartcontract';
+import { LastMiningStatus } from '../constants';
 import {
     getLandlordContractsEffect,
+    getLastMiningStatusEffect,
     getUserContractsEffect,
     getUserHistoryEffect,
     getUserInfoEffect,
@@ -119,3 +121,8 @@ export const $isContractorCabinLoading = combine(
 export type ContractorCabinStore = ReturnType<
     typeof $contractorCabin['getState']
 >;
+
+export const $lastMiningStatus = createStore<LastMiningStatus | null>(null).on(
+    getLastMiningStatusEffect.doneData,
+    (_, { status }) => status
+);
