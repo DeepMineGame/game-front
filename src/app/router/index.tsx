@@ -81,7 +81,7 @@ export const Router = () => {
     useEffect(() => {
         if (window.ENDPOINTS?.maintenance.server)
             navigate(unidentifiedActivity);
-    }, [navigate]);
+    }, [window.ENDPOINTS?.maintenance.server]);
 
     return (
         <>

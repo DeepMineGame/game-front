@@ -1,12 +1,16 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { shutdownStubMp4, shutdownStubWebm, StubPageMessage } from 'shared';
 import { Trans } from 'react-i18next';
-import { Navigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { city } from 'app/router/paths';
 import styles from './styles.module.scss';
 
 export const InterfaceStubPage: FC = () => {
-    if (!window.ENDPOINTS?.maintenance.server) return <Navigate to={city} />;
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!window.ENDPOINTS?.maintenance.server) navigate(city);
+    }, [window.ENDPOINTS?.maintenance.server]);
 
     return (
         <>
