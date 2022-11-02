@@ -22,10 +22,7 @@ export const getAreaConfig = (
 };
 
 export const getAreasEffect = createEffect<
-    {
-        searchParam: string;
-        searchIdentificationType?: searchBy;
-    },
+    { searchParam: string; searchIdentificationType?: searchBy },
     { rows: AreasDto[] },
     Error
 >(({ searchParam, searchIdentificationType = searchBy.assetId }) =>

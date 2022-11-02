@@ -17,10 +17,7 @@ export const MineOwnerInfoGate = createGate<{ searchParam: string }>(
 );
 
 export const getMinesEffect = createEffect<
-    {
-        searchParam: string;
-        searchIdentificationType?: searchBy;
-    },
+    { searchParam: string; searchIdentificationType?: searchBy },
     { rows: MineDto[] },
     Error
 >(({ searchParam, searchIdentificationType = searchBy.owner }) =>
@@ -28,10 +25,7 @@ export const getMinesEffect = createEffect<
 );
 
 export const getAreasEffect = createEffect<
-    {
-        searchParam: string;
-        searchIdentificationType?: searchBy;
-    },
+    { searchParam: string; searchIdentificationType?: searchBy },
     { rows: AreasDto[] },
     Error
 >(({ searchParam, searchIdentificationType = searchBy.assetId }) =>
@@ -39,9 +33,7 @@ export const getAreasEffect = createEffect<
 );
 
 export const getInventoryByIdEffect = createEffect<
-    {
-        searchParam: number;
-    },
+    { searchParam: number },
     { rows: UserInventoryType[] },
     Error
 >(({ searchParam }) =>

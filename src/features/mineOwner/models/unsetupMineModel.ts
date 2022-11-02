@@ -17,9 +17,7 @@ export const UnsetupMineGate = createGate<{ searchParams: string }>(
 );
 
 const getExecutorContractsEffect = createEffect<
-    {
-        searchParams: string;
-    },
+    { searchParams: string },
     { rows: ContractDto[] },
     Error
 >(({ searchParams }) =>
@@ -33,9 +31,7 @@ const getExecutorContractsEffect = createEffect<
 );
 
 const getContractorsContractsEffect = createEffect<
-    {
-        searchParams: string;
-    },
+    { searchParams: string },
     { rows: ContractDto[] },
     Error
 >(({ searchParams }) =>
@@ -49,9 +45,7 @@ const getContractorsContractsEffect = createEffect<
 );
 
 const getUserMine = createEffect<
-    {
-        searchParams: string;
-    },
+    { searchParams: string },
     { rows: MineDto[] },
     Error
 >(({ searchParams }) =>

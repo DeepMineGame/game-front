@@ -39,9 +39,7 @@ export const getContractByExecutorEffect = createEffect<
 
 export const getMineByAssetEffect = createEffect<
     ContractDto | null | undefined,
-    {
-        rows: MineDto[] | null | undefined;
-    },
+    { rows: MineDto[] | null | undefined },
     Error
 >((contract: ContractDto | null | undefined) =>
     contract
@@ -53,9 +51,7 @@ export const getMineByAssetEffect = createEffect<
 );
 
 export const getActionsForUserEffect = createEffect<
-    {
-        searchParam: number | string;
-    },
+    { searchParam: number | string },
     { rows: ActionDto[] },
     Error
 >(({ searchParam }) =>
@@ -64,7 +60,6 @@ export const getActionsForUserEffect = createEffect<
         searchParam,
     })
 );
-
 export const miningContractStore = createStore<ContractDto | null | undefined>(
     null
 ).on(getContractByExecutorEffect.doneData, (_, { rows }) =>

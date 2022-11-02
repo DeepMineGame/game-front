@@ -14,10 +14,7 @@ import {
 export const AreaStateGate = createGate<{ searchParam: string }>('AreaGate');
 
 export const getInventoriesEffect = createEffect<
-    {
-        searchIdentificationType?: SEARCH_BY;
-        searchParam: string;
-    },
+    { searchIdentificationType?: SEARCH_BY; searchParam: string },
     { rows: UserInventoryType[] },
     Error
 >(({ searchIdentificationType = SEARCH_BY.ownerNickname, searchParam }) =>
