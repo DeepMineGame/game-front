@@ -47,7 +47,7 @@ export const TEST_NET_ASSETS_ID_MAP = new Map(
         411110: 492745,
         411109: 492803,
         176451: 314739,
-        [ENGINEER_CERTIFICATE_ID]: ENGINEER_CERTIFICATE_ID, // todo: remove after testing
+        [ENGINEER_CERTIFICATE_ID]: ENGINEER_CERTIFICATE_ID,
     })
 );
 
