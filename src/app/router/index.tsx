@@ -7,6 +7,7 @@ import { useLogout, TravelProgress } from 'features';
 import { userStore, getUserFromSessionEffect } from 'entities/user';
 import { routes, fallbackRoute, AppRoute } from './routes';
 import { DocumentTitle } from './components/DocumentTitle';
+import { unidentifiedActivity } from './paths';
 
 const LogInWrapper: React.FC<{
     children: any;
@@ -75,6 +76,12 @@ const renderRoutes = (routeList: AppRoute[]) =>
 
 export const Router = () => {
     const user = useStore(userStore);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (window.ENDPOINTS?.maintenance.server)
+            navigate(unidentifiedActivity);
+    }, [navigate]);
 
     return (
         <>

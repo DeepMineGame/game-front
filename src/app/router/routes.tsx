@@ -26,6 +26,7 @@ import {
     Wasteland,
     EngineerPage,
     EquipmentHallPage,
+    InterfaceStubPage,
 } from 'pages';
 
 import * as paths from './paths';
@@ -233,6 +234,14 @@ export const routes: AppRoute[] = [
         forAdmin: true,
         forBetaUser: true,
         titleTag: 'Engineer Equipment Hall — DeepMine',
+    },
+    {
+        path: paths.unidentifiedActivity,
+        Component: InterfaceStubPage,
+        forLoggedIn: false,
+        forAdmin: true,
+        forBetaUser: true,
+        titleTag: 'Unidentified seismic activity — DeepMine',
     },
 ];
 
