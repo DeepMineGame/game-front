@@ -12,9 +12,7 @@ import {
 export const UserMineGate = createGate<{ searchParam: string }>('UserMineGate');
 
 export const getMinesByOwnerEffect = createEffect<
-    {
-        searchParam: string;
-    },
+    { searchParam: string },
     { rows: MineDto[] },
     Error
 >(({ searchParam }) =>

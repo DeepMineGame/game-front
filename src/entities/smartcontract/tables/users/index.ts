@@ -4,12 +4,10 @@ import { deepminegame } from '../../constants';
 import { UserDto } from './types';
 
 export const getSmartContractUserEffect = createEffect<
-    {
-        searchParam: string;
-    },
+    { searchParam: string },
     { rows: UserDto[] },
     Error
->(({ searchParam }: { searchParam: string }) =>
+>(({ searchParam }) =>
     getTableData({
         code: deepminegame,
         scope: deepminegame,

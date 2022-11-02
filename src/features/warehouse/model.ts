@@ -14,9 +14,7 @@ const WarehouseGate = createGate<{ searchParam: string }>('warehouseGate');
 const getAtomicAssetsByUserEffect = createEffect(getAtomicAssetsByUser);
 
 const getInventoryEffect = createEffect<
-    {
-        searchParam: string;
-    },
+    { searchParam: string },
     { rows: UserInventoryType[] },
     Error
 >(({ searchParam }) => getTableData(getInventoryConfig(searchParam)));

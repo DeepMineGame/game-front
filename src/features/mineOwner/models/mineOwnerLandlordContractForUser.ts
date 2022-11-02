@@ -9,9 +9,7 @@ import {
 } from 'entities/smartcontract';
 
 export const getContractEffectByExecutor = createEffect<
-    {
-        searchParam: string;
-    },
+    { searchParam: string },
     { rows: ContractDto[] },
     Error
 >(({ searchParam }) =>

@@ -58,12 +58,10 @@ export const minesForAreaSlots = createStore<MineDto[] | null>(null).on(
 export const ClaimDmeGate = createGate<{ searchParam: string }>('ClaimDmeGate');
 
 export const getRolesEffect = createEffect<
-    {
-        searchParam: string;
-    },
+    { searchParam: string },
     { rows: RoleDto[] },
     Error
->(({ searchParam }) => getRolesTableData({ searchParam }));
+>(getRolesTableData);
 
 export const rolesStore = createStore<RoleDto[] | null>(null).on(
     getRolesEffect.doneData,

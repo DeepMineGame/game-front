@@ -37,12 +37,7 @@ export const getActionEffect = createEffect<
     },
     { rows: ActionDto[] },
     Error
->(({ searchIdentification, searchParam }) =>
-    getActionsTable({
-        searchIdentification,
-        searchParam,
-    })
-);
+>(getActionsTable);
 
 export const getActionByUserEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) =>

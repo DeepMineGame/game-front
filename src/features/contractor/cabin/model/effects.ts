@@ -27,9 +27,7 @@ export const getLandlordContractsEffect = createEffect<
 );
 
 export const getUserContractsEffect = createEffect<
-    {
-        searchParam: string;
-    },
+    { searchParam: string },
     { rows: ContractDto[] },
     Error
 >(({ searchParam }) =>
@@ -43,17 +41,13 @@ export const getUserContractsEffect = createEffect<
 );
 
 export const getUserHistoryEffect = createEffect<
-    {
-        searchParam: string;
-    },
+    { searchParam: string },
     { rows: UserHistoryType[] },
     Error
 >(({ searchParam }) => getTableData(getHistoryConfig(searchParam)));
 
 export const getUserInfoEffect = createEffect<
-    {
-        searchParam: string;
-    },
+    { searchParam: string },
     { rows: UserInfoType[] },
     Error
 >(({ searchParam }) => getTableData(getUserConfig(searchParam)));

@@ -74,13 +74,13 @@ export const activeMineOwnerExecutorContractStore =
 
 export const activeContractorsContractsStore = createStore<
     ContractDto[] | null
->(null).on(getContractorsContractsEffect.doneData, (_, { rows }) =>
-    rows?.filter(
+>(null).on(getContractorsContractsEffect.doneData, (_, { rows }) => {
+    return rows?.filter(
         ({ type, status }: ContractDto) =>
             type === ContractType.mineowner_contractor &&
             status === ContractStatus.active
-    )
-);
+    );
+});
 
 export const userMineStore = createStore<MineDto | null>(null).on(
     getUserMine.doneData,

@@ -23,9 +23,7 @@ export const MiningPageGate = createGate<{ searchParam: string }>(
 );
 
 export const getContractByExecutorEffect = createEffect<
-    {
-        searchParam: string;
-    },
+    { searchParam: string },
     { rows: ContractDto[] },
     Error
 >(({ searchParam }) =>
@@ -87,9 +85,7 @@ export const actionsStore = createStore<ActionDto[] | null | undefined>(
 ).on(getActionsForUserEffect.doneData, (_, { rows }) => rows);
 
 export const getContractorEffect = createEffect<
-    {
-        searchParam: string;
-    },
+    { searchParam: string },
     { rows: ContractorDto[] },
     Error
 >(({ searchParam }) =>

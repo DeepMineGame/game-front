@@ -8,9 +8,7 @@ import {
 } from 'entities/smartcontract';
 
 export const getShiftActionsForUserEffect = createEffect<
-    {
-        searchParam: string;
-    },
+    { searchParam: string },
     ActionDto[],
     Error
 >(({ searchParam }) =>

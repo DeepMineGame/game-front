@@ -12,12 +12,10 @@ export const InventoryGate = createGate<{ searchParam: string }>(
 );
 
 const getActiveInventory = createEffect<
-    {
-        searchParam: string;
-    },
+    { searchParam: string },
     { rows: UserInventoryType[] },
     Error
->(({ searchParam }) => getInventoryTableData({ searchParam }));
+>(getInventoryTableData);
 
 export const activeUserInventoryStore = createStore<UserInventoryType[] | null>(
     null

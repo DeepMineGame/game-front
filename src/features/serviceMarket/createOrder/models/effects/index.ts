@@ -14,9 +14,7 @@ import {
 } from 'entities/smartcontract';
 
 export const getAreaByOwnerEffect = createEffect<
-    {
-        searchParam: string;
-    },
+    { searchParam: string },
     { rows: AreasDto[] },
     Error
 >(({ searchParam }) =>
@@ -24,9 +22,7 @@ export const getAreaByOwnerEffect = createEffect<
 );
 
 export const getMinesByOwnerEffect = createEffect<
-    {
-        searchParam: string;
-    },
+    { searchParam: string },
     { rows: MineDto[] },
     Error
 >(({ searchParam }) =>
@@ -37,9 +33,7 @@ export const getMinesByOwnerEffect = createEffect<
 );
 
 export const getContractByExecutorEffect = createEffect<
-    {
-        searchParam: string;
-    },
+    { searchParam: string },
     { rows: ContractDto[] },
     Error
 >(({ searchParam }) =>
@@ -54,9 +48,7 @@ export const getContractByExecutorEffect = createEffect<
 );
 
 export const getInventoryEffect = createEffect<
-    {
-        searchParam: string;
-    },
+    { searchParam: string },
     { rows: MergedInventoryWithAtomicAssets },
     Error
 >(({ searchParam }) => getTableData(getInventoryConfig(searchParam)));
