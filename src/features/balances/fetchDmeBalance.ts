@@ -39,7 +39,7 @@ export const fetchDmeBalance = async ({
     } catch (e) {
         const error = e as AxiosError;
 
-        if (isServerError(error)) {
+        if (axios.isAxiosError(error) && isServerError(error)) {
             if (connectionCount >= ConnectionCountLimit.wax)
                 throw new Error('Network Error', error);
 
