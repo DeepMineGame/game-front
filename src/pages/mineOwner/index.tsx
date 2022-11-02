@@ -22,7 +22,7 @@ export const MineOwnerPage = () => {
     return (
         <MineOwnerCabin state={cabinState}>
             <div className={styles.header}>
-                <Header withBackButton />
+                <Header />
             </div>
             {chainAccountName && (
                 <div className={styles.hologramWrapper}>

@@ -1,37 +1,45 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import {
     BackButton,
-    DeepMineLogo,
     desktopS,
     Title,
     useAccountName,
     useMediaQuery,
+    Text,
+    Link,
+    CityOutlined,
 } from 'shared';
 import { LeftOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import classNames from 'classnames';
 import { city } from 'app/router/paths';
-
+import { Space } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { SettingMenu, UserAvatarAndDrawer } from 'entities/user';
 import styles from './styles.module.scss';
 
 type Props = {
     title?: string;
-    hideLogo?: boolean;
-    withBackButton?: boolean;
 };
 
-export const Header: FC<Props> = ({ withBackButton, title, hideLogo }) => {
+export const Header: FC<Props> = ({ title }) => {
     const accountName = useAccountName();
     const navigate = useNavigate();
     const goToBack = () => navigate(-1);
     const isDesktop = useMediaQuery(desktopS);
-    const navigateToHome = () => navigate(city);
+    const { t } = useTranslation();
+
     return (
         <>
             <div className={styles.header}>
-                {withBackButton ? <BackButton onClick={goToBack} /> : <div />}
-                {title && !isDesktop ? (
+                <Link to={city}>
+                    <Space size={8}>
+                        <CityOutlined className={styles.cityIcon} />
+                        <Text type="secondary" strong fontFamily="bai">
+                            {t('components.common.city')}
+                        </Text>
+                    </Space>
+                </Link>
+                {title && !isDesktop && (
                     <div
                         className={styles.iconAndTitleWrapper}
                         onClick={goToBack}
@@ -44,17 +52,6 @@ export const Header: FC<Props> = ({ withBackButton, title, hideLogo }) => {
                         >
                             {title}
                         </Title>
-                    </div>
-                ) : (
-                    <div
-                        className={styles.logoContainer}
-                        onClick={navigateToHome}
-                    >
-                        <DeepMineLogo
-                            className={classNames(styles.logo, {
-                                [styles.hideLogo]: hideLogo,
-                            })}
-                        />
                     </div>
                 )}
                 {accountName ? (
