@@ -33,7 +33,7 @@ export const fetchWaxBalance = async ({
     } catch (e) {
         const error = e as AxiosError;
 
-        if (axios.isAxiosError(error) && isServerError(error)) {
+        if (isServerError(error)) {
             if (connectionCount >= ConnectionCountLimit.wax)
                 throw new Error('Network Error', error);
 
