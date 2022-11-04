@@ -17,7 +17,7 @@ type Props = {
 };
 
 export const LearningSkill = ({
-    skill: { schemaType, level, rarity, finishesAt },
+    skill: { schema_type, level, rarity, finishesAt },
 }: Props) => {
     const { t } = useTranslation();
     const reloadPage = useReloadPage();
@@ -31,7 +31,7 @@ export const LearningSkill = ({
         >
             <Col span="48px">
                 <Nft
-                    schemaType={schemaType}
+                    schemaType={schema_type}
                     templateId={0}
                     src={learningNftSrc}
                     level={level}
@@ -51,7 +51,7 @@ export const LearningSkill = ({
                     <Col span={24}>
                         <Text className={styles.description}>
                             {[
-                                `${schemaNameMap[schemaType]}`,
+                                `${schemaNameMap[schema_type]}`,
                                 rarity && rarityMap[rarity],
                                 `${t('components.common.level')} ${level}`,
                             ]
