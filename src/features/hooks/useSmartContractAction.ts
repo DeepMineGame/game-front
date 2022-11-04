@@ -1,11 +1,18 @@
 import {
-    showErrorModal,
+    createErrorMessage,
+    getTimeLeftFromUtc,
     showErrorNotification,
-    getErrorCode,
     useChainAuthContext,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { Action } from 'entities/smartcontract';
+import { Modal } from 'antd';
+import {
+    Action,
+    ActionDto,
+    actionMap,
+    getActionsTable,
+    mapSearchParamForIndexPosition,
+} from 'entities/smartcontract';
 
 const defaultTransactionOptions = {
     blocksBehind: 3,
@@ -28,14 +35,33 @@ export const useSmartContractAction = <T>({
 
     return async () => {
         try {
+            const { rows } = await getActionsTable({
+                searchIdentification:
+                    mapSearchParamForIndexPosition.ownerUserId,
+                searchParam: chainAccount.activeUser?.accountName!,
+                limit: 1,
+            });
+            const lastAction: ActionDto | null = rows?.[0];
+            const lastActionInProgress =
+                lastAction && (lastAction.finishes_at || 0) * 1000 > Date.now();
+            if (lastActionInProgress) {
+                return Modal.warn({
+                    title: t('components.actionModal.actionNotPossible'),
+                    content: `${t('components.actionModal.busy')} ${
+                        actionMap[lastAction.type]
+                    } ${t(
+                        'components.actionModal.willEnd'
+                    )} ${getTimeLeftFromUtc(lastAction.finishes_at)}`,
+                });
+            }
             await chainAccount?.activeUser?.signTransaction(action, options);
-            onSignSuccess?.();
+            return onSignSuccess?.();
         } catch (e) {
             const err = e as Error;
             showErrorNotification(err);
-            showErrorModal({
+            Modal.error({
                 title: t('components.common.status.error'),
-                content: t(`blockchainErrors.${getErrorCode(err.message)}`),
+                content: createErrorMessage(err, t),
             });
             throw e;
         }
@@ -45,7 +71,6 @@ export const useSmartContractAction = <T>({
 export const useSmartContractActionDynamic = () => {
     const chainAccount = useChainAuthContext();
     const { t } = useTranslation();
-
     return <T>(
         action: { actions: Action<T> },
         options = defaultTransactionOptions
@@ -55,9 +80,9 @@ export const useSmartContractActionDynamic = () => {
             .catch((e) => {
                 const err = e as Error;
                 showErrorNotification(err);
-                showErrorModal({
+                Modal.error({
                     title: t('components.common.status.error'),
-                    content: t(`blockchainErrors.${getErrorCode(err.message)}`),
+                    content: createErrorMessage(err, t),
                 });
                 throw e;
             });

@@ -1,23 +1,22 @@
-import { Button, Inventory, InventoryCardModal, useTableData } from 'shared';
+import { Button, Inventory, InventoryCardModal } from 'shared';
 import { FC, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
-
 import { Form } from 'antd';
-import { getInventoryConfig, UserInventoryType } from 'entities/smartcontract';
+import { useStore } from 'effector-react';
+import {
+    $mergedInventoryWithAtomicAssets,
+    MergedInventoryWithAtomicAssets,
+} from 'entities/atomicassets';
 import { orderFields } from 'entities/order';
+import { inventoriesTabMap } from 'entities/engineer';
 import { GeneralInformationStepProps } from '../interface';
-
 import localStyles from '../styles.module.scss';
 import {
     UpgradeTypeFormItem,
     useWatchUpgradeType,
 } from '../../UpgradeTypeFormItem';
-import {
-    raritiesTranslationMap,
-    inventoriesTypeMap,
-    inventoriesTabMap,
-} from './constants';
+import { raritiesTranslationMap, inventoriesTypeMap } from './constants';
 
 export const CitizenInformation: FC<GeneralInformationStepProps> = ({
     goToPreviousStep,
@@ -26,18 +25,21 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
 }) => {
     const { t } = useTranslation();
     const { hasValue, type } = useWatchUpgradeType(form);
-    const [asset, setAsset] = useState<UserInventoryType | undefined>();
+    const [asset, setAsset] = useState<
+        MergedInventoryWithAtomicAssets[number] | undefined
+    >();
 
     const [isInventoryOpen, setIsInventoryOpen] = useState(false);
     const [selectedInventoryCard, setSelectedInventoryCard] = useState<
-        UserInventoryType | undefined
+        MergedInventoryWithAtomicAssets[number] | undefined
     >();
-    const { data: userInventory } =
-        useTableData<UserInventoryType>(getInventoryConfig);
+    const userInventory = useStore($mergedInventoryWithAtomicAssets);
 
     const hasAllValues = hasValue && !!asset;
 
-    const handleItemSelect = (item: UserInventoryType) => {
+    const handleItemSelect = (
+        item: MergedInventoryWithAtomicAssets[number]
+    ) => {
         setAsset(item);
         setIsInventoryOpen(false);
         setSelectedInventoryCard(undefined);
@@ -114,12 +116,16 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
                 onCancel={() => setIsInventoryOpen(false)}
                 selectedTab={inventoriesTabMap[type]}
             />
-            <InventoryCardModal
-                onSelect={handleItemSelect}
-                card={selectedInventoryCard as UserInventoryType}
-                visible={!!selectedInventoryCard}
-                onCancel={() => setSelectedInventoryCard(undefined)}
-            />
+            {selectedInventoryCard && (
+                <InventoryCardModal
+                    onSelect={handleItemSelect}
+                    card={
+                        selectedInventoryCard as MergedInventoryWithAtomicAssets[number]
+                    }
+                    visible={!!selectedInventoryCard}
+                    onCancel={() => setSelectedInventoryCard(undefined)}
+                />
+            )}
         </>
     );
 };

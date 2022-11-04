@@ -12,4 +12,4 @@ export * from './warehouse';
 export * from './serviceMarket';
 export * from './landLord/areaManagement';
 export * from './mining';
-export * from './asset-card';
+export * from './mine-stats';

@@ -8,13 +8,16 @@ import {
     useAccountName,
     useMediaQuery,
     useReloadPage,
+    useTravelConfirm,
+    useUserLocation,
 } from 'shared';
 import { useStore } from 'effector-react';
 import { useSmartContractAction } from 'features';
 import {
     engageArea,
-    inventoriesStore,
+    $inventory,
     InventoryType,
+    LOCATION_TO_ID,
 } from 'entities/smartcontract';
 import commonStyles from '../../styles/styles.module.scss';
 import styles from './styles.module.scss';
@@ -28,7 +31,7 @@ export const EngageArea: FC<Props> = ({ className, disabled = true }) => {
     const accountName = useAccountName();
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
-    const inventories = useStore(inventoriesStore);
+    const inventories = useStore($inventory);
     const areaItem = inventories?.find(
         ({ inv_type }) => inv_type === InventoryType.areas
     );
@@ -37,9 +40,17 @@ export const EngageArea: FC<Props> = ({ className, disabled = true }) => {
         action: engageArea({ waxUser: accountName, areaId }),
     });
     const reloadPage = useReloadPage();
+    const { travelConfirm } = useTravelConfirm(
+        LOCATION_TO_ID.landlords_reception
+    );
+    const inLocation = useUserLocation();
 
     const onEngageClick = async () => {
+        if (!inLocation.landlordReception) {
+            return travelConfirm(reloadPage);
+        }
         await engageAreaAction();
+
         return reloadPage();
     };
 

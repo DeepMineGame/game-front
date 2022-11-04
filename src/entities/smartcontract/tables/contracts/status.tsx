@@ -28,7 +28,7 @@ export const isContractTermNotFulfilled = (contract: ContractDto) => {
         finishes_at,
     } = contract;
     if (!start_time) return false;
-    if (!penalty_amount) return false;
+    if (!Number(penalty_amount)) return false;
     if (!days_for_penalty) return false;
 
     const currentTime = Date.now();
@@ -57,6 +57,7 @@ export enum ContractStatesMeta {
     deadlineViolation = 'deadlineViolation',
     termViolation = 'termViolation',
     earlyBreak = 'earlyBreak',
+    deadlineExpired = 'deadlineExpired',
     complete = 'complete',
 }
 
@@ -65,16 +66,16 @@ export type Status = {
     meta?: ContractStatesMeta;
 };
 
-const isStatusActive = (contract: ContractDto) =>
+export const isStatusActive = (contract: ContractDto) =>
     contract.status === ContractStatus.active;
 
-const isStatusTerminated = (contract: ContractDto) =>
+export const isStatusTerminated = (contract: ContractDto) =>
     contract.status === ContractStatus.terminated;
 
-const isTimeFinished = (contract: ContractDto) =>
+export const isTimeFinished = (contract: ContractDto) =>
     contract.finishes_at < getNowInSeconds();
 
-const isDeadlineViolation = (contract: ContractDto) =>
+export const isDeadlineViolation = (contract: ContractDto) =>
     contract.start_time !== 0 && contract.start_time > contract.deadline_time;
 
 export const isWorkInProgress = (contract: ContractDto) =>
@@ -85,6 +86,9 @@ export const wasTerminatedBySomebody = (contract: ContractDto) =>
 
 export const wasTerminatedEarly = (contract: ContractDto) =>
     contract.term_time < contract.finishes_at;
+
+export const wasTerminatedAfterDeadline = (contract: ContractDto) =>
+    contract.term_time > contract.deadline_time;
 
 export const getContractStatus = (
     contract: ContractDto,

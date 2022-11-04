@@ -19,10 +19,10 @@ export const activeUserInventoryStore = createStore<UserInventoryType[] | null>(
     null
 ).on(getActiveInventory.doneData, (_, { rows }) => rows);
 
-export const getAtomicAssetsEffect = createEffect(getAtomicAssetsByUser);
+export const getAtomicAssetsByUserEffect = createEffect(getAtomicAssetsByUser);
 
-export const userAtomicAssetsStore = createStore<UserInventoryType[]>([]).on(
-    getAtomicAssetsEffect.doneData,
+export const $storage = createStore<UserInventoryType[]>([]).on(
+    getAtomicAssetsByUserEffect.doneData,
     (state, payload) => payload
 );
 
@@ -36,5 +36,5 @@ export const $hasEngineerCertificate = activeUserInventoryStore.map(
 
 forward({
     from: InventoryGate.open,
-    to: [getActiveInventory, getAtomicAssetsEffect],
+    to: [getActiveInventory, getAtomicAssetsByUserEffect],
 });

@@ -7,7 +7,7 @@ import { terminateContract } from 'entities/smartcontract';
 type Props = {
     accountName: string;
     contractId: number;
-    penalty: number;
+    penalty: number | string;
 };
 
 const TerminateContract: FC<Props> = ({ accountName, contractId, penalty }) => {
@@ -33,7 +33,7 @@ const TerminateContract: FC<Props> = ({ accountName, contractId, penalty }) => {
     };
 
     const getTerminate = useSmartContractAction({
-        action: terminateContract(accountName, contractId, 0),
+        action: terminateContract(accountName, contractId, false),
     });
 
     const handleTerminate = async () => {
@@ -43,10 +43,7 @@ const TerminateContract: FC<Props> = ({ accountName, contractId, penalty }) => {
 
     return (
         <div>
-            <Button
-                onClick={() => setIsTerminateModalVisible(true)}
-                type="primary"
-            >
+            <Button onClick={() => setIsTerminateModalVisible(true)}>
                 {t('pages.serviceMarket.contract.terminateContract')}
             </Button>
 

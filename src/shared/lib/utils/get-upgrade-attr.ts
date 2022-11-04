@@ -1,9 +1,9 @@
+import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
 import {
     ContractDto,
     EngineerSchema,
     EngineerSkillKey,
     rarityMap,
-    UserInventoryType,
 } from 'entities/smartcontract';
 
 type UpgradeRarity = keyof typeof rarityMap;
@@ -32,6 +32,7 @@ export const parseAttrs = (contract: ContractDto) => {
 };
 
 export const upgradeTypeMap = {
+    [EngineerSchema.undefined]: 'undefined',
     [EngineerSchema.mine]: 'mine',
     [EngineerSchema.module]: 'mineModule',
     [EngineerSchema.equipment]: 'equipment',
@@ -44,7 +45,7 @@ export const getUpgradeType = ({
     asset,
 }: {
     contract?: ContractDto;
-    asset?: UserInventoryType;
+    asset?: MergedInventoryWithAtomicAssets[number];
 }) => {
     if (contract)
         return upgradeTypeMap[parseAttrs(contract)?.schema_type as UpgradeType];
@@ -57,7 +58,7 @@ export const getUpgradeRarity = ({
     asset,
 }: {
     contract?: ContractDto;
-    asset?: UserInventoryType;
+    asset?: MergedInventoryWithAtomicAssets[number];
 }) => {
     if (contract)
         return rarityMap[parseAttrs(contract)?.rarity as UpgradeRarity];

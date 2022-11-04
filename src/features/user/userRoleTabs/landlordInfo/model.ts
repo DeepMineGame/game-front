@@ -1,7 +1,7 @@
 import { createEvent, createStore, sample } from 'effector';
 import {
     getAreasEffect,
-    inventoriesStore,
+    $inventory,
     InventoryType,
     UserInventoryType,
 } from 'entities/smartcontract';
@@ -17,7 +17,7 @@ export const areaNftStore = createStore<UserInventoryType[] | null>(null).on(
 
 // filters inventory items by area and set it in areaNftStore
 sample({
-    source: inventoriesStore,
+    source: $inventory,
     target: setAreaNftEvent,
     filter: (inventory) =>
         Boolean(

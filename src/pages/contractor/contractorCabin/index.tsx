@@ -1,117 +1,97 @@
-import React, { useCallback, useState } from 'react';
+import { FC } from 'react';
 import {
     desktopS,
     Header,
+    Loader,
     Monitor,
+    useAccountName,
     useDimensions,
     useMediaQuery,
     useReloadPage,
-    useTableData,
-    useUserLocation,
 } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import * as PATHS from 'app/router/paths';
 import cn from 'classnames';
 import {
+    $contractorCabin,
+    $inLocation,
+    ContractorCabinGate,
+    ContractorCabinStatus,
     ContractorMenu,
     ContractorMenuItems,
-    findEquipmentByName,
-    Travel,
+    getStatus,
+    CallToTravelNotification,
+    $isContractorCabinLoading,
+    $hasInstalledEquipment,
 } from 'features';
-import {
-    ContractDto,
-    ContractStatus,
-    ContractType,
-    getContractsNameConfig,
-    getHistoryConfig,
-    getInventoryConfig,
-    getUserConfig,
-    InUseType,
-    LOCATION_TO_ID,
-    mapSearchParamForIndexPositionToFindContracts,
-    miningEquipmentNames,
-    UserHistoryType,
-    UserInfoType,
-    UserInventoryType,
-} from 'entities/smartcontract';
-
-import { CABIN_STATUS } from './constants';
+import { useGate, useStore } from 'effector-react';
+import { Tooltip } from 'antd';
+import { useTranslation } from 'react-i18next';
+import { LOCATION_TO_ID } from 'entities/smartcontract';
 import styles from './styles.module.scss';
-import { ContractorCabinContent } from './components/ContractorCabinContent';
+import { SignContract } from './components/SignContract';
+import { NoEquipments } from './components/NoEquipments';
+import { NotFullEquipmentsSet } from './components/NotFullEquipmentsSet';
+import { Ready } from './components/Ready';
+import { MiningProgress } from './components/MiningProgress';
+import { MiningError } from './components/MiningError';
+import { MiningOver } from './components/MiningOver';
 
-export const ContractorCabin = () => {
+const states = {
+    [ContractorCabinStatus.sign_contract]: SignContract,
+    [ContractorCabinStatus.no_equipments]: NoEquipments,
+    [ContractorCabinStatus.not_full_equipments_set]: NotFullEquipmentsSet,
+    [ContractorCabinStatus.ready]: Ready,
+    [ContractorCabinStatus.mining_progress]: MiningProgress,
+    [ContractorCabinStatus.mining_interrupted]: MiningError,
+    [ContractorCabinStatus.mining_over]: MiningOver,
+};
+
+export const ContractorCabin: FC = () => {
+    const accountName = useAccountName();
+    const { t } = useTranslation();
+
+    useGate(ContractorCabinGate, { searchParam: accountName });
     const reloadPage = useReloadPage();
     const { width, height } = useDimensions();
     const isDesktop = useMediaQuery(desktopS);
-    const [status, setStatus] = useState<CABIN_STATUS>(0);
+    const contractorCabinStore = useStore($contractorCabin);
+    const status = getStatus(contractorCabinStore);
     const navigate = useNavigate();
     const bgRatio = 1366 / 712;
     const isBgWidthHidden = width > height * bgRatio;
-    const inLocation = useUserLocation();
-
-    const getConfigForContracts = useCallback((accountName: string) => {
-        return getContractsNameConfig(
-            accountName,
-            mapSearchParamForIndexPositionToFindContracts.executorId,
-            10000
-        );
-    }, []);
-
-    const { data: userInfo } = useTableData<UserInfoType>(getUserConfig);
-    const { data: userContracts } = useTableData<ContractDto>(
-        getConfigForContracts
-    );
-    const { data: userInventory } =
-        useTableData<UserInventoryType>(getInventoryConfig);
-    const { data: userHistory } =
-        useTableData<UserHistoryType>(getHistoryConfig);
-
-    const installedMiningEquipment = Object.fromEntries(
-        miningEquipmentNames.map((name) => [
-            name,
-            findEquipmentByName(userInventory || [], name),
-        ])
-    );
-    const hasInstalledEquipment = Object.values(installedMiningEquipment)?.some(
-        (item) => item?.in_use === InUseType.inUse
-    );
-
-    const mineOwnerContracts = userContracts.filter(
-        ({ type, executor, status: contractStatus }) =>
-            type === ContractType.mineowner_contractor &&
-            executor === userInfo[0]?.owner &&
-            contractStatus === ContractStatus.active
-    );
-    const hasPhysicalShift =
-        userInfo.length > 0 && userInfo[0].location === LOCATION_TO_ID.mine;
+    const inLocation = useStore($inLocation);
+    const hasInstalledEquipment = useStore($hasInstalledEquipment);
+    const isContractorCabinLoading = useStore($isContractorCabinLoading);
+    const unableToVisitMiningDesk = status < ContractorCabinStatus.ready;
+    const unableToVisitStats = status <= ContractorCabinStatus.mining_over;
+    const unableToVisitEquipment = !hasInstalledEquipment && !inLocation;
+    const State = states[status];
 
     const getActiveTooltip = () => {
-        if (status === CABIN_STATUS.setup && hasPhysicalShift) {
+        if (status === ContractorCabinStatus.no_equipments && inLocation) {
             return ContractorMenuItems.Equipment;
         }
 
-        if (status === CABIN_STATUS.ready) {
+        if (status === ContractorCabinStatus.ready) {
             return ContractorMenuItems.MiningDeck;
-        }
-
-        if (status === CABIN_STATUS.last_results) {
-            return ContractorMenuItems.InfoPanel;
         }
 
         return undefined;
     };
+
     return (
         <div
             className={cn(styles.cabinBackground, {
                 [styles.cabinBackgroundLightRed]:
-                    status === CABIN_STATUS.mining_interrupted,
+                    status === ContractorCabinStatus.mining_interrupted,
                 [styles.cabinBackgroundLightGreen]:
-                    status > CABIN_STATUS.mining_over ||
-                    status === CABIN_STATUS.ready ||
-                    status === CABIN_STATUS.setup,
+                    status > ContractorCabinStatus.mining_over ||
+                    status === ContractorCabinStatus.ready ||
+                    status === ContractorCabinStatus.no_equipments,
                 [styles.cabinBackgroundLightYellow]:
-                    status === CABIN_STATUS.mining_over ||
-                    status === CABIN_STATUS.mining_progress,
+                    status === ContractorCabinStatus.mining_over ||
+                    status === ContractorCabinStatus.mining_progress,
             })}
         >
             <Monitor
@@ -121,24 +101,57 @@ export const ContractorCabin = () => {
                         : styles.cabinMonitorContainerHeight
                 }
             >
-                <ContractorCabinContent
-                    hasPhysicalShift={hasPhysicalShift}
-                    setStatus={setStatus}
-                    userContracts={mineOwnerContracts}
-                    userInventory={userInventory}
-                    userHistory={userHistory}
-                />
+                {isContractorCabinLoading ? (
+                    <Loader className={styles.loader} />
+                ) : (
+                    <State />
+                )}
             </Monitor>
+            <Tooltip
+                overlay={
+                    unableToVisitMiningDesk
+                        ? t('pages.contractor.tooltips.notReadyMineDesk')
+                        : t('components.common.button.miningDeck')
+                }
+            >
+                <div
+                    className={styles.chair}
+                    onClick={() =>
+                        !unableToVisitMiningDesk && navigate(PATHS.mining)
+                    }
+                />
+            </Tooltip>
+            <Tooltip
+                overlay={
+                    unableToVisitStats
+                        ? t('pages.contractor.tooltips.unableGetStatAccess')
+                        : t('components.common.statsAndInfo.title')
+                }
+            >
+                <div
+                    className={styles.monitors}
+                    onClick={() =>
+                        !unableToVisitStats &&
+                        navigate(PATHS.contractorStatsAndInfo)
+                    }
+                />
+            </Tooltip>
+            <Tooltip overlay={t('components.contractorMenu.equipmentTooltip')}>
+                <div
+                    className={styles.stuff}
+                    onClick={() =>
+                        !unableToVisitEquipment && navigate(PATHS.equipmentSet)
+                    }
+                />
+            </Tooltip>
             <Header withBackButton />
             <ContractorMenu
                 config={{
                     disabledItems: {
-                        [ContractorMenuItems.InfoPanel]:
-                            status <= CABIN_STATUS.mining_over,
+                        [ContractorMenuItems.InfoPanel]: unableToVisitStats,
                         [ContractorMenuItems.MiningDeck]:
-                            status < CABIN_STATUS.ready,
-                        [ContractorMenuItems.Equipment]:
-                            !hasInstalledEquipment && !hasPhysicalShift,
+                            unableToVisitMiningDesk,
+                        [ContractorMenuItems.Equipment]: unableToVisitEquipment,
                     },
                     callbacks: {
                         [ContractorMenuItems.InfoPanel]: () =>
@@ -151,8 +164,8 @@ export const ContractorCabin = () => {
                     activeTooltip: getActiveTooltip(),
                 }}
             />
-            {!inLocation.mine && (
-                <Travel
+            {!inLocation && (
+                <CallToTravelNotification
                     toLocationId={LOCATION_TO_ID.mine}
                     onSuccess={reloadPage}
                 />

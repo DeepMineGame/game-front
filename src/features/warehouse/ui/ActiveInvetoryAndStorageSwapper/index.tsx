@@ -1,20 +1,21 @@
 import { DragEventHandler, FC, useState } from 'react';
-import { Col, Row, Tooltip } from 'antd';
+import { Col, Row } from 'antd';
 import cn from 'classnames';
-import { Button, primary5, Title, useReloadPage, useTableData } from 'shared';
+import { Button, Title, useReloadPage, useTravelConfirm } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { isUserInHive } from 'features/hive';
-import { Travel } from 'features/physicalShift';
+import { CallToTravelNotification } from 'features/physicalShift';
+import { LOCATION_TO_ID, withdrawAssets } from 'entities/smartcontract';
 import {
-    getInventoryConfig,
-    IN_GAME_NFT_IDS,
-    LOCATION_TO_ID,
-    UserInventoryType,
-    withdrawAssets,
-} from 'entities/smartcontract';
-import { atomicTransfer } from 'entities/atomicassets';
-import { userAtomicAssetsStore, WarehouseGate } from '../../model';
+    atomicTransfer,
+    MergedInventoryWithAtomicAssets,
+} from 'entities/atomicassets';
+import {
+    $mergedStorageWithAtomicAssets,
+    $mergedInventoryWithAtomicAssets,
+    WarehouseGate,
+} from '../../model';
 import { useSmartContractAction } from '../../../hooks';
 import styles from './styles.module.scss';
 import { useRenderCards } from './utils/useRenderCards';
@@ -26,27 +27,40 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     const { t } = useTranslation();
     useGate(WarehouseGate, { searchParam: accountName });
     const isInHive = useStore(isUserInHive);
+    const { travelConfirm } = useTravelConfirm(LOCATION_TO_ID.hive);
     const renderCards = useRenderCards();
-    const userAtomicAssets = useStore(userAtomicAssetsStore);
-    const { data: userInventory } =
-        useTableData<UserInventoryType>(getInventoryConfig);
-    const userInventoryNotUse = userInventory.filter(({ in_use }) => !in_use);
-
-    const gameAssets = userAtomicAssets.filter((item) =>
-        IN_GAME_NFT_IDS.includes(item.template_id)
+    const mergedStorageWithAtomicAssets = useStore(
+        $mergedStorageWithAtomicAssets
+    );
+    const mergedInventoryWithAtomicAssets = useStore(
+        $mergedInventoryWithAtomicAssets
     );
 
-    const [draggedElement, setDraggedElement] =
-        useState<null | UserInventoryType>(null);
+    const [draggedElement, setDraggedElement] = useState<
+        null | MergedInventoryWithAtomicAssets[number]
+    >(null);
+
     const reloadPage = useReloadPage();
     const [draggedElements, setDraggedElements] = useState(
-        new Set<UserInventoryType>()
+        new Set<MergedInventoryWithAtomicAssets[number]>()
     );
+    const removeDraggedElements = (
+        asset: MergedInventoryWithAtomicAssets[number]
+    ) =>
+        ![...draggedElements].some(
+            (element) => element.asset_id === asset.asset_id
+        );
     const isAtomicIncludesDragged =
-        gameAssets.filter((item) => draggedElements.has(item))?.length > 0;
+        mergedStorageWithAtomicAssets.filter((item) =>
+            draggedElements.has(item)
+        )?.length > 0;
 
     const onDrop: DragEventHandler<HTMLDivElement> = (e) => {
         e?.preventDefault();
+
+        if (!isInHive) {
+            return travelConfirm();
+        }
 
         if (draggedElement && draggedElements.has(draggedElement)) {
             return setDraggedElements(
@@ -86,7 +100,9 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
         return reloadPage();
     };
 
-    const handleDragCard = (element: UserInventoryType) => {
+    const handleDragCard = (
+        element: MergedInventoryWithAtomicAssets[number]
+    ) => {
         if (isInHive) {
             setDraggedElement(element);
         }
@@ -95,47 +111,40 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     return (
         <Row>
             {!isInHive && (
-                <Travel
+                <CallToTravelNotification
                     toLocationId={LOCATION_TO_ID.hive}
                     onSuccess={reloadPage}
                 />
             )}
-            <Tooltip
-                overlayClassName={styles.cardColumnTooltip}
-                visible={!isInHive}
-                color={primary5}
-                overlay={t(
-                    'components.hive.YouHaveToPhysicalToManageInventory'
-                )}
+            <Col
+                span={11}
+                className={cn(styles.cardColumn, {
+                    [styles.cardColumnDisabled]: !isInHive,
+                })}
+                onDrop={onDrop}
+                // https://stackoverflow.com/questions/32084053/why-is-ondrop-not-working
+                onDragOver={(e) => e.preventDefault()}
             >
-                <Col
-                    span={11}
-                    className={cn(styles.cardColumn, {
-                        [styles.cardColumnDisabled]: !isInHive,
-                    })}
-                    onDrop={onDrop}
-                    // https://stackoverflow.com/questions/32084053/why-is-ondrop-not-working
-                    onDragOver={(e) => e.preventDefault()}
-                >
-                    <Title className={styles.title} level={5}>
-                        {t('components.hive.activeInventory')}
-                    </Title>
-                    <div>
-                        {isAtomicIncludesDragged && draggedElements.size ? (
-                            <div className={styles.draggedElements}>
-                                {renderCards(draggedElements, handleDragCard)}
-                            </div>
-                        ) : (
-                            <div className={styles.cardsWrapper}>
-                                {renderCards(
-                                    userInventoryNotUse,
-                                    handleDragCard
-                                )}
-                            </div>
-                        )}
-                    </div>
-                </Col>
-            </Tooltip>
+                <Title className={styles.title} level={5}>
+                    {t('components.hive.activeInventory')}
+                </Title>
+                <div>
+                    {isAtomicIncludesDragged && draggedElements.size ? (
+                        <div className={styles.draggedElements}>
+                            {renderCards(draggedElements, handleDragCard)}
+                        </div>
+                    ) : (
+                        <div className={styles.cardsWrapper}>
+                            {renderCards(
+                                mergedInventoryWithAtomicAssets.filter(
+                                    removeDraggedElements
+                                ),
+                                handleDragCard
+                            )}
+                        </div>
+                    )}
+                </div>
+            </Col>
             <Col
                 offset={1}
                 span={11}
@@ -160,7 +169,12 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                             {renderCards(draggedElements, handleDragCard)}
                         </div>
                     ) : (
-                        renderCards(gameAssets, handleDragCard)
+                        renderCards(
+                            mergedStorageWithAtomicAssets.filter(
+                                removeDraggedElements
+                            ),
+                            handleDragCard
+                        )
                     )}
                 </div>
             </Col>

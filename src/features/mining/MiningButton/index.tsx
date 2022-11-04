@@ -24,6 +24,7 @@ import {
 } from 'entities/smartcontract';
 import { ClaimInfo } from '../ClaimInfo';
 import { miningContractStore, MiningPageGate } from '../miningModel';
+import { useDisabledState } from '../hooks';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -121,6 +122,8 @@ export const MiningAndClaimButton: FC<Props> = memo(
             ? t('pages.mining.cool')
             : t('components.common.button.claim');
 
+        const { disabled } = useDisabledState();
+
         return (
             <>
                 <Button
@@ -130,6 +133,7 @@ export const MiningAndClaimButton: FC<Props> = memo(
                     size={isDesktop ? 'large' : 'middle'}
                     onClick={onMiningButtonClick}
                     ghost={isMining}
+                    disabled={!isMiningFinished && disabled}
                 >
                     {isMiningFinished
                         ? buttonText[ActionState.finished]

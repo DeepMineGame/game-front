@@ -2,27 +2,30 @@ import {
     Button,
     green6,
     Loader,
-    showSuccessModal,
     orange6,
+    showSuccessModal,
     Title,
     useReloadPage,
     useTableData,
+    useTravelConfirm,
+    useUserLocation,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { FC } from 'react';
 import { Badge, Space } from 'antd';
 import { useGate, useStore } from 'effector-react';
-import { Travel, useSmartContractAction } from 'features';
+import { CallToTravelNotification, useSmartContractAction } from 'features';
 import { FrownOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { serviceMarket } from 'app/router/paths';
+import { ServiceMarketTabIds } from 'app/router/constants';
 import {
     activatemine,
-    deactmine,
     getMinesByOwnerEffect,
     getUserConfig,
     LOCATION_TO_ID,
     MineState,
+    setupMine,
     UserInfoType,
 } from 'entities/smartcontract';
 import { MineManagementGate, userMineStore } from '../../../models';
@@ -39,6 +42,8 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
     useGate(MineManagementGate, {
         searchParam: chainAccountName,
     });
+    const inLocation = useUserLocation();
+    const { travelConfirm } = useTravelConfirm(LOCATION_TO_ID.mine_deck);
     const { data: userInfo } = useTableData<UserInfoType>(getUserConfig);
     const inUserInMineOwnerLocation =
         userInfo?.[0]?.location === LOCATION_TO_ID.mine_deck;
@@ -50,22 +55,34 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
     const mine = useStore(userMineStore)?.[0];
     const isMineLoading = useStore(getMinesByOwnerEffect.pending);
     const isMineActive = mine?.state === MineState.activated;
+    const isMineSetuped = mine?.state === MineState.setuped;
+    const isMineDeactivated = mine?.state === MineState.deactivated;
     const statusText = isMineActive
         ? t('components.common.status.active')
         : t('components.common.status.inactive');
-
-    const deactivateMine = useSmartContractAction({
-        action: deactmine({ waxUser: chainAccountName, mineId: mine?.id }),
+    const setupMineAction = useSmartContractAction({
+        action: setupMine({
+            waxUser: chainAccountName,
+            contractId: contract?.id!,
+        }),
     });
     const activateMine = useSmartContractAction({
         action: activatemine({ waxUser: chainAccountName, mineId: mine?.id }),
     });
     const onActivationButtonClick = async () => {
-        if (!contract) {
-            return navigate(serviceMarket);
+        if (!inLocation.mineDeck) {
+            return travelConfirm(reloadPage);
         }
-        const action = isMineActive ? deactivateMine : activateMine;
-        await action();
+        if (!contract) {
+            return navigate(
+                `${serviceMarket}?tabId=${ServiceMarketTabIds.mineOperation}`
+            );
+        }
+        if (isMineSetuped || isMineDeactivated) {
+            await activateMine();
+            return reloadPage();
+        }
+        await setupMineAction();
         return showSuccessModal({
             title: t('features.mineOwner.mineActivation'),
             content: t('features.mineOwner.mineOperationSucceed'),
@@ -79,7 +96,7 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
             </div>
         );
     }
-    if (!mine) {
+    if (!mine && !getMinesByOwnerEffect.pending) {
         return (
             <div className={styles.background}>
                 <Title className={styles.title}>
@@ -91,9 +108,10 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
             </div>
         );
     }
-    const toggleMineText = isMineActive
-        ? t('components.common.button.deactivate')
-        : t('components.common.button.activate');
+    const toggleMineText =
+        isMineSetuped || isMineDeactivated
+            ? t('components.common.button.activate')
+            : t('components.common.button.setup');
     return (
         <div className={styles.background}>
             <Space direction="vertical">
@@ -115,25 +133,27 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
             </Space>
 
             <div>
-                <Space direction="vertical">
-                    <Button
-                        type={isMineActive ? 'ghost' : 'primary'}
-                        onClick={onActivationButtonClick}
-                        loading={isMinesLoading}
-                    >
-                        {contract ? toggleMineText : 'Sign new contract'}
-                    </Button>
-                    {chainAccountName && (
-                        <UnsetupMine
-                            activeContract={contract}
-                            isMineActive={isMineActive}
-                            accountName={chainAccountName}
-                        />
+                <Space size="large">
+                    {!isMineActive && (
+                        <Button
+                            type={isMineActive ? 'ghost' : 'primary'}
+                            onClick={onActivationButtonClick}
+                            loading={isMinesLoading}
+                        >
+                            {contract
+                                ? toggleMineText
+                                : t('pages.mineManagement.signNewContract')}
+                        </Button>
                     )}
+                    <UnsetupMine
+                        activeContract={contract}
+                        isMineActive={isMineActive}
+                        accountName={chainAccountName}
+                    />
                 </Space>
             </div>
             {userInfo?.length && !inUserInMineOwnerLocation && (
-                <Travel
+                <CallToTravelNotification
                     toLocationId={LOCATION_TO_ID.mine_deck}
                     onSuccess={reloadPage}
                 />

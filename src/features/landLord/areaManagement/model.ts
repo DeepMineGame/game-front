@@ -43,9 +43,10 @@ export const getMinesByAreaId = createEffect(
     }
 );
 
-export const inventoriesStore = createStore<UserInventoryType[] | null>(
-    null
-).on(getInventoriesEffect.doneData, (_, { rows }) => rows);
+export const $inventory = createStore<UserInventoryType[] | null>(null).on(
+    getInventoriesEffect.doneData,
+    (_, { rows }) => rows
+);
 
 export const userAreaNftStore = createStore<UserInventoryType[] | null>(null);
 
@@ -103,7 +104,7 @@ forward({
 });
 
 sample({
-    source: inventoriesStore,
+    source: $inventory,
     target: userAreaNftStore,
     filter: (inventories) =>
         Boolean(

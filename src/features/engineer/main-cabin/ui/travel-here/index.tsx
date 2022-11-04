@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Travel } from 'features';
+import { CallToTravelNotification } from 'features';
 import { LOCATION_TO_ID } from 'entities/smartcontract';
 import { useReloadPage } from 'shared/lib/hooks';
 import { Button } from 'shared/ui/ui-kit';
@@ -12,10 +12,10 @@ const TravelHere: FC = () => {
 
     return (
         <State
-            title={t('pages.travel.travelHere')}
+            title={t('travel.travelHere')}
             content={t('pages.engineer.youShouldTravelToContinue')}
             bottom={
-                <Travel
+                <CallToTravelNotification
                     onSuccess={reloadPage}
                     toLocationId={LOCATION_TO_ID.engineers_workshop}
                     trigger={

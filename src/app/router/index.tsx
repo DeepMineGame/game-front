@@ -3,7 +3,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useEvent, useStore } from 'effector-react';
 
 import { useChainAuthContext, LoadingScreen, LogAs } from 'shared';
-import { useLogout } from 'features';
+import { useLogout, TravelProgress } from 'features';
 import { userStore, getUserFromSessionEffect } from 'entities/user';
 import { routes, fallbackRoute, AppRoute } from './routes';
 import { DocumentTitle } from './components/DocumentTitle';
@@ -61,6 +61,7 @@ const renderRoutes = (routeList: AppRoute[]) =>
                     <LogInWrapper forAdmin={forAdmin}>
                         <DocumentTitle title={titleTag} />
                         <Component />
+                        <TravelProgress />
                     </LogInWrapper>
                 ) : (
                     <>

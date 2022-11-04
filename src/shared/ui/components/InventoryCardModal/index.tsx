@@ -1,6 +1,7 @@
 import {
     DMECoinIcon,
     GetCostParams,
+    isAssetAvailable,
     Modal,
     useAccountName,
     useReloadPage,
@@ -11,14 +12,14 @@ import { Col, message, ModalProps, Row, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { serviceMarket } from 'app/router/paths';
 import { ServiceMarketTabIds } from 'app/router/constants';
-import { AssetCard, getCardStatus, useSmartContractAction } from 'features';
+import { useSmartContractAction } from 'features';
 import { useStore } from 'effector-react';
-import { AssetDataType, getAtomicAssetsDataById } from 'entities/atomicassets';
 import {
-    rarityMap,
-    repairEquipment,
-    UserInventoryType,
-} from 'entities/smartcontract';
+    AssetDataType,
+    getAtomicAssetsDataById,
+    MergedInventoryWithAtomicAssets,
+} from 'entities/atomicassets';
+import { rarityMap, repairEquipment } from 'entities/smartcontract';
 import { balancesStore } from 'entities/user';
 import {
     ActionModal,
@@ -30,12 +31,14 @@ import {
     Text,
     Divider,
     Margin,
+    getAssetStatus,
+    Card,
 } from 'shared/ui/ui-kit';
 import styles from './styles.module.scss';
 
 type InventoryCardModalProps = ModalProps & {
-    card: UserInventoryType;
-    onSelect?: (card: UserInventoryType) => void;
+    card: MergedInventoryWithAtomicAssets[number];
+    onSelect?: (card: MergedInventoryWithAtomicAssets[number]) => void;
 };
 
 enum ModalType {
@@ -95,10 +98,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         onSignSuccess: reload,
     });
 
-    const isNotAvailable = card.available_from > Date.now();
-
-    const isNotCardBroken =
-        getCardStatus(card) !== Status.broken || isNotAvailable;
+    const assetIsBroken = getAssetStatus(card) === Status.broken;
 
     return (
         <Modal
@@ -109,17 +109,15 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         >
             <div className={styles.container}>
                 <div>
-                    <AssetCard
+                    <Card
                         inventory={card}
                         onRepairFinish={reload}
-                        showCardBadgeStatus={
-                            getCardStatus(card) === Status.broken
-                        }
+                        showCardBadgeStatus={assetIsBroken}
                         withDepreciationBar={false}
                     />
                     {onSelect && (
                         <Button
-                            disabled={isNotAvailable}
+                            disabled={assetIsBroken || !isAssetAvailable(card)}
                             onClick={handleSelect}
                             block
                             type="primary"
@@ -193,20 +191,18 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                     className={
                                         styles.depreciationProgressBarWidth
                                     }
-                                    completedMining={
-                                        cardData?.data.depreciation
-                                    }
-                                    serviceLife={
+                                    depreciation={cardData?.data.depreciation}
+                                    currentCapacity={
                                         cardData?.data['current capacity']
                                     }
-                                    totalServiceLife={
+                                    maximalCapacity={
                                         cardData?.data['maximal capacity']
                                     }
                                 />
                             </Col>
                             <Col span={10}>
                                 <Button
-                                    disabled={isNotCardBroken}
+                                    disabled={!assetIsBroken}
                                     size="large"
                                     type="link"
                                     onClick={() => {
@@ -246,7 +242,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             </Col>
                             <Col span={10}>
                                 <Button
-                                    disabled={isNotCardBroken}
+                                    disabled={!assetIsBroken}
                                     type="link"
                                     size="large"
                                     onClick={() => {

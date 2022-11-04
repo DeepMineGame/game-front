@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, SignLevelUpgradeOrderModal } from 'shared';
+import { Button, SignLevelUpgradeOrderModal, useReloadPage } from 'shared';
 import { useSmartContractAction } from 'features';
 import { message } from 'antd';
 import { ContractDto, signOrder } from 'entities/smartcontract';
@@ -12,6 +12,7 @@ type Props = {
 
 export const SignLevelUpgradeOrder: FC<Props> = ({ contract, accountName }) => {
     const { t } = useTranslation();
+    const reloadPage = useReloadPage();
     const [signLevelUpgradeOrderModalOpen, setSignLevelUpgradeOrderModalOpen] =
         useState(false);
 
@@ -22,10 +23,12 @@ export const SignLevelUpgradeOrder: FC<Props> = ({ contract, accountName }) => {
             waxUser: accountName,
             contractId: contract.id,
         }),
-        onSignSuccess: () =>
+        onSignSuccess: () => {
             message.success(
                 t('pages.serviceMarket.contract.successfullySigned')
-            ),
+            );
+            setTimeout(reloadPage, 1500);
+        },
     });
 
     const onSign = async () => {
@@ -54,6 +57,7 @@ export const SignLevelUpgradeOrder: FC<Props> = ({ contract, accountName }) => {
                     message.success(
                         t('pages.serviceMarket.contract.successfullySigned')
                     );
+                    setTimeout(reloadPage, 1500);
                 }}
             />
         </>

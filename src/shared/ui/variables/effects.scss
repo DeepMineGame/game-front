@@ -16,4 +16,27 @@
   box-shadow: 0 0 4px rgba(250, 173, 20, 0.5);
 }
 
-$glow: drop-shadow(0 0 20px $color-neutral-neutral-10);
+@mixin enter-hover {
+  @keyframes glitch {
+    0% {
+      filter: drop-shadow(0 0 20px $color-neutral-neutral-10)
+    }
+
+    50% {
+      filter: drop-shadow(0 0 18px $color-neutral-neutral-10);
+    }
+
+    100% {
+      filter: drop-shadow(0 0 20px $color-neutral-neutral-10);
+    }
+  }
+
+  &:hover {
+    animation: glitch 2s infinite;
+  }
+
+  &:hover .enterLink {
+    background-color: $color-primary-primary-6;
+  }
+}
+

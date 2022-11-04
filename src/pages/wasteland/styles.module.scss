@@ -4,7 +4,6 @@
   background-size: contain;
   background-position: bottom;
   background-repeat: no-repeat;
-  filter: $glow;
   cursor: pointer;
 }
 
@@ -25,14 +24,11 @@ h5.enterLink {
   cursor: pointer;
   background: rgba(20, 20, 20, 0.4);
   border-bottom: 1px solid $color-neutral-neutral-1;
-
-  &:hover {
-    background-color: $color-primary-primary-6;
-  }
 }
 
 .city {
   @include background-shared-style;
+  @include enter-hover;
 
   background-image: url("../../shared/ui/images/wasteland/city.webp");
   height: 30vh;
@@ -41,10 +37,6 @@ h5.enterLink {
 
   @media (min-width: $media-tablet)  {
     filter: initial;
-  }
-
-  &:hover {
-    filter: $glow
   }
 }
 
@@ -66,6 +58,7 @@ h5.enterLink {
 
 .mineDeck {
   @include background-shared-style;
+  @include enter-hover;
 
   position: absolute;
   right: 0;
@@ -77,10 +70,6 @@ h5.enterLink {
   @media (min-width: $media-tablet)  {
     filter: initial;
   }
-
-  &:hover {
-    filter: $glow
-  }
 }
 
 .mineDeckLink {
@@ -91,6 +80,7 @@ h5.enterLink {
 
 .mine {
   @include background-shared-style;
+  @include enter-hover;
 
   position: absolute;
   bottom: 0;
@@ -103,10 +93,6 @@ h5.enterLink {
 
   @media (min-width: $media-tablet)  {
     filter: initial;
-  }
-
-  &:hover {
-    filter: $glow
   }
 }
 

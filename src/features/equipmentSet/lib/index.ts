@@ -1,21 +1,22 @@
+import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
 import {
     ContractorDto,
     ID_TO_INVENTORY,
     InventoryNameType,
     miningEquipmentNames,
-    UserInventoryType,
 } from 'entities/smartcontract';
 
-export const getEquipmentName = (equipment: UserInventoryType) =>
-    ID_TO_INVENTORY[equipment.template_id];
+export const getEquipmentName = (
+    equipment: MergedInventoryWithAtomicAssets[number]
+) => ID_TO_INVENTORY[equipment.template_id];
 
 export const findEquipmentByName = (
-    inventory: UserInventoryType[],
+    inventory: MergedInventoryWithAtomicAssets,
     name: InventoryNameType
 ) => inventory.find((v) => getEquipmentName(v) === name);
 
 export const filterEquipmentByName = (
-    inventory: UserInventoryType[],
+    inventory: MergedInventoryWithAtomicAssets,
     name: InventoryNameType
 ) => inventory.filter((v) => getEquipmentName(v) === name);
 
@@ -52,18 +53,18 @@ export const filterEquipmentByName = (
  */
 export const getSelectedEquipmentBySlots = (
     equipmentSlots: ContractorDto['equip_slots'],
-    userInventory: UserInventoryType[]
+    userInventory: MergedInventoryWithAtomicAssets
 ) => {
     const equipment = equipmentSlots
         .map(({ asset_id }) =>
             userInventory.find((v) => v.asset_id === asset_id)
         )
-        .filter((v) => v) as UserInventoryType[];
+        .filter((v) => v) as MergedInventoryWithAtomicAssets;
 
     return Object.fromEntries(
         miningEquipmentNames.map((name) => [
             name,
             findEquipmentByName(equipment, name),
         ])
-    ) as Record<InventoryNameType, UserInventoryType>;
+    );
 };

@@ -1,7 +1,8 @@
-import { UserInventoryType } from 'entities/smartcontract';
+import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
 
 export const removeDraggedElementFromState =
-    (draggedElement: UserInventoryType) => (state: Set<UserInventoryType>) =>
+    (draggedElement: MergedInventoryWithAtomicAssets[number]) =>
+    (state: Set<MergedInventoryWithAtomicAssets[number]>) =>
         new Set(
             [...state].filter(
                 ({ asset_id }) => asset_id !== draggedElement?.asset_id

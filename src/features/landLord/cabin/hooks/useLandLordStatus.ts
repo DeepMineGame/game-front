@@ -1,16 +1,12 @@
 import { useMemo } from 'react';
 import { useStore } from 'effector-react';
 
-import {
-    InUseType,
-    inventoriesStore,
-    InventoryType,
-} from 'entities/smartcontract';
+import { InUseType, $inventory, InventoryType } from 'entities/smartcontract';
 import { CABIN_STATUS } from '../constants';
 import { minesForAreaSlots } from '../../areaManagement';
 
 export const useLandLordStatus = () => {
-    const inventories = useStore(inventoriesStore);
+    const inventories = useStore($inventory);
     const mines = useStore(minesForAreaSlots);
 
     // TODO: add searching and mine_is_set statuses after Service Market

@@ -11,6 +11,7 @@ type Props = Omit<TextProps, 'type'> &
         type?: BaseType | 'primary' | 'white' | 'neutral';
         size?: 'xs' | 'sm' | 'md' | 'lg';
         bold?: boolean;
+        block?: boolean;
     };
 
 export const Text: FC<Props> = ({
@@ -18,15 +19,16 @@ export const Text: FC<Props> = ({
     bold,
     size = 'sm',
     type,
+    block,
     ...props
 }) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('typography');
-
     return (
         <Typography.Text
             className={classNames(className, styles[size], {
                 [styles.bold]: bold,
+                [styles.block]: block,
                 [styles.fontFamilyBai]: props.fontFamily === 'bai',
                 [styles.fontFamilyOrbitron]: props.fontFamily === 'orbitron',
                 [`${prefixCls}-${type}`]: type,

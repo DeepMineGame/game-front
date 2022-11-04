@@ -20,5 +20,5 @@ export const fetchDmeBalance = async ({
     const balance = rows?.[0]?.balance;
     const [value] = balance ? balance.split(' ') : [0];
 
-    return Number(value).toFixed(1);
+    return Number(value).toFixed(4);
 };

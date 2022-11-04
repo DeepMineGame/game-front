@@ -36,7 +36,7 @@ export type ContractDto = {
     fee_percent: number;
     fee_daily_min_amount: number;
     days_for_penalty: number;
-    penalty_amount: number;
+    penalty_amount: string;
     demand_penalty: number;
     penalty_available: number;
     create_time: number;
@@ -63,7 +63,7 @@ export type ContractDto = {
     cost_of_execution: number;
     client_discord: string;
     executor_discord: string;
-    demand_penalty_by_client: number;
+    penalty_demanded_by: string;
     penalty_by_fee_days_available: number;
 };
 

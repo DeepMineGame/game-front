@@ -39,7 +39,9 @@ const EngineerSettings: FC<{ disabled: boolean }> = ({ disabled }) => {
     const reloadPage = useReloadPage();
     const accountName = useAccountName();
     const inLocation = useUserLocation();
-    const { travelConfirm } = useTravelConfirm();
+    const { travelConfirm } = useTravelConfirm(
+        LOCATION_TO_ID.engineers_workshop
+    );
     const { certificate } = useStore($engineerCabinStore);
 
     const onDismiss = useSmartContractAction({
@@ -84,7 +86,9 @@ const EngineerSettings: FC<{ disabled: boolean }> = ({ disabled }) => {
             ]}
         >
             <SettingOutlined
-                className={cn(styles.icon, { [styles.disabled]: disabled })}
+                className={cn(styles.icon, styles.settingsIcon, {
+                    [styles.disabled]: disabled,
+                })}
             />
         </Dropdown>
     );

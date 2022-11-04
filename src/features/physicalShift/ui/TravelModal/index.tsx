@@ -40,7 +40,7 @@ export const TravelModal = ({
                 onOk: t('pages.contractor.travel.travel'),
             }}
             costs={{
-                timeSeconds: 1,
+                timeSeconds: 20,
                 energy: 0,
             }}
         />

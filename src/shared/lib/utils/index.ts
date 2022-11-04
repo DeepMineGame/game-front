@@ -39,10 +39,10 @@ export const getUserRoleInContract = (
     return null;
 };
 
-export const getDmeAmount = (value: number) => {
+export const getDmeAmount = (value: number | string) => {
     if (Number.isNaN(value)) return 0;
 
-    return value / 10 ** 8;
+    return Number(value) / 10 ** 8;
 };
 
 export * from './getNftImagePath';
@@ -56,3 +56,7 @@ export {
     getUpgradeType,
     parseAttrs,
 } from './get-upgrade-attr';
+export { createErrorMessage } from './create-error-message';
+export * from './merge-assets';
+export { isAssetAvailable } from './is-asset-available';
+export { getGameAssets } from './get-game-assets';

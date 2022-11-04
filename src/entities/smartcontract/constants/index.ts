@@ -1,6 +1,7 @@
 import { isMainNet } from 'app/constants';
 
 export const ENGINEER_CERTIFICATE_ID = 505660;
+export const ENGINEER_EQUIPMENT_SCHEMA_ID = 522137;
 
 const TEST_NET_IN_GAME_IDS = [
     176450,
@@ -35,7 +36,7 @@ const TEST_NET_IN_GAME_IDS = [
     176871,
     176451,
     ENGINEER_CERTIFICATE_ID,
-    522137,
+    ENGINEER_EQUIPMENT_SCHEMA_ID,
 ];
 
 const MAIN_NET_IN_GAME_IDS = [
@@ -137,6 +138,8 @@ export enum INDEX_POSITION_USER {
 
 export const deepminegame = 'deepmineappg';
 export const deepminesmrt = 'deepminesrmt';
+export const deepmineming = 'deepmineming';
+export const deepmineengr = 'deepmineengr';
 
 export const dmeToUpgrade = {
     Common: {

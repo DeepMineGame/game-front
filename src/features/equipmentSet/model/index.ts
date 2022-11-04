@@ -8,6 +8,7 @@ import {
     ContractType,
     getContractorsTableData,
     getContractsNameConfig,
+    getInventoriesEffect,
     mapSearchParamForIndexPositionToFindContracts,
 } from 'entities/smartcontract';
 
@@ -50,5 +51,5 @@ export const contractorsStore = createStore<ContractorDto[] | null>(null).on(
 
 forward({
     from: EquipmentSetGate.open,
-    to: [getContractsEffect, getContractorsEffect],
+    to: [getContractsEffect, getContractorsEffect, getInventoriesEffect],
 });

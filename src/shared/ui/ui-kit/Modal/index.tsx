@@ -95,19 +95,3 @@ export const showSuccessModal = ({
         className: styles.simpleModal,
     });
 };
-
-export const showErrorModal = ({
-    title,
-    content,
-    ...props
-}: {
-    title: ReactNode;
-    content: ReactNode;
-} & ModalProps) => {
-    ModalAnt.error({
-        ...props,
-        title: <span className={styles.simpleModalTitle}>{title}</span>,
-        content,
-        className: styles.simpleModal,
-    });
-};

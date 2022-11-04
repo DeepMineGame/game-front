@@ -1,13 +1,23 @@
 import { useTranslation } from 'react-i18next';
-import { CardHolder, useReloadPage, Status } from 'shared';
-import { AssetCard, getCardStatus } from 'features';
+import {
+    CardHolder,
+    useReloadPage,
+    Status,
+    getAssetStatus,
+    Card,
+} from 'shared';
 import { FC } from 'react';
-import { InventoryNameType, UserInventoryType } from 'entities/smartcontract';
+import { InventoryNameType } from 'entities/smartcontract';
+import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
 import styles from './styles.module.scss';
 
 interface Props {
-    selectedEquipment: Record<InventoryNameType, UserInventoryType> | {};
-    onCardInUseRemove: (inventory: UserInventoryType) => void;
+    selectedEquipment:
+        | Record<InventoryNameType, MergedInventoryWithAtomicAssets[number]>
+        | {};
+    onCardInUseRemove: (
+        inventory: MergedInventoryWithAtomicAssets[number]
+    ) => void;
     onCardHolderClick: (name: InventoryNameType) => void;
     onCardNotInUseRemove: (name: InventoryNameType) => void;
     isMining?: boolean;
@@ -27,9 +37,9 @@ export const EquipmentCards: FC<Props> = ({
         <div className={styles.cards}>
             {Object.entries(selectedEquipment).map(([name, inventory]) =>
                 inventory ? (
-                    <AssetCard
+                    <Card
                         tooltipOverlay={
-                            getCardStatus(inventory) === Status.broken
+                            getAssetStatus(inventory) === Status.broken
                                 ? t(
                                       'pages.equipmentSet.main.tooltipForDamagedEquip'
                                   )

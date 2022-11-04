@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSmartContractAction } from 'features/hooks';
-import { upgradeFinish } from 'entities/smartcontract';
+import { LOCATION_TO_ID, upgradeFinish } from 'entities/smartcontract';
 import { Button } from 'shared/ui/ui-kit';
 import {
     useReloadPage,
@@ -18,7 +18,9 @@ const GetUpgrade: FC<Props> = ({ accountName, contractId }) => {
     const { t } = useTranslation();
     const reloadPage = useReloadPage();
     const inLocation = useUserLocation();
-    const { travelConfirm } = useTravelConfirm();
+    const { travelConfirm } = useTravelConfirm(
+        LOCATION_TO_ID.engineers_workshop
+    );
     const signUpgradeFinish = useSmartContractAction({
         action: upgradeFinish(accountName, contractId),
         onSignSuccess: reloadPage,
