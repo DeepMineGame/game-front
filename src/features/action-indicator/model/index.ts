@@ -9,7 +9,7 @@ import {
 } from 'entities/smartcontract';
 
 export const getActionForIndicate = createEffect(
-    async ({
+    ({
         searchParam,
     }: {
         searchParam: string;

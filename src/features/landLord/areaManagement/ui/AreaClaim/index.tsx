@@ -45,7 +45,7 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
 
     const onEngage = async () => {
         await engageAreaAction();
-        return showSuccessModal({
+        showSuccessModal({
             title: t('pages.areaManagement.engage'),
             content: t('pages.areaManagement.areaActionSucceed'),
             onOk: reloadPage,
@@ -54,7 +54,7 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
 
     const onUnengage = async () => {
         await unEngageAreaAction();
-        return showSuccessModal({
+        showSuccessModal({
             title: t('pages.areaManagement.unengage'),
             content: t('pages.areaManagement.areaActionSucceed'),
             onOk: reloadPage,
@@ -63,7 +63,7 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
 
     const handleClaim = async () => {
         await claimAction();
-        return showSuccessModal({
+        showSuccessModal({
             title: t('pages.areaManagement.claim'),
             content: t('pages.areaManagement.areaActionSucceed'),
             onOk: reloadPage,

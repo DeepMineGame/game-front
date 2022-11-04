@@ -7,7 +7,7 @@ import { terminateContract } from 'entities/smartcontract';
 type Props = {
     accountName: string;
     contractId: number;
-    penalty: number;
+    penalty: number | string;
 };
 
 const TerminateContract: FC<Props> = ({ accountName, contractId, penalty }) => {

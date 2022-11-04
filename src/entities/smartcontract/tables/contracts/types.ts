@@ -36,7 +36,7 @@ export type ContractDto = {
     fee_percent: number;
     fee_daily_min_amount: number;
     days_for_penalty: number;
-    penalty_amount: number;
+    penalty_amount: string;
     demand_penalty: number;
     penalty_available: number;
     create_time: number;

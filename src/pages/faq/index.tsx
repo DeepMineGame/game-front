@@ -33,7 +33,7 @@ export const FaqPage = () => {
                     </ExternalLink>{' '}
                     {t('pages.faq.more')}{' '}
                     <ExternalLink href="https://docs.deepmine.world/deepmine/deepmine-gaming-nfts/equipment">
-                        {t('pages.faq.here')}
+                        {t('pages.faq.here')}.
                     </ExternalLink>{' '}
                     {t('pages.faq.explore')}{' '}
                     <ExternalLink href="https://shelter.deepmine.world/">
@@ -95,6 +95,10 @@ export const FaqPage = () => {
                     {t('pages.faq.and')}{' '}
                     <ExternalLink href="https://docs.deepmine.world/deepmine/deepmine-entities/game-roles/contractor">
                         {t('roles.contractor')}
+                    </ExternalLink>{' '}
+                    and{' '}
+                    <ExternalLink href="https://docs.deepmine.world/deepmine/deepmine-entities/game-roles/specialist/engineer">
+                        {t('roles.engineer')}
                     </ExternalLink>
                     . {t('pages.faq.moreRoles')}{' '}
                     <ExternalLink href="/img/roles.webp">
@@ -118,6 +122,7 @@ export const FaqPage = () => {
                     <li>{t('pages.faq.community')}</li>
                     <li>{t('pages.faq.weAreChampionsMyFriend')}</li>
                     <li>{t('pages.faq.weAreChampionsOfTheWorld')}</li>
+                    <li>{t('pages.faq.abic')}</li>
                 </ul>
             </Space>
         </div>

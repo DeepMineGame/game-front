@@ -37,7 +37,12 @@ export const MineStat = () => {
         <KeyValueTable
             className={styles.table}
             items={{
-                [t('pages.landLord.cabin.DMEToClaim')]: feeToClaim / 10 ** 8,
+                [t('pages.landLord.cabin.DMEToClaim')]: (
+                    <span>
+                        {'\u00A0'}
+                        {`${feeToClaim / 10 ** 8}`}
+                    </span>
+                ),
                 [t('pages.mining.mineDepth')]:
                     userMine?.[0]?.layer_depth ?? '-',
             }}

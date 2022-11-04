@@ -45,7 +45,7 @@ const States = (mineOwnerContract: ContractDto) => ({
     },
     [DisabledState.NeedFinishMineownerContract]: {
         disabled: true,
-        message: <Trans i18nKey="pages.mining.installEquipSet" />,
+        message: <Trans i18nKey="pages.mining.contractRequiresAction" />,
         action: (
             <Link to={`/service-market/contract/${mineOwnerContract?.id}`}>
                 <Trans i18nKey="pages.mining.openContract" />
