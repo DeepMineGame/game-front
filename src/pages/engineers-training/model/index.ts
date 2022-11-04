@@ -100,14 +100,16 @@ export const $isInventoryFetching = combine(
 export const $learningSkill = $openSkillAction.map<LearningSkillType | null>(
     (openSkillAction) => {
         if (!openSkillAction || !openSkillAction?.attrs.length) return null;
-
         const action = openSkillAction as OpenSkillAction;
-        const [{ schema_type, level, rarity }] = action.attrs;
 
         return {
-            schemaType: schema_type,
-            level,
-            rarity,
+            ...action.attrs.reduce(
+                (result, attr) => ({
+                    ...result,
+                    [attr.key]: Number(attr.value),
+                }),
+                {} as Omit<LearningSkillType, 'finishesAt'>
+            ),
             finishesAt: action.finishes_at,
         };
     }
