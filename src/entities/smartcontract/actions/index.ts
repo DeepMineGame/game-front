@@ -17,6 +17,8 @@ export * from './terminateContract';
 export * from './abandonMine';
 export * from './engineer';
 export * from './repairEquipment';
+export * from './cmdStart';
+export * from './cmdFinish';
 
 export function toggleMining({
     waxUser,

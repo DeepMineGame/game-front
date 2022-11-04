@@ -37,7 +37,7 @@ export const Characteristics = ({ contractors }: Props) => {
                 />
                 <CharacteristicsLine
                     name={t('features.mining.mineSublevel')}
-                    value={mineStore?.[0]?.sub_level ?? '-'}
+                    value={mineStore?.[0]?.sublevel ?? '-'}
                 />
                 <CharacteristicsLine
                     name={t('pages.equipmentSet.characteristics.mineDepth')}
