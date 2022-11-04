@@ -18,7 +18,7 @@ export const useNft = () => {
         if (learningSkill) {
             if (
                 learningSkill.level === level &&
-                learningSkill.schemaType === schema &&
+                learningSkill.schema_type === schema &&
                 (!rarity || learningSkill.rarity === rarity)
             ) {
                 return TrainingNftStatus.learning;
@@ -42,7 +42,7 @@ export const useNft = () => {
         if (!learningSkill) return '';
 
         return getNftSrc(
-            learningSkill.schemaType,
+            learningSkill.schema_type,
             learningSkill.level,
             learningSkill.rarity
         );
