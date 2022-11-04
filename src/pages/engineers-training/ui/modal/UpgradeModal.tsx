@@ -3,13 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { Button, Text, useAccountName, useReloadPage } from 'shared';
 import { useSmartContractAction } from 'features/hooks';
 import { openSkill } from 'entities/smartcontract';
-import { TrainingNft, TrainingNftMeta } from '../../model/types';
+import { TrainingNftFull } from '../../model/types';
 import { ActionTable } from './shared/ActionTable';
 
 type Props = {
     isVisible: boolean;
     onCancel?: () => void;
-    nftData: TrainingNft & TrainingNftMeta;
+    nftData: TrainingNftFull;
 };
 
 const modalWidth = 458;

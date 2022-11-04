@@ -11,13 +11,13 @@ import {
     InventoryGate,
     $isInventoryFetching,
 } from '../../model';
-import { TrainingNft, TrainingNftMeta } from '../../model/types';
+import { TrainingNftFull } from '../../model/types';
 import { MainInformation } from './shared';
 import { ActionTable } from './shared/ActionTable';
 import { UpgradeModal } from './UpgradeModal';
 
 type Props = {
-    nftData: TrainingNft & TrainingNftMeta;
+    nftData: TrainingNftFull;
 };
 
 export const AvailableContent: React.FC<Props> = ({ nftData }) => {
@@ -44,7 +44,7 @@ export const AvailableContent: React.FC<Props> = ({ nftData }) => {
                         nftData={nftData}
                     />
                     <Button onClick={() => setIsUpgradeModalVisible(true)}>
-                        Learn
+                        {t('pages.engineersTraining.learn')}
                     </Button>
                 </>
             );

@@ -31,6 +31,8 @@ export type TrainingNftMeta = {
     level: Level;
 };
 
+export type TrainingNftFull = TrainingNft & TrainingNftMeta;
+
 export type TrainingLevel = { value: Level; nfts: TrainingNft[] };
 
 export type WaxUser = { account: string };

@@ -2,11 +2,12 @@ import { Typography, Row, Col } from 'antd';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
-import { EngineerSchema, RarityType } from 'entities/smartcontract';
+import { EngineerSchema } from 'entities/smartcontract';
 
 import { Nft, Props as NftProps } from '../nft';
-import { Level, TrainingLevel, TrainingNftStatus } from '../../model/types';
-import { $learningSkill, $level, $skillsMapByLevel } from '../../model';
+import { TrainingLevel } from '../../model/types';
+import { $level } from '../../model';
+import { useNft } from '../../model/hooks';
 
 import sharedStyles from '../styles.module.scss';
 import styles from './styles.module.scss';
@@ -31,34 +32,7 @@ export const TrainingArea = ({
 }: Props) => {
     const { t } = useTranslation();
     const currentLevel = useStore($level);
-    const skillsMapByLevel = useStore($skillsMapByLevel);
-    const learningSkill = useStore($learningSkill);
-
-    const getNftStatus = (
-        level: Level,
-        schema: EngineerSchema,
-        rarity?: RarityType
-    ): TrainingNftStatus => {
-        if (
-            learningSkill?.level === level &&
-            learningSkill.schemaType === schema &&
-            (rarity ? learningSkill.rarity === rarity : true)
-        ) {
-            return TrainingNftStatus.learning;
-        }
-
-        if (currentLevel < level) return TrainingNftStatus.notAvailable;
-
-        const hasSkill = skillsMapByLevel[level]?.some(
-            (skill) =>
-                skill.schema_type === schema &&
-                (rarity ? skill.rarity === rarity : true)
-        );
-
-        if (hasSkill) return TrainingNftStatus.learned;
-
-        return TrainingNftStatus.available;
-    };
+    const { getStatus } = useNft();
 
     return (
         <Row
@@ -109,7 +83,7 @@ export const TrainingArea = ({
                                                     src={nft.src}
                                                     level={level.value}
                                                     onClick={onNftClick}
-                                                    status={getNftStatus(
+                                                    status={getStatus(
                                                         level.value,
                                                         schemaType,
                                                         nft.rarity

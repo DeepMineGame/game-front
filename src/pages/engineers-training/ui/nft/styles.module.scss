@@ -15,8 +15,10 @@
             display: block;
             position: relative;
 
+            --default-background:  #939393;
+
             &[src=""] {
-                background-color: #939393;
+                background-color: var(--default-background);
             }
         }
     }

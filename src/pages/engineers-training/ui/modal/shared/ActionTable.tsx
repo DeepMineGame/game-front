@@ -8,12 +8,12 @@ import { useTranslation } from 'react-i18next';
 import { Table, Text } from 'shared';
 import { rarityMap } from 'entities/smartcontract';
 import { schemaNameMap } from '../../constants';
-import { TrainingNft, TrainingNftMeta } from '../../../model/types';
+import { TrainingNftFull } from '../../../model/types';
 
 import styles from './styles.module.scss';
 
 type Props = {
-    nftData: TrainingNft & TrainingNftMeta;
+    nftData: TrainingNftFull;
 };
 
 export const ActionTable = ({

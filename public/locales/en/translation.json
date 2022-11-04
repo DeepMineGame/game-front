@@ -730,7 +730,8 @@
       "upgradeLevel": "Upgrade level",
       "upgrade": "Upgrade",
       "scheme": "Scheme",
-      "learningSkill": "Learning skill"
+      "learningSkill": "Learning skill",
+      "learn": "Learn"
     }
   },
   "features": {

@@ -2,23 +2,19 @@ import { Modal } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text } from 'shared';
-import {
-    TrainingNft,
-    TrainingNftMeta,
-    TrainingNftStatus,
-} from '../../model/types';
+import { TrainingNftFull, TrainingNftStatus } from '../../model/types';
 import { AvailableContent } from './AvailableContent';
 import { LearnedContent } from './LearnedContent';
 import { NotAvailableContent } from './NotAvailableContent';
 
 export type Props = {
     onCancel?: () => void;
-    nftData: (TrainingNft & TrainingNftMeta) | null;
+    nftData: TrainingNftFull | null;
 };
 
 const contentMap: Record<
     TrainingNftStatus,
-    React.FC<{ nftData: TrainingNft & TrainingNftMeta }>
+    React.FC<{ nftData: TrainingNftFull }>
 > = {
     [TrainingNftStatus.notAvailable]: NotAvailableContent,
     [TrainingNftStatus.available]: AvailableContent,

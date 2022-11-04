@@ -1,11 +1,10 @@
-import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Col, Row } from 'antd';
 import { Text, useReloadPage } from 'shared';
 import cn from 'classnames';
 import { rarityMap } from 'entities/smartcontract';
 import { CountDown } from 'shared/ui/components';
-import { getNftSrc } from '../../model/levels';
+import { useNft } from '../../model/hooks';
 import { LearningSkillType, TrainingNftStatus } from '../../model/types';
 import { Nft } from '../nft';
 
@@ -22,11 +21,7 @@ export const LearningSkill = ({
 }: Props) => {
     const { t } = useTranslation();
     const reloadPage = useReloadPage();
-
-    const src = useMemo(
-        () => getNftSrc(schemaType, level, rarity),
-        [schemaType, level, rarity]
-    );
+    const { learningNftSrc } = useNft();
 
     return (
         <Row
@@ -38,7 +33,7 @@ export const LearningSkill = ({
                 <Nft
                     schemaType={schemaType}
                     templateId={0}
-                    src={src ?? ''}
+                    src={learningNftSrc}
                     level={level}
                     status={TrainingNftStatus.learning}
                     width={48}

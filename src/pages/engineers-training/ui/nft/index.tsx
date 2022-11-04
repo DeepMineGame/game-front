@@ -1,11 +1,7 @@
 import cn from 'classnames';
 import { Loader } from 'shared';
 import { RarityType, EngineerSchema } from 'entities/smartcontract';
-import {
-    TrainingNft,
-    TrainingNftMeta,
-    TrainingNftStatus,
-} from '../../model/types';
+import { TrainingNftFull, TrainingNftStatus } from '../../model/types';
 
 import styles from './styles.module.scss';
 
@@ -18,13 +14,13 @@ export type Props = {
     status: TrainingNftStatus;
     width: number;
     height: number;
-    onClick?: (nft: TrainingNft & TrainingNftMeta) => void;
+    onClick?: (nft: TrainingNftFull) => void;
     className?: string;
     isDisabled?: boolean;
 };
 
 export const Nft = ({
-    className = '',
+    className,
     src,
     rarity,
     schemaType,

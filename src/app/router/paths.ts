@@ -25,4 +25,4 @@ export const faq = '/faq';
 export const wasteland = '/wasteland';
 export const engineer = '/engineer';
 export const engineerEquipmentHall = '/engineer/equipment-hall';
-export const engineersTraining = '/engineers-training';
+export const engineerTraining = '/engineer/training';

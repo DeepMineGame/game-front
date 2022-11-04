@@ -1,12 +1,12 @@
 import { Col, Row } from 'antd';
 import { Text } from 'shared';
-import { TrainingNft, TrainingNftMeta } from '../../../model/types';
+import { TrainingNftFull } from '../../../model/types';
 import { Nft } from '../../nft';
 
 import styles from './styles.module.scss';
 
 type Props = {
-    nftData: TrainingNft & TrainingNftMeta;
+    nftData: TrainingNftFull;
     subtitle: string;
 };
 

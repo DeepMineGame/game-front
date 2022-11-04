@@ -10,14 +10,14 @@ export const getNftSrc = (
     schemaType: EngineerSchema,
     level: Level,
     rarity?: RarityType
-): string | null => {
+): string => {
     if (schemaType === EngineerSchema.equipment) {
         const currentLevel = equipmentLevels.find(
             (item) => item.value === level
         );
 
         return (
-            currentLevel?.nfts.find((nft) => nft.rarity === rarity)?.src ?? null
+            currentLevel?.nfts.find((nft) => nft.rarity === rarity)?.src ?? ''
         );
     }
     if (
@@ -31,10 +31,10 @@ export const getNftSrc = (
             (item) => item.value === level
         );
 
-        return currentLevel?.nfts[0].src ?? null;
+        return currentLevel?.nfts[0].src ?? '';
     }
 
-    return null;
+    return '';
 };
 
 export { equipmentLevels, mineLevels, mineModuleLevels, factoryLevels };

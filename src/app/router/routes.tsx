@@ -252,7 +252,7 @@ export const routes: AppRoute[] = [
         titleTag: 'Engineer Equipment Hall — DeepMine',
     },
     {
-        path: paths.engineersTraining,
+        path: paths.engineerTraining,
         Component: EngineersTraining,
         forLoggedIn: true,
         forAdmin: true,

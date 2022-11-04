@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import { TrainingNft, TrainingNftMeta } from '../../model/types';
+import { TrainingNftFull } from '../../model/types';
 import { MainInformation } from './shared';
 
 type Props = {
-    nftData: TrainingNft & TrainingNftMeta;
+    nftData: TrainingNftFull;
 };
 
 export const LearnedContent: React.FC<Props> = ({ nftData }) => {
