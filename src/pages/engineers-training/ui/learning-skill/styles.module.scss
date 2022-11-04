@@ -1,0 +1,18 @@
+@import "src/shared";
+
+.block {
+    padding: 12px 12px 16px;
+    max-width: 294px;
+}
+
+.title {
+    color: $color-neutral-neutral-8;
+}
+
+.description {
+    color: $color-neutral-neutral-9;
+}
+
+.time {
+    color: $color-primary-primary-6;
+}
