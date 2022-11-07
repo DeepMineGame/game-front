@@ -10,7 +10,7 @@ export const LandLordPage = () => {
     return (
         <div>
             <div className={styles.header}>
-                <Header withBackButton />
+                <Header />
             </div>
             {accountName && <LandLordCabin accountName={accountName} />}
             <LandLordMenu />

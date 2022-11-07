@@ -45,6 +45,7 @@
       "YouHaveToPhysicalToManageInventory": "You have to travel to manage the active inventory"
     },
     "common": {
+      "city": "City",
       "item": "Item",
       "openContract": "Open Contract",
       "free": "Free",
