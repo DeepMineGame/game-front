@@ -55,7 +55,9 @@ export type AssetDataType = {
         }
     ];
     immutable_data: {};
-    mutable_data: {};
+    mutable_data: {
+        'DME mined': number;
+    };
     data: {
         'DME mined'?: string;
         'DME to upgrade'?: string;

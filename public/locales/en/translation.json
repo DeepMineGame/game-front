@@ -718,7 +718,8 @@
     "mining": {
       "mineLevel": "Mine Level",
       "mineSublevel": "Mine Sublevel",
-      "depthLevel": "Depth level"
+      "depthLevel": "Depth level",
+      "currentDepthLevel": "Current depth level"
     },
     "mineOwner": {
       "needMineCard": "To start playing as a Mine Owner you need to place a Mine NFT card in your active inventory\nand sign the Mine Operation Contract with the Landlord.\nCheck your warehouse or go to Market to buy Mine NFT",
@@ -757,7 +758,11 @@
         "modules": "Modules",
         "unsetup": "Unsetup",
         "abandon": "Abandon mine",
-        "terminateContractorsContract": "Terminate contract with contractors first"
+        "terminateContractorsContract": "Terminate contract with contractors first",
+        "changeMineDepth": "Change mine depth",
+        "changeDepth": "Change depth",
+        "selectTheDepth": "Select the depth",
+        "finalizeDepthChange": "Finalize depth to"
       }
     },
     "actions": {

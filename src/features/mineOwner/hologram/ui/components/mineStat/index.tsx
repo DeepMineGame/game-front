@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 import { rolesStore, UserRoles } from 'entities/smartcontract';
 
-import { userMineStore } from '../../../../models';
+import { $userMine } from '../../../../models';
 import styles from './styles.module.scss';
 
 const IS_FIRST_VISIT_KEY = 'IS_FIRST_VISIT_KEY';
@@ -21,7 +21,7 @@ export const MineStat = () => {
     const feeToClaim = mineOwnerRole?.attrs?.find(
         ({ key }) => key === 'fee_to_claim'
     );
-    const userMine = useStore(userMineStore);
+    const userMine = useStore($userMine);
 
     useEffect(() => {
         if (isFirstRender) {
