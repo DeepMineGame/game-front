@@ -18,9 +18,11 @@ export const MineStat = () => {
         ({ role }) => role === UserRoles.mine_owner
     );
 
-    const feeToClaim = mineOwnerRole?.attrs?.find(
-        ({ key }) => key === 'fee_to_claim'
-    );
+    const feeToClaim =
+        Number(
+            mineOwnerRole?.attrs?.find(({ key }) => key === 'fee_to_claim')
+                ?.value
+        ) || 0;
     const userMine = useStore($userMine);
 
     useEffect(() => {
@@ -35,8 +37,12 @@ export const MineStat = () => {
         <KeyValueTable
             className={styles.table}
             items={{
-                [t('pages.landLord.cabin.DMEToClaim')]:
-                    feeToClaim?.value ?? '-',
+                [t('pages.landLord.cabin.DMEToClaim')]: (
+                    <span>
+                        {'\u00A0'}
+                        {`${feeToClaim / 10 ** 8}`}
+                    </span>
+                ),
                 [t('pages.mining.mineDepth')]:
                     userMine?.[0]?.layer_depth ?? '-',
             }}

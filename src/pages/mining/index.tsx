@@ -7,6 +7,8 @@ import {
     desktopS,
     neutral4,
     useAccountName,
+    useUserLocation,
+    useReloadPage,
     gold6,
     red6,
     green6,
@@ -26,6 +28,7 @@ import {
     ContractorCabinGate,
     $isContractorCabinLoading,
     useDisabledState,
+    CallToTravelNotification,
     $lastMiningStatus,
     LastMiningStatus,
 } from 'features';
@@ -34,7 +37,11 @@ import {
     CloseCircleFilled,
     ExclamationCircleFilled,
 } from '@ant-design/icons';
-import { ActionState, ActionType } from 'entities/smartcontract';
+import {
+    ActionState,
+    ActionType,
+    LOCATION_TO_ID,
+} from 'entities/smartcontract';
 import styles from './styles.module.scss';
 import { MiningInProgressTitle } from './components/MiningInProgressTitle';
 import { MineStatus } from './components/MineStatus';
@@ -50,14 +57,14 @@ const Icon = {
 
 export const MiningPage: FC = memo(() => {
     const [isMiningFinished, setIsMiningFinished] = useState(true);
-
+    const userLocation = useUserLocation();
     const accountName = useAccountName();
     useGate(ContractorCabinGate, { searchParam: accountName });
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
     const subTitleLevel = isDesktop ? 3 : 4;
     const gutter = isDesktop ? 80 : 16;
-
+    const reloadPage = useReloadPage();
     const actions = useStore(actionsStore);
     const mineStore = useStore($currentMine);
     const estTime = useStore(estimatesMiningTimeStore);
@@ -181,6 +188,12 @@ export const MiningPage: FC = memo(() => {
                 </Col>
             </Row>
             <Equipment />
+            {!userLocation.mine && (
+                <CallToTravelNotification
+                    toLocationId={LOCATION_TO_ID.mine}
+                    onSuccess={reloadPage}
+                />
+            )}
         </Page>
     );
 });

@@ -34,7 +34,7 @@ export const ClaimDME: FC = () => {
     const onDmeClick = async () => {
         await claimDme();
         await getRolesEffect({ searchParam: waxUser });
-        showSuccessModal({
+        return showSuccessModal({
             title: t('components.common.button.claim'),
             content: t('components.common.yourDMEHasBeenClaimed'),
             onOk: reloadPage,

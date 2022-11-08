@@ -1,13 +1,22 @@
 import { useTranslation } from 'react-i18next';
 import React from 'react';
+import { InfoCircleOutlined } from '@ant-design/icons';
+import { Tooltip } from 'antd';
 import { MineStat } from '../ui/components/mineStat';
 import { mineOwnerCabinState } from '../../models';
 
 export function useDescriptions() {
     const { t } = useTranslation();
-
+    const needNftCardTextAndInformer = (
+        <div>
+            {t('features.mineOwner.placeNft')}{' '}
+            <Tooltip overlay={t('features.mineOwner.needMineCard')}>
+                <InfoCircleOutlined />
+            </Tooltip>
+        </div>
+    );
     return {
-        [mineOwnerCabinState.initial]: t('features.mineOwner.needMineCard'),
+        [mineOwnerCabinState.initial]: needNftCardTextAndInformer,
         [mineOwnerCabinState.needPhysicalShift]: t(
             'features.mineOwner.needShift'
         ),
@@ -20,7 +29,7 @@ export function useDescriptions() {
         [mineOwnerCabinState.mineIsDepthChanging]: t(
             'features.mineOwner.depthChangingText'
         ),
-        [mineOwnerCabinState.needMineNft]: t('features.mineOwner.needMineCard'),
+        [mineOwnerCabinState.needMineNft]: needNftCardTextAndInformer,
         [mineOwnerCabinState.needActivateMine]: t(
             'features.mineOwner.mineManagementDescription'
         ),

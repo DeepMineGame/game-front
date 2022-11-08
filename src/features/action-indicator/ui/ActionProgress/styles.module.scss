@@ -1,7 +1,7 @@
 @import "src/shared";
 
-.travelProgressWrapper {
-  width: 150px;
+.actionWrapper {
+  width: 204px;
   height: 70px;
   position: fixed;
   bottom: 5vh;
@@ -9,19 +9,24 @@
   z-index: 10000;
 }
 
-.timer {
+.actionName {
   margin-top: 15px;
   margin-left: 13px;
   position: absolute;
-  font-size: 12px;
+}
+
+.timer {
+  font-size: 10px;
+  color: $color-neutral-neutral-7;
+  min-width: 40px;
 }
 
 .progress {
   position: absolute;
-  margin-top: 30px;
-  margin-left: 13px;
+  margin-top: 33px;
+  margin-left: 15px;
   display: flex;
-  width: 80%;
+  width: 87%;
   justify-content: space-between;
   align-items: center;
   gap: 5px;
@@ -29,4 +34,8 @@
 
 .icon {
   color: $color-neutral-neutral-7;
+}
+
+.successIcon {
+  color: $color-green-green-6;
 }
