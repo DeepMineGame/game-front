@@ -32,8 +32,12 @@ export const Header: FC<Props> = ({ title }) => {
         <>
             <div className={styles.header}>
                 <Link to={city}>
-                    <Space size={8}>
-                        <CityOutlined className={styles.cityIcon} />
+                    <Space>
+                        <CityOutlined
+                            width={32}
+                            height={32}
+                            className={styles.cityIcon}
+                        />
                         <Text type="secondary" strong fontFamily="bai">
                             {t('components.common.city')}
                         </Text>

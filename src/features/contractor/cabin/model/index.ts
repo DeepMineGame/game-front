@@ -19,6 +19,7 @@ import {
 import { isAssetAvailable } from 'shared/lib/utils';
 import {
     getLandlordContractsEffect,
+    getLastMiningStatusEffect,
     getUserContractsEffect,
     getUserHistoryEffect,
     getUserInfoEffect,
@@ -191,7 +192,12 @@ forward({
 
 forward({
     from: ContractorCabinGate.open,
-    to: [getUserContractsEffect, getUserInfoEffect, getUserHistoryEffect],
+    to: [
+        getUserContractsEffect,
+        getUserInfoEffect,
+        getUserHistoryEffect,
+        getLastMiningStatusEffect,
+    ],
 });
 
 export * from './stores';
