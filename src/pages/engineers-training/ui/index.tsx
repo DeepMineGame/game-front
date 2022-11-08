@@ -1,4 +1,4 @@
-import { Row, Col } from 'antd';
+import { Row, Col, Tooltip } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Loader, Page, useAccountName } from 'shared';
@@ -90,16 +90,6 @@ export const EngineersTraining = () => {
                                             levels={equipmentLevels}
                                         />
                                     </Col>
-                                    <Col flex={`${mineModulesWidth}px`}>
-                                        <TrainingArea
-                                            schemaType={EngineerSchema.module}
-                                            title={t(
-                                                'pages.engineersTraining.mineModules'
-                                            )}
-                                            onNftClick={handleNftClick}
-                                            levels={mineModuleLevels}
-                                        />
-                                    </Col>
                                     <Col flex={`${mineWidth}px`}>
                                         <TrainingArea
                                             schemaType={EngineerSchema.mine}
@@ -110,17 +100,44 @@ export const EngineersTraining = () => {
                                             levels={mineLevels}
                                         />
                                     </Col>
-                                    <Col flex={`${mineWidth}px`}>
-                                        <TrainingArea
-                                            schemaType={EngineerSchema.factory}
-                                            title={t(
-                                                'pages.engineersTraining.factory'
-                                            )}
-                                            onNftClick={handleNftClick}
-                                            levels={factoryLevels}
-                                            isDisabled
-                                        />
-                                    </Col>
+                                    <Tooltip
+                                        title={t(
+                                            'components.common.comingSoon'
+                                        )}
+                                    >
+                                        <Col flex={`${mineModulesWidth}px`}>
+                                            <TrainingArea
+                                                schemaType={
+                                                    EngineerSchema.module
+                                                }
+                                                title={t(
+                                                    'pages.engineersTraining.mineModules'
+                                                )}
+                                                onNftClick={handleNftClick}
+                                                levels={mineModuleLevels}
+                                                isDisabled
+                                            />
+                                        </Col>
+                                    </Tooltip>
+                                    <Tooltip
+                                        title={t(
+                                            'components.common.comingSoon'
+                                        )}
+                                    >
+                                        <Col flex={`${mineWidth}px`}>
+                                            <TrainingArea
+                                                schemaType={
+                                                    EngineerSchema.factory
+                                                }
+                                                title={t(
+                                                    'pages.engineersTraining.factory'
+                                                )}
+                                                onNftClick={handleNftClick}
+                                                levels={factoryLevels}
+                                                isDisabled
+                                            />
+                                        </Col>
+                                    </Tooltip>
                                 </Row>
                             </section>
                         </Col>
