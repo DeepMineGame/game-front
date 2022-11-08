@@ -17,6 +17,7 @@ enum DisabledState {
     MiningContractIsntActive,
     EquipmentIsBroken,
     LandlordContractFinished,
+    IsMineDepthChanging,
 }
 
 const States = (mineOwnerContract: ContractDto) => ({
@@ -77,9 +78,17 @@ const States = (mineOwnerContract: ContractDto) => ({
         ),
         action: undefined,
     },
+    [DisabledState.IsMineDepthChanging]: {
+        disabled: true,
+        message: <Trans i18nKey="pages.mining.mineDepthProcess" />,
+        action: undefined,
+    },
 });
 
 const getState = (store: ContractorCabinStore) => {
+    if (store.isMineDepthChanging) {
+        return DisabledState.IsMineDepthChanging;
+    }
     if (!store.hasMineOwnerContracts) {
         return DisabledState.NeedSignContract;
     }
@@ -110,6 +119,7 @@ const getState = (store: ContractorCabinStore) => {
 export const useDisabledState = () => {
     const [mineOwnerContract] = useStore($mineOwnerContracts);
     const contractorCabin = useStore($contractorCabin);
+
     const state = getState(contractorCabin);
 
     return States(mineOwnerContract)[state];

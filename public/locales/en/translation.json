@@ -206,6 +206,7 @@
       "miningContractIsntActive": "<b>Your Mining Contract is not active.</b> Please <b>uninstall the equipment set</b> to be able to sign the new contract",
       "somePiecesOfEquipmentIsBroken": "One or more pieces of <b>equipment is broken</b>. Replacement or repair required",
       "contractBetweenMineownerAndLandlordIsntValid": "<b>Mine operation contract</b> between a Mine Owner and a Landlord <b>is not valid</b>. Please contact the Mine owner to resolve the issue.",
+      "mineDepthProcess": "Mine in the process of the depth changes. The mining is impossible. Please wait till the process is finished",
       "openContract": "Open contract",
       "configureButton": "Configure"
     },
@@ -730,9 +731,12 @@
       "market": "Market",
       "welcome": "Welcome, Citizen",
       "mineNotSet": "Mine is not set",
+      "depthChanging": "Mine is undergoing depth change",
       "needShift": "You need to travel here to set a Mine",
       "needLandLord": "Sign a contract with a landlord to set a Mine",
       "needSetupMine": "Set up the Mine to continue",
+      "depthChangingText": "Go to mine management console for details",
+
       "needCrew": "You are ready to gather your ultimate mine crew. Sign the Mining Contract with a contractor to be able to activate your Mine.",
       "progress": "Setup in progress",
       "chooseContract": "Choose a contract",

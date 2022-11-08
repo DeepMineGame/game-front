@@ -15,7 +15,7 @@ import { useGate, useStore } from 'effector-react';
 import {
     getMineByAssetEffect,
     MiningAndClaimButton,
-    currentMineStore,
+    $currentMine,
     actionsStore,
     getActionsForUserEffect,
     getContractByExecutorEffect,
@@ -41,7 +41,7 @@ export const MiningPage: FC = memo(() => {
     const gutter = isDesktop ? 80 : 16;
 
     const actions = useStore(actionsStore);
-    const mineStore = useStore(currentMineStore);
+    const mineStore = useStore($currentMine);
     const estTime = useStore(estimatesMiningTimeStore);
 
     const isContractsLoading = useStore(getContractByExecutorEffect.pending);

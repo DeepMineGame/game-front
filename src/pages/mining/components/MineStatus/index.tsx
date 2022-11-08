@@ -2,13 +2,13 @@ import React, { FC, memo } from 'react';
 import { Badge } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
-import { currentMineStore } from 'features';
+import { $currentMine } from 'features';
 import { MineState } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
 export const MineStatus: FC = memo(() => {
     const { t } = useTranslation();
-    const mineStore = useStore(currentMineStore);
+    const mineStore = useStore($currentMine);
 
     const isActive = mineStore && mineStore[0]?.state === MineState.activated;
 
