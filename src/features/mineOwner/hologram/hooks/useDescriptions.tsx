@@ -17,6 +17,9 @@ export function useDescriptions() {
         [mineOwnerCabinState.needSetupMine]: t(
             'features.mineOwner.needSetupMine'
         ),
+        [mineOwnerCabinState.mineIsDepthChanging]: t(
+            'features.mineOwner.depthChangingText'
+        ),
         [mineOwnerCabinState.needMineNft]: t('features.mineOwner.needMineCard'),
         [mineOwnerCabinState.needActivateMine]: t(
             'features.mineOwner.mineManagementDescription'

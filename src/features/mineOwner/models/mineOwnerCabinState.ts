@@ -16,6 +16,7 @@ export enum mineOwnerCabinState {
     contractWithLandlordWasTerminated,
     needPhysicalShift,
     needSetupMine,
+    mineIsDepthChanging,
     needCrew,
     needActivateMine,
     everythingIsDone,
@@ -37,6 +38,7 @@ export const mineOwnerCabinStateResolver = createApi($mineOwnerCabinState, {
     setContractWithLandlordWasTerminated: () =>
         mineOwnerCabinState.contractWithLandlordWasTerminated,
     needPhysicalShiftState: () => mineOwnerCabinState.needPhysicalShift,
+    mineIsDepthChangingState: () => mineOwnerCabinState.mineIsDepthChanging,
     needSetupMineState: () => mineOwnerCabinState.needSetupMine,
     needCrewState: () => mineOwnerCabinState.needCrew,
     needActivateMineState: () => mineOwnerCabinState.needActivateMine,

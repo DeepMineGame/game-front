@@ -13,6 +13,9 @@ export function useTitles() {
         [mineOwnerCabinState.needPhysicalShift]: t(
             'features.mineOwner.mineNotSet'
         ),
+        [mineOwnerCabinState.mineIsDepthChanging]: t(
+            'features.mineOwner.depthChanging'
+        ),
 
         [mineOwnerCabinState.needSetupMine]: t('features.mineOwner.mineNotSet'),
         [mineOwnerCabinState.needCrew]: t('features.mineOwner.createTeam'),
