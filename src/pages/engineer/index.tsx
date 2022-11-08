@@ -12,7 +12,7 @@ const EngineerPage = () => {
     return (
         <Layout className={styles.root}>
             <HeaderAnt className={styles.header}>
-                <Header withBackButton />
+                <Header />
             </HeaderAnt>
             <EngineerCabinPage accountName={accountName} />
         </Layout>

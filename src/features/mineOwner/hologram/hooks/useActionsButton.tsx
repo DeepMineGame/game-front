@@ -12,7 +12,12 @@ import {
 } from 'shared';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createOrder, serviceMarket, warehouse } from 'app/router/paths';
+import {
+    createOrder,
+    mineManagement,
+    serviceMarket,
+    warehouse,
+} from 'app/router/paths';
 import { ATOMICHUB_URL } from 'app';
 import { useStore } from 'effector-react';
 import { ServiceMarketTabIds } from 'app/router/constants';
@@ -123,6 +128,12 @@ export function useActionsButton() {
             </div>
         ),
         [mineOwnerCabinState.needContractWithLandlord]: contractButton,
+        [mineOwnerCabinState.mineIsDepthChanging]: (
+            <Button type="link" onClick={() => navigate(mineManagement)}>
+                {t('features.mineOwner.mineManagement')}
+            </Button>
+        ),
+
         [mineOwnerCabinState.needSetupMine]: (
             <>
                 <ActionModal

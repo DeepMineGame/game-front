@@ -14,3 +14,4 @@ export { ReactComponent as DiscordIcon } from './discordIcon.svg';
 export { ReactComponent as MineOutlined } from './mine-outlined.svg';
 export { ReactComponent as BrokenOutlined } from './broken-outlined.svg';
 export { ReactComponent as HiveOutlined } from './hive.svg';
+export { ReactComponent as CityOutlined } from './city-outlined.svg';

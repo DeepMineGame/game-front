@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { city, contractorCabin, mineOwner } from 'app/router/paths';
-import { Title, useUserLocation } from 'shared';
+import { Header, Title, useUserLocation } from 'shared';
 import cn from 'classnames';
 import { UserLocator } from 'entities/user';
 import styles from './styles.module.scss';
@@ -14,6 +14,7 @@ export const Wasteland = () => {
     return (
         <div className={styles.wasteland}>
             <div className={styles.hub} />
+            <Header />
             <div className={styles.city} onClick={() => navigate(city)}>
                 <Title
                     className={cn(styles.cityTitle, styles.enterLink)}

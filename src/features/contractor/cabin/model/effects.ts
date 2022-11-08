@@ -7,6 +7,7 @@ import {
     getUserConfig,
     mapSearchParamForIndexPositionToFindContracts,
 } from 'entities/smartcontract';
+import { getLastMiningStatus } from './api';
 
 export const setMiningOverEvent = createEvent<boolean>();
 
@@ -44,3 +45,5 @@ export const getUserInfoEffect = createEffect(
     ({ searchParam }: { searchParam: string }) =>
         getTableData(getUserConfig(searchParam))
 );
+
+export const getLastMiningStatusEffect = createEffect(getLastMiningStatus);

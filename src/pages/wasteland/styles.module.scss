@@ -31,7 +31,7 @@ h5.enterLink {
   @include enter-hover;
 
   background-image: url("../../shared/ui/images/wasteland/city.webp");
-  height: 30vh;
+  height: 25vh;
   width: 20vw;
   margin: auto;
 
@@ -54,6 +54,7 @@ h5.enterLink {
   background-position: bottom;
   background-repeat: no-repeat;
   left: 0;
+  top: 0;
 }
 
 .mineDeck {

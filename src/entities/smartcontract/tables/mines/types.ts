@@ -19,7 +19,7 @@ export type MineDto = {
     area_type: string;
     layer_depth: number;
     level: number;
-    sub_level: number;
+    sublevel: number;
     state: MineState;
     contract_finishes_at: number;
     area_fee_percent: number;

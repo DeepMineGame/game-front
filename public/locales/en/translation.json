@@ -45,6 +45,7 @@
       "YouHaveToPhysicalToManageInventory": "You have to travel to manage the active inventory"
     },
     "common": {
+      "city": "City",
       "item": "Item",
       "openContract": "Open Contract",
       "free": "Free",
@@ -183,10 +184,11 @@
       "myEquipment": "MY EQUIPMENT",
       "configure": "CONFIGURE",
       "miningStatus": "Mine: ",
-      "miningInProgress": "Mining is progress",
-      "miningWasInterrupted": "Mining was interrupted",
-      "miningHasFinished": "Mining has finished",
-      "miningHasClaimed": "Mining has claimed",
+      "miningInProgress": "Mining in progress",
+      "lastMiningResult": "Last mining result",
+      "success": "succesfull",
+      "failed": "failed",
+      "interrupted": "interrupted",
       "miningFinishedSuccessfully": "Mining has finished successfully!",
       "cool": "That's cool",
       "tooltipAroundConsumables": "This is where improvements are installed that allow you to make mining more efficient. They will be available for the Mine level 1",
@@ -205,6 +207,7 @@
       "miningContractIsntActive": "<b>Your Mining Contract is not active.</b> Please <b>uninstall the equipment set</b> to be able to sign the new contract",
       "somePiecesOfEquipmentIsBroken": "One or more pieces of <b>equipment is broken</b>. Replacement or repair required",
       "contractBetweenMineownerAndLandlordIsntValid": "<b>Mine operation contract</b> between a Mine Owner and a Landlord <b>is not valid</b>. Please contact the Mine owner to resolve the issue.",
+      "mineDepthProcess": "Mine in the process of the depth changes. The mining is impossible. Please wait till the process is finished",
       "openContract": "Open contract",
       "configureButton": "Configure"
     },
@@ -720,7 +723,8 @@
     "mining": {
       "mineLevel": "Mine Level",
       "mineSublevel": "Mine Sublevel",
-      "depthLevel": "Depth level"
+      "depthLevel": "Depth level",
+      "currentDepthLevel": "Current depth level"
     },
     "mineOwner": {
       "placeNft": "Place a Mine NFT card in your active inventory",
@@ -731,9 +735,12 @@
       "market": "Market",
       "welcome": "Welcome, Citizen",
       "mineNotSet": "Mine is not set",
+      "depthChanging": "Mine is undergoing depth change",
       "needShift": "You need to travel here to set a Mine",
       "needLandLord": "Sign a contract with a landlord to set a Mine",
       "needSetupMine": "Set up the Mine to continue",
+      "depthChangingText": "Go to mine management console for details",
+
       "needCrew": "You are ready to gather your ultimate mine crew. Sign the Mining Contract with a contractor to be able to activate your Mine.",
       "progress": "Setup in progress",
       "chooseContract": "Choose a contract",
@@ -760,7 +767,11 @@
         "modules": "Modules",
         "unsetup": "Unsetup",
         "abandon": "Abandon mine",
-        "terminateContractorsContract": "Terminate contract with contractors first"
+        "terminateContractorsContract": "Terminate contract with contractors first",
+        "changeMineDepth": "Change mine depth",
+        "changeDepth": "Change depth",
+        "selectTheDepth": "Select the depth",
+        "finalizeDepthChange": "Finalize depth to"
       }
     },
     "actions": {

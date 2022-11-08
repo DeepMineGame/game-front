@@ -1,0 +1,12 @@
+@import "src/shared";
+
+.title {
+  color: $color-primary-primary-6 !important;
+  text-align: center;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+
+  @media (min-width: $media-desktop-s)  {
+    margin-bottom: 40px !important;
+  }
+}
