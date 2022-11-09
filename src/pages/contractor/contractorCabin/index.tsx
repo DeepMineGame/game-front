@@ -144,7 +144,7 @@ export const ContractorCabin: FC = () => {
                     }
                 />
             </Tooltip>
-            <Header withBackButton />
+            <Header />
             <ContractorMenu
                 config={{
                     disabledItems: {

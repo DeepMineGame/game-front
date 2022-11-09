@@ -2,14 +2,15 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 
-import { Page, useAccountName } from 'shared';
+import { Page, useAccountName, useReloadPage, useUserLocation } from 'shared';
 import {
     AreaClaim,
     AreaManagementTable,
+    CallToTravelNotification,
     minesForAreaSlots,
     userAreaNftStore,
 } from 'features';
-import { areasStore } from 'entities/smartcontract';
+import { areasStore, LOCATION_TO_ID } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
 export const AreaManagementPage = () => {
@@ -17,11 +18,12 @@ export const AreaManagementPage = () => {
     const accountName = useAccountName();
     const mines = useStore(minesForAreaSlots);
     const area = useStore(areasStore);
-
+    const userLocation = useUserLocation();
     const areas = useStore(userAreaNftStore);
     const areaItem = areas?.[0];
     const areaId = areaItem ? +areaItem.asset_id : undefined;
     const isActive = !!areaItem?.in_use;
+    const reloadPage = useReloadPage();
 
     const currentMineSlots = mines?.length ?? 0;
     const maxMineSlots = area?.[0]?.mine_slots.length ?? 0;
@@ -45,6 +47,12 @@ export const AreaManagementPage = () => {
                 <AreaManagementTable
                     disabled={!isActive}
                     accountName={accountName}
+                />
+            )}
+            {!userLocation.landlordReception && (
+                <CallToTravelNotification
+                    toLocationId={LOCATION_TO_ID.landlords_reception}
+                    onSuccess={reloadPage}
                 />
             )}
         </Page>

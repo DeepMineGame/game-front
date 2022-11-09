@@ -26,7 +26,7 @@ export const MineAreaInfo: FC = () => {
         [t('pages.contractorStatsAndInfo.mineArea.level')]:
             userMine?.level ?? '-',
         [t('pages.contractorStatsAndInfo.mineArea.sublevel')]:
-            userMine?.sub_level ?? '-',
+            userMine?.sublevel ?? '-',
         [t('pages.contractorStatsAndInfo.mineArea.depth')]:
             userMine?.layer_depth ?? '-',
         [t('pages.contractorStatsAndInfo.mineArea.mineFee')]: '4%',

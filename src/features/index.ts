@@ -13,3 +13,4 @@ export * from './serviceMarket';
 export * from './landLord/areaManagement';
 export * from './mining';
 export * from './mine-stats';
+export * from './action-indicator';

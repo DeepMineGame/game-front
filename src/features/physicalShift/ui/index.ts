@@ -1,1 +1,1 @@
-export * from './TravelProgress';
+export * from './TravelModal';

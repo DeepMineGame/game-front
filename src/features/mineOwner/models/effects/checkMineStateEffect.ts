@@ -8,13 +8,17 @@ import {
 import { mineOwnerCabinStateResolver } from '../mineOwnerCabinState';
 import { checkHasCrewEffect } from './checkHasCrewEffect';
 
-export const checkIsMineSetEffect = createEffect(
+export const checkMineStateEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
         const { rows: mines } = await getMinesTableData({
             searchParam,
             searchIdentificationType: searchBy.owner,
         });
         const userMine: MineDto | undefined = mines?.[0];
+
+        if (userMine?.state === MineState.depth_changing) {
+            return mineOwnerCabinStateResolver.mineIsDepthChangingState();
+        }
 
         if (
             userMine?.state === MineState.setuped ||
