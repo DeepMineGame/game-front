@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { SettingOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useSmartContractAction } from 'features/hooks';
-import { $engineerCabinStore } from 'entities/engineer';
+import { $engineerCabin } from 'entities/engineer';
 import {
     clearEngineer,
     LOCATION_TO_ID,
@@ -42,7 +42,7 @@ const EngineerSettings: FC<{ disabled: boolean }> = ({ disabled }) => {
     const { travelConfirm } = useTravelConfirm(
         LOCATION_TO_ID.engineers_workshop
     );
-    const { certificate } = useStore($engineerCabinStore);
+    const { certificate } = useStore($engineerCabin);
 
     const onDismiss = useSmartContractAction({
         action: clearEngineer(accountName, certificate?.asset_id!),

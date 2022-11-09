@@ -31,14 +31,20 @@ export const parseAttrs = (contract: ContractDto) => {
     }
 };
 
-export const upgradeTypeMap = {
+type UpgradeType =
+    | 'undefined'
+    | 'mine'
+    | 'mineModule'
+    | 'factory'
+    | 'equipment';
+
+export const upgradeTypeMap: Record<EngineerSchema, UpgradeType> = {
     [EngineerSchema.undefined]: 'undefined',
     [EngineerSchema.mine]: 'mine',
     [EngineerSchema.module]: 'mineModule',
+    [EngineerSchema.factory]: 'factory',
     [EngineerSchema.equipment]: 'equipment',
 };
-
-type UpgradeType = keyof typeof upgradeTypeMap;
 
 export const getUpgradeType = ({
     contract,
@@ -48,9 +54,11 @@ export const getUpgradeType = ({
     asset?: MergedInventoryWithAtomicAssets[number];
 }) => {
     if (contract)
-        return upgradeTypeMap[parseAttrs(contract)?.schema_type as UpgradeType];
+        return upgradeTypeMap[
+            parseAttrs(contract)?.schema_type as EngineerSchema
+        ];
 
-    return upgradeTypeMap[asset?.schema_type as UpgradeType];
+    return upgradeTypeMap[asset?.schema_type as EngineerSchema];
 };
 
 export const getUpgradeRarity = ({
