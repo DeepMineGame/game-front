@@ -6,7 +6,7 @@
     "@ant-design/dark-theme": "^2.0.2",
     "@ant-design/icons": "^4.7.0",
     "@ant-design/plots": "^1.0.9",
-    "@eosdacio/ual-wax": "^1.5.1",
+    "@eosdacio/ual-wax": "^1.7.0",
     "@rive-app/react-canvas": "^3.0.23",
     "@sentry/react": "^7.15.0",
     "@sentry/tracing": "^7.15.0",
@@ -37,7 +37,7 @@
     "react-scripts": "5.0.0",
     "react-timer-hook": "^3.0.5",
     "sass": "^1.49.10",
-    "ual-anchor": "^1.1.6",
+    "ual-anchor": "^1.3.0",
     "ual-reactjs-renderer": "^0.3.1"
   },
   "scripts": {
