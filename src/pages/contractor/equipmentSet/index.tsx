@@ -184,7 +184,7 @@ export const EquipmentSetPage: FC = () => {
                 onCardNotInUseRemove={removeSelectedCard}
             />
             <div className={styles.characteristics}>
-                <Characteristics contractors={contractors} />
+                <Characteristics />
             </div>
             <div className={styles.installButtonWrapper}>
                 <EquipmentInstallationModal
