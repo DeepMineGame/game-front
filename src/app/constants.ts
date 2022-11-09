@@ -11,7 +11,9 @@ export const isMainNet = process.env.REACT_APP_MAINNET === 'true';
 console.log(
     process.env.REACT_APP_MAINNET === 'true',
     process.env.REACT_APP_MAINNET,
-    typeof process.env.REACT_APP_MAINNET
+    typeof process.env.REACT_APP_MAINNET,
+    process.env,
+    '<-env'
 );
 
 export const WAX_CHAIN_ID = isMainNet
