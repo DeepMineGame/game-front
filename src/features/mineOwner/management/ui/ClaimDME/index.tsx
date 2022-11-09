@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import {
     Button,
+    fromUnit,
     showSuccessModal,
     useAccountName,
     useReloadPage,
@@ -16,7 +17,6 @@ import {
     getRolesEffect,
 } from 'entities/smartcontract';
 
-const fromUnit = (num: number) => num / 10 ** 8;
 export const ClaimDME: FC = () => {
     const waxUser = useAccountName();
     const { t } = useTranslation();

@@ -7,7 +7,6 @@ import {
     MiningContract,
 } from 'features/serviceMarket';
 import { ContractDto, ContractType } from 'entities/smartcontract';
-import { useContractState } from 'entities/contract';
 
 type Props = { contract: ContractDto; accountName: string };
 
@@ -28,17 +27,12 @@ const pageTitle = {
 
 export const ContractPage: FC<Props> = ({ contract, accountName }) => {
     const { t } = useTranslation();
-    const { isDeleted } = useContractState(contract, accountName);
 
     const Contract = contracts[contract.type];
 
     return (
         <Page headerTitle={t(pageTitle[contract.type]).toUpperCase()}>
-            <Contract
-                isDeleted={isDeleted}
-                contract={contract}
-                accountName={accountName}
-            />
+            <Contract contract={contract} accountName={accountName} />
         </Page>
     );
 };

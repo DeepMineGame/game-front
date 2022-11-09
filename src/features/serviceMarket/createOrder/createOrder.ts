@@ -1,4 +1,4 @@
-import { DAY_IN_SECONDS, HOUR_IN_SECONDS } from 'shared';
+import { DAY_IN_SECONDS, HOUR_IN_SECONDS, toUnit } from 'shared';
 import { deepminesmrt } from 'entities/smartcontract';
 import { BaseOrder, LevelUpgradeOrder, MineOrder } from 'entities/order';
 
@@ -12,7 +12,7 @@ const getBaseFields = (orderData: BaseOrder) => {
         opt_executor: orderData.opt_executor,
         opt_asset_id: Number.isNaN(assetId) ? undefined : assetId,
         is_client: isClient,
-        penalty_amount: Number(orderData.penalty_amount || 0) * 10 ** 8,
+        penalty_amount: toUnit(Number(orderData.penalty_amount || 0)),
         deadline_duration:
             orderData.deadline_duration_in_days * DAY_IN_SECONDS +
             orderData.deadline_duration_in_hours * HOUR_IN_SECONDS,

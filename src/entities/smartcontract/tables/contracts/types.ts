@@ -69,7 +69,7 @@ export type ContractDto = {
 
 export const contractName = {
     [ContractType.undefined]: null,
-    [ContractType.landlord_mineowner]: 'Mine setup',
+    [ContractType.landlord_mineowner]: 'Mine operation',
     [ContractType.mineowner_contractor]: 'Mining contract',
     [ContractType.level_upgrade]: 'Level Upgrade',
 };

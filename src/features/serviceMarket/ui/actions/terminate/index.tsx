@@ -55,10 +55,7 @@ const TerminateContract: FC<Props> = ({ accountName, contractId, penalty }) => {
                 submitText={t(
                     'pages.serviceMarket.contract.terminateModal.submit'
                 )}
-                description={t(
-                    'pages.serviceMarket.contract.terminateModal.description',
-                    { amount: penalty }
-                )}
+                description={t('pages.serviceMarket.contract.goingToTerminate')}
             />
 
             <SuccessModal

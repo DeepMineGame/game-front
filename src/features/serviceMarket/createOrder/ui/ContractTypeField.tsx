@@ -41,7 +41,7 @@ export const ContractTypeField: FC<{
                             <Tooltip
                                 overlay={infoForMineSetupContractTypeDisable}
                             >
-                                {t('features.actions.mineSetup')}
+                                {t('pages.serviceMarket.mineOperation')}
                             </Tooltip>
                         ),
                         disabled: !hasAreaOrMine,

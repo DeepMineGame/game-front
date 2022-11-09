@@ -122,7 +122,7 @@ export const getContractStatus = (
         };
     }
     if (wasTerminatedBySomebody(contract) && wasTerminatedEarly(contract)) {
-        if (contract.term_initiator !== account) {
+        if (contract.term_initiator !== account && !contract.deleted_at) {
             return {
                 value: ContractStates.waitingForAction,
                 meta: ContractStatesMeta.earlyBreak,

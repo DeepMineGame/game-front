@@ -6,6 +6,7 @@ import {
     ContractType,
     GetTableDataConfigType,
 } from 'entities/smartcontract';
+import { fromUnit } from './unit-parser';
 
 export const getTableData = async (config: GetTableDataConfigType) => {
     const { data } = await axios.post(WAX_GET_TABLE_ENDPOINT, {
@@ -42,7 +43,7 @@ export const getUserRoleInContract = (
 export const getDmeAmount = (value: number | string) => {
     if (Number.isNaN(value)) return 0;
 
-    return Number(value) / 10 ** 8;
+    return fromUnit(Number(value));
 };
 
 export * from './getNftImagePath';
@@ -60,3 +61,4 @@ export { createErrorMessage } from './create-error-message';
 export * from './merge-assets';
 export { isAssetAvailable } from './is-asset-available';
 export { getGameAssets } from './get-game-assets';
+export { fromUnit, toUnit } from './unit-parser';

@@ -13,6 +13,15 @@ const VIOLATION_STATES = [
     ContractStatesMeta.earlyBreak,
 ];
 
+export enum TerminateState {
+    undefined = 'undefined',
+    TerminatedByMeWaitCounterparty = 'terminatedByMeWaitCounterparty',
+    TerminatedByMeCounterpartyCollectedFine = 'terminatedByMeCounterpartyCollectedFine',
+    TerminatedByMeCounterpartyDidntCollectFine = 'terminatedByMeCounterpartyDidntCollectFine',
+    TerminatedByCounterpartyICollectedFine = 'terminatedByCounterpartyICollectedFine',
+    TerminatedByCounterpartyIDidntCollectFine = 'terminatedByCounterpartyIDidntCollectFine',
+}
+
 export const useContractState = (
     contract: ContractDto,
     accountName: string
@@ -27,6 +36,36 @@ export const useContractState = (
     const isClient = contract.client === accountName;
     const isExecutor = contract.executor === accountName;
     const isContractMember = isClient || isExecutor;
+
+    let terminateState = TerminateState.undefined;
+    const isPenaltyDemanded = !!contract.penalty_demanded_by;
+    const isTerminatedByMe = contract.term_initiator === accountName;
+
+    const isTerminatedByMeWaitCounterparty = isTerminatedByMe && !isDeleted;
+    if (isTerminatedByMeWaitCounterparty)
+        terminateState = TerminateState.TerminatedByMeWaitCounterparty;
+
+    const isTerminatedByMeCounterpartyCollectedFine =
+        isTerminatedByMe && isPenaltyDemanded && isDeleted;
+    if (isTerminatedByMeCounterpartyCollectedFine)
+        terminateState = TerminateState.TerminatedByMeCounterpartyCollectedFine;
+
+    const isTerminatedByMeCounterpartyDidntCollectFine =
+        isTerminatedByMe && !isPenaltyDemanded && isDeleted;
+    if (isTerminatedByMeCounterpartyDidntCollectFine)
+        terminateState =
+            TerminateState.TerminatedByMeCounterpartyDidntCollectFine;
+
+    const isTerminatedByCounterpartyICollectedFine =
+        !isTerminatedByMe && isPenaltyDemanded && isDeleted;
+    if (isTerminatedByCounterpartyICollectedFine)
+        terminateState = TerminateState.TerminatedByCounterpartyICollectedFine;
+
+    const isTerminatedByCounterpartyIDidntCollectFine =
+        !isTerminatedByMe && !isPenaltyDemanded && isDeleted;
+    if (isTerminatedByCounterpartyIDidntCollectFine)
+        terminateState =
+            TerminateState.TerminatedByCounterpartyIDidntCollectFine;
 
     const isCompleted =
         state === ContractStates.completed || (isDeleted && isContract);
@@ -61,5 +100,6 @@ export const useContractState = (
         showTerminatedAlert,
         showPenaltyActions,
         showCompleted,
+        terminateState,
     };
 };

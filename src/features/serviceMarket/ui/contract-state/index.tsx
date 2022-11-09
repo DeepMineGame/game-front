@@ -5,7 +5,6 @@ import {
     CheckCircleOutlined,
     ClockCircleOutlined,
     CloseCircleOutlined,
-    ExclamationCircleFilled,
     DeleteOutlined,
 } from '@ant-design/icons';
 import { useContractState, useContractType } from 'entities/contract';
@@ -32,7 +31,7 @@ export const ContractState: FC<ContractProps> = ({ contract, accountName }) => {
         );
     }
 
-    if (isNeedComplete) {
+    if (isNeedComplete || isTermViolation) {
         return (
             <div className={styles.status}>
                 <ClockCircleOutlined className={styles.waitIcon} />{' '}
@@ -46,9 +45,6 @@ export const ContractState: FC<ContractProps> = ({ contract, accountName }) => {
             <div className={styles.status}>
                 <CloseCircleOutlined className={styles.terminateIcon} />{' '}
                 {t('pages.serviceMarket.contract.terminated')}
-                {isTermViolation && (
-                    <ExclamationCircleFilled className={styles.warningIcon} />
-                )}
             </div>
         );
     }
