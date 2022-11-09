@@ -16,10 +16,31 @@ const VIOLATION_STATES = [
 export enum TerminateState {
     undefined = 'undefined',
     TerminatedByMeWaitCounterparty = 'terminatedByMeWaitCounterparty',
-    TerminatedByMeCounterpartyCollectedFine = 'terminatedByMeCounterpartyCollectedFine',
-    TerminatedByMeCounterpartyDidntCollectFine = 'terminatedByMeCounterpartyDidntCollectFine',
-    TerminatedByCounterpartyICollectedFine = 'terminatedByCounterpartyICollectedFine',
-    TerminatedByCounterpartyIDidntCollectFine = 'terminatedByCounterpartyIDidntCollectFine',
+    TerminatedByMeCounterpartyCollectedPenalty = 'terminatedByMeCounterpartyCollectedPenalty',
+    TerminatedByMeCounterpartyDidntCollectPenalty = 'terminatedByMeCounterpartyDidntCollectPenalty',
+    TerminatedByCounterpartyICollectedPenalty = 'terminatedByCounterpartyICollectedPenalty',
+    TerminatedByCounterpartyIDidntCollectPenalty = 'terminatedByCounterpartyIDidntCollectPenalty',
+}
+
+export enum ViolationState {
+    undefined = 'undefined',
+
+    ViolatedByMeWaitCounterparty = 'violatedByMeWaitCounterparty',
+    ViolatedAndTerminatedByMeWaitCounterparty = 'violatedAndTerminatedByMeWaitCounterparty',
+    ViolatedAndCompletedByMeWaitCounterparty = 'violatedAndCompletedByMeWaitCounterparty',
+
+    ViolatedByMeCounterpartyTerminatedAndCollectedPenalty = 'violatedByMeCounterpartyTerminatedAndCollectedPenalty',
+    ViolatedByMeCounterpartyTerminatedAndDidntCollectPenalty = 'violatedByMeCounterpartyTerminatedAndDidntCollectPenalty',
+
+    ViolatedByMeCounterpartyCompletedAndCollectedPenalty = 'violatedByMeCounterpartyCompletedAndCollectedPenalty',
+    ViolatedByMeCounterpartyCompletedAndDidntCollectPenalty = 'violatedByMeCounterpartyCompletedAndDidntCollectPenalty',
+
+    ViolatedByCounterpartyWaitMe = 'violatedByCounterpartyWaitMe',
+    ViolatedByCounterpartyITerminatedAndCollectedPenalty = 'violatedByCounterpartyITerminatedAndCollectedPenalty',
+    ViolatedByCounterpartyITerminatedAndDidntCollectPenalty = 'violatedByCounterpartyITerminatedAndDidntCollectPenalty',
+
+    ViolatedByCounterpartyICompletedAndCollectedPenalty = 'violatedByCounterpartyICompletedAndCollectedPenalty',
+    ViolatedByCounterpartyICompletedAndDidntCollectPenalty = 'violatedByCounterpartyICompletedAndDidntCollectPenalty',
 }
 
 export const useContractState = (
@@ -45,27 +66,29 @@ export const useContractState = (
     if (isTerminatedByMeWaitCounterparty)
         terminateState = TerminateState.TerminatedByMeWaitCounterparty;
 
-    const isTerminatedByMeCounterpartyCollectedFine =
+    const isTerminatedByMeCounterpartyCollectedPenalty =
         isTerminatedByMe && isPenaltyDemanded && isDeleted;
-    if (isTerminatedByMeCounterpartyCollectedFine)
-        terminateState = TerminateState.TerminatedByMeCounterpartyCollectedFine;
+    if (isTerminatedByMeCounterpartyCollectedPenalty)
+        terminateState =
+            TerminateState.TerminatedByMeCounterpartyCollectedPenalty;
 
-    const isTerminatedByMeCounterpartyDidntCollectFine =
+    const isTerminatedByMeCounterpartyDidntCollectPenalty =
         isTerminatedByMe && !isPenaltyDemanded && isDeleted;
-    if (isTerminatedByMeCounterpartyDidntCollectFine)
+    if (isTerminatedByMeCounterpartyDidntCollectPenalty)
         terminateState =
-            TerminateState.TerminatedByMeCounterpartyDidntCollectFine;
+            TerminateState.TerminatedByMeCounterpartyDidntCollectPenalty;
 
-    const isTerminatedByCounterpartyICollectedFine =
+    const isTerminatedByCounterpartyICollectedPenalty =
         !isTerminatedByMe && isPenaltyDemanded && isDeleted;
-    if (isTerminatedByCounterpartyICollectedFine)
-        terminateState = TerminateState.TerminatedByCounterpartyICollectedFine;
-
-    const isTerminatedByCounterpartyIDidntCollectFine =
-        !isTerminatedByMe && !isPenaltyDemanded && isDeleted;
-    if (isTerminatedByCounterpartyIDidntCollectFine)
+    if (isTerminatedByCounterpartyICollectedPenalty)
         terminateState =
-            TerminateState.TerminatedByCounterpartyIDidntCollectFine;
+            TerminateState.TerminatedByCounterpartyICollectedPenalty;
+
+    const isTerminatedByCounterpartyIDidntCollectPenalty =
+        !isTerminatedByMe && !isPenaltyDemanded && isDeleted;
+    if (isTerminatedByCounterpartyIDidntCollectPenalty)
+        terminateState =
+            TerminateState.TerminatedByCounterpartyIDidntCollectPenalty;
 
     const isCompleted =
         state === ContractStates.completed || (isDeleted && isContract);

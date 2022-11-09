@@ -26,6 +26,7 @@ const MineOperationContract: FC<ContractProps> = ({
         showTerminatedAlert,
         showPenaltyActions,
         terminateState,
+        isCompleted,
     } = useContractState(contract, accountName);
 
     return (
@@ -43,6 +44,22 @@ const MineOperationContract: FC<ContractProps> = ({
                             <Completed
                                 accountName={accountName}
                                 contractId={contract.id}
+                            />
+                        )}
+                        {isCompleted && (
+                            <Alert
+                                message={
+                                    <Trans
+                                        i18nKey="pages.serviceMarket.contract.completedContract"
+                                        values={{
+                                            amount: fromUnit(
+                                                contract.penalty_amount
+                                            ),
+                                        }}
+                                    />
+                                }
+                                type="info"
+                                showIcon
                             />
                         )}
                         {showTerminatedAlert &&
