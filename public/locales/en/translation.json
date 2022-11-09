@@ -699,6 +699,9 @@
       "slotWillBeAvailableAfterEquipmentSlotFilled": "This slot will be available after the equipment slot is filled",
       "equipment": "Equipment",
       "boosters": "Boosters",
+      "newLevel": "New level",
+      "timeSpent": "Time spent",
+      "experience": "Experience",
       "status": {
         "notInaugurated": "Not Inaugurated",
         "idle": "Idle",
@@ -711,6 +714,18 @@
         "successProbability": "Success Probability",
         "lookingCitizen": "Looking for a citizen who will sign your order",
         "upgradeInProgress": "Upgrade in progress:"
+      },
+      "upgrade": {
+        "success": "Upgrade has completed successfully",
+        "unsuccess": "Upgrade has completed unsuccessfully",
+        "wasBroken": "was broken.",
+        "wasDeliveredToClientsWarehouse": "was automatically delivered to the clients warehouse.",
+        "wasDeliveredToYourWarehouse": "was automatically delivered to the your warehouse.",
+        "wasNotDamagedClients": "was not damaged and automatically delivered to the clients warehouse.",
+        "wasNotDamagedYour": "was not damaged and automatically delivered to the your warehouse.",
+        "reportRequestedByEngineer": "Report was already requested by the Engineer.",
+        "reportRequestedByClient": "Report was already requested by client.",
+        "upgraded": "Upgraded"
       },
       "dismissRole": {
         "title": "Warning this action will cause you to stop acting as an Engineer",

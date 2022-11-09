@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Row, Col } from 'antd';
 import { getDmeAmount } from 'shared/lib/utils';
+import { UpgradeReport } from 'shared/ui';
 import {
     Conditions,
     Citizen,
@@ -13,7 +14,10 @@ import { ContractAlerts } from './components/ContractAlerts';
 import { useLevelUpgradeContract } from './constants';
 
 const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
-    const { canTerminate } = useLevelUpgradeContract(contract, accountName);
+    const { canTerminate, canGetReport } = useLevelUpgradeContract(
+        contract,
+        accountName
+    );
 
     return (
         <Row gutter={[32, 32]}>
@@ -59,12 +63,12 @@ const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
                                     accountName={accountName}
                                 />
                             )}
-                            {/* {canGetReport && (
-                                <GetReport
+                            {canGetReport && (
+                                <UpgradeReport
                                     accountName={accountName}
-                                    contractId={contract.id}
+                                    contract={contract}
                                 />
-                            )} */}
+                            )}
                         </Row>
                     </Col>
                 </Row>

@@ -84,7 +84,7 @@ sample({
     fn: (inventory) => getCertificate(inventory),
 });
 
-const $engineerCabinStore = combine(
+const $engineerCabin = combine(
     $engineer,
     smartContractUserStore,
     $certificate,
@@ -112,7 +112,7 @@ export {
     EngineerCabinGate,
     getActiveInventoryEffect,
     getEngineerByExecutorEffect,
-    $engineerCabinStore,
+    $engineerCabin,
     $isEngineerCabinLoading,
     $engineer,
     $userActiveInventory,

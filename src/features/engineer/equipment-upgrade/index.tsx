@@ -40,23 +40,24 @@ const EquipmentUpgrade: FC<Props> = ({ contract, status }) => {
                     isWaitCitizen={status === CabinStatus.NeedCitizen}
                 />
 
-                {status === CabinStatus.UpgradeCompleted ? (
-                    <GetUpgrade
-                        accountName={accountName}
-                        contractId={contract?.id!}
-                    />
-                ) : (
-                    <PerformUpgrade
-                        accountName={accountName}
-                        contractId={contract?.id!}
-                        improved={upgradeKit === UpgradeKitType.uncommon}
-                        disabled={
-                            !equipment ||
-                            !upgradeKit ||
-                            status === CabinStatus.UpgradeInProgress
-                        }
-                    />
-                )}
+                {contract &&
+                    (status === CabinStatus.UpgradeCompleted ? (
+                        <GetUpgrade
+                            accountName={accountName}
+                            contract={contract}
+                        />
+                    ) : (
+                        <PerformUpgrade
+                            accountName={accountName}
+                            contractId={contract.id}
+                            improved={upgradeKit === UpgradeKitType.uncommon}
+                            disabled={
+                                !equipment ||
+                                !upgradeKit ||
+                                status === CabinStatus.UpgradeInProgress
+                            }
+                        />
+                    ))}
             </Space>
         </Space>
     );
