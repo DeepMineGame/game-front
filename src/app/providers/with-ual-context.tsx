@@ -15,7 +15,7 @@ export const waxAuthenticators = isMainNet
 export const withUalContext = (App: React.FC) => () =>
     (
         <UALProvider
-            chains={chains}
+            chains={[chains]}
             appName="DeepMine"
             authenticators={waxAuthenticators}
         >

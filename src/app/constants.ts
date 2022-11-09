@@ -8,7 +8,7 @@ export const defaultConfig = {
 };
 
 export const isMainNet = process.env.REACT_APP_MAINNET === 'true';
-console.log('upd');
+console.log('upd2');
 
 export const WAX_CHAIN_ID = isMainNet
     ? '1064487b3cd1a897ce03ae5b6a865651747e2e152090f99c1d19d44e01aea5a4'
