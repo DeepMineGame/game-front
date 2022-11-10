@@ -3,9 +3,9 @@ import { Trans } from 'react-i18next';
 import { Col, Row } from 'antd';
 import { PenaltyActions } from 'features';
 import { ContractStatesMeta } from 'entities/smartcontract';
-import { TerminateState, useContractState } from 'entities/contract';
+import { useContractState } from 'entities/contract';
 import { Alert } from 'shared/ui';
-import { fromUnit, getDmeAmount } from 'shared/lib/utils';
+import { getDmeAmount } from 'shared/lib/utils';
 import { Completed, TerminateContract } from '../../ui/actions';
 import {
     GeneralDataTable,
@@ -25,7 +25,6 @@ const MineOperationContract: FC<ContractProps> = ({
         showCompleted,
         showTerminatedAlert,
         showPenaltyActions,
-        terminateState,
     } = useContractState(contract, accountName);
 
     return (
@@ -45,23 +44,15 @@ const MineOperationContract: FC<ContractProps> = ({
                                 contractId={contract.id}
                             />
                         )}
-                        {showTerminatedAlert &&
-                            terminateState !== TerminateState.undefined && (
-                                <Alert
-                                    message={
-                                        <Trans
-                                            i18nKey={`pages.serviceMarket.contract.${terminateState}`}
-                                            values={{
-                                                amount: fromUnit(
-                                                    contract.penalty_amount
-                                                ),
-                                            }}
-                                        />
-                                    }
-                                    type="info"
-                                    showIcon
-                                />
-                            )}
+                        {showTerminatedAlert && (
+                            <Alert
+                                message={
+                                    <Trans i18nKey="pages.serviceMarket.contract.youTerminated" />
+                                }
+                                type="info"
+                                showIcon
+                            />
+                        )}
                         {showPenaltyActions && (
                             <PenaltyActions
                                 isViolated={
