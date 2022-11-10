@@ -5,8 +5,8 @@ import {
     CheckCircleOutlined,
     ClockCircleOutlined,
     CloseCircleOutlined,
-    DeleteOutlined,
     ExclamationCircleFilled,
+    DeleteOutlined,
 } from '@ant-design/icons';
 import { useContractState, useContractType } from 'entities/contract';
 import { ContractProps } from '../../types';
