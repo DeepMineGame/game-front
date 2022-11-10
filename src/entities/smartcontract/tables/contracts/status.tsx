@@ -98,6 +98,7 @@ export const getContractStatus = (
         return { value: ContractStates.openOrder };
 
     const isUserClient = contract.client === account;
+    const isUserExecutor = contract.executor === account;
 
     if (
         isStatusActive(contract) &&
@@ -107,22 +108,36 @@ export const getContractStatus = (
         return { value: ContractStates.valid };
     }
 
-    // the executor logic here will be added in the future
     if (isDeadlineViolation(contract) && isUserClient) {
         return {
             value: ContractStates.waitingForAction,
             meta: ContractStatesMeta.deadlineViolation,
         };
     }
-    // the executor logic here will be added in the future
+
+    if (isDeadlineViolation(contract) && isUserExecutor) {
+        return {
+            value: ContractStates.valid,
+            meta: ContractStatesMeta.deadlineViolation,
+        };
+    }
+
     if (isContractTermNotFulfilled(contract) && isUserClient) {
         return {
             value: ContractStates.waitingForAction,
             meta: ContractStatesMeta.termViolation,
         };
     }
+
+    if (isContractTermNotFulfilled(contract) && isUserExecutor) {
+        return {
+            value: ContractStates.valid,
+            meta: ContractStatesMeta.termViolation,
+        };
+    }
+
     if (wasTerminatedBySomebody(contract) && wasTerminatedEarly(contract)) {
-        if (contract.term_initiator !== account && !contract.deleted_at) {
+        if (contract.term_initiator !== account) {
             return {
                 value: ContractStates.waitingForAction,
                 meta: ContractStatesMeta.earlyBreak,
