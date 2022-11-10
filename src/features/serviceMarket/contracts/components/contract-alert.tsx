@@ -14,7 +14,7 @@ import { useContractType } from 'entities/contract';
 import { ContractAlert as Alert, Button } from 'shared/ui';
 import { useReloadPage } from 'shared/lib/hooks';
 import { fromUnit } from 'shared/lib/utils';
-import { Completed } from '../../actions';
+import { Completed } from '../../ui/actions';
 
 export const ContractAlert: FC<{
     contract: ContractDto;
@@ -121,7 +121,7 @@ export const ContractAlert: FC<{
             }
 
             // Contract has been successfully completed
-            if (isCompleted) {
+            if (isCompleted && !isExecutorViolated) {
                 return (
                     <Alert
                         message={
@@ -137,15 +137,17 @@ export const ContractAlert: FC<{
             }
 
             // Contract has been successfully completed & wait executor confirmation
-            return (
-                <Completed
-                    contractId={contract.id}
-                    accountName={accountName}
-                    onComplete={async () => {
-                        await terminateContractAction();
-                    }}
-                />
-            );
+            if (isCompleted) {
+                return (
+                    <Completed
+                        contractId={contract.id}
+                        accountName={accountName}
+                        onComplete={async () => {
+                            await terminateContractAction();
+                        }}
+                    />
+                );
+            }
         }
 
         // Contract has been terminated by client & client collected penalty
@@ -378,7 +380,7 @@ export const ContractAlert: FC<{
             }
 
             // Contract has been successfully completed
-            if (isCompleted) {
+            if (isCompleted && !isExecutorViolated) {
                 return (
                     <Alert
                         message={
@@ -394,15 +396,17 @@ export const ContractAlert: FC<{
             }
 
             // Contract has been successfully completed & wait executor confirmation
-            return (
-                <Completed
-                    contractId={contract.id}
-                    accountName={accountName}
-                    onComplete={async () => {
-                        await terminateContractAction();
-                    }}
-                />
-            );
+            if (isCompleted) {
+                return (
+                    <Completed
+                        contractId={contract.id}
+                        accountName={accountName}
+                        onComplete={async () => {
+                            await terminateContractAction();
+                        }}
+                    />
+                );
+            }
         }
 
         // Contract has been terminated by client & client collected penalty

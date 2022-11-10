@@ -1,12 +1,8 @@
 import { FC } from 'react';
-import { Trans } from 'react-i18next';
 import { Col, Row } from 'antd';
-import { PenaltyActions } from 'features';
-import { ContractStatesMeta } from 'entities/smartcontract';
 import { useContractState } from 'entities/contract';
-import { Alert } from 'shared/ui';
 import { getDmeAmount } from 'shared/lib/utils';
-import { Completed, TerminateContract } from '../../ui/actions';
+import { TerminateContract } from '../../ui/actions';
 import {
     GeneralDataTable,
     ConditionTable,
@@ -14,18 +10,13 @@ import {
 } from '../../ui/contract';
 import { LandlordTable } from '../../ui/contract/mine-operation';
 import { ContractProps } from '../../types';
+import { ContractAlert } from '../components/contract-alert';
 
 const MineOperationContract: FC<ContractProps> = ({
     contract,
     accountName,
 }) => {
-    const {
-        stateMeta,
-        canTerminate,
-        showCompleted,
-        showTerminatedAlert,
-        showPenaltyActions,
-    } = useContractState(contract, accountName);
+    const { canTerminate } = useContractState(contract, accountName);
 
     return (
         <Row gutter={[32, 32]}>
@@ -38,33 +29,10 @@ const MineOperationContract: FC<ContractProps> = ({
                         />
                     </Col>
                     <Col span={24}>
-                        {showCompleted && (
-                            <Completed
-                                accountName={accountName}
-                                contractId={contract.id}
-                            />
-                        )}
-                        {showTerminatedAlert && (
-                            <Alert
-                                message={
-                                    <Trans i18nKey="pages.serviceMarket.contract.youTerminated" />
-                                }
-                                type="info"
-                                showIcon
-                            />
-                        )}
-                        {showPenaltyActions && (
-                            <PenaltyActions
-                                isViolated={
-                                    stateMeta ===
-                                        ContractStatesMeta.termViolation ||
-                                    stateMeta ===
-                                        ContractStatesMeta.deadlineViolation
-                                }
-                                amount={getDmeAmount(contract.penalty_amount)}
-                                contractId={contract.id}
-                            />
-                        )}
+                        <ContractAlert
+                            contract={contract}
+                            accountName={accountName}
+                        />
                     </Col>
                 </Row>
             </Col>
