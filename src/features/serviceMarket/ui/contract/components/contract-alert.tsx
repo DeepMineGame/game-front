@@ -148,28 +148,6 @@ export const ContractAlert: FC<{
             );
         }
 
-        // Contract has not been finished & executor violated terms
-        if (isExecutorViolated) {
-            return (
-                <Alert
-                    message={
-                        <Trans i18nKey="pages.serviceMarket.contract.violatedByMeWaitCounterparty" />
-                    }
-                />
-            );
-        }
-
-        // Contract has been terminated by executor and wait client
-        if (isExecutorViolated && isExecutorTermInitiator) {
-            return (
-                <Alert
-                    message={
-                        <Trans i18nKey="pages.serviceMarket.contract.violatedAndTerminatedByMeWaitCounterparty" />
-                    }
-                />
-            );
-        }
-
         // Contract has been terminated by client & client collected penalty
         if (
             isExecutorViolated &&
@@ -241,6 +219,28 @@ export const ContractAlert: FC<{
                             }}
                             i18nKey="pages.serviceMarket.contract.terminatedByMeCounterpartyDidntCollectPenalty"
                         />
+                    }
+                />
+            );
+        }
+
+        // Contract has been terminated by executor and wait client
+        if (isExecutorViolated && isExecutorTermInitiator) {
+            return (
+                <Alert
+                    message={
+                        <Trans i18nKey="pages.serviceMarket.contract.violatedAndTerminatedByMeWaitCounterparty" />
+                    }
+                />
+            );
+        }
+
+        // Contract has not been finished & executor violated terms
+        if (isExecutorViolated) {
+            return (
+                <Alert
+                    message={
+                        <Trans i18nKey="pages.serviceMarket.contract.violatedByMeWaitCounterparty" />
                     }
                 />
             );
@@ -405,35 +405,6 @@ export const ContractAlert: FC<{
             );
         }
 
-        // Contract has not been finished & executor violated terms
-        if (isExecutorViolated) {
-            return (
-                <Alert
-                    message={
-                        <Trans i18nKey="pages.serviceMarket.contract.violatedByCounterpartyContractCanTerminateWaitMe" />
-                    }
-                    action={
-                        <>
-                            <Button
-                                ghost
-                                type="primary"
-                                onClick={collectPenaltyAction}
-                            >
-                                <Trans i18nKey="pages.serviceMarket.contract.collectPenaltyAndBreak" />
-                            </Button>
-                            <Button
-                                ghost
-                                type="primary"
-                                onClick={dontCollectPenaltyAction}
-                            >
-                                <Trans i18nKey="pages.serviceMarket.contract.noCollectPenaltyAndBreak" />
-                            </Button>
-                        </>
-                    }
-                />
-            );
-        }
-
         // Contract has been terminated by client & client collected penalty
         if (
             isExecutorViolated &&
@@ -465,6 +436,35 @@ export const ContractAlert: FC<{
                             }}
                             i18nKey="pages.serviceMarket.contract.violatedByCounterpartyITerminatedAndDidntCollectPenalty"
                         />
+                    }
+                />
+            );
+        }
+
+        // Contract has not been finished & executor violated terms
+        if (isExecutorViolated) {
+            return (
+                <Alert
+                    message={
+                        <Trans i18nKey="pages.serviceMarket.contract.violatedByCounterpartyContractCanTerminateWaitMe" />
+                    }
+                    action={
+                        <>
+                            <Button
+                                ghost
+                                type="primary"
+                                onClick={collectPenaltyAction}
+                            >
+                                <Trans i18nKey="pages.serviceMarket.contract.collectPenaltyAndBreak" />
+                            </Button>
+                            <Button
+                                ghost
+                                type="primary"
+                                onClick={dontCollectPenaltyAction}
+                            >
+                                <Trans i18nKey="pages.serviceMarket.contract.noCollectPenaltyAndBreak" />
+                            </Button>
+                        </>
                     }
                 />
             );
