@@ -11,7 +11,6 @@ import {
     terminateContract,
     wasTerminatedEarly,
 } from 'entities/smartcontract';
-import { useContractType } from 'entities/contract';
 import { ContractAlert as Alert, Button } from 'shared/ui';
 import { useReloadPage } from 'shared/lib/hooks';
 import { fromUnit } from 'shared/lib/utils';
@@ -32,13 +31,10 @@ export const ContractAlert: FC<{
         contract.penalty_demanded_by === contract.executor;
     const isPenaltyDemanded = !!contract.penalty_demanded_by;
 
-    const { isContract } = useContractType(contract);
-
     const isContractFinished = isTimeFinished(contract);
     const isDeleted = !!contract.deleted_at;
     const isTerminated = contract.term_time > 0;
-    const isCompleted =
-        state === ContractStates.completed || (isDeleted && isContract);
+    const isCompleted = state === ContractStates.completed;
 
     const isExecutorTermInitiator =
         contract.executor === contract.term_initiator;
@@ -386,7 +382,10 @@ export const ContractAlert: FC<{
             }
 
             // Contract has been successfully completed
-            if (isCompleted && !isExecutorViolated) {
+            if (
+                (isCompleted && !isExecutorViolated) ||
+                isExecutorTermInitiator
+            ) {
                 return (
                     <Alert
                         message={
