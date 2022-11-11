@@ -9,7 +9,7 @@ import {
     UserDto,
 } from 'entities/smartcontract';
 import { mineOwnerCabinStateResolver } from '../mineOwnerCabinState';
-import { checkIsMineSetEffect } from './checkIsMineSetEffect';
+import { checkMineStateEffect } from './checkMineStateEffect';
 
 export const checkIfNeedPhysicalShiftEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
@@ -28,6 +28,6 @@ export const checkIfNeedPhysicalShiftEffect = createEffect(
         if (isUserOutsideFromMineDeckLocation && !userMine) {
             return mineOwnerCabinStateResolver.needPhysicalShiftState();
         }
-        return checkIsMineSetEffect({ searchParam });
+        return checkMineStateEffect({ searchParam });
     }
 );

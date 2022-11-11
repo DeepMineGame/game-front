@@ -11,3 +11,4 @@ export * from './LoadingScreen';
 export * from './LogAs';
 export * from './full-screen-background';
 export * from './countdown';
+export * from './upgrade-report';

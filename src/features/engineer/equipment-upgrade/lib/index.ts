@@ -24,10 +24,28 @@ const getPriceModifier = (upgradeKit: UpgradeKitType) => {
     return mine[upgradeKit];
 };
 
+const isEngineerRequestedReport = (contract: ContractDto) =>
+    contract.attrs.some(({ key }) => key === 'engineer_report_fetched');
+
+const getContractWithoutReport = (contracts: ContractDto[]) =>
+    contracts.find(
+        (contract) =>
+            contract.deleted_at > 0 &&
+            contract.start_time > 0 &&
+            !contract.term_time &&
+            !isEngineerRequestedReport(contract)
+    );
+
 const getEngineerActiveContract = (
     user?: string,
     contracts?: ContractDto[] | null
 ) => {
+    const withoutReport = getContractWithoutReport(contracts || []);
+
+    if (withoutReport && withoutReport.executor === user) {
+        return withoutReport;
+    }
+
     return (contracts || []).find(
         (contract) => !contract.deleted_at && contract.executor === user
     );
@@ -57,6 +75,8 @@ const getUpgradeKitType = (contract?: ContractDto) => {
 };
 
 export {
+    isEngineerRequestedReport,
+    getContractWithoutReport,
     getMinMaxUpgradeTime,
     getPriceModifier,
     getTimeModifier,

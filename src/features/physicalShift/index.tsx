@@ -7,8 +7,8 @@ import {
     PhysicalShiftParams,
 } from 'entities/smartcontract';
 import { useSmartContractAction } from '../hooks';
-import { TravelModal } from './ui/TravelModal';
-import { $travelStatus } from './model';
+import { $indicateActionDetails } from '../action-indicator/model';
+import { TravelModal } from './ui';
 
 type Props = {
     toLocationId: LOCATION_TO_ID;
@@ -24,7 +24,7 @@ export const CallToTravelNotification: FC<Props> = ({
     onSuccess,
     trigger,
 }) => {
-    const travelStatus = useStore($travelStatus);
+    const lastAction = useStore($indicateActionDetails);
 
     const [isTravelModalVisible, setIsTravelModalVisible] = useState(false);
 
@@ -45,7 +45,7 @@ export const CallToTravelNotification: FC<Props> = ({
         closeTravelModal();
     };
 
-    if (travelStatus.initialAmountOfSeconds > 0) return null;
+    if (lastAction.initialAmountOfSeconds > 0) return null;
 
     return (
         <>

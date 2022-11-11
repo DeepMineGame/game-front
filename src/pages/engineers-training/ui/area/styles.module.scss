@@ -1,0 +1,44 @@
+@import "src/shared";
+
+.trainingArea {
+    padding: 24px;
+
+    &Disabled {
+        opacity: 0.3;
+        pointer-events: none;
+    }
+
+    &Row {
+        & + & .trainingAreaCol:first-child > .trainingAreaNft::before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 1px;
+            height: 24px;
+            background-color: white;
+            left: 50%;
+            bottom: 100%;
+        }
+
+        &Disabled {
+            opacity: 0.3;
+
+            & .trainingAreaRowTitle {
+                font-weight: 400
+            }
+        }
+    }
+
+    &Col {
+        & + & > .trainingAreaNft::after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 16px;
+            height: 1px;
+            background-color: white;
+            bottom: 50%;
+            left: -8px;
+        } 
+    }
+}

@@ -11,7 +11,7 @@ import {
 } from 'features/engineer';
 import {
     EngineerCabinGate,
-    $engineerCabinStore,
+    $engineerCabin,
     getState,
     getStatus,
     $isEngineerCabinLoading,
@@ -25,7 +25,7 @@ const EquipmentHallPage: FC = () => {
     const inLocation = useUserLocation();
     useGate(EngineerCabinGate, { searchParam: accountName });
 
-    const engineerStore = useStore($engineerCabinStore);
+    const engineerStore = useStore($engineerCabin);
     const isCabinLoading = useStore($isEngineerCabinLoading);
 
     const status = getStatus(engineerStore);

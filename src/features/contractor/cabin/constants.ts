@@ -8,3 +8,9 @@ export enum ContractorCabinStatus {
     mining_interrupted,
     mining_over,
 }
+
+export enum LastMiningStatus {
+    success = 'success',
+    failed = 'failed',
+    interrupted = 'interrupted',
+}

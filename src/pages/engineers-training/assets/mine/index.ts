@@ -1,0 +1,9 @@
+export { default as mine1 } from './mine-1.png';
+export { default as mine2 } from './mine-2.png';
+export { default as mine3 } from './mine-3.png';
+export { default as mine4 } from './mine-4.png';
+export { default as mine5 } from './mine-5.png';
+export { default as mine6 } from './mine-6.png';
+export { default as mine7 } from './mine-7.png';
+export { default as mine8 } from './mine-8.png';
+export { default as mine9 } from './mine-9.png';

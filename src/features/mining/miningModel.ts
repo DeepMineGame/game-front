@@ -70,7 +70,7 @@ export const miningContractStore = createStore<ContractDto | null | undefined>(
     )
 );
 
-export const currentMineStore = createStore<MineDto[] | null>(null).on(
+export const $currentMine = createStore<MineDto[] | null>(null).on(
     getMineByAssetEffect.doneData,
     (_, { rows }) => rows
 );

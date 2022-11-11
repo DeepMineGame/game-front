@@ -75,7 +75,11 @@ export const Card: FC<CardProps> = ({
                                     ? getImagePath(inventory?.template_id)
                                     : ''
                             }
-                            alt="nft-equipment-card"
+                            onError={({ currentTarget }) => {
+                                currentTarget.onerror = null;
+                                currentTarget.src = '/img/no-image.webp';
+                            }}
+                            alt={`template ${inventory?.template_id || ''}`}
                         />
                     </div>
                     {withDepreciationBar && (

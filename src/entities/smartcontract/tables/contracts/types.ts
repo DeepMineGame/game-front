@@ -26,6 +26,26 @@ export const statusMap = {
     [ContractStatus.terminated]: 'Terminated',
 };
 
+export type AttrStatus = 'success' | 'failed' | 'failed_with_broke';
+
+export type ContractAttrs = {
+    asset_id_new: string;
+    asset_id_old: string;
+    asset_template_id: string;
+    contract_id: number;
+    cost_of_execution: number;
+    engineer_exp: string;
+    finished_by: string;
+    improved_kit: 0 | 1;
+    level: string;
+    rarity: string;
+    schema_type: string;
+    status: AttrStatus;
+    time_spent: number; // in seconds
+    upgrade_failed: string;
+    engineer_report_fetched?: boolean;
+};
+
 export type ContractDto = {
     id: number;
     client: string;
@@ -55,7 +75,7 @@ export type ContractDto = {
     client_warranty_amount: number;
     executor_warranty_amount: number;
     attrs: {
-        key: string;
+        key: keyof ContractAttrs;
         value: string;
     }[];
     signed_by_client: number;

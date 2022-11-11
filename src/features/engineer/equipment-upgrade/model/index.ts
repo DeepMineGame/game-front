@@ -3,6 +3,7 @@ import { createEffect, createStore, sample } from 'effector';
 import { AssetDataType, getAtomicAssetsDataById } from 'entities/atomicassets';
 import { FilterOrderStatus, getOrders, Role } from 'entities/gameStat';
 import { ContractDto, ContractType } from 'entities/smartcontract';
+import { getContractWithoutReport } from '../lib';
 
 const getContractsExecutorEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
@@ -29,11 +30,26 @@ const $engineerContracts = createStore<ContractDto[]>([]).on(
 sample({
     source: $engineerContracts,
     target: getEquipmentByIdEffect,
-    fn: (contracts) =>
-        contracts?.find((contract) => !contract.deleted_at)?.client_asset_id ||
-        '',
-    filter: (contracts) =>
-        !!contracts.find((contract) => !contract.deleted_at)?.client_asset_id,
+    fn: (contracts) => {
+        const withoutReport = getContractWithoutReport(contracts);
+        if (withoutReport?.client_asset_id) {
+            return withoutReport.client_asset_id;
+        }
+
+        return (
+            contracts?.find((contract) => !contract.deleted_at)
+                ?.client_asset_id || ''
+        );
+    },
+    filter: (contracts) => {
+        const withoutReport = getContractWithoutReport(contracts);
+        if (withoutReport) {
+            return !!withoutReport.client_asset_id;
+        }
+
+        return !!contracts.find((contract) => !contract.deleted_at)
+            ?.client_asset_id;
+    },
 });
 
 const $equipment = createStore<AssetDataType | null>(null).on(

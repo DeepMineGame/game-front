@@ -1,6 +1,6 @@
 import { deepmineengr } from '../../index';
 
-export function openSkill(waxUser: string, assetId: string | number) {
+export function openSkill(waxUser: string, templateId: string | number) {
     return {
         actions: [
             {
@@ -14,7 +14,7 @@ export function openSkill(waxUser: string, assetId: string | number) {
                 ],
                 data: {
                     wax_user: waxUser,
-                    skill_template_id: assetId,
+                    skill_template_id: templateId,
                 },
             },
         ],

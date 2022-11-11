@@ -9,6 +9,7 @@ import {
     UserHistoryType,
     UserInfoType,
 } from 'entities/smartcontract';
+import { getLastMiningStatus } from './api';
 
 export const setMiningOverEvent = createEvent<boolean>();
 
@@ -51,3 +52,5 @@ export const getUserInfoEffect = createEffect<
     { rows: UserInfoType[] },
     Error
 >(({ searchParam }) => getTableData(getUserConfig(searchParam)));
+
+export const getLastMiningStatusEffect = createEffect(getLastMiningStatus);

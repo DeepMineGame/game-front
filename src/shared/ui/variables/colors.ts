@@ -9,3 +9,4 @@ export const gold6 = '#D89614';
 export const green6 = '#47FF40';
 export const primary6 = '#F5C913';
 export const primary5 = '#CCA500';
+export const red6 = '#D32029';

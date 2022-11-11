@@ -4,12 +4,16 @@ import {
     ContractDto,
     ContractStatus,
     ContractType,
+    MineState,
     UserHistoryType,
     UserInfoType,
     UserInventoryType,
 } from 'entities/smartcontract';
+import { $currentMine } from '../../../mining';
+import { LastMiningStatus } from '../constants';
 import {
     getLandlordContractsEffect,
+    getLastMiningStatusEffect,
     getUserContractsEffect,
     getUserHistoryEffect,
     getUserInfoEffect,
@@ -68,32 +72,27 @@ export const $needFinishMineownerContract = createStore(false);
 export const $equipmentIsBroken = createStore(false);
 export const $landlordContractFinished = createStore(false);
 export const $miningContractIsntActive = createStore(false);
+export const $isMineDepthChanging = combine(
+    $currentMine,
+    (currentMine) => currentMine?.[0]?.state === MineState.depth_changing
+);
 
 export const $contractorCabin = combine(
-    $hasMineOwnerContracts,
-    $installedMiningEquipments,
-    $isNotFullEquipmentsSet,
-    $activeMining,
-    $interruptedMining,
-    $miningOver,
-    $needFinishMineownerContract,
-    $equipmentIsBroken,
-    $landlordContractFinished,
-    $miningContractIsntActive,
-    $landlordContract,
-    (
-        hasMineOwnerContracts,
-        installedMiningEquipments,
-        isNotFullEquipmentsSet,
-        activeMining,
-        interruptedMining,
-        miningOver,
-        needFinishMineownerContract,
-        equipmentIsBroken,
-        landlordContractFinished,
-        miningContractIsntActive,
-        landlordContract
-    ) => ({
+    {
+        hasMineOwnerContracts: $hasMineOwnerContracts,
+        installedMiningEquipments: $installedMiningEquipments,
+        isNotFullEquipmentsSet: $isNotFullEquipmentsSet,
+        activeMining: $activeMining,
+        interruptedMining: $interruptedMining,
+        miningOver: $miningOver,
+        needFinishMineownerContract: $needFinishMineownerContract,
+        equipmentIsBroken: $equipmentIsBroken,
+        landlordContractFinished: $landlordContractFinished,
+        miningContractIsntActive: $miningContractIsntActive,
+        landlordContract: $landlordContract,
+        isMineDepthChanging: $isMineDepthChanging,
+    },
+    ({
         hasMineOwnerContracts,
         installedMiningEquipments,
         isNotFullEquipmentsSet,
@@ -105,6 +104,20 @@ export const $contractorCabin = combine(
         landlordContractFinished,
         miningContractIsntActive,
         landlordContract,
+        isMineDepthChanging,
+    }) => ({
+        hasMineOwnerContracts,
+        installedMiningEquipments,
+        isNotFullEquipmentsSet,
+        activeMining,
+        interruptedMining,
+        miningOver,
+        needFinishMineownerContract,
+        equipmentIsBroken,
+        landlordContractFinished,
+        miningContractIsntActive,
+        landlordContract,
+        isMineDepthChanging,
     })
 );
 
@@ -119,3 +132,8 @@ export const $isContractorCabinLoading = combine(
 export type ContractorCabinStore = ReturnType<
     typeof $contractorCabin['getState']
 >;
+
+export const $lastMiningStatus = createStore<LastMiningStatus | null>(null).on(
+    getLastMiningStatusEffect.doneData,
+    (_, { status }) => status
+);

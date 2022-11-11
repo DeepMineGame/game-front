@@ -42,9 +42,10 @@
       "activeInventory": "Active inventory",
       "confirmTransfer": "Confirm transfer",
       "storage": "Storage",
-      "YouHaveToPhysicalToManageInventory": "You have to travel to manage the active inventory"
+      "YouHaveToPhysicalToManageInventory": "Travel to Hive to have the ability to load active inventory from the warehouse"
     },
     "common": {
+      "city": "City",
       "item": "Item",
       "openContract": "Open Contract",
       "free": "Free",
@@ -183,10 +184,11 @@
       "myEquipment": "MY EQUIPMENT",
       "configure": "CONFIGURE",
       "miningStatus": "Mine: ",
-      "miningInProgress": "Mining is progress",
-      "miningWasInterrupted": "Mining was interrupted",
-      "miningHasFinished": "Mining has finished",
-      "miningHasClaimed": "Mining has claimed",
+      "miningInProgress": "Mining in progress",
+      "lastMiningResult": "Last mining result",
+      "success": "succesfull",
+      "failed": "failed",
+      "interrupted": "interrupted",
       "miningFinishedSuccessfully": "Mining has finished successfully!",
       "cool": "That's cool",
       "tooltipAroundConsumables": "This is where improvements are installed that allow you to make mining more efficient. They will be available for the Mine level 1",
@@ -205,6 +207,7 @@
       "miningContractIsntActive": "<b>Your Mining Contract is not active.</b> Please <b>uninstall the equipment set</b> to be able to sign the new contract",
       "somePiecesOfEquipmentIsBroken": "One or more pieces of <b>equipment is broken</b>. Replacement or repair required",
       "contractBetweenMineownerAndLandlordIsntValid": "<b>Mine operation contract</b> between a Mine Owner and a Landlord <b>is not valid</b>. Please contact the Mine owner to resolve the issue.",
+      "mineDepthProcess": "Mine in the process of the depth changes. The mining is impossible. Please wait till the process is finished",
       "openContract": "Open contract",
       "configureButton": "Configure"
     },
@@ -436,7 +439,7 @@
         "miningTermsHint": "If during the entire period of the contract, within the specified number of days, less than the specified amount of DME was extracted, the other party has the right to terminate the contract and collect a penalty",
         "startOfOperation": "Start of operation",
         "effectiveDate": "Effective date",
-        "startOfOperationTooltip": "Time when parties begin performing their obligations upon the contract.",
+        "startOfOperationTooltip": "The date when agreement or transaction becomes binding",
         "goToServiceMarket": "To the Service Market",
         "orderCreated": "Your order was successfully created",
         "orderFailed": "Failed to create your order",
@@ -600,6 +603,7 @@
       "claim": "Claim DME",
       "engage": "Engage the Area",
       "unengage": "Unengage the Area",
+      "areaActionSucceed": "Area's action is succeed",
       "unengageDescription": "Are you sure you want to stop operating the area?",
       "search": "Searching for Mine owner",
       "mineSlots": "Mine slots",
@@ -616,10 +620,10 @@
       "watIs": "What is DeepMine?",
       "deepMineDescription": "DeepMine is a Play-and-Earn social economy strategy in the Sci-Fi-themed metaverse. DeepMine is about cooperation, free market economy and this simple mundane thing called saving humanity.",
       "wasRelease": "Is the game released yet? How do I start playing DeepMine?",
-      "closeAlpha": "Closed alpha testing has already been done, open beta is scheduled for fall 2022. Feel free to buy the in-game equipment to get ready for the upcoming start. \nYou’ll first need to create a Wallet on the Wax Blockchain —  it’s easier than you think. Read the guide\n",
+      "closeAlpha": "Closed alpha testing has already been done, open beta is scheduled for fall 2022. Feel free to buy the in-game equipment to get ready for the upcoming start. \nYou’ll first need to create a Wallet on the Wax Blockchain —  it’s easier than you think. Read the guide on our ",
       "needNft": "\n\nYou’ll then need to buy at least 5 DeepMine NFTs on",
       "more": "(1 for each type of equipment). Find more info",
-      "here": "here\n\n",
+      "here": "here.\n\n",
       "explore": "Make sure to explore the",
       "stake": "where you can stake DeepMine NFTs, grab some stuff at auctions and invite your friends to join your team, getting a reward in the process. Saving Eleazar is fun but requires some preparation.",
       "whatHappened": "Elea... what? What happened here?",
@@ -632,11 +636,11 @@
       "thePlanet": "The planet Eleazar is divided into 1000 areas with five different rarity types. Most of these 1000 areas are the Rock Fields (common rarity) while the rarest areas are DME Springs (legendary rarity) with the highest expectations from those who mine there. Only up to 100 mines can be established in each area, and only 10 mine slots are revealed at the beginning with the remaining oneson the",
       "toDiscover": "to discover.\n\nIn a nutshell, it’s 1000 areas—> up to 100 mines in each area — 9 mine levels + surface—> divided into 5 sublevels each. Each mine has 3 slots for the mine modules which improve mine characteristics. Sounds a bit too complex? Mining’s not the easiest thing in the world! However, once you start playing, you’ll start digging into things much faster (in all senses). Read our fullest blueprint",
       "whatRoles": "What are the game roles?",
-      "thereRole": "For a start, the player is free to pick out of 3 main game roles",
+      "thereRole": "For a start, the player is free to pick out of 4 main game roles",
       "and": "and",
       "moreRoles": "There are also specialties available to the players — see our nice and neat infographics",
       "rolesPoint": "What’s the point of the game roles and the game in general?",
-      "miningDme": "Mining DME token is the key in-game mechanism that allows for advancement in the DeepMine. Unlike in most other P2E games, the best progress in DeepMine implies cooperation between players with different roles.",
+      "miningDme": "Mining DME token is the key in-game mechanism that allows for advancement in the DeepMine. Unlike in most other P2E games, the best progress in DeepMine implies cooperation between players with different roles. \n Main point of the game is mining DME token, which is the key in-game mechanism that allows for advancement in the DeepMine. Game roles imply different methods of doing that, but be advised that unlike most other P2E games, achieving optimal progress in DeepMine implies cooperation between players with different roles.",
       "seeLanding": "We have our entire team doxxed for you — see deepmine.world",
       "eugen": "Deepmine’s Head of operations Eugene is a frequent guest at Web3 conferences including AIBC World, CGC and Hyper Games conferences.",
       "community": "DeepMine team keeps the community up to date on all the projects news in our Telegram and Discord groups. We regularly hold live AMA sessions with Eugene Shakula",
@@ -644,6 +648,7 @@
       "weAreChampions": "We are winners of the AIBC GameFi Pitch Competition 2022.",
       "weAreChampionsMyFriend": "We are winners of the AIBC GameFi Pitch Competition 2022.",
       "weAreChampionsOfTheWorld": "We’ve got credible partners: YARD [Hub] venture studio, DApplica, AtomicHub.",
+      "abic": "We are the winners of the AIBC GameFi Pitch Competition 2022 and Project of the Year Award",
       "areas": "areas"
     },
     "engineer": {
@@ -694,6 +699,9 @@
       "slotWillBeAvailableAfterEquipmentSlotFilled": "This slot will be available after the equipment slot is filled",
       "equipment": "Equipment",
       "boosters": "Boosters",
+      "newLevel": "New level",
+      "timeSpent": "Time spent",
+      "experience": "Experience",
       "status": {
         "notInaugurated": "Not Inaugurated",
         "idle": "Idle",
@@ -707,20 +715,54 @@
         "lookingCitizen": "Looking for a citizen who will sign your order",
         "upgradeInProgress": "Upgrade in progress:"
       },
+      "upgrade": {
+        "success": "Upgrade has completed successfully",
+        "unsuccess": "Upgrade has completed unsuccessfully",
+        "wasBroken": "was broken.",
+        "wasDeliveredToClientsWarehouse": "was automatically delivered to the clients warehouse.",
+        "wasDeliveredToYourWarehouse": "was automatically delivered to the your warehouse.",
+        "wasNotDamagedClients": "was not damaged and automatically delivered to the clients warehouse.",
+        "wasNotDamagedYour": "was not damaged and automatically delivered to the your warehouse.",
+        "reportRequestedByEngineer": "Report was already requested by the Engineer.",
+        "reportRequestedByClient": "Report was already requested by client.",
+        "upgraded": "Upgraded"
+      },
       "dismissRole": {
         "title": "Warning this action will cause you to stop acting as an Engineer",
         "content": "Action is only possible if you travel to this location and do not have any active Level Upgrade contracts.",
         "dismiss": "Dismiss Role"
       }
+    },
+    "engineersTraining": {
+      "equipment": "Equipment",
+      "mineModules": "Mine modules",
+      "mine": "Mine",
+      "factory": "Factory",
+      "xp": "xp",
+      "upgradeToLevel": "Upgrade to level {{level}}",
+      "trainingSlotName": "Training slot name",
+      "willBeAvailableToLearn": "Will be available to learn at level\u00a0{{level}}",
+      "availableToLearn": "Available to learn",
+      "alreadyLearned": "Already learned",
+      "forLearning": "To learn this ability, you will need a scheme. Please visit marketplace",
+      "forLearningNeedSchema": "To learn this ability, you will need a scheme in your active inventory. Please visit Hive",
+      "visitHive": "Visit Hive",
+      "upgradeLevel": "Upgrade level",
+      "upgrade": "Upgrade",
+      "scheme": "Scheme",
+      "learningSkill": "Learning skill",
+      "learn": "Learn"
     }
   },
   "features": {
     "mining": {
       "mineLevel": "Mine Level",
       "mineSublevel": "Mine Sublevel",
-      "depthLevel": "Depth level"
+      "depthLevel": "Depth level",
+      "currentDepthLevel": "Current depth level"
     },
     "mineOwner": {
+      "placeNft": "Place a Mine NFT card in your active inventory",
       "needMineCard": "To start playing as a Mine Owner you need to place a Mine NFT card in your active inventory\nand sign the Mine Operation Contract with the Landlord.\nCheck your warehouse or go to Market to buy Mine NFT",
       "pickUpFromStorage": "Go to Storage",
       "storage": "Storage",
@@ -728,9 +770,12 @@
       "market": "Market",
       "welcome": "Welcome, Citizen",
       "mineNotSet": "Mine is not set",
+      "depthChanging": "Mine is undergoing depth change",
       "needShift": "You need to travel here to set a Mine",
       "needLandLord": "Sign a contract with a landlord to set a Mine",
       "needSetupMine": "Set up the Mine to continue",
+      "depthChangingText": "Go to mine management console for details",
+
       "needCrew": "You are ready to gather your ultimate mine crew. Sign the Mining Contract with a contractor to be able to activate your Mine.",
       "progress": "Setup in progress",
       "chooseContract": "Choose a contract",
@@ -757,7 +802,11 @@
         "modules": "Modules",
         "unsetup": "Unsetup",
         "abandon": "Abandon mine",
-        "terminateContractorsContract": "Terminate contract with contractors first"
+        "terminateContractorsContract": "Terminate contract with contractors first",
+        "changeMineDepth": "Change mine depth",
+        "changeDepth": "Change depth",
+        "selectTheDepth": "Select the depth",
+        "finalizeDepthChange": "Finalize depth to"
       }
     },
     "actions": {

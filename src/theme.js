@@ -9,6 +9,7 @@ const neutral2 = '#1D1D1D';
 const gold6 = '#D89614';
 const primary6 = '#F5C913';
 const primary5 = '#CCA500';
+const neutral7 = '#7D7D7D';
 
 module.exports = {
     // button
@@ -36,21 +37,42 @@ module.exports = {
     '@btn-padding-horizontal-lg': '16px',
     '@btn-padding-horizontal-sm': '8px',
 
-    // allert
+    // alert
     '@alert-info-border-color': '#7B6300',
     '@alert-info-bg-color': '#3D3100',
+
     '@alert-warning-border-color': '#594214',
     '@alert-warning-bg-color': '#2B2111',
     '@alert-warning-icon-color': gold6,
+
+    '@alert-success-border-color': '#07B700',
+    '@alert-success-bg-color': '#046600',
+
+    '@alert-error-border-color': '#58181C',
+    '@alert-error-bg-color': '#2A1215',
+    '@alert-error-icon-color': '#D32029',
+
     '@alert-message-color': '#DBDBDB',
     '@alert-with-description-padding': '16px',
     '@alert-with-description-icon-size': '21px',
+
+    // modal
+    '@modal-body-padding': '8px 16px',
+    '@modal-header-bg': neutral2,
+    '@modal-header-border-color-split': neutral4,
+    '@modal-content-bg': neutral2,
+    '@modal-footer-border-color-split': neutral4,
+    '@modal-border-radius': '2px',
+
+    // table
+    '@table-row-hover-bg': neutral1,
+    '@table-border-color': neutral4,
 
     // checkbox
     '@checkbox-check-color': neutral1,
 
     // input
-    '@input-placeholder-color': '#7D7D7D',
+    '@input-placeholder-color': neutral7,
     '@input-hover-border-color': primary5,
 
     // tooltip
@@ -96,8 +118,14 @@ module.exports = {
     '@heading-color': '#FFFFFF',
     '@font-family': '"Bai Jamjuree", sans-serif',
 
+    // modal
+    '@modal-close-color': neutral7,
+    '@modal-header-border-color-split': neutral4,
+    '@icon-color-hover': primary5,
+
     // should be in the end
     // base
+    '@green-6': '#47FF40',
     '@primary-color': '#F5C913',
     '@primary-color-hover': primary5,
     '@primary-color-active': '#FFD93E',
@@ -123,4 +151,6 @@ module.exports = {
     '@primary-color-outline': 'rgba(24, 144, 255, 0.5)',
     '@theme': 'variable',
     '@border-color-split': 'transparent',
+    '@shadow-2':
+        '0 9px 28px 8px rgba(0, 0, 0, 0.05), 0 6px 16px rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12)',
 };

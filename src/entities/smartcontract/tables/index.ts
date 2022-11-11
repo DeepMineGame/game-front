@@ -30,7 +30,10 @@ export const getUserConfig = (account: string): GetTableDataConfigType => {
     };
 };
 
-export const getInventoryConfig = (account: string): GetTableDataConfigType => {
+export const getInventoryConfig = (
+    account: string,
+    limit = 100
+): GetTableDataConfigType => {
     return {
         code: deepminegame,
         scope: deepminegame,
@@ -39,7 +42,7 @@ export const getInventoryConfig = (account: string): GetTableDataConfigType => {
         key_type: 'name',
         lower_bound: account,
         upper_bound: account,
-        limit: 100,
+        limit,
     };
 };
 
