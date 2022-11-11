@@ -10,6 +10,7 @@ export const InterfaceStubPage: FC = () => {
 
     useEffect(() => {
         if (!window.ENDPOINTS?.maintenance.server) navigate(city);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [window.ENDPOINTS?.maintenance.server]);
 
     return (
