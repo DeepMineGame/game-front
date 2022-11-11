@@ -42,7 +42,7 @@ export const ContractorInfo: FC<Props> = ({ accountName }) => {
                             [t('components.common.level')]: mine.level,
                             [t(
                                 'pages.contractorStatsAndInfo.mineArea.sublevel'
-                            )]: mine.sub_level,
+                            )]: mine.sublevel,
                             [t('pages.contractorStatsAndInfo.mineArea.depth')]:
                                 mine.layer_depth,
                         }}

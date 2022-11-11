@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 import { rolesStore, UserRoles } from 'entities/smartcontract';
 
-import { userMineStore } from '../../../../models';
+import { $userMine } from '../../../../models';
 import styles from './styles.module.scss';
 
 const IS_FIRST_VISIT_KEY = 'IS_FIRST_VISIT_KEY';
@@ -18,10 +18,12 @@ export const MineStat = () => {
         ({ role }) => role === UserRoles.mine_owner
     );
 
-    const feeToClaim = mineOwnerRole?.attrs?.find(
-        ({ key }) => key === 'fee_to_claim'
-    );
-    const userMine = useStore(userMineStore);
+    const feeToClaim =
+        Number(
+            mineOwnerRole?.attrs?.find(({ key }) => key === 'fee_to_claim')
+                ?.value
+        ) || 0;
+    const userMine = useStore($userMine);
 
     useEffect(() => {
         if (isFirstRender) {
@@ -35,8 +37,12 @@ export const MineStat = () => {
         <KeyValueTable
             className={styles.table}
             items={{
-                [t('pages.landLord.cabin.DMEToClaim')]:
-                    feeToClaim?.value ?? '-',
+                [t('pages.landLord.cabin.DMEToClaim')]: (
+                    <span>
+                        {'\u00A0'}
+                        {`${feeToClaim / 10 ** 8}`}
+                    </span>
+                ),
                 [t('pages.mining.mineDepth')]:
                     userMine?.[0]?.layer_depth ?? '-',
             }}

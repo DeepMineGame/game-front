@@ -16,7 +16,8 @@ export const SignLevelUpgradeOrder: FC<Props> = ({ contract, accountName }) => {
     const [signLevelUpgradeOrderModalOpen, setSignLevelUpgradeOrderModalOpen] =
         useState(false);
 
-    const isEngineerOrder = !contract.client;
+    const isUserClient = contract.client === accountName;
+    const isUserExecutor = contract.executor === accountName;
 
     const signOrderAction = useSmartContractAction({
         action: signOrder({
@@ -32,12 +33,12 @@ export const SignLevelUpgradeOrder: FC<Props> = ({ contract, accountName }) => {
     });
 
     const onSign = async () => {
-        if (!isEngineerOrder) {
+        if (isUserExecutor) {
             await signOrderAction();
             return;
         }
 
-        if (isEngineerOrder) {
+        if (isUserClient) {
             setSignLevelUpgradeOrderModalOpen(true);
         }
     };

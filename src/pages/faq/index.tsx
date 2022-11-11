@@ -11,14 +11,14 @@ export const FaqPage = () => {
             <DeepMineLogo className={styles.logo} />
             <Title className={styles.title}>FAQ</Title>
 
-            <Space direction="vertical">
+            <Space className={styles.space} direction="vertical">
                 <Title level={5}>{t('pages.faq.watIs')}</Title>
                 <Typography.Paragraph className={styles.text}>
                     {t('pages.faq.deepMineDescription')}
                 </Typography.Paragraph>
             </Space>
 
-            <Space direction="vertical">
+            <Space className={styles.space} direction="vertical">
                 <Title level={5}>{t('pages.faq.wasRelease')}</Title>
                 <Typography.Paragraph className={styles.text}>
                     {t('pages.faq.closeAlpha')}
@@ -33,7 +33,7 @@ export const FaqPage = () => {
                     </ExternalLink>{' '}
                     {t('pages.faq.more')}{' '}
                     <ExternalLink href="https://docs.deepmine.world/deepmine/deepmine-gaming-nfts/equipment">
-                        {t('pages.faq.here')}
+                        {t('pages.faq.here')}.
                     </ExternalLink>{' '}
                     {t('pages.faq.explore')}{' '}
                     <ExternalLink href="https://shelter.deepmine.world/">
@@ -43,7 +43,7 @@ export const FaqPage = () => {
                 </Typography.Paragraph>
             </Space>
 
-            <Space direction="vertical">
+            <Space className={styles.space} direction="vertical">
                 <Title level={5}>{t('pages.faq.whatHappened')}</Title>
                 <Typography.Paragraph className={styles.text}>
                     {t('pages.faq.distantFuture')}
@@ -65,7 +65,7 @@ export const FaqPage = () => {
                 </Typography.Paragraph>
             </Space>
 
-            <Space direction="vertical">
+            <Space className={styles.space} direction="vertical">
                 <Title level={5}>{t('pages.faq.areasMinesEquipment')}</Title>
                 <Typography.Paragraph className={styles.text}>
                     {t('pages.faq.thePlanet')}{' '}
@@ -80,7 +80,7 @@ export const FaqPage = () => {
                 </Typography.Paragraph>
             </Space>
 
-            <Space direction="vertical">
+            <Space className={styles.space} direction="vertical">
                 <Title level={5}>{t('pages.faq.whatRoles')}</Title>
                 <Typography.Paragraph className={styles.text}>
                     {t('pages.faq.thereRole')}
@@ -95,6 +95,10 @@ export const FaqPage = () => {
                     {t('pages.faq.and')}{' '}
                     <ExternalLink href="https://docs.deepmine.world/deepmine/deepmine-entities/game-roles/contractor">
                         {t('roles.contractor')}
+                    </ExternalLink>{' '}
+                    and{' '}
+                    <ExternalLink href="https://docs.deepmine.world/deepmine/deepmine-entities/game-roles/specialist/engineer">
+                        {t('roles.engineer')}
                     </ExternalLink>
                     . {t('pages.faq.moreRoles')}{' '}
                     <ExternalLink href="/img/roles.webp">
@@ -103,14 +107,14 @@ export const FaqPage = () => {
                 </Typography.Paragraph>
             </Space>
 
-            <Space direction="vertical">
+            <Space className={styles.space} direction="vertical">
                 <Title level={5}>{t('pages.faq.rolesPoint')}</Title>
                 <Typography.Paragraph className={styles.text}>
                     {t('pages.faq.miningDme')}
                 </Typography.Paragraph>
             </Space>
 
-            <Space direction="vertical">
+            <Space className={styles.space} direction="vertical">
                 <Title level={5}>{t('pages.faq.whyLegit')}</Title>
                 <ul className={styles.text}>
                     <li>{t('pages.faq.seeLanding')}</li>
@@ -118,6 +122,7 @@ export const FaqPage = () => {
                     <li>{t('pages.faq.community')}</li>
                     <li>{t('pages.faq.weAreChampionsMyFriend')}</li>
                     <li>{t('pages.faq.weAreChampionsOfTheWorld')}</li>
+                    <li>{t('pages.faq.abic')}</li>
                 </ul>
             </Space>
         </div>

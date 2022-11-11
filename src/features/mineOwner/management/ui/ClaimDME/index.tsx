@@ -1,5 +1,10 @@
 import React, { FC } from 'react';
-import { Button, showSuccessModal, useAccountName } from 'shared';
+import {
+    Button,
+    showSuccessModal,
+    useAccountName,
+    useReloadPage,
+} from 'shared';
 import { useStore } from 'effector-react';
 import { useSmartContractAction } from 'features';
 import { useTranslation } from 'react-i18next';
@@ -11,16 +16,17 @@ import {
     getRolesEffect,
 } from 'entities/smartcontract';
 
+const fromUnit = (num: number) => num / 10 ** 8;
 export const ClaimDME: FC = () => {
     const waxUser = useAccountName();
     const { t } = useTranslation();
-
+    const reloadPage = useReloadPage();
     const roles = useStore(rolesStore);
     const mineOwnerRole = roles?.filter(
         ({ role }) => role === UserRoles.mine_owner
     );
     const dmeToClaim = mineOwnerRole?.length
-        ? extractFeeToClaimAttr(mineOwnerRole[0])?.value
+        ? fromUnit(extractFeeToClaimAttr(mineOwnerRole[0]))
         : null;
 
     const dmeMoreThenZero = Number(dmeToClaim) > 0;
@@ -28,9 +34,10 @@ export const ClaimDME: FC = () => {
     const onDmeClick = async () => {
         await claimDme();
         await getRolesEffect({ searchParam: waxUser });
-        showSuccessModal({
+        return showSuccessModal({
             title: t('components.common.button.claim'),
             content: t('components.common.yourDMEHasBeenClaimed'),
+            onOk: reloadPage,
         });
     };
 

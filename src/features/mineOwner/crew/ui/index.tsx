@@ -6,13 +6,13 @@ import { MineCrewTable, useAccountName, AddItem } from 'shared';
 import { createOrder } from 'app/router/paths';
 import { orderFields } from 'entities/order';
 import { ContractRole, ContractType } from 'entities/smartcontract';
-import { MineConsumerGate, userMineStore } from '../../models';
+import { MineConsumerGate, $userMine } from '../../models';
 
 export const MineOwnerCrew: FC = () => {
     const { t } = useTranslation();
     const accountName = useAccountName();
     useGate(MineConsumerGate, { searchParam: accountName });
-    const mines = useStore(userMineStore);
+    const mines = useStore($userMine);
     const activeSlots = mines?.[0]?.contractor_slots.filter(
         (slot) => slot?.contractor
     );

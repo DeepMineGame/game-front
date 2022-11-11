@@ -28,7 +28,7 @@ import {
     setupMine,
     UserInfoType,
 } from 'entities/smartcontract';
-import { MineManagementGate, userMineStore } from '../../../models';
+import { MineManagementGate, $userMine } from '../../../models';
 import { ClaimDME } from '../ClaimDME';
 import { UnsetupMine } from '../UnsetupMine';
 import { activeMineOwnerExecutorContractStore } from '../../../models/unsetupMineModel';
@@ -52,7 +52,7 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
     const reloadPage = useReloadPage();
     const { t } = useTranslation();
     const isMinesLoading = useStore(getMinesByOwnerEffect.pending);
-    const mine = useStore(userMineStore)?.[0];
+    const mine = useStore($userMine)?.[0];
     const isMineLoading = useStore(getMinesByOwnerEffect.pending);
     const isMineActive = mine?.state === MineState.activated;
     const isMineSetuped = mine?.state === MineState.setuped;

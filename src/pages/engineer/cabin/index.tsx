@@ -5,7 +5,7 @@ import {
     EngineerCabinGate,
     CabinStatus,
     getStatus,
-    $engineerCabinStore,
+    $engineerCabin,
     $isEngineerCabinLoading,
     getState,
     CabinState,
@@ -36,7 +36,7 @@ const EngineerCabinPage: FC<Props> = ({ accountName }) => {
 
     const inLocation = useUserLocation();
     const isTablet = useMediaQuery(tablet);
-    const engineerStore = useStore($engineerCabinStore);
+    const engineerStore = useStore($engineerCabin);
     const isCabinLoading = useStore($isEngineerCabinLoading);
 
     const status = getStatus(engineerStore);

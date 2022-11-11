@@ -1,0 +1,27 @@
+@import "src/shared";
+
+.trainingPage {
+    background-color: $color-neutral-neutral-2;
+}
+
+.trainingSection {
+    max-width: 1140px;
+    min-width: 488px;
+}
+
+.content {
+    flex-direction: column;
+    max-width: max-content;
+    margin: 0 auto;
+
+    &Top {
+        padding-left: 16px;
+        width: 100%;
+    }
+}
+
+.card {
+    background: $color-neutral-neutral-1;
+    border: 1px solid $color-neutral-neutral-7;
+    border-radius: 8px;
+}

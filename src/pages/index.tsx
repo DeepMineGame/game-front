@@ -6,6 +6,7 @@ export { CityPage } from './city';
 export { AuthPage } from './auth';
 export { EngineerPage } from './engineer';
 export { EquipmentHallPage } from './engineer/equipment-hall';
+export { EngineersTraining } from './engineers-training';
 
 export * from './mineOwner';
 export * from './landLord';

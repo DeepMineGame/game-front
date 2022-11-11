@@ -1,6 +1,7 @@
 import {
     DMECoinIcon,
     GetCostParams,
+    isAssetAvailable,
     Modal,
     useAccountName,
     useReloadPage,
@@ -30,7 +31,7 @@ import {
     Text,
     Divider,
     Margin,
-    getCardStatus,
+    getAssetStatus,
     Card,
 } from 'shared/ui/ui-kit';
 import styles from './styles.module.scss';
@@ -97,12 +98,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         onSignSuccess: reload,
     });
 
-    const isNotAvailable =
-        card.available_from !== undefined &&
-        card.available_from * 1000 > Date.now();
-
-    const isNotCardBroken =
-        getCardStatus(card) !== Status.broken || isNotAvailable;
+    const assetIsBroken = getAssetStatus(card) === Status.broken;
 
     return (
         <Modal
@@ -116,14 +112,12 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                     <Card
                         inventory={card}
                         onRepairFinish={reload}
-                        showCardBadgeStatus={
-                            getCardStatus(card) === Status.broken
-                        }
+                        showCardBadgeStatus={assetIsBroken}
                         withDepreciationBar={false}
                     />
                     {onSelect && (
                         <Button
-                            disabled={isNotAvailable}
+                            disabled={assetIsBroken || !isAssetAvailable(card)}
                             onClick={handleSelect}
                             block
                             type="primary"
@@ -208,7 +202,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             </Col>
                             <Col span={10}>
                                 <Button
-                                    disabled={isNotCardBroken}
+                                    disabled={!assetIsBroken}
                                     size="large"
                                     type="link"
                                     onClick={() => {
@@ -248,7 +242,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             </Col>
                             <Col span={10}>
                                 <Button
-                                    disabled={isNotCardBroken}
+                                    disabled={!assetIsBroken}
                                     type="link"
                                     size="large"
                                     onClick={() => {

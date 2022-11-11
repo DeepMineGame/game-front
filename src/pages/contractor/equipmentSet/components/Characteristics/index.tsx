@@ -1,29 +1,23 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useStore } from 'effector-react';
+import { useStore, useGate } from 'effector-react';
 
+import { useAccountName } from 'shared';
 import {
-    ContractorDto,
-    getMinesEffect,
-    minesStore,
-} from 'entities/smartcontract';
+    $currentMine,
+    estimatesMiningTimeStore,
+    MiningPageGate,
+} from 'features';
 import { CharacteristicsLine } from '../CharacteristicsLine';
 
 import styles from './styles.module.scss';
 
-interface Props {
-    contractors: ContractorDto[] | null;
-}
-
-export const Characteristics = ({ contractors }: Props) => {
+export const Characteristics = () => {
     const { t } = useTranslation();
-    const mineStore = useStore(minesStore);
-    useEffect(() => {
-        const contractorAreaId = contractors?.[0]?.area_id;
-        if (contractorAreaId) {
-            getMinesEffect({ searchParam: contractorAreaId });
-        }
-    }, [contractors]);
+    const accountName = useAccountName();
+    useGate(MiningPageGate, { searchParam: accountName });
+    const estTime = useStore(estimatesMiningTimeStore);
+    const mineStore = useStore($currentMine);
 
     return (
         <div className={styles.container}>
@@ -37,7 +31,7 @@ export const Characteristics = ({ contractors }: Props) => {
                 />
                 <CharacteristicsLine
                     name={t('features.mining.mineSublevel')}
-                    value={mineStore?.[0]?.sub_level ?? '-'}
+                    value={mineStore?.[0]?.sublevel ?? '-'}
                 />
                 <CharacteristicsLine
                     name={t('pages.equipmentSet.characteristics.mineDepth')}
@@ -47,6 +41,7 @@ export const Characteristics = ({ contractors }: Props) => {
                     name={t(
                         'pages.equipmentSet.characteristics.estimatesMiningTime'
                     )}
+                    value={estTime}
                 />
                 <CharacteristicsLine
                     name={t(

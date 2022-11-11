@@ -27,6 +27,7 @@ import {
     EngineerPage,
     EquipmentHallPage,
     InterfaceStubPage,
+    EngineersTraining,
 } from 'pages';
 
 import * as paths from './paths';
@@ -242,6 +243,13 @@ export const routes: AppRoute[] = [
         forAdmin: true,
         forBetaUser: true,
         titleTag: 'Unidentified seismic activity — DeepMine',
+     },
+        path: paths.engineerTraining,
+        Component: EngineersTraining,
+        forLoggedIn: true,
+        forAdmin: true,
+        forBetaUser: true,
+        titleTag: 'Engineers Training — DeepMine',
     },
 ];
 

@@ -1,0 +1,41 @@
+@import "src/shared";
+
+.actionWrapper {
+  width: 204px;
+  height: 70px;
+  position: fixed;
+  bottom: 5vh;
+  right: 5vw;
+  z-index: 10000;
+}
+
+.actionName {
+  margin-top: 15px;
+  margin-left: 13px;
+  position: absolute;
+}
+
+.timer {
+  font-size: 10px;
+  color: $color-neutral-neutral-7;
+  min-width: 40px;
+}
+
+.progress {
+  position: absolute;
+  margin-top: 33px;
+  margin-left: 15px;
+  display: flex;
+  width: 87%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+}
+
+.icon {
+  color: $color-neutral-neutral-7;
+}
+
+.successIcon {
+  color: $color-green-green-6;
+}

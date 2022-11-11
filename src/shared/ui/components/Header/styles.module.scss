@@ -1,8 +1,10 @@
 @import 'src/shared';
 
 .header {
+  position: relative;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 4px 16px;
 }
 
@@ -34,4 +36,9 @@ h4.title, h1.title {
 
 .backArrow {
   margin-right: 11px;
+}
+
+.cityIcon {
+  display: flex;
+  justify-self: center;
 }
