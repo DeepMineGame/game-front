@@ -94,72 +94,146 @@ export const getContractStatus = (
     contract: ContractDto,
     account: string
 ): Status => {
-    if (!contract.client || !contract.executor)
-        return { value: ContractStates.openOrder };
+    const isOrder = !contract.client || !contract.executor;
 
     const isUserClient = contract.client === account;
     const isUserExecutor = contract.executor === account;
 
-    if (
-        isStatusActive(contract) &&
-        isWorkInProgress(contract) &&
-        !isTimeFinished(contract)
-    ) {
-        return { value: ContractStates.valid };
-    }
+    const isTerminated = !!contract.term_initiator;
+    const isDeadlineViolated = isDeadlineViolation(contract);
+    const isTermViolated = isContractTermNotFulfilled(contract);
+    const isValid = isStatusActive(contract) && isWorkInProgress(contract);
 
-    if (isDeadlineViolation(contract) && isUserClient) {
-        return {
-            value: ContractStates.waitingForAction,
-            meta: ContractStatesMeta.deadlineViolation,
-        };
-    }
+    const isExecutorTermInitiator =
+        contract.executor === contract.term_initiator;
 
-    if (isDeadlineViolation(contract) && isUserExecutor) {
-        return {
-            value: ContractStates.valid,
-            meta: ContractStatesMeta.deadlineViolation,
-        };
-    }
+    const isDeleted = contract.deleted_at > 0;
 
-    if (isContractTermNotFulfilled(contract) && isUserClient) {
-        return {
-            value: ContractStates.waitingForAction,
-            meta: ContractStatesMeta.termViolation,
-        };
-    }
+    const isContractFinished = isTimeFinished(contract);
 
-    if (isContractTermNotFulfilled(contract) && isUserExecutor) {
-        return {
-            value: ContractStates.valid,
-            meta: ContractStatesMeta.termViolation,
-        };
-    }
+    if (isOrder) return { value: ContractStates.openOrder };
 
-    if (wasTerminatedBySomebody(contract) && wasTerminatedEarly(contract)) {
-        if (contract.term_initiator !== account) {
+    if (isValid) return { value: ContractStates.valid };
+
+    // User is client
+    if (isUserClient) {
+        // Executor violated deadline
+        if (isDeadlineViolated && !isDeleted) {
             return {
                 value: ContractStates.waitingForAction,
-                meta: ContractStatesMeta.earlyBreak,
+                meta: ContractStatesMeta.deadlineViolation,
             };
         }
-        return { value: ContractStates.terminated };
+
+        // Executor violated terms
+        if (isTermViolated && !isDeleted) {
+            return {
+                value: ContractStates.waitingForAction,
+                meta: ContractStatesMeta.termViolation,
+            };
+        }
+
+        // Contract has been finished
+        if (isContractFinished) {
+            if (isExecutorTermInitiator && !isDeleted) {
+                // Contract has been successfully completed & wait counterparty
+                return {
+                    value: ContractStates.waitingForAction,
+                    meta: ContractStatesMeta.complete,
+                };
+            }
+
+            // // Contract has been successfully completed
+            // if (isDeleted || isTerminated) {
+            return { value: ContractStates.completed };
+            // }
+        }
+
+        if (!isTerminated) {
+            return { value: ContractStates.valid };
+        }
+
+        // Contract has been terminated early
+        return {
+            value: ContractStates.terminated,
+            meta: ContractStatesMeta.earlyBreak,
+        };
     }
 
-    if (isTimeFinished(contract) && !isContractTermNotFulfilled(contract)) {
-        if (
-            isStatusActive(contract) ||
-            (isStatusTerminated(contract) &&
-                contract.term_initiator !== account)
-        ) {
+    // User is executor
+    if (isUserExecutor) {
+        // Contract has been finished
+        if (isContractFinished) {
+            // Contract has been deleted
+            if (isDeleted) {
+                // Executor violated deadline
+                if (isDeadlineViolated) {
+                    return {
+                        value: ContractStates.completed,
+                        meta: ContractStatesMeta.deadlineViolation,
+                    };
+                }
+
+                // Executor violated terms
+                if (isTermViolated) {
+                    return {
+                        value: ContractStates.completed,
+                        meta: ContractStatesMeta.termViolation,
+                    };
+                }
+
+                return { value: ContractStates.completed };
+            }
+
+            if (isTerminated && !isDeleted) {
+                // Executor violated deadline
+                if (isDeadlineViolated) {
+                    return {
+                        value: ContractStates.completed,
+                        meta: ContractStatesMeta.deadlineViolation,
+                    };
+                }
+
+                // Executor violated terms
+                if (isTermViolated && !isDeleted) {
+                    return {
+                        value: ContractStates.completed,
+                        meta: ContractStatesMeta.termViolation,
+                    };
+                }
+            }
+
             return {
                 value: ContractStates.waitingForAction,
                 meta: ContractStatesMeta.complete,
             };
         }
-        if (isStatusTerminated(contract)) {
-            return { value: ContractStates.completed };
+
+        // Contract has been terminated early
+        if (isDeleted || isTerminated) {
+            return {
+                value: ContractStates.terminated,
+                meta: ContractStatesMeta.earlyBreak,
+            };
         }
+
+        // Executor violated deadline
+        if (isDeadlineViolated) {
+            return {
+                value: ContractStates.valid,
+                meta: ContractStatesMeta.deadlineViolation,
+            };
+        }
+
+        // Executor violated terms
+        if (isTermViolated) {
+            return {
+                value: ContractStates.valid,
+                meta: ContractStatesMeta.termViolation,
+            };
+        }
+
+        return { value: ContractStates.valid };
     }
 
     return { value: ContractStates.valid };

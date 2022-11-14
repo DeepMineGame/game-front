@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Trans } from 'react-i18next';
+import { Space } from 'antd';
 import { useSmartContractAction } from 'features/hooks';
 import {
     ContractDto,
@@ -9,7 +10,6 @@ import {
     isDeadlineViolation,
     isTimeFinished,
     terminateContract,
-    wasTerminatedEarly,
 } from 'entities/smartcontract';
 import { ContractAlert as Alert, Button } from 'shared/ui';
 import { useReloadPage } from 'shared/lib/hooks';
@@ -43,7 +43,7 @@ export const ContractAlert: FC<{
     const isExecutorViolated =
         isDeadlineViolation(contract) ||
         isContractTermNotFulfilled(contract) ||
-        (wasTerminatedEarly(contract) && isExecutorTermInitiator);
+        isExecutorTermInitiator;
 
     const terminateContractAction = useSmartContractAction({
         action: terminateContract(accountName, contract.id, false),
@@ -294,7 +294,7 @@ export const ContractAlert: FC<{
                         <Trans i18nKey="pages.serviceMarket.contract.terminatedByCounterpartyWaitMe" />
                     }
                     action={
-                        <>
+                        <Space>
                             <Button
                                 ghost
                                 type="primary"
@@ -309,7 +309,7 @@ export const ContractAlert: FC<{
                             >
                                 <Trans i18nKey="pages.serviceMarket.contract.noCollectPenalty" />
                             </Button>
-                        </>
+                        </Space>
                     }
                 />
             );
@@ -360,7 +360,7 @@ export const ContractAlert: FC<{
                             <Trans i18nKey="pages.serviceMarket.contract.violatedByCounterpartyContractCanCompleteWaitMe" />
                         }
                         action={
-                            <>
+                            <Space>
                                 <Button
                                     ghost
                                     type="primary"
@@ -375,7 +375,7 @@ export const ContractAlert: FC<{
                                 >
                                     <Trans i18nKey="pages.serviceMarket.contract.dontCollectPenaltyAndComplete" />
                                 </Button>
-                            </>
+                            </Space>
                         }
                     />
                 );
@@ -538,7 +538,7 @@ export const ContractAlert: FC<{
                         <Trans i18nKey="pages.serviceMarket.contract.violatedByCounterpartyContractCanTerminateWaitMe" />
                     }
                     action={
-                        <>
+                        <Space>
                             <Button
                                 ghost
                                 type="primary"
@@ -553,7 +553,7 @@ export const ContractAlert: FC<{
                             >
                                 <Trans i18nKey="pages.serviceMarket.contract.noCollectPenaltyAndBreak" />
                             </Button>
-                        </>
+                        </Space>
                     }
                 />
             );
