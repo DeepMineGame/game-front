@@ -70,6 +70,10 @@ const getContractState = (
 
     // upgrade complete
     if (isFinished) {
+        if (isDeleted) {
+            return { value: ContractStates.completed };
+        }
+
         if (
             (!isDeleted || isStatusTerminated(contract)) &&
             contract.term_initiator !== accountName
@@ -79,8 +83,6 @@ const getContractState = (
                 meta: ContractStatesMeta.complete,
             };
         }
-
-        return { value: ContractStates.completed };
     }
 
     return { value: ContractStates.valid };
