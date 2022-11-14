@@ -1,12 +1,8 @@
 import { FC } from 'react';
-import { Trans } from 'react-i18next';
 import { Col, Row } from 'antd';
-import { PenaltyActions } from 'features';
-import { ContractStatesMeta } from 'entities/smartcontract';
 import { useContractState } from 'entities/contract';
-import { Alert } from 'shared/ui';
 import { getDmeAmount } from 'shared/lib/utils';
-import { Completed, TerminateContract } from '../../ui/actions';
+import { TerminateContract } from '../../ui/actions';
 import {
     GeneralDataTable,
     ConditionTable,
@@ -14,19 +10,10 @@ import {
 } from '../../ui/contract';
 import { ContractorTable } from '../../ui/contract/mining';
 import { ContractProps } from '../../types';
+import { ContractAlert } from '../components/contract-alert';
 
-const MiningContract: FC<ContractProps> = ({
-    contract,
-    accountName,
-    isDeleted,
-}) => {
-    const {
-        stateMeta,
-        canTerminate,
-        showCompleted,
-        showTerminatedAlert,
-        showPenaltyActions,
-    } = useContractState(contract, accountName);
+const MiningContract: FC<ContractProps> = ({ contract, accountName }) => {
+    const { canTerminate } = useContractState(contract, accountName);
 
     return (
         <Row gutter={[32, 32]}>
@@ -38,40 +25,10 @@ const MiningContract: FC<ContractProps> = ({
                             accountName={accountName}
                         />
                     </Col>
-
-                    {!isDeleted && (
-                        <Col span={24}>
-                            {showCompleted && (
-                                <Completed
-                                    accountName={accountName}
-                                    contractId={contract.id}
-                                />
-                            )}
-                            {showTerminatedAlert && (
-                                <Alert
-                                    message={
-                                        <Trans i18nKey="pages.serviceMarket.contract.youTerminated" />
-                                    }
-                                    type="info"
-                                    showIcon
-                                />
-                            )}
-                            {showPenaltyActions && (
-                                <PenaltyActions
-                                    isViolated={
-                                        stateMeta ===
-                                            ContractStatesMeta.termViolation ||
-                                        stateMeta ===
-                                            ContractStatesMeta.deadlineViolation
-                                    }
-                                    amount={getDmeAmount(
-                                        contract.penalty_amount
-                                    )}
-                                    contractId={contract.id}
-                                />
-                            )}
-                        </Col>
-                    )}
+                    <ContractAlert
+                        contract={contract}
+                        accountName={accountName}
+                    />
                 </Row>
             </Col>
             <Col xs={24} md={12}>
@@ -83,7 +40,6 @@ const MiningContract: FC<ContractProps> = ({
                     accountName={accountName}
                 />
             </Col>
-
             <Col xs={24} md={12}>
                 <Row gutter={[32, 32]}>
                     <Col span={24}>
@@ -92,7 +48,6 @@ const MiningContract: FC<ContractProps> = ({
                             accountName={accountName}
                         />
                     </Col>
-
                     <Col span={24}>
                         <Row justify="end">
                             {canTerminate && (
