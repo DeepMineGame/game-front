@@ -130,7 +130,7 @@ const useLevelUpgradeContract = (
     const isDeadlineExpired = stateMeta === ContractStatesMeta.deadlineExpired;
     const isWaitingForAction = state === ContractStates.waitingForAction;
 
-    const canGetReport = isContractMember && isCompleted;
+    const canGetReport = isContractMember && isCompleted && !isDeleted;
 
     return {
         canTerminate,
