@@ -32,7 +32,7 @@ export const ContractState: FC<ContractProps> = ({ contract, accountName }) => {
         );
     }
 
-    if (isNeedComplete) {
+    if (isNeedComplete || isTermViolation) {
         return (
             <div className={styles.status}>
                 <ClockCircleOutlined className={styles.waitIcon} />{' '}

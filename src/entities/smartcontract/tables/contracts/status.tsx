@@ -149,15 +149,23 @@ export const getContractStatus = (
             // }
         }
 
-        if (!isTerminated) {
-            return { value: ContractStates.valid };
+        if (isDeleted) {
+            // Contract has been terminated early
+            return {
+                value: ContractStates.terminated,
+                meta: ContractStatesMeta.earlyBreak,
+            };
         }
 
-        // Contract has been terminated early
-        return {
-            value: ContractStates.terminated,
-            meta: ContractStatesMeta.earlyBreak,
-        };
+        if (isExecutorTermInitiator) {
+            // Contract has been terminated early
+            return {
+                value: ContractStates.waitingForAction,
+                meta: ContractStatesMeta.earlyBreak,
+            };
+        }
+
+        return { value: ContractStates.valid };
     }
 
     // User is executor
