@@ -33,7 +33,7 @@ export const FaqPage = () => {
                     </ExternalLink>{' '}
                     {t('pages.faq.more')}{' '}
                     <ExternalLink href="https://docs.deepmine.world/deepmine/deepmine-gaming-nfts/equipment">
-                        {t('pages.faq.here')}.
+                        {t('pages.faq.here')}
                     </ExternalLink>{' '}
                     {t('pages.faq.explore')}{' '}
                     <ExternalLink href="https://shelter.deepmine.world/">

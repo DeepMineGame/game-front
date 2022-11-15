@@ -83,7 +83,9 @@ export const DepthChanger = () => {
                 overlay={
                     <Menu
                         disabled={!isTimeExpire && !ableToFinalise}
-                        items={getMenuItemsByCount(mine?.level || 0)}
+                        items={getMenuItemsByCount(
+                            mine?.level ? Number(mine.level + 1) : 0
+                        )}
                     />
                 }
                 disabled={mine?.level === 0}
