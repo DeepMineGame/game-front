@@ -14,13 +14,8 @@ import styles from './styles.module.scss';
 
 export const ContractState: FC<ContractProps> = ({ contract, accountName }) => {
     const { t } = useTranslation();
-    const {
-        isTermViolation,
-        isNeedComplete,
-        isCompleted,
-        isTerminated,
-        isDeleted,
-    } = useContractState(contract, accountName);
+    const { isTermViolation, isCompleted, isTerminated, isDeleted } =
+        useContractState(contract, accountName);
     const { isOrder } = useContractType(contract);
 
     if (isCompleted) {
@@ -32,16 +27,7 @@ export const ContractState: FC<ContractProps> = ({ contract, accountName }) => {
         );
     }
 
-    if (isNeedComplete || isTermViolation) {
-        return (
-            <div className={styles.status}>
-                <ClockCircleOutlined className={styles.waitIcon} />{' '}
-                {t('pages.serviceMarket.contract.waitingAction')}
-            </div>
-        );
-    }
-
-    if (isTerminated || isTermViolation) {
+    if (isTerminated) {
         return (
             <div className={styles.status}>
                 <CloseCircleOutlined className={styles.terminateIcon} />{' '}
@@ -49,6 +35,15 @@ export const ContractState: FC<ContractProps> = ({ contract, accountName }) => {
                 {isTermViolation && (
                     <ExclamationCircleFilled className={styles.warningIcon} />
                 )}
+            </div>
+        );
+    }
+
+    if (isTermViolation) {
+        return (
+            <div className={styles.status}>
+                <ClockCircleOutlined className={styles.waitIcon} />{' '}
+                {t('pages.serviceMarket.contract.waitingAction')}
             </div>
         );
     }

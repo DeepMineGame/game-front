@@ -122,7 +122,7 @@ export const getContractStatus = (
     // User is client
     if (isUserClient) {
         // Executor violated deadline
-        if (isDeadlineViolated && !isDeleted) {
+        if (isDeadlineViolated && !isDeleted && !isTerminated) {
             return {
                 value: ContractStates.waitingForAction,
                 meta: ContractStatesMeta.deadlineViolation,
@@ -130,7 +130,7 @@ export const getContractStatus = (
         }
 
         // Executor violated terms
-        if (isTermViolated && !isDeleted) {
+        if (isTermViolated && !isDeleted && !isTerminated) {
             return {
                 value: ContractStates.waitingForAction,
                 meta: ContractStatesMeta.termViolation,

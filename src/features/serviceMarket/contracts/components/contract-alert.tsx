@@ -65,7 +65,11 @@ export const ContractAlert: FC<{
         // Contract has been finished
         if (isContractFinished) {
             // Contract has been completed & client collected penalty
-            if (isExecutorViolated && isDeleted && isClientCollectedPenalty) {
+            if (
+                isExecutorViolated &&
+                isTerminated &&
+                isClientCollectedPenalty
+            ) {
                 return (
                     <Alert
                         message={
@@ -81,7 +85,7 @@ export const ContractAlert: FC<{
             }
 
             // Contract has been completed & client didnt collect penalty
-            if (isExecutorViolated && isDeleted && !isPenaltyDemanded) {
+            if (isExecutorViolated && isTerminated && !isPenaltyDemanded) {
                 return (
                     <Alert
                         message={
@@ -195,7 +199,7 @@ export const ContractAlert: FC<{
             return (
                 <Alert
                     message={
-                        <Trans i18nKey="pages.serviceMarket.contract.violatedAndTerminatedByMeWaitCounterparty" />
+                        <Trans i18nKey="pages.serviceMarket.contract.terminatedByMeWaitCounterparty" />
                     }
                 />
             );
@@ -321,7 +325,11 @@ export const ContractAlert: FC<{
         // Contract has been finished
         if (isContractFinished) {
             // Contract has been completed & client collected penalty
-            if (isExecutorViolated && isDeleted && isClientCollectedPenalty) {
+            if (
+                isExecutorViolated &&
+                isTerminated &&
+                isClientCollectedPenalty
+            ) {
                 return (
                     <Alert
                         message={
@@ -337,7 +345,7 @@ export const ContractAlert: FC<{
             }
 
             // Contract has been completed & client didnt collect penalty
-            if (isExecutorViolated && isDeleted && !isPenaltyDemanded) {
+            if (isExecutorViolated && isTerminated && !isPenaltyDemanded) {
                 return (
                     <Alert
                         message={
@@ -525,6 +533,35 @@ export const ContractAlert: FC<{
                             }}
                             i18nKey="pages.serviceMarket.contract.terminatedByCounterpartyIDidntCollectPenalty"
                         />
+                    }
+                />
+            );
+        }
+
+        // Contract has not been finished & terminated by executor
+        if (isExecutorTermInitiator) {
+            return (
+                <Alert
+                    message={
+                        <Trans i18nKey="pages.serviceMarket.contract.terminatedByCounterpartyWaitMe" />
+                    }
+                    action={
+                        <Space>
+                            <Button
+                                ghost
+                                type="primary"
+                                onClick={collectPenaltyAction}
+                            >
+                                <Trans i18nKey="pages.serviceMarket.contract.collectPenalty" />
+                            </Button>
+                            <Button
+                                ghost
+                                type="primary"
+                                onClick={dontCollectPenaltyAction}
+                            >
+                                <Trans i18nKey="pages.serviceMarket.contract.noCollectPenalty" />
+                            </Button>
+                        </Space>
                     }
                 />
             );
