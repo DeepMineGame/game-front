@@ -674,6 +674,7 @@
       "travelHere": "Travel Here",
       "youShouldTravelToContinue": "You should travel to this location to continue",
       "getReport": "Get report",
+      "finishUpgrade": "Finish Upgrade",
       "performUpgrade": "Perform upgrade",
       "areYouSureToPerformUpgrade": "Are you sure you want to perform upgrade?",
       "upgradeCompleted": "Upgrade: Completed",
@@ -775,7 +776,6 @@
       "needLandLord": "Sign a contract with a landlord to set a Mine",
       "needSetupMine": "Set up the Mine to continue",
       "depthChangingText": "Go to mine management console for details",
-
       "needCrew": "You are ready to gather your ultimate mine crew. Sign the Mining Contract with a contractor to be able to activate your Mine.",
       "progress": "Setup in progress",
       "chooseContract": "Choose a contract",
