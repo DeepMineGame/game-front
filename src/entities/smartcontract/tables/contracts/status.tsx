@@ -107,6 +107,7 @@ export const getContractStatus = (
     const isValid =
         isStatusActive(contract) &&
         isWorkInProgress(contract) &&
+        isUserExecutor &&
         !isContractFinished;
 
     const isExecutorTermInitiator =
