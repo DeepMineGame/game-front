@@ -14,8 +14,13 @@ import styles from './styles.module.scss';
 
 export const ContractState: FC<ContractProps> = ({ contract, accountName }) => {
     const { t } = useTranslation();
-    const { isTermViolation, isCompleted, isTerminated, isDeleted } =
-        useContractState(contract, accountName);
+    const {
+        isTermViolation,
+        isNeedComplete,
+        isCompleted,
+        isTerminated,
+        isDeleted,
+    } = useContractState(contract, accountName);
     const { isOrder } = useContractType(contract);
 
     if (isCompleted) {
@@ -39,7 +44,7 @@ export const ContractState: FC<ContractProps> = ({ contract, accountName }) => {
         );
     }
 
-    if (isTermViolation) {
+    if (isTermViolation || isNeedComplete) {
         return (
             <div className={styles.status}>
                 <ClockCircleOutlined className={styles.waitIcon} />{' '}

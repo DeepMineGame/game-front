@@ -45,19 +45,21 @@ export const ContractAlert: FC<{
         isContractTermNotFulfilled(contract) ||
         isExecutorTermInitiator;
 
+    const reloadPage = useReloadPage();
+
     const terminateContractAction = useSmartContractAction({
         action: terminateContract(accountName, contract.id, false),
-        onSignSuccess: useReloadPage(),
+        onSignSuccess: () => setTimeout(reloadPage, 1500),
     });
 
     const collectPenaltyAction = useSmartContractAction({
         action: terminateContract(accountName, contract.id, true),
-        onSignSuccess: useReloadPage(),
+        onSignSuccess: () => setTimeout(reloadPage, 1500),
     });
 
     const dontCollectPenaltyAction = useSmartContractAction({
         action: terminateContract(accountName, contract.id, false),
-        onSignSuccess: useReloadPage(),
+        onSignSuccess: () => setTimeout(reloadPage, 1500),
     });
 
     // User is executor (Mineowner | Contractor)
@@ -325,11 +327,7 @@ export const ContractAlert: FC<{
         // Contract has been finished
         if (isContractFinished) {
             // Contract has been completed & client collected penalty
-            if (
-                isExecutorViolated &&
-                isTerminated &&
-                isClientCollectedPenalty
-            ) {
+            if (isExecutorViolated && isDeleted && isClientCollectedPenalty) {
                 return (
                     <Alert
                         message={
@@ -345,7 +343,7 @@ export const ContractAlert: FC<{
             }
 
             // Contract has been completed & client didnt collect penalty
-            if (isExecutorViolated && isTerminated && !isPenaltyDemanded) {
+            if (isExecutorViolated && isDeleted && !isPenaltyDemanded) {
                 return (
                     <Alert
                         message={
