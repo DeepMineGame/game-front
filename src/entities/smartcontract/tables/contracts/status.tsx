@@ -99,17 +99,20 @@ export const getContractStatus = (
     const isUserClient = contract.client === account;
     const isUserExecutor = contract.executor === account;
 
+    const isContractFinished = isTimeFinished(contract);
+
     const isTerminated = !!contract.term_initiator;
     const isDeadlineViolated = isDeadlineViolation(contract);
     const isTermViolated = isContractTermNotFulfilled(contract);
-    const isValid = isStatusActive(contract) && isWorkInProgress(contract);
+    const isValid =
+        isStatusActive(contract) &&
+        isWorkInProgress(contract) &&
+        !isContractFinished;
 
     const isExecutorTermInitiator =
         contract.executor === contract.term_initiator;
 
     const isDeleted = contract.deleted_at > 0;
-
-    const isContractFinished = isTimeFinished(contract);
 
     if (isOrder) return { value: ContractStates.openOrder };
 

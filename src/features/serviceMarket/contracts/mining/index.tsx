@@ -25,10 +25,12 @@ const MiningContract: FC<ContractProps> = ({ contract, accountName }) => {
                             accountName={accountName}
                         />
                     </Col>
-                    <ContractAlert
-                        contract={contract}
-                        accountName={accountName}
-                    />
+                    <Col span={24}>
+                        <ContractAlert
+                            contract={contract}
+                            accountName={accountName}
+                        />
+                    </Col>
                 </Row>
             </Col>
             <Col xs={24} md={12}>
