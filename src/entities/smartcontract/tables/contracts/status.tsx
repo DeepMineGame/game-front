@@ -99,8 +99,8 @@ export const getContractStatus = (
     const isUserClient = contract.client === account;
     const isUserExecutor = contract.executor === account;
 
-    const isContractFinished = isTimeFinished(contract);
-
+    const isContractStarted = contract.start_time > 0;
+    const isContractFinished = isContractStarted && isTimeFinished(contract);
     const isTerminated = !!contract.term_initiator;
     const isDeadlineViolated = isDeadlineViolation(contract);
     const isTermViolated = isContractTermNotFulfilled(contract);

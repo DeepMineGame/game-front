@@ -5,6 +5,7 @@ import { useSmartContractAction } from 'features/hooks';
 import {
     ContractDto,
     ContractStates,
+    ContractStatesMeta,
     getContractStatus,
     isContractTermNotFulfilled,
     isDeadlineViolation,
@@ -20,7 +21,10 @@ export const ContractAlert: FC<{
     contract: ContractDto;
     accountName: string;
 }> = ({ contract, accountName }) => {
-    const { value: state } = getContractStatus(contract, accountName);
+    const { value: state, meta: stateMeta } = getContractStatus(
+        contract,
+        accountName
+    );
 
     const isUserClient = contract.client === accountName;
     const isUserExecutor = contract.executor === accountName;
@@ -31,7 +35,8 @@ export const ContractAlert: FC<{
         contract.penalty_demanded_by === contract.executor;
     const isPenaltyDemanded = !!contract.penalty_demanded_by;
 
-    const isContractFinished = isTimeFinished(contract);
+    const isContractStarted = contract.start_time > 0;
+    const isContractFinished = isContractStarted && isTimeFinished(contract);
     const isDeleted = !!contract.deleted_at;
     const isTerminated = contract.term_time > 0;
     const isCompleted = state === ContractStates.completed;
@@ -43,7 +48,8 @@ export const ContractAlert: FC<{
     const isExecutorViolated =
         isDeadlineViolation(contract) ||
         isContractTermNotFulfilled(contract) ||
-        isExecutorTermInitiator;
+        (isExecutorTermInitiator &&
+            stateMeta === ContractStatesMeta.earlyBreak);
 
     const reloadPage = useReloadPage();
 
@@ -61,6 +67,9 @@ export const ContractAlert: FC<{
         action: terminateContract(accountName, contract.id, false),
         onSignSuccess: () => setTimeout(reloadPage, 1500),
     });
+
+    // eslint-disable-next-line no-debugger
+    debugger;
 
     // User is executor (Mineowner | Contractor)
     if (isUserExecutor) {
@@ -196,17 +205,6 @@ export const ContractAlert: FC<{
             );
         }
 
-        // Contract has been terminated by executor and wait client
-        if (isExecutorViolated && isExecutorTermInitiator) {
-            return (
-                <Alert
-                    message={
-                        <Trans i18nKey="pages.serviceMarket.contract.terminatedByMeWaitCounterparty" />
-                    }
-                />
-            );
-        }
-
         // Contract has been terminated by executor & client collected penalty
         if (
             isExecutorViolated &&
@@ -244,6 +242,17 @@ export const ContractAlert: FC<{
                             }}
                             i18nKey="pages.serviceMarket.contract.terminatedByMeCounterpartyDidntCollectPenalty"
                         />
+                    }
+                />
+            );
+        }
+
+        // Contract has been terminated by executor and wait client
+        if (isExecutorViolated && isExecutorTermInitiator) {
+            return (
+                <Alert
+                    message={
+                        <Trans i18nKey="pages.serviceMarket.contract.terminatedByMeWaitCounterparty" />
                     }
                 />
             );
