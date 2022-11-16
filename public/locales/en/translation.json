@@ -676,6 +676,7 @@
       "getReport": "Get report",
       "finishUpgrade": "Finish Upgrade",
       "performUpgrade": "Perform upgrade",
+      "stopUpgrade": "Stop Upgrade",
       "areYouSureToPerformUpgrade": "Are you sure you want to perform upgrade?",
       "upgradeCompleted": "Upgrade: Completed",
       "upgradeInProgress": "Upgrade: in progress",
