@@ -27,6 +27,7 @@ import {
     EngineerPage,
     EquipmentHallPage,
     EngineersTraining,
+    ServiceMarketPageNew,
 } from 'pages';
 
 import * as paths from './paths';
@@ -147,14 +148,23 @@ export const routes: AppRoute[] = [
         forBetaUser: true,
         titleTag: 'Badlands — DeepMine',
     },
+    // {
+    //     path: paths.serviceMarket,
+    //     Component: ServiceMarketPage,
+    //     forLoggedIn: true,
+    //     forAdmin: true,
+    //     forBetaUser: true,
+    //     titleTag: 'Service-market — DeepMine',
+    // },
     {
         path: paths.serviceMarket,
-        Component: ServiceMarketPage,
+        Component: ServiceMarketPageNew,
         forLoggedIn: true,
         forAdmin: true,
         forBetaUser: true,
         titleTag: 'Service-market — DeepMine',
     },
+
     {
         path: paths.serviceMarketOrder,
         Component: OperationPage,

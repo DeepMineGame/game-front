@@ -406,8 +406,9 @@
       }
     },
     "serviceMarket": {
-      "serviceMarket": "SERVICE MARKET",
+      "serviceMarket": "Service market",
       "myContracts": "My contracts",
+      "createContract": "Create contract",
       "miningContracts": "Mining contracts",
       "mineOperation": "Mine operation",
       "levelUpgradeOrder": "Level upgrade order",

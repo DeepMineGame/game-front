@@ -17,3 +17,4 @@ export * from './serviceMarket';
 export * from './nftPreview';
 export * from './faq';
 export * from './wasteland';
+export * from './service-market';
