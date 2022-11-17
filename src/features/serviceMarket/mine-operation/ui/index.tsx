@@ -1,31 +1,39 @@
 import { useTranslation } from 'react-i18next';
-import { useEvent, useGate, useStore } from 'effector-react';
-import { Skeleton } from 'antd';
-import { Segmented } from 'shared';
-import { MiningContractsTable } from '../../mining-contracts/ui/MiningContractsTable';
-import { TabGrid } from '../../ui/tab-grid';
+import { useGate, useStore } from 'effector-react';
+import { Skeleton, Space } from 'antd';
+import { ContractsTable, Segmented } from 'shared';
+import { useCallback } from 'react';
+import { OrderStatus, Roles } from 'entities/gameStat';
+import { TabGrid } from '../../ui';
 import {
-    mineOperationChangeFilterEvent,
-    MineOperationFilter,
-    filteredMineOperationContractsStore,
-    mineOperationFilterStore,
-    getMineOperationContractsEffect,
-    MineOperationContractsGate,
-} from '../model/model';
+    changeFilterEvent,
+    ContractsGate,
+    contractsStore,
+    filterStore,
+    getContractsByFilterEffect,
+} from '../../contracts-table/model';
 
-export const MineOperationContracts = () => {
-    useGate(MineOperationContractsGate);
+export const LandlordTab = () => {
     const { t } = useTranslation();
 
-    const contracts = useStore(filteredMineOperationContractsStore);
-    const isLoading = useStore(getMineOperationContractsEffect.pending);
-    const filter = useStore(mineOperationFilterStore);
+    useGate(ContractsGate, {
+        statuses: OrderStatus.current,
+        user_role: Roles.landlord,
+        search_role: Roles.mineowner,
+    });
 
-    const changeFilter = useEvent(mineOperationChangeFilterEvent);
+    const contracts = useStore(contractsStore);
+    const isLoading = useStore(getContractsByFilterEffect.pending);
+    const filter = useStore(filterStore);
 
-    const handleFilterChange = (newFilter: string | number) => {
-        changeFilter(newFilter as MineOperationFilter);
-    };
+    const onChangeSearchRole = useCallback(
+        (role) =>
+            changeFilterEvent({
+                ...filter,
+                search_role: role,
+            }),
+        [filter]
+    );
 
     if (isLoading) {
         return <Skeleton />;
@@ -34,22 +42,21 @@ export const MineOperationContracts = () => {
     return (
         <TabGrid
             filters={
-                <Segmented
-                    options={[
-                        {
-                            value: MineOperationFilter.LookingForMineOwner,
-                            label: t('pages.serviceMarket.lookingForMineOwner'),
-                        },
-                        {
-                            value: MineOperationFilter.LookingForLandlord,
-                            label: t('pages.serviceMarket.lookingForLandlord'),
-                        },
-                    ]}
-                    onChange={handleFilterChange}
-                    value={filter}
-                />
+                <Space>
+                    <div>Looking for: </div>
+                    <Segmented
+                        options={[
+                            {
+                                value: Roles.mineowner,
+                                label: t('roles.mineowner'),
+                            },
+                        ]}
+                        onChange={onChangeSearchRole}
+                        value={filter.search_role}
+                    />
+                </Space>
             }
-            table={<MiningContractsTable contracts={contracts} />}
+            table={<ContractsTable contracts={contracts} />}
         />
     );
 };

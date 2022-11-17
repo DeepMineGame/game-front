@@ -1,6 +1,6 @@
 export enum ServiceMarketTabIds {
-    myContracts,
-    miningContracts,
-    mineOperation,
+    contractor,
+    mineOwner,
+    landLord,
     levelUpgrade,
 }

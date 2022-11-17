@@ -407,7 +407,6 @@
     },
     "serviceMarket": {
       "serviceMarket": "SERVICE MARKET",
-      "myContracts": "My contracts",
       "miningContracts": "Mining contracts",
       "mineOperation": "Mine operation",
       "levelUpgradeOrder": "Level upgrade order",
@@ -578,7 +577,9 @@
         "contractType": "Contract type",
         "completionDate": "Completion date",
         "penalty": "Penalty, DME",
-        "status": "Status"
+        "fee": "Fee, DME",
+        "status": "Status",
+        "cost": "Cost"
       },
       "levelUpgradeTab": {
         "nickname": "Nickname",

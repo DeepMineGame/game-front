@@ -1,32 +1,40 @@
 import { useTranslation } from 'react-i18next';
-import { FC } from 'react';
-import { Segmented } from 'shared';
-import { Skeleton } from 'antd';
-import { useEvent, useGate, useStore } from 'effector-react';
-import { TabGrid } from 'features/serviceMarket';
+import { FC, useCallback } from 'react';
+import { ContractsTable, Segmented } from 'shared';
+import { Skeleton, Space } from 'antd';
+import { useGate, useStore } from 'effector-react';
 import {
-    levelUpgradeChangeFilterEvent,
-    LevelUpgradeFilter,
-    filteredLevelUpgradeContractsStore,
-    levelUpgradeFilterStore,
-    getLevelUpgradeContractsEffect,
-    LevelUpgradeContractsGate,
-} from '../model';
-import { LevelUpgradeContractsTable } from './table';
+    changeFilterEvent,
+    ContractsGate,
+    contractsStore,
+    filterStore,
+    getContractsByFilterEffect,
+    TabGrid,
+} from 'features/serviceMarket';
 
-export const LevelUpgrade: FC = () => {
-    useGate(LevelUpgradeContractsGate);
+import { OrderStatus, Roles } from 'entities/gameStat';
+
+export const EngineerTab: FC = () => {
     const { t } = useTranslation();
 
-    const contracts = useStore(filteredLevelUpgradeContractsStore);
-    const isLoading = useStore(getLevelUpgradeContractsEffect.pending);
-    const filter = useStore(levelUpgradeFilterStore);
+    useGate(ContractsGate, {
+        statuses: OrderStatus.current,
+        user_role: Roles.engineer,
+        search_role: Roles.contractor,
+    });
 
-    const changeFilter = useEvent(levelUpgradeChangeFilterEvent);
+    const contracts = useStore(contractsStore);
+    const isLoading = useStore(getContractsByFilterEffect.pending);
+    const filter = useStore(filterStore);
 
-    const handleFilterChange = (newFilter: string | number) => {
-        changeFilter(newFilter as LevelUpgradeFilter);
-    };
+    const onChangeSearchRole = useCallback(
+        (role) =>
+            changeFilterEvent({
+                ...filter,
+                search_role: role,
+            }),
+        [filter]
+    );
 
     if (isLoading) {
         return <Skeleton />;
@@ -35,26 +43,25 @@ export const LevelUpgrade: FC = () => {
     return (
         <TabGrid
             filters={
-                <Segmented
-                    options={[
-                        {
-                            value: LevelUpgradeFilter.LookingForEngineer,
-                            label: t(
-                                'pages.serviceMarket.levelUpgradeTab.lookingForEngineer'
-                            ),
-                        },
-                        {
-                            value: LevelUpgradeFilter.LookingForCitizen,
-                            label: t(
-                                'pages.serviceMarket.levelUpgradeTab.lookingForCitizen'
-                            ),
-                        },
-                    ]}
-                    onChange={handleFilterChange}
-                    value={filter}
-                />
+                <Space>
+                    <div>Looking for: </div>
+                    <Segmented
+                        options={[
+                            {
+                                value: Roles.contractor,
+                                label: t('roles.contractor'),
+                            },
+                            {
+                                value: Roles.mineowner,
+                                label: t('roles.mineowner'),
+                            },
+                        ]}
+                        onChange={onChangeSearchRole}
+                        value={filter.search_role}
+                    />
+                </Space>
             }
-            table={<LevelUpgradeContractsTable contracts={contracts} />}
+            table={<ContractsTable contracts={contracts} />}
         />
     );
 };

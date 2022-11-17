@@ -1,52 +1,28 @@
 import { createGate } from 'effector-react';
-import {
-    attach,
-    createEffect,
-    createEvent,
-    createStore,
-    forward,
-} from 'effector';
+import { createEffect, createEvent, createStore, forward } from 'effector';
 import { ContractDto } from 'entities/smartcontract';
-import {
-    FilterOrderStatus,
-    getOrders,
-    GetOrdersParams,
-} from 'entities/gameStat';
-import { userStore } from 'entities/user';
+import { getMarketOrders, GetMarketOrdersParams } from 'entities/gameStat';
 
-export const ContractsGate = createGate<{ searchParam: string }>(
-    'ContractsGate'
+export const ContractsGate = createGate<GetMarketOrdersParams>('ContractsGate');
+export const changeFilterEvent = createEvent<GetMarketOrdersParams>();
+
+export const filterStore = createStore<GetMarketOrdersParams>({}).on(
+    changeFilterEvent,
+    (_state, filter) => filter
 );
-export const changeFilterEvent = createEvent<GetOrdersParams>();
 
-export const filterStore = createStore<GetOrdersParams>({
-    status: FilterOrderStatus.current,
-}).on(changeFilterEvent, (_state, filter) => filter);
+export const getContractsByFilterEffect = createEffect(getMarketOrders);
 
-export const getContractsByFilterEffect = createEffect(getOrders);
-
-export const contractsStore = createStore<null | ContractDto[]>(null).on(
-    getContractsByFilterEffect.doneData,
-    (_, data) => data
-);
+export const contractsStore = createStore<null | ContractDto[]>(null)
+    .on(getContractsByFilterEffect.doneData, (_, data) => data)
+    .on(getContractsByFilterEffect.fail, () => null);
 
 forward({
     from: ContractsGate.open,
-    to: attach({
-        effect: getContractsByFilterEffect,
-        source: [filterStore, userStore],
-        mapParams: (params, [filters, user]) => ({
-            ...filters,
-            user: user?.wax_address,
-        }),
-    }),
+    to: changeFilterEvent,
 });
 
 forward({
     from: changeFilterEvent,
-    to: attach({
-        effect: getContractsByFilterEffect,
-        source: userStore,
-        mapParams: (params, user) => ({ ...params, user: user?.wax_address! }),
-    }),
+    to: getContractsByFilterEffect,
 });

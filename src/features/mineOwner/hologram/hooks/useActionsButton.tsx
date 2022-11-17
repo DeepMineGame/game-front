@@ -52,7 +52,7 @@ export function useActionsButton() {
                 type="link"
                 onClick={() =>
                     navigate(
-                        `${serviceMarket}?tabId=${ServiceMarketTabIds.mineOperation}`
+                        `${serviceMarket}?tabId=${ServiceMarketTabIds.landLord}`
                     )
                 }
             >
