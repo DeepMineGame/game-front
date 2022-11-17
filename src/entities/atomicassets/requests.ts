@@ -12,51 +12,26 @@ let [currentAtomicEndpoint] = endpoints.atomic;
 
 let [currentWaxEndpoint] = endpoints.wax;
 
-export const getAtomicAssetsDataById = async (
-    id: string | number,
+export const getAssets = async <T>(
+    ids: T,
     connectionCount = 0
-): Promise<AssetDataType | undefined> => {
+): Promise<
+    T extends string[] ? AssetDataType[] : AssetDataType | undefined
+> => {
+    const isIdsArray = Array.isArray(ids);
+
     try {
         connectionCount++;
+
         const { data } = await axios.get(
-            `${currentAtomicEndpoint}/assets/${id}`
+            `${currentAtomicEndpoint}/assets${
+                isIdsArray
+                    ? `?ids=${ids.filter((i) => i).join(',')}`
+                    : `/${ids}`
+            }`
         );
 
-        return data?.data;
-    } catch (e) {
-        const error = e as AxiosError;
-
-        if (isServerError(error)) {
-            if (connectionCount >= ConnectionCountLimit.atomic)
-                throw new Error('Network Error', error);
-
-            currentAtomicEndpoint = getNextEndpoint({
-                endpointsList: endpoints.atomic,
-                currentEndpoint: currentAtomicEndpoint,
-            });
-
-            await wait(1);
-            return await getAtomicAssetsDataById(id, connectionCount);
-        }
-
-        throw new Error(error.message);
-    }
-};
-
-export const getAssets = async (
-    ids: string[],
-    connectionCount = 0
-): Promise<AssetDataType[]> => {
-    try {
-        connectionCount++;
-
-        const { data = [] } = await axios.get(
-            `${currentAtomicEndpoint}/assets?ids=${ids
-                .filter((i) => i)
-                .join(',')}`
-        );
-
-        return data?.data as AssetDataType[];
+        return data?.data || (isIdsArray ? [] : undefined);
     } catch (e) {
         const error = e as AxiosError;
 

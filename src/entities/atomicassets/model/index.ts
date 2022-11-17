@@ -3,7 +3,9 @@ import { AssetDataType, getAssets } from 'entities/atomicassets';
 import { $inventory } from 'entities/smartcontract';
 import { mergeAssets, getGameAssets } from 'shared/lib/utils';
 
-export const getAtomicAssetsEffect = createEffect(getAssets);
+export const getAtomicAssetsEffect = createEffect<string[], AssetDataType[]>(
+    getAssets
+);
 
 export const $inventoryAtomicAssets = createStore<AssetDataType[]>([]).on(
     getAtomicAssetsEffect.doneData,

@@ -16,7 +16,7 @@ import { useSmartContractAction } from 'features';
 import { useStore } from 'effector-react';
 import {
     AssetDataType,
-    getAtomicAssetsDataById,
+    getAssets,
     MergedInventoryWithAtomicAssets,
 } from 'entities/atomicassets';
 import { rarityMap, repairEquipment } from 'entities/smartcontract';
@@ -80,7 +80,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
 
     const updateData = useCallback(async () => {
         if (card?.asset_id) {
-            setCardData(await getAtomicAssetsDataById(card.asset_id));
+            setCardData(await getAssets(card.asset_id));
         }
     }, [card]);
 

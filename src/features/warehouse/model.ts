@@ -28,8 +28,12 @@ const $inventory = createStore<UserInventoryType[]>([]).on(
     (_, { rows }) => rows
 );
 
-const getStorageAtomicAssetsEffect = createEffect(getAssets);
-const getInventoryAtomicAssetsEffect = createEffect(getAssets);
+const getStorageAtomicAssetsEffect = createEffect<string[], AssetDataType[]>(
+    getAssets
+);
+const getInventoryAtomicAssetsEffect = createEffect<string[], AssetDataType[]>(
+    getAssets
+);
 
 const $storageAssetsIds = createStore<string[]>([]);
 const $inventoryAssetsIds = createStore<string[]>([]);
