@@ -18,7 +18,7 @@ export const UnsetupMineGate = createGate<{ searchParams: string }>(
 
 const getExecutorContractsEffect = createEffect<
     { searchParams: string },
-    { rows: ContractDto[] }
+    { rows: ContractDto[] } | undefined
 >(({ searchParams }) =>
     getTableData(
         getContractsNameConfig(
@@ -31,7 +31,7 @@ const getExecutorContractsEffect = createEffect<
 
 const getContractorsContractsEffect = createEffect<
     { searchParams: string },
-    { rows: ContractDto[] }
+    { rows: ContractDto[] } | undefined
 >(({ searchParams }) =>
     getTableData(
         getContractsNameConfig(
@@ -42,19 +42,21 @@ const getContractorsContractsEffect = createEffect<
     )
 );
 
-const getUserMine = createEffect<{ searchParams: string }, { rows: MineDto[] }>(
-    ({ searchParams }) =>
-        getMinesTableData({
-            searchParam: searchParams,
-            searchIdentificationType: searchBy.owner,
-        })
+const getUserMine = createEffect<
+    { searchParams: string },
+    { rows: MineDto[] } | undefined
+>(({ searchParams }) =>
+    getMinesTableData({
+        searchParam: searchParams,
+        searchIdentificationType: searchBy.owner,
+    })
 );
 
 export const activeMineOwnerExecutorContractStore =
     createStore<ContractDto | null>(null).on(
         getExecutorContractsEffect.doneData,
-        (_, { rows }) =>
-            rows?.find(
+        (_, data) =>
+            data?.rows?.find(
                 ({ type, status }: ContractDto) =>
                     type === ContractType.landlord_mineowner &&
                     status === ContractStatus.active
@@ -63,8 +65,8 @@ export const activeMineOwnerExecutorContractStore =
 
 export const activeContractorsContractsStore = createStore<
     ContractDto[] | null
->(null).on(getContractorsContractsEffect.doneData, (_, { rows }) => {
-    return rows?.filter(
+>(null).on(getContractorsContractsEffect.doneData, (_, data) => {
+    return data?.rows?.filter(
         ({ type, status }: ContractDto) =>
             type === ContractType.mineowner_contractor &&
             status === ContractStatus.active
@@ -73,7 +75,7 @@ export const activeContractorsContractsStore = createStore<
 
 export const userMineStore = createStore<MineDto | null>(null).on(
     getUserMine.doneData,
-    (_, { rows }) => rows?.[0]
+    (_, data) => data?.rows?.[0]
 );
 
 forward({

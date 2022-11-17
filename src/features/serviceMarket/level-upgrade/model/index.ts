@@ -25,7 +25,7 @@ export const levelUpgradeChangeFilterEvent = createEvent<LevelUpgradeFilter>();
 
 export const getLevelUpgradeContractsEffect = createEffect<
     void,
-    { rows: ContractDto[] }
+    { rows: ContractDto[] } | undefined
 >(() =>
     getTableData(
         getContractsNameConfig(
@@ -38,8 +38,8 @@ export const getLevelUpgradeContractsEffect = createEffect<
 
 export const levelUpgradeContractsStore = createStore<ContractDto[]>([]).on(
     getLevelUpgradeContractsEffect.doneData,
-    (_, contracts) =>
-        contracts.rows?.filter(
+    (_, data) =>
+        data?.rows?.filter(
             (contract: ContractDto) => !contract.client || !contract.executor
         ) ?? []
 );

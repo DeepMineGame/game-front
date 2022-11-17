@@ -24,38 +24,40 @@ const EngineerCabinGate = createGate<{ searchParam: string }>(
 
 const getActiveInventoryEffect = createEffect<
     { searchParam: string },
-    { rows: UserInventoryType[] }
+    { rows: UserInventoryType[] } | undefined
 >(getInventoryTableData);
 
 const $userActiveInventory = createStore<UserInventoryType[]>([]).on(
     getActiveInventoryEffect.doneData,
-    (_, { rows }) => rows
+    (_, data) => data?.rows
 );
 
 const $certificate = createStore<UserInventoryType | null>(null);
 
 const getEngineerByExecutorEffect = createEffect<
     { searchParam: string },
-    { rows: EngineerType[] }
+    { rows: EngineerType[] } | undefined
 >(getEngineerTableData);
 
 const $engineer = createStore<EngineerType | null>(null).on(
     getEngineerByExecutorEffect.doneData,
-    (_, { rows }) => rows?.[0] || null
+    (_, data) => data?.rows?.[0] || null
 );
 
-const getActionByUserEffect = createEffect(
-    async ({ searchParam }: { searchParam: string }) =>
-        getActionEffect({
-            searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
-            searchParam,
-        })
+const getActionByUserEffect = createEffect<
+    { searchParam: string },
+    { rows: ActionDto[] } | undefined
+>(({ searchParam }) =>
+    getActionEffect({
+        searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
+        searchParam,
+    })
 );
 
 const $openSkillAction = createStore<ActionDto | null>(null).on(
     getActionEffect.doneData,
-    (_, { rows }) => {
-        const activeAction = rows?.find(
+    (_, data) => {
+        const activeAction = data?.rows?.find(
             ({ type, finishes_at }) =>
                 type === ActionType.engineer_open_skill &&
                 finishes_at * 1000 > Date.now()

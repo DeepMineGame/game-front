@@ -13,12 +13,12 @@ export const InventoryGate = createGate<{ searchParam: string }>(
 
 const getActiveInventory = createEffect<
     { searchParam: string },
-    { rows: UserInventoryType[] }
+    { rows: UserInventoryType[] } | undefined
 >(getInventoryTableData);
 
 export const activeUserInventoryStore = createStore<UserInventoryType[] | null>(
     null
-).on(getActiveInventory.doneData, (_, { rows }) => rows);
+).on(getActiveInventory.doneData, (_, data) => data?.rows);
 
 export const getAtomicAssetsByUserEffect = createEffect(getAtomicAssetsByUser);
 

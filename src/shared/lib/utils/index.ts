@@ -1,55 +1,46 @@
-import {
-    ConnectionCountLimit,
-    endpoints,
-    getNextEndpoint,
-} from 'app/constants';
-import axios, { AxiosError } from 'axios';
+import { ConnectionCountLimit, endpoints } from 'app/constants';
+import axios from 'axios';
 import {
     ContractDto,
     ContractType,
     GetTableDataConfigType,
 } from 'entities/smartcontract';
-import { isServerError } from './is-server-error';
-import { wait } from './wait';
+import { nodeUrlSwitcher } from './node-url-switcher';
 
+// eslint-disable-next-line prefer-const
 let [currentWaxEndpoint] = endpoints.wax;
 
 export const getTableData = async <T>(
     config: GetTableDataConfigType,
     connectionCount = 0
-): Promise<{ rows: T[] }> => {
-    try {
-        connectionCount++;
+): Promise<{ rows: T[] } | undefined> => {
+    let fetchedData;
 
-        const { data } = await axios.post<{ rows: T[] }>(
-            `${currentWaxEndpoint}/v1/chain/get_table_rows`,
-            {
-                json: 'true',
-                reverse: false,
-                show_payer: false,
-                ...config,
-            }
-        );
+    await nodeUrlSwitcher(
+        async () => {
+            connectionCount++;
 
-        return data;
-    } catch (e) {
-        const error = e as AxiosError;
+            const { data } = await axios.post<{ rows: T[] }>(
+                `${currentWaxEndpoint}/v1/chain/get_table_rows`,
+                {
+                    json: 'true',
+                    reverse: false,
+                    show_payer: false,
+                    ...config,
+                }
+            );
 
-        if (isServerError(error)) {
-            if (connectionCount >= ConnectionCountLimit.wax)
-                throw new Error('Network Error', error);
-
-            currentWaxEndpoint = getNextEndpoint({
-                endpointsList: endpoints.wax,
-                currentEndpoint: currentWaxEndpoint,
-            });
-
-            await wait(1);
-            return await getTableData(config, connectionCount);
+            fetchedData = data;
+        },
+        {
+            connectionCount,
+            connectionCountLimit: ConnectionCountLimit.wax,
+            currentEndpoint: currentWaxEndpoint,
+            endpointsList: endpoints.wax,
         }
+    );
 
-        throw new Error(error.message);
-    }
+    return fetchedData;
 };
 
 export const getUserRoleInContract = (
@@ -96,3 +87,4 @@ export { isAssetAvailable } from './is-asset-available';
 export { getGameAssets } from './get-game-assets';
 export { wait } from './wait';
 export { isServerError } from './is-server-error';
+export { nodeUrlSwitcher } from './node-url-switcher';

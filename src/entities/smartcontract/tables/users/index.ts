@@ -5,7 +5,7 @@ import { UserDto } from './types';
 
 export const getSmartContractUserEffect = createEffect<
     { searchParam: string },
-    { rows: UserDto[] }
+    { rows: UserDto[] } | undefined
 >(({ searchParam }) =>
     getTableData({
         code: deepminegame,
@@ -21,7 +21,7 @@ export const getSmartContractUserEffect = createEffect<
 
 export const smartContractUserStore = createStore<UserDto[] | null>(null).on(
     getSmartContractUserEffect.doneData,
-    (_, { rows }) => rows
+    (_, data) => data?.rows
 );
 
 export * from './types';

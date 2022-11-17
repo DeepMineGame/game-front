@@ -1,11 +1,8 @@
-import {
-    ConnectionCountLimit,
-    endpoints,
-    getNextEndpoint,
-} from 'app/constants';
-import axios, { AxiosError } from 'axios';
-import { isServerError, wait } from 'shared';
+import { ConnectionCountLimit, endpoints } from 'app/constants';
+import axios from 'axios';
+import { nodeUrlSwitcher } from 'shared';
 
+// eslint-disable-next-line prefer-const
 let [currentWaxEndpoint] = endpoints.wax;
 
 export const fetchDmeBalance = async ({
@@ -14,47 +11,39 @@ export const fetchDmeBalance = async ({
 }: {
     searchParam: string;
     connectionCount?: number;
-}): Promise<string> => {
-    try {
-        connectionCount++;
+}): Promise<string | undefined> => {
+    let fetchedData;
 
-        const {
-            data: { rows },
-        } = await axios.post<{ rows: { balance: string }[] }>(
-            `${currentWaxEndpoint}/v1/chain/get_table_rows`,
-            {
-                code: 'deepminedmet',
-                index_position: 1,
-                json: true,
-                limit: '1',
-                scope: searchParam,
-                table: 'accounts',
-            }
-        );
+    await nodeUrlSwitcher(
+        async () => {
+            connectionCount++;
 
-        const balance = rows?.[0]?.balance;
-        const [value] = balance ? balance.split(' ') : [0];
+            const {
+                data: { rows },
+            } = await axios.post<{ rows: { balance: string }[] }>(
+                `${currentWaxEndpoint}/v1/chain/get_table_rows`,
+                {
+                    code: 'deepminedmet',
+                    index_position: 1,
+                    json: true,
+                    limit: '1',
+                    scope: searchParam,
+                    table: 'accounts',
+                }
+            );
 
-        return Number(value).toFixed(4);
-    } catch (e) {
-        const error = e as AxiosError;
+            const balance = rows?.[0]?.balance;
+            const [value] = balance ? balance.split(' ') : [0];
 
-        if (isServerError(error)) {
-            if (connectionCount >= ConnectionCountLimit.wax)
-                throw new Error('Network Error', error);
-
-            currentWaxEndpoint = getNextEndpoint({
-                endpointsList: endpoints.wax,
-                currentEndpoint: currentWaxEndpoint,
-            });
-
-            await wait(1);
-            return await fetchDmeBalance({
-                searchParam,
-                connectionCount,
-            });
+            fetchedData = Number(value).toFixed(4);
+        },
+        {
+            connectionCount,
+            connectionCountLimit: ConnectionCountLimit.wax,
+            currentEndpoint: currentWaxEndpoint,
+            endpointsList: endpoints.wax,
         }
+    );
 
-        throw new Error(error.message);
-    }
+    return fetchedData;
 };

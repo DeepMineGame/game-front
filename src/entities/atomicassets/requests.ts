@@ -1,15 +1,13 @@
-import axios, { AxiosError } from 'axios';
-import {
-    endpoints,
-    getNextEndpoint,
-    ConnectionCountLimit,
-} from 'app/constants';
-import { isServerError, wait } from 'shared';
+import axios from 'axios';
+import { endpoints, ConnectionCountLimit } from 'app/constants';
+import { nodeUrlSwitcher } from 'shared';
 import { UserInventoryType } from '../smartcontract';
 import { AssetDataType } from './types';
 
+// eslint-disable-next-line prefer-const
 let [currentAtomicEndpoint] = endpoints.atomic;
 
+// eslint-disable-next-line prefer-const
 let [currentWaxEndpoint] = endpoints.wax;
 
 export const getAssets = async <T>(
@@ -19,37 +17,31 @@ export const getAssets = async <T>(
     T extends string[] ? AssetDataType[] : AssetDataType | undefined
 > => {
     const isIdsArray = Array.isArray(ids);
+    let fetchedData: any;
 
-    try {
-        connectionCount++;
+    await nodeUrlSwitcher(
+        async () => {
+            connectionCount++;
 
-        const { data } = await axios.get(
-            `${currentAtomicEndpoint}/assets${
-                isIdsArray
-                    ? `?ids=${ids.filter((i) => i).join(',')}`
-                    : `/${ids}`
-            }`
-        );
+            const { data } = await axios.get(
+                `${currentAtomicEndpoint}/assets${
+                    isIdsArray
+                        ? `?ids=${ids.filter((i) => i).join(',')}`
+                        : `/${ids}`
+                }`
+            );
 
-        return data?.data || (isIdsArray ? [] : undefined);
-    } catch (e) {
-        const error = e as AxiosError;
-
-        if (isServerError(error)) {
-            if (connectionCount >= ConnectionCountLimit.atomic)
-                throw new Error('Network Error', error);
-
-            currentAtomicEndpoint = getNextEndpoint({
-                endpointsList: endpoints.atomic,
-                currentEndpoint: currentAtomicEndpoint,
-            });
-
-            await wait(1);
-            return await getAssets(ids, connectionCount);
+            fetchedData = data?.data || (isIdsArray ? [] : undefined);
+        },
+        {
+            connectionCount,
+            connectionCountLimit: ConnectionCountLimit.atomic,
+            currentEndpoint: currentAtomicEndpoint,
+            endpointsList: endpoints.atomic,
         }
+    );
 
-        throw new Error(error.message);
-    }
+    return fetchedData;
 };
 
 export const getAtomicAssetsByUser = async ({
@@ -59,43 +51,35 @@ export const getAtomicAssetsByUser = async ({
     searchParam: string;
     connectionCount?: number;
 }): Promise<UserInventoryType[] | undefined> => {
-    try {
-        connectionCount++;
+    let fetchedData;
 
-        const { data } = await axios.post<{ rows: UserInventoryType[] }>(
-            `${currentWaxEndpoint}/v1/chain/get_table_rows`,
-            {
-                json: true,
-                code: 'atomicassets',
-                scope: searchParam,
-                table: 'assets',
-                index_position: 1,
-                limit: 500,
-                reverse: false,
-                show_payer: false,
-            }
-        );
+    await nodeUrlSwitcher(
+        async () => {
+            connectionCount++;
 
-        return data?.rows as UserInventoryType[] | undefined;
-    } catch (e) {
-        const error = e as AxiosError;
+            const { data } = await axios.post<{ rows: UserInventoryType[] }>(
+                `${currentWaxEndpoint}/v1/chain/get_table_rows`,
+                {
+                    json: true,
+                    code: 'atomicassets',
+                    scope: searchParam,
+                    table: 'assets',
+                    index_position: 1,
+                    limit: 500,
+                    reverse: false,
+                    show_payer: false,
+                }
+            );
 
-        if (isServerError(error)) {
-            if (connectionCount >= ConnectionCountLimit.wax)
-                throw new Error('Network Error', error);
-
-            currentWaxEndpoint = getNextEndpoint({
-                endpointsList: endpoints.wax,
-                currentEndpoint: currentWaxEndpoint,
-            });
-
-            await wait(1);
-            return await getAtomicAssetsByUser({
-                searchParam,
-                connectionCount,
-            });
+            fetchedData = data?.rows;
+        },
+        {
+            connectionCount,
+            connectionCountLimit: ConnectionCountLimit.wax,
+            currentEndpoint: currentWaxEndpoint,
+            endpointsList: endpoints.wax,
         }
+    );
 
-        throw new Error(error.message);
-    }
+    return fetchedData;
 };

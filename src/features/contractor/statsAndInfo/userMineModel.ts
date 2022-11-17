@@ -13,7 +13,7 @@ export const UserMineGate = createGate<{ searchParam: string }>('UserMineGate');
 
 export const getMinesByOwnerEffect = createEffect<
     { searchParam: string },
-    { rows: MineDto[] }
+    { rows: MineDto[] } | undefined
 >(({ searchParam }) =>
     getMinesTableData({
         searchIdentificationType: searchBy.owner,
@@ -23,19 +23,19 @@ export const getMinesByOwnerEffect = createEffect<
 
 export const getAreaByAssetEffect = createEffect<
     MineDto[],
-    { rows: AreasDto[] }
+    { rows: AreasDto[] } | undefined
 >((mine: MineDto[]) =>
     getTableData(getAreaConfig(mine[0]?.area_id, searchBy.assetId))
 );
 
 export const userMineStore = createStore<MineDto[]>([]).on(
     getMinesByOwnerEffect.doneData,
-    (_, { rows }) => rows
+    (_, data) => data?.rows
 );
 
 export const areaForMine = createStore<AreasDto[] | null>(null).on(
     getAreaByAssetEffect.doneData,
-    (_, { rows }) => rows
+    (_, data) => data?.rows
 );
 
 forward({

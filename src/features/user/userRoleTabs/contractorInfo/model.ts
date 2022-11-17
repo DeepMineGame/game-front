@@ -34,7 +34,7 @@ const getAreaEffect = createEffect(
 
 export const getInventoryByIdEffect = createEffect<
     { searchParam: number },
-    { rows: UserInventoryType[] }
+    { rows: UserInventoryType[] } | undefined
 >(({ searchParam }) =>
     getInventoryTableData({
         searchIdentificationType: SEARCH_BY.inventoryId,
@@ -44,19 +44,19 @@ export const getInventoryByIdEffect = createEffect<
 
 export const contractorMineStore = createStore<null | MineDto>(null).on(
     getMinesEffect.doneData,
-    (_, { rows }) => rows?.[0]
+    (_, data) => data?.rows?.[0]
 );
 export const contractorDataStore = createStore<ContractorDto | null>(null).on(
     getContractorsEffect.doneData,
-    (_, { rows }) => rows?.[0]
+    (_, data) => data?.rows?.[0]
 );
 export const contractorAreaStore = createStore<null | AreasDto>(null).on(
     getAreasEffect.doneData,
-    (_, { rows }) => rows?.[0]
+    (_, data) => data?.rows?.[0]
 );
 export const areaNftStore = createStore<UserInventoryType | null>(null).on(
     getInventoryByIdEffect.doneData,
-    (_, { rows }) => rows?.[0]
+    (_, data) => data?.rows?.[0]
 );
 
 forward({

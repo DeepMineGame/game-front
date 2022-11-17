@@ -15,7 +15,7 @@ export const setMiningOverEvent = createEvent<boolean>();
 
 export const getLandlordContractsEffect = createEffect<
     { searchParam: string },
-    { rows: ContractDto[] }
+    { rows: ContractDto[] } | undefined
 >(({ searchParam }) =>
     getTableData(
         getContractsNameConfig(
@@ -28,7 +28,7 @@ export const getLandlordContractsEffect = createEffect<
 
 export const getUserContractsEffect = createEffect<
     { searchParam: string },
-    { rows: ContractDto[] }
+    { rows: ContractDto[] } | undefined
 >(({ searchParam }) =>
     getTableData(
         getContractsNameConfig(
@@ -41,12 +41,12 @@ export const getUserContractsEffect = createEffect<
 
 export const getUserHistoryEffect = createEffect<
     { searchParam: string },
-    { rows: UserHistoryType[] }
+    { rows: UserHistoryType[] } | undefined
 >(({ searchParam }) => getTableData(getHistoryConfig(searchParam)));
 
 export const getUserInfoEffect = createEffect<
     { searchParam: string },
-    { rows: UserInfoType[] }
+    { rows: UserInfoType[] } | undefined
 >(({ searchParam }) => getTableData(getUserConfig(searchParam)));
 
 export const getLastMiningStatusEffect = createEffect(getLastMiningStatus);

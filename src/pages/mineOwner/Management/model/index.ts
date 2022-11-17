@@ -12,7 +12,7 @@ export const ChangeDepthGate = createGate<{ searchParam: string }>(
 );
 export const getActionsEffect = createEffect<
     { searchParam: string },
-    { rows: ActionDto[] }
+    { rows: ActionDto[] } | undefined
 >(({ searchParam }) =>
     getActionsTable({
         searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
@@ -21,8 +21,8 @@ export const getActionsEffect = createEffect<
 );
 export const $changeDepthAction = createStore<ActionDto | null>(null).on(
     getActionsEffect.doneData,
-    (_, { rows }) =>
-        rows?.find(
+    (_, data) =>
+        data?.rows?.find(
             (action) => action.type === ActionType.mine_change_layer_depth
         )
 );

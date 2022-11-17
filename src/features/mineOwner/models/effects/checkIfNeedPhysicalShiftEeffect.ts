@@ -13,18 +13,18 @@ import { checkMineStateEffect } from './checkMineStateEffect';
 
 export const checkIfNeedPhysicalShiftEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
-        const { rows: user } = await getTableData<UserDto>(
+        const dataUser = await getTableData<UserDto>(
             getUserConfig(searchParam)
         );
 
         const isUserOutsideFromMineDeckLocation =
-            user?.[0]?.location !== LOCATION_TO_ID.mine_deck;
+            dataUser?.rows?.[0]?.location !== LOCATION_TO_ID.mine_deck;
 
-        const { rows: mines } = await getMinesTableData<MineDto>({
+        const dataMines = await getMinesTableData<MineDto>({
             searchParam,
             searchIdentificationType: searchBy.owner,
         });
-        const userMine: MineDto | undefined = mines?.[0];
+        const userMine: MineDto | undefined = dataMines?.rows?.[0];
         if (isUserOutsideFromMineDeckLocation && !userMine) {
             return mineOwnerCabinStateResolver.needPhysicalShiftState();
         }

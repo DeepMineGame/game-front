@@ -18,7 +18,7 @@ export const EquipmentSetGate = createGate<{ searchParam: string }>(
 
 const getContractsEffect = createEffect<
     { searchParam: string },
-    { rows: ContractDto[] }
+    { rows: ContractDto[] } | undefined
 >(({ searchParam }) =>
     getTableData(
         getContractsNameConfig(
@@ -31,13 +31,13 @@ const getContractsEffect = createEffect<
 
 export const getContractorsEffect = createEffect<
     { searchParam: string },
-    { rows: ContractorDto[] }
+    { rows: ContractorDto[] } | undefined
 >(getContractorsTableData);
 
 export const contractorContractIdStore = createStore<null | number>(null).on(
     getContractsEffect.doneData,
-    (_, { rows: userContracts }) =>
-        userContracts.find(
+    (_, data) =>
+        data?.rows?.find(
             ({ status, type }: ContractDto) =>
                 type === ContractType.mineowner_contractor &&
                 status === ContractStatus.active
@@ -46,7 +46,7 @@ export const contractorContractIdStore = createStore<null | number>(null).on(
 
 export const contractorsStore = createStore<ContractorDto[] | null>(null).on(
     getContractorsEffect.doneData,
-    (_, { rows }) => rows
+    (_, data) => data?.rows
 );
 
 forward({

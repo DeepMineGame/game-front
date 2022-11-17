@@ -1,11 +1,8 @@
-import {
-    ConnectionCountLimit,
-    endpoints,
-    getNextEndpoint,
-} from 'app/constants';
-import axios, { AxiosError } from 'axios';
-import { isServerError, wait } from 'shared';
+import { ConnectionCountLimit, endpoints } from 'app/constants';
+import axios from 'axios';
+import { nodeUrlSwitcher } from 'shared';
 
+// eslint-disable-next-line prefer-const
 let [currentWaxEndpoint] = endpoints.wax;
 
 export const fetchWaxBalance = async ({
@@ -14,41 +11,33 @@ export const fetchWaxBalance = async ({
 }: {
     searchParam: string;
     connectionCount?: number;
-}): Promise<string> => {
-    try {
-        connectionCount++;
+}): Promise<string | undefined> => {
+    let fetchedData;
 
-        const { data = [] } = await axios.post(
-            `${currentWaxEndpoint}/v1/chain/get_currency_balance`,
-            {
-                code: 'eosio.token',
-                account: searchParam,
-                symbol: 'WAX',
-            }
-        );
+    await nodeUrlSwitcher(
+        async () => {
+            connectionCount++;
 
-        const [value] = data.length ? data[0].split(' ') : [0];
+            const { data = [] } = await axios.post(
+                `${currentWaxEndpoint}/v1/chain/get_currency_balance`,
+                {
+                    code: 'eosio.token',
+                    account: searchParam,
+                    symbol: 'WAX',
+                }
+            );
 
-        return Number(value).toFixed(1);
-    } catch (e) {
-        const error = e as AxiosError;
+            const [value] = data.length ? data[0].split(' ') : [0];
 
-        if (isServerError(error)) {
-            if (connectionCount >= ConnectionCountLimit.wax)
-                throw new Error('Network Error', error);
-
-            currentWaxEndpoint = getNextEndpoint({
-                endpointsList: endpoints.wax,
-                currentEndpoint: currentWaxEndpoint,
-            });
-
-            await wait(1);
-            return await fetchWaxBalance({
-                searchParam,
-                connectionCount,
-            });
+            fetchedData = Number(value).toFixed(1);
+        },
+        {
+            connectionCount,
+            connectionCountLimit: ConnectionCountLimit.wax,
+            currentEndpoint: currentWaxEndpoint,
+            endpointsList: endpoints.wax,
         }
+    );
 
-        throw new Error(error.message);
-    }
+    return fetchedData;
 };

@@ -15,14 +15,14 @@ import {
 
 export const getAreaByOwnerEffect = createEffect<
     { searchParam: string },
-    { rows: AreasDto[] }
+    { rows: AreasDto[] } | undefined
 >(({ searchParam }) =>
     getTableData(getAreaConfig(searchParam, searchBy.owner))
 );
 
 export const getMinesByOwnerEffect = createEffect<
     { searchParam: string },
-    { rows: MineDto[] }
+    { rows: MineDto[] } | undefined
 >(({ searchParam }) =>
     getMinesEffect({
         searchIdentificationType: searchBy.owner,
@@ -32,7 +32,7 @@ export const getMinesByOwnerEffect = createEffect<
 
 export const getContractByExecutorEffect = createEffect<
     { searchParam: string },
-    { rows: ContractDto[] }
+    { rows: ContractDto[] } | undefined
 >(({ searchParam }) =>
     getTableData(
         getContractConfig({
@@ -46,5 +46,5 @@ export const getContractByExecutorEffect = createEffect<
 
 export const getInventoryEffect = createEffect<
     { searchParam: string },
-    { rows: MergedInventoryWithAtomicAssets }
+    { rows: MergedInventoryWithAtomicAssets } | undefined
 >(({ searchParam }) => getTableData(getInventoryConfig(searchParam)));

@@ -10,14 +10,14 @@ export const AreasGate = createGate<{
 
 export const getAreasEffect = createEffect<
     { searchParam: string; searchIdentificationType?: searchBy.owner },
-    { rows: AreasDto[] }
+    { rows: AreasDto[] } | undefined
 >(({ searchParam, searchIdentificationType }) =>
     getTableData(getAreaConfig(searchParam, searchIdentificationType))
 );
 
 export const areasStore = createStore<AreasDto[] | null>(null).on(
     getAreasEffect.doneData,
-    (_, { rows }) => rows
+    (_, data) => data?.rows
 );
 
 forward({

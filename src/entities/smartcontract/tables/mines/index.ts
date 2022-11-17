@@ -37,7 +37,7 @@ export const getMinesTableData = <T>({
 
 export const getMinesEffect = createEffect<
     { searchParam: string; searchIdentificationType?: searchBy },
-    { rows: MineDto[] }
+    { rows: MineDto[] } | undefined
 >(({ searchParam, searchIdentificationType = searchBy.assetId }) =>
     getMinesTableData({ searchParam, searchIdentificationType })
 );
@@ -53,7 +53,7 @@ export const getMinesByOwnerEffect = createEffect(
 
 export const minesStore = createStore<MineDto[] | null>(null).on(
     getMinesEffect.doneData,
-    (_, { rows }) => rows
+    (_, data) => data?.rows
 );
 
 export * from './types';

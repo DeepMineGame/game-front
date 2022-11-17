@@ -15,7 +15,7 @@ export const AreaStateGate = createGate<{ searchParam: string }>('AreaGate');
 
 export const getInventoriesEffect = createEffect<
     { searchIdentificationType?: SEARCH_BY; searchParam: string },
-    { rows: UserInventoryType[] }
+    { rows: UserInventoryType[] } | undefined
 >(({ searchIdentificationType = SEARCH_BY.ownerNickname, searchParam }) =>
     getInventoryTableData({
         searchIdentificationType,
@@ -25,7 +25,7 @@ export const getInventoriesEffect = createEffect<
 
 export const getAreasEffect = createEffect<
     UserInventoryType | null,
-    { rows: AreasDto[] }
+    { rows: AreasDto[] } | undefined
 >((areaNft: UserInventoryType | null) =>
     getTableData(getAreaConfig(areaNft?.asset_id!, searchBy.assetId))
 );
@@ -34,15 +34,15 @@ export const landlordAreaNftStore = createStore<UserInventoryType | null>(
     null
 ).on(
     getInventoriesEffect.doneData,
-    (_, { rows }) =>
-        rows?.find(({ template_id }) =>
+    (_, data) =>
+        data?.rows?.find(({ template_id }) =>
             areasAssetTemplateId.includes(template_id)
         ) || null
 );
 
 export const landlordAreaTableStore = createStore<AreasDto | null>(null).on(
     getAreasEffect.doneData,
-    (_, { rows }) => rows?.[0]
+    (_, data) => data?.rows?.[0]
 );
 
 export const reservedSlotsCountStore = createStore(0).on(

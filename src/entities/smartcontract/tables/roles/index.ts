@@ -28,10 +28,10 @@ export const getRolesTableData = <T>({
 
 export const getRolesEffect = createEffect<
     { searchParam: string },
-    { rows: RoleDto[] }
+    { rows: RoleDto[] } | undefined
 >(getRolesTableData);
 
 export const rolesStore = createStore<RoleDto[] | null>(null).on(
     getRolesEffect.doneData,
-    (_, { rows }) => rows
+    (_, data) => data?.rows
 );

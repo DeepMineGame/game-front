@@ -9,13 +9,13 @@ import {
 
 export const getShiftActionsForUserEffect = createEffect<
     { searchParam: string },
-    ActionDto[]
+    ActionDto[] | undefined
 >(({ searchParam }) =>
     getActionsTable<ActionDto>({
         searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
         searchParam,
-    }).then(({ rows }) =>
-        rows?.filter(({ type }) => type === ActionType.physical_shift)
+    }).then((data) =>
+        data?.rows?.filter(({ type }) => type === ActionType.physical_shift)
     )
 );
 

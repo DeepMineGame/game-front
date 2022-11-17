@@ -24,7 +24,7 @@ export const MiningPageGate = createGate<{ searchParam: string }>(
 
 export const getContractByExecutorEffect = createEffect<
     { searchParam: string },
-    { rows: ContractDto[] }
+    { rows: ContractDto[] } | undefined
 >(({ searchParam }) =>
     getTableData(
         getContractConfig({
@@ -38,7 +38,7 @@ export const getContractByExecutorEffect = createEffect<
 
 export const getMineByAssetEffect = createEffect<
     ContractDto | null | undefined,
-    { rows: MineDto[] | null | undefined }
+    { rows: MineDto[] | null | undefined } | undefined
 >((contract: ContractDto | null | undefined) =>
     contract
         ? getMinesTableData({
@@ -50,7 +50,7 @@ export const getMineByAssetEffect = createEffect<
 
 export const getActionsForUserEffect = createEffect<
     { searchParam: number | string },
-    { rows: ActionDto[] }
+    { rows: ActionDto[] } | undefined
 >(({ searchParam }) =>
     getActionsTable({
         searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
@@ -59,9 +59,9 @@ export const getActionsForUserEffect = createEffect<
 );
 export const miningContractStore = createStore<ContractDto | null | undefined>(
     null
-).on(getContractByExecutorEffect.doneData, (_, { rows }) =>
-    rows?.find(
-        ({ status, type }: ContractDto) =>
+).on(getContractByExecutorEffect.doneData, (_, data) =>
+    data?.rows?.find(
+        ({ status, type }) =>
             type === ContractType.mineowner_contractor &&
             status === ContractStatus.active
     )
@@ -69,16 +69,16 @@ export const miningContractStore = createStore<ContractDto | null | undefined>(
 
 export const $currentMine = createStore<MineDto[] | null>(null).on(
     getMineByAssetEffect.doneData,
-    (_, { rows }) => rows
+    (_, data) => data?.rows
 );
 
 export const actionsStore = createStore<ActionDto[] | null | undefined>(
     null
-).on(getActionsForUserEffect.doneData, (_, { rows }) => rows);
+).on(getActionsForUserEffect.doneData, (_, data) => data?.rows);
 
 export const getContractorEffect = createEffect<
     { searchParam: string },
-    { rows: ContractorDto[] }
+    { rows: ContractorDto[] } | undefined
 >(({ searchParam }) =>
     getContractorsTableData({
         searchParam,
@@ -88,7 +88,7 @@ export const getContractorEffect = createEffect<
 
 export const contractorStore = createStore<ContractorDto | null>(null).on(
     getContractorEffect.doneData,
-    (_, { rows }) => rows?.[0]
+    (_, data) => data?.rows?.[0]
 );
 
 export const estimatesMiningTimeStore = createStore('').on(

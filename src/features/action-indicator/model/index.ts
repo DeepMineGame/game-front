@@ -15,8 +15,8 @@ export const getActionForIndicate = createEffect<
     getActionsTable<ActionDto>({
         searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
         searchParam,
-    }).then(({ rows }) =>
-        rows
+    }).then((data) =>
+        data?.rows
             ?.reverse()
             .find(
                 ({ state, type }) =>
