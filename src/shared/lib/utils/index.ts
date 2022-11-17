@@ -1,21 +1,46 @@
+import { ConnectionCountLimit, endpoints } from 'app/constants';
 import axios from 'axios';
-
-import { WAX_GET_TABLE_ENDPOINT } from 'app';
 import {
     ContractDto,
     ContractType,
     GetTableDataConfigType,
 } from 'entities/smartcontract';
+import { nodeUrlSwitcher } from './node-url-switcher';
 
-export const getTableData = async (config: GetTableDataConfigType) => {
-    const { data } = await axios.post(WAX_GET_TABLE_ENDPOINT, {
-        json: 'true',
-        reverse: false,
-        show_payer: false,
-        ...config,
-    });
+// eslint-disable-next-line prefer-const
+let [currentWaxEndpoint] = endpoints.wax;
 
-    return data;
+export const getTableData = async <T>(
+    config: GetTableDataConfigType,
+    connectionCount = 0
+): Promise<{ rows: T[] } | undefined> => {
+    let fetchedData;
+
+    await nodeUrlSwitcher(
+        async () => {
+            connectionCount++;
+
+            const { data } = await axios.post<{ rows: T[] }>(
+                `${currentWaxEndpoint}/v1/chain/get_table_rows`,
+                {
+                    json: 'true',
+                    reverse: false,
+                    show_payer: false,
+                    ...config,
+                }
+            );
+
+            fetchedData = data;
+        },
+        {
+            connectionCount,
+            connectionCountLimit: ConnectionCountLimit.wax,
+            currentEndpoint: currentWaxEndpoint,
+            endpointsList: endpoints.wax,
+        }
+    );
+
+    return fetchedData;
 };
 
 export const getUserRoleInContract = (
@@ -60,3 +85,6 @@ export { createErrorMessage } from './create-error-message';
 export * from './merge-assets';
 export { isAssetAvailable } from './is-asset-available';
 export { getGameAssets } from './get-game-assets';
+export { wait } from './wait';
+export { isServerError } from './is-server-error';
+export { nodeUrlSwitcher } from './node-url-switcher';

@@ -6,11 +6,11 @@ import { getInventoryEffect } from './effects';
 export const hasInstalledEquipmentStore = createStore<boolean>(false).on(
     getInventoryEffect.doneData,
 
-    (_, { rows: userInventory }) => {
+    (_, data) => {
         const installedMiningEquipment = Object.fromEntries(
             miningEquipmentNames.map((name) => [
                 name,
-                findEquipmentByName(userInventory || [], name),
+                findEquipmentByName(data?.rows || [], name),
             ])
         );
 

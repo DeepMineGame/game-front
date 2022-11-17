@@ -15,7 +15,7 @@ export const MinesGate = createGate<{ searchParam: string }>('MinesGate');
 
 export const minesStore = createStore<MineDto[]>([]).on(
     getMinesByOwnerEffect.doneData,
-    (_, { rows }) => rows
+    (_, data) => data?.rows
 );
 
 forward({

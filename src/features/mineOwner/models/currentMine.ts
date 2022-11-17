@@ -17,7 +17,7 @@ export const getMinesByOwnerEffect = createEffect(
 
 export const $userMine = createStore<MineDto[] | null>(null).on(
     getMinesByOwnerEffect.doneData,
-    (_, { rows }) => rows
+    (_, data) => data?.rows
 );
 
 forward({

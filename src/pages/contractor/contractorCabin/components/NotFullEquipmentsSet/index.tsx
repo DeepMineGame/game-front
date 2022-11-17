@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { Button, desktopS, useMediaQuery } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import { warehouse } from 'app/router/paths';
-import { ATOMICHUB_URL } from 'app';
+import { ATOMICHUB_URL } from 'app/constants';
 import { Col, Row } from 'antd';
 import { useStore } from 'effector-react';
 import { $miningEquipments } from 'features/contractor';

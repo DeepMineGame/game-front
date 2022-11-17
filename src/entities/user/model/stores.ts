@@ -35,11 +35,11 @@ export const userStoreError = createStore<Error | null>(null)
 export const balancesStore = createStore({ dmeBalance: '', waxBalance: '' })
     .on(fetchWaxBalanceEffect.doneData, (state, waxBalance) => ({
         ...state,
-        waxBalance,
+        waxBalance: waxBalance || '',
     }))
     .on(fetchDmeBalanceEffect.doneData, (state, dmeBalance) => ({
         ...state,
-        dmeBalance,
+        dmeBalance: dmeBalance || '',
     }));
 
 export const UserGate = createGate<{ searchParam: string }>('UserGate');

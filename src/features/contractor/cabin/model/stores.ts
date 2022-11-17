@@ -23,13 +23,13 @@ type MiningEquipments = Record<string, UserInventoryType | undefined>;
 
 const $userContracts = createStore<ContractDto[]>([]).on(
     getUserContractsEffect.doneData,
-    (_, { rows }) => rows
+    (_, data) => data?.rows
 );
 
 export const $landlordContract = createStore<ContractDto | null>(null).on(
     getLandlordContractsEffect.doneData,
-    (_, { rows }) =>
-        rows.find(
+    (_, data) =>
+        data?.rows?.find(
             ({ type, status }) =>
                 type === ContractType.landlord_mineowner &&
                 status === ContractStatus.active
@@ -38,7 +38,7 @@ export const $landlordContract = createStore<ContractDto | null>(null).on(
 
 export const $userInfo = createStore<UserInfoType | null>(null).on(
     getUserInfoEffect.doneData,
-    (_, { rows }) => rows?.[0]
+    (_, data) => data?.rows?.[0]
 );
 
 export const $mineOwnerContracts = combine(
@@ -55,7 +55,7 @@ export const $mineOwnerContracts = combine(
 
 export const $userHistory = createStore<UserHistoryType[]>([]).on(
     getUserHistoryEffect.doneData,
-    (_, { rows }) => rows
+    (_, data) => data?.rows
 );
 
 export const $hasMineOwnerContracts = createStore(false);

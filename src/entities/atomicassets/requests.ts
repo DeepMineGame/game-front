@@ -1,42 +1,85 @@
 import axios from 'axios';
-
-import { ATOMIC_ASSETS_ENDPOINT, WAX_GET_TABLE_ENDPOINT } from 'app';
+import { endpoints, ConnectionCountLimit } from 'app/constants';
+import { nodeUrlSwitcher } from 'shared';
 import { UserInventoryType } from '../smartcontract';
 import { AssetDataType } from './types';
 
-export const getAtomicAssetsDataById = async (id: string | number) => {
-    const { data } = await axios.get(
-        `${ATOMIC_ASSETS_ENDPOINT}/atomicassets/v1/assets/${id}`
+// eslint-disable-next-line prefer-const
+let [currentAtomicEndpoint] = endpoints.atomic;
+
+// eslint-disable-next-line prefer-const
+let [currentWaxEndpoint] = endpoints.wax;
+
+export const getAssets = async <T>(
+    ids: T,
+    connectionCount = 0
+): Promise<
+    T extends string[] ? AssetDataType[] : AssetDataType | undefined
+> => {
+    const isIdsArray = Array.isArray(ids);
+    let fetchedData: any;
+
+    await nodeUrlSwitcher(
+        async () => {
+            connectionCount++;
+
+            const { data } = await axios.get(
+                `${currentAtomicEndpoint}/assets${
+                    isIdsArray
+                        ? `?ids=${ids.filter((i) => i).join(',')}`
+                        : `/${ids}`
+                }`
+            );
+
+            fetchedData = data?.data || (isIdsArray ? [] : undefined);
+        },
+        {
+            connectionCount,
+            connectionCountLimit: ConnectionCountLimit.atomic,
+            currentEndpoint: currentAtomicEndpoint,
+            endpointsList: endpoints.atomic,
+        }
     );
 
-    return data?.data as AssetDataType | undefined;
-};
-
-export const getAssets = async (ids: string[]) => {
-    const { data = [] } = await axios.get(
-        `${ATOMIC_ASSETS_ENDPOINT}/atomicassets/v1/assets?ids=${ids
-            .filter((i) => i)
-            .join(',')}`
-    );
-
-    return data?.data as AssetDataType[];
+    return fetchedData;
 };
 
 export const getAtomicAssetsByUser = async ({
     searchParam,
+    connectionCount = 0,
 }: {
     searchParam: string;
-}) => {
-    const { data } = await axios.post(`${WAX_GET_TABLE_ENDPOINT}`, {
-        json: true,
-        code: 'atomicassets',
-        scope: searchParam,
-        table: 'assets',
-        index_position: 1,
-        limit: 500,
-        reverse: false,
-        show_payer: false,
-    });
+    connectionCount?: number;
+}): Promise<UserInventoryType[] | undefined> => {
+    let fetchedData;
 
-    return data?.rows as UserInventoryType[] | undefined;
+    await nodeUrlSwitcher(
+        async () => {
+            connectionCount++;
+
+            const { data } = await axios.post<{ rows: UserInventoryType[] }>(
+                `${currentWaxEndpoint}/v1/chain/get_table_rows`,
+                {
+                    json: true,
+                    code: 'atomicassets',
+                    scope: searchParam,
+                    table: 'assets',
+                    index_position: 1,
+                    limit: 500,
+                    reverse: false,
+                    show_payer: false,
+                }
+            );
+
+            fetchedData = data?.rows;
+        },
+        {
+            connectionCount,
+            connectionCountLimit: ConnectionCountLimit.wax,
+            currentEndpoint: currentWaxEndpoint,
+            endpointsList: endpoints.wax,
+        }
+    );
+
+    return fetchedData;
 };

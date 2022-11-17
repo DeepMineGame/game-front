@@ -10,8 +10,12 @@ export const extractFeeToClaimAttr = (role: RoleDto): number =>
         role?.attrs?.filter(({ key }) => key === 'fee_to_claim')?.[0]?.value
     ) || 0;
 
-export const getRolesTableData = ({ searchParam }: { searchParam: string }) => {
-    return getTableData({
+export const getRolesTableData = <T>({
+    searchParam,
+}: {
+    searchParam: string;
+}) =>
+    getTableData<T>({
         code: deepminegame,
         scope: deepminegame,
         table: 'roles',
@@ -21,15 +25,13 @@ export const getRolesTableData = ({ searchParam }: { searchParam: string }) => {
         upper_bound: searchParam,
         limit: 10,
     });
-};
 
-export const getRolesEffect = createEffect(
-    async ({ searchParam }: { searchParam: string }) => {
-        return getRolesTableData({ searchParam });
-    }
-);
+export const getRolesEffect = createEffect<
+    { searchParam: string },
+    { rows: RoleDto[] } | undefined
+>(getRolesTableData);
 
 export const rolesStore = createStore<RoleDto[] | null>(null).on(
     getRolesEffect.doneData,
-    (_, { rows }) => rows
+    (_, data) => data?.rows
 );

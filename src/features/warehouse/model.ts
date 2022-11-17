@@ -13,10 +13,10 @@ const WarehouseGate = createGate<{ searchParam: string }>('warehouseGate');
 
 const getAtomicAssetsByUserEffect = createEffect(getAtomicAssetsByUser);
 
-const getInventoryEffect = createEffect(
-    async ({ searchParam }: { searchParam: string }) =>
-        getTableData(getInventoryConfig(searchParam))
-);
+const getInventoryEffect = createEffect<
+    { searchParam: string },
+    { rows: UserInventoryType[] } | undefined
+>(({ searchParam }) => getTableData(getInventoryConfig(searchParam)));
 
 const $storage = createStore<UserInventoryType[]>([]).on(
     getAtomicAssetsByUserEffect.doneData,
@@ -25,11 +25,15 @@ const $storage = createStore<UserInventoryType[]>([]).on(
 
 const $inventory = createStore<UserInventoryType[]>([]).on(
     getInventoryEffect.doneData,
-    (_, { rows }) => rows
+    (_, data) => data?.rows
 );
 
-const getStorageAtomicAssetsEffect = createEffect(getAssets);
-const getInventoryAtomicAssetsEffect = createEffect(getAssets);
+const getStorageAtomicAssetsEffect = createEffect<string[], AssetDataType[]>(
+    getAssets
+);
+const getInventoryAtomicAssetsEffect = createEffect<string[], AssetDataType[]>(
+    getAssets
+);
 
 const $storageAssetsIds = createStore<string[]>([]);
 const $inventoryAssetsIds = createStore<string[]>([]);

@@ -21,23 +21,16 @@ export const getAreaConfig = (
     };
 };
 
-export const getAreasEffect = createEffect(
-    async ({
-        searchParam,
-        searchIdentificationType = searchBy.assetId,
-    }: {
-        searchParam: string;
-        searchIdentificationType?: searchBy;
-    }) => {
-        return getTableData(
-            getAreaConfig(searchParam, searchIdentificationType)
-        );
-    }
+export const getAreasEffect = createEffect<
+    { searchParam: string; searchIdentificationType?: searchBy },
+    { rows: AreasDto[] } | undefined
+>(({ searchParam, searchIdentificationType = searchBy.assetId }) =>
+    getTableData(getAreaConfig(searchParam, searchIdentificationType))
 );
 
 export const areasStore = createStore<AreasDto[] | null>(null).on(
     getAreasEffect.doneData,
-    (_, { rows }) => rows
+    (_, data) => data?.rows
 );
 
 export * from './types';

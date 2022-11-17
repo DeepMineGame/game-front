@@ -12,14 +12,14 @@ import { checkIsMineActiveEffect } from './checkIsMineActiveEffect';
 
 export const checkHasCrewEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
-        const { rows: contracts } = await getTableData(
+        const data = await getTableData<ContractDto>(
             getContractsNameConfig(
                 searchParam,
                 mapSearchParamForIndexPositionToFindContracts.clientId,
                 1000
             )
         );
-        const contractorsContracts = contracts?.filter(
+        const contractorsContracts = data?.rows?.filter(
             ({ type }: ContractDto) =>
                 type === ContractType.mineowner_contractor
         );
