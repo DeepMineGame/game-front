@@ -18,8 +18,7 @@ export const EquipmentSetGate = createGate<{ searchParam: string }>(
 
 const getContractsEffect = createEffect<
     { searchParam: string },
-    { rows: ContractDto[] },
-    Error
+    { rows: ContractDto[] }
 >(({ searchParam }) =>
     getTableData(
         getContractsNameConfig(
@@ -32,8 +31,7 @@ const getContractsEffect = createEffect<
 
 export const getContractorsEffect = createEffect<
     { searchParam: string },
-    { rows: ContractorDto[] },
-    Error
+    { rows: ContractorDto[] }
 >(getContractorsTableData);
 
 export const contractorContractIdStore = createStore<null | number>(null).on(

@@ -45,8 +45,7 @@ export const getContractByExecutorEffect = createEffect<
         searchIdentification?: mapSearchParamForIndexPositionToFindContracts;
         searchParam: string;
     },
-    { rows: ContractDto[] },
-    Error
+    { rows: ContractDto[] }
 >(
     ({
         searchIdentification = mapSearchParamForIndexPositionToFindContracts.executorId,

@@ -35,8 +35,7 @@ export const getActionEffect = createEffect<
         searchIdentification: mapSearchParamForIndexPosition;
         searchParam: number | string;
     },
-    { rows: ActionDto[] },
-    Error
+    { rows: ActionDto[] }
 >(getActionsTable);
 
 export const getActionByUserEffect = createEffect(

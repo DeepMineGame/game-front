@@ -28,8 +28,7 @@ export const getRolesTableData = <T>({
 
 export const getRolesEffect = createEffect<
     { searchParam: string },
-    { rows: RoleDto[] },
-    Error
+    { rows: RoleDto[] }
 >(getRolesTableData);
 
 export const rolesStore = createStore<RoleDto[] | null>(null).on(

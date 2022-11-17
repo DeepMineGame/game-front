@@ -10,8 +10,7 @@ export const AreasGate = createGate<{
 
 export const getAreasEffect = createEffect<
     { searchParam: string; searchIdentificationType?: searchBy.owner },
-    { rows: AreasDto[] },
-    Error
+    { rows: AreasDto[] }
 >(({ searchParam, searchIdentificationType }) =>
     getTableData(getAreaConfig(searchParam, searchIdentificationType))
 );

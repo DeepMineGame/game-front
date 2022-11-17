@@ -37,8 +37,7 @@ export const getMinesTableData = <T>({
 
 export const getMinesEffect = createEffect<
     { searchParam: string; searchIdentificationType?: searchBy },
-    { rows: MineDto[] },
-    Error
+    { rows: MineDto[] }
 >(({ searchParam, searchIdentificationType = searchBy.assetId }) =>
     getMinesTableData({ searchParam, searchIdentificationType })
 );

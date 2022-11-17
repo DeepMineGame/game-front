@@ -34,8 +34,7 @@ const getAreaEffect = createEffect(
 
 export const getInventoryByIdEffect = createEffect<
     { searchParam: number },
-    { rows: UserInventoryType[] },
-    Error
+    { rows: UserInventoryType[] }
 >(({ searchParam }) =>
     getInventoryTableData({
         searchIdentificationType: SEARCH_BY.inventoryId,

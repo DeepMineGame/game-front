@@ -26,8 +26,7 @@ export const miningContractsChangeFilterEvent =
 
 export const getMiningContractsEffect = createEffect<
     void,
-    { rows: ContractDto[] },
-    Error
+    { rows: ContractDto[] }
 >(() =>
     getTableData(
         getContractsNameConfig(

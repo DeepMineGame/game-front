@@ -24,8 +24,7 @@ export const MiningPageGate = createGate<{ searchParam: string }>(
 
 export const getContractByExecutorEffect = createEffect<
     { searchParam: string },
-    { rows: ContractDto[] },
-    Error
+    { rows: ContractDto[] }
 >(({ searchParam }) =>
     getTableData(
         getContractConfig({
@@ -39,8 +38,7 @@ export const getContractByExecutorEffect = createEffect<
 
 export const getMineByAssetEffect = createEffect<
     ContractDto | null | undefined,
-    { rows: MineDto[] | null | undefined },
-    Error
+    { rows: MineDto[] | null | undefined }
 >((contract: ContractDto | null | undefined) =>
     contract
         ? getMinesTableData({
@@ -52,8 +50,7 @@ export const getMineByAssetEffect = createEffect<
 
 export const getActionsForUserEffect = createEffect<
     { searchParam: number | string },
-    { rows: ActionDto[] },
-    Error
+    { rows: ActionDto[] }
 >(({ searchParam }) =>
     getActionsTable({
         searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
@@ -81,8 +78,7 @@ export const actionsStore = createStore<ActionDto[] | null | undefined>(
 
 export const getContractorEffect = createEffect<
     { searchParam: string },
-    { rows: ContractorDto[] },
-    Error
+    { rows: ContractorDto[] }
 >(({ searchParam }) =>
     getContractorsTableData({
         searchParam,

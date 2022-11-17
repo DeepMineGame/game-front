@@ -18,8 +18,7 @@ export const UnsetupMineGate = createGate<{ searchParams: string }>(
 
 const getExecutorContractsEffect = createEffect<
     { searchParams: string },
-    { rows: ContractDto[] },
-    Error
+    { rows: ContractDto[] }
 >(({ searchParams }) =>
     getTableData(
         getContractsNameConfig(
@@ -32,8 +31,7 @@ const getExecutorContractsEffect = createEffect<
 
 const getContractorsContractsEffect = createEffect<
     { searchParams: string },
-    { rows: ContractDto[] },
-    Error
+    { rows: ContractDto[] }
 >(({ searchParams }) =>
     getTableData(
         getContractsNameConfig(
@@ -44,15 +42,12 @@ const getContractorsContractsEffect = createEffect<
     )
 );
 
-const getUserMine = createEffect<
-    { searchParams: string },
-    { rows: MineDto[] },
-    Error
->(({ searchParams }) =>
-    getMinesTableData({
-        searchParam: searchParams,
-        searchIdentificationType: searchBy.owner,
-    })
+const getUserMine = createEffect<{ searchParams: string }, { rows: MineDto[] }>(
+    ({ searchParams }) =>
+        getMinesTableData({
+            searchParam: searchParams,
+            searchIdentificationType: searchBy.owner,
+        })
 );
 
 export const activeMineOwnerExecutorContractStore =

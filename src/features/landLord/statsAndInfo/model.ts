@@ -15,8 +15,7 @@ export const AreaStateGate = createGate<{ searchParam: string }>('AreaGate');
 
 export const getInventoriesEffect = createEffect<
     { searchIdentificationType?: SEARCH_BY; searchParam: string },
-    { rows: UserInventoryType[] },
-    Error
+    { rows: UserInventoryType[] }
 >(({ searchIdentificationType = SEARCH_BY.ownerNickname, searchParam }) =>
     getInventoryTableData({
         searchIdentificationType,
@@ -26,8 +25,7 @@ export const getInventoriesEffect = createEffect<
 
 export const getAreasEffect = createEffect<
     UserInventoryType | null,
-    { rows: AreasDto[] },
-    Error
+    { rows: AreasDto[] }
 >((areaNft: UserInventoryType | null) =>
     getTableData(getAreaConfig(areaNft?.asset_id!, searchBy.assetId))
 );

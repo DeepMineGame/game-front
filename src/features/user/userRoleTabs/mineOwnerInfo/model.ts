@@ -18,24 +18,21 @@ export const MineOwnerInfoGate = createGate<{ searchParam: string }>(
 
 export const getMinesEffect = createEffect<
     { searchParam: string; searchIdentificationType?: searchBy },
-    { rows: MineDto[] },
-    Error
+    { rows: MineDto[] }
 >(({ searchParam, searchIdentificationType = searchBy.owner }) =>
     getMinesTableData({ searchParam, searchIdentificationType })
 );
 
 export const getAreasEffect = createEffect<
     { searchParam: string; searchIdentificationType?: searchBy },
-    { rows: AreasDto[] },
-    Error
+    { rows: AreasDto[] }
 >(({ searchParam, searchIdentificationType = searchBy.assetId }) =>
     getTableData(getAreaConfig(searchParam, searchIdentificationType))
 );
 
 export const getInventoryByIdEffect = createEffect<
     { searchParam: number },
-    { rows: UserInventoryType[] },
-    Error
+    { rows: UserInventoryType[] }
 >(({ searchParam }) =>
     getInventoryTableData({
         searchIdentificationType: SEARCH_BY.inventoryId,

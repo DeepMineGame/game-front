@@ -30,8 +30,7 @@ export const getContractorsTableData = <T,>({
 
 export const getContractorsEffect = createEffect<
     { searchParam: string; searchType?: ContractorsSearchType },
-    { rows: ContractorDto[] },
-    Error
+    { rows: ContractorDto[] }
 >(({ searchParam, searchType = ContractorsSearchType.owner }) =>
     getContractorsTableData({ searchParam, searchType })
 );

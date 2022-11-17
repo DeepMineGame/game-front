@@ -10,8 +10,7 @@ import {
 
 export const getContractEffectByExecutor = createEffect<
     { searchParam: string },
-    { rows: ContractDto[] },
-    Error
+    { rows: ContractDto[] }
 >(({ searchParam }) =>
     getTableData(
         getContractsNameConfig(

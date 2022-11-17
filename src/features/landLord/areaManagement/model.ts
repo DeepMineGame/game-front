@@ -17,8 +17,7 @@ export const AreaGate = createGate<{ searchParam: string }>('AreaGate');
 
 export const getInventoriesEffect = createEffect<
     { searchIdentificationType?: SEARCH_BY; searchParam: string },
-    { rows: UserInventoryType[] },
-    Error
+    { rows: UserInventoryType[] }
 >(({ searchIdentificationType = SEARCH_BY.ownerNickname, searchParam }) =>
     getInventoryTableData({
         searchIdentificationType,
@@ -28,8 +27,7 @@ export const getInventoriesEffect = createEffect<
 
 export const getMinesByAreaId = createEffect<
     UserInventoryType[] | null,
-    { rows: MineDto[] | undefined },
-    Error
+    { rows: MineDto[] | undefined }
 >((areaNft: UserInventoryType[] | null) =>
     areaNft?.length
         ? getMinesTableData({
@@ -56,8 +54,7 @@ export const ClaimDmeGate = createGate<{ searchParam: string }>('ClaimDmeGate');
 
 export const getRolesEffect = createEffect<
     { searchParam: string },
-    { rows: RoleDto[] },
-    Error
+    { rows: RoleDto[] }
 >(getRolesTableData);
 
 export const rolesStore = createStore<RoleDto[] | null>(null).on(

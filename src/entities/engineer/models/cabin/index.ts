@@ -24,8 +24,7 @@ const EngineerCabinGate = createGate<{ searchParam: string }>(
 
 const getActiveInventoryEffect = createEffect<
     { searchParam: string },
-    { rows: UserInventoryType[] },
-    Error
+    { rows: UserInventoryType[] }
 >(getInventoryTableData);
 
 const $userActiveInventory = createStore<UserInventoryType[]>([]).on(
@@ -37,8 +36,7 @@ const $certificate = createStore<UserInventoryType | null>(null);
 
 const getEngineerByExecutorEffect = createEffect<
     { searchParam: string },
-    { rows: EngineerType[] },
-    Error
+    { rows: EngineerType[] }
 >(getEngineerTableData);
 
 const $engineer = createStore<EngineerType | null>(null).on(

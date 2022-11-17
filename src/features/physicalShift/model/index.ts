@@ -9,8 +9,7 @@ import {
 
 export const getShiftActionsForUserEffect = createEffect<
     { searchParam: string },
-    ActionDto[],
-    Error
+    ActionDto[]
 >(({ searchParam }) =>
     getActionsTable<ActionDto>({
         searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
