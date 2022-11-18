@@ -30,8 +30,7 @@ export const getAssets = async <T>(
                     isIdsArray
                         ? `?ids=${ids.filter((i) => i).join(',')}`
                         : `/${ids}`
-                }`,
-                defaultConfig
+                }`
             );
 
             fetchedData = data?.data || (isIdsArray ? [] : undefined);
@@ -72,7 +71,6 @@ export const getAtomicAssetsByUser = async ({
                     limit: 500,
                     reverse: false,
                     show_payer: false,
-                    ...defaultConfig,
                 }
             );
 

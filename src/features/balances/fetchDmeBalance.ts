@@ -33,7 +33,6 @@ export const fetchDmeBalance = async ({
                     limit: '1',
                     scope: searchParam,
                     table: 'accounts',
-                    ...defaultConfig,
                 }
             );
 

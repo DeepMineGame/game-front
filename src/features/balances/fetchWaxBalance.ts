@@ -28,7 +28,6 @@ export const fetchWaxBalance = async ({
                     code: 'eosio.token',
                     account: searchParam,
                     symbol: 'WAX',
-                    ...defaultConfig,
                 }
             );
 

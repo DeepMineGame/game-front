@@ -31,7 +31,6 @@ export const getTableData = async <T>(
                     reverse: false,
                     show_payer: false,
                     ...config,
-                    ...defaultConfig,
                 }
             );
 
