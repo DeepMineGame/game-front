@@ -1,8 +1,12 @@
-import { ConnectionCountLimit, endpoints } from 'app/constants';
+import {
+    ConnectionCountLimit,
+    defaultConfig,
+    endpoints,
+    getNextEndpoint,
+} from 'app/constants';
 import axios from 'axios';
 import { nodeUrlSwitcher } from 'shared';
 
-// eslint-disable-next-line prefer-const
 let [currentWaxEndpoint] = endpoints.wax;
 
 export const fetchDmeBalance = async ({
@@ -29,6 +33,7 @@ export const fetchDmeBalance = async ({
                     limit: '1',
                     scope: searchParam,
                     table: 'accounts',
+                    ...defaultConfig,
                 }
             );
 
@@ -37,12 +42,13 @@ export const fetchDmeBalance = async ({
 
             fetchedData = Number(value).toFixed(4);
         },
-        {
-            connectionCount,
-            connectionCountLimit: ConnectionCountLimit.wax,
-            currentEndpoint: currentWaxEndpoint,
-            endpointsList: endpoints.wax,
-        }
+        () => {
+            currentWaxEndpoint = getNextEndpoint({
+                endpointsList: endpoints.wax,
+                currentEndpoint: currentWaxEndpoint,
+            });
+        },
+        { connectionCount, connectionCountLimit: ConnectionCountLimit.wax }
     );
 
     return fetchedData;

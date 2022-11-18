@@ -1,13 +1,15 @@
 import axios from 'axios';
-import { endpoints, ConnectionCountLimit } from 'app/constants';
+import {
+    endpoints,
+    ConnectionCountLimit,
+    getNextEndpoint,
+    defaultConfig,
+} from 'app/constants';
 import { nodeUrlSwitcher } from 'shared';
 import { UserInventoryType } from '../smartcontract';
 import { AssetDataType } from './types';
 
-// eslint-disable-next-line prefer-const
 let [currentAtomicEndpoint] = endpoints.atomic;
-
-// eslint-disable-next-line prefer-const
 let [currentWaxEndpoint] = endpoints.wax;
 
 export const getAssets = async <T>(
@@ -28,17 +30,19 @@ export const getAssets = async <T>(
                     isIdsArray
                         ? `?ids=${ids.filter((i) => i).join(',')}`
                         : `/${ids}`
-                }`
+                }`,
+                defaultConfig
             );
 
             fetchedData = data?.data || (isIdsArray ? [] : undefined);
         },
-        {
-            connectionCount,
-            connectionCountLimit: ConnectionCountLimit.atomic,
-            currentEndpoint: currentAtomicEndpoint,
-            endpointsList: endpoints.atomic,
-        }
+        () => {
+            currentAtomicEndpoint = getNextEndpoint({
+                endpointsList: endpoints.wax,
+                currentEndpoint: currentAtomicEndpoint,
+            });
+        },
+        { connectionCount, connectionCountLimit: ConnectionCountLimit.atomic }
     );
 
     return fetchedData;
@@ -68,17 +72,19 @@ export const getAtomicAssetsByUser = async ({
                     limit: 500,
                     reverse: false,
                     show_payer: false,
+                    ...defaultConfig,
                 }
             );
 
             fetchedData = data?.rows;
         },
-        {
-            connectionCount,
-            connectionCountLimit: ConnectionCountLimit.wax,
-            currentEndpoint: currentWaxEndpoint,
-            endpointsList: endpoints.wax,
-        }
+        () => {
+            currentWaxEndpoint = getNextEndpoint({
+                endpointsList: endpoints.wax,
+                currentEndpoint: currentWaxEndpoint,
+            });
+        },
+        { connectionCount, connectionCountLimit: ConnectionCountLimit.wax }
     );
 
     return fetchedData;

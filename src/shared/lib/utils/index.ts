@@ -1,4 +1,9 @@
-import { ConnectionCountLimit, endpoints } from 'app/constants';
+import {
+    ConnectionCountLimit,
+    defaultConfig,
+    endpoints,
+    getNextEndpoint,
+} from 'app/constants';
 import axios from 'axios';
 import {
     ContractDto,
@@ -7,7 +12,6 @@ import {
 } from 'entities/smartcontract';
 import { nodeUrlSwitcher } from './node-url-switcher';
 
-// eslint-disable-next-line prefer-const
 let [currentWaxEndpoint] = endpoints.wax;
 
 export const getTableData = async <T>(
@@ -27,17 +31,19 @@ export const getTableData = async <T>(
                     reverse: false,
                     show_payer: false,
                     ...config,
+                    ...defaultConfig,
                 }
             );
 
             fetchedData = data;
         },
-        {
-            connectionCount,
-            connectionCountLimit: ConnectionCountLimit.wax,
-            currentEndpoint: currentWaxEndpoint,
-            endpointsList: endpoints.wax,
-        }
+        () => {
+            currentWaxEndpoint = getNextEndpoint({
+                endpointsList: endpoints.wax,
+                currentEndpoint: currentWaxEndpoint,
+            });
+        },
+        { connectionCount, connectionCountLimit: ConnectionCountLimit.wax }
     );
 
     return fetchedData;
