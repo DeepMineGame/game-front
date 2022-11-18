@@ -36,7 +36,7 @@ export const getAssets = async <T>(
         },
         () => {
             currentAtomicEndpoint = getNextEndpoint({
-                endpointsList: endpoints.wax,
+                endpointsList: endpoints.atomic,
                 currentEndpoint: currentAtomicEndpoint,
             });
         },
