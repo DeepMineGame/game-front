@@ -1,8 +1,10 @@
-import { ConnectionCountLimit, endpoints } from 'app/constants';
-import axios from 'axios';
+import {
+    ConnectionCountLimit,
+    endpoints,
+    getNextEndpoint,
+} from 'app/constants';
 import { nodeUrlSwitcher } from 'shared';
 
-// eslint-disable-next-line prefer-const
 let [currentWaxEndpoint] = endpoints.wax;
 
 export const fetchDmeBalance = async ({
@@ -18,31 +20,33 @@ export const fetchDmeBalance = async ({
         async () => {
             connectionCount++;
 
-            const {
-                data: { rows },
-            } = await axios.post<{ rows: { balance: string }[] }>(
+            const data = await fetch(
                 `${currentWaxEndpoint}/v1/chain/get_table_rows`,
                 {
-                    code: 'deepminedmet',
-                    index_position: 1,
-                    json: true,
-                    limit: '1',
-                    scope: searchParam,
-                    table: 'accounts',
+                    body: JSON.stringify({
+                        code: 'deepminedmet',
+                        index_position: 1,
+                        json: true,
+                        limit: '1',
+                        scope: searchParam,
+                        table: 'accounts',
+                    }),
+                    method: 'POST',
                 }
             );
 
-            const balance = rows?.[0]?.balance;
+            const balance = (await data.json()).rows?.[0]?.balance;
             const [value] = balance ? balance.split(' ') : [0];
 
             fetchedData = Number(value).toFixed(4);
         },
-        {
-            connectionCount,
-            connectionCountLimit: ConnectionCountLimit.wax,
-            currentEndpoint: currentWaxEndpoint,
-            endpointsList: endpoints.wax,
-        }
+        () => {
+            currentWaxEndpoint = getNextEndpoint({
+                endpointsList: endpoints.wax,
+                currentEndpoint: currentWaxEndpoint,
+            });
+        },
+        { connectionCount, connectionCountLimit: ConnectionCountLimit.wax }
     );
 
     return fetchedData;
