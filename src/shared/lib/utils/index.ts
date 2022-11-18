@@ -3,7 +3,6 @@ import {
     endpoints,
     getNextEndpoint,
 } from 'app/constants';
-import axios from 'axios';
 import {
     ContractDto,
     ContractType,
@@ -23,17 +22,20 @@ export const getTableData = async <T>(
         async () => {
             connectionCount++;
 
-            const { data } = await axios.post<{ rows: T[] }>(
+            const data = await fetch(
                 `${currentWaxEndpoint}/v1/chain/get_table_rows`,
                 {
-                    json: 'true',
-                    reverse: false,
-                    show_payer: false,
-                    ...config,
+                    body: JSON.stringify({
+                        json: 'true',
+                        reverse: false,
+                        show_payer: false,
+                        ...config,
+                    }),
+                    method: 'POST',
                 }
             );
 
-            fetchedData = data;
+            fetchedData = await data.json();
         },
         () => {
             currentWaxEndpoint = getNextEndpoint({

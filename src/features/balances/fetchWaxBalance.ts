@@ -1,6 +1,5 @@
 import {
     ConnectionCountLimit,
-    defaultConfig,
     endpoints,
     getNextEndpoint,
 } from 'app/constants';

@@ -3,7 +3,6 @@ import {
     endpoints,
     ConnectionCountLimit,
     getNextEndpoint,
-    defaultConfig,
 } from 'app/constants';
 import { nodeUrlSwitcher } from 'shared';
 import { UserInventoryType } from '../smartcontract';
@@ -60,21 +59,24 @@ export const getAtomicAssetsByUser = async ({
         async () => {
             connectionCount++;
 
-            const { data } = await axios.post<{ rows: UserInventoryType[] }>(
+            const data = await fetch(
                 `${currentWaxEndpoint}/v1/chain/get_table_rows`,
                 {
-                    json: true,
-                    code: 'atomicassets',
-                    scope: searchParam,
-                    table: 'assets',
-                    index_position: 1,
-                    limit: 500,
-                    reverse: false,
-                    show_payer: false,
+                    body: JSON.stringify({
+                        json: true,
+                        code: 'atomicassets',
+                        scope: searchParam,
+                        table: 'assets',
+                        index_position: 1,
+                        limit: 500,
+                        reverse: false,
+                        show_payer: false,
+                    }),
+                    method: 'POST',
                 }
             );
 
-            fetchedData = data?.rows;
+            fetchedData = (await data.json()).rows;
         },
         () => {
             currentWaxEndpoint = getNextEndpoint({
