@@ -1,54 +1,32 @@
-import { getNextEndpoint } from 'app/constants';
-import { AxiosError } from 'axios';
 import { isServerError } from './is-server-error';
 import { wait } from './wait';
 
 type Config = {
     connectionCount: number;
     connectionCountLimit: number;
-    endpointsList: string[];
-    currentEndpoint: string;
 };
 
 export const nodeUrlSwitcher = async (
-    fn: () => Promise<any>,
-    {
-        connectionCount,
-        connectionCountLimit,
-        endpointsList,
-        currentEndpoint,
-    }: Config
+    requestFn: () => Promise<any>,
+    switchFn: () => void,
+    { connectionCount, connectionCountLimit }: Config
 ): Promise<any> => {
     try {
-        await fn();
+        await requestFn();
     } catch (e) {
-        const error = e as AxiosError;
+        const error = e as Error & { response: { status: number } };
 
         if (isServerError(error)) {
             if (connectionCount >= connectionCountLimit)
                 throw new Error('Network Error', error);
 
-            // remove after tests
-            // eslint-disable-next-line no-console
-            console.log(`current node endpoint: ${currentEndpoint}`);
-
-            currentEndpoint = getNextEndpoint({
-                endpointsList,
-                currentEndpoint,
-            });
-
-            // remove after tests
-            // eslint-disable-next-line no-console
-            console.log(`new node endpoint: ${currentEndpoint}`);
+            switchFn();
 
             await wait(1);
 
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            return await nodeUrlSwitcher(fn, {
+            return await nodeUrlSwitcher(requestFn, switchFn, {
                 connectionCount,
                 connectionCountLimit,
-                endpointsList,
-                currentEndpoint,
             });
         }
 
