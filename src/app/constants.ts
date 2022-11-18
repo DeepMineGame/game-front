@@ -42,8 +42,8 @@ const defaultEndpoints = {
               'https://wax.pink.gg',
           ]
         : [
-              'https://testnet-wax.3dkrender.com',
               'https://waxtestnet.greymass.com',
+              'https://testnet-wax.3dkrender.com',
               'https://wax-test.blokcrafters.io',
               'https://testnet.wax.blacklusion.io',
               'https://wax-testnet.eosphere.io',
@@ -78,7 +78,7 @@ const defaultEndpoints = {
 
 export const endpoints = {
     atomic: (window.ENDPOINTS || defaultEndpoints).atomic,
-    wax: (window.ENDPOINTS || defaultEndpoints).wax,
+    wax: defaultEndpoints.wax,
 };
 
 export const ConnectionCountLimit = {

@@ -1,4 +1,3 @@
-import { AxiosError } from 'axios';
 import { isServerError } from './is-server-error';
 import { wait } from './wait';
 
@@ -15,7 +14,7 @@ export const nodeUrlSwitcher = async (
     try {
         await requestFn();
     } catch (e) {
-        const error = e as AxiosError;
+        const error = e as Error & { response: { status: number } };
 
         if (isServerError(error)) {
             if (connectionCount >= connectionCountLimit)
