@@ -77,6 +77,7 @@ sample({
 sample({
     source: $inventory,
     target: getInventoryAtomicAssetsEffect,
+    filter: (inventory) => inventory.length > 0,
     fn: (assets) => assets?.map((asset) => String(asset.asset_id)),
 });
 
