@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { defaultConfig, ENDPOINT } from 'app/constants';
-import { User } from './model/type';
+import { User } from './model';
 
 export const getUserFromSession = async () => {
     const { data } = await axios.get<User>(

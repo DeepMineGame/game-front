@@ -5,7 +5,7 @@ import { getDmeAmount, Link, secondsToDays, Table, toLocaleDate } from 'shared';
 import { ContractDto } from 'entities/smartcontract';
 
 type Props = {
-    contracts: ContractDto[];
+    contracts: ContractDto[] | null;
 };
 
 export const MiningContractsTable: FC<Props> = ({ contracts }) => {
@@ -77,7 +77,7 @@ export const MiningContractsTable: FC<Props> = ({ contracts }) => {
                         `${value} ${t('components.common.days').toLowerCase()}`,
                 },
             ]}
-            dataSource={contracts.map((contract) => ({
+            dataSource={contracts?.map((contract) => ({
                 key: contract.id,
                 nickName: contract.client || contract.executor || '-',
                 id: contract.id,

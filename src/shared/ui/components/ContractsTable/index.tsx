@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
 import { t } from 'i18next';
-import { DiscordIcon } from 'shared';
+import { DiscordIcon, useAccountName } from 'shared';
 import { Space, Tooltip } from 'antd';
 import { ContractState, UpgradeContractState } from 'features/serviceMarket';
 import {
@@ -13,7 +13,7 @@ import { getDmeAmount, getUserRoleInContract } from 'shared/lib/utils';
 import { Link, Table, Tag } from '../../ui-kit';
 import { toLocaleDate } from '../../utils';
 
-type Props = { contracts: ContractDto[]; account: string };
+type Props = { contracts: ContractDto[] | null };
 
 const contractStateMap = {
     [ContractType.undefined]: () => null,
@@ -22,18 +22,21 @@ const contractStateMap = {
     [ContractType.level_upgrade]: UpgradeContractState,
 };
 
-export const ContractsTable: FC<Props> = ({ contracts, account }) => {
+export const ContractsTable: FC<Props> = ({ contracts }) => {
+    const account = useAccountName();
     const dataSource = useMemo(
         () =>
-            contracts.map((contract) => {
+            contracts?.map((contract) => {
                 const contractStatus = getContractStatus(contract, account);
                 const Status = contractStateMap[contract.type];
 
                 return {
+                    cost: contract.cost_of_execution,
                     nickName: contract.client || contract.executor || '-',
                     key: contract.id,
                     id: contract.id,
                     type: contractName[contract.type],
+                    fee: contract.fee_daily_min_amount,
                     date:
                         contract.finishes_at === 0
                             ? '-'
@@ -106,13 +109,6 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
                         );
                     },
                 },
-
-                {
-                    title: t('pages.serviceMarket.myContractsTab.contractType'),
-                    dataIndex: 'type',
-                    key: 'type',
-                    sorter: (a, b) => a.type.length - b.type.length,
-                },
                 {
                     title: t(
                         'pages.serviceMarket.myContractsTab.completionDate'
@@ -123,10 +119,22 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
                         new Date(a.date).getTime() - new Date(b.date).getTime(),
                 },
                 {
+                    title: t('pages.serviceMarket.myContractsTab.fee'),
+                    dataIndex: 'fee',
+                    key: 'fee',
+                    sorter: (a, b) => a.fee - b.fee,
+                },
+                {
                     title: t('pages.serviceMarket.myContractsTab.penalty'),
                     dataIndex: 'penalty',
                     key: 'penalty',
                     sorter: (a, b) => a.penalty - b.penalty,
+                },
+                {
+                    title: t('pages.serviceMarket.myContractsTab.cost'),
+                    dataIndex: 'cost',
+                    key: 'const',
+                    sorter: (a, b) => a.const - b.cost,
                 },
                 {
                     title: t('pages.serviceMarket.myContractsTab.status'),
@@ -139,7 +147,7 @@ export const ContractsTable: FC<Props> = ({ contracts, account }) => {
                 },
             ]}
             dataSource={dataSource}
-            pagination={{ position: ['bottomCenter'], pageSize: 5 }}
+            pagination={{ position: ['bottomCenter'] }}
         />
     );
 };

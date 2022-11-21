@@ -1,15 +1,15 @@
 import { createGate } from 'effector-react';
 import { createEffect, createStore, forward, sample } from 'effector';
 import {
-    getMinesTableData,
     getInventoryTableData,
+    getMinesTableData,
+    getRolesTableData,
     InventoryType,
     MineDto,
+    RoleDto,
     SEARCH_BY,
     searchBy,
     UserInventoryType,
-    RoleDto,
-    getRolesTableData,
     UserRoles,
 } from 'entities/smartcontract';
 
@@ -77,13 +77,12 @@ sample({
             ({ role }) => role === UserRoles.landlord
         );
 
-        const dmeToClaim =
+        return (
             Number(
                 landlordRole?.attrs?.find(({ key }) => key === 'fee_to_claim')
                     ?.value
-            ) || 0;
-
-        return dmeToClaim;
+            ) || 0
+        );
     },
 });
 

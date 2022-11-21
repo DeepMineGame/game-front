@@ -31,7 +31,7 @@ export const SignContract: FC = () => {
                     className={cn(contractorStyles.coloredText)}
                     onClick={() =>
                         navigate(
-                            `${serviceMarket}?tabId=${ServiceMarketTabIds.miningContracts}`
+                            `${serviceMarket}?tabId=${ServiceMarketTabIds.mineOwner}`
                         )
                     }
                 >

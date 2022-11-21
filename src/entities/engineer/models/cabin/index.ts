@@ -57,13 +57,11 @@ const getActionByUserEffect = createEffect<
 const $openSkillAction = createStore<ActionDto | null>(null).on(
     getActionEffect.doneData,
     (_, data) => {
-        const activeAction = data?.rows?.find(
+        return data?.rows?.find(
             ({ type, finishes_at }) =>
                 type === ActionType.engineer_open_skill &&
                 finishes_at * 1000 > Date.now()
         );
-
-        return activeAction;
     }
 );
 

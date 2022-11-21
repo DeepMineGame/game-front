@@ -1,7 +1,7 @@
 import { FC, memo, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DocumentTitle } from 'app/router/components/DocumentTitle';
-import { Empty } from 'antd';
+import { Empty, TabsProps } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'shared';
 import { useLocation } from 'react-router';
@@ -13,10 +13,18 @@ type Props = {
     title?: string;
     className?: string;
     defaultDocTitle?: boolean;
+    tabProps?: TabsProps;
 };
 
 export const PageWithTabs: FC<Props> = memo(
-    ({ tabs, documentTitleScope, title, className, defaultDocTitle }) => {
+    ({
+        tabs,
+        documentTitleScope,
+        title,
+        className,
+        defaultDocTitle,
+        tabProps,
+    }) => {
         const { t } = useTranslation();
         const query = useQuery();
         const tabId = query.get('tabId');
@@ -61,6 +69,7 @@ export const PageWithTabs: FC<Props> = memo(
                         activeKey={tabId!}
                         onChange={handleTabSelect}
                         items={tabs}
+                        {...tabProps}
                     />
                 ) : (
                     <Empty />
