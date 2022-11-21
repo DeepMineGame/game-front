@@ -10,7 +10,11 @@ import {
     minesForAreaSlots,
     userAreaNftStore,
 } from 'features';
-import { areasStore, LOCATION_TO_ID } from 'entities/smartcontract';
+import {
+    areasStore,
+    InventoryType,
+    LOCATION_TO_ID,
+} from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
 export const AreaManagementPage = () => {
@@ -20,7 +24,9 @@ export const AreaManagementPage = () => {
     const area = useStore(areasStore);
     const userLocation = useUserLocation();
     const areas = useStore(userAreaNftStore);
-    const areaItem = areas?.[0];
+    const areaItem = areas?.find(
+        ({ inv_type }) => inv_type === InventoryType.areas
+    );
     const areaId = areaItem ? +areaItem.asset_id : undefined;
     const isActive = !!areaItem?.in_use;
     const reloadPage = useReloadPage();

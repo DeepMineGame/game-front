@@ -102,8 +102,8 @@ sample({
     target: userAreaNftStore,
     filter: (inventories) =>
         Boolean(
-            inventories?.filter(
+            inventories?.find(
                 ({ inv_type }) => inv_type === InventoryType.areas
-            )?.length
+            )
         ),
 });
