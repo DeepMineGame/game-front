@@ -7,6 +7,8 @@ export const defaultConfig = {
     withCredentials: true,
 };
 
+export const CONNECTION_TIMEOUT = 2 * 1000;
+
 export const isMainNet = process.env.REACT_APP_MAINNET === 'true';
 
 export const WAX_CHAIN_ID = isMainNet

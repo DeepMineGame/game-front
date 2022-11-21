@@ -3,6 +3,7 @@ import {
     endpoints,
     ConnectionCountLimit,
     getNextEndpoint,
+    CONNECTION_TIMEOUT,
 } from 'app/constants';
 import { nodeUrlSwitcher } from 'shared';
 import { UserInventoryType } from '../smartcontract';
@@ -54,10 +55,13 @@ export const getAtomicAssetsByUser = async ({
     connectionCount?: number;
 }): Promise<UserInventoryType[] | undefined> => {
     let fetchedData;
+    const { abort, signal } = new AbortController();
 
     await nodeUrlSwitcher(
         async () => {
             connectionCount++;
+
+            const timerId = setTimeout(() => abort(), CONNECTION_TIMEOUT);
 
             const data = await fetch(
                 `${currentWaxEndpoint}/v1/chain/get_table_rows`,
@@ -73,8 +77,11 @@ export const getAtomicAssetsByUser = async ({
                         show_payer: false,
                     }),
                     method: 'POST',
+                    signal,
                 }
             );
+
+            clearTimeout(timerId);
 
             fetchedData = (await data.json()).rows;
         },
