@@ -1,5 +1,6 @@
 import {
     ConnectionCountLimit,
+    CONNECTION_TIMEOUT,
     endpoints,
     getNextEndpoint,
 } from 'app/constants';
@@ -15,10 +16,13 @@ export const fetchDmeBalance = async ({
     connectionCount?: number;
 }): Promise<string | undefined> => {
     let fetchedData;
+    const { abort, signal } = new AbortController();
 
     await nodeUrlSwitcher(
         async () => {
             connectionCount++;
+
+            const timerId = setTimeout(() => abort(), CONNECTION_TIMEOUT);
 
             const data = await fetch(
                 `${currentWaxEndpoint}/v1/chain/get_table_rows`,
@@ -32,8 +36,11 @@ export const fetchDmeBalance = async ({
                         table: 'accounts',
                     }),
                     method: 'POST',
+                    signal,
                 }
             );
+
+            clearTimeout(timerId);
 
             const balance = (await data.json()).rows?.[0]?.balance;
             const [value] = balance ? balance.split(' ') : [0];
