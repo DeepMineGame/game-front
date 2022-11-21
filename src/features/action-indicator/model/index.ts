@@ -8,24 +8,22 @@ import {
     mapSearchParamForIndexPosition,
 } from 'entities/smartcontract';
 
-export const getActionForIndicate = createEffect(
-    ({
+export const getActionForIndicate = createEffect<
+    { searchParam: string },
+    ActionDto | undefined
+>(({ searchParam }) =>
+    getActionsTable<ActionDto>({
+        searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
         searchParam,
-    }: {
-        searchParam: string;
-    }): Promise<ActionDto | undefined> =>
-        getActionsTable({
-            searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
-            searchParam,
-        }).then(({ rows }) =>
-            rows
-                ?.reverse()
-                .find(
-                    ({ state, type }: ActionDto) =>
-                        state === ActionState.active ||
-                        type === ActionType.physical_shift
-                )
-        )
+    }).then((data) =>
+        data?.rows
+            ?.reverse()
+            .find(
+                ({ state, type }) =>
+                    state === ActionState.active ||
+                    type === ActionType.physical_shift
+            )
+    )
 );
 
 export const $indicateActionDetails = createStore({

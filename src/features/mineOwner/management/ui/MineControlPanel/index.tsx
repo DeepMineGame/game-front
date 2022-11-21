@@ -75,7 +75,7 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
         }
         if (!contract) {
             return navigate(
-                `${serviceMarket}?tabId=${ServiceMarketTabIds.landLord}`
+                `${serviceMarket}?tabId=${ServiceMarketTabIds.mineOwner}`
             );
         }
         if (isMineSetuped || isMineDeactivated) {

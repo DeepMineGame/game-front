@@ -10,7 +10,7 @@ export enum mapSearchParamForIndexPosition {
     contractId,
 }
 
-export const getActionsTable = async ({
+export const getActionsTable = async <T>({
     searchIdentification,
     searchParam,
     limit = 1000,
@@ -18,8 +18,8 @@ export const getActionsTable = async ({
     searchIdentification: mapSearchParamForIndexPosition;
     searchParam: number | string;
     limit?: number;
-}) => {
-    return getTableData({
+}) =>
+    getTableData<T>({
         code: deepminegame,
         scope: deepminegame,
         table: 'actions',
@@ -29,20 +29,14 @@ export const getActionsTable = async ({
         upper_bound: searchParam,
         limit,
     });
-};
-export const getActionEffect = createEffect(
-    async ({
-        searchIdentification,
-        searchParam,
-    }: {
+
+export const getActionEffect = createEffect<
+    {
         searchIdentification: mapSearchParamForIndexPosition;
         searchParam: number | string;
-    }): Promise<{ rows: ActionDto[] }> =>
-        getActionsTable({
-            searchIdentification,
-            searchParam,
-        })
-);
+    },
+    { rows: ActionDto[] } | undefined
+>(getActionsTable);
 
 export const getActionByUserEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) =>
@@ -54,7 +48,7 @@ export const getActionByUserEffect = createEffect(
 
 export const actionsStore = createStore<ActionDto[] | null>(null).on(
     getActionEffect.doneData,
-    (_, { rows }) => rows
+    (_, data) => data?.rows
 );
 
 export * from './types';

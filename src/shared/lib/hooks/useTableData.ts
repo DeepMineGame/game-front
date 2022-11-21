@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { getTableData } from 'shared';
-import {
-    GetTableDataConfigType,
-    GetTableDataResponseType,
-} from 'entities/smartcontract';
+import { GetTableDataConfigType } from 'entities/smartcontract';
 import { useAccountName } from './useAccountName';
 
 export function useTableData<T>(
@@ -12,16 +9,14 @@ export function useTableData<T>(
     needUpdate?: boolean
 ) {
     const accountName = useAccountName();
-    const [result, setResult] = useState<
-        GetTableDataResponseType<T> | undefined
-    >(undefined);
+    const [result, setResult] = useState<{ rows: T[] }>();
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (needUpdate !== false) {
             if (accountName) {
                 setIsLoading(true);
-                getTableData(getConfig(accountName))
+                getTableData<T>(getConfig(accountName))
                     .then((data) => {
                         setResult(data);
                     })

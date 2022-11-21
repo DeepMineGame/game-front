@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { defaultConfig, ENDPOINT } from 'app';
+import { defaultConfig, ENDPOINT } from 'app/constants';
 import { ContractDto } from 'entities/smartcontract';
 
 export enum OrderStatus {

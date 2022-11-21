@@ -5,21 +5,22 @@ import { ContractsTable, Segmented } from 'shared';
 import { useCallback } from 'react';
 import { OrderStatus, Roles } from 'entities/gameStat';
 import { TabGrid } from '../../ui';
+
 import {
     changeFilterEvent,
     ContractsGate,
     contractsStore,
     filterStore,
     getContractsByFilterEffect,
-} from '../../contracts-table/model';
+} from '../../contractor-table/model';
 
-export const LandlordTab = () => {
+export const MineOwnerTab = () => {
     const { t } = useTranslation();
 
     useGate(ContractsGate, {
         statuses: OrderStatus.current,
-        user_role: Roles.landlord,
-        search_role: Roles.mineowner,
+        user_role: Roles.mineowner,
+        search_role: Roles.contractor,
     });
 
     const contracts = useStore(contractsStore);
@@ -47,8 +48,16 @@ export const LandlordTab = () => {
                     <Segmented
                         options={[
                             {
-                                value: Roles.mineowner,
-                                label: t('roles.mineowner'),
+                                value: Roles.contractor,
+                                label: t('roles.contractor'),
+                            },
+                            {
+                                value: Roles.landlord,
+                                label: t('roles.landlord'),
+                            },
+                            {
+                                value: Roles.engineer,
+                                label: t('roles.engineer'),
                             },
                         ]}
                         onChange={onChangeSearchRole}

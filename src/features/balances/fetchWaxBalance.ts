@@ -1,18 +1,47 @@
+import {
+    ConnectionCountLimit,
+    endpoints,
+    getNextEndpoint,
+} from 'app/constants';
 import axios from 'axios';
-import { WAX_GET_BALANCE_ENDPOINT } from 'app';
+import { nodeUrlSwitcher } from 'shared';
+
+let [currentWaxEndpoint] = endpoints.wax;
 
 export const fetchWaxBalance = async ({
     searchParam,
+    connectionCount = 0,
 }: {
     searchParam: string;
-}) => {
-    const { data = [] } = await axios.post(WAX_GET_BALANCE_ENDPOINT, {
-        code: 'eosio.token',
-        account: searchParam,
-        symbol: 'WAX',
-    });
+    connectionCount?: number;
+}): Promise<string | undefined> => {
+    let fetchedData;
 
-    const [value] = data.length ? data[0].split(' ') : [0];
+    await nodeUrlSwitcher(
+        async () => {
+            connectionCount++;
 
-    return Number(value).toFixed(1);
+            const { data = [] } = await axios.post(
+                `${currentWaxEndpoint}/v1/chain/get_currency_balance`,
+                {
+                    code: 'eosio.token',
+                    account: searchParam,
+                    symbol: 'WAX',
+                }
+            );
+
+            const [value] = data.length ? data[0].split(' ') : [0];
+
+            fetchedData = Number(value).toFixed(1);
+        },
+        () => {
+            currentWaxEndpoint = getNextEndpoint({
+                endpointsList: endpoints.wax,
+                currentEndpoint: currentWaxEndpoint,
+            });
+        },
+        { connectionCount, connectionCountLimit: ConnectionCountLimit.wax }
+    );
+
+    return fetchedData;
 };

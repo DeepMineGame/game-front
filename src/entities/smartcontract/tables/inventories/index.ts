@@ -11,14 +11,14 @@ export enum SEARCH_BY {
 }
 export * from './types';
 
-export const getInventoryTableData = ({
+export const getInventoryTableData = <T>({
     searchIdentificationType = SEARCH_BY.ownerNickname,
     searchParam,
 }: {
     searchIdentificationType?: SEARCH_BY;
     searchParam: string | number;
 }) =>
-    getTableData({
+    getTableData<T>({
         code: deepminegame,
         scope: deepminegame,
         table: 'inventories',
@@ -32,22 +32,17 @@ export const getInventoryTableData = ({
         limit: 1000,
     });
 
-export const getInventoriesEffect = createEffect(
-    async ({
-        searchIdentificationType = SEARCH_BY.ownerNickname,
+export const getInventoriesEffect = createEffect<
+    { searchIdentificationType?: SEARCH_BY; searchParam: string },
+    { rows: UserInventoryType[] } | undefined
+>(({ searchIdentificationType = SEARCH_BY.ownerNickname, searchParam }) =>
+    getInventoryTableData({
+        searchIdentificationType,
         searchParam,
-    }: {
-        searchIdentificationType?: SEARCH_BY;
-        searchParam: string;
-    }) => {
-        return getInventoryTableData({
-            searchIdentificationType,
-            searchParam,
-        });
-    }
+    })
 );
 
 export const $inventory = createStore<UserInventoryType[]>([]).on(
     getInventoriesEffect.doneData,
-    (_, { rows }) => rows
+    (_, data) => data?.rows
 );

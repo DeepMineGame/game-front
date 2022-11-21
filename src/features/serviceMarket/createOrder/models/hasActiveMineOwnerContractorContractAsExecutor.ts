@@ -9,9 +9,9 @@ import { getContractByExecutorEffect } from './effects';
 export const hasActiveMineOwnerContractorContractAsExecutor =
     createStore<boolean>(false).on(
         getContractByExecutorEffect.doneData,
-        (_, { rows }: { rows?: ContractDto[] }) => {
+        (_, data) => {
             return Boolean(
-                rows?.find(
+                data?.rows?.find(
                     ({ status, type, deleted_at }: ContractDto) =>
                         !deleted_at &&
                         type === ContractType.mineowner_contractor &&

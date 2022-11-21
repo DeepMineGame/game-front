@@ -9,7 +9,7 @@ import {
     getContractsByFilterEffect,
 } from './model';
 
-export const ServiceMarketContractsTable: FC = () => {
+export const ContractorTable: FC = () => {
     useGate(ContractsGate, {
         statuses: OrderStatus.current,
         user_role: Roles.contractor,

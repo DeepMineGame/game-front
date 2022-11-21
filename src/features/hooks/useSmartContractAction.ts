@@ -35,13 +35,13 @@ export const useSmartContractAction = <T>({
 
     return async () => {
         try {
-            const { rows } = await getActionsTable({
+            const data = await getActionsTable<ActionDto>({
                 searchIdentification:
                     mapSearchParamForIndexPosition.ownerUserId,
                 searchParam: chainAccount.activeUser?.accountName!,
                 limit: 1,
             });
-            const lastAction: ActionDto | null = rows?.[0];
+            const lastAction: ActionDto | null = data?.rows?.[0] || null;
             const lastActionInProgress =
                 lastAction && (lastAction.finishes_at || 0) * 1000 > Date.now();
             if (lastActionInProgress) {

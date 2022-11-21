@@ -85,7 +85,7 @@ export const $userAllInventoryMap = $userAllInventory.map((allInventory) =>
 
 export const getUserAllInventoryEffect = createEffect<
     WaxUser,
-    { rows: UserInventoryType[] }
+    { rows: UserInventoryType[] } | undefined
 >(({ account }) => getTableData(getInventoryConfig(account, 1000)));
 
 export const $isEngineerFetching = getEngineerByExecutorEffect.pending;
@@ -129,6 +129,6 @@ sample({
 
 sample({
     source: getUserAllInventoryEffect.doneData,
-    fn: ({ rows }) => rows,
+    fn: (data) => data?.rows || [],
     target: $userAllInventory,
 });

@@ -3,8 +3,8 @@ import { FC, useCallback } from 'react';
 import { Segmented } from 'shared';
 import { Space } from 'antd';
 import { Roles } from 'entities/gameStat';
-import { changeFilterEvent, filterStore } from '../../contracts-table/model';
-import { ServiceMarketContractsTable } from '../../contracts-table';
+import { changeFilterEvent, filterStore } from '../../contractor-table/model';
+import { ContractorTable } from '../../contractor-table';
 import { TabGrid } from '../tab-grid';
 
 export const ContractorTab: FC = () => {
@@ -40,7 +40,7 @@ export const ContractorTab: FC = () => {
                     />
                 </Space>
             }
-            table={<ServiceMarketContractsTable />}
+            table={<ContractorTable />}
         />
     );
 };

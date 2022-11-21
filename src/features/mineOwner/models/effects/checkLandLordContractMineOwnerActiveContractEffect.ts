@@ -12,14 +12,14 @@ import { checkIfNeedPhysicalShiftEffect } from './checkIfNeedPhysicalShiftEeffec
 
 export const checkLandLordContractMineOwnerActiveContractEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
-        const { rows: contracts } = await getTableData(
+        const data = await getTableData<ContractDto>(
             getContractsNameConfig(
                 searchParam,
                 mapSearchParamForIndexPositionToFindContracts.executorId,
                 1000
             )
         );
-        const mineOwnerLandlordContracts = contracts?.filter(
+        const mineOwnerLandlordContracts = data?.rows?.filter(
             ({ type }: ContractDto) => type === ContractType.landlord_mineowner
         );
 
@@ -27,10 +27,10 @@ export const checkLandLordContractMineOwnerActiveContractEffect = createEffect(
             ({ status }: ContractDto) => status === ContractStatus.active
         );
 
-        const hasTerminatedContracts = contracts?.some(
+        const hasTerminatedContracts = data?.rows?.some(
             ({ status }: ContractDto) => status === ContractStatus.terminated
         );
-        const hasSelfSignedContract = contracts?.find(
+        const hasSelfSignedContract = data?.rows?.find(
             ({ status }: ContractDto) =>
                 status === ContractStatus.signed_by_executor
         );
