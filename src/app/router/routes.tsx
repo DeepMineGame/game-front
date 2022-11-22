@@ -9,7 +9,7 @@ import {
     MineOwnerStatAndInfoPage,
     LandLordPage,
     HivePage,
-    PageNotFound,
+    NotFoundPage,
     MineManagementPage,
     MineOwnerPage,
     MineOwnerMiningCrewPage,
@@ -26,6 +26,7 @@ import {
     Wasteland,
     EngineerPage,
     EquipmentHallPage,
+    InterfaceStubPage,
     EngineersTraining,
 } from 'pages';
 
@@ -132,22 +133,6 @@ export const routes: AppRoute[] = [
         titleTag: 'Mine owner / Mine crew',
     },
     {
-        path: paths.pageNotFound,
-        Component: PageNotFound,
-        forLoggedIn: false,
-        forAdmin: true,
-        forBetaUser: true,
-        titleTag: 'Badlands — DeepMine',
-    },
-    {
-        path: paths.wipPage,
-        Component: () => <PageNotFound type="wip" />,
-        forLoggedIn: false,
-        forAdmin: true,
-        forBetaUser: true,
-        titleTag: 'Badlands — DeepMine',
-    },
-    {
         path: paths.serviceMarket,
         Component: ServiceMarketPage,
         forLoggedIn: true,
@@ -252,6 +237,14 @@ export const routes: AppRoute[] = [
         titleTag: 'Engineer Equipment Hall — DeepMine',
     },
     {
+        path: paths.unidentifiedActivity,
+        Component: InterfaceStubPage,
+        forLoggedIn: false,
+        forAdmin: true,
+        forBetaUser: true,
+        titleTag: 'Unidentified seismic activity — DeepMine',
+    },
+    {
         path: paths.engineerTraining,
         Component: EngineersTraining,
         forLoggedIn: true,
@@ -263,6 +256,6 @@ export const routes: AppRoute[] = [
 
 export const fallbackRoute: AppRoute = {
     path: '*',
-    Component: PageNotFound,
+    Component: NotFoundPage,
     titleTag: 'Intro - Deepmine',
 };

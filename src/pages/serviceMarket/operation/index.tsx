@@ -8,7 +8,7 @@ import {
     getContractEffect,
 } from 'entities/contract';
 import { ContractStatus } from 'entities/smartcontract';
-import { PageNotFound } from '../../pageNotFound';
+import { NotFoundPage } from '../../not-found';
 import { ContractPage } from './ContractPage';
 import { OrderPage } from './OrderPage';
 
@@ -36,7 +36,7 @@ export const OperationPage = () => {
     }
 
     if (!contract) {
-        return <PageNotFound />;
+        return <NotFoundPage />;
     }
 
     if (ORDER_STATUS.includes(contract.status)) {

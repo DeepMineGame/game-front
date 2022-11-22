@@ -211,12 +211,13 @@
       "openContract": "Open contract",
       "configureButton": "Configure"
     },
-    "pageNotFound": {
-      "weLost": "WE GOT LOST",
-      "itSeem": "It seems like this page doesn’t exist Try going back or click the button bellow and we’ll take you to the city",
-      "soon": "This page is coming soon",
-      "weWork": "We are working very hard to get this page up as soon as possible For now you can try to go back or click the button bellow and we’ll take you to the city",
-      "goToCity": "Go to the city"
+    "notFound": {
+      "title": "This page is lost in the void",
+      "message": "We'll try to find her, but we don't know how long it will take."
+    },
+    "interfaceStub": {
+      "title": "Unidentified seismic activity on Eleazar",
+      "message": "A team of technicians is already on the scene.<br />Access to activity on the planet will be restored shortly."
     },
     "home": {
       "mineOwnerCabin": "GO TO MINE",
