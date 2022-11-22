@@ -6,6 +6,8 @@ import {
     getHistoryConfig,
     getUserConfig,
     mapSearchParamForIndexPositionToFindContracts,
+    UserHistoryType,
+    UserInfoType,
 } from 'entities/smartcontract';
 import { getLastMiningStatus } from './api';
 
@@ -13,8 +15,7 @@ export const setMiningOverEvent = createEvent<boolean>();
 
 export const getLandlordContractsEffect = createEffect<
     { searchParam: string },
-    { rows: ContractDto[] },
-    Error
+    { rows: ContractDto[] } | undefined
 >(({ searchParam }) =>
     getTableData(
         getContractsNameConfig(
@@ -25,25 +26,27 @@ export const getLandlordContractsEffect = createEffect<
     )
 );
 
-export const getUserContractsEffect = createEffect(
-    ({ searchParam }: { searchParam: string }) =>
-        getTableData(
-            getContractsNameConfig(
-                searchParam,
-                mapSearchParamForIndexPositionToFindContracts.executorId,
-                1000
-            )
+export const getUserContractsEffect = createEffect<
+    { searchParam: string },
+    { rows: ContractDto[] } | undefined
+>(({ searchParam }) =>
+    getTableData(
+        getContractsNameConfig(
+            searchParam,
+            mapSearchParamForIndexPositionToFindContracts.executorId,
+            1000
         )
+    )
 );
 
-export const getUserHistoryEffect = createEffect(
-    ({ searchParam }: { searchParam: string }) =>
-        getTableData(getHistoryConfig(searchParam))
-);
+export const getUserHistoryEffect = createEffect<
+    { searchParam: string },
+    { rows: UserHistoryType[] } | undefined
+>(({ searchParam }) => getTableData(getHistoryConfig(searchParam)));
 
-export const getUserInfoEffect = createEffect(
-    ({ searchParam }: { searchParam: string }) =>
-        getTableData(getUserConfig(searchParam))
-);
+export const getUserInfoEffect = createEffect<
+    { searchParam: string },
+    { rows: UserInfoType[] } | undefined
+>(({ searchParam }) => getTableData(getUserConfig(searchParam)));
 
 export const getLastMiningStatusEffect = createEffect(getLastMiningStatus);

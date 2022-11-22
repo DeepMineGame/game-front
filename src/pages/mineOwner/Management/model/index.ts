@@ -10,19 +10,20 @@ import {
 export const ChangeDepthGate = createGate<{ searchParam: string }>(
     'ChangeDepthGate'
 );
-export const getActionsEffect = createEffect(
-    ({ searchParam }: { searchParam: string }) =>
-        getActionsTable({
-            searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
-            searchParam,
-        })
+export const getActionsEffect = createEffect<
+    { searchParam: string },
+    { rows: ActionDto[] } | undefined
+>(({ searchParam }) =>
+    getActionsTable({
+        searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
+        searchParam,
+    })
 );
 export const $changeDepthAction = createStore<ActionDto | null>(null).on(
     getActionsEffect.doneData,
-    (_, { rows }) =>
-        rows?.find(
-            (action: ActionDto) =>
-                action.type === ActionType.mine_change_layer_depth
+    (_, data) =>
+        data?.rows?.find(
+            (action) => action.type === ActionType.mine_change_layer_depth
         )
 );
 

@@ -1,20 +1,10 @@
 import { useTranslation } from 'react-i18next';
-import {
-    DrillBitOutlined,
-    MineOutlined,
-    PageWithTabs,
-    useAccountName,
-} from 'shared';
-import {
-    MineOperationContracts,
-    MiningContracts,
-    MyContractsTab,
-} from 'features';
+import { PageWithTabs, useAccountName } from 'shared';
+import { LandlordTab, MineOwnerTab, ContractorTab } from 'features';
 import { Skeleton } from 'antd';
 import { ServiceMarketTabIds } from 'app/router/constants';
 import { FC } from 'react';
-import { UnorderedListOutlined, UpSquareOutlined } from '@ant-design/icons';
-import { LevelUpgrade } from 'features/serviceMarket';
+import { EngineerTab } from 'features/serviceMarket';
 import styles from './styles.module.scss';
 
 export * from './order';
@@ -26,49 +16,35 @@ export const ServiceMarketPage: FC = () => {
 
     return (
         <PageWithTabs
+            tabProps={{
+                tabBarExtraContent: {
+                    left: 'I am: \u00a0 ',
+                },
+                destroyInactiveTabPane: true,
+            }}
             className={styles.page}
             defaultDocTitle
             title={t('pages.serviceMarket.serviceMarket')}
             tabs={[
                 {
-                    key: ServiceMarketTabIds.myContracts,
-                    children: accountName ? <MyContractsTab /> : <Skeleton />,
-                    tab: (
-                        <>
-                            <UnorderedListOutlined />
-                            {t('pages.serviceMarket.myContracts')}
-                        </>
-                    ),
+                    key: ServiceMarketTabIds.contractor,
+                    children: accountName ? <ContractorTab /> : <Skeleton />,
+                    tab: t('pages.serviceMarket.contract.contractor'),
                 },
                 {
-                    key: ServiceMarketTabIds.miningContracts,
-                    children: <MiningContracts />,
-                    tab: (
-                        <>
-                            <DrillBitOutlined />
-                            {t('pages.serviceMarket.miningContracts')}
-                        </>
-                    ),
+                    key: ServiceMarketTabIds.mineOwner,
+                    children: <MineOwnerTab />,
+                    tab: t('roles.mineowner'),
                 },
                 {
-                    key: ServiceMarketTabIds.mineOperation,
-                    children: <MineOperationContracts />,
-                    tab: (
-                        <>
-                            <MineOutlined />
-                            {t('pages.serviceMarket.mineOperation')}
-                        </>
-                    ),
+                    key: ServiceMarketTabIds.landLord,
+                    children: <LandlordTab />,
+                    tab: t('roles.landlord'),
                 },
                 {
                     key: ServiceMarketTabIds.levelUpgrade,
-                    children: <LevelUpgrade />,
-                    tab: (
-                        <>
-                            <UpSquareOutlined />
-                            {t('pages.serviceMarket.levelUpgrade')}
-                        </>
-                    ),
+                    children: <EngineerTab />,
+                    tab: t('roles.engineer'),
                 },
             ]}
         />

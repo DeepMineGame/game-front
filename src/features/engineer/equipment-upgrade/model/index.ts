@@ -1,7 +1,7 @@
 import { createEffect, createStore, sample } from 'effector';
 
-import { AssetDataType, getAtomicAssetsDataById } from 'entities/atomicassets';
-import { FilterOrderStatus, getOrders, Role } from 'entities/gameStat';
+import { AssetDataType, getAssets } from 'entities/atomicassets';
+import { getOrders, Role, FilterOrderStatus } from 'entities/gameStat';
 import { ContractDto, ContractType } from 'entities/smartcontract';
 import { getContractWithoutReport } from '../lib';
 
@@ -15,8 +15,8 @@ const getContractsExecutorEffect = createEffect(
     }
 );
 
-const getEquipmentByIdEffect = createEffect(async (searchParam: string) =>
-    getAtomicAssetsDataById(searchParam)
+const getEquipmentByIdEffect = createEffect<string, AssetDataType | undefined>(
+    getAssets
 );
 
 const $engineerContracts = createStore<ContractDto[]>([]).on(

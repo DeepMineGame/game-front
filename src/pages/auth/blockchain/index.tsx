@@ -69,7 +69,7 @@ export const BlockchainAuthPage: React.FC<Props> = ({ onSuccess }) => {
                         const data = await getTableData(
                             getUserConfig(user.wax_address)
                         );
-                        const isExist = !!data.rows?.length;
+                        const isExist = !!data?.rows?.length;
 
                         if (!isExist) {
                             await authorizeUserInBlockchain(

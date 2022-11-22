@@ -28,7 +28,7 @@ const GetUpgrade: FC<Props> = ({ accountName, contract }) => {
     );
     const signUpgradeFinish = useSmartContractAction({
         action: upgradeFinish(accountName, contract.id),
-        onSignSuccess: reloadPage,
+        onSignSuccess: () => setTimeout(reloadPage, 1500),
     });
 
     const finishUpgrade = async () => {
@@ -51,7 +51,7 @@ const GetUpgrade: FC<Props> = ({ accountName, contract }) => {
                 type="primary"
                 onClick={handleUpgradeFinish}
             >
-                {t('pages.engineer.getReport')}
+                {t('pages.engineer.finishUpgrade')}
             </Button>
         );
     }

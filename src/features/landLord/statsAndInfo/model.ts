@@ -13,41 +13,36 @@ import {
 
 export const AreaStateGate = createGate<{ searchParam: string }>('AreaGate');
 
-export const getInventoriesEffect = createEffect(
-    async ({
-        searchIdentificationType = SEARCH_BY.ownerNickname,
+export const getInventoriesEffect = createEffect<
+    { searchIdentificationType?: SEARCH_BY; searchParam: string },
+    { rows: UserInventoryType[] } | undefined
+>(({ searchIdentificationType = SEARCH_BY.ownerNickname, searchParam }) =>
+    getInventoryTableData({
+        searchIdentificationType,
         searchParam,
-    }: {
-        searchIdentificationType?: SEARCH_BY;
-        searchParam: string;
-    }) => {
-        return getInventoryTableData({
-            searchIdentificationType,
-            searchParam,
-        });
-    }
+    })
 );
 
-export const getAreasEffect = createEffect(
-    async (areaNft: UserInventoryType | null) => {
-        return getTableData(
-            getAreaConfig(areaNft?.asset_id!, searchBy.assetId)
-        );
-    }
+export const getAreasEffect = createEffect<
+    UserInventoryType | null,
+    { rows: AreasDto[] } | undefined
+>((areaNft: UserInventoryType | null) =>
+    getTableData(getAreaConfig(areaNft?.asset_id!, searchBy.assetId))
 );
 
 export const landlordAreaNftStore = createStore<UserInventoryType | null>(
     null
 ).on(
     getInventoriesEffect.doneData,
-    (_, { rows }: { rows: UserInventoryType[] }) =>
-        rows?.filter(({ template_id }) =>
+    (_, data) =>
+        data?.rows?.find(({ template_id }) =>
             areasAssetTemplateId.includes(template_id)
-        )[0]
+        ) || null
 );
+
 export const landlordAreaTableStore = createStore<AreasDto | null>(null).on(
     getAreasEffect.doneData,
-    (_, { rows }) => rows?.[0]
+    (_, data) => data?.rows?.[0]
 );
 
 export const reservedSlotsCountStore = createStore(0).on(

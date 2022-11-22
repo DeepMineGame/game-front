@@ -5,7 +5,7 @@ import cn from 'classnames';
 import { Button, desktopS, useMediaQuery } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import { warehouse } from 'app/router/paths';
-import { ATOMICHUB_URL } from 'app';
+import { ATOMICHUB_URL } from 'app/constants';
 import commonStyles from '../../styles/styles.module.scss';
 import styles from './styles.module.scss';
 

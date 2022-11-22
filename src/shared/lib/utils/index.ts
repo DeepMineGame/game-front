@@ -1,21 +1,59 @@
-import axios from 'axios';
-
-import { WAX_GET_TABLE_ENDPOINT } from 'app';
+import {
+    ConnectionCountLimit,
+    CONNECTION_TIMEOUT,
+    endpoints,
+    getNextEndpoint,
+} from 'app/constants';
 import {
     ContractDto,
     ContractType,
     GetTableDataConfigType,
 } from 'entities/smartcontract';
+import { nodeUrlSwitcher } from './node-url-switcher';
 
-export const getTableData = async (config: GetTableDataConfigType) => {
-    const { data } = await axios.post(WAX_GET_TABLE_ENDPOINT, {
-        json: 'true',
-        reverse: false,
-        show_payer: false,
-        ...config,
-    });
+let [currentWaxEndpoint] = endpoints.wax;
 
-    return data;
+export const getTableData = async <T>(
+    config: GetTableDataConfigType,
+    connectionCount = 0
+): Promise<{ rows: T[] } | undefined> => {
+    let fetchedData;
+    const { abort, signal } = new AbortController();
+
+    await nodeUrlSwitcher(
+        async () => {
+            connectionCount++;
+
+            const timerId = setTimeout(() => abort(), CONNECTION_TIMEOUT);
+
+            const data = await fetch(
+                `${currentWaxEndpoint}/v1/chain/get_table_rows`,
+                {
+                    body: JSON.stringify({
+                        json: 'true',
+                        reverse: false,
+                        show_payer: false,
+                        ...config,
+                    }),
+                    method: 'POST',
+                    signal,
+                }
+            );
+
+            clearTimeout(timerId);
+
+            fetchedData = await data.json();
+        },
+        () => {
+            currentWaxEndpoint = getNextEndpoint({
+                endpointsList: endpoints.wax,
+                currentEndpoint: currentWaxEndpoint,
+            });
+        },
+        { connectionCount, connectionCountLimit: ConnectionCountLimit.wax }
+    );
+
+    return fetchedData;
 };
 
 export const getUserRoleInContract = (
@@ -60,3 +98,6 @@ export { createErrorMessage } from './create-error-message';
 export * from './merge-assets';
 export { isAssetAvailable } from './is-asset-available';
 export { getGameAssets } from './get-game-assets';
+export { wait } from './wait';
+export { isServerError } from './is-server-error';
+export { nodeUrlSwitcher } from './node-url-switcher';
