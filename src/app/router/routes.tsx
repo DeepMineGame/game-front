@@ -243,7 +243,8 @@ export const routes: AppRoute[] = [
         forAdmin: true,
         forBetaUser: true,
         titleTag: 'Unidentified seismic activity — DeepMine',
-     },
+    },
+    {
         path: paths.engineerTraining,
         Component: EngineersTraining,
         forLoggedIn: true,
