@@ -1,6 +1,6 @@
 import { isMainNet } from 'app/constants';
 
-export const ENGINEER_CERTIFICATE_ID = isMainNet ? 0 : 528605;
+export const ENGINEER_CERTIFICATE_ID = isMainNet ? 619715 : 528605;
 
 const TEST_NET_IN_GAME_IDS = [
     177577,
