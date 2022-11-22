@@ -6,16 +6,11 @@ import {
     ContractGate,
     contractStore,
     getContractEffect,
+    useContractType,
 } from 'entities/contract';
-import { ContractStatus } from 'entities/smartcontract';
 import { NotFoundPage } from '../../not-found';
 import { ContractPage } from './ContractPage';
 import { OrderPage } from './OrderPage';
-
-const ORDER_STATUS = [
-    ContractStatus.signed_by_client,
-    ContractStatus.signed_by_executor,
-];
 
 export const OperationPage = () => {
     const accountName = useAccountName();
@@ -26,6 +21,8 @@ export const OperationPage = () => {
     const contract = useStore(contractStore);
     const isContractLoading = useStore(getContractEffect.pending);
     const isLoading = isContractLoading || !accountName;
+
+    const { isOrder } = useContractType(contract);
 
     if (isLoading) {
         return (
@@ -39,7 +36,7 @@ export const OperationPage = () => {
         return <NotFoundPage />;
     }
 
-    if (ORDER_STATUS.includes(contract.status)) {
+    if (isOrder) {
         return <OrderPage contract={contract} accountName={accountName} />;
     }
 
