@@ -32,7 +32,7 @@ export const actionMap = {
     [ActionType.mine_unsetup]: 'Mine unsetup',
     [ActionType.mine_change_layer_depth]: 'Mine change layer depth',
     [ActionType.engineer_open_skill]: 'Engineer open skill',
-    [ActionType.engineer_upgrade_item]: 'Engineer open skill',
+    [ActionType.engineer_upgrade_item]: 'Upgrade in progress',
     [ActionType.engineer_level_up]: 'Engineer level up',
     [ActionType.equipment_repair]: 'Engineer level up',
 };

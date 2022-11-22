@@ -18,6 +18,10 @@ export const getStatus = (store: ContractorCabinStore) => {
         return ContractorCabinStatus.ready;
     }
 
+    if (store.miningOver) {
+        return ContractorCabinStatus.mining_over;
+    }
+
     if (store.activeMining) {
         return ContractorCabinStatus.mining_progress;
     }
@@ -26,5 +30,5 @@ export const getStatus = (store: ContractorCabinStore) => {
         return ContractorCabinStatus.mining_interrupted;
     }
 
-    return ContractorCabinStatus.mining_over;
+    return ContractorCabinStatus.undefined;
 };
