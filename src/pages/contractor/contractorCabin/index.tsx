@@ -45,6 +45,7 @@ const states = {
     [ContractorCabinStatus.mining_progress]: MiningProgress,
     [ContractorCabinStatus.mining_interrupted]: MiningError,
     [ContractorCabinStatus.mining_over]: MiningOver,
+    [ContractorCabinStatus.undefined]: Loader,
 };
 
 export const ContractorCabin: FC = () => {

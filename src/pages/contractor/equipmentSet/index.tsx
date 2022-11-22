@@ -8,6 +8,7 @@ import {
     useReloadPage,
     showWarningModal,
     useActions,
+    useUserLocation,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
@@ -17,12 +18,14 @@ import {
     contractorContractIdStore,
     EquipmentSetGate,
     contractorsStore,
+    CallToTravelNotification,
 } from 'features';
 import {
     ActionState,
     ActionType,
     installEquipment,
     InventoryNameType,
+    LOCATION_TO_ID,
     miningEquipmentNames,
     uninstallEquipment,
     UserInventoryType,
@@ -39,6 +42,7 @@ import { EquipmentCards } from './components/EquipmentCards';
 export const EquipmentSetPage: FC = () => {
     const accountName = useAccountName();
     useGate(EquipmentSetGate, { searchParam: accountName });
+    const inLocation = useUserLocation();
 
     const { t } = useTranslation();
     const reloadPage = useReloadPage();
@@ -210,6 +214,12 @@ export const EquipmentSetPage: FC = () => {
                     card={selectedInventoryModalCard}
                     visible={isInventoryCardVisible}
                     onCancel={() => setIsInventoryCardVisible(false)}
+                />
+            )}
+            {!inLocation.mine && (
+                <CallToTravelNotification
+                    toLocationId={LOCATION_TO_ID.mine}
+                    onSuccess={reloadPage}
                 />
             )}
         </Page>
