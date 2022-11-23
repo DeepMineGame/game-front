@@ -6,7 +6,7 @@ import {
     ContractGate,
     contractStore,
     getContractEffect,
-    useContractType,
+    useContractType as getContractType,
 } from 'entities/contract';
 import { NotFoundPage } from '../../not-found';
 import { ContractPage } from './ContractPage';
@@ -22,7 +22,11 @@ export const OperationPage = () => {
     const isContractLoading = useStore(getContractEffect.pending);
     const isLoading = isContractLoading || !accountName;
 
-    const { isOrder } = useContractType(contract);
+    let isOrder;
+
+    if (contract) {
+        isOrder = getContractType(contract).isOrder;
+    }
 
     if (isLoading) {
         return (

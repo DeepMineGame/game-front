@@ -4,23 +4,19 @@ import {
     ContractType,
 } from 'entities/smartcontract';
 
-export const useContractType = (contract: ContractDto | null) => {
+export const useContractType = (contract: ContractDto) => {
     const isExecutorSigned =
-        contract?.status === ContractStatus.signed_by_executor;
-    const isClientSigned = contract?.status === ContractStatus.signed_by_client;
-    const isDeletedOrder =
-        contract?.status === ContractStatus.terminated &&
-        !contract.term_initiator;
+        contract.status === ContractStatus.signed_by_executor;
+    const isClientSigned = contract.status === ContractStatus.signed_by_client;
 
-    const isOrder = isClientSigned || isExecutorSigned || isDeletedOrder;
+    const isOrder = !contract.client || !contract.executor;
     const isContract = isClientSigned && isExecutorSigned;
 
     const isMiningContract =
-        contract?.type === ContractType.mineowner_contractor;
+        contract.type === ContractType.mineowner_contractor;
     const isMineOperationContract =
-        contract?.type === ContractType.landlord_mineowner;
-    const isLevelUpgradeContract =
-        contract?.type === ContractType.level_upgrade;
+        contract.type === ContractType.landlord_mineowner;
+    const isLevelUpgradeContract = contract.type === ContractType.level_upgrade;
 
     return {
         isExecutorSigned,
