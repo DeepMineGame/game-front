@@ -21,12 +21,7 @@ export const OperationPage = () => {
     const contract = useStore(contractStore);
     const isContractLoading = useStore(getContractEffect.pending);
     const isLoading = isContractLoading || !accountName;
-
-    let isOrder;
-
-    if (contract) {
-        isOrder = getContractType(contract).isOrder;
-    }
+    const isOrder = contract && getContractType(contract).isOrder;
 
     if (isLoading) {
         return (
