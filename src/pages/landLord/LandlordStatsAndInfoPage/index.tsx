@@ -12,7 +12,7 @@ export const LandlordStatsAndInfoPage: FC = () => {
         <PageWithTabs
             tabs={[
                 {
-                    key: 1,
+                    key: 0,
                     tab: t('components.common.areaInfo'),
                     children: accountName ? (
                         <AreaStats accountName={accountName} />
