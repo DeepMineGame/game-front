@@ -6,10 +6,10 @@ import {
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { Modal } from 'antd';
+import { useActionTitle } from 'features/user';
 import {
     Action,
     ActionDto,
-    actionMap,
     getActionsTable,
     mapSearchParamForIndexPosition,
 } from 'entities/smartcontract';
@@ -32,6 +32,7 @@ export const useSmartContractAction = <T>({
 }: UseSmartContractActionParams<T>) => {
     const chainAccount = useChainAuthContext();
     const { t } = useTranslation();
+    const actionMap = useActionTitle();
 
     return async () => {
         try {

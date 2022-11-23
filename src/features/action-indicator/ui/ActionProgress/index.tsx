@@ -3,7 +3,7 @@ import { getTimeLeftFromUtc, useAccountName, useTick } from 'shared';
 import { Progress } from 'antd';
 import { useGate, useStore } from 'effector-react';
 import { CheckCircleOutlined } from '@ant-design/icons';
-import { actionMap } from 'entities/smartcontract';
+import { useActionTitle } from 'features/user';
 import { LastActionGate, $indicateActionDetails } from '../../model';
 import styles from './styles.module.scss';
 
@@ -21,13 +21,13 @@ export const ActionProgress = () => {
             100
     );
 
+    const actionName = useActionTitle()[lastAction.actionType];
+
     useTick(!isFinished);
 
     return (
         <div className={styles.actionWrapper}>
-            <div className={styles.actionName}>
-                {actionMap[lastAction.actionType]}
-            </div>
+            <div className={styles.actionName}>{actionName}</div>
             <div className={styles.progress}>
                 {!isFinished && <div className={styles.timer}>{timeLeft}</div>}
                 <Progress percent={100 - timeToPercentage} showInfo={false} />

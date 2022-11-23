@@ -157,10 +157,7 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                                     ),
                                 }}
                             />
-                            <UserAction
-                                className={styles.userAction}
-                                smartContractUserData={smartContractUserData}
-                            />
+                            <UserAction />
                         </>
                     )}
                 </div>

@@ -1,0 +1,19 @@
+@import 'src/shared';
+
+.root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: $color-neutral-neutral-1;
+  border: 1px solid $color-neutral-neutral-4;
+  border-top: none;
+
+  span {
+    color: $color-neutral-neutral-9 !important;
+  }
+
+  b {
+    color: $color-neutral-neutral-9;
+  }
+}
