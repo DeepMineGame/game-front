@@ -1,4 +1,4 @@
 export * from './action/ui';
-export { useActionTitle } from './action/hooks/useActionTitle';
+export { useActionName } from './action/hooks/useActionName';
 export * from './userActionsTable';
 export * from './userRoleTabs';

@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { ActionType } from 'entities/smartcontract';
 
-export function useActionTitle() {
+export const useActionName = (actionType: ActionType) => {
     const { t } = useTranslation();
 
     return {
@@ -23,5 +23,5 @@ export function useActionTitle() {
         [ActionType.engineer_level_up]: t('features.actions.engineerLevelUp'),
         [ActionType.equipment_repair]: t('features.actions.equipmentRepair'),
         [ActionType.undefined]: null,
-    };
-}
+    }[actionType];
+};

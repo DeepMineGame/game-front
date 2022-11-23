@@ -3,7 +3,7 @@ import { getTimeLeftFromUtc, useAccountName, useTick } from 'shared';
 import { Progress } from 'antd';
 import { useGate, useStore } from 'effector-react';
 import { CheckCircleOutlined } from '@ant-design/icons';
-import { useActionTitle } from 'features/user';
+import { useActionName } from 'features/user';
 import { LastActionGate, $indicateActionDetails } from '../../model';
 import styles from './styles.module.scss';
 
@@ -21,7 +21,7 @@ export const ActionProgress = () => {
             100
     );
 
-    const actionName = useActionTitle()[lastAction.actionType];
+    const actionName = useActionName(lastAction.actionType);
 
     useTick(!isFinished);
 

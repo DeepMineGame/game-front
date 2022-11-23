@@ -6,10 +6,11 @@ import {
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { Modal } from 'antd';
-import { useActionTitle } from 'features/user';
+import { useActionName } from 'features/user';
 import {
     Action,
     ActionDto,
+    ActionType,
     getActionsTable,
     mapSearchParamForIndexPosition,
 } from 'entities/smartcontract';
@@ -32,7 +33,8 @@ export const useSmartContractAction = <T>({
 }: UseSmartContractActionParams<T>) => {
     const chainAccount = useChainAuthContext();
     const { t } = useTranslation();
-    const actionMap = useActionTitle();
+    let actionType: ActionType = ActionType.undefined;
+    const actionName = useActionName(actionType);
 
     return async () => {
         try {
@@ -42,15 +44,16 @@ export const useSmartContractAction = <T>({
                 searchParam: chainAccount.activeUser?.accountName!,
                 limit: 1,
             });
+            actionType = data?.rows?.[0].type || ActionType.undefined;
             const lastAction: ActionDto | null = data?.rows?.[0] || null;
             const lastActionInProgress =
                 lastAction && (lastAction.finishes_at || 0) * 1000 > Date.now();
             if (lastActionInProgress) {
                 return Modal.warn({
                     title: t('components.actionModal.actionNotPossible'),
-                    content: `${t('components.actionModal.busy')} ${
-                        actionMap[lastAction.type]
-                    } ${t(
+                    content: `${t(
+                        'components.actionModal.busy'
+                    )} ${actionName} ${t(
                         'components.actionModal.willEnd'
                     )} ${getTimeLeftFromUtc(lastAction.finishes_at)}`,
                 });

@@ -5,14 +5,14 @@ import {
     $indicateActionDetails,
     LastActionGate,
 } from 'features/action-indicator';
-import { useActionTitle } from '../hooks/useActionTitle';
+import { useActionName } from '../hooks/useActionName';
 import styles from './styles.module.scss';
 
 export const UserAction: FC = () => {
     useGate(LastActionGate, { searchParam: useAccountName() });
     const lastAction = useStore($indicateActionDetails);
     const isFinished = Date.now() >= lastAction.finishAt;
-    const actionName = useActionTitle()[lastAction.actionType];
+    const actionName = useActionName(lastAction.actionType);
 
     useTick(!isFinished);
 
