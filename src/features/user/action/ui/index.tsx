@@ -1,52 +1,27 @@
-import React, { FC } from 'react';
-import { Badge } from 'antd';
+import { FC } from 'react';
 import { useGate, useStore } from 'effector-react';
-import { getTimeLeftFromUtc, isUtcDateExpired, useTick } from 'shared';
-import { actionsStore, ActionState, UserDto } from 'entities/smartcontract';
-import { UserActionGate } from '../model';
-import { useActionTitle } from '../hooks/useActionTitle';
+import { getTimeLeftFromUtc, useAccountName, useTick, Text } from 'shared';
+import {
+    $indicateActionDetails,
+    LastActionGate,
+} from 'features/action-indicator';
+import { useActionName } from '../hooks/useActionName';
+import styles from './styles.module.scss';
 
-type Props = {
-    smartContractUserData: UserDto;
-    className?: string;
-};
+export const UserAction: FC = () => {
+    useGate(LastActionGate, { searchParam: useAccountName() });
+    const lastAction = useStore($indicateActionDetails);
+    const isFinished = Date.now() >= lastAction.finishAt;
+    const actionName = useActionName(lastAction.actionType);
 
-const actionsStateToBadgeStatusMap = {
-    [ActionState.undefined]: undefined,
-    [ActionState.active]: 'processing',
-    [ActionState.interrupted]: 'default',
-    [ActionState.finished]: 'success',
-    [ActionState.claimed]: 'success',
-    [ActionState.idle]: 'default',
-} as const;
+    useTick(!isFinished);
 
-export const UserAction: FC<Props> = ({ smartContractUserData, className }) => {
-    useGate(UserActionGate, { searchParam: smartContractUserData.owner });
-    const actions = useStore(actionsStore);
-    const lastAction = actions && actions[actions.length - 1];
-    const mapActionText = useActionTitle();
-    const isActionFinished =
-        !!lastAction && isUtcDateExpired(lastAction.finishes_at);
+    if (isFinished) return null;
 
-    useTick(!!lastAction && !isActionFinished);
-
-    if (lastAction && !isActionFinished) {
-        return (
-            <div className={className}>
-                <Badge
-                    status={actionsStateToBadgeStatusMap[lastAction.state]}
-                    text={
-                        mapActionText[
-                            lastAction.type as keyof typeof mapActionText
-                        ]
-                    }
-                />
-                {!isActionFinished && (
-                    <b>{getTimeLeftFromUtc(lastAction.finishes_at)}</b>
-                )}
-            </div>
-        );
-    }
-
-    return null;
+    return (
+        <div className={styles.root}>
+            <Text>{actionName}</Text>
+            <b>{getTimeLeftFromUtc(lastAction.finishAt / 1000)}</b>
+        </div>
+    );
 };
