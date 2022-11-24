@@ -34,8 +34,7 @@ export const DepthChanger = () => {
     const timeLeft = changeDepthAction?.finishes_at
         ? getTimeLeftFromUtc(changeDepthAction.finishes_at)
         : '';
-    const mineStore = useStore($userMine);
-    const mine = mineStore?.[0];
+    const mine = useStore($userMine);
     const callAction = useSmartContractActionDynamic();
     const getMenuItemsByCount = (amount: number) =>
         Array.from(Array(amount).keys()).map((key) => ({
