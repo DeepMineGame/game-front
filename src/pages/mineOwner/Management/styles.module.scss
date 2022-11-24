@@ -6,3 +6,14 @@
   max-width: 608px;
   margin: 16px auto;
 }
+
+.mineLevelLine {
+  display: flex;
+  align-items: center;
+  gap: 4px
+}
+
+.mineLevelProgress {
+  width: 88px;
+  margin-right: 8px;
+}

@@ -52,7 +52,7 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
     const reloadPage = useReloadPage();
     const { t } = useTranslation();
     const isMinesLoading = useStore(getMinesByOwnerEffect.pending);
-    const mine = useStore($userMine)?.[0];
+    const mine = useStore($userMine);
     const isMineLoading = useStore(getMinesByOwnerEffect.pending);
     const isMineActive = mine?.state === MineState.activated;
     const isMineSetuped = mine?.state === MineState.setuped;
