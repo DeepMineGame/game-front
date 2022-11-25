@@ -33,7 +33,7 @@ export const MineOwnerMenu: FC<Props> = ({
     useGate(MineConsumerGate, { searchParam: accountName });
     const navigate = useNavigate();
     const { t } = useTranslation();
-    const userMine = useStore($userMine)?.[0];
+    const userMine = useStore($userMine);
     const cabinState = useStore($mineOwnerCabinState);
     const baseButtonDisableStates = [mineOwnerCabinState.needMineNft];
     const statusThatDisableManagementButton = [...baseButtonDisableStates];

@@ -16,13 +16,16 @@ export const fetchDmeBalance = async ({
     connectionCount?: number;
 }): Promise<string | undefined> => {
     let fetchedData;
-    const { abort, signal } = new AbortController();
+    const abortController = new AbortController();
 
     await nodeUrlSwitcher(
         async () => {
             connectionCount++;
 
-            const timerId = setTimeout(() => abort(), CONNECTION_TIMEOUT);
+            const timerId = setTimeout(
+                () => abortController.abort(),
+                CONNECTION_TIMEOUT
+            );
 
             const data = await fetch(
                 `${currentWaxEndpoint}/v1/chain/get_table_rows`,
@@ -36,7 +39,7 @@ export const fetchDmeBalance = async ({
                         table: 'accounts',
                     }),
                     method: 'POST',
-                    signal,
+                    signal: abortController.signal,
                 }
             );
 
