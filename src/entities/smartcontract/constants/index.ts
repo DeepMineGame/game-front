@@ -301,6 +301,16 @@ const TEST_NET_IN_GAME_IDS = [
     528154,
     ENGINEER_CERTIFICATE_ID,
     528605,
+    // Mines
+    541314,
+    541315,
+    541316,
+    541317,
+    541318,
+    541319,
+    541320,
+    541321,
+    541322,
 ];
 
 const MAIN_NET_IN_GAME_IDS = [
@@ -637,6 +647,16 @@ const MAIN_NET_IN_GAME_IDS = [
     514916,
     514917,
     514918,
+    // Mines
+    624915,
+    624916,
+    624917,
+    624918,
+    624919,
+    624920,
+    624922,
+    624928,
+    625019,
 ];
 
 export const IN_GAME_NFT_IDS = isMainNet
@@ -887,6 +907,16 @@ export const ID_TO_INVENTORY = isMainNet
           621888: 'Mine',
           621889: 'Mine',
           621890: 'Mine',
+          624915: 'Mine',
+          624916: 'Mine',
+          624917: 'Mine',
+          624918: 'Mine',
+          624919: 'Mine',
+          624920: 'Mine',
+          624922: 'Mine',
+          624928: 'Mine',
+          625019: 'Mine',
+
           [ENGINEER_CERTIFICATE_ID]: 'Engineer Certificate',
       } as const)
     : ({
@@ -916,27 +946,34 @@ export const ID_TO_INVENTORY = isMainNet
           176872: 'Wandering Reactor',
           176871: 'Wandering Reactor',
           176451: 'Mine',
+          541314: 'Mine',
+          541315: 'Mine',
+          541316: 'Mine',
+          541317: 'Mine',
+          541318: 'Mine',
+          541319: 'Mine',
+          541320: 'Mine',
+          541321: 'Mine',
+          541322: 'Mine',
           [ENGINEER_CERTIFICATE_ID]: 'Engineer Certificate',
       } as const);
 
-export const mineAssetTemplateId = isMainNet ? 314739 : 176451;
+export const mineAssetTemplateId = isMainNet
+    ? [
+          314739, 624915, 624916, 624917, 624918, 624919, 624920, 624922,
+          624928, 625019,
+      ]
+    : [
+          176451, 541314, 541315, 541316, 541317, 541318, 541319, 541320,
+          541321, 541322,
+      ];
 export const areasAssetTemplateId = isMainNet
     ? [314749, 314748, 314747, 314744, 314743]
     : [176450, 176449, 176448, 176447, 176446];
 
 export type InventoryIdTypeWithName = keyof typeof ID_TO_INVENTORY;
-export type InventoryIdType =
-    | InventoryIdTypeWithName
-    | typeof mineAssetTemplateId;
+export type InventoryIdType = InventoryIdTypeWithName;
 export type InventoryNameType = typeof ID_TO_INVENTORY[InventoryIdTypeWithName];
-
-export const INVENTORY_NAMES = [
-    ...new Set(
-        Object.entries(ID_TO_INVENTORY)
-            .map(([, value]) => value)
-            .filter((v) => v)
-    ),
-] as InventoryNameType[];
 
 export enum ACTION_STATE_TO_ID {
     undefined,
@@ -944,13 +981,6 @@ export enum ACTION_STATE_TO_ID {
     interrupted,
     finished,
     claimed,
-}
-
-export enum INDEX_POSITION_CONTRACT {
-    undefined,
-    contractId,
-    clientId,
-    nickname,
 }
 
 export enum INDEX_POSITION_INVENTORY {

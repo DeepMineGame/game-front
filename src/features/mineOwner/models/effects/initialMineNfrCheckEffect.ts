@@ -8,8 +8,8 @@ import { mineOwnerCabinStateResolver } from '../mineOwnerCabinState';
 import { checkLandLordContractMineOwnerActiveContractEffect } from './checkLandLordContractMineOwnerActiveContractEffect';
 
 export const hasMineNftFilter = (inventories: UserInventoryType[] | null) => {
-    return inventories?.find(
-        ({ template_id }) => template_id === mineAssetTemplateId
+    return inventories?.find(({ template_id }) =>
+        mineAssetTemplateId.includes(template_id)
     );
 };
 

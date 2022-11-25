@@ -94,7 +94,7 @@ export const MineOwnerContractor: FC<TypeStepProps> = ({
             </Form.Item>
             <PersonalizedOrderCheckbox isSelfClient={!isClient} form={form} />
             <AssetSelectField
-                templatesId={[mineAssetTemplateId]}
+                templatesId={mineAssetTemplateId}
                 form={form}
                 accountName={accountName}
             />
