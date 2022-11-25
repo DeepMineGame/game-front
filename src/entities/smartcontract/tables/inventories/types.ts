@@ -46,7 +46,7 @@ export enum EquipmentType {
 
 export type UserInventoryType = {
     asset_id: string;
-    template_id: InventoryIdType;
+    template_id: number;
     owner: string;
     in_use: InUseType;
     struct_type: StructType;

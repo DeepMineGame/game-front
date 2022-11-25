@@ -88,7 +88,7 @@ export const LandLordMineOwner: FC<TypeStepProps> = ({
                 templatesId={
                     isLandlordRoleSelected
                         ? areasAssetTemplateId
-                        : [mineAssetTemplateId]
+                        : mineAssetTemplateId
                 }
                 form={form}
                 accountName={accountName}
