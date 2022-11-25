@@ -822,7 +822,8 @@
       "equipmentRefurbish": "Equipment refurbish",
       "engineerUnlockSkill": "Engineer Open Skill",
       "engineerUpgradeItem": "Engineer Upgrade Item",
-      "engineerLevelUp": "Engineer Level Up"
+      "engineerLevelUp": "Engineer Level Up",
+      "mineChangeLayerDepth": "Mine change layer depth"
     }
   },
   "roles": {

@@ -916,6 +916,7 @@ export const ID_TO_INVENTORY = isMainNet
           624922: 'Mine',
           624928: 'Mine',
           625019: 'Mine',
+
           [ENGINEER_CERTIFICATE_ID]: 'Engineer Certificate',
       } as const)
     : ({

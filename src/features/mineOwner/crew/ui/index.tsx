@@ -13,7 +13,7 @@ export const MineOwnerCrew: FC = () => {
     const accountName = useAccountName();
     useGate(MineConsumerGate, { searchParam: accountName });
     const mines = useStore($userMine);
-    const activeSlots = mines?.[0]?.contractor_slots.filter(
+    const activeSlots = mines?.contractor_slots.filter(
         (slot) => slot?.contractor
     );
     const mapSlotToTableDate = activeSlots?.map((slot, i) => ({
@@ -24,11 +24,11 @@ export const MineOwnerCrew: FC = () => {
         ejection: 0,
         activity: 0,
     }));
-    const mapEmptySlotsToAddButton = mines?.[0]?.contractor_slots
+    const mapEmptySlotsToAddButton = mines?.contractor_slots
         .filter((slot) => !slot?.contractor)
-        // eslint-disable-next-line react/no-array-index-key
         .map((_, i) => (
             <AddItem
+                // eslint-disable-next-line react/no-array-index-key
                 key={i}
                 text={t('components.common.table.addNewContractor')}
                 link={`${createOrder}?${orderFields.contractType}=${ContractType.mineowner_contractor}&${orderFields.isClient}=${ContractRole.client}`}

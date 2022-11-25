@@ -23,10 +23,7 @@ export function CitizenInfo({ accountName }: Props) {
                         Location: locationMap[smartContractUserData.location],
                     }}
                 />
-                <UserAction
-                    className={styles.userAction}
-                    smartContractUserData={smartContractUserData}
-                />
+                <UserAction />
                 <KeyValueTable
                     items={{
                         Energy: smartContractUserData.stamina,

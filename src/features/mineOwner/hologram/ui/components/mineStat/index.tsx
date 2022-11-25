@@ -43,8 +43,7 @@ export const MineStat = () => {
                         {`${feeToClaim / 10 ** 8}`}
                     </span>
                 ),
-                [t('pages.mining.mineDepth')]:
-                    userMine?.[0]?.layer_depth ?? '-',
+                [t('pages.mining.mineDepth')]: userMine?.layer_depth ?? '-',
             }}
         />
     );
