@@ -3,6 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { ShareAltOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import { useContractType } from 'entities/contract';
+import {
+    normalizeAttrs,
+    raritiesTranslationMap,
+    RarityType,
+} from 'entities/smartcontract';
 import { secondsToDays, Text, toLocaleDate } from 'shared/ui';
 import { ContractState, TableWithTitle } from '..';
 import { ContractProps } from '../../types';
@@ -11,6 +16,7 @@ import styles from './styles.module.scss';
 const GeneralDataTable: FC<ContractProps> = ({ contract, accountName }) => {
     const { t } = useTranslation();
     const { isOrder } = useContractType(contract);
+    const attributes = normalizeAttrs(contract.attrs);
 
     const generalData = {
         [t(
@@ -42,6 +48,17 @@ const GeneralDataTable: FC<ContractProps> = ({ contract, accountName }) => {
             contract.contract_duration
         )} ${t('components.common.days').toLowerCase()}`,
     };
+
+    if (attributes.level) {
+        generalData[t('pages.serviceMarket.createOrder.mineLevel')] =
+            attributes.level;
+    }
+    if (attributes.rarity !== undefined) {
+        const rarity: RarityType = Number(attributes.rarity);
+        generalData[t('pages.serviceMarket.createOrder.mineRarity')] = t(
+            raritiesTranslationMap[rarity]
+        );
+    }
 
     return (
         <TableWithTitle

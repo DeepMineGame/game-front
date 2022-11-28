@@ -1,14 +1,15 @@
 import { FC } from 'react';
 import { ContractType } from 'entities/smartcontract';
 import { orderFields } from 'entities/order';
-import { MineInformation } from './MineInformation';
 import { LevelUpgradeInformation } from './LevelUpgradeInformation';
 import { GeneralInformationStepProps } from './interface';
+import { MiningContractInformation } from './MiningContractInformation';
+import { MineSetupInformation } from './MineSetupInformation';
 
 const ContentMap: Record<ContractType, FC<GeneralInformationStepProps>> = {
     [ContractType.undefined]: () => null,
-    [ContractType.landlord_mineowner]: MineInformation,
-    [ContractType.mineowner_contractor]: MineInformation,
+    [ContractType.landlord_mineowner]: MineSetupInformation,
+    [ContractType.mineowner_contractor]: MiningContractInformation,
     [ContractType.level_upgrade]: LevelUpgradeInformation,
 };
 

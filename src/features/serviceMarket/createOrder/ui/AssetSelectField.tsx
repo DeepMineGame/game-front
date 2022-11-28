@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { FormInstance, Form, Alert } from 'antd';
 import { useGate, useStore } from 'effector-react';
 import { Select } from 'shared';
@@ -35,6 +35,13 @@ export const AssetSelectField: FC<{
 
     const { t } = useTranslation();
 
+    useEffect(() => {
+        form.setFieldsValue({
+            ...form.getFieldsValue(),
+            [orderFields.assetId]: null,
+        });
+    }, [isClientField, form]);
+
     if (
         (isMineOwnerRoleSelected || isMineSetupContractTypeSelected) &&
         isClientField !== undefined
@@ -57,9 +64,9 @@ export const AssetSelectField: FC<{
                     }
                     options={[
                         ...activeInventoryAssetsFilteredByTemplates.map(
-                            ({ asset_id, rarity }) => ({
+                            ({ asset_id, rarity, level }) => ({
                                 value: asset_id,
-                                label: `ID${asset_id}, ${rarityMap[rarity]}`,
+                                label: `ID${asset_id}, ${rarityMap[rarity]}, Level ${level}`,
                             })
                         ),
                         ...atomicAssetsFilteredByTemplates.map(
