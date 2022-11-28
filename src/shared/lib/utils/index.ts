@@ -1,60 +1,38 @@
-import {
-    ConnectionCountLimit,
-    CONNECTION_TIMEOUT,
-    endpoints,
-    getNextEndpoint,
-} from 'app/constants';
+import { CONNECTION_TIMEOUT } from 'app/constants';
 import {
     ContractDto,
     ContractType,
     GetTableDataConfigType,
 } from 'entities/smartcontract';
-import { nodeUrlSwitcher } from './node-url-switcher';
-
-let [currentWaxEndpoint] = endpoints.wax;
+import { RequestSubject, poolRequest } from './node-url-switcher';
 
 export const getTableData = async <T>(
-    config: GetTableDataConfigType,
-    connectionCount = 0
+    config: GetTableDataConfigType
 ): Promise<{ rows: T[] } | undefined> => {
     let fetchedData;
-    const abortController = new AbortController();
 
-    await nodeUrlSwitcher(
-        async () => {
-            connectionCount++;
+    await poolRequest(RequestSubject.Wax, async (endpoint: string) => {
+        const abortController = new AbortController();
 
-            const timerId = setTimeout(
-                () => abortController.abort(),
-                CONNECTION_TIMEOUT
-            );
+        const timerId = setTimeout(
+            () => abortController.abort(),
+            CONNECTION_TIMEOUT
+        );
 
-            const data = await fetch(
-                `${currentWaxEndpoint}/v1/chain/get_table_rows`,
-                {
-                    body: JSON.stringify({
-                        json: 'true',
-                        reverse: false,
-                        show_payer: false,
-                        ...config,
-                    }),
-                    method: 'POST',
-                    signal: abortController.signal,
-                }
-            );
+        const data = await fetch(`${endpoint}/v1/chain/get_table_rows`, {
+            body: JSON.stringify({
+                json: 'true',
+                reverse: false,
+                show_payer: false,
+                ...config,
+            }),
+            method: 'POST',
+            signal: abortController.signal,
+        });
 
-            clearTimeout(timerId);
-
-            fetchedData = await data.json();
-        },
-        () => {
-            currentWaxEndpoint = getNextEndpoint({
-                endpointsList: endpoints.wax,
-                currentEndpoint: currentWaxEndpoint,
-            });
-        },
-        { connectionCount, connectionCountLimit: ConnectionCountLimit.wax }
-    );
+        clearTimeout(timerId);
+        fetchedData = await data.json();
+    });
 
     return fetchedData;
 };
@@ -103,4 +81,4 @@ export { isAssetAvailable } from './is-asset-available';
 export { getGameAssets } from './get-game-assets';
 export { wait } from './wait';
 export { isServerError } from './is-server-error';
-export { nodeUrlSwitcher } from './node-url-switcher';
+export { poolRequest, RequestSubject } from './node-url-switcher';

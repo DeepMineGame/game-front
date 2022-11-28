@@ -1,101 +1,65 @@
 import axios from 'axios';
-import {
-    endpoints,
-    ConnectionCountLimit,
-    getNextEndpoint,
-    CONNECTION_TIMEOUT,
-} from 'app/constants';
-import { nodeUrlSwitcher } from 'shared';
+import { CONNECTION_TIMEOUT } from 'app/constants';
+import { RequestSubject, poolRequest } from 'shared';
 import { UserInventoryType } from '../smartcontract';
 import { AssetDataType } from './types';
 
-let [currentAtomicEndpoint] = endpoints.atomic;
-let [currentWaxEndpoint] = endpoints.wax;
-
 export const getAssets = async <T>(
-    ids: T,
-    connectionCount = 0
+    ids: T
 ): Promise<
     T extends string[] ? AssetDataType[] : AssetDataType | undefined
 > => {
     const isIdsArray = Array.isArray(ids);
     let fetchedData: any;
 
-    await nodeUrlSwitcher(
-        async () => {
-            connectionCount++;
+    await poolRequest(RequestSubject.Atomic, async (endpoint: string) => {
+        const { data } = await axios.get(
+            `${endpoint}/assets${
+                isIdsArray
+                    ? `?ids=${ids.filter((i) => i).join(',')}`
+                    : `/${ids}`
+            }`
+        );
 
-            const { data } = await axios.get(
-                `${currentAtomicEndpoint}/assets${
-                    isIdsArray
-                        ? `?ids=${ids.filter((i) => i).join(',')}`
-                        : `/${ids}`
-                }`
-            );
-
-            fetchedData = data?.data || (isIdsArray ? [] : undefined);
-        },
-        () => {
-            currentAtomicEndpoint = getNextEndpoint({
-                endpointsList: endpoints.atomic,
-                currentEndpoint: currentAtomicEndpoint,
-            });
-        },
-        { connectionCount, connectionCountLimit: ConnectionCountLimit.atomic }
-    );
+        fetchedData = data?.data || (isIdsArray ? [] : undefined);
+    });
 
     return fetchedData;
 };
 
 export const getAtomicAssetsByUser = async ({
     searchParam,
-    connectionCount = 0,
 }: {
     searchParam: string;
-    connectionCount?: number;
 }): Promise<UserInventoryType[] | undefined> => {
     let fetchedData;
-    const abortController = new AbortController();
 
-    await nodeUrlSwitcher(
-        async () => {
-            connectionCount++;
+    await poolRequest(RequestSubject.Wax, async (endpoint: string) => {
+        const abortController = new AbortController();
 
-            const timerId = setTimeout(
-                () => abortController.abort(),
-                CONNECTION_TIMEOUT
-            );
+        const timerId = setTimeout(
+            () => abortController.abort(),
+            CONNECTION_TIMEOUT
+        );
 
-            const data = await fetch(
-                `${currentWaxEndpoint}/v1/chain/get_table_rows`,
-                {
-                    body: JSON.stringify({
-                        json: true,
-                        code: 'atomicassets',
-                        scope: searchParam,
-                        table: 'assets',
-                        index_position: 1,
-                        limit: 500,
-                        reverse: false,
-                        show_payer: false,
-                    }),
-                    method: 'POST',
-                    signal: abortController.signal,
-                }
-            );
+        const data = await fetch(`${endpoint}/v1/chain/get_table_rows`, {
+            body: JSON.stringify({
+                json: true,
+                code: 'atomicassets',
+                scope: searchParam,
+                table: 'assets',
+                index_position: 1,
+                limit: 500,
+                reverse: false,
+                show_payer: false,
+            }),
+            method: 'POST',
+            signal: abortController.signal,
+        });
 
-            clearTimeout(timerId);
-
-            fetchedData = (await data.json()).rows;
-        },
-        () => {
-            currentWaxEndpoint = getNextEndpoint({
-                endpointsList: endpoints.wax,
-                currentEndpoint: currentWaxEndpoint,
-            });
-        },
-        { connectionCount, connectionCountLimit: ConnectionCountLimit.wax }
-    );
+        clearTimeout(timerId);
+        fetchedData = (await data.json()).rows;
+    });
 
     return fetchedData;
 };
