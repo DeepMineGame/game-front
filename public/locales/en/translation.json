@@ -209,7 +209,10 @@
       "contractBetweenMineownerAndLandlordIsntValid": "<b>Mine operation contract</b> between a Mine Owner and a Landlord <b>is not valid</b>. Please contact the Mine owner to resolve the issue.",
       "mineDepthProcess": "Mine in the process of the depth changes. The mining is impossible. Please wait till the process is finished",
       "openContract": "Open contract",
-      "configureButton": "Configure"
+      "configureButton": "Configure",
+      "availableForClaim": "Available for claim",
+      "transferredToYourAccount": "Transferred to your account",
+      "details": "Details"
     },
     "notFound": {
       "title": "This page is lost in the void",
