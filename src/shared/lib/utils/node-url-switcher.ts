@@ -1,37 +1,45 @@
+import { ConnectionCountLimit } from 'app/constants';
 import { isServerError } from './is-server-error';
-import { wait } from './wait';
+import { pool } from './requests/pool';
 
-type Config = {
-    connectionCount: number;
-    connectionCountLimit: number;
-};
+export enum RequestSubject {
+    Wax = 1,
+    Atomic = 2,
+}
 
-export const nodeUrlSwitcher = async (
-    requestFn: () => Promise<any>,
-    switchFn: () => void,
-    { connectionCount, connectionCountLimit }: Config
+export const poolRequest = async (
+    subject: RequestSubject,
+    requestFn: (endpoint: string) => Promise<any>
 ): Promise<any> => {
-    try {
-        await requestFn();
-    } catch (e) {
-        const error = e as Error & { response: { status: number } };
+    let tries = 0;
 
-        if (isServerError(error)) {
-            if (connectionCount >= connectionCountLimit)
-                throw new Error('Network Error', error);
+    const limit =
+        subject === RequestSubject.Wax
+            ? ConnectionCountLimit.wax
+            : ConnectionCountLimit.atomic;
 
-            switchFn();
+    while (tries < limit) {
+        const endpoint =
+            subject === RequestSubject.Wax
+                ? pool.getWaxEndpoint()
+                : pool.getAtomicEndpoint();
 
-            await wait(1);
+        try {
+            await requestFn(endpoint.url);
+            endpoint.processing--;
+            return;
+        } catch (e) {
+            const error = e as Error & { response: { status: number } };
 
-            return await nodeUrlSwitcher(requestFn, switchFn, {
-                connectionCount,
-                connectionCountLimit,
-            });
+            tries++;
+            endpoint.processing--;
+            endpoint.networkErrors++;
+
+            if (!isServerError(error)) {
+                throw new Error(error.message);
+            }
+
+            if (tries >= limit) throw new Error('Network Error', error);
         }
-
-        throw new Error(error.message);
     }
-
-    return undefined;
 };
