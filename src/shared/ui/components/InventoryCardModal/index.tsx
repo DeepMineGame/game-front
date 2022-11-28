@@ -22,7 +22,6 @@ import {
 import { rarityMap, repairEquipment } from 'entities/smartcontract';
 import { balancesStore } from 'entities/user';
 import {
-    ActionModal,
     Button,
     DepreciationProgressBar,
     Link,
@@ -33,6 +32,7 @@ import {
     Margin,
     getAssetStatus,
     Card,
+    ModalWithTable,
 } from 'shared/ui/ui-kit';
 import styles from './styles.module.scss';
 
@@ -273,7 +273,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                     </div>
                 </div>
             </div>
-            <ActionModal
+            <ModalWithTable
                 visible={isModalVisible}
                 texts={{
                     title:
@@ -281,6 +281,9 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             ? t('features.actions.equipmentRepair')
                             : t('features.actions.equipmentRefurbish'),
                     onOk: t(`pages.equipmentSet.cardModal.${modalData?.type}`),
+                    subtitle: t(
+                        'components.common.actionModal.descriptionTime'
+                    ),
                 }}
                 onSubmit={() => {
                     if (Number(dmeBalance) < modalData.costs.coinAmount) {
@@ -297,7 +300,12 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                         refurbishAction();
                 }}
                 onCancel={() => setIsModalVisible(false)}
-                costs={modalData?.costs}
+                items={{
+                    [t('kit.timer.time')]: modalData?.costs.timeSeconds,
+                    [t('kit.timer.energy')]: modalData?.costs.energy,
+                    [t('components.common.button.dme')]:
+                        modalData?.costs.coinAmount,
+                }}
             />
         </Modal>
     );

@@ -6,7 +6,6 @@ import { Badge } from 'antd';
 import {
     Button,
     Title,
-    ActionModal,
     green6,
     orange6,
     ExclamationModal,
@@ -127,12 +126,17 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
                 description={t('pages.areaManagement.unengageDescription')}
                 submitText={t('pages.areaManagement.unengage')}
             />
-            <ActionModal
+            <ModalWithTable
+                items={{
+                    [t('kit.timer.time')]: 1,
+                }}
                 texts={{
                     onOk: t('components.common.button.activate'),
                     title: t('pages.areaManagement.engage'),
+                    subtitle: t(
+                        'components.common.actionModal.descriptionTime'
+                    ),
                 }}
-                costs={{ timeSeconds: 1 }}
                 visible={isModalActionVisible}
                 onCancel={() => setIsModalActionVisible(false)}
                 onSubmit={onEngage}

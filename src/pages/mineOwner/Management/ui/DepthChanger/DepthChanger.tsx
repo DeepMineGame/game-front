@@ -2,9 +2,9 @@ import { Dropdown, Menu, Modal } from 'antd';
 import React, { useState } from 'react';
 import { $userMine, useSmartContractActionDynamic } from 'features';
 import {
-    ActionModal,
     getTimeLeftFromUtc,
     Loader,
+    ModalWithTable,
     useAccountName,
     useReloadPage,
     useTick,
@@ -101,12 +101,17 @@ export const DepthChanger = () => {
                       )} ${changeDepthToAttr}`
                     : timeExpireText}
             </Dropdown.Button>
-            <ActionModal
+            <ModalWithTable
                 texts={{
                     onOk: t('components.common.button.activate'),
                     title: t('features.mineOwner.management.changeMineDepth'),
+                    subtitle: t(
+                        'components.common.actionModal.descriptionTime'
+                    ),
                 }}
-                costs={{ timeSeconds: 15 }}
+                items={{
+                    [t('kit.timer.time')]: 15,
+                }}
                 visible={isModalVisible}
                 onCancel={() => setModalVisible(false)}
                 onSubmit={startChangeDepthAction}

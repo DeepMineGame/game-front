@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import {
-    ActionModal,
     Button,
     desktopS,
+    ModalWithTable,
     showSuccessModal,
     useAccountName,
     useMediaQuery,
@@ -136,12 +136,17 @@ export function useActionsButton() {
 
         [mineOwnerCabinState.needSetupMine]: (
             <>
-                <ActionModal
+                <ModalWithTable
+                    items={{
+                        [t('kit.timer.time')]: 1,
+                    }}
                     texts={{
                         onOk: t('components.common.button.activate'),
                         title: t('features.mineOwner.setupMine'),
+                        subtitle: t(
+                            'components.common.actionModal.descriptionTime'
+                        ),
                     }}
-                    costs={{ timeSeconds: 1 }}
                     visible={isSetupMineModalVisible}
                     onCancel={() => setSetupMineModalVisible(false)}
                     onSubmit={

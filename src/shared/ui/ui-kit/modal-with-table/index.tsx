@@ -19,6 +19,7 @@ type Props = {
     items: Record<string, ReactNode>;
 };
 
+// TODO: remove EquipmentInstallationModal
 export const ModalWithTable: FC<Props> = ({
     visible,
     onCancel,
