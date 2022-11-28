@@ -2,6 +2,7 @@ import { Dropdown, Menu, Modal } from 'antd';
 import React, { useState } from 'react';
 import { $userMine, useSmartContractActionDynamic } from 'features';
 import {
+    getTimeLeft,
     getTimeLeftFromUtc,
     Loader,
     ModalWithTable,
@@ -110,7 +111,7 @@ export const DepthChanger = () => {
                     ),
                 }}
                 items={{
-                    [t('kit.timer.time')]: 15,
+                    [t('kit.timer.time')]: getTimeLeft(15, true),
                 }}
                 visible={isModalVisible}
                 onCancel={() => setModalVisible(false)}

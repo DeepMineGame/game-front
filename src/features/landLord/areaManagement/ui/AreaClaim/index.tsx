@@ -13,6 +13,7 @@ import {
     showSuccessModal,
     getDmeAmount,
     ModalWithTable,
+    getTimeLeft,
 } from 'shared';
 import { useSmartContractAction } from 'features/hooks';
 import { engageArea, unEngageArea, claimArea } from 'entities/smartcontract';
@@ -128,7 +129,7 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
             />
             <ModalWithTable
                 items={{
-                    [t('kit.timer.time')]: 1,
+                    [t('kit.timer.time')]: getTimeLeft(1, true),
                 }}
                 texts={{
                     onOk: t('components.common.button.activate'),

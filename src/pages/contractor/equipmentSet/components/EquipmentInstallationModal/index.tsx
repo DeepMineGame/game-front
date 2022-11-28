@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, ModalWithTable } from 'shared';
+import { Button, getTimeLeft, ModalWithTable } from 'shared';
 import styles from './styles.module.scss';
 
 interface Props {
@@ -51,7 +51,7 @@ export const EquipmentInstallationModal = ({
                 onCancel={toggleModal}
                 onSubmit={isInstall ? handleInstall : handleUninstall}
                 items={{
-                    [t('kit.timer.time')]: 1,
+                    [t('kit.timer.time')]: getTimeLeft(1, true),
                     [t('kit.timer.energy')]: 0,
                 }}
                 texts={{

@@ -1,6 +1,7 @@
 import {
     DMECoinIcon,
     GetCostParams,
+    getTimeLeft,
     isAssetAvailable,
     Modal,
     useAccountName,
@@ -301,7 +302,10 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                 }}
                 onCancel={() => setIsModalVisible(false)}
                 items={{
-                    [t('kit.timer.time')]: modalData?.costs.timeSeconds,
+                    [t('kit.timer.time')]: getTimeLeft(
+                        modalData?.costs.timeSeconds,
+                        true
+                    ),
                     [t('kit.timer.energy')]: modalData?.costs.energy,
                     [t('components.common.button.dme')]:
                         modalData?.costs.coinAmount,

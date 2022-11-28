@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import {
     Button,
     desktopS,
+    getTimeLeft,
     ModalWithTable,
     showSuccessModal,
     useAccountName,
@@ -138,7 +139,7 @@ export function useActionsButton() {
             <>
                 <ModalWithTable
                     items={{
-                        [t('kit.timer.time')]: 1,
+                        [t('kit.timer.time')]: getTimeLeft(1, true),
                     }}
                     texts={{
                         onOk: t('components.common.button.activate'),

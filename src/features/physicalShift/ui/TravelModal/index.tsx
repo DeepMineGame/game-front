@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { ModalWithTable } from 'shared';
+import { getTimeLeft, ModalWithTable } from 'shared';
 import { LOCATION_TO_ID } from 'entities/smartcontract';
 
 interface SignContractProps {
@@ -41,7 +41,7 @@ export const TravelModal = ({
                 subtitle: t('components.common.actionModal.descriptionTime'),
             }}
             items={{
-                [t('kit.timer.time')]: 20,
+                [t('kit.timer.time')]: getTimeLeft(20, true),
                 [t('kit.timer.energy')]: 0,
             }}
         />
