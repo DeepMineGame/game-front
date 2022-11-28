@@ -5,7 +5,6 @@ import { Button } from '../Button';
 import { Title } from '../typography/Title';
 import { Modal } from '../Modal';
 import { KeyValueTable } from '../KeyValueTable';
-import styles from './styles.module.scss';
 
 type Props = {
     visible: boolean;
@@ -31,7 +30,6 @@ export const ModalWithTable: FC<Props> = ({
 
     return (
         <Modal
-            className={styles.modal}
             visible={visible}
             title={
                 <Title fontFamily="bai" level={5}>
