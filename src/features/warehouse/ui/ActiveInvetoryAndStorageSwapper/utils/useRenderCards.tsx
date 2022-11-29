@@ -16,7 +16,7 @@ export function useRenderCards() {
         return Array.from(items)?.map((card) => (
             <div
                 onDragStart={() => isAssetAvailable(card) && onDragStart(card)}
-                key={card.template_id}
+                key={card.asset_id}
             >
                 <Card
                     inventory={card}
