@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActionModal, Button } from 'shared';
+import { Button, ActionModal } from 'shared';
 import styles from './styles.module.scss';
 
 interface Props {
@@ -50,7 +50,7 @@ export const EquipmentInstallationModal = ({
                 visible={infoModalVisibility}
                 onCancel={toggleModal}
                 onSubmit={isInstall ? handleInstall : handleUninstall}
-                costs={{ timeSeconds: 1, coinAmount: 0 }}
+                costs={{ timeSeconds: 1, energy: 0 }}
                 texts={{
                     title: t('pages.equipmentSet.main.installation'),
                     onOk: isInstall

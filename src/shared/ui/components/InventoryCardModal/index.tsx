@@ -22,6 +22,7 @@ import {
 import { rarityMap, repairEquipment } from 'entities/smartcontract';
 import { balancesStore } from 'entities/user';
 import {
+    ActionModal,
     Button,
     DepreciationProgressBar,
     Link,
@@ -32,7 +33,6 @@ import {
     Margin,
     getAssetStatus,
     Card,
-    ActionModal,
 } from 'shared/ui/ui-kit';
 import styles from './styles.module.scss';
 
@@ -297,7 +297,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                         refurbishAction();
                 }}
                 onCancel={() => setIsModalVisible(false)}
-                costs={modalData.costs}
+                costs={modalData?.costs}
             />
         </Modal>
     );

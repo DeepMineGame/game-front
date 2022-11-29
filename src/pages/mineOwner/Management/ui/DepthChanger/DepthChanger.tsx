@@ -2,9 +2,9 @@ import { Dropdown, Menu, Modal } from 'antd';
 import React, { useState } from 'react';
 import { $userMine, useSmartContractActionDynamic } from 'features';
 import {
+    ActionModal,
     getTimeLeftFromUtc,
     Loader,
-    ActionModal,
     useAccountName,
     useReloadPage,
     useTick,

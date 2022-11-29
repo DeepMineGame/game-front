@@ -6,6 +6,7 @@ import { Badge } from 'antd';
 import {
     Button,
     Title,
+    ActionModal,
     green6,
     orange6,
     ExclamationModal,
@@ -13,7 +14,6 @@ import {
     showSuccessModal,
     getDmeAmount,
     ModalWithTable,
-    ActionModal,
 } from 'shared';
 import { useSmartContractAction } from 'features/hooks';
 import { engageArea, unEngageArea, claimArea } from 'entities/smartcontract';
@@ -128,12 +128,12 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
                 submitText={t('pages.areaManagement.unengage')}
             />
             <ActionModal
-                costs={{ timeSeconds: 1 }}
                 texts={{
                     onOk: t('components.common.button.activate'),
                     title: t('pages.areaManagement.engage'),
                 }}
                 visible={isModalActionVisible}
+                costs={{ timeSeconds: 1 }}
                 onCancel={() => setIsModalActionVisible(false)}
                 onSubmit={onEngage}
             />

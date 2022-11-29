@@ -39,7 +39,10 @@ export const TravelModal = ({
                 ),
                 onOk: t('pages.contractor.travel.travel'),
             }}
-            costs={{ timeSeconds: 20, energy: 0 }}
+            costs={{
+                timeSeconds: 20,
+                energy: 0,
+            }}
         />
     );
 };
