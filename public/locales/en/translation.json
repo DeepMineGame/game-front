@@ -216,7 +216,7 @@
     },
     "notFound": {
       "title": "This page is lost in the void",
-      "message": "We'll try to find her, but we don't know how long it will take."
+      "message": "We'll try to find it, but we don't know how long it will take."
     },
     "interfaceStub": {
       "title": "Unidentified seismic activity on Eleazar",
