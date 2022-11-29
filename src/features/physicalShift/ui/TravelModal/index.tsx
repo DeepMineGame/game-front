@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { getTimeLeft, ModalWithTable } from 'shared';
+import { ActionModal } from 'shared';
 import { LOCATION_TO_ID } from 'entities/smartcontract';
 
 interface SignContractProps {
@@ -27,7 +27,7 @@ export const TravelModal = ({
     const titleLocalesKey = titlesMap[locationId];
 
     return (
-        <ModalWithTable
+        <ActionModal
             visible={visible}
             onCancel={onClose}
             onSubmit={onClick}
@@ -38,12 +38,8 @@ export const TravelModal = ({
                         : 'pages.contractor.travel.title'
                 ),
                 onOk: t('pages.contractor.travel.travel'),
-                subtitle: t('components.common.actionModal.descriptionTime'),
             }}
-            items={{
-                [t('kit.timer.time')]: getTimeLeft(20, true),
-                [t('kit.timer.energy')]: 0,
-            }}
+            costs={{ timeSeconds: 20, energy: 0 }}
         />
     );
 };

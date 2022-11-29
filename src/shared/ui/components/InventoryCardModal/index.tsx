@@ -1,7 +1,6 @@
 import {
     DMECoinIcon,
     GetCostParams,
-    getTimeLeft,
     isAssetAvailable,
     Modal,
     useAccountName,
@@ -33,7 +32,7 @@ import {
     Margin,
     getAssetStatus,
     Card,
-    ModalWithTable,
+    ActionModal,
 } from 'shared/ui/ui-kit';
 import styles from './styles.module.scss';
 
@@ -274,7 +273,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                     </div>
                 </div>
             </div>
-            <ModalWithTable
+            <ActionModal
                 visible={isModalVisible}
                 texts={{
                     title:
@@ -282,9 +281,6 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             ? t('features.actions.equipmentRepair')
                             : t('features.actions.equipmentRefurbish'),
                     onOk: t(`pages.equipmentSet.cardModal.${modalData?.type}`),
-                    subtitle: t(
-                        'components.common.actionModal.descriptionTime'
-                    ),
                 }}
                 onSubmit={() => {
                     if (Number(dmeBalance) < modalData.costs.coinAmount) {
@@ -301,15 +297,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                         refurbishAction();
                 }}
                 onCancel={() => setIsModalVisible(false)}
-                items={{
-                    [t('kit.timer.time')]: getTimeLeft(
-                        modalData?.costs.timeSeconds,
-                        true
-                    ),
-                    [t('kit.timer.energy')]: modalData?.costs.energy,
-                    [t('components.common.button.dme')]:
-                        modalData?.costs.coinAmount,
-                }}
+                costs={modalData.costs}
             />
         </Modal>
     );

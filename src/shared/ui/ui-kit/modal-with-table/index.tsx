@@ -4,9 +4,9 @@ import { Space } from 'antd';
 import { Button } from '../Button';
 import { Title } from '../typography/Title';
 import { Modal } from '../Modal';
-import { KeyValueTable } from '../KeyValueTable';
+import { KeyValueTable, KeyValueTableProps } from '../KeyValueTable';
 
-type Props = {
+export type ModalWithTableProps = {
     visible: boolean;
     onCancel: () => void;
     onSubmit: () => void;
@@ -15,11 +15,11 @@ type Props = {
         title: string;
         subtitle?: string;
     };
-    items: Record<string, ReactNode>;
+    items?: KeyValueTableProps['items'];
 };
 
 // TODO: remove EquipmentInstallationModal
-export const ModalWithTable: FC<Props> = ({
+export const ModalWithTable: FC<ModalWithTableProps> = ({
     visible,
     onCancel,
     onSubmit,
@@ -53,7 +53,7 @@ export const ModalWithTable: FC<Props> = ({
                     {texts.subtitle}
                 </Title>
             )}
-            <KeyValueTable items={items} />
+            <KeyValueTable items={items!} />
         </Modal>
     );
 };

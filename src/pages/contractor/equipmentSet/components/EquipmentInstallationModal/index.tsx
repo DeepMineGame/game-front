@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, getTimeLeft, ModalWithTable } from 'shared';
+import { ActionModal, Button } from 'shared';
 import styles from './styles.module.scss';
 
 interface Props {
@@ -46,22 +46,16 @@ export const EquipmentInstallationModal = ({
                     ? t('pages.equipmentSet.main.install')
                     : t('pages.equipmentSet.main.uninstall')}
             </Button>
-            <ModalWithTable
+            <ActionModal
                 visible={infoModalVisibility}
                 onCancel={toggleModal}
                 onSubmit={isInstall ? handleInstall : handleUninstall}
-                items={{
-                    [t('kit.timer.time')]: getTimeLeft(1, true),
-                    [t('kit.timer.energy')]: 0,
-                }}
+                costs={{ timeSeconds: 1, coinAmount: 0 }}
                 texts={{
                     title: t('pages.equipmentSet.main.installation'),
                     onOk: isInstall
                         ? t('components.common.button.install')
                         : t('components.common.button.uninstall'),
-                    subtitle: t(
-                        'components.common.actionModal.descriptionTime'
-                    ),
                 }}
             />
         </>

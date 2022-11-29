@@ -39,3 +39,4 @@ export * from './LoadingSpin';
 export * from './stub-page-message';
 export * from './contract-alert';
 export * from './modal-with-table';
+export * from './action-modal';

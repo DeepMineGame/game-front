@@ -7,14 +7,14 @@ export enum Theme {
     transparent = 'transparent',
 }
 
-type Props = {
-    items: { [key: string]: ReactNode };
+export type KeyValueTableProps = {
+    items: Record<string, ReactNode> | ReactNode[][];
     className?: string;
     coloredItems?: string[];
     theme?: Theme;
 };
 
-export const KeyValueTable: FC<Props> = ({
+export const KeyValueTable: FC<KeyValueTableProps> = ({
     items,
     className,
     coloredItems,
@@ -26,17 +26,24 @@ export const KeyValueTable: FC<Props> = ({
                 [styles.transparent]: theme === Theme.transparent,
             })}
         >
-            {Object.entries(items).map(([key, value]) => (
-                <div
-                    className={cn(styles.unit, {
-                        [styles.unitColored]: coloredItems?.includes(key),
-                    })}
-                    key={key}
-                >
-                    <div className={styles.key}>{key}</div>
-                    <div className={styles.value}>{value}</div>
-                </div>
-            ))}
+            {(Array.isArray(items) ? items : Object.entries(items)).map(
+                ([key, value], i) => (
+                    <div
+                        className={cn(styles.unit, {
+                            ...(!Array.isArray(items) && {
+                                [styles.unitColored]: coloredItems?.includes(
+                                    key as string
+                                ),
+                            }),
+                        })}
+                        // eslint-disable-next-line react/no-array-index-key
+                        key={i}
+                    >
+                        <div className={styles.key}>{key}</div>
+                        <div className={styles.value}>{value}</div>
+                    </div>
+                )
+            )}
         </div>
     );
 };
