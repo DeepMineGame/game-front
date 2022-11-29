@@ -132,8 +132,8 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
                     onOk: t('components.common.button.activate'),
                     title: t('pages.areaManagement.engage'),
                 }}
-                visible={isModalActionVisible}
                 costs={{ timeSeconds: 1 }}
+                visible={isModalActionVisible}
                 onCancel={() => setIsModalActionVisible(false)}
                 onSubmit={onEngage}
             />
