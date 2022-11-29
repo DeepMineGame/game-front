@@ -87,7 +87,7 @@ export const LandLordCabin: FC<{ accountName: string }> = ({ accountName }) => {
                 )}
                 {status === CABIN_STATUS.stats && <LandStats />}
             </div>
-            {userInfo?.length && !inUserInLandlordLocation && (
+            {userInfo?.length > 0 && !inUserInLandlordLocation && (
                 <CallToTravelNotification
                     toLocationId={LOCATION_TO_ID.landlords_reception}
                     onSuccess={reloadPage}
