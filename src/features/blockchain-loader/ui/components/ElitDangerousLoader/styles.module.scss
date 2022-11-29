@@ -1,4 +1,4 @@
-$color: #F5C913;
+@import "src/shared";
 $size: 3px;
 $time: 1;
 
@@ -19,8 +19,8 @@ $time: 1;
   border-left: $size solid transparent;
   border-right: $size solid transparent;
   animation: blink $time + s infinite;
-  border-bottom: ($size * 1.8) solid #F5C913;;
-  filter: drop-shadow(0 0 ($size * 1.5) #F5C913);
+  border-bottom: ($size * 1.8) solid $color-primary-primary-6;
+  filter: drop-shadow(0 0 ($size * 1.5) $color-primary-primary-6);
 
   @for $i from 1 through 18 {
     &.outer#{$i} {
