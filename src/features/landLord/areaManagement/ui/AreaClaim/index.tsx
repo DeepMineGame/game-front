@@ -12,6 +12,8 @@ import {
     ExclamationModal,
     useReloadPage,
     showSuccessModal,
+    getDmeAmount,
+    ModalWithTable,
 } from 'shared';
 import { useSmartContractAction } from 'features/hooks';
 import { engageArea, unEngageArea, claimArea } from 'entities/smartcontract';
@@ -32,6 +34,7 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
 
     const [isModalActionVisible, setIsModalActionVisible] = useState(false);
     const [isModalUnengageVisible, setIsModalUnengageVisible] = useState(false);
+    const [claimInfoModalVisable, setClaimInfoModalVisable] = useState(false);
     const engageAreaAction = useSmartContractAction({
         action: engageArea({ waxUser: accountName, areaId }),
     });
@@ -63,11 +66,7 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
 
     const handleClaim = async () => {
         await claimAction();
-        showSuccessModal({
-            title: t('pages.areaManagement.claim'),
-            content: t('pages.areaManagement.areaActionSucceed'),
-            onOk: reloadPage,
-        });
+        setClaimInfoModalVisable(true);
     };
 
     return (
@@ -137,6 +136,19 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
                 visible={isModalActionVisible}
                 onCancel={() => setIsModalActionVisible(false)}
                 onSubmit={onEngage}
+            />
+            <ModalWithTable
+                visible={claimInfoModalVisable}
+                onCancel={reloadPage}
+                onSubmit={reloadPage}
+                items={{
+                    [t('pages.mining.availableForClaim')]:
+                        getDmeAmount(claimDme),
+                }}
+                texts={{
+                    title: t('pages.areaManagement.claim'),
+                    subtitle: `${t('pages.mining.details')}:`,
+                }}
             />
         </div>
     );

@@ -129,7 +129,7 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
                         text={statusText}
                     />
                 </Space>
-                <ClaimDME />
+                <ClaimDME contract={contract} />
             </Space>
 
             <div>
