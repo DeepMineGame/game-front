@@ -14,3 +14,4 @@ export * from './landLord/areaManagement';
 export * from './mining';
 export * from './mine-stats';
 export * from './action-indicator';
+export * from './blockchain-loader';

@@ -1,0 +1,46 @@
+$color: #F5C913;
+$size: 3px;
+$time: 1;
+
+.dankAssLoader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .row {
+    display: flex;
+  }
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  margin: 0 (-$size / 2);
+  border-left: $size solid transparent;
+  border-right: $size solid transparent;
+  animation: blink $time + s infinite;
+  border-bottom: ($size * 1.8) solid #F5C913;;
+  filter: drop-shadow(0 0 ($size * 1.5) #F5C913);
+
+  @for $i from 1 through 18 {
+    &.outer#{$i} {
+      animation-delay: -($time / 18) * $i + s;
+    }
+  }
+
+  @for $i from 1 through 6 {
+    &.inner#{$i} {
+      animation-delay: -($time / 6) * $i + s;
+    }
+  }
+
+  &.down {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes blink {
+  0% { opacity: 0.1; }
+  30% { opacity: 1; }
+  100% { opacity: 0.1; }
+}
