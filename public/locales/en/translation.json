@@ -452,7 +452,7 @@
         "haveNoNftAlert": {
           "haveNo": "You don’t have an NFT to create this order. Please visit the Marketplace"
         },
-        "setMineOrArea": "You must set up mine or engage area first",
+        "setMineOrArea": "To proceed, engage the area (for landlord) or put a mine in your active inventory (for mine owner)",
         "youHaveNoAreaOrFreeSlots": "You have no engaged area or have no empty mine slots",
         "youHaveSignedContract": "You already have the contract",
         "yourMineIsFull": "You have no the mine or your mine has no more free slots",
