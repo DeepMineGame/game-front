@@ -59,7 +59,7 @@ export const EngageArea: FC<Props> = ({ className, disabled = true }) => {
             <div className={cn(commonStyles.title, styles.title)}>
                 {t('pages.landLord.cabin.engageTitle')}
             </div>
-            {isDesktop && (
+            {isDesktop && !inLocation.landlordReception && (
                 <div
                     className={cn(commonStyles.description, styles.description)}
                 >

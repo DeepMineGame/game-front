@@ -387,14 +387,14 @@
     "landLord": {
       "cabin": {
         "noAreaTitle": "Area is not detected",
-        "noAreaDescription": "You need a Area card in your active inventory. Check your storage or go to Market to buy one.",
+        "noAreaDescription": "You need an Area in your active inventory. Pick it from Storage or go to Market to buy one.",
         "goToMarket": "Go to Market",
         "pickUp": "Pick up from storage",
         "storage": "Storage",
         "market": "Market",
         "engageTitle": "Operate the area",
         "engageDescription": "You need to travel to this location",
-        "engageButton": "Operate the area",
+        "engageButton": "Operate",
         "setupTitle": "Find a mine",
         "setupDescription": "You need to install a mine on your area to proceed",
         "searching": "Searching for a Mine owner",
