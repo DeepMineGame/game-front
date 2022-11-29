@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { AddItem, DiscoverItem, SearchingItem } from 'shared';
 import { useGate, useStore } from 'effector-react';
-import { MineDto } from 'entities/smartcontract';
+import { ContractDto, MineDto } from 'entities/smartcontract';
 import { AreaManagementTableContent } from '../AreaManagementTableContent';
 import { AddMineOwnerModal } from '../AddMineOwnerModal';
 import { Activity, MineCrewDataType } from '../../types';
@@ -17,14 +17,18 @@ const discoverSlotsCount = 2;
 type Props = {
     disabled?: boolean;
     accountName: string;
+    ownContracts: ContractDto[];
 };
 const getMineCrewContractors = (mine: MineDto) =>
     mine.contractor_slots.filter((v) => v.contractor.length > 0).length;
 
-export const AreaManagementTable: FC<Props> = ({ disabled, accountName }) => {
+export const AreaManagementTable: FC<Props> = ({
+    disabled,
+    accountName,
+    ownContracts,
+}) => {
     const { t } = useTranslation();
     useGate(AreaGate, { searchParam: accountName });
-    const [searchingSlotsCount, setSearchingSlotsCount] = useState(0);
     const [isAddModalVisible, setIsAddModalVisible] = useState(false);
     const mines = useStore(minesForAreaSlots);
     const data = mines?.map(
@@ -41,13 +45,15 @@ export const AreaManagementTable: FC<Props> = ({ disabled, accountName }) => {
                 activity: Activity.high,
             } as MineCrewDataType)
     );
-    const searchingSlots = new Array(searchingSlotsCount).fill(
+
+    const searchingSlots = ownContracts.map((contract) => (
         <SearchingItem
-            onClick={() => setSearchingSlotsCount(0)}
             text={t('pages.areaManagement.search')}
+            contract={contract}
+            accountName={accountName}
         />
-    );
-    const emptySlots = new Array(emptySlotsCount).fill(
+    ));
+    const emptySlots = new Array(emptySlotsCount - ownContracts.length).fill(
         <AddItem
             className={styles.emptySlot}
             onClick={() => setIsAddModalVisible(true)}

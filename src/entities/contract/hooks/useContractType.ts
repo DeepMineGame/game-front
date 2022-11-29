@@ -9,7 +9,11 @@ export const useContractType = (contract: ContractDto) => {
         contract.status === ContractStatus.signed_by_executor;
     const isClientSigned = contract.status === ContractStatus.signed_by_client;
 
-    const isOrder = !contract.client || !contract.executor;
+    const isOrder = [
+        ContractStatus.signed_by_executor,
+        ContractStatus.signed_by_client,
+    ].includes(contract.status);
+
     const isContract = isClientSigned && isExecutorSigned;
 
     const isMiningContract =

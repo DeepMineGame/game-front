@@ -1,21 +1,29 @@
 @import 'src/shared';
 
 .item {
-  display: flex;
-  align-items: center;
-  background: $color-neutral-neutral-1;
-  color: $color-neutral-neutral-9;
-  padding: 16px;
-  border: 1px solid $color-neutral-neutral-4;
-  border-top: none;
-  cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: $color-neutral-neutral-1;
+    color: $color-neutral-neutral-9;
+    padding: 16px;
+    border: 1px solid $color-neutral-neutral-4;
+    border-top: none;
 
-  & > span:first-child {
-    font-size: 24px;
-    margin-right: 33px;
-  }
+    & > span:first-child {
+        font-size: 24px;
+        margin-right: 33px;
+    }
 }
 
 .text {
-  margin-right: 35px;
+    margin-right: 35px;
+}
+
+.contractId {
+    margin-left: auto;
+    color: $color-primary-primary-6;
+}
+
+.button {
+    margin-left: 16px;
 }

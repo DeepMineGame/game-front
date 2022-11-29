@@ -8,7 +8,6 @@ import {
     getContractEffect,
     useContractType as getContractType,
 } from 'entities/contract';
-import { ContractStatus } from 'entities/smartcontract';
 
 import { NotFoundPage } from '../../not-found';
 import { ContractPage } from './ContractPage';

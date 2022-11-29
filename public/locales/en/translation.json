@@ -631,7 +631,10 @@
       "add": "Add new mine",
       "searching": "Searching for Mine owner",
       "findMineOwner": "Find a Mine owner on the Service Market",
-      "createOrder": "Create an order for a Mine owner"
+      "createOrder": "Create an order for a Mine owner",
+      "placeAsMineOwner": "Place myself as a Mine owner",
+      "youNeedSecond": "You have only signed once, you need a second signature to continue.",
+      "creatingSelfMineContract": "You are creating the self Minе Setup Contract with 21-day duration. It must be signed twice and can be terminated at any time without penalty."
     },
     "faq": {
       "watIs": "What is DeepMine?",
