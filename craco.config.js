@@ -4,6 +4,7 @@ const { darkTheme } = require('@ant-design/dark-theme');
 const customTheme = require('./src/theme');
 
 function devServerConfig(config) {
+    const proxyTarget = process.env.REACT_APP_MAINNET ? 'api' : 'rc';
     return {
         ...config,
         https: true,
@@ -11,12 +12,17 @@ function devServerConfig(config) {
         proxy: {
             '/ubs': {
                 // target: 'http://localhost:3001',
-                target: 'https://rc.deepmine.world',
+                target: `https://${proxyTarget}.deepmine.world`,
                 changeOrigin: true,
                 withCredentials: true,
             },
             '/statistic': {
-                target: 'https://rc.deepmine.world',
+                target: `https://${proxyTarget}.deepmine.world`,
+                changeOrigin: true,
+                withCredentials: true,
+            },
+            '/config': {
+                target: `https://${proxyTarget}.deepmine.world`,
                 changeOrigin: true,
                 withCredentials: true,
             },

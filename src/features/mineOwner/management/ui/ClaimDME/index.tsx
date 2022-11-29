@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
+import { FC, useState } from 'react';
 import {
     Button,
-    showSuccessModal,
+    getDmeAmount,
+    ModalWithTable,
     useAccountName,
     useReloadPage,
 } from 'shared';
@@ -14,10 +15,13 @@ import {
     UserRoles,
     moclaim,
     getRolesEffect,
+    ContractDto,
 } from 'entities/smartcontract';
 
 const fromUnit = (num: number) => num / 10 ** 8;
-export const ClaimDME: FC = () => {
+export const ClaimDME: FC<{ contract: ContractDto | null }> = ({
+    contract,
+}) => {
     const waxUser = useAccountName();
     const { t } = useTranslation();
     const reloadPage = useReloadPage();
@@ -27,24 +31,49 @@ export const ClaimDME: FC = () => {
     );
     const dmeToClaim = mineOwnerRole?.length
         ? fromUnit(extractFeeToClaimAttr(mineOwnerRole[0]))
-        : null;
+        : 0;
+
+    const feeInDme =
+        (getDmeAmount(dmeToClaim) / 100) * (contract?.fee_percent || 0);
+    const [claimInfoModalVisable, setClaimInfoModalVisable] = useState(false);
 
     const dmeMoreThenZero = Number(dmeToClaim) > 0;
     const claimDme = useSmartContractAction({ action: moclaim({ waxUser }) });
     const onDmeClick = async () => {
         await claimDme();
         await getRolesEffect({ searchParam: waxUser });
-        return showSuccessModal({
-            title: t('components.common.button.claim'),
-            content: t('components.common.yourDMEHasBeenClaimed'),
-            onOk: reloadPage,
-        });
+        setClaimInfoModalVisable(true);
     };
 
     return (
-        <Button type="primary" onClick={onDmeClick} disabled={!dmeMoreThenZero}>
-            {t('components.common.button.claim')} {dmeToClaim}{' '}
-            {t('components.common.button.dme')}
-        </Button>
+        <>
+            <Button
+                type="primary"
+                onClick={onDmeClick}
+                disabled={!dmeMoreThenZero}
+            >
+                {t('components.common.button.claim')} {dmeToClaim}{' '}
+                {t('components.common.button.dme')}
+            </Button>
+            <ModalWithTable
+                visible={claimInfoModalVisable}
+                onCancel={reloadPage}
+                onSubmit={reloadPage}
+                items={{
+                    [t('pages.mining.availableForClaim')]:
+                        getDmeAmount(dmeToClaim),
+                    [t('pages.serviceMarket.contract.fee')]: Number(
+                        feeInDme.toFixed(8)
+                    ),
+                    [t('pages.mining.transferredToYourAccount')]: Number(
+                        (getDmeAmount(dmeToClaim) - feeInDme).toFixed(8)
+                    ),
+                }}
+                texts={{
+                    title: t('pages.areaManagement.claim'),
+                    subtitle: `${t('pages.mining.details')}:`,
+                }}
+            />
+        </>
     );
 };

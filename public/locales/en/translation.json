@@ -209,11 +209,14 @@
       "contractBetweenMineownerAndLandlordIsntValid": "<b>Mine operation contract</b> between a Mine Owner and a Landlord <b>is not valid</b>. Please contact the Mine owner to resolve the issue.",
       "mineDepthProcess": "Mine in the process of the depth changes. The mining is impossible. Please wait till the process is finished",
       "openContract": "Open contract",
-      "configureButton": "Configure"
+      "configureButton": "Configure",
+      "availableForClaim": "Available for claim",
+      "transferredToYourAccount": "Transferred to your account",
+      "details": "Details"
     },
     "notFound": {
       "title": "This page is lost in the void",
-      "message": "We'll try to find her, but we don't know how long it will take."
+      "message": "We'll try to find it, but we don't know how long it will take."
     },
     "interfaceStub": {
       "title": "Unidentified seismic activity on Eleazar",
@@ -384,14 +387,14 @@
     "landLord": {
       "cabin": {
         "noAreaTitle": "Area is not detected",
-        "noAreaDescription": "You need a Area card in your active inventory. Check your storage or go to Market to buy one.",
+        "noAreaDescription": "You need an Area in your active inventory. Pick it from Storage or go to Market to buy one.",
         "goToMarket": "Go to Market",
         "pickUp": "Pick up from storage",
         "storage": "Storage",
         "market": "Market",
         "engageTitle": "Operate the area",
         "engageDescription": "You need to travel to this location",
-        "engageButton": "Operate the area",
+        "engageButton": "Operate",
         "setupTitle": "Find a mine",
         "setupDescription": "You need to install a mine on your area to proceed",
         "searching": "Searching for a Mine owner",
@@ -449,7 +452,7 @@
         "haveNoNftAlert": {
           "haveNo": "You don’t have an NFT to create this order. Please visit the Marketplace"
         },
-        "setMineOrArea": "You must set up mine or engage area first",
+        "setMineOrArea": "To proceed, engage the area (for landlord) or put a mine in your active inventory (for mine owner)",
         "youHaveNoAreaOrFreeSlots": "You have no engaged area or have no empty mine slots",
         "youHaveSignedContract": "You already have the contract",
         "yourMineIsFull": "You have no the mine or your mine has no more free slots",
@@ -758,6 +761,7 @@
     }
   },
   "features": {
+    "connectToBlockchain": "Connection to blockchain",
     "mining": {
       "mineLevel": "Mine Level",
       "mineSublevel": "Mine Sublevel",

@@ -14,6 +14,8 @@ import { useNavigate } from 'react-router-dom';
 import { city } from 'app/router/paths';
 import { Space } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useStore } from 'effector-react';
+import { $isBlockchainConnectionUnstable, BlockchainLoader } from 'features';
 import { SettingMenu, UserAvatarAndDrawer } from 'entities/user';
 import styles from './styles.module.scss';
 
@@ -27,6 +29,7 @@ export const Header: FC<Props> = ({ title }) => {
     const goToBack = () => navigate(-1);
     const isDesktop = useMediaQuery(desktopS);
     const { t } = useTranslation();
+    const isNodeSwitching = useStore($isBlockchainConnectionUnstable);
 
     return (
         <>
@@ -59,7 +62,13 @@ export const Header: FC<Props> = ({ title }) => {
                     </div>
                 )}
                 {accountName ? (
-                    <UserAvatarAndDrawer user={accountName} />
+                    <div>
+                        {isNodeSwitching ? (
+                            <BlockchainLoader />
+                        ) : (
+                            <UserAvatarAndDrawer user={accountName} />
+                        )}
+                    </div>
                 ) : (
                     <div>
                         <SettingMenu />

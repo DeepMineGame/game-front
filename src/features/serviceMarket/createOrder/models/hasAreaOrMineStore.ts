@@ -1,10 +1,14 @@
 import { createStore } from 'effector';
-import { getAreaByOwnerEffect, getMinesByOwnerEffect } from './effects';
+import { mineAssetTemplateId } from 'entities/smartcontract';
+import { getAreaByOwnerEffect, getInventoryEffect } from './effects';
 
 export const hasAreaOrMineStore = createStore<boolean>(false)
-    .on(
-        getMinesByOwnerEffect.doneData,
-        (hasAreaOrMine, data) => Boolean(data?.rows?.length) || hasAreaOrMine
+    .on(getInventoryEffect.doneData, (hasAreaOrMine, data) =>
+        Boolean(
+            data?.rows?.find(({ template_id }) =>
+                mineAssetTemplateId.includes(template_id)
+            )
+        )
     )
     .on(
         getAreaByOwnerEffect.doneData,
