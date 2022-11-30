@@ -2,16 +2,28 @@ name: rc deploy
 
 on:
   push:
-      branches:
-        - dev
+    branches:
+      - dev
 
   pull_request:
-      branches:
-        - dev
+    branches:
+      - dev
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - dockerfile: ./docker/Dockerfile
+            tags: deepminegame/game_front:latest
+            args: UBS_URL=https://rc.deepmine.world
+          - dockerfile: ./docker/Dockerfile
+            tags: deepminegame/game_front:preprod
+            args: |
+              UBS_URL=https://api.deepmine.world
+              MAINNET=true
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -37,12 +49,12 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./docker/Dockerfile
+          file: ${{ matrix.dockerfile }}
           push: true
-          tags: deepminegame/game_front:latest
+          tags: ${{ matrix.tags }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
-          build-args: UBS_URL=https://rc.deepmine.world
+          build-args: ${{ matrix.args }}
 
       # Temp fix
       # https://github.com/docker/build-push-action/issues/252
@@ -52,7 +64,7 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
-  deploy:
+  rc_deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -70,3 +82,23 @@ jobs:
 
       - name: Deploy
         run: ssh ${{ secrets.RC_SSH_USER }}@${{ secrets.RC_SSH_HOST }} "docker service update --force deepmine_game_front"
+
+  pre_prod_deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pre_prod
+    steps:
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.RC_SSH_PRIVATE_KEY }}
+          known_hosts: 'placeholder'
+
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.RC_SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Pull images
+        run: ssh ${{ secrets.RC_SSH_USER }}@${{ secrets.RC_SSH_HOST }} "docker-compose pull"
+
+      - name: Deploy
+        run: ssh ${{ secrets.RC_SSH_USER }}@${{ secrets.RC_SSH_HOST }} "docker service update --force deepmine_game_front_preprod"

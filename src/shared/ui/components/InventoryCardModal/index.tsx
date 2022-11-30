@@ -226,11 +226,17 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                         <Divider verticalMargin={Margin.small} />
                         <Row align="middle">
                             <Col span={7}>
-                                <Text>
-                                    {t(
-                                        'pages.equipmentSet.cardModal.depreciation'
+                                <Tooltip
+                                    overlay={t(
+                                        'pages.equipmentSet.cardModal.depreciationTooltip'
                                     )}
-                                </Text>
+                                >
+                                    <Text>
+                                        {t(
+                                            'pages.equipmentSet.cardModal.depreciation'
+                                        )}
+                                    </Text>
+                                </Tooltip>
                             </Col>
                             <Col span={7}>
                                 <DepreciationProgressBar
@@ -247,31 +253,42 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                 />
                             </Col>
                             <Col span={10}>
-                                <Button
-                                    disabled={!assetIsBroken}
-                                    size="large"
-                                    type="link"
-                                    onClick={() => {
-                                        setModalData({
-                                            type: ModalType.repair,
-                                            costs: {
-                                                timeSeconds: 1,
-                                                coinAmount: getCost({
-                                                    level: card.level as GetCostParams['level'],
-                                                    rarity: rarityMap[
-                                                        card.rarity
-                                                    ] as GetCostParams['rarity'],
-                                                    isRefurbish: false,
-                                                }),
-                                                energy: 150,
-                                            },
-                                        });
-                                        setIsModalVisible(true);
-                                    }}
-                                    className={styles.button}
-                                >
-                                    {t('pages.equipmentSet.cardModal.repair')}
-                                </Button>
+                                <Space>
+                                    <Button
+                                        disabled={!assetIsBroken}
+                                        size="large"
+                                        type="link"
+                                        onClick={() => {
+                                            setModalData({
+                                                type: ModalType.repair,
+                                                costs: {
+                                                    timeSeconds: 1,
+                                                    coinAmount: getCost({
+                                                        level: card.level as GetCostParams['level'],
+                                                        rarity: rarityMap[
+                                                            card.rarity
+                                                        ] as GetCostParams['rarity'],
+                                                        isRefurbish: false,
+                                                    }),
+                                                    energy: 150,
+                                                },
+                                            });
+                                            setIsModalVisible(true);
+                                        }}
+                                        className={styles.button}
+                                    >
+                                        {t(
+                                            'pages.equipmentSet.cardModal.repair'
+                                        )}
+                                    </Button>
+                                    <Tooltip
+                                        overlay={t(
+                                            'pages.equipmentSet.cardModal.repairTooltip'
+                                        )}
+                                    >
+                                        <QuestionCircleOutlined />
+                                    </Tooltip>
+                                </Space>
                             </Col>
                         </Row>
                         <Divider verticalMargin={Margin.small} />
@@ -287,33 +304,42 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                 <Text>{malfunctionProbability}</Text>
                             </Col>
                             <Col span={10}>
-                                <Button
-                                    disabled={!assetIsBroken}
-                                    type="link"
-                                    size="large"
-                                    onClick={() => {
-                                        setModalData({
-                                            type: ModalType.refurbish,
-                                            costs: {
-                                                timeSeconds: 120,
-                                                coinAmount: getCost({
-                                                    level: card.level as GetCostParams['level'],
-                                                    rarity: rarityMap[
-                                                        card.rarity
-                                                    ] as GetCostParams['rarity'],
-                                                    isRefurbish: true,
-                                                }),
-                                                energy: 150,
-                                            },
-                                        });
-                                        setIsModalVisible(true);
-                                    }}
-                                    className={styles.button}
-                                >
-                                    {t(
-                                        'pages.equipmentSet.cardModal.refurbish'
-                                    )}
-                                </Button>
+                                <Space>
+                                    <Button
+                                        disabled={!assetIsBroken}
+                                        type="link"
+                                        size="large"
+                                        onClick={() => {
+                                            setModalData({
+                                                type: ModalType.refurbish,
+                                                costs: {
+                                                    timeSeconds: 120,
+                                                    coinAmount: getCost({
+                                                        level: card.level as GetCostParams['level'],
+                                                        rarity: rarityMap[
+                                                            card.rarity
+                                                        ] as GetCostParams['rarity'],
+                                                        isRefurbish: true,
+                                                    }),
+                                                    energy: 150,
+                                                },
+                                            });
+                                            setIsModalVisible(true);
+                                        }}
+                                        className={styles.button}
+                                    >
+                                        {t(
+                                            'pages.equipmentSet.cardModal.refurbish'
+                                        )}
+                                    </Button>
+                                    <Tooltip
+                                        overlay={t(
+                                            'pages.equipmentSet.cardModal.refurbishTooltip'
+                                        )}
+                                    >
+                                        <QuestionCircleOutlined />
+                                    </Tooltip>
+                                </Space>
                             </Col>
                         </Row>
                     </div>
