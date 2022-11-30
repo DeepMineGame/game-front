@@ -7,13 +7,8 @@ $deprecation-bar-color: linear-gradient(90deg, #6EC005 0%, #A9E301 24.84%, #F1CE
 }
 
 .progress {
-  max-width: 144px;
   display: flex;
   align-items: center;
-
-  @media only screen and (min-width: $media-desktop-s)  {
-    max-width: 198px;
-  }
 
   :global {
     .ant-progress-outer {

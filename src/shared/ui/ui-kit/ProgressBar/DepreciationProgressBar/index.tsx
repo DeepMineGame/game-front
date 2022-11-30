@@ -1,6 +1,7 @@
 import { FC, memo } from 'react';
-import { Progress } from 'antd';
+import { Progress, Tooltip } from 'antd';
 import cn from 'classnames';
+import { useTranslation } from 'react-i18next';
 import { AssetDataType } from 'entities/atomicassets';
 import styles from '../styles.module.scss';
 
@@ -23,6 +24,7 @@ export const DepreciationProgressBar: FC<DepreciationProgressBarProps> = memo(
                 {depreciation}/{currentCapacity} ({maximalCapacity})
             </div>
         );
+        const { t } = useTranslation();
 
         const amountOfMiningPercentage =
             100 - (Number(currentCapacity) / Number(maximalCapacity)) * 100;
@@ -31,14 +33,16 @@ export const DepreciationProgressBar: FC<DepreciationProgressBarProps> = memo(
         const amountOfStep = Number(depreciation);
 
         return (
-            <Progress
-                className={cn(styles.rootDeprecation, className)}
-                percent={amountOfMiningPercentage}
-                success={{
-                    percent: amountOfMiningPercentage + step * amountOfStep,
-                }}
-                format={format}
-            />
+            <Tooltip overlay={t('components.depreciationBar.tooltip')}>
+                <Progress
+                    className={cn(styles.rootDeprecation, className)}
+                    percent={amountOfMiningPercentage}
+                    success={{
+                        percent: amountOfMiningPercentage + step * amountOfStep,
+                    }}
+                    format={format}
+                />
+            </Tooltip>
         );
     }
 );

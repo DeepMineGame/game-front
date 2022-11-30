@@ -33,10 +33,6 @@ export const MineAreaInfo: FC = () => {
     };
 
     const mineSubInfoData = {
-        [t('pages.contractorStatsAndInfo.mineArea.miningDifficulty')]: 25,
-        [t('pages.contractorStatsAndInfo.mineArea.miningEfficiency')]: 356,
-        [t('pages.contractorStatsAndInfo.mineArea.fossilChance')]: '7%',
-        [t('pages.contractorStatsAndInfo.mineArea.stability')]: '95%',
         [t('pages.contractorStatsAndInfo.mineArea.habitation')]: '34/53',
     };
 
@@ -53,10 +49,6 @@ export const MineAreaInfo: FC = () => {
     };
 
     const areaSubInfoData = {
-        [t('pages.contractorStatsAndInfo.mineArea.miningDifficulty')]: 25,
-        [t('pages.contractorStatsAndInfo.mineArea.miningEfficiency')]: 356,
-        [t('pages.contractorStatsAndInfo.mineArea.fossilChance')]: '7%',
-        [t('pages.contractorStatsAndInfo.mineArea.stability')]: '95%',
         [t('pages.contractorStatsAndInfo.mineArea.saturation')]: '13%',
     };
 
