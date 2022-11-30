@@ -798,7 +798,7 @@
       "mineManagementDescription": "Go to Mine Management unit to activate the Mine",
       "mineIsActive": "Mine is Active",
       "contractWasTerminated": "Contract was Terminated",
-      "mineIsActiveDescription": "Everything is fine, Mine is running. Now you can see the information about the mining process and efficiency",
+      "mineIsActiveDescription": "Everything is fine and Mine is running. You can see information about the mining process and efficiency in Stats deck",
       "mineIsActiveDescriptionMobile": "Now you can see the statistics of the mining process and efficiency",
       "management": {
         "addons": "ADD-ONS",
