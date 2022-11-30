@@ -912,7 +912,7 @@
     "00063": "can't find an asset for asset id",
     "00064": "can't find asset template in game",
     "00065": "asset ID is already exists in Inventory",
-    "00066": "you already have the 'Mine' Item in Inventory",
+    "00066": "You can't put 2 mines in the active inventory at the same time, because it will cause selection and control difficulties. Use only one Mine NFT",
     "00067": "you already have the 'Area' Item in Inventory",
     "00068": "all your Equipment must be different",
     "00069": "you already have an active action at this moment",
