@@ -21,7 +21,12 @@ import {
     getAssets,
     MergedInventoryWithAtomicAssets,
 } from 'entities/atomicassets';
-import { rarityMap, repairEquipment } from 'entities/smartcontract';
+import {
+    getMalfunctionProbabilitiesTable,
+    getMalfunctionProbabilityTranslation,
+    rarityMap,
+    repairEquipment,
+} from 'entities/smartcontract';
 import { balancesStore } from 'entities/user';
 import {
     ActionModal,
@@ -72,7 +77,6 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     const { t } = useTranslation();
 
     const accountName = useAccountName();
-    console.log(card);
 
     const handleSelect = (e: React.MouseEvent<HTMLElement>) => {
         onSelect?.(card);
@@ -102,6 +106,21 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     });
 
     const assetIsBroken = getAssetStatus(card) === Status.broken;
+
+    const dmeToLevelUpgrade = getDmeAmount(card.data['DME to upgrade'] || 0);
+    const dmeMined = card.data['DME Mined'] || 0;
+
+    const numericMalfunctionProbability = getMalfunctionProbabilitiesTable(
+        card.data.name as Parameters<
+            typeof getMalfunctionProbabilitiesTable
+        >[number]
+    )?.[card.data.rarity][
+        Number(card.data['current capacity']) - Number(card.data.depreciation)
+    ];
+
+    const malfunctionProbability = numericMalfunctionProbability
+        ? t(getMalfunctionProbabilityTranslation(numericMalfunctionProbability))
+        : '-';
 
     return (
         <Modal
@@ -177,16 +196,24 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             </Col>
                             <Col span={10} className={styles.rightCol}>
                                 <Space>
-                                    <NftProgressBar
-                                        className={
-                                            styles.upgradeProgressBarWidth
-                                        }
-                                        current={card.data['DME Mined'] || 0}
-                                        remained={getDmeAmount(
-                                            card.data['DME to upgrade'] || 0
-                                        )}
-                                        rightContent={<DMECoinIcon />}
-                                    />
+                                    {dmeMined === dmeToLevelUpgrade ? (
+                                        <Link
+                                            to={`${serviceMarket}?tabId=${ServiceMarketTabIds.levelUpgrade}`}
+                                        >
+                                            {t(
+                                                'pages.equipmentSet.cardModal.upgrade'
+                                            )}
+                                        </Link>
+                                    ) : (
+                                        <NftProgressBar
+                                            className={
+                                                styles.upgradeProgressBarWidth
+                                            }
+                                            current={dmeMined}
+                                            remained={dmeToLevelUpgrade}
+                                            rightContent={<DMECoinIcon />}
+                                        />
+                                    )}
                                     <Tooltip
                                         overlay={t(
                                             'pages.equipmentSet.cardModal.levelUpgradeTooltip'
@@ -258,7 +285,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                 </Text>
                             </Col>
                             <Col span={4} className={styles.alignRight}>
-                                <Text>1</Text>
+                                <Text>{malfunctionProbability}</Text>
                             </Col>
                             <Col span={10}>
                                 <Button

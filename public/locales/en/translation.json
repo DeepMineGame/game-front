@@ -321,7 +321,12 @@
         "refurbish": "Refurbish",
         "insufficientFunds": "Insufficient funds for {{action}}",
         "rarityUpgradeTooltip": "Exchange three identical cards to receive an upgraded one. Upgrade is possible when all cards are placed in the warehouse.",
-        "levelUpgradeTooltip": "Conclude level upgrade contract with Engineer for Equipment and Mines that mined a required amount of DME. Upgrade is possible when a card is placed in the active inventory."
+        "levelUpgradeTooltip": "Conclude level upgrade contract with Engineer for Equipment and Mines that mined a required amount of DME. Upgrade is possible when a card is placed in the active inventory.",
+        "malfunctionProbability": {
+          "low": "Low",
+          "average": "Average",
+          "high": "High"
+        }
       },
       "characteristics": {
         "title": "Characteristics",
