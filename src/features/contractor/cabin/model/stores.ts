@@ -80,16 +80,17 @@ export const $isMineDepthChanging = combine(
 );
 export const $generalEquipmentBreakageProbabillity =
     $installedMiningEquipments.map((installedMiningEquipments) => {
+        const maxProbability = 1;
         // to find generalProbabilityOfNoBreakage, multiply each equipmentProbabilityOfNoBreakage
         // example: equipmentProbabilityOfNoBreakage =
-        // = (1 - malfunctionProbabilitiyEquip1) * (1 - malfunctionProbabilitiyEquip2) *
-        // * ... * (1 - malfunctionProbabilitiyEquip5)
+        // = (maxProbability - malfunctionProbabilitiyEquip1) * (maxProbability - malfunctionProbabilitiyEquip2) *
+        // * ... * (maxProbability - malfunctionProbabilitiyEquip5)
         const generalProbabilityOfNoBreakage = installedMiningEquipments.reduce(
             (acc, equipment) => {
                 // to find equipmentProbabilityOfNoBreakage,
-                // get malfunctionProbabilitiy from table and do 1 - malfunctionProbabilitiy
+                // get malfunctionProbabilitiy from table and do maxProbability - malfunctionProbabilitiy
                 const equipmentProbabilityOfNoBreakage =
-                    1 -
+                    maxProbability -
                     (getMalfunctionProbabilitiesTable(
                         equipment.data
                             .name as GetMalfunctionProbabilitiesTableParams
@@ -100,11 +101,11 @@ export const $generalEquipmentBreakageProbabillity =
 
                 return acc * equipmentProbabilityOfNoBreakage;
             },
-            1
+            maxProbability
         );
 
-        // to find generalEquipmentBreakageProbabillity, do 1 - generalProbabilityOfNoBreakage
-        return 1 - generalProbabilityOfNoBreakage;
+        // to find generalEquipmentBreakageProbabillity, do maxProbability - generalProbabilityOfNoBreakage
+        return maxProbability - generalProbabilityOfNoBreakage;
     });
 
 export const $contractorCabin = combine(
