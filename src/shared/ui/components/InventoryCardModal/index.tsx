@@ -1,6 +1,7 @@
 import {
     DMECoinIcon,
     GetCostParams,
+    getDmeAmount,
     isAssetAvailable,
     Modal,
     useAccountName,
@@ -8,12 +9,13 @@ import {
     useRepair,
 } from 'shared';
 import React, { FC, useState, useEffect, useCallback } from 'react';
-import { Col, message, ModalProps, Row, Tooltip } from 'antd';
+import { Col, message, ModalProps, Row, Space, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { serviceMarket } from 'app/router/paths';
 import { ServiceMarketTabIds } from 'app/router/constants';
 import { useSmartContractAction } from 'features';
 import { useStore } from 'effector-react';
+import { QuestionCircleOutlined } from '@ant-design/icons';
 import {
     AssetDataType,
     getAssets,
@@ -70,6 +72,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     const { t } = useTranslation();
 
     const accountName = useAccountName();
+    console.log(card);
 
     const handleSelect = (e: React.MouseEvent<HTMLElement>) => {
         onSelect?.(card);
@@ -144,11 +147,22 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                 <Text>{cardData?.data.rarity}</Text>
                             </Col>
                             <Col span={10} className={styles.rightCol}>
-                                <Link
-                                    to={`${serviceMarket}?tabId=${ServiceMarketTabIds.levelUpgrade}`}
-                                >
-                                    {t('pages.equipmentSet.cardModal.upgrade')}
-                                </Link>
+                                <Space>
+                                    <Link
+                                        to={`${serviceMarket}?tabId=${ServiceMarketTabIds.levelUpgrade}`}
+                                    >
+                                        {t(
+                                            'pages.equipmentSet.cardModal.upgrade'
+                                        )}
+                                    </Link>
+                                    <Tooltip
+                                        overlay={t(
+                                            'pages.equipmentSet.cardModal.rarityUpgradeTooltip'
+                                        )}
+                                    >
+                                        <QuestionCircleOutlined />
+                                    </Tooltip>
+                                </Space>
                             </Col>
                         </Row>
                         <Divider verticalMargin={Margin.small} />
@@ -162,19 +176,25 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                 <Text>{cardData?.data.level}</Text>
                             </Col>
                             <Col span={10} className={styles.rightCol}>
-                                <Tooltip
-                                    overlay={t('components.common.comingSoon')}
-                                    mouseEnterDelay={0}
-                                    mouseLeaveDelay={0}
-                                >
-                                    <span />
+                                <Space>
                                     <NftProgressBar
-                                        initial={30}
-                                        current={30}
-                                        remained={120}
+                                        className={
+                                            styles.upgradeProgressBarWidth
+                                        }
+                                        current={card.data['DME Mined'] || 0}
+                                        remained={getDmeAmount(
+                                            card.data['DME to upgrade'] || 0
+                                        )}
                                         rightContent={<DMECoinIcon />}
                                     />
-                                </Tooltip>
+                                    <Tooltip
+                                        overlay={t(
+                                            'pages.equipmentSet.cardModal.levelUpgradeTooltip'
+                                        )}
+                                    >
+                                        <QuestionCircleOutlined />
+                                    </Tooltip>
+                                </Space>
                             </Col>
                         </Row>
                         <Divider verticalMargin={Margin.small} />

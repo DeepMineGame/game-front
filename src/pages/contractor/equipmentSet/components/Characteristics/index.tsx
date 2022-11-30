@@ -50,26 +50,8 @@ export const Characteristics = () => {
                 />
                 <CharacteristicsLine
                     name={t(
-                        'pages.equipmentSet.characteristics.estimateMiningEfficiency'
-                    )}
-                />
-                <CharacteristicsLine
-                    name={t(
-                        'pages.equipmentSet.characteristics.estimateMiningPower'
-                    )}
-                />
-                <CharacteristicsLine
-                    name={t(
-                        'pages.equipmentSet.characteristics.sublevelEfficiensy'
-                    )}
-                />
-                <CharacteristicsLine
-                    name={t(
                         'pages.equipmentSet.characteristics.equipmentBreakageProbabillity'
                     )}
-                />
-                <CharacteristicsLine
-                    name={t('pages.equipmentSet.characteristics.fossilChance')}
                 />
             </div>
         </div>

@@ -77,12 +77,14 @@ export const LevelUpgradeTerms: FC<TermsStepProps> = ({
             <div className={localStyles.space}>
                 <Form.Item
                     name={orderFields.costOfExecution}
-                    label={t('pages.serviceMarket.createOrder.costOfExecution')}
+                    label={t(
+                        'pages.serviceMarket.createOrder.levelUpgradeTerms.upgradeCost'
+                    )}
                     className={cn(styles.formField)}
                     tooltip={
                         <Card
                             title={t(
-                                'pages.serviceMarket.createOrder.costOfExecution'
+                                'pages.serviceMarket.createOrder.levelUpgradeTerms.upgradeCost'
                             )}
                             className={styles.tooltipCard}
                         >
