@@ -4,6 +4,8 @@ import {
     ContractDto,
     ContractStatus,
     ContractType,
+    getMalfunctionProbabilitiesTable,
+    GetMalfunctionProbabilitiesTableParams,
     MineState,
     UserHistoryType,
     UserInfoType,
@@ -76,6 +78,27 @@ export const $isMineDepthChanging = combine(
     $currentMine,
     (currentMine) => currentMine?.[0]?.state === MineState.depth_changing
 );
+export const $generalEquipmentBreakageProbabillity =
+    $installedMiningEquipments.map((installedMiningEquipments) => {
+        const generalProbabilityOfNoBreakage = installedMiningEquipments.reduce(
+            (acc, equipment) => {
+                const equipmentProbabilityOfNoBreakage =
+                    1 -
+                    (getMalfunctionProbabilitiesTable(
+                        equipment.data
+                            .name as GetMalfunctionProbabilitiesTableParams
+                    )?.[equipment.data.rarity][
+                        Number(equipment.data['current capacity']) -
+                            Number(equipment.data.depreciation)
+                    ] || 0);
+
+                return acc * equipmentProbabilityOfNoBreakage;
+            },
+            1
+        );
+
+        return 1 - generalProbabilityOfNoBreakage;
+    });
 
 export const $contractorCabin = combine(
     {

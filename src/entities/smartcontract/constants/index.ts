@@ -1574,6 +1574,10 @@ export const getMalfunctionProbabilitiesTable = (
     return undefined;
 };
 
+export type GetMalfunctionProbabilitiesTableParams = Parameters<
+    typeof getMalfunctionProbabilitiesTable
+>[number];
+
 export const getMalfunctionProbabilityTranslation = (
     malfunctionProbability: NumericMalfunctionProbability
 ) => {

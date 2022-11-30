@@ -23,6 +23,7 @@ import {
 } from 'entities/atomicassets';
 import {
     getMalfunctionProbabilitiesTable,
+    GetMalfunctionProbabilitiesTableParams,
     getMalfunctionProbabilityTranslation,
     rarityMap,
     repairEquipment,
@@ -111,9 +112,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     const dmeMined = card.data['DME Mined'] || 0;
 
     const numericMalfunctionProbability = getMalfunctionProbabilitiesTable(
-        card.data.name as Parameters<
-            typeof getMalfunctionProbabilitiesTable
-        >[number]
+        card.data.name as GetMalfunctionProbabilitiesTableParams
     )?.[card.data.rarity][
         Number(card.data['current capacity']) - Number(card.data.depreciation)
     ];
