@@ -11,7 +11,7 @@ import {
 
 export const ContractorTable: FC = () => {
     useGate(ContractsGate, {
-        statuses: OrderStatus.current,
+        statuses: OrderStatus.new,
         user_role: Roles.contractor,
         search_role: Roles.mineowner,
     });

@@ -18,7 +18,7 @@ export const MineOwnerTab = () => {
     const { t } = useTranslation();
 
     useGate(ContractsGate, {
-        statuses: OrderStatus.current,
+        statuses: OrderStatus.new,
         user_role: Roles.mineowner,
         search_role: Roles.contractor,
     });

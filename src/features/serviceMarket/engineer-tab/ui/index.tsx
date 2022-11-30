@@ -18,7 +18,7 @@ export const EngineerTab: FC = () => {
     const { t } = useTranslation();
 
     useGate(ContractsGate, {
-        statuses: OrderStatus.current,
+        statuses: OrderStatus.new,
         user_role: Roles.engineer,
         search_role: Roles.contractor,
     });
