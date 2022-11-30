@@ -5,6 +5,7 @@ import { useStore, useGate } from 'effector-react';
 import { useAccountName } from 'shared';
 import {
     $currentMine,
+    $generalEquipmentBreakageProbabillity,
     estimatesMiningTimeStore,
     MiningPageGate,
 } from 'features';
@@ -18,6 +19,9 @@ export const Characteristics = () => {
     useGate(MiningPageGate, { searchParam: accountName });
     const estTime = useStore(estimatesMiningTimeStore);
     const mineStore = useStore($currentMine);
+    const equipmentBreakageProbabillity = useStore(
+        $generalEquipmentBreakageProbabillity
+    );
 
     return (
         <div className={styles.container}>
@@ -45,12 +49,15 @@ export const Characteristics = () => {
                 />
                 <CharacteristicsLine
                     name={t(
-                        'pages.equipmentSet.characteristics.estimatesAmountDME'
+                        'pages.equipmentSet.characteristics.equipmentBreakageProbabillity'
                     )}
+                    value={`${(equipmentBreakageProbabillity * 100).toFixed(
+                        2
+                    )}%`}
                 />
                 <CharacteristicsLine
                     name={t(
-                        'pages.equipmentSet.characteristics.equipmentBreakageProbabillity'
+                        'pages.equipmentSet.characteristics.estimatesAmountDME'
                     )}
                 />
             </div>

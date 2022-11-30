@@ -324,7 +324,12 @@
         "levelUpgradeTooltip": "Conclude level upgrade contract with Engineer for Equipment and Mines that mined a required amount of DME. Upgrade is possible when a card is placed in the active inventory.",
         "repairTooltip": "Restores the number of available mining actions without restoring the equipment wear",
         "refurbishTooltip": "Restores all the numbers and makes your equipment as good as new",
-        "depreciationTooltip": "Mining actions performed/current wear capacity (maximum wear capacity)"
+        "depreciationTooltip": "Mining actions performed/current wear capacity (maximum wear capacity)",
+        "malfunctionProbability": {
+          "low": "Low",
+          "average": "Average",
+          "high": "High"
+        }
       },
       "characteristics": {
         "title": "Characteristics",

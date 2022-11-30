@@ -15,11 +15,11 @@
 .container {
   display: flex;
   gap: 32px;
-  width: fit-content;
 }
 
 .infoContainer {
   color: $color-neutral-neutral-8 !important;
+  width: 87%;
 }
 
 .title {
@@ -61,7 +61,7 @@
 }
 
 .depreciationProgressBarWidth {
-  width: 200px;
+  width: 180px;
 }
 
 .upgradeProgressBarWidth {
