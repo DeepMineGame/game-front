@@ -340,15 +340,12 @@
         "landlord": "Landlord",
         "areaRarity": "Area Rarity",
         "minesOnArea": "Mines on Area",
-        "areaFee": "Area Fee",
         "saturation": "Saturation",
         "mineOwner": "Mine Owner",
         "mineRarity": "Mine Rarity",
         "level": "Level",
         "sublevel": "Sublevel",
-        "depth": "Depth",
-        "mineFee": "Mine fee",
-        "habitation": "Habitation"
+        "depth": "Depth"
       }
     },
     "contractorMiningStats": {

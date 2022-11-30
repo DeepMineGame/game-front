@@ -22,18 +22,12 @@ export const MineAreaInfo: FC = () => {
             : '-',
         [t('pages.contractorStatsAndInfo.mineArea.mineOwner')]:
             userMine?.owner ?? '-',
-        [t('pages.contractorStatsAndInfo.mineArea.mineRarity')]: 'Common',
         [t('pages.contractorStatsAndInfo.mineArea.level')]:
             userMine?.level ?? '-',
         [t('pages.contractorStatsAndInfo.mineArea.sublevel')]:
             userMine?.sublevel ?? '-',
         [t('pages.contractorStatsAndInfo.mineArea.depth')]:
             userMine?.layer_depth ?? '-',
-        [t('pages.contractorStatsAndInfo.mineArea.mineFee')]: '4%',
-    };
-
-    const mineSubInfoData = {
-        [t('pages.contractorStatsAndInfo.mineArea.habitation')]: '34/53',
     };
 
     const areaInfoData = {
@@ -45,11 +39,6 @@ export const MineAreaInfo: FC = () => {
             : '-',
         [t('pages.contractorStatsAndInfo.mineArea.minesOnArea')]:
             userArea?.mine_slots.filter((v) => !!v).length ?? '-',
-        [t('pages.contractorStatsAndInfo.mineArea.areaFee')]: 2,
-    };
-
-    const areaSubInfoData = {
-        [t('pages.contractorStatsAndInfo.mineArea.saturation')]: '13%',
     };
 
     return (
@@ -68,10 +57,6 @@ export const MineAreaInfo: FC = () => {
                         coloredItems={Object.keys(mineInfoData).slice(0, 2)}
                     />
                 </div>
-                <KeyValueTable
-                    className={styles.subInfo}
-                    items={mineSubInfoData}
-                />
             </div>
             <div className={styles.info}>
                 <div className={styles.initialInfo}>
@@ -87,10 +72,6 @@ export const MineAreaInfo: FC = () => {
                         coloredItems={Object.keys(areaInfoData).slice(0, 2)}
                     />
                 </div>
-                <KeyValueTable
-                    className={styles.subInfo}
-                    items={areaSubInfoData}
-                />
             </div>
         </div>
     );
