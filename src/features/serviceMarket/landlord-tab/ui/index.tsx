@@ -17,7 +17,7 @@ export const LandlordTab = () => {
     const { t } = useTranslation();
 
     useGate(ContractsGate, {
-        statuses: OrderStatus.current,
+        statuses: OrderStatus.new,
         user_role: Roles.landlord,
         search_role: Roles.mineowner,
     });

@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { useStore } from 'effector-react';
 import { useAccountName } from 'shared';
+import { OrderStatus } from 'entities/gameStat';
 import { changeFilterEvent, filterStore } from '../../contractor-table/model';
 
 export const TabGrid: FC<{ filters: ReactNode; table: ReactNode }> = ({
@@ -17,12 +18,16 @@ export const TabGrid: FC<{ filters: ReactNode; table: ReactNode }> = ({
     const navigate = useNavigate();
     const { t } = useTranslation();
     const filter = useStore(filterStore);
-    const setMyContractsFilter = useCallback(() => {
-        changeFilterEvent({
-            ...filter,
-            user: filter?.user ? undefined : accountName,
-        });
-    }, [accountName, filter]);
+    const setMyContractsFilter = useCallback(
+        (statuses?: OrderStatus) => {
+            changeFilterEvent({
+                ...filter,
+                statuses,
+                user: filter?.user ? undefined : accountName,
+            });
+        },
+        [accountName, filter]
+    );
     return (
         <Row gutter={[0, 18]}>
             <Col span={24}>
@@ -33,7 +38,11 @@ export const TabGrid: FC<{ filters: ReactNode; table: ReactNode }> = ({
                             type="primary"
                             ghost
                             icon={<UnorderedListOutlined />}
-                            onClick={setMyContractsFilter}
+                            onClick={() =>
+                                setMyContractsFilter(
+                                    filter.user ? OrderStatus.new : undefined
+                                )
+                            }
                         >
                             {filter.user ? 'Service market' : 'My contracts'}
                         </Button>
