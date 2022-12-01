@@ -63,11 +63,8 @@ export const Header: FC<Props> = ({ title }) => {
                 )}
                 {accountName ? (
                     <div>
-                        {isNodeSwitching ? (
-                            <BlockchainLoader />
-                        ) : (
-                            <UserAvatarAndDrawer user={accountName} />
-                        )}
+                        <UserAvatarAndDrawer user={accountName} />
+                        {isNodeSwitching && <BlockchainLoader />}
                     </div>
                 ) : (
                     <div>

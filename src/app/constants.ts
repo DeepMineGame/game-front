@@ -8,6 +8,7 @@ export const defaultConfig = {
 };
 
 export const CONNECTION_TIMEOUT = 8 * 1000;
+export const minLoaderDuration = 500;
 
 export const isMainNet = process.env.REACT_APP_MAINNET === 'true';
 

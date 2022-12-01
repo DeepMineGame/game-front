@@ -1,5 +1,4 @@
 import { ConnectionCountLimit } from 'app/constants';
-import { setBlockchainConnectionUnstable } from 'features';
 import { isServerError } from './is-server-error';
 import { pool } from './requests/pool';
 
@@ -27,21 +26,21 @@ export const poolRequest = async (
 
         try {
             await requestFn(endpoint.url);
-            endpoint.processing--;
-            setBlockchainConnectionUnstable(false);
+            pool.onReqComplete(endpoint);
             return;
         } catch (e) {
             const error = e as Error & { response: { status: number } };
-            setBlockchainConnectionUnstable(true);
+
+            pool.onReqComplete(endpoint, error);
             tries++;
-            endpoint.processing--;
-            endpoint.networkErrors++;
 
             if (!isServerError(error)) {
                 throw new Error(error.message);
             }
 
-            if (tries >= limit) throw new Error('Network Error', error);
+            if (tries >= limit) {
+                throw new Error('Network Error', error);
+            }
         }
     }
 };
