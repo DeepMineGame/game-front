@@ -46,7 +46,8 @@ export const BlockchainAuthPage: React.FC<Props> = ({ onSuccess }) => {
     ) => {
         try {
             await chain.signTransaction(authorizeUser(waxAddress, userId), {
-                expireSeconds: 300,
+                blocksBehind: 3,
+                expireSeconds: 30,
             });
             setIsWaitingForConnectWax(true);
             await new Promise((resolve) => {
