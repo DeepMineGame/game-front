@@ -1,4 +1,5 @@
 import { endpoints } from 'app/constants';
+import { setBlockchainConnectionUnstable } from 'features';
 
 const networkErrorsWeight = 10;
 
@@ -53,6 +54,7 @@ class EndpointsPool {
         const endpoint = bestEndpoint(this.waxEndpoints);
         endpoint.processing++;
 
+        setBlockchainConnectionUnstable(endpoint.processing > 0);
         return endpoint;
     }
 
@@ -60,7 +62,21 @@ class EndpointsPool {
         const endpoint = bestEndpoint(this.atomicEndpoints);
         endpoint.processing++;
 
+        setBlockchainConnectionUnstable(endpoint.processing > 0);
         return endpoint;
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    onReqComplete(
+        endpoint: EndpointStatistic,
+        err: Error | undefined = undefined
+    ) {
+        if (err) {
+            endpoint.networkErrors++;
+        }
+
+        endpoint.processing--;
+        setBlockchainConnectionUnstable(endpoint.processing > 0);
     }
 }
 
