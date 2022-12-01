@@ -39,13 +39,6 @@ export const poolRequest = async (
             }
 
             if (tries >= limit) {
-                // TODO: remove temp debug log
-                // eslint-disable-next-line no-console
-                console.log('Network error', {
-                    tries,
-                    limit,
-                    endpoint: endpoint.url,
-                });
                 throw new Error('Network Error', error);
             }
         }
