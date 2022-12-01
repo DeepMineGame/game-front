@@ -166,14 +166,15 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                 <div className={styles.cardsWrapper}>
                     {!isAtomicIncludesDragged && draggedElements?.size ? (
                         <div className={styles.draggedElements}>
-                            {renderCards(draggedElements, handleDragCard)}
+                            {renderCards(draggedElements, handleDragCard, true)}
                         </div>
                     ) : (
                         renderCards(
                             mergedStorageWithAtomicAssets.filter(
                                 removeDraggedElements
                             ),
-                            handleDragCard
+                            handleDragCard,
+                            true
                         )
                     )}
                 </div>

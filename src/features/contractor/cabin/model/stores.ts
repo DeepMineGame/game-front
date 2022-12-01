@@ -4,6 +4,8 @@ import {
     ContractDto,
     ContractStatus,
     ContractType,
+    getMalfunctionProbabilitiesTable,
+    GetMalfunctionProbabilitiesTableParams,
     MineState,
     UserHistoryType,
     UserInfoType,
@@ -76,6 +78,35 @@ export const $isMineDepthChanging = combine(
     $currentMine,
     (currentMine) => currentMine?.[0]?.state === MineState.depth_changing
 );
+export const $generalEquipmentBreakageProbabillity =
+    $installedMiningEquipments.map((installedMiningEquipments) => {
+        const maxProbability = 1;
+        // to find generalProbabilityOfNoBreakage, multiply each equipmentProbabilityOfNoBreakage
+        // example: equipmentProbabilityOfNoBreakage =
+        // = (maxProbability - malfunctionProbabilitiyEquip1) * (maxProbability - malfunctionProbabilitiyEquip2) *
+        // * ... * (maxProbability - malfunctionProbabilitiyEquip5)
+        const generalProbabilityOfNoBreakage = installedMiningEquipments.reduce(
+            (acc, equipment) => {
+                // to find equipmentProbabilityOfNoBreakage,
+                // get malfunctionProbabilitiy from table and do maxProbability - malfunctionProbabilitiy
+                const equipmentProbabilityOfNoBreakage =
+                    maxProbability -
+                    (getMalfunctionProbabilitiesTable(
+                        equipment.data
+                            .name as GetMalfunctionProbabilitiesTableParams
+                    )?.[equipment.data.rarity][
+                        Number(equipment.data['current capacity']) -
+                            Number(equipment.data.depreciation)
+                    ] || 0);
+
+                return acc * equipmentProbabilityOfNoBreakage;
+            },
+            maxProbability
+        );
+
+        // to find generalEquipmentBreakageProbabillity, do maxProbability - generalProbabilityOfNoBreakage
+        return maxProbability - generalProbabilityOfNoBreakage;
+    });
 
 export const $contractorCabin = combine(
     {

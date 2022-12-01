@@ -11,7 +11,8 @@ export function useRenderCards() {
         items:
             | Set<MergedInventoryWithAtomicAssets[number]>
             | MergedInventoryWithAtomicAssets,
-        onDragStart: (element: MergedInventoryWithAtomicAssets[number]) => void
+        onDragStart: (element: MergedInventoryWithAtomicAssets[number]) => void,
+        hideDetails?: boolean
     ) => {
         return Array.from(items)?.map((card) => (
             <div
@@ -22,7 +23,7 @@ export function useRenderCards() {
                     inventory={card}
                     className={styles.card}
                     key={card.asset_id}
-                    buttonText="Details"
+                    buttonText={hideDetails ? undefined : 'Details'}
                     onButtonClick={() =>
                         navigate(`/inventory/${card.asset_id}`)
                     }

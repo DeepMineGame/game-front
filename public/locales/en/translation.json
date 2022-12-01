@@ -153,6 +153,12 @@
     "user": {
       "accountSettings": "Account settings",
       "personalInfo": "Personal information"
+    },
+    "depreciationBar": {
+      "tooltip": "Mining number/Repair number (Default max repair number)"
+    },
+    "levelUpgradeBar": {
+      "tooltip": "DME to claim to unlock level upgrade"
     }
   },
   "pages": {
@@ -285,7 +291,7 @@
         "button": "Travel"
       },
       "tooltips": {
-        "notReadyMineDesk": "Install the equipment and sign the contract if you haven't done it yet to visit mine",
+        "notReadyMineDesk": "To be able to mine, install the equipment and sign the contract if you haven't done it yet",
         "unableGetStatAccess": "Complete mining first to visit Stats & info desk"
       }
     },
@@ -307,24 +313,30 @@
         "rarity": "Rarity",
         "level": "Level",
         "depreciation": "Depreciation",
-        "breakageProbability": "Breakage probability",
+        "breakageProbability": "Malfunction probability",
         "mineLevel": "Mine level",
         "mineSublevel": "Mine sublevel",
         "upgrade": "Upgrade",
         "repair": "Repair",
         "refurbish": "Refurbish",
-        "insufficientFunds": "Insufficient funds for {{action}}"
+        "insufficientFunds": "Insufficient funds for {{action}}",
+        "rarityUpgradeTooltip": "Exchange three identical cards to receive an upgraded one. Upgrade is possible when all cards are placed in the warehouse.",
+        "levelUpgradeTooltip": "Conclude level upgrade contract with Engineer for Equipment and Mines that mined a required amount of DME. Upgrade is possible when a card is placed in the active inventory.",
+        "repairTooltip": "Restores the number of available mining actions without restoring the equipment wear",
+        "refurbishTooltip": "Restores all the numbers and makes your equipment as good as new",
+        "depreciationTooltip": "Mining actions performed/current wear capacity (maximum wear capacity)",
+        "malfunctionProbability": {
+          "low": "Low",
+          "average": "Average",
+          "high": "High"
+        }
       },
       "characteristics": {
         "title": "Characteristics",
         "mineDepth": "Mine Depth",
-        "estimatesMiningTime": "Estimates mining Time",
-        "estimatesAmountDME": "Estimates Amount of DME",
-        "estimateMiningEfficiency": "Estimate Mining Efficiency",
-        "estimateMiningPower": "Estimate Mining Power",
-        "sublevelEfficiensy": "Sublevel Efficiensy",
-        "equipmentBreakageProbabillity": "Equipment Breakage Probabillity",
-        "fossilChance": "Fossil Chance"
+        "estimatesMiningTime": "Mining Time estimate",
+        "estimatesAmountDME": "DME Amount estimate",
+        "equipmentBreakageProbabillity": "Equipment Breakage Probabillity"
       }
     },
     "contractorStatsAndInfo": {
@@ -336,19 +348,12 @@
         "landlord": "Landlord",
         "areaRarity": "Area Rarity",
         "minesOnArea": "Mines on Area",
-        "areaFee": "Area Fee",
         "saturation": "Saturation",
         "mineOwner": "Mine Owner",
         "mineRarity": "Mine Rarity",
         "level": "Level",
         "sublevel": "Sublevel",
-        "depth": "Depth",
-        "mineFee": "Mine fee",
-        "miningDifficulty": "Mining Difficulty",
-        "miningEfficiency": "Mining Efficiency",
-        "fossilChance": "Fossil Chance",
-        "stability": "Stability",
-        "habitation": "Habitation"
+        "depth": "Depth"
       }
     },
     "contractorMiningStats": {
@@ -389,7 +394,7 @@
         "noAreaTitle": "Area is not detected",
         "noAreaDescription": "You need an Area in your active inventory. Pick it from Storage or go to Market to buy one.",
         "goToMarket": "Go to Market",
-        "pickUp": "Pick up from storage",
+        "pickUp": "Pick from storage",
         "storage": "Storage",
         "market": "Market",
         "engageTitle": "Operate the area",
@@ -405,7 +410,7 @@
         "mines": "Mines"
       },
       "menu": {
-        "goLandActivate": "Go here activate the area",
+        "goLandActivate": "Go here to activate the area",
         "statsAndInfo": "Go here to see stats & info"
       }
     },
@@ -480,6 +485,7 @@
         "costOfExecution": "Cost of execution",
         "levelUpgradeTerms": {
           "penalty": "If the performing party violates the terms of the contract or terminates the contract prematurely, the counterparty may charge a fine",
+          "upgradeCost": "Upgrade cost",
           "engineer": {
             "startOfOperation": "The period of time during which you are required to start performing the upgrade",
             "costOfExecution": "The amount of DME you receives for performing the upgrade"
@@ -659,7 +665,7 @@
     "engineer": {
       "noCertificateDetected": "Engineer certificate is not detected",
       "youNeedCertificate": "You need an Engineer Certificate in your active inventory. Pick it from Storage or go to Market to buy one.",
-      "pickFromStorage": "Pick up from Storage",
+      "pickFromStorage": "Pick from storage",
       "engineersInauguration": "Engineers Inauguration",
       "youNeedToAttendInauguration": "You need to attend Engineers Inauguration to start working as an engineer",
       "attendInauguration": "Attend Inauguration",
@@ -800,7 +806,7 @@
       "mineManagementDescription": "Go to Mine Management unit to activate the Mine",
       "mineIsActive": "Mine is Active",
       "contractWasTerminated": "Contract was Terminated",
-      "mineIsActiveDescription": "Everything is fine, Mine is running. Now you can see the information about the mining process and efficiency",
+      "mineIsActiveDescription": "Everything is fine and Mine is running. You can see information about the mining process and efficiency in Stats deck",
       "mineIsActiveDescriptionMobile": "Now you can see the statistics of the mining process and efficiency",
       "management": {
         "addons": "ADD-ONS",
@@ -844,7 +850,7 @@
     "travelHere": "Travel here",
     "confirm": {
       "title": "Travel is necessary",
-      "content": "To perform this action you need to move to this location"
+      "content": "To perform this action you need to travel to this location"
     }
   },
   "blockchainErrors": {
@@ -892,7 +898,7 @@
     "00041": "you can't specify 'executor' as a Mineowner",
     "00042": "you already have an active Contract",
     "00043": "you can't specify 'executor' as a Contractor",
-    "00044": "you must free all equipment slots before creating a new contract",
+    "00044": "To be able to create a new contract, you need to remove the equipment that was installed in the previous mine. To do this, go to the Mine and uninstall the equipment",
     "00045": "wrong Contract status",
     "00046": "you're not a client or an executor of the Contract",
     "00047": "you must specify asset_id",
@@ -914,7 +920,7 @@
     "00063": "can't find an asset for asset id",
     "00064": "can't find asset template in game",
     "00065": "asset ID is already exists in Inventory",
-    "00066": "you already have the 'Mine' Item in Inventory",
+    "00066": "You can't put 2 mines in the active inventory at the same time, because it will cause selection and control difficulties. Use only one Mine NFT",
     "00067": "you already have the 'Area' Item in Inventory",
     "00068": "all your Equipment must be different",
     "00069": "you already have an active action at this moment",

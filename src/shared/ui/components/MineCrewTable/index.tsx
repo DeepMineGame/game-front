@@ -1,16 +1,8 @@
 import React, { FC } from 'react';
-import { Tag, Badge } from 'antd';
+import { Badge } from 'antd';
 import type { ColumnsType } from 'antd/lib/table';
 import { useTranslation } from 'react-i18next';
-import {
-    Table,
-    DiscordIcon,
-    neutral2,
-    neutral8,
-    green6,
-    gold6,
-    Link,
-} from 'shared';
+import { Table, DiscordIcon, neutral8, green6, gold6, Link } from 'shared';
 import styles from './styles.module.scss';
 
 enum Status {
@@ -71,22 +63,9 @@ export const MineCrewTable: FC<{ data?: MineCrewDataType[] }> = ({ data }) => {
             dataIndex: 'contractor',
             key: 'contractor',
             render: (contractor: string, _: MineCrewDataType, idx: number) => {
-                const whose = {
-                    0: 'you',
-                    2: 'mineOwner',
-                };
-
                 return (
                     <div className={styles.contractor}>
                         <Link to={`/user/${contractor}`}>{contractor}</Link>
-                        {(idx === 0 || idx === 2) && (
-                            <Tag
-                                className={styles.contractorTag}
-                                color={neutral2}
-                            >
-                                {t(`pages.contractorMineCrew.${whose[idx]}`)}
-                            </Tag>
-                        )}
                     </div>
                 );
             },

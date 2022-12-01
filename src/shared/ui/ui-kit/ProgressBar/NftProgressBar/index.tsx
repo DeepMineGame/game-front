@@ -1,6 +1,8 @@
-import { Progress } from 'antd';
+import { Progress, Tooltip } from 'antd';
 import React from 'react';
 import cn from 'classnames';
+import { useTranslation } from 'react-i18next';
+import { neutral3Color, primary6 } from 'shared/ui/variables';
 import styles from '../styles.module.scss';
 
 function getPercentage(value: number, total: number) {
@@ -23,9 +25,13 @@ export function NftProgressBar({
 }: ProgressProps) {
     const currentProgress = getPercentage(current, remained);
     const disabledProgress = getPercentage(remained, initial);
+    const { t } = useTranslation();
     const info = () => (
         <div className={styles.info}>
-            {current}/{remained}
+            {current}/
+            <Tooltip overlay={t('components.levelUpgradeBar.tooltip')}>
+                {remained}
+            </Tooltip>
             <div className={styles.rightContent}>
                 {rightContent ?? <span>({initial})</span>}
             </div>
@@ -34,11 +40,11 @@ export function NftProgressBar({
     return (
         <Progress
             className={cn(styles.progress, className)}
-            strokeColor="#1D1D1D"
+            strokeColor={neutral3Color}
             percent={disabledProgress}
             success={{
                 percent: currentProgress,
-                strokeColor: '#F5C913',
+                strokeColor: primary6,
             }}
             format={info}
         />

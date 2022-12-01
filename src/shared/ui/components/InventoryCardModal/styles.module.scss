@@ -2,7 +2,7 @@
 
 .modal {
   max-width: 100%;
-  width: auto !important;
+  width: 1120px !important;
   background: $color-neutral-neutral-2 !important;
   height: 100%;
 
@@ -15,15 +15,11 @@
 .container {
   display: flex;
   gap: 32px;
-  width: fit-content;
 }
 
 .infoContainer {
   color: $color-neutral-neutral-8 !important;
-
-  @media only screen and (min-width: $media-desktop-s)  {
-    max-width: 512px;
-  }
+  width: 87%;
 }
 
 .title {
@@ -65,5 +61,9 @@
 }
 
 .depreciationProgressBarWidth {
-  width: 105px;
+  width: 180px;
+}
+
+.upgradeProgressBarWidth {
+  width: 265px;
 }
