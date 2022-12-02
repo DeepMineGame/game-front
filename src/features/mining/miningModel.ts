@@ -1,4 +1,10 @@
-import { combine, createEffect, createStore, forward } from 'effector';
+import {
+    combine,
+    createEffect,
+    createEvent,
+    createStore,
+    forward,
+} from 'effector';
 import { getDmeAmount, getTableData, getTimeLeft } from 'shared';
 import { createGate } from 'effector-react';
 import {
@@ -24,6 +30,10 @@ import {
 export const MiningPageGate = createGate<{ searchParam: string }>(
     'MiningPageGate'
 );
+
+export const updateDmeAmountEstimateEvent = createEvent<{
+    searchParam: string;
+}>();
 
 export const getContractByExecutorEffect = createEffect<
     { searchParam: string },
@@ -116,6 +126,8 @@ export const $dmeAmountEstimate = combine(
         $miningArea,
     },
     ({ contractor, $miningArea: miningArea }) => {
+        console.log('dmeAmountEstimate updated');
+
         if (contractor && miningArea) {
             const estMiningPowerMin = contractor.params.est_mining_power_min;
             const estMiningPowerMax = contractor.params.est_mining_power_max;
@@ -129,8 +141,8 @@ export const $dmeAmountEstimate = combine(
                 Number(current_amount) / Number(amount_capacity);
 
             return {
-                min: getDmeAmount(estMiningPowerMin / dmeFullnessPercent),
-                max: getDmeAmount(estMiningPowerMax / dmeFullnessPercent),
+                min: getDmeAmount(estMiningPowerMin * dmeFullnessPercent),
+                max: getDmeAmount(estMiningPowerMax * dmeFullnessPercent),
             };
         }
 
@@ -157,4 +169,9 @@ forward({
 forward({
     from: miningContractStore,
     to: getMineByAssetEffect,
+});
+
+forward({
+    from: updateDmeAmountEstimateEvent,
+    to: getContractorEffect,
 });
