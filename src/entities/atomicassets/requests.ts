@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { CONNECTION_TIMEOUT } from 'app/constants';
 import { RequestSubject, poolRequest } from 'shared';
 import { UserInventoryType } from '../smartcontract';
 import { AssetDataType } from './types';
@@ -34,31 +33,20 @@ export const getAtomicAssetsByUser = async ({
 }): Promise<UserInventoryType[] | undefined> => {
     let fetchedData;
 
-    await poolRequest(RequestSubject.Wax, async (endpoint: string) => {
-        const abortController = new AbortController();
-
-        const timerId = setTimeout(
-            () => abortController.abort(),
-            CONNECTION_TIMEOUT
+    await poolRequest(RequestSubject.Atomic, async (endpoint: string) => {
+        const { data } = await axios.get(
+            `${endpoint}/assets?collection_name=deepminegame&limit=1000&order=desc&sort=asset_id&owner=${searchParam}`
         );
 
-        const data = await fetch(`${endpoint}/v1/chain/get_table_rows`, {
-            body: JSON.stringify({
-                json: true,
-                code: 'atomicassets',
-                scope: searchParam,
-                table: 'assets',
-                index_position: 1,
-                limit: 500,
-                reverse: false,
-                show_payer: false,
-            }),
-            method: 'POST',
-            signal: abortController.signal,
-        });
+        const rows = (data?.data || []) as AssetDataType[];
 
-        clearTimeout(timerId);
-        fetchedData = (await data.json()).rows;
+        fetchedData = rows.map((el) => {
+            return {
+                asset_id: el.asset_id,
+                template_id: Number(el.template.template_id),
+                schema_name: el.schema.schema_name,
+            };
+        });
     });
 
     return fetchedData;
