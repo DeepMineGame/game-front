@@ -51,8 +51,8 @@ export const Characteristics = () => {
                     name={t(
                         'pages.equipmentSet.characteristics.equipmentBreakageProbabillity'
                     )}
-                    value={`${(equipmentBreakageProbabillity * 100).toFixed(
-                        2
+                    value={`${Number(
+                        (equipmentBreakageProbabillity * 100).toFixed(2)
                     )}%`}
                 />
                 <CharacteristicsLine
