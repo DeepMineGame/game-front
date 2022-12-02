@@ -44,7 +44,7 @@ export const useSmartContractAction = <T>({
                 searchParam: chainAccount.activeUser?.accountName!,
                 limit: 1,
             });
-            actionType = data?.rows?.[0].type || ActionType.undefined;
+            actionType = data?.rows?.[0]?.type || ActionType.undefined;
             const lastAction: ActionDto | null = data?.rows?.[0] || null;
             const lastActionInProgress =
                 lastAction && (lastAction.finishes_at || 0) * 1000 > Date.now();
