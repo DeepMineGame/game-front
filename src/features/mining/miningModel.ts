@@ -126,8 +126,6 @@ export const $dmeAmountEstimate = combine(
         $miningArea,
     },
     ({ contractor, $miningArea: miningArea }) => {
-        console.log('dmeAmountEstimate updated');
-
         if (contractor && miningArea) {
             const estMiningPowerMin = contractor.params.est_mining_power_min;
             const estMiningPowerMax = contractor.params.est_mining_power_max;
