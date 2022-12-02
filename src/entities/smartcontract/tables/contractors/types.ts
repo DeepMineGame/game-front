@@ -26,6 +26,8 @@ export type ContractorDto = {
         dme_fullness_percent: string;
         reserved_amount: number;
         amount_to_claim: number;
+        est_mining_power_max: number;
+        est_mining_power_min: number;
     };
     equip_slots: {
         asset_id: string;

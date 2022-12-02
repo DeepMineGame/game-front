@@ -5,6 +5,7 @@ import { useStore, useGate } from 'effector-react';
 import { useAccountName } from 'shared';
 import {
     $currentMine,
+    $dmeAmountEstimate,
     $generalEquipmentBreakageProbabillity,
     estimatesMiningTimeStore,
     MiningPageGate,
@@ -22,6 +23,7 @@ export const Characteristics = () => {
     const equipmentBreakageProbabillity = useStore(
         $generalEquipmentBreakageProbabillity
     );
+    const dmeAmountEstimate = useStore($dmeAmountEstimate);
 
     return (
         <div className={styles.container}>
@@ -59,6 +61,9 @@ export const Characteristics = () => {
                     name={t(
                         'pages.equipmentSet.characteristics.estimatesAmountDME'
                     )}
+                    value={`${Number(
+                        dmeAmountEstimate.min.toFixed(2)
+                    )} - ${Number(dmeAmountEstimate.max.toFixed(2))}`}
                 />
             </div>
         </div>

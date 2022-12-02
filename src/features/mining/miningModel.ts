@@ -1,5 +1,5 @@
-import { createEffect, createStore, forward } from 'effector';
-import { getTableData, getTimeLeft } from 'shared';
+import { combine, createEffect, createStore, forward } from 'effector';
+import { getDmeAmount, getTableData, getTimeLeft } from 'shared';
 import { createGate } from 'effector-react';
 import {
     ActionDto,
@@ -16,6 +16,9 @@ import {
     mapSearchParamForIndexPositionToFindContracts,
     MineDto,
     searchBy,
+    getAreasEffect,
+    AreasDto,
+    LayerDepth,
 } from 'entities/smartcontract';
 
 export const MiningPageGate = createGate<{ searchParam: string }>(
@@ -101,6 +104,46 @@ export const estimatesMiningTimeStore = createStore('').on(
               )} - ${getTimeLeft(contractorDto?.params?.est_time_max)}`
             : ''
 );
+
+export const $miningArea = createStore<AreasDto | null>(null).on(
+    getAreasEffect.doneData,
+    (_, data) => data?.rows[0]
+);
+
+export const $dmeAmountEstimate = combine(
+    {
+        contractor: contractorStore,
+        $miningArea,
+    },
+    ({ contractor, $miningArea: miningArea }) => {
+        if (contractor && miningArea) {
+            const estMiningPowerMin = contractor.params.est_mining_power_min;
+            const estMiningPowerMax = contractor.params.est_mining_power_max;
+            const currentLayerDepth = contractor.params.layer_depth;
+            const currentLayer = `layer_${
+                currentLayerDepth as LayerDepth
+            }` as const;
+            const { amount_capacity, current_amount } =
+                miningArea[currentLayer];
+            const dmeFullnessPercent =
+                Number(current_amount) / Number(amount_capacity);
+
+            return {
+                min: getDmeAmount(estMiningPowerMin / dmeFullnessPercent),
+                max: getDmeAmount(estMiningPowerMax / dmeFullnessPercent),
+            };
+        }
+
+        return { min: 0, max: 0 };
+    }
+);
+
+forward({
+    from: contractorStore.map((contractor) => ({
+        searchParam: contractor?.area_id || '',
+    })),
+    to: getAreasEffect,
+});
 
 forward({
     from: MiningPageGate.open,
