@@ -41,6 +41,8 @@ export const createMineOrder = (orderData: MineOrder) => {
                     days_for_penalty: Number(orderData.days_for_penalty),
                     contract_duration:
                         orderData.contract_duration * DAY_IN_SECONDS,
+                    opt_level: null,
+                    opt_rarity: null,
                 },
             },
         ],
