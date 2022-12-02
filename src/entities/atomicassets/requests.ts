@@ -43,7 +43,7 @@ export const getAtomicAssetsByUser = async ({
         fetchedData = rows.map((el) => {
             return {
                 asset_id: el.asset_id,
-                template_id: el.template.template_id,
+                template_id: Number(el.template.template_id),
                 schema_name: el.schema.schema_name,
             };
         });
