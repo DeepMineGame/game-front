@@ -26,6 +26,7 @@ export function signOrder({
                     ...(assetId && { opt_asset_id: assetId }),
                     opt_level: null,
                     opt_rarity: null,
+                    opt_as_client: null,
                 },
             },
         ],
