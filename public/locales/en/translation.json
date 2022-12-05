@@ -400,8 +400,8 @@
         "engageTitle": "Operate the area",
         "engageDescription": "You need to travel to this location",
         "engageButton": "Operate",
-        "setupTitle": "Find a mine",
-        "setupDescription": "You need to install a mine on your area to proceed",
+        "setupTitle": "Add a new mine",
+        "setupDescription": "You need to make a contract with a Mineowner to add a mine on your land",
         "searching": "Searching for a Mine owner",
         "mineIsSetTitle": "The Mine is installed",
         "mineIsSetDescription": "Now you can see the full stastistics",
@@ -411,7 +411,9 @@
       },
       "menu": {
         "goLandActivate": "Go here to activate the area",
-        "statsAndInfo": "Go here to see stats & info"
+        "statsAndInfo": "Go here to see stats & info",
+        "installMineTooltip": "Go here to install a mine",
+        "manageAreaTooltip": "Go here to manage the area"
       }
     },
     "serviceMarket": {
