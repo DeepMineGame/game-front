@@ -9,6 +9,7 @@ import {
     useMediaQuery,
     useReloadPage,
     showWarningModal,
+    showErrorNotification,
 } from 'shared';
 import { CheckCircleOutlined } from '@ant-design/icons';
 import { Space } from 'antd';
@@ -85,7 +86,9 @@ export const MiningAndClaimButton: FC<Props> = memo(
         }, [claimDmeCallback, isClaimedState, reloadPage, accountName]);
         const onMiningButtonClick = useCallback(() => {
             const toggleMiningAndReinitializeStores = () =>
-                toggleMiningCallback()?.then(reloadPage);
+                toggleMiningCallback()
+                    ?.then(reloadPage)
+                    .catch(showErrorNotification);
             if (isMiningFinished) {
                 setIsClaimedState(false);
                 return setClaimModalVisibility(true);

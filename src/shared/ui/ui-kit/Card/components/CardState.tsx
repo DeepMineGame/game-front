@@ -26,12 +26,11 @@ export const CardState: FC<{
         status === Status.broken;
 
     if (
-        onFinish &&
         isFinishesAtExist &&
         status !== Status.broken &&
         isUtcDateExpired(finishesAt)
     )
-        onFinish();
+        onFinish?.();
 
     return (
         <div className={styles.stateWrapper}>
