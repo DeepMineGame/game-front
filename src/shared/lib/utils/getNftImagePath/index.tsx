@@ -4,10 +4,7 @@ import {
     InventoryIdType,
 } from 'entities/smartcontract';
 
-const GIF_IMAGES = [
-    314105, 314712, 314721, 314749, 314748, 314747, 314744, 314743, 314738,
-    492749,
-];
+const GIF_IMAGES = [314749, 314748, 314747, 314744, 314743, 492749];
 
 export const TEST_NET_ASSETS_ID_MAP = new Map(
     Object.entries({
