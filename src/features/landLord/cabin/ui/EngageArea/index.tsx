@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 
 import {
+    ActionModal,
     Button,
     desktopS,
     useAccountName,
@@ -44,6 +45,7 @@ export const EngageArea: FC<Props> = ({ className, disabled = true }) => {
         LOCATION_TO_ID.landlords_reception
     );
     const inLocation = useUserLocation();
+    const [isModalActionVisible, setIsModalActionVisible] = useState(false);
 
     const onEngageClick = async () => {
         if (!inLocation.landlordReception) {
@@ -66,9 +68,23 @@ export const EngageArea: FC<Props> = ({ className, disabled = true }) => {
                     {t('pages.landLord.cabin.engageDescription')}
                 </div>
             )}
-            <Button type="primary" disabled={disabled} onClick={onEngageClick}>
+            <Button
+                type="primary"
+                disabled={disabled}
+                onClick={() => setIsModalActionVisible(true)}
+            >
                 {t('pages.landLord.cabin.engageButton')}
             </Button>
+            <ActionModal
+                texts={{
+                    onOk: t('pages.landLord.cabin.engageButton'),
+                    title: t('pages.landLord.cabin.engageTitle'),
+                }}
+                costs={{ timeSeconds: 20, energy: 1 }}
+                visible={isModalActionVisible}
+                onCancel={() => setIsModalActionVisible(false)}
+                onSubmit={onEngageClick}
+            />
         </div>
     );
 };

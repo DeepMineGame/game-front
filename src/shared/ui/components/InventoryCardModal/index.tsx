@@ -270,7 +270,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                                         ] as GetCostParams['rarity'],
                                                         isRefurbish: false,
                                                     }),
-                                                    energy: 150,
+                                                    energy: 0,
                                                 },
                                             });
                                             setIsModalVisible(true);

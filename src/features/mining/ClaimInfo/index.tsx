@@ -30,8 +30,9 @@ export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
     const timeSpent =
         contractor && contractor.finishes_at - contractor.starts_at;
     const dmeToClaim = (contractor && contractor.params?.amount_to_claim) || 0;
-    const feeInDme =
-        (getDmeAmount(dmeToClaim) / 100) * mineOwnerContract.fee_percent;
+    const feeInDme = mineOwnerContract
+        ? (getDmeAmount(dmeToClaim) / 100) * mineOwnerContract.fee_percent
+        : 0;
 
     useEffect(() => {
         let interval: ReturnType<typeof setInterval>;
