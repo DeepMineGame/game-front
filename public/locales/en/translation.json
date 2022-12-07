@@ -29,7 +29,10 @@
     "actionModal": {
       "actionNotPossible": "Action is not possible",
       "busy": "You cannot perform this action because you are busy with",
-      "willEnd": "which will end in"
+      "lastAction": "last action",
+      "willEnd": "which will end in",
+      "lastActionSuccess": "The last action was successfully completed",
+      "needRefreshPage": "Refresh the page to get the latest data from the blockchain"
     },
     "contractorMenu": {
       "infoPanelTooltip": "Info panel is located here",

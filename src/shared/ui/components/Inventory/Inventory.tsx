@@ -57,7 +57,7 @@ export const Inventory: FC<InventoryProps> = ({
             title="Active inventory"
             className={styles.modal}
         >
-            <div className={styles.container}>
+            <div>
                 <div className={styles.filterHeader}>
                     <div className={styles.filterHeaderLeft}>
                         <Dropdown items={sortConfig}>
@@ -74,7 +74,6 @@ export const Inventory: FC<InventoryProps> = ({
                             <div className={styles.filterName}>{name}</div>
                         </div>
                     </div>
-                    <div className={styles.size}>Size: 500/1000</div>
                 </div>
                 <div className={styles.navbar}>
                     {tabList.map((tab) => (

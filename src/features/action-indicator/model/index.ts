@@ -15,15 +15,23 @@ export const getActionForIndicate = createEffect<
     getActionsTable<ActionDto>({
         searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
         searchParam,
-    }).then((data) =>
-        data?.rows
-            ?.reverse()
-            .find(
-                ({ state, type }) =>
-                    state === ActionState.active ||
-                    type === ActionType.physical_shift
-            )
-    )
+    }).then((data) => {
+        const lastNoTravelAction = data?.rows?.find(
+            ({ state }) => state === ActionState.active
+        );
+        const lastTravelAction = data?.rows?.find(
+            ({ type }) => type === ActionType.physical_shift
+        );
+
+        const isLastNoTravelActionExpired =
+            Date.now() >= (lastNoTravelAction?.finishes_at || 0) * 1000;
+
+        if (isLastNoTravelActionExpired) {
+            return lastTravelAction;
+        }
+
+        return lastNoTravelAction || lastTravelAction;
+    })
 );
 
 export const $indicateActionDetails = createStore({
