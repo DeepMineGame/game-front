@@ -22,8 +22,7 @@ import {
     MergedInventoryWithAtomicAssets,
 } from 'entities/atomicassets';
 import {
-    getMalfunctionProbabilitiesTable,
-    GetMalfunctionProbabilitiesTableParams,
+    getMalfunctionProbability,
     getMalfunctionProbabilityTranslation,
     rarityMap,
     repairEquipment,
@@ -111,13 +110,9 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     const dmeToLevelUpgrade = getDmeAmount(card.data['DME to upgrade'] || 0);
     const dmeMined = card.data['DME Mined'] || 0;
 
-    const numericMalfunctionProbability = getMalfunctionProbabilitiesTable(
-        card.data.name as GetMalfunctionProbabilitiesTableParams
-    )?.[card.data.rarity][
-        Number(card.data['current capacity']) - Number(card.data.depreciation)
-    ];
+    const numericMalfunctionProbability = getMalfunctionProbability(card);
 
-    const malfunctionProbability = numericMalfunctionProbability
+    const malfunctionProbabilityTranslation = numericMalfunctionProbability
         ? t(getMalfunctionProbabilityTranslation(numericMalfunctionProbability))
         : '-';
 
@@ -301,7 +296,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                 </Text>
                             </Col>
                             <Col span={4} className={styles.alignRight}>
-                                <Text>{malfunctionProbability}</Text>
+                                <Text>{malfunctionProbabilityTranslation}</Text>
                             </Col>
                             <Col span={10}>
                                 <Space>
