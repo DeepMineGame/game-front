@@ -1,15 +1,14 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
 
 import { Page, useAccountName, useReloadPage, useUserLocation } from 'shared';
 import {
-    $contracts,
     AreaClaim,
     AreaManagementTable,
     CallToTravelNotification,
-    LandlordContractsGate,
-    getLandlordContractsEffect,
+    $ContractorContracts,
+    ContractorContractsGate,
+    getLandlordContractsFX,
     minesForAreaSlots,
     userAreaNftStore,
     PlaceMyselfMineAsOwner,
@@ -27,14 +26,14 @@ export const AreaManagementPage = () => {
     const { t } = useTranslation();
     const accountName = useAccountName();
 
-    useGate(LandlordContractsGate, { searchParam: accountName });
+    useGate(ContractorContractsGate, { searchParam: accountName });
     const mines = useStore(minesForAreaSlots);
     const area = useStore(areasStore);
     const userLocation = useUserLocation();
     const areas = useStore(userAreaNftStore);
 
-    const contracts = useStore($contracts);
-    const isContractsLoading = useStore(getLandlordContractsEffect.pending);
+    const contracts = useStore($ContractorContracts);
+    const isContractsLoading = useStore(getLandlordContractsFX.pending);
 
     const contractsToSign = contracts.filter(
         (contract) =>

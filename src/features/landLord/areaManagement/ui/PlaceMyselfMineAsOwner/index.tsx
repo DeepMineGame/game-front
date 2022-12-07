@@ -1,29 +1,32 @@
-import { FC, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { createMineOrder } from 'features/serviceMarket';
+import {
+    ExclamationCircleOutlined,
+    ExclamationCircleFilled,
+} from '@ant-design/icons';
+import { ATOMICHUB_URL } from 'app/constants';
+import { createMineOrder, getEmptySlot } from 'features/serviceMarket';
 import {
     useSmartContractAction,
     useSmartContractActionDynamic,
 } from 'features/hooks';
 
 import {
-    areasStore,
     ContractDto,
     ContractType,
     getInventoryConfig,
     InUseType,
-    searchBy,
     signOrder,
     StructType,
     UserInventoryType,
 } from 'entities/smartcontract';
-import { AreasGate, MinesGate, minesStore } from 'entities/contract';
-import { Button, confirm, Modal, Select, Text } from 'shared/ui/ui-kit';
+import { MinesGate, minesStore } from 'entities/contract';
+import { Button, confirm, Modal, Result, Select, Text } from 'shared/ui/ui-kit';
 import { useReloadPage, useTableData } from 'shared/lib/hooks';
 import { neutral9 } from 'shared/ui/variables';
 import styles from './styles.module.scss';
+import { LandlordAreasGate, landlordAreasStore } from './model';
 
 type Props = {
     contract?: ContractDto;
@@ -37,17 +40,18 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
     isDisabled,
 }) => {
     useGate(MinesGate, { searchParam: accountName });
-    useGate(AreasGate, {
+    useGate(LandlordAreasGate, {
         searchParam: accountName,
-        searchIdentificationType: searchBy.owner,
     });
+
     const { t } = useTranslation();
     const reloadPage = useReloadPage();
     const callAction = useSmartContractActionDynamic();
     const [isVisible, setIsVisible] = useState(false);
+    const [isWarningVisible, setIsWarningVisible] = useState(false);
     const [mineId, setMineId] = useState('');
     const userMine = useStore(minesStore);
-    const userAreas = useStore(areasStore) || [];
+    const userAreas = useStore(landlordAreasStore) || [];
 
     const { data: userInventory } =
         useTableData<UserInventoryType>(getInventoryConfig);
@@ -61,6 +65,8 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
     const activeArea = userAreas.filter(
         (area) => area.owner === accountName
     )[0];
+
+    const noEmptySlot = getEmptySlot(activeArea?.mine_slots ?? []) === -1;
 
     const handleCreate = async () => {
         await callAction(
@@ -84,6 +90,10 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
     };
 
     const handleClick = () => {
+        if (!activeArea || noEmptySlot) {
+            return setIsWarningVisible(true);
+        }
+
         // 1. create order as ll
         if (!contract) {
             return confirm({
@@ -119,6 +129,20 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
         await signContractAction();
     };
 
+    const mines = useMemo(
+        () => [
+            ...userMine.map(({ id }) => ({
+                value: id,
+                label: `ID ${id}`,
+            })),
+            ...allowedMine.map(({ asset_id }) => ({
+                value: asset_id,
+                label: `ID ${asset_id}`,
+            })),
+        ],
+        [userMine, allowedMine]
+    );
+
     return (
         <>
             <Button
@@ -129,6 +153,25 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
             >
                 {t('pages.areaManagement.placeAsMineOwner')}
             </Button>
+
+            <Modal
+                visible={isWarningVisible}
+                okText={t('components.common.button.visitMarketplace')}
+                onCancel={() => setIsWarningVisible(false)}
+                onOk={() => window.open(ATOMICHUB_URL, '_blank')}
+            >
+                <Result
+                    className={styles.info}
+                    icon={
+                        <ExclamationCircleFilled className={styles.infoIcon} />
+                    }
+                    title={t(
+                        !activeArea
+                            ? 'pages.serviceMarket.order.doNotHaveArea'
+                            : 'pages.serviceMarket.order.doNotHaveAreaSlot'
+                    )}
+                />
+            </Modal>
 
             <Modal
                 visible={isVisible}
@@ -145,16 +188,7 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
                         onChange={setMineId}
                         className={styles.select}
                         placeholder={t('pages.serviceMarket.order.selectMine')}
-                        options={[
-                            ...userMine.map(({ id }) => ({
-                                value: id,
-                                label: `ID ${id}`,
-                            })),
-                            ...allowedMine.map(({ asset_id }) => ({
-                                value: asset_id,
-                                label: `ID ${asset_id}`,
-                            })),
-                        ]}
+                        options={mines}
                     />
                 </div>
             </Modal>

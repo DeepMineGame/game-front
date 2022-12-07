@@ -9,7 +9,7 @@ export const MineOwnerMiningCrewPage: FC = () => {
 
     return (
         <PageWithTabs
-            title="MINE CREW"
+            title={t('pages.contractorStatsAndInfo.mineCrew').toUpperCase()}
             tabs={[
                 {
                     key: 0,
