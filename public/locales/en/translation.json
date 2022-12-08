@@ -817,6 +817,9 @@
       "contractWasTerminated": "Contract was Terminated",
       "mineIsActiveDescription": "Everything is fine and Mine is running. You can see information about the mining process and efficiency in Stats deck",
       "mineIsActiveDescriptionMobile": "Now you can see the statistics of the mining process and efficiency",
+      "PlaceAsContractor": "Place myself as a contractor",
+      "youNeed": "You signed the contract once, you need 2 signatures",
+      "creatingSelfMiningContract": "You are creating the self Mining Contract with 21-day duration. It must be signed twice and can be terminated at any time without penalty.",
       "management": {
         "addons": "ADD-ONS",
         "petobot": "Petobot",

@@ -86,7 +86,7 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
             })
         );
 
-        setTimeout(() => reloadPage(), 1500);
+        setTimeout(() => reloadPage(), 2000);
     };
 
     const handleClick = () => {
@@ -127,6 +127,8 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
 
     const handleSignOrder = async () => {
         await signContractAction();
+        setIsVisible(false);
+        setTimeout(() => reloadPage(), 2000);
     };
 
     const mines = useMemo(

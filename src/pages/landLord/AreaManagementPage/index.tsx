@@ -6,9 +6,9 @@ import {
     AreaClaim,
     AreaManagementTable,
     CallToTravelNotification,
-    $ContractorContracts,
-    ContractorContractsGate,
-    getLandlordContractsFX,
+    $MineOwnerContracts,
+    MineOwnerContractsGate,
+    getMineOwnerContractsFx,
     minesForAreaSlots,
     userAreaNftStore,
     PlaceMyselfMineAsOwner,
@@ -26,19 +26,27 @@ export const AreaManagementPage = () => {
     const { t } = useTranslation();
     const accountName = useAccountName();
 
-    useGate(ContractorContractsGate, { searchParam: accountName });
+    useGate(MineOwnerContractsGate, { searchParam: accountName });
     const mines = useStore(minesForAreaSlots);
     const area = useStore(areasStore);
     const userLocation = useUserLocation();
     const areas = useStore(userAreaNftStore);
 
-    const contracts = useStore($ContractorContracts);
-    const isContractsLoading = useStore(getLandlordContractsFX.pending);
+    const contracts = useStore($MineOwnerContracts);
+    const isContractsLoading = useStore(getMineOwnerContractsFx.pending);
 
     const contractsToSign = contracts.filter(
         (contract) =>
             contract.activation_time === 0 &&
             contract.status !== ContractStatus.terminated
+    );
+
+    const selfSignedContracts = contracts.filter(
+        (contract) =>
+            contract.client === contract.executor &&
+            contract.activation_time !== 0 &&
+            contract.deadline_time * 1000 > Date.now() &&
+            contract.status === ContractStatus.active
     );
 
     const areaItem = areas?.find(
@@ -63,7 +71,7 @@ export const AreaManagementPage = () => {
             <PlaceMyselfMineAsOwner
                 contract={contractsToSign[0]}
                 accountName={accountName}
-                isDisabled={isContractsLoading}
+                isDisabled={!!selfSignedContracts.length || isContractsLoading}
             />
             <div className={styles.miningSlots}>
                 {t('pages.areaManagement.mineSlots')}{' '}
@@ -76,6 +84,7 @@ export const AreaManagementPage = () => {
                     disabled={!isActive}
                     accountName={accountName}
                     ownContracts={contractsToSign}
+                    selfSignedContracts={selfSignedContracts}
                 />
             )}
             {!userLocation.landlordReception && (
