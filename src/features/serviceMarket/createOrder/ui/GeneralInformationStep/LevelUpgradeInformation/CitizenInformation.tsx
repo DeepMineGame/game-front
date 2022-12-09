@@ -1,9 +1,10 @@
 import { Button, Inventory, InventoryCardModal } from 'shared';
-import { FC, useState, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { Form } from 'antd';
 import { useStore } from 'effector-react';
+import { EngineerSchema } from 'entities/smartcontract';
 import {
     $mergedInventoryWithAtomicAssets,
     MergedInventoryWithAtomicAssets,
@@ -16,7 +17,7 @@ import {
     UpgradeTypeFormItem,
     useWatchUpgradeType,
 } from '../../UpgradeTypeFormItem';
-import { raritiesTranslationMap, inventoriesTypeMap } from './constants';
+import { inventoriesTypeMap, raritiesTranslationMap } from './constants';
 
 export const CitizenInformation: FC<GeneralInformationStepProps> = ({
     goToPreviousStep,
@@ -25,6 +26,16 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
 }) => {
     const { t } = useTranslation();
     const { hasValue, type } = useWatchUpgradeType(form);
+    const equipmentType =
+        type === EngineerSchema.mine
+            ? ('Mine' as const)
+            : [
+                  'DME Wire' as const,
+                  'Plunging Blocks' as const,
+                  'Cutter' as const,
+                  'Delaminator' as const,
+                  'Wandering Reactor' as const,
+              ];
     const [asset, setAsset] = useState<
         MergedInventoryWithAtomicAssets[number] | undefined
     >();
@@ -115,6 +126,7 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
                 visible={isInventoryOpen}
                 onCancel={() => setIsInventoryOpen(false)}
                 selectedTab={inventoriesTabMap[type]}
+                equipmentTypeFilter={equipmentType}
             />
             {selectedInventoryCard && (
                 <InventoryCardModal
