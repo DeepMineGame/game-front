@@ -17,8 +17,8 @@ export const findEquipmentByName = (
 
 export const filterEquipmentByName = (
     inventory: MergedInventoryWithAtomicAssets,
-    name: InventoryNameType
-) => inventory.filter((v) => getEquipmentName(v) === name);
+    equipmentType: InventoryNameType | InventoryNameType[]
+) => inventory.filter((v) => equipmentType.includes(getEquipmentName(v)));
 
 /**
  * Return specified equipment object

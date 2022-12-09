@@ -203,7 +203,7 @@ export const EquipmentSetPage: FC = () => {
                     onOpenCard={handleOpenCard}
                     onSelect={handleCardSelect}
                     userInventory={userInventory}
-                    name={selectedEquipmentName}
+                    equipmentTypeFilter={selectedEquipmentName}
                     visible={isInventoryVisible}
                     onCancel={() => setIsInventoryVisible(false)}
                 />
