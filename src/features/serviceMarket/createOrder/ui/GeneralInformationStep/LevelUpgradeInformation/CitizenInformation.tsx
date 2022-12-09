@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { Form } from 'antd';
 import { useStore } from 'effector-react';
-import { EngineerSchema } from 'entities/smartcontract';
+import { EngineerSchema, miningEquipmentNames } from 'entities/smartcontract';
 import {
     $mergedInventoryWithAtomicAssets,
     MergedInventoryWithAtomicAssets,
@@ -27,15 +27,7 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
     const { t } = useTranslation();
     const { hasValue, type } = useWatchUpgradeType(form);
     const equipmentType =
-        type === EngineerSchema.mine
-            ? ('Mine' as const)
-            : [
-                  'DME Wire' as const,
-                  'Plunging Blocks' as const,
-                  'Cutter' as const,
-                  'Delaminator' as const,
-                  'Wandering Reactor' as const,
-              ];
+        type === EngineerSchema.mine ? ('Mine' as const) : miningEquipmentNames;
     const [asset, setAsset] = useState<
         MergedInventoryWithAtomicAssets[number] | undefined
     >();
