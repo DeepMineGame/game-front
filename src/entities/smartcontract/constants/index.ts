@@ -1,4 +1,5 @@
 import { isMainNet } from 'app/constants';
+import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
 
 export const ENGINEER_CERTIFICATE_ID = isMainNet ? 619715 : 528605;
 
@@ -1071,13 +1072,18 @@ export const dmeToUpgrade = {
 
 type NumericMalfunctionProbability = 0.0001 | 0.0101 | 0.025 | 0.05;
 
-export const getMalfunctionProbabilitiesTable = (
-    equipmentName: Exclude<InventoryNameType, 'Mine' | 'Engineer Certificate'>
-):
-    | Record<string, Record<number, NumericMalfunctionProbability>>
-    | undefined => {
-    if (equipmentName === 'Cutter' || equipmentName === 'Wandering Reactor') {
-        return {
+export const getMalfunctionProbability = (
+    equipment: MergedInventoryWithAtomicAssets[number]
+) => {
+    let table:
+        | Record<string, Record<number, NumericMalfunctionProbability>>
+        | undefined;
+
+    if (
+        equipment.data.name === 'Cutter' ||
+        equipment.data.name === 'Wandering Reactor'
+    ) {
+        table = {
             Common: {
                 19: 0.0001,
                 18: 0.0001,
@@ -1191,8 +1197,11 @@ export const getMalfunctionProbabilitiesTable = (
         };
     }
 
-    if (equipmentName === 'Delaminator' || equipmentName === 'DME Wire') {
-        return {
+    if (
+        equipment.data.name === 'Delaminator' ||
+        equipment.data.name === 'DME Wire'
+    ) {
+        table = {
             Common: {
                 39: 0.0001,
                 38: 0.0001,
@@ -1406,8 +1415,8 @@ export const getMalfunctionProbabilitiesTable = (
         };
     }
 
-    if (equipmentName === 'Plunging Blocks') {
-        return {
+    if (equipment.data.name === 'Plunging Blocks') {
+        table = {
             Common: {
                 29: 0.0001,
                 28: 0.0001,
@@ -1571,12 +1580,12 @@ export const getMalfunctionProbabilitiesTable = (
         };
     }
 
-    return undefined;
-};
+    const stability =
+        Number(equipment.data['current capacity']) -
+        Number(equipment.data.depreciation);
 
-export type GetMalfunctionProbabilitiesTableParams = Parameters<
-    typeof getMalfunctionProbabilitiesTable
->[number];
+    return table?.[equipment.data.rarity][stability];
+};
 
 export const getMalfunctionProbabilityTranslation = (
     malfunctionProbability: NumericMalfunctionProbability

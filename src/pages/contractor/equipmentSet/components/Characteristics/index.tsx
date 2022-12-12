@@ -1,14 +1,17 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useStore, useGate } from 'effector-react';
+import { useStore, useGate, useEvent } from 'effector-react';
 
 import { useAccountName } from 'shared';
 import {
     $currentMine,
+    $dmeAmountEstimate,
     $generalEquipmentBreakageProbabillity,
+    $isNotFullEquipmentsSet,
     estimatesMiningTimeStore,
     MiningPageGate,
+    updateDmeAmountEstimateEvent,
 } from 'features';
+import { useEffect } from 'react';
 import { CharacteristicsLine } from '../CharacteristicsLine';
 
 import styles from './styles.module.scss';
@@ -22,6 +25,23 @@ export const Characteristics = () => {
     const equipmentBreakageProbabillity = useStore(
         $generalEquipmentBreakageProbabillity
     );
+    const dmeAmountEstimate = useStore($dmeAmountEstimate);
+    const isNotFullEquipmentsSet = useStore($isNotFullEquipmentsSet);
+    const updateDmeAmountEstimate = useEvent(updateDmeAmountEstimateEvent);
+
+    useEffect(() => {
+        let timerId: number;
+
+        if (!isNotFullEquipmentsSet) {
+            timerId = window.setInterval(
+                () => updateDmeAmountEstimate({ searchParam: accountName }),
+                10000
+            );
+        }
+
+        return () => window.clearInterval(timerId);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isNotFullEquipmentsSet]);
 
     return (
         <div className={styles.container}>
@@ -51,15 +71,20 @@ export const Characteristics = () => {
                     name={t(
                         'pages.equipmentSet.characteristics.equipmentBreakageProbabillity'
                     )}
-                    value={`${(equipmentBreakageProbabillity * 100).toFixed(
-                        2
+                    value={`${Number(
+                        (equipmentBreakageProbabillity * 100).toFixed(2)
                     )}%`}
                 />
-                <CharacteristicsLine
-                    name={t(
-                        'pages.equipmentSet.characteristics.estimatesAmountDME'
-                    )}
-                />
+                {!isNotFullEquipmentsSet && (
+                    <CharacteristicsLine
+                        name={t(
+                            'pages.equipmentSet.characteristics.estimatesAmountDME'
+                        )}
+                        value={`${Number(
+                            dmeAmountEstimate.min.toFixed(2)
+                        )} - ${Number(dmeAmountEstimate.max.toFixed(2))}`}
+                    />
+                )}
             </div>
         </div>
     );

@@ -29,7 +29,10 @@
     "actionModal": {
       "actionNotPossible": "Action is not possible",
       "busy": "You cannot perform this action because you are busy with",
-      "willEnd": "which will end in"
+      "lastAction": "last action",
+      "willEnd": "which will end in",
+      "lastActionSuccess": "The last action was successfully completed",
+      "needRefreshPage": "Refresh the page to get the latest data from the blockchain"
     },
     "contractorMenu": {
       "infoPanelTooltip": "Info panel is located here",
@@ -155,7 +158,7 @@
       "personalInfo": "Personal information"
     },
     "depreciationBar": {
-      "tooltip": "Mining number/Repair number (Default max repair number)"
+      "tooltip": "Mining actions performed - number of actions performed after last repair. Current wear capacity - current state of equipment accounting for all the breakdowns. Each breakdown lowers the counter. When number of mining actions performed reaches current wear capacity number the equipment breaks down. Maximum wear capacity - the state of the new equipment. Can be restored through Refurbish process"
     },
     "levelUpgradeBar": {
       "tooltip": "DME to claim to unlock level upgrade"
@@ -439,7 +442,7 @@
         "selectRole": "Select role",
         "selectItem": "Select item",
         "fee": "Fee",
-        "feeTooltip": "% of DME charged on each dig at the mine.",
+        "feeTooltip": "Between Landlord and Mine Owner, MO is always the one who pays this fee. Between Mine Owner and Contractor, Contractor is always the one who pays this fee.",
         "penalty": "Penalty",
         "penaltyHint": "If the performing party violates the terms of the contract or terminates the contract prematurely, the counterparty may charge a fine.",
         "ifDuring": "If during the entire contract, the executor within",

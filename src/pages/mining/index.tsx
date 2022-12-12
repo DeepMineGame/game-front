@@ -157,33 +157,37 @@ export const MiningPage: FC = memo(() => {
                     </div>
                 </Col>
                 <Col sm={7} xs={24}>
-                    <Title level={4} fontFamily="orbitron">
-                        {t('pages.mining.consumables')}
-                    </Title>
-                    <Space size="large" direction="vertical">
-                        <Tooltip
-                            placement="left"
-                            color={neutral4}
-                            title={t('pages.mining.tooltipAroundConsumables')}
-                        >
-                            <Space
-                                direction={
-                                    isDesktop ? 'horizontal' : 'vertical'
-                                }
+                    <Space direction="vertical" size="large">
+                        <Title level={4} fontFamily="orbitron">
+                            {t('pages.mining.consumables')}
+                        </Title>
+                        <Space size="large" direction="vertical">
+                            <Tooltip
+                                placement="left"
+                                color={neutral4}
+                                title={t(
+                                    'pages.mining.tooltipAroundConsumables'
+                                )}
                             >
-                                <Plugin />
-                                <Plugin />
-                            </Space>
-                        </Tooltip>
-                        {accountName && (
-                            <MiningAndClaimButton
-                                accountName={accountName}
-                                action={lastMineAction}
-                                isMiningWillEndInFuture={
-                                    !!lastMineAction && !isMiningFinished
-                                }
-                            />
-                        )}
+                                <Space
+                                    direction={
+                                        isDesktop ? 'horizontal' : 'vertical'
+                                    }
+                                >
+                                    <Plugin />
+                                    <Plugin />
+                                </Space>
+                            </Tooltip>
+                            {accountName && (
+                                <MiningAndClaimButton
+                                    accountName={accountName}
+                                    action={lastMineAction}
+                                    isMiningWillEndInFuture={
+                                        !!lastMineAction && !isMiningFinished
+                                    }
+                                />
+                            )}
+                        </Space>
                     </Space>
                 </Col>
             </Row>

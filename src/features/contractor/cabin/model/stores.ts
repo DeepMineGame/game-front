@@ -4,8 +4,7 @@ import {
     ContractDto,
     ContractStatus,
     ContractType,
-    getMalfunctionProbabilitiesTable,
-    GetMalfunctionProbabilitiesTableParams,
+    getMalfunctionProbability,
     MineState,
     UserHistoryType,
     UserInfoType,
@@ -87,17 +86,11 @@ export const $generalEquipmentBreakageProbabillity =
         // * ... * (maxProbability - malfunctionProbabilitiyEquip5)
         const generalProbabilityOfNoBreakage = installedMiningEquipments.reduce(
             (acc, equipment) => {
-                // to find equipmentProbabilityOfNoBreakage,
-                // get malfunctionProbabilitiy from table and do maxProbability - malfunctionProbabilitiy
+                const malfunctionProbability =
+                    getMalfunctionProbability(equipment);
+                // to find equipmentProbabilityOfNoBreakage, do maxProbability - malfunctionProbabilitiy
                 const equipmentProbabilityOfNoBreakage =
-                    maxProbability -
-                    (getMalfunctionProbabilitiesTable(
-                        equipment.data
-                            .name as GetMalfunctionProbabilitiesTableParams
-                    )?.[equipment.data.rarity][
-                        Number(equipment.data['current capacity']) -
-                            Number(equipment.data.depreciation)
-                    ] || 0);
+                    maxProbability - (malfunctionProbability || 0);
 
                 return acc * equipmentProbabilityOfNoBreakage;
             },

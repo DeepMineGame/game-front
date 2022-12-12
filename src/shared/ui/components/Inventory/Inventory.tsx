@@ -11,7 +11,7 @@ import styles from './styles.module.scss';
 import { sortConfig, tabList, tabsNameMap } from './constants';
 
 type InventoryProps = ModalProps & {
-    name?: InventoryNameType;
+    equipmentTypeFilter?: InventoryNameType | InventoryNameType[];
     userInventory: MergedInventoryWithAtomicAssets;
     onSelect: (card: MergedInventoryWithAtomicAssets[number]) => void;
     onOpenCard: (card: MergedInventoryWithAtomicAssets[number]) => void;
@@ -19,7 +19,7 @@ type InventoryProps = ModalProps & {
 };
 
 export const Inventory: FC<InventoryProps> = ({
-    name,
+    equipmentTypeFilter,
     userInventory,
     onSelect,
     onOpenCard,
@@ -36,8 +36,8 @@ export const Inventory: FC<InventoryProps> = ({
         }
     }, [props.selectedTab]);
 
-    const cards = name
-        ? filterEquipmentByName(userInventory, name)
+    const cards = equipmentTypeFilter
+        ? filterEquipmentByName(userInventory, equipmentTypeFilter)
         : userInventory;
 
     const handleCardSelect =
@@ -57,7 +57,7 @@ export const Inventory: FC<InventoryProps> = ({
             title="Active inventory"
             className={styles.modal}
         >
-            <div className={styles.container}>
+            <div>
                 <div className={styles.filterHeader}>
                     <div className={styles.filterHeaderLeft}>
                         <Dropdown items={sortConfig}>
@@ -71,10 +71,13 @@ export const Inventory: FC<InventoryProps> = ({
                         <div className={styles.filter}>
                             <FilterOutlined className={styles.filterIcon} />
                             <div className={styles.filterText}>Filters</div>
-                            <div className={styles.filterName}>{name}</div>
+                            <div className={styles.filterName}>
+                                {Array.isArray(equipmentTypeFilter)
+                                    ? equipmentTypeFilter.join(', ')
+                                    : equipmentTypeFilter}
+                            </div>
                         </div>
                     </div>
-                    <div className={styles.size}>Size: 500/1000</div>
                 </div>
                 <div className={styles.navbar}>
                     {tabList.map((tab) => (

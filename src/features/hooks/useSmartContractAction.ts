@@ -51,9 +51,9 @@ export const useSmartContractAction = <T>({
             if (lastActionInProgress) {
                 return Modal.warn({
                     title: t('components.actionModal.actionNotPossible'),
-                    content: `${t(
-                        'components.actionModal.busy'
-                    )} ${actionName} ${t(
+                    content: `${t('components.actionModal.busy')} ${
+                        actionName || t('components.actionModal.lastAction')
+                    } ${t(
                         'components.actionModal.willEnd'
                     )} ${getTimeLeftFromUtc(lastAction.finishes_at)}`,
                 });

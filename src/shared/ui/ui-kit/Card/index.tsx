@@ -7,7 +7,11 @@ import {
     DepreciationProgressBar,
     isUtcDateExpired,
 } from 'shared';
-import { UserInventoryType } from 'entities/smartcontract';
+import {
+    ID_TO_INVENTORY,
+    miningEquipmentNames,
+    UserInventoryType,
+} from 'entities/smartcontract';
 import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
 import { ProgressProps } from '../ProgressBar/NftProgressBar';
 import styles from './styles.module.scss';
@@ -51,7 +55,9 @@ export const Card: FC<CardProps> = ({
     withDepreciationBar = true,
 }) => {
     const status = getAssetStatus(inventory);
-
+    const isEquipment =
+        inventory &&
+        miningEquipmentNames.includes(ID_TO_INVENTORY[inventory.template_id]);
     return (
         <Tooltip overlay={tooltipOverlay}>
             <div className={cn(styles.wrapper, className)}>
@@ -82,7 +88,7 @@ export const Card: FC<CardProps> = ({
                             alt={`template ${inventory?.template_id || ''}`}
                         />
                     </div>
-                    {withDepreciationBar && (
+                    {isEquipment && withDepreciationBar && (
                         <DepreciationProgressBar
                             depreciation={
                                 (
