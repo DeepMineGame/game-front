@@ -2,7 +2,10 @@ import { FC, useCallback, useState } from 'react';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { ExclamationCircleFilled } from '@ant-design/icons';
-import { ATOMICHUB_URL } from 'app/constants';
+import {
+    AtomicHubMarketSections,
+    getAtomicHubUrlToSection,
+} from 'app/constants';
 import {
     Button,
     Result,
@@ -76,7 +79,14 @@ const SignContractorOrder: FC<Props> = ({ contract, accountName }) => {
             <SignModal
                 isVisible={isWarningModalVisible}
                 onCancel={() => setIsWarningModalVisible(false)}
-                onOk={() => window.open(ATOMICHUB_URL, '_blank')}
+                onOk={() =>
+                    window.open(
+                        getAtomicHubUrlToSection(
+                            AtomicHubMarketSections.structures
+                        ),
+                        '_blank'
+                    )
+                }
                 okText={t('components.common.button.visitMarketplace')}
             >
                 <Result

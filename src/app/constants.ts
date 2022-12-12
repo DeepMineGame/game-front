@@ -101,4 +101,12 @@ export const getNextEndpoint = ({
 
 export const ATOMICHUB_URL = isMainNet
     ? 'https://wax.atomichub.io/'
-    : 'https://wax-test.atomichub.io/explorer/collection/deepminetest';
+    : 'https://wax-test.atomichub.io/';
+
+export enum AtomicHubMarketSections {
+    structures = 'structures',
+    areas = 'areas',
+    equipment = 'equipment',
+}
+export const getAtomicHubUrlToSection = (section: AtomicHubMarketSections) =>
+    `${ATOMICHUB_URL}market?collection_name=deepminegame&order=desc&schema_name=${section}`;
