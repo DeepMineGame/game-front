@@ -1007,6 +1007,7 @@ export const deepminesmrt = 'deepminesrmt';
 export const deepmineming = 'deepmineming';
 export const deepmineengr = 'deepmineengr';
 
+// there are fewer zeros than in the game table to count the percentages, see the getCost method
 export const dmeToUpgrade = {
     Common: {
         0: 50000,
