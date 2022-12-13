@@ -9,6 +9,7 @@ import {
 import { useStore } from 'effector-react';
 import { useSmartContractAction } from 'features';
 import { useTranslation } from 'react-i18next';
+import { Modal } from 'antd';
 import {
     extractFeeToClaimAttr,
     rolesStore,
@@ -35,21 +36,24 @@ export const ClaimDME: FC<{ contract: ContractDto | null }> = ({
 
     const feeInDme =
         (getDmeAmount(dmeToClaim) / 100) * (contract?.fee_percent || 1);
-    const [claimInfoModalVisible, setClaimInfoModalVisable] = useState(false);
+    const [claimInfoModalVisible, setClaimInfoModalVisible] = useState(false);
 
     const dmeMoreThenZero = Number(dmeToClaim) > 0;
     const claimDme = useSmartContractAction({ action: moclaim({ waxUser }) });
     const onDmeClick = async () => {
         await claimDme();
         await getRolesEffect({ searchParam: waxUser });
-        setClaimInfoModalVisable(true);
+        Modal.success({
+            content: t('components.common.yourDMEHasBeenClaimed'),
+            onOk: reloadPage,
+        });
     };
 
     return (
         <>
             <Button
                 type="primary"
-                onClick={onDmeClick}
+                onClick={() => setClaimInfoModalVisible(true)}
                 disabled={!dmeMoreThenZero}
             >
                 {t('components.common.button.claim')} {dmeToClaim}{' '}
@@ -58,7 +62,7 @@ export const ClaimDME: FC<{ contract: ContractDto | null }> = ({
             <ModalWithTable
                 visible={claimInfoModalVisible}
                 onCancel={reloadPage}
-                onSubmit={reloadPage}
+                onSubmit={onDmeClick}
                 items={{
                     [t('pages.mining.availableForClaim')]:
                         dmeToClaim.toFixed(8),
