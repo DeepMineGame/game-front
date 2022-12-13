@@ -31,8 +31,9 @@
       "busy": "You cannot perform this action because you are busy with",
       "lastAction": "last action",
       "willEnd": "which will end in",
-      "lastActionSuccess": "The last action was successfully completed",
-      "needRefreshPage": "Refresh the page to get the latest data from the blockchain"
+      "isComplete":"is complete",
+      "hide": "Hide",
+      "ok": "Ok"
     },
     "contractorMenu": {
       "infoPanelTooltip": "Info panel is located here",

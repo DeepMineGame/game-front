@@ -1,9 +1,6 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Space } from 'antd';
-import { Button } from '../Button';
-import { Title } from '../typography/Title';
-import { Modal } from '../Modal';
+import { Modal, Typography } from 'antd';
 import { KeyValueTable, KeyValueTableProps } from '../KeyValueTable';
 import styles from './styles.module.scss';
 
@@ -32,35 +29,21 @@ export const ModalWithTable: FC<ModalWithTableProps> = ({
 
     return (
         <Modal
+            okButtonProps={{ size: 'large' }}
+            cancelButtonProps={{ size: 'large' }}
             className={className}
             visible={visible}
-            title={
-                <Title fontFamily="bai" level={4}>
-                    {texts.title}
-                </Title>
-            }
+            title={texts.title}
             onCancel={onCancel}
-            footer={
-                <Space align="end">
-                    <Button type="ghost" onClick={onCancel}>
-                        {t('components.common.button.cancel')}
-                    </Button>
-                    <Button type="primary" onClick={onSubmit}>
-                        {texts.onOk || t('components.common.button.okay')}
-                    </Button>
-                </Space>
-            }
+            onOk={onSubmit}
+            okText={texts.onOk || t('components.common.button.okay')}
+            cancelText={t('components.common.button.cancel')}
         >
             <div className={styles.content}>
                 {texts.subtitle && (
-                    <Title
-                        level={4}
-                        fontFamily="bai"
-                        thin
-                        className={styles.title}
-                    >
+                    <Typography.Text className={styles.title}>
                         {texts.subtitle}
-                    </Title>
+                    </Typography.Text>
                 )}
                 <KeyValueTable items={items!} />
             </div>
