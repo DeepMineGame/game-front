@@ -3,7 +3,10 @@ import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { Button, Result, showSuccessModal, useReloadPage } from 'shared';
-import { ATOMICHUB_URL } from 'app/constants';
+import {
+    AtomicHubMarketSections,
+    getAtomicHubUrlToSection,
+} from 'app/constants';
 import { useSmartContractAction } from 'features/hooks';
 import {
     ContractDto,
@@ -91,7 +94,15 @@ const SignMineOwnerOrder: FC<Props> = React.memo(
                     isVisible={isModalVisible}
                     onCancel={() => setIsModalVisible(false)}
                     okText={t('components.common.button.visitMarketplace')}
-                    onOk={() => window.open(ATOMICHUB_URL, '_blank')}
+                    onOk={() =>
+                        window.open(
+                            getAtomicHubUrlToSection(
+                                AtomicHubMarketSections.areas
+                            ),
+
+                            '_blank'
+                        )
+                    }
                 >
                     <Result
                         className={styles.info}

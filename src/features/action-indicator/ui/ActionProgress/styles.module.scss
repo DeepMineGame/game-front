@@ -36,6 +36,40 @@
   color: $color-neutral-neutral-7;
 }
 
-.successIcon {
-  color: $color-green-green-6;
+.controls {
+  display: flex;
+  gap: 24px;
+  justify-content: end;
+  width: 100%;
+  cursor: pointer;
+
+  .ok {
+    color: $color-primary-primary-7
+  }
 }
+
+// animation from designer @see https://codepen.io/snappyrogue/pen/xxzNdbN
+.successSvg {
+  -moz-animation: strokeIt 3s cubic-bezier(0.45, 0.03, 0.51, 0.95) alternate infinite;
+  -webkit-animation: strokeIt 3s cubic-bezier(0.45, 0.03, 0.51, 0.95) alternate infinite;
+  animation: strokeIt 3s cubic-bezier(0.45, 0.03, 0.51, 0.95) alternate infinite;
+  fill: #1B1B1B;
+  stroke: #47FF40;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: arcs;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 875.6;
+  opacity: .7;
+
+}
+
+@keyframes strokeIt {
+  from {
+    stroke-dashoffset: 875.6;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+

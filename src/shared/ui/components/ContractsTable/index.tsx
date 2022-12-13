@@ -32,7 +32,7 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
 
                 return {
                     cost: contract.cost_of_execution,
-                    nickName: contract.client || contract.executor || '-',
+                    nickName: contract.client || contract.executor,
                     key: contract.id,
                     id: contract.id,
                     type: contractName[contract.type],
@@ -89,7 +89,9 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                                 </Tooltip>
                                 <Space align="center" size={0}>
                                     <Link to={`/user/${partnerNickname}`}>
-                                        {partnerNickname || '-'}
+                                        {partnerNickname ||
+                                            contract.executor ||
+                                            contract.client}
                                     </Link>
                                     {role && (
                                         <Tag kind="secondary">

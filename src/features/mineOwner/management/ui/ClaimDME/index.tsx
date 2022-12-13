@@ -34,8 +34,8 @@ export const ClaimDME: FC<{ contract: ContractDto | null }> = ({
         : 0;
 
     const feeInDme =
-        (getDmeAmount(dmeToClaim) / 100) * (contract?.fee_percent || 0);
-    const [claimInfoModalVisable, setClaimInfoModalVisable] = useState(false);
+        (getDmeAmount(dmeToClaim) / 100) * (contract?.fee_percent || 1);
+    const [claimInfoModalVisible, setClaimInfoModalVisable] = useState(false);
 
     const dmeMoreThenZero = Number(dmeToClaim) > 0;
     const claimDme = useSmartContractAction({ action: moclaim({ waxUser }) });
@@ -56,12 +56,12 @@ export const ClaimDME: FC<{ contract: ContractDto | null }> = ({
                 {t('components.common.button.dme')}
             </Button>
             <ModalWithTable
-                visible={claimInfoModalVisable}
+                visible={claimInfoModalVisible}
                 onCancel={reloadPage}
                 onSubmit={reloadPage}
                 items={{
                     [t('pages.mining.availableForClaim')]:
-                        getDmeAmount(dmeToClaim),
+                        dmeToClaim.toFixed(8),
                     [t('pages.serviceMarket.contract.fee')]: Number(
                         feeInDme.toFixed(8)
                     ),
