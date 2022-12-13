@@ -66,7 +66,7 @@ export const ClaimDME: FC<{ contract: ContractDto | null }> = ({
                         feeInDme.toFixed(8)
                     ),
                     [t('pages.mining.transferredToYourAccount')]: Number(
-                        (getDmeAmount(dmeToClaim) - feeInDme).toFixed(8)
+                        (dmeToClaim - feeInDme).toFixed(8)
                     ),
                 }}
                 texts={{
