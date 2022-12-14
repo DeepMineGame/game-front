@@ -18,7 +18,10 @@ import {
     serviceMarket,
     warehouse,
 } from 'app/router/paths';
-import { ATOMICHUB_URL } from 'app/constants';
+import {
+    AtomicHubMarketSections,
+    getAtomicHubUrlToSection,
+} from 'app/constants';
 import { useStore } from 'effector-react';
 import { ServiceMarketTabIds } from 'app/router/constants';
 import {
@@ -45,7 +48,9 @@ export function useActionsButton() {
     const reloadPage = useReloadPage();
     const inLocation = useUserLocation();
     const { travelConfirm } = useTravelConfirm(LOCATION_TO_ID.mine_deck);
-
+    const atomicHubStructuresLink = getAtomicHubUrlToSection(
+        AtomicHubMarketSections.structures
+    );
     const contractButton = (
         <div>
             <Button
@@ -102,7 +107,9 @@ export function useActionsButton() {
                 </Button>
                 <Button
                     type="link"
-                    onClick={() => window.open(ATOMICHUB_URL, '_blank')}
+                    onClick={() =>
+                        window.open(atomicHubStructuresLink, '_blank')
+                    }
                 >
                     {isDesktop
                         ? t('features.mineOwner.goToMarket')
@@ -119,7 +126,9 @@ export function useActionsButton() {
                 </Button>
                 <Button
                     type="link"
-                    onClick={() => window.open(ATOMICHUB_URL, '_blank')}
+                    onClick={() =>
+                        window.open(atomicHubStructuresLink, '_blank')
+                    }
                 >
                     {isDesktop
                         ? t('features.mineOwner.goToMarket')

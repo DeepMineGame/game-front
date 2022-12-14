@@ -12,7 +12,7 @@ export const NoCertificate: FC = () => {
     const navigate = useNavigate();
     const { t } = useTranslation();
     const isTablet = useMediaQuery(tablet);
-
+    const atmoicHubEngineerCertUrl = 'explorer/template/deepminegame/619715';
     return (
         <State
             title={t('pages.engineer.noCertificateDetected')}
@@ -35,7 +35,12 @@ export const NoCertificate: FC = () => {
                         type="primary"
                         ghost
                         size={isTablet ? 'middle' : 'small'}
-                        onClick={() => window.open(ATOMICHUB_URL, '_blank')}
+                        onClick={() =>
+                            window.open(
+                                `${ATOMICHUB_URL}${atmoicHubEngineerCertUrl}`,
+                                '_blank'
+                            )
+                        }
                     >
                         {t(
                             isTablet

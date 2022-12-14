@@ -5,7 +5,10 @@ import cn from 'classnames';
 import { Button, desktopS, useMediaQuery } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import { warehouse } from 'app/router/paths';
-import { ATOMICHUB_URL } from 'app/constants';
+import {
+    AtomicHubMarketSections,
+    getAtomicHubUrlToSection,
+} from 'app/constants';
 import commonStyles from '../../styles/styles.module.scss';
 import styles from './styles.module.scss';
 
@@ -43,7 +46,14 @@ export const NoArea: FC<Props> = ({ className }) => {
                 <Button
                     type="primary"
                     ghost
-                    onClick={() => window.open(ATOMICHUB_URL, '_blank')}
+                    onClick={() =>
+                        window.open(
+                            getAtomicHubUrlToSection(
+                                AtomicHubMarketSections.areas
+                            ),
+                            '_blank'
+                        )
+                    }
                 >
                     {isDesktop
                         ? t('pages.landLord.cabin.goToMarket')

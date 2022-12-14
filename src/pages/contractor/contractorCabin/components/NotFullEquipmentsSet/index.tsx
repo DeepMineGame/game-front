@@ -4,7 +4,10 @@ import cn from 'classnames';
 import { Button, desktopS, useMediaQuery } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import { warehouse } from 'app/router/paths';
-import { ATOMICHUB_URL } from 'app/constants';
+import {
+    AtomicHubMarketSections,
+    getAtomicHubUrlToSection,
+} from 'app/constants';
 import { Col, Row } from 'antd';
 import { useStore } from 'effector-react';
 import { $miningEquipments } from 'features/contractor';
@@ -31,11 +34,13 @@ export const NotFullEquipmentsSet: FC = () => {
                             styles.description
                         )}
                     >
-                        {t(
-                            `pages.contractor.notFullEquipmentsSet.${
-                                isDesktop ? 'description' : 'descriptionMobile'
-                            }`
-                        )}
+                        {isDesktop
+                            ? t(
+                                  'pages.contractor.notFullEquipmentsSet.description'
+                              )
+                            : t(
+                                  'pages.contractor.notFullEquipmentsSet.descriptionMobile'
+                              )}
                     </div>
                     <Row>
                         <Col span={12}>
@@ -54,7 +59,12 @@ export const NotFullEquipmentsSet: FC = () => {
                                 className={styles.button}
                                 type="link"
                                 onClick={() =>
-                                    window.open(ATOMICHUB_URL, '_blank')
+                                    window.open(
+                                        getAtomicHubUrlToSection(
+                                            AtomicHubMarketSections.equipment
+                                        ),
+                                        '_blank'
+                                    )
                                 }
                             >
                                 {t(
