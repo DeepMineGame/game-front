@@ -59,6 +59,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     ...props
 }) => {
     const reload = useReloadPage();
+    const { t } = useTranslation();
     const [cardData, setCardData] = useState<AssetDataType | undefined>(
         undefined
     );
@@ -73,8 +74,6 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     const [isModalVisible, setIsModalVisible] = useState(false);
     const { getCost } = useRepair();
     const { dmeBalance } = useStore(balancesStore);
-
-    const { t } = useTranslation();
 
     const accountName = useAccountName();
 
@@ -250,7 +249,6 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             <Col span={10}>
                                 <Space>
                                     <Button
-                                        disabled={!assetIsBroken}
                                         size="large"
                                         type="link"
                                         onClick={() => {
@@ -301,7 +299,6 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             <Col span={10}>
                                 <Space>
                                     <Button
-                                        disabled={!assetIsBroken}
                                         type="link"
                                         size="large"
                                         onClick={() => {

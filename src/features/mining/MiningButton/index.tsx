@@ -13,7 +13,7 @@ import {
 } from 'shared';
 import { CheckCircleOutlined } from '@ant-design/icons';
 import { Space } from 'antd';
-import { useSmartContractAction } from 'features';
+import { contractorStore, useSmartContractAction } from 'features';
 import {
     ActionDto,
     ActionState,
@@ -37,6 +37,8 @@ type Props = {
 export const MiningAndClaimButton: FC<Props> = memo(
     ({ action, isMiningWillEndInFuture, accountName }) => {
         useGate(MiningPageGate, { searchParam: accountName });
+        const contractor = useStore(contractorStore);
+
         const [claimModalVisibility, setClaimModalVisibility] = useState(false);
         const reloadPage = useReloadPage();
         const isDesktop = useMediaQuery(desktopS);
@@ -146,6 +148,7 @@ export const MiningAndClaimButton: FC<Props> = memo(
                     onOk={onClaimButtonClick}
                     onCancel={hideClaimModal}
                     okText={okText}
+                    okButtonProps={{ disabled: !contractor?.finished }}
                     visible={claimModalVisibility}
                     title={t('pages.mining.miningFinishedSuccessfully')}
                 >
