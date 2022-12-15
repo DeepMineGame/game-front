@@ -14,6 +14,7 @@ export enum Role {
     mineowner = 'mineowner',
     citizen = 'citizen',
     engineer = 'engineer',
+    landlord = 'landlord',
 }
 
 export type GetOrdersParams = {

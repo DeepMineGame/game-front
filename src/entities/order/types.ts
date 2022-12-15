@@ -13,7 +13,6 @@ export type BaseOrder = {
     opt_client?: string;
     opt_executor?: string;
     penalty_amount: number;
-    deadline_duration: number;
     deadline_duration_in_days: number;
     deadline_duration_in_hours: number;
 };
@@ -40,7 +39,6 @@ export const orderFields = {
     optClient: 'opt_client',
     optExecutor: 'opt_executor',
     penaltyAmount: 'penalty_amount',
-    deadlineDuration: 'deadline_duration',
     feePercent: 'fee_percent',
     feeDailyMinAmount: 'fee_daily_min_amount',
     daysForPenalty: 'days_for_penalty',

@@ -159,7 +159,7 @@ export const routes: AppRoute[] = [
     {
         path: paths.landLordStats,
         Component: LandlordStatsAndInfoPage,
-        forLoggedIn: false,
+        forLoggedIn: true,
         forAdmin: true,
         forBetaUser: true,
         titleTag: 'Landlord — DeepMine',
@@ -167,7 +167,7 @@ export const routes: AppRoute[] = [
     {
         path: paths.areaManagement,
         Component: AreaManagementPage,
-        forLoggedIn: false,
+        forLoggedIn: true,
         forAdmin: true,
         forBetaUser: true,
         titleTag: 'Landlord — Area management',

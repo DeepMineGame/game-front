@@ -57,7 +57,7 @@ const MineOperationOrder: FC<ContractProps> = ({ contract, accountName }) => {
                         </Col>
 
                         <Col span={24}>
-                            <Row justify="end">
+                            <Row justify="end" gutter={[12, 12]}>
                                 {canSignOperationLandlordOrder && (
                                     <SignLandlordOrder
                                         contract={contract}

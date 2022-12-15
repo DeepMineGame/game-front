@@ -1,10 +1,11 @@
+/* eslint-disable react/no-array-index-key */
 import React, { FC, useState } from 'react';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 
 import { AddItem, DiscoverItem, SearchingItem } from 'shared';
 import { useGate, useStore } from 'effector-react';
-import { MineDto } from 'entities/smartcontract';
+import { ContractDto, MineDto } from 'entities/smartcontract';
 import { AreaManagementTableContent } from '../AreaManagementTableContent';
 import { AddMineOwnerModal } from '../AddMineOwnerModal';
 import { Activity, MineCrewDataType } from '../../types';
@@ -17,19 +18,27 @@ const discoverSlotsCount = 2;
 type Props = {
     disabled?: boolean;
     accountName: string;
+    ownContracts: ContractDto[];
+    selfSignedContracts: ContractDto[];
 };
 const getMineCrewContractors = (mine: MineDto) =>
     mine.contractor_slots.filter((v) => v.contractor.length > 0).length;
 
-export const AreaManagementTable: FC<Props> = ({ disabled, accountName }) => {
+export const AreaManagementTable: FC<Props> = ({
+    disabled,
+    accountName,
+    ownContracts,
+    selfSignedContracts,
+}) => {
     const { t } = useTranslation();
     useGate(AreaGate, { searchParam: accountName });
-    const [searchingSlotsCount, setSearchingSlotsCount] = useState(0);
     const [isAddModalVisible, setIsAddModalVisible] = useState(false);
     const mines = useStore(minesForAreaSlots);
+
     const data = mines?.map(
         (mine) =>
             ({
+                key: mine.id,
                 discord: 'https://discord.com/',
                 mine: `ID${mine.id}`,
                 status: mine.state,
@@ -41,26 +50,55 @@ export const AreaManagementTable: FC<Props> = ({ disabled, accountName }) => {
                 activity: Activity.high,
             } as MineCrewDataType)
     );
-    const searchingSlots = new Array(searchingSlotsCount).fill(
+
+    const ownSignedContract = selfSignedContracts
+        .filter(
+            (contract) =>
+                !mines?.some((mine) => +mine.id === +contract.executor_asset_id)
+        )
+        .map(
+            (contract) =>
+                ({
+                    key: contract.id,
+                    discord: 'https://discord.com/',
+                    mine: `ID${contract.executor_asset_id}`,
+                    status: 3,
+                    crew: [0, 0],
+                    ejection: 346,
+                    activity: Activity.high,
+                } as MineCrewDataType)
+        );
+
+    const searchingSlots = ownContracts.map((contract) => (
         <SearchingItem
-            onClick={() => setSearchingSlotsCount(0)}
+            key={contract.id}
             text={t('pages.areaManagement.search')}
+            contract={contract}
+            accountName={accountName}
         />
-    );
-    const emptySlots = new Array(emptySlotsCount).fill(
+    ));
+
+    const emptySlots = [
+        ...new Array(emptySlotsCount - ownContracts.length),
+    ].map((_, idx) => (
         <AddItem
+            key={idx}
             className={styles.emptySlot}
             onClick={() => setIsAddModalVisible(true)}
             text={t('pages.areaManagement.add')}
         />
-    );
-    const discoverSlots = new Array(discoverSlotsCount).fill(
-        <DiscoverItem className={styles.discoverSlot} />
-    );
+    ));
+
+    const discoverSlots = [...new Array(discoverSlotsCount)].map((_, idx) => (
+        <DiscoverItem key={idx} className={styles.discoverSlot} />
+    ));
 
     return (
         <div className={cn({ [styles.disabled]: disabled })}>
-            <AreaManagementTableContent disabled={disabled} data={data} />
+            <AreaManagementTableContent
+                disabled={disabled}
+                data={data?.concat(ownSignedContract)}
+            />
             {searchingSlots}
             {emptySlots}
             {discoverSlots}

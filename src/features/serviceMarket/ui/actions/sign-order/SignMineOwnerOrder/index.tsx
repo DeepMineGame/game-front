@@ -123,4 +123,4 @@ const SignMineOwnerOrder: FC<Props> = React.memo(
     }
 );
 
-export { SignMineOwnerOrder };
+export { SignMineOwnerOrder, getEmptySlot };
