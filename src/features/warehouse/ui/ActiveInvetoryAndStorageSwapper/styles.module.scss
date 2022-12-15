@@ -73,15 +73,14 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-}
-
-.title {
-  margin-bottom: 28px !important;
-  display: flex;
-  justify-content: space-between;
+  margin-top: 24px;
 }
 
 .draggedElements {
   animation: pulse 3s linear infinite;
   composes: cardsWrapper;
+}
+
+.filter {
+  margin-top: 24px;
 }

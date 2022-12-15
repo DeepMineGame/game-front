@@ -49,6 +49,7 @@
       "YouHaveToPhysicalToManageInventory": "Travel to Hive to have the ability to load active inventory from the warehouse"
     },
     "common": {
+      "selectByName": "Select by name",
       "city": "City",
       "item": "Item",
       "openContract": "Open Contract",
@@ -149,7 +150,24 @@
         "undefined": "Undefined",
         "area": "Area",
         "equipment": "Equipment",
-        "structure": "Structure"
+        "structure": "Structure",
+        "badge": "Badge",
+        "schema": "Schema",
+        "upgradeKit": "Upgrade kit",
+        "card": "Card",
+        "module": "Module",
+        "sticker": "Sticker",
+        "pack": "Pack",
+        "areas": "Areas",
+        "structures": "Structures",
+        "badges": "Badges",
+        "schemas": "Schemas",
+        "upgradeKits": "Upgrade kits",
+        "cards": "Cards",
+        "modules": "Modules",
+        "stickers": "Stickers",
+        "packs": "Packs",
+        "all": "All"
       },
       "price": "Price",
       "myStatus": "My Status"
