@@ -1,10 +1,4 @@
-import {
-    DMECoinIcon,
-    getDmeAmount,
-    KeyValueTable,
-    Page,
-    useAccountName,
-} from 'shared';
+import { DMECoinIcon, KeyValueTable, Page, useAccountName } from 'shared';
 import { useTranslation } from 'react-i18next';
 import React from 'react';
 import { $userMine, Addons, MineControlPanel, $mineNft } from 'features';
@@ -19,11 +13,12 @@ const SUB_LEVELS_MAX_AMOUNT = 5;
 export const MineManagementPage = () => {
     const mine = useStore($userMine);
     const mineNft = useStore($mineNft);
+
     const dmeToLevelUpgradePercent =
         mineNft &&
         Math.floor(
-            (100 * Number(mineNft?.data['DME mined'])) /
-                Number(mineNft?.data['DME to upgrade'])
+            (100 * Number(mineNft?.data['DME Mined'])) /
+                Number(mineNft?.data['DME to Upgrade'])
         );
     const { t } = useTranslation();
     const chainAccountName = useAccountName();
@@ -51,24 +46,18 @@ export const MineManagementPage = () => {
                                     )}
                                     showInfo={false}
                                 />{' '}
-                                {mineNft?.data['DME mined'] &&
-                                mineNft?.data['DME to upgrade'] ? (
+                                {mineNft?.data['DME Mined'] &&
+                                mineNft?.data['DME to Upgrade'] ? (
                                     <>
                                         <span>
                                             {Math.floor(
-                                                getDmeAmount(
-                                                    mineNft?.data['DME mined']
-                                                )
+                                                mineNft?.data['DME Mined']
                                             )}
                                         </span>
                                         /
                                         <span>
                                             {Math.floor(
-                                                getDmeAmount(
-                                                    mineNft?.data[
-                                                        'DME to upgrade'
-                                                    ]
-                                                )
+                                                mineNft?.data['DME to Upgrade']
                                             )}
                                         </span>
                                     </>

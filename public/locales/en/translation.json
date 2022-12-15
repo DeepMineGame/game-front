@@ -593,7 +593,7 @@
         "contractType": "Contract type",
         "completionDate": "Completion date",
         "penalty": "Penalty, DME",
-        "fee": "Fee, DME",
+        "fee": "Fee, %",
         "status": "Status",
         "cost": "Cost"
       },
