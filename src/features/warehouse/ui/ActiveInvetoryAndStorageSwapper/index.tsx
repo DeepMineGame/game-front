@@ -1,5 +1,5 @@
 import { DragEventHandler, FC, useState } from 'react';
-import { Col, Row } from 'antd';
+import { Col, Row, Space } from 'antd';
 import cn from 'classnames';
 import { Button, Title, useReloadPage, useTravelConfirm } from 'shared';
 import { useGate, useStore } from 'effector-react';
@@ -149,28 +149,33 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                 // https://stackoverflow.com/questions/32084053/why-is-ondrop-not-working
                 onDragOver={(e) => e.preventDefault()}
             >
-                <Row justify="space-between" align="middle">
-                    <Col>
-                        <Title level={4}>
-                            {t('components.hive.activeInventory')}
-                        </Title>
-                    </Col>
-                    <Col style={{ height: 40 }} />
-                </Row>
-                {!isStorageAssetDragging && (
-                    <>
-                        <TypeFilter
-                            className={styles.filter}
-                            activeTab={assetTypeFilter}
-                            onChange={changeType}
-                        />
-                        <NameFilter
-                            items={filteredActiveInventoryAssetsByType}
-                            value={activeInventoryAssetNameFilter}
-                            onChange={changeActiveInventoryAssetName}
-                        />
-                    </>
-                )}
+                <Space
+                    direction="vertical"
+                    size="large"
+                    className={styles.space}
+                >
+                    <Row justify="space-between" align="middle">
+                        <Col>
+                            <Title level={4}>
+                                {t('components.hive.activeInventory')}
+                            </Title>
+                        </Col>
+                        <Col style={{ height: 40 }} />
+                    </Row>
+                    {!isStorageAssetDragging && (
+                        <div>
+                            <TypeFilter
+                                activeTab={assetTypeFilter}
+                                onChange={changeType}
+                            />
+                            <NameFilter
+                                items={filteredActiveInventoryAssetsByType}
+                                value={activeInventoryAssetNameFilter}
+                                onChange={changeActiveInventoryAssetName}
+                            />
+                        </div>
+                    )}
+                </Space>
                 <div>
                     {isStorageAssetDragging ? (
                         <div className={styles.draggedElements}>
@@ -193,35 +198,42 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                 onDrop={onDrop}
                 onDragOver={(e) => e.preventDefault()}
             >
-                <Row justify="space-between" align="middle">
-                    <Col>
-                        <Title level={4}>{t('components.hive.storage')}</Title>
-                    </Col>
-                    <Col>
-                        <Button
-                            type="primary"
-                            disabled={!draggedElements?.size || !isInHive}
-                            size="large"
-                            onClick={onTransferClick}
-                        >
-                            {t('components.hive.confirmTransfer')}
-                        </Button>
-                    </Col>
-                </Row>
-                {!isActiveInventoryAssetDragging && (
-                    <>
-                        <TypeFilter
-                            className={styles.filter}
-                            onChange={changeType}
-                            activeTab={assetTypeFilter}
-                        />
-                        <NameFilter
-                            items={filteredStorageAssetsByType}
-                            value={storageAssetNameFilter}
-                            onChange={changeStorageAssetName}
-                        />
-                    </>
-                )}
+                <Space
+                    direction="vertical"
+                    size="large"
+                    className={styles.space}
+                >
+                    <Row justify="space-between" align="middle">
+                        <Col>
+                            <Title level={4}>
+                                {t('components.hive.storage')}
+                            </Title>
+                        </Col>
+                        <Col>
+                            <Button
+                                type="primary"
+                                disabled={!draggedElements?.size || !isInHive}
+                                size="large"
+                                onClick={onTransferClick}
+                            >
+                                {t('components.hive.confirmTransfer')}
+                            </Button>
+                        </Col>
+                    </Row>
+                    {!isActiveInventoryAssetDragging && (
+                        <div>
+                            <TypeFilter
+                                onChange={changeType}
+                                activeTab={assetTypeFilter}
+                            />
+                            <NameFilter
+                                items={filteredStorageAssetsByType}
+                                value={storageAssetNameFilter}
+                                onChange={changeStorageAssetName}
+                            />
+                        </div>
+                    )}
+                </Space>
                 <div className={styles.cardsWrapper}>
                     {isActiveInventoryAssetDragging ? (
                         <div className={styles.draggedElements}>

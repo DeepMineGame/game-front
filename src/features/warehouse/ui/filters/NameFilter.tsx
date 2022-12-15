@@ -45,6 +45,7 @@ export const NameFilter = ({
                 onChange(name ?? null);
             }}
             value={value}
+            style={{ minWidth: 200 }}
             allowClear
         />
     );
