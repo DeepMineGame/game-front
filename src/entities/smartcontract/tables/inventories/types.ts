@@ -1,5 +1,3 @@
-import { InventoryIdType } from '../../constants';
-
 export enum InventoryType {
     /* [0] */ undefined,
     /* [1] */ areas,

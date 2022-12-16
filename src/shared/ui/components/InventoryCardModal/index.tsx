@@ -1,7 +1,6 @@
 import {
     DMECoinIcon,
     GetCostParams,
-    getDmeAmount,
     isAssetAvailable,
     Modal,
     useAccountName,
@@ -59,6 +58,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     ...props
 }) => {
     const reload = useReloadPage();
+    const { t } = useTranslation();
     const [cardData, setCardData] = useState<AssetDataType | undefined>(
         undefined
     );
@@ -73,8 +73,6 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     const [isModalVisible, setIsModalVisible] = useState(false);
     const { getCost } = useRepair();
     const { dmeBalance } = useStore(balancesStore);
-
-    const { t } = useTranslation();
 
     const accountName = useAccountName();
 
@@ -107,7 +105,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
 
     const assetIsBroken = getAssetStatus(card) === Status.broken;
 
-    const dmeToLevelUpgrade = getDmeAmount(card.data['DME to upgrade'] || 0);
+    const dmeToLevelUpgrade = card.data['DME to Upgrade'] || 0;
     const dmeMined = card.data['DME Mined'] || 0;
 
     const numericMalfunctionProbability = getMalfunctionProbability(card);
@@ -250,7 +248,6 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             <Col span={10}>
                                 <Space>
                                     <Button
-                                        disabled={!assetIsBroken}
                                         size="large"
                                         type="link"
                                         onClick={() => {
@@ -301,7 +298,6 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             <Col span={10}>
                                 <Space>
                                     <Button
-                                        disabled={!assetIsBroken}
                                         type="link"
                                         size="large"
                                         onClick={() => {

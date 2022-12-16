@@ -1,5 +1,4 @@
 import { AssetDataType } from 'entities/atomicassets';
-import { getDmeAmount } from 'shared/lib/utils';
 import { UpgradeKitType } from '../model/upgrade-kit';
 import {
     getMinMaxUpgradeTime,
@@ -15,10 +14,9 @@ export const useUpgradeModifiers = (
     const priceModifier = getPriceModifier(upgradeKit);
     const { min: minTime, max: maxTime } = getMinMaxUpgradeTime(equipment);
 
-    const price = getDmeAmount(
+    const price =
         (priceModifier / 100) *
-            (Number(equipment?.data?.['DME to upgrade']) || 0)
-    );
+        (Number(equipment?.data?.['DME to Upgrade']) || 0);
 
     return {
         price,

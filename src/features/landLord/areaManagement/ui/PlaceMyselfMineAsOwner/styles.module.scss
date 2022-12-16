@@ -1,0 +1,44 @@
+@import 'src/shared';
+
+.button {
+    display: block;
+    margin-top: 20px;
+    margin-left: auto;
+}
+
+.selectWrapper {
+    min-height: 130px;
+    max-width: 352px;
+    margin: 0 auto;
+}
+
+.selectTitle {
+    display: block;
+    margin-bottom: 8px;
+    color: $color-neutral-neutral-8 !important;
+}
+
+.select {
+    width: 100%;
+}
+
+.info {
+    padding: 0;
+
+    :global {
+        .ant-result-title {
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 32px;
+            color: $color-neutral-neutral-9 !important;
+        }
+
+        & svg {
+            color: $color-primary-primary-6 !important;
+        }
+    }
+}
+
+.infoIcon {
+    font-size: 64px !important;
+}

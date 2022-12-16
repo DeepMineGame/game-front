@@ -62,13 +62,11 @@ export const MineCrewTable: FC<{ data?: MineCrewDataType[] }> = ({ data }) => {
             title: t('pages.contractorMineCrew.contractor'),
             dataIndex: 'contractor',
             key: 'contractor',
-            render: (contractor: string, _: MineCrewDataType, idx: number) => {
-                return (
-                    <div className={styles.contractor}>
-                        <Link to={`/user/${contractor}`}>{contractor}</Link>
-                    </div>
-                );
-            },
+            render: (contractor: string) => (
+                <div className={styles.contractor}>
+                    <Link to={`/user/${contractor}`}>{contractor}</Link>
+                </div>
+            ),
         },
         {
             title: t('pages.contractorMineCrew.status'),
