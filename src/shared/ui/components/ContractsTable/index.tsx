@@ -36,7 +36,7 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                     key: contract.id,
                     id: contract.id,
                     type: contractName[contract.type],
-                    fee: contract.fee_daily_min_amount,
+                    fee: contract.fee_percent,
                     date:
                         contract.finishes_at === 0
                             ? '-'
