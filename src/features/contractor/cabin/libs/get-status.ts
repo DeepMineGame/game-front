@@ -2,7 +2,11 @@ import { ContractorCabinStatus } from '../constants';
 import { ContractorCabinStore } from '../model';
 
 export const getStatus = (store: ContractorCabinStore) => {
-    if (!store.hasMineOwnerContracts) {
+    if (
+        !store.hasMineOwnerContracts &&
+        !store.activeMining &&
+        !store.miningOver
+    ) {
         return ContractorCabinStatus.sign_contract;
     }
 

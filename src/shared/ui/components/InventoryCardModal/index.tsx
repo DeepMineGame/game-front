@@ -1,7 +1,6 @@
 import {
     DMECoinIcon,
     GetCostParams,
-    getDmeAmount,
     isAssetAvailable,
     Modal,
     useAccountName,
@@ -106,7 +105,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
 
     const assetIsBroken = getAssetStatus(card) === Status.broken;
 
-    const dmeToLevelUpgrade = getDmeAmount(card.data['DME to upgrade'] || 0);
+    const dmeToLevelUpgrade = card.data['DME to Upgrade'] || 0;
     const dmeMined = card.data['DME Mined'] || 0;
 
     const numericMalfunctionProbability = getMalfunctionProbability(card);

@@ -132,7 +132,7 @@ export const MiningPage: FC = memo(() => {
                         )}
                         <MineStatus />
                     </div>
-                    <Skeleton loading={isMineStoreLoading || !mineStore} />
+                    <Skeleton loading={isMineStoreLoading} />
                     <div className={styles.data}>
                         {mineStore?.length ? (
                             <div className={styles.line}>
