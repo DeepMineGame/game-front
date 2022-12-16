@@ -32,7 +32,7 @@ export const AddMineOwnerModal: FC<Props> = ({ visible, onCancel }) => {
                 type="ghost"
                 onClick={() =>
                     navigate(
-                        `${serviceMarket}?tabId=${ServiceMarketTabIds.mineOwner}`
+                        `${serviceMarket}?tabId=${ServiceMarketTabIds.landLord}`
                     )
                 }
             >
