@@ -91,7 +91,7 @@ module.exports = {
         '@typescript-eslint/no-shadow': 'error',
         'no-unused-vars': 'off',
         '@typescript-eslint/no-unused-vars': 'warn',
-        'consistent-return': 'warn',
+        'consistent-return': 'off',
         semi: [2, 'always'],
         camelcase: 'off',
         'import/order': [
