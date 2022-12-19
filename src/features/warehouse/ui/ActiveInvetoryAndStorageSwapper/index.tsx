@@ -1,7 +1,14 @@
 import { DragEventHandler, FC, useState } from 'react';
 import { Col, Row } from 'antd';
 import cn from 'classnames';
-import { Button, Title, useReloadPage, useTravelConfirm } from 'shared';
+import {
+    Button,
+    desktopS,
+    Title,
+    useMediaQuery,
+    useReloadPage,
+    useTravelConfirm,
+} from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { isUserInHive } from 'features/hive';
@@ -26,6 +33,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
 }) => {
     const { t } = useTranslation();
     useGate(WarehouseGate, { searchParam: accountName });
+    const isDesktop = useMediaQuery(desktopS);
     const isInHive = useStore(isUserInHive);
     const { travelConfirm } = useTravelConfirm(LOCATION_TO_ID.hive);
     const renderCards = useRenderCards();
@@ -55,21 +63,25 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
             draggedElements.has(item)
         )?.length > 0;
 
-    const onDrop: DragEventHandler<HTMLDivElement> = (e) => {
+    const toggleDraggedElements = (
+        e?: DragEvent,
+        element?: MergedInventoryWithAtomicAssets[number]
+    ) => {
         e?.preventDefault();
+        const selectedElem = element || draggedElement;
 
         if (!isInHive) {
             return travelConfirm();
         }
 
-        if (draggedElement && draggedElements.has(draggedElement)) {
+        if (selectedElem && draggedElements.has(selectedElem)) {
             return setDraggedElements(
-                removeDraggedElementFromState(draggedElement)
+                removeDraggedElementFromState(selectedElem)
             );
         }
-        if (draggedElement) {
+        if (selectedElem) {
             return setDraggedElements(
-                (state) => new Set([...state, draggedElement])
+                (state) => new Set([...state, selectedElem])
             );
         }
         return null;
@@ -103,9 +115,13 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     const handleDragCard = (
         element: MergedInventoryWithAtomicAssets[number]
     ) => {
-        if (isInHive) {
-            setDraggedElement(element);
+        if (!isInHive) {
+            return;
         }
+        if (isDesktop) {
+            return setDraggedElement(element);
+        }
+        return toggleDraggedElements(undefined, element);
     };
 
     return (
@@ -121,7 +137,9 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                 className={cn(styles.cardColumn, {
                     [styles.cardColumnDisabled]: !isInHive,
                 })}
-                onDrop={onDrop}
+                onDrop={
+                    toggleDraggedElements as unknown as DragEventHandler<HTMLDivElement>
+                }
                 // https://stackoverflow.com/questions/32084053/why-is-ondrop-not-working
                 onDragOver={(e) => e.preventDefault()}
             >
@@ -149,7 +167,9 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                 offset={1}
                 span={11}
                 className={styles.cardColumn}
-                onDrop={onDrop}
+                onDrop={
+                    toggleDraggedElements as unknown as DragEventHandler<HTMLDivElement>
+                }
                 onDragOver={(e) => e.preventDefault()}
             >
                 <Title level={5} className={styles.title}>
