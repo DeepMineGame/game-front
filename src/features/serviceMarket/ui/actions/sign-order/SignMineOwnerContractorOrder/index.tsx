@@ -7,10 +7,11 @@ import { ContractDto, signOrder } from 'entities/smartcontract';
 type Props = {
     contract: ContractDto;
     accountName: string;
+    isSelfContract: boolean;
 };
 
 const SignMineOwnerContractorOrder: FC<Props> = React.memo(
-    ({ contract, accountName }) => {
+    ({ contract, accountName, isSelfContract }) => {
         const { t } = useTranslation();
         const reloadPage = useReloadPage();
 
@@ -19,6 +20,7 @@ const SignMineOwnerContractorOrder: FC<Props> = React.memo(
                 waxUser: accountName,
                 assetId: contract.client_asset_id,
                 contractId: contract.id,
+                ...(isSelfContract && { isClient: 0 }),
             }),
         });
 

@@ -19,7 +19,8 @@ const MiningOrder: FC<ContractProps> = ({ contract, accountName }) => {
     const { canSignMiningContractorOrder, canSignMiningMineOwnerOrder } =
         useOrderSign(contract, accountName);
     const { canDeleteOrder } = useOrderDelete(contract, accountName);
-    const { isExecutorSigned, isClientSigned } = useContractType(contract);
+    const { isExecutorSigned, isClientSigned, isSelfSigned } =
+        useContractType(contract);
 
     return (
         <div>
@@ -51,7 +52,7 @@ const MiningOrder: FC<ContractProps> = ({ contract, accountName }) => {
                         </Col>
 
                         <Col span={24}>
-                            <Row justify="end">
+                            <Row justify="end" gutter={[12, 12]}>
                                 {canSignMiningContractorOrder && (
                                     <SignContractorOrder
                                         contract={contract}
@@ -62,6 +63,7 @@ const MiningOrder: FC<ContractProps> = ({ contract, accountName }) => {
                                     <SignMineOwnerContractorOrder
                                         contract={contract}
                                         accountName={accountName}
+                                        isSelfContract={isSelfSigned}
                                     />
                                 )}
 

@@ -44,21 +44,25 @@ export const MineOwnerCrew: FC = () => {
 
     const contractsToSign = contracts.filter(
         (contract) =>
+            contract.type === ContractType.mineowner_contractor &&
             contract.activation_time === 0 &&
             contract.status !== ContractStatus.terminated
     );
 
     const selfSignedContracts = contracts.filter(
         (contract) =>
+            contract.type === ContractType.mineowner_contractor &&
             contract.client === contract.executor &&
             contract.deadline_time * 1000 > Date.now() &&
             contract.activation_time !== 0 &&
             contract.status === ContractStatus.active
     );
-
-    const selfSigned = selfSignedContracts.map(({ id, client }) =>
-        getSlot(id, client, 1)
-    );
+    const selfSigned = selfSignedContracts
+        .filter(
+            ({ client }) =>
+                !activeSlots.some(({ contractor }) => contractor === client)
+        )
+        .map(({ id, client }) => getSlot(id, client, 1));
 
     const mapSlotToTableDate = activeSlots
         .map(({ contractor }, idx) => getSlot(idx, contractor, 2))
