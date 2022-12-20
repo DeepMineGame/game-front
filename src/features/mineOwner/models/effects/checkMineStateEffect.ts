@@ -15,7 +15,6 @@ export const checkMineStateEffect = createEffect(
             searchIdentificationType: searchBy.owner,
         });
         const userMine: MineDto | undefined = data?.rows?.[0];
-
         if (userMine?.state === MineState.depth_changing) {
             return mineOwnerCabinStateResolver.mineIsDepthChangingState();
         }
@@ -25,6 +24,10 @@ export const checkMineStateEffect = createEffect(
             userMine?.state === MineState.activated
         ) {
             return checkHasCrewEffect({ searchParam });
+        }
+
+        if (userMine?.state === MineState.deactivated) {
+            return mineOwnerCabinStateResolver.needActivateMineState();
         }
 
         return mineOwnerCabinStateResolver.needSetupMineState();

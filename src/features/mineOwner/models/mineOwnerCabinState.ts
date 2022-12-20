@@ -40,8 +40,8 @@ export const mineOwnerCabinStateResolver = createApi($mineOwnerCabinState, {
     needPhysicalShiftState: () => mineOwnerCabinState.needPhysicalShift,
     mineIsDepthChangingState: () => mineOwnerCabinState.mineIsDepthChanging,
     needSetupMineState: () => mineOwnerCabinState.needSetupMine,
-    needCrewState: () => mineOwnerCabinState.needCrew,
     needActivateMineState: () => mineOwnerCabinState.needActivateMine,
+    needCrewState: () => mineOwnerCabinState.needCrew,
     everythingIsDoneState: () => mineOwnerCabinState.everythingIsDone,
 });
 
