@@ -4,7 +4,7 @@ import { Form } from 'antd';
 
 import { Button, getLabelSelectItem, Select } from 'shared';
 import { orderFields } from 'entities/order';
-import { EngineerSchema } from 'entities/smartcontract';
+import { EngineerSchema, raritiesTranslationMap } from 'entities/smartcontract';
 import { GeneralInformationStepProps } from '../interface';
 
 import styles from '../../../styles.module.scss';
@@ -13,7 +13,7 @@ import {
     UpgradeTypeFormItem,
     useWatchUpgradeType,
 } from '../../UpgradeTypeFormItem';
-import { raritiesTranslationMap, rarityList } from './constants';
+import { rarityList } from '../constants';
 
 export const EngineerInformation: FC<GeneralInformationStepProps> = ({
     goToPreviousStep,
@@ -52,9 +52,7 @@ export const EngineerInformation: FC<GeneralInformationStepProps> = ({
                             placeholder={t('components.common.rarity')}
                             options={rarityList.map((rarity) => ({
                                 value: rarity,
-                                label: t(
-                                    `components.common.rarities.${raritiesTranslationMap[rarity]}`
-                                ),
+                                label: t(raritiesTranslationMap[rarity]),
                             }))}
                         />
                     </Form.Item>

@@ -52,6 +52,8 @@ const PlaceAsContractor: FC<Props> = ({
                 wax_user: accountName,
                 deadline_duration_in_days: 1,
                 deadline_duration_in_hours: 0,
+                opt_level: null,
+                opt_rarity: null,
             })
         );
 

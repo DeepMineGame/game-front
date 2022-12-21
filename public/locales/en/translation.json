@@ -518,7 +518,11 @@
             "startOfOperation": "The period of time during which the engineer is required to start performing the upgrade",
             "costOfExecution": "The amount of DME the engineer receives for performing the upgrade"
           }
-        }
+        },
+        "mineRarity": "Mine rarity",
+        "mineRarityDescription": "Desired rarity of the mine where you want to operate",
+        "mineLevel": "Mine level",
+        "mineLevelDescription": "Desired level of the mine where you want to operate"
       },
       "lookingForMineOwner": "Looking for Mine owner",
       "lookingForContractor": "Looking for Contractor",

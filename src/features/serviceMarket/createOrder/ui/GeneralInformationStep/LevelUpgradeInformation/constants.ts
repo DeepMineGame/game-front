@@ -1,13 +1,4 @@
-import { InventoryType, RarityType } from 'entities/smartcontract';
-
-export const raritiesTranslationMap: Record<RarityType, string> = {
-    [RarityType.undefined]: '',
-    [RarityType.common]: 'common',
-    [RarityType.uncommon]: 'uncommon',
-    [RarityType.rare]: 'rare',
-    [RarityType.epic]: 'epic',
-    [RarityType.legendary]: 'legendary',
-};
+import { InventoryType } from 'entities/smartcontract';
 
 export const inventoriesTypeMap: Record<InventoryType, string> = {
     [InventoryType.undefined]: 'undefined',
@@ -22,11 +13,3 @@ export const inventoriesTypeMap: Record<InventoryType, string> = {
     [InventoryType.stickers]: 'sticker',
     [InventoryType.packs]: 'pack',
 };
-
-export const rarityList: RarityType[] = [
-    RarityType.common,
-    RarityType.uncommon,
-    RarityType.rare,
-    RarityType.epic,
-    RarityType.legendary,
-];

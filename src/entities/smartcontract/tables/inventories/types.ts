@@ -40,6 +40,15 @@ export const rarityMap = {
     [RarityType.legendary]: 'Legendary',
 } as const;
 
+export const raritiesTranslationMap: Record<RarityType, string> = {
+    [RarityType.undefined]: '',
+    [RarityType.common]: 'components.common.rarities.common',
+    [RarityType.uncommon]: 'components.common.rarities.uncommon',
+    [RarityType.rare]: 'components.common.rarities.rare',
+    [RarityType.epic]: 'components.common.rarities.epic',
+    [RarityType.legendary]: 'components.common.rarities.legendary',
+};
+
 export enum EquipmentType {
     undefined,
     cutter,
