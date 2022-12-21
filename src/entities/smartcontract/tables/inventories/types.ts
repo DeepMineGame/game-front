@@ -3,6 +3,13 @@ export enum InventoryType {
     /* [1] */ areas,
     /* [2] */ equipment,
     /* [3] */ structures,
+    /* [4] */ badges,
+    /* [5] */ schemas,
+    /* [6] */ upgrade_kits,
+    /* [7] */ modules,
+    /* [8] */ cards,
+    /* [9] */ packs,
+    /* [10] */ stickers,
 }
 
 export enum RarityType {

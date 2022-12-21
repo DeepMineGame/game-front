@@ -14,6 +14,13 @@ export const inventoriesTypeMap: Record<InventoryType, string> = {
     [InventoryType.areas]: 'area',
     [InventoryType.equipment]: 'equipment',
     [InventoryType.structures]: 'structure',
+    [InventoryType.badges]: 'badge',
+    [InventoryType.schemas]: 'schema',
+    [InventoryType.upgrade_kits]: 'upgradeKit',
+    [InventoryType.cards]: 'card',
+    [InventoryType.modules]: 'module',
+    [InventoryType.stickers]: 'sticker',
+    [InventoryType.packs]: 'pack',
 };
 
 export const rarityList: RarityType[] = [
