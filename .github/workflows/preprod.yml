@@ -1,9 +1,9 @@
-name: rc deploy
+name: preprod
 
 on:
   push:
     branches:
-      - dev
+      - preprod
 
 jobs:
   build:
@@ -60,9 +60,11 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
-  rc_deploy:
+
+  pre_prod_deploy:
     needs: build
     runs-on: ubuntu-latest
+    environment: pre_prod
     steps:
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
@@ -77,4 +79,4 @@ jobs:
         run: ssh ${{ secrets.RC_SSH_USER }}@${{ secrets.RC_SSH_HOST }} "docker-compose pull"
 
       - name: Deploy
-        run: ssh ${{ secrets.RC_SSH_USER }}@${{ secrets.RC_SSH_HOST }} "docker service update --force deepmine_game_front"
+        run: ssh ${{ secrets.RC_SSH_USER }}@${{ secrets.RC_SSH_HOST }} "docker service update --force deepmine_game_front_preprod"
