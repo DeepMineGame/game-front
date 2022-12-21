@@ -77,8 +77,9 @@ export const MineManagementPage = () => {
 
                         [t('features.mining.mineSublevel')]: (
                             <Progress
-                                percent={mineSubLevelToPercent || 0}
+                                percent={mineSubLevelToPercent || 25}
                                 steps={5}
+                                showInfo={false}
                             />
                         ),
                         [t('features.mining.depthLevel')]: (
