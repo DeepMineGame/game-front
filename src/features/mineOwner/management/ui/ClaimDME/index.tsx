@@ -19,7 +19,6 @@ import {
     ContractDto,
 } from 'entities/smartcontract';
 
-const fromUnit = (num: number) => num / 10 ** 8;
 export const ClaimDME: FC<{ contract: ContractDto | null }> = ({
     contract,
 }) => {
@@ -31,7 +30,7 @@ export const ClaimDME: FC<{ contract: ContractDto | null }> = ({
         ({ role }) => role === UserRoles.mine_owner
     );
     const dmeToClaim = mineOwnerRole?.length
-        ? fromUnit(extractFeeToClaimAttr(mineOwnerRole[0]))
+        ? getDmeAmount(extractFeeToClaimAttr(mineOwnerRole[0]))
         : 0;
 
     const feeInDme =

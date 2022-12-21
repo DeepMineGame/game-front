@@ -16,7 +16,14 @@ import {
     ModalWithTable,
 } from 'shared';
 import { useSmartContractAction } from 'features/hooks';
-import { engageArea, unEngageArea, claimArea } from 'entities/smartcontract';
+import {
+    engageArea,
+    unEngageArea,
+    claimArea,
+    UserRoles,
+    rolesStore,
+    extractFeeToClaimAttr,
+} from 'entities/smartcontract';
 import { ClaimDmeGate, claimDmeStore, getRolesEffect } from '../../model';
 import styles from './styles.module.scss';
 
@@ -31,7 +38,14 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
     const { t } = useTranslation();
     const claimDme = useStore(claimDmeStore);
     const isLoading = useStore(getRolesEffect.pending);
+    const roles = useStore(rolesStore);
 
+    const landlordRole = roles?.filter(
+        ({ role }) => role === UserRoles.landlord
+    );
+    const dmeToClaim = landlordRole?.length
+        ? getDmeAmount(extractFeeToClaimAttr(landlordRole[0]))
+        : 0;
     const [isModalActionVisible, setIsModalActionVisible] = useState(false);
     const [isModalUnengageVisible, setIsModalUnengageVisible] = useState(false);
     const [claimInfoModalVisable, setClaimInfoModalVisable] = useState(false);
@@ -97,7 +111,7 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
                     block
                     className={styles.claimButton}
                 >
-                    {t('pages.areaManagement.claim')}
+                    {t('pages.areaManagement.claim')} {dmeToClaim}
                 </Button>
             </div>
 
