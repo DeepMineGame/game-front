@@ -85,6 +85,8 @@ export type ContractDto = {
     executor_discord: string;
     penalty_demanded_by: string;
     penalty_by_fee_days_available: number;
+    rarity: number;
+    level: number;
 };
 
 export const contractName = {
