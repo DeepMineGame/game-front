@@ -5,11 +5,11 @@ import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import { orderFields } from 'entities/order';
 
-import { raritiesTranslationMap } from 'entities/smartcontract';
 import styles from '../../../styles.module.scss';
 import localStyles from '../styles.module.scss';
 import { GeneralInformationStepProps } from '../interface';
-import { rarityList } from '../constants';
+import { RaritySelector } from '../RaritySelector';
+import { LevelSelector } from '../LevelSelector';
 
 const { useWatch } = Form;
 
@@ -29,17 +29,12 @@ export const LandlordInformation: FC<GeneralInformationStepProps> = ({
         orderFields.deadlineDurationInHours,
         form
     );
-    const mineRarity = useWatch(orderFields.optRarity, form);
-    const mineLevel = useWatch(orderFields.optLevel, form);
 
     const hasAllValues =
         feeFieldValue &&
         deadlineTimeInDaysFieldValue &&
         finishesAtFieldValue &&
-        (deadlineTimeInHoursFieldValue ||
-            deadlineTimeInHoursFieldValue === 0) &&
-        mineRarity !== undefined &&
-        mineLevel !== undefined;
+        (deadlineTimeInHoursFieldValue || deadlineTimeInHoursFieldValue === 0);
 
     return (
         <Form.Item>
@@ -121,57 +116,8 @@ export const LandlordInformation: FC<GeneralInformationStepProps> = ({
                 </div>
             </InputA.Group>
             <div className={localStyles.flexSection}>
-                <Form.Item
-                    className={styles.formField}
-                    label={t('pages.serviceMarket.createOrder.mineRarity')}
-                    name={orderFields.optRarity}
-                    tooltip={
-                        <Card
-                            title={t(
-                                'pages.serviceMarket.createOrder.mineRarity'
-                            )}
-                            className={styles.tooltipCard}
-                        >
-                            {t(
-                                'pages.serviceMarket.createOrder.mineRarityDescription'
-                            )}
-                        </Card>
-                    }
-                >
-                    <Select
-                        placeholder={t(
-                            'pages.serviceMarket.createOrder.mineRarity'
-                        )}
-                        options={rarityList.map((rarity) => ({
-                            value: rarity,
-                            label: t(raritiesTranslationMap[rarity]),
-                        }))}
-                    />
-                </Form.Item>
-                <Form.Item
-                    className={styles.formField}
-                    label={t('pages.serviceMarket.createOrder.mineLevel')}
-                    name={orderFields.optLevel}
-                    tooltip={
-                        <Card
-                            title={t(
-                                'pages.serviceMarket.createOrder.mineLevel'
-                            )}
-                            className={styles.tooltipCard}
-                        >
-                            {t(
-                                'pages.serviceMarket.createOrder.mineLevelDescription'
-                            )}
-                        </Card>
-                    }
-                >
-                    <Select
-                        placeholder={t(
-                            'pages.serviceMarket.createOrder.mineLevel'
-                        )}
-                        options={getLabelSelectItem({ amount: 8, label: '' })}
-                    />
-                </Form.Item>
+                <RaritySelector />
+                <LevelSelector />
             </div>
             <Space direction="horizontal">
                 <Button onClick={goToPreviousStep} ghost>
