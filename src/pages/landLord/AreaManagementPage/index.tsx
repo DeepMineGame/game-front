@@ -17,6 +17,7 @@ import {
 import {
     areasStore,
     ContractStatus,
+    ContractType,
     InventoryType,
     LOCATION_TO_ID,
 } from 'entities/smartcontract';
@@ -37,12 +38,14 @@ export const AreaManagementPage = () => {
 
     const contractsToSign = contracts.filter(
         (contract) =>
+            contract.type === ContractType.landlord_mineowner &&
             contract.activation_time === 0 &&
             contract.status !== ContractStatus.terminated
     );
 
     const selfSignedContracts = contracts.filter(
         (contract) =>
+            contract.type === ContractType.landlord_mineowner &&
             contract.client === contract.executor &&
             contract.activation_time !== 0 &&
             contract.deadline_time * 1000 > Date.now() &&

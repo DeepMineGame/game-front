@@ -12,19 +12,27 @@ export const useOrderSign = (
         isExecutorSigned,
         isMiningContract: isMiningOrder,
         isMineOperationContract: isMineOperationOrder,
+        isSelfSigned,
     } = useContractType(contract);
 
-    const isUserNotClient = contract.client !== accountName;
+    const isUserClient = contract.client === accountName;
+    const isUserNotClient = !isUserClient;
     const isUserNotExecutor = contract.executor !== accountName;
 
+    const isUserSelfContract = isUserClient && isSelfSigned;
+
     const canSignMiningMineOwnerOrder =
-        isMiningOrder && isClientSigned && isUserNotClient;
+        isMiningOrder &&
+        isClientSigned &&
+        (isUserNotClient || isUserSelfContract);
 
     const canSignMiningContractorOrder =
         isMiningOrder && isExecutorSigned && isUserNotExecutor;
 
     const canSignOperationLandlordOrder =
-        isMineOperationOrder && isClientSigned && isUserNotClient;
+        isMineOperationOrder &&
+        isClientSigned &&
+        (isUserNotClient || isUserSelfContract);
 
     const canSignOperationMineOwnerOrder =
         isMineOperationOrder &&

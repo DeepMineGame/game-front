@@ -6,7 +6,7 @@ import { ContractStatesMeta } from 'entities/smartcontract';
 import { useContractState } from 'entities/contract';
 import { Alert } from 'shared/ui';
 import { getDmeAmount } from 'shared/lib/utils';
-import { Completed, TerminateContract } from '../../ui/actions';
+import { Completed, DeleteOrder, TerminateContract } from '../../ui/actions';
 import {
     GeneralDataTable,
     ConditionTable,
@@ -23,6 +23,7 @@ const MiningContract: FC<ContractProps> = ({
     const {
         stateMeta,
         canTerminate,
+        canDeleteSelfContract,
         showCompleted,
         showTerminatedAlert,
         showPenaltyActions,
@@ -102,6 +103,12 @@ const MiningContract: FC<ContractProps> = ({
                                     )}
                                     contractId={contract.id}
                                     accountName={accountName}
+                                />
+                            )}
+                            {canDeleteSelfContract && (
+                                <DeleteOrder
+                                    accountName={accountName}
+                                    contractId={contract.id}
                                 />
                             )}
                         </Row>

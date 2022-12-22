@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { AddItem, DiscoverItem, SearchingItem } from 'shared';
 import { useGate, useStore } from 'effector-react';
-import { ContractDto, MineDto } from 'entities/smartcontract';
+import { ContractDto, MineDto, MineState } from 'entities/smartcontract';
 import { AreaManagementTableContent } from '../AreaManagementTableContent';
 import { AddMineOwnerModal } from '../AddMineOwnerModal';
 import { Activity, MineCrewDataType } from '../../types';
@@ -40,7 +40,7 @@ export const AreaManagementTable: FC<Props> = ({
             ({
                 key: mine.id,
                 discord: 'https://discord.com/',
-                mine: `ID${mine.id}`,
+                mine: `ID ${mine.id}`,
                 status: mine.state,
                 crew: [
                     getMineCrewContractors(mine),
@@ -61,8 +61,8 @@ export const AreaManagementTable: FC<Props> = ({
                 ({
                     key: contract.id,
                     discord: 'https://discord.com/',
-                    mine: `ID${contract.executor_asset_id}`,
-                    status: 3,
+                    mine: `ID ${contract.executor_asset_id}`,
+                    status: MineState.deactivated,
                     crew: [0, 0],
                     ejection: 346,
                     activity: Activity.high,

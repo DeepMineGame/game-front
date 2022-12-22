@@ -31,9 +31,14 @@ import styles from './styles.module.scss';
 type Props = {
     contract: ContractDto;
     accountName: string;
+    isSelfContract: boolean;
 };
 
-const SignLandlordOrder: FC<Props> = ({ contract, accountName }) => {
+const SignLandlordOrder: FC<Props> = ({
+    contract,
+    accountName,
+    isSelfContract,
+}) => {
     useGate(MinesGate, { searchParam: accountName });
 
     const { t } = useTranslation();
@@ -56,6 +61,7 @@ const SignLandlordOrder: FC<Props> = ({ contract, accountName }) => {
             waxUser: accountName,
             assetId: mineId,
             contractId: contract.id,
+            ...(isSelfContract && { isClient: 0 }),
         }),
     });
 

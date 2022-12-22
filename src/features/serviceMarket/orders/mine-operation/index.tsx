@@ -21,7 +21,8 @@ import { ContractProps } from '../../types';
 const MineOperationOrder: FC<ContractProps> = ({ contract, accountName }) => {
     const roles = useStore(rolesStore) || [];
     const userRoles = useUserRoles(roles);
-    const { isExecutorSigned, isClientSigned } = useContractType(contract);
+    const { isExecutorSigned, isClientSigned, isSelfSigned } =
+        useContractType(contract);
     const { canDeleteOrder } = useOrderDelete(contract, accountName);
     const { canSignOperationLandlordOrder, canSignOperationMineOwnerOrder } =
         useOrderSign(contract, accountName, userRoles);
@@ -62,6 +63,7 @@ const MineOperationOrder: FC<ContractProps> = ({ contract, accountName }) => {
                                     <SignLandlordOrder
                                         contract={contract}
                                         accountName={accountName}
+                                        isSelfContract={isSelfSigned}
                                     />
                                 )}
 

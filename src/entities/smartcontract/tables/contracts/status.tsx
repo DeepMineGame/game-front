@@ -94,7 +94,13 @@ export const getContractStatus = (
     contract: ContractDto,
     account: string
 ): Status => {
-    if (!contract.client || !contract.executor)
+    if (
+        !contract.client ||
+        !contract.executor ||
+        (contract.client === contract.executor &&
+            !contract.activation_time &&
+            !wasTerminatedBySomebody(contract))
+    )
         return { value: ContractStates.openOrder };
 
     const isUserClient = contract.client === account;

@@ -16,6 +16,7 @@ export const useContractType = (contract: ContractDto) => {
         (isTerminated && !contract.activation_time);
 
     const isContract = isClientSigned && isExecutorSigned;
+    const isSelfSigned = contract.client === contract.executor;
 
     const isMiningContract =
         contract.type === ContractType.mineowner_contractor;
@@ -31,5 +32,6 @@ export const useContractType = (contract: ContractDto) => {
         isLevelUpgradeContract,
         isOrder,
         isContract,
+        isSelfSigned,
     };
 };
