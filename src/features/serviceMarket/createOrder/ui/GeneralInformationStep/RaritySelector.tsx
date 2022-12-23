@@ -25,6 +25,7 @@ export const RaritySelector = () => {
             }
         >
             <Select
+                disabled
                 placeholder={t('pages.serviceMarket.createOrder.mineRarity')}
                 options={rarityList.map((rarity) => ({
                     value: rarity,

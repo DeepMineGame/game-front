@@ -12,6 +12,8 @@ import {
     minesForAreaSlots,
     userAreaNftStore,
     PlaceMyselfMineAsOwner,
+    $contracts,
+    LandlordContractsGate,
 } from 'features';
 
 import {
@@ -28,22 +30,24 @@ export const AreaManagementPage = () => {
     const accountName = useAccountName();
 
     useGate(MineOwnerContractsGate, { searchParam: accountName });
+    useGate(LandlordContractsGate, { searchParam: accountName });
     const mines = useStore(minesForAreaSlots);
     const area = useStore(areasStore);
     const userLocation = useUserLocation();
     const areas = useStore(userAreaNftStore);
 
-    const contracts = useStore($MineOwnerContracts);
+    const mineOwnerContracts = useStore($MineOwnerContracts);
+    const landLordContracts = useStore($contracts);
     const isContractsLoading = useStore(getMineOwnerContractsFx.pending);
-
-    const contractsToSign = contracts.filter(
+    console.log(landLordContracts);
+    const contractsToSign = mineOwnerContracts.filter(
         (contract) =>
             contract.type === ContractType.landlord_mineowner &&
             contract.activation_time === 0 &&
             contract.status !== ContractStatus.terminated
     );
 
-    const selfSignedContracts = contracts.filter(
+    const selfSignedContracts = mineOwnerContracts.filter(
         (contract) =>
             contract.type === ContractType.landlord_mineowner &&
             contract.client === contract.executor &&

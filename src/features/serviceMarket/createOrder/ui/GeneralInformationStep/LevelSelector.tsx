@@ -23,6 +23,7 @@ export const LevelSelector = () => {
             }
         >
             <Select
+                disabled
                 placeholder={t('pages.serviceMarket.createOrder.mineLevel')}
                 options={getLabelSelectItem({
                     amount: 8,

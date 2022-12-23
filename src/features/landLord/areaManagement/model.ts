@@ -13,7 +13,7 @@ import {
     UserRoles,
     ContractDto,
 } from 'entities/smartcontract';
-import { FilterOrderStatus, getOrders, Role } from 'entities/gameStat';
+import { getMarketOrders, OrderStatus, Roles } from 'entities/gameStat';
 
 export const AreaGate = createGate<{ searchParam: string }>('AreaGate');
 
@@ -76,10 +76,11 @@ export const LandlordContractsGate = createGate<{
 
 export const getLandlordContractsEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
-        return getOrders({
-            userRole: Role.mineowner,
-            status: FilterOrderStatus.current,
+        return getMarketOrders({
+            user_role: Roles.landlord,
+            statuses: OrderStatus.current,
             user: searchParam,
+            search_role: Roles.mineowner,
         });
     }
 );

@@ -8,9 +8,9 @@ export type GetCostParams = {
 
 export const useRepair = () => {
     const getCost = ({ level, rarity, isRefurbish }: GetCostParams) => {
-        if (level === 0 && !isRefurbish) {
-            return 0;
-        }
+        // if (level === 0 && !isRefurbish) {
+        //     return 0;
+        // }
 
         // extra zeros by reducing zeros in dmeToUpgrade
         const percent = isRefurbish ? 3000 + level * 100 : 150 + level * 100;

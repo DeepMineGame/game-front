@@ -35,7 +35,7 @@ export const AreaManagementTable: FC<Props> = ({
     const [isAddModalVisible, setIsAddModalVisible] = useState(false);
     const mines = useStore(minesForAreaSlots);
 
-    const data = mines?.map(
+    const contracts = mines?.map(
         (mine) =>
             ({
                 key: mine.id,
@@ -97,7 +97,7 @@ export const AreaManagementTable: FC<Props> = ({
         <div className={cn({ [styles.disabled]: disabled })}>
             <AreaManagementTableContent
                 disabled={disabled}
-                data={data?.concat(ownSignedContract)}
+                data={contracts?.concat(ownSignedContract)}
             />
             {searchingSlots}
             {emptySlots}
