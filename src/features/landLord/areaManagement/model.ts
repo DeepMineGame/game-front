@@ -30,15 +30,19 @@ export const getInventoriesEffect = createEffect<
 export const getMinesByAreaId = createEffect<
     UserInventoryType[] | null,
     { rows: MineDto[] | undefined } | undefined
->((areaNft: UserInventoryType[] | null) =>
-    areaNft?.length
+>((inventory: UserInventoryType[] | null) => {
+    const areaNft = inventory?.find(
+        ({ inv_type }) => inv_type === InventoryType.areas
+    );
+
+    return areaNft
         ? getMinesTableData({
               searchIdentificationType: searchBy.areaId,
-              searchParam: areaNft[0]?.asset_id,
+              searchParam: areaNft?.asset_id,
               limit: 30,
           })
-        : { rows: undefined }
-);
+        : { rows: undefined };
+});
 
 export const $inventory = createStore<UserInventoryType[] | null>(null).on(
     getInventoriesEffect.doneData,
