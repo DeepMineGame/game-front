@@ -43,8 +43,8 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
 
                 return {
                     cost: contract.cost_of_execution,
-                    rarity: contract.rarity,
-                    level: contract.level,
+                    // rarity: contract.rarity,
+                    // level: contract.level,
                     nickName: contract.client || contract.executor,
                     key: contract.id,
                     id: contract.id,
@@ -124,20 +124,20 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                         );
                     },
                 },
-                {
-                    title: 'Rarity',
-                    dataIndex: 'rarity',
-                    key: 'rarity',
-                    render: (rarity: -1 | 1 | 2 | 3 | 4 | 5) =>
-                        rarity === -1 ? (
-                            'N/A'
-                        ) : (
-                            <div
-                                className={styles.rarityMarker}
-                                style={{ background: rarityColorMap[rarity] }}
-                            />
-                        ),
-                },
+                // {
+                //     title: 'Rarity',
+                //     dataIndex: 'rarity',
+                //     key: 'rarity',
+                //     render: (rarity: -1 | 1 | 2 | 3 | 4 | 5) =>
+                //         rarity === -1 ? (
+                //             'N/A'
+                //         ) : (
+                //             <div
+                //                 className={styles.rarityMarker}
+                //                 style={{ background: rarityColorMap[rarity] }}
+                //             />
+                //         ),
+                // },
                 {
                     title: t(
                         'pages.serviceMarket.myContractsTab.completionDate'
@@ -165,12 +165,12 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                     key: 'const',
                     sorter: (a, b) => a.const - b.cost,
                 },
-                {
-                    title: 'Mine level',
-                    dataIndex: 'level',
-                    key: 'level',
-                    render: (level) => (level === -1 ? 'N/A' : level),
-                },
+                // {
+                //     title: 'Mine level',
+                //     dataIndex: 'level',
+                //     key: 'level',
+                //     render: (level) => (level === -1 ? 'N/A' : level),
+                // },
                 {
                     title: t('pages.serviceMarket.myContractsTab.status'),
                     dataIndex: 'status',
