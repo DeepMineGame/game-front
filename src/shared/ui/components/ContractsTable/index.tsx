@@ -13,7 +13,7 @@ import {
 import { getDmeAmount, getUserRoleInContract } from 'shared/lib/utils';
 import { Link, Table, Tag } from '../../ui-kit';
 import { toLocaleDate } from '../../utils';
-import styles from './styles.module.scss';
+// import styles from './styles.module.scss';
 
 type Props = { contracts: ContractDto[] | null };
 
@@ -24,14 +24,14 @@ const contractStateMap = {
     [ContractType.level_upgrade]: UpgradeContractState,
 };
 
-const rarityColorMap = {
-    0: undefined,
-    1: '#DBDBDB', // neutral9
-    2: '#09E001', // green4
-    3: '#0089FF', // geekblue5
-    4: '#CB2EFF', // purple6
-    5: '#E8D639', // yellow7,
-};
+// const rarityColorMap = {
+//     0: undefined,
+//     1: '#DBDBDB', // neutral9
+//     2: '#09E001', // green4
+//     3: '#0089FF', // geekblue5
+//     4: '#CB2EFF', // purple6
+//     5: '#E8D639', // yellow7,
+// };
 
 export const ContractsTable: FC<Props> = ({ contracts }) => {
     const account = useAccountName();
