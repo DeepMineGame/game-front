@@ -1,28 +1,31 @@
 import { createEffect, createStore, forward } from 'effector';
 import { createGate } from 'effector-react';
-import { ContractDto } from 'entities/smartcontract';
+import { ContractDto, ContractType } from 'entities/smartcontract';
 import { FilterOrderStatus, getOrders, Role } from 'entities/gameStat';
 
-export const ContractorContractsGate = createGate<{
+export const MiningContractsGate = createGate<{
     searchParam: string;
 }>('ContractGate');
 
-export const getContractContractsFx = createEffect(
+export const getMiningContractsFx = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
         return getOrders({
-            userRole: Role.contractor,
+            userRole: Role.mineowner,
             status: FilterOrderStatus.current,
             user: searchParam,
         });
     }
 );
 
-export const $ContractorContracts = createStore<ContractDto[]>([]).on(
-    getContractContractsFx.doneData,
-    (_, contracts) => contracts
+export const $MiningContracts = createStore<ContractDto[]>([]).on(
+    getMiningContractsFx.doneData,
+    (_, contracts) =>
+        contracts.filter(
+            (contract) => contract.type === ContractType.mineowner_contractor
+        )
 );
 
 forward({
-    from: ContractorContractsGate.open,
-    to: getContractContractsFx,
+    from: MiningContractsGate.open,
+    to: getMiningContractsFx,
 });

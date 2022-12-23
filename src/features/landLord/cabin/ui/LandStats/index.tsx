@@ -1,12 +1,16 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
-import { useStore } from 'effector-react';
+import { useGate, useStore } from 'effector-react';
 
-import { getDmeAmount, KeyValueTable } from 'shared';
-import { contractorsStore } from 'entities/smartcontract';
+import { getDmeAmount, KeyValueTable, useAccountName } from 'shared';
+import {
+    extractFeeToClaimAttr,
+    rolesStore,
+    UserRoles,
+} from 'entities/smartcontract';
 import commonStyles from '../../styles/styles.module.scss';
-import { minesForAreaSlots } from '../../../areaManagement';
+import { ClaimDmeGate, minesForAreaSlots } from '../../../areaManagement';
 import styles from './styles.module.scss';
 
 interface Props {
@@ -14,9 +18,20 @@ interface Props {
 }
 
 export const LandStats: FC<Props> = ({ className }) => {
+    const accountName = useAccountName();
+    useGate(ClaimDmeGate, { searchParam: accountName });
+
     const { t } = useTranslation();
+    const roles = useStore(rolesStore);
+
     const mines = useStore(minesForAreaSlots);
-    const contractors = useStore(contractorsStore);
+
+    const landlordRole = roles?.filter(
+        ({ role }) => role === UserRoles.landlord
+    );
+    const dmeToClaim = landlordRole?.length
+        ? getDmeAmount(extractFeeToClaimAttr(landlordRole[0]))
+        : 0;
 
     return (
         <div className={className}>
@@ -26,9 +41,7 @@ export const LandStats: FC<Props> = ({ className }) => {
             <KeyValueTable
                 className={styles.table}
                 items={{
-                    [t('pages.landLord.cabin.DMEToClaim')]: getDmeAmount(
-                        contractors?.[0]?.real_amount_to_claim ?? 0
-                    ),
+                    [t('pages.landLord.cabin.DMEToClaim')]: dmeToClaim,
                     [t('pages.landLord.cabin.mines')]: mines?.length ?? 0,
                 }}
             />

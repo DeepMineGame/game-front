@@ -55,7 +55,9 @@ export const Characteristics = () => {
                 />
                 <CharacteristicsLine
                     name={t('features.mining.mineSublevel')}
-                    value={mineStore?.[0]?.sublevel ?? '-'}
+                    value={
+                        mineStore?.[0]?.sublevel ? mineStore[0].sublevel + 1 : 1
+                    }
                 />
                 <CharacteristicsLine
                     name={t('pages.equipmentSet.characteristics.mineDepth')}

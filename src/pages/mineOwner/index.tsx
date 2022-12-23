@@ -24,17 +24,13 @@ export const MineOwnerPage = () => {
             <div className={styles.header}>
                 <Header />
             </div>
-            {chainAccountName && (
-                <div className={styles.hologramWrapper}>
-                    <Hologram user={chainAccountName} />
-                </div>
-            )}
-            {chainAccountName && (
-                <MineOwnerMenu
-                    currentMineOwnerCabinState={cabinState}
-                    accountName={chainAccountName}
-                />
-            )}
+            <div className={styles.hologramWrapper}>
+                <Hologram user={chainAccountName} />
+            </div>
+            <MineOwnerMenu
+                currentMineOwnerCabinState={cabinState}
+                accountName={chainAccountName}
+            />
             {!inLocation.mineDeck && (
                 <CallToTravelNotification
                     toLocationId={LOCATION_TO_ID.mine_deck}

@@ -3,6 +3,13 @@ export enum InventoryType {
     /* [1] */ areas,
     /* [2] */ equipment,
     /* [3] */ structures,
+    /* [4] */ badges,
+    /* [5] */ schemas,
+    /* [6] */ upgrade_kits,
+    /* [7] */ modules,
+    /* [8] */ cards,
+    /* [9] */ packs,
+    /* [10] */ stickers,
 }
 
 export enum RarityType {
@@ -32,6 +39,15 @@ export const rarityMap = {
     [RarityType.epic]: 'Epic',
     [RarityType.legendary]: 'Legendary',
 } as const;
+
+export const raritiesTranslationMap: Record<RarityType, string> = {
+    [RarityType.undefined]: '',
+    [RarityType.common]: 'components.common.rarities.common',
+    [RarityType.uncommon]: 'components.common.rarities.uncommon',
+    [RarityType.rare]: 'components.common.rarities.rare',
+    [RarityType.epic]: 'components.common.rarities.epic',
+    [RarityType.legendary]: 'components.common.rarities.legendary',
+};
 
 export enum EquipmentType {
     undefined,

@@ -22,6 +22,8 @@ export type MineOrder = BaseOrder & {
     fee_daily_min_amount: number;
     days_for_penalty: number;
     contract_duration: number;
+    opt_level?: number | null;
+    opt_rarity?: RarityType | null;
 };
 
 export type LevelUpgradeOrder = BaseOrder & {

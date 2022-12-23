@@ -31,7 +31,7 @@
       "busy": "You cannot perform this action because you are busy with",
       "lastAction": "last action",
       "willEnd": "which will end in",
-      "isComplete":"is complete",
+      "isComplete": "is complete",
       "hide": "Hide",
       "ok": "Ok"
     },
@@ -49,6 +49,7 @@
       "YouHaveToPhysicalToManageInventory": "Travel to Hive to have the ability to load active inventory from the warehouse"
     },
     "common": {
+      "selectByName": "Select by name",
       "city": "City",
       "item": "Item",
       "openContract": "Open Contract",
@@ -59,7 +60,7 @@
         "uninstall": "Uninstall",
         "deactivate": "Deactivate",
         "activate": "Activate",
-        "setup": "Set up",
+        "setup": "Setup",
         "claim": "Claim",
         "dme": "DME",
         "dmp": "DMP",
@@ -149,7 +150,24 @@
         "undefined": "Undefined",
         "area": "Area",
         "equipment": "Equipment",
-        "structure": "Structure"
+        "structure": "Structure",
+        "badge": "Badge",
+        "schema": "Schema",
+        "upgradeKit": "Upgrade kit",
+        "card": "Card",
+        "module": "Module",
+        "sticker": "Sticker",
+        "pack": "Pack",
+        "areas": "Areas",
+        "structures": "Structures",
+        "badges": "Badges",
+        "schemas": "Schemas",
+        "upgradeKits": "Upgrade kits",
+        "cards": "Cards",
+        "modules": "Modules",
+        "stickers": "Stickers",
+        "packs": "Packs",
+        "all": "All"
       },
       "price": "Price",
       "myStatus": "My Status"
@@ -500,7 +518,11 @@
             "startOfOperation": "The period of time during which the engineer is required to start performing the upgrade",
             "costOfExecution": "The amount of DME the engineer receives for performing the upgrade"
           }
-        }
+        },
+        "mineRarity": "Mine rarity",
+        "mineRarityDescription": "Desired rarity of the mine where you want to operate",
+        "mineLevel": "Mine level",
+        "mineLevelDescription": "Desired level of the mine where you want to operate"
       },
       "lookingForMineOwner": "Looking for Mine owner",
       "lookingForContractor": "Looking for Contractor",
@@ -696,6 +718,7 @@
       "getReport": "Get report",
       "finishUpgrade": "Finish Upgrade",
       "performUpgrade": "Perform upgrade",
+      "stopUpgrade": "Stop Upgrade",
       "areYouSureToPerformUpgrade": "Are you sure you want to perform upgrade?",
       "upgradeCompleted": "Upgrade: Completed",
       "upgradeInProgress": "Upgrade: in progress",
@@ -801,7 +824,8 @@
       "progress": "Setup in progress",
       "chooseContract": "Choose a contract",
       "createContract": "Create a contract",
-      "setupMine": "Set up the Mine",
+      "setupMine": "Setup the Mine",
+      "setup": "Setup",
       "mineIsSet": "Mine is set",
       "mineActivation": "Mine activation",
       "mineOperationSucceed": "Mine operation is succeed",
@@ -818,6 +842,7 @@
       "mineIsActiveDescription": "Everything is fine and Mine is running. You can see information about the mining process and efficiency in Stats deck",
       "mineIsActiveDescriptionMobile": "Now you can see the statistics of the mining process and efficiency",
       "PlaceAsContractor": "Place myself as a contractor",
+      "searchContractor": "Searching for Contractor",
       "youNeed": "You signed the contract once, you need 2 signatures",
       "creatingSelfMiningContract": "You are creating the self Mining Contract with 21-day duration. It must be signed twice and can be terminated at any time without penalty.",
       "management": {

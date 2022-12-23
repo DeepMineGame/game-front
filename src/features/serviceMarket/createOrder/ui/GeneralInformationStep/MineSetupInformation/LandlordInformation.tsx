@@ -5,13 +5,15 @@ import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import { orderFields } from 'entities/order';
 
-import styles from '../../styles.module.scss';
-import localStyles from './styles.module.scss';
-import { GeneralInformationStepProps } from './interface';
+import styles from '../../../styles.module.scss';
+import localStyles from '../styles.module.scss';
+import { GeneralInformationStepProps } from '../interface';
+import { RaritySelector } from '../RaritySelector';
+import { LevelSelector } from '../LevelSelector';
 
 const { useWatch } = Form;
 
-export const MineInformation: FC<GeneralInformationStepProps> = ({
+export const LandlordInformation: FC<GeneralInformationStepProps> = ({
     goToNextStep,
     goToPreviousStep,
     form,
@@ -27,6 +29,7 @@ export const MineInformation: FC<GeneralInformationStepProps> = ({
         orderFields.deadlineDurationInHours,
         form
     );
+
     const hasAllValues =
         feeFieldValue &&
         deadlineTimeInDaysFieldValue &&
@@ -112,6 +115,10 @@ export const MineInformation: FC<GeneralInformationStepProps> = ({
                     </Form.Item>
                 </div>
             </InputA.Group>
+            <div className={localStyles.flexSection}>
+                <RaritySelector />
+                <LevelSelector />
+            </div>
             <Space direction="horizontal">
                 <Button onClick={goToPreviousStep} ghost>
                     {t('kit.back')}

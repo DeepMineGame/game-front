@@ -9,9 +9,11 @@ import {
     ContractType,
     getContractStatus,
 } from 'entities/smartcontract';
+
 import { getDmeAmount, getUserRoleInContract } from 'shared/lib/utils';
 import { Link, Table, Tag } from '../../ui-kit';
 import { toLocaleDate } from '../../utils';
+// import styles from './styles.module.scss';
 
 type Props = { contracts: ContractDto[] | null };
 
@@ -21,6 +23,15 @@ const contractStateMap = {
     [ContractType.mineowner_contractor]: ContractState,
     [ContractType.level_upgrade]: UpgradeContractState,
 };
+
+// const rarityColorMap = {
+//     0: undefined,
+//     1: '#DBDBDB', // neutral9
+//     2: '#09E001', // green4
+//     3: '#0089FF', // geekblue5
+//     4: '#CB2EFF', // purple6
+//     5: '#E8D639', // yellow7,
+// };
 
 export const ContractsTable: FC<Props> = ({ contracts }) => {
     const account = useAccountName();
@@ -32,11 +43,13 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
 
                 return {
                     cost: contract.cost_of_execution,
+                    // rarity: contract.rarity,
+                    // level: contract.level,
                     nickName: contract.client || contract.executor,
                     key: contract.id,
                     id: contract.id,
                     type: contractName[contract.type],
-                    fee: contract.fee_daily_min_amount,
+                    fee: contract.fee_percent,
                     date:
                         contract.finishes_at === 0
                             ? '-'
@@ -111,6 +124,20 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                         );
                     },
                 },
+                // {
+                //     title: 'Rarity',
+                //     dataIndex: 'rarity',
+                //     key: 'rarity',
+                //     render: (rarity: -1 | 1 | 2 | 3 | 4 | 5) =>
+                //         rarity === -1 ? (
+                //             'N/A'
+                //         ) : (
+                //             <div
+                //                 className={styles.rarityMarker}
+                //                 style={{ background: rarityColorMap[rarity] }}
+                //             />
+                //         ),
+                // },
                 {
                     title: t(
                         'pages.serviceMarket.myContractsTab.completionDate'
@@ -138,6 +165,12 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                     key: 'const',
                     sorter: (a, b) => a.const - b.cost,
                 },
+                // {
+                //     title: 'Mine level',
+                //     dataIndex: 'level',
+                //     key: 'level',
+                //     render: (level) => (level === -1 ? 'N/A' : level),
+                // },
                 {
                     title: t('pages.serviceMarket.myContractsTab.status'),
                     dataIndex: 'status',

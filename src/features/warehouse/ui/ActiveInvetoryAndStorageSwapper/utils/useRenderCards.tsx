@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import { Card } from 'shared';
+import { Card, desktopS, useMediaQuery } from 'shared';
 import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
 import { isAssetAvailable } from 'shared/lib/utils';
 import styles from '../styles.module.scss';
 
 export function useRenderCards() {
     const navigate = useNavigate();
+    const isDesktop = useMediaQuery(desktopS);
 
     return (
         items:
@@ -17,6 +18,9 @@ export function useRenderCards() {
         return Array.from(items)?.map((card) => (
             <div
                 onDragStart={() => isAssetAvailable(card) && onDragStart(card)}
+                onTouchEnd={() =>
+                    !isDesktop && isAssetAvailable(card) && onDragStart(card)
+                }
                 key={card.asset_id}
             >
                 <Card

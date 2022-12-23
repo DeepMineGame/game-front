@@ -21,7 +21,8 @@ export const ContractState: FC<ContractProps> = ({ contract, accountName }) => {
         isTerminated,
         isDeleted,
     } = useContractState(contract, accountName);
-    const { isOrder } = useContractType(contract);
+
+    const { isOrder, isSelfSigned } = useContractType(contract);
 
     if (isCompleted) {
         return (
@@ -53,7 +54,7 @@ export const ContractState: FC<ContractProps> = ({ contract, accountName }) => {
         );
     }
 
-    if (isDeleted && isOrder)
+    if (isDeleted && (isOrder || isSelfSigned))
         return (
             <div className={styles.status}>
                 <DeleteOutlined /> {t('pages.serviceMarket.contract.deleted')}

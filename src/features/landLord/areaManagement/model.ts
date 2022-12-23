@@ -13,7 +13,7 @@ import {
     UserRoles,
     ContractDto,
 } from 'entities/smartcontract';
-import { FilterOrderStatus, getOrders, Role } from 'entities/gameStat';
+import { getMarketOrders, OrderStatus, Roles } from 'entities/gameStat';
 
 export const AreaGate = createGate<{ searchParam: string }>('AreaGate');
 
@@ -30,15 +30,19 @@ export const getInventoriesEffect = createEffect<
 export const getMinesByAreaId = createEffect<
     UserInventoryType[] | null,
     { rows: MineDto[] | undefined } | undefined
->((areaNft: UserInventoryType[] | null) =>
-    areaNft?.length
+>((inventory: UserInventoryType[] | null) => {
+    const areaNft = inventory?.find(
+        ({ inv_type }) => inv_type === InventoryType.areas
+    );
+
+    return areaNft
         ? getMinesTableData({
               searchIdentificationType: searchBy.areaId,
-              searchParam: areaNft[0]?.asset_id,
+              searchParam: areaNft?.asset_id,
               limit: 30,
           })
-        : { rows: undefined }
-);
+        : { rows: undefined };
+});
 
 export const $inventory = createStore<UserInventoryType[] | null>(null).on(
     getInventoriesEffect.doneData,
@@ -72,10 +76,11 @@ export const LandlordContractsGate = createGate<{
 
 export const getLandlordContractsEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
-        return getOrders({
-            userRole: Role.mineowner,
-            status: FilterOrderStatus.current,
+        return getMarketOrders({
+            user_role: Roles.landlord,
+            statuses: OrderStatus.current,
             user: searchParam,
+            search_role: Roles.mineowner,
         });
     }
 );

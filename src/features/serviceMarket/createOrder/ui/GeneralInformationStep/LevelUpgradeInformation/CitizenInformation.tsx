@@ -4,7 +4,11 @@ import { useTranslation } from 'react-i18next';
 import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { Form } from 'antd';
 import { useStore } from 'effector-react';
-import { EngineerSchema, miningEquipmentNames } from 'entities/smartcontract';
+import {
+    EngineerSchema,
+    miningEquipmentNames,
+    raritiesTranslationMap,
+} from 'entities/smartcontract';
 import {
     $mergedInventoryWithAtomicAssets,
     MergedInventoryWithAtomicAssets,
@@ -17,7 +21,7 @@ import {
     UpgradeTypeFormItem,
     useWatchUpgradeType,
 } from '../../UpgradeTypeFormItem';
-import { inventoriesTypeMap, raritiesTranslationMap } from './constants';
+import { inventoriesTypeMap } from './constants';
 
 export const CitizenInformation: FC<GeneralInformationStepProps> = ({
     goToPreviousStep,
@@ -80,9 +84,7 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
                                           inventoriesTypeMap[asset.inv_type]
                                       }`
                                   )}, ${t(
-                                      `components.common.rarities.${
-                                          raritiesTranslationMap[asset.rarity]
-                                      }`
+                                      raritiesTranslationMap[asset.rarity]
                                   )}, Level ${asset.level}`
                                 : t(
                                       'pages.serviceMarket.createOrder.selectItem'

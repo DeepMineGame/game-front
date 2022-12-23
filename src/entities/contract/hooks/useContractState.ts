@@ -21,7 +21,7 @@ export const useContractState = (
         contract,
         accountName
     );
-    const { isContract } = useContractType(contract);
+    const { isContract, isSelfSigned } = useContractType(contract);
 
     const isDeleted = !!contract.deleted_at;
     const isClient = contract.client === accountName;
@@ -41,6 +41,10 @@ export const useContractState = (
     const canTerminate =
         isContractMember && isActive && !isNeedComplete && !isTermViolation;
 
+    // delete self contract after terminate
+    const canDeleteSelfContract =
+        isContractMember && isSelfSigned && !canTerminate && !isDeleted;
+
     const showPenaltyActions = isTermViolation && isContractMember;
     const showTerminatedAlert = isTerminated && isContractMember;
     const showCompleted = isNeedComplete && isContractMember;
@@ -58,6 +62,7 @@ export const useContractState = (
         state,
         stateMeta,
         canTerminate,
+        canDeleteSelfContract,
         showTerminatedAlert,
         showPenaltyActions,
         showCompleted,

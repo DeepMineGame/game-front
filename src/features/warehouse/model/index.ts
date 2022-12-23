@@ -6,7 +6,11 @@ import {
     getAssets,
     getAtomicAssetsByUser,
 } from 'entities/atomicassets';
-import { getInventoryConfig, UserInventoryType } from 'entities/smartcontract';
+import {
+    getInventoryConfig,
+    InventoryType,
+    UserInventoryType,
+} from 'entities/smartcontract';
 import { mergeAssets, getGameAssets } from 'shared/lib/utils';
 
 const WarehouseGate = createGate<{ searchParam: string }>('warehouseGate');
@@ -54,10 +58,41 @@ const $mergedInventoryWithAtomicAssets = combine(
     (...assets) => mergeAssets(...assets).filter(({ in_use }) => !in_use)
 );
 
+const parseAtomicAssetType = ({
+    schema: { schema_name },
+}: AssetDataType): InventoryType => {
+    switch (schema_name) {
+        case 'areas':
+            return InventoryType.areas;
+        case 'equipment':
+            return InventoryType.equipment;
+        case 'structures':
+            return InventoryType.structures;
+        case 'badges':
+            return InventoryType.badges;
+        case 'schemas':
+            return InventoryType.schemas;
+        case 'modules':
+            return InventoryType.modules;
+        case 'packs':
+            return InventoryType.packs;
+        case 'stickers':
+            return InventoryType.stickers;
+        case 'cards':
+            return InventoryType.cards;
+        default:
+            return InventoryType.undefined;
+    }
+};
+
 const $mergedStorageWithAtomicAssets = combine(
     $storage,
     $storageAtomicAssets,
-    mergeAssets
+    (...assets) =>
+        mergeAssets(...assets).map((asset) => ({
+            ...asset,
+            inv_type: parseAtomicAssetType(asset),
+        }))
 );
 
 sample({

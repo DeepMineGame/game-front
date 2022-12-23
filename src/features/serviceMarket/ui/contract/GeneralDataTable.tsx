@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { ShareAltOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import { useContractType } from 'entities/contract';
+import { raritiesTranslationMap, RarityType } from 'entities/smartcontract';
 import { secondsToDays, Text, toLocaleDate } from 'shared/ui';
 import { ContractState, TableWithTitle } from '..';
 import { ContractProps } from '../../types';
@@ -42,6 +43,16 @@ const GeneralDataTable: FC<ContractProps> = ({ contract, accountName }) => {
             contract.contract_duration
         )} ${t('components.common.days').toLowerCase()}`,
     };
+
+    if (contract.level !== -1) {
+        generalData[t('pages.serviceMarket.createOrder.mineLevel')] =
+            contract.level.toString();
+    }
+    if (contract.rarity !== -1) {
+        generalData[t('pages.serviceMarket.createOrder.mineRarity')] = t(
+            raritiesTranslationMap[contract.rarity as RarityType]
+        );
+    }
 
     return (
         <TableWithTitle
