@@ -147,7 +147,7 @@ export function useActionsButton() {
             <>
                 <ActionModal
                     texts={{
-                        onOk: t('components.common.button.activate'),
+                        onOk: t('components.common.button.setup'),
                         title: t('features.mineOwner.setupMine'),
                     }}
                     costs={{ timeSeconds: 1 }}
