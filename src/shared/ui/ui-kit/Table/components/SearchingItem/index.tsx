@@ -5,6 +5,7 @@ import cn from 'classnames';
 import { useSmartContractAction } from 'features/hooks';
 import { ContractDto, terminateContract } from 'entities/smartcontract';
 import { useReloadPage } from 'shared/lib/hooks';
+import { Link } from 'shared/ui/ui-kit';
 import { Button } from '../../../Button';
 import styles from './styles.module.scss';
 
@@ -38,7 +39,9 @@ export const SearchingItem: FC<Props> = ({
             <LoadingOutlined />
             <span className={styles.text}>{text}</span>
             <span className={styles.contractId}>
-                {t('pages.serviceMarket.contract.contractId')} {contract.id}
+                <Link to={`/service-market/contract/${contract.id}`}>
+                    {t('pages.serviceMarket.contract.contractId')} {contract.id}
+                </Link>
             </span>
             <Button
                 onClick={handleCancel}

@@ -12,17 +12,18 @@ import {
     minesForAreaSlots,
     userAreaNftStore,
     PlaceMyselfMineAsOwner,
-    $contracts,
-    LandlordContractsGate,
+    // LandlordContractsGate,
 } from 'features';
 
 import {
     areasStore,
-    ContractStatus,
-    ContractType,
     InventoryType,
     LOCATION_TO_ID,
 } from 'entities/smartcontract';
+import {
+    getActiveSelfSignedContract,
+    getNotSignedSelfContract,
+} from 'entities/contract';
 import styles from './styles.module.scss';
 
 export const AreaManagementPage = () => {
@@ -30,30 +31,19 @@ export const AreaManagementPage = () => {
     const accountName = useAccountName();
 
     useGate(MineOwnerContractsGate, { searchParam: accountName });
-    useGate(LandlordContractsGate, { searchParam: accountName });
+    // useGate(LandlordContractsGate, { searchParam: accountName });
     const mines = useStore(minesForAreaSlots);
     const area = useStore(areasStore);
     const userLocation = useUserLocation();
     const areas = useStore(userAreaNftStore);
 
     const mineOwnerContracts = useStore($MineOwnerContracts);
-    const landLordContracts = useStore($contracts);
+    // const landLordContracts = useStore($contracts);
     const isContractsLoading = useStore(getMineOwnerContractsFx.pending);
-    console.log(landLordContracts);
-    const contractsToSign = mineOwnerContracts.filter(
-        (contract) =>
-            contract.type === ContractType.landlord_mineowner &&
-            contract.activation_time === 0 &&
-            contract.status !== ContractStatus.terminated
-    );
 
+    const contractsToSign = mineOwnerContracts.filter(getNotSignedSelfContract);
     const selfSignedContracts = mineOwnerContracts.filter(
-        (contract) =>
-            contract.type === ContractType.landlord_mineowner &&
-            contract.client === contract.executor &&
-            contract.activation_time !== 0 &&
-            contract.deadline_time * 1000 > Date.now() &&
-            contract.status === ContractStatus.active
+        getActiveSelfSignedContract
     );
 
     const areaItem = areas?.find(

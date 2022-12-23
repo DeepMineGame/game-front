@@ -1,6 +1,6 @@
 import { createEffect, createStore, forward } from 'effector';
 import { createGate } from 'effector-react';
-import { ContractDto } from 'entities/smartcontract';
+import { ContractDto, ContractType } from 'entities/smartcontract';
 import { FilterOrderStatus, getOrders, Role } from 'entities/gameStat';
 
 export const MineOwnerContractsGate = createGate<{
@@ -19,7 +19,10 @@ export const getMineOwnerContractsFx = createEffect(
 
 export const $MineOwnerContracts = createStore<ContractDto[]>([]).on(
     getMineOwnerContractsFx.doneData,
-    (_, contracts) => contracts
+    (_, contracts) =>
+        contracts.filter(
+            (contract) => contract.type === ContractType.landlord_mineowner
+        )
 );
 
 forward({
