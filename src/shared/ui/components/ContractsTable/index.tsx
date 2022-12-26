@@ -1,7 +1,8 @@
-import { FC, useMemo } from 'react';
+import { FC, useMemo, SyntheticEvent } from 'react';
 import { t } from 'i18next';
 import { DiscordIcon, useAccountName } from 'shared';
 import { Space, Tooltip } from 'antd';
+import { useNavigate } from 'react-router';
 import { ContractState, UpgradeContractState } from 'features/serviceMarket';
 import {
     ContractDto,
@@ -13,7 +14,7 @@ import {
 import { getDmeAmount, getUserRoleInContract } from 'shared/lib/utils';
 import { Link, Table, Tag } from '../../ui-kit';
 import { toLocaleDate } from '../../utils';
-// import styles from './styles.module.scss';
+import styles from './styles.module.scss';
 
 type Props = { contracts: ContractDto[] | null };
 
@@ -34,6 +35,7 @@ const contractStateMap = {
 // };
 
 export const ContractsTable: FC<Props> = ({ contracts }) => {
+    const navigate = useNavigate();
     const account = useAccountName();
     const dataSource = useMemo(
         () =>
@@ -67,8 +69,17 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
         [account, contracts]
     );
 
+    const stopPropagateEvent = (event: SyntheticEvent<any>) =>
+        event.stopPropagation();
+
     return (
         <Table
+            onRow={(record) => ({
+                onClick: () => {
+                    navigate(`/service-market/contract/${record.id}`);
+                },
+            })}
+            rowClassName={() => styles.row}
             columns={[
                 {
                     title: t('pages.serviceMarket.id'),
@@ -98,10 +109,16 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                                 <Tooltip
                                     overlay={t('components.common.comingSoon')}
                                 >
-                                    <DiscordIcon cursor="pointer" />
+                                    <DiscordIcon
+                                        cursor="pointer"
+                                        onClick={stopPropagateEvent}
+                                    />
                                 </Tooltip>
                                 <Space align="center" size={0}>
-                                    <Link to={`/user/${partnerNickname}`}>
+                                    <Link
+                                        to={`/user/${partnerNickname}`}
+                                        onClick={stopPropagateEvent}
+                                    >
                                         {partnerNickname ||
                                             contract.executor ||
                                             contract.client}
