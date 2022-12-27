@@ -57,7 +57,7 @@ export const routes: AppRoute[] = [
         Component: ContractorCabin,
         forLoggedIn: true,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'Contractor — DeepMine',
     },
     {
@@ -65,7 +65,7 @@ export const routes: AppRoute[] = [
         Component: EquipmentSetPage,
         forLoggedIn: true,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'Equipment set — DeepMine',
     },
     {
@@ -73,7 +73,7 @@ export const routes: AppRoute[] = [
         Component: CityPage,
         forLoggedIn: true,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'City — DeepMine',
     },
     {
@@ -81,7 +81,7 @@ export const routes: AppRoute[] = [
         Component: Wasteland,
         forLoggedIn: true,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'Wasteland — DeepMine',
     },
     {
@@ -89,7 +89,7 @@ export const routes: AppRoute[] = [
         Component: MiningPage,
         forLoggedIn: true,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'Mining — DeepMine',
     },
     {
@@ -97,7 +97,7 @@ export const routes: AppRoute[] = [
         Component: MineOwnerPage,
         forLoggedIn: true,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'Mine owner cabin — DeepMine',
     },
     {
@@ -105,7 +105,7 @@ export const routes: AppRoute[] = [
         Component: MineManagementPage,
         forLoggedIn: true,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'Mine management — DeepMine',
     },
     {
@@ -113,7 +113,7 @@ export const routes: AppRoute[] = [
         Component: ContractorStatsAndInfoPage,
         forLoggedIn: true,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'Contractor / Stats and Info',
     },
     {
@@ -121,7 +121,7 @@ export const routes: AppRoute[] = [
         Component: MineOwnerStatAndInfoPage,
         forLoggedIn: true,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'Mine owner / Stats and Info',
     },
     {
@@ -129,7 +129,7 @@ export const routes: AppRoute[] = [
         Component: MineOwnerMiningCrewPage,
         forLoggedIn: true,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'Mine owner / Mine crew',
     },
     {
@@ -137,7 +137,7 @@ export const routes: AppRoute[] = [
         Component: ServiceMarketPage,
         forLoggedIn: true,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'Service-market — DeepMine',
     },
     {
@@ -145,7 +145,7 @@ export const routes: AppRoute[] = [
         Component: OperationPage,
         forLoggedIn: true,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'Service-market — DeepMine',
     },
     {
@@ -153,7 +153,7 @@ export const routes: AppRoute[] = [
         Component: LandLordPage,
         forLoggedIn: true,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'Landlord — DeepMine',
     },
     {
@@ -161,7 +161,7 @@ export const routes: AppRoute[] = [
         Component: LandlordStatsAndInfoPage,
         forLoggedIn: true,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'Landlord — DeepMine',
     },
     {
@@ -169,7 +169,7 @@ export const routes: AppRoute[] = [
         Component: AreaManagementPage,
         forLoggedIn: true,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'Landlord — Area management',
     },
     {
@@ -177,7 +177,7 @@ export const routes: AppRoute[] = [
         Component: HivePage,
         forLoggedIn: true,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'Hive — DeepMine',
     },
     {
@@ -185,7 +185,7 @@ export const routes: AppRoute[] = [
         Component: InfoPage,
         forLoggedIn: false,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'Hive — DeepMine',
     },
     {
@@ -193,7 +193,7 @@ export const routes: AppRoute[] = [
         Component: Warehouse,
         forLoggedIn: true,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'Warehouse — DeepMine',
     },
     {
@@ -201,7 +201,7 @@ export const routes: AppRoute[] = [
         Component: CreateOrderPage,
         forLoggedIn: true,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'Create order — DeepMine',
     },
     {
@@ -209,7 +209,7 @@ export const routes: AppRoute[] = [
         Component: NftPreviewPage,
         forLoggedIn: true,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'Card preview — DeepMine',
     },
     {
@@ -218,7 +218,7 @@ export const routes: AppRoute[] = [
         Component: FaqPage,
         forLoggedIn: false,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
     },
     {
         path: paths.engineer,
@@ -233,7 +233,7 @@ export const routes: AppRoute[] = [
         Component: EquipmentHallPage,
         forLoggedIn: true,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'Engineer Equipment Hall — DeepMine',
     },
     {
@@ -241,7 +241,7 @@ export const routes: AppRoute[] = [
         Component: InterfaceStubPage,
         forLoggedIn: false,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'Unidentified seismic activity — DeepMine',
     },
     {
@@ -249,7 +249,7 @@ export const routes: AppRoute[] = [
         Component: EngineersTraining,
         forLoggedIn: true,
         forAdmin: true,
-        forBetaUser: false,
+        forBetaUser: true,
         titleTag: 'Engineers Training — DeepMine',
     },
 ];
