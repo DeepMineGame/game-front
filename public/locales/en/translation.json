@@ -934,7 +934,7 @@
     "00039": "can't specify 'client' for this contract type",
     "00040": "you're not an owner of the Area",
     "00041": "you can't specify 'executor' as a Mineowner",
-    "00042": "You already have an active Contract. Please check the service market and make sure that all your contracts as the contractor are terminated, orders have been deleted, and the penalty have or haven't been collected by you in all of the applicable contracts",
+    "00042": "You already have an active Contract. Please check the service market and make sure that all your contracts as the contractor are terminated, orders have been deleted, and the penalty have or haven't been collected by you in all of the applicable contracts\n\nActive contract iD you can see in the blockchain error in the bottom left corner",
     "00043": "you can't specify 'executor' as a Contractor",
     "00044": "To be able to create a new contract, you need to remove the equipment that was installed in the previous mine. To do this, go to the Mine and uninstall the equipment",
     "00045": "wrong Contract status",
