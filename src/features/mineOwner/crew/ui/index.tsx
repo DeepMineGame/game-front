@@ -40,7 +40,6 @@ export const MineOwnerCrew: FC = () => {
         userMine?.contractor_slots.filter((slot) => slot?.contractor) ?? [];
 
     const contracts = useStore($MiningContracts);
-
     const isContractsLoading = useStore(getMiningContractsFx.pending);
 
     const selfContractsToSign = contracts.filter(getNotSignedSelfContract);
@@ -78,9 +77,13 @@ export const MineOwnerCrew: FC = () => {
         />
     ));
 
-    const emptySlots = [
-        ...new Array(activeContractors.length - searchingSlots.length),
-    ].map((_, idx) => (
+    const maxEmptySlots = Math.max(
+        userMine?.contractor_slots.filter((slot) => !slot?.contractor).length ||
+            0 - activeContractors.length - searchingSlots.length,
+        0
+    );
+
+    const emptySlots = [...new Array(maxEmptySlots)].map((_, idx) => (
         <AddItem
             // eslint-disable-next-line react/no-array-index-key
             key={idx}
