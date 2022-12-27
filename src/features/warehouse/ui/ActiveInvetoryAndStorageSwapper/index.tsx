@@ -1,6 +1,5 @@
 import { DragEventHandler, FC, useState } from 'react';
 import { Col, Row, Space } from 'antd';
-import cn from 'classnames';
 import {
     Button,
     desktopS,
@@ -158,9 +157,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
             )}
             <Col
                 span={11}
-                className={cn(styles.cardColumn, {
-                    [styles.cardColumnDisabled]: !isInHive,
-                })}
+                className={styles.cardColumn}
                 onDrop={
                     toggleDraggedElements as unknown as DragEventHandler<HTMLDivElement>
                 }

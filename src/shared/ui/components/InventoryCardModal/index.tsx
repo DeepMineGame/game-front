@@ -10,8 +10,7 @@ import {
 import React, { FC, useState, useEffect, useCallback } from 'react';
 import { Col, message, ModalProps, Row, Space, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { serviceMarket } from 'app/router/paths';
-import { ServiceMarketTabIds } from 'app/router/constants';
+import { createOrder } from 'app/router/paths';
 import { useSmartContractAction } from 'features';
 import { useStore } from 'effector-react';
 import { QuestionCircleOutlined } from '@ant-design/icons';
@@ -21,12 +20,14 @@ import {
     MergedInventoryWithAtomicAssets,
 } from 'entities/atomicassets';
 import {
+    ContractType,
     getMalfunctionProbability,
     getMalfunctionProbabilityTranslation,
     rarityMap,
     repairEquipment,
 } from 'entities/smartcontract';
 import { balancesStore } from 'entities/user';
+import { orderFields } from 'entities/order';
 import {
     ActionModal,
     Button,
@@ -160,15 +161,15 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             <Col span={10} className={styles.rightCol}>
                                 <Space>
                                     <Link
-                                        to={`${serviceMarket}?tabId=${ServiceMarketTabIds.levelUpgrade}`}
+                                        to={`${createOrder}?${orderFields.contractType}=${ContractType.level_upgrade}`}
                                     >
                                         {t(
-                                            'pages.equipmentSet.cardModal.upgrade'
+                                            'pages.equipmentSet.cardModal.levelUpgrade'
                                         )}
                                     </Link>
                                     <Tooltip
                                         overlay={t(
-                                            'pages.equipmentSet.cardModal.rarityUpgradeTooltip'
+                                            'pages.equipmentSet.cardModal.levelUpgradeTooltip'
                                         )}
                                     >
                                         <QuestionCircleOutlined />
@@ -189,13 +190,11 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             <Col span={10} className={styles.rightCol}>
                                 <Space>
                                     {dmeMined === dmeToLevelUpgrade ? (
-                                        <Link
-                                            to={`${serviceMarket}?tabId=${ServiceMarketTabIds.levelUpgrade}`}
-                                        >
+                                        <a href="https://wax.atomichub.io/tradeup/deepmineupgr/11equip+12equip+13equip+14equip+21equip+22equip+23equip+24equip+31equip+32equip+33equip+34equip+41equip+42equip+43equip+44equip+51equip+52equip+53equip+54equip">
                                             {t(
-                                                'pages.equipmentSet.cardModal.upgrade'
+                                                'pages.equipmentSet.cardModal.rarityUpgrade'
                                             )}
-                                        </Link>
+                                        </a>
                                     ) : (
                                         <NftProgressBar
                                             className={
@@ -208,7 +207,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                     )}
                                     <Tooltip
                                         overlay={t(
-                                            'pages.equipmentSet.cardModal.levelUpgradeTooltip'
+                                            'pages.equipmentSet.cardModal.rarityUpgradeTooltip'
                                         )}
                                     >
                                         <QuestionCircleOutlined />
@@ -312,7 +311,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                                         ] as GetCostParams['rarity'],
                                                         isRefurbish: true,
                                                     }),
-                                                    energy: 150,
+                                                    energy: 0,
                                                 },
                                             });
                                             setIsModalVisible(true);
