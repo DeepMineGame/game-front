@@ -158,9 +158,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
             )}
             <Col
                 span={11}
-                className={cn(styles.cardColumn, {
-                    [styles.cardColumnDisabled]: !isInHive,
-                })}
+                className={cn(styles.cardColumn)}
                 onDrop={
                     toggleDraggedElements as unknown as DragEventHandler<HTMLDivElement>
                 }
