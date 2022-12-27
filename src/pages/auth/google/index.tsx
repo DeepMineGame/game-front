@@ -29,7 +29,7 @@ export const GoogleAuthPage: React.FC<Props> = ({ onSuccess }) => {
     const [isAuthLinkFetching, setIsAuthLinkFetching] = useState(false);
 
     useEffect(() => {
-        if (user?.is_admin || user?.is_beta) onSuccess();
+        if (user) onSuccess();
     }, [user]);
 
     useEffect(() => {
@@ -75,16 +75,26 @@ export const GoogleAuthPage: React.FC<Props> = ({ onSuccess }) => {
         <div className={styles.wrapper}>
             <DeepMineLogo width={240} height={142} />
             <div className={styles.content}>
-                <Button
-                    size="large"
-                    onClick={handleAuthClick}
-                    className={styles.actionButton}
-                    type="primary"
-                    loading={isAuthLinkFetching}
-                    ghost
-                >
-                    {t('intro.signInGoogle')}
-                </Button>
+                {user?.is_admin === false && user?.is_beta === false ? (
+                    <Typography.Text
+                        type="danger"
+                        className={styles.warning}
+                        style={{ marginTop: 45 }}
+                    >
+                        {t('intro.only-members')}
+                    </Typography.Text>
+                ) : (
+                    <Button
+                        size="large"
+                        onClick={handleAuthClick}
+                        className={styles.actionButton}
+                        type="primary"
+                        loading={isAuthLinkFetching}
+                        ghost
+                    >
+                        {t('intro.signInGoogle')}
+                    </Button>
+                )}
             </div>
             {!!user && <LoggedInBlock user={user} />}
         </div>
