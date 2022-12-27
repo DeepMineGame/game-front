@@ -75,26 +75,16 @@ export const GoogleAuthPage: React.FC<Props> = ({ onSuccess }) => {
         <div className={styles.wrapper}>
             <DeepMineLogo width={240} height={142} />
             <div className={styles.content}>
-                {user?.is_admin === false && user?.is_beta === false ? (
-                    <Typography.Text
-                        type="danger"
-                        className={styles.warning}
-                        style={{ marginTop: 45 }}
-                    >
-                        {t('intro.only-members')}
-                    </Typography.Text>
-                ) : (
-                    <Button
-                        size="large"
-                        onClick={handleAuthClick}
-                        className={styles.actionButton}
-                        type="primary"
-                        loading={isAuthLinkFetching}
-                        ghost
-                    >
-                        {t('intro.signInGoogle')}
-                    </Button>
-                )}
+                <Button
+                    size="large"
+                    onClick={handleAuthClick}
+                    className={styles.actionButton}
+                    type="primary"
+                    loading={isAuthLinkFetching}
+                    ghost
+                >
+                    {t('intro.signInGoogle')}
+                </Button>
             </div>
             {!!user && <LoggedInBlock user={user} />}
         </div>
