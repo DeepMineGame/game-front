@@ -6,7 +6,9 @@
     "signInGoogle": "SIGN IN WITH GOOGLE",
     "loggedIn": "You are logged in",
     "Logout": "Logout",
-    "waxAlreadyExists": "WAX wallet is already linked to another account"
+    "waxAlreadyExists": "WAX wallet is already linked to another account",
+    "attention": "Attention! You are entering Beta version of DeepMine. Game is still in development with possible bugs and errors as a part of the normal project evolution at this stage. Read full disclaimer here: ",
+    "live": "DeepMine beta is Live"
   },
   "kit": {
     "back": "Back",
