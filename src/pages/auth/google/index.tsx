@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useEvent, useStore } from 'effector-react';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { Typography } from 'antd';
+import { Alert, Space } from 'antd';
 import { DeepMineLogo, Button, LoadingScreen } from 'shared';
 import {
     userStore,
@@ -29,7 +29,7 @@ export const GoogleAuthPage: React.FC<Props> = ({ onSuccess }) => {
     const [isAuthLinkFetching, setIsAuthLinkFetching] = useState(false);
 
     useEffect(() => {
-        if (user?.is_admin || user?.is_beta) onSuccess();
+        if (user) onSuccess();
     }, [user]);
 
     useEffect(() => {
@@ -74,16 +74,9 @@ export const GoogleAuthPage: React.FC<Props> = ({ onSuccess }) => {
     return (
         <div className={styles.wrapper}>
             <DeepMineLogo width={240} height={142} />
-            <div className={styles.content}>
-                {user?.is_admin === false && user?.is_beta === false ? (
-                    <Typography.Text
-                        type="danger"
-                        className={styles.warning}
-                        style={{ marginTop: 45 }}
-                    >
-                        {t('intro.only-members')}
-                    </Typography.Text>
-                ) : (
+
+            <Space direction="vertical" size="large">
+                <div className={styles.content}>
                     <Button
                         size="large"
                         onClick={handleAuthClick}
@@ -94,8 +87,23 @@ export const GoogleAuthPage: React.FC<Props> = ({ onSuccess }) => {
                     >
                         {t('intro.signInGoogle')}
                     </Button>
-                )}
-            </div>
+                </div>
+                <Alert
+                    className={styles.alert}
+                    description={
+                        <div>
+                            {t('intro.attention')}
+                            <a
+                                href="https://medium.com/@deepmineworld/deepmine-beta-is-live-63167681173d"
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                {t('intro.live')}
+                            </a>
+                        </div>
+                    }
+                />
+            </Space>
             {!!user && <LoggedInBlock user={user} />}
         </div>
     );
