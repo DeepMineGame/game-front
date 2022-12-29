@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useEvent, useStore } from 'effector-react';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { Typography } from 'antd';
+import { Alert, Space } from 'antd';
 import { DeepMineLogo, Button, LoadingScreen } from 'shared';
 import {
     userStore,
@@ -74,18 +74,36 @@ export const GoogleAuthPage: React.FC<Props> = ({ onSuccess }) => {
     return (
         <div className={styles.wrapper}>
             <DeepMineLogo width={240} height={142} />
-            <div className={styles.content}>
-                <Button
-                    size="large"
-                    onClick={handleAuthClick}
-                    className={styles.actionButton}
-                    type="primary"
-                    loading={isAuthLinkFetching}
-                    ghost
-                >
-                    {t('intro.signInGoogle')}
-                </Button>
-            </div>
+
+            <Space direction="vertical" size="large">
+                <div className={styles.content}>
+                    <Button
+                        size="large"
+                        onClick={handleAuthClick}
+                        className={styles.actionButton}
+                        type="primary"
+                        loading={isAuthLinkFetching}
+                        ghost
+                    >
+                        {t('intro.signInGoogle')}
+                    </Button>
+                </div>
+                <Alert
+                    className={styles.alert}
+                    description={
+                        <div>
+                            {t('intro.attention')}
+                            <a
+                                href="https://medium.com/@deepmineworld/deepmine-beta-is-live-63167681173d"
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                {t('intro.live')}
+                            </a>
+                        </div>
+                    }
+                />
+            </Space>
             {!!user && <LoggedInBlock user={user} />}
         </div>
     );

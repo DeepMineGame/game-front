@@ -116,7 +116,11 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                                 </Tooltip>
                                 <Space align="center" size={0}>
                                     <Link
-                                        to={`/user/${partnerNickname}`}
+                                        to={`/user/${
+                                            partnerNickname ||
+                                            contract.executor ||
+                                            contract.client
+                                        }`}
                                         onClick={stopPropagateEvent}
                                     >
                                         {partnerNickname ||
