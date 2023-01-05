@@ -57,7 +57,7 @@ const defaultEndpoints = {
         ? [
               'https://wax.blokcrafters.io/atomicassets/v1',
               'https://aa.dapplica.io/atomicassets/v1',
-              'https://wax.api.at1omicassets.io/atomicassets/v1',
+              'https://wax.api.atomicassets.io/atomicassets/v1',
               'https://wax.hkeos.com/aa/atomicassets/v1',
               'https://atomic2.hivebp.io/atomicassets/v1',
               'https://aa.wax.blacklusion.io/atomicassets/v1',
