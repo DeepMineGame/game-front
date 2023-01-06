@@ -139,9 +139,10 @@ export const getContractStatus = (
 
     if (isTimeFinished(contract) && !isContractTermNotFulfilled(contract)) {
         if (
-            isStatusActive(contract) ||
-            (isStatusTerminated(contract) &&
-                contract.term_initiator !== account)
+            !contract.deleted_at &&
+            (isStatusActive(contract) ||
+                (isStatusTerminated(contract) &&
+                    contract.term_initiator !== account))
         ) {
             return {
                 value: ContractStates.waitingForAction,
