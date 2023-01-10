@@ -24,7 +24,6 @@ import {
     searchBy,
     getAreasEffect,
     AreasDto,
-    LayerDepth,
 } from 'entities/smartcontract';
 
 export const MiningPageGate = createGate<{ searchParam: string }>(
@@ -129,18 +128,10 @@ export const $dmeAmountEstimate = combine(
         if (contractor && miningArea) {
             const estMiningPowerMin = contractor.params.est_mining_power_min;
             const estMiningPowerMax = contractor.params.est_mining_power_max;
-            const currentLayerDepth = contractor.params.layer_depth;
-            const currentLayer = `layer_${
-                currentLayerDepth as LayerDepth
-            }` as const;
-            const { amount_capacity, current_amount } =
-                miningArea[currentLayer];
-            const dmeFullnessPercent =
-                Number(current_amount) / Number(amount_capacity);
 
             return {
-                min: getDmeAmount(estMiningPowerMin * dmeFullnessPercent),
-                max: getDmeAmount(estMiningPowerMax * dmeFullnessPercent),
+                min: getDmeAmount(estMiningPowerMin),
+                max: getDmeAmount(estMiningPowerMax),
             };
         }
 
