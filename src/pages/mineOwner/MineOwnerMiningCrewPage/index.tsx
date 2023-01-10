@@ -12,13 +12,13 @@ export const MineOwnerMiningCrewPage: FC = () => {
             title={t('pages.contractorStatsAndInfo.mineCrew').toUpperCase()}
             tabs={[
                 {
-                    key: 0,
+                    key: 'mineOwnerCrew',
                     children: accountName ? (
                         <MineOwnerCrew />
                     ) : (
                         <div>{t('components.common.noData')}</div>
                     ),
-                    tab: 'Mine crew',
+                    label: 'Mine crew',
                 },
             ]}
         />

@@ -149,7 +149,7 @@ export const MiningAndClaimButton: FC<Props> = memo(
                     onCancel={hideClaimModal}
                     okText={okText}
                     okButtonProps={{ disabled: !contractor?.finished }}
-                    visible={claimModalVisibility}
+                    open={claimModalVisibility}
                     title={t('pages.mining.miningFinishedSuccessfully')}
                 >
                     {isClaimedState ? (

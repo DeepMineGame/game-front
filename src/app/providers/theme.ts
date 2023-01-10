@@ -7,13 +7,14 @@ const neutral4 = '#303030';
 const neutral1 = '#141414';
 const neutral2 = '#1D1D1D';
 const gold6 = '#D89614';
+
 const primary6 = '#F5C913';
 const primary5 = '#CCA500';
 const neutral7 = '#7D7D7D';
 
-module.exports = {
+export const theme = {
     // button
-    '@btn-danger-bg': '#A61D24',
+    '@btn-danger-bg': '#A61D24', // -
     '@btn-danger-color': '#FFFFFF',
     '@btn-text-shadow': 'none',
     '@btn-primary-color': neutral1,
@@ -38,8 +39,8 @@ module.exports = {
     '@btn-padding-horizontal-sm': '8px',
 
     // alert
-    '@alert-info-border-color': '#7B6300',
-    '@alert-info-bg-color': '#3D3100',
+    '@alert-info-border-color': '#7B6300', // +
+    '@alert-info-bg-color': '#3D3100', // +
 
     '@alert-warning-border-color': '#594214',
     '@alert-warning-bg-color': '#2B2111',
@@ -115,42 +116,42 @@ module.exports = {
     '@heading-3-size': '20px',
     '@heading-4-size': '16px',
     '@heading-5-size': '12px',
-    '@heading-color': '#FFFFFF',
-    '@font-family': '"Bai Jamjuree", sans-serif',
+    '@heading-color': '#FFFFFF', // +
+    '@font-family': '"Bai Jamjuree", sans-serif', // +
 
     // modal
     '@modal-close-color': neutral7,
-    '@modal-header-border-color-split': neutral4,
     '@icon-color-hover': primary5,
 
     // should be in the end
     // base
-    '@green-6': '#47FF40',
-    '@primary-color': '#F5C913',
-    '@primary-color-hover': primary5,
-    '@primary-color-active': '#FFD93E',
+    '@green-6': '#47FF40', // +
+    '@primary-color': '#F5C913', // +
+    '@primary-color-hover': primary5, // +
+    '@primary-color-active': '#FFD93E', // +
     '@height-base': '32px',
     '@height-lg': '40px',
     '@height-sm': '24px',
     '@component-background': neutral1,
-    '@border-color-base': '#434343',
-    '@text-color': '#DBDBDB',
-    '@text-color-secondary': '#FFFFFF',
-    '@disabled-bg': neutral3Color,
-    '@disabled-color': '#5A5A5A',
-    '@error-color': '#D32029',
-    '@item-hover-bg': '#3D3100',
-    '@error-color-hover': '#A61D24',
-    '@error-color-active': '#D32029',
-    '@error-color-outline': 'rgba(245, 34, 45, 0.5)',
-    '@warning-color-hover': gold6,
-    '@warning-color-active': '#AA7714',
-    '@warning-color-outline': 'rgba(250, 173, 20, 0.5)',
-    '@outline-blur-size': '4px',
-    '@outline-width': '0',
-    '@primary-color-outline': 'rgba(24, 144, 255, 0.5)',
-    '@theme': 'variable',
-    '@border-color-split': 'transparent',
+    '@border-color-base': '#434343', // +
+    '@text-color': '#DBDBDB', // +
+    '@text-color-secondary': '#FFFFFF', // +
+    '@disabled-bg': neutral3Color, // +
+    '@disabled-color': '#5A5A5A', // +
+    '@error-color': '#D32029', // -
+    '@item-hover-bg': '#3D3100', // +
+    '@error-color-hover': '#A61D24', // -
+    '@error-color-active': '#D32029', // -
+    '@error-color-outline': 'rgba(245, 34, 45, 0.5)', // -
+    '@warning-color-hover': gold6, // +
+    '@warning-color-active': '#AA7714', // +
+    '@warning-color-outline': 'rgba(250, 173, 20, 0.5)', // +
+    '@outline-blur-size': '4px', // -
+    '@outline-width': '0', // -
+    '@primary-color-outline': 'rgba(24, 144, 255, 0.5)', // -
+    '@theme': 'variable', // -
+    '@border-color-split': 'transparent', // -
+    // -
     '@shadow-2':
         '0 9px 28px 8px rgba(0, 0, 0, 0.05), 0 6px 16px rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12)',
 };

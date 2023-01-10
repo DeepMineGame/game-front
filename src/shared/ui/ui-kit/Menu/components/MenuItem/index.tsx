@@ -7,13 +7,11 @@ type Props = {
     icon: ReactNode;
     disabled?: boolean;
     onClick?: MouseEventHandler;
-    type?: ButtonType;
     ghost?: boolean;
     tooltipText?: string;
 };
 
 export const MenuItem: FC<Props> = ({
-    type = 'ghost',
     ghost = false,
     icon,
     disabled,
@@ -22,7 +20,6 @@ export const MenuItem: FC<Props> = ({
 }) => {
     const button = (
         <Button
-            type={type}
             size="large"
             onClick={onClick}
             icon={icon}

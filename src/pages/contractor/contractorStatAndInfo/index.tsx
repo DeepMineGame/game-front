@@ -17,10 +17,10 @@ import {
 import { Role } from 'entities/gameStat';
 
 enum StatsAndInfoTab {
-    miningStats,
-    mineAreaInfo,
-    mineCrew,
-    contract,
+    miningStats = 'miningStats',
+    mineAreaInfo = 'mineAreaInfo',
+    mineCrew = 'mineCrew',
+    contract = 'contract',
 }
 export const ContractorStatsAndInfoPage: FC = () => {
     const { t } = useTranslation();
@@ -43,12 +43,12 @@ export const ContractorStatsAndInfoPage: FC = () => {
                 {
                     key: StatsAndInfoTab.miningStats,
                     children: <MiningStats stats={mineOwnerStats} />,
-                    tab: t(`pages.contractorStatsAndInfo.miningStats`),
+                    label: t(`pages.contractorStatsAndInfo.miningStats`),
                 },
                 {
                     key: StatsAndInfoTab.mineAreaInfo,
                     children: <MineAreaInfo />,
-                    tab: t(`pages.contractorStatsAndInfo.mineAreaInfo`),
+                    label: t(`pages.contractorStatsAndInfo.mineAreaInfo`),
                 },
                 {
                     key: StatsAndInfoTab.contract,
@@ -57,12 +57,12 @@ export const ContractorStatsAndInfoPage: FC = () => {
                     ) : (
                         <div>{t('components.common.noData')}</div>
                     ),
-                    tab: t(`pages.contractorStatsAndInfo.contract`),
+                    label: t(`pages.contractorStatsAndInfo.contract`),
                 },
                 {
                     key: StatsAndInfoTab.mineCrew,
                     children: <MineCrew />,
-                    tab: t(`pages.contractorStatsAndInfo.mineCrew`),
+                    label: t(`pages.contractorStatsAndInfo.mineCrew`),
                 },
             ]}
             documentTitleScope="Contractor"

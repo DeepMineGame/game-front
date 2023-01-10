@@ -1,6 +1,5 @@
 // import i18n (needs to be bundled ;))
 import './index.i18n';
-import './app.less';
 import axios, { AxiosError } from 'axios';
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';

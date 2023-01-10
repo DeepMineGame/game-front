@@ -1,8 +1,8 @@
-import { FC, MouseEventHandler } from 'react';
+import React, { FC } from 'react';
 import { Button as ButtonAnt, ButtonProps } from 'antd';
 
 type Props = {
-    onClick?: MouseEventHandler;
+    onClick?: any;
 } & ButtonProps;
 
 export const Button: FC<Props> = ({ children, onClick, ...props }) => {

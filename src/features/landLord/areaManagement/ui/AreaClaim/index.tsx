@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
-import { Badge } from 'antd';
+import { Badge, ConfigProvider } from 'antd';
 
 import {
     Button,
@@ -14,6 +14,8 @@ import {
     showSuccessModal,
     getDmeAmount,
     ModalWithTable,
+    neutral1,
+    neutral9,
 } from 'shared';
 import { useSmartContractAction } from 'features/hooks';
 import {
@@ -115,23 +117,15 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
                 </Button>
             </div>
 
-            <div className={styles.engageContainer}>
-                {isActive ? (
-                    <Button
-                        type="ghost"
-                        onClick={() => setIsModalUnengageVisible(true)}
-                    >
-                        {t('pages.areaManagement.unengage')}
-                    </Button>
-                ) : (
-                    <Button
-                        type="ghost"
-                        onClick={() => setIsModalActionVisible(true)}
-                    >
-                        {t('pages.areaManagement.engage')}
-                    </Button>
-                )}
-            </div>
+            {isActive ? (
+                <Button ghost onClick={() => setIsModalUnengageVisible(true)}>
+                    {t('pages.areaManagement.unengage')}
+                </Button>
+            ) : (
+                <Button ghost onClick={() => setIsModalActionVisible(true)}>
+                    {t('pages.areaManagement.engage')}
+                </Button>
+            )}
 
             <ExclamationModal
                 visible={isModalUnengageVisible}

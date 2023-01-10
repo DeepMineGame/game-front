@@ -23,7 +23,11 @@ export const CityPage: FC = () => {
         <div className={styles.homeScreen}>
             <Header />
             <div onClick={() => navigate(wasteland)} className={styles.mine}>
-                <Title level={5} className={styles.mineOwnerTitle}>
+                <Title
+                    fontFamily="orbitron"
+                    level={5}
+                    className={styles.mineOwnerTitle}
+                >
                     {t('pages.home.mineOwnerCabin')}
                 </Title>
                 {(isUserLocation.mine || isUserLocation.mineDeck) && (
@@ -33,7 +37,11 @@ export const CityPage: FC = () => {
             <Space>
                 <div className={styles.hive} onClick={() => navigate(hive)}>
                     {isUserLocation.hive && <UserLocator />}
-                    <Title className={styles.enterLink} level={5}>
+                    <Title
+                        fontFamily="orbitron"
+                        className={styles.enterLink}
+                        level={5}
+                    >
                         {t('pages.home.hive')}
                     </Title>
                 </div>
@@ -42,7 +50,11 @@ export const CityPage: FC = () => {
                     onClick={() => navigate(landLord)}
                 >
                     {isUserLocation.landlordReception && <UserLocator />}
-                    <Title className={styles.enterLink} level={5}>
+                    <Title
+                        fontFamily="orbitron"
+                        className={styles.enterLink}
+                        level={5}
+                    >
                         {t('pages.home.landlordCabin')}
                     </Title>
                 </div>
@@ -51,6 +63,7 @@ export const CityPage: FC = () => {
                     onClick={() => navigate(serviceMarket)}
                 >
                     <Title
+                        fontFamily="orbitron"
                         level={5}
                         className={cn(
                             styles.enterLink,
@@ -63,7 +76,11 @@ export const CityPage: FC = () => {
             </Space>
             <div className={styles.engineer} onClick={() => navigate(engineer)}>
                 {isUserLocation.engineersWorkshop && <UserLocator />}
-                <Title level={5} className={styles.enterLink}>
+                <Title
+                    fontFamily="orbitron"
+                    level={5}
+                    className={styles.enterLink}
+                >
                     {t('pages.home.engineers')}
                 </Title>
             </div>

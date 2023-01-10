@@ -5,14 +5,13 @@ import {
     Title,
     useAccountName,
     useMediaQuery,
-    Text,
     Link,
     CityOutlined,
 } from 'shared';
 import { LeftOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { city } from 'app/router/paths';
-import { Space } from 'antd';
+import { Space, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 import { $isBlockchainConnectionUnstable, BlockchainLoader } from 'features';
@@ -41,9 +40,9 @@ export const Header: FC<Props> = ({ title }) => {
                             height={32}
                             className={styles.cityIcon}
                         />
-                        <Text type="secondary" strong fontFamily="bai">
+                        <Typography.Text strong>
                             {t('components.common.city')}
-                        </Text>
+                        </Typography.Text>
                     </Space>
                 </Link>
                 {title && !isDesktop && (

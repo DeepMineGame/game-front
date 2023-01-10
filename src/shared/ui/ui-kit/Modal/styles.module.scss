@@ -17,21 +17,3 @@
     top: 100px;
   }
 }
-
-// FIXME: THIS PLACE SHOULD BE FIXED URGENT!!!
-.modalWrapper {
-  div, svg {
-    background: $color-neutral-neutral-2;
-    border-color: $color-neutral-neutral-4;
-    color: $color-neutral-neutral-9
-  }
-}
-
-// FIXME: THIS PLACE SHOULD BE FIXED URGENT!!!
-.simpleModal {
-  div, .simpleModalTitle {
-    font-family: $bai;
-    background: $color-neutral-neutral-2;
-    color: $color-neutral-neutral-9 !important;
-  }
-}

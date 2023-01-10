@@ -17,6 +17,7 @@ export const Wasteland = () => {
             <Header />
             <div className={styles.city} onClick={() => navigate(city)}>
                 <Title
+                    fontFamily="orbitron"
                     className={cn(styles.cityTitle, styles.enterLink)}
                     level={5}
                 >
@@ -29,6 +30,7 @@ export const Wasteland = () => {
             >
                 {isUserLocation.mineDeck && <UserLocator center />}
                 <Title
+                    fontFamily="orbitron"
                     className={cn(styles.mineDeckLink, styles.enterLink)}
                     level={5}
                 >
@@ -41,6 +43,7 @@ export const Wasteland = () => {
             >
                 {isUserLocation.mine && <UserLocator center />}
                 <Title
+                    fontFamily="orbitron"
                     className={cn(styles.mineTitle, styles.enterLink)}
                     level={5}
                 >

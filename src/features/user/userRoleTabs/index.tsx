@@ -1,16 +1,9 @@
 import { FC } from 'react';
 import { useStore, useGate } from 'effector-react';
 import { useTranslation } from 'react-i18next';
-import { Empty, Space, Tooltip } from 'antd';
+import { Empty, Space, Tabs, Tooltip } from 'antd';
 import { ShareAltOutlined } from '@ant-design/icons';
-import {
-    Button,
-    desktopS,
-    Tabs,
-    Title,
-    useMediaQuery,
-    useUserRoles,
-} from 'shared';
+import { Button, desktopS, Title, useMediaQuery, useUserRoles } from 'shared';
 import {
     rolesStore,
     smartContractUserStore,
@@ -66,8 +59,8 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
             tabPosition={isDesktop ? 'right' : 'top'}
             items={[
                 {
-                    tab: t('roles.citizen'),
-                    key: UserRoles.citizen,
+                    label: t('roles.citizen'),
+                    key: String(UserRoles.citizen),
                     children: (
                         <>
                             {userLine}
@@ -76,8 +69,8 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
                     ),
                 },
                 {
-                    tab: t('roles.landlord'),
-                    key: UserRoles.landlord,
+                    label: t('roles.landlord'),
+                    key: String(UserRoles.landlord),
                     disabled: !userRoles.isLandlord,
                     children: (
                         <>
@@ -87,8 +80,8 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
                     ),
                 },
                 {
-                    tab: t('roles.mineowner'),
-                    key: UserRoles.mine_owner,
+                    label: t('roles.mineowner'),
+                    key: String(UserRoles.mine_owner),
                     disabled: !userRoles.isMineOwner,
                     children: (
                         <>
@@ -98,8 +91,8 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
                     ),
                 },
                 {
-                    tab: t('roles.contractor'),
-                    key: UserRoles.contractor,
+                    label: t('roles.contractor'),
+                    key: String(UserRoles.contractor),
                     disabled: !userRoles.isContractor,
                     children: (
                         <>

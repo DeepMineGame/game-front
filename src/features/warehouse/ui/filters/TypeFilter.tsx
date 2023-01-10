@@ -1,6 +1,6 @@
 import { useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
-import { Tabs as TabsComponent } from 'shared';
+import { Tabs } from 'antd';
 import { InventoryType } from 'entities/smartcontract';
 
 import { $allTypes } from '../../model/filter';
@@ -36,13 +36,15 @@ export const TypeFilter = ({
     const tabList = useStore($allTypes);
 
     return (
-        <TabsComponent
+        <Tabs
             activeKey={activeTab?.toString()}
             className={className}
             onChange={(selected) => onChange?.(+selected)}
             items={tabList.map((tab) => ({
-                key: tab,
-                tab: t(`components.common.inventoryTypes.${tabNamesMap[tab]}`),
+                key: String(tab),
+                label: t(
+                    `components.common.inventoryTypes.${tabNamesMap[tab]}`
+                ),
                 children: null,
                 disabled: isDisabled,
             }))}

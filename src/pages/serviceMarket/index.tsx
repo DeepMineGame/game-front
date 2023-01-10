@@ -29,22 +29,22 @@ export const ServiceMarketPage: FC = () => {
                 {
                     key: ServiceMarketTabIds.contractor,
                     children: accountName ? <ContractorTab /> : <Skeleton />,
-                    tab: t('pages.serviceMarket.contract.contractor'),
+                    label: t('pages.serviceMarket.contract.contractor'),
                 },
                 {
                     key: ServiceMarketTabIds.mineOwner,
                     children: <MineOwnerTab />,
-                    tab: t('roles.mineowner'),
+                    label: t('roles.mineowner'),
                 },
                 {
                     key: ServiceMarketTabIds.landLord,
                     children: <LandlordTab />,
-                    tab: t('roles.landlord'),
+                    label: t('roles.landlord'),
                 },
                 {
                     key: ServiceMarketTabIds.levelUpgrade,
                     children: <EngineerTab />,
-                    tab: t('roles.engineer'),
+                    label: t('roles.engineer'),
                 },
             ]}
         />

@@ -7,8 +7,14 @@ import {
     useReloadPage,
     useRepair,
 } from 'shared';
-import React, { FC, useState, useEffect, useCallback } from 'react';
-import { Col, message, ModalProps, Row, Space, Tooltip } from 'antd';
+import React, {
+    FC,
+    useState,
+    useEffect,
+    useCallback,
+    MouseEventHandler,
+} from 'react';
+import { Button, Col, message, ModalProps, Row, Space, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { createOrder } from 'app/router/paths';
 import { useSmartContractAction } from 'features';
@@ -30,7 +36,6 @@ import { balancesStore } from 'entities/user';
 import { orderFields } from 'entities/order';
 import {
     ActionModal,
-    Button,
     DepreciationProgressBar,
     Link,
     NftProgressBar,
@@ -77,7 +82,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
 
     const accountName = useAccountName();
 
-    const handleSelect = (e: React.MouseEvent<HTMLElement>) => {
+    const handleSelect = (e: React.MouseEvent<any>) => {
         onSelect?.(card);
         if (props.onCancel) {
             props.onCancel(e);

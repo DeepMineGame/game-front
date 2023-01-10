@@ -1,14 +1,14 @@
-import { FC, memo, useCallback, useEffect } from 'react';
+import { FC, memo, ReactNode, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DocumentTitle } from 'app/router/components/DocumentTitle';
-import { Empty, TabsProps } from 'antd';
+import { Empty, Tabs, TabsProps } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'shared';
 import { useLocation } from 'react-router';
-import { Page, Tab, Tabs } from '../../ui-kit';
+import { Page } from '../../ui-kit';
 
 type Props = {
-    tabs: Tab[];
+    tabs: { key: string; children: ReactNode; label: string }[];
     documentTitleScope?: string;
     title?: string;
     className?: string;
@@ -40,12 +40,7 @@ export const PageWithTabs: FC<Props> = memo(
             navigate,
         ]);
 
-        const selectedTabData = tabs.find((tab) => tab.key === Number(tabId));
-
-        useEffect(() => {
-            navigateToTab(tabId || '0', true);
-            // eslint-disable-next-line react-hooks/exhaustive-deps
-        }, []);
+        const selectedTabData = tabs.find((tab) => tab.key === tabId);
 
         return (
             <Page
@@ -60,13 +55,13 @@ export const PageWithTabs: FC<Props> = memo(
                         title={`${
                             documentTitleScope ? `${documentTitleScope} / ` : ''
                         } Stats and Info / ${
-                            selectedTabData?.tab || ''
+                            selectedTabData?.label || ''
                         } — DeepMine`}
                     />
                 )}
                 {tabs?.length ? (
                     <Tabs
-                        activeKey={tabId!}
+                        activeKey={tabId || tabs[0].key}
                         onChange={handleTabSelect}
                         items={tabs}
                         {...tabProps}
