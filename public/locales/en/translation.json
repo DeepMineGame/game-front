@@ -464,7 +464,7 @@
         "selectRole": "Select role",
         "selectItem": "Select item",
         "fee": "Fee",
-        "feeTooltip": "Between Landlord and Mine Owner, MO is always the one who pays this fee. Between Mine Owner and Contractor, Contractor is always the one who pays this fee.",
+        "feeTooltip": "If during the entire contract, the executor has: x days or more with the output less than: Y executor can be fined and the contract can be terminated with: Penalty",
         "penalty": "Penalty",
         "penaltyHint": "If the performing party violates the terms of the contract or terminates the contract prematurely, the counterparty may charge a fine.",
         "ifDuring": "If during the entire contract, the executor within",
