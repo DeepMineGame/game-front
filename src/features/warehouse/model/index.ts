@@ -20,7 +20,7 @@ const getAtomicAssetsByUserEffect = createEffect(getAtomicAssetsByUser);
 const getInventoryEffect = createEffect<
     { searchParam: string },
     { rows: UserInventoryType[] } | undefined
->(({ searchParam }) => getTableData(getInventoryConfig(searchParam)));
+>(({ searchParam }) => getTableData(getInventoryConfig(searchParam, 10000)));
 
 const $storage = createStore<UserInventoryType[]>([]).on(
     getAtomicAssetsByUserEffect.doneData,
