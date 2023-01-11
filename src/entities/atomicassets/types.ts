@@ -81,4 +81,5 @@ export type AssetDataType = {
     transferred_at_time: string;
     minted_at_block: string;
     minted_at_time: string;
+    broken: 0 | 1;
 };
