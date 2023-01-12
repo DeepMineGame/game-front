@@ -69,7 +69,6 @@ export type UserInventoryType = {
     inv_type: InventoryType;
     level: number;
     equip_type: EquipmentType;
-    broken: number;
     available_from: number;
     schema_type: number;
 };

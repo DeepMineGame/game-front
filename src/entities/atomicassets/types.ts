@@ -61,6 +61,7 @@ export type AssetDataType = {
     data: {
         'DME Mined': number;
         'DME to Upgrade': number;
+        broken: 0 | 1;
         backimg: string;
         description: string;
         img: string;
