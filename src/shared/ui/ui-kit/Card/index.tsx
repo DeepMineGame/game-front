@@ -23,7 +23,7 @@ export enum Status {
 export const getAssetStatus = (
     inventory?: MergedInventoryWithAtomicAssets[number]
 ): Status => {
-    if (inventory?.broken) return Status.broken;
+    if (inventory?.data?.broken) return Status.broken;
     if (inventory?.in_use) return Status.installed;
 
     return Status.notInstalled;
