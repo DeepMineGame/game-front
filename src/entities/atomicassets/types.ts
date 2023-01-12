@@ -61,6 +61,7 @@ export type AssetDataType = {
     data: {
         'DME Mined': number;
         'DME to Upgrade': number;
+        broken: 0 | 1;
         backimg: string;
         description: string;
         img: string;
@@ -81,5 +82,4 @@ export type AssetDataType = {
     transferred_at_time: string;
     minted_at_block: string;
     minted_at_time: string;
-    broken: 0 | 1;
 };
