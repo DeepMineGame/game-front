@@ -360,7 +360,7 @@
         "title": "Characteristics",
         "mineDepth": "Mine Depth",
         "estimatesMiningTime": "Mining Time estimate",
-        "estimatesAmountDME": "DME Amount estimate",
+        "estimatesAmountDME": "Maximum mining capability",
         "equipmentBreakageProbabillity": "Equipment Breakage Probabillity"
       }
     },
