@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import {
     Button,
     getDmeAmount,
@@ -16,8 +16,6 @@ import { useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { calcmining } from 'entities/smartcontract';
 
-const THREE_SECONDS = 3000;
-
 export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
     const { t } = useTranslation();
 
@@ -26,6 +24,7 @@ export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
     const isContractorLoading = useStore(getContractorEffect.pending);
     const calcMining = useSmartContractAction({
         action: calcmining({ waxUser: accountName }),
+        onSignSuccess: () => getContractorEffect({ searchParam: accountName }),
     });
     const timeSpent =
         contractor && contractor.finishes_at - contractor.starts_at;
@@ -34,17 +33,7 @@ export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
         ? (getDmeAmount(dmeToClaim) / 100) * mineOwnerContract.fee_percent
         : 0;
 
-    useEffect(() => {
-        let interval: ReturnType<typeof setInterval>;
-        if (!contractor?.finished) {
-            interval = setInterval(() => {
-                getContractorEffect({ searchParam: accountName });
-            }, THREE_SECONDS);
-        }
-        return () => clearInterval(interval);
-    }, [accountName, contractor?.finished]);
-
-    if (!contractor?.finished && isContractorLoading) {
+    if (isContractorLoading) {
         return <Loader />;
     }
 
