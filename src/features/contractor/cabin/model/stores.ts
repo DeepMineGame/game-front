@@ -77,7 +77,7 @@ export const $isMineDepthChanging = combine(
     $currentMine,
     (currentMine) => currentMine?.[0]?.state === MineState.depth_changing
 );
-export const $generalEquipmentBreakageProbabillity =
+export const $generalEquipmentBreakageProbability =
     $installedMiningEquipments.map((installedMiningEquipments) => {
         const maxProbability = 1;
         // to find generalProbabilityOfNoBreakage, multiply each equipmentProbabilityOfNoBreakage
