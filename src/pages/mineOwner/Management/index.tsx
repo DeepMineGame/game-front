@@ -25,8 +25,7 @@ export const MineManagementPage = () => {
     const mineSubLevelToPercent =
         mine &&
         mine.sublevel > 0 &&
-        (mine.sublevel + 1 / SUB_LEVELS_MAX_AMOUNT) * 100;
-
+        ((mine.sublevel + 1) / SUB_LEVELS_MAX_AMOUNT) * 100;
     return (
         <Page headerTitle={t('pages.mineManagement.title')}>
             {chainAccountName && (
