@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { defaultConfig, ENDPOINT } from 'app/constants';
-import { ContractDto } from 'entities/smartcontract';
+import qs from 'qs';
+import { ContractDto, ContractType } from 'entities/smartcontract';
 
 export enum OrderStatus {
     current = 'current',
@@ -34,6 +35,31 @@ export const getMarketOrders = async (params: GetMarketOrdersParams) => {
         `${ENDPOINT}/statistic/market/orders`,
         {
             params,
+            ...defaultConfig,
+        }
+    );
+
+    return data;
+};
+
+export interface ServiceMarketMyOrdersFilter {
+    user?: string;
+    nickname?: string;
+    offers?: boolean;
+    types?: ContractType[];
+    statuses?: OrderStatus[];
+    order?: string;
+    orderBy?: string;
+}
+
+export const getMyOrders = async (params: ServiceMarketMyOrdersFilter) => {
+    const { data = [] } = await axios.get<ContractDto[]>(
+        `${ENDPOINT}/statistic/market/my_orders`,
+        {
+            params,
+            paramsSerializer: (p) => {
+                return qs.stringify(p, { arrayFormat: 'comma' });
+            },
             ...defaultConfig,
         }
     );
