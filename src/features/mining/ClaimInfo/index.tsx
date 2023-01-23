@@ -10,15 +10,18 @@ import {
     $mineOwnerContracts,
     contractorStore,
     getContractorEffect,
+    MiningPageGate,
     useSmartContractAction,
 } from 'features';
-import { useStore } from 'effector-react';
+import { useStore, useGate } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { calcmining } from 'entities/smartcontract';
 
 const THREE_SECONDS = 3000;
 
 export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
+    useGate(MiningPageGate, { searchParam: accountName });
+
     const { t } = useTranslation();
 
     const contractor = useStore(contractorStore);

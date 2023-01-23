@@ -1,9 +1,16 @@
 import { useTranslation } from 'react-i18next';
-import { PageWithTabs, useAccountName } from 'shared';
-import { LandlordTab, MineOwnerTab, ContractorTab } from 'features';
+import { Page, PageWithTabs, useAccountName } from 'shared';
+import {
+    LandlordTab,
+    MyContracts,
+    MineOwnerTab,
+    ContractorTab,
+    $isPressedMyContracts,
+} from 'features';
 import { Skeleton } from 'antd';
 import { ServiceMarketTabIds } from 'app/router/constants';
 import { FC } from 'react';
+import { useStore } from 'effector-react';
 import { EngineerTab } from 'features/serviceMarket';
 import styles from './styles.module.scss';
 
@@ -13,8 +20,16 @@ export * from './operation';
 export const ServiceMarketPage: FC = () => {
     const accountName = useAccountName();
     const { t } = useTranslation();
+    const isMyContractsPressed = useStore($isPressedMyContracts);
 
-    return (
+    return isMyContractsPressed ? (
+        <Page
+            className={styles.page}
+            headerTitle={t('pages.serviceMarket.myContracts').toUpperCase()}
+        >
+            <MyContracts />
+        </Page>
+    ) : (
         <PageWithTabs
             tabProps={{
                 tabBarExtraContent: {
@@ -24,7 +39,7 @@ export const ServiceMarketPage: FC = () => {
             }}
             className={styles.page}
             defaultDocTitle
-            title={t('pages.serviceMarket.serviceMarket')}
+            title={t('pages.serviceMarket.serviceMarket').toUpperCase()}
             tabs={[
                 {
                     key: ServiceMarketTabIds.contractor,
