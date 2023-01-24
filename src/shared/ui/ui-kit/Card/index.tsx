@@ -7,11 +7,7 @@ import {
     DepreciationProgressBar,
     isUtcDateExpired,
 } from 'shared';
-import {
-    ID_TO_INVENTORY,
-    miningEquipmentNames,
-    UserInventoryType,
-} from 'entities/smartcontract';
+import { ID_TO_INVENTORY, miningEquipmentNames } from 'entities/smartcontract';
 import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
 import { ProgressProps } from '../ProgressBar/NftProgressBar';
 import styles from './styles.module.scss';
@@ -24,8 +20,10 @@ export enum Status {
     notInstalled = 'notInstalled',
 }
 
-export const getAssetStatus = (inventory?: UserInventoryType): Status => {
-    if (inventory?.broken) return Status.broken;
+export const getAssetStatus = (
+    inventory?: MergedInventoryWithAtomicAssets[number]
+): Status => {
+    if (inventory?.data?.broken) return Status.broken;
     if (inventory?.in_use) return Status.installed;
 
     return Status.notInstalled;
@@ -37,7 +35,7 @@ export type CardProps = {
     onButtonClick?: () => void;
     onClick?: (e: any) => void;
     className?: string;
-    inventory?: MergedInventoryWithAtomicAssets[number] | UserInventoryType;
+    inventory?: MergedInventoryWithAtomicAssets[number];
     onRepairFinish?: () => void;
     withDepreciationBar?: boolean;
     showCardBadgeStatus: boolean;
