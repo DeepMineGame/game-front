@@ -5,7 +5,7 @@ import { useAccountName } from 'shared';
 import {
     $currentMine,
     $dmeAmountEstimate,
-    $generalEquipmentBreakageProbabillity,
+    $generalEquipmentBreakageProbability,
     $isNotFullEquipmentsSet,
     estimatesMiningTimeStore,
     MiningPageGate,
@@ -23,7 +23,7 @@ export const Characteristics = () => {
     const estTime = useStore(estimatesMiningTimeStore);
     const mineStore = useStore($currentMine);
     const equipmentBreakageProbabillity = useStore(
-        $generalEquipmentBreakageProbabillity
+        $generalEquipmentBreakageProbability
     );
     const dmeAmountEstimate = useStore($dmeAmountEstimate);
     const isNotFullEquipmentsSet = useStore($isNotFullEquipmentsSet);

@@ -46,14 +46,6 @@
   max-width: 250px;
 }
 
-.formField {
-  :global {
-    .ant-form-item-label > label, .ant-form-item-tooltip {
-      color: $color-neutral-neutral-8 !important;
-    }
-  }
-}
-
 .tooltipCard {
   background: $color-neutral-neutral-1;
   border: 1px solid $color-neutral-neutral-5;
@@ -70,4 +62,8 @@
       border: 1px solid $color-neutral-neutral-5;
     }
   }
+}
+
+.inputNumber {
+  width: 100%;
 }

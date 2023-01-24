@@ -1,33 +1,21 @@
 import { PlusOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import { Button, Col, Row, Space } from 'antd';
 import { createOrder } from 'app/router/paths';
-import { FC, ReactNode, useCallback } from 'react';
+import { FC, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { useStore } from 'effector-react';
-import { useAccountName } from 'shared';
-import { OrderStatus } from 'entities/gameStat';
-import { changeFilterEvent, filterStore } from '../../contractor-table/model';
+
+import { $isPressedMyContracts, setIsPressedMyContracts } from '../../models';
 
 export const TabGrid: FC<{ filters: ReactNode; table: ReactNode }> = ({
     filters,
     table,
 }) => {
-    const accountName = useAccountName();
-
     const navigate = useNavigate();
     const { t } = useTranslation();
-    const filter = useStore(filterStore);
-    const setMyContractsFilter = useCallback(
-        (statuses?: OrderStatus) => {
-            changeFilterEvent({
-                ...filter,
-                statuses,
-                user: filter?.user ? undefined : accountName,
-            });
-        },
-        [accountName, filter]
-    );
+    const isPressedMyContracts = useStore($isPressedMyContracts);
+
     return (
         <Row gutter={[0, 18]}>
             <Col span={24}>
@@ -38,13 +26,11 @@ export const TabGrid: FC<{ filters: ReactNode; table: ReactNode }> = ({
                             type="primary"
                             ghost
                             icon={<UnorderedListOutlined />}
-                            onClick={() =>
-                                setMyContractsFilter(
-                                    filter.user ? OrderStatus.new : undefined
-                                )
-                            }
+                            onClick={() => setIsPressedMyContracts()}
                         >
-                            {filter.user ? 'Service market' : 'My contracts'}
+                            {isPressedMyContracts
+                                ? t('pages.serviceMarket.serviceMarket')
+                                : t('pages.serviceMarket.myContracts')}
                         </Button>
                         <Button
                             type="primary"

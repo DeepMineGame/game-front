@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { Card, Form, Input as InputA, Space } from 'antd';
-import { Button, Input, Select, getLabelSelectItem } from 'shared';
+import { Card, Form, Input as InputA, InputNumber, Space } from 'antd';
+import { Button, Select, getLabelSelectItem } from 'shared';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import { orderFields } from 'entities/order';
@@ -43,6 +43,7 @@ export const ContractorInformation: FC<GeneralInformationStepProps> = ({
                     name={orderFields.feePercent}
                     label={t('pages.serviceMarket.createOrder.fee')}
                     className={cn(styles.formField, localStyles.feeInput)}
+                    initialValue={10}
                     tooltip={
                         <Card
                             title={t('pages.serviceMarket.createOrder.fee')}
@@ -52,7 +53,14 @@ export const ContractorInformation: FC<GeneralInformationStepProps> = ({
                         </Card>
                     }
                 >
-                    <Input placeholder="%" />
+                    <InputNumber
+                        defaultValue={10}
+                        placeholder="%"
+                        type="number"
+                        min={10}
+                        controls={false}
+                        className={styles.inputNumber}
+                    />
                 </Form.Item>
                 <Form.Item
                     name={orderFields.contractDuration}

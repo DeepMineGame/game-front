@@ -31,10 +31,9 @@ export const isContractTermNotFulfilled = (contract: ContractDto) => {
     if (!Number(penalty_amount)) return false;
     if (!days_for_penalty) return false;
 
-    const currentTime = Date.now();
-    const finishesAt = finishes_at * 1000;
-    const finishTime = finishesAt < currentTime ? finishesAt : currentTime;
-    const daysPassed = (finishTime - start_time * 1000) / DAY_IN_SECONDS;
+    const currentTime = getNowInSeconds();
+    const finishTime = finishes_at < currentTime ? finishes_at : currentTime;
+    const daysPassed = (finishTime - start_time) / DAY_IN_SECONDS;
 
     const missedDays = getMissedDays(
         fee_days,

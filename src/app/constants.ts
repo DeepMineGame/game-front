@@ -18,7 +18,7 @@ export const WAX_CHAIN_ID = isMainNet
 
 export const WAX_RPC_ENDPOINTS_HOST = isMainNet
     ? 'node-prod-01.deepmine.world'
-    : 'wax-test.blokcrafters.io';
+    : 'node.deepmine.world';
 
 export const WAX_RPC_ENDPOINTS_PROTOCOL = 'https';
 
@@ -46,6 +46,7 @@ const defaultEndpoints = {
               'https://wax.pink.gg',
           ]
         : [
+              'https://node.deepmine.world',
               'https://testnet-wax.3dkrender.com',
               'https://waxtestnet.greymass.com',
               'https://wax-test.blokcrafters.io',

@@ -442,7 +442,10 @@
       }
     },
     "serviceMarket": {
-      "serviceMarket": "SERVICE MARKET",
+      "currentContracts": "Current contracts",
+      "personalContracts": "Personal contracts",
+      "serviceMarket": "Service market",
+      "myContracts": "My contracts",
       "miningContracts": "Mining contracts",
       "mineOperation": "Mine operation",
       "levelUpgradeOrder": "Level upgrade order",
@@ -463,7 +466,7 @@
         "selectToDisable": "Select contract type to disable",
         "selectRole": "Select role",
         "selectItem": "Select item",
-        "fee": "Fee",
+        "fee": "Fee (min 10%)",
         "feeTooltip": "If during the entire contract, the executor has: x days or more with the output less than: Y executor can be fined and the contract can be terminated with: Penalty",
         "penalty": "Penalty",
         "penaltyHint": "If the performing party violates the terms of the contract or terminates the contract prematurely, the counterparty may charge a fine.",
