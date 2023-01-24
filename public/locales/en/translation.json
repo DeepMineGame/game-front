@@ -466,7 +466,7 @@
         "selectToDisable": "Select contract type to disable",
         "selectRole": "Select role",
         "selectItem": "Select item",
-        "fee": "Fee",
+        "fee": "Fee (min 10%)",
         "feeTooltip": "Between Landlord and Mine Owner, MO is always the one who pays this fee. Between Mine Owner and Contractor, Contractor is always the one who pays this fee.",
         "penalty": "Penalty",
         "penaltyHint": "If the performing party violates the terms of the contract or terminates the contract prematurely, the counterparty may charge a fine.",
