@@ -20,7 +20,6 @@ export const MyContracts: FC = () => {
     const accountName = useAccountName();
     const defaultFilterValue = useMemo(
         () => ({
-            offers: true,
             user: accountName,
         }),
         [accountName]
@@ -34,7 +33,7 @@ export const MyContracts: FC = () => {
             if (type === ContractsType.current) {
                 return changeMyContractsFilterEvent(defaultFilterValue);
             }
-            changeMyContractsFilterEvent({ user: accountName });
+            changeMyContractsFilterEvent({ user: accountName, offers: true });
         },
         [accountName, defaultFilterValue]
     );
