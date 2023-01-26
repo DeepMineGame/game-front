@@ -474,7 +474,7 @@
         "contractorFined": "executor can be fined and the contract can be terminated with",
         "willExtractLessThan": "will extract less than",
         "miningTerms": "Mining terms",
-        "miningTermsHint": "If during the entire period of the contract, within the specified number of days, less than the specified amount of DME was extracted, the other party has the right to terminate the contract and collect a penalty",
+        "miningTermsHint": "The % of claimed DME mine owners get from contractors OR landlords get from mine owners",
         "startOfOperation": "Start of operation",
         "effectiveDate": "Effective date",
         "startOfOperationTooltip": "The date when agreement or transaction becomes binding",
