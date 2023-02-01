@@ -6,16 +6,19 @@ export const getMissedDays = (
     daysPassed: number,
     feeDailyMinAmount: number
 ) => {
-    return [...Array(Math.floor(daysPassed)).keys()].reduce((penalty, day) => {
-        const workDay = feeDays[day]?.key;
+    return [...Array(Math.floor(Math.abs(daysPassed))).keys()].reduce(
+        (penalty, day) => {
+            const workDay = feeDays[day]?.key;
 
-        if (!feeDays[day]) penalty++;
-        if (workDay > day) penalty++;
-        if (workDay === day && feeDays[day]?.value < feeDailyMinAmount)
-            penalty++;
+            if (!feeDays[day]) penalty++;
+            if (workDay > day) penalty++;
+            if (workDay === day && feeDays[day]?.value < feeDailyMinAmount)
+                penalty++;
 
-        return penalty;
-    }, 0);
+            return penalty;
+        },
+        0
+    );
 };
 
 export const isContractTermNotFulfilled = (contract: ContractDto) => {
