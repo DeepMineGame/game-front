@@ -1,3 +1,5 @@
+import { RarityType } from '../inventories';
+
 export enum AreaRarity {
     rockFields,
     spaceDebris,
@@ -26,7 +28,7 @@ export type AreasDto = {
     init_id: number;
     fee_to_claim: number;
     initialized: boolean;
-    rarity: AreaRarity;
+    rarity: RarityType;
     owner: string;
     mine_slots: MineSlots;
 } & Record<
