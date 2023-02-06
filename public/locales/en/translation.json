@@ -81,7 +81,8 @@
       "table": {
         "table": "Table",
         "addNewContractor": "Add new contractor",
-        "openNewMine": "Open new mine spot"
+        "openNewMine": "Open new mine spot",
+        "afterGeologRelease": "New slots can be opened after \"Geolog role\" realize"
       },
       "graph": "Graph",
       "current": "Current",

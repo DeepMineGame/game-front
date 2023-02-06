@@ -3,33 +3,46 @@ import React, { FC, useState } from 'react';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 
-import { AddItem, DiscoverItem, SearchingItem } from 'shared';
+import { AddItem, DiscoverItem, SearchingItem, useAccountName } from 'shared';
 import { useGate, useStore } from 'effector-react';
-import { ContractDto, MineDto, MineState } from 'entities/smartcontract';
+import {
+    AreasDto,
+    ContractDto,
+    MineDto,
+    MineState,
+    RarityType,
+} from 'entities/smartcontract';
 import { AreaManagementTableContent } from '../AreaManagementTableContent';
 import { AddMineOwnerModal } from '../AddMineOwnerModal';
 import { Activity, MineCrewDataType } from '../../types';
 import { AreaGate, minesForAreaSlots } from '../../model';
 import styles from './styles.module.scss';
 
-const emptySlotsCount = 5;
-const discoverSlotsCount = 2;
-
 type Props = {
     disabled?: boolean;
-    accountName: string;
     ownContracts: ContractDto[];
     selfSignedContracts: ContractDto[];
+    area: AreasDto;
 };
 const getMineCrewContractors = (mine: MineDto) =>
     mine.contractor_slots.filter((v) => v.contractor.length > 0).length;
 
+const rarityDiscoverSlotsAmount = {
+    [RarityType.undefined]: 0,
+    [RarityType.uncommon]: 3,
+    [RarityType.common]: 3,
+    [RarityType.rare]: 3,
+    [RarityType.epic]: 4,
+    [RarityType.legendary]: 5,
+};
+
 export const AreaManagementTable: FC<Props> = ({
     disabled,
-    accountName,
     ownContracts,
     selfSignedContracts,
+    area,
 }) => {
+    const accountName = useAccountName();
     const { t } = useTranslation();
     useGate(AreaGate, { searchParam: accountName });
     const [isAddModalVisible, setIsAddModalVisible] = useState(false);
@@ -79,7 +92,11 @@ export const AreaManagementTable: FC<Props> = ({
     ));
 
     const emptySlots = [
-        ...new Array(emptySlotsCount - ownContracts.length),
+        ...new Array(
+            area.mine_slots.length -
+                rarityDiscoverSlotsAmount[area.rarity] -
+                ownContracts.length
+        ),
     ].map((_, idx) => (
         <AddItem
             key={idx}
@@ -88,8 +105,9 @@ export const AreaManagementTable: FC<Props> = ({
             text={t('pages.areaManagement.add')}
         />
     ));
-
-    const discoverSlots = [...new Array(discoverSlotsCount)].map((_, idx) => (
+    const discoverSlots = [
+        ...new Array(rarityDiscoverSlotsAmount[area.rarity]),
+    ].map((_, idx) => (
         <DiscoverItem key={idx} className={styles.discoverSlot} />
     ));
 

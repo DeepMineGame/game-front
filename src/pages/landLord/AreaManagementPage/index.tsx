@@ -76,10 +76,10 @@ export const AreaManagementPage = () => {
                     {currentMineSlots}/{maxMineSlots}
                 </span>
             </div>
-            {accountName && (
+            {area?.[0] && (
                 <AreaManagementTable
+                    area={area?.[0]}
                     disabled={!isActive}
-                    accountName={accountName}
                     ownContracts={contractsToSign}
                     selfSignedContracts={selfSignedContracts}
                 />
