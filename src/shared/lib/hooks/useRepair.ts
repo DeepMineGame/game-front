@@ -18,22 +18,22 @@ export const useRepair = () => {
 
         switch (rarity) {
             case rarityMap['1']:
-                percentPivot = 28.5;
+                percentPivot = 26.8;
                 break;
             case rarityMap['2']:
-                percentPivot = 13.72;
+                percentPivot = 11.6;
                 break;
             case rarityMap['3']:
-                percentPivot = 9.46;
+                percentPivot = 8.2;
                 break;
             case rarityMap['4']:
-                percentPivot = 7;
+                percentPivot = 6;
                 break;
             case rarityMap['5']:
-                percentPivot = 4.5;
+                percentPivot = 4;
                 break;
             default:
-                percentPivot = 28.5;
+                percentPivot = 26.8;
         }
         // extra zeros by reducing zeros in dmeToUpgrade
         const percent = isRefurbish ? 3000 : percentPivot * ONE_HUNDRED_PERCENT;
