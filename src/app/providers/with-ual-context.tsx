@@ -26,6 +26,7 @@ export const waxAuthenticators = isMainNet
     ? [anchor, waxCloudWallet, wombat]
     : [anchor];
 
+console.log([...chains, wombat], 111);
 export const withUalContext = (App: React.FC) => () =>
     (
         <UALProvider
