@@ -88,6 +88,16 @@ export const GoogleAuthPage: React.FC<Props> = ({ onSuccess }) => {
                         {t('intro.signInGoogle')}
                     </Button>
                 </div>
+                <div className={styles.onboardingButton}>
+                    <Button
+                        onClick={() => {
+                            window.location.href =
+                                'https://onboarding.deepmine.world';
+                        }}
+                    >
+                        {t('intro.onBoarding')}
+                    </Button>
+                </div>
                 <Alert
                     className={styles.alert}
                     description={
