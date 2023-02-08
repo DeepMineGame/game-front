@@ -261,7 +261,10 @@
       "landlordCabin": "LANDLORDS LOUNGE",
       "engineers": "ENGINEERS WORKSHOP",
       "mineDeck": "MINE DECK",
-      "goToCity": "GO TO CITY"
+      "goToCity": "GO TO CITY",
+      "choseYourStarterPack": "Choose your starting pack",
+      "buyCrate": "Buy the Equipment crate",
+      "buySet": "Buy the Equipment Set"
     },
     "contractor": {
       "signingContract": {
