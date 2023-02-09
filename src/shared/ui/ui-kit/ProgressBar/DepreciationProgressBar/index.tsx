@@ -10,6 +10,7 @@ type DepreciationProgressBarProps = {
     currentCapacity?: AssetDataType['data']['current capacity'];
     maximalCapacity?: AssetDataType['data']['maximal capacity'];
     className?: string;
+    rarity: AssetDataType['data']['rarity'] | undefined;
 };
 
 export const DepreciationProgressBar: FC<DepreciationProgressBarProps> = memo(
@@ -18,6 +19,7 @@ export const DepreciationProgressBar: FC<DepreciationProgressBarProps> = memo(
         currentCapacity = 0,
         maximalCapacity = 0,
         className,
+        rarity,
     }) => {
         const format = () => (
             <div className={styles.info}>
@@ -35,7 +37,11 @@ export const DepreciationProgressBar: FC<DepreciationProgressBarProps> = memo(
         return (
             <Tooltip overlay={t('components.depreciationBar.tooltip')}>
                 <Progress
-                    className={cn(styles.rootDeprecation, className)}
+                    className={cn(
+                        styles.rootDeprecation,
+                        styles[rarity || ''],
+                        className
+                    )}
                     percent={amountOfMiningPercentage}
                     success={{
                         percent: amountOfMiningPercentage + step * amountOfStep,
