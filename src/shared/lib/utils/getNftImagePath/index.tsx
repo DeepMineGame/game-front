@@ -1,8 +1,5 @@
 import { UpgradeKitType } from 'features/engineer';
-import {
-    ENGINEER_CERTIFICATE_ID,
-    InventoryIdType,
-} from 'entities/smartcontract';
+import { InventoryIdType } from 'entities/smartcontract';
 
 const GIF_IMAGES = [492749];
 
@@ -296,7 +293,8 @@ export const TEST_NET_ASSETS_ID_MAP = new Map(
         528152: 619313,
         528153: 619314,
         528154: 619317,
-        [ENGINEER_CERTIFICATE_ID]: ENGINEER_CERTIFICATE_ID,
+        // Engineer Certificate
+        528605: 619715,
         // Mine
         621854: 530681,
         621855: 530682,
@@ -336,15 +334,15 @@ export const TEST_NET_ASSETS_ID_MAP = new Map(
         621890: 530769,
         // Mines
         176451: 314739,
-        624915: 541314,
-        624916: 541315,
-        624917: 541316,
-        624918: 541317,
-        624919: 541318,
-        624920: 541319,
-        624922: 541320,
-        624928: 541321,
-        625019: 541322,
+        541314: 624915,
+        541315: 624916,
+        541316: 624917,
+        541317: 624918,
+        541318: 624919,
+        541319: 624920,
+        541320: 624922,
+        541321: 624928,
+        541322: 625019,
     })
 );
 
