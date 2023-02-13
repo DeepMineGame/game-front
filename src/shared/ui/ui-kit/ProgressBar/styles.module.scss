@@ -1,6 +1,51 @@
 @import "src/shared";
 
-$deprecation-bar-color: linear-gradient(90deg, #6EC005 0%, #A9E301 24.84%, #F1CE18 50.31%, #FF7A00 75.77%, #E70000 100.31%);
+$deprecation-bar-color-Common: linear-gradient(90deg, #6EC005 0%, #A9E301 30%, #F1CE18 60%, #FF7A00 80%, #E70000 100%);
+$deprecation-bar-color-Uncommon: linear-gradient(90deg, #6EC005 0%, #A9E301 35%, #F1CE18 65%, #FF7A00 80%, #E70000 100%);
+$deprecation-bar-color-Rare: linear-gradient(90deg, #6EC005 0%, #A9E301 45%, #F1CE18 60%, #FF7A00 80%, #E70000 100%);
+$deprecation-bar-color-Epic: linear-gradient(90deg, #6EC005 0%, #A9E301 55%, #F1CE18 70%, #FF7A00 85%, #E70000 100%);
+$deprecation-bar-color-Legendary: linear-gradient(90deg, #6EC005 0%, #A9E301 65%, #F1CE18 80%, #FF7A00 90%, #E70000 100%);
+
+.Common {
+  :global {
+    .ant-progress-inner {
+      background: $deprecation-bar-color-Common;
+    }
+  }
+}
+
+.Uncommon {
+  :global {
+    .ant-progress-inner {
+      background: $deprecation-bar-color-Common;
+    }
+  }
+}
+
+.Rare {
+  :global {
+    .ant-progress-inner {
+      background: $deprecation-bar-color-Rare;
+    }
+  }
+}
+
+.Epic {
+  :global {
+    .ant-progress-inner {
+      background: $deprecation-bar-color-Epic;
+    }
+  }
+}
+
+.Legendary {
+  :global {
+    .ant-progress-inner {
+      background: $deprecation-bar-color-Legendary;
+    }
+  }
+}
+
 
 .progress > div > div {
   background-color: $color-neutral-neutral-6;
@@ -39,7 +84,6 @@ $deprecation-bar-color: linear-gradient(90deg, #6EC005 0%, #A9E301 24.84%, #F1CE
   :global {
     .ant-progress-inner {
       overflow: initial;
-      background: $deprecation-bar-color;
     }
 
     .ant-progress-bg {

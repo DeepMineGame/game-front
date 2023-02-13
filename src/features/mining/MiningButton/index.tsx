@@ -24,7 +24,7 @@ import {
     toggleMining,
 } from 'entities/smartcontract';
 import { ClaimInfo } from '../ClaimInfo';
-import { miningContractStore, MiningPageGate } from '../miningModel';
+import { miningContractStore, MiningPageGate } from '../models';
 import { useDisabledState } from '../hooks';
 import styles from './styles.module.scss';
 
