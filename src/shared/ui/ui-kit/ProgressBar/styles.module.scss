@@ -1,15 +1,16 @@
+// stylelint-disable
 @import "src/shared";
 
-$deprecation-bar-color-Common: linear-gradient(90deg, #6EC005 0%, #A9E301 30%, #F1CE18 60%, #FF7A00 80%, #E70000 100%);
-$deprecation-bar-color-Uncommon: linear-gradient(90deg, #6EC005 0%, #A9E301 35%, #F1CE18 65%, #FF7A00 80%, #E70000 100%);
-$deprecation-bar-color-Rare: linear-gradient(90deg, #6EC005 0%, #A9E301 45%, #F1CE18 60%, #FF7A00 80%, #E70000 100%);
-$deprecation-bar-color-Epic: linear-gradient(90deg, #6EC005 0%, #A9E301 55%, #F1CE18 70%, #FF7A00 85%, #E70000 100%);
-$deprecation-bar-color-Legendary: linear-gradient(90deg, #6EC005 0%, #A9E301 65%, #F1CE18 80%, #FF7A00 90%, #E70000 100%);
+$deprecation-bar-color-common: linear-gradient(90deg, #6EC005 0%, #A9E301 30%, #F1CE18 60%, #FF7A00 80%, #E70000 100%);
+$deprecation-bar-color-uncommon: linear-gradient(90deg, #6EC005 0%, #A9E301 35%, #F1CE18 65%, #FF7A00 80%, #E70000 100%);
+$deprecation-bar-color-rare: linear-gradient(90deg, #6EC005 0%, #A9E301 45%, #F1CE18 60%, #FF7A00 80%, #E70000 100%);
+$deprecation-bar-color-epic: linear-gradient(90deg, #6EC005 0%, #A9E301 55%, #F1CE18 70%, #FF7A00 85%, #E70000 100%);
+$deprecation-bar-color-legendary: linear-gradient(90deg, #6EC005 0%, #A9E301 65%, #F1CE18 80%, #FF7A00 90%, #E70000 100%);
 
 .Common {
   :global {
     .ant-progress-inner {
-      background: $deprecation-bar-color-Common;
+      background: $deprecation-bar-color-common;
     }
   }
 }
@@ -17,7 +18,7 @@ $deprecation-bar-color-Legendary: linear-gradient(90deg, #6EC005 0%, #A9E301 65%
 .Uncommon {
   :global {
     .ant-progress-inner {
-      background: $deprecation-bar-color-Common;
+      background: $deprecation-bar-color-uncommon;
     }
   }
 }
@@ -25,7 +26,7 @@ $deprecation-bar-color-Legendary: linear-gradient(90deg, #6EC005 0%, #A9E301 65%
 .Rare {
   :global {
     .ant-progress-inner {
-      background: $deprecation-bar-color-Rare;
+      background: $deprecation-bar-color-rare;
     }
   }
 }
@@ -33,7 +34,7 @@ $deprecation-bar-color-Legendary: linear-gradient(90deg, #6EC005 0%, #A9E301 65%
 .Epic {
   :global {
     .ant-progress-inner {
-      background: $deprecation-bar-color-Epic;
+      background: $deprecation-bar-color-epic;
     }
   }
 }
@@ -41,7 +42,7 @@ $deprecation-bar-color-Legendary: linear-gradient(90deg, #6EC005 0%, #A9E301 65%
 .Legendary {
   :global {
     .ant-progress-inner {
-      background: $deprecation-bar-color-Legendary;
+      background: $deprecation-bar-color-legendary;
     }
   }
 }
