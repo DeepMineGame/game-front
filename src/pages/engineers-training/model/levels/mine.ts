@@ -1,4 +1,4 @@
-import { EngineerSchema } from 'entities/smartcontract';
+import { EngineerSchema, Level } from 'entities/smartcontract';
 import {
     mine1,
     mine2,
@@ -11,7 +11,7 @@ import {
     mine9,
 } from '../../assets';
 import { mineTemplates } from '../templates';
-import { Level, TrainingLevel } from '../types';
+import { TrainingLevel } from '../types';
 
 export const mineLevels: TrainingLevel[] = [
     {

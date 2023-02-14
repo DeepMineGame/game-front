@@ -15,7 +15,7 @@ import { useSmartContractAction } from 'features/hooks';
 import { upgradeLevel } from 'entities/smartcontract';
 
 import {
-    $level,
+    $engineerRoleLevel,
     $xp,
     $levelProgressPercent,
     $nextLevel,
@@ -29,7 +29,7 @@ import styles from './styles.module.scss';
 export const LevelProgress = () => {
     const { t } = useTranslation();
 
-    const level = useStore($level);
+    const level = useStore($engineerRoleLevel);
     const xp = useStore($xp);
     const levelProgressPercent = useStore($levelProgressPercent);
     const nextLevel = useStore($nextLevel);

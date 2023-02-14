@@ -1,7 +1,6 @@
 // eslint-disable-next-line max-classes-per-file
 import { isMainNet } from 'app/constants';
-import { RarityType } from 'entities/smartcontract';
-import { Level } from './types';
+import { Level, RarityType } from 'entities/smartcontract';
 
 type TemplateId = number;
 

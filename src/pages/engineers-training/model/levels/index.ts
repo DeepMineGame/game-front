@@ -1,5 +1,4 @@
-import { EngineerSchema, RarityType } from 'entities/smartcontract';
-import { Level } from '../types';
+import { EngineerSchema, Level, RarityType } from 'entities/smartcontract';
 
 import { equipmentLevels } from './equipment';
 import { mineLevels } from './mine';

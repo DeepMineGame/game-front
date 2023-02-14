@@ -1,4 +1,4 @@
-import { EngineerSchema, RarityType } from 'entities/smartcontract';
+import { EngineerSchema, Level, RarityType } from 'entities/smartcontract';
 import {
     eqGray1,
     eqGray2,
@@ -47,7 +47,7 @@ import {
     eqGold9,
 } from '../../assets';
 import { equipmentTemplates } from '../templates';
-import { Level, TrainingLevel } from '../types';
+import { TrainingLevel } from '../types';
 
 export const equipmentLevels: TrainingLevel[] = [
     {

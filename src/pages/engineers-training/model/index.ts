@@ -4,6 +4,7 @@ import { getTableData } from 'shared';
 import {
     EngineerSkill,
     getInventoryConfig,
+    Level,
     UserInventoryType,
 } from 'entities/smartcontract';
 import {
@@ -14,21 +15,22 @@ import {
     getActionByUserEffect,
     $openSkillAction,
 } from 'entities/engineer';
-import { LearningSkillType, Level, OpenSkillAction, WaxUser } from './types';
+import { LearningSkillType, OpenSkillAction, WaxUser } from './types';
+import { $engineerRole, getRolesEffect } from './engeneerRole';
 
 export const TrainingPageGate = createGate<WaxUser>();
 export const InventoryGate = createGate<WaxUser>();
 
-export const $level = $engineer.map<Level>(
+export const $engineerRoleLevel = $engineerRole.map<Level>(
     (state) => state?.level ?? Level.first
 );
 
-export const $nextLevel = $level.map<Level>((level) => level + 1);
+export const $nextLevel = $engineerRoleLevel.map<Level>((level) => level + 1);
 
 export const $maxLevel = createStore(Level.ninth);
 
 export const $isMaxLevelPassed = combine(
-    $level,
+    $engineerRoleLevel,
     $maxLevel,
     (level, maxLevel) => level === maxLevel
 );
@@ -48,13 +50,17 @@ export const $skillsMapByLevel = $engineer.map((state) =>
     )
 );
 
-export const $xp = $engineer.map((state) => state?.experience ?? 0);
+export const $xp = $engineerRole.map((state) => state?.experience ?? 0);
 
-export const $levelProgressPercent = combine($engineer, $xp, (engineer, xp) => {
-    const xpToNextLevel = engineer?.exp_to_level_up ?? 0;
+export const $levelProgressPercent = combine(
+    $engineerRole,
+    $xp,
+    (engineer, xp) => {
+        const xpToNextLevel = engineer?.exp_to_level_up ?? 0;
 
-    return xpToNextLevel && Math.floor((xp * 100) / xpToNextLevel);
-});
+        return xpToNextLevel && Math.floor((xp * 100) / xpToNextLevel);
+    }
+);
 
 export const $xpHasBeenReached = $levelProgressPercent.map(
     (levelProgressPercent) => levelProgressPercent === 100
@@ -118,7 +124,11 @@ export const $learningSkill = $openSkillAction.map<LearningSkillType | null>(
 sample({
     clock: TrainingPageGate.open,
     fn: ({ account }) => ({ searchParam: account }),
-    target: [getEngineerByExecutorEffect, getActionByUserEffect],
+    target: [
+        getEngineerByExecutorEffect,
+        getActionByUserEffect,
+        getRolesEffect,
+    ],
 });
 
 sample({

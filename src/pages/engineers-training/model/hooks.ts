@@ -1,12 +1,12 @@
 import { useStore } from 'effector-react';
 import { useMemo } from 'react';
-import { EngineerSchema, RarityType } from 'entities/smartcontract';
-import { Level, TrainingNftStatus } from './types';
+import { EngineerSchema, Level, RarityType } from 'entities/smartcontract';
+import { TrainingNftStatus } from './types';
 import { getNftSrc } from './levels';
-import { $learningSkill, $level, $skillsMapByLevel } from '.';
+import { $learningSkill, $engineerRoleLevel, $skillsMapByLevel } from '.';
 
 export const useNft = () => {
-    const currentLevel = useStore($level);
+    const currentLevel = useStore($engineerRoleLevel);
     const skillsMapByLevel = useStore($skillsMapByLevel);
     const learningSkill = useStore($learningSkill);
 
