@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { Header, Title, useUserLocation } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -11,6 +11,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { Space } from 'antd';
 import cn from 'classnames';
+import { StarterPackNotifier, StarterPackOfferModal } from 'features';
 import { UserLocator } from 'entities/user';
 import styles from './styles.module.scss';
 
@@ -67,6 +68,8 @@ export const CityPage: FC = () => {
                     {t('pages.home.engineers')}
                 </Title>
             </div>
+            <StarterPackOfferModal />
+            <StarterPackNotifier />
         </div>
     );
 };

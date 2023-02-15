@@ -1,11 +1,5 @@
-import React, { memo, useEffect } from 'react';
-import {
-    Button,
-    getDmeAmount,
-    getTimeLeft,
-    KeyValueTable,
-    Loader,
-} from 'shared';
+import React, { memo, useEffect, useState } from 'react';
+import { Button, getDmeAmount, getTimeLeft, KeyValueTable } from 'shared';
 import {
     $mineOwnerContracts,
     contractorStore,
@@ -15,20 +9,22 @@ import {
 } from 'features';
 import { useStore, useGate } from 'effector-react';
 import { useTranslation } from 'react-i18next';
+import { Skeleton } from 'antd';
 import { calcmining } from 'entities/smartcontract';
 
 const THREE_SECONDS = 3000;
 
 export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
     useGate(MiningPageGate, { searchParam: accountName });
-
+    const [isMiningCalculating, setIsMiningCalculation] = useState(false);
     const { t } = useTranslation();
 
     const contractor = useStore(contractorStore);
     const [mineOwnerContract] = useStore($mineOwnerContracts);
-    const isContractorLoading = useStore(getContractorEffect.pending);
+
     const calcMining = useSmartContractAction({
         action: calcmining({ waxUser: accountName }),
+        onSignSuccess: () => setIsMiningCalculation(true),
     });
     const timeSpent =
         contractor && contractor.finishes_at - contractor.starts_at;
@@ -43,12 +39,14 @@ export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
             interval = setInterval(() => {
                 getContractorEffect({ searchParam: accountName });
             }, THREE_SECONDS);
+        } else {
+            setIsMiningCalculation(false);
         }
         return () => clearInterval(interval);
     }, [accountName, contractor?.finished]);
 
-    if (!contractor?.finished && isContractorLoading) {
-        return <Loader />;
+    if (isMiningCalculating) {
+        return <Skeleton />;
     }
 
     return contractor?.finished ? (

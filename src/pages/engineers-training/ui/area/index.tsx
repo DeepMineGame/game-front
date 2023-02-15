@@ -6,7 +6,7 @@ import { EngineerSchema } from 'entities/smartcontract';
 
 import { Nft, Props as NftProps } from '../nft';
 import { TrainingLevel } from '../../model/types';
-import { $level } from '../../model';
+import { $engineerRoleLevel } from '../../model';
 import { useNft } from '../../model/hooks';
 
 import sharedStyles from '../styles.module.scss';
@@ -31,7 +31,7 @@ export const TrainingArea = ({
     isDisabled,
 }: Props) => {
     const { t } = useTranslation();
-    const currentLevel = useStore($level);
+    const currentLevel = useStore($engineerRoleLevel);
     const { getStatus } = useNft();
 
     return (

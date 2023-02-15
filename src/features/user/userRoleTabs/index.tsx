@@ -23,6 +23,7 @@ import { CitizenInfo } from './citizenInfo';
 import { LandlordInfo } from './landlordInfo';
 import { MineOwnerInfo } from './mineOwnerInfo';
 import { ContractorInfo } from './contractorInfo';
+import { EngineerInfo } from './engineerInfo';
 
 type Props = {
     accountName: string;
@@ -105,6 +106,17 @@ export const UserRoleTabs: FC<Props> = ({ accountName }) => {
                         <>
                             {userLine}
                             <ContractorInfo accountName={accountName} />
+                        </>
+                    ),
+                },
+                {
+                    tab: t('roles.engineer'),
+                    key: UserRoles.engineer,
+                    disabled: !userRoles.isEngineer,
+                    children: (
+                        <>
+                            {userLine}
+                            <EngineerInfo />
                         </>
                     ),
                 },

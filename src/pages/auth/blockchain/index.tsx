@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useEvent, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
-import { Typography } from 'antd';
+import { Space, Typography } from 'antd';
 import { WaxUser } from '@eosdacio/ual-wax';
 
 import {
@@ -120,28 +120,41 @@ export const BlockchainAuthPage: React.FC<Props> = ({ onSuccess }) => {
     return (
         <div className={styles.wrapper}>
             <DeepMineLogo width={240} height={142} />
-            <div className={styles.content}>
-                <Button
-                    size="large"
-                    onClick={handleConnectClick}
-                    className={styles.actionButton}
-                    type="primary"
-                    ghost
-                >
-                    {t('intro.connect')}
-                </Button>
-                {(!!userError || hasError) && (
-                    <p style={{ marginTop: 4 }}>
-                        <Typography.Text
-                            type="danger"
-                            className={styles.warning}
-                        >
-                            {t('intro.waxAlreadyExists')}
-                        </Typography.Text>
-                    </p>
-                )}
-            </div>
-            <LoggedInBlock user={user} />
+
+            <Space size="large" direction="vertical">
+                <div className={styles.content}>
+                    <Button
+                        size="large"
+                        onClick={handleConnectClick}
+                        className={styles.actionButton}
+                        type="primary"
+                        ghost
+                    >
+                        {t('intro.connect')}
+                    </Button>
+                    {(!!userError || hasError) && (
+                        <p style={{ marginTop: 4 }}>
+                            <Typography.Text
+                                type="danger"
+                                className={styles.warning}
+                            >
+                                {t('intro.waxAlreadyExists')}
+                            </Typography.Text>
+                        </p>
+                    )}
+                </div>
+                <div className={styles.onboardingButton}>
+                    {/* <Button */}
+                    {/*    onClick={() => { */}
+                    {/*        window.location.href = */}
+                    {/*            'https://onboarding.deepmine.world'; */}
+                    {/*    }} */}
+                    {/* > */}
+                    {/*    {t('intro.onBoarding')} */}
+                    {/* </Button> */}
+                </div>
+                <LoggedInBlock user={user} />
+            </Space>
         </div>
     );
 };

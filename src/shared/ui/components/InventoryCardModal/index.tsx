@@ -242,6 +242,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                     maximalCapacity={
                                         cardData?.data['maximal capacity']
                                     }
+                                    rarity={cardData?.data.rarity}
                                 />
                             </Col>
                             <Col span={10}>

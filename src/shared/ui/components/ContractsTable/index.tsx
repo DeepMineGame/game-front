@@ -3,6 +3,7 @@ import { t } from 'i18next';
 import { DiscordIcon, useAccountName } from 'shared';
 import { Space, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
+import { CopyOutlined } from '@ant-design/icons';
 import { ContractState, UpgradeContractState } from 'features/serviceMarket';
 import {
     ContractDto,
@@ -63,6 +64,7 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                         ),
                         value: contractStatus,
                     },
+                    discord: contract.client_discord,
                     contract,
                 };
             }),
@@ -106,14 +108,36 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
 
                         return (
                             <Space align="start" size="large">
-                                <Tooltip
-                                    overlay={t('components.common.comingSoon')}
-                                >
-                                    <DiscordIcon
-                                        cursor="pointer"
-                                        onClick={stopPropagateEvent}
-                                    />
-                                </Tooltip>
+                                {contract.client_discord && (
+                                    <Tooltip
+                                        overlay={
+                                            <div
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    navigator.clipboard.writeText(
+                                                        contract.client_discord
+                                                    );
+                                                }}
+                                                className={styles.pointer}
+                                            >
+                                                <Tooltip
+                                                    trigger="click"
+                                                    overlay={t(
+                                                        'pages.info.copied'
+                                                    )}
+                                                >
+                                                    {contract.client_discord}{' '}
+                                                    <CopyOutlined />
+                                                </Tooltip>
+                                            </div>
+                                        }
+                                    >
+                                        <DiscordIcon
+                                            cursor="pointer"
+                                            onClick={stopPropagateEvent}
+                                        />
+                                    </Tooltip>
+                                )}
                                 <Space align="center" size={0}>
                                     <Link
                                         to={`/user/${

@@ -1,6 +1,6 @@
-import { EngineerSchema } from 'entities/smartcontract';
+import { EngineerSchema, Level } from 'entities/smartcontract';
 import { factoryTemplates } from '../templates';
-import { Level, TrainingLevel } from '../types';
+import { TrainingLevel } from '../types';
 
 const emptySrc = '';
 

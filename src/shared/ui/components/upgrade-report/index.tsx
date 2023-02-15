@@ -62,7 +62,7 @@ const getDataSource = (contract: ContractDto) => {
             key: 'lvl',
             icon: UpSquareOutlined,
             title: 'pages.engineer.newLevel',
-            value: `level ${level}`,
+            value: `level ${level || 'Not changed'}`,
         },
         {
             key: 'kit',

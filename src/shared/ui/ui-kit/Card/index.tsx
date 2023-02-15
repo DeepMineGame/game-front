@@ -103,6 +103,7 @@ export const Card: FC<CardProps> = ({
                                     inventory as MergedInventoryWithAtomicAssets[number]
                                 )?.data?.['maximal capacity']
                             }
+                            rarity={inventory?.data.rarity}
                         />
                     )}
                 </div>
