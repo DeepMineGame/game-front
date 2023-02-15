@@ -63,7 +63,6 @@ const defaultEndpoints = {
               'https://wax.hkeos.com/aa/atomicassets/v1',
               'https://atomic2.hivebp.io/atomicassets/v1',
               'https://aa.wax.blacklusion.io/atomicassets/v1',
-              'https://api.wax-aa.bountyblok.io/atomicassets/v1',
               'https://wax-aa.eosdublin.io/atomicassets/v1',
               'https://atomic.wax.eosrio.io/atomicassets/v1',
               'https://atomic.hivebp.io/atomicassets/v1',
