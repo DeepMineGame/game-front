@@ -46,7 +46,7 @@ export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
     }, [accountName, contractor?.finished]);
 
     if (isMiningCalculating) {
-        return <Skeleton />;
+        return <Skeleton active />;
     }
 
     return contractor?.finished ? (

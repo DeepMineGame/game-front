@@ -64,7 +64,7 @@ export const InfoPage: FC = () => {
                             </TabsCardPane>
                         </TabsCard>
                     ) : (
-                        <Skeleton />
+                        <Skeleton active />
                     )}
                 </Col>
             </Row>
