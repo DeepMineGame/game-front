@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
-import { createMineOrder } from 'features/serviceMarket';
+import { createMineOrder } from 'features/service-market';
 import {
     useSmartContractAction,
     useSmartContractActionDynamic,

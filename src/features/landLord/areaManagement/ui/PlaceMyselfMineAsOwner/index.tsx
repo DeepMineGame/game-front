@@ -6,7 +6,7 @@ import {
     ExclamationCircleFilled,
 } from '@ant-design/icons';
 import { ATOMICHUB_URL } from 'app/constants';
-import { createMineOrder, getEmptySlot } from 'features/serviceMarket';
+import { createMineOrder, getEmptySlot } from 'features/service-market';
 import {
     useSmartContractAction,
     useSmartContractActionDynamic,

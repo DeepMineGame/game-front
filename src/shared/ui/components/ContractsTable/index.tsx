@@ -4,7 +4,7 @@ import { DiscordIcon, useAccountName } from 'shared';
 import { Space, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
 import { CopyOutlined } from '@ant-design/icons';
-import { ContractState, UpgradeContractState } from 'features/serviceMarket';
+import { ContractState, UpgradeContractState } from 'features/service-market';
 import {
     ContractDto,
     contractName,

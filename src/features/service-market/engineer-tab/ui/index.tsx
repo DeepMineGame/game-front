@@ -10,7 +10,7 @@ import {
     filterStore,
     getContractsByFilterEffect,
     TabGrid,
-} from 'features/serviceMarket';
+} from 'features/service-market';
 
 import { OrderStatus, Roles } from 'entities/gameStat';
 

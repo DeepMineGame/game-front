@@ -11,7 +11,7 @@ import { Skeleton } from 'antd';
 import { ServiceMarketTabIds } from 'app/router/constants';
 import { FC } from 'react';
 import { useStore } from 'effector-react';
-import { EngineerTab } from 'features/serviceMarket';
+import { EngineerTab } from 'features/service-market';
 import styles from './styles.module.scss';
 
 export * from './order';
