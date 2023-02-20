@@ -471,15 +471,10 @@
         "selectToDisable": "Select contract type to disable",
         "selectRole": "Select role",
         "selectItem": "Select item",
-        "fee": "Fee (min 10%)",
+        "fee": "Fee",
         "feeTooltip": "If during the entire contract, the executor has: x days or more with the output less than: Y executor can be fined and the contract can be terminated with: Penalty",
         "penalty": "Penalty",
         "penaltyHint": "If the performing party violates the terms of the contract or terminates the contract prematurely, the counterparty may charge a fine.",
-        "ifDuring": "If during the entire contract, the executor within",
-        "contractorFined": "executor can be fined and the contract can be terminated with",
-        "willExtractLessThan": "will extract less than",
-        "miningTerms": "Mining terms",
-        "miningTermsHint": "The % of claimed DME mine owners get from contractors OR landlords get from mine owners",
         "startOfOperation": "Start of operation",
         "effectiveDate": "Effective date",
         "startOfOperationTooltip": "The date when agreement or transaction becomes binding",
@@ -1029,5 +1024,10 @@
     "00125": "you must terminate the Contract with Landlord first",
     "00127": "wrong Location for Contractor role",
     "00200": "The mine is not set up on the Area. Please contact your mine owner to resolve this problem"
-  }
+  },
+  "Mine rarity": "Mine rarity",
+  "Mine level": "Mine level",
+  "Specify the preferred level and rarity of the mine you want to work on": "Specify the preferred level and rarity of the mine you want to work on",
+  "Auto-renewal": "Auto-renewal",
+  "Minimum Fee": "Minimum Fee"
 }
