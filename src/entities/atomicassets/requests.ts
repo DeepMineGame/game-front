@@ -10,12 +10,11 @@ export const getAssets = async <T>(
 > => {
     const isIdsArray = Array.isArray(ids);
     let fetchedData: any;
-
     await poolRequest(RequestSubject.Atomic, async (endpoint: string) => {
         const { data } = await axios.get(
             `${endpoint}/assets${
                 isIdsArray
-                    ? `?ids=${ids.filter((i) => i).join(',')}`
+                    ? `?ids=${ids.filter((i) => i).join(',')}&limit=1000`
                     : `/${ids}`
             }`
         );
