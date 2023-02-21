@@ -4,7 +4,7 @@ import { DiscordIcon, useAccountName } from 'shared';
 import { Space, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
 import { CopyOutlined } from '@ant-design/icons';
-import { ContractState, UpgradeContractState } from 'features/serviceMarket';
+import { ContractState, UpgradeContractState } from 'features/service-market';
 import {
     ContractDto,
     contractName,
@@ -12,7 +12,7 @@ import {
     getContractStatus,
 } from 'entities/smartcontract';
 
-import { getDmeAmount, getUserRoleInContract } from 'shared/lib/utils';
+import { getUserRoleInContract } from 'shared/lib/utils';
 import { Link, Table, Tag } from '../../ui-kit';
 import { toLocaleDate } from '../../utils';
 import styles from './styles.module.scss';
@@ -57,7 +57,6 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                         contract.finishes_at === 0
                             ? '-'
                             : toLocaleDate(contract.finishes_at * 1000),
-                    penalty: getDmeAmount(contract.penalty_amount),
                     status: {
                         label: (
                             <Status contract={contract} accountName={account} />

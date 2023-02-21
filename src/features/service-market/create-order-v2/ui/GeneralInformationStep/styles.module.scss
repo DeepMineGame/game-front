@@ -1,0 +1,31 @@
+@import "src/shared";
+
+.feeInput {
+  width: 191px;
+  padding-right: 31px;
+}
+
+.finisAtSelect {
+  width: 160px;
+}
+
+.deadlineInputsContainer {
+  display: grid;
+  width: 160px;
+
+  @media (min-width: $media-desktop-s)  {
+    grid-template-columns: 175px 175px;
+    align-items: end;
+  }
+}
+
+.flexSection {
+  display: flex;
+  gap: 15px;
+  align-items: self-end;
+
+  & > * {
+    flex-grow: 1;
+    width: 100%;
+  }
+}
