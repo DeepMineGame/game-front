@@ -602,8 +602,8 @@
         "terminateModal": {
           "title": "Contract termination",
           "submit": "Terminate",
-          "description": "If you terminate the contract prematurely, you might pay a penalty of {{amount}} DME",
-          "success": "The contract is terminated. You may have to pay a fine of {{amount}} DME"
+          "description": "Are you really want to terminate contract",
+          "success": "The contract is terminated."
         },
         "completed": "Completed",
         "valid": "Valid Contract",

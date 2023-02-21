@@ -5,7 +5,6 @@ import {
     getUpgradeRarity,
     parseAttrs,
     toLocaleDate,
-    getDmeAmount,
 } from 'shared';
 import { ContractDto } from 'entities/smartcontract';
 import { TableWithTitle } from '../..';
@@ -33,9 +32,6 @@ const Conditions: FC<Props> = ({ contract }) => {
         [t('pages.serviceMarket.costOfExecution')]: `${
             contract.cost_of_execution
         } ${t('components.common.button.dme')}`,
-        [t('pages.serviceMarket.contract.penalty')]: `${getDmeAmount(
-            contract.penalty_amount
-        )} ${t('components.common.button.dme')}`,
     };
 
     return (

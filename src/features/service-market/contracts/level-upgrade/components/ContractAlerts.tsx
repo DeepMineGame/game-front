@@ -5,10 +5,8 @@ import { useSmartContractAction } from 'features/hooks';
 import { terminateContract, upgradeFinish } from 'entities/smartcontract';
 import { ContractAlert, Button } from 'shared/ui';
 import { useReloadPage } from 'shared/lib/hooks';
-import { getDmeAmount } from 'shared/lib/utils';
 import { useLevelUpgradeContract } from '../constants';
 import { Completed } from '../../../ui/actions';
-import { PenaltyActions } from '../../../ui';
 import { ContractProps } from '../../../types';
 
 export const ContractAlerts: FC<ContractProps> = ({
@@ -20,8 +18,6 @@ export const ContractAlerts: FC<ContractProps> = ({
 
     const isClientCollectedPenalty =
         contract.penalty_demanded_by === contract.client;
-    const isEngineerCollectedPenalty =
-        contract.penalty_demanded_by === contract.executor;
 
     const terminateContractAction = useSmartContractAction({
         action: terminateContract(accountName, contract.id, false),
@@ -56,27 +52,6 @@ export const ContractAlerts: FC<ContractProps> = ({
 
     if (isEngineer) {
         if (isTermInitiator) {
-            // 1. Engineer early break
-            if (isTerminatedStatus && isEarlyBreak)
-                return (
-                    <ContractAlert
-                        message={
-                            <Trans
-                                i18nKey={
-                                    isClientCollectedPenalty
-                                        ? 'pages.serviceMarket.contract.terminatedByYouAndChargedPenalty'
-                                        : 'pages.serviceMarket.contract.youTerminated'
-                                }
-                                values={{
-                                    amount: getDmeAmount(
-                                        contract.penalty_amount
-                                    ),
-                                }}
-                            />
-                        }
-                    />
-                );
-
             // 2. Engineer deadline break
             if (isTerminatedStatus && isDeadlineExpired) {
                 return (
@@ -100,39 +75,6 @@ export const ContractAlerts: FC<ContractProps> = ({
             );
         }
 
-        // 4. Client early break
-        if (isEarlyBreak && isWaitingForAction) {
-            return (
-                <PenaltyActions
-                    isViolated={false}
-                    amount={getDmeAmount(contract.penalty_amount)}
-                    contractId={contract.id}
-                />
-            );
-        }
-
-        // 7. Terminated - Engineer charge penalty early from citizen
-        // 9. Terminated - Engineer not charge penalty early
-        if (isTerminatedStatus && isEarlyBreak) {
-            return (
-                <ContractAlert
-                    message={
-                        <Trans
-                            i18nKey={`pages.serviceMarket.contract.${
-                                isEngineerCollectedPenalty
-                                    ? 'terminatedByCounterpartyYouCollectedPenalty'
-                                    : 'terminatedByCounterpartyYouNotCollectedPenalty'
-                            }`}
-                            values={{
-                                amount:
-                                    getDmeAmount(contract.penalty_amount) * 2,
-                            }}
-                        />
-                    }
-                />
-            );
-        }
-
         // 5. Client break after deadline without penalty
         // 6. Client break after deadline with penalty
         // 8. Terminated - Client charge penalty after deadline
@@ -142,19 +84,6 @@ export const ContractAlerts: FC<ContractProps> = ({
                 <ContractAlert
                     message={
                         <Space direction="vertical" size={12}>
-                            <Trans
-                                i18nKey={`pages.serviceMarket.contract.${
-                                    isClientCollectedPenalty
-                                        ? 'deadlinePassedWithCollectPenalty'
-                                        : 'deadlinePassedNoCollectPenalty'
-                                }`}
-                                values={{
-                                    amount:
-                                        getDmeAmount(contract.penalty_amount) *
-                                        2,
-                                }}
-                            />
-
                             {isWaitingForAction && (
                                 <Button
                                     ghost
@@ -178,18 +107,6 @@ export const ContractAlerts: FC<ContractProps> = ({
         // 1. Engineer early break
         // 2. Engineer deadline break
         // 3. Engineer not start work after deadline, Citizen might terminate
-        if (
-            isDeadlineStartExpired ||
-            (isWaitingForAction && (isEarlyBreak || isDeadlineExpired))
-        ) {
-            return (
-                <PenaltyActions
-                    isViolated={isDeadlineStartExpired}
-                    amount={getDmeAmount(contract.penalty_amount)}
-                    contractId={contract.id}
-                />
-            );
-        }
 
         if (isTermInitiator && isTerminatedStatus) {
             // 4. Client early break
@@ -198,31 +115,6 @@ export const ContractAlerts: FC<ContractProps> = ({
                     <ContractAlert
                         message={
                             <Trans i18nKey="pages.serviceMarket.contract.youTerminated" />
-                        }
-                    />
-                );
-            }
-
-            // 5. Client break after deadline without
-            // 6. Client break after deadline with penalty
-            // 8. Terminated - Client charge penalty after deadline
-            // 10. Terminated - Client not charge penalty after deadline
-            if (isDeadlineExpired) {
-                return (
-                    <ContractAlert
-                        message={
-                            <Trans
-                                i18nKey={`pages.serviceMarket.contract.${
-                                    isClientCollectedPenalty
-                                        ? 'terminatedByYouWithCollectPenalty'
-                                        : 'terminatedByYouNotCollectPenalty'
-                                }`}
-                                values={{
-                                    amount:
-                                        getDmeAmount(contract.penalty_amount) *
-                                        2,
-                                }}
-                            />
                         }
                     />
                 );
@@ -241,10 +133,6 @@ export const ContractAlerts: FC<ContractProps> = ({
                                     ? 'terminatedByCounterpartyYouCollectedPenalty'
                                     : 'terminatedByCounterpartyYouNotCollectedPenalty'
                             }`}
-                            values={{
-                                amount:
-                                    getDmeAmount(contract.penalty_amount) * 2,
-                            }}
                         />
                     }
                 />

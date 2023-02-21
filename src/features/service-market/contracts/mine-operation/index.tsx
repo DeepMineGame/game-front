@@ -1,17 +1,10 @@
 import { FC } from 'react';
 import { Trans } from 'react-i18next';
 import { Col, Row } from 'antd';
-import { PenaltyActions } from 'features';
-import { ContractStatesMeta } from 'entities/smartcontract';
 import { useContractState } from 'entities/contract';
 import { Alert } from 'shared/ui';
-import { getDmeAmount } from 'shared/lib/utils';
 import { Completed, DeleteOrder, TerminateContract } from '../../ui/actions';
-import {
-    GeneralDataTable,
-    ConditionTable,
-    MineOwnerTable,
-} from '../../ui/contract';
+import { GeneralDataTable, ConditionTable, MineOwnerTable } from '../../ui';
 import { LandlordTable } from '../../ui/contract/mine-operation';
 import { ContractProps } from '../../types';
 
@@ -21,11 +14,9 @@ const MineOperationContract: FC<ContractProps> = ({
     isDeleted,
 }) => {
     const {
-        stateMeta,
         canTerminate,
         showCompleted,
         showTerminatedAlert,
-        showPenaltyActions,
         canDeleteSelfContract,
     } = useContractState(contract, accountName);
 
@@ -57,20 +48,6 @@ const MineOperationContract: FC<ContractProps> = ({
                                     showIcon
                                 />
                             )}
-                            {showPenaltyActions && (
-                                <PenaltyActions
-                                    isViolated={
-                                        stateMeta ===
-                                            ContractStatesMeta.termViolation ||
-                                        stateMeta ===
-                                            ContractStatesMeta.deadlineViolation
-                                    }
-                                    amount={getDmeAmount(
-                                        contract.penalty_amount
-                                    )}
-                                    contractId={contract.id}
-                                />
-                            )}
                         </Col>
                     )}
                 </Row>
@@ -95,7 +72,6 @@ const MineOperationContract: FC<ContractProps> = ({
                         <Row justify="end">
                             {canTerminate && (
                                 <TerminateContract
-                                    penalty={contract.penalty_amount}
                                     contractId={contract.id}
                                     accountName={accountName}
                                 />

@@ -22,17 +22,9 @@ export const getMissedDays = (
 };
 
 export const isContractTermNotFulfilled = (contract: ContractDto) => {
-    const {
-        days_for_penalty,
-        penalty_amount,
-        fee_daily_min_amount,
-        fee_days,
-        start_time,
-        finishes_at,
-    } = contract;
+    const { fee_daily_min_amount, fee_days, start_time, finishes_at } =
+        contract;
     if (!start_time) return false;
-    if (!Number(penalty_amount)) return false;
-    if (!days_for_penalty) return false;
 
     const currentTime = getNowInSeconds();
     const finishTime = finishes_at < currentTime ? finishes_at : currentTime;
@@ -44,7 +36,7 @@ export const isContractTermNotFulfilled = (contract: ContractDto) => {
         fee_daily_min_amount
     );
 
-    return missedDays >= days_for_penalty;
+    return missedDays;
 };
 
 export enum ContractStates {
@@ -139,7 +131,7 @@ export const getContractStatus = (
         return { value: ContractStates.terminated };
     }
 
-    if (isTimeFinished(contract) && !isContractTermNotFulfilled(contract)) {
+    if (isTimeFinished(contract)) {
         if (
             !contract.deleted_at &&
             (isStatusActive(contract) ||

@@ -1,13 +1,7 @@
 import { FC } from 'react';
 import { Row, Col } from 'antd';
-import { getDmeAmount } from 'shared/lib/utils';
 import { UpgradeReport } from 'shared/ui';
-import {
-    Conditions,
-    Citizen,
-    Engineer,
-    GeneralInfo,
-} from '../../ui/contract/level-upgrade';
+import { Conditions, Citizen, Engineer, GeneralInfo } from '../../ui';
 import { ContractProps } from '../../types';
 import { TerminateContract } from '../../ui/actions';
 import { ContractAlerts } from './components/ContractAlerts';
@@ -56,9 +50,6 @@ const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
                         <Row justify="end">
                             {canTerminate && (
                                 <TerminateContract
-                                    penalty={getDmeAmount(
-                                        contract.penalty_amount
-                                    )}
                                     contractId={contract.id}
                                     accountName={accountName}
                                 />

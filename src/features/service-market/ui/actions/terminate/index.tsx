@@ -7,10 +7,9 @@ import { terminateContract } from 'entities/smartcontract';
 type Props = {
     accountName: string;
     contractId: number;
-    penalty: number | string;
 };
 
-const TerminateContract: FC<Props> = ({ accountName, contractId, penalty }) => {
+const TerminateContract: FC<Props> = ({ accountName, contractId }) => {
     const { t } = useTranslation();
     const reloadPage = useReloadPage();
 
@@ -56,8 +55,7 @@ const TerminateContract: FC<Props> = ({ accountName, contractId, penalty }) => {
                     'pages.serviceMarket.contract.terminateModal.submit'
                 )}
                 description={t(
-                    'pages.serviceMarket.contract.terminateModal.description',
-                    { amount: penalty }
+                    'pages.serviceMarket.contract.terminateModal.description'
                 )}
             />
 
@@ -67,10 +65,7 @@ const TerminateContract: FC<Props> = ({ accountName, contractId, penalty }) => {
                 onSubmit={submitSuccessModal}
                 title={t('pages.serviceMarket.contract.terminateModal.title')}
                 description={t(
-                    'pages.serviceMarket.contract.terminateModal.success',
-                    {
-                        amount: penalty,
-                    }
+                    'pages.serviceMarket.contract.terminateModal.success'
                 )}
             />
         </div>
