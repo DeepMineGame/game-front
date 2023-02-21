@@ -40,6 +40,7 @@ export const MineTerms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                     name={orderFields.deposit}
                     label={t('Minimum Fee')}
                     className={cn(styles.formField, localStyles.feeInput)}
+                    initialValue={1}
                     tooltip={
                         <Card
                             title={t('pages.serviceMarket.createOrder.fee')}
