@@ -19,11 +19,10 @@ export type BaseOrder = {
 
 export type MineOrder = BaseOrder & {
     fee_percent: number;
-    fee_daily_min_amount: number;
-    days_for_penalty: number;
     contract_duration: number;
     opt_level?: number | null;
     opt_rarity?: RarityType | null;
+    deposit: number;
 };
 
 export type LevelUpgradeOrder = BaseOrder & {
@@ -51,4 +50,5 @@ export const orderFields = {
     optRarity: 'opt_rarity',
     deadlineDurationInDays: 'deadline_duration_in_days',
     deadlineDurationInHours: 'deadline_duration_in_hours',
+    deposit: 'deposit',
 } as const;

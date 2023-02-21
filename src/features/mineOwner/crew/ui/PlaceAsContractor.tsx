@@ -42,8 +42,6 @@ const PlaceAsContractor: FC<Props> = ({
             createMineOrder({
                 contract_duration: 21,
                 contract_type: ContractType.mineowner_contractor,
-                days_for_penalty: 20,
-                fee_daily_min_amount: 0,
                 fee_percent: 10,
                 is_client: 1,
                 opt_asset_id: +mineId || 0,
@@ -54,6 +52,7 @@ const PlaceAsContractor: FC<Props> = ({
                 deadline_duration_in_hours: 0,
                 opt_level: null,
                 opt_rarity: null,
+                deposit: 0,
             })
         );
 

@@ -35,14 +35,11 @@ export const createMineOrder = (orderData: MineOrder) => {
                     ...getBaseFields(orderData),
                     contract_type: orderData.contract_type,
                     fee_percent: Number(orderData.fee_percent),
-                    fee_daily_min_amount: Number(
-                        orderData.fee_daily_min_amount
-                    ),
-                    days_for_penalty: Number(orderData.days_for_penalty),
                     contract_duration:
                         orderData.contract_duration * DAY_IN_SECONDS,
                     opt_level: orderData.opt_level ?? null,
                     opt_rarity: orderData.opt_rarity ?? null,
+                    deposit: orderData.deposit,
                 },
             },
         ],

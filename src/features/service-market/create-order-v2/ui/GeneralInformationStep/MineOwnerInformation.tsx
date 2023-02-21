@@ -1,6 +1,6 @@
-import { FC } from 'react';
-import { Card, Form, Input as InputA, InputNumber, Space } from 'antd';
-import { Button, Select, getLabelSelectItem } from 'shared';
+import React, { FC } from 'react';
+import { Form, Input as InputA, Space } from 'antd';
+import { Button, getLabelSelectItem, Select } from 'shared';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import { orderFields } from 'entities/order';
@@ -17,48 +17,11 @@ export const MineOwnerInformation: FC<GeneralInformationStepProps> = ({
     form,
 }) => {
     const { t } = useTranslation();
-    const feeFieldValue = useWatch(orderFields.feePercent, form);
     const finishesAtFieldValue = useWatch(orderFields.contractDuration, form);
-    const deadlineTimeInDaysFieldValue = useWatch(
-        orderFields.deadlineDurationInDays,
-        form
-    );
-    const deadlineTimeInHoursFieldValue = useWatch(
-        orderFields.deadlineDurationInHours,
-        form
-    );
-    const hasAllValues =
-        feeFieldValue &&
-        deadlineTimeInDaysFieldValue &&
-        finishesAtFieldValue &&
-        (deadlineTimeInHoursFieldValue || deadlineTimeInHoursFieldValue === 0);
 
     return (
         <Form.Item>
             <InputA.Group compact>
-                <Form.Item
-                    name={orderFields.feePercent}
-                    label={t('pages.serviceMarket.createOrder.fee')}
-                    className={cn(styles.formField, localStyles.feeInput)}
-                    initialValue={10}
-                    tooltip={
-                        <Card
-                            title={t('pages.serviceMarket.createOrder.fee')}
-                            className={styles.tooltipCard}
-                        >
-                            {t('pages.serviceMarket.createOrder.feeTooltip')}
-                        </Card>
-                    }
-                >
-                    <InputNumber
-                        defaultValue={10}
-                        placeholder="%"
-                        type="number"
-                        min={10}
-                        controls={false}
-                        className={styles.inputNumber}
-                    />
-                </Form.Item>
                 <Form.Item
                     name={orderFields.contractDuration}
                     label={t('components.common.duration')}
@@ -74,58 +37,12 @@ export const MineOwnerInformation: FC<GeneralInformationStepProps> = ({
                     />
                 </Form.Item>
             </InputA.Group>
-            <InputA.Group>
-                <div className={localStyles.deadlineInputsContainer}>
-                    <Form.Item
-                        name={orderFields.deadlineDurationInDays}
-                        label={t(
-                            'pages.serviceMarket.createOrder.startOfOperation'
-                        )}
-                        className={cn(styles.formField)}
-                        tooltip={
-                            <Card
-                                title={t(
-                                    'pages.serviceMarket.createOrder.effectiveDate'
-                                )}
-                                className={styles.tooltipCard}
-                            >
-                                {t(
-                                    'pages.serviceMarket.createOrder.startOfOperationTooltip'
-                                )}
-                            </Card>
-                        }
-                    >
-                        <Select
-                            placeholder={t('components.common.days')}
-                            options={getLabelSelectItem({
-                                amount: 3,
-                                label: t('components.common.day'),
-                            })}
-                            disabled
-                        />
-                    </Form.Item>
-                    <Form.Item
-                        name={orderFields.deadlineDurationInHours}
-                        className={cn(styles.formField)}
-                    >
-                        <Select
-                            placeholder={t('components.common.hour')}
-                            options={getLabelSelectItem({
-                                amount: 23,
-                                label: t('components.common.hour'),
-                                sinceZero: true,
-                            })}
-                            disabled
-                        />
-                    </Form.Item>
-                </div>
-            </InputA.Group>
             <Space direction="horizontal">
                 <Button onClick={goToPreviousStep} ghost>
                     {t('kit.back')}
                 </Button>
                 <Button
-                    disabled={!hasAllValues}
+                    disabled={!finishesAtFieldValue}
                     onClick={goToNextStep}
                     type="primary"
                 >

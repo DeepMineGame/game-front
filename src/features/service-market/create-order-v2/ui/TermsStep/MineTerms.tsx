@@ -8,21 +8,8 @@ import styles from '../../styles.module.scss';
 import localStyles from './styles.module.scss';
 import { TermsStepProps } from './interface';
 
-const { useWatch } = Form;
-
-export const MineTerms: FC<TermsStepProps> = ({ goToPreviousStep, form }) => {
+export const MineTerms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
     const { t } = useTranslation();
-    const contractDuration = useWatch(orderFields.contractDuration, form) || 0;
-    const daysForPenaltyFieldValue = useWatch(orderFields.daysForPenalty, form);
-    const feeDailyMinAmountValue = useWatch(
-        orderFields.feeDailyMinAmount,
-        form
-    );
-    const penaltyAmountFieldValue = useWatch(orderFields.penaltyAmount, form);
-    const hasAllValues =
-        daysForPenaltyFieldValue &&
-        feeDailyMinAmountValue &&
-        penaltyAmountFieldValue;
 
     return (
         <div>
@@ -30,6 +17,7 @@ export const MineTerms: FC<TermsStepProps> = ({ goToPreviousStep, form }) => {
                 <Form.Item
                     label={t('pages.serviceMarket.createOrder.fee')}
                     className={cn(styles.formField, localStyles.feeInput)}
+                    name={orderFields.feePercent}
                     initialValue={10}
                     tooltip={
                         <Card
@@ -43,15 +31,15 @@ export const MineTerms: FC<TermsStepProps> = ({ goToPreviousStep, form }) => {
                     <InputNumber
                         placeholder="%"
                         type="number"
+                        min={10}
                         controls={false}
                         className={styles.inputNumber}
                     />
                 </Form.Item>
                 <Form.Item
-                    name={orderFields.feePercent}
+                    name={orderFields.deposit}
                     label={t('Minimum Fee')}
                     className={cn(styles.formField, localStyles.feeInput)}
-                    initialValue={10}
                     tooltip={
                         <Card
                             title={t('pages.serviceMarket.createOrder.fee')}
@@ -62,10 +50,8 @@ export const MineTerms: FC<TermsStepProps> = ({ goToPreviousStep, form }) => {
                     }
                 >
                     <InputNumber
-                        defaultValue={10}
                         placeholder="%"
                         type="number"
-                        min={10}
                         controls={false}
                         className={styles.inputNumber}
                     />
@@ -122,11 +108,7 @@ export const MineTerms: FC<TermsStepProps> = ({ goToPreviousStep, form }) => {
                 <Button onClick={goToPreviousStep} ghost>
                     {t('kit.back')}
                 </Button>
-                <Button
-                    disabled={!hasAllValues}
-                    htmlType="submit"
-                    type="primary"
-                >
+                <Button htmlType="submit" type="primary">
                     {t('components.common.button.create')}
                 </Button>
             </Space>
