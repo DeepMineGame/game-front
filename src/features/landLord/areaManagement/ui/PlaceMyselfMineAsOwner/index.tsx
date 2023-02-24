@@ -6,7 +6,7 @@ import {
     ExclamationCircleFilled,
 } from '@ant-design/icons';
 import { ATOMICHUB_URL } from 'app/constants';
-import { createMineOrder, getEmptySlot } from 'features/service-market';
+import { getEmptySlot } from 'features/service-market';
 import {
     useSmartContractAction,
     useSmartContractActionDynamic,
@@ -15,6 +15,7 @@ import {
 import {
     ContractDto,
     ContractType,
+    createMineOrder,
     getInventoryConfig,
     InUseType,
     signOrder,
