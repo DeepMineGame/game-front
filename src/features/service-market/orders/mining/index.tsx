@@ -1,12 +1,9 @@
-import { FC } from 'react';
-import { Row, Col } from 'antd';
+import React, { FC } from 'react';
+import { Row, Col, PageHeader, Space } from 'antd';
 import { useOrderDelete, useOrderSign } from 'entities/order';
 import { useContractType } from 'entities/contract';
-import {
-    ConditionTable,
-    MineOwnerTable,
-    GeneralDataTable,
-} from '../../ui/contract';
+import { statusMap } from 'entities/smartcontract';
+import { ConditionTable, MineOwnerTable, GeneralDataTable } from '../../ui';
 import {
     SignContractorOrder,
     SignMineOwnerContractorOrder,
@@ -24,6 +21,32 @@ const MiningOrder: FC<ContractProps> = ({ contract, accountName }) => {
 
     return (
         <div>
+            <PageHeader
+                style={{ marginBottom: '20px' }}
+                ghost={false}
+                title={statusMap[contract.status]}
+                extra={[
+                    canSignMiningContractorOrder && (
+                        <SignContractorOrder
+                            contract={contract}
+                            accountName={accountName}
+                        />
+                    ),
+                    canSignMiningMineOwnerOrder && (
+                        <SignMineOwnerContractorOrder
+                            contract={contract}
+                            accountName={accountName}
+                            isSelfContract={isSelfSigned}
+                        />
+                    ),
+                    canDeleteOrder && (
+                        <DeleteOrder
+                            accountName={accountName}
+                            contractId={contract.id}
+                        />
+                    ),
+                ]}
+            />
             <Row gutter={[32, 32]}>
                 <Col span={24}>
                     <GeneralDataTable
@@ -49,31 +72,6 @@ const MiningOrder: FC<ContractProps> = ({ contract, accountName }) => {
                     <Row gutter={[32, 32]}>
                         <Col span={24}>
                             <ConditionTable contract={contract} />
-                        </Col>
-
-                        <Col span={24}>
-                            <Row justify="end" gutter={[12, 12]}>
-                                {canSignMiningContractorOrder && (
-                                    <SignContractorOrder
-                                        contract={contract}
-                                        accountName={accountName}
-                                    />
-                                )}
-                                {canSignMiningMineOwnerOrder && (
-                                    <SignMineOwnerContractorOrder
-                                        contract={contract}
-                                        accountName={accountName}
-                                        isSelfContract={isSelfSigned}
-                                    />
-                                )}
-
-                                {canDeleteOrder && (
-                                    <DeleteOrder
-                                        accountName={accountName}
-                                        contractId={contract.id}
-                                    />
-                                )}
-                            </Row>
                         </Col>
                     </Row>
                 </Col>
