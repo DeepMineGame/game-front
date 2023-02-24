@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { Form, Space, Typography } from 'antd';
 import { Button, Select, getLabelSelectItem, Checkbox } from 'shared';
 import { useTranslation } from 'react-i18next';
@@ -43,7 +43,10 @@ export const ContractorInformation: FC<GeneralInformationStepProps> = ({
                         }).filter((_, idx) => idx !== 0)}
                     />
                 </Form.Item>
-                <Form.Item>
+                <Form.Item
+                    name={orderFields.autorenew_enabled}
+                    valuePropName="checked"
+                >
                     <Checkbox>{t('Auto-renewal')}</Checkbox>
                 </Form.Item>
             </div>

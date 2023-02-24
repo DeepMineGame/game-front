@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Form, Input as InputA, Space } from 'antd';
-import { Button, getLabelSelectItem, Select } from 'shared';
+import { Button, Checkbox, getLabelSelectItem, Select } from 'shared';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import { orderFields } from 'entities/order';
@@ -22,20 +22,31 @@ export const MineOwnerInformation: FC<GeneralInformationStepProps> = ({
     return (
         <Form.Item>
             <InputA.Group compact>
-                <Form.Item
-                    name={orderFields.contractDuration}
-                    label={t('components.common.duration')}
-                    className={cn(localStyles.finisAtSelect, styles.formField)}
-                >
-                    <Select
-                        placeholder={t('components.common.days')}
-                        options={getLabelSelectItem({
-                            amount: 21,
-                            label: t('components.common.day'),
-                            // temporary solution because contract for 1 day isn't possible yet
-                        }).filter((_, idx) => idx !== 0)}
-                    />
-                </Form.Item>
+                <div className={localStyles.flexSection}>
+                    <Form.Item
+                        name={orderFields.contractDuration}
+                        label={t('components.common.duration')}
+                        className={cn(
+                            localStyles.finisAtSelect,
+                            styles.formField
+                        )}
+                    >
+                        <Select
+                            placeholder={t('components.common.days')}
+                            options={getLabelSelectItem({
+                                amount: 21,
+                                label: t('components.common.day'),
+                                // temporary solution because contract for 1 day isn't possible yet
+                            }).filter((_, idx) => idx !== 0)}
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        name={orderFields.autorenew_enabled}
+                        valuePropName="checked"
+                    >
+                        <Checkbox>{t('Auto-renewal')}</Checkbox>
+                    </Form.Item>
+                </div>
             </InputA.Group>
             <Space direction="horizontal">
                 <Button onClick={goToPreviousStep} ghost>
