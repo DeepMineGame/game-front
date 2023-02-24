@@ -5,7 +5,11 @@ import { FrownOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { serviceMarket } from 'app/router/paths';
-import { ContractType } from 'entities/smartcontract';
+import {
+    ContractType,
+    createLevelUpgradeOrder,
+    createMineOrder,
+} from 'entities/smartcontract';
 import { useSmartContractActionDynamic } from '../../hooks';
 import styles from './styles.module.scss';
 import { TypeStep } from './ui/TypeStep';
@@ -13,7 +17,6 @@ import { GeneralInformationStep } from './ui/GeneralInformationStep';
 import { TermsStep } from './ui/TermsStep';
 import { CreateResult } from './ui/CreateResult';
 import { useInitialValues } from './hooks/useInitialValues';
-import { createMineOrder, createLevelUpgradeOrder } from './createOrder';
 
 enum Step {
     first,

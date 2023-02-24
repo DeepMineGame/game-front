@@ -2,13 +2,17 @@ import { FC, useState } from 'react';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
-import { createMineOrder } from 'features/service-market';
 import {
     useSmartContractAction,
     useSmartContractActionDynamic,
 } from 'features/hooks';
 
-import { ContractDto, ContractType, signOrder } from 'entities/smartcontract';
+import {
+    ContractDto,
+    ContractType,
+    signOrder,
+    createMineOrder,
+} from 'entities/smartcontract';
 import { MinesGate, minesStore } from 'entities/contract';
 import { confirm, Select, Text, Modal, Button } from 'shared/ui/ui-kit';
 import { neutral9 } from 'shared/ui/variables';
