@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { useStore } from 'effector-react';
-import { Row, Col } from 'antd';
-import { rolesStore } from 'entities/smartcontract';
+import { Row, Col, PageHeader } from 'antd';
+import { rolesStore, statusMap } from 'entities/smartcontract';
 import { useContractType } from 'entities/contract';
 import { useOrderDelete, useOrderSign } from 'entities/order';
 import { useUserRoles } from 'shared/lib/hooks';
@@ -15,6 +15,8 @@ import {
     SignLandlordOrder,
     SignMineOwnerOrder,
     DeleteOrder,
+    SignContractorOrder,
+    SignMineOwnerContractorOrder,
 } from '../../ui/actions';
 import { ContractProps } from '../../types';
 
@@ -29,6 +31,35 @@ const MineOperationOrder: FC<ContractProps> = ({ contract, accountName }) => {
 
     return (
         <div>
+            <PageHeader
+                style={{ marginBottom: '20px' }}
+                ghost={false}
+                title={statusMap[contract.status]}
+                extra={[
+                    canSignOperationLandlordOrder && (
+                        <SignLandlordOrder
+                            contract={contract}
+                            accountName={accountName}
+                            isSelfContract={isSelfSigned}
+                        />
+                    ),
+
+                    canSignOperationMineOwnerOrder && (
+                        <SignMineOwnerOrder
+                            contract={contract}
+                            accountName={accountName}
+                        />
+                    ),
+
+                    canDeleteOrder && (
+                        <DeleteOrder
+                            accountName={accountName}
+                            contractId={contract.id}
+                        />
+                    ),
+                ]}
+            />
+
             <Row gutter={[32, 32]}>
                 <Col span={24}>
                     <GeneralDataTable
@@ -55,32 +86,6 @@ const MineOperationOrder: FC<ContractProps> = ({ contract, accountName }) => {
                     <Row gutter={[32, 32]}>
                         <Col span={24}>
                             <ConditionTable contract={contract} />
-                        </Col>
-
-                        <Col span={24}>
-                            <Row justify="end" gutter={[12, 12]}>
-                                {canSignOperationLandlordOrder && (
-                                    <SignLandlordOrder
-                                        contract={contract}
-                                        accountName={accountName}
-                                        isSelfContract={isSelfSigned}
-                                    />
-                                )}
-
-                                {canSignOperationMineOwnerOrder && (
-                                    <SignMineOwnerOrder
-                                        contract={contract}
-                                        accountName={accountName}
-                                    />
-                                )}
-
-                                {canDeleteOrder && (
-                                    <DeleteOrder
-                                        accountName={accountName}
-                                        contractId={contract.id}
-                                    />
-                                )}
-                            </Row>
                         </Col>
                     </Row>
                 </Col>

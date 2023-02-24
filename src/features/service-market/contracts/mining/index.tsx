@@ -1,9 +1,9 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { Trans } from 'react-i18next';
-import { Col, Row } from 'antd';
+import { Col, PageHeader, Row } from 'antd';
 
 import { useContractState } from 'entities/contract';
-import { Alert } from 'shared/ui';
+import { statusMap } from 'entities/smartcontract';
 import { Completed, DeleteOrder, TerminateContract } from '../../ui/actions';
 import { GeneralDataTable, ConditionTable, MineOwnerTable } from '../../ui';
 import { ContractorTable } from '../../ui/contract/mining';
@@ -14,83 +14,74 @@ const MiningContract: FC<ContractProps> = ({
     accountName,
     isDeleted,
 }) => {
-    const {
-        canTerminate,
-        canDeleteSelfContract,
-        showCompleted,
-        showTerminatedAlert,
-    } = useContractState(contract, accountName);
+    const { canTerminate, canDeleteSelfContract, showCompleted } =
+        useContractState(contract, accountName);
 
     return (
-        <Row gutter={[32, 32]}>
-            <Col xs={24} md={12}>
-                <Row gutter={[24, 24]}>
-                    <Col span={24}>
-                        <GeneralDataTable
-                            contract={contract}
+        <div>
+            <PageHeader
+                style={{ marginBottom: '20px' }}
+                ghost={false}
+                title={statusMap[contract.status]}
+                extra={[
+                    canTerminate && (
+                        <TerminateContract
+                            contractId={contract.id}
                             accountName={accountName}
                         />
-                    </Col>
-
-                    {!isDeleted && (
+                    ),
+                    canDeleteSelfContract && (
+                        <DeleteOrder
+                            accountName={accountName}
+                            contractId={contract.id}
+                        />
+                    ),
+                ]}
+            />
+            <Row gutter={[32, 32]}>
+                <Col xs={24} md={12}>
+                    <Row gutter={[24, 24]}>
                         <Col span={24}>
-                            {showCompleted && (
-                                <Completed
-                                    accountName={accountName}
-                                    contractId={contract.id}
-                                />
-                            )}
-                            {showTerminatedAlert && (
-                                <Alert
-                                    message={
-                                        <Trans i18nKey="pages.serviceMarket.contract.youTerminated" />
-                                    }
-                                    type="info"
-                                    showIcon
-                                />
-                            )}
+                            <GeneralDataTable
+                                contract={contract}
+                                accountName={accountName}
+                            />
                         </Col>
-                    )}
-                </Row>
-            </Col>
-            <Col xs={24} md={12}>
-                <ConditionTable contract={contract} />
-            </Col>
-            <Col xs={24} md={12}>
-                <ContractorTable
-                    contract={contract}
-                    accountName={accountName}
-                />
-            </Col>
 
-            <Col xs={24} md={12}>
-                <Row gutter={[32, 32]}>
-                    <Col span={24}>
-                        <MineOwnerTable
-                            contract={contract}
-                            accountName={accountName}
-                        />
-                    </Col>
+                        {!isDeleted && (
+                            <Col span={24}>
+                                {showCompleted && (
+                                    <Completed
+                                        accountName={accountName}
+                                        contractId={contract.id}
+                                    />
+                                )}
+                            </Col>
+                        )}
+                    </Row>
+                </Col>
+                <Col xs={24} md={12}>
+                    <ConditionTable contract={contract} />
+                </Col>
+                <Col xs={24} md={12}>
+                    <ContractorTable
+                        contract={contract}
+                        accountName={accountName}
+                    />
+                </Col>
 
-                    <Col span={24}>
-                        <Row justify="end">
-                            {canTerminate && (
-                                <TerminateContract
-                                    contractId={contract.id}
-                                    accountName={accountName}
-                                />
-                            )}
-                            {canDeleteSelfContract && (
-                                <DeleteOrder
-                                    accountName={accountName}
-                                    contractId={contract.id}
-                                />
-                            )}
-                        </Row>
-                    </Col>
-                </Row>
-            </Col>
-        </Row>
+                <Col xs={24} md={12}>
+                    <Row gutter={[32, 32]}>
+                        <Col span={24}>
+                            <MineOwnerTable
+                                contract={contract}
+                                accountName={accountName}
+                            />
+                        </Col>
+                    </Row>
+                </Col>
+            </Row>
+        </div>
     );
 };
 

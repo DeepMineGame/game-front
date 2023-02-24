@@ -198,12 +198,6 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                     sorter: (a, b) => a.fee - b.fee,
                 },
                 {
-                    title: t('pages.serviceMarket.myContractsTab.penalty'),
-                    dataIndex: 'penalty',
-                    key: 'penalty',
-                    sorter: (a, b) => a.penalty - b.penalty,
-                },
-                {
                     title: t('pages.serviceMarket.myContractsTab.cost'),
                     dataIndex: 'cost',
                     key: 'const',

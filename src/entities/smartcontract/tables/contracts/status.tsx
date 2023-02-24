@@ -1,44 +1,6 @@
 import { DAY_IN_SECONDS, getNowInSeconds } from 'shared';
 import { ContractDto, ContractStatus } from './types';
 
-export const getMissedDays = (
-    feeDays: { key: number; value: number }[],
-    daysPassed: number,
-    feeDailyMinAmount: number
-) => {
-    return [...Array(Math.floor(Math.abs(daysPassed))).keys()].reduce(
-        (penalty, day) => {
-            const workDay = feeDays[day]?.key;
-
-            if (!feeDays[day]) penalty++;
-            if (workDay > day) penalty++;
-            if (workDay === day && feeDays[day]?.value < feeDailyMinAmount)
-                penalty++;
-
-            return penalty;
-        },
-        0
-    );
-};
-
-export const isContractTermNotFulfilled = (contract: ContractDto) => {
-    const { fee_daily_min_amount, fee_days, start_time, finishes_at } =
-        contract;
-    if (!start_time) return false;
-
-    const currentTime = getNowInSeconds();
-    const finishTime = finishes_at < currentTime ? finishes_at : currentTime;
-    const daysPassed = (finishTime - start_time) / DAY_IN_SECONDS;
-
-    const missedDays = getMissedDays(
-        fee_days,
-        daysPassed,
-        fee_daily_min_amount
-    );
-
-    return missedDays;
-};
-
 export enum ContractStates {
     openOrder = 'openOrder',
     valid = 'validContract',
@@ -114,13 +76,7 @@ export const getContractStatus = (
             meta: ContractStatesMeta.deadlineViolation,
         };
     }
-    // the executor logic here will be added in the future
-    if (isContractTermNotFulfilled(contract) && isUserClient) {
-        return {
-            value: ContractStates.waitingForAction,
-            meta: ContractStatesMeta.termViolation,
-        };
-    }
+
     if (wasTerminatedBySomebody(contract) && wasTerminatedEarly(contract)) {
         if (contract.term_initiator !== account) {
             return {
