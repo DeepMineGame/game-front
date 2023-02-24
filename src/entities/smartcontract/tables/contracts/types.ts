@@ -85,6 +85,8 @@ export type ContractDto = {
     penalty_by_fee_days_available: number;
     rarity: number;
     level: number;
+    deposit: number;
+    autorenew_enabled: boolean;
 };
 
 export const contractName = {

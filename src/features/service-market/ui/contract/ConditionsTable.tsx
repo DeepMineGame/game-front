@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Switch } from 'antd';
 import { ContractDto } from 'entities/smartcontract';
 import { DAY_IN_SECONDS, secondsToTime, msToSeconds } from 'shared/ui';
 import { TableWithTitle } from '..';
@@ -20,6 +21,8 @@ const ConditionTable: FC<Props> = ({ contract }) => {
             : '-',
 
         [t('pages.serviceMarket.contract.fee')]: `${contract.fee_percent}%`,
+        [t('Deposit')]: `${contract.deposit}`,
+        [t('Auto-renewal')]: <Switch checked={contract.autorenew_enabled} />,
     };
 
     return (
