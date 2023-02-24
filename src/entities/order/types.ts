@@ -23,6 +23,7 @@ export type MineOrder = BaseOrder & {
     opt_level?: number | null;
     opt_rarity?: RarityType | null;
     deposit: number;
+    autorenew_enabled?: boolean;
 };
 
 export type LevelUpgradeOrder = BaseOrder & {
@@ -51,4 +52,5 @@ export const orderFields = {
     deadlineDurationInDays: 'deadline_duration_in_days',
     deadlineDurationInHours: 'deadline_duration_in_hours',
     deposit: 'deposit',
+    autorenew_enabled: 'autorenew_enabled',
 } as const;

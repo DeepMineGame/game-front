@@ -40,6 +40,7 @@ export const createMineOrder = (orderData: MineOrder) => {
                     opt_level: orderData.opt_level ?? null,
                     opt_rarity: orderData.opt_rarity ?? null,
                     deposit: orderData.deposit,
+                    autorenew_enabled: orderData.autorenew_enabled ? true : 0,
                 },
             },
         ],

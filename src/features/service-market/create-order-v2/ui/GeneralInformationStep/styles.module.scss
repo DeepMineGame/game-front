@@ -20,7 +20,7 @@
 }
 
 .flexSection {
-  display: flex;
+  display: flex !important;
   gap: 15px;
   align-items: self-end;
 
