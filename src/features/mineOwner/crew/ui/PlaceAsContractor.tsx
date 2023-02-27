@@ -50,7 +50,6 @@ const PlaceAsContractor: FC<Props> = ({
                 is_client: 1,
                 opt_asset_id: +mineId || 0,
                 opt_executor: accountName,
-                penalty_amount: 0,
                 wax_user: accountName,
                 deadline_duration_in_days: 1,
                 deadline_duration_in_hours: 0,

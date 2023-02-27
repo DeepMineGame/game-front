@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Form } from 'antd';
+import { Card, Form, Input } from 'antd';
 
 import { Button, getLabelSelectItem, Select } from 'shared';
+import cn from 'classnames';
 import { orderFields } from 'entities/order';
 import { EngineerSchema, raritiesTranslationMap } from 'entities/smartcontract';
 import { GeneralInformationStepProps } from '../interface';
@@ -14,6 +15,12 @@ import {
     useWatchUpgradeType,
 } from '../../UpgradeTypeFormItem';
 import { rarityList } from '../constants';
+import { Role } from '../../../models';
+
+const rolesMap: Record<Role, string> = {
+    [Role.engineer]: 'engineer',
+    [Role.citizen]: 'citizen',
+};
 
 export const EngineerInformation: FC<GeneralInformationStepProps> = ({
     goToPreviousStep,
@@ -25,6 +32,7 @@ export const EngineerInformation: FC<GeneralInformationStepProps> = ({
         useWatchUpgradeType(form);
     const hasRarityItem = upgradeType === EngineerSchema.equipment;
     const hasAllValues = hasUpgradeType;
+    const role: Role = Form.useWatch(orderFields.isClient, form);
 
     return (
         <>
@@ -58,6 +66,30 @@ export const EngineerInformation: FC<GeneralInformationStepProps> = ({
                     </Form.Item>
                 )}
             </div>
+            <Form.Item
+                name={orderFields.costOfExecution}
+                label={t(
+                    'pages.serviceMarket.createOrder.levelUpgradeTerms.upgradeCost'
+                )}
+                className={cn(styles.formField)}
+                tooltip={
+                    <Card
+                        title={t(
+                            'pages.serviceMarket.createOrder.levelUpgradeTerms.upgradeCost'
+                        )}
+                        className={styles.tooltipCard}
+                    >
+                        {t(
+                            `pages.serviceMarket.createOrder.levelUpgradeTerms.${rolesMap[role]}.costOfExecution`
+                        )}
+                    </Card>
+                }
+            >
+                <Input
+                    placeholder={t('components.common.button.dme')}
+                    type="number"
+                />
+            </Form.Item>
             <div className={localStyles.flexSection}>
                 <Button onClick={goToPreviousStep} ghost>
                     {t('kit.back')}

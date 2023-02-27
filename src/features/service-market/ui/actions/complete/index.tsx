@@ -16,7 +16,7 @@ const Completed: FC<Props> = ({ accountName, contractId, onComplete }) => {
     const reloadPage = useReloadPage();
 
     const terminateAction = useSmartContractAction({
-        action: terminateContract(accountName, contractId, false),
+        action: terminateContract(accountName, contractId),
         onSignSuccess: reloadPage,
     });
 

@@ -12,9 +12,9 @@ export type BaseOrder = {
     is_client: ContractRole;
     opt_client?: string;
     opt_executor?: string;
-    penalty_amount: number;
     deadline_duration_in_days: number;
     deadline_duration_in_hours: number;
+    deposit: number;
 };
 
 export type MineOrder = BaseOrder & {
@@ -40,10 +40,8 @@ export const orderFields = {
     isClient: 'is_client',
     optClient: 'opt_client',
     optExecutor: 'opt_executor',
-    penaltyAmount: 'penalty_amount',
     feePercent: 'fee_percent',
     feeDailyMinAmount: 'fee_daily_min_amount',
-    daysForPenalty: 'days_for_penalty',
     contractDuration: 'contract_duration',
     costOfExecution: 'cost_of_execution',
     optSchema: 'opt_schema_type',

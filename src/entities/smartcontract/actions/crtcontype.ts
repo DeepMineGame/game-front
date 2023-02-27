@@ -12,6 +12,7 @@ const getBaseFields = (orderData: BaseOrder) => {
         opt_executor: orderData.opt_executor,
         opt_asset_id: Number.isNaN(assetId) ? undefined : assetId,
         is_client: isClient,
+        deposit: Number(orderData.deposit || 0) * 10 ** 8,
         deadline_duration:
             orderData.deadline_duration_in_days * DAY_IN_SECONDS +
             orderData.deadline_duration_in_hours * HOUR_IN_SECONDS,
@@ -38,7 +39,6 @@ export const createMineOrder = (orderData: MineOrder) => {
                         orderData.contract_duration * DAY_IN_SECONDS,
                     opt_level: orderData.opt_level ?? null,
                     opt_rarity: orderData.opt_rarity ?? null,
-                    deposit: Number(orderData.deposit || 0) * 10 ** 8,
                     autorenew_enabled: orderData.autorenew_enabled ? true : 0,
                 },
             },
@@ -64,8 +64,6 @@ export const createLevelUpgradeOrder = (orderData: LevelUpgradeOrder) => {
                     opt_level: orderData.opt_level,
                     opt_rarity: orderData.opt_rarity,
                     cost_of_execution: Number(orderData.cost_of_execution),
-                    penalty_amount:
-                        Number(orderData.penalty_amount || 0) * 10 ** 8,
                 },
             },
         ],

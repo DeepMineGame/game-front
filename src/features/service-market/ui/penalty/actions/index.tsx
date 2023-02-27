@@ -35,10 +35,10 @@ export const PenaltyActions: FC<Props> = ({
         useState(false);
 
     const getPenaltyAction = useSmartContractAction({
-        action: terminateContract(accountName, contractId, true),
+        action: terminateContract(accountName, contractId),
     });
     const getNoPenaltyAction = useSmartContractAction({
-        action: terminateContract(accountName, contractId, false),
+        action: terminateContract(accountName, contractId),
     });
 
     const closeSuccessModal = () => {

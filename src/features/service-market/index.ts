@@ -1,4 +1,3 @@
-export * from './create-order';
 export * from './mine-owner-tab/ui';
 export * from './landlord-tab/ui';
 export * from './contractor-table';

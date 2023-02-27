@@ -20,7 +20,7 @@ export const ContractAlerts: FC<ContractProps> = ({
         contract.penalty_demanded_by === contract.client;
 
     const terminateContractAction = useSmartContractAction({
-        action: terminateContract(accountName, contract.id, false),
+        action: terminateContract(accountName, contract.id),
         onSignSuccess: reloadPage,
     });
 

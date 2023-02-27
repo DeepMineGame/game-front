@@ -55,7 +55,6 @@ export type ContractDto = {
     type: ContractType;
     fee_percent: number;
     fee_daily_min_amount: number;
-    demand_penalty: number;
     penalty_available: number;
     create_time: number;
     activation_time: number;
