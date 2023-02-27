@@ -72,7 +72,7 @@ const SignContractorOrder: FC<Props> = ({ contract, accountName }) => {
 
     return (
         <>
-            <Button onClick={handleSign} size="large" type="primary" block>
+            <Button onClick={handleSign} type="primary" block>
                 {t('pages.serviceMarket.order.selectMineAndSign')}
             </Button>
 

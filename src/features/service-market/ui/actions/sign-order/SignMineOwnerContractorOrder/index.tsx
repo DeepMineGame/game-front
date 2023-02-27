@@ -34,7 +34,7 @@ const SignMineOwnerContractorOrder: FC<Props> = React.memo(
         }, [reloadPage, signContractAction, t]);
 
         return (
-            <Button onClick={handleSignOrder} size="large" type="primary" block>
+            <Button onClick={handleSignOrder} type="primary" block>
                 {t('pages.serviceMarket.order.signOrder')}
             </Button>
         );
