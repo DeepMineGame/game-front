@@ -112,7 +112,6 @@ const useLevelUpgradeContract = (
     const isClient = contract.client === accountName;
     const isEngineer = contract.executor === accountName;
     const isContractMember = isClient || isEngineer;
-    const isTermInitiator = contract.term_initiator === accountName;
 
     const isTerminated = contract.term_time > 0;
     const upgradeStarted = contract.start_time > 0;
@@ -126,7 +125,6 @@ const useLevelUpgradeContract = (
     const isDeadlineStartExpired =
         stateMeta === ContractStatesMeta.deadlineViolation;
     const isTerminatedStatus = state === ContractStates.terminated;
-    const isEarlyBreak = stateMeta === ContractStatesMeta.earlyBreak;
     const isDeadlineExpired = stateMeta === ContractStatesMeta.deadlineExpired;
     const isWaitingForAction = state === ContractStates.waitingForAction;
 
@@ -142,8 +140,6 @@ const useLevelUpgradeContract = (
         isTerminatedStatus,
         isWaitingForAction,
         isDeadlineStartExpired,
-        isTermInitiator,
-        isEarlyBreak,
         isDeadlineExpired,
         isCompleted,
         isNeedComplete,

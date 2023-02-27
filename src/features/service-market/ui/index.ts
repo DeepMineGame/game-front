@@ -1,4 +1,3 @@
-export * from './penalty';
 export * from './contract';
 export * from './contract-state';
 export * from './upgrade-contract-state';
