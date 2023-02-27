@@ -33,12 +33,12 @@ export const createMineOrder = (orderData: MineOrder) => {
                 data: {
                     ...getBaseFields(orderData),
                     contract_type: orderData.contract_type,
-                    fee_percent: Number(orderData.fee_percent || 0) * 10 ** 8,
+                    fee_percent: Number(orderData.fee_percent || 0),
                     contract_duration:
                         orderData.contract_duration * DAY_IN_SECONDS,
                     opt_level: orderData.opt_level ?? null,
                     opt_rarity: orderData.opt_rarity ?? null,
-                    deposit: orderData.deposit,
+                    deposit: Number(orderData.deposit || 0) * 10 ** 8,
                     autorenew_enabled: orderData.autorenew_enabled ? true : 0,
                 },
             },
