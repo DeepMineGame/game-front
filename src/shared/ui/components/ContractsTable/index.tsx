@@ -204,7 +204,7 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                     sorter: (a, b) => a.const - b.cost,
                 },
                 {
-                    title: 'Mine level',
+                    title: 'Level',
                     dataIndex: 'level',
                     key: 'level',
                     render: (level) => (level === -1 ? 'N/A' : level),
