@@ -9,7 +9,8 @@ import {
 } from 'features';
 import { useStore, useGate } from 'effector-react';
 import { useTranslation } from 'react-i18next';
-import { Skeleton } from 'antd';
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 import { calcmining } from 'entities/smartcontract';
 
 const THREE_SECONDS = 3000;
@@ -46,7 +47,12 @@ export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
     }, [accountName, contractor?.finished]);
 
     if (isMiningCalculating) {
-        return <Skeleton active />;
+        return (
+            <Spin
+                spinning
+                indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
+            />
+        );
     }
 
     return contractor?.finished ? (
