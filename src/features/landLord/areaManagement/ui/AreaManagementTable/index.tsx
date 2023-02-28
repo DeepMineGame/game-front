@@ -93,7 +93,7 @@ export const AreaManagementTable: FC<Props> = ({
 
     const emptySlots = [
         ...new Array(
-            Number(area.mine_slots?.length) -
+            Number(area?.mine_slots?.length) -
                 rarityDiscoverSlotsAmount[area.rarity] -
                 ownContracts.length
         ),
