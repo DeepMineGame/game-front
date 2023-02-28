@@ -90,12 +90,12 @@ export const AreaManagementTable: FC<Props> = ({
             accountName={accountName}
         />
     ));
-
+    console.log(area, area?.mine_slots, ownContracts);
     const emptySlots = [
         ...new Array(
             Number(area?.mine_slots?.length) -
-                rarityDiscoverSlotsAmount[area.rarity] -
-                ownContracts.length
+                rarityDiscoverSlotsAmount[area?.rarity] -
+                Number(ownContracts?.length)
         ),
     ].map((_, idx) => (
         <AddItem
