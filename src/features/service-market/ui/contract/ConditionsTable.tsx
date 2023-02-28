@@ -1,7 +1,7 @@
 import { FC, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Modal as ModalAnt, Switch } from 'antd';
-import { useAccountName, useReloadPage } from 'shared';
+import { getDmeAmount, useAccountName, useReloadPage } from 'shared';
 import { useSmartContractAction } from 'features';
 import { ContractDto, disautorenew } from 'entities/smartcontract';
 import { DAY_IN_SECONDS, secondsToTime, msToSeconds } from 'shared/ui';
@@ -34,7 +34,7 @@ const ConditionTable: FC<Props> = ({ contract }) => {
                 })
             );
         }
-    }, [contract.autorenew_enabled, disableAutoRenew]);
+    }, [contract.autorenew_enabled, disableAutoRenew, reloadPage, t]);
 
     const conditionData = {
         [t('pages.serviceMarket.contract.operationStart')]: contract.start_time
@@ -44,7 +44,7 @@ const ConditionTable: FC<Props> = ({ contract }) => {
             : '-',
 
         [t('pages.serviceMarket.contract.fee')]: `${contract.fee_percent}%`,
-        [t('Deposit')]: `${contract.deposit}`,
+        [t('Deposit')]: getDmeAmount(contract.deposit),
         [t('Auto-renewal')]: (
             <Switch
                 onClick={autoRenewOff}
