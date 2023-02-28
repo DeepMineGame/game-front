@@ -84,7 +84,7 @@ const SignLandlordOrder: FC<Props> = ({
 
     return (
         <>
-            <Button onClick={handleSign} type="primary" size="large" block>
+            <Button onClick={handleSign} type="primary" block>
                 {t('pages.serviceMarket.order.selectMineAndSign')}
             </Button>
 

@@ -40,7 +40,6 @@ export const EquipmentInstallationModal = ({
                 type="primary"
                 onClick={toggleModal}
                 className={styles.actionButton}
-                size="large"
             >
                 {isInstall
                     ? t('pages.equipmentSet.main.install')
