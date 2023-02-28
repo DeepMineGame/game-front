@@ -192,7 +192,7 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                         new Date(a.date).getTime() - new Date(b.date).getTime(),
                 },
                 {
-                    title: t('pages.serviceMarket.myContractsTab.fee'),
+                    title: t('fee'),
                     dataIndex: 'fee',
                     key: 'fee',
                     sorter: (a, b) => a.fee - b.fee,

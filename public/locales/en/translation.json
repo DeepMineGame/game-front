@@ -999,5 +999,6 @@
   "Auto-renewal": "Auto-renewal",
   "Auto-renewal disabled": "Auto-renewal disabled",
   "Minimum Fee": "Minimum Fee",
-  "Deposit": "Deposit"
+  "Deposit": "Deposit",
+  "fee": "Fee"
 }
