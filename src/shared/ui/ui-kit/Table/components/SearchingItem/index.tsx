@@ -26,7 +26,7 @@ export const SearchingItem: FC<Props> = ({
     const reloadPage = useReloadPage();
 
     const terminateAction = useSmartContractAction({
-        action: terminateContract(accountName, contract.id, false),
+        action: terminateContract(accountName, contract.id),
         onSignSuccess: reloadPage,
     });
 

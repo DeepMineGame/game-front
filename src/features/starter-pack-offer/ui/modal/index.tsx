@@ -59,7 +59,7 @@ export const StarterPackOfferModal = () => {
                         ghost
                         onClick={() => {
                             window.location.href =
-                                'https://shop.deepmine.world/shop/1';
+                                'https://shop.deepmine.world/shop/7';
                         }}
                     >
                         {t('pages.home.buySet')}

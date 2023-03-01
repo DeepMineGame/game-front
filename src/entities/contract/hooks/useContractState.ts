@@ -45,7 +45,6 @@ export const useContractState = (
     const canDeleteSelfContract =
         isContractMember && isSelfSigned && !canTerminate && !isDeleted;
 
-    const showPenaltyActions = isTermViolation && isContractMember;
     const showTerminatedAlert = isTerminated && isContractMember;
     const showCompleted = isNeedComplete && isContractMember;
 
@@ -64,7 +63,6 @@ export const useContractState = (
         canTerminate,
         canDeleteSelfContract,
         showTerminatedAlert,
-        showPenaltyActions,
         showCompleted,
     };
 };

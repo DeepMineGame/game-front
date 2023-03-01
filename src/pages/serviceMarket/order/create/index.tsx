@@ -1,7 +1,7 @@
 import React from 'react';
 import { Page } from 'shared';
-import { CreateOrderForm } from 'features';
 import { useTranslation } from 'react-i18next';
+import { CreateOrderFormV2 } from 'features';
 import styles from './styles.module.scss';
 
 export const CreateOrderPage = () => {
@@ -14,7 +14,7 @@ export const CreateOrderPage = () => {
                 'pages.serviceMarket.createOrder.createOrder'
             ).toUpperCase()}
         >
-            <CreateOrderForm />
+            <CreateOrderFormV2 />
         </Page>
     );
 };

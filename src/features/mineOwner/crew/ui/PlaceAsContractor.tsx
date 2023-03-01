@@ -2,13 +2,17 @@ import { FC, useState } from 'react';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
-import { createMineOrder } from 'features/serviceMarket';
 import {
     useSmartContractAction,
     useSmartContractActionDynamic,
 } from 'features/hooks';
 
-import { ContractDto, ContractType, signOrder } from 'entities/smartcontract';
+import {
+    ContractDto,
+    ContractType,
+    signOrder,
+    createMineOrder,
+} from 'entities/smartcontract';
 import { MinesGate, minesStore } from 'entities/contract';
 import { confirm, Select, Text, Modal, Button } from 'shared/ui/ui-kit';
 import { neutral9 } from 'shared/ui/variables';
@@ -42,18 +46,16 @@ const PlaceAsContractor: FC<Props> = ({
             createMineOrder({
                 contract_duration: 21,
                 contract_type: ContractType.mineowner_contractor,
-                days_for_penalty: 20,
-                fee_daily_min_amount: 0,
                 fee_percent: 10,
                 is_client: 1,
                 opt_asset_id: +mineId || 0,
                 opt_executor: accountName,
-                penalty_amount: 0,
                 wax_user: accountName,
                 deadline_duration_in_days: 1,
                 deadline_duration_in_hours: 0,
                 opt_level: null,
                 opt_rarity: null,
+                deposit: 0,
             })
         );
 

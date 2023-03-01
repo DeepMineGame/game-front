@@ -1,10 +1,6 @@
 import { deepminesmrt } from '../index';
 
-export function terminateContract(
-    waxUser: string,
-    contractId: number,
-    demandPenalty: boolean
-) {
+export function terminateContract(waxUser: string, contractId: number) {
     return {
         actions: [
             {
@@ -19,7 +15,6 @@ export function terminateContract(
                 data: {
                     wax_user: waxUser,
                     contract_id: contractId,
-                    demand_penalty: demandPenalty,
                 },
             },
         ],

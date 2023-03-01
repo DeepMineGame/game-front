@@ -12,18 +12,18 @@ export type BaseOrder = {
     is_client: ContractRole;
     opt_client?: string;
     opt_executor?: string;
-    penalty_amount: number;
     deadline_duration_in_days: number;
     deadline_duration_in_hours: number;
+    deposit: number;
 };
 
 export type MineOrder = BaseOrder & {
     fee_percent: number;
-    fee_daily_min_amount: number;
-    days_for_penalty: number;
     contract_duration: number;
     opt_level?: number | null;
     opt_rarity?: RarityType | null;
+    deposit: number;
+    autorenew_enabled?: boolean;
 };
 
 export type LevelUpgradeOrder = BaseOrder & {
@@ -40,10 +40,8 @@ export const orderFields = {
     isClient: 'is_client',
     optClient: 'opt_client',
     optExecutor: 'opt_executor',
-    penaltyAmount: 'penalty_amount',
     feePercent: 'fee_percent',
     feeDailyMinAmount: 'fee_daily_min_amount',
-    daysForPenalty: 'days_for_penalty',
     contractDuration: 'contract_duration',
     costOfExecution: 'cost_of_execution',
     optSchema: 'opt_schema_type',
@@ -51,4 +49,6 @@ export const orderFields = {
     optRarity: 'opt_rarity',
     deadlineDurationInDays: 'deadline_duration_in_days',
     deadlineDurationInHours: 'deadline_duration_in_hours',
+    deposit: 'deposit',
+    autorenew_enabled: 'autorenew_enabled',
 } as const;

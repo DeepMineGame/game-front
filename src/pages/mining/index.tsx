@@ -14,7 +14,7 @@ import {
     green6,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { Alert, Col, Row, Skeleton, Space, Tooltip } from 'antd';
+import { Alert, Col, Row, Space, Spin, Tooltip } from 'antd';
 import { useGate, useStore } from 'effector-react';
 
 import {
@@ -36,6 +36,7 @@ import {
     CheckCircleFilled,
     CloseCircleFilled,
     ExclamationCircleFilled,
+    LoadingOutlined,
 } from '@ant-design/icons';
 import {
     ActionState,
@@ -132,7 +133,12 @@ export const MiningPage: FC = memo(() => {
                         )}
                         <MineStatus />
                     </div>
-                    <Skeleton loading={isMineStoreLoading} />
+                    <Spin
+                        spinning={isMineStoreLoading && !mineStore}
+                        indicator={
+                            <LoadingOutlined style={{ fontSize: 24 }} spin />
+                        }
+                    />
                     <div className={styles.data}>
                         {mineStore?.length ? (
                             <div className={styles.line}>

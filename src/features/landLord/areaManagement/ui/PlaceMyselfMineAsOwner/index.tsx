@@ -6,7 +6,7 @@ import {
     ExclamationCircleFilled,
 } from '@ant-design/icons';
 import { ATOMICHUB_URL } from 'app/constants';
-import { createMineOrder, getEmptySlot } from 'features/serviceMarket';
+import { getEmptySlot } from 'features/service-market';
 import {
     useSmartContractAction,
     useSmartContractActionDynamic,
@@ -15,6 +15,7 @@ import {
 import {
     ContractDto,
     ContractType,
+    createMineOrder,
     getInventoryConfig,
     InUseType,
     signOrder,
@@ -73,18 +74,16 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
             createMineOrder({
                 contract_duration: 21,
                 contract_type: ContractType.landlord_mineowner,
-                days_for_penalty: 20,
-                fee_daily_min_amount: 0,
                 fee_percent: 10,
                 is_client: 1,
                 opt_asset_id: activeArea?.id! as unknown as number,
                 opt_executor: accountName,
-                penalty_amount: 0,
                 wax_user: accountName,
                 deadline_duration_in_days: 1,
                 deadline_duration_in_hours: 0,
                 opt_level: null,
                 opt_rarity: null,
+                deposit: 0,
             })
         );
 

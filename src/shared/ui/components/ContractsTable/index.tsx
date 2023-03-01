@@ -4,7 +4,7 @@ import { DiscordIcon, useAccountName } from 'shared';
 import { Space, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
 import { CopyOutlined } from '@ant-design/icons';
-import { ContractState, UpgradeContractState } from 'features/serviceMarket';
+import { ContractState, UpgradeContractState } from 'features/service-market';
 import {
     ContractDto,
     contractName,
@@ -12,7 +12,7 @@ import {
     getContractStatus,
 } from 'entities/smartcontract';
 
-import { getDmeAmount, getUserRoleInContract } from 'shared/lib/utils';
+import { getUserRoleInContract } from 'shared/lib/utils';
 import { Link, Table, Tag } from '../../ui-kit';
 import { toLocaleDate } from '../../utils';
 import styles from './styles.module.scss';
@@ -26,14 +26,14 @@ const contractStateMap = {
     [ContractType.level_upgrade]: UpgradeContractState,
 };
 
-// const rarityColorMap = {
-//     0: undefined,
-//     1: '#DBDBDB', // neutral9
-//     2: '#09E001', // green4
-//     3: '#0089FF', // geekblue5
-//     4: '#CB2EFF', // purple6
-//     5: '#E8D639', // yellow7,
-// };
+const rarityColorMap = {
+    0: undefined,
+    1: '#DBDBDB', // neutral9
+    2: '#09E001', // green4
+    3: '#0089FF', // geekblue5
+    4: '#CB2EFF', // purple6
+    5: '#E8D639', // yellow7,
+};
 
 export const ContractsTable: FC<Props> = ({ contracts }) => {
     const navigate = useNavigate();
@@ -46,8 +46,8 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
 
                 return {
                     cost: contract.cost_of_execution,
-                    // rarity: contract.rarity,
-                    // level: contract.level,
+                    rarity: contract.rarity,
+                    level: contract.level,
                     nickName: contract.client || contract.executor,
                     key: contract.id,
                     id: contract.id,
@@ -57,7 +57,6 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                         contract.finishes_at === 0
                             ? '-'
                             : toLocaleDate(contract.finishes_at * 1000),
-                    penalty: getDmeAmount(contract.penalty_amount),
                     status: {
                         label: (
                             <Status contract={contract} accountName={account} />
@@ -169,20 +168,20 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                         );
                     },
                 },
-                // {
-                //     title: 'Rarity',
-                //     dataIndex: 'rarity',
-                //     key: 'rarity',
-                //     render: (rarity: -1 | 1 | 2 | 3 | 4 | 5) =>
-                //         rarity === -1 ? (
-                //             'N/A'
-                //         ) : (
-                //             <div
-                //                 className={styles.rarityMarker}
-                //                 style={{ background: rarityColorMap[rarity] }}
-                //             />
-                //         ),
-                // },
+                {
+                    title: 'Rarity',
+                    dataIndex: 'rarity',
+                    key: 'rarity',
+                    render: (rarity: -1 | 1 | 2 | 3 | 4 | 5) =>
+                        rarity === -1 ? (
+                            'N/A'
+                        ) : (
+                            <div
+                                className={styles.rarityMarker}
+                                style={{ background: rarityColorMap[rarity] }}
+                            />
+                        ),
+                },
                 {
                     title: t(
                         'pages.serviceMarket.myContractsTab.completionDate'
@@ -193,16 +192,10 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                         new Date(a.date).getTime() - new Date(b.date).getTime(),
                 },
                 {
-                    title: t('pages.serviceMarket.myContractsTab.fee'),
+                    title: t('fee'),
                     dataIndex: 'fee',
                     key: 'fee',
                     sorter: (a, b) => a.fee - b.fee,
-                },
-                {
-                    title: t('pages.serviceMarket.myContractsTab.penalty'),
-                    dataIndex: 'penalty',
-                    key: 'penalty',
-                    sorter: (a, b) => a.penalty - b.penalty,
                 },
                 {
                     title: t('pages.serviceMarket.myContractsTab.cost'),
@@ -210,12 +203,12 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                     key: 'const',
                     sorter: (a, b) => a.const - b.cost,
                 },
-                // {
-                //     title: 'Mine level',
-                //     dataIndex: 'level',
-                //     key: 'level',
-                //     render: (level) => (level === -1 ? 'N/A' : level),
-                // },
+                {
+                    title: 'Level',
+                    dataIndex: 'level',
+                    key: 'level',
+                    render: (level) => (level === -1 ? 'N/A' : level),
+                },
                 {
                     title: t('pages.serviceMarket.myContractsTab.status'),
                     dataIndex: 'status',

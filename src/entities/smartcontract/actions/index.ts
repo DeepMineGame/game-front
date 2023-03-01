@@ -19,6 +19,8 @@ export * from './engineer';
 export * from './repairEquipment';
 export * from './cmdStart';
 export * from './cmdFinish';
+export * from './crtcontype';
+export * from './disautorenew';
 
 export function toggleMining({
     waxUser,

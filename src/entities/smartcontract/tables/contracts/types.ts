@@ -55,10 +55,6 @@ export type ContractDto = {
     type: ContractType;
     fee_percent: number;
     fee_daily_min_amount: number;
-    days_for_penalty: number;
-    penalty_amount: string;
-    demand_penalty: number;
-    penalty_available: number;
     create_time: number;
     activation_time: number;
     start_time: number;
@@ -83,10 +79,10 @@ export type ContractDto = {
     cost_of_execution: number;
     client_discord: string;
     executor_discord: string;
-    penalty_demanded_by: string;
-    penalty_by_fee_days_available: number;
     rarity: number;
     level: number;
+    deposit: number;
+    autorenew_enabled: boolean;
 };
 
 export const contractName = {

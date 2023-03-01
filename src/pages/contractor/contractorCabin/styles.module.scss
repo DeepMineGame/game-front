@@ -38,8 +38,12 @@
 }
 
 .cabinMonitorContainerHeight {
-  width: 71vh;
-  left: 15.3vh;
+  width: 100vw;
+
+  @media (min-width: $media-mobile-oriental) {
+    width: 71vh;
+    left: 15.3vh;
+  }
 }
 
 .cabinMonitorContainerWidth {

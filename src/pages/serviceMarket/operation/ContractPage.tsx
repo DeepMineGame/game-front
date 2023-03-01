@@ -5,16 +5,16 @@ import {
     LevelUpgradeContract,
     MineOperationContract,
     MiningContract,
-} from 'features/serviceMarket';
+} from 'features/service-market';
 import { ContractDto, ContractType } from 'entities/smartcontract';
 import { useContractState } from 'entities/contract';
 
 type Props = { contract: ContractDto; accountName: string };
 
 const contracts = {
-    [ContractType.level_upgrade]: LevelUpgradeContract,
     [ContractType.landlord_mineowner]: MineOperationContract,
     [ContractType.mineowner_contractor]: MiningContract,
+    [ContractType.level_upgrade]: LevelUpgradeContract,
     [ContractType.undefined]: MiningContract,
 };
 
