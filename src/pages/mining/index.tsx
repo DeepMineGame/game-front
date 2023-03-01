@@ -22,8 +22,6 @@ import {
     MiningAndClaimButton,
     $currentMine,
     actionsStore,
-    getActionsForUserEffect,
-    getContractByExecutorEffect,
     estimatesMiningTimeStore,
     ContractorCabinGate,
     $isContractorCabinLoading,
@@ -71,10 +69,7 @@ export const MiningPage: FC = memo(() => {
     const estTime = useStore(estimatesMiningTimeStore);
     const lastMiningStatus = useStore($lastMiningStatus);
 
-    const isContractsLoading = useStore(getContractByExecutorEffect.pending);
-    const isActionsLoading = useStore(getActionsForUserEffect.pending);
     const isMineStoreLoading = useStore(getMineByAssetEffect.pending);
-    const isLoading = isActionsLoading || isContractsLoading;
     const isContractorCabinLoading = useStore($isContractorCabinLoading);
 
     const mineActions = actions?.filter(({ type }) => type === ActionType.mine);
@@ -126,11 +121,9 @@ export const MiningPage: FC = memo(() => {
             <Row justify="center" gutter={gutter} className={styles.grid}>
                 <Col sm={17} xs={24} className={styles.firsColumn}>
                     <div className={styles.wrapperForTittleWithRightSection}>
-                        {!isLoading && (
-                            <Title level={subTitleLevel} fontFamily="orbitron">
-                                {t('pages.mining.miningStats')}
-                            </Title>
-                        )}
+                        <Title level={subTitleLevel} fontFamily="orbitron">
+                            {t('pages.mining.miningStats')}
+                        </Title>
                         <MineStatus />
                     </div>
                     <Spin
