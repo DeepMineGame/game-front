@@ -82,6 +82,7 @@ export type ContractDto = {
     level: number;
     deposit: number;
     autorenew_enabled: boolean;
+    fee_counter: number;
 };
 
 export const contractName = {
