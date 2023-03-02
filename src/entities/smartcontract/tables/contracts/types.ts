@@ -66,7 +66,6 @@ export type ContractDto = {
     term_initiator: string;
     finishes_at: number;
     status: ContractStatus;
-    fee_days: { key: number; value: number }[];
     min_amount: number;
     client_warranty_amount: number;
     executor_warranty_amount: number;
@@ -83,6 +82,7 @@ export type ContractDto = {
     level: number;
     deposit: number;
     autorenew_enabled: boolean;
+    fee_counter: number;
 };
 
 export const contractName = {

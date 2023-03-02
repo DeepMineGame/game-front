@@ -1000,5 +1000,8 @@
   "Auto-renewal disabled": "Auto-renewal disabled",
   "Minimum Fee": "Minimum Fee",
   "Deposit": "Deposit",
-  "fee": "Fee"
+  "fee": "Fee",
+  "Fee paid": "Fee paid",
+  "Cost of execution": "Cost of execution",
+  "Penalty": "Penalty"
 }

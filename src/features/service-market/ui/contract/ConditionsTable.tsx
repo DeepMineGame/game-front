@@ -35,7 +35,6 @@ const ConditionTable: FC<Props> = ({ contract }) => {
             );
         }
     }, [contract.autorenew_enabled, disableAutoRenew, reloadPage, t]);
-
     const conditionData = {
         [t('pages.serviceMarket.contract.operationStart')]: contract.start_time
             ? `${Math.floor(
@@ -44,13 +43,14 @@ const ConditionTable: FC<Props> = ({ contract }) => {
             : '-',
 
         [t('pages.serviceMarket.contract.fee')]: `${contract.fee_percent}%`,
-        [t('Deposit')]: getDmeAmount(contract.deposit),
+        [t('Minimum Fee')]: getDmeAmount(contract.deposit),
         [t('Auto-renewal')]: (
             <Switch
                 onClick={autoRenewOff}
                 checked={contract.autorenew_enabled}
             />
         ),
+        [t('Fee paid')]: contract.fee_counter,
     };
 
     return (
