@@ -66,6 +66,16 @@ export const LevelUpgradeTerms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                     className={cn(styles.formField, localStyles.feeInput)}
                     name={orderFields.feePercent}
                     initialValue={10}
+                    tooltip={
+                        <Card
+                            title={t('Cost of execution')}
+                            className={styles.tooltipCard}
+                        >
+                            {t(
+                                'The amount of DME the performing party receives for contract performance'
+                            )}
+                        </Card>
+                    }
                 >
                     <InputNumber
                         placeholder="%"
@@ -82,10 +92,12 @@ export const LevelUpgradeTerms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                     initialValue={1}
                     tooltip={
                         <Card
-                            title={t('Cost of execution')}
+                            title={t('Penalty')}
                             className={styles.tooltipCard}
                         >
-                            {t('pages.serviceMarket.createOrder.feeTooltip')}
+                            {t(
+                                'If the an engineer violates the terms of the contract or terminates the contract prematurely, the counterparty may charge a fine'
+                            )}
                         </Card>
                     }
                 >
