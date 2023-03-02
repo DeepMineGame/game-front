@@ -1001,5 +1001,7 @@
   "Minimum Fee": "Minimum Fee",
   "Deposit": "Deposit",
   "fee": "Fee",
-  "Fee paid": "Fee paid"
+  "Fee paid": "Fee paid",
+  "Cost of execution": "Cost of execution",
+  "Penalty": "Penalty"
 }
