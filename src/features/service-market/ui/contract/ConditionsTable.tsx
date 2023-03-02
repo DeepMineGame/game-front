@@ -4,7 +4,6 @@ import { Modal as ModalAnt, Switch } from 'antd';
 import { getDmeAmount, useAccountName, useReloadPage } from 'shared';
 import { useSmartContractAction } from 'features';
 import { ContractDto, disautorenew } from 'entities/smartcontract';
-import { DAY_IN_SECONDS, secondsToTime, msToSeconds } from 'shared/ui';
 import { TableWithTitle } from '..';
 
 type Props = {
@@ -14,7 +13,7 @@ type Props = {
 const ConditionTable: FC<Props> = ({ contract }) => {
     const accountName = useAccountName();
     const { t } = useTranslation();
-    const workDuration = Date.now() - contract.start_time * 1000;
+    // const workDuration = Date.now() - contract.start_time * 1000;
     const reloadPage = useReloadPage();
 
     const disableAutoRenew = useSmartContractAction({
@@ -35,12 +34,20 @@ const ConditionTable: FC<Props> = ({ contract }) => {
             );
         }
     }, [contract.autorenew_enabled, disableAutoRenew, reloadPage, t]);
+    // const shouldDisplayStartOperationIn =
+    //     contract.type === ContractType.level_upgrade;
+
     const conditionData = {
-        [t('pages.serviceMarket.contract.operationStart')]: contract.start_time
-            ? `${Math.floor(
-                  msToSeconds(workDuration) / DAY_IN_SECONDS
-              )}d ${secondsToTime(msToSeconds(workDuration))}`
-            : '-',
+        // ...(shouldDisplayStartOperationIn && contract.deadline_time
+        //     ? {
+        //           [t('pages.serviceMarket.contract.operationStart')]:
+        //               isUtcDateExpired(contract.deadline_time)
+        //                   ? 'Expired'
+        //                   : getTimeLeft(
+        //                         getNowInSeconds() - contract.deadline_time
+        //                     ),
+        //       }
+        //     : {}),
 
         [t('pages.serviceMarket.contract.fee')]: `${contract.fee_percent}%`,
         [t('Minimum Fee')]: getDmeAmount(contract.deposit),
