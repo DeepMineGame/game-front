@@ -20,7 +20,7 @@ export const getContractorsTableData = <T,>({
     getTableData<T>({
         code: deepmineming,
         scope: deepmineming,
-        table: 'contractors',
+        table: 'contractors2',
         index_position: searchType,
         key_type: searchType === ContractorsSearchType.owner ? 'name' : 'i64',
         lower_bound: searchParam,
