@@ -1,6 +1,6 @@
 import { createGate } from 'effector-react';
 import { createEffect, createStore, forward } from 'effector';
-import { getActions, UserActionDto } from 'entities/gameStat';
+import { getActions, UserActionDto } from 'entities/game-stat';
 import { getRolesEffect } from 'entities/smartcontract';
 
 export const UserActionTableGage = createGate<{

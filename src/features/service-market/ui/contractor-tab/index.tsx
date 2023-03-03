@@ -2,7 +2,7 @@ import { useStore } from 'effector-react';
 import { FC, useCallback } from 'react';
 import { Segmented } from 'shared';
 import { Space } from 'antd';
-import { Roles } from 'entities/gameStat';
+import { Roles } from 'entities/game-stat';
 import { changeFilterEvent, filterStore } from '../../contractor-table/model';
 import { ContractorTable } from '../../contractor-table';
 import { TabGrid } from '../tab-grid';

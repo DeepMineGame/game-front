@@ -3,7 +3,7 @@ import { useGate, useStore } from 'effector-react';
 import { Skeleton, Space } from 'antd';
 import { ContractsTable, Segmented } from 'shared';
 import { useCallback } from 'react';
-import { OrderStatus, Roles } from 'entities/gameStat';
+import { OrderStatus, Roles } from 'entities/game-stat';
 import { TabGrid } from '../../ui';
 import {
     changeFilterEvent,

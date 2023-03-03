@@ -1,7 +1,7 @@
 import { createGate } from 'effector-react';
 import { createEffect, createEvent, createStore, forward } from 'effector';
 import { ContractDto } from 'entities/smartcontract';
-import { getMyOrders, ServiceMarketMyOrdersFilter } from 'entities/gameStat';
+import { getMyOrders, ServiceMarketMyOrdersFilter } from 'entities/game-stat';
 
 export const MyContractsGate =
     createGate<ServiceMarketMyOrdersFilter>('ContractsGate');

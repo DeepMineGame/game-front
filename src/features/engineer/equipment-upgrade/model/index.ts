@@ -1,7 +1,7 @@
 import { createEffect, createStore, sample } from 'effector';
 
 import { AssetDataType, getAssets } from 'entities/atomicassets';
-import { getOrders, Role, FilterOrderStatus } from 'entities/gameStat';
+import { getOrders, Role, FilterOrderStatus } from 'entities/game-stat';
 import { ContractDto, ContractType } from 'entities/smartcontract';
 import { getContractWithoutReport } from '../lib';
 

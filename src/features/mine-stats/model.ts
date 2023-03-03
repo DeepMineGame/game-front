@@ -1,6 +1,6 @@
 import { createEffect, createStore, forward } from 'effector';
 import { createGate } from 'effector-react';
-import { getMineStats, MineStatUnit, Role } from 'entities/gameStat';
+import { getMineStats, MineStatUnit, Role } from 'entities/game-stat';
 
 const getMineOwnerStatEffect = createEffect(getMineStats);
 

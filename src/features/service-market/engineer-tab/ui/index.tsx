@@ -12,7 +12,7 @@ import {
     TabGrid,
 } from 'features/service-market';
 
-import { OrderStatus, Roles } from 'entities/gameStat';
+import { OrderStatus, Roles } from 'entities/game-stat';
 
 export const EngineerTab: FC = () => {
     const { t } = useTranslation();

@@ -14,7 +14,7 @@ import {
     contractStore,
     ContractType,
 } from 'entities/smartcontract';
-import { Role } from 'entities/gameStat';
+import { Role } from 'entities/game-stat';
 
 enum StatsAndInfoTab {
     miningStats,

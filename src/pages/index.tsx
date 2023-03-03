@@ -8,13 +8,13 @@ export { EngineerPage } from './engineer';
 export { EquipmentHallPage } from './engineer/equipment-hall';
 export { EngineersTraining } from './engineers-training';
 
-export * from './mineOwner';
-export * from './landLord';
+export * from './mine-owner';
+export * from './landlord';
 export * from './hive';
 export * from './not-found';
 export * from './warehouse';
-export * from './serviceMarket';
-export * from './nftPreview';
+export * from './service-market';
+export * from './nft-preview';
 export * from './faq';
 export * from './wasteland';
 export * from './interface-stub';
