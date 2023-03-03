@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
-import { Trans } from 'react-i18next';
 import { Col, PageHeader, Row } from 'antd';
 
 import { useContractState } from 'entities/contract';
-import { statusMap } from 'entities/smartcontract';
+import { statusColorMap, statusMap } from 'entities/smartcontract';
 import { Completed, DeleteOrder, TerminateContract } from '../../ui/actions';
 import { GeneralDataTable, ConditionTable, MineOwnerTable } from '../../ui';
 import { ContractorTable } from '../../ui/contract/mining';
@@ -20,9 +19,20 @@ const MiningContract: FC<ContractProps> = ({
     return (
         <div>
             <PageHeader
-                style={{ marginBottom: '20px' }}
+                style={{
+                    marginBottom: '20px',
+                    border: `2px solid ${statusColorMap[contract.status]}`,
+                }}
                 ghost={false}
-                title={statusMap[contract.status]}
+                title={
+                    <span
+                        style={{
+                            color: statusColorMap[contract.status] || 'initial',
+                        }}
+                    >
+                        {statusMap[contract.status]}
+                    </span>
+                }
                 extra={[
                     canTerminate && (
                         <TerminateContract

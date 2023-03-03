@@ -26,6 +26,14 @@ export const statusMap = {
     [ContractStatus.terminated]: 'Terminated',
 };
 
+export const statusColorMap = {
+    [ContractStatus.undefined]: null,
+    [ContractStatus.signed_by_client]: '#F5C913', // primary6
+    [ContractStatus.signed_by_executor]: '#F5C913', // primary6
+    [ContractStatus.active]: '#47FF40', // green6
+    [ContractStatus.terminated]: '#5A5A5A', // neutral6
+};
+
 export type AttrStatus = 'success' | 'failed' | 'failed_with_broke';
 
 export type ContractAttrs = {

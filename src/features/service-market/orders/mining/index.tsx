@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import { Row, Col, PageHeader, Space } from 'antd';
+import { Row, Col, PageHeader } from 'antd';
 import { useOrderDelete, useOrderSign } from 'entities/order';
 import { useContractType } from 'entities/contract';
-import { statusMap } from 'entities/smartcontract';
+import { statusColorMap, statusMap } from 'entities/smartcontract';
 import { ConditionTable, MineOwnerTable, GeneralDataTable } from '../../ui';
 import {
     SignContractorOrder,
@@ -22,9 +22,20 @@ const MiningOrder: FC<ContractProps> = ({ contract, accountName }) => {
     return (
         <div>
             <PageHeader
-                style={{ marginBottom: '20px' }}
+                style={{
+                    marginBottom: '20px',
+                    border: `2px solid ${statusColorMap[contract.status]}`,
+                }}
                 ghost={false}
-                title={statusMap[contract.status]}
+                title={
+                    <span
+                        style={{
+                            color: statusColorMap[contract.status] || 'initial',
+                        }}
+                    >
+                        {statusMap[contract.status]}
+                    </span>
+                }
                 extra={[
                     canSignMiningContractorOrder && (
                         <SignContractorOrder

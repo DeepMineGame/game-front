@@ -1,6 +1,6 @@
-export { ContractorCabin } from './contractor/contractorCabin';
-export { EquipmentSetPage } from './contractor/equipmentSet';
-export { ContractorStatsAndInfoPage } from './contractor/contractorStatAndInfo';
+export { ContractorCabin } from './contractor/contractor-cabin';
+export { EquipmentSetPage } from './contractor/equipment-set';
+export { ContractorStatsAndInfoPage } from './contractor/contractor-stat-and-info';
 export { MiningPage } from './mining';
 export { CityPage } from './city';
 export { AuthPage } from './auth';
