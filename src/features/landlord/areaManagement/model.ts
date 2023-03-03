@@ -13,7 +13,7 @@ import {
     UserRoles,
     ContractDto,
 } from 'entities/smartcontract';
-import { getMarketOrders, OrderStatus, Roles } from 'entities/gameStat';
+import { getMarketOrders, OrderStatus, Roles } from 'entities/game-stat';
 
 export const AreaGate = createGate<{ searchParam: string }>('AreaGate');
 

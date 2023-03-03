@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { ContractsTable } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { Empty, Skeleton } from 'antd';
-import { OrderStatus, Roles } from 'entities/gameStat';
+import { OrderStatus, Roles } from 'entities/game-stat';
 import {
     ContractsGate,
     contractsStore,

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { ColumnsType } from 'antd/lib/table';
 import { Table, desktopS, useMediaQuery } from 'shared';
-import { UserActionDto } from 'entities/gameStat';
+import { UserActionDto } from 'entities/game-stat';
 
 export enum Action {
     'mining',

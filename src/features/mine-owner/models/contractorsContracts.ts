@@ -1,7 +1,7 @@
 import { createEffect, createStore, forward } from 'effector';
 import { createGate } from 'effector-react';
 import { ContractDto, ContractType } from 'entities/smartcontract';
-import { FilterOrderStatus, getOrders, Role } from 'entities/gameStat';
+import { FilterOrderStatus, getOrders, Role } from 'entities/game-stat';
 
 export const MiningContractsGate = createGate<{
     searchParam: string;

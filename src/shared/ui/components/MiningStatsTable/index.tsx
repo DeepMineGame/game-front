@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { ColumnsType } from 'antd/lib/table';
 import { Table, toLocaleDate } from 'shared';
-import { MineStatUnit } from 'entities/gameStat';
+import { MineStatUnit } from 'entities/game-stat';
 import styles from './styles.module.scss';
 
 export const MiningStatsTable: FC<{

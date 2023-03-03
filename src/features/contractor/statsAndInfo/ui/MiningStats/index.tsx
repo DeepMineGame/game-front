@@ -9,7 +9,7 @@ import {
     toLocaleDate,
 } from 'shared';
 import { UnorderedListOutlined, BarChartOutlined } from '@ant-design/icons';
-import { MineStatUnit } from 'entities/gameStat';
+import { MineStatUnit } from 'entities/game-stat';
 import styles from './styles.module.scss';
 
 export const MiningStats: FC<{ stats: MineStatUnit[] }> = ({ stats }) => {
