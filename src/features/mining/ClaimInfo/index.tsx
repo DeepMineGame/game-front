@@ -50,7 +50,12 @@ export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
         return (
             <Spin
                 spinning
-                indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
+                indicator={
+                    <LoadingOutlined
+                        style={{ fontSize: 24, marginBottom: '20px' }}
+                        spin
+                    />
+                }
             />
         );
     }
