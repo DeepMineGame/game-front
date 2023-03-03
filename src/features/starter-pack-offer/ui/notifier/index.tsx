@@ -13,8 +13,9 @@ export const StarterPackNotifier = () => {
     const accountName = useAccountName();
     useGate(StarterPackNotifierGate, { searchParam: accountName });
     const hasAtomicAssets = useStore($hasAtomicAssets);
-    console.log(hasAtomicAssets, getAtomicAssetsByUserEffect.pending);
-    if (hasAtomicAssets || getAtomicAssetsByUserEffect.pending) {
+    const isLoading = useStore(getAtomicAssetsByUserEffect.pending);
+
+    if (hasAtomicAssets || isLoading) {
         return null;
     }
 
