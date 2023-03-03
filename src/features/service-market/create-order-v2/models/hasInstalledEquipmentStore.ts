@@ -1,6 +1,6 @@
 import { createStore } from 'effector';
 import { InUseType, miningEquipmentNames } from 'entities/smartcontract';
-import { findEquipmentByName } from '../../../equipmentSet';
+import { findEquipmentByName } from '../../../equipment-set';
 import { getInventoryEffect } from './effects';
 
 export const hasInstalledEquipmentStore = createStore<boolean>(false).on(

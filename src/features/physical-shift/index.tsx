@@ -7,7 +7,7 @@ import {
     PhysicalShiftParams,
 } from 'entities/smartcontract';
 import { useSmartContractAction } from '../hooks';
-import { $indicateActionDetails } from '../action-indicator/model';
+import { $indicateActionDetails } from '../action-indicator';
 import { TravelModal } from './ui';
 
 type Props = {
