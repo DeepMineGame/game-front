@@ -144,14 +144,14 @@ export const BlockchainAuthPage: React.FC<Props> = ({ onSuccess }) => {
                     )}
                 </div>
                 <div className={styles.onboardingButton}>
-                    {/* <Button */}
-                    {/*    onClick={() => { */}
-                    {/*        window.location.href = */}
-                    {/*            'https://onboarding.deepmine.world'; */}
-                    {/*    }} */}
-                    {/* > */}
-                    {/*    {t('intro.onBoarding')} */}
-                    {/* </Button> */}
+                    <Button
+                        onClick={() => {
+                            window.location.href =
+                                'https://onboarding.deepmine.world';
+                        }}
+                    >
+                        {t('intro.onBoarding')}
+                    </Button>
                 </div>
                 <LoggedInBlock user={user} />
             </Space>
