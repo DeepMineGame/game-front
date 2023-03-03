@@ -1,10 +1,10 @@
-import { sample, forward, combine } from 'effector';
+import { combine, forward, sample } from 'effector';
 import { createGate } from 'effector-react';
 import { getAssetStatus, Status } from 'shared';
-import { findEquipmentByName } from 'features/equipmentSet';
+import { findEquipmentByName } from 'features/equipment-set';
 import {
-    ActionType,
     ACTION_STATE_TO_ID,
+    ActionType,
     InUseType,
     isStatusTerminated,
     isTimeFinished,
@@ -120,15 +120,13 @@ sample({
     fn: (inventoriedAssets) => {
         const installedItems = inventoriedAssets.filter(({ in_use }) => in_use);
 
-        const miningEquipments = miningEquipmentNames.reduce<{
+        return miningEquipmentNames.reduce<{
             [k: string]: UserInventoryType | undefined;
         }>((acc, name) => {
             acc[name] = findEquipmentByName(installedItems || [], name);
 
             return acc;
         }, {});
-
-        return miningEquipments;
     },
 });
 
