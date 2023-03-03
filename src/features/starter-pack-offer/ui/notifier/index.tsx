@@ -13,7 +13,7 @@ export const StarterPackNotifier = () => {
     const accountName = useAccountName();
     useGate(StarterPackNotifierGate, { searchParam: accountName });
     const hasAtomicAssets = useStore($hasAtomicAssets);
-    console.log(hasAtomicAssets);
+    console.log(hasAtomicAssets, getAtomicAssetsByUserEffect.pending);
     if (hasAtomicAssets || getAtomicAssetsByUserEffect.pending) {
         return null;
     }
