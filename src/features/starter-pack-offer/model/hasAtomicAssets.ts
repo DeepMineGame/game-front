@@ -10,7 +10,10 @@ export const getAtomicAssetsByUserEffect = createEffect(getAtomicAssetsByUser);
 
 export const $hasAtomicAssets = createStore(false).on(
     getAtomicAssetsByUserEffect.doneData,
-    (state, payload) => Boolean(payload?.length)
+    (state, payload) => {
+        console.log(payload);
+        return Boolean(payload?.length);
+    }
 );
 
 forward({
