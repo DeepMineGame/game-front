@@ -1,4 +1,11 @@
-import { Card, CardHolder, desktopS, Title, useMediaQuery } from 'shared';
+import {
+    Card,
+    CardHolder,
+    desktopS,
+    Loader,
+    Title,
+    useMediaQuery,
+} from 'shared';
 import { useStore } from 'effector-react';
 import { Col, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
@@ -6,6 +13,7 @@ import { findEquipmentByName } from 'features';
 import { useNavigate } from 'react-router-dom';
 import { equipmentSet } from 'app/router/paths';
 import {
+    getInventoriesEffect,
     miningEquipmentNames,
     UserInventoryType,
 } from 'entities/smartcontract';
@@ -17,6 +25,7 @@ import styles from './styles.module.scss';
 
 export const Equipment = () => {
     const inventoriedAssets = useStore($mergedInventoryWithAtomicAssets);
+    const isEquipmentLoading = useStore(getInventoriesEffect.pending);
     const installedItems = inventoriedAssets?.filter(({ in_use }) => in_use);
     const installedMiningEquipment = Object.fromEntries(
         miningEquipmentNames.map((name) => [
@@ -30,6 +39,9 @@ export const Equipment = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
 
+    if (isEquipmentLoading) {
+        return <Loader centered />;
+    }
     return (
         <>
             <Row gutter={gutter}>
