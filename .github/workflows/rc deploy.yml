@@ -83,8 +83,6 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     environment: pre_prod
-    env:
-      beta: true
 
     steps:
       - name: Install SSH Key
@@ -101,3 +99,5 @@ jobs:
 
       - name: Deploy
         run: ssh ${{ secrets.RC_SSH_USER }}@${{ secrets.RC_SSH_HOST }} "docker service update --force deepmine_game_front_preprod"
+        env:
+          beta: true
