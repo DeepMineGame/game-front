@@ -79,7 +79,7 @@ export const Router = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (window.ENDPOINTS?.maintenance.server && !process.env.beta)
+        if (window.ENDPOINTS?.maintenance.server && !process.env.BETA)
             navigate(unidentifiedActivity);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [window.ENDPOINTS?.maintenance.server]);

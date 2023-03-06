@@ -20,6 +20,7 @@ jobs:
             args: |
               UBS_URL=https://api.deepmine.world
               MAINNET=true
+              BETA=false
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -99,5 +100,3 @@ jobs:
 
       - name: Deploy
         run: ssh ${{ secrets.RC_SSH_USER }}@${{ secrets.RC_SSH_HOST }} "docker service update --force deepmine_game_front_preprod"
-        env:
-          beta: true
