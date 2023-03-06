@@ -83,7 +83,7 @@ export const Router = () => {
             navigate(unidentifiedActivity);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [window.ENDPOINTS?.maintenance.server]);
-
+    console.log(process.env);
     return (
         <>
             {user?.is_log_as && <LogAs />}
