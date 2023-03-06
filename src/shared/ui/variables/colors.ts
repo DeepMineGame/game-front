@@ -3,6 +3,7 @@ export const orange6 = '#D87A16';
 export const neutral4 = '#303030';
 export const neutral1 = '#141414';
 export const neutral2 = '#1D1D1D';
+export const netural6 = '#5A5A5A';
 export const neutral8 = '#ACACAC';
 export const neutral9 = '#DBDBDB';
 export const gold6 = '#D89614';

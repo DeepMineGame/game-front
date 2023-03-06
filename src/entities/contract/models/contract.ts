@@ -5,6 +5,7 @@ import { getOrder } from '../api';
 
 export const ContractGate = createGate<{
     id: string;
+    accountName: string;
 }>('ContractGate');
 
 export const getContractEffect = createEffect(getOrder);

@@ -18,21 +18,42 @@ export enum ContractStatus {
     terminated,
 }
 
-export const statusMap = {
-    [ContractStatus.undefined]: null,
-    [ContractStatus.signed_by_client]: 'Signed by client',
-    [ContractStatus.signed_by_executor]: 'Signed by executor',
-    [ContractStatus.active]: 'Active',
-    [ContractStatus.terminated]: 'Terminated',
-};
+export enum OrderState {
+    undefined = '',
+    OpenOrder = 'open_order',
+    ValidContract = 'valid_contract',
+    WaitingForAction = 'waiting_for_action',
+    Completed = 'completed',
+    Terminated = 'terminated',
+}
 
-export const statusColorMap = {
-    [ContractStatus.undefined]: null,
-    [ContractStatus.signed_by_client]: '#F5C913', // primary6
-    [ContractStatus.signed_by_executor]: '#F5C913', // primary6
-    [ContractStatus.active]: '#47FF40', // green6
-    [ContractStatus.terminated]: '#5A5A5A', // neutral6
-};
+export enum OrderSubState {
+    undefined = '',
+    // unsigned by client or executor
+    Unsigned = 'unsigned',
+    // active contract
+    Active = 'active',
+    // another side violate contract terms, contact not finished
+    ViolateTerms = 'violate_terms',
+
+    // user premature terminate the contract
+    PrematureTerminated = 'premature_terminate',
+
+    // order terminated
+    Terminated = 'terminated',
+    // order terminated, client collected penalty
+    TerminatedWithPenalty = 'terminate_with_penalty',
+    // order terminated, client chose not to collect penalty
+    TerminatedWithoutPenalty = 'terminate_without_penalty',
+    // order completed
+    Completed = 'completed',
+    // order completed, client collected penalty
+    CompletedWithPenalty = 'completed_with_penalty',
+    // order completed, client chose not to collect penalty
+    CompletedWithoutPenalty = 'completed_without_penalty',
+    // order terminated before both side singed
+    Closed = 'closed',
+}
 
 export type AttrStatus = 'success' | 'failed' | 'failed_with_broke';
 
@@ -91,6 +112,12 @@ export type ContractDto = {
     deposit: number;
     autorenew_enabled: boolean;
     fee_counter: number;
+    computed?: {
+        status: OrderState;
+        sub_status: OrderSubState;
+        terms_violated: boolean;
+        premature_terminated: boolean;
+    };
 };
 
 export const contractName = {
