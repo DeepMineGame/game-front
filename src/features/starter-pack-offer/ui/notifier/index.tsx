@@ -3,6 +3,7 @@ import { useAccountName } from 'shared';
 import { toggleStarterPackModalVisibilityEvent } from '../../model';
 import {
     $hasAtomicAssets,
+    $hasInventoryItems,
     getAtomicAssetsByUserEffect,
     StarterPackNotifierGate,
 } from '../../model/hasAtomicAssets';
@@ -13,9 +14,10 @@ export const StarterPackNotifier = () => {
     const accountName = useAccountName();
     useGate(StarterPackNotifierGate, { searchParam: accountName });
     const hasAtomicAssets = useStore($hasAtomicAssets);
+    const hasInventoryItems = useStore($hasInventoryItems);
     const isLoading = useStore(getAtomicAssetsByUserEffect.pending);
 
-    if (hasAtomicAssets || isLoading) {
+    if (hasAtomicAssets || hasInventoryItems || isLoading) {
         return null;
     }
 
