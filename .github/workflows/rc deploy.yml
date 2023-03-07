@@ -100,3 +100,5 @@ jobs:
 
       - name: Deploy
         run: ssh ${{ secrets.RC_SSH_USER }}@${{ secrets.RC_SSH_HOST }} "docker service update --force deepmine_game_front_preprod"
+        args:
+          BETA=true
