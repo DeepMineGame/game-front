@@ -14,32 +14,57 @@ export const useRepair = () => {
         //     return 0;
         // }
 
-        let percentPivot;
+        let repairPercentPivot;
 
         switch (rarity) {
             case rarityMap['1']:
-                percentPivot = 26.8;
+                repairPercentPivot = 26.8;
                 break;
             case rarityMap['2']:
-                percentPivot = 11.6;
+                repairPercentPivot = 11.6;
                 break;
             case rarityMap['3']:
-                percentPivot = 8.2;
+                repairPercentPivot = 8.2;
                 break;
             case rarityMap['4']:
-                percentPivot = 6;
+                repairPercentPivot = 5.6;
                 break;
             case rarityMap['5']:
-                percentPivot = 4;
+                repairPercentPivot = 4;
                 break;
             default:
-                percentPivot = 26.8;
+                repairPercentPivot = 26.8;
         }
+
+        let refurbishPercentPivot;
+
+        switch (rarity) {
+            case rarityMap['1']:
+                refurbishPercentPivot = 80.4;
+                break;
+            case rarityMap['2']:
+                refurbishPercentPivot = 34.8;
+                break;
+            case rarityMap['3']:
+                refurbishPercentPivot = 24.6;
+                break;
+            case rarityMap['4']:
+                refurbishPercentPivot = 16.8;
+                break;
+            case rarityMap['5']:
+                refurbishPercentPivot = 12;
+                break;
+            default:
+                refurbishPercentPivot = 80.4;
+        }
+
         // extra zeros by reducing zeros in dmeToUpgrade
-        const percent = isRefurbish ? 3000 : percentPivot * ONE_HUNDRED_PERCENT;
+        const percent = isRefurbish
+            ? refurbishPercentPivot * ONE_HUNDRED_PERCENT
+            : repairPercentPivot * ONE_HUNDRED_PERCENT;
         const amount = dmeToUpgrade[rarity][level];
 
-        return (amount * percent) / 10 ** 8;
+        return Number((amount * percent) / 10 ** 8).toFixed(2);
     };
 
     return { getCost };
