@@ -1,13 +1,12 @@
 import React, { FC } from 'react';
-import { Trans } from 'react-i18next';
-import { Col, PageHeader, Row } from 'antd';
+import { Col, Row } from 'antd';
 
 import { useContractState } from 'entities/contract';
-import { statusMap } from 'entities/smartcontract';
 import { Completed, DeleteOrder, TerminateContract } from '../../ui/actions';
 import { GeneralDataTable, ConditionTable, MineOwnerTable } from '../../ui';
 import { ContractorTable } from '../../ui/contract/mining';
 import { ContractProps } from '../../types';
+import { StatusHeader } from '../../ui/status-header';
 
 const MiningContract: FC<ContractProps> = ({
     contract,
@@ -19,10 +18,8 @@ const MiningContract: FC<ContractProps> = ({
 
     return (
         <div>
-            <PageHeader
-                style={{ marginBottom: '20px' }}
-                ghost={false}
-                title={statusMap[contract.status]}
+            <StatusHeader
+                contract={contract}
                 extra={[
                     canTerminate && (
                         <TerminateContract

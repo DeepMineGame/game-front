@@ -84,6 +84,7 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
                 opt_level: null,
                 opt_rarity: null,
                 deposit: 0,
+                autorenew_enabled: true,
             })
         );
 

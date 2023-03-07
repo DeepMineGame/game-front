@@ -255,13 +255,15 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                                 type: ModalType.repair,
                                                 costs: {
                                                     timeSeconds: 1,
-                                                    coinAmount: getCost({
-                                                        level: card.level as GetCostParams['level'],
-                                                        rarity: rarityMap[
-                                                            card.rarity
-                                                        ] as GetCostParams['rarity'],
-                                                        isRefurbish: false,
-                                                    }),
+                                                    coinAmount: Number(
+                                                        getCost({
+                                                            level: card.level as GetCostParams['level'],
+                                                            rarity: rarityMap[
+                                                                card.rarity
+                                                            ] as GetCostParams['rarity'],
+                                                            isRefurbish: false,
+                                                        })
+                                                    ),
                                                     energy: 0,
                                                 },
                                             });
@@ -305,13 +307,15 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                                 type: ModalType.refurbish,
                                                 costs: {
                                                     timeSeconds: 120,
-                                                    coinAmount: getCost({
-                                                        level: card.level as GetCostParams['level'],
-                                                        rarity: rarityMap[
-                                                            card.rarity
-                                                        ] as GetCostParams['rarity'],
-                                                        isRefurbish: true,
-                                                    }),
+                                                    coinAmount: Number(
+                                                        getCost({
+                                                            level: card.level as GetCostParams['level'],
+                                                            rarity: rarityMap[
+                                                                card.rarity
+                                                            ] as GetCostParams['rarity'],
+                                                            isRefurbish: true,
+                                                        })
+                                                    ),
                                                     energy: 0,
                                                 },
                                             });

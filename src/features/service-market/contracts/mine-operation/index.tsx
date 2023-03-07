@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
-import { Col, PageHeader, Row } from 'antd';
+import { Col, Row } from 'antd';
 import { useContractState } from 'entities/contract';
-import { statusMap } from 'entities/smartcontract';
 import { Completed, DeleteOrder, TerminateContract } from '../../ui/actions';
 import { GeneralDataTable, ConditionTable, MineOwnerTable } from '../../ui';
 import { LandlordTable } from '../../ui/contract/mine-operation';
 import { ContractProps } from '../../types';
+import { StatusHeader } from '../../ui/status-header';
 
 const MineOperationContract: FC<ContractProps> = ({
     contract,
@@ -14,13 +14,10 @@ const MineOperationContract: FC<ContractProps> = ({
 }) => {
     const { canTerminate, showCompleted, canDeleteSelfContract } =
         useContractState(contract, accountName);
-
     return (
         <div>
-            <PageHeader
-                style={{ marginBottom: '20px' }}
-                ghost={false}
-                title={statusMap[contract.status]}
+            <StatusHeader
+                contract={contract}
                 extra={[
                     canTerminate && (
                         <TerminateContract

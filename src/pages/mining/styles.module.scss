@@ -30,6 +30,7 @@
 
 .firsColumn {
   border-right: 1px solid $color-neutral-neutral-4;
+  margin-bottom: 16px;
 }
 
 .grid {
@@ -45,4 +46,5 @@
 .infosWrapper {
   gap: 18px;
   display: grid;
+  margin-bottom: 18px;
 }

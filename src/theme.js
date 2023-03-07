@@ -1,4 +1,4 @@
-// see default theme - https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
+// see default theme - https://github.com/ant-design/ant-design/blob/4.x-stable/components/style/themes/default.less
 
 const neutral3Color = '#262626';
 const neutral6Color = '#5A5A5A';
@@ -10,6 +10,7 @@ const gold6 = '#D89614';
 const primary6 = '#F5C913';
 const primary5 = '#CCA500';
 const neutral7 = '#7D7D7D';
+const netural9 = '#DBDBDB';
 
 module.exports = {
     // button
@@ -120,7 +121,6 @@ module.exports = {
 
     // modal
     '@modal-close-color': neutral7,
-    '@modal-header-border-color-split': neutral4,
     '@icon-color-hover': primary5,
 
     // should be in the end
@@ -153,4 +153,6 @@ module.exports = {
     '@border-color-split': 'transparent',
     '@shadow-2':
         '0 9px 28px 8px rgba(0, 0, 0, 0.05), 0 6px 16px rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12)',
+    '@tag-default-bg': neutral2,
+    '@tag-default-color': netural9,
 };

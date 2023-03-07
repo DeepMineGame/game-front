@@ -20,6 +20,7 @@ jobs:
             args: |
               UBS_URL=https://api.deepmine.world
               MAINNET=true
+              BETA=true
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -83,6 +84,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     environment: pre_prod
+
     steps:
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2

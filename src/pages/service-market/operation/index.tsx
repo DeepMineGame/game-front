@@ -17,7 +17,7 @@ export const OperationPage = () => {
     const accountName = useAccountName();
     const { contractId = '-1' } = useParams();
 
-    useGate(ContractGate, { id: contractId });
+    useGate(ContractGate, { id: contractId, accountName });
 
     const contract = useStore(contractStore);
     const isContractLoading = useStore(getContractEffect.pending);

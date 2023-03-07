@@ -1,24 +1,19 @@
 import React, { FC } from 'react';
 import { useStore } from 'effector-react';
-import { Row, Col, PageHeader } from 'antd';
-import { rolesStore, statusMap } from 'entities/smartcontract';
+import { Row, Col } from 'antd';
+import { rolesStore } from 'entities/smartcontract';
 import { useContractType } from 'entities/contract';
 import { useOrderDelete, useOrderSign } from 'entities/order';
 import { useUserRoles } from 'shared/lib/hooks';
 import { LandlordTable } from '../../ui/contract/mine-operation';
-import {
-    ConditionTable,
-    MineOwnerTable,
-    GeneralDataTable,
-} from '../../ui/contract';
+import { ConditionTable, MineOwnerTable, GeneralDataTable } from '../../ui';
 import {
     SignLandlordOrder,
     SignMineOwnerOrder,
     DeleteOrder,
-    SignContractorOrder,
-    SignMineOwnerContractorOrder,
 } from '../../ui/actions';
 import { ContractProps } from '../../types';
+import { StatusHeader } from '../../ui/status-header';
 
 const MineOperationOrder: FC<ContractProps> = ({ contract, accountName }) => {
     const roles = useStore(rolesStore) || [];
@@ -31,10 +26,8 @@ const MineOperationOrder: FC<ContractProps> = ({ contract, accountName }) => {
 
     return (
         <div>
-            <PageHeader
-                style={{ marginBottom: '20px' }}
-                ghost={false}
-                title={statusMap[contract.status]}
+            <StatusHeader
+                contract={contract}
                 extra={[
                     canSignOperationLandlordOrder && (
                         <SignLandlordOrder

@@ -79,11 +79,10 @@ export const Router = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (window.ENDPOINTS?.maintenance.server)
+        if (window.ENDPOINTS?.maintenance.server && !process.env.REACT_APP_BETA)
             navigate(unidentifiedActivity);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [window.ENDPOINTS?.maintenance.server]);
-
     return (
         <>
             {user?.is_log_as && <LogAs />}
