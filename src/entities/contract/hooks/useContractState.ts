@@ -13,6 +13,12 @@ const VIOLATION_STATES = [
     ContractStatesMeta.earlyBreak,
 ];
 
+/**
+ * Deprecated - use backend state and subState instead
+ * @param contract
+ * @param accountName
+ * @sse https://www.figma.com/file/8agyvDM2HbbgnKWDJmPaUi/DM-Game-main?node-id=9658-327934&t=8KBQktAmGqJ64By8-0
+ */
 export const useContractState = (
     contract: ContractDto,
     accountName: string

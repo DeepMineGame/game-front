@@ -2,8 +2,14 @@ import React, { FC } from 'react';
 import { Col, Row } from 'antd';
 
 import { useContractState } from 'entities/contract';
-import { Completed, DeleteOrder, TerminateContract } from '../../ui/actions';
-import { GeneralDataTable, ConditionTable, MineOwnerTable } from '../../ui';
+import { OrderState, OrderSubState } from 'entities/smartcontract';
+import {
+    CompletedAlert,
+    CompletedButton,
+    DeleteOrder,
+    TerminateContract,
+} from '../../ui/actions';
+import { ConditionTable, GeneralDataTable, MineOwnerTable } from '../../ui';
 import { ContractorTable } from '../../ui/contract/mining';
 import { ContractProps } from '../../types';
 import { StatusHeader } from '../../ui/status-header';
@@ -15,6 +21,9 @@ const MiningContract: FC<ContractProps> = ({
 }) => {
     const { canTerminate, canDeleteSelfContract, showCompleted } =
         useContractState(contract, accountName);
+    const completedAndWaitAction =
+        contract.computed?.status === OrderState.WaitingForAction &&
+        contract.computed.sub_status === OrderSubState.Completed;
 
     return (
         <div>
@@ -29,6 +38,12 @@ const MiningContract: FC<ContractProps> = ({
                     ),
                     canDeleteSelfContract && (
                         <DeleteOrder
+                            accountName={accountName}
+                            contractId={contract.id}
+                        />
+                    ),
+                    completedAndWaitAction && (
+                        <CompletedButton
                             accountName={accountName}
                             contractId={contract.id}
                         />
@@ -48,7 +63,7 @@ const MiningContract: FC<ContractProps> = ({
                         {!isDeleted && (
                             <Col span={24}>
                                 {showCompleted && (
-                                    <Completed
+                                    <CompletedAlert
                                         accountName={accountName}
                                         contractId={contract.id}
                                     />

@@ -11,9 +11,13 @@ type Props = {
     onComplete?: () => Promise<void>;
 };
 
-const Completed: FC<Props> = ({ accountName, contractId, onComplete }) => {
-    const { t } = useTranslation();
+const CompletedButton: FC<Props> = ({
+    accountName,
+    contractId,
+    onComplete,
+}) => {
     const reloadPage = useReloadPage();
+    const { t } = useTranslation();
 
     const terminateAction = useSmartContractAction({
         action: terminateContract(accountName, contractId),
@@ -27,6 +31,15 @@ const Completed: FC<Props> = ({ accountName, contractId, onComplete }) => {
             await terminateAction();
         }
     };
+    return (
+        <Button ghost type="primary" onClick={handleComplete}>
+            {t('pages.serviceMarket.contract.completeContract')}
+        </Button>
+    );
+};
+
+const CompletedAlert: FC<Props> = ({ accountName, contractId, onComplete }) => {
+    const { t } = useTranslation();
 
     return (
         <Alert
@@ -34,9 +47,11 @@ const Completed: FC<Props> = ({ accountName, contractId, onComplete }) => {
                 'pages.serviceMarket.contract.completeContractDescription'
             )}
             action={
-                <Button ghost type="primary" onClick={handleComplete}>
-                    {t('pages.serviceMarket.contract.completeContract')}
-                </Button>
+                <CompletedButton
+                    accountName={accountName}
+                    contractId={contractId}
+                    onComplete={onComplete}
+                />
             }
             type="info"
             showIcon
@@ -44,4 +59,4 @@ const Completed: FC<Props> = ({ accountName, contractId, onComplete }) => {
     );
 };
 
-export { Completed };
+export { CompletedAlert, CompletedButton };
