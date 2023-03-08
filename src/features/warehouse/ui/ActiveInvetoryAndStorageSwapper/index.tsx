@@ -254,10 +254,10 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                 <div className={styles.cardsWrapper}>
                     {isActiveInventoryAssetDragging ? (
                         <div className={styles.draggedElements}>
-                            {renderCards(draggedElements, handleDragCard, true)}
+                            {renderCards(draggedElements, handleDragCard)}
                         </div>
                     ) : (
-                        renderCards(filteredStorageAssets, handleDragCard, true)
+                        renderCards(filteredStorageAssets, handleDragCard)
                     )}
                 </div>
             </Col>
