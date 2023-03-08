@@ -1003,5 +1003,7 @@
   "Cost of execution": "Cost of execution",
   "Penalty": "Penalty",
   "The amount of DME the performing party receives for contract performance": "The amount of DME the performing party receives for contract performance",
-  "If the an engineer violates the terms of the contract or terminates the contract prematurely, the counterparty may charge a fine": "If the an engineer violates the terms of the contract or terminates the contract prematurely, the counterparty may charge a fine"
+  "If the an engineer violates the terms of the contract or terminates the contract prematurely, the counterparty may charge a fine": "If the an engineer violates the terms of the contract or terminates the contract prematurely, the counterparty may charge a fine",
+  "Back": "Back",
+  "Details": "Details"
 }

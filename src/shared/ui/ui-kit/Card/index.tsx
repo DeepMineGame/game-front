@@ -56,6 +56,10 @@ export const Card: FC<CardProps> = ({
     const isEquipment =
         inventory &&
         miningEquipmentNames.includes(ID_TO_INVENTORY[inventory.template_id]);
+
+    const templateId =
+        inventory?.template_id || Number(inventory?.template.template_id);
+
     return (
         <Tooltip overlay={tooltipOverlay}>
             <div className={cn(styles.wrapper, className)}>
@@ -74,11 +78,7 @@ export const Card: FC<CardProps> = ({
                         <img
                             height="100%"
                             width="100%"
-                            src={
-                                inventory?.template_id
-                                    ? getImagePath(inventory?.template_id)
-                                    : ''
-                            }
+                            src={templateId ? getImagePath(templateId) : ''}
                             onError={({ currentTarget }) => {
                                 currentTarget.onerror = null;
                                 currentTarget.src = '/img/no-image.webp';

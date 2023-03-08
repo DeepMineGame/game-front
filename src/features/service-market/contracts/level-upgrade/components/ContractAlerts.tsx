@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import { Space } from 'antd';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { useSmartContractAction } from 'features/hooks';
 import { terminateContract, upgradeFinish } from 'entities/smartcontract';
 import { ContractAlert, Button } from 'shared/ui';
 import { useReloadPage } from 'shared/lib/hooks';
 import { useLevelUpgradeContract } from '../constants';
-import { Completed } from '../../../ui/actions';
+import { CompletedAlert } from '../../../ui/actions';
 import { ContractProps } from '../../../types';
 
 export const ContractAlerts: FC<ContractProps> = ({
@@ -67,7 +67,7 @@ export const ContractAlerts: FC<ContractProps> = ({
     // 13. Upgrade Complete
     if (showComplete) {
         return (
-            <Completed
+            <CompletedAlert
                 accountName={accountName}
                 contractId={contract.id}
                 onComplete={completeUpgrade}

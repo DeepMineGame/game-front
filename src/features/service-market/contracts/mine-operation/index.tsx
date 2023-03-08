@@ -1,7 +1,11 @@
 import React, { FC } from 'react';
 import { Col, Row } from 'antd';
 import { useContractState } from 'entities/contract';
-import { Completed, DeleteOrder, TerminateContract } from '../../ui/actions';
+import {
+    CompletedAlert,
+    DeleteOrder,
+    TerminateContract,
+} from '../../ui/actions';
 import { GeneralDataTable, ConditionTable, MineOwnerTable } from '../../ui';
 import { LandlordTable } from '../../ui/contract/mine-operation';
 import { ContractProps } from '../../types';
@@ -46,7 +50,7 @@ const MineOperationContract: FC<ContractProps> = ({
                         {!isDeleted && (
                             <Col span={24}>
                                 {showCompleted && (
-                                    <Completed
+                                    <CompletedAlert
                                         accountName={accountName}
                                         contractId={contract.id}
                                     />
