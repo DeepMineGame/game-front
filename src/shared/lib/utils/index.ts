@@ -82,3 +82,4 @@ export { getGameAssets } from './get-game-assets';
 export { wait } from './wait';
 export { isServerError } from './is-server-error';
 export { poolRequest, RequestSubject } from './node-url-switcher';
+export * from './prop';
