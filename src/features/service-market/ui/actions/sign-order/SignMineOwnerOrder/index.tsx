@@ -85,7 +85,6 @@ const SignMineOwnerOrder: FC<Props> = React.memo(
                     onClick={handleSign}
                     type="primary"
                     disabled={isAreasLoading}
-                    size="large"
                     block
                 >
                     {t('pages.serviceMarket.order.signOrder')}
