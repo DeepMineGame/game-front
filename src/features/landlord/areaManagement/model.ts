@@ -11,9 +11,7 @@ import {
     searchBy,
     UserInventoryType,
     UserRoles,
-    ContractDto,
 } from 'entities/smartcontract';
-import { getMarketOrders, OrderStatus, Roles } from 'entities/game-stat';
 
 export const AreaGate = createGate<{ searchParam: string }>('AreaGate');
 
@@ -69,31 +67,6 @@ export const rolesStore = createStore<RoleDto[] | null>(null).on(
 );
 
 export const claimDmeStore = createStore(0);
-
-export const LandlordContractsGate = createGate<{
-    searchParam: string;
-}>('ContractGate');
-
-export const getLandlordContractsEffect = createEffect(
-    async ({ searchParam }: { searchParam: string }) => {
-        return getMarketOrders({
-            user_role: Roles.landlord,
-            statuses: OrderStatus.current,
-            user: searchParam,
-            search_role: Roles.mineowner,
-        });
-    }
-);
-
-export const $contracts = createStore<ContractDto[]>([]).on(
-    getLandlordContractsEffect.doneData,
-    (_, contracts) => contracts
-);
-
-forward({
-    from: LandlordContractsGate.open,
-    to: getLandlordContractsEffect,
-});
 
 forward({
     from: ClaimDmeGate.open,
