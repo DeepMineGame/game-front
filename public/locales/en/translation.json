@@ -1005,5 +1005,9 @@
   "The amount of DME the performing party receives for contract performance": "The amount of DME the performing party receives for contract performance",
   "If the an engineer violates the terms of the contract or terminates the contract prematurely, the counterparty may charge a fine": "If the an engineer violates the terms of the contract or terminates the contract prematurely, the counterparty may charge a fine",
   "Back": "Back",
-  "Details": "Details"
+  "Details": "Details",
+  "Total slots": "Total slots",
+  "Locked slots":"Locked slots",
+  "Available slots": "Available slots",
+  "Active": "Active"
 }
