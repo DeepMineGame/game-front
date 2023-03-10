@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { Col, Row } from 'antd';
-import { useContractState } from 'entities/contract';
+import { prop } from 'shared';
+import { OrderState, OrderSubState } from 'entities/smartcontract';
 import {
-    CompletedAlert,
+    CompletedButton,
     DeleteOrder,
     TerminateContract,
 } from '../../ui/actions';
@@ -14,29 +15,45 @@ import { StatusHeader } from '../../ui/status-header';
 const MineOperationContract: FC<ContractProps> = ({
     contract,
     accountName,
-    isDeleted,
+    // isDeleted,
 }) => {
-    const { canTerminate, showCompleted, canDeleteSelfContract } =
-        useContractState(contract, accountName);
+    // const { showCompleted } = useContractState(contract, accountName);
+    const terminateButton = (
+        <TerminateContract contractId={contract.id} accountName={accountName} />
+    );
+    const completeButton = (
+        <CompletedButton contractId={contract.id} accountName={accountName} />
+    );
+    const buttonsMap = {
+        [OrderState.WaitingForAction]: {
+            [OrderSubState.PrematureTerminated]: terminateButton,
+            [OrderSubState.ViolateTerms]: completeButton,
+            [OrderSubState.Completed]: completeButton,
+        },
+        [OrderState.ValidContract]: {
+            [OrderSubState.Active]: terminateButton,
+        },
+        [OrderState.OpenOrder]: {
+            [OrderSubState.Unsigned]: (
+                <DeleteOrder
+                    accountName={accountName}
+                    contractId={contract.id}
+                />
+            ),
+        },
+    };
+
+    const buttonsForStateSet =
+        contract.computed?.status &&
+        prop(contract.computed?.status, buttonsMap);
+    const buttons = prop(
+        contract.computed?.sub_status || '',
+        buttonsForStateSet
+    );
+
     return (
         <div>
-            <StatusHeader
-                contract={contract}
-                extra={[
-                    canTerminate && (
-                        <TerminateContract
-                            contractId={contract.id}
-                            accountName={accountName}
-                        />
-                    ),
-                    canDeleteSelfContract && (
-                        <DeleteOrder
-                            accountName={accountName}
-                            contractId={contract.id}
-                        />
-                    ),
-                ]}
-            />
+            <StatusHeader contract={contract} extra={[buttons]} />
             <Row gutter={[32, 32]}>
                 <Col xs={24} md={12}>
                     <Row gutter={[24, 24]}>
@@ -46,17 +63,16 @@ const MineOperationContract: FC<ContractProps> = ({
                                 accountName={accountName}
                             />
                         </Col>
-
-                        {!isDeleted && (
-                            <Col span={24}>
-                                {showCompleted && (
-                                    <CompletedAlert
-                                        accountName={accountName}
-                                        contractId={contract.id}
-                                    />
-                                )}
-                            </Col>
-                        )}
+                        {/* {!isDeleted && ( */}
+                        {/*    <Col span={24}> */}
+                        {/*        {showCompleted && ( */}
+                        {/*            <CompletedAlert */}
+                        {/*                accountName={accountName} */}
+                        {/*                contractId={contract.id} */}
+                        {/*            /> */}
+                        {/*        )} */}
+                        {/*    </Col> */}
+                        {/* )} */}
                     </Row>
                 </Col>
                 <Col xs={24} md={12}>
@@ -68,7 +84,6 @@ const MineOperationContract: FC<ContractProps> = ({
                         accountName={accountName}
                     />
                 </Col>
-
                 <Col xs={24} md={12}>
                     <Row gutter={[32, 32]}>
                         <Col span={24}>
@@ -76,23 +91,6 @@ const MineOperationContract: FC<ContractProps> = ({
                                 contract={contract}
                                 accountName={accountName}
                             />
-                        </Col>
-
-                        <Col span={24}>
-                            <Row justify="end">
-                                {canTerminate && (
-                                    <TerminateContract
-                                        contractId={contract.id}
-                                        accountName={accountName}
-                                    />
-                                )}
-                                {canDeleteSelfContract && (
-                                    <DeleteOrder
-                                        accountName={accountName}
-                                        contractId={contract.id}
-                                    />
-                                )}
-                            </Row>
                         </Col>
                     </Row>
                 </Col>
