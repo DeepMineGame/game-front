@@ -5,6 +5,8 @@ import { OrderState, OrderSubState } from 'entities/smartcontract';
 import {
     CompletedButton,
     DeleteOrder,
+    SignLandlordOrder,
+    SignMineOwnerOrder,
     TerminateContract,
 } from '../../ui/actions';
 import { GeneralDataTable, ConditionTable, MineOwnerTable } from '../../ui';
@@ -15,18 +17,21 @@ import { StatusHeader } from '../../ui/status-header';
 const MineOperationContract: FC<ContractProps> = ({
     contract,
     accountName,
-    // isDeleted,
 }) => {
-    // const { showCompleted } = useContractState(contract, accountName);
+    const isClientEmpty = contract.client === '';
     const terminateButton = (
         <TerminateContract contractId={contract.id} accountName={accountName} />
     );
     const completeButton = (
         <CompletedButton contractId={contract.id} accountName={accountName} />
     );
+    const deleteButton = (
+        <DeleteOrder accountName={accountName} contractId={contract.id} />
+    );
+    const isSelfSigned = contract.client === contract.executor;
     const buttonsMap = {
         [OrderState.WaitingForAction]: {
-            [OrderSubState.PrematureTerminated]: terminateButton,
+            [OrderSubState.PrematureTerminated]: deleteButton,
             [OrderSubState.ViolateTerms]: completeButton,
             [OrderSubState.Completed]: completeButton,
         },
@@ -34,12 +39,21 @@ const MineOperationContract: FC<ContractProps> = ({
             [OrderSubState.Active]: terminateButton,
         },
         [OrderState.OpenOrder]: {
-            [OrderSubState.Unsigned]: (
-                <DeleteOrder
-                    accountName={accountName}
-                    contractId={contract.id}
-                />
-            ),
+            [OrderSubState.Unsigned]: [
+                deleteButton,
+                isClientEmpty ? (
+                    <SignMineOwnerOrder
+                        contract={contract}
+                        accountName={accountName}
+                    />
+                ) : (
+                    <SignLandlordOrder
+                        contract={contract}
+                        accountName={accountName}
+                        isSelfContract={isSelfSigned}
+                    />
+                ),
+            ],
         },
     };
 
@@ -63,16 +77,6 @@ const MineOperationContract: FC<ContractProps> = ({
                                 accountName={accountName}
                             />
                         </Col>
-                        {/* {!isDeleted && ( */}
-                        {/*    <Col span={24}> */}
-                        {/*        {showCompleted && ( */}
-                        {/*            <CompletedAlert */}
-                        {/*                accountName={accountName} */}
-                        {/*                contractId={contract.id} */}
-                        {/*            /> */}
-                        {/*        )} */}
-                        {/*    </Col> */}
-                        {/* )} */}
                     </Row>
                 </Col>
                 <Col xs={24} md={12}>

@@ -9,17 +9,14 @@ import {
     $MineOwnerContracts,
     MineOwnerContractsGate,
     getMineOwnerContractsFx,
-    minesForAreaSlots,
     userAreaNftStore,
     PlaceMyselfMineAsOwner,
-    // LandlordContractsGate,
+    $area,
+    UserAreaGate,
 } from 'features';
 
-import {
-    areasStore,
-    InventoryType,
-    LOCATION_TO_ID,
-} from 'entities/smartcontract';
+import { Space } from 'antd';
+import { InventoryType, LOCATION_TO_ID } from 'entities/smartcontract';
 import {
     getActiveSelfSignedContract,
     getNotSignedSelfContract,
@@ -31,14 +28,12 @@ export const AreaManagementPage = () => {
     const accountName = useAccountName();
 
     useGate(MineOwnerContractsGate, { searchParam: accountName });
-    // useGate(LandlordContractsGate, { searchParam: accountName });
-    const mines = useStore(minesForAreaSlots);
-    const area = useStore(areasStore);
+    useGate(UserAreaGate, { searchParam: accountName });
+    const area = useStore($area);
     const userLocation = useUserLocation();
     const areas = useStore(userAreaNftStore);
 
     const mineOwnerContracts = useStore($MineOwnerContracts);
-    // const landLordContracts = useStore($contracts);
     const isContractsLoading = useStore(getMineOwnerContractsFx.pending);
 
     const contractsToSign = mineOwnerContracts.filter(getNotSignedSelfContract);
@@ -53,32 +48,28 @@ export const AreaManagementPage = () => {
     const isActive = !!areaItem?.in_use;
     const reloadPage = useReloadPage();
 
-    const currentMineSlots = mines?.length ?? 0;
-    const maxMineSlots = area?.[0]?.mine_slots.length ?? 0;
-
     return (
         <Page headerTitle={t('pages.areaManagement.title')}>
-            {accountName && (
+            <Space
+                size="large"
+                direction="vertical"
+                className={styles.headerAndStat}
+            >
                 <AreaClaim
                     isActive={isActive}
                     areaId={areaId}
                     accountName={accountName}
                 />
-            )}
+                {/* {area && <SlotStatistics area={area} />} */}
+            </Space>
             <PlaceMyselfMineAsOwner
                 contract={contractsToSign[0]}
                 accountName={accountName}
                 isDisabled={!!selfSignedContracts.length || isContractsLoading}
             />
-            <div className={styles.miningSlots}>
-                {t('pages.areaManagement.mineSlots')}{' '}
-                <span>
-                    {currentMineSlots}/{maxMineSlots}
-                </span>
-            </div>
-            {area?.[0] && (
+            {area && (
                 <AreaManagementTable
-                    area={area?.[0]}
+                    area={area}
                     disabled={!isActive}
                     ownContracts={contractsToSign}
                     selfSignedContracts={selfSignedContracts}

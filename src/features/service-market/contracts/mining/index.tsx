@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
 import { Col, Row } from 'antd';
 
-import { useContractState } from 'entities/contract';
+import { prop } from 'shared';
 import { OrderState, OrderSubState } from 'entities/smartcontract';
 import {
-    CompletedAlert,
     CompletedButton,
     DeleteOrder,
+    SignContractorOrder,
+    SignMineOwnerContractorOrder,
     TerminateContract,
 } from '../../ui/actions';
 import { ConditionTable, GeneralDataTable, MineOwnerTable } from '../../ui';
@@ -14,42 +15,97 @@ import { ContractorTable } from '../../ui/contract/mining';
 import { ContractProps } from '../../types';
 import { StatusHeader } from '../../ui/status-header';
 
-const MiningContract: FC<ContractProps> = ({
-    contract,
-    accountName,
-    isDeleted,
-}) => {
-    const { canTerminate, canDeleteSelfContract, showCompleted } =
-        useContractState(contract, accountName);
-    const completedAndWaitAction =
-        contract.computed?.status === OrderState.WaitingForAction &&
-        contract.computed.sub_status === OrderSubState.Completed;
+const MiningContract: FC<ContractProps> = ({ contract, accountName }) => {
+    const terminateButton = (
+        <TerminateContract contractId={contract.id} accountName={accountName} />
+    );
+    const completeButton = (
+        <CompletedButton contractId={contract.id} accountName={accountName} />
+    );
+    const deleteButton = (
+        <DeleteOrder accountName={accountName} contractId={contract.id} />
+    );
 
+    const isClientEmpty = contract.client === '';
+    const buttonsMap = {
+        [OrderState.OpenOrder]: {
+            [OrderSubState.undefined]: deleteButton,
+            [OrderSubState.Unsigned]: [
+                isClientEmpty ? (
+                    <SignContractorOrder
+                        contract={contract}
+                        accountName={accountName}
+                    />
+                ) : (
+                    <SignMineOwnerContractorOrder
+                        contract={contract}
+                        accountName={accountName}
+                        isSelfContract={false}
+                    />
+                ),
+                deleteButton,
+            ],
+        },
+        [OrderState.ValidContract]: {
+            [OrderSubState.undefined]: terminateButton,
+            [OrderSubState.Active]: terminateButton,
+        },
+
+        [OrderState.WaitingForAction]: {
+            [OrderSubState.undefined]: completeButton,
+            [OrderSubState.PrematureTerminated]: terminateButton,
+        },
+    };
+
+    const selfSignedButtonMap = {
+        [OrderState.OpenOrder]: {
+            [OrderSubState.Unsigned]: [
+                contract.executor ? (
+                    <SignMineOwnerContractorOrder
+                        contract={contract}
+                        accountName={accountName}
+                        isSelfContract={false}
+                    />
+                ) : (
+                    <SignContractorOrder
+                        contract={contract}
+                        accountName={accountName}
+                    />
+                ),
+                deleteButton,
+            ],
+        },
+        [OrderState.ValidContract]: {
+            [OrderSubState.undefined]: terminateButton,
+            [OrderSubState.Active]: terminateButton,
+        },
+
+        [OrderState.WaitingForAction]: {
+            [OrderSubState.undefined]: completeButton,
+            [OrderSubState.Completed]: completeButton,
+            [OrderSubState.Active]: terminateButton,
+            [OrderSubState.PrematureTerminated]: deleteButton,
+        },
+        [OrderState.Terminated]: {
+            [OrderSubState.PrematureTerminated]: deleteButton,
+        },
+    };
+
+    const isSelfSignedContract = contract.executor === contract.client;
+
+    const buttonsForStateSet =
+        contract.computed?.status &&
+        prop(
+            contract.computed?.status,
+            isSelfSignedContract ? selfSignedButtonMap : buttonsMap
+        );
+    const buttons = prop(
+        contract.computed?.sub_status || '',
+        buttonsForStateSet
+    );
     return (
         <div>
-            <StatusHeader
-                contract={contract}
-                extra={[
-                    canTerminate && (
-                        <TerminateContract
-                            contractId={contract.id}
-                            accountName={accountName}
-                        />
-                    ),
-                    canDeleteSelfContract && (
-                        <DeleteOrder
-                            accountName={accountName}
-                            contractId={contract.id}
-                        />
-                    ),
-                    completedAndWaitAction && (
-                        <CompletedButton
-                            accountName={accountName}
-                            contractId={contract.id}
-                        />
-                    ),
-                ]}
-            />
+            <StatusHeader contract={contract} extra={[buttons]} />
             <Row gutter={[32, 32]}>
                 <Col xs={24} md={12}>
                     <Row gutter={[24, 24]}>
@@ -59,17 +115,6 @@ const MiningContract: FC<ContractProps> = ({
                                 accountName={accountName}
                             />
                         </Col>
-
-                        {!isDeleted && (
-                            <Col span={24}>
-                                {showCompleted && (
-                                    <CompletedAlert
-                                        accountName={accountName}
-                                        contractId={contract.id}
-                                    />
-                                )}
-                            </Col>
-                        )}
                     </Row>
                 </Col>
                 <Col xs={24} md={12}>
@@ -81,7 +126,6 @@ const MiningContract: FC<ContractProps> = ({
                         accountName={accountName}
                     />
                 </Col>
-
                 <Col xs={24} md={12}>
                     <Row gutter={[32, 32]}>
                         <Col span={24}>
