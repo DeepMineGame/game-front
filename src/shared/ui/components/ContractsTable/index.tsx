@@ -211,9 +211,7 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                     title: t('pages.serviceMarket.myContractsTab.status'),
                     dataIndex: 'status',
                     key: 'status',
-                    sorter: (a, b) =>
-                        Number(a.status?.value.length) -
-                        Number(b.status?.value.length),
+                    sorter: (a, b) => a.value.length - b.value.length,
                     render: ({ label }) => label,
                 },
             ]}
