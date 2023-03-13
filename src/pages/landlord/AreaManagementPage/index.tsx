@@ -63,7 +63,6 @@ export const AreaManagementPage = () => {
                 />
                 {area && <SlotStatistics area={area} />}
             </Space>
-
             <PlaceMyselfMineAsOwner
                 contract={contractsToSign[0]}
                 accountName={accountName}
