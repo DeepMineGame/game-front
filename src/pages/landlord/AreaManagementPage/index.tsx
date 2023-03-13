@@ -11,7 +11,6 @@ import {
     getMineOwnerContractsFx,
     userAreaNftStore,
     PlaceMyselfMineAsOwner,
-    SlotStatistics,
     $area,
     UserAreaGate,
 } from 'features';
@@ -61,7 +60,7 @@ export const AreaManagementPage = () => {
                     areaId={areaId}
                     accountName={accountName}
                 />
-                {area && <SlotStatistics area={area} />}
+                {/* {area && <SlotStatistics area={area} />} */}
             </Space>
             <PlaceMyselfMineAsOwner
                 contract={contractsToSign[0]}
