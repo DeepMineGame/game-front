@@ -9,7 +9,6 @@ import {
     ContractDto,
     contractName,
     ContractType,
-    getContractStatus,
 } from 'entities/smartcontract';
 
 import { getUserRoleInContract } from 'shared/lib/utils';
@@ -41,7 +40,6 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
     const dataSource = useMemo(
         () =>
             contracts?.map((contract) => {
-                const contractStatus = getContractStatus(contract, account);
                 const Status = contractStateMap[contract.type];
 
                 return {
@@ -61,7 +59,7 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                         label: (
                             <Status contract={contract} accountName={account} />
                         ),
-                        value: contractStatus,
+                        value: contract?.computed?.status,
                     },
                     discord: contract.client_discord,
                     contract,
@@ -214,8 +212,7 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                     dataIndex: 'status',
                     key: 'status',
                     sorter: (a, b) =>
-                        a.status.value.value.length -
-                        b.status.value.value.length,
+                        a.status.value.length - b.status.value.length,
                     render: ({ label }) => label,
                 },
             ]}
