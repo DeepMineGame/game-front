@@ -92,9 +92,6 @@ const MiningContract: FC<ContractProps> = ({ contract, accountName }) => {
             [OrderSubState.Active]: terminateButton,
             [OrderSubState.PrematureTerminated]: deleteButton,
         },
-        [OrderState.Terminated]: {
-            [OrderSubState.PrematureTerminated]: deleteButton,
-        },
     };
 
     const buttonsForStateSet =
