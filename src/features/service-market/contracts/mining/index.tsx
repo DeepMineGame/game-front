@@ -27,9 +27,13 @@ const MiningContract: FC<ContractProps> = ({ contract, accountName }) => {
     );
 
     const isClientEmpty = contract.client === '';
+    const isCurrentUserClientOrExecutor =
+        contract.client === accountName || contract.executor === accountName;
+
     const buttonsMap = {
         [OrderState.OpenOrder]: {
-            [OrderSubState.undefined]: deleteButton,
+            [OrderSubState.undefined]:
+                isCurrentUserClientOrExecutor && deleteButton,
             [OrderSubState.Unsigned]: [
                 isClientEmpty ? (
                     <SignContractorOrder
@@ -43,7 +47,7 @@ const MiningContract: FC<ContractProps> = ({ contract, accountName }) => {
                         isSelfContract={false}
                     />
                 ),
-                deleteButton,
+                isCurrentUserClientOrExecutor && deleteButton,
             ],
         },
         [OrderState.ValidContract]: {
