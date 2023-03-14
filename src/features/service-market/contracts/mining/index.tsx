@@ -35,21 +35,23 @@ const MiningContract: FC<ContractProps> = ({ contract, accountName }) => {
         contract.client === accountName || contract.executor === accountName;
 
     const signButtonMap = {
-        [OrderSubState.Unsigned]: [
-            isClientEmpty ? (
-                <SignContractorOrder
-                    contract={contract}
-                    accountName={accountName}
-                />
-            ) : (
-                <SignMineOwnerContractorOrder
-                    contract={contract}
-                    accountName={accountName}
-                    isSelfContract={false}
-                />
-            ),
-            isCurrentUserClientOrExecutor && deleteButton,
-        ],
+        [OrderState.OpenOrder]: {
+            [OrderSubState.Unsigned]: [
+                isClientEmpty ? (
+                    <SignContractorOrder
+                        contract={contract}
+                        accountName={accountName}
+                    />
+                ) : (
+                    <SignMineOwnerContractorOrder
+                        contract={contract}
+                        accountName={accountName}
+                        isSelfContract={false}
+                    />
+                ),
+                isCurrentUserClientOrExecutor && deleteButton,
+            ],
+        },
     };
     const buttonsMap = {
         [OrderState.OpenOrder]: {
@@ -107,11 +109,19 @@ const MiningContract: FC<ContractProps> = ({ contract, accountName }) => {
         contract.computed?.sub_status || '',
         buttonsForStateSet
     );
+    const buttonFonNonInvolvedUsersForStateSet = prop(
+        contract.computed?.status || '',
+        signButtonMap
+    );
+    const buttonsForNonInvolvedUser = prop(
+        contract.computed?.sub_status || '',
+        buttonFonNonInvolvedUsersForStateSet
+    );
     return (
         <div>
             <StatusHeader
                 contract={contract}
-                extra={isUserInvolved ? [buttons] : [signButtonMap]}
+                extra={isUserInvolved ? [buttons] : [buttonsForNonInvolvedUser]}
             />
             <Row gutter={[32, 32]}>
                 <Col xs={24} md={12}>
