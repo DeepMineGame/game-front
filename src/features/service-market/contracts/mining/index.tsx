@@ -16,6 +16,8 @@ import { ContractProps } from '../../types';
 import { StatusHeader } from '../../ui/status-header';
 
 const MiningContract: FC<ContractProps> = ({ contract, accountName }) => {
+    const isSelfSignedContract = contract.executor === contract.client;
+
     const terminateButton = (
         <TerminateContract contractId={contract.id} accountName={accountName} />
     );
@@ -68,7 +70,7 @@ const MiningContract: FC<ContractProps> = ({ contract, accountName }) => {
                     <SignMineOwnerContractorOrder
                         contract={contract}
                         accountName={accountName}
-                        isSelfContract={false}
+                        isSelfContract
                     />
                 ) : (
                     <SignContractorOrder
@@ -94,8 +96,6 @@ const MiningContract: FC<ContractProps> = ({ contract, accountName }) => {
             [OrderSubState.PrematureTerminated]: deleteButton,
         },
     };
-
-    const isSelfSignedContract = contract.executor === contract.client;
 
     const buttonsForStateSet =
         contract.computed?.status &&
