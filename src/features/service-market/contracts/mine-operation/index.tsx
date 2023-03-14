@@ -28,12 +28,15 @@ const MineOperationContract: FC<ContractProps> = ({
     const deleteButton = (
         <DeleteOrder accountName={accountName} contractId={contract.id} />
     );
+    const isUserInvolved =
+        contract.client === accountName || contract.executor === accountName;
+
     const isSelfSigned = contract.client === contract.executor;
     const buttonsMap = {
         [OrderState.WaitingForAction]: {
             [OrderSubState.PrematureTerminated]: deleteButton,
             [OrderSubState.ViolateTerms]: completeButton,
-            [OrderSubState.Completed]: completeButton,
+            [OrderSubState.Completed]: isUserInvolved && completeButton,
         },
         [OrderState.ValidContract]: {
             [OrderSubState.Active]: terminateButton,
