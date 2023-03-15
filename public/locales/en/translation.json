@@ -380,7 +380,6 @@
         "minesOnArea": "Mines on Area",
         "saturation": "Saturation",
         "mineOwner": "Mine Owner",
-        "mineRarity": "Mine Rarity",
         "level": "Level",
         "sublevel": "Sublevel",
         "depth": "Depth"
@@ -520,7 +519,6 @@
             "costOfExecution": "The amount of DME the engineer receives for performing the upgrade"
           }
         },
-        "mineRarity": "Mine rarity",
         "mineRarityDescription": "Desired rarity of the mine where you want to operate",
         "mineLevel": "Mine level",
         "mineLevelDescription": "Desired level of the mine where you want to operate"

@@ -36,7 +36,7 @@ const MiningContract: FC<ContractProps> = ({ contract, accountName }) => {
 
     const signButtonMap = {
         [OrderState.OpenOrder]: {
-            [OrderSubState.Unsigned]: [
+            [OrderSubState.Unsigned]: isUserInvolved && [
                 isClientEmpty ? (
                     <SignContractorOrder
                         contract={contract}
@@ -117,6 +117,7 @@ const MiningContract: FC<ContractProps> = ({ contract, accountName }) => {
         contract.computed?.sub_status || '',
         buttonFonNonInvolvedUsersForStateSet
     );
+
     return (
         <div>
             <StatusHeader
