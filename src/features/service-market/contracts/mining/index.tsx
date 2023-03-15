@@ -1,7 +1,11 @@
 import React, { FC } from 'react';
 import { Col, Row } from 'antd';
 
-import { ContractStatus, OrderState } from 'entities/smartcontract';
+import {
+    ContractStatus,
+    OrderState,
+    OrderSubState,
+} from 'entities/smartcontract';
 import {
     CompletedButton,
     DeleteOrder,
@@ -27,10 +31,6 @@ const MiningContract: FC<ContractProps> = ({ contract, accountName }) => {
         <DeleteOrder accountName={accountName} contractId={contract.id} />
     );
     const isUserInvolved =
-        contract.client === accountName || contract.executor === accountName;
-
-    const isClientEmpty = contract.client === '';
-    const isCurrentUserClientOrExecutor =
         contract.client === accountName || contract.executor === accountName;
 
     const isSignByClient = contract.status === ContractStatus.signed_by_client;
@@ -108,6 +108,41 @@ const MiningContract: FC<ContractProps> = ({ contract, accountName }) => {
                         accountName={accountName}
                     />
                 );
+            }
+        }
+    }
+    if (OrderState.ValidContract === contract.computed?.status) {
+        if (isUserInvolved) {
+            buttonsV2 = terminateButton;
+        }
+    }
+    if (OrderState.WaitingForAction === contract.computed?.status) {
+        if (isUserInvolved) {
+            if (OrderSubState.undefined === contract.computed?.sub_status) {
+                buttonsV2 = completeButton;
+            }
+            if (
+                OrderSubState.PrematureTerminated ===
+                contract.computed?.sub_status
+            ) {
+                buttonsV2 = terminateButton;
+            }
+            if (isSelfSignedContract) {
+                if (OrderSubState.undefined === contract.computed?.sub_status) {
+                    buttonsV2 = completeButton;
+                }
+                if (OrderSubState.Completed === contract.computed?.sub_status) {
+                    buttonsV2 = completeButton;
+                }
+                if (OrderSubState.Active === contract.computed?.sub_status) {
+                    buttonsV2 = terminateButton;
+                }
+                if (
+                    OrderSubState.PrematureTerminated ===
+                    contract.computed?.sub_status
+                ) {
+                    buttonsV2 = deleteButton;
+                }
             }
         }
     }
