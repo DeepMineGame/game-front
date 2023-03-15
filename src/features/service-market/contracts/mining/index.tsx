@@ -40,28 +40,6 @@ const MiningContract: FC<ContractProps> = ({ contract, accountName }) => {
 
     if (OrderState.OpenOrder === contract.computed?.status) {
         if (isUserInvolved) {
-            if (isSelfSignedContract) {
-                if (isSignByClient) {
-                    buttonsV2 = [
-                        <SignContractorOrder
-                            contract={contract}
-                            accountName={accountName}
-                        />,
-                        deleteButton,
-                    ];
-                }
-                if (isSignByExecutor) {
-                    buttonsV2 = [
-                        <SignMineOwnerContractorOrder
-                            contract={contract}
-                            accountName={accountName}
-                            isSelfContract
-                        />,
-                        deleteButton,
-                    ];
-                }
-            }
-
             if (isSignByClient) {
                 if (contract.client === accountName) {
                     buttonsV2 = deleteButton;
@@ -87,6 +65,28 @@ const MiningContract: FC<ContractProps> = ({ contract, accountName }) => {
                             isSelfContract={false}
                         />
                     );
+                }
+            }
+            if (isSelfSignedContract) {
+                if (isSignByClient) {
+                    buttonsV2 = [
+                        <SignMineOwnerContractorOrder
+                            contract={contract}
+                            accountName={accountName}
+                            isSelfContract
+                        />,
+                        deleteButton,
+                    ];
+                }
+                if (isSignByExecutor) {
+                    buttonsV2 = [
+                        <SignContractorOrder
+                            contract={contract}
+                            accountName={accountName}
+                            isClient={1}
+                        />,
+                        deleteButton,
+                    ];
                 }
             }
         }
