@@ -1,12 +1,7 @@
 import React, { FC } from 'react';
 import { Col, Row } from 'antd';
 
-import { prop } from 'shared';
-import {
-    ContractStatus,
-    OrderState,
-    OrderSubState,
-} from 'entities/smartcontract';
+import { ContractStatus, OrderState } from 'entities/smartcontract';
 import {
     CompletedButton,
     DeleteOrder,
@@ -38,112 +33,88 @@ const MiningContract: FC<ContractProps> = ({ contract, accountName }) => {
     const isCurrentUserClientOrExecutor =
         contract.client === accountName || contract.executor === accountName;
 
-    const signButtonMap = {
-        [OrderState.OpenOrder]: {
-            [OrderSubState.Unsigned]: isUserInvolved && [
-                isClientEmpty ? (
-                    <SignContractorOrder
-                        contract={contract}
-                        accountName={accountName}
-                    />
-                ) : (
+    const isSignByClient = contract.status === ContractStatus.signed_by_client;
+    const isSignByExecutor =
+        contract.status === ContractStatus.signed_by_executor;
+    let buttonsV2;
+
+    if (OrderState.OpenOrder === contract.computed?.status) {
+        if (isUserInvolved) {
+            if (isSelfSignedContract) {
+                if (isSignByClient) {
+                    buttonsV2 = [
+                        <SignContractorOrder
+                            contract={contract}
+                            accountName={accountName}
+                        />,
+                        deleteButton,
+                    ];
+                }
+                if (isSignByExecutor) {
+                    buttonsV2 = [
+                        <SignMineOwnerContractorOrder
+                            contract={contract}
+                            accountName={accountName}
+                            isSelfContract
+                        />,
+                        deleteButton,
+                    ];
+                }
+            }
+
+            if (isSignByClient) {
+                if (contract.client === accountName) {
+                    buttonsV2 = deleteButton;
+                }
+                if (contract.client !== accountName) {
+                    buttonsV2 = (
+                        <SignContractorOrder
+                            contract={contract}
+                            accountName={accountName}
+                        />
+                    );
+                }
+            }
+            if (isSignByExecutor) {
+                if (contract.executor === accountName) {
+                    buttonsV2 = deleteButton;
+                }
+                if (contract.executor !== accountName) {
+                    buttonsV2 = (
+                        <SignMineOwnerContractorOrder
+                            contract={contract}
+                            accountName={accountName}
+                            isSelfContract={false}
+                        />
+                    );
+                }
+            }
+        }
+
+        if (!isUserInvolved) {
+            if (isSignByClient) {
+                buttonsV2 = (
                     <SignMineOwnerContractorOrder
                         contract={contract}
                         accountName={accountName}
                         isSelfContract={false}
                     />
-                ),
-                isCurrentUserClientOrExecutor && deleteButton,
-            ],
-        },
-    };
-
-    const buttonsMap = {
-        [OrderState.OpenOrder]: {
-            [OrderSubState.undefined]:
-                isCurrentUserClientOrExecutor && deleteButton,
-            [OrderSubState.Unsigned]: isUserInvolved && [
-                contract.status > ContractStatus.signed_by_client ? (
-                    <SignMineOwnerContractorOrder
-                        contract={contract}
-                        accountName={accountName}
-                        isSelfContract={false}
-                    />
-                ) : (
+                );
+            }
+            if (isSignByExecutor) {
+                buttonsV2 = (
                     <SignContractorOrder
                         contract={contract}
                         accountName={accountName}
                     />
-                ),
-                isCurrentUserClientOrExecutor && deleteButton,
-            ],
-        },
-        [OrderState.ValidContract]: {
-            [OrderSubState.undefined]: terminateButton,
-            [OrderSubState.Active]: terminateButton,
-        },
-        [OrderState.WaitingForAction]: {
-            [OrderSubState.undefined]: completeButton,
-            [OrderSubState.PrematureTerminated]: terminateButton,
-        },
-    };
-
-    const selfSignedButtonMap = {
-        [OrderState.OpenOrder]: {
-            [OrderSubState.Unsigned]: [
-                contract.executor ? (
-                    <SignMineOwnerContractorOrder
-                        contract={contract}
-                        accountName={accountName}
-                        isSelfContract
-                    />
-                ) : (
-                    <SignContractorOrder
-                        contract={contract}
-                        accountName={accountName}
-                    />
-                ),
-                deleteButton,
-            ],
-        },
-        [OrderState.ValidContract]: {
-            [OrderSubState.undefined]: terminateButton,
-            [OrderSubState.Active]: terminateButton,
-        },
-
-        [OrderState.WaitingForAction]: {
-            [OrderSubState.undefined]: completeButton,
-            [OrderSubState.Completed]: completeButton,
-            [OrderSubState.Active]: terminateButton,
-            [OrderSubState.PrematureTerminated]: deleteButton,
-        },
-    };
-
-    const buttonsForStateSet =
-        contract.computed?.status &&
-        prop(
-            contract.computed?.status,
-            isSelfSignedContract ? selfSignedButtonMap : buttonsMap
-        );
-    const buttons = prop(
-        contract.computed?.sub_status || '',
-        buttonsForStateSet
-    );
-    const buttonFonNonInvolvedUsersForStateSet = prop(
-        contract.computed?.status || '',
-        signButtonMap
-    );
-    const buttonsForNonInvolvedUser = prop(
-        contract.computed?.sub_status || '',
-        buttonFonNonInvolvedUsersForStateSet
-    );
+                );
+            }
+        }
+    }
 
     return (
         <div>
-            <StatusHeader
-                contract={contract}
-                extra={isUserInvolved ? [buttons] : [buttonsForNonInvolvedUser]}
-            />
+            <StatusHeader contract={contract} extra={buttonsV2} />
             <Row gutter={[32, 32]}>
                 <Col xs={24} md={12}>
                     <Row gutter={[24, 24]}>

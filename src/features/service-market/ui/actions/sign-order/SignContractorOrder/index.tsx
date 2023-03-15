@@ -42,7 +42,6 @@ const SignContractorOrder: FC<Props> = ({ contract, accountName }) => {
 
     useGate(MinesGate, { searchParam: accountName });
     const mines = useStore(minesStore);
-
     const emptySlot = getEmptySlot(mines[0]?.contractor_slots ?? []);
 
     const signContractAction = useSmartContractAction({
