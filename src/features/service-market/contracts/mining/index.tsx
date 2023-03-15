@@ -2,7 +2,11 @@ import React, { FC } from 'react';
 import { Col, Row } from 'antd';
 
 import { prop } from 'shared';
-import { OrderState, OrderSubState } from 'entities/smartcontract';
+import {
+    ContractStatus,
+    OrderState,
+    OrderSubState,
+} from 'entities/smartcontract';
 import {
     CompletedButton,
     DeleteOrder,
@@ -53,10 +57,26 @@ const MiningContract: FC<ContractProps> = ({ contract, accountName }) => {
             ],
         },
     };
+
     const buttonsMap = {
         [OrderState.OpenOrder]: {
             [OrderSubState.undefined]:
                 isCurrentUserClientOrExecutor && deleteButton,
+            [OrderSubState.Unsigned]: isUserInvolved && [
+                contract.status > ContractStatus.signed_by_client ? (
+                    <SignMineOwnerContractorOrder
+                        contract={contract}
+                        accountName={accountName}
+                        isSelfContract={false}
+                    />
+                ) : (
+                    <SignContractorOrder
+                        contract={contract}
+                        accountName={accountName}
+                    />
+                ),
+                isCurrentUserClientOrExecutor && deleteButton,
+            ],
         },
         [OrderState.ValidContract]: {
             [OrderSubState.undefined]: terminateButton,
