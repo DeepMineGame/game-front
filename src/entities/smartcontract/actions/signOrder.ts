@@ -29,7 +29,7 @@ export function signOrder({
                 data: {
                     wax_user: waxUser,
                     contract_id: contractId,
-                    ...(assetId && { opt_asset_id: assetId }),
+                    ...(assetId && { opt_asset_id1: assetId }),
                     opt_level: level ?? null,
                     opt_rarity: rarity ?? null,
                     opt_as_client: isClient ?? null,

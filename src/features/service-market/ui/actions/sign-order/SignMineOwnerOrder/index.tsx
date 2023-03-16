@@ -23,6 +23,7 @@ import styles from '../SignLandlordOrder/styles.module.scss';
 type Props = {
     contract: ContractDto;
     accountName: string;
+    isSelfContract: boolean;
 };
 
 const getEmptySlot = (slots: MineSlots) => {
@@ -36,8 +37,8 @@ const getEmptySlot = (slots: MineSlots) => {
     );
 };
 
-const SignMineOwnerOrder: FC<Props> = React.memo(
-    ({ contract, accountName }) => {
+const SignAsLandlord: FC<Props> = React.memo(
+    ({ contract, accountName, isSelfContract }) => {
         const { t } = useTranslation();
         const reloadPage = useReloadPage();
 
@@ -59,6 +60,7 @@ const SignMineOwnerOrder: FC<Props> = React.memo(
                 waxUser: accountName,
                 assetId: activeArea?.id,
                 contractId: contract.id,
+                ...(isSelfContract && { isClient: 1 }),
             }),
         });
 
@@ -122,4 +124,4 @@ const SignMineOwnerOrder: FC<Props> = React.memo(
     }
 );
 
-export { SignMineOwnerOrder, getEmptySlot };
+export { SignAsLandlord, getEmptySlot };
