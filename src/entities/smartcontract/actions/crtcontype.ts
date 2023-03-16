@@ -10,7 +10,7 @@ const getBaseFields = (orderData: BaseOrder) => {
         wax_user: orderData.wax_user,
         opt_client: orderData.opt_client,
         opt_executor: orderData.opt_executor,
-        opt_asset_id: Number.isNaN(assetId) ? undefined : assetId,
+        opt_asset_id1: Number.isNaN(assetId) ? undefined : assetId,
         is_client: isClient,
         deposit: Number(orderData.deposit || 0) * 10 ** 8,
         deadline_duration:
