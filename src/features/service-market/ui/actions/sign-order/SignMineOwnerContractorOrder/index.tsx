@@ -10,7 +10,7 @@ type Props = {
     isSelfContract: boolean;
 };
 
-const SignMineOwnerContractorOrder: FC<Props> = React.memo(
+const SignAsContractor: FC<Props> = React.memo(
     ({ contract, accountName, isSelfContract }) => {
         const { t } = useTranslation();
         const reloadPage = useReloadPage();
@@ -41,4 +41,4 @@ const SignMineOwnerContractorOrder: FC<Props> = React.memo(
     }
 );
 
-export { SignMineOwnerContractorOrder };
+export { SignAsContractor };

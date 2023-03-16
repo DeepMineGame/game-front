@@ -4,8 +4,8 @@ import { useOrderDelete, useOrderSign } from 'entities/order';
 import { useContractType } from 'entities/contract';
 import { ConditionTable, MineOwnerTable, GeneralDataTable } from '../../ui';
 import {
-    SignContractorOrder,
-    SignMineOwnerContractorOrder,
+    SignAsMineOwner,
+    SignAsContractor,
     DeleteOrder,
 } from '../../ui/actions';
 import { ContractorTable } from '../../ui/contract/mining';
@@ -25,13 +25,13 @@ const MiningOrder: FC<ContractProps> = ({ contract, accountName }) => {
                 contract={contract}
                 extra={[
                     canSignMiningContractorOrder && (
-                        <SignContractorOrder
+                        <SignAsMineOwner
                             contract={contract}
                             accountName={accountName}
                         />
                     ),
                     canSignMiningMineOwnerOrder && (
-                        <SignMineOwnerContractorOrder
+                        <SignAsContractor
                             contract={contract}
                             accountName={accountName}
                             isSelfContract={isSelfSigned}

@@ -34,11 +34,7 @@ type Props = {
 const getEmptySlot = (slots: ContractorSlots) =>
     slots.findIndex(isEmptyContractorSlot) ?? -1;
 
-const SignContractorOrder: FC<Props> = ({
-    contract,
-    accountName,
-    isClient,
-}) => {
+const SignAsMineOwner: FC<Props> = ({ contract, accountName, isClient }) => {
     const { t } = useTranslation();
     const reloadPage = useReloadPage();
     const [isWarningModalVisible, setIsWarningModalVisible] = useState(false);
@@ -130,4 +126,4 @@ const SignContractorOrder: FC<Props> = ({
     );
 };
 
-export { SignContractorOrder };
+export { SignAsMineOwner };

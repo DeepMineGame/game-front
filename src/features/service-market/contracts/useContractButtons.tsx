@@ -8,8 +8,8 @@ import {
 import {
     CompletedButton,
     DeleteOrder,
-    SignContractorOrder,
-    SignMineOwnerContractorOrder,
+    SignAsMineOwner,
+    SignAsContractor,
     TerminateContract,
 } from '../ui/actions';
 
@@ -42,9 +42,10 @@ export const useContractButtons = (contract: ContractDto) => {
                 }
                 if (contract.client !== accountName) {
                     buttons = (
-                        <SignContractorOrder
+                        <SignAsContractor
                             contract={contract}
                             accountName={accountName}
+                            isSelfContract={false}
                         />
                     );
                 }
@@ -55,10 +56,9 @@ export const useContractButtons = (contract: ContractDto) => {
                 }
                 if (contract.executor !== accountName) {
                     buttons = (
-                        <SignMineOwnerContractorOrder
+                        <SignAsMineOwner
                             contract={contract}
                             accountName={accountName}
-                            isSelfContract={false}
                         />
                     );
                 }
@@ -66,7 +66,7 @@ export const useContractButtons = (contract: ContractDto) => {
             if (isSelfSignedContract) {
                 if (isSignByClient) {
                     buttons = [
-                        <SignMineOwnerContractorOrder
+                        <SignAsContractor
                             contract={contract}
                             accountName={accountName}
                             isSelfContract
@@ -76,7 +76,7 @@ export const useContractButtons = (contract: ContractDto) => {
                 }
                 if (isSignByExecutor) {
                     buttons = [
-                        <SignContractorOrder
+                        <SignAsMineOwner
                             contract={contract}
                             accountName={accountName}
                             isClient={1}
@@ -90,7 +90,7 @@ export const useContractButtons = (contract: ContractDto) => {
         if (!isUserInvolved) {
             if (isSignByClient) {
                 buttons = (
-                    <SignMineOwnerContractorOrder
+                    <SignAsContractor
                         contract={contract}
                         accountName={accountName}
                         isSelfContract={false}
@@ -99,7 +99,7 @@ export const useContractButtons = (contract: ContractDto) => {
             }
             if (isSignByExecutor) {
                 buttons = (
-                    <SignContractorOrder
+                    <SignAsMineOwner
                         contract={contract}
                         accountName={accountName}
                     />
