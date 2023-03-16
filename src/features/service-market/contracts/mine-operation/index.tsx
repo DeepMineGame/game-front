@@ -1,69 +1,16 @@
 import React, { FC } from 'react';
 import { Col, Row } from 'antd';
-import { prop } from 'shared';
-import { OrderState, OrderSubState } from 'entities/smartcontract';
-import {
-    CompletedButton,
-    DeleteOrder,
-    SignLandlordOrder,
-    SignMineOwnerOrder,
-    TerminateContract,
-} from '../../ui/actions';
 import { GeneralDataTable, ConditionTable, MineOwnerTable } from '../../ui';
 import { LandlordTable } from '../../ui/contract/mine-operation';
 import { ContractProps } from '../../types';
 import { StatusHeader } from '../../ui/status-header';
+import { useContractButtons } from '../useContractButtons';
 
 const MineOperationContract: FC<ContractProps> = ({
     contract,
     accountName,
 }) => {
-    const isClientEmpty = contract.client === '';
-    const terminateButton = (
-        <TerminateContract contractId={contract.id} accountName={accountName} />
-    );
-    const completeButton = (
-        <CompletedButton contractId={contract.id} accountName={accountName} />
-    );
-    const deleteButton = (
-        <DeleteOrder accountName={accountName} contractId={contract.id} />
-    );
-    const isSelfSigned = contract.client === contract.executor;
-    const buttonsMap = {
-        [OrderState.WaitingForAction]: {
-            [OrderSubState.PrematureTerminated]: deleteButton,
-            [OrderSubState.ViolateTerms]: completeButton,
-            [OrderSubState.Completed]: completeButton,
-        },
-        [OrderState.ValidContract]: {
-            [OrderSubState.Active]: terminateButton,
-        },
-        [OrderState.OpenOrder]: {
-            [OrderSubState.Unsigned]: [
-                deleteButton,
-                isClientEmpty ? (
-                    <SignMineOwnerOrder
-                        contract={contract}
-                        accountName={accountName}
-                    />
-                ) : (
-                    <SignLandlordOrder
-                        contract={contract}
-                        accountName={accountName}
-                        isSelfContract={isSelfSigned}
-                    />
-                ),
-            ],
-        },
-    };
-
-    const buttonsForStateSet =
-        contract.computed?.status &&
-        prop(contract.computed?.status, buttonsMap);
-    const buttons = prop(
-        contract.computed?.sub_status || '',
-        buttonsForStateSet
-    );
+    const buttons = useContractButtons(contract);
 
     return (
         <div>

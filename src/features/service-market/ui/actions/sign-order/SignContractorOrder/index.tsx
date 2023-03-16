@@ -28,21 +28,24 @@ import styles from './styles.module.scss';
 type Props = {
     contract: ContractDto;
     accountName: string;
+    isClient?: 1 | 0;
 };
 
 const getEmptySlot = (slots: ContractorSlots) =>
     slots.findIndex(isEmptyContractorSlot) ?? -1;
 
-const SignContractorOrder: FC<Props> = ({ contract, accountName }) => {
+const SignContractorOrder: FC<Props> = ({
+    contract,
+    accountName,
+    isClient,
+}) => {
     const { t } = useTranslation();
     const reloadPage = useReloadPage();
     const [isWarningModalVisible, setIsWarningModalVisible] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [mineId, setMineId] = useState('');
-
     useGate(MinesGate, { searchParam: accountName });
     const mines = useStore(minesStore);
-
     const emptySlot = getEmptySlot(mines[0]?.contractor_slots ?? []);
 
     const signContractAction = useSmartContractAction({
@@ -50,6 +53,7 @@ const SignContractorOrder: FC<Props> = ({ contract, accountName }) => {
             waxUser: accountName,
             assetId: mineId,
             contractId: contract.id,
+            ...(isClient && { isClient }),
         }),
     });
 

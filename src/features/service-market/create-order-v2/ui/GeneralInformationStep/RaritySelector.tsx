@@ -13,19 +13,16 @@ export const RaritySelector = () => {
     return (
         <Form.Item
             className={styles.formField}
-            label={t('pages.serviceMarket.createOrder.mineRarity')}
+            label={t('Mine rarity')}
             name={orderFields.optRarity}
             tooltip={
-                <Card
-                    title={t('pages.serviceMarket.createOrder.mineRarity')}
-                    className={styles.tooltipCard}
-                >
+                <Card title={t('Mine rarity')} className={styles.tooltipCard}>
                     {t('pages.serviceMarket.createOrder.mineRarityDescription')}
                 </Card>
             }
         >
             <Select
-                placeholder={t('pages.serviceMarket.createOrder.mineRarity')}
+                placeholder="N/A"
                 options={rarityList.map((rarity) => ({
                     value: rarity,
                     label: t(raritiesTranslationMap[rarity]),

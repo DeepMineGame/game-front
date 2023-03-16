@@ -49,7 +49,7 @@ const GeneralDataTable: FC<ContractProps> = ({ contract, accountName }) => {
             contract.level.toString();
     }
     if (contract.rarity !== -1) {
-        generalData[t('pages.serviceMarket.createOrder.mineRarity')] = t(
+        generalData[t('Mine rarity')] = t(
             raritiesTranslationMap[contract.rarity as RarityType]
         );
     }

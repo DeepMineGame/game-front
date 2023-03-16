@@ -64,7 +64,7 @@ export const LevelUpgradeTerms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                 <Form.Item
                     label={t('Cost of execution')}
                     className={cn(styles.formField, localStyles.feeInput)}
-                    name={orderFields.feePercent}
+                    name={orderFields.costOfExecution}
                     initialValue={10}
                     tooltip={
                         <Card
