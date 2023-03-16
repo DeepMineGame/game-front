@@ -123,6 +123,9 @@ export const useContractButtons = (contract: ContractDto) => {
             ) {
                 buttons = terminateButton;
             }
+            if (OrderSubState.Completed === contract.computed?.sub_status) {
+                buttons = completeButton;
+            }
             if (isSelfSignedContract) {
                 if (OrderSubState.undefined === contract.computed?.sub_status) {
                     buttons = completeButton;
