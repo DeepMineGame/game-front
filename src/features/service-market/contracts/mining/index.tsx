@@ -5,10 +5,10 @@ import { ConditionTable, GeneralDataTable, MineOwnerTable } from '../../ui';
 import { ContractorTable } from '../../ui/contract/mining';
 import { ContractProps } from '../../types';
 import { StatusHeader } from '../../ui/status-header';
-import { useContractButtons } from '../useContractButtons';
+import { useMiningContractButtons } from '../useMiningContractButtons';
 
 const MiningContract: FC<ContractProps> = ({ contract, accountName }) => {
-    const buttons = useContractButtons(contract);
+    const buttons = useMiningContractButtons(contract);
     return (
         <div>
             <StatusHeader contract={contract} extra={buttons} />

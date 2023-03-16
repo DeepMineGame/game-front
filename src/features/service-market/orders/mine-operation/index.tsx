@@ -9,7 +9,7 @@ import { LandlordTable } from '../../ui/contract/mine-operation';
 import { ConditionTable, MineOwnerTable, GeneralDataTable } from '../../ui';
 import {
     SignLandlordOrder,
-    SignMineOwnerOrder,
+    SignAsLandlord,
     DeleteOrder,
 } from '../../ui/actions';
 import { ContractProps } from '../../types';
@@ -21,8 +21,11 @@ const MineOperationOrder: FC<ContractProps> = ({ contract, accountName }) => {
     const { isExecutorSigned, isClientSigned, isSelfSigned } =
         useContractType(contract);
     const { canDeleteOrder } = useOrderDelete(contract, accountName);
-    const { canSignOperationLandlordOrder, canSignOperationMineOwnerOrder } =
-        useOrderSign(contract, accountName, userRoles);
+    const { canSignOperationLandlordOrder } = useOrderSign(
+        contract,
+        accountName,
+        userRoles
+    );
 
     return (
         <div>
@@ -37,12 +40,13 @@ const MineOperationOrder: FC<ContractProps> = ({ contract, accountName }) => {
                         />
                     ),
 
-                    canSignOperationMineOwnerOrder && (
-                        <SignMineOwnerOrder
-                            contract={contract}
-                            accountName={accountName}
-                        />
-                    ),
+                    // canSignOperationMineOwnerOrder && (
+                    //     <SignAsLandlord
+                    //         contract={contract}
+                    //         accountName={accountName}
+                    //         isSelfContract={false}
+                    //     />
+                    // ),
 
                     canDeleteOrder && (
                         <DeleteOrder

@@ -4,13 +4,13 @@ import { GeneralDataTable, ConditionTable, MineOwnerTable } from '../../ui';
 import { LandlordTable } from '../../ui/contract/mine-operation';
 import { ContractProps } from '../../types';
 import { StatusHeader } from '../../ui/status-header';
-import { useContractButtons } from '../useContractButtons';
+import { useMineOperationButtons } from '../useMineOperationButtons';
 
 const MineOperationContract: FC<ContractProps> = ({
     contract,
     accountName,
 }) => {
-    const buttons = useContractButtons(contract);
+    const buttons = useMineOperationButtons(contract);
 
     return (
         <div>
