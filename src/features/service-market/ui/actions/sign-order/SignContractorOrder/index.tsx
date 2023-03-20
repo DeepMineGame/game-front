@@ -49,7 +49,7 @@ const SignAsMineOwner: FC<Props> = ({ contract, accountName, isClient }) => {
             waxUser: accountName,
             assetId: mineId,
             contractId: contract.id,
-            ...(isClient && { isClient }),
+            ...((isClient === 1 || isClient === 0) && { isClient }),
         }),
     });
 
