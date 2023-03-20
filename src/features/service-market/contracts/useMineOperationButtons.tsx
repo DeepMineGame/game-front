@@ -70,6 +70,7 @@ export const useMineOperationButtons = (contract: ContractDto) => {
                         <SignAsMineOwner
                             contract={contract}
                             accountName={accountName}
+                            isClient={0}
                         />,
                         deleteButton,
                     ];
