@@ -149,12 +149,7 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
 
     return (
         <>
-            <Button
-                type="ghost"
-                onClick={handleClick}
-                className={styles.button}
-                disabled={isDisabled}
-            >
+            <Button type="ghost" onClick={handleClick} disabled={isDisabled}>
                 {t('pages.areaManagement.placeAsMineOwner')}
             </Button>
 

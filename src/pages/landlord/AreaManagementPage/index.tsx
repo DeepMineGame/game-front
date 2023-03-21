@@ -1,7 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
 
-import { Page, useAccountName, useReloadPage, useUserLocation } from 'shared';
+import {
+    Button,
+    Page,
+    useAccountName,
+    useReloadPage,
+    useUserLocation,
+} from 'shared';
 import {
     AreaClaim,
     AreaManagementTable,
@@ -13,9 +19,13 @@ import {
     PlaceMyselfMineAsOwner,
     $area,
     UserAreaGate,
+    SlotStatistics,
+    AddNewMine,
+    AreaGate,
 } from 'features';
 
-import { Space } from 'antd';
+import { Col, Row, Space } from 'antd';
+import { UnlockOutlined } from '@ant-design/icons';
 import { InventoryType, LOCATION_TO_ID } from 'entities/smartcontract';
 import {
     getActiveSelfSignedContract,
@@ -29,6 +39,8 @@ export const AreaManagementPage = () => {
 
     useGate(MineOwnerContractsGate, { searchParam: accountName });
     useGate(UserAreaGate, { searchParam: accountName });
+    useGate(AreaGate, { searchParam: accountName });
+
     const area = useStore($area);
     const userLocation = useUserLocation();
     const areas = useStore(userAreaNftStore);
@@ -47,9 +59,18 @@ export const AreaManagementPage = () => {
     const areaId = areaItem ? +areaItem.asset_id : undefined;
     const isActive = !!areaItem?.in_use;
     const reloadPage = useReloadPage();
-
+    const setSelfButton = (
+        <PlaceMyselfMineAsOwner
+            contract={contractsToSign[0]}
+            accountName={accountName}
+            isDisabled={!!selfSignedContracts.length || isContractsLoading}
+        />
+    );
     return (
-        <Page headerTitle={t('pages.areaManagement.title')}>
+        <Page
+            headerTitle={t('pages.areaManagement.title')}
+            className={styles.body}
+        >
             <Space
                 size="large"
                 direction="vertical"
@@ -60,21 +81,31 @@ export const AreaManagementPage = () => {
                     areaId={areaId}
                     accountName={accountName}
                 />
-                {/* {area && <SlotStatistics area={area} />} */}
+                {area && <SlotStatistics area={area} />}
+                <Row justify="center" gutter={16}>
+                    <Col span={3}>
+                        <Button
+                            block
+                            type="ghost"
+                            disabled
+                            icon={<UnlockOutlined />}
+                        >
+                            {t('Open new mine spot')}
+                        </Button>
+                    </Col>
+                    <Col span={3} flex="center">
+                        <AddNewMine />
+                    </Col>
+                    <Col span={3}>{setSelfButton}</Col>
+                </Row>
+                {areaId && (
+                    <AreaManagementTable
+                        disabled={!isActive}
+                        ownContracts={contractsToSign}
+                        areaId={areaId}
+                    />
+                )}
             </Space>
-            <PlaceMyselfMineAsOwner
-                contract={contractsToSign[0]}
-                accountName={accountName}
-                isDisabled={!!selfSignedContracts.length || isContractsLoading}
-            />
-            {area && (
-                <AreaManagementTable
-                    area={area}
-                    disabled={!isActive}
-                    ownContracts={contractsToSign}
-                    selfSignedContracts={selfSignedContracts}
-                />
-            )}
             {!userLocation.landlordReception && (
                 <CallToTravelNotification
                     toLocationId={LOCATION_TO_ID.landlords_reception}

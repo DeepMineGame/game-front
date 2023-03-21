@@ -82,14 +82,12 @@
       "table": {
         "table": "Table",
         "addNewContractor": "Add new contractor",
-        "openNewMine": "Open new mine spot",
         "afterGeologRelease": "New slots can be opened after \"Geolog role\" realize"
       },
       "graph": "Graph",
       "current": "Current",
       "new": "New",
       "completed": "Completed",
-      "noData": "No data",
       "logout": "Logout",
       "inventory": "Inventory",
       "yourDMEHasBeenClaimed": "Your DME has been claimed",
@@ -619,7 +617,6 @@
       "search": "Searching for Mine owner",
       "mineSlots": "Mine slots",
       "status": "Mine status",
-      "dmePerEjection": "DME per ejection",
       "crew": "Mine crew",
       "activity": "Mine activity",
       "add": "Add new mine",
@@ -1007,5 +1004,12 @@
   "Total slots": "Total slots",
   "Locked slots":"Locked slots",
   "Available slots": "Available slots",
-  "Active": "Active"
+  "Active": "Active",
+  "Add new mine": "Add new mine",
+  "Open new mine spot": "Open new mine spot",
+  "Mined after ejection": "Mined after ejection",
+  "Place myself as a Mine owner": "Place myself as a Mine owner",
+  "There are no mines installed here yet": "There are no mines installed here yet",
+  "You need to create a contract to install the mine or choose from the existing ones on the Service Market. Also, you can become the Mineowner and install the mine on your land.": "You need to create a contract to install the mine or choose from the existing ones on the Service Market. Also, you can become the Mineowner and install the mine on your land."
+
 }

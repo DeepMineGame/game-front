@@ -4,13 +4,11 @@ import { BaseOrder, LevelUpgradeOrder, MineOrder } from 'entities/order';
 
 const getBaseFields = (orderData: BaseOrder) => {
     const isClient = Boolean(orderData.is_client);
-    const assetId = Number(orderData.opt_asset_id);
 
     return {
         wax_user: orderData.wax_user,
         opt_client: orderData.opt_client,
         opt_executor: orderData.opt_executor,
-        opt_asset_id1: Number.isNaN(assetId) ? undefined : assetId,
         is_client: isClient,
         deposit: Number(orderData.deposit || 0) * 10 ** 8,
         deadline_duration:
@@ -40,6 +38,9 @@ export const createMineOrder = (orderData: MineOrder) => {
                     opt_level: orderData.opt_level ?? null,
                     opt_rarity: orderData.opt_rarity ?? null,
                     autorenew_enabled: orderData.autorenew_enabled ? true : 0,
+                    opt_asset_id: Number.isNaN(orderData.opt_asset_id)
+                        ? undefined
+                        : orderData.opt_asset_id,
                 },
             },
         ],
@@ -64,6 +65,9 @@ export const createLevelUpgradeOrder = (orderData: LevelUpgradeOrder) => {
                     opt_level: orderData.opt_level,
                     opt_rarity: orderData.opt_rarity,
                     cost_of_execution: Number(orderData.cost_of_execution),
+                    opt_asset_id1: Number.isNaN(orderData.opt_asset_id)
+                        ? undefined
+                        : orderData.opt_asset_id,
                 },
             },
         ],
