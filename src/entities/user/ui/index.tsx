@@ -16,7 +16,11 @@ import { useNavigate } from 'react-router-dom';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { warehouse } from 'app/router/paths';
-import { smartContractUserStore } from 'entities/smartcontract';
+import {
+    rolesStore,
+    smartContractUserStore,
+    UserRoles,
+} from 'entities/smartcontract';
 
 import { locationMap } from '../../smartcontract';
 import { balancesStore, UserGate } from '../model';
@@ -32,13 +36,14 @@ export * from './components/UserLocator';
 
 export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
     useGate(UserGate, { searchParam: user });
+    const roles = useStore(rolesStore) || [];
     const navigate = useNavigate();
     const smartContractUsers = useStore(smartContractUserStore);
     const smartContractUserData = smartContractUsers?.[0];
     const { waxBalance, dmeBalance } = useStore(balancesStore);
     const { t } = useTranslation();
     const [visible, setVisible] = useState(false);
-
+    const citizenRole = roles.find(({ role }) => role === UserRoles.citizen);
     const showDrawer = () => {
         setVisible(true);
     };
@@ -101,11 +106,11 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                             </Title>
                             <div>
                                 {t('components.common.level')}{' '}
-                                {smartContractUserData?.level}
+                                {citizenRole?.level}
                             </div>
                             <div>
                                 {t('components.common.exp')}{' '}
-                                {smartContractUserData?.experience}
+                                {citizenRole?.experience}
                             </div>
                         </div>
                     </Space>
