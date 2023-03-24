@@ -62,7 +62,7 @@ export const ContractorStatsAndInfoPage: FC = () => {
                 {
                     key: StatsAndInfoTab.mineCrew,
                     children: <MineCrew />,
-                    tab: t(`pages.contractorStatsAndInfo.mineCrew`),
+                    tab: t(`Mine crew`),
                 },
             ]}
             documentTitleScope="Contractor"

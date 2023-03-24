@@ -30,10 +30,9 @@ const getStatusColor = (status: MineState) => {
 
 type Props = {
     data?: MinesOnLand;
-    disabled?: boolean;
 };
 
-export const AreaManagementTableContent: FC<Props> = ({ data, disabled }) => {
+export const AreaManagementTableContent: FC<Props> = ({ data }) => {
     const { t } = useTranslation();
 
     if (!data) {
@@ -78,8 +77,8 @@ export const AreaManagementTableContent: FC<Props> = ({ data, disabled }) => {
             key: 'mined_after_ejection',
         },
         {
-            title: t('pages.areaManagement.crew'),
-            dataIndex: 'crew',
+            title: t('Mine crew'),
+            dataIndex: 'current_crew',
             key: 'crew',
             render: (crew) => <div className={styles.crew}>{crew}</div>,
         },

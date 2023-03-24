@@ -370,7 +370,6 @@
     "contractorStatsAndInfo": {
       "miningStats": "Mining stats",
       "mineAreaInfo": "Mine & Area Info",
-      "mineCrew": "Mine crew",
       "contract": "Contract",
       "mineArea": {
         "landlord": "Landlord",
@@ -617,7 +616,6 @@
       "search": "Searching for Mine owner",
       "mineSlots": "Mine slots",
       "status": "Mine status",
-      "crew": "Mine crew",
       "activity": "Mine activity",
       "add": "Add new mine",
       "searching": "Searching for Mine owner",
@@ -1010,6 +1008,6 @@
   "Mined after ejection": "Mined after ejection",
   "Place myself as a Mine owner": "Place myself as a Mine owner",
   "There are no mines installed here yet": "There are no mines installed here yet",
-  "You need to create a contract to install the mine or choose from the existing ones on the Service Market. Also, you can become the Mineowner and install the mine on your land.": "You need to create a contract to install the mine or choose from the existing ones on the Service Market. Also, you can become the Mineowner and install the mine on your land."
-
+  "You need to create a contract to install the mine or choose from the existing ones on the Service Market. Also, you can become the Mineowner and install the mine on your land.": "You need to create a contract to install the mine or choose from the existing ones on the Service Market. Also, you can become the Mineowner and install the mine on your land.",
+  "Mine crew": "Mine crew"
 }
