@@ -65,9 +65,24 @@ export const createLevelUpgradeOrder = (orderData: LevelUpgradeOrder) => {
                     opt_level: orderData.opt_level,
                     opt_rarity: orderData.opt_rarity,
                     cost_of_execution: Number(orderData.cost_of_execution),
-                    opt_asset_id1: Number.isNaN(orderData.opt_asset_id)
+                    opt_asset_id: Number.isNaN(orderData.opt_asset_id)
                         ? undefined
                         : orderData.opt_asset_id,
+                    opt_asset_id1: Number.isNaN(orderData.opt_asset_id1)
+                        ? undefined
+                        : orderData.opt_asset_id1,
+                    opt_asset_id2: Number.isNaN(orderData.opt_asset_id2)
+                        ? undefined
+                        : orderData.opt_asset_id2,
+                    opt_asset_id3: Number.isNaN(orderData.opt_asset_id3)
+                        ? undefined
+                        : orderData.opt_asset_id3,
+                    opt_asset_id4: Number.isNaN(orderData.opt_asset_id4)
+                        ? undefined
+                        : orderData.opt_asset_id4,
+                    opt_asset_id5: Number.isNaN(orderData.opt_asset_id5)
+                        ? undefined
+                        : orderData.opt_asset_id5,
                 },
             },
         ],

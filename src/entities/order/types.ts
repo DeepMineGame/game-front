@@ -31,12 +31,22 @@ export type LevelUpgradeOrder = BaseOrder & {
     opt_schema_type: EngineerSchema;
     opt_level: number;
     opt_rarity: RarityType;
+    opt_asset_id1: number;
+    opt_asset_id2: number;
+    opt_asset_id3: number;
+    opt_asset_id4: number;
+    opt_asset_id5: number;
 };
 
 export const orderFields = {
     waxUser: 'wax_user',
     contractType: 'contract_type',
     assetId: 'opt_asset_id',
+    assetId1: 'opt_asset_id1',
+    assetId2: 'opt_asset_id2',
+    assetId3: 'opt_asset_id3',
+    assetId4: 'opt_asset_id4',
+    assetId5: 'opt_asset_id5',
     isClient: 'is_client',
     optClient: 'opt_client',
     optExecutor: 'opt_executor',
