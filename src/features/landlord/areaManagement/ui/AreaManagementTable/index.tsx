@@ -13,16 +13,11 @@ import {
 } from '../../../models/mines-on-land';
 
 type Props = {
-    disabled?: boolean;
     ownContracts: ContractDto[];
     areaId: number;
 };
 
-export const AreaManagementTable: FC<Props> = ({
-    disabled,
-    ownContracts,
-    areaId,
-}) => {
+export const AreaManagementTable: FC<Props> = ({ ownContracts, areaId }) => {
     useGate(LandGate, { searchParam: areaId });
     const accountName = useAccountName();
     const { t } = useTranslation();
@@ -46,10 +41,7 @@ export const AreaManagementTable: FC<Props> = ({
         return (
             <div>
                 {Boolean(mines?.length) && (
-                    <AreaManagementTableContent
-                        disabled={disabled}
-                        data={mines}
-                    />
+                    <AreaManagementTableContent data={mines} />
                 )}
                 {searchingSlots}
             </div>

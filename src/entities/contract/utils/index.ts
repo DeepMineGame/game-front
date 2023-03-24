@@ -9,9 +9,8 @@ export const getActiveSelfSignedContract = (contract: ContractDto) => {
     );
 };
 
-export const getNotSignedSelfContract = (contract: ContractDto) => {
+export const getNotSignedContract = (contract: ContractDto) => {
     return (
-        contract.client === contract.executor &&
         contract.activation_time === 0 &&
         contract.deleted_at === 0 &&
         contract.status !== ContractStatus.terminated

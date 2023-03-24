@@ -10,7 +10,7 @@ export const MineOwnerContractsGate = createGate<{
 export const getMineOwnerContractsFx = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
         return getOrders({
-            userRole: Role.mineowner,
+            userRole: Role.all,
             status: FilterOrderStatus.current,
             user: searchParam,
         });

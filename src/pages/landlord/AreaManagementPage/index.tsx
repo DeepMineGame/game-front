@@ -29,7 +29,7 @@ import { UnlockOutlined } from '@ant-design/icons';
 import { InventoryType, LOCATION_TO_ID } from 'entities/smartcontract';
 import {
     getActiveSelfSignedContract,
-    getNotSignedSelfContract,
+    getNotSignedContract,
 } from 'entities/contract';
 import styles from './styles.module.scss';
 
@@ -48,7 +48,7 @@ export const AreaManagementPage = () => {
     const mineOwnerContracts = useStore($MineOwnerContracts);
     const isContractsLoading = useStore(getMineOwnerContractsFx.pending);
 
-    const contractsToSign = mineOwnerContracts.filter(getNotSignedSelfContract);
+    const contractsToSign = mineOwnerContracts.filter(getNotSignedContract);
     const selfSignedContracts = mineOwnerContracts.filter(
         getActiveSelfSignedContract
     );
@@ -100,7 +100,6 @@ export const AreaManagementPage = () => {
                 </Row>
                 {areaId && (
                     <AreaManagementTable
-                        disabled={!isActive}
                         ownContracts={contractsToSign}
                         areaId={areaId}
                     />
