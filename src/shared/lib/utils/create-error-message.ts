@@ -6,6 +6,11 @@ export const createErrorMessage = <T1 extends (text: string) => string>(
 ) => {
     const errorCode = getErrorCode(error.message);
     const translate = t(`blockchainErrors.${errorCode}`);
+    const hasTranslate = !translate.includes('blockchainErrors');
 
-    return `${translate} (Debug information: ${error.message})`;
+    if (hasTranslate) {
+        return `${translate} (Debug information: ${error.message})`;
+    }
+
+    return error.message;
 };

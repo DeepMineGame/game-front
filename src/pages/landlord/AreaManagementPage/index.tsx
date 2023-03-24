@@ -59,11 +59,12 @@ export const AreaManagementPage = () => {
     const areaId = areaItem ? +areaItem.asset_id : undefined;
     const isActive = !!areaItem?.in_use;
     const reloadPage = useReloadPage();
+    const selfContractToSign = contractsToSign.find(
+        ({ client, executor }) => client === executor
+    );
     const setSelfButton = (
         <PlaceMyselfMineAsOwner
-            contract={contractsToSign.find(
-                ({ client, executor }) => client === executor
-            )}
+            contract={selfContractToSign}
             accountName={accountName}
             isDisabled={!!selfSignedContracts.length || isContractsLoading}
         />
