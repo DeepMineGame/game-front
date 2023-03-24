@@ -61,7 +61,9 @@ export const AreaManagementPage = () => {
     const reloadPage = useReloadPage();
     const setSelfButton = (
         <PlaceMyselfMineAsOwner
-            contract={contractsToSign[0]}
+            contract={contractsToSign.find(
+                ({ client, executor }) => client === executor
+            )}
             accountName={accountName}
             isDisabled={!!selfSignedContracts.length || isContractsLoading}
         />
