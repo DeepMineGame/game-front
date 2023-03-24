@@ -62,7 +62,6 @@ export const useSmartContractAction = <T>({
             return onSignSuccess?.();
         } catch (e) {
             const err = e as Error;
-            showErrorNotification(err);
             Modal.error({
                 title: t('components.common.status.error'),
                 content: createErrorMessage(err, t),

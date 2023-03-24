@@ -2,22 +2,25 @@ import { Col, Row, Statistic } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { FC } from 'react';
 import { useGate, useStore } from 'effector-react';
-import { useAccountName } from 'shared';
+import { Loader, useAccountName } from 'shared';
 import { AreasDto, OrderState } from 'entities/smartcontract';
 import { $LandlordContracts, LandlordContractsGate } from '../../../models';
 
-export const SlotStatistics: FC<{ area: AreasDto }> = ({ area }) => {
+export const SlotStatistics: FC<{ area: AreasDto | null }> = ({ area }) => {
     const { t } = useTranslation();
     const accountName = useAccountName();
     useGate(LandlordContractsGate, { searchParam: accountName });
+    const landlordContracts = useStore($LandlordContracts);
+
+    if (!area) {
+        return <Loader centered size="large" />;
+    }
     const lockedSlots = area.mine_slots.filter(
         ({ reserved }) => reserved
     )?.length;
     const availableSlots = area.mine_slots.filter(
         ({ reserved }) => !reserved
     )?.length;
-
-    const landlordContracts = useStore($LandlordContracts);
 
     const active = landlordContracts.filter(
         ({ computed }) => computed?.status === OrderState.ValidContract

@@ -81,9 +81,9 @@ export const AreaManagementPage = () => {
                     areaId={areaId}
                     accountName={accountName}
                 />
-                {area && <SlotStatistics area={area} />}
+                <SlotStatistics area={area} />
                 <Row justify="center" gutter={16}>
-                    <Col span={3}>
+                    <Col span={4}>
                         <Button
                             block
                             type="ghost"
@@ -93,10 +93,10 @@ export const AreaManagementPage = () => {
                             {t('Open new mine spot')}
                         </Button>
                     </Col>
-                    <Col span={3} flex="center">
+                    <Col span={4} flex="center">
                         <AddNewMine />
                     </Col>
-                    <Col span={3}>{setSelfButton}</Col>
+                    <Col span={4}>{setSelfButton}</Col>
                 </Row>
                 {areaId && (
                     <AreaManagementTable
