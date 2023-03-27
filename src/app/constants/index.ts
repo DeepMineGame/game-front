@@ -81,8 +81,10 @@ const defaultEndpoints = {
 };
 
 export const endpoints = {
-    atomic: (window.ENDPOINTS || defaultEndpoints).atomic,
-    wax: (window.ENDPOINTS || defaultEndpoints).wax,
+    // atomic: (window.ENDPOINTS || defaultEndpoints).atomic,
+    // wax: (window.ENDPOINTS || defaultEndpoints).wax,
+    atomic: defaultEndpoints.atomic,
+    wax: defaultEndpoints.wax,
 };
 
 export const ConnectionCountLimit = {
