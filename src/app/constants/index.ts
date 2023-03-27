@@ -36,7 +36,7 @@ export const waxChain = {
 const defaultEndpoints = {
     wax: isMainNet
         ? [
-              'node-prod.deepmine.world',
+              'https://node-prod.deepmine.world',
               // 'https://api.waxsweden.org',
               // 'https://api.wax.greeneosio.com',
               // 'https://wax.blokcrafters.io',
