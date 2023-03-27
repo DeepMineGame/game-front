@@ -762,7 +762,6 @@
       "depthChanging": "Mine is undergoing depth change",
       "needShift": "You need to travel here to set a Mine",
       "needLandLord": "Sign a contract with a landlord to set a Mine",
-      "needSetupMine": "Set up the Mine to continue",
       "depthChangingText": "Go to mine management console for details",
       "needCrew": "You are ready to gather your ultimate mine crew. Sign the Mining Contract with a contractor to be able to activate your Mine.",
       "progress": "Setup in progress",
@@ -986,5 +985,7 @@
   "Place myself as a Mine owner": "Place myself as a Mine owner",
   "There are no mines installed here yet": "There are no mines installed here yet",
   "You need to create a contract to install the mine or choose from the existing ones on the Service Market. Also, you can become the Mineowner and install the mine on your land.": "You need to create a contract to install the mine or choose from the existing ones on the Service Market. Also, you can become the Mineowner and install the mine on your land.",
-  "Mine crew": "Mine crew"
+  "Mine crew": "Mine crew",
+  "Mine": "Mine",
+  "Travel here and set up the Mine to continue": "Travel here and set up the Mine to continue"
 }

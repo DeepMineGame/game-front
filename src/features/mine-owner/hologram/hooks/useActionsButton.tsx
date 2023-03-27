@@ -36,6 +36,7 @@ import {
     mineOwnerLandlordContractForUserStore,
 } from '../../models';
 import { useSmartContractAction } from '../../../hooks';
+import { $indicateActionDetails } from '../../../action-indicator';
 
 export function useActionsButton() {
     const [isSetupMineModalVisible, setSetupMineModalVisible] = useState(false);
@@ -51,6 +52,8 @@ export function useActionsButton() {
     const atomicHubStructuresLink = getAtomicHubUrlToSection(
         AtomicHubMarketSections.structures
     );
+    const lastAction = useStore($indicateActionDetails);
+    const isLastActionFinished = Date.now() >= lastAction.finishAt;
     const contractButton = (
         <div>
             <Button
@@ -162,6 +165,7 @@ export function useActionsButton() {
                 <Button
                     type="link"
                     onClick={() => setSetupMineModalVisible(true)}
+                    disabled={!isLastActionFinished}
                 >
                     {t('features.mineOwner.setupMine')}
                 </Button>

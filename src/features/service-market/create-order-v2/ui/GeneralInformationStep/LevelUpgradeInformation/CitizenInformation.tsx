@@ -46,8 +46,8 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
         MergedInventoryWithAtomicAssets[number] | undefined
     >();
     const userInventory = useStore($mergedInventoryWithAtomicAssets);
-    const isMineUpgrade = equipmentType === 'Mine';
-    const hasAllValues = isMineUpgrade
+    const isOneItemToUpgrade = equipmentType === 'Mine';
+    const hasAllValues = isOneItemToUpgrade
         ? !!asset
         : form.getFieldValue(orderFields.assetId1);
     const [selectedEquipmentSet, setSelectedEquipmentSet] = useState<{
@@ -92,7 +92,7 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
         };
 
     useEffect(() => {
-        if (isMineUpgrade) {
+        if (isOneItemToUpgrade) {
             return form.setFieldsValue({
                 [orderFields.assetId1]: asset?.asset_id,
             });
@@ -106,13 +106,14 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
                 selectedEquipmentSet['Plunging Blocks']?.asset_id,
             [orderFields.assetId5]: selectedEquipmentSet['DME Wire']?.asset_id,
         });
-    }, [asset, form, isMineUpgrade, selectedEquipmentSet]);
+    }, [asset, form, isOneItemToUpgrade, selectedEquipmentSet]);
+
     return (
         <>
             <UpgradeTypeFormItem />
             {hasValue && (
                 <div>
-                    {isMineUpgrade ? (
+                    {isOneItemToUpgrade ? (
                         <Form.Item name={orderFields.assetId1}>
                             <div className={styles.flexSection}>
                                 <Button

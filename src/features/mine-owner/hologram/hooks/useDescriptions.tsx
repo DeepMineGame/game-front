@@ -24,7 +24,7 @@ export function useDescriptions() {
             'features.mineOwner.needLandLord'
         ),
         [mineOwnerCabinState.needSetupMine]: t(
-            'features.mineOwner.needSetupMine'
+            'Travel here and set up the Mine to continue'
         ),
         [mineOwnerCabinState.mineIsDepthChanging]: t(
             'features.mineOwner.depthChangingText'
