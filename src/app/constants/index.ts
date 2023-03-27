@@ -37,13 +37,13 @@ const defaultEndpoints = {
     wax: isMainNet
         ? [
               'https://node-prod.deepmine.world',
-              // 'https://api.waxsweden.org',
-              // 'https://api.wax.greeneosio.com',
+              'https://wax.pink.gg',
+              'https://api.waxsweden.org',
+              'https://api.wax.greeneosio.com',
               // 'https://wax.blokcrafters.io',
-              // 'https://wax.greymass.com',
-              // 'https://wax.dapplica.io',
-              // 'https://wax.cryptolions.io',
-              // 'https://wax.pink.gg',
+              'https://wax.greymass.com',
+              'https://wax.dapplica.io',
+              'https://wax.cryptolions.io',
           ]
         : [
               'https://node.deepmine.world',
