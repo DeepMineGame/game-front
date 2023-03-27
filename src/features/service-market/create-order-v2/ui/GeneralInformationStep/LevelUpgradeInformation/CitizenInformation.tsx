@@ -46,7 +46,8 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
         MergedInventoryWithAtomicAssets[number] | undefined
     >();
     const userInventory = useStore($mergedInventoryWithAtomicAssets);
-    const isOneItemToUpgrade = equipmentType === 'Mine';
+    const isOneItemToUpgrade =
+        equipmentType === 'Mine' || type === EngineerSchema.equipment;
     const hasAllValues = isOneItemToUpgrade
         ? !!asset
         : form.getFieldValue(orderFields.assetId1);
@@ -121,7 +122,11 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
                                     icon={<PlusOutlined />}
                                     onClick={() => {
                                         setIsInventoryOpen(true);
-                                        setSelectedEquipmentForFilter('Mine');
+                                        if (equipmentType === 'Mine') {
+                                            setSelectedEquipmentForFilter(
+                                                'Mine'
+                                            );
+                                        }
                                     }}
                                     ghost
                                 >
@@ -158,7 +163,6 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
                                         icon={<PlusOutlined />}
                                         onClick={() => {
                                             setIsInventoryOpen(true);
-
                                             setSelectedEquipmentForFilter(
                                                 typeName
                                             );

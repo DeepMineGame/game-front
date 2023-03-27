@@ -7,6 +7,7 @@ import { EngineerSchema } from 'entities/smartcontract';
 
 import styles from '../styles.module.scss';
 
+export const equipmentSet = 'equipmentSet';
 export const UpgradeTypeFormItem: FC = () => {
     const { t } = useTranslation();
 
@@ -44,6 +45,10 @@ export const UpgradeTypeFormItem: FC = () => {
                         label: t(
                             `pages.serviceMarket.createOrder.upgradeTypeList.${EngineerSchema.mine}`
                         ),
+                    },
+                    {
+                        value: equipmentSet,
+                        label: t('Equipment set'),
                     },
                 ]}
             />
