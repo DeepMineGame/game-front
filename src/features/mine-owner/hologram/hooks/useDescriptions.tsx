@@ -2,11 +2,15 @@ import { useTranslation } from 'react-i18next';
 import React from 'react';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
+import { useStore } from 'effector-react';
 import { MineStat } from '../ui/components/mineStat';
 import { mineOwnerCabinState } from '../../models';
+import { $indicateActionDetails } from '../../../action-indicator';
 
 export function useDescriptions() {
     const { t } = useTranslation();
+    const lastAction = useStore($indicateActionDetails);
+    const isLastActionFinished = Date.now() >= lastAction.finishAt;
     const needNftCardTextAndInformer = (
         <div>
             {t('features.mineOwner.placeNft')}{' '}
@@ -23,9 +27,9 @@ export function useDescriptions() {
         [mineOwnerCabinState.needContractWithLandlord]: t(
             'features.mineOwner.needLandLord'
         ),
-        [mineOwnerCabinState.needSetupMine]: t(
-            'Travel here and set up the Mine to continue'
-        ),
+        [mineOwnerCabinState.needSetupMine]: isLastActionFinished
+            ? t('Set up the Mine to continue')
+            : t('Action in progress'),
         [mineOwnerCabinState.mineIsDepthChanging]: t(
             'features.mineOwner.depthChangingText'
         ),

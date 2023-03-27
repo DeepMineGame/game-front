@@ -146,7 +146,7 @@ export function useActionsButton() {
             </Button>
         ),
 
-        [mineOwnerCabinState.needSetupMine]: (
+        [mineOwnerCabinState.needSetupMine]: isLastActionFinished && (
             <>
                 <ActionModal
                     texts={{
@@ -165,7 +165,6 @@ export function useActionsButton() {
                 <Button
                     type="link"
                     onClick={() => setSetupMineModalVisible(true)}
-                    disabled={!isLastActionFinished}
                 >
                     {t('features.mineOwner.setupMine')}
                 </Button>

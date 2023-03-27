@@ -987,5 +987,6 @@
   "You need to create a contract to install the mine or choose from the existing ones on the Service Market. Also, you can become the Mineowner and install the mine on your land.": "You need to create a contract to install the mine or choose from the existing ones on the Service Market. Also, you can become the Mineowner and install the mine on your land.",
   "Mine crew": "Mine crew",
   "Mine": "Mine",
-  "Travel here and set up the Mine to continue": "Travel here and set up the Mine to continue"
+  "Set up the Mine to continue": "Set up the Mine to continue",
+  "Action in progress" : "Action in progress"
 }
