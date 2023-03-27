@@ -530,7 +530,6 @@
         "landlord": "Landlord",
         "contractor": "Contractor",
         "mineOwner": "Mine owner",
-        "contractId": "Contract ID",
         "operationStart": "Start of operation in",
         "miningTerms": "Mining terms",
         "fee": "Fee",
@@ -1010,5 +1009,8 @@
   "modules": "Modules",
   "stickers": "Stickers",
   "packs": "Packs",
-  "all": "All"
+  "all": "All",
+  "Contract ID": "Contract ID",
+  "Searching for Mine owner": "Searching for Mine owner",
+  "Waiting for Mine set up": "Waiting for Mine set up"
 }

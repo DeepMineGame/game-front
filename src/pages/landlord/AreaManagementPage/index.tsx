@@ -3,6 +3,7 @@ import { useGate, useStore } from 'effector-react';
 
 import {
     Button,
+    complement,
     Page,
     useAccountName,
     useReloadPage,
@@ -26,7 +27,11 @@ import {
 
 import { Col, Row, Space } from 'antd';
 import { UnlockOutlined } from '@ant-design/icons';
-import { InventoryType, LOCATION_TO_ID } from 'entities/smartcontract';
+import {
+    ContractStatus,
+    InventoryType,
+    LOCATION_TO_ID,
+} from 'entities/smartcontract';
 import {
     getActiveSelfSignedContract,
     getNotSignedContract,
@@ -49,6 +54,10 @@ export const AreaManagementPage = () => {
     const isContractsLoading = useStore(getMineOwnerContractsFx.pending);
 
     const contractsToSign = mineOwnerContracts.filter(getNotSignedContract);
+    const signedContracts = mineOwnerContracts
+        .filter(complement(getNotSignedContract))
+        .filter(({ status }) => ContractStatus.active === status);
+
     const selfSignedContracts = mineOwnerContracts.filter(
         getActiveSelfSignedContract
     );
@@ -104,6 +113,7 @@ export const AreaManagementPage = () => {
                 {areaId && (
                     <AreaManagementTable
                         ownContracts={contractsToSign}
+                        signedContracts={signedContracts}
                         areaId={areaId}
                     />
                 )}

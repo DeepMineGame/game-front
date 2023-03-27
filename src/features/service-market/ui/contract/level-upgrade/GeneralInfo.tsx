@@ -14,11 +14,7 @@ const GeneralInfo: FC<Props> = ({ contract, accountName, isOrder = false }) => {
     const { t } = useTranslation();
 
     const generalData = {
-        [t(
-            isOrder
-                ? 'pages.serviceMarket.order.orderId'
-                : 'pages.serviceMarket.contract.contractId'
-        )]: (
+        [t('Contract ID')]: (
             <div>
                 <Space size={10}>
                     <Text type="white">{contract.id}</Text>

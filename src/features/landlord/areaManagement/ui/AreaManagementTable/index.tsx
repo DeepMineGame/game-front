@@ -15,24 +15,41 @@ import {
 type Props = {
     ownContracts: ContractDto[];
     areaId: number;
+    signedContracts: ContractDto[];
 };
 
-export const AreaManagementTable: FC<Props> = ({ ownContracts, areaId }) => {
+export const AreaManagementTable: FC<Props> = ({
+    ownContracts,
+    areaId,
+    signedContracts,
+}) => {
     useGate(LandGate, { searchParam: areaId });
     const accountName = useAccountName();
     const { t } = useTranslation();
     const mines = useStore($minesOnLand);
+    const idsSetupMineContracts = mines.map(({ id }) => id);
     const isLoading = useStore(getMinesOnLandEffect.pending);
+    const unSetupMine = signedContracts.filter(
+        ({ id }) => !idsSetupMineContracts.includes(id)
+    );
 
     const searchingSlots = ownContracts.map((contract) => (
         <SearchingItem
             key={contract.id}
-            text={t('pages.areaManagement.search')}
+            text={t('Searching for Mine owner')}
             contract={contract}
             accountName={accountName}
         />
     ));
 
+    const unSetupMinePlug = unSetupMine.map((contract) => (
+        <SearchingItem
+            key={contract.id}
+            text={t('Waiting for Mine set up')}
+            contract={contract}
+            accountName={accountName}
+        />
+    ));
     if (isLoading) {
         return null;
     }
@@ -44,6 +61,7 @@ export const AreaManagementTable: FC<Props> = ({ ownContracts, areaId }) => {
                     <AreaManagementTableContent data={mines} />
                 )}
                 {searchingSlots}
+                {unSetupMinePlug}
             </div>
         );
     }

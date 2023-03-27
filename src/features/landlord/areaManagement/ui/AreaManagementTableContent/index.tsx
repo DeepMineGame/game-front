@@ -9,8 +9,9 @@ import {
     green6,
     gold6,
     neutral3Color,
+    Link,
 } from 'shared';
-import { MinesOnLand } from 'entities';
+import { MinesOnLand } from 'entities/game-stat';
 import { MineState } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 
@@ -52,11 +53,23 @@ export const AreaManagementTableContent: FC<Props> = ({ data }) => {
                 ),
         },
         {
+            title: t('Contract ID'),
+            dataIndex: 'id',
+            key: 'id',
+            render: (contractId: string) => {
+                return (
+                    <Link to={`/service-market/contract/${contractId}`}>
+                        {t('Contract ID')} {contractId}
+                    </Link>
+                );
+            },
+        },
+        {
             title: t('components.common.mine.title'),
             dataIndex: 'mine_id',
             key: 'mine_id',
             render: (mine: string) => {
-                return <div className={styles.mine}>{mine}</div>;
+                return <div>{mine}</div>;
             },
         },
         {
