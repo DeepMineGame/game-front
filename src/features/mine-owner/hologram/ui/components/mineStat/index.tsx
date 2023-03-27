@@ -20,8 +20,8 @@ export const MineStat = () => {
 
     const feeToClaim =
         Number(
-            mineOwnerRole?.attrs?.find(({ key }) => key === 'fee_to_claim')
-                ?.value
+            mineOwnerRole?.attrs?.find(({ first }) => first === 'fee_to_claim')
+                ?.second
         ) || 0;
     const userMine = useStore($userMine);
 
