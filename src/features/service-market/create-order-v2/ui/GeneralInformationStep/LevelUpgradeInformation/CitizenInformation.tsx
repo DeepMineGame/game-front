@@ -66,9 +66,6 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
     ) => {
         setIsInventoryOpen(false);
         setSelectedInventoryCard(undefined);
-        if (selectedEquipmentForFilter === 'Mine') {
-            return setAsset(item);
-        }
 
         if (typeof selectedEquipmentForFilter === 'string') {
             setSelectedEquipmentSet({
@@ -76,6 +73,7 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
                 [selectedEquipmentForFilter]: item,
             });
         }
+        return setAsset(item);
     };
     const handleDeleteAsset =
         (deletedAsset?: MergedInventoryWithAtomicAssets[number]) => () => {
@@ -131,7 +129,7 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
                                     ghost
                                 >
                                     {asset
-                                        ? `${t(`Mine`)}, ${t(
+                                        ? `${asset.name}, ${t(
                                               raritiesTranslationMap[
                                                   asset.rarity
                                               ]

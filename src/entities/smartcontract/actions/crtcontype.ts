@@ -1,6 +1,8 @@
 import { DAY_IN_SECONDS, HOUR_IN_SECONDS } from 'shared';
-import { deepminesmrt } from 'entities/smartcontract';
+import { deepminesmrt, EngineerSchema } from 'entities/smartcontract';
 import { BaseOrder, LevelUpgradeOrder, MineOrder } from 'entities/order';
+
+export const equipmentSet = 'equipmentSet';
 
 const getBaseFields = (orderData: BaseOrder) => {
     const isClient = Boolean(orderData.is_client);
@@ -61,7 +63,11 @@ export const createLevelUpgradeOrder = (orderData: LevelUpgradeOrder) => {
                 ],
                 data: {
                     ...getBaseFields(orderData),
-                    opt_schema_type: orderData.opt_schema_type,
+                    opt_schema_type:
+                        // @ts-ignore
+                        orderData.opt_schema_type === equipmentSet
+                            ? EngineerSchema.equipment
+                            : orderData.opt_schema_type,
                     opt_level: orderData.opt_level,
                     opt_rarity: orderData.opt_rarity,
                     cost_of_execution: Number(orderData.cost_of_execution),
