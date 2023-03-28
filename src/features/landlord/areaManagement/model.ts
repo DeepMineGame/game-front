@@ -83,8 +83,9 @@ sample({
 
         return (
             Number(
-                landlordRole?.attrs?.find(({ key }) => key === 'fee_to_claim')
-                    ?.value
+                landlordRole?.attrs?.find(
+                    ({ first }) => first === 'fee_to_claim'
+                )?.second
             ) || 0
         );
     },

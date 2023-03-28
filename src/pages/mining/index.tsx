@@ -76,8 +76,8 @@ export const MiningPage: FC = memo(() => {
     const lastMineAction = mineActions?.reverse()?.[0];
     const estDmeAmount =
         lastMineAction &&
-        lastMineAction?.attrs?.find(({ key }) => key === 'est_dme_amount')
-            ?.value;
+        lastMineAction?.attrs?.find(({ first }) => first === 'est_dme_amount')
+            ?.second;
 
     const { disabled, ...alertProps } = useDisabledState();
 

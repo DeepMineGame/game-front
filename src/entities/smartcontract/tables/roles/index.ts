@@ -7,7 +7,8 @@ export * from './types';
 
 export const extractFeeToClaimAttr = (role: RoleDto): number =>
     Number(
-        role?.attrs?.filter(({ key }) => key === 'fee_to_claim')?.[0]?.value
+        role?.attrs?.filter(({ first }) => first === 'fee_to_claim')?.[0]
+            ?.second
     ) || 0;
 
 export const getRolesTableData = <T>({

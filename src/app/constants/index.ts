@@ -17,7 +17,7 @@ export const WAX_CHAIN_ID = isMainNet
     : 'f16b1833c747c43682f4386fca9cbb327929334a762755ebec17f6f23c9b8a12';
 
 export const WAX_RPC_ENDPOINTS_HOST = isMainNet
-    ? 'node-prod-01.deepmine.world'
+    ? 'node-prod.deepmine.world'
     : 'node.deepmine.world';
 
 export const WAX_RPC_ENDPOINTS_PROTOCOL = 'https';
@@ -36,14 +36,14 @@ export const waxChain = {
 const defaultEndpoints = {
     wax: isMainNet
         ? [
-              'https://node-prod-01.deepmine.world',
+              'https://node-prod.deepmine.world',
+              'https://wax.pink.gg',
               'https://api.waxsweden.org',
               'https://api.wax.greeneosio.com',
-              'https://wax.blokcrafters.io',
+              // 'https://wax.blokcrafters.io',
               'https://wax.greymass.com',
               'https://wax.dapplica.io',
               'https://wax.cryptolions.io',
-              'https://wax.pink.gg',
           ]
         : [
               'https://node.deepmine.world',
@@ -81,8 +81,10 @@ const defaultEndpoints = {
 };
 
 export const endpoints = {
-    atomic: (window.ENDPOINTS || defaultEndpoints).atomic,
-    wax: (window.ENDPOINTS || defaultEndpoints).wax,
+    // atomic: (window.ENDPOINTS || defaultEndpoints).atomic,
+    // wax: (window.ENDPOINTS || defaultEndpoints).wax,
+    atomic: defaultEndpoints.atomic,
+    wax: defaultEndpoints.wax,
 };
 
 export const ConnectionCountLimit = {
