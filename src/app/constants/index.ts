@@ -18,7 +18,7 @@ export const WAX_CHAIN_ID = isMainNet
 
 export const WAX_RPC_ENDPOINTS_HOST = isMainNet
     ? // ? 'node-prod.deepmine.world'
-      'https://wax.pink.gg'
+      'wax.pink.gg'
     : 'node.deepmine.world';
 
 export const WAX_RPC_ENDPOINTS_PROTOCOL = 'https';
