@@ -19,7 +19,7 @@ export const SlotStatistics: FC<{ area: AreasDto | null }> = ({ area }) => {
         ({ reserved }) => reserved
     )?.length;
     const availableSlots = area.mine_slots.filter(
-        ({ reserved }) => !reserved
+        ({ reserved, mine_id }) => !reserved && !mine_id
     )?.length;
 
     const active = landlordContracts.filter(
