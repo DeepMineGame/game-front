@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Row, Col } from 'antd';
 import { useOrderDelete } from 'entities/order';
+import { OrderState } from 'entities/smartcontract';
 import { UpgradeReport } from 'shared/ui';
 import { Conditions, Citizen, Engineer, GeneralInfo } from '../../ui';
 import { ContractProps } from '../../types';
@@ -37,12 +38,14 @@ const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
                             contract={contract}
                         />
                     ),
-                    !canDeleteOrder && (
-                        <SignLevelUpgradeOrder
-                            contract={contract}
-                            accountName={accountName}
-                        />
-                    ),
+                    !canDeleteOrder &&
+                        contract.computed?.status !==
+                            OrderState.ValidContract && (
+                            <SignLevelUpgradeOrder
+                                contract={contract}
+                                accountName={accountName}
+                            />
+                        ),
                     canDeleteOrder && (
                         <DeleteOrder
                             accountName={accountName}
