@@ -1,4 +1,4 @@
-import { Typography } from 'antd';
+import { Space, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { mobileOriental, useMediaQuery } from '../../../lib/hooks';
 import styles from './styles.module.scss';
@@ -39,10 +39,15 @@ export const RotateYourPhone = ({ children }: { children: any }) => {
                     fill="#DBDBDB"
                 />
             </svg>
-            <Typography.Title>{t('Rotate your phone')}</Typography.Title>
-            <Typography.Paragraph>
-                {t('For the best experience')}
-            </Typography.Paragraph>
+            <br />
+            <Space direction="vertical">
+                <Typography.Title>{t('Rotate your phone')}</Typography.Title>
+                <Typography.Paragraph>
+                    {t('For the best experience')}
+                </Typography.Paragraph>
+            </Space>
+
+            <br />
             <br />
             <Typography.Paragraph>
                 {t(
