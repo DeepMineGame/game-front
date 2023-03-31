@@ -1012,5 +1012,11 @@
   "all": "All",
   "Contract ID": "Contract ID",
   "Searching for Mine owner": "Searching for Mine owner",
-  "Waiting for Mine set up": "Waiting for Mine set up"
+  "Waiting for Mine set up": "Waiting for Mine set up",
+  "Rotate your phone": "Rotate your phone",
+  "For the best experience": "For the best experience",
+  "Swipe down from the top-right corner of your screen to open Control Center": "1. Swipe down from the top-right corner of your screen to open Control Center",
+  "Tap the Portrait Orientation Lock button to make sure that it's off": "2. Tap the Portrait Orientation Lock button to make sure that it's off",
+  "Turn your phone sideways": "3. Turn your phone sideways"
+
 }

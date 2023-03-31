@@ -5,6 +5,7 @@ import { useEvent, useStore } from 'effector-react';
 import { useChainAuthContext, LoadingScreen, LogAs } from 'shared';
 import { useLogout, LastActionInProgressChecker } from 'features';
 import { userStore, getUserFromSessionEffect } from 'entities/user';
+import { RotateYourPhone } from 'shared';
 import { routes, fallbackRoute, AppRoute } from './routes';
 import { DocumentTitle } from './components/DocumentTitle';
 import { unidentifiedActivity } from './paths';
@@ -52,27 +53,32 @@ const LogInWrapper: React.FC<{
     return children;
 };
 
-const renderRoutes = (routeList: AppRoute[]) =>
-    routeList.map(({ path, Component, forLoggedIn, forAdmin, titleTag }) => (
-        <Route
-            key={path}
-            path={path}
-            element={
-                forLoggedIn ? (
-                    <LogInWrapper forAdmin={forAdmin}>
-                        <DocumentTitle title={titleTag} />
-                        <Component />
-                        <LastActionInProgressChecker />
-                    </LogInWrapper>
-                ) : (
-                    <>
-                        <DocumentTitle title={titleTag} />
-                        <Component />
-                    </>
-                )
-            }
-        />
-    ));
+const renderRoutes = (routeList: AppRoute[]) => {
+    return routeList.map(
+        ({ path, Component, forLoggedIn, forAdmin, titleTag }) => (
+            <Route
+                key={path}
+                path={path}
+                element={
+                    forLoggedIn ? (
+                        <LogInWrapper forAdmin={forAdmin}>
+                            <DocumentTitle title={titleTag} />
+                            <RotateYourPhone>
+                                <Component />
+                                <LastActionInProgressChecker />
+                            </RotateYourPhone>
+                        </LogInWrapper>
+                    ) : (
+                        <>
+                            <DocumentTitle title={titleTag} />
+                            <Component />
+                        </>
+                    )
+                }
+            />
+        )
+    );
+};
 
 export const Router = () => {
     const user = useStore(userStore);

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+export const mobileOriental = '(min-width: 640px)'; // $media-mobile-oriental
 export const tablet = '(min-width: 769px)'; // sync with $media-tablet
 export const desktopS = '(min-width: 1024px)';
 
