@@ -12,6 +12,7 @@ import {
 } from 'shared';
 import { useLogout, LastActionInProgressChecker } from 'features';
 import { userStore, getUserFromSessionEffect } from 'entities/user';
+import { RotateYourPhone } from 'shared';
 import { routes, fallbackRoute, AppRoute } from './routes';
 import { DocumentTitle } from './components/DocumentTitle';
 import { unidentifiedActivity } from './paths';
