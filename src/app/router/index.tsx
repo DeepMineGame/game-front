@@ -6,17 +6,13 @@ import {
     useChainAuthContext,
     LoadingScreen,
     LogAs,
-    useMediaQuery,
-    tablet,
-    mobileOriental,
+    RotateYourPhone,
 } from 'shared';
 import { useLogout, LastActionInProgressChecker } from 'features';
 import { userStore, getUserFromSessionEffect } from 'entities/user';
-import { RotateYourPhone } from 'shared';
 import { routes, fallbackRoute, AppRoute } from './routes';
 import { DocumentTitle } from './components/DocumentTitle';
 import { unidentifiedActivity } from './paths';
-import { RotateYourPhone } from '../../shared/ui/ui-kit/RotateYourPhone';
 
 const LogInWrapper: React.FC<{
     children: any;
