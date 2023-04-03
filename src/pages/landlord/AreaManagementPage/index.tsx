@@ -44,7 +44,7 @@ export const AreaManagementPage = () => {
 
     useGate(MineOwnerContractsGate, { searchParam: accountName });
     useGate(UserAreaGate, { searchParam: accountName });
-    // useGate(AreaGate, { searchParam: accountName });
+    useGate(AreaGate, { searchParam: accountName });
 
     const area = useStore($area);
     const userLocation = useUserLocation();
