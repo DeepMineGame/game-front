@@ -37,13 +37,13 @@ const defaultEndpoints = {
     wax: isMainNet
         ? [
               'https://node-prod.deepmine.world',
-              // 'https://wax.pink.gg',
-              // 'https://api.waxsweden.org',
-              // 'https://api.wax.greeneosio.com',
-              // 'https://wax.blokcrafters.io',
-              // 'https://wax.greymass.com',
-              // 'https://wax.dapplica.io',
-              // 'https://wax.cryptolions.io',
+              'https://wax.pink.gg',
+              'https://api.waxsweden.org',
+              'https://api.wax.greeneosio.com',
+              'https://wax.blokcrafters.io',
+              'https://wax.greymass.com',
+              'https://wax.dapplica.io',
+              'https://wax.cryptolions.io',
           ]
         : [
               'https://node.deepmine.world',
@@ -57,7 +57,7 @@ const defaultEndpoints = {
           ],
     atomic: isMainNet
         ? [
-              'https://wax.blokcrafters.io/atomicassets/v1',
+              // 'https://wax.blokcrafters.io/atomicassets/v1',
               'https://aa.dapplica.io/atomicassets/v1',
               'https://wax.api.atomicassets.io/atomicassets/v1',
               'https://wax.hkeos.com/aa/atomicassets/v1',
