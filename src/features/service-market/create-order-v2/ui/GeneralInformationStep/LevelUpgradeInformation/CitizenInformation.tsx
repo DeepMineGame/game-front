@@ -155,42 +155,42 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
                                 name={orderFields.assetId + ++key}
                                 style={{ margin: 0 }}
                             >
-                                <div className={styles.flexSection}>
-                                    <Button
-                                        type="primary"
-                                        icon={<PlusOutlined />}
-                                        onClick={() => {
-                                            setIsInventoryOpen(true);
-                                            setSelectedEquipmentForFilter(
-                                                typeName
-                                            );
-                                        }}
-                                        ghost
-                                    >
-                                        {selectedEquipmentSet[typeName]
-                                            ? `${typeName}, ${t(
-                                                  raritiesTranslationMap[
-                                                      selectedEquipmentSet[
-                                                          typeName
-                                                      ]?.rarity || 0
-                                                  ]
-                                              )}, Level ${
-                                                  selectedEquipmentSet[typeName]
-                                                      ?.level
-                                              }`
-                                            : `Select ${typeName}`}
-                                    </Button>
-                                    {selectedEquipmentSet[typeName] && (
-                                        <Button
-                                            onClick={handleDeleteAsset(
-                                                selectedEquipmentSet[typeName]
-                                            )}
-                                            icon={<DeleteOutlined />}
-                                            style={{ maxWidth: 32 }}
-                                            ghost
-                                        />
-                                    )}
-                                </div>
+                                {/* <div className={styles.flexSection}> */}
+                                {/*    <Button */}
+                                {/*        type="primary" */}
+                                {/*        icon={<PlusOutlined />} */}
+                                {/*        onClick={() => { */}
+                                {/*            setIsInventoryOpen(true); */}
+                                {/*            setSelectedEquipmentForFilter( */}
+                                {/*                typeName */}
+                                {/*            ); */}
+                                {/*        }} */}
+                                {/*        ghost */}
+                                {/*    > */}
+                                {/*        {selectedEquipmentSet[typeName] */}
+                                {/*            ? `${typeName}, ${t( */}
+                                {/*                  raritiesTranslationMap[ */}
+                                {/*                      selectedEquipmentSet[ */}
+                                {/*                          typeName */}
+                                {/*                      ]?.rarity || 0 */}
+                                {/*                  ] */}
+                                {/*              )}, Level ${ */}
+                                {/*                  selectedEquipmentSet[typeName] */}
+                                {/*                      ?.level */}
+                                {/*              }` */}
+                                {/*            : `Select ${typeName}`} */}
+                                {/*    </Button> */}
+                                {/*    {selectedEquipmentSet[typeName] && ( */}
+                                {/*        <Button */}
+                                {/*            onClick={handleDeleteAsset( */}
+                                {/*                selectedEquipmentSet[typeName] */}
+                                {/*            )} */}
+                                {/*            icon={<DeleteOutlined />} */}
+                                {/*            style={{ maxWidth: 32 }} */}
+                                {/*            ghost */}
+                                {/*        /> */}
+                                {/*    )} */}
+                                {/* </div> */}
                                 <br />
                             </Form.Item>
                         ))
