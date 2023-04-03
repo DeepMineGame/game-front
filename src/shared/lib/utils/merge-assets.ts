@@ -13,6 +13,7 @@ export const mergeAssets = <T1, T2>(
 ): (T1 & T2)[] =>
     sourceAssets.map(
         (assetFromSource) =>
+            // @ts-ignore
             console.log('target', targetAssets, 'source', sourceAssets) || {
                 ...assetFromSource,
                 ...(targetAssets?.find(
