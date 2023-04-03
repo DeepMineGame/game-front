@@ -15,14 +15,6 @@ export function signOrder({
     rarity?: number;
     isClient?: number;
 }) {
-    console.log({
-        wax_user: waxUser,
-        contract_id: contractId,
-        ...(assetId && { opt_asset_id1: assetId }),
-        opt_level: level ?? null,
-        opt_rarity: rarity ?? null,
-        opt_as_client: isClient ?? null,
-    });
     return {
         actions: [
             {
@@ -37,7 +29,11 @@ export function signOrder({
                 data: {
                     wax_user: waxUser,
                     contract_id: contractId,
-                    ...(assetId && { opt_asset_id1: assetId }),
+                    opt_asset_id1: assetId || null,
+                    opt_asset_id2: null,
+                    opt_asset_id3: null,
+                    opt_asset_id4: null,
+                    opt_asset_id5: null,
                     opt_level: level ?? null,
                     opt_rarity: rarity ?? null,
                     opt_as_client: isClient ?? null,
