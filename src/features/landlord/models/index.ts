@@ -1,2 +1,2 @@
 export * from './area';
-export * from './landLordContracts';
+export * from './land-lord-contracts';

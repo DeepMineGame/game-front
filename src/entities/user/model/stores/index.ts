@@ -6,7 +6,7 @@ import {
     getSmartContractUserEffect,
     getMinesByOwnerEffect,
     getContractorsEffect,
-} from '../../smartcontract';
+} from '../../../smartcontract';
 import {
     getUserFromSessionEffect,
     authUserFromGoogleEffect,
@@ -14,8 +14,8 @@ import {
     fetchWaxBalanceEffect,
     fetchDmeBalanceEffect,
     connectUserWithWaxAccountEffect,
-} from './effects';
-import { User } from './type';
+} from '../effects';
+import { User } from '../type';
 
 export const setUserEvent = createEvent<User>();
 

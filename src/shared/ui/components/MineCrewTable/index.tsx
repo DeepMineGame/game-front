@@ -43,7 +43,7 @@ export const MineCrewTable: FC<{ data?: MineCrewDataType[] }> = ({ data }) => {
     const { t } = useTranslation();
 
     if (!data) {
-        return <div>{t('components.common.noData')}</div>;
+        return null;
     }
 
     const columns: ColumnsType<MineCrewDataType> = [

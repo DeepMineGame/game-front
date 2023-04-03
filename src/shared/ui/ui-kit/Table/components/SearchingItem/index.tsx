@@ -40,7 +40,7 @@ export const SearchingItem: FC<Props> = ({
             <span className={styles.text}>{text}</span>
             <span className={styles.contractId}>
                 <Link to={`/service-market/contract/${contract.id}`}>
-                    {t('pages.serviceMarket.contract.contractId')} {contract.id}
+                    {t('Contract ID')} {contract.id}
                 </Link>
             </span>
             <Button

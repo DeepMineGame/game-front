@@ -42,7 +42,7 @@ export const TypeFilter = ({
             onChange={(selected) => onChange?.(+selected)}
             items={tabList.map((tab) => ({
                 key: tab,
-                tab: t(`components.common.inventoryTypes.${tabNamesMap[tab]}`),
+                tab: t(tabNamesMap[tab]),
                 children: null,
                 disabled: isDisabled,
             }))}

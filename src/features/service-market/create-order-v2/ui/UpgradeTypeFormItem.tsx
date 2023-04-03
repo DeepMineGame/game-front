@@ -3,7 +3,7 @@ import { Select } from 'shared';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { orderFields } from 'entities/order';
-import { EngineerSchema } from 'entities/smartcontract';
+import { EngineerSchema, equipmentSet } from 'entities/smartcontract';
 
 import styles from '../styles.module.scss';
 
@@ -44,6 +44,10 @@ export const UpgradeTypeFormItem: FC = () => {
                         label: t(
                             `pages.serviceMarket.createOrder.upgradeTypeList.${EngineerSchema.mine}`
                         ),
+                    },
+                    {
+                        value: equipmentSet,
+                        label: t('Equipment set'),
                     },
                 ]}
             />

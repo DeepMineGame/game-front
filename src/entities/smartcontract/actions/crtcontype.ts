@@ -1,16 +1,16 @@
 import { DAY_IN_SECONDS, HOUR_IN_SECONDS } from 'shared';
-import { deepminesmrt } from 'entities/smartcontract';
+import { deepminesmrt, EngineerSchema } from 'entities/smartcontract';
 import { BaseOrder, LevelUpgradeOrder, MineOrder } from 'entities/order';
+
+export const equipmentSet = 'equipmentSet';
 
 const getBaseFields = (orderData: BaseOrder) => {
     const isClient = Boolean(orderData.is_client);
-    const assetId = Number(orderData.opt_asset_id);
 
     return {
         wax_user: orderData.wax_user,
         opt_client: orderData.opt_client,
         opt_executor: orderData.opt_executor,
-        opt_asset_id: Number.isNaN(assetId) ? undefined : assetId,
         is_client: isClient,
         deposit: Number(orderData.deposit || 0) * 10 ** 8,
         deadline_duration:
@@ -40,6 +40,9 @@ export const createMineOrder = (orderData: MineOrder) => {
                     opt_level: orderData.opt_level ?? null,
                     opt_rarity: orderData.opt_rarity ?? null,
                     autorenew_enabled: orderData.autorenew_enabled ? true : 0,
+                    opt_asset_id: Number.isNaN(orderData.opt_asset_id)
+                        ? undefined
+                        : orderData.opt_asset_id,
                 },
             },
         ],
@@ -60,10 +63,32 @@ export const createLevelUpgradeOrder = (orderData: LevelUpgradeOrder) => {
                 ],
                 data: {
                     ...getBaseFields(orderData),
-                    opt_schema_type: orderData.opt_schema_type,
+                    opt_schema_type:
+                        // @ts-ignore
+                        orderData.opt_schema_type === equipmentSet
+                            ? EngineerSchema.equipment
+                            : orderData.opt_schema_type,
                     opt_level: orderData.opt_level,
                     opt_rarity: orderData.opt_rarity,
                     cost_of_execution: Number(orderData.cost_of_execution),
+                    opt_asset_id: Number.isNaN(orderData.opt_asset_id)
+                        ? undefined
+                        : orderData.opt_asset_id,
+                    opt_asset_id1: Number.isNaN(orderData.opt_asset_id1)
+                        ? undefined
+                        : orderData.opt_asset_id1,
+                    opt_asset_id2: Number.isNaN(orderData.opt_asset_id2)
+                        ? undefined
+                        : orderData.opt_asset_id2,
+                    opt_asset_id3: Number.isNaN(orderData.opt_asset_id3)
+                        ? undefined
+                        : orderData.opt_asset_id3,
+                    opt_asset_id4: Number.isNaN(orderData.opt_asset_id4)
+                        ? undefined
+                        : orderData.opt_asset_id4,
+                    opt_asset_id5: Number.isNaN(orderData.opt_asset_id5)
+                        ? undefined
+                        : orderData.opt_asset_id5,
                 },
             },
         ],

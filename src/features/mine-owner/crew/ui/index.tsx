@@ -9,7 +9,7 @@ import { ContractRole, ContractType } from 'entities/smartcontract';
 import {
     getActiveOrderByType,
     getActiveSelfSignedContract,
-    getNotSignedSelfContract,
+    getNotSignedContract,
 } from 'entities/contract';
 import {
     MineConsumerGate,
@@ -42,7 +42,9 @@ export const MineOwnerCrew: FC = () => {
     const contracts = useStore($MiningContracts);
     const isContractsLoading = useStore(getMiningContractsFx.pending);
 
-    const selfContractsToSign = contracts.filter(getNotSignedSelfContract);
+    const selfContractsToSign = contracts
+        .filter(getNotSignedContract)
+        .filter(({ client, executor }) => client === executor);
     const selfSignedContracts = contracts.filter(getActiveSelfSignedContract);
     const miningOrders = contracts.filter(getActiveOrderByType);
 

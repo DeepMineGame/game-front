@@ -1,7 +1,7 @@
 import { InventoryNameType } from '../../constants';
 
 export const miningEquipmentNames = [
-    'Cutter',
+    'Сutter',
     'Delaminator',
     'DME Wire',
     'Plunging Blocks',

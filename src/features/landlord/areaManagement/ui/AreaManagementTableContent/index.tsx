@@ -9,9 +9,10 @@ import {
     green6,
     gold6,
     neutral3Color,
+    Link,
 } from 'shared';
+import { MinesOnLand } from 'entities/game-stat';
 import { MineState } from 'entities/smartcontract';
-import { Activity, MineCrewDataType } from '../../types';
 import styles from './styles.module.scss';
 
 const getStatusColor = (status: MineState) => {
@@ -29,21 +30,20 @@ const getStatusColor = (status: MineState) => {
 };
 
 type Props = {
-    data?: MineCrewDataType[];
-    disabled?: boolean;
+    data?: MinesOnLand;
 };
 
-export const AreaManagementTableContent: FC<Props> = ({ data, disabled }) => {
+export const AreaManagementTableContent: FC<Props> = ({ data }) => {
     const { t } = useTranslation();
 
     if (!data) {
         return <div>{t('components.common.noData')}</div>;
     }
 
-    const columns: ColumnsType<MineCrewDataType> = [
+    const columns: ColumnsType<MinesOnLand> = [
         {
-            dataIndex: 'discord',
-            key: 'discord',
+            dataIndex: 'mine_owner_discord',
+            key: 'mine_owner_discord',
             width: 56,
             render: (discord: string) =>
                 discord && (
@@ -53,22 +53,30 @@ export const AreaManagementTableContent: FC<Props> = ({ data, disabled }) => {
                 ),
         },
         {
+            title: t('Contract ID'),
+            dataIndex: 'id',
+            key: 'id',
+            render: (contractId: string) => {
+                return (
+                    <Link to={`/service-market/contract/${contractId}`}>
+                        {t('Contract ID')} {contractId}
+                    </Link>
+                );
+            },
+        },
+        {
             title: t('components.common.mine.title'),
-            dataIndex: 'mine',
-            key: 'mine',
+            dataIndex: 'mine_id',
+            key: 'mine_id',
             render: (mine: string) => {
-                return <div className={styles.mine}>{mine}</div>;
+                return <div>{mine}</div>;
             },
         },
         {
             title: t('pages.areaManagement.status'),
             dataIndex: 'status',
             key: 'status',
-            sorter: {
-                compare: (a: MineCrewDataType, b: MineCrewDataType) =>
-                    a.status - b.status,
-                multiple: 1,
-            },
+
             render: (status: MineState) => (
                 <div className={styles.status}>
                     <Badge color={getStatusColor(status)} />{' '}
@@ -77,53 +85,22 @@ export const AreaManagementTableContent: FC<Props> = ({ data, disabled }) => {
             ),
         },
         {
-            title: t('pages.areaManagement.dmePerEjection'),
-            dataIndex: 'ejection',
-            key: 'ejection',
-            sorter: {
-                compare: (a: MineCrewDataType, b: MineCrewDataType) =>
-                    a.ejection - b.ejection,
-                multiple: 2,
-            },
+            title: t('Mined after ejection'),
+            dataIndex: 'mined_after_ejection',
+            key: 'mined_after_ejection',
         },
         {
-            title: t('pages.areaManagement.crew'),
-            dataIndex: 'crew',
+            title: t('Mine crew'),
+            dataIndex: 'current_crew',
             key: 'crew',
-            sorter: {
-                compare: (a: MineCrewDataType, b: MineCrewDataType) =>
-                    a.crew[0] - b.crew[0],
-                multiple: 3,
-            },
-            render: (crew: [number, number]) => (
-                <div className={styles.crew}>
-                    {crew[0]}/{crew[1]}
-                </div>
-            ),
+            render: (crew) => <div className={styles.crew}>{crew}</div>,
         },
         {
             title: t('pages.areaManagement.activity'),
             dataIndex: 'activity',
             key: 'activity',
-            sorter: {
-                compare: (a: MineCrewDataType, b: MineCrewDataType) =>
-                    a.activity - b.activity,
-                multiple: 4,
-            },
-            render: (activity: Activity) =>
-                t(`pages.contractorMineCrew.${Activity[activity]}`),
         },
     ];
-
-    if (disabled || data.length === 0) {
-        return (
-            <Table
-                className={styles.disabled}
-                columns={columns}
-                tableLayout="fixed"
-            />
-        );
-    }
 
     return <Table dataSource={data} columns={columns} tableLayout="fixed" />;
 };

@@ -57,7 +57,7 @@ const ConditionTable: FC<Props> = ({ contract }) => {
                 checked={contract.autorenew_enabled}
             />
         ),
-        [t('Fee paid')]: contract.fee_counter,
+        [t('Fee paid')]: getDmeAmount(contract.fee_counter),
     };
 
     return (
