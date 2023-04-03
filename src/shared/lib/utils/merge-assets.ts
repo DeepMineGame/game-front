@@ -11,13 +11,11 @@ export const mergeAssets = <T1, T2>(
     targetAssets: (T2 & BaseAsset)[],
     sourceAssets: (T1 & BaseAsset)[]
 ): (T1 & T2)[] =>
-    sourceAssets.map(
-        (assetFromSource) => ({
-                ...assetFromSource,
-                ...(targetAssets?.find(
-                    (assetFromTarget) =>
-                        String(assetFromSource.asset_id) ===
-                        String(assetFromTarget.asset_id)
-                ) as T2),
-            }
-    );
+    sourceAssets.map((assetFromSource) => ({
+        ...assetFromSource,
+        ...(targetAssets?.find(
+            (assetFromTarget) =>
+                String(assetFromSource.asset_id) ===
+                String(assetFromTarget.asset_id)
+        ) as T2),
+    }));
