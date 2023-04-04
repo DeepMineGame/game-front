@@ -57,7 +57,9 @@ const defaultEndpoints = {
           ],
     atomic: isMainNet
         ? [
-              // 'https://wax.blokcrafters.io/atomicassets/v1',
+              'https://atomic.ledgerwise.io/atomicassets/v1',
+              'https://wax-aa.eu.eosamsterdam.net/atomicassets/v1',
+              'https://wax.blokcrafters.io/atomicassets/v1',
               'https://aa.dapplica.io/atomicassets/v1',
               'https://wax.api.atomicassets.io/atomicassets/v1',
               'https://wax.hkeos.com/aa/atomicassets/v1',
@@ -66,8 +68,6 @@ const defaultEndpoints = {
               'https://wax-aa.eosdublin.io/atomicassets/v1',
               'https://atomic.wax.eosrio.io/atomicassets/v1',
               'https://atomic.hivebp.io/atomicassets/v1',
-              'https://wax-aa.eu.eosamsterdam.net/atomicassets/v1',
-              'https://atomic.ledgerwise.io/atomicassets/v1',
               'https://api.atomic.greeneosio.com/atomicassets/v1',
               'https://atomic.sentnl.io/atomicassets/v1',
               'https://api-wax-aa.eosarabia.net/atomicassets/v1',
