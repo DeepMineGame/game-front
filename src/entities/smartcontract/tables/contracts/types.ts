@@ -60,6 +60,7 @@ export type AttrStatus = 'success' | 'failed' | 'failed_with_broke';
 export type ContractAttrs = {
     asset_id_new: string;
     asset_id_old: string;
+    asset_ids: string;
     asset_template_id: string;
     contract_id: number;
     cost_of_execution: number;
