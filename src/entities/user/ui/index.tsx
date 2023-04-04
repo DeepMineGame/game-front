@@ -108,10 +108,10 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                                 {t('components.common.level')}{' '}
                                 {citizenRole?.level}
                             </div>
-                            <div>
-                                {t('components.common.exp')}{' '}
-                                {citizenRole?.experience}
-                            </div>
+                            {/* <div> */}
+                            {/*    {t('components.common.exp')}{' '} */}
+                            {/*    {citizenRole?.experience} */}
+                            {/* </div> */}
                         </div>
                     </Space>
                     <div className={styles.attrs}>
