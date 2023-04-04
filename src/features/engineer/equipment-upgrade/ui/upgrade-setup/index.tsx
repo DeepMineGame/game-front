@@ -45,7 +45,7 @@ const EquipmentContent: FC<{
         return <Loader centered />;
     }
 
-    if (equipment) {
+    if (equipment?.template) {
         return (
             <img
                 height="100%"
