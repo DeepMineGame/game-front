@@ -29,7 +29,9 @@ const UpgradeInfo: FC = () => {
     return (
         <div>
             <Text size="md" strong>
-                {equipment?.data?.name}
+                {Array.isArray(equipment)
+                    ? t('Equipment set')
+                    : equipment?.data?.name}
             </Text>
             <div>
                 <Text size="md" strong>

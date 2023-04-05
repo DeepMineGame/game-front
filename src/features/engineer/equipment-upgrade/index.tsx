@@ -27,7 +27,6 @@ const EquipmentUpgrade: FC<Props> = ({ contract, status }) => {
     const equipment = useStore($equipment);
     const upgradeKit = useStore($upgradeKit);
     const equipmentLoading = useStore(getEquipmentByIdEffect.pending);
-
     return (
         <Space
             direction={isTablet ? 'horizontal' : 'vertical'}

@@ -5,9 +5,14 @@ import timeModification from '../data/time-modification.json';
 import priceModification from '../data/price-modification.json';
 import { UpgradeKitType } from '../model/upgrade-kit';
 
-const getMinMaxUpgradeTime = (equipment: AssetDataType | null) => {
-    const level = `${equipment?.data?.level || 0}`;
+const getMinMaxUpgradeTime = (
+    equipment: AssetDataType | AssetDataType[] | null
+) => {
     const { mine } = upgrades;
+
+    const level = Array.isArray(equipment)
+        ? `${equipment[0]?.data?.level || 0}`
+        : `${equipment?.data?.level || 0}`;
 
     return mine[level as keyof typeof mine];
 };

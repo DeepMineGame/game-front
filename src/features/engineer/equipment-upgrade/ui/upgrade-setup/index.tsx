@@ -13,7 +13,7 @@ import { UpgradeSlot } from '../upgrade-slot';
 import { UpgradeKit } from '../upgrade-kit';
 
 type Props = {
-    equipment: AssetDataType | null;
+    equipment: AssetDataType | AssetDataType[] | null;
     isLoading: boolean;
     isWaitCitizen: boolean;
     status: CabinStatus;
@@ -33,7 +33,7 @@ const disabledStatuses = [
 ];
 
 const EquipmentContent: FC<{
-    equipment: AssetDataType | null;
+    equipment: AssetDataType | AssetDataType[] | null;
     isLoading: boolean;
     isWaitCitizen: boolean;
 }> = ({ equipment, isWaitCitizen, isLoading }) => {
@@ -45,6 +45,19 @@ const EquipmentContent: FC<{
         return <Loader centered />;
     }
 
+    if (Array.isArray(equipment)) {
+        return (
+            <img
+                height="100%"
+                width="100%"
+                src={getImagePath(
+                    +equipment[0].template.template_id as InventoryIdType
+                )}
+                alt="equipment card"
+                style={{ transform: 'scale(1.05)' }}
+            />
+        );
+    }
     if (equipment?.template) {
         return (
             <img

@@ -10,7 +10,7 @@ import { useUpgradeModifiers } from '../../lib/useUpgradeModifier';
 import styles from './styles.module.scss';
 
 type Props = ModalProps & {
-    equipment: AssetDataType | null;
+    equipment: AssetDataType | AssetDataType[] | null;
     onSelect: (value: UpgradeKitType) => void;
     value: string;
 };

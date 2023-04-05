@@ -8,15 +8,15 @@ import {
 
 export const useUpgradeModifiers = (
     upgradeKit: UpgradeKitType,
-    equipment: AssetDataType | null
+    equipment: AssetDataType | AssetDataType[] | null
 ) => {
     const timeModifier = getTimeModifier(upgradeKit);
     const priceModifier = getPriceModifier(upgradeKit);
     const { min: minTime, max: maxTime } = getMinMaxUpgradeTime(equipment);
-
-    const price =
-        (priceModifier / 100) *
-        (Number(equipment?.data?.['DME to Upgrade']) || 0);
+    const dmeToUpgrade = Array.isArray(equipment)
+        ? Number(equipment[0]?.data?.['DME to Upgrade'])
+        : Number(equipment?.data?.['DME to Upgrade']) || 0;
+    const price = (priceModifier / 100) * dmeToUpgrade;
 
     return {
         price,

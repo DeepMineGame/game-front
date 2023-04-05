@@ -696,7 +696,6 @@
         "work": "Working"
       },
       "equipmentHall": {
-        "title": "Equipment hall",
         "estimateTime": "Estimate upgrade time",
         "successProbability": "Success Probability",
         "lookingCitizen": "Looking for a citizen who will sign your order",
@@ -1017,6 +1016,6 @@
   "For the best experience": "For the best experience",
   "Swipe down from the top-right corner of your screen to open Control Center": "1. Swipe down from the top-right corner of your screen to open Control Center",
   "Tap the Portrait Orientation Lock button to make sure that it's off": "2. Tap the Portrait Orientation Lock button to make sure that it's off",
-  "Turn your phone sideways": "3. Turn your phone sideways"
-
+  "Turn your phone sideways": "3. Turn your phone sideways",
+  "Equipment hall": "Equipment hall"
 }
