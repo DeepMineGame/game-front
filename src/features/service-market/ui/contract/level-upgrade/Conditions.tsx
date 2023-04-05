@@ -15,6 +15,10 @@ type Props = {
 
 const Conditions: FC<Props> = ({ contract }) => {
     const { t } = useTranslation();
+    const assets = contract?.attrs.find(
+        ({ key }) => key === 'asset_ids'
+    )?.value;
+    const isMoreThanOneAssets = assets?.length && assets?.length > 1;
 
     const conditionData = {
         [t('pages.serviceMarket.upgrade')]: `${t(
@@ -32,6 +36,9 @@ const Conditions: FC<Props> = ({ contract }) => {
         [t('pages.serviceMarket.costOfExecution')]: `${
             contract.cost_of_execution
         } ${t('components.common.button.dme')}`,
+        [isMoreThanOneAssets ? 'Assets' : 'Asset']: contract?.attrs.find(
+            ({ key }) => key === 'asset_ids'
+        )?.value,
     };
 
     return (

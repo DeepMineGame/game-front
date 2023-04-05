@@ -12,10 +12,7 @@ type Props = {
 
 const GeneralInfo: FC<Props> = ({ contract, accountName, isOrder = false }) => {
     const { t } = useTranslation();
-    const assets = contract?.attrs.find(
-        ({ key }) => key === 'asset_ids'
-    )?.value;
-    const isMoreThanOneAssets = assets?.length && assets?.length > 1;
+
     const generalData = {
         [t('Contract ID')]: (
             <div>
@@ -50,9 +47,6 @@ const GeneralInfo: FC<Props> = ({ contract, accountName, isOrder = false }) => {
                 <Text type="primary">{contract.client_asset_id}</Text>
             ),
         }),
-        [isMoreThanOneAssets ? 'Assets' : 'Asset']: contract?.attrs.find(
-            ({ key }) => key === 'asset_ids'
-        )?.value,
     };
 
     return (
