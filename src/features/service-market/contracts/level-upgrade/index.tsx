@@ -1,58 +1,71 @@
 import React, { FC } from 'react';
 import { Row, Col } from 'antd';
-import { useOrderDelete } from 'entities/order';
-import { OrderState } from 'entities/smartcontract';
-import { UpgradeReport } from 'shared/ui';
+
 import { Conditions, Citizen, Engineer, GeneralInfo } from '../../ui';
 import { ContractProps } from '../../types';
-import {
-    DeleteOrder,
-    SignLevelUpgradeOrder,
-    TerminateContract,
-} from '../../ui/actions';
+
 import { StatusHeader } from '../../ui/status-header';
+import { useSignButtons } from '../useSignButtons';
+import { SignLevelUpgradeOrder } from '../../ui/actions';
 import { ContractAlerts } from './components/ContractAlerts';
-import { useLevelUpgradeContract } from './constants';
 
 const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
-    const { canTerminate, canGetReport } = useLevelUpgradeContract(
+    // const { canTerminate, canGetReport } = useLevelUpgradeContract(
+    //     contract,
+    //     accountName
+    // );
+    // const { canDeleteOrder } = useOrderDelete(contract, accountName);
+    const buttons = useSignButtons({
         contract,
-        accountName
-    );
-    const { canDeleteOrder } = useOrderDelete(contract, accountName);
+        clientSignButton: (
+            <SignLevelUpgradeOrder
+                contract={contract}
+                accountName={accountName}
+            />
+        ),
+        executorSignButton: (
+            <SignLevelUpgradeOrder
+                contract={contract}
+                accountName={accountName}
+            />
+        ),
+    });
 
     return (
         <div>
             <StatusHeader
                 contract={contract}
-                extra={[
-                    canTerminate && (
-                        <TerminateContract
-                            contractId={contract.id}
-                            accountName={accountName}
-                        />
-                    ),
-                    canGetReport && (
-                        <UpgradeReport
-                            accountName={accountName}
-                            contract={contract}
-                        />
-                    ),
-                    !canDeleteOrder &&
-                        contract.computed?.status !==
-                            OrderState.ValidContract && (
-                            <SignLevelUpgradeOrder
-                                contract={contract}
-                                accountName={accountName}
-                            />
-                        ),
-                    canDeleteOrder && (
-                        <DeleteOrder
-                            accountName={accountName}
-                            contractId={contract.id}
-                        />
-                    ),
-                ]}
+                extra={
+                    buttons
+                    // [
+                    //     canTerminate && (
+                    //         <TerminateContract
+                    //             contractId={contract.id}
+                    //             accountName={accountName}
+                    //         />
+                    //     ),
+                    //     canGetReport && (
+                    //         <UpgradeReport
+                    //             accountName={accountName}
+                    //             contract={contract}
+                    //         />
+                    //     ),
+                    //     !canDeleteOrder &&
+                    //         contract.computed?.status !==
+                    //             OrderState.ValidContract && (
+                    //             <SignLevelUpgradeOrder
+                    //                 contract={contract}
+                    //                 accountName={accountName}
+                    //             />
+                    //         ),
+                    //     canDeleteOrder && (
+                    //         <DeleteOrder
+                    //             accountName={accountName}
+                    //             contractId={contract.id}
+                    //         />
+                    //     ),
+                    // ]
+                }
             />
 
             <Row gutter={[32, 32]}>

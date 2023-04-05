@@ -45,7 +45,7 @@ export const SignLevelUpgradeOrder: FC<Props> = ({ contract, accountName }) => {
 
     return (
         <>
-            <Button onClick={onSign} type="primary" size="large" block>
+            <Button onClick={onSign} type="primary">
                 {t('pages.serviceMarket.order.signOrder')}
             </Button>
             <SignLevelUpgradeOrderModal
