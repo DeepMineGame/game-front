@@ -21,13 +21,15 @@ const Conditions: FC<Props> = ({ contract }) => {
     const isMoreThanOneAssets = assets?.length && assets?.length > 1;
 
     const conditionData = {
-        [t('pages.serviceMarket.upgrade')]: `${t(
-            `pages.serviceMarket.levelUpgradeTab.type.${getUpgradeType({
-                contract,
-            })}`
-        )}, ${getUpgradeRarity({ contract })}, level ${
-            parseAttrs(contract)?.level
-        }`,
+        // [t('pages.serviceMarket.upgrade')]: `${t(
+        //     `pages.serviceMarket.levelUpgradeTab.type.${getUpgradeType({
+        //         contract,
+        //     })}`
+        // )}, ${getUpgradeRarity({ contract })}, level ${
+        //     parseAttrs(contract)?.level
+        // }`,
+        Upgrade: contract?.attrs.find(({ key }) => key === 'asset_ids')?.value,
+
         ...(!!contract.deadline_time && {
             [t('pages.serviceMarket.startOperations')]: toLocaleDate(
                 contract.deadline_time * 1000
@@ -36,9 +38,6 @@ const Conditions: FC<Props> = ({ contract }) => {
         [t('pages.serviceMarket.costOfExecution')]: `${
             contract.cost_of_execution
         } ${t('components.common.button.dme')}`,
-        [isMoreThanOneAssets ? 'Assets' : 'Asset']: contract?.attrs.find(
-            ({ key }) => key === 'asset_ids'
-        )?.value,
     };
 
     return (
