@@ -1,6 +1,7 @@
 import { combine, createEffect, createStore, sample } from 'effector';
 import { createGate } from 'effector-react';
 import { getTableData } from 'shared';
+import { $xp } from 'features/engineer';
 import {
     EngineerSkill,
     getInventoryConfig,
@@ -49,8 +50,6 @@ export const $skillsMapByLevel = $engineer.map((state) =>
         {}
     )
 );
-
-export const $xp = $engineerRole.map((state) => state?.experience ?? 0);
 
 export const $levelProgressPercent = combine(
     $engineerRole,

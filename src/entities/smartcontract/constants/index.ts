@@ -1224,6 +1224,7 @@ export const deepminegame = 'deepmineappg';
 export const deepminesmrt = 'deepminesrmt';
 export const deepmineming = 'deepmineming';
 export const deepmineengr = 'deepmineengr';
+export const deepminestat = 'deepminestat';
 
 // there are fewer zeros than in the game table to count the percentages, see the getCost method
 export const dmeToUpgrade = {
