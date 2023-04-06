@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Row, Col } from 'antd';
 
+import { UpgradeReport } from 'shared';
 import { Conditions, Citizen, Engineer, GeneralInfo } from '../../ui';
 import { ContractProps } from '../../types';
 
@@ -8,12 +9,10 @@ import { StatusHeader } from '../../ui/status-header';
 import { useSignButtons } from '../useSignButtons';
 import { SignLevelUpgradeOrder } from '../../ui/actions';
 import { ContractAlerts } from './components/ContractAlerts';
+import { useLevelUpgradeContract } from './constants';
 
 const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
-    // const { canTerminate, canGetReport } = useLevelUpgradeContract(
-    //     contract,
-    //     accountName
-    // );
+    const { canGetReport } = useLevelUpgradeContract(contract, accountName);
     // const { canDeleteOrder } = useOrderDelete(contract, accountName);
     const buttons = useSignButtons({
         contract,
@@ -35,8 +34,8 @@ const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
         <div>
             <StatusHeader
                 contract={contract}
-                extra={
-                    buttons
+                extra={[
+                    buttons,
                     // [
                     //     canTerminate && (
                     //         <TerminateContract
@@ -44,12 +43,12 @@ const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
                     //             accountName={accountName}
                     //         />
                     //     ),
-                    //     canGetReport && (
-                    //         <UpgradeReport
-                    //             accountName={accountName}
-                    //             contract={contract}
-                    //         />
-                    //     ),
+                    canGetReport && (
+                        <UpgradeReport
+                            accountName={accountName}
+                            contract={contract}
+                        />
+                    ),
                     //     !canDeleteOrder &&
                     //         contract.computed?.status !==
                     //             OrderState.ValidContract && (
@@ -65,7 +64,7 @@ const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
                     //         />
                     //     ),
                     // ]
-                }
+                ]}
             />
 
             <Row gutter={[32, 32]}>
