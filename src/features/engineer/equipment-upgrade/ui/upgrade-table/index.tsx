@@ -30,7 +30,7 @@ const UpgradeTable: FC<Props> = ({ equipment, isWaitCitizen, upgradeKit }) => {
                 [t('pages.engineer.equipmentHall.estimateTime')]: showData
                     ? `${getTimeLeft(minTime)} - ${getTimeLeft(maxTime)}`
                     : '-',
-                [t('components.common.price')]: showData
+                [t('Price')]: showData
                     ? `${price} ${t('components.common.button.dme')}`
                     : '-',
             }}

@@ -14,7 +14,7 @@ export const useUpgradeModifiers = (
     const priceModifier = getPriceModifier(upgradeKit);
     const { min: minTime, max: maxTime } = getMinMaxUpgradeTime(equipment);
     const dmeToUpgrade = Array.isArray(equipment)
-        ? Number(equipment[0]?.data?.['DME to Upgrade'])
+        ? Number(equipment[0]?.data?.['DME to Upgrade']) * 5
         : Number(equipment?.data?.['DME to Upgrade']) || 0;
     const price = (priceModifier / 100) * dmeToUpgrade;
 
