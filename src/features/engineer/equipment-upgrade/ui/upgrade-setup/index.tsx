@@ -4,6 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { Space } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { serviceMarket } from 'app/router/paths';
+import {
+    commonAssetsSetImg,
+    epicAssetSetImg,
+    legendaryAssetSetImg,
+    rareAssetSetImg,
+    unCommonAssetSetImg,
+} from 'shared';
 import { InventoryIdType, rarityMap, RarityType } from 'entities/smartcontract';
 import { AssetDataType } from 'entities/atomicassets';
 import { CabinStatus } from 'entities/engineer';
@@ -11,11 +18,6 @@ import { getImagePath } from 'shared/lib/utils';
 import { Loader, LoadingSpin, Text } from 'shared/ui/ui-kit';
 import { UpgradeSlot } from '../upgrade-slot';
 import { UpgradeKit } from '../upgrade-kit';
-import commonAssetsSetImg from './assets/common-assets-set.webp';
-import unCommonAssetSetImg from './assets/uncommon-assets-set.webp';
-import rareAssetSetImg from './assets/rare-asset-set.webp';
-import epicAssetSetImg from './assets/epic-asset-set.webp';
-import legendaryAssetSetImg from './assets/legendary-asset-set.webp';
 
 type Props = {
     equipment: AssetDataType | AssetDataType[] | null;
