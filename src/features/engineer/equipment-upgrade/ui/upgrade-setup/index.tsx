@@ -4,13 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import { Space } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { serviceMarket } from 'app/router/paths';
-import { InventoryIdType } from 'entities/smartcontract';
+import { InventoryIdType, rarityMap, RarityType } from 'entities/smartcontract';
 import { AssetDataType } from 'entities/atomicassets';
 import { CabinStatus } from 'entities/engineer';
 import { getImagePath } from 'shared/lib/utils';
 import { Loader, LoadingSpin, Text } from 'shared/ui/ui-kit';
 import { UpgradeSlot } from '../upgrade-slot';
 import { UpgradeKit } from '../upgrade-kit';
+import commonAssetsSetImg from './assets/common-assets-set.webp';
+import unCommonAssetSetImg from './assets/uncommon-assets-set.webp';
+import rareAssetSetImg from './assets/rare-asset-set.webp';
+import epicAssetSetImg from './assets/epic-asset-set.webp';
+import legendaryAssetSetImg from './assets/legendary-asset-set.webp';
 
 type Props = {
     equipment: AssetDataType | AssetDataType[] | null;
@@ -46,14 +51,21 @@ const EquipmentContent: FC<{
     }
 
     if (Array.isArray(equipment)) {
+        const rarity = equipment[0]?.data.rarity;
+        const imageRarityMap = {
+            [rarityMap[RarityType.undefined]]: commonAssetsSetImg,
+            [rarityMap[RarityType.common]]: commonAssetsSetImg,
+            [rarityMap[RarityType.uncommon]]: unCommonAssetSetImg,
+            [rarityMap[RarityType.rare]]: rareAssetSetImg,
+            [rarityMap[RarityType.epic]]: epicAssetSetImg,
+            [rarityMap[RarityType.legendary]]: legendaryAssetSetImg,
+        };
         return (
             <img
                 height="100%"
                 width="100%"
-                src={getImagePath(
-                    +equipment[0].template.template_id as InventoryIdType
-                )}
-                alt="equipment card"
+                src={imageRarityMap[rarity]}
+                alt={`equipment card ${rarity}`}
                 style={{ transform: 'scale(1.05)' }}
             />
         );
