@@ -61,22 +61,27 @@ const UpgradeKitModal: FC<Props> = ({
         equipment
     );
 
+    const isMultiAsset = Array.isArray(equipment);
     return (
         <Modal
             {...props}
-            title={t('pages.engineer.selectUpgradeKit')}
+            title={t('Select upgrade kit')}
             className={styles.modal}
         >
             <div className={styles.container}>
                 <KitCard
                     selected={value}
                     name={UpgradeKitType.common}
-                    title={t('pages.engineer.CommonKit')}
+                    title={
+                        isMultiAsset
+                            ? `${t('Common kit')} x 5`
+                            : t('Common kit')
+                    }
                     onClick={onSelect}
                     bottom={
                         <>
                             <Text strong>
-                                {commonPrice}{' '}
+                                {isMultiAsset ? commonPrice * 5 : commonPrice}{' '}
                                 {t('components.common.button.dme')}
                             </Text>
                             <Text>{t('pages.engineer.noTimeReduction')}</Text>
@@ -87,12 +92,18 @@ const UpgradeKitModal: FC<Props> = ({
                 <KitCard
                     selected={value}
                     name={UpgradeKitType.uncommon}
-                    title={t('pages.engineer.UncommonKit')}
+                    title={
+                        isMultiAsset
+                            ? `${t('Uncommon kit')} x 5`
+                            : t('Uncommon kit')
+                    }
                     onClick={onSelect}
                     bottom={
                         <>
                             <Text strong>
-                                {uncommonPrice}{' '}
+                                {isMultiAsset
+                                    ? uncommonPrice * 5
+                                    : uncommonPrice}{' '}
                                 {t('components.common.button.dme')}
                             </Text>
                             <Text>

@@ -677,9 +677,6 @@
       "upgradesPossibleAfterOrderCreated": "Upgrades and repairs are only possible after an order has been created",
       "visitServiceMarket": "Visit Service Market",
       "upgradeKit": "Upgrade Kit",
-      "selectUpgradeKit": "Select upgrade kit",
-      "CommonKit": "Common kit",
-      "UncommonKit": "Uncommon kit",
       "noTimeReduction": "No time reduction",
       "timeReduction": "Time reduction -{{percent}}%",
       "slotWillBeAvailableAfterEquipmentSlotFilled": "This slot will be available after the equipment slot is filled",
@@ -1017,5 +1014,8 @@
   "Tap the Portrait Orientation Lock button to make sure that it's off": "2. Tap the Portrait Orientation Lock button to make sure that it's off",
   "Turn your phone sideways": "3. Turn your phone sideways",
   "Equipment hall": "Equipment hall",
-  "Price": "Price"
+  "Price": "Price",
+  "Select upgrade kit": "Select upgrade kit",
+  "Common kit": "Common kit",
+  "Uncommon kit": "Uncommon kit"
 }
