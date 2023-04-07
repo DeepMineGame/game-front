@@ -77,12 +77,12 @@ const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
                             />
                         </Col>
 
-                        <Col span={24}>
-                            <ContractAlerts
-                                contract={contract}
-                                accountName={accountName}
-                            />
-                        </Col>
+                        {/* <Col span={24}> */}
+                        {/*    <ContractAlerts */}
+                        {/*        contract={contract} */}
+                        {/*        accountName={accountName} */}
+                        {/*    /> */}
+                        {/* </Col> */}
                     </Row>
                 </Col>
                 <Col xs={24} md={12}>
