@@ -7,10 +7,11 @@ import { getKitImage } from 'shared/lib/utils';
 import { Modal, Text } from 'shared/ui/ui-kit';
 import { UpgradeKitType } from '../../model/upgrade-kit';
 import { useUpgradeModifiers } from '../../lib/useUpgradeModifier';
+import { EQUIPMENT_SET_LENGTH } from '../../constants';
 import styles from './styles.module.scss';
 
 type Props = ModalProps & {
-    equipment: AssetDataType | AssetDataType[] | null;
+    equipment: AssetDataType[] | null;
     onSelect: (value: UpgradeKitType) => void;
     value: string;
 };
@@ -61,7 +62,7 @@ const UpgradeKitModal: FC<Props> = ({
         equipment
     );
 
-    const isMultiAsset = Array.isArray(equipment);
+    const isEquipmentSet = equipment?.length === EQUIPMENT_SET_LENGTH;
     return (
         <Modal
             {...props}
@@ -73,7 +74,7 @@ const UpgradeKitModal: FC<Props> = ({
                     selected={value}
                     name={UpgradeKitType.common}
                     title={
-                        isMultiAsset
+                        isEquipmentSet
                             ? `${t('Common kit')} x 5`
                             : t('Common kit')
                     }
@@ -81,7 +82,7 @@ const UpgradeKitModal: FC<Props> = ({
                     bottom={
                         <>
                             <Text strong>
-                                {isMultiAsset ? commonPrice * 5 : commonPrice}{' '}
+                                {isEquipmentSet ? commonPrice * 5 : commonPrice}{' '}
                                 {t('components.common.button.dme')}
                             </Text>
                             <Text>{t('pages.engineer.noTimeReduction')}</Text>
@@ -93,7 +94,7 @@ const UpgradeKitModal: FC<Props> = ({
                     selected={value}
                     name={UpgradeKitType.uncommon}
                     title={
-                        isMultiAsset
+                        isEquipmentSet
                             ? `${t('Uncommon kit')} x 5`
                             : t('Uncommon kit')
                     }
@@ -101,7 +102,7 @@ const UpgradeKitModal: FC<Props> = ({
                     bottom={
                         <>
                             <Text strong>
-                                {isMultiAsset
+                                {isEquipmentSet
                                     ? uncommonPrice * 5
                                     : uncommonPrice}{' '}
                                 {t('components.common.button.dme')}

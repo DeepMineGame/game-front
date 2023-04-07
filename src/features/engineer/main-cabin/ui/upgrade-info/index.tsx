@@ -5,6 +5,7 @@ import { RightSquareFilled } from '@ant-design/icons';
 import {
     $engineerContracts,
     $equipment,
+    EQUIPMENT_SET_LENGTH,
     getEngineerActiveContract,
 } from 'features/engineer';
 import { useAccountName } from 'shared/lib/hooks';
@@ -15,6 +16,7 @@ const UpgradeInfo: FC = () => {
     const accountName = useAccountName();
     const engineerContracts = useStore($engineerContracts);
     const equipment = useStore($equipment);
+    const isEquipmentSet = equipment?.length === EQUIPMENT_SET_LENGTH;
 
     const activeContract = getEngineerActiveContract(
         accountName,
@@ -29,9 +31,9 @@ const UpgradeInfo: FC = () => {
     return (
         <div>
             <Text size="md" strong>
-                {Array.isArray(equipment)
+                {isEquipmentSet
                     ? t('Equipment set')
-                    : equipment?.data?.name}
+                    : equipment?.[0].data?.name}
             </Text>
             <div>
                 <Text size="md" strong>

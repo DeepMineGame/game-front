@@ -1,5 +1,5 @@
 import { commonAssetsSetImg, getImagePath } from 'shared';
-import { ContractDto, InventoryIdType } from 'entities/smartcontract';
+import { ContractDto } from 'entities/smartcontract';
 
 export const buildImagePath = (contract: ContractDto) => {
     const assetIds = contract.attrs.find(

@@ -82,3 +82,4 @@ const EquipmentUpgrade: FC<Props> = ({ contract, status }) => {
     );
 };
 export { EquipmentUpgrade };
+export * from './constants';

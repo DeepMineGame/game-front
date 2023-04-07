@@ -11,16 +11,17 @@ import {
     rareAssetSetImg,
     unCommonAssetSetImg,
 } from 'shared';
-import { InventoryIdType, rarityMap, RarityType } from 'entities/smartcontract';
+import { rarityMap, RarityType } from 'entities/smartcontract';
 import { AssetDataType } from 'entities/atomicassets';
 import { CabinStatus } from 'entities/engineer';
 import { getImagePath } from 'shared/lib/utils';
 import { Loader, LoadingSpin, Text } from 'shared/ui/ui-kit';
 import { UpgradeSlot } from '../upgrade-slot';
 import { UpgradeKit } from '../upgrade-kit';
+import { EQUIPMENT_SET_LENGTH } from '../../constants';
 
 type Props = {
-    equipment: AssetDataType | AssetDataType[] | null;
+    equipment: AssetDataType[] | null;
     isLoading: boolean;
     isWaitCitizen: boolean;
     status: CabinStatus;
@@ -38,12 +39,12 @@ const disabledStatuses = [
     CabinStatus.UpgradeCompleted,
     CabinStatus.CanSeeStats,
 ];
-
 const EquipmentContent: FC<{
-    equipment: AssetDataType | AssetDataType[] | null;
+    equipment: AssetDataType[] | null;
     isLoading: boolean;
     isWaitCitizen: boolean;
 }> = ({ equipment, isWaitCitizen, isLoading }) => {
+    const isEquipmentSet = equipment?.length === EQUIPMENT_SET_LENGTH;
     if (isWaitCitizen) {
         return <LoadingSpin size="md" />;
     }
@@ -52,7 +53,7 @@ const EquipmentContent: FC<{
         return <Loader centered />;
     }
 
-    if (Array.isArray(equipment)) {
+    if (isEquipmentSet) {
         const rarity = equipment[0]?.data.rarity;
         const imageRarityMap = {
             [rarityMap[RarityType.undefined]]: commonAssetsSetImg,
@@ -68,20 +69,18 @@ const EquipmentContent: FC<{
                 width="100%"
                 src={imageRarityMap[rarity]}
                 alt={`equipment card ${rarity}`}
-                style={{ transform: 'scale(1.05)' }}
+                style={{ transform: 'scale(1.1)' }}
             />
         );
     }
-    if (equipment?.template) {
+    if (equipment?.[0]?.template) {
         return (
             <img
                 height="100%"
                 width="100%"
-                src={getImagePath(
-                    +equipment.template.template_id as InventoryIdType
-                )}
+                src={getImagePath(+equipment[0].template.template_id)}
                 alt="equipment card"
-                style={{ transform: 'scale(1.05)' }}
+                style={{ transform: 'scale(1.1)' }}
             />
         );
     }

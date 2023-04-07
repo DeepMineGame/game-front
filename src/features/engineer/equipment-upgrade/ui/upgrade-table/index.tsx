@@ -10,7 +10,7 @@ import styles from './styles.module.scss';
 type Props = {
     isWaitCitizen: boolean;
     upgradeKit: UpgradeKitType;
-    equipment: AssetDataType | AssetDataType[] | null;
+    equipment: AssetDataType[] | null;
 };
 
 const UpgradeTable: FC<Props> = ({ equipment, isWaitCitizen, upgradeKit }) => {

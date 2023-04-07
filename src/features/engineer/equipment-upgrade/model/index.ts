@@ -17,7 +17,7 @@ const getContractsExecutorEffect = createEffect(
 
 const getEquipmentByIdEffect = createEffect<
     string,
-    AssetDataType | AssetDataType[] | undefined
+    AssetDataType[] | undefined
 >((assets) => getAssets(assets.split(',')));
 
 const $engineerContracts = createStore<ContractDto[]>([]).on(
@@ -60,7 +60,7 @@ sample({
     },
 });
 
-const $equipment = createStore<AssetDataType | AssetDataType[] | null>(null).on(
+const $equipment = createStore<AssetDataType[] | null>(null).on(
     getEquipmentByIdEffect.doneData,
     (_, data) => data || null
 );
