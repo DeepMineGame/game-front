@@ -8,6 +8,8 @@ export const EngineerTrainingRoom = createGate<{ searchParam: string }>(
 export const getExpEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
         const data = await getStatRolesTableData({ searchParam });
+        console.log(data);
+
         return data?.rows;
     }
 );

@@ -70,7 +70,8 @@ export const createLevelUpgradeOrder = (orderData: LevelUpgradeOrder) => {
                             : orderData.opt_schema_type,
                     opt_level: orderData.opt_level,
                     opt_rarity: orderData.opt_rarity,
-                    cost_of_execution: Number(orderData.cost_of_execution),
+                    cost_of_execution:
+                        Number(orderData.cost_of_execution) * 10 ** 8,
                     opt_asset_id: Number.isNaN(orderData.opt_asset_id)
                         ? undefined
                         : orderData.opt_asset_id,

@@ -20,7 +20,7 @@ export const getStatRolesTableData = ({
         scope: deepminestat,
         table: 'statroles',
         index_position: 2,
-        key_type: '',
+        key_type: 'name',
         lower_bound: searchParam,
         upper_bound: searchParam,
         limit: 10,

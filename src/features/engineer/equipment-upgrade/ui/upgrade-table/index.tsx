@@ -11,9 +11,15 @@ type Props = {
     isWaitCitizen: boolean;
     upgradeKit: UpgradeKitType;
     equipment: AssetDataType[] | null;
+    cost?: number;
 };
 
-const UpgradeTable: FC<Props> = ({ equipment, isWaitCitizen, upgradeKit }) => {
+const UpgradeTable: FC<Props> = ({
+    equipment,
+    isWaitCitizen,
+    upgradeKit,
+    cost,
+}) => {
     const { t } = useTranslation();
 
     const showData = !!upgradeKit && !isWaitCitizen && equipment;
@@ -30,9 +36,10 @@ const UpgradeTable: FC<Props> = ({ equipment, isWaitCitizen, upgradeKit }) => {
                 [t('pages.engineer.equipmentHall.estimateTime')]: showData
                     ? `${getTimeLeft(minTime)} - ${getTimeLeft(maxTime)}`
                     : '-',
-                [t('Price')]: showData
+                [t('Kit price')]: showData
                     ? `${price} ${t('components.common.button.dme')}`
                     : '-',
+                [t('Cost of execution')]: cost,
             }}
         />
     );
