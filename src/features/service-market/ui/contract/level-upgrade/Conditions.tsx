@@ -1,11 +1,6 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-    getUpgradeType,
-    getUpgradeRarity,
-    parseAttrs,
-    toLocaleDate,
-} from 'shared';
+import { toLocaleDate } from 'shared';
 import { ContractDto, rarityMap } from 'entities/smartcontract';
 import { TableWithTitle } from '../..';
 
@@ -15,19 +10,8 @@ type Props = {
 
 const Conditions: FC<Props> = ({ contract }) => {
     const { t } = useTranslation();
-    const assets = contract?.attrs.find(
-        ({ key }) => key === 'asset_ids'
-    )?.value;
-    const isMoreThanOneAssets = assets?.length && assets?.length > 1;
 
     const conditionData = {
-        // [t('pages.serviceMarket.upgrade')]: `${t(
-        //     `pages.serviceMarket.levelUpgradeTab.type.${getUpgradeType({
-        //         contract,
-        //     })}`
-        // )}, ${getUpgradeRarity({ contract })}, level ${
-        //     parseAttrs(contract)?.level
-        // }`,
         Upgrade: contract?.attrs.find(({ key }) => key === 'asset_ids')?.value,
 
         ...(!!contract.deadline_time && {
