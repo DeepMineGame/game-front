@@ -1,3 +1,5 @@
+import { RarityType } from '../inventories';
+
 export enum ContractType {
     undefined,
     landlord_mineowner,
@@ -108,7 +110,7 @@ export type ContractDto = {
     cost_of_execution: number;
     client_discord: string;
     executor_discord: string;
-    rarity: number;
+    rarity: RarityType | -1;
     level: number;
     deposit: number;
     autorenew_enabled: boolean;

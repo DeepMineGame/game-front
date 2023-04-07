@@ -6,7 +6,7 @@ import {
     parseAttrs,
     toLocaleDate,
 } from 'shared';
-import { ContractDto } from 'entities/smartcontract';
+import { ContractDto, rarityMap } from 'entities/smartcontract';
 import { TableWithTitle } from '../..';
 
 type Props = {
@@ -38,6 +38,12 @@ const Conditions: FC<Props> = ({ contract }) => {
         [t('pages.serviceMarket.costOfExecution')]: `${
             contract.cost_of_execution
         } ${t('components.common.button.dme')}`,
+        [t('Deposit')]: `${contract.deposit} ${t(
+            'components.common.button.dme'
+        )}`,
+        [t('Level')]: contract.level,
+        [t('Rarity')]:
+            contract.rarity !== -1 ? rarityMap[contract.rarity] : 'unknown',
     };
 
     return (
