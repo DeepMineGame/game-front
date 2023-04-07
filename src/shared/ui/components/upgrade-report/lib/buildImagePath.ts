@@ -9,7 +9,6 @@ export const buildImagePath = (contract: ContractDto) => {
         ({ key }) => key === 'asset_template_id'
     )?.value;
     const isMultiAsset = assetIds?.includes(',');
-    console.log(isMultiAsset, assetIds, getImagePath(Number(assetIds)));
     if (isMultiAsset) {
         return commonAssetsSetImg;
     }
