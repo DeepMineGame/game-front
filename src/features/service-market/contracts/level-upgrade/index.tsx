@@ -8,7 +8,7 @@ import { ContractProps } from '../../types';
 import { StatusHeader } from '../../ui/status-header';
 import { useSignButtons } from '../useSignButtons';
 import { SignLevelUpgradeOrder } from '../../ui/actions';
-import { ContractAlerts } from './components/ContractAlerts';
+// import { ContractAlerts } from './components/ContractAlerts';
 import { useLevelUpgradeContract } from './constants';
 
 const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
