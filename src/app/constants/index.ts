@@ -57,6 +57,7 @@ const defaultEndpoints = {
           ],
     atomic: isMainNet
         ? [
+              'https://api-wax-aa.eosarabia.net/atomicassets/v1',
               'https://atomic.ledgerwise.io/atomicassets/v1',
               'https://wax-aa.eu.eosamsterdam.net/atomicassets/v1',
               'https://wax.blokcrafters.io/atomicassets/v1',
