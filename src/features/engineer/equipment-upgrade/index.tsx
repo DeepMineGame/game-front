@@ -50,10 +50,7 @@ const EquipmentUpgrade: FC<Props> = ({ contract, status }) => {
 
                 {contract &&
                     (status === CabinStatus.UpgradeCompleted ? (
-                        <GetUpgrade
-                            accountName={accountName}
-                            contract={contract}
-                        />
+                        <GetUpgrade contract={contract} />
                     ) : (
                         <Row gutter={[12, 12]}>
                             <PerformUpgrade

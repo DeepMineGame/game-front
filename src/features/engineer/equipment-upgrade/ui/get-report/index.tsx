@@ -8,6 +8,7 @@ import {
 } from 'entities/smartcontract';
 import { Button } from 'shared/ui/ui-kit';
 import {
+    useAccountName,
     useReloadPage,
     useTravelConfirm,
     useUserLocation,
@@ -15,11 +16,11 @@ import {
 import { UpgradeReport } from 'shared/ui';
 
 type Props = {
-    accountName: string;
     contract: ContractDto;
 };
 
-const GetUpgrade: FC<Props> = ({ accountName, contract }) => {
+const GetUpgrade: FC<Props> = ({ contract }) => {
+    const accountName = useAccountName();
     const { t } = useTranslation();
     const reloadPage = useReloadPage();
     const inLocation = useUserLocation();

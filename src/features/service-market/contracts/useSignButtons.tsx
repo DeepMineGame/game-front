@@ -7,6 +7,7 @@ import {
     OrderSubState,
 } from 'entities/smartcontract';
 import { CompletedButton, DeleteOrder, TerminateContract } from '../ui/actions';
+import { GetUpgrade } from '../../engineer/equipment-upgrade/ui';
 
 export const useSignButtons = ({
     contract,
@@ -92,7 +93,7 @@ export const useSignButtons = ({
                 buttons = terminateButton;
             }
             if (OrderSubState.Completed === contract.computed?.sub_status) {
-                buttons = completeButton;
+                buttons = <GetUpgrade contract={contract} />;
             }
             if (OrderSubState.ViolateTerms === contract.computed?.sub_status) {
                 buttons = completeButton;
