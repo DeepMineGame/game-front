@@ -1290,7 +1290,7 @@ export const dmeToUpgrade = {
     },
 };
 
-type NumericMalfunctionProbability = 0 | 0.0001 | 0.025 | 0.1;
+export type NumericMalfunctionProbability = 0 | 0.0001 | 0.025 | 0.1;
 
 export const getMalfunctionProbability = (
     equipment: MergedInventoryWithAtomicAssets[number]
