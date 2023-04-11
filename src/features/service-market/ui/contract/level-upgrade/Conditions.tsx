@@ -19,9 +19,9 @@ const Conditions: FC<Props> = ({ contract }) => {
                 contract.deadline_time * 1000
             ),
         }),
-        [t('pages.serviceMarket.costOfExecution')]: `${
-            contract.cost_of_execution
-        } ${t('components.common.button.dme')}`,
+        [t('Cost of execution')]: `${contract.cost_of_execution} ${t(
+            'components.common.button.dme'
+        )}`,
         [t('Deposit')]: `${contract.deposit} ${t(
             'components.common.button.dme'
         )}`,

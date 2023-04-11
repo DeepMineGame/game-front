@@ -480,7 +480,6 @@
           "plungingBlocks": "Plunging blocks"
         },
         "upgradeToLevel": "Upgrade to level",
-        "costOfExecution": "Cost of execution",
         "levelUpgradeTerms": {
           "upgradeCost": "Upgrade cost",
           "engineer": {
@@ -508,7 +507,6 @@
       "successProbability": "Success Probability",
       "startOperations": "Start of operations",
       "upgrade": "Upgrade",
-      "costOfExecution": "Cost of execution",
       "insurance": "Insurance",
       "duration": "Duration",
       "order": {
