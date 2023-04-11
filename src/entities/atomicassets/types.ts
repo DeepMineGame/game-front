@@ -1,5 +1,3 @@
-import { RarityType } from '../smartcontract';
-
 export type AssetDataType = {
     contract: string;
     asset_id: string;
@@ -69,7 +67,7 @@ export type AssetDataType = {
         img: string;
         level: string;
         name: string;
-        rarity: RarityType;
+        rarity: 'Common' | 'Uncommon' | 'Rare' | 'Epic' | 'Legendary';
         type: string;
         depreciation: string;
         'current capacity': string;

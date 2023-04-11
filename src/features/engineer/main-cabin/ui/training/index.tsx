@@ -8,7 +8,7 @@ const Training: FC = () => {
 
     return (
         <State
-            title={t('pages.engineer.engineersTraining')}
+            title={t('Engineers training')}
             content={
                 <KeyValueTable
                     items={{

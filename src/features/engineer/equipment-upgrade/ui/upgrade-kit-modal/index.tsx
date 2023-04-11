@@ -7,10 +7,11 @@ import { getKitImage } from 'shared/lib/utils';
 import { Modal, Text } from 'shared/ui/ui-kit';
 import { UpgradeKitType } from '../../model/upgrade-kit';
 import { useUpgradeModifiers } from '../../lib/useUpgradeModifier';
+import { EQUIPMENT_SET_LENGTH } from '../../constants';
 import styles from './styles.module.scss';
 
 type Props = ModalProps & {
-    equipment: AssetDataType | null;
+    equipment: AssetDataType[] | null;
     onSelect: (value: UpgradeKitType) => void;
     value: string;
 };
@@ -61,22 +62,27 @@ const UpgradeKitModal: FC<Props> = ({
         equipment
     );
 
+    const isEquipmentSet = equipment?.length === EQUIPMENT_SET_LENGTH;
     return (
         <Modal
             {...props}
-            title={t('pages.engineer.selectUpgradeKit')}
+            title={t('Select upgrade kit')}
             className={styles.modal}
         >
             <div className={styles.container}>
                 <KitCard
                     selected={value}
                     name={UpgradeKitType.common}
-                    title={t('pages.engineer.CommonKit')}
+                    title={
+                        isEquipmentSet
+                            ? `${t('Common kit')} x 5`
+                            : t('Common kit')
+                    }
                     onClick={onSelect}
                     bottom={
                         <>
                             <Text strong>
-                                {commonPrice}{' '}
+                                {isEquipmentSet ? commonPrice * 5 : commonPrice}{' '}
                                 {t('components.common.button.dme')}
                             </Text>
                             <Text>{t('pages.engineer.noTimeReduction')}</Text>
@@ -87,12 +93,18 @@ const UpgradeKitModal: FC<Props> = ({
                 <KitCard
                     selected={value}
                     name={UpgradeKitType.uncommon}
-                    title={t('pages.engineer.UncommonKit')}
+                    title={
+                        isEquipmentSet
+                            ? `${t('Uncommon kit')} x 5`
+                            : t('Uncommon kit')
+                    }
                     onClick={onSelect}
                     bottom={
                         <>
                             <Text strong>
-                                {uncommonPrice}{' '}
+                                {isEquipmentSet
+                                    ? uncommonPrice * 5
+                                    : uncommonPrice}{' '}
                                 {t('components.common.button.dme')}
                             </Text>
                             <Text>

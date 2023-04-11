@@ -78,7 +78,7 @@ export const LevelUpgradeTerms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                     }
                 >
                     <InputNumber
-                        placeholder="%"
+                        placeholder="DME"
                         type="number"
                         min={10}
                         controls={false}
@@ -102,7 +102,7 @@ export const LevelUpgradeTerms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                     }
                 >
                     <InputNumber
-                        placeholder="%"
+                        placeholder="DME"
                         type="number"
                         controls={false}
                         className={styles.inputNumber}

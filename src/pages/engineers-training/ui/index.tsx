@@ -1,4 +1,4 @@
-import { Row, Col, Tooltip } from 'antd';
+import { Row, Col, Tooltip, Button } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Loader, Page, useAccountName } from 'shared';
@@ -44,7 +44,7 @@ export const EngineersTraining = () => {
 
     return (
         <Page
-            headerTitle={t('pages.engineer.engineersTraining').toUpperCase()}
+            headerTitle={t('Engineers training').toUpperCase()}
             className={styles.trainingPage}
         >
             <div>
@@ -75,6 +75,8 @@ export const EngineersTraining = () => {
                                 )}
                             </Row>
                         </Col>
+                        <Button>{t('Refuse engineer role')}</Button>
+
                         <Col span={24}>
                             <section className={styles.trainingSection}>
                                 <Row gutter={[24, 24]} justify="center">

@@ -13,6 +13,11 @@ import DarkYellowBg from './landlord/yellow-dark.webp';
 import EngineerRoomYellow from './engineer/engineers-room-yellow.webp';
 import EngineerRoomDark from './engineer/engineers-room-dark.webp';
 import EngineerRoomLight from './engineer/engineers-room-light.webp';
+import commonAssetsSetImg from './equipment-sets/common-assets-set.webp';
+import unCommonAssetSetImg from './equipment-sets/uncommon-assets-set.webp';
+import rareAssetSetImg from './equipment-sets/rare-asset-set.webp';
+import epicAssetSetImg from './equipment-sets/epic-asset-set.webp';
+import legendaryAssetSetImg from './equipment-sets/legendary-asset-set.webp';
 
 export {
     LightBlueBg,
@@ -28,4 +33,9 @@ export {
     EngineerRoomYellow,
     EngineerRoomDark,
     EngineerRoomLight,
+    commonAssetsSetImg,
+    unCommonAssetSetImg,
+    rareAssetSetImg,
+    epicAssetSetImg,
+    legendaryAssetSetImg,
 };

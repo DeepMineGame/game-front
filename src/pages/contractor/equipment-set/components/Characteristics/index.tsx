@@ -12,6 +12,10 @@ import {
     updateDmeAmountEstimateEvent,
 } from 'features';
 import { useEffect } from 'react';
+import {
+    getMalfunctionProbabilityTranslation,
+    NumericMalfunctionProbability,
+} from 'entities/smartcontract';
 import { CharacteristicsLine } from '../CharacteristicsLine';
 
 import styles from './styles.module.scss';
@@ -73,9 +77,13 @@ export const Characteristics = () => {
                     name={t(
                         'pages.equipmentSet.characteristics.equipmentBreakageProbabillity'
                     )}
-                    value={`${Number(
-                        (equipmentBreakageProbabillity * 100).toFixed(2)
-                    )}%`}
+                    value={`${t(
+                        getMalfunctionProbabilityTranslation(
+                            Number(
+                                equipmentBreakageProbabillity * 100
+                            ) as NumericMalfunctionProbability
+                        )
+                    )}`}
                 />
                 {!isNotFullEquipmentsSet && (
                     <CharacteristicsLine

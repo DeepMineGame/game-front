@@ -1224,6 +1224,7 @@ export const deepminegame = 'deepmineappg';
 export const deepminesmrt = 'deepminesrmt';
 export const deepmineming = 'deepmineming';
 export const deepmineengr = 'deepmineengr';
+export const deepminestat = 'deepminestat';
 
 // there are fewer zeros than in the game table to count the percentages, see the getCost method
 export const dmeToUpgrade = {
@@ -1289,7 +1290,7 @@ export const dmeToUpgrade = {
     },
 };
 
-type NumericMalfunctionProbability = 0 | 0.0001 | 0.025 | 0.1;
+export type NumericMalfunctionProbability = 0 | 0.0001 | 0.025 | 0.1;
 
 export const getMalfunctionProbability = (
     equipment: MergedInventoryWithAtomicAssets[number]

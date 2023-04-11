@@ -27,7 +27,6 @@ const EquipmentUpgrade: FC<Props> = ({ contract, status }) => {
     const equipment = useStore($equipment);
     const upgradeKit = useStore($upgradeKit);
     const equipmentLoading = useStore(getEquipmentByIdEffect.pending);
-
     return (
         <Space
             direction={isTablet ? 'horizontal' : 'vertical'}
@@ -46,14 +45,12 @@ const EquipmentUpgrade: FC<Props> = ({ contract, status }) => {
                     equipment={equipment}
                     upgradeKit={upgradeKit as UpgradeKitType}
                     isWaitCitizen={status === CabinStatus.NeedCitizen}
+                    cost={contract?.cost_of_execution}
                 />
 
                 {contract &&
                     (status === CabinStatus.UpgradeCompleted ? (
-                        <GetUpgrade
-                            accountName={accountName}
-                            contract={contract}
-                        />
+                        <GetUpgrade contract={contract} />
                     ) : (
                         <Row gutter={[12, 12]}>
                             <PerformUpgrade
@@ -83,3 +80,4 @@ const EquipmentUpgrade: FC<Props> = ({ contract, status }) => {
     );
 };
 export { EquipmentUpgrade };
+export * from './constants';

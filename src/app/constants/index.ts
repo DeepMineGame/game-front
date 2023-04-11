@@ -71,7 +71,6 @@ const defaultEndpoints = {
               'https://atomic.hivebp.io/atomicassets/v1',
               'https://api.atomic.greeneosio.com/atomicassets/v1',
               'https://atomic.sentnl.io/atomicassets/v1',
-              'https://api-wax-aa.eosarabia.net/atomicassets/v1',
               'https://aa-api-wax.eosauthority.com/atomicassets/v1',
               'https://atomic.tokengamer.io/atomicassets/v1',
               'https://wax-atomic.eosiomadrid.io/atomicassets/v1',

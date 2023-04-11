@@ -4,7 +4,7 @@ import {
     citizenEngineerAlerts,
     engineerOwnAlerts,
     engineerClientAlerts,
-} from './constants';
+} from '../constants';
 
 const getFinishedBy = (contract: ContractDto): string | undefined => {
     return contract.attrs.find(({ key }) => key === 'finished_by')?.value;

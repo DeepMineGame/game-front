@@ -4,10 +4,15 @@ import upgrades from '../data/upgrade-time.json';
 import timeModification from '../data/time-modification.json';
 import priceModification from '../data/price-modification.json';
 import { UpgradeKitType } from '../model/upgrade-kit';
+import { EQUIPMENT_SET_LENGTH } from '../constants';
 
-const getMinMaxUpgradeTime = (equipment: AssetDataType | null) => {
-    const level = `${equipment?.data?.level || 0}`;
+const getMinMaxUpgradeTime = (equipment: AssetDataType[] | null) => {
     const { mine } = upgrades;
+    const isEquipmentSet = equipment?.length === EQUIPMENT_SET_LENGTH;
+
+    const level = isEquipmentSet
+        ? `${equipment[0]?.data?.level || 0}`
+        : `${equipment?.[0]?.data?.level || 0}`;
 
     return mine[level as keyof typeof mine];
 };

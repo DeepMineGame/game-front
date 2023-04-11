@@ -1,18 +1,9 @@
 import React, { FC, useMemo, useRef, useState } from 'react';
 import { Alert, Col, Modal, Row, Table } from 'antd';
 import type { ColumnsType } from 'antd/lib/table';
-import {
-    BulbOutlined,
-    ClockCircleOutlined,
-    UpSquareOutlined,
-    DoubleRightOutlined,
-    ToolOutlined,
-} from '@ant-design/icons';
+import { DoubleRightOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
-import {
-    getUpgradeKitType,
-    isEngineerRequestedReport,
-} from 'features/engineer';
+import { isEngineerRequestedReport } from 'features/engineer';
 import {
     ContractDto,
     InventoryIdType,
@@ -21,13 +12,14 @@ import {
 import { getReport } from 'entities/engineer';
 
 import { Button, Text } from 'shared/ui/ui-kit';
-import { secondsToTime } from 'shared/ui/utils';
 import { getImagePath, getUpgradeType } from 'shared/lib/utils';
 import { green6 } from 'shared/ui/variables';
 import { BrokenIcon } from 'shared/ui/icons';
 import { StatusTypes } from './types';
 import styles from './styles.module.scss';
-import { getAlertMessages, getFinishedBy } from './libs';
+import { getDataSource } from './lib/getDataSource';
+import { getAlertMessages, getFinishedBy } from './lib';
+import { buildImagePath } from './lib/buildImagePath';
 
 type Props = {
     accountName: string;
@@ -40,37 +32,6 @@ const typeMap: StatusTypes = {
     success: 'success',
     failed: 'warning',
     failed_with_broke: 'error',
-};
-
-const getDataSource = (contract: ContractDto) => {
-    const { engineer_exp, time_spent, level } = normalizeAttrs(contract.attrs);
-
-    return [
-        {
-            key: 'exp',
-            icon: BulbOutlined,
-            title: 'pages.engineer.experience',
-            value: engineer_exp,
-        },
-        {
-            key: 'time',
-            icon: ClockCircleOutlined,
-            title: 'pages.engineer.timeSpent',
-            value: secondsToTime(time_spent || 0),
-        },
-        {
-            key: 'lvl',
-            icon: UpSquareOutlined,
-            title: 'pages.engineer.newLevel',
-            value: `level ${level || 'Not changed'}`,
-        },
-        {
-            key: 'kit',
-            icon: ToolOutlined,
-            title: 'pages.engineer.upgradeKit',
-            value: getUpgradeKitType(contract),
-        },
-    ];
 };
 
 const UpgradeReport: FC<Props> = ({
@@ -176,14 +137,7 @@ const UpgradeReport: FC<Props> = ({
                                 <img
                                     height="100%"
                                     width="100%"
-                                    src={getImagePath(
-                                        Number(
-                                            contract.attrs.find(
-                                                ({ key }) =>
-                                                    key === 'asset_template_id'
-                                            )?.value
-                                        ) as InventoryIdType
-                                    )}
+                                    src={buildImagePath(contract)}
                                     alt="upgraded template"
                                 />
                             </div>

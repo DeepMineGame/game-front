@@ -1,6 +1,6 @@
 import { ArrowUpOutlined } from '@ant-design/icons';
 import { Typography, Row, Col, Progress } from 'antd';
-import { useStore } from 'effector-react';
+import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import {
@@ -12,11 +12,11 @@ import {
     useReloadPage,
 } from 'shared';
 import { useSmartContractAction } from 'features/hooks';
+import { $xp, EngineerTrainingRoom } from 'features/engineer';
 import { upgradeLevel } from 'entities/smartcontract';
 
 import {
     $engineerRoleLevel,
-    $xp,
     $levelProgressPercent,
     $nextLevel,
     $isMaxLevelPassed,
@@ -28,7 +28,9 @@ import styles from './styles.module.scss';
 
 export const LevelProgress = () => {
     const { t } = useTranslation();
+    const accountName = useAccountName();
 
+    useGate(EngineerTrainingRoom, { searchParam: accountName });
     const level = useStore($engineerRoleLevel);
     const xp = useStore($xp);
     const levelProgressPercent = useStore($levelProgressPercent);
@@ -37,7 +39,6 @@ export const LevelProgress = () => {
     const xpHasBeenReached = useStore($xpHasBeenReached);
 
     const reloadPage = useReloadPage();
-    const accountName = useAccountName();
 
     const upgradeLevelAction = useSmartContractAction({
         action: upgradeLevel(accountName),

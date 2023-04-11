@@ -148,7 +148,6 @@
         "epic": "Epic",
         "legendary": "Legendary"
       },
-      "price": "Price",
       "myStatus": "My Status"
     },
     "user": {
@@ -481,7 +480,6 @@
           "plungingBlocks": "Plunging blocks"
         },
         "upgradeToLevel": "Upgrade to level",
-        "costOfExecution": "Cost of execution",
         "levelUpgradeTerms": {
           "upgradeCost": "Upgrade cost",
           "engineer": {
@@ -509,7 +507,6 @@
       "successProbability": "Success Probability",
       "startOperations": "Start of operations",
       "upgrade": "Upgrade",
-      "costOfExecution": "Cost of execution",
       "insurance": "Insurance",
       "duration": "Duration",
       "order": {
@@ -678,9 +675,6 @@
       "upgradesPossibleAfterOrderCreated": "Upgrades and repairs are only possible after an order has been created",
       "visitServiceMarket": "Visit Service Market",
       "upgradeKit": "Upgrade Kit",
-      "selectUpgradeKit": "Select upgrade kit",
-      "CommonKit": "Common kit",
-      "UncommonKit": "Uncommon kit",
       "noTimeReduction": "No time reduction",
       "timeReduction": "Time reduction -{{percent}}%",
       "slotWillBeAvailableAfterEquipmentSlotFilled": "This slot will be available after the equipment slot is filled",
@@ -696,7 +690,6 @@
         "work": "Working"
       },
       "equipmentHall": {
-        "title": "Equipment hall",
         "estimateTime": "Estimate upgrade time",
         "successProbability": "Success Probability",
         "lookingCitizen": "Looking for a citizen who will sign your order",
@@ -1017,6 +1010,14 @@
   "For the best experience": "For the best experience",
   "Swipe down from the top-right corner of your screen to open Control Center": "1. Swipe down from the top-right corner of your screen to open Control Center",
   "Tap the Portrait Orientation Lock button to make sure that it's off": "2. Tap the Portrait Orientation Lock button to make sure that it's off",
-  "Turn your phone sideways": "3. Turn your phone sideways"
-
+  "Turn your phone sideways": "3. Turn your phone sideways",
+  "Equipment hall": "Equipment hall",
+  "Kit price": "Kit price",
+  "Select upgrade kit": "Select upgrade kit",
+  "Common kit": "Common kit",
+  "Uncommon kit": "Uncommon kit",
+  "Level": "Level",
+  "Rarity": "Rarity",
+  "Engineers training": "Engineers training",
+  "Refuse engineer role": "Refuse engineer role"
 }

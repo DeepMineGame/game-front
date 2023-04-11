@@ -49,9 +49,7 @@ const EquipmentHallPage: FC = () => {
     );
 
     return (
-        <Page
-            headerTitle={t('pages.engineer.equipmentHall.title').toUpperCase()}
-        >
+        <Page headerTitle={t('Equipment hall').toUpperCase()}>
             {isCabinLoading ? (
                 <Loader centered />
             ) : (

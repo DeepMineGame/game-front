@@ -19,7 +19,7 @@ import { UpgradeKitModal } from '../upgrade-kit-modal';
 
 type Props = {
     isWaitCitizen: boolean;
-    equipment: AssetDataType | null;
+    equipment: AssetDataType[] | null;
     disabled: boolean;
 };
 

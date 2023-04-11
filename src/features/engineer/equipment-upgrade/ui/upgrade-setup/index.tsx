@@ -4,16 +4,24 @@ import { useNavigate } from 'react-router-dom';
 import { Space } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { serviceMarket } from 'app/router/paths';
-import { InventoryIdType } from 'entities/smartcontract';
+import {
+    commonAssetsSetImg,
+    epicAssetSetImg,
+    legendaryAssetSetImg,
+    rareAssetSetImg,
+    unCommonAssetSetImg,
+} from 'shared';
+import { rarityMap, RarityType } from 'entities/smartcontract';
 import { AssetDataType } from 'entities/atomicassets';
 import { CabinStatus } from 'entities/engineer';
 import { getImagePath } from 'shared/lib/utils';
 import { Loader, LoadingSpin, Text } from 'shared/ui/ui-kit';
 import { UpgradeSlot } from '../upgrade-slot';
 import { UpgradeKit } from '../upgrade-kit';
+import { EQUIPMENT_SET_LENGTH } from '../../constants';
 
 type Props = {
-    equipment: AssetDataType | null;
+    equipment: AssetDataType[] | null;
     isLoading: boolean;
     isWaitCitizen: boolean;
     status: CabinStatus;
@@ -31,12 +39,12 @@ const disabledStatuses = [
     CabinStatus.UpgradeCompleted,
     CabinStatus.CanSeeStats,
 ];
-
 const EquipmentContent: FC<{
-    equipment: AssetDataType | null;
+    equipment: AssetDataType[] | null;
     isLoading: boolean;
     isWaitCitizen: boolean;
 }> = ({ equipment, isWaitCitizen, isLoading }) => {
+    const isEquipmentSet = equipment?.length === EQUIPMENT_SET_LENGTH;
     if (isWaitCitizen) {
         return <LoadingSpin size="md" />;
     }
@@ -45,16 +53,34 @@ const EquipmentContent: FC<{
         return <Loader centered />;
     }
 
-    if (equipment) {
+    if (isEquipmentSet) {
+        const rarity = equipment[0]?.data.rarity;
+        const imageRarityMap = {
+            [rarityMap[RarityType.undefined]]: commonAssetsSetImg,
+            [rarityMap[RarityType.common]]: commonAssetsSetImg,
+            [rarityMap[RarityType.uncommon]]: unCommonAssetSetImg,
+            [rarityMap[RarityType.rare]]: rareAssetSetImg,
+            [rarityMap[RarityType.epic]]: epicAssetSetImg,
+            [rarityMap[RarityType.legendary]]: legendaryAssetSetImg,
+        };
         return (
             <img
                 height="100%"
                 width="100%"
-                src={getImagePath(
-                    +equipment.template.template_id as InventoryIdType
-                )}
+                src={imageRarityMap[rarity]}
+                alt={`equipment card ${rarity}`}
+                style={{ transform: 'scale(1.1)' }}
+            />
+        );
+    }
+    if (equipment?.[0]?.template) {
+        return (
+            <img
+                height="100%"
+                width="100%"
+                src={getImagePath(+equipment[0].template.template_id)}
                 alt="equipment card"
-                style={{ transform: 'scale(1.05)' }}
+                style={{ transform: 'scale(1.1)' }}
             />
         );
     }
