@@ -2,12 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useEvent, useStore } from 'effector-react';
 
-import {
-    useChainAuthContext,
-    LoadingScreen,
-    LogAs,
-    RotateYourPhone,
-} from 'shared';
+import { useChainAuthContext, LoadingScreen, LogAs } from 'shared';
 import { useLogout, LastActionInProgressChecker } from 'features';
 import { userStore, getUserFromSessionEffect } from 'entities/user';
 import { routes, fallbackRoute, AppRoute } from './routes';
@@ -67,10 +62,8 @@ const renderRoutes = (routeList: AppRoute[]) => {
                     forLoggedIn ? (
                         <LogInWrapper forAdmin={forAdmin}>
                             <DocumentTitle title={titleTag} />
-                            <RotateYourPhone>
-                                <Component />
-                                <LastActionInProgressChecker />
-                            </RotateYourPhone>
+                            <Component />
+                            <LastActionInProgressChecker />
                         </LogInWrapper>
                     ) : (
                         <>

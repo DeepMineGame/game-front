@@ -40,4 +40,3 @@ export * from './stub-page-message';
 export * from './contract-alert';
 export * from './modal-with-table';
 export * from './action-modal';
-export * from './RotateYourPhone';
