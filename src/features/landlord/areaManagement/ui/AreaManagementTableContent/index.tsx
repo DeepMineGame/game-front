@@ -10,6 +10,8 @@ import {
     gold6,
     neutral3Color,
     Link,
+    useAccountName,
+    Tag,
 } from 'shared';
 import { MinesOnLand } from 'entities/game-stat';
 import { MineState } from 'entities/smartcontract';
@@ -35,22 +37,43 @@ type Props = {
 
 export const AreaManagementTableContent: FC<Props> = ({ data }) => {
     const { t } = useTranslation();
+    const accountName = useAccountName();
 
     if (!data) {
         return <div>{t('components.common.noData')}</div>;
     }
-
     const columns: ColumnsType<MinesOnLand> = [
         {
             dataIndex: 'mine_owner_discord',
             key: 'mine_owner_discord',
             width: 56,
-            render: (discord: string) =>
-                discord && (
-                    <a href={discord}>
-                        <DiscordIcon style={{ verticalAlign: 'middle' }} />
-                    </a>
-                ),
+            render: (discord: string, record) => {
+                return (
+                    discord && (
+                        <a href={discord}>
+                            <DiscordIcon style={{ verticalAlign: 'middle' }} />
+                        </a>
+                    )
+                );
+            },
+        },
+        {
+            title: t('Mine owner'),
+            dataIndex: 'mine_owner',
+            key: 'mine_owner',
+            render: (owner) => {
+                return (
+                    <div>
+                        {accountName === owner ? (
+                            <span>
+                                {owner} <Tag kind="primary">Self</Tag>
+                            </span>
+                        ) : (
+                            owner
+                        )}
+                    </div>
+                );
+            },
         },
         {
             title: t('Contract ID'),

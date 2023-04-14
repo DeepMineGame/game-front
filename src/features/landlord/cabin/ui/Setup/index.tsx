@@ -25,7 +25,7 @@ export const Setup: FC<Props> = ({ className }) => {
             </div>
             <div className={styles.actionButton}>
                 <Button type="primary" onClick={() => navigate(areaManagement)}>
-                    {t('pages.areaManagement.title')}
+                    {t('Area management')}
                 </Button>
             </div>
         </div>

@@ -79,10 +79,7 @@ export const AreaManagementPage = () => {
         />
     );
     return (
-        <Page
-            headerTitle={t('pages.areaManagement.title')}
-            className={styles.body}
-        >
+        <Page headerTitle={t('Area management')} className={styles.body}>
             <Space
                 size="large"
                 direction="vertical"

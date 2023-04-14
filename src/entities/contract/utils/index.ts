@@ -3,8 +3,6 @@ import { ContractDto, ContractStatus } from 'entities/smartcontract';
 export const getActiveSelfSignedContract = (contract: ContractDto) => {
     return (
         contract.client === contract.executor &&
-        contract.deadline_time * 1000 > Date.now() &&
-        contract.activation_time !== 0 &&
         contract.status === ContractStatus.active
     );
 };
