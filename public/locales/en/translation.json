@@ -580,7 +580,6 @@
       }
     },
     "areaManagement": {
-      "title": "Area management",
       "claim": "Claim DME",
       "engage": "Engage the Area",
       "unengage": "Unengage the Area",
@@ -1019,5 +1018,7 @@
   "Level": "Level",
   "Rarity": "Rarity",
   "Engineers training": "Engineers training",
-  "Refuse engineer role": "Refuse engineer role"
+  "Refuse engineer role": "Refuse engineer role",
+  "Area management": "Area management",
+  "Mine owner": "Mine owner"
 }
