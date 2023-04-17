@@ -70,6 +70,7 @@ export const LevelUpgradeContractsTable: FC<Props> = ({ contracts }) => {
                     dataIndex: 'cost',
                     key: 'cost',
                     sorter: (a, b) => a.cost - b.cost,
+                    render: (val) => val / 10 ** 8,
                 },
                 {
                     title: t('pages.serviceMarket.levelUpgradeTab.upgradeType'),

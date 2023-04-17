@@ -47,7 +47,7 @@ export const AreaManagementTableContent: FC<Props> = ({ data }) => {
             dataIndex: 'mine_owner_discord',
             key: 'mine_owner_discord',
             width: 56,
-            render: (discord: string, record) => {
+            render: (discord: string) => {
                 return (
                     discord && (
                         <a href={discord}>
