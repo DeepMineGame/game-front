@@ -46,6 +46,7 @@ const EquipmentUpgrade: FC<Props> = ({ contract, status }) => {
                     upgradeKit={upgradeKit as UpgradeKitType}
                     isWaitCitizen={status === CabinStatus.NeedCitizen}
                     cost={contract?.cost_of_execution}
+                    contract={contract}
                 />
 
                 {contract &&

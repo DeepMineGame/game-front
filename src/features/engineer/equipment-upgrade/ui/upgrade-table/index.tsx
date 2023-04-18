@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AssetDataType } from 'entities/atomicassets';
+import { ContractDto, rarityMap, RarityType } from 'entities/smartcontract';
 import { getTimeLeft } from 'shared/ui/utils';
 import { KeyValueTable } from 'shared/ui/ui-kit';
 import { UpgradeKitType } from '../../model/upgrade-kit';
@@ -12,6 +13,7 @@ type Props = {
     upgradeKit: UpgradeKitType;
     equipment: AssetDataType[] | null;
     cost?: number;
+    contract?: ContractDto;
 };
 
 const UpgradeTable: FC<Props> = ({
@@ -19,6 +21,7 @@ const UpgradeTable: FC<Props> = ({
     isWaitCitizen,
     upgradeKit,
     cost,
+    contract,
 }) => {
     const { t } = useTranslation();
 
@@ -39,7 +42,9 @@ const UpgradeTable: FC<Props> = ({
                 [t('Kit price')]: showData
                     ? `${price} ${t('components.common.button.dme')}`
                     : '-',
-                [t('Cost of execution')]: cost,
+                [t('Cost of execution')]: cost ? cost / 10 ** 8 : '-',
+                [t('Rarity')]:
+                    rarityMap[contract?.rarity || RarityType.undefined] || '-',
             }}
         />
     );

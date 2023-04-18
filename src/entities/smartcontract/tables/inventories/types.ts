@@ -32,6 +32,7 @@ export enum StructType {
 }
 
 export const rarityMap = {
+    [-1]: '',
     [RarityType.undefined]: '',
     [RarityType.common]: 'Common',
     [RarityType.uncommon]: 'Uncommon',
