@@ -40,6 +40,9 @@ export const SignLevelUpgradeOrderModal: FC<Props> = ({
     const { t } = useTranslation();
     const accountName = useAccountName();
     const userInventory = useStore($mergedInventoryWithAtomicAssets);
+    const inventoryFilteredByRarity = userInventory.filter(
+        ({ rarity }) => contract.rarity === rarity
+    );
 
     const [selectedInventoryCard, setSelectedInventoryCard] = useState<
         MergedInventoryWithAtomicAssets[number] | undefined
@@ -127,7 +130,7 @@ export const SignLevelUpgradeOrderModal: FC<Props> = ({
             <Inventory
                 onOpenCard={setSelectedInventoryCard}
                 onSelect={handleAssetSelect}
-                userInventory={userInventory}
+                userInventory={inventoryFilteredByRarity}
                 visible={isInventoryOpen}
                 onCancel={() => setIsInventoryOpen(false)}
                 selectedTab={
