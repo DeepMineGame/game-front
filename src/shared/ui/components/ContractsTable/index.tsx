@@ -200,6 +200,7 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                     dataIndex: 'cost',
                     key: 'const',
                     sorter: (a, b) => a.const - b.cost,
+                    render: (val) => val / 10 ** 8,
                 },
                 {
                     title: 'Level',
