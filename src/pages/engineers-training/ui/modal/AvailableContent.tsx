@@ -20,7 +20,7 @@ import { UpgradeModal } from './UpgradeModal';
 type Props = {
     nftData: TrainingNftFull;
 };
-
+const ENGINEER_INAUGURATION_EXP = 1000;
 export const AvailableContent: React.FC<Props> = ({ nftData }) => {
     useGate(InventoryGate, { account: useAccountName() });
     const { t } = useTranslation();
@@ -32,6 +32,7 @@ export const AvailableContent: React.FC<Props> = ({ nftData }) => {
     const allInventoryMap = useStore($userAllInventoryMap);
     const hasInActiveInventory = !!activeInventoryMap[nftData.templateId];
     const hasInAllInventory = !!allInventoryMap[nftData.templateId];
+    const ableToGetFirstFreeSkill = engineerExp === ENGINEER_INAUGURATION_EXP;
     const renderContent = () => {
         if (isInventoryFetching) return <Loader centered />;
         if (hasInActiveInventory)
@@ -75,7 +76,7 @@ export const AvailableContent: React.FC<Props> = ({ nftData }) => {
                         >
                             {t('components.common.button.visitMarketplace')}
                         </Button>
-                        {!engineerExp && (
+                        {ableToGetFirstFreeSkill && (
                             <>
                                 {' '}
                                 <UpgradeModal
