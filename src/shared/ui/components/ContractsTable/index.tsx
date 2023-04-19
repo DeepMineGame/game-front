@@ -4,11 +4,12 @@ import { DiscordIcon, useAccountName } from 'shared';
 import { Space, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
 import { CopyOutlined } from '@ant-design/icons';
-import { ContractState, UpgradeContractState } from 'features/service-market';
 import {
     ContractDto,
     contractName,
     ContractType,
+    OrderState,
+    stateMap,
 } from 'entities/smartcontract';
 
 import { getUserRoleInContract } from 'shared/lib/utils';
@@ -17,13 +18,6 @@ import { toLocaleDate } from '../../utils';
 import styles from './styles.module.scss';
 
 type Props = { contracts: ContractDto[] | null };
-
-const contractStateMap = {
-    [ContractType.undefined]: () => null,
-    [ContractType.landlord_mineowner]: ContractState,
-    [ContractType.mineowner_contractor]: ContractState,
-    [ContractType.level_upgrade]: UpgradeContractState,
-};
 
 const rarityColorMap = {
     0: undefined,
@@ -40,8 +34,6 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
     const dataSource = useMemo(
         () =>
             contracts?.map((contract) => {
-                const Status = contractStateMap[contract.type];
-
                 return {
                     cost: contract.cost_of_execution,
                     rarity: contract.rarity,
@@ -56,9 +48,9 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                             ? '-'
                             : toLocaleDate(contract.finishes_at * 1000),
                     status: {
-                        label: (
-                            <Status contract={contract} accountName={account} />
-                        ),
+                        label: stateMap[
+                            contract.computed?.status || OrderState.undefined
+                        ],
                         value: contract?.computed?.status,
                     },
                     discord: contract.client_discord,

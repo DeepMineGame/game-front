@@ -14,11 +14,7 @@ const GeneralDataTable: FC<ContractProps> = ({ contract, accountName }) => {
     const { isOrder } = useContractType(contract);
 
     const generalData = {
-        [t(
-            isOrder
-                ? 'pages.serviceMarket.order.orderId'
-                : 'pages.serviceMarket.contract.contractId'
-        )]: (
+        [t(isOrder ? 'pages.serviceMarket.order.orderId' : 'Contract ID')]: (
             <div className={styles.contractId}>
                 <Text>{contract.id}</Text>
                 <Tooltip trigger="click" overlay={t('pages.info.copied')}>
@@ -31,11 +27,6 @@ const GeneralDataTable: FC<ContractProps> = ({ contract, accountName }) => {
                 </Tooltip>
             </div>
         ),
-        ...(!isOrder && {
-            [t('pages.serviceMarket.status')]: (
-                <ContractState contract={contract} accountName={accountName} />
-            ),
-        }),
         [t('pages.serviceMarket.creationDate')]: toLocaleDate(
             contract.create_time * 1000
         ),

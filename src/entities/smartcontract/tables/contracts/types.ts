@@ -129,3 +129,12 @@ export const contractName = {
     [ContractType.mineowner_contractor]: 'Mining contract',
     [ContractType.level_upgrade]: 'Level Upgrade',
 };
+
+export const stateMap = {
+    [OrderState.undefined]: '',
+    [OrderState.OpenOrder]: 'Open order',
+    [OrderState.Terminated]: 'Terminated',
+    [OrderState.ValidContract]: 'Valid contract',
+    [OrderState.Completed]: 'Completed',
+    [OrderState.WaitingForAction]: 'Wait for action',
+};

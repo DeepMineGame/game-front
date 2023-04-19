@@ -1,15 +1,11 @@
 import React from 'react';
 import { PageHeader, PageHeaderProps, Tag } from 'antd';
-import { ContractDto, OrderState, OrderSubState } from 'entities/smartcontract';
-
-const stateMap = {
-    [OrderState.undefined]: '',
-    [OrderState.OpenOrder]: 'Open order',
-    [OrderState.Terminated]: 'Terminated',
-    [OrderState.ValidContract]: 'Valid contract',
-    [OrderState.Completed]: 'Completed',
-    [OrderState.WaitingForAction]: 'Wait for action',
-};
+import {
+    ContractDto,
+    OrderState,
+    OrderSubState,
+    stateMap,
+} from 'entities/smartcontract';
 
 const stateColorMap = {
     [OrderState.undefined]: 'initial',
