@@ -1,17 +1,18 @@
 import { KeyValueTable, useAccountName } from 'shared';
 import { useGate, useStore } from 'effector-react';
+import { $xp } from 'features/engineer';
 import { $engineerRole, EngineerInfoGate } from './model';
 
 export const EngineerInfo = () => {
     const engineerRole = useStore($engineerRole);
+    // const engineerExp = useStore($xp);
     const accountName = useAccountName();
     useGate(EngineerInfoGate, { searchParam: accountName });
     return (
         <KeyValueTable
             items={{
                 Level: engineerRole?.level,
-                Experience: engineerRole?.experience,
-                'Experience to level up': engineerRole?.exp_to_level_up,
+                // Exp: engineerExp,
             }}
         />
     );

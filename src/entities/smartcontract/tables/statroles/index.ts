@@ -7,7 +7,7 @@ export type StatRoles = {
     owner: string;
     role: UserRoles;
     experience: number | undefined;
-    exp_to_level_up: string;
+    exp_to_level_up: number;
 };
 
 export const getStatRolesTableData = ({

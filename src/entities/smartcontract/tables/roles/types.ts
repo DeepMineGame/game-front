@@ -30,7 +30,5 @@ export type RoleDto = {
     owner: string;
     role: UserRoles;
     attrs: { first: string; second: string }[];
-    experience: number;
     level: Level;
-    exp_to_level_up: number;
 };

@@ -19,6 +19,12 @@ export const $xp = createStore<number>(0).on(
         data?.find(({ role }) => role === UserRoles.engineer)?.experience
 );
 
+export const $xpToLevelUp = createStore<number>(0).on(
+    getExpEffect.doneData,
+    (_, data) =>
+        data?.find(({ role }) => role === UserRoles.engineer)?.exp_to_level_up
+);
+
 forward({
     from: EngineerTrainingRoom.open,
     to: getExpEffect,
