@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { Button, Loader, Text, useAccountName } from 'shared';
-import { $xp } from 'features/engineer';
+import { $engineer } from 'entities/engineer';
 import {
     $userActiveInventoryMap,
     $userAllInventoryMap,
@@ -20,19 +20,18 @@ import { UpgradeModal } from './UpgradeModal';
 type Props = {
     nftData: TrainingNftFull;
 };
-const ENGINEER_INAUGURATION_EXP = 1000;
 export const AvailableContent: React.FC<Props> = ({ nftData }) => {
     useGate(InventoryGate, { account: useAccountName() });
     const { t } = useTranslation();
     const navigate = useNavigate();
     const [isUpgradeModalVisible, setIsUpgradeModalVisible] = useState(false);
-    const engineerExp = useStore($xp);
     const isInventoryFetching = useStore($isInventoryFetching);
     const activeInventoryMap = useStore($userActiveInventoryMap);
     const allInventoryMap = useStore($userAllInventoryMap);
     const hasInActiveInventory = !!activeInventoryMap[nftData.templateId];
     const hasInAllInventory = !!allInventoryMap[nftData.templateId];
-    const ableToGetFirstFreeSkill = engineerExp === ENGINEER_INAUGURATION_EXP;
+    const engineer = useStore($engineer);
+    const ableToGetFirstFreeSkill = engineer?.skills?.length === 0;
     const renderContent = () => {
         if (isInventoryFetching) return <Loader centered />;
         if (hasInActiveInventory)
