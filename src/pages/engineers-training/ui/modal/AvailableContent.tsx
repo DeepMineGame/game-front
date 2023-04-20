@@ -21,7 +21,8 @@ type Props = {
     nftData: TrainingNftFull;
 };
 export const AvailableContent: React.FC<Props> = ({ nftData }) => {
-    useGate(InventoryGate, { account: useAccountName() });
+    const account = useAccountName();
+    useGate(InventoryGate, { account });
     const { t } = useTranslation();
     const navigate = useNavigate();
     const [isUpgradeModalVisible, setIsUpgradeModalVisible] = useState(false);
@@ -32,6 +33,7 @@ export const AvailableContent: React.FC<Props> = ({ nftData }) => {
     const hasInAllInventory = !!allInventoryMap[nftData.templateId];
     const engineer = useStore($engineer);
     const ableToGetFirstFreeSkill = engineer?.skills?.length === 0;
+
     const renderContent = () => {
         if (isInventoryFetching) return <Loader centered />;
         if (hasInActiveInventory)
