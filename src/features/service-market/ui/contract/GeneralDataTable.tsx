@@ -46,10 +46,7 @@ const GeneralDataTable: FC<ContractProps> = ({ contract, accountName }) => {
     }
 
     return (
-        <TableWithTitle
-            title={t('pages.serviceMarket.contract.generalInformation')}
-            data={generalData}
-        />
+        <TableWithTitle title={t('General information')} data={generalData} />
     );
 };
 
