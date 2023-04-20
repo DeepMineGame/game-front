@@ -62,7 +62,7 @@ export const $levelProgressPercent = combine(
 );
 
 export const $xpHasBeenReached = $levelProgressPercent.map(
-    (levelProgressPercent) => levelProgressPercent === 100
+    (levelProgressPercent) => levelProgressPercent >= 100
 );
 
 export const $userActiveInventoryMap = $userActiveInventory.map(
@@ -89,9 +89,9 @@ export const $userAllInventoryMap = $userAllInventory.map((allInventory) =>
 );
 
 export const getUserAllInventoryEffect = createEffect<
-    WaxUser,
+    { searchParam: string },
     { rows: UserInventoryType[] } | undefined
->(({ account }) => getTableData(getInventoryConfig(account, 1000)));
+>(({ searchParam }) => getTableData(getInventoryConfig(searchParam, 1000)));
 
 export const $isEngineerFetching = getEngineerByExecutorEffect.pending;
 
