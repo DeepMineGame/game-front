@@ -130,9 +130,7 @@ export const CreateOrderFormV2 = () => {
                             t('components.common.inProgress'),
                     },
                     {
-                        title: t(
-                            'pages.serviceMarket.createOrder.generalInformation'
-                        ),
+                        title: t('General information'),
                         description:
                             currentStep === Step.second &&
                             t('components.common.inProgress'),

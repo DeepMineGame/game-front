@@ -3,14 +3,12 @@ import { useTranslation } from 'react-i18next';
 import { ShareAltOutlined } from '@ant-design/icons';
 import { Space, Tooltip } from 'antd';
 import { Text, toLocaleDate } from 'shared/ui';
-import { TableWithTitle, UpgradeContractState } from '../..';
+import { TableWithTitle } from '../..';
 import { ContractProps } from '../../../types';
 
-type Props = {
-    isOrder?: boolean;
-} & ContractProps;
+type Props = ContractProps;
 
-const GeneralInfo: FC<Props> = ({ contract, accountName, isOrder = false }) => {
+const GeneralInfo: FC<Props> = ({ contract }) => {
     const { t } = useTranslation();
 
     const generalData = {
@@ -30,15 +28,6 @@ const GeneralInfo: FC<Props> = ({ contract, accountName, isOrder = false }) => {
                 </Space>
             </div>
         ),
-
-        ...(!isOrder && {
-            [t('pages.serviceMarket.status')]: (
-                <UpgradeContractState
-                    contract={contract}
-                    accountName={accountName}
-                />
-            ),
-        }),
         [t('pages.serviceMarket.creationDate')]: toLocaleDate(
             contract.create_time * 1000
         ),
@@ -50,10 +39,7 @@ const GeneralInfo: FC<Props> = ({ contract, accountName, isOrder = false }) => {
     };
 
     return (
-        <TableWithTitle
-            title={t('pages.serviceMarket.contract.generalInformation')}
-            data={generalData}
-        />
+        <TableWithTitle title={t('General information')} data={generalData} />
     );
 };
 

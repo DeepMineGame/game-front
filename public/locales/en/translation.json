@@ -435,7 +435,6 @@
       "createOrder": {
         "createOrder": "Create order",
         "contractType": "Contract type",
-        "generalInformation": "General information",
         "terms": "Terms",
         "selectContractType": "Select contract type",
         "selectToDisable": "Select contract type to disable",
@@ -501,7 +500,6 @@
       "nickname": "Nickname",
       "id": "ID",
       "creationDate": "Creation date",
-      "status": "Status",
       "nftId": "NFT ID",
       "reputation": "Reputation",
       "successProbability": "Success Probability",
@@ -522,7 +520,6 @@
         "doNotHaveAreaSlot": "You do not have a area slot that meets the conditions of the order"
       },
       "contract": {
-        "generalInformation": "General information",
         "conditions": "Conditions",
         "landlord": "Landlord",
         "contractor": "Contractor",
@@ -1020,5 +1017,6 @@
   "Engineers training": "Engineers training",
   "Refuse engineer role": "Refuse engineer role",
   "Area management": "Area management",
-  "Mine owner": "Mine owner"
+  "Mine owner": "Mine owner",
+  "General information": "General information"
 }
