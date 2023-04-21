@@ -20,12 +20,14 @@ const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
             <SignLevelUpgradeOrder
                 contract={contract}
                 accountName={accountName}
+                asClient
             />
         ),
         executorSignButton: (
             <SignLevelUpgradeOrder
                 contract={contract}
                 accountName={accountName}
+                asClient={false}
             />
         ),
     });

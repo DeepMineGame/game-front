@@ -16,7 +16,7 @@ export const useUpgradeModifiers = (
     const { min: minTime, max: maxTime } = getMinMaxUpgradeTime(equipment);
     const isEquipmentSet = equipment?.length === EQUIPMENT_SET_LENGTH;
     const dmeToUpgrade = isEquipmentSet
-        ? Number(equipment[0]?.data?.['DME to Upgrade'])
+        ? Number(equipment[0]?.data?.['DME to Upgrade']) * 5
         : Number(equipment?.[0]?.data?.['DME to Upgrade']) || 0;
     const price = (priceModifier / 100) * dmeToUpgrade;
 
