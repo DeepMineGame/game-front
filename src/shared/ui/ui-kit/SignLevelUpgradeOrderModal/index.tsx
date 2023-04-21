@@ -57,6 +57,7 @@ export const SignLevelUpgradeOrderModal: FC<Props> = ({
             waxUser: accountName,
             contractId: contract.id,
             assetId: selectedAsset?.asset_id,
+            isClient: 1,
         }),
         onSignSuccess,
     });
