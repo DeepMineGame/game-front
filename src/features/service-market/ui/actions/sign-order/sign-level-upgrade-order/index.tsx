@@ -8,18 +8,18 @@ import { ContractDto, signOrder } from 'entities/smartcontract';
 type Props = {
     contract: ContractDto;
     accountName: string;
+    asClient: boolean;
 };
 
-export const SignLevelUpgradeOrder: FC<Props> = ({ contract, accountName }) => {
+export const SignLevelUpgradeOrder: FC<Props> = ({
+    contract,
+    accountName,
+    asClient,
+}) => {
     const { t } = useTranslation();
     const reloadPage = useReloadPage();
     const [signLevelUpgradeOrderModalOpen, setSignLevelUpgradeOrderModalOpen] =
         useState(false);
-
-    const isCitizenOrder = contract.client === accountName;
-    const isEngineerOrder = contract.executor === accountName;
-    const isClientEmpty = contract.client === '';
-    const isExecutorEmpty = contract.executor === '';
 
     const signOrderAction = useSmartContractAction({
         action: signOrder({
@@ -35,14 +35,12 @@ export const SignLevelUpgradeOrder: FC<Props> = ({ contract, accountName }) => {
     });
 
     const onSign = async () => {
-        if (isCitizenOrder || isClientEmpty) {
+        if (asClient) {
             setSignLevelUpgradeOrderModalOpen(true);
             return;
         }
 
-        if (isEngineerOrder || isExecutorEmpty) {
-            await signOrderAction();
-        }
+        await signOrderAction();
     };
 
     return (
