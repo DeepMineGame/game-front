@@ -25,6 +25,7 @@ export const SignLevelUpgradeOrder: FC<Props> = ({
         action: signOrder({
             waxUser: accountName,
             contractId: contract.id,
+            isClient: 0,
         }),
         onSignSuccess: () => {
             message.success(
