@@ -22,7 +22,7 @@ const Conditions: FC<Props> = ({ contract }) => {
         [t('Cost of execution')]: `${contract.cost_of_execution / 10 ** 8} ${t(
             'components.common.button.dme'
         )}`,
-        [t('Deposit')]: `${contract.deposit} ${t(
+        [t('Deposit')]: `${contract.deposit / 10 ** 8} ${t(
             'components.common.button.dme'
         )}`,
         [t('Level')]: contract.level,
