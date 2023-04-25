@@ -63,11 +63,11 @@ const SignAsMineOwner: FC<Props> = ({ contract, accountName, isClient }) => {
     }, [reloadPage, signContractAction, t]);
 
     const handleSign = () => {
-        if (!mines.length) {
-            setIsWarningModalVisible(true);
-        } else {
-            setIsModalVisible(true);
-        }
+        // if (!mines.length) {
+        //     setIsWarningModalVisible(true);
+        // } else {
+        setIsModalVisible(true);
+        // }
     };
 
     return (
