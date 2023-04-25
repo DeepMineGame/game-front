@@ -80,7 +80,6 @@ export const LevelUpgradeTerms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                     <InputNumber
                         placeholder="DME"
                         type="number"
-                        min={10}
                         controls={false}
                         className={styles.inputNumber}
                     />
