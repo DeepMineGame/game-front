@@ -58,3 +58,4 @@ const MainCabin: FC<Props> = ({ status, header }) => {
 };
 
 export { MainCabin };
+export * from './ui';

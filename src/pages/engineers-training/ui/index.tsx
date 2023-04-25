@@ -3,7 +3,9 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Loader, Page, useAccountName } from 'shared';
 import { useGate, useStore } from 'effector-react';
+import { AttendInauguration } from 'features/engineer';
 import { EngineerSchema } from 'entities/smartcontract';
+import { $engineerCabin, CabinStatus, getStatus } from 'entities/engineer';
 import {
     $isEngineerFetching,
     $learningSkill,
@@ -33,6 +35,8 @@ export const EngineersTraining = () => {
     const [nftData, setNftData] = useState<TrainingModalProps['nftData']>(null);
     const isFetching = useStore($isEngineerFetching);
     const learningSkill = useStore($learningSkill);
+    const engineerStore = useStore($engineerCabin);
+    const status = getStatus(engineerStore);
 
     const handleNftClick: TrainingAreaProps['onNftClick'] = (nft) => {
         setNftData(nft);
@@ -75,7 +79,11 @@ export const EngineersTraining = () => {
                                 )}
                             </Row>
                         </Col>
-                        <Button>{t('Refuse engineer role')}</Button>
+                        {status <= CabinStatus.NeedInauguration ? (
+                            <AttendInauguration />
+                        ) : (
+                            <Button>{t('Refuse engineer role')}</Button>
+                        )}
 
                         <Col span={24}>
                             <section className={styles.trainingSection}>
