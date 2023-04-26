@@ -16,7 +16,12 @@ import {
     isEmptyContractorSlot,
 } from 'shared';
 import { useSmartContractAction } from 'features/hooks';
-import { MinesGate, minesStore } from 'entities/contract';
+import {
+    $isActiveInventoryHasMineAsset,
+    $mineInActiveInventory,
+    MinesGate,
+    minesStore,
+} from 'entities/contract';
 import {
     ContractorSlots,
     ContractDto,
@@ -41,9 +46,18 @@ const SignAsMineOwner: FC<Props> = ({ contract, accountName, isClient }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [mineId, setMineId] = useState('');
     useGate(MinesGate, { searchParam: accountName });
-    const mines = useStore(minesStore);
-    const emptySlot = getEmptySlot(mines[0]?.contractor_slots ?? []);
+    const minesFromBlockChainTable = useStore(minesStore);
+    const mineInActiveInventory = useStore($mineInActiveInventory);
 
+    const mines = minesFromBlockChainTable.length
+        ? minesFromBlockChainTable
+        : mineInActiveInventory;
+    const emptySlot = getEmptySlot(
+        minesFromBlockChainTable[0]?.contractor_slots ?? []
+    );
+    const isActiveInventoryHasMineAsset = useStore(
+        $isActiveInventoryHasMineAsset
+    );
     const signContractAction = useSmartContractAction({
         action: signOrder({
             waxUser: accountName,
@@ -63,7 +77,7 @@ const SignAsMineOwner: FC<Props> = ({ contract, accountName, isClient }) => {
     }, [reloadPage, signContractAction, t]);
 
     const handleSign = () => {
-        if (!mines.length) {
+        if (!isActiveInventoryHasMineAsset) {
             setIsWarningModalVisible(true);
         } else {
             setIsModalVisible(true);
@@ -115,9 +129,11 @@ const SignAsMineOwner: FC<Props> = ({ contract, accountName, isClient }) => {
                         onChange={setMineId}
                         className={styles.select}
                         placeholder={t('pages.serviceMarket.order.selectMine')}
-                        options={mines.map(({ id }) => ({
-                            value: id,
-                            label: `ID${id}`,
+                        options={mines.map((props) => ({
+                            value: 'id' in props ? props.id : props.asset_id,
+                            label: `ID ${
+                                'id' in props ? props.id : props.asset_id
+                            }`,
                         }))}
                     />
                 </div>
