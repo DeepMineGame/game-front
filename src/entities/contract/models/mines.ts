@@ -1,6 +1,13 @@
 import { createEffect, createStore, forward } from 'effector';
 import { createGate } from 'effector-react';
-import { getMinesEffect, MineDto, searchBy } from 'entities/smartcontract';
+import {
+    getInventoryTableData,
+    getMinesEffect,
+    mineAssetTemplateId,
+    MineDto,
+    searchBy,
+    UserInventoryType,
+} from 'entities/smartcontract';
 
 const getMinesByOwnerEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
@@ -18,7 +25,30 @@ export const minesStore = createStore<MineDto[]>([]).on(
     (_, data) => data?.rows
 );
 
+const getInventory = createEffect<
+    { searchParam: string },
+    { rows: UserInventoryType[] } | undefined
+>(getInventoryTableData);
+
 forward({
     from: MinesGate.open,
-    to: getMinesByOwnerEffect,
+    to: [getMinesByOwnerEffect, getInventory],
 });
+
+export const $isActiveInventoryHasMineAsset = createStore(false).on(
+    getInventory.doneData,
+    (_, invetories) =>
+        Boolean(
+            invetories?.rows.find(({ template_id }) =>
+                mineAssetTemplateId.includes(template_id)
+            )
+        )
+);
+
+export const $mineInActiveInventory = createStore<UserInventoryType[]>([]).on(
+    getInventory.doneData,
+    (_, invetories) =>
+        invetories?.rows.filter(({ template_id }) =>
+            mineAssetTemplateId.includes(template_id)
+        )
+);
