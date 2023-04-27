@@ -18,7 +18,7 @@ export const useUpgradeModifiers = (
     const dmeToUpgrade = isEquipmentSet
         ? Number(equipment[0]?.data?.['DME to Upgrade']) * 5
         : Number(equipment?.[0]?.data?.['DME to Upgrade']) || 0;
-    const price = (priceModifier / 100) * dmeToUpgrade;
+    const price = Number((priceModifier / 100) * dmeToUpgrade).toFixed(2);
 
     return {
         price,
