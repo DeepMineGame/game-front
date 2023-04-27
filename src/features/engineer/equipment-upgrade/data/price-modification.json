@@ -1,10 +1,10 @@
 {
   "mine": {
-    "common": 5,
-    "uncommon": 6
+    "common": 3,
+    "uncommon": 3.6
   },
   "equipment": {
-    "common": 5,
-    "uncommon": 6
+    "common": 10,
+    "uncommon": 12
   }
 }

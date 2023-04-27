@@ -33,7 +33,7 @@ sample({
     target: getEquipmentByIdEffect,
     fn: (contracts) => {
         const withoutReport = getContractWithoutReport(contracts);
-        if (withoutReport?.client_asset_id) {
+        if (withoutReport?.attrs.find(({ key }) => key === 'asset_ids')) {
             return (
                 withoutReport.attrs?.find(({ key }) => key === 'asset_ids')
                     ?.value || ''
