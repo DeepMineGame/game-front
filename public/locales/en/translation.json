@@ -195,7 +195,6 @@
       "success": "successful",
       "failed": "failed",
       "interrupted": "interrupted",
-      "miningFinishedSuccessfully": "Mining has finished successfully!",
       "cool": "That's cool",
       "tooltipAroundConsumables": "This is where improvements are installed that allow you to make mining more efficient. They will be available for the Mine level 1",
       "estimatesMiningTime": "Estimates mining time",
@@ -1018,5 +1017,6 @@
   "Refuse engineer role": "Refuse engineer role",
   "Area management": "Area management",
   "Mine owner": "Mine owner",
-  "General information": "General information"
+  "General information": "General information",
+  "Mining has finished successfully!": "Mining has finished successfully!"
 }

@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import {
     Button,
     desktopS,
-    Modal,
     Title,
     useMediaQuery,
     useReloadPage,
@@ -12,7 +11,7 @@ import {
     showErrorNotification,
 } from 'shared';
 import { CheckCircleOutlined } from '@ant-design/icons';
-import { Space } from 'antd';
+import { Modal, Space } from 'antd';
 import { contractorStore, useSmartContractAction } from 'features';
 import {
     ActionDto,
@@ -150,22 +149,26 @@ export const MiningAndClaimButton: FC<Props> = memo(
                     okText={okText}
                     okButtonProps={{ disabled: !contractor?.finished }}
                     visible={claimModalVisibility}
-                    title={t('pages.mining.miningFinishedSuccessfully')}
+                    title={t('Mining has finished successfully!')}
                 >
-                    {isClaimedState ? (
-                        <Space
-                            className={styles.wide}
-                            direction="vertical"
-                            align="center"
-                        >
-                            <CheckCircleOutlined className={styles.icon} />
-                            <Title level={3}>
-                                {t('components.common.yourDMEHasBeenClaimed')}
-                            </Title>
-                        </Space>
-                    ) : (
-                        <ClaimInfo accountName={accountName} />
-                    )}
+                    <div className={styles.modal}>
+                        {isClaimedState ? (
+                            <Space
+                                className={styles.wide}
+                                direction="vertical"
+                                align="center"
+                            >
+                                <CheckCircleOutlined className={styles.icon} />
+                                <Title level={3}>
+                                    {t(
+                                        'components.common.yourDMEHasBeenClaimed'
+                                    )}
+                                </Title>
+                            </Space>
+                        ) : (
+                            <ClaimInfo accountName={accountName} />
+                        )}
+                    </div>
                 </Modal>
             </>
         );
