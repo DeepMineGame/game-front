@@ -10,6 +10,9 @@ export type StatRoles = {
     exp_to_level_up: number;
 };
 
+enum SearchType {
+    accountName = 2,
+}
 export const getStatRolesTableData = ({
     searchParam,
 }: {
@@ -19,7 +22,7 @@ export const getStatRolesTableData = ({
         code: deepminestat,
         scope: deepminestat,
         table: 'statroles',
-        index_position: 2,
+        index_position: SearchType.accountName,
         key_type: 'name',
         lower_bound: searchParam,
         upper_bound: searchParam,
