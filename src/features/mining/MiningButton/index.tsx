@@ -151,24 +151,20 @@ export const MiningAndClaimButton: FC<Props> = memo(
                     visible={claimModalVisibility}
                     title={t('Mining has finished successfully!')}
                 >
-                    <div className={styles.modal}>
-                        {isClaimedState ? (
-                            <Space
-                                className={styles.wide}
-                                direction="vertical"
-                                align="center"
-                            >
-                                <CheckCircleOutlined className={styles.icon} />
-                                <Title level={3}>
-                                    {t(
-                                        'components.common.yourDMEHasBeenClaimed'
-                                    )}
-                                </Title>
-                            </Space>
-                        ) : (
-                            <ClaimInfo accountName={accountName} />
-                        )}
-                    </div>
+                    {isClaimedState ? (
+                        <Space
+                            className={styles.wide}
+                            direction="vertical"
+                            align="center"
+                        >
+                            <CheckCircleOutlined className={styles.icon} />
+                            <Title level={3}>
+                                {t('components.common.yourDMEHasBeenClaimed')}
+                            </Title>
+                        </Space>
+                    ) : (
+                        <ClaimInfo accountName={accountName} />
+                    )}
                 </Modal>
             </>
         );
