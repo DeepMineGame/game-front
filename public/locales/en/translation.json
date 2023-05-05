@@ -202,7 +202,6 @@
       "mineDepth": "Mine depth",
       "doWantStopMining": "Do you really want to stop mining?",
       "consumablesWillBurnOut": "Your consumables will be burned, energy and time used mining will be lost and you won't receive DME",
-      "timeSpent": "Time spent",
       "dmeCollected": "DME collected",
       "calculateMining": "Calculate mining",
       "hasNoMineOwnerContracts": "To start mining, you need to <b>sign a Mining Contract</b> with a Mine owner and <b>then install equipment set</b>",
@@ -215,7 +214,6 @@
       "mineDepthProcess": "Mine in the process of the depth changes. The mining is impossible. Please wait till the process is finished",
       "openContract": "Open contract",
       "configureButton": "Configure",
-      "availableForClaim": "Available for claim",
       "transferredToYourAccount": "Transferred to your account",
       "details": "Details"
     },
@@ -1018,5 +1016,7 @@
   "Area management": "Area management",
   "Mine owner": "Mine owner",
   "General information": "General information",
-  "Mining has finished successfully!": "Mining has finished successfully!"
+  "Mining has finished successfully!": "Mining has finished successfully!",
+  "Time spent": "Time spent",
+  "Available for claim": "Available for claim"
 }
