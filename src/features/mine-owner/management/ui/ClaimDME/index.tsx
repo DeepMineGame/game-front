@@ -62,8 +62,7 @@ export const ClaimDME: FC<{ contract: ContractDto | null }> = ({
                 onCancel={reloadPage}
                 onSubmit={onDmeClick}
                 items={{
-                    [t('pages.mining.availableForClaim')]:
-                        dmeToClaim.toFixed(8),
+                    [t('Available for claim')]: dmeToClaim.toFixed(8),
                     [t('pages.serviceMarket.contract.fee')]: Number(
                         feeInDme.toFixed(8)
                     ),

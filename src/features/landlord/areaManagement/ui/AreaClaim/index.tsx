@@ -156,8 +156,7 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
                 onCancel={reloadPage}
                 onSubmit={reloadPage}
                 items={{
-                    [t('pages.mining.availableForClaim')]:
-                        getDmeAmount(claimDme),
+                    [t('Available for claim')]: getDmeAmount(claimDme),
                 }}
                 texts={{
                     title: t('pages.areaManagement.claim'),

@@ -1,5 +1,12 @@
 import React, { memo, useEffect, useState } from 'react';
-import { Button, getDmeAmount, getTimeLeft, KeyValueTable } from 'shared';
+import {
+    Button,
+    DMECoinIcon,
+    getDmeAmount,
+    getTimeLeft,
+    KeyValueTable,
+    TimerIcon,
+} from 'shared';
 import {
     $mineOwnerContracts,
     contractorStore,
@@ -62,18 +69,37 @@ export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
 
     return contractor?.finished ? (
         <KeyValueTable
-            items={{
-                [t('pages.mining.timeSpent')]: timeSpent
-                    ? getTimeLeft(timeSpent)
-                    : '-',
-                [t('pages.mining.availableForClaim')]: getDmeAmount(dmeToClaim),
-                [t('pages.serviceMarket.contract.fee')]: Number(
-                    feeInDme.toFixed(8)
-                ),
-                [t('pages.mining.transferredToYourAccount')]: Number(
-                    (getDmeAmount(dmeToClaim) - feeInDme).toFixed(8)
-                ),
-            }}
+            items={[
+                [
+                    <>
+                        {' '}
+                        <TimerIcon />
+                        {t('Time spent')}
+                    </>,
+                    timeSpent ? getTimeLeft(timeSpent) : '-',
+                ],
+                [
+                    <>
+                        <DMECoinIcon width={24} height={24} />
+                        {t('Available for claim')}
+                    </>,
+                    getDmeAmount(dmeToClaim),
+                ],
+                [
+                    <>
+                        <DMECoinIcon width={24} height={24} />
+                        {t('pages.serviceMarket.contract.fee')}
+                    </>,
+                    Number(feeInDme.toFixed(8)),
+                ],
+                [
+                    <>
+                        <DMECoinIcon width={24} height={24} />
+                        {t('pages.mining.transferredToYourAccount')}
+                    </>,
+                    Number((getDmeAmount(dmeToClaim) - feeInDme).toFixed(8)),
+                ],
+            ]}
         />
     ) : (
         <Button onClick={calcMining} type="primary">
