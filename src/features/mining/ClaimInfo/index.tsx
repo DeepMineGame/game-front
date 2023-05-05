@@ -69,49 +69,37 @@ export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
 
     return contractor?.finished ? (
         <KeyValueTable
-            items={
+            items={[
                 [
-                    [
-                        <>
-                            {' '}
-                            <TimerIcon />
-                            {t('Time spent')}
-                        </>,
-                        timeSpent ? getTimeLeft(timeSpent) : '-',
-                    ],
-                    [
-                        <>
-                            <DMECoinIcon width={24} height={24} />
-                            {t('Available for claim')}
-                        </>,
-                        getDmeAmount(dmeToClaim),
-                    ],
-                    [
-                        <>
-                            <DMECoinIcon width={24} height={24} />
-                            {t('pages.serviceMarket.contract.fee')}
-                        </>,
-                        Number(feeInDme.toFixed(8)),
-                    ],
-                    [
-                        <>
-                            <DMECoinIcon width={24} height={24} />
-                            {t('pages.mining.transferredToYourAccount')}
-                        </>,
-                        Number(
-                            (getDmeAmount(dmeToClaim) - feeInDme).toFixed(8)
-                        ),
-                    ],
-                ]
-                // : ,
-                // [t('pages.mining.availableForClaim')]: getDmeAmount(dmeToClaim),
-                // [t('pages.serviceMarket.contract.fee')]: Number(
-                //     feeInDme.toFixed(8)
-                // ),
-                // [t('pages.mining.transferredToYourAccount')]: Number(
-                //     (getDmeAmount(dmeToClaim) - feeInDme).toFixed(8)
-                // ),
-            }
+                    <>
+                        {' '}
+                        <TimerIcon />
+                        {t('Time spent')}
+                    </>,
+                    timeSpent ? getTimeLeft(timeSpent) : '-',
+                ],
+                [
+                    <>
+                        <DMECoinIcon width={24} height={24} />
+                        {t('Available for claim')}
+                    </>,
+                    getDmeAmount(dmeToClaim),
+                ],
+                [
+                    <>
+                        <DMECoinIcon width={24} height={24} />
+                        {t('pages.serviceMarket.contract.fee')}
+                    </>,
+                    Number(feeInDme.toFixed(8)),
+                ],
+                [
+                    <>
+                        <DMECoinIcon width={24} height={24} />
+                        {t('pages.mining.transferredToYourAccount')}
+                    </>,
+                    Number((getDmeAmount(dmeToClaim) - feeInDme).toFixed(8)),
+                ],
+            ]}
         />
     ) : (
         <Button onClick={calcMining} type="primary">
