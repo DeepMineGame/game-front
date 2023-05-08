@@ -136,7 +136,6 @@
       "shelter": "Shelter",
       "goToMarket": "Go to Market",
       "createContract": "Create a contract",
-      "findContract": "Find a contract",
       "travel": "Travel",
       "market": "Market",
       "storage": "Storage",
@@ -1018,5 +1017,6 @@
   "General information": "General information",
   "Mining has finished successfully!": "Mining has finished successfully!",
   "Time spent": "Time spent",
-  "Available for claim": "Available for claim"
+  "Available for claim": "Available for claim",
+  "Find a contract": "Find a contract"
 }

@@ -3,6 +3,7 @@ import { Space } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { createOrder, serviceMarket } from 'app/router/paths';
+import { ServiceMarketTabIds } from 'app/router/constants';
 import { Button } from 'shared/ui/ui-kit';
 import { tablet, useMediaQuery } from 'shared/lib/hooks';
 import { State } from '../state';
@@ -35,9 +36,13 @@ const FindWork: FC = () => {
                         type="primary"
                         ghost
                         size={isTablet ? 'middle' : 'small'}
-                        onClick={() => navigate(serviceMarket)}
+                        onClick={() =>
+                            navigate(
+                                `${serviceMarket}?tabId=${ServiceMarketTabIds.levelUpgrade}`
+                            )
+                        }
                     >
-                        {t('components.common.findContract')}
+                        {t('Find a contract')}
                     </Button>
                 </Space>
             }
