@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Space, Alert } from 'antd';
 import { serviceMarket } from 'app/router/paths';
+import { ServiceMarketTabIds } from 'app/router/constants';
 import { EngineerStateBadge } from 'features/engineer';
 import { CabinState, CabinStatus } from 'entities/engineer';
 import { ContractDto } from 'entities/smartcontract';
@@ -97,7 +98,11 @@ const StatusInfo: FC<Props> = ({ state, status, contract }) => {
                             <Button
                                 size="small"
                                 type="primary"
-                                onClick={() => navigate(serviceMarket)}
+                                onClick={() =>
+                                    navigate(
+                                        `${serviceMarket}?tabId=${ServiceMarketTabIds.levelUpgrade}`
+                                    )
+                                }
                             >
                                 {t('pages.engineer.visitServiceMarket')}
                             </Button>
