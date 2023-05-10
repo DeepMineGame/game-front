@@ -1,7 +1,12 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toLocaleDate } from 'shared';
-import { ContractDto, rarityMap } from 'entities/smartcontract';
+import {
+    ContractDto,
+    ID_TO_INVENTORY,
+    normalizeAttrs,
+    rarityMap,
+} from 'entities/smartcontract';
 import { TableWithTitle } from '../..';
 
 type Props = {
@@ -10,9 +15,12 @@ type Props = {
 
 const Conditions: FC<Props> = ({ contract }) => {
     const { t } = useTranslation();
-
+    const { asset_template_ids, asset_ids } = normalizeAttrs(contract.attrs);
+    const equipmentNames = asset_template_ids?.map(
+        (id) => ID_TO_INVENTORY[Number(id)]
+    );
     const conditionData = {
-        Upgrade: contract?.attrs.find(({ key }) => key === 'asset_ids')?.value,
+        Upgrade: equipmentNames?.join(', '),
 
         ...(!!contract.deadline_time && {
             [t('pages.serviceMarket.startOperations')]: toLocaleDate(
