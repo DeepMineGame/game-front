@@ -60,12 +60,7 @@ const ConditionTable: FC<Props> = ({ contract }) => {
         [t('Fee paid')]: getDmeAmount(contract.fee_counter),
     };
 
-    return (
-        <TableWithTitle
-            title={t('pages.serviceMarket.contract.conditions')}
-            data={conditionData}
-        />
-    );
+    return <TableWithTitle title={t('Conditions')} data={conditionData} />;
 };
 
 export { ConditionTable };

@@ -516,7 +516,6 @@
         "doNotHaveAreaSlot": "You do not have a area slot that meets the conditions of the order"
       },
       "contract": {
-        "conditions": "Conditions",
         "landlord": "Landlord",
         "contractor": "Contractor",
         "mineOwner": "Mine owner",
@@ -1018,5 +1017,7 @@
   "Mining has finished successfully!": "Mining has finished successfully!",
   "Time spent": "Time spent",
   "Available for claim": "Available for claim",
-  "Find a contract": "Find a contract"
+  "Find a contract": "Find a contract",
+  "Conditions": "Conditions",
+  "Upgrade info": "Upgrade info"
 }

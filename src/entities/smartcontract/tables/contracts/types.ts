@@ -79,6 +79,8 @@ export type ContractAttrs = {
     asset_template_ids: string[];
     upgrade_statuses: AttrStatus[];
     upgrade_levels: string[];
+    asset_ids_new: string[];
+    asset_ids_old: string[];
 };
 
 export type ContractDto = {

@@ -6,7 +6,7 @@ import {
     ToolOutlined,
     UpSquareOutlined,
 } from '@ant-design/icons';
-import { secondsToTime } from 'shared';
+import { colorizeUpgradeStatus, secondsToTime } from 'shared';
 import { getUpgradeKitType } from 'features/engineer';
 import {
     ContractDto,
@@ -61,7 +61,7 @@ export const getDataSource = (contract: ContractDto) => {
                               ? DoubleRightOutlined
                               : LineOutlined,
                       title: name,
-                      value: upgrade_statuses?.[i],
+                      value: colorizeUpgradeStatus(upgrade_statuses?.[i]),
                   };
               })
             : []),
