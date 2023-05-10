@@ -76,6 +76,11 @@ export type ContractAttrs = {
     time_spent: number; // in seconds
     upgrade_failed: string;
     engineer_report_fetched?: boolean;
+    asset_template_ids: string[];
+    upgrade_statuses: AttrStatus[];
+    upgrade_levels: string[];
+    asset_ids_new: string[];
+    asset_ids_old: string[];
 };
 
 export type ContractDto = {

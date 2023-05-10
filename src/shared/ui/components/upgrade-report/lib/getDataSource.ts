@@ -1,15 +1,31 @@
 import {
     BulbOutlined,
     ClockCircleOutlined,
+    DoubleRightOutlined,
+    LineOutlined,
     ToolOutlined,
     UpSquareOutlined,
 } from '@ant-design/icons';
-import { secondsToTime } from 'shared';
+import { colorizeUpgradeStatus, secondsToTime } from 'shared';
 import { getUpgradeKitType } from 'features/engineer';
-import { ContractDto, normalizeAttrs } from 'entities/smartcontract';
+import {
+    ContractDto,
+    ID_TO_INVENTORY,
+    normalizeAttrs,
+} from 'entities/smartcontract';
 
 export const getDataSource = (contract: ContractDto) => {
-    const { engineer_exp, time_spent, level } = normalizeAttrs(contract.attrs);
+    const {
+        engineer_exp,
+        time_spent,
+        asset_template_ids,
+        upgrade_statuses,
+        upgrade_levels,
+    } = normalizeAttrs(contract.attrs);
+
+    const equipmentNames = asset_template_ids?.map(
+        (id) => ID_TO_INVENTORY[Number(id)]
+    );
 
     return [
         {
@@ -28,7 +44,7 @@ export const getDataSource = (contract: ContractDto) => {
             key: 'lvl',
             icon: UpSquareOutlined,
             title: 'pages.engineer.newLevel',
-            value: `level ${level || 'Not changed'}`,
+            value: `level ${upgrade_levels?.[0] || 'not changed'}`,
         },
         {
             key: 'kit',
@@ -36,5 +52,18 @@ export const getDataSource = (contract: ContractDto) => {
             title: 'pages.engineer.upgradeKit',
             value: getUpgradeKitType(contract),
         },
+        ...(equipmentNames?.length
+            ? equipmentNames.map((name, i) => {
+                  return {
+                      key: name,
+                      icon:
+                          upgrade_statuses?.[i] === 'success'
+                              ? DoubleRightOutlined
+                              : LineOutlined,
+                      title: name,
+                      value: colorizeUpgradeStatus(upgrade_statuses?.[i]),
+                  };
+              })
+            : []),
     ];
 };

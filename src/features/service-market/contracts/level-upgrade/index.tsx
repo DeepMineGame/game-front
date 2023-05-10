@@ -9,6 +9,7 @@ import { StatusHeader } from '../../ui/status-header';
 import { useSignButtons } from '../useSignButtons';
 import { SignLevelUpgradeOrder } from '../../ui/actions';
 // import { ContractAlerts } from './components/ContractAlerts';
+import { AssetsInfo } from '../../ui/contract/level-upgrade/AssetsInfo';
 import { useLevelUpgradeContract } from './constants';
 
 const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
@@ -102,6 +103,9 @@ const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
                             />
                         </Col>
                     </Row>
+                </Col>
+                <Col xs={24} md={12}>
+                    <AssetsInfo contract={contract} />
                 </Col>
             </Row>
         </div>

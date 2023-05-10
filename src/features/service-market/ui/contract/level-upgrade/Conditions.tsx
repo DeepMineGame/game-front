@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toLocaleDate } from 'shared';
-import { ContractDto, rarityMap } from 'entities/smartcontract';
+import { ContractDto, normalizeAttrs, rarityMap } from 'entities/smartcontract';
 import { TableWithTitle } from '../..';
 
 type Props = {
@@ -10,10 +10,9 @@ type Props = {
 
 const Conditions: FC<Props> = ({ contract }) => {
     const { t } = useTranslation();
-
+    const { asset_ids } = normalizeAttrs(contract.attrs);
     const conditionData = {
-        Upgrade: contract?.attrs.find(({ key }) => key === 'asset_ids')?.value,
-
+        Upgrade: asset_ids?.split(',').join(', '),
         ...(!!contract.deadline_time && {
             [t('pages.serviceMarket.startOperations')]: toLocaleDate(
                 contract.deadline_time * 1000
@@ -30,12 +29,7 @@ const Conditions: FC<Props> = ({ contract }) => {
             contract.rarity !== -1 ? rarityMap[contract.rarity] : 'unknown',
     };
 
-    return (
-        <TableWithTitle
-            title={t('pages.serviceMarket.contract.conditions')}
-            data={conditionData}
-        />
-    );
+    return <TableWithTitle title={t('Conditions')} data={conditionData} />;
 };
 
 export { Conditions };
