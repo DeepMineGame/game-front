@@ -14,7 +14,6 @@ import {
     normalizeAttrs,
 } from 'entities/smartcontract';
 
-const SET_AMOUNT = 5;
 export const getDataSource = (contract: ContractDto) => {
     const {
         engineer_exp,
@@ -27,21 +26,6 @@ export const getDataSource = (contract: ContractDto) => {
     const equipmentNames = asset_template_ids?.map(
         (id) => ID_TO_INVENTORY[Number(id)]
     );
-    const isEquipmentSet = equipmentNames?.length === SET_AMOUNT;
-
-    if (isEquipmentSet) {
-        return equipmentNames?.map((name, i) => {
-            return {
-                key: name,
-                icon:
-                    upgrade_statuses?.[i] === 'success'
-                        ? DoubleRightOutlined
-                        : LineOutlined,
-                title: name,
-                value: upgrade_statuses?.[i],
-            };
-        });
-    }
 
     return [
         {
@@ -68,5 +52,18 @@ export const getDataSource = (contract: ContractDto) => {
             title: 'pages.engineer.upgradeKit',
             value: getUpgradeKitType(contract),
         },
+        ...(equipmentNames?.length
+            ? equipmentNames.map((name, i) => {
+                  return {
+                      key: name,
+                      icon:
+                          upgrade_statuses?.[i] === 'success'
+                              ? DoubleRightOutlined
+                              : LineOutlined,
+                      title: name,
+                      value: upgrade_statuses?.[i],
+                  };
+              })
+            : []),
     ];
 };
