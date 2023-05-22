@@ -376,7 +376,6 @@
       "mineOwner": "Mine Owner"
     },
     "mineManagement": {
-      "title": "MINE MANAGEMENT",
       "mine": "MINE",
       "signNewContract": "Sign new contract"
     },
@@ -1019,5 +1018,6 @@
   "Conditions": "Conditions",
   "Upgrade info": "Upgrade info",
   "UPGRADE LEVEL": "UPGRADE LEVEL",
-  "Learn": "Learn"
+  "Learn": "Learn",
+  "MINE MANAGEMENT": "MINE MANAGEMENT"
 }
