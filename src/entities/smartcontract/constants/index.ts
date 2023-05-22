@@ -757,7 +757,7 @@ export const ID_TO_INVENTORY = isMainNet
           626354: 'DME Wire',
           626355: 'DME Wire',
           626356: 'DME Wire',
-          626357: 'DME Wire',
+          685682: 'DME Wire',
           626358: 'DME Wire',
           626359: 'DME Wire',
           626360: 'DME Wire',
