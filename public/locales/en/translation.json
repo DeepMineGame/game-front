@@ -718,8 +718,6 @@
       "forLearning": "To learn this ability, you will need a scheme. Please visit marketplace",
       "forLearningNeedSchema": "To learn this ability, you will need a scheme in your active inventory. Please visit Hive",
       "visitHive": "Visit Hive",
-      "upgradeLevel": "Upgrade level",
-      "upgrade": "Upgrade",
       "scheme": "Scheme",
       "learningSkill": "Learning skill",
       "learn": "Learn"
@@ -1019,5 +1017,7 @@
   "Available for claim": "Available for claim",
   "Find a contract": "Find a contract",
   "Conditions": "Conditions",
-  "Upgrade info": "Upgrade info"
+  "Upgrade info": "Upgrade info",
+  "UPGRADE LEVEL": "UPGRADE LEVEL",
+  "Learn": "Learn"
 }
