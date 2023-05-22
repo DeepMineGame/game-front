@@ -23,10 +23,11 @@ const getTimeModifier = (upgradeKit: UpgradeKitType) => {
     return mine[upgradeKit];
 };
 
-const getPriceModifier = (upgradeKit: UpgradeKitType) => {
-    const { mine } = priceModification;
-
-    return mine[upgradeKit];
+const getPriceModifier = (
+    upgradeKit: UpgradeKitType,
+    type: 'mine' | 'equipment'
+) => {
+    return priceModification[type][upgradeKit];
 };
 
 const isEngineerRequestedReport = (contract: ContractDto) =>

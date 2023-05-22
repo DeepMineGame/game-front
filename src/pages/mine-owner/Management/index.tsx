@@ -27,7 +27,7 @@ export const MineManagementPage = () => {
         mine.sublevel > 0 &&
         ((mine.sublevel + 1) / SUB_LEVELS_MAX_AMOUNT) * 100;
     return (
-        <Page headerTitle={t('pages.mineManagement.title')}>
+        <Page headerTitle={t('MINE MANAGEMENT')}>
             {chainAccountName && (
                 <div className={styles.item}>
                     <MineControlPanel chainAccountName={chainAccountName} />

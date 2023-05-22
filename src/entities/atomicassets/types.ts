@@ -29,7 +29,7 @@ export type AssetDataType = {
         created_at_time: string;
     };
     template: {
-        template_id: string;
+        template_id: number;
         max_supply: string;
         issued_supply: string;
         is_transferable: true;

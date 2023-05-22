@@ -5,6 +5,7 @@ import {
     ModalWithTable,
     useAccountName,
     useReloadPage,
+    useUserLocation,
 } from 'shared';
 import { useStore } from 'effector-react';
 import { useSmartContractAction } from 'features';
@@ -22,6 +23,7 @@ import {
 export const ClaimDME: FC<{ contract: ContractDto | null }> = ({
     contract,
 }) => {
+    const inLocation = useUserLocation();
     const waxUser = useAccountName();
     const { t } = useTranslation();
     const reloadPage = useReloadPage();
@@ -52,7 +54,7 @@ export const ClaimDME: FC<{ contract: ContractDto | null }> = ({
             <Button
                 type="primary"
                 onClick={() => setClaimInfoModalVisible(true)}
-                disabled={!dmeMoreThenZero}
+                disabled={!dmeMoreThenZero || !inLocation.mineDeck}
             >
                 {t('components.common.button.claim')} {dmeToClaim}{' '}
                 {t('components.common.button.dme')}

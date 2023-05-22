@@ -30,11 +30,7 @@ export const UpgradeModal = ({ isVisible, onCancel, nftData }: Props) => {
 
     return (
         <Modal
-            title={
-                <Text fontFamily="orbitron">
-                    {t('pages.engineersTraining.upgradeLevel').toUpperCase()}
-                </Text>
-            }
+            title={<Text fontFamily="orbitron">{t('UPGRADE LEVEL')}</Text>}
             visible={isVisible}
             onCancel={onCancel}
             width={modalWidth}
@@ -44,7 +40,7 @@ export const UpgradeModal = ({ isVisible, onCancel, nftData }: Props) => {
                     {t('components.common.button.cancel')}
                 </Button>,
                 <Button onClick={handleUpgrade} type="primary" key="upgrade">
-                    {t('pages.engineersTraining.upgrade')}
+                    {t('Learn')}
                 </Button>,
             ]}
         >
