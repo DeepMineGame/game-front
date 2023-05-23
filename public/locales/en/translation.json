@@ -45,7 +45,6 @@
     },
     "hive": {
       "info&Actions": "Info&Actions",
-      "warehouse": "Warehouse",
       "activeInventory": "Active inventory",
       "confirmTransfer": "Confirm transfer",
       "storage": "Storage",
@@ -1019,5 +1018,6 @@
   "Upgrade info": "Upgrade info",
   "UPGRADE LEVEL": "UPGRADE LEVEL",
   "Learn": "Learn",
-  "MINE MANAGEMENT": "MINE MANAGEMENT"
+  "MINE MANAGEMENT": "MINE MANAGEMENT",
+  "Warehouse": "Warehouse"
 }

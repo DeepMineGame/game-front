@@ -39,7 +39,7 @@ export const HivePage: FC = () => {
                             />
                         </div>
                     </Tooltip>
-                    <Tooltip overlay={t('components.hive.warehouse')}>
+                    <Tooltip overlay={t('Warehouse')}>
                         <div>
                             <MenuItem
                                 onClick={() => navigate(warehouse)}
