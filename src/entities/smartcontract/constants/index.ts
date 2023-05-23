@@ -704,7 +704,7 @@ const MAIN_NET_IN_GAME_IDS = [
     624928,
     625019,
     // Legendary equipment
-    314134,
+
     626395,
     626396,
     626397,
