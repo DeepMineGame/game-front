@@ -170,15 +170,15 @@ export const TEST_NET_ASSETS_ID_MAP = new Map(
         619255: 528108,
         619256: 528109,
         // Plunging Blocks epic
-        619257: 528110,
-        619258: 528111,
-        619259: 528112,
-        619260: 528113,
-        619261: 528114,
-        619262: 528115,
-        619263: 528116,
-        619264: 528117,
-        619265: 528118,
+        528110: 619257,
+        528111: 619258,
+        528112: 619259,
+        528113: 619260,
+        528114: 619261,
+        528115: 619262,
+        528116: 619263,
+        528117: 619264,
+        528118: 619265,
         // DME Wire common
         528042: 619178,
         528043: 619179,
@@ -396,6 +396,7 @@ export const getImagePath = (templateId: InventoryIdType) => {
     const ID = TEST_NET_ASSETS_ID_MAP.get(String(templateId)) || templateId;
     const isGif = GIF_IMAGES.some((gifId) => gifId === ID);
     const ext = isGif ? 'gif' : 'webp';
+    console.log(ID, templateId);
     return `/img/cards/${ID}.${ext}`;
 };
 
