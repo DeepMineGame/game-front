@@ -32,7 +32,7 @@ export type GetMarketOrdersParams = {
 
 export const getMarketOrders = async (params: GetMarketOrdersParams) => {
     const { data = [] } = await axios.get<ContractDto[]>(
-        `${ENDPOINT}/statistic/market/orders`,
+        `${ENDPOINT}/statistic/market/v2/orders`,
         {
             params,
             ...defaultConfig,
