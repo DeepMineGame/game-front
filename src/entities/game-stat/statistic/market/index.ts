@@ -21,13 +21,14 @@ export enum Roles {
 export type GetMarketOrdersParams = {
     user?: string;
     user_role?: Roles;
-    search_role?: string;
+    search_role?: Roles;
     statuses?: OrderStatus;
     levels?: string;
     rarities?: string;
     nickname?: string;
     order?: string;
     order_by?: string;
+    offers?: true;
 };
 
 export const getMarketOrders = async (params: GetMarketOrdersParams) => {
