@@ -12,10 +12,7 @@ export const ServiceMarketPage: FC = () => {
     const { t } = useTranslation();
 
     return (
-        <Page
-            className={styles.page}
-            headerTitle={t('pages.serviceMarket.serviceMarket').toUpperCase()}
-        >
+        <Page className={styles.page} headerTitle={t('SERVICE MARKET')}>
             <ContractorTab />
         </Page>
     );
