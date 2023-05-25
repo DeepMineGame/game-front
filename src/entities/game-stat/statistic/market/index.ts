@@ -10,7 +10,6 @@ export enum OrderStatus {
 }
 
 export enum Roles {
-    all = 'all',
     contractor = 'contractor',
     mineowner = 'mineowner',
     citizen = 'citizen',
