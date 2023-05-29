@@ -704,7 +704,6 @@ const MAIN_NET_IN_GAME_IDS = [
     624928,
     625019,
     // Legendary equipment
-
     626395,
     626396,
     626397,
@@ -744,6 +743,16 @@ const MAIN_NET_IN_GAME_IDS = [
     626367,
     626368,
     626369,
+    // Legendary cutter
+    626379,
+    626380,
+    626381,
+    626382,
+    626383,
+    626384,
+    626385,
+    626386,
+    626387,
 ];
 
 export const IN_GAME_NFT_IDS = isMainNet
