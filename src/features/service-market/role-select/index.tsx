@@ -2,6 +2,7 @@ import { Radio, Select, Space } from 'antd';
 import { useCallback } from 'react';
 import { useStore } from 'effector-react';
 import { useAccountName } from 'shared';
+import { useTranslation } from 'react-i18next';
 import { e_upg_asset_type, OrderStatus, Roles } from 'entities/game-stat';
 import { changeFilterEvent, filterStore } from '../contractor-table/model';
 import { availableSelectItemByRole } from './lib';
@@ -16,6 +17,7 @@ const mineEquipment = [
 export const RoleSelect = () => {
     const filter = useStore(filterStore);
     const accountName = useAccountName();
+    const { t } = useTranslation();
 
     const onChangeSearchRole = useCallback(
         (role) => {
@@ -88,14 +90,14 @@ export const RoleSelect = () => {
     return (
         <Space direction="vertical" size="large">
             <Space>
-                I am{' '}
+                {t('I am')}{' '}
                 <Select
                     options={rolesToSelectOptions}
-                    placeholder="Select your role"
+                    placeholder={t('Select your role')}
                     value={filter.user_role}
                     onChange={onChangeSelfRole}
                 >
-                    Select your role
+                    {t('Select your role')}
                 </Select>{' '}
                 looking for{' '}
                 <Select
@@ -104,15 +106,15 @@ export const RoleSelect = () => {
                             ? availableSelectItemByRole[filter.user_role]
                             : []
                     }
-                    placeholder="Select role"
+                    placeholder={t('Select role')}
                     value={filter.search_role}
                     onChange={onChangeSearchRole}
                 >
-                    Select role
+                    {t('Select role')}
                 </Select>
             </Space>
             <Space>
-                <Radio.Group>
+                <Radio.Group defaultValue="all">
                     <Radio
                         onChange={() => {
                             changeFilterEvent({
@@ -123,7 +125,7 @@ export const RoleSelect = () => {
                         }}
                         value="all"
                     >
-                        All contracts
+                        {t('All contracts')}
                     </Radio>
                     <Radio
                         onChange={() => {
@@ -133,7 +135,7 @@ export const RoleSelect = () => {
                         }}
                         value="my"
                     >
-                        My contracts
+                        {t('My contracts')}
                     </Radio>
                     <Radio
                         value="offers"
@@ -144,7 +146,7 @@ export const RoleSelect = () => {
                             });
                         }}
                     >
-                        Contract offerings
+                        {t('Contract offerings')}
                     </Radio>
                 </Radio.Group>
             </Space>
