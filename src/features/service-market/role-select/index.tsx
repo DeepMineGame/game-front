@@ -31,7 +31,7 @@ export const RoleSelect = () => {
                 return changeFilterEvent({
                     ...filter,
                     search_role: role,
-                    assetTypes: mineEquipment.join(','),
+                    asset_types: mineEquipment.join(','),
                 });
             }
 
@@ -39,7 +39,7 @@ export const RoleSelect = () => {
                 return changeFilterEvent({
                     ...filter,
                     search_role: role,
-                    assetTypes: e_upg_asset_type.mine,
+                    asset_types: e_upg_asset_type.mine,
                 });
             }
             changeFilterEvent({
@@ -62,7 +62,7 @@ export const RoleSelect = () => {
                 return changeFilterEvent({
                     ...filter,
                     user_role: role,
-                    assetTypes: mineEquipment.join(','),
+                    asset_types: mineEquipment.join(','),
                 });
             }
 
@@ -70,7 +70,7 @@ export const RoleSelect = () => {
                 return changeFilterEvent({
                     ...filter,
                     user_role: role,
-                    assetTypes: e_upg_asset_type.mine,
+                    asset_types: e_upg_asset_type.mine,
                 });
             }
 
