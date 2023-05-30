@@ -743,6 +743,7 @@ const MAIN_NET_IN_GAME_IDS = [
     626367,
     626368,
     626369,
+    // Legendary cutter
     626379,
     626380,
     626381,
