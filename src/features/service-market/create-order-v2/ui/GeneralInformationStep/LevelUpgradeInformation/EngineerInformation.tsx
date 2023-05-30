@@ -23,7 +23,7 @@ export const EngineerInformation: FC<GeneralInformationStepProps> = ({
     const { t } = useTranslation();
     const { type: upgradeType, hasValue: hasUpgradeType } =
         useWatchUpgradeType(form);
-    const hasRarityItem = upgradeType === EngineerSchema.equipment;
+    const hasRarityItem = upgradeType !== EngineerSchema.mine;
     return (
         <>
             <UpgradeTypeFormItem />

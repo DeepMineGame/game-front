@@ -6,5 +6,4 @@ export * from './ui';
 export * from './ui/actions/sign-order';
 export * from './contracts';
 export * from './engineer-tab';
-export * from './my-contracts';
 export * from './create-order-v2';
