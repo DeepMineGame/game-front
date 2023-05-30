@@ -396,7 +396,6 @@ export const getImagePath = (templateId: InventoryIdType) => {
     const ID = TEST_NET_ASSETS_ID_MAP.get(String(templateId)) || templateId;
     const isGif = GIF_IMAGES.some((gifId) => gifId === ID);
     const ext = isGif ? 'gif' : 'webp';
-    console.log(ID, templateId);
     return `/img/cards/${ID}.${ext}`;
 };
 

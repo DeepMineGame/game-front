@@ -10,29 +10,39 @@ export enum OrderStatus {
 }
 
 export enum Roles {
-    all = 'all',
     contractor = 'contractor',
     mineowner = 'mineowner',
-    citizen = 'citizen',
     engineer = 'engineer',
     landlord = 'landlord',
+}
+
+export enum e_upg_asset_type {
+    undefined,
+    cutter,
+    wandering_reactor,
+    plunging_blocks,
+    delaminator,
+    dme_wire,
+    mine,
 }
 
 export type GetMarketOrdersParams = {
     user?: string;
     user_role?: Roles;
-    search_role?: string;
+    search_role?: Roles;
     statuses?: OrderStatus;
     levels?: string;
     rarities?: string;
     nickname?: string;
     order?: string;
     order_by?: string;
+    offers?: true;
+    asset_types?: string | number;
 };
 
 export const getMarketOrders = async (params: GetMarketOrdersParams) => {
     const { data = [] } = await axios.get<ContractDto[]>(
-        `${ENDPOINT}/statistic/market/orders`,
+        `${ENDPOINT}/statistic/market/v2/orders`,
         {
             params,
             ...defaultConfig,

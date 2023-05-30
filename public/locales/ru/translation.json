@@ -7,5 +7,11 @@
   },
   "kit": {
     "back": "Назад"
-  }
+  },
+  "Select your role": "Select your role",
+  "I am": "I am",
+  "Select role": "Select role",
+  "Contract offerings": "Contract offerings",
+  "My contracts": "My contracts",
+  "All contracts": "All contracts"
 }

@@ -415,8 +415,6 @@
     "serviceMarket": {
       "currentContracts": "Current contracts",
       "personalContracts": "Personal contracts",
-      "serviceMarket": "Service market",
-      "myContracts": "My contracts",
       "levelUpgradeOrder": "Level upgrade order",
       "levelUpgrade": "Level upgrade",
       "miningOrder": "Mining order",
@@ -1019,5 +1017,6 @@
   "UPGRADE LEVEL": "UPGRADE LEVEL",
   "Learn": "Learn",
   "MINE MANAGEMENT": "MINE MANAGEMENT",
-  "Warehouse": "Warehouse"
+  "Warehouse": "Warehouse",
+  "SERVICE MARKET": "SERVICE MARKET"
 }
