@@ -48,10 +48,8 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                             ? '-'
                             : toLocaleDate(contract.finishes_at * 1000),
                     status: {
-                        label: stateMap[
-                            contract.computed?.status || OrderState.undefined
-                        ],
-                        value: contract?.computed?.status,
+                        label: stateMap[contract.state],
+                        value: contract.state,
                     },
                     discord: contract.client_discord,
                     contract,
