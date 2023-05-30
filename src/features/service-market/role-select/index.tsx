@@ -4,6 +4,7 @@ import { useStore } from 'effector-react';
 import { useAccountName } from 'shared';
 import { e_upg_asset_type, OrderStatus, Roles } from 'entities/game-stat';
 import { changeFilterEvent, filterStore } from '../contractor-table/model';
+import { availableSelectItemByRole } from './lib';
 
 const mineEquipment = [
     e_upg_asset_type.cutter,
@@ -98,7 +99,11 @@ export const RoleSelect = () => {
                 </Select>{' '}
                 looking for{' '}
                 <Select
-                    options={rolesToSelectOptions}
+                    options={
+                        filter.user_role !== undefined
+                            ? availableSelectItemByRole[filter.user_role]
+                            : []
+                    }
                     placeholder="Select role"
                     value={filter.search_role}
                     onChange={onChangeSearchRole}
