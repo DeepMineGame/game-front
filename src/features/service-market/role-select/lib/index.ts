@@ -1,21 +1,21 @@
 import { Roles } from 'entities/game-stat';
 
-const contractorItem = {
-    label: Roles.contractor,
+export const contractorItem = {
+    label: 'Contractor',
     value: Roles.contractor,
 };
-const mineOwnerItem = {
-    label: Roles.mineowner,
+export const mineOwnerItem = {
+    label: 'Mine owner',
     value: Roles.mineowner,
 };
 
-const landLordItem = {
-    label: Roles.landlord,
+export const landLordItem = {
+    label: 'Land lord',
     value: Roles.landlord,
 };
 
-const engineerItem = {
-    label: Roles.engineer,
+export const engineerItem = {
+    label: 'Engineer',
     value: Roles.engineer,
 };
 

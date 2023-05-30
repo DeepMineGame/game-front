@@ -5,7 +5,13 @@ import { useAccountName } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { e_upg_asset_type, OrderStatus, Roles } from 'entities/game-stat';
 import { changeFilterEvent, filterStore } from '../contractor-table/model';
-import { availableSelectItemByRole } from './lib';
+import {
+    availableSelectItemByRole,
+    contractorItem,
+    engineerItem,
+    landLordItem,
+    mineOwnerItem,
+} from './lib';
 
 const mineEquipment = [
     e_upg_asset_type.cutter,
@@ -82,10 +88,12 @@ export const RoleSelect = () => {
         [filter]
     );
 
-    const rolesToSelectOptions = Object.values(Roles).map((role) => ({
-        label: role,
-        value: role,
-    }));
+    const rolesToSelectOptions = [
+        contractorItem,
+        mineOwnerItem,
+        landLordItem,
+        engineerItem,
+    ];
 
     return (
         <Space direction="vertical" size="large">
