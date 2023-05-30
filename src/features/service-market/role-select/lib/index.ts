@@ -10,7 +10,7 @@ export const mineOwnerItem = {
 };
 
 export const landLordItem = {
-    label: 'Land lord',
+    label: 'Landlord',
     value: Roles.landlord,
 };
 
