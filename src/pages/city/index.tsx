@@ -58,7 +58,7 @@ export const CityPage: FC = () => {
                             styles.serviceMarketTitle
                         )}
                     >
-                        {t('SERVICE MARKET').toUpperCase()}
+                        {t('SERVICE MARKET')}
                     </Title>
                 </div>
             </Space>

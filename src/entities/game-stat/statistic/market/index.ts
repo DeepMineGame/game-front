@@ -12,9 +12,18 @@ export enum OrderStatus {
 export enum Roles {
     contractor = 'contractor',
     mineowner = 'mineowner',
-    citizen = 'citizen',
     engineer = 'engineer',
     landlord = 'landlord',
+}
+
+export enum e_upg_asset_type {
+    undefined,
+    cutter,
+    wandering_reactor,
+    plunging_blocks,
+    delaminator,
+    dme_wire,
+    mine,
 }
 
 export type GetMarketOrdersParams = {
@@ -28,6 +37,7 @@ export type GetMarketOrdersParams = {
     order?: string;
     order_by?: string;
     offers?: true;
+    assetTypes?: string | number;
 };
 
 export const getMarketOrders = async (params: GetMarketOrdersParams) => {

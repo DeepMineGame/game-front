@@ -2,27 +2,80 @@ import { Radio, Select, Space } from 'antd';
 import { useCallback } from 'react';
 import { useStore } from 'effector-react';
 import { useAccountName } from 'shared';
-import { OrderStatus, Roles } from 'entities/game-stat';
+import { e_upg_asset_type, OrderStatus, Roles } from 'entities/game-stat';
 import { changeFilterEvent, filterStore } from '../contractor-table/model';
 
+const mineEquipment = [
+    e_upg_asset_type.cutter,
+    e_upg_asset_type.dme_wire,
+    e_upg_asset_type.delaminator,
+    e_upg_asset_type.plunging_blocks,
+    e_upg_asset_type.wandering_reactor,
+];
 export const RoleSelect = () => {
     const filter = useStore(filterStore);
     const accountName = useAccountName();
 
     const onChangeSearchRole = useCallback(
-        (role) =>
+        (role) => {
+            const isMineOwnerEngineerSelected =
+                role === Roles.mineowner && filter.user_role === Roles.engineer;
+            const isContractorMineOwnerSelected =
+                role === Roles.contractor &&
+                filter.user_role === Roles.engineer;
+
+            if (isContractorMineOwnerSelected) {
+                return changeFilterEvent({
+                    ...filter,
+                    search_role: role,
+                    assetTypes: mineEquipment.join(','),
+                });
+            }
+
+            if (isMineOwnerEngineerSelected) {
+                return changeFilterEvent({
+                    ...filter,
+                    search_role: role,
+                    assetTypes: e_upg_asset_type.mine,
+                });
+            }
             changeFilterEvent({
                 ...filter,
                 search_role: role,
-            }),
+            });
+        },
         [filter]
     );
     const onChangeSelfRole = useCallback(
-        (role) =>
+        (role) => {
+            const isMineOwnerEngineerSelected =
+                role === Roles.mineowner &&
+                filter.search_role === Roles.engineer;
+            const isContractorMineOwnerSelected =
+                role === Roles.contractor &&
+                filter.search_role === Roles.engineer;
+
+            if (isContractorMineOwnerSelected) {
+                return changeFilterEvent({
+                    ...filter,
+                    user_role: role,
+                    assetTypes: mineEquipment.join(','),
+                });
+            }
+
+            if (isMineOwnerEngineerSelected) {
+                return changeFilterEvent({
+                    ...filter,
+                    user_role: role,
+                    assetTypes: e_upg_asset_type.mine,
+                });
+            }
+
             changeFilterEvent({
                 ...filter,
                 user_role: role,
-            }),
+            });
+        },
         [filter]
     );
 
