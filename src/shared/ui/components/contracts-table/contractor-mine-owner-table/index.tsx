@@ -42,6 +42,7 @@ export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
                     fee: contract.fee_percent,
                     date: toLocaleDate(contract.create_time * 1000),
                     discord: contract.client_discord,
+                    rarity: contract.computed?.land_rarity,
                     contract,
                 };
             }),
