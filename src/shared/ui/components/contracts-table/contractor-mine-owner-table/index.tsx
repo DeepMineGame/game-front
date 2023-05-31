@@ -169,7 +169,7 @@ export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
                         new Date(a.date).getTime() - new Date(b.date).getTime(),
                 },
                 {
-                    title: t('fee'),
+                    title: t('Fee, %'),
                     dataIndex: 'fee',
                     key: 'fee',
                     sorter: (a, b) => a.fee - b.fee,
