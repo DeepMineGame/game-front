@@ -70,6 +70,7 @@ export type ContractAttrs = {
     finished_by: string;
     improved_kit: 0 | 1;
     level: string;
+    mine_sublevel: string;
     rarity: string;
     schema_type: string;
     status: AttrStatus;
@@ -126,6 +127,8 @@ export type ContractDto = {
         sub_status: OrderSubState;
         terms_violated: boolean;
         premature_terminated: boolean;
+        land_rarity: 'Common' | 'Uncommon' | 'Rare' | 'Epic' | 'Legendary';
+        mine_level: number;
     };
 };
 

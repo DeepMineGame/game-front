@@ -6,7 +6,7 @@ export * from './PageWithTabs';
 export * from './statsAndInfo';
 export * from './MiningStatsTable';
 export * from './MineCrewTable';
-export * from './ContractsTable';
+export * from './contracts-table';
 export * from './LoadingScreen';
 export * from './LogAs';
 export * from './full-screen-background';
