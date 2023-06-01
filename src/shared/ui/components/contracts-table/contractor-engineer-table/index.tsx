@@ -1,7 +1,7 @@
 import React, { FC, useMemo, SyntheticEvent } from 'react';
 import { t } from 'i18next';
 import { DiscordIcon, rarityColorMapByEnum, useAccountName } from 'shared';
-import { Progress, Space, Tooltip } from 'antd';
+import { Space, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
 import { CopyOutlined } from '@ant-design/icons';
 import { ContractDto } from 'entities/smartcontract';

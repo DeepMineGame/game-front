@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router';
 import { CopyOutlined } from '@ant-design/icons';
 import { ContractDto, normalizeAttrs } from 'entities/smartcontract';
 
-import { Link, Table, Tag } from '../../../ui-kit';
+import { Link, Table } from '../../../ui-kit';
 import { toLocaleDate } from '../../../utils';
 import styles from '../styles.module.scss';
 

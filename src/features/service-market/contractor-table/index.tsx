@@ -5,6 +5,7 @@ import {
     ContractsTable,
     LandlordMineOwnerTable,
     MineOwnerContractorTable,
+    MineOwnerLandlordTable,
 } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { Empty, Skeleton } from 'antd';
@@ -15,7 +16,6 @@ import {
     filterStore,
     getContractsByFilterEffect,
 } from './model';
-import { MineOwnerLandlordTable } from '../../../shared/ui/components/contracts-table/mine-owner-landlord-table';
 
 const defaultFilter = {
     statuses: OrderStatus.new,

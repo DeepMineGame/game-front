@@ -219,3 +219,4 @@ export * from './contractor-engineer-table';
 export * from './contractor-mine-owner-table';
 export * from './landlord-mine-owner-table';
 export * from './mine-owner-contractor-table';
+export * from './mine-owner-landlord-table';
