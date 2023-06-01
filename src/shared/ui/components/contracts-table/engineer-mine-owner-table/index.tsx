@@ -4,15 +4,16 @@ import { DiscordIcon, rarityColorMapByEnum, useAccountName } from 'shared';
 import { Space, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
 import { CopyOutlined } from '@ant-design/icons';
-import { ContractDto } from 'entities/smartcontract';
+import { ContractDto, normalizeAttrs } from 'entities/smartcontract';
 
+import { e_upg_asset_type, equipmentNames } from 'entities/game-stat';
 import { Link, Table } from '../../../ui-kit';
 import { toLocaleDate } from '../../../utils';
 import styles from '../styles.module.scss';
 
 type Props = { contracts: ContractDto[] | null };
 
-export const ContractorEngineerTable: FC<Props> = ({ contracts }) => {
+export const EngineerMineOwnerTable: FC<Props> = ({ contracts }) => {
     const navigate = useNavigate();
     const account = useAccountName();
     const dataSource = useMemo(
@@ -23,9 +24,11 @@ export const ContractorEngineerTable: FC<Props> = ({ contracts }) => {
                     level: contract.level,
                     key: contract.id,
                     id: contract.id,
-                    fee: contract.fee_percent,
+                    cost_of_execution: contract.cost_of_execution,
                     date: toLocaleDate(contract.create_time * 1000),
                     rarity: contract.rarity,
+                    coast: contract,
+                    item: normalizeAttrs(contract.attrs).asset_ids || '',
                     contract,
                 };
             }),
@@ -55,20 +58,20 @@ export const ContractorEngineerTable: FC<Props> = ({ contracts }) => {
                     ),
                 },
                 {
-                    title: t('Engineer'),
+                    title: t('Mine owner'),
                     dataIndex: 'nickName',
                     key: 'nickName',
                     render: (_, { contract }) => {
                         return (
                             <Space align="start" size="large">
-                                {contract.executor_discord && (
+                                {contract.client_discord && (
                                     <Tooltip
                                         overlay={
                                             <div
                                                 onClick={(e) => {
                                                     e.stopPropagation();
                                                     navigator.clipboard.writeText(
-                                                        contract.executor_discord
+                                                        contract.client_discord
                                                     );
                                                 }}
                                                 className={styles.pointer}
@@ -79,7 +82,7 @@ export const ContractorEngineerTable: FC<Props> = ({ contracts }) => {
                                                         'pages.info.copied'
                                                     )}
                                                 >
-                                                    {contract.executor_discord}{' '}
+                                                    {contract.client_discord}{' '}
                                                     <CopyOutlined />
                                                 </Tooltip>
                                             </div>
@@ -93,15 +96,27 @@ export const ContractorEngineerTable: FC<Props> = ({ contracts }) => {
                                 )}
                                 <Space align="center" size={0}>
                                     <Link
-                                        to={`/user/${contract.executor}`}
+                                        to={`/user/${contract.client}`}
                                         onClick={stopPropagateEvent}
                                     >
-                                        {contract.executor}
+                                        {contract.client}
                                     </Link>
                                 </Space>
                             </Space>
                         );
                     },
+                },
+                {
+                    title: t('Item'),
+                    dataIndex: 'item',
+                    key: 'item',
+                    render: (item, { contract }) =>
+                        item.split(',')?.length > 1
+                            ? 'Equipment set'
+                            : equipmentNames[
+                                  normalizeAttrs(contract.attrs).asset_types ||
+                                      e_upg_asset_type.undefined
+                              ],
                 },
                 {
                     title: t('Rarity'),
@@ -134,10 +149,11 @@ export const ContractorEngineerTable: FC<Props> = ({ contracts }) => {
                         new Date(a.date).getTime() - new Date(b.date).getTime(),
                 },
                 {
-                    title: t('Fee, %'),
-                    dataIndex: 'fee',
-                    key: 'fee',
+                    title: t('Cost, DME'),
+                    dataIndex: 'cost_of_execution',
+                    key: 'cost_of_execution',
                     sorter: (a, b) => a.fee - b.fee,
+                    render: (val) => val / 10 ** 8,
                 },
                 {
                     title: t('Minimum fee, DME'),

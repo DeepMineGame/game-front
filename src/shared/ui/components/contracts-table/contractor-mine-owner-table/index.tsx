@@ -4,12 +4,7 @@ import { DiscordIcon, useAccountName } from 'shared';
 import { Progress, Space, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
 import { CopyOutlined } from '@ant-design/icons';
-import {
-    ContractDto,
-    contractName,
-    normalizeAttrs,
-    stateMap,
-} from 'entities/smartcontract';
+import { ContractDto, normalizeAttrs } from 'entities/smartcontract';
 
 import { Link, Table, Tag } from '../../../ui-kit';
 import { toLocaleDate } from '../../../utils';

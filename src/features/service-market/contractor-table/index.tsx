@@ -2,9 +2,11 @@ import { FC } from 'react';
 import {
     ContractorEngineerTable,
     ContractorMineOwnerTable,
-    ContractsTable,
+    EngineerContractorTable,
+    EngineerMineOwnerTable,
     LandlordMineOwnerTable,
     MineOwnerContractorTable,
+    MineOwnerEngineerTable,
     MineOwnerLandlordTable,
 } from 'shared';
 import { useGate, useStore } from 'effector-react';
@@ -53,9 +55,16 @@ export const ContractsRenderByRole: FC = () => {
         return <MineOwnerLandlordTable contracts={contracts} />;
     }
 
-    return contracts?.length ? (
-        <ContractsTable contracts={contracts} />
-    ) : (
-        <Empty />
-    );
+    if (user_role === Roles.mineowner && search_role === Roles.engineer) {
+        return <MineOwnerEngineerTable contracts={contracts} />;
+    }
+
+    if (user_role === Roles.engineer && search_role === Roles.contractor) {
+        return <EngineerContractorTable contracts={contracts} />;
+    }
+
+    if (user_role === Roles.engineer && search_role === Roles.mineowner) {
+        return <EngineerMineOwnerTable contracts={contracts} />;
+    }
+    return <Empty />;
 };
