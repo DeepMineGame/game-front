@@ -19,7 +19,7 @@ import styles from './styles.module.scss';
 
 type Props = { contracts: ContractDto[] | null };
 
-const rarityColorMap = {
+export const rarityColorMapByEnum = {
     0: undefined,
     1: '#DBDBDB', // neutral9
     2: '#09E001', // green4
@@ -166,7 +166,9 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
                         ) : (
                             <div
                                 className={styles.rarityMarker}
-                                style={{ background: rarityColorMap[rarity] }}
+                                style={{
+                                    background: rarityColorMapByEnum[rarity],
+                                }}
                             />
                         ),
                 },
@@ -213,5 +215,6 @@ export const ContractsTable: FC<Props> = ({ contracts }) => {
         />
     );
 };
-
+export * from './contractor-engineer-table';
 export * from './contractor-mine-owner-table';
+export * from './landlord-mine-owner-table';

@@ -1,6 +1,6 @@
 import React, { FC, useMemo, SyntheticEvent } from 'react';
 import { t } from 'i18next';
-import { DiscordIcon, useAccountName } from 'shared';
+import { DiscordIcon, rarityColorMapByEnum, useAccountName } from 'shared';
 import { Progress, Space, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
 import { CopyOutlined } from '@ant-design/icons';
@@ -26,7 +26,7 @@ const rarityColorMap = {
 };
 const SUB_LEVELS_MAX_AMOUNT = 5;
 
-export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
+export const LandlordMineOwnerTable: FC<Props> = ({ contracts }) => {
     const navigate = useNavigate();
     const account = useAccountName();
     const dataSource = useMemo(
@@ -41,7 +41,7 @@ export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
                     id: contract.id,
                     fee: contract.fee_percent,
                     date: toLocaleDate(contract.create_time * 1000),
-                    rarity: contract.computed?.land_rarity,
+                    rarity: contract.rarity,
                     contract,
                 };
             }),
@@ -77,14 +77,14 @@ export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
                     render: (value, { contract }) => {
                         return (
                             <Space align="start" size="large">
-                                {contract.client_discord && (
+                                {contract.executor_discord && (
                                     <Tooltip
                                         overlay={
                                             <div
                                                 onClick={(e) => {
                                                     e.stopPropagation();
                                                     navigator.clipboard.writeText(
-                                                        contract.client_discord
+                                                        contract.executor_discord
                                                     );
                                                 }}
                                                 className={styles.pointer}
@@ -95,7 +95,7 @@ export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
                                                         'pages.info.copied'
                                                     )}
                                                 >
-                                                    {contract.client_discord}{' '}
+                                                    {contract.executor_discord}{' '}
                                                     <CopyOutlined />
                                                 </Tooltip>
                                             </div>
@@ -109,10 +109,10 @@ export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
                                 )}
                                 <Space align="center" size={0}>
                                     <Link
-                                        to={`/user/${contract.client}`}
+                                        to={`/user/${contract.executor}`}
                                         onClick={stopPropagateEvent}
                                     >
-                                        {contract.client}
+                                        {contract.executor}
                                     </Link>
                                 </Space>
                             </Space>
@@ -120,22 +120,20 @@ export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
                     },
                 },
                 {
-                    title: 'Area rarity',
+                    title: 'Rarity',
                     dataIndex: 'rarity',
                     key: 'rarity',
-                    render: (
-                        rarity:
-                            | 'Common'
-                            | 'Uncommon'
-                            | 'Rare'
-                            | 'Epic'
-                            | 'Legendary'
-                    ) => (
-                        <div
-                            className={styles.rarityMarker}
-                            style={{ background: rarityColorMap[rarity] }}
-                        />
-                    ),
+                    render: (rarity: -1 | 1 | 2 | 3 | 4 | 5) =>
+                        rarity === -1 ? (
+                            'N/A'
+                        ) : (
+                            <div
+                                className={styles.rarityMarker}
+                                style={{
+                                    background: rarityColorMapByEnum[rarity],
+                                }}
+                            />
+                        ),
                 },
                 {
                     title: 'Mine level',

@@ -1,5 +1,10 @@
 import { FC } from 'react';
-import { ContractsTable, ContractorMineOwnerTable } from 'shared';
+import {
+    ContractorEngineerTable,
+    ContractorMineOwnerTable,
+    ContractsTable,
+    LandlordMineOwnerTable,
+} from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { Empty, Skeleton } from 'antd';
 import { OrderStatus, Roles } from 'entities/game-stat';
@@ -28,6 +33,14 @@ export const ContractsRenderByRole: FC = () => {
 
     if (user_role === Roles.contractor && search_role === Roles.mineowner) {
         return <ContractorMineOwnerTable contracts={contracts} />;
+    }
+
+    if (user_role === Roles.contractor && search_role === Roles.engineer) {
+        return <ContractorEngineerTable contracts={contracts} />;
+    }
+
+    if (user_role === Roles.landlord) {
+        return <LandlordMineOwnerTable contracts={contracts} />;
     }
 
     return contracts?.length ? (
