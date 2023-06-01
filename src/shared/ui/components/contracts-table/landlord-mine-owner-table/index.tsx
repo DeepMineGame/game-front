@@ -4,12 +4,7 @@ import { DiscordIcon, rarityColorMapByEnum, useAccountName } from 'shared';
 import { Progress, Space, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
 import { CopyOutlined } from '@ant-design/icons';
-import {
-    ContractDto,
-    contractName,
-    normalizeAttrs,
-    stateMap,
-} from 'entities/smartcontract';
+import { ContractDto, normalizeAttrs } from 'entities/smartcontract';
 
 import { Link, Table, Tag } from '../../../ui-kit';
 import { toLocaleDate } from '../../../utils';
@@ -17,13 +12,6 @@ import styles from '../styles.module.scss';
 
 type Props = { contracts: ContractDto[] | null };
 
-const rarityColorMap = {
-    Common: '#DBDBDB', // neutral9
-    Uncommon: '#09E001', // green4
-    Rare: '#0089FF', // geekblue5
-    Epic: '#CB2EFF', // purple6
-    Legendary: '#E8D639', // yellow7,
-};
 const SUB_LEVELS_MAX_AMOUNT = 5;
 
 export const LandlordMineOwnerTable: FC<Props> = ({ contracts }) => {

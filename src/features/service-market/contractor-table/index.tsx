@@ -4,6 +4,7 @@ import {
     ContractorMineOwnerTable,
     ContractsTable,
     LandlordMineOwnerTable,
+    MineOwnerContractorTable,
 } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { Empty, Skeleton } from 'antd';
@@ -14,6 +15,7 @@ import {
     filterStore,
     getContractsByFilterEffect,
 } from './model';
+import { MineOwnerLandlordTable } from '../../../shared/ui/components/contracts-table/mine-owner-landlord-table';
 
 const defaultFilter = {
     statuses: OrderStatus.new,
@@ -41,6 +43,14 @@ export const ContractsRenderByRole: FC = () => {
 
     if (user_role === Roles.landlord) {
         return <LandlordMineOwnerTable contracts={contracts} />;
+    }
+
+    if (user_role === Roles.mineowner && search_role === Roles.contractor) {
+        return <MineOwnerContractorTable contracts={contracts} />;
+    }
+
+    if (user_role === Roles.mineowner && search_role === Roles.landlord) {
+        return <MineOwnerLandlordTable contracts={contracts} />;
     }
 
     return contracts?.length ? (

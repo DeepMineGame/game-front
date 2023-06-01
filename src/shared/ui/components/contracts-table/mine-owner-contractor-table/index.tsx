@@ -1,15 +1,10 @@
 import React, { FC, useMemo, SyntheticEvent } from 'react';
 import { t } from 'i18next';
 import { DiscordIcon, useAccountName } from 'shared';
-import { Progress, Space, Tooltip } from 'antd';
+import { Space, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
 import { CopyOutlined } from '@ant-design/icons';
-import {
-    ContractDto,
-    contractName,
-    normalizeAttrs,
-    stateMap,
-} from 'entities/smartcontract';
+import { ContractDto, normalizeAttrs } from 'entities/smartcontract';
 
 import { Link, Table, Tag } from '../../../ui-kit';
 import { toLocaleDate } from '../../../utils';
@@ -17,16 +12,7 @@ import styles from '../styles.module.scss';
 
 type Props = { contracts: ContractDto[] | null };
 
-export const rarityColorMap = {
-    Common: '#DBDBDB', // neutral9
-    Uncommon: '#09E001', // green4
-    Rare: '#0089FF', // geekblue5
-    Epic: '#CB2EFF', // purple6
-    Legendary: '#E8D639', // yellow7,
-};
-const SUB_LEVELS_MAX_AMOUNT = 5;
-
-export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
+export const MineOwnerContractorTable: FC<Props> = ({ contracts }) => {
     const navigate = useNavigate();
     const account = useAccountName();
     const dataSource = useMemo(
@@ -71,20 +57,20 @@ export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
                     ),
                 },
                 {
-                    title: t('Mine owner'),
+                    title: t('Contractor'),
                     dataIndex: 'nickName',
                     key: 'nickName',
                     render: (value, { contract }) => {
                         return (
                             <Space align="start" size="large">
-                                {contract.client_discord && (
+                                {contract.executor_discord && (
                                     <Tooltip
                                         overlay={
                                             <div
                                                 onClick={(e) => {
                                                     e.stopPropagation();
                                                     navigator.clipboard.writeText(
-                                                        contract.client_discord
+                                                        contract.executor_discord
                                                     );
                                                 }}
                                                 className={styles.pointer}
@@ -95,7 +81,7 @@ export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
                                                         'pages.info.copied'
                                                     )}
                                                 >
-                                                    {contract.client_discord}{' '}
+                                                    {contract.executor_discord}{' '}
                                                     <CopyOutlined />
                                                 </Tooltip>
                                             </div>
@@ -109,54 +95,13 @@ export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
                                 )}
                                 <Space align="center" size={0}>
                                     <Link
-                                        to={`/user/${contract.client}`}
+                                        to={`/user/${contract.executor}`}
                                         onClick={stopPropagateEvent}
                                     >
-                                        {contract.client}
+                                        {contract.executor}
                                     </Link>
                                 </Space>
                             </Space>
-                        );
-                    },
-                },
-                {
-                    title: 'Area rarity',
-                    dataIndex: 'rarity',
-                    key: 'rarity',
-                    render: (
-                        rarity:
-                            | 'Common'
-                            | 'Uncommon'
-                            | 'Rare'
-                            | 'Epic'
-                            | 'Legendary'
-                    ) => (
-                        <div
-                            className={styles.rarityMarker}
-                            style={{ background: rarityColorMap[rarity] }}
-                        />
-                    ),
-                },
-                {
-                    title: 'Mine level',
-                    dataIndex: 'level',
-                    key: 'level',
-                    render: (level) => (level === -1 ? 'N/A' : level),
-                },
-                {
-                    title: 'Sublevel',
-                    dataIndex: 'subLevel',
-                    key: 'subLevel',
-                    render: (subLevel) => {
-                        const mineSubLevelToPercent =
-                            subLevel > 0 &&
-                            ((subLevel + 1) / SUB_LEVELS_MAX_AMOUNT) * 100;
-                        return (
-                            <Progress
-                                percent={mineSubLevelToPercent || 25}
-                                steps={5}
-                                showInfo={false}
-                            />
                         );
                     },
                 },
