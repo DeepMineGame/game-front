@@ -25,5 +25,8 @@
   "Min mine level": "Min mine level",
   "Any": "Any",
   "Cost, DME": "Cost, DME",
-  "Item": "Item"
+  "Item": "Item",
+  "Contract type": "Contract type",
+  "Status": "Status",
+  "Nickname": "Nickname"
 }

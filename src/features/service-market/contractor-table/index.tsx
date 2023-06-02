@@ -8,6 +8,7 @@ import {
     MineOwnerContractorTable,
     MineOwnerEngineerTable,
     MineOwnerLandlordTable,
+    MyContractsTable,
 } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { Empty, Skeleton } from 'antd';
@@ -27,12 +28,16 @@ const defaultFilter = {
 export const ContractsRenderByRole: FC = () => {
     useGate(ContractsGate, defaultFilter);
 
-    const { user_role, search_role } = useStore(filterStore);
+    const { user_role, search_role, user } = useStore(filterStore);
     const contracts = useStore(contractsStore);
     const isLoading = useStore(getContractsByFilterEffect.pending);
 
     if (isLoading) {
         return <Skeleton />;
+    }
+
+    if (user) {
+        return <MyContractsTable contracts={contracts} />;
     }
 
     if (user_role === Roles.contractor && search_role === Roles.mineowner) {

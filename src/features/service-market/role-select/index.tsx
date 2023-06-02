@@ -101,30 +101,32 @@ export const RoleSelect = () => {
 
     return (
         <Space direction="vertical" size="large">
-            <Space>
-                {t('I am')}{' '}
-                <Select
-                    options={rolesToSelectOptions}
-                    placeholder={t('Select your role')}
-                    value={filter.user_role}
-                    onChange={onChangeSelfRole}
-                >
-                    {t('Select your role')}
-                </Select>{' '}
-                looking for{' '}
-                <Select
-                    options={
-                        filter.user_role !== undefined
-                            ? availableSelectItemByRole[filter.user_role]
-                            : []
-                    }
-                    placeholder={t('Select role')}
-                    value={filter.search_role}
-                    onChange={onChangeSearchRole}
-                >
-                    {t('Select role')}
-                </Select>
-            </Space>
+            {!filter.user && (
+                <Space>
+                    {t('I am')}{' '}
+                    <Select
+                        options={rolesToSelectOptions}
+                        placeholder={t('Select your role')}
+                        value={filter.user_role}
+                        onChange={onChangeSelfRole}
+                    >
+                        {t('Select your role')}
+                    </Select>{' '}
+                    looking for{' '}
+                    <Select
+                        options={
+                            filter.user_role !== undefined
+                                ? availableSelectItemByRole[filter.user_role]
+                                : []
+                        }
+                        placeholder={t('Select role')}
+                        value={filter.search_role}
+                        onChange={onChangeSearchRole}
+                    >
+                        {t('Select role')}
+                    </Select>
+                </Space>
+            )}
             <Space>
                 <Radio.Group defaultValue="all">
                     <Radio
