@@ -156,7 +156,7 @@ export const EngineerMineOwnerTable: FC<Props> = ({ contracts }) => {
                     render: (val) => val / 10 ** 8,
                 },
                 {
-                    title: t('Minimum fee, DME'),
+                    title: t('Deposit, DME'),
                     dataIndex: 'deposit',
                     key: 'deposit',
                     sorter: (a, b) => a.const - b.cost,
