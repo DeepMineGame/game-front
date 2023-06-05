@@ -7,7 +7,7 @@ import {
     stateMap,
 } from 'entities/smartcontract';
 
-const stateColorMap = {
+export const stateColorMap = {
     [OrderState.undefined]: 'initial',
     [OrderState.OpenOrder]: '#F5C913', // primary6
     [OrderState.Terminated]: '#5A5A5A', // netural6,

@@ -1,16 +1,40 @@
 import React, { FC, useMemo, SyntheticEvent } from 'react';
 import { t } from 'i18next';
-import { DiscordIcon, rarityColorMapByEnum, useAccountName } from 'shared';
+import { DiscordIcon, useAccountName } from 'shared';
 import { Space, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
-import { CopyOutlined } from '@ant-design/icons';
-import { ContractDto, contractName } from 'entities/smartcontract';
+import {
+    CheckCircleOutlined,
+    CloseCircleOutlined,
+    CopyOutlined,
+    PlusCircleOutlined,
+} from '@ant-design/icons';
+import {
+    ContractDto,
+    contractName,
+    OrderState,
+    stateMap,
+} from 'entities/smartcontract';
 
 import { Link, Table } from '../../../ui-kit';
 import { toLocaleDate } from '../../../utils';
 import styles from '../styles.module.scss';
 
 type Props = { contracts: ContractDto[] | null };
+export const stateIconMap = {
+    [OrderState.undefined]: '',
+    [OrderState.OpenOrder]: <PlusCircleOutlined style={{ color: '#2E9EFF' }} />,
+    [OrderState.Terminated]: (
+        <CloseCircleOutlined style={{ color: '#D32029' }} />
+    ),
+    [OrderState.ValidContract]: <CheckCircleOutlined />,
+    [OrderState.Completed]: (
+        <CheckCircleOutlined style={{ color: '#47FF40' }} />
+    ),
+    [OrderState.WaitingForAction]: (
+        <CheckCircleOutlined style={{ color: '#F5C913' }} />
+    ),
+};
 
 export const MyContractsTable: FC<Props> = ({ contracts }) => {
     const navigate = useNavigate();
@@ -25,7 +49,12 @@ export const MyContractsTable: FC<Props> = ({ contracts }) => {
                     fee: contract.fee_percent,
                     date: toLocaleDate(contract.create_time * 1000),
                     contractType: contractName[contract.type],
-                    status: contract.state,
+                    status: (
+                        <Space>
+                            {stateIconMap[contract.state]}{' '}
+                            {stateMap[contract.state]}
+                        </Space>
+                    ),
                     contract,
                 };
             }),
