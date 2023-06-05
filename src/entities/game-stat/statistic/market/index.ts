@@ -27,7 +27,7 @@ export enum e_upg_asset_type {
 }
 
 export const equipmentNames = {
-    [e_upg_asset_type.undefined]: undefined,
+    [e_upg_asset_type.undefined]: 'N/A',
     [e_upg_asset_type.cutter]: 'Cutter',
     [e_upg_asset_type.wandering_reactor]: 'Wandering reactor',
     [e_upg_asset_type.plunging_blocks]: 'Plunging blocks',

@@ -116,7 +116,7 @@ export const EngineerContractorTable: FC<Props> = ({ contracts }) => {
                             : equipmentNames[
                                   normalizeAttrs(contract.attrs).asset_types ||
                                       e_upg_asset_type.undefined
-                              ],
+                              ] || t('N/A'),
                 },
                 {
                     title: t('Rarity'),

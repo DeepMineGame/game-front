@@ -106,7 +106,7 @@ export const MineOwnerLandlordTable: FC<Props> = ({ contracts }) => {
                     },
                 },
                 {
-                    title: 'Rarity',
+                    title: 'Area rarity',
                     dataIndex: 'rarity',
                     key: 'rarity',
                     render: (
@@ -116,12 +116,15 @@ export const MineOwnerLandlordTable: FC<Props> = ({ contracts }) => {
                             | 'Rare'
                             | 'Epic'
                             | 'Legendary'
-                    ) => (
-                        <div
-                            className={styles.rarityMarker}
-                            style={{ background: rarityColorMap[rarity] }}
-                        />
-                    ),
+                    ) =>
+                        rarity ? (
+                            <div
+                                className={styles.rarityMarker}
+                                style={{ background: rarityColorMap[rarity] }}
+                            />
+                        ) : (
+                            t('N/A')
+                        ),
                 },
 
                 {
