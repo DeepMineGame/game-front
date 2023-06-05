@@ -1,17 +1,28 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ShareAltOutlined } from '@ant-design/icons';
-import { Tooltip } from 'antd';
+import { Progress, Tooltip } from 'antd';
 import { useContractType } from 'entities/contract';
-import { raritiesTranslationMap, RarityType } from 'entities/smartcontract';
+import {
+    normalizeAttrs,
+    raritiesTranslationMap,
+    RarityType,
+} from 'entities/smartcontract';
 import { secondsToDays, Text, toLocaleDate } from 'shared/ui';
-import { ContractState, TableWithTitle } from '..';
+import { TableWithTitle } from '..';
 import { ContractProps } from '../../types';
 import styles from './styles.module.scss';
+
+const SUB_LEVELS_MAX_AMOUNT = 5;
 
 const GeneralDataTable: FC<ContractProps> = ({ contract, accountName }) => {
     const { t } = useTranslation();
     const { isOrder } = useContractType(contract);
+    const subLevel = normalizeAttrs(contract.attrs).mine_sublevel;
+    const mineSubLevelToPercent =
+        subLevel &&
+        Number(subLevel) > 0 &&
+        ((Number(subLevel) + 1) / SUB_LEVELS_MAX_AMOUNT) * 100;
 
     const generalData = {
         [t(isOrder ? 'pages.serviceMarket.order.orderId' : 'Contract ID')]: (
@@ -33,6 +44,13 @@ const GeneralDataTable: FC<ContractProps> = ({ contract, accountName }) => {
         [t('components.common.duration')]: `${secondsToDays(
             contract.contract_duration
         )} ${t('components.common.days').toLowerCase()}`,
+        [t('Mine sublevel')]: (
+            <Progress
+                percent={mineSubLevelToPercent || 25}
+                steps={5}
+                showInfo={false}
+            />
+        ),
     };
 
     if (contract.level !== -1) {
