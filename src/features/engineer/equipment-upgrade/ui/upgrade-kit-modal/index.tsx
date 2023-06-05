@@ -83,7 +83,7 @@ const UpgradeKitModal: FC<Props> = ({
                         <>
                             <Text strong>
                                 {isEquipmentSet
-                                    ? Number(commonPrice) * 5
+                                    ? Number(commonPrice)
                                     : commonPrice}{' '}
                                 {t('components.common.button.dme')}
                             </Text>
@@ -105,7 +105,7 @@ const UpgradeKitModal: FC<Props> = ({
                         <>
                             <Text strong>
                                 {isEquipmentSet
-                                    ? Number(uncommonPrice) * 5
+                                    ? Number(uncommonPrice)
                                     : uncommonPrice}{' '}
                                 {t('components.common.button.dme')}
                             </Text>

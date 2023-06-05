@@ -49,12 +49,15 @@ export const MyContractsTable: FC<Props> = ({ contracts }) => {
                     fee: contract.fee_percent,
                     date: toLocaleDate(contract.create_time * 1000),
                     contractType: contractName[contract.type],
-                    status: (
-                        <Space>
-                            {stateIconMap[contract.state]}{' '}
-                            {stateMap[contract.state]}
-                        </Space>
-                    ),
+                    status: {
+                        value: contract.state,
+                        component: (
+                            <Space>
+                                {stateIconMap[contract.state]}{' '}
+                                {stateMap[contract.state]}
+                            </Space>
+                        ),
+                    },
                     contract,
                 };
             }),
@@ -161,7 +164,9 @@ export const MyContractsTable: FC<Props> = ({ contracts }) => {
                     title: t('Status'),
                     dataIndex: 'status',
                     key: 'status',
-                    sorter: (a, b) => a.const - b.cost,
+                    sorter: (a, b) =>
+                        a.status.value.length - b.status.value.length,
+                    render: ({ component }) => component,
                 },
             ]}
             dataSource={dataSource}
