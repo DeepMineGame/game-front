@@ -23,7 +23,7 @@ export const ContractorEngineerTable: FC<Props> = ({ contracts }) => {
                     level: contract.level,
                     key: contract.id,
                     id: contract.id,
-                    fee: contract.fee_percent,
+                    cost: contract.cost_of_execution,
                     date: toLocaleDate(contract.create_time * 1000),
                     rarity: contract.rarity,
                     contract,
@@ -134,10 +134,11 @@ export const ContractorEngineerTable: FC<Props> = ({ contracts }) => {
                         new Date(a.date).getTime() - new Date(b.date).getTime(),
                 },
                 {
-                    title: t('Fee, %'),
-                    dataIndex: 'fee',
-                    key: 'fee',
+                    title: t('Cost, DME'),
+                    dataIndex: 'cost',
+                    key: 'cost',
                     sorter: (a, b) => a.fee - b.fee,
+                    render: (val) => val / 10 ** 8,
                 },
                 {
                     title: t('Minimum fee, DME'),
