@@ -124,7 +124,7 @@ export const ContractorEngineerTable: FC<Props> = ({ contracts }) => {
                     dataIndex: 'level',
                     key: 'level',
                     render: (level) =>
-                        level === -1 ? 'N/A' : `${level} → ${level++}`,
+                        level === -1 ? 'N/A' : `${level - 1} → ${level}`,
                 },
                 {
                     title: t('Creation date'),
