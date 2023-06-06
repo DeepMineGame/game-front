@@ -131,12 +131,16 @@ export const MyContractsTable: FC<Props> = ({ contracts }) => {
                                     </Tooltip>
                                 )}
                                 <Space align="center" size={0}>
-                                    <Link
-                                        to={`/user/${nick}`}
-                                        onClick={stopPropagateEvent}
-                                    >
-                                        {nick}
-                                    </Link>
+                                    {nick ? (
+                                        <Link
+                                            to={`/user/${nick}`}
+                                            onClick={stopPropagateEvent}
+                                        >
+                                            {nick}
+                                        </Link>
+                                    ) : (
+                                        t('Not assigned yet')
+                                    )}
                                 </Space>
                             </Space>
                         );
