@@ -4,15 +4,11 @@ import type { ColumnsType } from 'antd/lib/table';
 import { DoubleRightOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { isEngineerRequestedReport } from 'features/engineer';
-import {
-    ContractDto,
-    InventoryIdType,
-    normalizeAttrs,
-} from 'entities/smartcontract';
+import { ContractDto, normalizeAttrs } from 'entities/smartcontract';
 import { getReport } from 'entities/engineer';
 
 import { Button, Text } from 'shared/ui/ui-kit';
-import { getImagePath, getUpgradeType } from 'shared/lib/utils';
+import { getUpgradeType } from 'shared/lib/utils';
 import { green6 } from 'shared/ui/variables';
 import { BrokenIcon } from 'shared/ui/icons';
 import { StatusTypes } from './types';

@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { Button, Modal } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import { createOrder, serviceMarket } from 'app/router/paths';
-import { ServiceMarketTabIds } from 'app/router/constants';
 import { ContractRole, ContractType } from 'entities/smartcontract';
 import { orderFields } from 'entities/order';
+import { Roles } from 'entities/game-stat';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -31,9 +31,7 @@ export const AddMineOwnerModal: FC<Props> = ({ visible, onCancel }) => {
                 block
                 type="ghost"
                 onClick={() =>
-                    navigate(
-                        `${serviceMarket}?tabId=${ServiceMarketTabIds.landLord}`
-                    )
+                    navigate(`${serviceMarket}?user_role=${Roles.landlord}`)
                 }
             >
                 {t('pages.areaManagement.findMineOwner')}

@@ -1,4 +1,5 @@
 import { RarityType } from '../inventories';
+import { e_upg_asset_type } from '../../../game-stat';
 
 export enum ContractType {
     undefined,
@@ -70,6 +71,7 @@ export type ContractAttrs = {
     finished_by: string;
     improved_kit: 0 | 1;
     level: string;
+    mine_sublevel: string;
     rarity: string;
     schema_type: string;
     status: AttrStatus;
@@ -77,6 +79,7 @@ export type ContractAttrs = {
     upgrade_failed: string;
     engineer_report_fetched?: boolean;
     asset_template_ids: string[];
+    asset_types: e_upg_asset_type;
     upgrade_statuses: AttrStatus[];
     upgrade_levels: string[];
     asset_ids_new: string[];
@@ -126,6 +129,8 @@ export type ContractDto = {
         sub_status: OrderSubState;
         terms_violated: boolean;
         premature_terminated: boolean;
+        land_rarity: 'Common' | 'Uncommon' | 'Rare' | 'Epic' | 'Legendary';
+        mine_level: number;
     };
 };
 

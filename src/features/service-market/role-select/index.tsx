@@ -24,7 +24,43 @@ export const RoleSelect = () => {
     const filter = useStore(filterStore);
     const accountName = useAccountName();
     const { t } = useTranslation();
+    const onChangeSelfRole = useCallback(
+        (role: Roles) => {
+            const isMineOwnerEngineerSelected =
+                role === Roles.mineowner &&
+                filter.search_role === Roles.engineer;
+            const isContractorMineOwnerSelected =
+                role === Roles.contractor &&
+                filter.search_role === Roles.engineer;
+            const firstAvailableSearchRole =
+                availableSelectItemByRole[role][0].value;
 
+            if (isContractorMineOwnerSelected) {
+                return changeFilterEvent({
+                    ...filter,
+                    user_role: role,
+                    asset_types: mineEquipment.join(','),
+                    search_role: firstAvailableSearchRole,
+                });
+            }
+
+            if (isMineOwnerEngineerSelected) {
+                return changeFilterEvent({
+                    ...filter,
+                    user_role: role,
+                    asset_types: e_upg_asset_type.mine,
+                    search_role: firstAvailableSearchRole,
+                });
+            }
+
+            changeFilterEvent({
+                ...filter,
+                user_role: role,
+                search_role: firstAvailableSearchRole,
+            });
+        },
+        [filter]
+    );
     const onChangeSearchRole = useCallback(
         (role) => {
             const isMineOwnerEngineerSelected =
@@ -55,38 +91,6 @@ export const RoleSelect = () => {
         },
         [filter]
     );
-    const onChangeSelfRole = useCallback(
-        (role) => {
-            const isMineOwnerEngineerSelected =
-                role === Roles.mineowner &&
-                filter.search_role === Roles.engineer;
-            const isContractorMineOwnerSelected =
-                role === Roles.contractor &&
-                filter.search_role === Roles.engineer;
-
-            if (isContractorMineOwnerSelected) {
-                return changeFilterEvent({
-                    ...filter,
-                    user_role: role,
-                    asset_types: mineEquipment.join(','),
-                });
-            }
-
-            if (isMineOwnerEngineerSelected) {
-                return changeFilterEvent({
-                    ...filter,
-                    user_role: role,
-                    asset_types: e_upg_asset_type.mine,
-                });
-            }
-
-            changeFilterEvent({
-                ...filter,
-                user_role: role,
-            });
-        },
-        [filter]
-    );
 
     const rolesToSelectOptions = [
         contractorItem,
@@ -97,30 +101,32 @@ export const RoleSelect = () => {
 
     return (
         <Space direction="vertical" size="large">
-            <Space>
-                {t('I am')}{' '}
-                <Select
-                    options={rolesToSelectOptions}
-                    placeholder={t('Select your role')}
-                    value={filter.user_role}
-                    onChange={onChangeSelfRole}
-                >
-                    {t('Select your role')}
-                </Select>{' '}
-                looking for{' '}
-                <Select
-                    options={
-                        filter.user_role !== undefined
-                            ? availableSelectItemByRole[filter.user_role]
-                            : []
-                    }
-                    placeholder={t('Select role')}
-                    value={filter.search_role}
-                    onChange={onChangeSearchRole}
-                >
-                    {t('Select role')}
-                </Select>
-            </Space>
+            {!filter.user && (
+                <Space>
+                    {t('I am')}{' '}
+                    <Select
+                        options={rolesToSelectOptions}
+                        placeholder={t('Select your role')}
+                        value={filter.user_role}
+                        onChange={onChangeSelfRole}
+                    >
+                        {t('Select your role')}
+                    </Select>{' '}
+                    looking for{' '}
+                    <Select
+                        options={
+                            filter.user_role !== undefined
+                                ? availableSelectItemByRole[filter.user_role]
+                                : []
+                        }
+                        placeholder={t('Select role')}
+                        value={filter.search_role}
+                        onChange={onChangeSearchRole}
+                    >
+                        {t('Select role')}
+                    </Select>
+                </Space>
+            )}
             <Space>
                 <Radio.Group defaultValue="all">
                     <Radio

@@ -18,7 +18,6 @@ import { CallToTravelNotification, useSmartContractAction } from 'features';
 import { FrownOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { serviceMarket } from 'app/router/paths';
-import { ServiceMarketTabIds } from 'app/router/constants';
 import {
     activatemine,
     getMinesByOwnerEffect,
@@ -28,6 +27,7 @@ import {
     setupMine,
     UserInfoType,
 } from 'entities/smartcontract';
+import { Roles } from 'entities/game-stat';
 import { MineManagementGate, $userMine } from '../../../models';
 import { ClaimDME } from '../ClaimDME';
 import { UnsetupMine } from '../UnsetupMine';
@@ -74,9 +74,7 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
             return travelConfirm(reloadPage);
         }
         if (!contract) {
-            return navigate(
-                `${serviceMarket}?tabId=${ServiceMarketTabIds.mineOwner}`
-            );
+            return navigate(`${serviceMarket}?user_role=${Roles.mineowner}`);
         }
         if (isMineSetuped || isMineDeactivated) {
             await activateMine();

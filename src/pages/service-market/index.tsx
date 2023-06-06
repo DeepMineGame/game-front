@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Page } from 'shared';
-import { ContractorTab } from 'features';
+import { Contracts } from 'features';
 import { FC } from 'react';
 
 import styles from './styles.module.scss';
@@ -13,7 +13,7 @@ export const ServiceMarketPage: FC = () => {
 
     return (
         <Page className={styles.page} headerTitle={t('SERVICE MARKET')}>
-            <ContractorTab />
+            <Contracts />
         </Page>
     );
 };
