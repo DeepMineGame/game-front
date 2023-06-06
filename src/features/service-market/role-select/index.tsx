@@ -25,35 +25,39 @@ export const RoleSelect = () => {
     const accountName = useAccountName();
     const { t } = useTranslation();
     const onChangeSelfRole = useCallback(
-        (role: Roles) => {
+        (userRole: Roles) => {
+            const searchRole = availableSelectItemByRole[userRole][0].value;
+
             const isMineOwnerEngineerSelected =
-                role === Roles.mineowner &&
-                filter.search_role === Roles.engineer;
+                (userRole === Roles.mineowner || userRole === Roles.engineer) &&
+                (searchRole === Roles.mineowner ||
+                    searchRole === Roles.engineer);
+
             const isContractorEngineerSelected =
-                role === Roles.contractor &&
-                filter.search_role === Roles.engineer;
-            const firstAvailableSearchRole =
-                availableSelectItemByRole[role][0].value;
+                (userRole === Roles.contractor ||
+                    userRole === Roles.engineer) &&
+                (searchRole === Roles.contractor ||
+                    searchRole === Roles.engineer);
 
             if (isContractorEngineerSelected) {
                 return changeFilterEvent({
-                    user_role: role,
+                    user_role: userRole,
                     asset_types: mineEquipment.join(','),
-                    search_role: firstAvailableSearchRole,
+                    search_role: searchRole,
                 });
             }
 
             if (isMineOwnerEngineerSelected) {
                 return changeFilterEvent({
-                    user_role: role,
+                    user_role: userRole,
                     asset_types: e_upg_asset_type.mine,
-                    search_role: firstAvailableSearchRole,
+                    search_role: searchRole,
                 });
             }
 
             changeFilterEvent({
-                user_role: role,
-                search_role: firstAvailableSearchRole,
+                user_role: userRole,
+                search_role: searchRole,
             });
         },
         [filter]
