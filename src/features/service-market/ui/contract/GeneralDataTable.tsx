@@ -15,7 +15,7 @@ import styles from './styles.module.scss';
 
 const SUB_LEVELS_MAX_AMOUNT = 5;
 
-const GeneralDataTable: FC<ContractProps> = ({ contract, accountName }) => {
+const GeneralDataTable: FC<ContractProps> = ({ contract }) => {
     const { t } = useTranslation();
     const { isOrder } = useContractType(contract);
     const subLevel = normalizeAttrs(contract.attrs).mine_sublevel;

@@ -23,7 +23,6 @@ import {
     getAtomicHubUrlToSection,
 } from 'app/constants';
 import { useStore } from 'effector-react';
-import { ServiceMarketTabIds } from 'app/router/constants';
 import {
     ContractType,
     ContractRole,
@@ -31,6 +30,7 @@ import {
     LOCATION_TO_ID,
 } from 'entities/smartcontract';
 import { orderFields } from 'entities/order';
+import { Roles } from 'entities/game-stat';
 import {
     mineOwnerCabinState,
     mineOwnerLandlordContractForUserStore,
@@ -59,9 +59,7 @@ export function useActionsButton() {
             <Button
                 type="link"
                 onClick={() =>
-                    navigate(
-                        `${serviceMarket}?tabId=${ServiceMarketTabIds.mineOwner}`
-                    )
+                    navigate(`${serviceMarket}?search_role=${Roles.mineowner}`)
                 }
             >
                 {isDesktop

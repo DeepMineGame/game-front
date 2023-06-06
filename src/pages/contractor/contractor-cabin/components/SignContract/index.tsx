@@ -4,9 +4,9 @@ import cn from 'classnames';
 import { Button } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import { createOrder, serviceMarket } from 'app/router/paths';
-import { ServiceMarketTabIds } from 'app/router/constants';
 import { ContractRole, ContractType } from 'entities/smartcontract';
 import { orderFields } from 'entities/order';
+import { Roles } from 'entities/game-stat';
 import contractorStyles from '../../styles.module.scss';
 import styles from './styles.module.scss';
 
@@ -31,7 +31,7 @@ export const SignContract: FC = () => {
                     className={cn(contractorStyles.coloredText)}
                     onClick={() =>
                         navigate(
-                            `${serviceMarket}?tabId=${ServiceMarketTabIds.contractor}`
+                            `${serviceMarket}?user_role=${Roles.contractor}`
                         )
                     }
                 >

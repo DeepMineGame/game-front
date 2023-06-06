@@ -9,6 +9,7 @@ import {
     MineOwnerEngineerTable,
     MineOwnerLandlordTable,
     MyContractsTable,
+    useQuery,
 } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { Empty, Skeleton } from 'antd';
@@ -20,12 +21,16 @@ import {
     getContractsByFilterEffect,
 } from './model';
 
-const defaultFilter = {
-    statuses: OrderStatus.new,
-    user_role: Roles.contractor,
-    search_role: Roles.mineowner,
-};
 export const ContractsRenderByRole: FC = () => {
+    const query = useQuery();
+    const searchRoleFromQuery = query.get('search_role') as Roles;
+    const userRoleFromQuery = query.get('user_role') as Roles;
+
+    const defaultFilter = {
+        statuses: OrderStatus.new,
+        user_role: userRoleFromQuery || Roles.contractor,
+        search_role: searchRoleFromQuery || Roles.mineowner,
+    };
     useGate(ContractsGate, defaultFilter);
 
     const { user_role, search_role, user } = useStore(filterStore);

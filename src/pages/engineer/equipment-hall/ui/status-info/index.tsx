@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Space, Alert } from 'antd';
 import { serviceMarket } from 'app/router/paths';
-import { ServiceMarketTabIds } from 'app/router/constants';
 import { EngineerStateBadge } from 'features/engineer';
 import { CabinState, CabinStatus } from 'entities/engineer';
 import { ContractDto } from 'entities/smartcontract';
+import { Roles } from 'entities/game-stat';
 import { Button, LoadingSpin, Text, Title } from 'shared/ui/ui-kit';
 import { CountDown } from 'shared/ui';
 import { useReloadPage } from 'shared/lib/hooks';
@@ -100,7 +100,7 @@ const StatusInfo: FC<Props> = ({ state, status, contract }) => {
                                 type="primary"
                                 onClick={() =>
                                     navigate(
-                                        `${serviceMarket}?tabId=${ServiceMarketTabIds.levelUpgrade}`
+                                        `${serviceMarket}?user_role=${Roles.engineer}`
                                     )
                                 }
                             >
