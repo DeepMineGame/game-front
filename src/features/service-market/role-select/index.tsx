@@ -29,15 +29,14 @@ export const RoleSelect = () => {
             const isMineOwnerEngineerSelected =
                 role === Roles.mineowner &&
                 filter.search_role === Roles.engineer;
-            const isContractorMineOwnerSelected =
+            const isContractorEngineerSelected =
                 role === Roles.contractor &&
                 filter.search_role === Roles.engineer;
             const firstAvailableSearchRole =
                 availableSelectItemByRole[role][0].value;
 
-            if (isContractorMineOwnerSelected) {
+            if (isContractorEngineerSelected) {
                 return changeFilterEvent({
-                    ...filter,
                     user_role: role,
                     asset_types: mineEquipment.join(','),
                     search_role: firstAvailableSearchRole,
@@ -46,7 +45,6 @@ export const RoleSelect = () => {
 
             if (isMineOwnerEngineerSelected) {
                 return changeFilterEvent({
-                    ...filter,
                     user_role: role,
                     asset_types: e_upg_asset_type.mine,
                     search_role: firstAvailableSearchRole,
@@ -54,7 +52,6 @@ export const RoleSelect = () => {
             }
 
             changeFilterEvent({
-                ...filter,
                 user_role: role,
                 search_role: firstAvailableSearchRole,
             });
