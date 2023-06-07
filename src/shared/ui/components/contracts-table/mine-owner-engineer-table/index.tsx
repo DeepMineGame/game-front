@@ -1,6 +1,11 @@
 import React, { FC, useMemo, SyntheticEvent } from 'react';
 import { t } from 'i18next';
-import { DiscordIcon, rarityColorMapByEnum, useAccountName } from 'shared';
+import {
+    DiscordIcon,
+    rarityColorMapByEnum,
+    useAccountName,
+    useSearchByNickNameTableProps,
+} from 'shared';
 import { Space, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
 import { CopyOutlined } from '@ant-design/icons';
@@ -13,6 +18,7 @@ import styles from '../styles.module.scss';
 type Props = { contracts: ContractDto[] | null };
 
 export const MineOwnerEngineerTable: FC<Props> = ({ contracts }) => {
+    const nicknameSearchProps = useSearchByNickNameTableProps();
     const navigate = useNavigate();
     const account = useAccountName();
     const dataSource = useMemo(
@@ -59,6 +65,7 @@ export const MineOwnerEngineerTable: FC<Props> = ({ contracts }) => {
                     title: t('Engineer'),
                     dataIndex: 'nickName',
                     key: 'nickName',
+                    ...nicknameSearchProps,
                     render: (_, { contract }) => {
                         return (
                             <Space align="start" size="large">

@@ -11,3 +11,4 @@ export * from './useUserLocation';
 export * from './useRepair';
 export * from './use-actions';
 export * from './useTravelConfirm';
+export { useSearchByNickNameTableProps } from './use-search-by-nickname-table-props';
