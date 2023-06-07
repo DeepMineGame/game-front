@@ -1,12 +1,16 @@
-import React, { FC, useMemo, SyntheticEvent } from 'react';
+import React, { FC, SyntheticEvent, useMemo } from 'react';
 import { t } from 'i18next';
-import { DiscordIcon, useAccountName } from 'shared';
+import {
+    DiscordIcon,
+    useAccountName,
+    useSearchByNickNameTableProps,
+} from 'shared';
 import { Progress, Space, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
 import { CopyOutlined } from '@ant-design/icons';
 import { ContractDto, normalizeAttrs } from 'entities/smartcontract';
 
-import { Link, Table, Tag } from '../../../ui-kit';
+import { Link, Table } from '../../../ui-kit';
 import { toLocaleDate } from '../../../utils';
 import styles from '../styles.module.scss';
 
@@ -24,6 +28,7 @@ const SUB_LEVELS_MAX_AMOUNT = 5;
 export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
     const navigate = useNavigate();
     const account = useAccountName();
+    const nicknameSearchProps = useSearchByNickNameTableProps();
     const dataSource = useMemo(
         () =>
             contracts?.map((contract) => {
@@ -69,6 +74,7 @@ export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
                     title: t('Mine owner'),
                     dataIndex: 'nickName',
                     key: 'nickName',
+                    ...nicknameSearchProps,
                     render: (value, { contract }) => {
                         return (
                             <Space align="start" size="large">

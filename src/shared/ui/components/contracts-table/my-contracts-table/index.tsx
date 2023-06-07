@@ -1,6 +1,10 @@
 import React, { FC, useMemo, SyntheticEvent } from 'react';
 import { t } from 'i18next';
-import { DiscordIcon, useAccountName } from 'shared';
+import {
+    DiscordIcon,
+    useAccountName,
+    useSearchByNickNameTableProps,
+} from 'shared';
 import { Space, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
 import {
@@ -37,6 +41,8 @@ export const stateIconMap = {
 };
 
 export const MyContractsTable: FC<Props> = ({ contracts }) => {
+    const nicknameSearchProps = useSearchByNickNameTableProps();
+
     const navigate = useNavigate();
     const accountName = useAccountName();
     const account = useAccountName();
@@ -88,6 +94,7 @@ export const MyContractsTable: FC<Props> = ({ contracts }) => {
                 },
                 {
                     title: t('Nickname'),
+                    ...nicknameSearchProps,
                     dataIndex: 'nickName',
                     key: 'nickName',
                     render: (_, { contract }) => {
