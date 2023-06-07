@@ -59,7 +59,9 @@ export function useActionsButton() {
             <Button
                 type="link"
                 onClick={() =>
-                    navigate(`${serviceMarket}?search_role=${Roles.mineowner}`)
+                    navigate(
+                        `${serviceMarket}?user_role=${Roles.mineowner}&search_role=${Roles.landlord}`
+                    )
                 }
             >
                 {isDesktop
