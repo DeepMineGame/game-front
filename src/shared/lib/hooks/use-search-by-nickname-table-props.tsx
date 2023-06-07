@@ -32,7 +32,8 @@ export function useSearchByNickNameTableProps() {
                 <Input
                     ref={searchInput}
                     placeholder="Search nickname"
-                    value={selectedKeys[0] || filter.nickname}
+                    defaultValue={filter.nickname}
+                    value={selectedKeys[0]}
                     onChange={(e) =>
                         setSelectedKeys(e.target.value ? [e.target.value] : [])
                     }
