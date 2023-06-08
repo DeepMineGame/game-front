@@ -127,6 +127,7 @@ export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
                     dataIndex: 'level',
                     key: 'level',
                     render: (level) => (level === -1 ? 'N/A' : level),
+                    sorter: (a, b) => a.level - b.level,
                 },
                 {
                     title: 'Sublevel',
@@ -144,6 +145,7 @@ export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
                             />
                         );
                     },
+                    sorter: (a, b) => a.subLevel - b.subLevel,
                 },
                 {
                     title: t('Creation date'),

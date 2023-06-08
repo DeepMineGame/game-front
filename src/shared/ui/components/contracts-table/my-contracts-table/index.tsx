@@ -220,8 +220,6 @@ export const MyContractsTable: FC<Props> = ({ contracts }) => {
                         },
                     ],
                     onFilter: (value, record) => record.status.value === value,
-                    sorter: (a, b) =>
-                        a.status.value.length - b.status.value.length,
                     render: ({ component }) => component,
                 },
             ]}

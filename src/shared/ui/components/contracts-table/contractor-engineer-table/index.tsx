@@ -2,7 +2,6 @@ import React, { FC, useMemo, SyntheticEvent } from 'react';
 import { t } from 'i18next';
 import {
     DiscordIcon,
-    rarityColorMapByEnum,
     useAccountName,
     useSearchByNickNameTableProps,
 } from 'shared';
@@ -119,6 +118,7 @@ export const ContractorEngineerTable: FC<Props> = ({ contracts }) => {
                     key: 'level',
                     render: (level) =>
                         level === -1 ? 'N/A' : `${level - 1} → ${level}`,
+                    sorter: (a, b) => a.level - b.level,
                 },
                 {
                     title: t('Creation date'),
