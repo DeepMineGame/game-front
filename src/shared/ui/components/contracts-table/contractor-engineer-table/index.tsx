@@ -14,6 +14,7 @@ import { ContractDto } from 'entities/smartcontract';
 import { Link, Table } from '../../../ui-kit';
 import { toLocaleDate } from '../../../utils';
 import styles from '../styles.module.scss';
+import { rarityColumnWithSorterProps } from '../lib/rarity-column-with-sorter-props';
 
 type Props = { contracts: ContractDto[] | null };
 
@@ -111,22 +112,7 @@ export const ContractorEngineerTable: FC<Props> = ({ contracts }) => {
                         );
                     },
                 },
-                {
-                    title: t('Rarity'),
-                    dataIndex: 'rarity',
-                    key: 'rarity',
-                    render: (rarity: -1 | 1 | 2 | 3 | 4 | 5) =>
-                        rarity === -1 ? (
-                            'N/A'
-                        ) : (
-                            <div
-                                className={styles.rarityMarker}
-                                style={{
-                                    background: rarityColorMapByEnum[rarity],
-                                }}
-                            />
-                        ),
-                },
+                rarityColumnWithSorterProps,
                 {
                     title: t('Level upgrade'),
                     dataIndex: 'level',

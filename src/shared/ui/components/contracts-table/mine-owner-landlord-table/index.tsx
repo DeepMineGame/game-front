@@ -13,7 +13,7 @@ import { ContractDto, normalizeAttrs } from 'entities/smartcontract';
 import { Link, Table } from '../../../ui-kit';
 import { toLocaleDate } from '../../../utils';
 import styles from '../styles.module.scss';
-import { rarityColumnWithSorterProps } from '../lib';
+import { areaRarityColumnWithSorterProps } from '../lib';
 
 type Props = { contracts: ContractDto[] | null };
 
@@ -112,7 +112,7 @@ export const MineOwnerLandlordTable: FC<Props> = ({ contracts }) => {
                         );
                     },
                 },
-                rarityColumnWithSorterProps,
+                areaRarityColumnWithSorterProps,
                 {
                     title: t('Creation date'),
                     dataIndex: 'date',

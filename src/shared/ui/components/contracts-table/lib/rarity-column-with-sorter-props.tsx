@@ -1,41 +1,42 @@
-import { t } from 'i18next';
-import React from 'react';
+import { RarityType } from 'entities/smartcontract';
 import styles from '../styles.module.scss';
-import { rarityColorMap } from '../contractor-mine-owner-table';
+import { rarityColorMapByEnum } from '..';
 
 export const rarityColumnWithSorterProps = {
-    title: 'Area rarity',
+    title: 'Rarity',
     dataIndex: 'rarity',
     key: 'rarity',
-    render: (rarity: 'Common' | 'Uncommon' | 'Rare' | 'Epic' | 'Legendary') =>
-        rarity ? (
+    render: (rarity: -1 | RarityType) =>
+        rarity === -1 ? (
+            'N/A'
+        ) : (
             <div
                 className={styles.rarityMarker}
-                style={{ background: rarityColorMap[rarity] }}
+                style={{
+                    background: rarityColorMapByEnum[rarity],
+                }}
             />
-        ) : (
-            t('N/A')
         ),
     filters: [
         {
             text: 'Common',
-            value: 'Common',
+            value: RarityType.common,
         },
         {
             text: 'Uncommon',
-            value: 'Uncommon',
+            value: RarityType.uncommon,
         },
         {
             text: 'Rare',
-            value: 'Rare',
+            value: RarityType.rare,
         },
         {
             text: 'Epic',
-            value: 'Epic',
+            value: RarityType.epic,
         },
         {
             text: 'Legendary',
-            value: 'Legendary',
+            value: RarityType.legendary,
         },
     ],
     onFilter: (value: string | number | boolean, record: any) =>

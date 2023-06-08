@@ -1,4 +1,4 @@
-import React, { FC, useMemo, SyntheticEvent } from 'react';
+import React, { FC, SyntheticEvent, useMemo } from 'react';
 import { t } from 'i18next';
 import {
     DiscordIcon,
@@ -9,11 +9,16 @@ import {
 import { Progress, Space, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
 import { CopyOutlined } from '@ant-design/icons';
-import { ContractDto, normalizeAttrs } from 'entities/smartcontract';
+import {
+    ContractDto,
+    normalizeAttrs,
+    RarityType,
+} from 'entities/smartcontract';
 
 import { Link, Table } from '../../../ui-kit';
 import { toLocaleDate } from '../../../utils';
 import styles from '../styles.module.scss';
+import { rarityColumnWithSorterProps } from '../lib/rarity-column-with-sorter-props';
 
 type Props = { contracts: ContractDto[] | null };
 
@@ -115,22 +120,7 @@ export const LandlordMineOwnerTable: FC<Props> = ({ contracts }) => {
                         );
                     },
                 },
-                {
-                    title: 'Rarity',
-                    dataIndex: 'rarity',
-                    key: 'rarity',
-                    render: (rarity: -1 | 1 | 2 | 3 | 4 | 5) =>
-                        rarity === -1 ? (
-                            'N/A'
-                        ) : (
-                            <div
-                                className={styles.rarityMarker}
-                                style={{
-                                    background: rarityColorMapByEnum[rarity],
-                                }}
-                            />
-                        ),
-                },
+                rarityColumnWithSorterProps,
                 {
                     title: 'Mine level',
                     dataIndex: 'level',
