@@ -16,6 +16,7 @@ import {
 import {
     ContractDto,
     contractName,
+    ContractType,
     OrderState,
     stateMap,
 } from 'entities/smartcontract';
@@ -157,6 +158,27 @@ export const MyContractsTable: FC<Props> = ({ contracts }) => {
                     title: t('Contract type'),
                     dataIndex: 'contractType',
                     key: 'contractType',
+                    filters: [
+                        {
+                            text: contractName[ContractType.landlord_mineowner],
+                            value: contractName[
+                                ContractType.landlord_mineowner
+                            ],
+                        },
+                        {
+                            text: contractName[
+                                ContractType.mineowner_contractor
+                            ],
+                            value: contractName[
+                                ContractType.mineowner_contractor
+                            ],
+                        },
+                        {
+                            text: contractName[ContractType.level_upgrade],
+                            value: contractName[ContractType.level_upgrade],
+                        },
+                    ],
+                    onFilter: (value, record) => record.contractType === value,
                 },
                 {
                     title: t('Creation date'),
