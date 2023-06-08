@@ -1,4 +1,4 @@
-import React, { FC, useMemo, SyntheticEvent } from 'react';
+import React, { FC, SyntheticEvent, useMemo } from 'react';
 import { t } from 'i18next';
 import {
     DiscordIcon,
@@ -175,6 +175,29 @@ export const MyContractsTable: FC<Props> = ({ contracts }) => {
                     title: t('Status'),
                     dataIndex: 'status',
                     key: 'status',
+                    filters: [
+                        {
+                            text: stateMap[OrderState.OpenOrder],
+                            value: OrderState.OpenOrder,
+                        },
+                        {
+                            text: stateMap[OrderState.ValidContract],
+                            value: OrderState.ValidContract,
+                        },
+                        {
+                            text: stateMap[OrderState.Completed],
+                            value: OrderState.Completed,
+                        },
+                        {
+                            text: stateMap[OrderState.Terminated],
+                            value: OrderState.Terminated,
+                        },
+                        {
+                            text: stateMap[OrderState.WaitingForAction],
+                            value: OrderState.WaitingForAction,
+                        },
+                    ],
+                    onFilter: (value, record) => record.status.value === value,
                     sorter: (a, b) =>
                         a.status.value.length - b.status.value.length,
                     render: ({ component }) => component,
