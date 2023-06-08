@@ -2,7 +2,6 @@ import React, { FC, useMemo, SyntheticEvent } from 'react';
 import { t } from 'i18next';
 import {
     DiscordIcon,
-    rarityColorMap,
     useAccountName,
     useSearchByNickNameTableProps,
 } from 'shared';
@@ -14,6 +13,7 @@ import { ContractDto, normalizeAttrs } from 'entities/smartcontract';
 import { Link, Table } from '../../../ui-kit';
 import { toLocaleDate } from '../../../utils';
 import styles from '../styles.module.scss';
+import { rarityColumnWithSorterProps } from '../lib';
 
 type Props = { contracts: ContractDto[] | null };
 
@@ -112,28 +112,7 @@ export const MineOwnerLandlordTable: FC<Props> = ({ contracts }) => {
                         );
                     },
                 },
-                {
-                    title: 'Area rarity',
-                    dataIndex: 'rarity',
-                    key: 'rarity',
-                    render: (
-                        rarity:
-                            | 'Common'
-                            | 'Uncommon'
-                            | 'Rare'
-                            | 'Epic'
-                            | 'Legendary'
-                    ) =>
-                        rarity ? (
-                            <div
-                                className={styles.rarityMarker}
-                                style={{ background: rarityColorMap[rarity] }}
-                            />
-                        ) : (
-                            t('N/A')
-                        ),
-                },
-
+                rarityColumnWithSorterProps,
                 {
                     title: t('Creation date'),
                     dataIndex: 'date',
