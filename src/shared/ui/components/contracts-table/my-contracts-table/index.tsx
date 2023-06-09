@@ -1,4 +1,4 @@
-import React, { FC, useMemo, SyntheticEvent } from 'react';
+import React, { FC, SyntheticEvent, useMemo } from 'react';
 import { t } from 'i18next';
 import {
     DiscordIcon,
@@ -16,6 +16,7 @@ import {
 import {
     ContractDto,
     contractName,
+    ContractType,
     OrderState,
     stateMap,
 } from 'entities/smartcontract';
@@ -157,6 +158,27 @@ export const MyContractsTable: FC<Props> = ({ contracts }) => {
                     title: t('Contract type'),
                     dataIndex: 'contractType',
                     key: 'contractType',
+                    filters: [
+                        {
+                            text: contractName[ContractType.landlord_mineowner],
+                            value: contractName[
+                                ContractType.landlord_mineowner
+                            ],
+                        },
+                        {
+                            text: contractName[
+                                ContractType.mineowner_contractor
+                            ],
+                            value: contractName[
+                                ContractType.mineowner_contractor
+                            ],
+                        },
+                        {
+                            text: contractName[ContractType.level_upgrade],
+                            value: contractName[ContractType.level_upgrade],
+                        },
+                    ],
+                    onFilter: (value, record) => record.contractType === value,
                 },
                 {
                     title: t('Creation date'),
@@ -175,8 +197,29 @@ export const MyContractsTable: FC<Props> = ({ contracts }) => {
                     title: t('Status'),
                     dataIndex: 'status',
                     key: 'status',
-                    sorter: (a, b) =>
-                        a.status.value.length - b.status.value.length,
+                    filters: [
+                        {
+                            text: stateMap[OrderState.OpenOrder],
+                            value: OrderState.OpenOrder,
+                        },
+                        {
+                            text: stateMap[OrderState.ValidContract],
+                            value: OrderState.ValidContract,
+                        },
+                        {
+                            text: stateMap[OrderState.Completed],
+                            value: OrderState.Completed,
+                        },
+                        {
+                            text: stateMap[OrderState.Terminated],
+                            value: OrderState.Terminated,
+                        },
+                        {
+                            text: stateMap[OrderState.WaitingForAction],
+                            value: OrderState.WaitingForAction,
+                        },
+                    ],
+                    onFilter: (value, record) => record.status.value === value,
                     render: ({ component }) => component,
                 },
             ]}

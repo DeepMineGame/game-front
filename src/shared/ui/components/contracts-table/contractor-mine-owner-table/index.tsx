@@ -13,6 +13,7 @@ import { ContractDto, normalizeAttrs } from 'entities/smartcontract';
 import { Link, Table } from '../../../ui-kit';
 import { toLocaleDate } from '../../../utils';
 import styles from '../styles.module.scss';
+import { areaRarityColumnWithSorterProps } from '../lib';
 
 type Props = { contracts: ContractDto[] | null };
 
@@ -120,29 +121,13 @@ export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
                         );
                     },
                 },
-                {
-                    title: 'Area rarity',
-                    dataIndex: 'rarity',
-                    key: 'rarity',
-                    render: (
-                        rarity:
-                            | 'Common'
-                            | 'Uncommon'
-                            | 'Rare'
-                            | 'Epic'
-                            | 'Legendary'
-                    ) => (
-                        <div
-                            className={styles.rarityMarker}
-                            style={{ background: rarityColorMap[rarity] }}
-                        />
-                    ),
-                },
+                areaRarityColumnWithSorterProps,
                 {
                     title: 'Mine level',
                     dataIndex: 'level',
                     key: 'level',
                     render: (level) => (level === -1 ? 'N/A' : level),
+                    sorter: (a, b) => a.level - b.level,
                 },
                 {
                     title: 'Sublevel',
@@ -160,6 +145,7 @@ export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
                             />
                         );
                     },
+                    sorter: (a, b) => a.subLevel - b.subLevel,
                 },
                 {
                     title: t('Creation date'),
