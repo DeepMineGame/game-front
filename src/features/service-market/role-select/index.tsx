@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { useStore } from 'effector-react';
 import { useAccountName } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { e_upg_asset_type, OrderStatus, Roles } from 'entities/game-stat';
+import { e_upg_asset_type, Roles } from 'entities/game-stat';
 import { changeFilterEvent, filterStore } from '../contractor-table/model';
 import {
     availableSelectItemByRole,
@@ -133,7 +133,6 @@ export const RoleSelect = () => {
                     <Radio
                         onChange={() => {
                             changeFilterEvent({
-                                statuses: OrderStatus.new,
                                 user_role: Roles.contractor,
                                 search_role: Roles.mineowner,
                             });

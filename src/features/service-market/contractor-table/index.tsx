@@ -27,7 +27,6 @@ export const ContractsRenderByRole: FC = () => {
     const userRoleFromQuery = query.get('user_role') as Roles;
 
     const defaultFilter = {
-        statuses: OrderStatus.new,
         user_role: userRoleFromQuery || Roles.contractor,
         search_role: searchRoleFromQuery || Roles.mineowner,
     };
