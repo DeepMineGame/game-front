@@ -44,7 +44,6 @@ export const RoleSelect = () => {
                     user_role: userRole,
                     asset_types: mineEquipment.join(','),
                     search_role: searchRole,
-                    user: accountName,
                 });
             }
 
@@ -53,14 +52,12 @@ export const RoleSelect = () => {
                     user_role: userRole,
                     asset_types: e_upg_asset_type.mine,
                     search_role: searchRole,
-                    user: accountName,
                 });
             }
 
             changeFilterEvent({
                 user_role: userRole,
                 search_role: searchRole,
-                user: accountName,
             });
         },
         [filter]
@@ -138,7 +135,6 @@ export const RoleSelect = () => {
                             changeFilterEvent({
                                 user_role: Roles.contractor,
                                 search_role: Roles.mineowner,
-                                user: accountName,
                             });
                         }}
                         value="all"

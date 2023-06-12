@@ -9,12 +9,11 @@ import {
     MineOwnerEngineerTable,
     MineOwnerLandlordTable,
     MyContractsTable,
-    useAccountName,
     useQuery,
 } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { Empty, Skeleton } from 'antd';
-import { OrderStatus, Roles } from 'entities/game-stat';
+import { Roles } from 'entities/game-stat';
 import {
     ContractsGate,
     contractsStore,
@@ -26,12 +25,10 @@ export const ContractsRenderByRole: FC = () => {
     const query = useQuery();
     const searchRoleFromQuery = query.get('search_role') as Roles;
     const userRoleFromQuery = query.get('user_role') as Roles;
-    const accountName = useAccountName();
 
     const defaultFilter = {
         user_role: userRoleFromQuery || Roles.contractor,
         search_role: searchRoleFromQuery || Roles.mineowner,
-        user: accountName,
     };
     useGate(ContractsGate, defaultFilter);
 
