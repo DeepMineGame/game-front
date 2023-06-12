@@ -8,7 +8,6 @@ import { ContractProps } from '../../types';
 import { StatusHeader } from '../../ui/status-header';
 import { useSignButtons } from '../useSignButtons';
 import { SignLevelUpgradeOrder } from '../../ui/actions';
-// import { ContractAlerts } from './components/ContractAlerts';
 import { AssetsInfo } from '../../ui/contract/level-upgrade/AssetsInfo';
 import { useLevelUpgradeContract } from './constants';
 
@@ -39,34 +38,12 @@ const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
                 contract={contract}
                 extra={[
                     buttons,
-                    // [
-                    //     canTerminate && (
-                    //         <TerminateContract
-                    //             contractId={contract.id}
-                    //             accountName={accountName}
-                    //         />
-                    //     ),
                     canGetReport && (
                         <UpgradeReport
                             accountName={accountName}
                             contract={contract}
                         />
                     ),
-                    //     !canDeleteOrder &&
-                    //         contract.computed?.status !==
-                    //             OrderState.ValidContract && (
-                    //             <SignLevelUpgradeOrder
-                    //                 contract={contract}
-                    //                 accountName={accountName}
-                    //             />
-                    //         ),
-                    //     canDeleteOrder && (
-                    //         <DeleteOrder
-                    //             accountName={accountName}
-                    //             contractId={contract.id}
-                    //         />
-                    //     ),
-                    // ]
                 ]}
             />
 
@@ -79,13 +56,6 @@ const LevelUpgradeContract: FC<ContractProps> = ({ contract, accountName }) => {
                                 accountName={accountName}
                             />
                         </Col>
-
-                        {/* <Col span={24}> */}
-                        {/*    <ContractAlerts */}
-                        {/*        contract={contract} */}
-                        {/*        accountName={accountName} */}
-                        {/*    /> */}
-                        {/* </Col> */}
                     </Row>
                 </Col>
                 <Col xs={24} md={12}>

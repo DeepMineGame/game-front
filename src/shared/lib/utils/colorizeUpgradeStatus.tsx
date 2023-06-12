@@ -9,7 +9,7 @@ export const colorizeUpgradeStatus = (status?: AttrStatus) => {
         return <span style={{ color: red6 }}>{status}</span>;
     }
     if (status === 'failed_with_broke') {
-        return <span style={{ color: red6 }}>{status}</span>;
+        return <span style={{ color: red6 }}>failed with broke</span>;
     }
     if (status === 'failed') {
         return <span style={{ color: neutral9 }}>{status}</span>;
