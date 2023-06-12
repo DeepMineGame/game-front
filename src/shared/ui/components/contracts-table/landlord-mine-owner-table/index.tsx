@@ -2,18 +2,13 @@ import React, { FC, SyntheticEvent, useMemo } from 'react';
 import { t } from 'i18next';
 import {
     DiscordIcon,
-    rarityColorMapByEnum,
     useAccountName,
     useSearchByNickNameTableProps,
 } from 'shared';
 import { Progress, Space, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
 import { CopyOutlined } from '@ant-design/icons';
-import {
-    ContractDto,
-    normalizeAttrs,
-    RarityType,
-} from 'entities/smartcontract';
+import { ContractDto, normalizeAttrs } from 'entities/smartcontract';
 
 import { Link, Table } from '../../../ui-kit';
 import { toLocaleDate } from '../../../utils';
