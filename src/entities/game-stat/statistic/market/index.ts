@@ -37,10 +37,9 @@ export const equipmentNames = {
 };
 
 export type GetMarketOrdersParams = {
-    user?: string;
     user_role?: Roles;
     search_role?: Roles;
-    statuses?: OrderStatus;
+    states?: OrderStatus;
     levels?: string;
     rarities?: string;
     nickname?: string;
@@ -48,7 +47,7 @@ export type GetMarketOrdersParams = {
     order_by?: string;
     offers?: true;
     asset_types?: string | number;
-    requester?: string;
+    user?: string;
 };
 
 export const getMarketOrders = async (params: GetMarketOrdersParams) => {
