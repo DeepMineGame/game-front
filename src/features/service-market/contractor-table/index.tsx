@@ -31,7 +31,7 @@ export const ContractsRenderByRole: FC = () => {
     const defaultFilter = {
         user_role: userRoleFromQuery || Roles.contractor,
         search_role: searchRoleFromQuery || Roles.mineowner,
-        requester: accountName,
+        user: accountName,
     };
     useGate(ContractsGate, defaultFilter);
 
