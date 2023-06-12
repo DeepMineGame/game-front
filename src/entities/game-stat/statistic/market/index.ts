@@ -48,6 +48,7 @@ export type GetMarketOrdersParams = {
     order_by?: string;
     offers?: true;
     asset_types?: string | number;
+    requester?: string;
 };
 
 export const getMarketOrders = async (params: GetMarketOrdersParams) => {
