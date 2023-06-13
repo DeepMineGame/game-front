@@ -1,4 +1,4 @@
-import { createEvent, createStore, forward } from 'effector';
+import { createEvent, createStore } from 'effector';
 
 export const enum RadioButtonContractTypeNames {
     'All contracts',

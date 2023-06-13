@@ -27,7 +27,6 @@ const mineEquipment = [
 ];
 export const RoleSelect = () => {
     const activeRadioButton = useStore(activeRadioButton$);
-    console.log(activeRadioButton);
     const filter = useStore(filterStore);
     const accountName = useAccountName();
     const { t } = useTranslation();
@@ -112,7 +111,8 @@ export const RoleSelect = () => {
 
     return (
         <Space direction="vertical" size="large">
-            {!filter.user && (
+            {activeRadioButton ===
+                RadioButtonContractTypeNames['All contracts'] && (
                 <Space>
                     {t('I am')}{' '}
                     <Select
