@@ -12,6 +12,11 @@ import {
     landLordItem,
     mineOwnerItem,
 } from './lib';
+import {
+    activeRadioButton$,
+    changeContractTypeRadioButtonEvent,
+    RadioButtonContractTypeNames,
+} from './model';
 
 const mineEquipment = [
     e_upg_asset_type.cutter,
@@ -21,6 +26,8 @@ const mineEquipment = [
     e_upg_asset_type.wandering_reactor,
 ];
 export const RoleSelect = () => {
+    const activeRadioButton = useStore(activeRadioButton$);
+    console.log(activeRadioButton);
     const filter = useStore(filterStore);
     const accountName = useAccountName();
     const { t } = useTranslation();
@@ -44,6 +51,7 @@ export const RoleSelect = () => {
                     user_role: userRole,
                     asset_types: mineEquipment.join(','),
                     search_role: searchRole,
+                    user: accountName,
                 });
             }
 
@@ -52,12 +60,14 @@ export const RoleSelect = () => {
                     user_role: userRole,
                     asset_types: e_upg_asset_type.mine,
                     search_role: searchRole,
+                    user: accountName,
                 });
             }
 
             changeFilterEvent({
                 user_role: userRole,
                 search_role: searchRole,
+                user: accountName,
             });
         },
         [filter]
@@ -129,15 +139,19 @@ export const RoleSelect = () => {
                 </Space>
             )}
             <Space>
-                <Radio.Group defaultValue="all">
+                <Radio.Group value={activeRadioButton}>
                     <Radio
                         onChange={() => {
                             changeFilterEvent({
                                 user_role: Roles.contractor,
                                 search_role: Roles.mineowner,
+                                user: accountName,
                             });
+                            changeContractTypeRadioButtonEvent(
+                                RadioButtonContractTypeNames['All contracts']
+                            );
                         }}
-                        value="all"
+                        value={RadioButtonContractTypeNames['All contracts']}
                     >
                         {t('All contracts')}
                     </Radio>
@@ -146,18 +160,28 @@ export const RoleSelect = () => {
                             changeFilterEvent({
                                 user: accountName,
                             });
+                            changeContractTypeRadioButtonEvent(
+                                RadioButtonContractTypeNames['My contracts']
+                            );
                         }}
-                        value="my"
+                        value={RadioButtonContractTypeNames['My contracts']}
                     >
                         {t('My contracts')}
                     </Radio>
                     <Radio
-                        value="offers"
+                        value={
+                            RadioButtonContractTypeNames['Contract offerings']
+                        }
                         onChange={() => {
                             changeFilterEvent({
                                 user: accountName,
                                 offers: true,
                             });
+                            changeContractTypeRadioButtonEvent(
+                                RadioButtonContractTypeNames[
+                                    'Contract offerings'
+                                ]
+                            );
                         }}
                     >
                         {t('Contract offerings')}
