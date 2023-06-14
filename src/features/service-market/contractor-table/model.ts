@@ -1,5 +1,6 @@
 import { createGate } from 'effector-react';
 import { createEffect, createEvent, createStore, forward } from 'effector';
+import { persist } from 'effector-storage/local';
 import { ContractDto } from 'entities/smartcontract';
 import { getMarketOrders, GetMarketOrdersParams } from 'entities/game-stat';
 
@@ -10,7 +11,7 @@ export const filterStore = createStore<GetMarketOrdersParams>({}).on(
     changeFilterEvent,
     (_state, filter) => filter
 );
-
+persist({ store: filterStore, key: 'service market filter store' });
 export const getContractsByFilterEffect = createEffect(getMarketOrders);
 
 export const contractsStore = createStore<null | ContractDto[]>(null)
