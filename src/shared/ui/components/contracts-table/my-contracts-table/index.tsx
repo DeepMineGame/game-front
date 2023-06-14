@@ -55,7 +55,7 @@ export const MyContractsTable: FC<Props> = ({ contracts }) => {
                     id: contract.id,
                     fee:
                         contract.type === ContractType.level_upgrade
-                            ? contract.cost_of_execution
+                            ? contract.cost_of_execution / 10 ** 8
                             : contract.fee_percent,
                     date: toLocaleDate(contract.create_time * 1000),
                     contractType: contractName[contract.type],
