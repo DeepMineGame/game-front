@@ -16,21 +16,11 @@ export const getActionForIndicate = createEffect<
         searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
         searchParam,
     }).then((data) => {
-        const lastNoTravelAction = data?.rows?.find(
-            ({ state }) => state === ActionState.active
-        );
-        const lastTravelAction = data?.rows?.find(
-            ({ type }) => type === ActionType.physical_shift
+        const notFinishedAction = data?.rows?.find(
+            ({ finishes_at }) => finishes_at * 1000 >= Date.now()
         );
 
-        const isLastNoTravelActionExpired =
-            Date.now() >= (lastNoTravelAction?.finishes_at || 0) * 1000;
-
-        if (isLastNoTravelActionExpired) {
-            return lastTravelAction;
-        }
-
-        return lastNoTravelAction || lastTravelAction;
+        return notFinishedAction;
     })
 );
 
