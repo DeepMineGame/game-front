@@ -22,7 +22,7 @@ export const TabGrid: FC<{ filters: ReactNode; table: ReactNode }> = ({
                         onClick={() => navigate(createOrder)}
                         icon={<PlusOutlined />}
                     >
-                        {t('pages.serviceMarket.createOrder.createOrder')}
+                        {t('Create order')}
                     </Button>
                 </Row>
             </Col>

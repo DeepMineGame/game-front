@@ -425,7 +425,6 @@
       "yourRole": "Your role",
       "all": "All",
       "createOrder": {
-        "createOrder": "Create order",
         "contractType": "Contract type",
         "terms": "Terms",
         "selectContractType": "Select contract type",

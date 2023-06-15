@@ -10,9 +10,7 @@ export const CreateOrderPage = () => {
     return (
         <Page
             className={styles.page}
-            headerTitle={t(
-                'pages.serviceMarket.createOrder.createOrder'
-            ).toUpperCase()}
+            headerTitle={t('Create order').toUpperCase()}
         >
             <CreateOrderFormV2 />
         </Page>
