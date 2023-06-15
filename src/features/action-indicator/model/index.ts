@@ -2,7 +2,6 @@ import { createEffect, createStore, forward } from 'effector';
 import { createGate } from 'effector-react';
 import {
     ActionDto,
-    ActionState,
     ActionType,
     getActionsTable,
     mapSearchParamForIndexPosition,
@@ -16,11 +15,9 @@ export const getActionForIndicate = createEffect<
         searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
         searchParam,
     }).then((data) => {
-        const notFinishedAction = data?.rows?.find(
+        return data?.rows?.find(
             ({ finishes_at }) => finishes_at * 1000 >= Date.now()
         );
-
-        return notFinishedAction;
     })
 );
 
