@@ -111,7 +111,7 @@ export const $learningSkill = $openSkillAction.map<LearningSkillType | null>(
             ...action.attrs.reduce(
                 (result, attr) => ({
                     ...result,
-                    [attr.key]: Number(attr.value),
+                    [attr.first]: Number(attr.second),
                 }),
                 {} as Omit<LearningSkillType, 'finishesAt'>
             ),

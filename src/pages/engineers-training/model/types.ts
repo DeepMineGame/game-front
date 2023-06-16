@@ -31,8 +31,8 @@ export type TrainingLevel = { value: Level; nfts: TrainingNft[] };
 export type WaxUser = { account: string };
 
 export type OpenSkillAction = ActionDto<{
-    key: 'level' | 'rarity' | 'schema_type';
-    value: string;
+    first: 'level' | 'rarity' | 'schema_type';
+    second: string;
 }>;
 
 export type LearningSkillType = {
