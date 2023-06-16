@@ -193,6 +193,8 @@
       "success": "successful",
       "failed": "failed",
       "interrupted": "interrupted",
+      "pending": "pending",
+      "finished": "finished",
       "cool": "That's cool",
       "tooltipAroundConsumables": "This is where improvements are installed that allow you to make mining more efficient. They will be available for the Mine level 1",
       "estimatesMiningTime": "Estimates mining time",
