@@ -2,7 +2,6 @@ import { createEffect, createStore, forward } from 'effector';
 import { createGate } from 'effector-react';
 import {
     ActionDto,
-    ActionState,
     ActionType,
     getActionsTable,
     mapSearchParamForIndexPosition,
@@ -16,21 +15,9 @@ export const getActionForIndicate = createEffect<
         searchIdentification: mapSearchParamForIndexPosition.ownerUserId,
         searchParam,
     }).then((data) => {
-        const lastNoTravelAction = data?.rows?.find(
-            ({ state }) => state === ActionState.active
+        return data?.rows?.find(
+            ({ finishes_at }) => finishes_at * 1000 >= Date.now()
         );
-        const lastTravelAction = data?.rows?.find(
-            ({ type }) => type === ActionType.physical_shift
-        );
-
-        const isLastNoTravelActionExpired =
-            Date.now() >= (lastNoTravelAction?.finishes_at || 0) * 1000;
-
-        if (isLastNoTravelActionExpired) {
-            return lastTravelAction;
-        }
-
-        return lastNoTravelAction || lastTravelAction;
     })
 );
 

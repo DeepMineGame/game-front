@@ -2,11 +2,12 @@ import { FC, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import { ModalProps } from 'antd';
+import { useTableData } from 'shared';
 import { AssetDataType } from 'entities/atomicassets';
+import { getEkiatableConfig, getEkutableConfig } from 'entities/smartcontract';
 import { getKitImage } from 'shared/lib/utils';
 import { Modal, Text } from 'shared/ui/ui-kit';
 import { UpgradeKitType } from '../../model/upgrade-kit';
-import { useUpgradeModifiers } from '../../lib/useUpgradeModifier';
 import { EQUIPMENT_SET_LENGTH } from '../../constants';
 import styles from './styles.module.scss';
 
@@ -44,7 +45,13 @@ const KitCard: FC<KitProps> = ({ title, name, selected, bottom, onClick }) => {
         </div>
     );
 };
-
+enum EquipmentRarityMapToNumber {
+    Common,
+    Uncommon,
+    Rare,
+    Epic,
+    Legendary,
+}
 const UpgradeKitModal: FC<Props> = ({
     onSelect,
     value,
@@ -52,15 +59,44 @@ const UpgradeKitModal: FC<Props> = ({
     ...props
 }) => {
     const { t } = useTranslation();
-    const { price: commonPrice } = useUpgradeModifiers(
-        UpgradeKitType.common,
-        equipment
-    );
+    const { data: commonUpgradeTableData } = useTableData<{
+        equip_level: number;
+        rarities: string[];
+    }>(getEkutableConfig);
+    const { data: uncommonUpgradeTableData } = useTableData<{
+        equip_level: number;
+        rarities: string[];
+    }>(getEkiatableConfig);
 
-    const { price: uncommonPrice, timeModifier } = useUpgradeModifiers(
-        UpgradeKitType.uncommon,
-        equipment
-    );
+    // const { price: commonPrice } = useUpgradeModifiers(
+    //     UpgradeKitType.common,
+    //     equipment
+    // );
+
+    const commonPrice =
+        Number(
+            commonUpgradeTableData.find(
+                ({ equip_level }) =>
+                    equipment?.[0].data.level &&
+                    Number(equipment[0].data.level) + 1 === equip_level
+            )?.rarities[EquipmentRarityMapToNumber[equipment![0].data.rarity]]
+        ) /
+        10 ** 8;
+
+    const uncommonPrice =
+        Number(
+            uncommonUpgradeTableData.find(
+                ({ equip_level }) =>
+                    equipment?.[0].data.level &&
+                    Number(equipment[0].data.level) + 1 === equip_level
+            )?.rarities[EquipmentRarityMapToNumber[equipment![0].data.rarity]]
+        ) /
+        10 ** 8;
+
+    // const { price: uncommonPrice, timeModifier } = useUpgradeModifiers(
+    //     UpgradeKitType.uncommon,
+    //     equipment
+    // );
 
     const isEquipmentSet = equipment?.length === EQUIPMENT_SET_LENGTH;
     return (
@@ -82,12 +118,10 @@ const UpgradeKitModal: FC<Props> = ({
                     bottom={
                         <>
                             <Text strong>
-                                {isEquipmentSet
-                                    ? Number(commonPrice)
-                                    : commonPrice}{' '}
+                                {commonPrice}{' '}
                                 {t('components.common.button.dme')}
                             </Text>
-                            <Text>{t('pages.engineer.noTimeReduction')}</Text>
+                            {/* <Text>{t('pages.engineer.noTimeReduction')}</Text> */}
                         </>
                     }
                 />
@@ -104,16 +138,14 @@ const UpgradeKitModal: FC<Props> = ({
                     bottom={
                         <>
                             <Text strong>
-                                {isEquipmentSet
-                                    ? Number(uncommonPrice)
-                                    : uncommonPrice}{' '}
+                                {uncommonPrice}{' '}
                                 {t('components.common.button.dme')}
                             </Text>
-                            <Text>
-                                {t('pages.engineer.timeReduction', {
-                                    percent: 100 - timeModifier,
-                                })}
-                            </Text>
+                            {/* <Text> */}
+                            {/*    {t('pages.engineer.timeReduction', { */}
+                            {/*        percent: 100 - timeModifier, */}
+                            {/*    })} */}
+                            {/* </Text> */}
                         </>
                     }
                 />

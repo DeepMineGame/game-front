@@ -97,7 +97,6 @@ export const LastActionInProgressChecker = () => {
     useGate(LastActionGate, { searchParam: accountName });
     const lastAction = useStore($indicateActionDetails);
     const isFinished = Date.now() >= lastAction.finishAt;
-
     if (isFinished) return null;
     return <ActionProgress />;
 };

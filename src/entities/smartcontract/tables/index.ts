@@ -17,6 +17,8 @@ export * from './types';
 export * from './roles';
 export * from './engineer';
 export * from './statroles';
+export * from './ekutable';
+export * from './ekiatable';
 
 export const getUserConfig = (account: string): GetTableDataConfigType => {
     return {
