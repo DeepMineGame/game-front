@@ -16,6 +16,10 @@ import { useGate, useStore } from 'effector-react';
 import { Empty, Skeleton } from 'antd';
 import { Roles } from 'entities/game-stat';
 import {
+    activeRadioButton$,
+    RadioButtonContractTypeNames,
+} from '../role-select/model';
+import {
     ContractsGate,
     contractsStore,
     filterStore,
@@ -35,17 +39,22 @@ export const ContractsRenderByRole: FC = () => {
         search_role: searchRoleFromQuery || Roles.mineowner,
         user: accountName,
     };
-    useGate(ContractsGate, filters || defaultFilter);
+    const hasFilters = Object.keys(filters).length;
+    useGate(ContractsGate, hasFilters ? filters : defaultFilter);
+    const activeRadioButton = useStore(activeRadioButton$);
 
     const contracts = useStore(contractsStore);
     const isLoading = useStore(getContractsByFilterEffect.pending);
-    const { user, user_role, search_role } = filters;
+    const { user_role, search_role } = filters;
 
     if (isLoading) {
         return <Skeleton />;
     }
 
-    if (user) {
+    if (
+        activeRadioButton === RadioButtonContractTypeNames['My contracts'] ||
+        activeRadioButton === RadioButtonContractTypeNames['Contract offerings']
+    ) {
         return <MyContractsTable contracts={contracts} />;
     }
 
