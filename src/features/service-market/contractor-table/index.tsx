@@ -44,7 +44,7 @@ export const ContractsRenderByRole: FC = () => {
 
     const contracts = useStore(contractsStore);
     const isLoading = useStore(getContractsByFilterEffect.pending);
-    const { user, user_role, search_role } = filters;
+    const { user_role, search_role } = filters;
 
     if (isLoading) {
         return <Skeleton />;
