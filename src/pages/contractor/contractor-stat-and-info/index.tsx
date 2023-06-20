@@ -41,28 +41,28 @@ export const ContractorStatsAndInfoPage: FC = () => {
         <PageWithTabs
             tabs={[
                 {
-                    key: StatsAndInfoTab.miningStats,
+                    key: String(StatsAndInfoTab.miningStats),
                     children: <MiningStats stats={mineOwnerStats} />,
-                    tab: t(`pages.contractorStatsAndInfo.miningStats`),
+                    label: t(`pages.contractorStatsAndInfo.miningStats`),
                 },
                 {
-                    key: StatsAndInfoTab.mineAreaInfo,
+                    key: String(StatsAndInfoTab.mineAreaInfo),
                     children: <MineAreaInfo />,
-                    tab: t(`pages.contractorStatsAndInfo.mineAreaInfo`),
+                    label: t(`pages.contractorStatsAndInfo.mineAreaInfo`),
                 },
                 {
-                    key: StatsAndInfoTab.contract,
+                    key: String(StatsAndInfoTab.contract),
                     children: contract ? (
                         <Contract contract={contract} />
                     ) : (
                         <div>{t('components.common.noData')}</div>
                     ),
-                    tab: t(`pages.contractorStatsAndInfo.contract`),
+                    label: t(`pages.contractorStatsAndInfo.contract`),
                 },
                 {
-                    key: StatsAndInfoTab.mineCrew,
+                    key: String(StatsAndInfoTab.mineCrew),
                     children: <MineCrew />,
-                    tab: t(`Mine crew`),
+                    label: t(`Mine crew`),
                 },
             ]}
             documentTitleScope="Contractor"

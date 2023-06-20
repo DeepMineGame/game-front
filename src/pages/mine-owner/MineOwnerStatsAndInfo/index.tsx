@@ -35,23 +35,23 @@ export const MineOwnerStatAndInfoPage: FC = () => {
         <PageWithTabs
             tabs={[
                 {
-                    key: Tabs.stats,
+                    key: String(Tabs.stats),
                     children: <MiningStats stats={mineOwnerStats} />,
-                    tab: t(`pages.contractorStatsAndInfo.miningStats`),
+                    label: t(`pages.contractorStatsAndInfo.miningStats`),
                 },
                 {
-                    key: Tabs.areaInfo,
+                    key: String(Tabs.areaInfo),
                     children: <MineAreaInfo />,
-                    tab: t(`pages.contractorStatsAndInfo.mineAreaInfo`),
+                    label: t(`pages.contractorStatsAndInfo.mineAreaInfo`),
                 },
                 {
-                    key: Tabs.contract,
+                    key: String(Tabs.contract),
                     children: contract ? (
                         <Contract contract={contract} />
                     ) : (
                         <div>{t('components.common.noData')}</div>
                     ),
-                    tab: t(`pages.contractorStatsAndInfo.contract`),
+                    label: t(`pages.contractorStatsAndInfo.contract`),
                 },
             ]}
             documentTitleScope="Mine owner"

@@ -41,8 +41,8 @@ export const TypeFilter = ({
             className={className}
             onChange={(selected) => onChange?.(+selected)}
             items={tabList.map((tab) => ({
-                key: tab,
-                tab: t(tabNamesMap[tab]),
+                key: String(tab),
+                label: t(tabNamesMap[tab]),
                 children: null,
                 disabled: isDisabled,
             }))}

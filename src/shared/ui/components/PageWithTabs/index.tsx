@@ -40,7 +40,7 @@ export const PageWithTabs: FC<Props> = memo(
             navigate,
         ]);
 
-        const selectedTabData = tabs.find((tab) => tab.key === Number(tabId));
+        const selectedTabData = tabs.find((tab) => tab.key === String(tabId));
 
         useEffect(() => {
             navigateToTab(tabId || '0', true);
@@ -60,7 +60,7 @@ export const PageWithTabs: FC<Props> = memo(
                         title={`${
                             documentTitleScope ? `${documentTitleScope} / ` : ''
                         } Stats and Info / ${
-                            selectedTabData?.tab || ''
+                            selectedTabData?.label || ''
                         } — DeepMine`}
                     />
                 )}

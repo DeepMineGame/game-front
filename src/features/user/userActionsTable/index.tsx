@@ -1,11 +1,10 @@
 import { FC, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Col, Row, Skeleton } from 'antd';
+import { Col, Row, Skeleton, Tabs } from 'antd';
 import { useGate, useStore } from 'effector-react';
 import {
     ActionsTable,
     desktopS,
-    Tabs,
     useAccountName,
     useMediaQuery,
     useUserRoles,
@@ -50,23 +49,23 @@ const UserActions: FC = () => {
     );
     const tabs = [
         {
-            tab: t('roles.citizen'),
-            key: UserRoles.citizen,
+            label: t('roles.citizen'),
+            key: String(UserRoles.citizen),
         },
         {
-            tab: t('roles.landlord'),
+            label: t('roles.landlord'),
             disabled: !userRoles.isLandlord,
-            key: UserRoles.landlord,
+            key: String(UserRoles.landlord),
         },
         {
-            tab: t('roles.mineowner'),
+            label: t('roles.mineowner'),
             disabled: !userRoles.isMineOwner,
-            key: UserRoles.mine_owner,
+            key: String(UserRoles.mine_owner),
         },
         {
-            tab: t('roles.contractor'),
+            label: t('roles.contractor'),
             disabled: !userRoles.isContractor,
-            key: UserRoles.contractor,
+            key: String(UserRoles.contractor),
         },
     ];
 

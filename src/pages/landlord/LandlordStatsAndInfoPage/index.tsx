@@ -12,8 +12,8 @@ export const LandlordStatsAndInfoPage: FC = () => {
         <PageWithTabs
             tabs={[
                 {
-                    key: 0,
-                    tab: t('components.common.areaInfo'),
+                    key: '0',
+                    label: t('components.common.areaInfo'),
                     children: accountName ? (
                         <AreaStats accountName={accountName} />
                     ) : (
