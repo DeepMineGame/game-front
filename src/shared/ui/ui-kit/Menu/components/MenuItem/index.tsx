@@ -1,7 +1,7 @@
 import { Tooltip } from 'antd';
 import React, { FC, MouseEventHandler, ReactNode } from 'react';
 import { Button } from 'shared';
-import { ButtonType } from 'antd/lib/button/button';
+import { ButtonType } from 'antd/es/button';
 
 type Props = {
     icon: ReactNode;

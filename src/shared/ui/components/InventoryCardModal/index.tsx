@@ -80,7 +80,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     const handleSelect = (e: React.MouseEvent<HTMLElement>) => {
         onSelect?.(card);
         if (props.onCancel) {
-            props.onCancel(e);
+            props.onCancel(e as any);
         }
     };
 

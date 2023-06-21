@@ -1,5 +1,6 @@
 import React from 'react';
-import { PageHeader, PageHeaderProps, Tag } from 'antd';
+import { Tag } from 'antd';
+import { PageHeader, PageHeaderProps } from '@ant-design/pro-components';
 import {
     ContractDto,
     OrderState,
@@ -42,6 +43,7 @@ export const StatusHeader = ({
         orderSubStateMap[
             contract.computed?.sub_status || OrderSubState.undefined
         ] === stateMap[contract.computed?.status || OrderState.undefined];
+
     const tag =
         contract.computed?.sub_status && !isSubStateEqualStateText ? (
             <Tag>{orderSubStateMap[contract.computed?.sub_status]}</Tag>

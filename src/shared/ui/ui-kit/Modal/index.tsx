@@ -32,7 +32,7 @@ export const Modal: FC<Props> = (props) => {
                         {props.onCancel && (
                             <Button
                                 ghost
-                                onClick={props.onCancel}
+                                onClick={props.onCancel as any}
                                 {...props.cancelButtonProps}
                             >
                                 {props.cancelText || 'Cancel'}
@@ -41,7 +41,7 @@ export const Modal: FC<Props> = (props) => {
                         {props.onOk && (
                             <Button
                                 type="primary"
-                                onClick={props.onOk}
+                                onClick={props.onOk as any}
                                 {...props.okButtonProps}
                             >
                                 {props.okText || 'Ok'}
