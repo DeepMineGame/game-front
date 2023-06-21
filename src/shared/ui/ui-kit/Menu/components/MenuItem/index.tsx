@@ -6,14 +6,10 @@ type Props = {
     icon: ReactNode;
     disabled?: boolean;
     onClick?: MouseEventHandler;
-    type?: ButtonType;
-    ghost?: boolean;
     tooltipText?: string;
 };
 
 export const MenuItem: FC<Props> = ({
-    type = 'ghost',
-    ghost = false,
     icon,
     disabled,
     onClick,
@@ -21,17 +17,15 @@ export const MenuItem: FC<Props> = ({
 }) => {
     const button = (
         <Button
-            type={type}
             size="large"
             onClick={onClick}
             icon={icon}
             disabled={disabled}
-            ghost={ghost}
         />
     );
     if (tooltipText) {
         return (
-            <Tooltip title={tooltipText} visible>
+            <Tooltip title={tooltipText} open>
                 {button}
             </Tooltip>
         );

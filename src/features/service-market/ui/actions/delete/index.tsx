@@ -25,11 +25,7 @@ const DeleteOrder: FC<Props> = ({ accountName, contractId }) => {
     };
 
     return (
-        <Button
-            onClick={handleDeleteOrder}
-            icon={<DeleteOutlined />}
-            type="ghost"
-        >
+        <Button onClick={handleDeleteOrder} icon={<DeleteOutlined />}>
             {t('pages.serviceMarket.order.deleteOrder')}
         </Button>
     );

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 
-import { Modal } from 'shared';
+import { Modal } from 'antd';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -30,7 +30,7 @@ export const ExclamationModal: FC<Props> = ({
             closable={false}
             centered
             className={styles.modal}
-            visible={visible}
+            open={visible}
             onCancel={onCancel}
             onOk={onSubmit}
             okText={submitText}
