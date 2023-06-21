@@ -4,6 +4,7 @@ import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { AssetDataType } from 'entities/atomicassets';
 import styles from '../styles.module.scss';
+import { neutral3Color, primary6 } from '../../../variables';
 
 type DepreciationProgressBarProps = {
     depreciation?: AssetDataType['data']['depreciation'];
@@ -47,6 +48,8 @@ export const DepreciationProgressBar: FC<DepreciationProgressBarProps> = memo(
                         percent: amountOfMiningPercentage + step * amountOfStep,
                     }}
                     format={format}
+                    strokeColor={primary6}
+                    trailColor={neutral3Color}
                 />
             </Tooltip>
         );

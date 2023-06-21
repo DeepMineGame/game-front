@@ -146,7 +146,7 @@ export const SignLevelUpgradeOrderModal: FC<Props> = ({
                     card={
                         selectedInventoryCard as MergedInventoryWithAtomicAssets[number]
                     }
-                    visible={!!selectedInventoryCard}
+                    open={!!selectedInventoryCard}
                     onCancel={() => setSelectedInventoryCard(undefined)}
                 />
             )}

@@ -1,4 +1,11 @@
-import { DMECoinIcon, KeyValueTable, Page, useAccountName } from 'shared';
+import {
+    DMECoinIcon,
+    KeyValueTable,
+    neutral3Color,
+    Page,
+    primary6,
+    useAccountName,
+} from 'shared';
 import { useTranslation } from 'react-i18next';
 import React from 'react';
 import { $userMine, Addons, MineControlPanel, $mineNft } from 'features';
@@ -40,6 +47,8 @@ export const MineManagementPage = () => {
                             <div className={styles.mineLevelLine}>
                                 <Progress
                                     className={styles.mineLevelProgress}
+                                    strokeColor={primary6}
+                                    trailColor={neutral3Color}
                                     percent={Number(
                                         dmeToLevelUpgradePercent || 0
                                     )}
@@ -79,6 +88,8 @@ export const MineManagementPage = () => {
                                 percent={mineSubLevelToPercent || 25}
                                 steps={5}
                                 showInfo={false}
+                                strokeColor={primary6}
+                                trailColor={neutral3Color}
                             />
                         ),
                         [t('features.mining.depthLevel')]: (

@@ -212,7 +212,7 @@ export const EquipmentSetPage: FC = () => {
                 <InventoryCardModal
                     onSelect={handleCardSelect}
                     card={selectedInventoryModalCard}
-                    visible={isInventoryCardVisible}
+                    open={isInventoryCardVisible}
                     onCancel={() => setIsInventoryCardVisible(false)}
                 />
             )}

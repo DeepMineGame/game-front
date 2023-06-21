@@ -43,9 +43,10 @@ export const NftPreviewPage: FC = () => {
         <Page>
             {cardFromInventory ? (
                 <InventoryCardModal
-                    visible
+                    open
                     card={cardFromInventory || cardFromAtomic}
                     onCancel={goBackButton}
+                    footer={null}
                 />
             ) : (
                 <Skeleton />

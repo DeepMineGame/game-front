@@ -2,6 +2,8 @@ import React, { FC, SyntheticEvent, useMemo } from 'react';
 import { t } from 'i18next';
 import {
     DiscordIcon,
+    neutral3Color,
+    primary6,
     useAccountName,
     useSearchByNickNameTableProps,
 } from 'shared';
@@ -142,6 +144,8 @@ export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
                                 percent={mineSubLevelToPercent || 25}
                                 steps={5}
                                 showInfo={false}
+                                strokeColor={primary6}
+                                trailColor={neutral3Color}
                             />
                         );
                     },
