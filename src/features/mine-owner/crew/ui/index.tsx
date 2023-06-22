@@ -64,7 +64,7 @@ export const MineOwnerCrew: FC = () => {
     const selfSlots = selfContractsToSign.map((contract) => (
         <SearchingItem
             key={contract.id}
-            text={t('features.mineOwner.PlaceAsContractor')}
+            text={t('Place myself as a contractor')}
             contract={contract}
             accountName={accountName}
         />
