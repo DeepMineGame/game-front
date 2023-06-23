@@ -1,6 +1,15 @@
 // stylelint-disable scss/at-import-partial-extension
 @import "src/shared";
 
+:global {
+  .ant-modal-content {
+    background-color: #333333 !important;
+    color: white;
+  }
+  .ant-modal-confirm-title, .ant-modal-confirm-content {
+    color: rgba(255, 255, 255, 0.85) !important;
+  }
+}
 .modal {
   font-family: $bai;
   padding: 0;

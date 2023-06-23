@@ -66,7 +66,7 @@ export const showWarningModal = ({
         ...props,
         title: <span className={styles.simpleModalTitle}>{title}</span>,
         content,
-        className: styles.simpleModal,
+        className: styles.modal,
         okCancel: true,
     });
 };
@@ -75,7 +75,7 @@ export const confirm = ({ title, ...props }: ModalFuncProps) => {
     ModalAnt.confirm({
         ...props,
         title: <b className={styles.simpleModalTitle}>{title}</b>,
-        className: styles.simpleModal,
+        className: styles.modal,
         okCancel: true,
     });
 };
@@ -90,8 +90,7 @@ export const showSuccessModal = ({
 } & ModalProps) => {
     ModalAnt.success({
         ...props,
-        title: <span className={styles.simpleModalTitle}>{title}</span>,
         content,
-        className: styles.simpleModal,
+        className: styles.modal,
     });
 };
