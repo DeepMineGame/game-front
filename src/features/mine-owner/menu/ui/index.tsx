@@ -82,7 +82,7 @@ export const MineOwnerMenu: FC<Props> = ({
                         <Tooltip
                             overlay={tooltip}
                             key={tooltip}
-                            visible={showTooltip}
+                            open={showTooltip}
                         >
                             <div>
                                 <MenuItem

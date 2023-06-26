@@ -224,7 +224,7 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
                     card={
                         selectedInventoryCard as MergedInventoryWithAtomicAssets[number]
                     }
-                    visible={!!selectedInventoryCard}
+                    open={!!selectedInventoryCard}
                     onCancel={() => setSelectedInventoryCard(undefined)}
                 />
             )}

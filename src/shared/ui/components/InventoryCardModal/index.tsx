@@ -2,13 +2,12 @@ import {
     DMECoinIcon,
     GetCostParams,
     isAssetAvailable,
-    Modal,
     useAccountName,
     useReloadPage,
     useRepair,
 } from 'shared';
 import React, { FC, useState, useEffect, useCallback } from 'react';
-import { Col, message, ModalProps, Row, Space, Tooltip } from 'antd';
+import { Col, message, Modal, ModalProps, Row, Space, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { createOrder } from 'app/router/paths';
 import { useSmartContractAction } from 'features';
@@ -80,7 +79,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     const handleSelect = (e: React.MouseEvent<HTMLElement>) => {
         onSelect?.(card);
         if (props.onCancel) {
-            props.onCancel(e);
+            props.onCancel(e as any);
         }
     };
 
@@ -121,13 +120,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         card.in_use !== undefined;
 
     return (
-        <Modal
-            wideOnMobile
-            {...props}
-            title="Active inventory"
-            className={styles.modal}
-            cancelText={t('Back')}
-        >
+        <Modal {...props} title="Active inventory" className={styles.modal}>
             <div className={styles.container}>
                 <div>
                     <Card

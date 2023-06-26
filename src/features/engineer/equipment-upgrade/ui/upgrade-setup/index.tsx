@@ -110,7 +110,7 @@ const EquipmentSetup: FC<Props> = ({
                                 ? () => navigate(serviceMarket)
                                 : undefined
                         }
-                        visible={
+                        open={
                             status === CabinStatus.NeedContract
                                 ? true
                                 : undefined

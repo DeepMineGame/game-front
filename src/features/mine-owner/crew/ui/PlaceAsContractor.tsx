@@ -79,7 +79,7 @@ const PlaceAsContractor: FC<Props> = ({
         // 1. create order as mine owner
         if (!contract) {
             return confirm({
-                title: t('features.mineOwner.PlaceAsContractor'),
+                title: t('Place myself as a contractor'),
                 content: t('features.mineOwner.creatingSelfMiningContract'),
                 icon: <ExclamationCircleOutlined style={{ color: neutral9 }} />,
 
@@ -91,7 +91,7 @@ const PlaceAsContractor: FC<Props> = ({
 
         // 2. sign mine owner contract as contractor
         confirm({
-            title: t('features.mineOwner.PlaceAsContractor'),
+            title: t('Place myself as a contractor'),
             content: t('pages.areaManagement.youNeedSecond'),
             icon: <ExclamationCircleOutlined style={{ color: neutral9 }} />,
             onOk: () => {
@@ -103,12 +103,11 @@ const PlaceAsContractor: FC<Props> = ({
     return (
         <div>
             <Button
-                type="ghost"
                 onClick={handleClick}
                 className={styles.button}
                 disabled={isDisabled}
             >
-                {t('features.mineOwner.PlaceAsContractor')}
+                {t('Place myself as a contractor')}
             </Button>
             <Modal
                 visible={isVisible}

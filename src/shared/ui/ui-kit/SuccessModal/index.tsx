@@ -25,8 +25,7 @@ export const SuccessModal: FC<Props> = ({
         <Modal
             width={520}
             centered
-            className={styles.modal}
-            visible={visible}
+            open={visible}
             onCancel={onCancel}
             title={title}
             onOk={onSubmit}

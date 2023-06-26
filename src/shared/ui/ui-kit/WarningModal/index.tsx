@@ -30,13 +30,12 @@ export const WarningModal: FC<Props> = ({
         <Modal
             width={520}
             centered
-            className={styles.modal}
-            visible={visible}
+            open={visible}
             onCancel={onCancel}
             title={title}
             footer={
                 footer || [
-                    <Button onClick={onCancel} ghost>
+                    <Button onClick={onCancel}>
                         {t('components.common.button.cancel')}
                     </Button>,
                     <Button onClick={onSubmit} type="primary">

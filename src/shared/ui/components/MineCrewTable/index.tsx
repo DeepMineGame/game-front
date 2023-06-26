@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Badge } from 'antd';
+import { Badge, Space } from 'antd';
 import type { ColumnsType } from 'antd/lib/table';
 import { useTranslation } from 'react-i18next';
 import { Table, DiscordIcon, neutral8, green6, gold6, Link } from 'shared';
@@ -78,10 +78,10 @@ export const MineCrewTable: FC<{ data?: MineCrewDataType[] }> = ({ data }) => {
                 multiple: 1,
             },
             render: (status: Status) => (
-                <div className={styles.status}>
-                    <Badge color={getStatusColor(status)} />{' '}
+                <Space>
+                    <Badge color={getStatusColor(status)} />
                     {t(`components.common.status.${Status[status]}`)}
-                </div>
+                </Space>
             ),
         },
         {

@@ -2,7 +2,6 @@
 
 .card {
     display: flex;
-    flex-direction: column;
     align-content: center;
     justify-content: center;
     height: 138px;
@@ -23,4 +22,8 @@
 
 .icon.notAllowed {
     color: $color-neutral-neutral-6;
+}
+
+.icon {
+    margin: auto;
 }

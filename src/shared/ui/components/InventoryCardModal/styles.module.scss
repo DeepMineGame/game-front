@@ -3,8 +3,6 @@
 .modal {
   max-width: 100%;
   width: 1120px !important;
-  background: $color-neutral-neutral-2 !important;
-  height: 100%;
 
   @media only screen and (min-width: $media-desktop-s)  {
     overflow: auto;

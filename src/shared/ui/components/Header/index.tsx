@@ -41,7 +41,12 @@ export const Header: FC<Props> = ({ title }) => {
                             height={32}
                             className={styles.cityIcon}
                         />
-                        <Text type="secondary" strong fontFamily="bai">
+                        <Text
+                            type="secondary"
+                            className={styles.city}
+                            strong
+                            fontFamily="bai"
+                        >
                             {t('components.common.city')}
                         </Text>
                     </Space>

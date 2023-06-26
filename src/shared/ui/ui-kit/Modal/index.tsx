@@ -32,7 +32,7 @@ export const Modal: FC<Props> = (props) => {
                         {props.onCancel && (
                             <Button
                                 ghost
-                                onClick={props.onCancel}
+                                onClick={props.onCancel as any}
                                 {...props.cancelButtonProps}
                             >
                                 {props.cancelText || 'Cancel'}
@@ -41,7 +41,7 @@ export const Modal: FC<Props> = (props) => {
                         {props.onOk && (
                             <Button
                                 type="primary"
-                                onClick={props.onOk}
+                                onClick={props.onOk as any}
                                 {...props.okButtonProps}
                             >
                                 {props.okText || 'Ok'}
@@ -66,7 +66,7 @@ export const showWarningModal = ({
         ...props,
         title: <span className={styles.simpleModalTitle}>{title}</span>,
         content,
-        className: styles.simpleModal,
+        className: styles.modal,
         okCancel: true,
     });
 };
@@ -75,7 +75,7 @@ export const confirm = ({ title, ...props }: ModalFuncProps) => {
     ModalAnt.confirm({
         ...props,
         title: <b className={styles.simpleModalTitle}>{title}</b>,
-        className: styles.simpleModal,
+        className: styles.modal,
         okCancel: true,
     });
 };
@@ -90,8 +90,7 @@ export const showSuccessModal = ({
 } & ModalProps) => {
     ModalAnt.success({
         ...props,
-        title: <span className={styles.simpleModalTitle}>{title}</span>,
         content,
-        className: styles.simpleModal,
+        className: styles.modal,
     });
 };

@@ -22,14 +22,13 @@ export const AddMineOwnerModal: FC<Props> = ({ visible, onCancel }) => {
         <Modal
             className={styles.modal}
             width={458}
-            visible={visible}
+            open={visible}
             onCancel={onCancel}
             title={t('pages.areaManagement.add')}
         >
             <Button
                 className={styles.button}
                 block
-                type="ghost"
                 onClick={() =>
                     navigate(`${serviceMarket}?user_role=${Roles.landlord}`)
                 }
@@ -39,7 +38,6 @@ export const AddMineOwnerModal: FC<Props> = ({ visible, onCancel }) => {
             <Button
                 className={styles.button}
                 block
-                type="ghost"
                 onClick={() =>
                     navigate(
                         `${createOrder}?${orderFields.contractType}=${ContractType.landlord_mineowner}&${orderFields.isClient}=${ContractRole.client}`

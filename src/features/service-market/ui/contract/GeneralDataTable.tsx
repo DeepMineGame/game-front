@@ -8,7 +8,13 @@ import {
     raritiesTranslationMap,
     RarityType,
 } from 'entities/smartcontract';
-import { secondsToDays, Text, toLocaleDate } from 'shared/ui';
+import {
+    neutral3Color,
+    primary6,
+    secondsToDays,
+    Text,
+    toLocaleDate,
+} from 'shared/ui';
 import { TableWithTitle } from '..';
 import { ContractProps } from '../../types';
 import styles from './styles.module.scss';
@@ -49,6 +55,8 @@ const GeneralDataTable: FC<ContractProps> = ({ contract }) => {
                 percent={mineSubLevelToPercent || 25}
                 steps={5}
                 showInfo={false}
+                strokeColor={primary6}
+                trailColor={neutral3Color}
             />
         ),
     };

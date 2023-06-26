@@ -1,6 +1,8 @@
 import Rive from '@rive-app/react-canvas';
 import {
     getTimeLeftFromUtc,
+    neutral3Color,
+    primary6,
     useAccountName,
     useReloadPage,
     useTick,
@@ -65,6 +67,8 @@ export const ActionProgress = () => {
                         <Progress
                             percent={100 - timeToPercentage}
                             showInfo={false}
+                            strokeColor={primary6}
+                            trailColor={neutral3Color}
                         />
                         <CheckCircleOutlined className={styles.icon} />
                     </>

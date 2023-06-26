@@ -1,10 +1,10 @@
-import { FC, Key, memo, ReactNode } from 'react';
+import { FC, memo, ReactNode } from 'react';
 import { Tabs as TabsAnt, TabsProps } from 'antd';
 
 export type Tab = {
-    tab: ReactNode;
-    key: Key;
-    children: ReactNode;
+    label: ReactNode;
+    key: string;
+    children?: ReactNode;
     disabled?: boolean;
 };
 

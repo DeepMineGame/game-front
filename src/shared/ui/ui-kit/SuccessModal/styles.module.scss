@@ -1,32 +1,5 @@
 @import 'src/shared';
 
-.modal {
-    & > div {
-        background: $color-neutral-neutral-2;
-    }
-
-    color: $color-neutral-neutral-9;
-
-    :global {
-        .ant-modal-header {
-            background-color: $color-neutral-neutral-2;
-            border-bottom: 1px solid $color-neutral-neutral-4;
-        }
-
-        .ant-modal-title {
-            color: $color-neutral-neutral-9;
-        }
-
-        .ant-modal-body {
-            padding: 20px 32px 56px;
-        }
-
-        .ant-modal-footer {
-            border-top: 1px solid $color-neutral-neutral-4;
-        }
-    }
-}
-
 .content {
     display: flex;
     flex-direction: column;
