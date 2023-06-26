@@ -1,7 +1,13 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useTableData } from 'shared';
 import { AssetDataType } from 'entities/atomicassets';
-import { ContractDto, rarityMap, RarityType } from 'entities/smartcontract';
+import {
+    ContractDto,
+    getEkutableConfig,
+    rarityMap,
+    RarityType,
+} from 'entities/smartcontract';
 import { getTimeLeft } from 'shared/ui/utils';
 import { KeyValueTable } from 'shared/ui/ui-kit';
 import { UpgradeKitType } from '../../model/upgrade-kit';
@@ -15,7 +21,13 @@ type Props = {
     cost?: number;
     contract?: ContractDto;
 };
-
+enum EquipmentRarityMapToNumber {
+    Common,
+    Uncommon,
+    Rare,
+    Epic,
+    Legendary,
+}
 const UpgradeTable: FC<Props> = ({
     equipment,
     isWaitCitizen,
@@ -27,10 +39,22 @@ const UpgradeTable: FC<Props> = ({
 
     const showData = !!upgradeKit && !isWaitCitizen && equipment;
 
-    const { price, minTime, maxTime } = useUpgradeModifiers(
-        upgradeKit,
-        equipment
-    );
+    const { minTime, maxTime } = useUpgradeModifiers(upgradeKit, equipment);
+
+    const { data: commonUpgradeTableData } = useTableData<{
+        equip_level: number;
+        rarities: string[];
+    }>(getEkutableConfig);
+
+    const commonPrice =
+        Number(
+            commonUpgradeTableData.find(
+                ({ equip_level }) =>
+                    equipment?.[0].data.level &&
+                    Number(equipment[0].data.level) + 1 === equip_level
+            )?.rarities[EquipmentRarityMapToNumber[equipment![0].data.rarity]]
+        ) /
+        10 ** 8;
 
     return (
         <KeyValueTable
@@ -40,7 +64,7 @@ const UpgradeTable: FC<Props> = ({
                     ? `${getTimeLeft(minTime)} - ${getTimeLeft(maxTime)}`
                     : '-',
                 [t('Kit price')]: showData
-                    ? `${price} ${t('components.common.button.dme')}`
+                    ? `${commonPrice} ${t('components.common.button.dme')}`
                     : '-',
                 [t('Cost of execution')]: cost ? cost / 10 ** 8 : '-',
                 [t('Rarity')]:
