@@ -12,7 +12,6 @@ import {
     useUserLocation,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { FC } from 'react';
 import { Badge, Space } from 'antd';
 import { useGate, useStore } from 'effector-react';
 import { CallToTravelNotification, useSmartContractAction } from 'features';
