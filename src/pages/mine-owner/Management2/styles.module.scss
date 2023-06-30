@@ -1,4 +1,5 @@
 @import "src/shared";
+
 .background {
   background: url("../../../shared/ui/images/mineowner/mine-owner-cabin-default-light.webp") no-repeat center;
   min-height: 100vh;
@@ -6,7 +7,7 @@
   background-size: cover;
   position: absolute;
 
-  &:after {
+  &::after {
     content: '';
     background: url("../../../shared/ui/images/mineowner/pattern.svg") no-repeat center;
     min-height: 100vh;
@@ -28,7 +29,6 @@
   backdrop-filter: blur(11px);
   z-index: 1;
   margin: auto;
-
   position: absolute;
   top: 50%;
   left: 50%;
@@ -66,6 +66,7 @@
   height: 16.08px;
   float: right;
 }
+
 .carousel {
   width: 179.176px;
   height: 218.886px;
