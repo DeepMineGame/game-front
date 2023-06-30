@@ -1,3 +1,4 @@
+@import "src/shared";
 .background {
   background: url("../../../shared/ui/images/mineowner/mine-owner-cabin-default-light.webp") no-repeat center;
   min-height: 100vh;
@@ -21,7 +22,6 @@
 }
 
 .panel {
-  width: 598px;
   height: 452px;
   border: 1px solid var(--neutral-neutral-8, #ACACAC);
   background: rgba(15, 14, 14, 0.50);
@@ -33,6 +33,10 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  @media (min-width: $media-desktop-s)  {
+    width: 598px;
+  }
 }
 
 .left {
