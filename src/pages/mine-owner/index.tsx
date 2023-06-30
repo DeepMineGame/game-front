@@ -43,3 +43,4 @@ export const MineOwnerPage = () => {
 export * from './Management';
 export * from './MineOwnerMiningCrewPage';
 export * from './MineOwnerStatsAndInfo';
+export * from './Management2';

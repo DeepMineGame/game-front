@@ -13,7 +13,7 @@ import { useStore } from 'effector-react';
 import { Progress, Space, Tooltip } from 'antd';
 import Icon, { InfoCircleOutlined } from '@ant-design/icons';
 import styles from './styles.module.scss';
-import { DepthChanger } from './ui/DepthChanger';
+import { DepthChanger } from '../../../features/mine-owner/management/ui/DepthChanger';
 
 const SUB_LEVELS_MAX_AMOUNT = 5;
 
@@ -34,10 +34,10 @@ export const MineManagementPage = () => {
         mine.sublevel > 0 &&
         ((mine.sublevel + 1) / SUB_LEVELS_MAX_AMOUNT) * 100;
     return (
-        <Page headerTitle={t('MINE MANAGEMENT')}>
+        <Page headerTitle={t('MINE MANAGEMENT')} className={styles.page}>
             {chainAccountName && (
                 <div className={styles.item}>
-                    <MineControlPanel chainAccountName={chainAccountName} />
+                    <MineControlPanel />
                 </div>
             )}
             <div className={styles.table}>
@@ -92,7 +92,7 @@ export const MineManagementPage = () => {
                                 trailColor={neutral3Color}
                             />
                         ),
-                        [t('features.mining.depthLevel')]: (
+                        [t('Depth level')]: (
                             <Space>
                                 <div>
                                     {t('features.mining.currentDepthLevel')}{' '}

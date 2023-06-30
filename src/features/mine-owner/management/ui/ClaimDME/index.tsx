@@ -52,6 +52,7 @@ export const ClaimDME: FC<{ contract: ContractDto | null }> = ({
     return (
         <>
             <Button
+                block
                 type="primary"
                 onClick={() => setClaimInfoModalVisible(true)}
                 disabled={!dmeMoreThenZero || !inLocation.mineDeck}

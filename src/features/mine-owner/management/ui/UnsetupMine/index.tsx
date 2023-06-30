@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import React, { FC } from 'react';
-import { useReloadPage } from 'shared';
+import { useAccountName, useReloadPage } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { useNavigate } from 'react-router-dom';
 import { mineOwner } from 'app/router/paths';
@@ -21,10 +21,10 @@ import {
 import { useSmartContractAction } from '../../../../hooks';
 
 export const UnsetupMine: FC<{
-    accountName: string;
     isMineActive: boolean;
     activeContract: ContractDto | null;
-}> = ({ accountName, isMineActive, activeContract }) => {
+}> = ({ isMineActive, activeContract }) => {
+    const accountName = useAccountName();
     useGate(UnsetupMineGate, { searchParams: accountName });
     const contractorsContracts = useStore(activeContractorsContractsStore);
     const userMine = useStore(userMineStore);

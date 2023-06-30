@@ -61,8 +61,6 @@
         "install": "Install",
         "uninstall": "Uninstall",
         "deactivate": "Deactivate",
-        "activate": "Activate",
-        "setup": "Setup",
         "claim": "Claim",
         "dme": "DME",
         "dmp": "DMP",
@@ -725,7 +723,6 @@
     "mining": {
       "mineLevel": "Mine Level",
       "mineSublevel": "Mine Sublevel",
-      "depthLevel": "Depth level",
       "currentDepthLevel": "Current depth level"
     },
     "mineOwner": {
@@ -1019,6 +1016,10 @@
   "MINE MANAGEMENT": "MINE MANAGEMENT",
   "Warehouse": "Warehouse",
   "SERVICE MARKET": "SERVICE MARKET",
-  "Place myself as a contractor": "Place myself as a contractor"
-
+  "Place myself as a contractor": "Place myself as a contractor",
+  "Mine status": "Mine status",
+  "Inactive": "Inactive",
+  "Activate": "Activate",
+  "Depth level": "Depth level",
+  "Upgrade": "Upgrade"
 }

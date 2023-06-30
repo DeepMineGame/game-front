@@ -1,0 +1,19 @@
+@import "src/shared";
+
+.title {
+  font-family: $orbitron;
+  margin-top: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.wrapper {
+  padding: 24px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 24px;
+}
