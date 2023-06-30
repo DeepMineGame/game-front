@@ -1,7 +1,7 @@
 import Lottie from 'lottie-react';
 import { useNavigate } from 'react-router-dom';
 import { CallToTravelNotification, MineOwnerManagementPanel } from 'features';
-import { useReloadPage, useTableData } from 'shared';
+import { desktopS, useMediaQuery, useReloadPage, useTableData } from 'shared';
 import {
     getUserConfig,
     LOCATION_TO_ID,
@@ -50,22 +50,30 @@ export const MineOwnerManagementPage = () => {
     const inUserInMineOwnerLocation =
         userInfo?.[0]?.location === LOCATION_TO_ID.mine_deck;
     const reloadPage = useReloadPage();
+    const isDesktop = useMediaQuery(desktopS);
 
     return (
         <>
             <div className={styles.background} />
-            <div className={styles.left}>
-                <BackButton className={styles.backButton} />
-                <Lottie animationData={sphere} className={styles.sphere} />
-                <Lottie animationData={bar} className={styles.bar} />
-            </div>
+            {isDesktop && (
+                <div className={styles.left}>
+                    <BackButton className={styles.backButton} />
+                    <Lottie animationData={sphere} className={styles.sphere} />
+                    <Lottie animationData={bar} className={styles.bar} />
+                </div>
+            )}
             <div className={styles.panel}>
                 <MineOwnerManagementPanel />
             </div>
-            <div className={styles.right}>
-                <Lottie animationData={carousel} className={styles.carousel} />
-                <Lottie animationData={vinyl} className={styles.vinyl} />
-            </div>
+            {isDesktop && (
+                <div className={styles.right}>
+                    <Lottie
+                        animationData={carousel}
+                        className={styles.carousel}
+                    />
+                    <Lottie animationData={vinyl} className={styles.vinyl} />
+                </div>
+            )}
             {userInfo?.length && !inUserInMineOwnerLocation && (
                 <CallToTravelNotification
                     toLocationId={LOCATION_TO_ID.mine_deck}
