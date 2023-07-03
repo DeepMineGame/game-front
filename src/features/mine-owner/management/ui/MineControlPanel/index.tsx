@@ -5,13 +5,13 @@ import {
     orange6,
     showSuccessModal,
     Title,
+    useAccountName,
     useReloadPage,
     useTableData,
     useTravelConfirm,
     useUserLocation,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { FC } from 'react';
 import { Badge, Space } from 'antd';
 import { useGate, useStore } from 'effector-react';
 import { CallToTravelNotification, useSmartContractAction } from 'features';
@@ -34,13 +34,10 @@ import { UnsetupMine } from '../UnsetupMine';
 import { activeMineOwnerExecutorContractStore } from '../../../models/unsetupMineModel';
 import styles from './styles.module.scss';
 
-type Props = {
-    chainAccountName: string;
-};
-
-export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
+export const MineControlPanel = () => {
+    const accountName = useAccountName();
     useGate(MineManagementGate, {
-        searchParam: chainAccountName,
+        searchParam: accountName,
     });
     const inLocation = useUserLocation();
     const { travelConfirm } = useTravelConfirm(LOCATION_TO_ID.mine_deck);
@@ -62,12 +59,12 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
         : t('components.common.status.inactive');
     const setupMineAction = useSmartContractAction({
         action: setupMine({
-            waxUser: chainAccountName,
+            waxUser: accountName,
             contractId: contract?.id!,
         }),
     });
     const activateMine = useSmartContractAction({
-        action: activatemine({ waxUser: chainAccountName, mineId: mine?.id }),
+        action: activatemine({ waxUser: accountName, mineId: mine?.id }),
     });
     const onActivationButtonClick = async () => {
         if (!inLocation.mineDeck) {
@@ -146,7 +143,6 @@ export const MineControlPanel: FC<Props> = ({ chainAccountName }) => {
                     <UnsetupMine
                         activeContract={contract}
                         isMineActive={isMineActive}
-                        accountName={chainAccountName}
                     />
                 </Space>
             </div>

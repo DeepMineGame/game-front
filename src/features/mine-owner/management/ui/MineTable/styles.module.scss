@@ -1,0 +1,25 @@
+.mineLevelLine {
+  display: flex;
+  align-items: center;
+  gap: 4px
+}
+
+.mineLevelProgress {
+  width: 88px;
+  margin-right: 8px;
+}
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  border-radius: 2px;
+  border: 1px solid var(--neutral-neutral-4, #303030);
+
+}
+
+.table {
+  border: 1px solid var(--neutral-neutral-4, #303030);
+  margin-top: 24px;
+  margin-bottom: 24px;
+}

@@ -10,7 +10,6 @@ import {
     LandLordPage,
     HivePage,
     NotFoundPage,
-    MineManagementPage,
     MineOwnerPage,
     MineOwnerMiningCrewPage,
     InfoPage,
@@ -28,6 +27,7 @@ import {
     EquipmentHallPage,
     InterfaceStubPage,
     EngineersTraining,
+    MineOwnerManagementPage,
 } from 'pages';
 
 import * as paths from './paths';
@@ -102,7 +102,7 @@ export const routes: AppRoute[] = [
     },
     {
         path: paths.mineManagement,
-        Component: MineManagementPage,
+        Component: MineOwnerManagementPage,
         forLoggedIn: true,
         forAdmin: false,
         forBetaUser: false,

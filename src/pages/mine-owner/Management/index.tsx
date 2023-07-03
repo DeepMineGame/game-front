@@ -8,12 +8,17 @@ import {
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import React from 'react';
-import { $userMine, Addons, MineControlPanel, $mineNft } from 'features';
+import {
+    $userMine,
+    Addons,
+    MineControlPanel,
+    $mineNft,
+    DepthChanger,
+} from 'features';
 import { useStore } from 'effector-react';
 import { Progress, Space, Tooltip } from 'antd';
 import Icon, { InfoCircleOutlined } from '@ant-design/icons';
 import styles from './styles.module.scss';
-import { DepthChanger } from './ui/DepthChanger';
 
 const SUB_LEVELS_MAX_AMOUNT = 5;
 
@@ -34,10 +39,10 @@ export const MineManagementPage = () => {
         mine.sublevel > 0 &&
         ((mine.sublevel + 1) / SUB_LEVELS_MAX_AMOUNT) * 100;
     return (
-        <Page headerTitle={t('MINE MANAGEMENT')}>
+        <Page headerTitle={t('MINE MANAGEMENT')} className={styles.page}>
             {chainAccountName && (
                 <div className={styles.item}>
-                    <MineControlPanel chainAccountName={chainAccountName} />
+                    <MineControlPanel />
                 </div>
             )}
             <div className={styles.table}>
@@ -92,7 +97,7 @@ export const MineManagementPage = () => {
                                 trailColor={neutral3Color}
                             />
                         ),
-                        [t('features.mining.depthLevel')]: (
+                        [t('Depth level')]: (
                             <Space>
                                 <div>
                                     {t('features.mining.currentDepthLevel')}{' '}
