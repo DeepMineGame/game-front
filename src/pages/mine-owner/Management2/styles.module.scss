@@ -79,6 +79,9 @@
 .backButton {
   float: right;
   margin-bottom: 40px;
+  position: relative;
+  z-index: 100;
+  cursor: pointer;
 }
 
 .vinyl {
