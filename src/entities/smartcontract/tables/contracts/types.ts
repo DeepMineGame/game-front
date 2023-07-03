@@ -1,5 +1,5 @@
+import { e_upg_asset_type } from 'entities/game-stat';
 import { RarityType } from '../inventories';
-import { e_upg_asset_type } from '../../../game-stat';
 
 export enum ContractType {
     undefined,
@@ -79,7 +79,7 @@ export type ContractAttrs = {
     upgrade_failed: string;
     engineer_report_fetched?: boolean;
     asset_template_ids: string[];
-    asset_types: e_upg_asset_type;
+    asset_types: e_upg_asset_type; // e_upg_asset_type with ','
     upgrade_statuses: AttrStatus[];
     upgrade_levels: string[];
     asset_ids_new: string[];

@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toLocaleDate } from 'shared';
 import { ContractDto, normalizeAttrs, rarityMap } from 'entities/smartcontract';
+import { e_upg_asset_type, equipmentNames } from 'entities/game-stat';
 import { TableWithTitle } from '../..';
 
 type Props = {
@@ -10,7 +11,9 @@ type Props = {
 
 const Conditions: FC<Props> = ({ contract }) => {
     const { t } = useTranslation();
-    const { asset_ids } = normalizeAttrs(contract.attrs);
+    const { asset_ids, asset_types } = normalizeAttrs(contract.attrs);
+    const isEquipmentSet =
+        (asset_types as unknown as string)?.split(',').length === 5;
     const conditionData = {
         Upgrade: asset_ids?.split(',').join(', '),
         ...(!!contract.deadline_time && {
@@ -18,6 +21,15 @@ const Conditions: FC<Props> = ({ contract }) => {
                 contract.deadline_time * 1000
             ),
         }),
+        'Asset type': isEquipmentSet
+            ? 'Equipment set'
+            : (asset_types as unknown as string)
+                  ?.split(',')
+                  .map(
+                      (item) =>
+                          equipmentNames[item as unknown as e_upg_asset_type]
+                  ),
+
         [t('Cost of execution')]: `${contract.cost_of_execution / 10 ** 8} ${t(
             'components.common.button.dme'
         )}`,
