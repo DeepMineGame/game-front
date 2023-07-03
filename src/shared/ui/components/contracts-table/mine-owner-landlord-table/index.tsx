@@ -65,6 +65,7 @@ export const MineOwnerLandlordTable: FC<Props> = ({ contracts }) => {
                 {
                     title: t('Landlord'),
                     dataIndex: 'nickName',
+                    width: 300,
                     key: 'nickName',
                     ...nicknameSearchProps,
                     render: (value, { contract }) => {

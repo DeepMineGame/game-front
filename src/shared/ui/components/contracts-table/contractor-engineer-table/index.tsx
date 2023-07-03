@@ -64,6 +64,7 @@ export const ContractorEngineerTable: FC<Props> = ({ contracts }) => {
                 {
                     title: t('Engineer'),
                     dataIndex: 'nickName',
+                    width: 300,
                     ...nicknameSearchProps,
                     key: 'nickName',
                     render: (_, { contract }) => {
