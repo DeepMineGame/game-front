@@ -50,6 +50,7 @@ monospace`,
                     colorInfoHover: '#FFD93E',
                     colorLink: '#CCA500',
                     colorTextLightSolid: '#141414',
+                    colorBgSpotlight: '#CCA500',
                 },
             }}
         >
