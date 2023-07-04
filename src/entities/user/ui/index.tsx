@@ -169,12 +169,11 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                 <div className={styles.buttonWrapper}>
                     <Button
                         className={styles.button}
-                        ghost
                         icon={<DatabaseOutlined />}
                         onClick={() => navigate(warehouse)}
                         size="large"
                     >
-                        {t('components.common.inventory')}
+                        {t('Inventory')}
                     </Button>
                 </div>
             </Drawer>

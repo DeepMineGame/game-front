@@ -86,7 +86,6 @@
       "new": "New",
       "completed": "Completed",
       "logout": "Logout",
-      "inventory": "Inventory",
       "yourDMEHasBeenClaimed": "Your DME has been claimed",
       "statsAndInfo": {
         "title": "Stats & info",
@@ -1022,5 +1021,6 @@
   "Activate": "Activate",
   "Depth level": "Depth level",
   "Upgrade": "Upgrade",
-  "RENTAL HUB": "RENTAL HUB"
+  "RENTAL HUB": "RENTAL HUB",
+  "Inventory": "Inventory"
 }
