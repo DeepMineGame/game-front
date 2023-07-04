@@ -1,4 +1,4 @@
-import { Dropdown, Menu, Modal } from 'antd';
+import { App, Dropdown, Menu } from 'antd';
 import React, { useState } from 'react';
 import { $userMine, useSmartContractActionDynamic } from 'features';
 import {
@@ -16,6 +16,8 @@ import { $changeDepthAction, ChangeDepthGate } from '../../model';
 import styles from './styles.module.scss';
 
 export const DepthChanger = () => {
+    const { modal } = App.useApp();
+
     const accountName = useAccountName();
     const reloadPage = useReloadPage();
     const { t } = useTranslation();
@@ -65,7 +67,7 @@ export const DepthChanger = () => {
             })
         )?.then(reloadPage);
     const notifyAboutToChangeDepthNeeded = () =>
-        Modal.warn({
+        modal.warning({
             title: t('features.mineOwner.management.selectTheDepth'),
         });
     const startChangeDepthAction = () =>

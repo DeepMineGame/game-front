@@ -10,7 +10,7 @@ import {
 import { useStore } from 'effector-react';
 import { useSmartContractAction } from 'features';
 import { useTranslation } from 'react-i18next';
-import { Modal } from 'antd';
+import { App } from 'antd';
 import {
     extractFeeToClaimAttr,
     rolesStore,
@@ -23,6 +23,8 @@ import {
 export const ClaimDME: FC<{ contract: ContractDto | null }> = ({
     contract,
 }) => {
+    const { modal } = App.useApp();
+
     const inLocation = useUserLocation();
     const waxUser = useAccountName();
     const { t } = useTranslation();
@@ -43,7 +45,7 @@ export const ClaimDME: FC<{ contract: ContractDto | null }> = ({
     const onDmeClick = async () => {
         await claimDme();
         await getRolesEffect({ searchParam: waxUser });
-        Modal.success({
+        modal.success({
             content: t('components.common.yourDMEHasBeenClaimed'),
             onOk: reloadPage,
         });
