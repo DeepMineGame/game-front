@@ -13,6 +13,7 @@ import { KeyValueTable } from 'shared/ui/ui-kit';
 import { UpgradeKitType } from '../../model/upgrade-kit';
 import { useUpgradeModifiers } from '../../lib/useUpgradeModifier';
 import styles from './styles.module.scss';
+import { EQUIPMENT_SET_LENGTH } from '../../constants';
 
 type Props = {
     isWaitCitizen: boolean;
@@ -36,6 +37,7 @@ const UpgradeTable: FC<Props> = ({
     contract,
 }) => {
     const { t } = useTranslation();
+    const isEquipmentSet = equipment?.length === EQUIPMENT_SET_LENGTH;
 
     const showData = !!upgradeKit && !isWaitCitizen && equipment;
 
@@ -64,7 +66,9 @@ const UpgradeTable: FC<Props> = ({
                     ? `${getTimeLeft(minTime)} - ${getTimeLeft(maxTime)}`
                     : '-',
                 [t('Kit price')]: showData
-                    ? `${commonPrice} ${t('components.common.button.dme')}`
+                    ? `${isEquipmentSet ? commonPrice : commonPrice * 5} ${t(
+                          'components.common.button.dme'
+                      )}`
                     : '-',
                 [t('Cost of execution')]: cost ? cost / 10 ** 8 : '-',
                 [t('Rarity')]:
