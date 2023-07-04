@@ -84,6 +84,8 @@ export type ContractAttrs = {
     upgrade_levels: string[];
     asset_ids_new: string[];
     asset_ids_old: string[];
+    area_rarity: RarityType;
+    mine_level: number | undefined;
 };
 
 export type ContractDto = {
