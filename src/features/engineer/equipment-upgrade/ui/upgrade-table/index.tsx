@@ -12,8 +12,8 @@ import { getTimeLeft } from 'shared/ui/utils';
 import { KeyValueTable } from 'shared/ui/ui-kit';
 import { UpgradeKitType } from '../../model/upgrade-kit';
 import { useUpgradeModifiers } from '../../lib/useUpgradeModifier';
-import styles from './styles.module.scss';
 import { EQUIPMENT_SET_LENGTH } from '../../constants';
+import styles from './styles.module.scss';
 
 type Props = {
     isWaitCitizen: boolean;
