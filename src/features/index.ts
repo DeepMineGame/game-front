@@ -16,3 +16,4 @@ export * from './mine-stats';
 export * from './action-indicator';
 export * from './blockchain-loader';
 export * from './starter-pack-offer';
+export * from './city';

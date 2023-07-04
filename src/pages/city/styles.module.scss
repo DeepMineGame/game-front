@@ -14,6 +14,8 @@
 }
 
 .enterLink {
+  @include enter-hover;
+
   font-family: $orbitron;
   padding: 4px 12px;
   display: inline-block;
@@ -31,7 +33,7 @@
 .mine {
   @include enter-hover;
 
-  height: 85vh;
+  height: 41vh;
   width: 15vw;
   float: right;
   background-image: url("../../shared/ui/images/city/mine.webp");
@@ -40,6 +42,10 @@
   background-position: right;
   cursor: pointer;
   position: relative;
+
+  @media (min-width: $media-tablet)  {
+    height: 85vh;
+  }
 }
 
 .hive {
@@ -61,12 +67,12 @@
 }
 
 .serviceMarket {
-  @include enter-hover;
+  //@include enter-hover;
 
   display: inline-block;
-  height: 50vh;
-  width: 20vw;
-  background-image: url("../../shared/ui/images/city/market.webp");
+  //height: 50vh;
+  //width: 20vw;
+  //background-image: url("../../shared/ui/images/city/market.webp");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -76,10 +82,6 @@
   @media (min-width: $media-tablet)  {
     background-position: left;
   }
-}
-
-.serviceMarketTitle {
-  margin-top: 45vh;
 }
 
 .landlordLounge {

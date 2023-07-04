@@ -1,0 +1,45 @@
+@import "src/shared";
+
+.hubTop {
+  @include enter-hover;
+
+  background-image: url("../../../../shared/ui/images/city/hubTop.png");
+  height: 289px;
+  width: 293px;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: contain;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+.hubBottom {
+  @include enter-hover;
+
+  background-image: url("../../../../shared/ui/images/city/hubBottom.png");
+  height: 139px;
+  width: 314px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: contain;
+  cursor: pointer;
+  position: relative;
+  margin-top: -38px;
+}
+
+.enterLink {
+  @include enter-hover;
+
+  font-family: $orbitron;
+  padding: 4px 12px;
+  display: inline-block;
+  color: $color-neutral-neutral-10 !important;
+  cursor: pointer;
+  background: rgba(20, 20, 20, 0.4);
+  border-bottom: 1px solid $color-neutral-neutral-1;
+}
+.rentalHubTitle {
+  float: right;
+  margin-top: 35px;
+}
