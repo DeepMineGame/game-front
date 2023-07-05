@@ -452,7 +452,6 @@
         "personalOrder": "Personalized order",
         "levelUpgrade": "Level upgrade",
         "selectType": "Select type",
-        "upgradeType": "Upgrade type",
         "upgradeTypeList": [
           "",
           "Mine upgrade",
@@ -1022,5 +1021,6 @@
   "Depth level": "Depth level",
   "Upgrade": "Upgrade",
   "RENTAL HUB": "RENTAL HUB",
-  "Inventory": "Inventory"
+  "Inventory": "Inventory",
+  "Upgrade type": "Upgrade type"
 }

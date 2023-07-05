@@ -13,7 +13,7 @@ export const UpgradeTypeFormItem: FC = () => {
     return (
         <Form.Item
             className={styles.formField}
-            label={t('pages.serviceMarket.createOrder.upgradeType')}
+            label={t('Upgrade type')}
             name={orderFields.optSchema}
         >
             <Select
