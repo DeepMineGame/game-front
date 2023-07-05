@@ -86,7 +86,6 @@
       "new": "New",
       "completed": "Completed",
       "logout": "Logout",
-      "inventory": "Inventory",
       "yourDMEHasBeenClaimed": "Your DME has been claimed",
       "statsAndInfo": {
         "title": "Stats & info",
@@ -453,7 +452,6 @@
         "personalOrder": "Personalized order",
         "levelUpgrade": "Level upgrade",
         "selectType": "Select type",
-        "upgradeType": "Upgrade type",
         "upgradeTypeList": [
           "",
           "Mine upgrade",
@@ -1021,5 +1019,8 @@
   "Inactive": "Inactive",
   "Activate": "Activate",
   "Depth level": "Depth level",
-  "Upgrade": "Upgrade"
+  "Upgrade": "Upgrade",
+  "RENTAL HUB": "RENTAL HUB",
+  "Inventory": "Inventory",
+  "Upgrade type": "Upgrade type"
 }

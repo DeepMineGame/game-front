@@ -6,8 +6,8 @@ export const rarityColumnWithSorterProps = {
     title: 'Rarity',
     dataIndex: 'rarity',
     key: 'rarity',
-    render: (rarity: -1 | RarityType) =>
-        rarity === -1 ? (
+    render: (rarity: undefined | RarityType) =>
+        rarity === undefined ? (
             'N/A'
         ) : (
             <div

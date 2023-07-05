@@ -5,7 +5,7 @@ import {
     useChainAuthContext,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { Modal } from 'antd';
+import { App, Modal } from 'antd';
 import { useActionName } from 'features/user';
 import {
     Action,
@@ -25,12 +25,16 @@ type UseSmartContractActionParams<T> = {
     options?: typeof defaultTransactionOptions;
     onSignSuccess?: () => void;
 };
-
+const config = {
+    title: 'Use Hook!',
+    content: 'error',
+};
 export const useSmartContractAction = <T>({
     action,
     options = defaultTransactionOptions,
     onSignSuccess,
 }: UseSmartContractActionParams<T>) => {
+    const { modal } = App.useApp();
     const chainAccount = useChainAuthContext();
     const { t } = useTranslation();
     let actionType: ActionType = ActionType.undefined;
@@ -49,7 +53,7 @@ export const useSmartContractAction = <T>({
             const lastActionInProgress =
                 lastAction && (lastAction.finishes_at || 0) * 1000 > Date.now();
             if (lastActionInProgress) {
-                return Modal.warn({
+                return modal.warning({
                     title: t('components.actionModal.actionNotPossible'),
                     content: `${t('components.actionModal.busy')} ${
                         actionName || t('components.actionModal.lastAction')
@@ -62,7 +66,7 @@ export const useSmartContractAction = <T>({
             return onSignSuccess?.();
         } catch (e) {
             const err = e as Error;
-            Modal.error({
+            modal.error({
                 title: t('components.common.status.error'),
                 content: createErrorMessage(err, t),
             });
@@ -72,6 +76,7 @@ export const useSmartContractAction = <T>({
 };
 
 export const useSmartContractActionDynamic = () => {
+    const { modal } = App.useApp();
     const chainAccount = useChainAuthContext();
     const { t } = useTranslation();
     return <T>(
@@ -83,7 +88,8 @@ export const useSmartContractActionDynamic = () => {
             .catch((e) => {
                 const err = e as Error;
                 showErrorNotification(err);
-                Modal.error({
+
+                modal.error({
                     title: t('components.common.status.error'),
                     content: createErrorMessage(err, t),
                 });

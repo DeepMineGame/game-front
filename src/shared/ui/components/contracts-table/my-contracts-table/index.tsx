@@ -100,6 +100,7 @@ export const MyContractsTable: FC<Props> = ({ contracts }) => {
                     title: t('Nickname'),
                     ...nicknameSearchProps,
                     dataIndex: 'nickName',
+                    width: 300,
                     key: 'nickName',
                     render: (_, { contract }) => {
                         const nick =

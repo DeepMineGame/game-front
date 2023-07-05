@@ -14,6 +14,7 @@ import { Link, Table } from '../../../ui-kit';
 import { toLocaleDate } from '../../../utils';
 import styles from '../styles.module.scss';
 import { areaRarityColumnWithSorterProps } from '../lib';
+import { rarityColumnWithSorterProps } from '../lib/rarity-column-with-sorter-props';
 
 type Props = { contracts: ContractDto[] | null };
 
@@ -33,7 +34,7 @@ export const MineOwnerLandlordTable: FC<Props> = ({ contracts }) => {
                     id: contract.id,
                     fee: contract.fee_percent,
                     date: toLocaleDate(contract.create_time * 1000),
-                    rarity: contract.computed?.land_rarity,
+                    rarity: normalizeAttrs(contract.attrs).area_rarity,
                     contract,
                 };
             }),
@@ -65,6 +66,7 @@ export const MineOwnerLandlordTable: FC<Props> = ({ contracts }) => {
                 {
                     title: t('Landlord'),
                     dataIndex: 'nickName',
+                    width: 300,
                     key: 'nickName',
                     ...nicknameSearchProps,
                     render: (value, { contract }) => {
@@ -112,7 +114,7 @@ export const MineOwnerLandlordTable: FC<Props> = ({ contracts }) => {
                         );
                     },
                 },
-                areaRarityColumnWithSorterProps,
+                rarityColumnWithSorterProps,
                 {
                     title: t('Creation date'),
                     dataIndex: 'date',

@@ -213,7 +213,7 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
                 onOpenCard={setSelectedInventoryCard}
                 onSelect={handleItemSelect}
                 userInventory={userInventory}
-                visible={isInventoryOpen}
+                open={isInventoryOpen}
                 onCancel={() => setIsInventoryOpen(false)}
                 selectedTab={inventoriesTabMap[type]}
                 equipmentTypeFilter={selectedEquipmentForFilter}
@@ -226,6 +226,7 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
                     }
                     open={!!selectedInventoryCard}
                     onCancel={() => setSelectedInventoryCard(undefined)}
+                    onOk={() => handleItemSelect(selectedInventoryCard)}
                 />
             )}
         </>

@@ -1,17 +1,10 @@
 import React, { FC } from 'react';
 import { Header, Title, useUserLocation } from 'shared';
 import { useNavigate } from 'react-router-dom';
-import {
-    hive,
-    landLord,
-    serviceMarket,
-    wasteland,
-    engineer,
-} from 'app/router/paths';
+import { hive, landLord, wasteland, engineer } from 'app/router/paths';
 import { useTranslation } from 'react-i18next';
 import { Space } from 'antd';
-import cn from 'classnames';
-import { StarterPackNotifier, StarterPackOfferModal } from 'features';
+import { StarterPackNotifier, StarterPackOfferModal, Hub } from 'features';
 import { UserLocator } from 'entities/user';
 import styles from './styles.module.scss';
 
@@ -47,19 +40,8 @@ export const CityPage: FC = () => {
                         {t('pages.home.landlordCabin')}
                     </Title>
                 </div>
-                <div
-                    className={styles.serviceMarket}
-                    onClick={() => navigate(serviceMarket)}
-                >
-                    <Title
-                        level={5}
-                        className={cn(
-                            styles.enterLink,
-                            styles.serviceMarketTitle
-                        )}
-                    >
-                        {t('SERVICE MARKET')}
-                    </Title>
+                <div className={styles.serviceMarket}>
+                    <Hub />
                 </div>
             </Space>
             <div className={styles.engineer} onClick={() => navigate(engineer)}>

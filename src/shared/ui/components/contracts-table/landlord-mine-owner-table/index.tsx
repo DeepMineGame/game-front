@@ -31,7 +31,7 @@ export const LandlordMineOwnerTable: FC<Props> = ({ contracts }) => {
             contracts?.map((contract) => {
                 return {
                     deposit: contract.deposit,
-                    level: contract.computed?.mine_level,
+                    level: normalizeAttrs(contract.attrs).mine_level,
                     subLevel: normalizeAttrs(contract.attrs).mine_sublevel,
                     nickName: contract.client,
                     key: contract.id,
@@ -70,6 +70,7 @@ export const LandlordMineOwnerTable: FC<Props> = ({ contracts }) => {
                 {
                     title: t('Mine owner'),
                     dataIndex: 'nickName',
+                    width: 300,
                     key: 'nickName',
                     ...nicknameSearchProps,
                     render: (value, { contract }) => {
