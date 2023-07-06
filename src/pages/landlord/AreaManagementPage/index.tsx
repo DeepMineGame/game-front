@@ -4,6 +4,7 @@ import { useGate, useStore } from 'effector-react';
 import {
     Button,
     complement,
+    getImagePath,
     Page,
     useAccountName,
     useReloadPage,
@@ -85,28 +86,41 @@ export const AreaManagementPage = () => {
                 direction="vertical"
                 className={styles.headerAndStat}
             >
-                <AreaClaim
-                    isActive={isActive}
-                    areaId={areaId}
-                    accountName={accountName}
-                />
-                <SlotStatistics area={area} />
-                <Row justify="center" gutter={16}>
-                    <Col span={4}>
-                        <Button
-                            block
-                            type="ghost"
-                            disabled
-                            icon={<UnlockOutlined />}
-                        >
-                            {t('Open new mine spot')}
-                        </Button>
-                    </Col>
-                    <Col span={4} flex="center">
-                        <AddNewMine />
-                    </Col>
-                    <Col span={4}>{setSelfButton}</Col>
-                </Row>
+                <div className={styles.wrapper}>
+                    <div className={styles.base}>
+                        <div className={styles.areaClaim}>
+                            <AreaClaim
+                                isActive={isActive}
+                                areaId={areaId}
+                                accountName={accountName}
+                            />
+                        </div>
+
+                        <div className={styles.statistics}>
+                            <SlotStatistics area={area} />
+                        </div>
+                        <Row justify="center" gutter={16}>
+                            <Col span={4}>
+                                <Button
+                                    block
+                                    type="ghost"
+                                    disabled
+                                    icon={<UnlockOutlined />}
+                                >
+                                    {t('Open new mine spot')}
+                                </Button>
+                            </Col>
+                            <Col span={4} flex="center">
+                                <AddNewMine />
+                            </Col>
+                            <Col span={4}>{setSelfButton}</Col>
+                        </Row>
+                    </div>
+                    {areaItem?.template_id && (
+                        <img src={getImagePath(areaItem.template_id)} alt="" />
+                    )}
+                </div>
+
                 {areaId && (
                     <AreaManagementTable
                         ownContracts={contractsToSign}
