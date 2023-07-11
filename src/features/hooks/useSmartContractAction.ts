@@ -5,7 +5,7 @@ import {
     useChainAuthContext,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { App, Modal } from 'antd';
+import { App } from 'antd';
 import { useActionName } from 'features/user';
 import {
     Action,

@@ -301,7 +301,7 @@
         "installed": "Your equipment has been installed",
         "removed": "Your equipment has been removed",
         "remove": "Remove",
-        "haveNoContract": "You have no contracts",
+        "You have no contracts": "You have no contracts",
         "signMineOwnerContract": "Sign contract with mine owner first",
         "tooltipForDamagedEquip": "Place the equipment into active inventory to repair"
       },
@@ -1022,5 +1022,6 @@
   "Upgrade": "Upgrade",
   "RENTAL HUB": "RENTAL HUB",
   "Inventory": "Inventory",
-  "Upgrade type": "Upgrade type"
+  "Upgrade type": "Upgrade type",
+  "You have no contracts": "You have no contracts"
 }

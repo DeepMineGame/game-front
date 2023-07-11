@@ -1,4 +1,4 @@
-import { Badge, Space, Typography } from 'antd';
+import { App, Badge, Space, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
 import {
@@ -6,7 +6,6 @@ import {
     Button,
     green6,
     orange6,
-    showSuccessModal,
     useAccountName,
     useReloadPage,
     useTravelConfirm,
@@ -49,6 +48,8 @@ export const MineOwnerManagementPanel = () => {
     const contract = useStore(activeMineOwnerExecutorContractStore);
     const isMineSetuped = mine?.state === MineState.setuped;
     const isMineDeactivated = mine?.state === MineState.deactivated;
+    const { modal } = App.useApp();
+
     const setupMineAction = useSmartContractAction({
         action: setupMine({
             waxUser: accountName,
@@ -69,7 +70,7 @@ export const MineOwnerManagementPanel = () => {
             return reloadPage();
         }
         await setupMineAction();
-        return showSuccessModal({
+        return modal.success({
             title: t('features.mineOwner.mineActivation'),
             content: t('features.mineOwner.mineOperationSucceed'),
             onOk: reloadPage,

@@ -6,6 +6,7 @@ import {
     ExclamationCircleFilled,
 } from '@ant-design/icons';
 import { ATOMICHUB_URL } from 'app/constants';
+import { App } from 'antd';
 import { getEmptySlot } from 'features/service-market';
 import {
     useSmartContractAction,
@@ -23,7 +24,7 @@ import {
     UserInventoryType,
 } from 'entities/smartcontract';
 import { MinesGate, minesStore } from 'entities/contract';
-import { Button, confirm, Modal, Result, Select, Text } from 'shared/ui/ui-kit';
+import { Button, Modal, Result, Select, Text } from 'shared/ui/ui-kit';
 import { useReloadPage, useTableData } from 'shared/lib/hooks';
 import { neutral9 } from 'shared/ui/variables';
 import styles from './styles.module.scss';
@@ -53,6 +54,7 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
     const [mineId, setMineId] = useState('');
     const userMine = useStore(minesStore);
     const userAreas = useStore(landlordAreasStore) || [];
+    const { modal } = App.useApp();
 
     const { data: userInventory } =
         useTableData<UserInventoryType>(getInventoryConfig);
@@ -98,7 +100,7 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
 
         // 1. create order as ll
         if (!contract) {
-            return confirm({
+            return modal.confirm({
                 title: t('pages.areaManagement.placeAsMineOwner'),
                 content: t('pages.areaManagement.creatingSelfMineContract'),
                 icon: <ExclamationCircleOutlined style={{ color: neutral9 }} />,
@@ -110,7 +112,7 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
         }
 
         // 2. sign ll contract as mine owner
-        confirm({
+        modal.confirm({
             title: t('pages.areaManagement.placeAsMineOwner'),
             content: t('pages.areaManagement.youNeedSecond'),
             icon: <ExclamationCircleOutlined style={{ color: neutral9 }} />,

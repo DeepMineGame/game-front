@@ -3,14 +3,11 @@ import { useStore } from 'effector-react';
 import cn from 'classnames';
 import { SettingOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
+import { App } from 'antd';
 import { useSmartContractAction } from 'features/hooks';
 import { $engineerCabin } from 'entities/engineer';
-import {
-    clearEngineer,
-    LOCATION_TO_ID,
-    physicalShift,
-} from 'entities/smartcontract';
-import { confirm, Dropdown } from 'shared/ui/ui-kit';
+import { clearEngineer, LOCATION_TO_ID } from 'entities/smartcontract';
+import { Dropdown } from 'shared/ui/ui-kit';
 import {
     useAccountName,
     useReloadPage,
@@ -19,22 +16,9 @@ import {
 } from 'shared/lib/hooks';
 import styles from './styles.module.scss';
 
-export const useEngineerTravel = (onSuccess?: () => void) => {
-    const accountName = useAccountName();
-
-    const travelToWorkshop = useSmartContractAction({
-        action: physicalShift(accountName, LOCATION_TO_ID.engineers_workshop),
-        onSignSuccess: onSuccess,
-    });
-
-    const handleTravel = async () => {
-        await travelToWorkshop();
-    };
-
-    return { handleTravel };
-};
-
 const EngineerSettings: FC<{ disabled: boolean }> = ({ disabled }) => {
+    const { modal } = App.useApp();
+
     const { t } = useTranslation();
     const reloadPage = useReloadPage();
     const accountName = useAccountName();
@@ -54,7 +38,7 @@ const EngineerSettings: FC<{ disabled: boolean }> = ({ disabled }) => {
     };
 
     const dismissConfirm = () => {
-        confirm({
+        modal.confirm({
             title: t('pages.engineer.dismissRole.title'),
             content: t('pages.engineer.dismissRole.content'),
             icon: <ExclamationCircleOutlined className={styles.icon} />,

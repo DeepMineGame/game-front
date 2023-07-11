@@ -3,10 +3,8 @@ import {
     Inventory,
     InventoryCardModal,
     Page,
-    showSuccessModal,
     useAccountName,
     useReloadPage,
-    showWarningModal,
     useActions,
     useUserLocation,
 } from 'shared';
@@ -20,6 +18,7 @@ import {
     contractorsStore,
     CallToTravelNotification,
 } from 'features';
+import { App } from 'antd';
 import {
     ActionState,
     ActionType,
@@ -49,6 +48,7 @@ export const EquipmentSetPage: FC = () => {
     const contractors = useStore(contractorsStore);
     const { lastAction: lastMineAction } = useActions(ActionType.mine);
     const isMining = lastMineAction?.state === ActionState.active;
+    const { modal } = App.useApp();
 
     const [isInventoryVisible, setIsInventoryVisible] = useState(false);
     const [isInventoryCardVisible, setIsInventoryCardVisible] = useState(false);
@@ -98,9 +98,9 @@ export const EquipmentSetPage: FC = () => {
             .map(([, equipment]) => equipment?.asset_id)
             .filter((v) => v) as string[];
         if (!contractId) {
-            showWarningModal({
-                title: t('pages.equipmentSet.main.haveNoContract'),
-                content: t('pages.equipmentSet.main.haveNoContract'),
+            modal.warning({
+                title: t('You have no contracts'),
+                content: t('You have no contracts'),
             });
         }
         if (notActivatedEquipmentIds.length) {
@@ -112,7 +112,7 @@ export const EquipmentSetPage: FC = () => {
                 })
             );
         }
-        return showSuccessModal({
+        return modal.success({
             title: t('pages.equipmentSet.main.title'),
             content: t('pages.equipmentSet.main.installed'),
             onOk: reloadPage,
@@ -126,7 +126,7 @@ export const EquipmentSetPage: FC = () => {
                 items: assetIds,
             })
         );
-        return showSuccessModal({
+        return modal.success({
             title: t('pages.equipmentSet.main.uninstall'),
             content: t('pages.equipmentSet.main.removed'),
             onOk: reloadPage,
@@ -142,7 +142,7 @@ export const EquipmentSetPage: FC = () => {
                 items: [inventory.asset_id],
             })
         );
-        return showSuccessModal({
+        return modal.success({
             title: t('pages.equipmentSet.main.uninstall'),
             content: t('pages.equipmentSet.main.removed'),
             onOk: reloadPage,
