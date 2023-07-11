@@ -40,7 +40,6 @@ export const MineOwnerPage = () => {
         </MineOwnerCabin>
     );
 };
-export * from './Management';
 export * from './MineOwnerMiningCrewPage';
 export * from './MineOwnerStatsAndInfo';
-export * from './Management2';
+export * from './Management';
