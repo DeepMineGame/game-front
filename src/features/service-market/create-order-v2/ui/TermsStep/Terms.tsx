@@ -18,7 +18,6 @@ export const Terms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                     label={t('pages.serviceMarket.createOrder.fee')}
                     className={cn(styles.formField, localStyles.feeInput)}
                     name={orderFields.feePercent}
-                    initialValue={10}
                     tooltip={
                         <Card
                             title={t('pages.serviceMarket.createOrder.fee')}
@@ -28,12 +27,14 @@ export const Terms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                         </Card>
                     }
                 >
-                    <InputNumber
+                    <InputNumber<number>
                         placeholder="%"
-                        type="number"
+                        defaultValue={10}
                         min={10}
                         controls={false}
                         className={styles.inputNumber}
+                        formatter={(value) => `${value} %`}
+                        parser={(value) => Number(value!.replace(' %', ''))}
                     />
                 </Form.Item>
                 <Form.Item
@@ -50,11 +51,13 @@ export const Terms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                         </Card>
                     }
                 >
-                    <InputNumber
-                        placeholder="%"
-                        type="number"
+                    <InputNumber<number>
+                        placeholder="DME"
                         controls={false}
+                        min={1}
                         className={styles.inputNumber}
+                        formatter={(value) => `${value} DME`}
+                        parser={(value) => Number(value!.replace(' DME', ''))}
                     />
                 </Form.Item>
             </Space>

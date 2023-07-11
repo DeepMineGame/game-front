@@ -2,6 +2,7 @@ import { Badge, Space, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
 import {
+    BackButton,
     Button,
     green6,
     orange6,
@@ -36,17 +37,16 @@ export const MineOwnerManagementPanel = () => {
     });
     const mine = useStore($userMine);
     const isMinesLoading = useStore(getMinesByOwnerEffect.pending);
-
+    const navigate = useNavigate();
+    const goToBack = () => navigate(-1);
     const { travelConfirm } = useTravelConfirm(LOCATION_TO_ID.mine_deck);
     const inLocation = useUserLocation();
     const reloadPage = useReloadPage();
-    const navigate = useNavigate();
     const activateMine = useSmartContractAction({
         action: activatemine({ waxUser: accountName, mineId: mine?.id }),
     });
     const { t } = useTranslation();
     const contract = useStore(activeMineOwnerExecutorContractStore);
-    const isMineLoading = useStore(getMinesByOwnerEffect.pending);
     const isMineSetuped = mine?.state === MineState.setuped;
     const isMineDeactivated = mine?.state === MineState.deactivated;
     const setupMineAction = useSmartContractAction({
@@ -79,42 +79,45 @@ export const MineOwnerManagementPanel = () => {
     const toggleMineText =
         isMineSetuped || isMineDeactivated ? t('Activate') : t('Setup');
     return (
-        <div className={styles.wrapper}>
-            <Typography.Title className={styles.title} level={3}>
-                {t('MINE MANAGEMENT')}
-                <UnsetupMine
-                    activeContract={contract}
-                    isMineActive={isMineActive}
-                />
-            </Typography.Title>
-            <Space direction="vertical" size="middle">
-                <Space className={styles.status}>
-                    <Typography.Text>{t('Mine status')}</Typography.Text>
-
-                    <Badge
-                        className={styles.badgeText}
-                        color={isMineActive ? green6 : orange6}
-                        text={statusText}
+        <>
+            <BackButton className={styles.backButton} onClick={goToBack} />
+            <div className={styles.wrapper}>
+                <Typography.Title className={styles.title} level={3}>
+                    {t('MINE MANAGEMENT')}
+                    <UnsetupMine
+                        activeContract={contract}
+                        isMineActive={isMineActive}
                     />
-                </Space>
-            </Space>
-            <div className={styles.buttons}>
-                <ClaimDME contract={contract} />
+                </Typography.Title>
+                <Space direction="vertical" size="middle">
+                    <Space className={styles.status}>
+                        <Typography.Text>{t('Mine status')}</Typography.Text>
 
-                {!isMineActive && (
-                    <Button
-                        block
-                        type={isMineActive ? 'ghost' : 'primary'}
-                        onClick={onActivationButtonClick}
-                        loading={isMinesLoading}
-                    >
-                        {contract
-                            ? toggleMineText
-                            : t('pages.mineManagement.signNewContract')}
-                    </Button>
-                )}
+                        <Badge
+                            className={styles.badgeText}
+                            color={isMineActive ? green6 : orange6}
+                            text={statusText}
+                        />
+                    </Space>
+                </Space>
+                <div className={styles.buttons}>
+                    <ClaimDME contract={contract} />
+
+                    {!isMineActive && (
+                        <Button
+                            block
+                            type={isMineActive ? 'ghost' : 'primary'}
+                            onClick={onActivationButtonClick}
+                            loading={isMinesLoading}
+                        >
+                            {contract
+                                ? toggleMineText
+                                : t('pages.mineManagement.signNewContract')}
+                        </Button>
+                    )}
+                </div>
+                <MineTable />
             </div>
-            <MineTable />
-        </div>
+        </>
     );
 };
