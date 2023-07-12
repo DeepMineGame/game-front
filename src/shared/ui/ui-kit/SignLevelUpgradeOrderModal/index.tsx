@@ -132,7 +132,7 @@ export const SignLevelUpgradeOrderModal: FC<Props> = ({
                 onOpenCard={setSelectedInventoryCard}
                 onSelect={handleAssetSelect}
                 userInventory={inventoryFilteredByRarity}
-                visible={isInventoryOpen}
+                open={isInventoryOpen}
                 onCancel={() => setIsInventoryOpen(false)}
                 selectedTab={
                     inventoriesTabMap[
