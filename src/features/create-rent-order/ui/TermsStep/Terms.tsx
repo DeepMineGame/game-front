@@ -49,7 +49,7 @@ export const Terms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                 <Select
                     placeholder={t('components.common.days')}
                     options={getLabelSelectItem({
-                        amount: 21,
+                        amount: 30,
                         label: t('components.common.day'),
                         // temporary solution because contract for 1 day isn't possible yet
                     }).filter((_, idx) => idx !== 0)}
