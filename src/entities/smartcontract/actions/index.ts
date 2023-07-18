@@ -21,7 +21,7 @@ export * from './cmdStart';
 export * from './cmdFinish';
 export * from './crtcontype';
 export * from './disautorenew';
-
+export * from './crtrcontract';
 export function toggleMining({
     waxUser,
     contractId,
