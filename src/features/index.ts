@@ -1,3 +1,4 @@
+export * from './create-rent-order';
 export * from './useLogout';
 export * from './hooks';
 export * from './balances/fetchWaxBalance';

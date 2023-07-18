@@ -18,3 +18,4 @@ export * from './nft-preview';
 export * from './faq';
 export * from './wasteland';
 export * from './interface-stub';
+export * from './create-rent-order';

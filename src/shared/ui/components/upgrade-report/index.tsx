@@ -110,7 +110,7 @@ const UpgradeReport: FC<Props> = ({
 
             <Modal
                 closable={false}
-                visible={isVisible}
+                open={isVisible}
                 title={
                     <Text bold size="md">
                         {t(

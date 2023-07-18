@@ -28,6 +28,7 @@ import {
     InterfaceStubPage,
     EngineersTraining,
     MineOwnerManagementPage,
+    CreateRentOrderPage,
 } from 'pages';
 
 import * as paths from './paths';
@@ -139,6 +140,14 @@ export const routes: AppRoute[] = [
         forAdmin: false,
         forBetaUser: false,
         titleTag: 'Service-market — DeepMine',
+    },
+    {
+        path: paths.createRentOrder,
+        Component: CreateRentOrderPage,
+        forLoggedIn: true,
+        forAdmin: false,
+        forBetaUser: false,
+        titleTag: 'Rent hub — DeepMine',
     },
     {
         path: paths.serviceMarketOrder,
