@@ -18,6 +18,7 @@ export const Terms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                     label={t('Rental fee')}
                     className={cn(styles.formField, localStyles.feeInput)}
                     name={rentOrderField.fee_percent}
+                    initialValue={10}
                     tooltip={
                         <Card
                             title={t('Rental fee')}
@@ -31,6 +32,8 @@ export const Terms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                 >
                     <InputNumber
                         placeholder="%"
+                        min={10}
+                        max={100}
                         type="number"
                         controls={false}
                         className={styles.inputNumber}
