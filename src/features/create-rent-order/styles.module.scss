@@ -1,0 +1,59 @@
+@import "src/shared";
+
+.backPlateBg {
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    min-height: 65vh;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: radial-gradient(85.88% 85.88% at -0.62% -5.89%, rgba(0, 0, 0, 0.792) 0%, rgba(0, 0, 0, 0.504) 100%), radial-gradient(84.71% 103.35% at 95.28% 4.33%, rgba(0, 0, 0, 0.712) 0%, rgba(0, 0, 0, 0.496) 88.95%);
+  }
+}
+
+.backPlate {
+  min-height: 65vh;
+  display: flex;
+  composes: backPlateBg;
+}
+
+.backPlateInner {
+  margin: auto;
+}
+
+.form {
+  composes: backPlateBg;
+  padding: 20vh;
+  display: grid;
+  grid-template-rows: 1fr;
+  gap: 40px;
+  grid-template-areas:
+    ". .";
+}
+
+.rightSection {
+  width: 352px;
+}
+
+.steps {
+  justify-self: flex-end;
+  max-width: 250px;
+}
+
+.tooltipCard {
+  background: $color-neutral-neutral-1;
+  border: 1px solid $color-neutral-neutral-5;
+  border-radius: 2px;
+  color: $color-neutral-neutral-9;
+  margin: -6px -8px;
+}
+
+.inputNumber {
+  width: 100%;
+}

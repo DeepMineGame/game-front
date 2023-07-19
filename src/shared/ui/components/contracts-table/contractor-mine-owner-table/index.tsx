@@ -44,7 +44,7 @@ export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
                     id: contract.id,
                     fee: contract.fee_percent,
                     date: toLocaleDate(contract.create_time * 1000),
-                    rarity: contract.computed?.land_rarity,
+                    rarity: normalizeAttrs(contract.attrs).area_rarity,
                     contract,
                 };
             }),

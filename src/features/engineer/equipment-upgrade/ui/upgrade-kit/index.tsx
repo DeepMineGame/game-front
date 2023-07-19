@@ -57,7 +57,7 @@ const UpgradeKit: FC<Props> = ({ equipment, disabled, isWaitCitizen }) => {
                 equipment={equipment}
                 value={selectedKit}
                 onSelect={selectKit}
-                visible={showKitModal}
+                open={showKitModal}
                 onCancel={closeModal}
                 onOk={(event) => {
                     closeModal(event);

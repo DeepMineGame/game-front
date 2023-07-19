@@ -6,8 +6,8 @@ import styles from './styles.module.scss';
 interface Props {
     disabled?: boolean;
     isInstall?: boolean;
-    onInstall?: () => Promise<void>;
-    onUninstall?: () => Promise<void>;
+    onInstall?: () => {};
+    onUninstall?: () => {};
 }
 export const EquipmentInstallationModal = ({
     disabled,

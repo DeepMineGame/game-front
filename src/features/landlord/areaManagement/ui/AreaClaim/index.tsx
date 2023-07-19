@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
-import { Badge, Button } from 'antd';
+import { App, Badge, Button } from 'antd';
 
 import {
     Title,
@@ -10,7 +10,6 @@ import {
     orange6,
     ExclamationModal,
     useReloadPage,
-    showSuccessModal,
     getDmeAmount,
     ModalWithTable,
 } from 'shared';
@@ -34,6 +33,8 @@ type Props = {
 
 export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
     useGate(ClaimDmeGate, { searchParam: accountName });
+    const { modal } = App.useApp();
+
     const { t } = useTranslation();
     const claimDme = useStore(claimDmeStore);
     const isLoading = useStore(getRolesEffect.pending);
@@ -61,7 +62,7 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
 
     const onEngage = async () => {
         await engageAreaAction();
-        showSuccessModal({
+        modal.success({
             title: t('pages.areaManagement.engage'),
             content: t('pages.areaManagement.areaActionSucceed'),
             onOk: reloadPage,
@@ -70,7 +71,7 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
 
     const onUnengage = async () => {
         await unEngageAreaAction();
-        showSuccessModal({
+        modal.success({
             title: t('pages.areaManagement.unengage'),
             content: t('pages.areaManagement.areaActionSucceed'),
             onOk: reloadPage,

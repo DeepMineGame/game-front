@@ -13,8 +13,8 @@ import {
     Select,
     useReloadPage,
     useTableData,
-    showSuccessModal,
 } from 'shared';
+import { App } from 'antd';
 import { useSmartContractAction } from 'features/hooks';
 import {
     ContractDto,
@@ -40,6 +40,7 @@ const SignLandlordOrder: FC<Props> = ({
     isSelfContract,
 }) => {
     useGate(MinesGate, { searchParam: accountName });
+    const { modal } = App.useApp();
 
     const { t } = useTranslation();
     const reloadPage = useReloadPage();
@@ -67,7 +68,7 @@ const SignLandlordOrder: FC<Props> = ({
 
     const handleSignOrder = useCallback(async () => {
         await signContractAction();
-        showSuccessModal({
+        modal.success({
             title: t('pages.serviceMarket.order.signOrder'),
             content: t('pages.serviceMarket.order.orderCreated'),
             onOk: reloadPage,

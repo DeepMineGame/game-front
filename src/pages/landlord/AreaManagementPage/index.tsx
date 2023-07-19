@@ -117,7 +117,11 @@ export const AreaManagementPage = () => {
                         </Row>
                     </div>
                     {areaItem?.template_id && (
-                        <img src={getImagePath(areaItem.template_id)} alt="" />
+                        <img
+                            src={getImagePath(areaItem.template_id)}
+                            alt="area nft"
+                            className={styles.areaNftImage}
+                        />
                     )}
                 </div>
 

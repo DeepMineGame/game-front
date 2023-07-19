@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { App } from 'antd';
 import { useSmartContractAction } from 'features/hooks';
 import { LOCATION_TO_ID, upgradeStart } from 'entities/smartcontract';
-import { Button, confirm } from 'shared/ui/ui-kit';
+import { Button } from 'shared/ui/ui-kit';
 import { neutral9 } from 'shared/ui/variables';
 import {
     useReloadPage,
@@ -24,6 +25,8 @@ const PerformUpgrade: FC<Props> = ({
     contractId,
     improved,
 }) => {
+    const { modal } = App.useApp();
+
     const { t } = useTranslation();
     const inLocation = useUserLocation();
     const { travelConfirm } = useTravelConfirm(
@@ -41,7 +44,7 @@ const PerformUpgrade: FC<Props> = ({
     };
 
     const performConfirm = () => {
-        confirm({
+        modal.confirm({
             title: t('pages.engineer.areYouSureToPerformUpgrade'),
             icon: <ExclamationCircleOutlined style={{ color: neutral9 }} />,
             okText: t('pages.engineer.performUpgrade'),

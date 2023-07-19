@@ -7,11 +7,10 @@ import {
     Title,
     useMediaQuery,
     useReloadPage,
-    showWarningModal,
     showErrorNotification,
 } from 'shared';
 import { CheckCircleOutlined } from '@ant-design/icons';
-import { Modal, Space } from 'antd';
+import { App, Modal, Space } from 'antd';
 import { contractorStore, useSmartContractAction } from 'features';
 import {
     ActionDto,
@@ -37,6 +36,7 @@ export const MiningAndClaimButton: FC<Props> = memo(
     ({ action, isMiningWillEndInFuture, accountName }) => {
         useGate(MiningPageGate, { searchParam: accountName });
         const contractor = useStore(contractorStore);
+        const { modal } = App.useApp();
 
         const [claimModalVisibility, setClaimModalVisibility] = useState(false);
         const reloadPage = useReloadPage();
@@ -96,7 +96,7 @@ export const MiningAndClaimButton: FC<Props> = memo(
             }
 
             if (!isMiningFinished && !isClaimed && isMiningWillEndInFuture) {
-                return showWarningModal({
+                return modal.warning({
                     title: t('pages.mining.doWantStopMining'),
                     content: t('pages.mining.consumablesWillBurnOut'),
                     onOk: toggleMiningAndReinitializeStores,

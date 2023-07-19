@@ -301,7 +301,7 @@
         "installed": "Your equipment has been installed",
         "removed": "Your equipment has been removed",
         "remove": "Remove",
-        "haveNoContract": "You have no contracts",
+        "You have no contracts": "You have no contracts",
         "signMineOwnerContract": "Sign contract with mine owner first",
         "tooltipForDamagedEquip": "Place the equipment into active inventory to repair"
       },
@@ -1022,5 +1022,12 @@
   "Upgrade": "Upgrade",
   "RENTAL HUB": "RENTAL HUB",
   "Inventory": "Inventory",
-  "Upgrade type": "Upgrade type"
+  "Upgrade type": "Upgrade type",
+  "You have no contracts": "You have no contracts",
+  "Rental fee": "Rental fee",
+  "Rental fee % of production in DME that the equipment lessee gives to the owner from each DME produced": "Rental fee % of production in DME that the equipment lessee gives to the owner from each DME produced",
+  "Duration": "Duration",
+  "Duration Length of lease period": "Duration Length of lease period",
+  "Deposit amoutn": "Deposit amoutn",
+  "Deposit amount": "Deposit amount"
 }

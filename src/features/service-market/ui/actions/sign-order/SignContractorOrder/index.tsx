@@ -12,9 +12,9 @@ import {
     Text,
     Select,
     useReloadPage,
-    showSuccessModal,
     isEmptyContractorSlot,
 } from 'shared';
+import { App } from 'antd';
 import { useSmartContractAction } from 'features/hooks';
 import {
     $isActiveInventoryHasMineAsset,
@@ -41,6 +41,7 @@ const getEmptySlot = (slots: ContractorSlots) =>
 
 const SignAsMineOwner: FC<Props> = ({ contract, accountName, isClient }) => {
     const { t } = useTranslation();
+    const { modal } = App.useApp();
     const reloadPage = useReloadPage();
     const [isWarningModalVisible, setIsWarningModalVisible] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -69,7 +70,7 @@ const SignAsMineOwner: FC<Props> = ({ contract, accountName, isClient }) => {
 
     const handleSignOrder = useCallback(async () => {
         await signContractAction();
-        showSuccessModal({
+        modal.success({
             title: t('pages.serviceMarket.order.signOrder'),
             content: t('pages.serviceMarket.order.orderCreated'),
             onOk: reloadPage,

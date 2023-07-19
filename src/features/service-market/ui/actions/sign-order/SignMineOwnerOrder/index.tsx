@@ -2,11 +2,12 @@ import React, { FC, useCallback, useState } from 'react';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { ExclamationCircleFilled } from '@ant-design/icons';
-import { Button, Result, showSuccessModal, useReloadPage } from 'shared';
+import { Button, Result, useReloadPage } from 'shared';
 import {
     AtomicHubMarketSections,
     getAtomicHubUrlToSection,
 } from 'app/constants';
+import { App } from 'antd';
 import { useSmartContractAction } from 'features/hooks';
 import {
     ContractDto,
@@ -39,6 +40,8 @@ const getEmptySlot = (slots: MineSlots) => {
 
 const SignAsLandlord: FC<Props> = React.memo(
     ({ contract, accountName, isSelfContract }) => {
+        const { modal } = App.useApp();
+
         const { t } = useTranslation();
         const reloadPage = useReloadPage();
 
@@ -66,7 +69,7 @@ const SignAsLandlord: FC<Props> = React.memo(
 
         const handleSignOrder = useCallback(async () => {
             await signContractAction();
-            showSuccessModal({
+            modal.success({
                 title: t('pages.serviceMarket.order.signOrder'),
                 content: t('pages.serviceMarket.order.orderCreated'),
                 onOk: reloadPage,

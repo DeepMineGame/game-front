@@ -1,6 +1,7 @@
 import React, { FC, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, showSuccessModal, useReloadPage } from 'shared';
+import { Button, useReloadPage } from 'shared';
+import { App } from 'antd';
 import { useSmartContractAction } from 'features/hooks';
 import { ContractDto, signOrder } from 'entities/smartcontract';
 
@@ -14,6 +15,7 @@ const SignAsContractor: FC<Props> = React.memo(
     ({ contract, accountName, isSelfContract }) => {
         const { t } = useTranslation();
         const reloadPage = useReloadPage();
+        const { modal } = App.useApp();
 
         const signContractAction = useSmartContractAction({
             action: signOrder({
@@ -26,7 +28,7 @@ const SignAsContractor: FC<Props> = React.memo(
 
         const handleSignOrder = useCallback(async () => {
             await signContractAction();
-            showSuccessModal({
+            modal.success({
                 title: t('pages.serviceMarket.order.signOrder'),
                 content: t('pages.serviceMarket.order.orderCreated'),
                 onOk: reloadPage,

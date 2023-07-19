@@ -163,7 +163,6 @@ export const MiningPage: FC = memo(() => {
                         <Space size="large" direction="vertical">
                             <Tooltip
                                 placement="left"
-                                color={neutral4}
                                 title={t(
                                     'pages.mining.tooltipAroundConsumables'
                                 )}

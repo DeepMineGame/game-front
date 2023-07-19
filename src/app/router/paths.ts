@@ -19,6 +19,7 @@ export const user = '/user/:accountName';
 export const warehouse = '/warehouse';
 export const serviceMarket = '/service-market';
 export const createOrder = '/service-market/create-order';
+export const createRentOrder = '/rental-hub/create-order';
 export const serviceMarketOrder = '/service-market/contract/:contractId';
 export const inventoryItemPreview = '/inventory/:assetId';
 export const faq = '/faq';

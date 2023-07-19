@@ -3,7 +3,6 @@ import {
     green6,
     Loader,
     orange6,
-    showSuccessModal,
     Title,
     useAccountName,
     useReloadPage,
@@ -12,7 +11,7 @@ import {
     useUserLocation,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { Badge, Space } from 'antd';
+import { App, Badge, Space } from 'antd';
 import { useGate, useStore } from 'effector-react';
 import { CallToTravelNotification, useSmartContractAction } from 'features';
 import { FrownOutlined } from '@ant-design/icons';
@@ -39,6 +38,8 @@ export const MineControlPanel = () => {
     useGate(MineManagementGate, {
         searchParam: accountName,
     });
+    const { modal } = App.useApp();
+
     const inLocation = useUserLocation();
     const { travelConfirm } = useTravelConfirm(LOCATION_TO_ID.mine_deck);
     const { data: userInfo } = useTableData<UserInfoType>(getUserConfig);
@@ -78,7 +79,7 @@ export const MineControlPanel = () => {
             return reloadPage();
         }
         await setupMineAction();
-        return showSuccessModal({
+        return modal.success({
             title: t('features.mineOwner.mineActivation'),
             content: t('features.mineOwner.mineOperationSucceed'),
             onOk: reloadPage,

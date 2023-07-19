@@ -18,6 +18,7 @@ export const Terms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                     label={t('pages.serviceMarket.createOrder.fee')}
                     className={cn(styles.formField, localStyles.feeInput)}
                     name={orderFields.feePercent}
+                    initialValue={10}
                     tooltip={
                         <Card
                             title={t('pages.serviceMarket.createOrder.fee')}
@@ -29,7 +30,6 @@ export const Terms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                 >
                     <InputNumber<number>
                         placeholder="%"
-                        defaultValue={10}
                         min={10}
                         controls={false}
                         className={styles.inputNumber}

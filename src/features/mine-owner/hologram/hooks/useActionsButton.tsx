@@ -3,7 +3,6 @@ import {
     ActionModal,
     Button,
     desktopS,
-    showSuccessModal,
     useAccountName,
     useMediaQuery,
     useReloadPage,
@@ -23,6 +22,7 @@ import {
     getAtomicHubUrlToSection,
 } from 'app/constants';
 import { useStore } from 'effector-react';
+import { App } from 'antd';
 import {
     ContractType,
     ContractRole,
@@ -40,6 +40,7 @@ import { $indicateActionDetails } from '../../../action-indicator';
 
 export function useActionsButton() {
     const [isSetupMineModalVisible, setSetupMineModalVisible] = useState(false);
+    const { modal } = App.useApp();
 
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
@@ -93,7 +94,7 @@ export function useActionsButton() {
 
     const setupSignAndReload = async () => {
         await setupMineAction();
-        showSuccessModal({
+        modal.success({
             title: t('features.mineOwner.setupMine'),
             content: t('features.mineOwner.mineIsSet'),
             onOk: reloadPage,

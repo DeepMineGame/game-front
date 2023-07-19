@@ -120,7 +120,12 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         card.in_use !== undefined;
 
     return (
-        <Modal {...props} title="Active inventory" className={styles.modal}>
+        <Modal
+            {...props}
+            title="Active inventory"
+            className={styles.modal}
+            onOk={handleSelect}
+        >
             <div className={styles.container}>
                 <div>
                     <Card

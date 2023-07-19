@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
+import { App } from 'antd';
 import {
     useSmartContractAction,
     useSmartContractActionDynamic,
@@ -14,7 +15,7 @@ import {
     createMineOrder,
 } from 'entities/smartcontract';
 import { MinesGate, minesStore } from 'entities/contract';
-import { confirm, Select, Text, Modal, Button } from 'shared/ui/ui-kit';
+import { Select, Text, Modal, Button } from 'shared/ui/ui-kit';
 import { neutral9 } from 'shared/ui/variables';
 import { useReloadPage } from 'shared/lib/hooks';
 import styles from './styles.module.scss';
@@ -31,6 +32,8 @@ const PlaceAsContractor: FC<Props> = ({
     isDisabled,
 }) => {
     const { t } = useTranslation();
+    const { modal } = App.useApp();
+
     const reloadPage = useReloadPage();
     const callAction = useSmartContractActionDynamic();
 
@@ -78,7 +81,7 @@ const PlaceAsContractor: FC<Props> = ({
     const handleClick = () => {
         // 1. create order as mine owner
         if (!contract) {
-            return confirm({
+            return modal.confirm({
                 title: t('Place myself as a contractor'),
                 content: t('features.mineOwner.creatingSelfMiningContract'),
                 icon: <ExclamationCircleOutlined style={{ color: neutral9 }} />,
@@ -90,7 +93,7 @@ const PlaceAsContractor: FC<Props> = ({
         }
 
         // 2. sign mine owner contract as contractor
-        confirm({
+        modal.confirm({
             title: t('Place myself as a contractor'),
             content: t('pages.areaManagement.youNeedSecond'),
             icon: <ExclamationCircleOutlined style={{ color: neutral9 }} />,
