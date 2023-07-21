@@ -12,6 +12,8 @@ import {
     UserInventoryType,
 } from 'entities/smartcontract';
 import { mergeAssets, getGameAssets } from 'shared/lib/utils';
+import { getRentAssetsEffect } from './rent-inventory';
+import { getInventoryAtomicAssetsEffect } from './effects';
 
 const WarehouseGate = createGate<{ searchParam: string }>('warehouseGate');
 
@@ -33,9 +35,6 @@ const $inventory = createStore<UserInventoryType[]>([]).on(
 );
 
 const getStorageAtomicAssetsEffect = createEffect<string[], AssetDataType[]>(
-    getAssets
-);
-const getInventoryAtomicAssetsEffect = createEffect<string[], AssetDataType[]>(
     getAssets
 );
 
@@ -128,11 +127,6 @@ sample({
     target: getInventoryAtomicAssetsEffect,
 });
 
-forward({
-    from: WarehouseGate.open,
-    to: [getAtomicAssetsByUserEffect, getInventoryEffect],
-});
-
 export {
     WarehouseGate,
     getAtomicAssetsByUserEffect,
@@ -140,3 +134,8 @@ export {
     $mergedInventoryWithAtomicAssets,
     $mergedStorageWithAtomicAssets,
 };
+
+forward({
+    from: WarehouseGate.open,
+    to: [getAtomicAssetsByUserEffect, getInventoryEffect],
+});

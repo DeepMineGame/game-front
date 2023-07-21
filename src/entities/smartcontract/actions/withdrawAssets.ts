@@ -1,10 +1,14 @@
 import { deepminegame } from '../index';
 
-export function withdrawAssets(waxUser: string, ids: string[]) {
+export function withdrawAssets(
+    waxUser: string,
+    ids: string[],
+    account = deepminegame
+) {
     return {
         actions: [
             {
-                account: deepminegame,
+                account,
                 name: 'withdrawasst',
                 authorization: [
                     {

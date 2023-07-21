@@ -1,5 +1,5 @@
 import { DragEventHandler, FC, useState } from 'react';
-import { Col, Row, Space } from 'antd';
+import { Col, Radio, RadioChangeEvent, Row, Space } from 'antd';
 import {
     Button,
     desktopS,
@@ -12,7 +12,12 @@ import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { isUserInHive } from 'features/hive';
 import { CallToTravelNotification } from 'features/physical-shift';
-import { LOCATION_TO_ID, withdrawAssets } from 'entities/smartcontract';
+import {
+    deepminegame,
+    deepminesmrt,
+    LOCATION_TO_ID,
+    withdrawAssets,
+} from 'entities/smartcontract';
 import {
     atomicTransfer,
     MergedInventoryWithAtomicAssets,
@@ -34,6 +39,15 @@ import {
     changeType,
     DraggableAssetsGate,
 } from '../../model/filter';
+import {
+    $inventoryTypeToggleState,
+    InventoryTypeRadioButtonValues,
+    inventoryTypeToggle,
+} from '../../model/inventory-type-toggle';
+import {
+    $rentInventoryAtomicAssets,
+    getRentAssetsEffect,
+} from '../../model/rent-inventory';
 import styles from './styles.module.scss';
 import { useRenderCards } from './utils/useRenderCards';
 import { removeDraggedElementFromState } from './utils/removeDraggedElementFromState';
@@ -106,17 +120,30 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     const draggedElementsIds = Array.from(draggedElements).map(
         ({ asset_id }) => asset_id
     );
+    const inventoryTypeToggleState = useStore($inventoryTypeToggleState);
+
     const transferFromAtomicStorageToDeepMineInventory = useSmartContractAction(
         {
             action: atomicTransfer({
                 accountName,
                 ids: draggedElementsIds,
+                to:
+                    inventoryTypeToggleState ===
+                    InventoryTypeRadioButtonValues.active
+                        ? deepminegame
+                        : deepminesmrt,
             }),
         }
     );
+    const isRentStorageSelected =
+        inventoryTypeToggleState === InventoryTypeRadioButtonValues.rent;
     const transferFromDeepMineInventoryToAtomicStorage = useSmartContractAction(
         {
-            action: withdrawAssets(accountName, draggedElementsIds),
+            action: withdrawAssets(
+                accountName,
+                draggedElementsIds,
+                isRentStorageSelected ? deepminesmrt : deepminegame
+            ),
         }
     );
     const onTransferClick = async () => {
@@ -146,15 +173,10 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
 
     const isStorageAssetDragging =
         isAtomicIncludesDragged && hasDraggingElement;
+    const rentInventoryAtomicAssets = useStore($rentInventoryAtomicAssets);
 
     return (
         <Row>
-            {!isInHive && (
-                <CallToTravelNotification
-                    toLocationId={LOCATION_TO_ID.hive}
-                    onSuccess={reloadPage}
-                />
-            )}
             <Col
                 span={11}
                 className={styles.cardColumn}
@@ -171,9 +193,31 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                 >
                     <Row justify="space-between" align="middle">
                         <Col>
-                            <Title level={4}>
-                                {t('components.hive.activeInventory')}
-                            </Title>
+                            <Title level={4}>{t('Inventory')}</Title>
+                            <Radio.Group
+                                onChange={(e: RadioChangeEvent) =>
+                                    inventoryTypeToggle(e.target.value)
+                                }
+                                value={inventoryTypeToggleState}
+                            >
+                                <Radio
+                                    value={
+                                        InventoryTypeRadioButtonValues.active
+                                    }
+                                >
+                                    {t('Active inventory')}
+                                </Radio>
+                                <Radio
+                                    value={InventoryTypeRadioButtonValues.rent}
+                                    onClick={() =>
+                                        getRentAssetsEffect({
+                                            searchParam: accountName,
+                                        })
+                                    }
+                                >
+                                    {t('Rent storage')}
+                                </Radio>
+                            </Radio.Group>
                         </Col>
                         <Col style={{ height: 40 }} />
                     </Row>
@@ -199,7 +243,9 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                     ) : (
                         <div className={styles.cardsWrapper}>
                             {renderCards(
-                                filteredActiveInventoryAssets,
+                                isRentStorageSelected
+                                    ? (rentInventoryAtomicAssets as any)
+                                    : filteredActiveInventoryAssets,
                                 handleDragCard
                             )}
                         </div>
@@ -222,9 +268,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                 >
                     <Row justify="space-between" align="middle">
                         <Col>
-                            <Title level={4}>
-                                {t('components.hive.storage')}
-                            </Title>
+                            <Title level={4}>{t('Storage')}</Title>
                         </Col>
                         <Col>
                             <Button
@@ -233,7 +277,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                                 size="large"
                                 onClick={onTransferClick}
                             >
-                                {t('components.hive.confirmTransfer')}
+                                {t('Confirm transfer')}
                             </Button>
                         </Col>
                     </Row>
@@ -261,6 +305,12 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                     )}
                 </div>
             </Col>
+            {!isInHive && (
+                <CallToTravelNotification
+                    toLocationId={LOCATION_TO_ID.hive}
+                    onSuccess={reloadPage}
+                />
+            )}
         </Row>
     );
 };

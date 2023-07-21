@@ -1,8 +1,8 @@
-import { Button, Inventory, InventoryCardModal } from 'shared';
+import { Button, Inventory, InventoryCardModal, useAccountName } from 'shared';
 import { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
-import { useStore } from 'effector-react';
+import { useGate, useStore } from 'effector-react';
 import { Form } from 'antd';
 import {
     InventoryNameType,
@@ -22,6 +22,7 @@ import {
     LeaseTypeFormItem,
     useWatchUpgradeType,
 } from '../../LeaseTypeFormItem';
+import { $rentInventoryAtomicAssets, rentInventoryGate } from '../../../models';
 
 export const LeaseItemType: FC<GeneralInformationStepProps> = ({
     goToNextStep,
@@ -44,7 +45,8 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
     const [selectedInventoryCard, setSelectedInventoryCard] = useState<
         MergedInventoryWithAtomicAssets[number] | undefined
     >();
-    const userInventory = useStore($mergedInventoryWithAtomicAssets);
+    useGate(rentInventoryGate, { searchParam: useAccountName() });
+    const userInventory = useStore($rentInventoryAtomicAssets);
     const isOneItemToLease =
         equipmentType === 'Mine' || type === EquipmentType.equipment;
     const hasAllValues = isOneItemToLease
@@ -94,17 +96,7 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
             form.setFieldsValue({
                 [rentOrderField.asset_ids]: [asset?.asset_id],
             });
-            console.log(form.getFieldsValue());
         }
-        // form.setFieldsValue({
-        //     [rentOrderField.asset_ids]: [
-        //         selectedEquipmentSet.Сutter?.asset_id,
-        //         selectedEquipmentSet['Wandering Reactor']?.asset_id,
-        //         selectedEquipmentSet.Delaminator?.asset_id,
-        //         selectedEquipmentSet['Plunging Blocks']?.asset_id,
-        //         selectedEquipmentSet['DME Wire']?.asset_id,
-        //     ],
-        // });
     }, [asset, form, isOneItemToLease, selectedEquipmentSet]);
 
     return (
@@ -199,7 +191,7 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
             <Inventory
                 onOpenCard={setSelectedInventoryCard}
                 onSelect={handleItemSelect}
-                userInventory={userInventory}
+                userInventory={userInventory as any}
                 open={isInventoryOpen}
                 onCancel={() => setIsInventoryOpen(false)}
                 selectedTab={inventoriesTabMap[type]}

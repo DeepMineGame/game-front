@@ -3,7 +3,7 @@ import { Select } from 'shared';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { orderFields } from 'entities/order';
-import { EngineerSchema, equipmentSet } from 'entities/smartcontract';
+import { equipmentSet } from 'entities/smartcontract';
 
 export enum EquipmentType {
     undefined,

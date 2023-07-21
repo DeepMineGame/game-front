@@ -45,9 +45,6 @@
     },
     "hive": {
       "info&Actions": "Info&Actions",
-      "activeInventory": "Active inventory",
-      "confirmTransfer": "Confirm transfer",
-      "storage": "Storage",
       "YouHaveToPhysicalToManageInventory": "Travel to Hive to have the ability to load active inventory from the warehouse"
     },
     "common": {
@@ -1030,5 +1027,9 @@
   "Duration Length of lease period": "Duration Length of lease period",
   "Deposit amoutn": "Deposit amoutn",
   "Deposit amount": "Deposit amount",
-  "Setup": "Setup"
+  "Setup": "Setup",
+  "Storage": "Storage",
+  "Active inventory": "Active inventory",
+  "Rent storage": "Rent storage",
+  "Confirm transfer": "Confirm transfer"
 }

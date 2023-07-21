@@ -8,7 +8,7 @@ import {
 
 export const getEquipmentName = (
     equipment: MergedInventoryWithAtomicAssets[number]
-) => ID_TO_INVENTORY[equipment.template_id];
+) => ID_TO_INVENTORY[equipment.template_id || equipment.template.template_id];
 
 export const findEquipmentByName = (
     inventory: MergedInventoryWithAtomicAssets,

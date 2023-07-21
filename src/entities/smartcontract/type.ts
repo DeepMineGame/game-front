@@ -4,7 +4,7 @@ export type GetTableDataConfigType = {
     table: string;
     index_position: number;
     key_type: 'id' | 'i64' | 'name' | '';
-    lower_bound: string | number;
+    lower_bound: string | number | undefined;
     upper_bound?: string | number;
     limit: number;
 };

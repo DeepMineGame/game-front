@@ -3,9 +3,11 @@ import { deepminegame } from '../../smartcontract';
 export const atomicTransfer = ({
     accountName,
     ids,
+    to = deepminegame,
 }: {
     accountName: string;
     ids: string[];
+    to?: string;
 }) => ({
     actions: [
         {
@@ -19,7 +21,7 @@ export const atomicTransfer = ({
             ],
             data: {
                 from: accountName,
-                to: deepminegame,
+                to,
                 asset_ids: ids,
                 memo: '',
             },
