@@ -51,9 +51,7 @@ export const ContractorInformation: FC<GeneralInformationStepProps> = ({
                 </Form.Item>
             </div>
             <Space direction="horizontal">
-                <Button onClick={goToPreviousStep} ghost>
-                    {t('kit.back')}
-                </Button>
+                <Button onClick={goToPreviousStep}>{t('kit.back')}</Button>
                 <Button onClick={goToNextStep} type="primary">
                     {t('components.common.button.next')}
                 </Button>
