@@ -107,7 +107,7 @@ export const MineControlPanel = () => {
     const toggleMineText =
         isMineSetuped || isMineDeactivated
             ? t('components.common.button.activate')
-            : t('components.common.button.setup');
+            : t('Setup');
     return (
         <div className={styles.background}>
             <Space direction="vertical">

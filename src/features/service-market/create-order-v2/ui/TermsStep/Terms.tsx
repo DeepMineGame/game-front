@@ -41,7 +41,7 @@ export const Terms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                     name={orderFields.deposit}
                     label={t('Minimum Fee')}
                     className={cn(styles.formField, localStyles.feeInput)}
-                    initialValue={1}
+                    initialValue={0}
                     tooltip={
                         <Card
                             title={t('pages.serviceMarket.createOrder.fee')}
@@ -54,7 +54,6 @@ export const Terms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                     <InputNumber<number>
                         placeholder="DME"
                         controls={false}
-                        min={1}
                         className={styles.inputNumber}
                         formatter={(value) => `${value} DME`}
                         parser={(value) => Number(value!.replace(' DME', ''))}
@@ -109,9 +108,7 @@ export const Terms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
             </Input.Group>
 
             <Space direction="horizontal">
-                <Button onClick={goToPreviousStep} ghost>
-                    {t('kit.back')}
-                </Button>
+                <Button onClick={goToPreviousStep}>{t('kit.back')}</Button>
                 <Button htmlType="submit" type="primary">
                     {t('components.common.button.create')}
                 </Button>

@@ -49,9 +49,7 @@ export const MineOwnerInformation: FC<GeneralInformationStepProps> = ({
                 </div>
             </InputA.Group>
             <Space direction="horizontal">
-                <Button onClick={goToPreviousStep} ghost>
-                    {t('kit.back')}
-                </Button>
+                <Button onClick={goToPreviousStep}>{t('kit.back')}</Button>
                 <Button
                     disabled={!finishesAtFieldValue}
                     onClick={goToNextStep}

@@ -14,6 +14,7 @@ export function useRenderCards() {
         items:
             | Set<MergedInventoryWithAtomicAssets[number]>
             | MergedInventoryWithAtomicAssets,
+
         onDragStart: (element: MergedInventoryWithAtomicAssets[number]) => void
     ) => {
         return Array.from(items)?.map((card) => (

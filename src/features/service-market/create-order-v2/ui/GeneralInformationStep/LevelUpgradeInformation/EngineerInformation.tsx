@@ -57,9 +57,7 @@ export const EngineerInformation: FC<GeneralInformationStepProps> = ({
                 )}
             </div>
             <div className={localStyles.flexSection}>
-                <Button onClick={goToPreviousStep} ghost>
-                    {t('kit.back')}
-                </Button>
+                <Button onClick={goToPreviousStep}>{t('kit.back')}</Button>
                 <Button
                     disabled={!hasUpgradeType}
                     onClick={goToNextStep}

@@ -198,9 +198,7 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
                 </div>
             )}
             <div className={styles.flexSection}>
-                <Button onClick={goToPreviousStep} ghost>
-                    {t('kit.back')}
-                </Button>
+                <Button onClick={goToPreviousStep}>{t('kit.back')}</Button>
                 <Button
                     disabled={!hasAllValues}
                     onClick={goToNextStep}

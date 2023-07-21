@@ -39,7 +39,6 @@ export const Inventory: FC<InventoryProps> = ({
     const cards = equipmentTypeFilter
         ? filterEquipmentByName(userInventory, equipmentTypeFilter)
         : userInventory;
-
     const handleCardSelect =
         (card: MergedInventoryWithAtomicAssets[number]) => () => {
             onSelect(card);

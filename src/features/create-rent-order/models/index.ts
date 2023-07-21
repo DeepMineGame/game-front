@@ -7,15 +7,7 @@ import {
     getMinesByOwnerEffect,
 } from './effects';
 
-export * from './hasAreaOrMineStore';
-export * from './hasEngagedArea';
-export * from './hasAreaOrMineStore';
-export * from './inventoryModel';
-export * from './hasAreaEmptySlots';
-export * from './hasMineEmptySlots';
-export * from './hasActiveLandLordMineOwnerContractAsExecutor';
-export * from './hasInstalledEquipmentStore';
-export * from './hasActiveMineOwnerContractorContractAsExecutor';
+export * from './rent-inventory-model';
 
 export enum Role {
     engineer,

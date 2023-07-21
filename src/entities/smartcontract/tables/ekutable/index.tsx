@@ -1,6 +1,6 @@
 import { deepmineengr } from '../../constants';
 
-export const getEkutableConfig = (account: string) => ({
+export const getEkutableConfig = () => ({
     json: true,
     code: deepmineengr,
     scope: deepmineengr,
