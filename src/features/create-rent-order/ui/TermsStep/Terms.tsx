@@ -8,7 +8,10 @@ import styles from '../../styles.module.scss';
 import localStyles from './styles.module.scss';
 import { TermsStepProps } from './interface';
 
-export const Terms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
+export const Terms: FC<TermsStepProps> = ({
+    goToPreviousStep,
+    goToNextStep,
+}) => {
     const { t } = useTranslation();
 
     return (
@@ -40,6 +43,18 @@ export const Terms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                     />
                 </Form.Item>
             </Input.Group>
+
+            <Form.Item
+                label={t('Minimum Fee')}
+                className={cn(styles.formField, localStyles.feeInput)}
+                name={rentOrderField.fee_min_amount}
+            >
+                <InputNumber
+                    type="number"
+                    controls={false}
+                    className={styles.inputNumber}
+                />
+            </Form.Item>
 
             <Form.Item
                 name={rentOrderField.contract_duration}
@@ -76,8 +91,8 @@ export const Terms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
             </Form.Item>
             <Space direction="horizontal">
                 <Button onClick={goToPreviousStep}>{t('kit.back')}</Button>
-                <Button htmlType="submit" type="primary">
-                    {t('components.common.button.create')}
+                <Button onClick={goToNextStep} type="primary">
+                    {t('Next')}
                 </Button>
             </Space>
         </div>

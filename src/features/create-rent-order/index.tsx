@@ -11,6 +11,7 @@ import styles from './styles.module.scss';
 import { GeneralInformationStep } from './ui/GeneralInformationStep';
 import { TermsStep } from './ui/TermsStep';
 import { CreateResult } from './ui/CreateResult';
+import { DepositAndBuyout } from './ui/DepositAndBuyot';
 
 enum Step {
     first,
@@ -115,6 +116,12 @@ export const CreateRentOrder = () => {
                             currentStep === Step.second &&
                             t('components.common.inProgress'),
                     },
+                    {
+                        title: t('Deposit and buyout'),
+                        description:
+                            currentStep === Step.third &&
+                            t('components.common.inProgress'),
+                    },
                 ]}
             />
             <StepContent step={Step.first} currentStep={currentStep}>
@@ -128,6 +135,12 @@ export const CreateRentOrder = () => {
                 <TermsStep
                     form={form}
                     goToPreviousStep={() => setStep(Step.first)}
+                    goToNextStep={() => setStep(Step.third)}
+                />
+            </StepContent>
+            <StepContent step={Step.third} currentStep={currentStep}>
+                <DepositAndBuyout
+                    goToPreviousStep={() => setStep(Step.second)}
                 />
             </StepContent>
         </Form>

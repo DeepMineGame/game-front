@@ -1031,5 +1031,12 @@
   "Storage": "Storage",
   "Active inventory": "Active inventory",
   "Rent storage": "Rent storage",
-  "Confirm transfer": "Confirm transfer"
+  "Confirm transfer": "Confirm transfer",
+  "Next": "Next",
+  "The deposit can be made in one or more currencies": "The deposit can be made in one or more currencies",
+  "Buyout": "Buyout",
+  "The buyout can be made in one or more currencies": "The buyout can be made in one or more currencies",
+  "Buyout price": "Buyout price",
+  "Create": "Create",
+  "Deposit and buyout": "Deposit and buyout"
 }
