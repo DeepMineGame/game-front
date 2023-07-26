@@ -7,13 +7,22 @@ import styles from './styles.module.scss';
 
 export * from './order';
 export * from './operation';
-
-export const ServiceMarketPage: FC = () => {
+export enum ServiceMarketPageType {
+    serviceMarket,
+    rentalHub,
+}
+export const ServiceMarketPage: FC<{ type: ServiceMarketPageType }> = ({
+    type = ServiceMarketPageType.serviceMarket,
+}) => {
     const { t } = useTranslation();
 
     return (
         <Page className={styles.page} headerTitle={t('SERVICE MARKET')}>
-            <Contracts />
+            {type === ServiceMarketPageType.serviceMarket ? (
+                <Contracts />
+            ) : (
+                <div>123</div>
+            )}
         </Page>
     );
 };

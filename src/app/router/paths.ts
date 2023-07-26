@@ -20,6 +20,9 @@ export const warehouse = '/warehouse';
 export const serviceMarket = '/service-market';
 export const createOrder = '/service-market/create-order';
 export const createRentOrder = '/rental-hub/create-order';
+export const rentalHub = '/rental-hub';
+export const rentalHubOrder = '/rental-hub/contract/:contractId';
+
 export const serviceMarketOrder = '/service-market/contract/:contractId';
 export const inventoryItemPreview = '/inventory/:assetId';
 export const faq = '/faq';

@@ -15,3 +15,4 @@ export * from './mine-owner-engineer-table';
 export * from './engineer-contractor-table';
 export * from './engineer-mine-owner-table';
 export * from './my-contracts-table';
+export * from './rent-contracts';

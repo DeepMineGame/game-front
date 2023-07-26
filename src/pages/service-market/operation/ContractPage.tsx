@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Page } from 'shared';
+import { RentalContract } from 'features';
 import {
     LevelUpgradeContract,
     MineOperationContract,
@@ -14,7 +15,7 @@ const contracts = {
     [ContractType.landlord_mineowner]: MineOperationContract,
     [ContractType.mineowner_contractor]: MiningContract,
     [ContractType.level_upgrade]: LevelUpgradeContract,
-    [ContractType.undefined]: MiningContract,
+    [ContractType.undefined]: RentalContract,
 };
 
 const pageTitle = {
@@ -28,10 +29,14 @@ const pageTitle = {
 export const ContractPage: FC<Props> = ({ contract, accountName }) => {
     const { t } = useTranslation();
 
-    const Contract = contracts[contract.type];
+    const Contract = contracts[contract.type] || RentalContract;
 
     return (
-        <Page headerTitle={t(pageTitle[contract.type]).toUpperCase()}>
+        <Page
+            headerTitle={t(
+                contract.type ? pageTitle[contract.type] : 'Rent contract'
+            ).toUpperCase()}
+        >
             <Contract contract={contract} accountName={accountName} />
         </Page>
     );

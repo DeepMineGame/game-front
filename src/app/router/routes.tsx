@@ -1,36 +1,38 @@
 import { FC } from 'react';
 
 import {
-    ContractorCabin,
-    EquipmentSetPage,
-    CityPage,
-    MiningPage,
-    ContractorStatsAndInfoPage,
-    MineOwnerStatAndInfoPage,
-    LandLordPage,
-    HivePage,
-    NotFoundPage,
-    MineOwnerPage,
-    MineOwnerMiningCrewPage,
-    InfoPage,
-    Warehouse,
-    ServiceMarketPage,
     AreaManagementPage,
-    CreateOrderPage,
-    LandlordStatsAndInfoPage,
-    OperationPage,
-    NftPreviewPage,
     AuthPage,
-    FaqPage,
-    Wasteland,
-    EngineerPage,
-    EquipmentHallPage,
-    InterfaceStubPage,
-    EngineersTraining,
-    MineOwnerManagementPage,
+    CityPage,
+    ContractorCabin,
+    ContractorStatsAndInfoPage,
+    CreateOrderPage,
     CreateRentOrderPage,
+    EngineerPage,
+    EngineersTraining,
+    EquipmentHallPage,
+    EquipmentSetPage,
+    FaqPage,
+    HivePage,
+    InfoPage,
+    InterfaceStubPage,
+    LandLordPage,
+    LandlordStatsAndInfoPage,
+    MineOwnerManagementPage,
+    MineOwnerMiningCrewPage,
+    MineOwnerPage,
+    MineOwnerStatAndInfoPage,
+    MiningPage,
+    NftPreviewPage,
+    NotFoundPage,
+    OperationPage,
+    ServiceMarketPage,
+    ServiceMarketPageType,
+    Warehouse,
+    Wasteland,
 } from 'pages';
 
+import { OperationPageType } from 'entities/contract';
 import * as paths from './paths';
 
 export type AppRoute = {
@@ -135,7 +137,19 @@ export const routes: AppRoute[] = [
     },
     {
         path: paths.serviceMarket,
-        Component: ServiceMarketPage,
+        Component: () => (
+            <ServiceMarketPage type={ServiceMarketPageType.serviceMarket} />
+        ),
+        forLoggedIn: true,
+        forAdmin: false,
+        forBetaUser: false,
+        titleTag: 'Service-market — DeepMine',
+    },
+    {
+        path: paths.rentalHub,
+        Component: () => (
+            <ServiceMarketPage type={ServiceMarketPageType.rentalHub} />
+        ),
         forLoggedIn: true,
         forAdmin: false,
         forBetaUser: false,
@@ -151,7 +165,17 @@ export const routes: AppRoute[] = [
     },
     {
         path: paths.serviceMarketOrder,
-        Component: OperationPage,
+        Component: () => (
+            <OperationPage type={OperationPageType.serviceMarket} />
+        ),
+        forLoggedIn: true,
+        forAdmin: false,
+        forBetaUser: false,
+        titleTag: 'Service-market — DeepMine',
+    },
+    {
+        path: paths.rentalHubOrder,
+        Component: () => <OperationPage type={OperationPageType.rentalHub} />,
         forLoggedIn: true,
         forAdmin: false,
         forBetaUser: false,

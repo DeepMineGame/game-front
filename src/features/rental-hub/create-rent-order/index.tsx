@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { serviceMarket } from 'app/router/paths';
 import { createRentOrder, rentOrderField } from 'entities/smartcontract';
-import { useSmartContractActionDynamic } from '../hooks';
+import { useSmartContractActionDynamic } from '../../hooks';
 import styles from './styles.module.scss';
 import { GeneralInformationStep } from './ui/GeneralInformationStep';
 import { TermsStep } from './ui/TermsStep';

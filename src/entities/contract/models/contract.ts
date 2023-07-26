@@ -2,13 +2,26 @@ import { createEffect, createStore, forward } from 'effector';
 import { createGate } from 'effector-react';
 import { ContractDto } from 'entities/smartcontract';
 import { getOrder } from '../api';
+import { getRentOrder } from '../../rent-market-api';
 
-export const ContractGate = createGate<{
+export enum OperationPageType {
+    rentalHub,
+    serviceMarket,
+}
+
+type ContractGateProps = {
     id: string;
     accountName: string;
-}>('ContractGate');
+    type: OperationPageType;
+};
+export const ContractGate = createGate<ContractGateProps>('ContractGate');
 
-export const getContractEffect = createEffect(getOrder);
+export const getContractEffect = createEffect(
+    ({ id, accountName, type }: ContractGateProps) =>
+        type === OperationPageType.serviceMarket
+            ? getOrder({ id, accountName })
+            : getRentOrder({ id })
+);
 
 export const contractStore = createStore<ContractDto | null>(null).on(
     getContractEffect.doneData,

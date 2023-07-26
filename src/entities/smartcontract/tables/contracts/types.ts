@@ -134,6 +134,8 @@ export type ContractDto = {
         land_rarity: 'Common' | 'Uncommon' | 'Rare' | 'Epic' | 'Legendary';
         mine_level: number;
     };
+    // rent contract
+    owner?: string;
 };
 
 export const contractName = {
