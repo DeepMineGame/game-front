@@ -136,6 +136,7 @@ export type ContractDto = {
     };
     // rent contract
     owner?: string;
+    fee_min_amount?: string;
 };
 
 export const contractName = {

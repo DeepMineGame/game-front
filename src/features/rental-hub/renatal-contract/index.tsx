@@ -40,7 +40,7 @@ const RentalContract: FC<ContractProps> = ({ contract, accountName }) => {
                         title={t('Conditions')}
                         data={{
                             [t('Rental fee')]: contract.fee_percent,
-                            [t('Minimum Fee')]: contract.fee_counter,
+                            [t('Minimum Fee')]: contract.fee_min_amount,
                         }}
                     />
                 </Col>
