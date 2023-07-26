@@ -48,8 +48,7 @@ const RentalContract: FC<ContractProps> = ({ contract, accountName }) => {
                     <TableWithTitle
                         title={t('Owner')}
                         data={{
-                            [t('Rental fee')]: contract.owner,
-                            [t('Minimum Fee')]: contract.fee_counter,
+                            [t('Owner')]: contract.owner,
                         }}
                     />
                 </Col>
