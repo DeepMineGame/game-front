@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Page } from 'shared';
-import { Contracts } from 'features';
+import { Contracts, RentalContractsTable } from 'features';
 import { FC } from 'react';
 
 import styles from './styles.module.scss';
@@ -21,7 +21,7 @@ export const ServiceMarketPage: FC<{ type: ServiceMarketPageType }> = ({
             {type === ServiceMarketPageType.serviceMarket ? (
                 <Contracts />
             ) : (
-                <div>123</div>
+                <RentalContractsTable />
             )}
         </Page>
     );

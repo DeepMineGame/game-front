@@ -14,3 +14,11 @@ export const getRentOrder = async ({ id }: GetOrderParams) => {
 
     return data?.[0];
 };
+
+export const getRentOrders = async () => {
+    const { data } = await axios.get<ContractDto[]>(
+        `${ENDPOINT}/rent-market-api/contract`
+    );
+
+    return data;
+};
