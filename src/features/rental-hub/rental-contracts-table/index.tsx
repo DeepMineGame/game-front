@@ -7,11 +7,12 @@ import {
     useSearchByNickNameTableProps,
     rarityColumnWithSorterProps,
 } from 'shared';
-import { Radio, Space, Table, Tooltip } from 'antd';
+import { Button, Radio, Space, Table, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
-import { CopyOutlined } from '@ant-design/icons';
+import { CopyOutlined, PlusOutlined } from '@ant-design/icons';
 import { useGate, useStore } from 'effector-react';
 
+import { createRentOrder } from 'app/router/paths';
 import { changeFilterEvent } from '../../service-market';
 import {
     activeRadioButton$,
@@ -95,6 +96,15 @@ export const RentalContractsTable = () => {
                     </Radio>
                 </Radio.Group>
             </Space>
+            <Button
+                type="primary"
+                onClick={() => navigate(createRentOrder)}
+                icon={<PlusOutlined />}
+                className={style.createOrderButton}
+                disabled
+            >
+                {t('Create order')}
+            </Button>
             <Table
                 onRow={(record) => ({
                     onClick: () => {
