@@ -1,44 +1,44 @@
-import { FC, memo, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-    desktopS,
-    getTimeLeftFromUtc,
-    Title,
-    useMediaQuery,
-    useTick,
-} from 'shared';
-import { ActionDto } from 'entities/smartcontract';
+import { desktopS, getTimeLeft, Title, useMediaQuery } from 'shared';
 import styles from './styles.module.scss';
 
 type Props = {
-    action: ActionDto;
     setIsMiningFinished: (value: boolean) => void;
+    timeLeft?: number;
 };
 
-export const MiningInProgressTitle: FC<Props> = memo(
-    ({ action, setIsMiningFinished }) => {
-        const { t } = useTranslation();
-        const isDesktop = useMediaQuery(desktopS);
+export const MiningInProgressTitle: FC<Props> = ({
+    setIsMiningFinished,
+    timeLeft,
+}) => {
+    const { t } = useTranslation();
+    const isDesktop = useMediaQuery(desktopS);
+    const [seconds, setSeconds] = useState(timeLeft || 0);
 
-        const isFinished = Date.now() > action.finishes_at * 1000;
+    useEffect(() => {
+        if (seconds > 0) {
+            setTimeout(() => setSeconds(seconds - 1), 1000);
+            setIsMiningFinished(false);
+        } else {
+            setIsMiningFinished(true);
+        }
+    }, [seconds]);
 
-        useEffect(() => {
-            setIsMiningFinished(isFinished);
-        }, [isFinished, setIsMiningFinished]);
-
-        useTick(!isFinished);
-
+    if (seconds) {
         return (
             <Title
                 level={isDesktop ? 2 : 4}
                 className={styles.title}
                 fontFamily="orbitron"
             >
-                {`${t('pages.mining.miningInProgress')}: ${getTimeLeftFromUtc(
-                    action.finishes_at,
+                {`${t('pages.mining.miningInProgress')}: ${getTimeLeft(
+                    Math.round(seconds),
                     true
                 )}`}
             </Title>
         );
     }
-);
+
+    return null;
+};

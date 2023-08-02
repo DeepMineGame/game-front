@@ -5,7 +5,6 @@ import {
     Plugin,
     useMediaQuery,
     desktopS,
-    neutral4,
     useAccountName,
     useUserLocation,
     useReloadPage,
@@ -29,6 +28,8 @@ import {
     CallToTravelNotification,
     $lastMiningStatus,
     LastMiningStatus,
+    $mineStat,
+    MineStatGate,
 } from 'features';
 import {
     CheckCircleFilled,
@@ -55,10 +56,12 @@ const Icon = {
 };
 
 export const MiningPage: FC = memo(() => {
-    const [isMiningFinished, setIsMiningFinished] = useState(true);
+    const [isMiningTimerEnd, setIsMiningTimerEnd] = useState(true);
     const userLocation = useUserLocation();
     const accountName = useAccountName();
     useGate(ContractorCabinGate, { searchParam: accountName });
+    useGate(MineStatGate, { accountName });
+    const mineStat = useStore($mineStat);
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
     const subTitleLevel = isDesktop ? 3 : 4;
@@ -81,16 +84,12 @@ export const MiningPage: FC = memo(() => {
 
     const { disabled, ...alertProps } = useDisabledState();
 
-    const isMiningInProgress =
-        lastMineAction?.state === ActionState.active &&
-        lastMineAction.finishes_at * 1000 > Date.now();
-
     return (
         <Page headerTitle={t('pages.mining.mining')}>
-            {isMiningInProgress && (
+            {Boolean(mineStat?.mining_seconds_left) && (
                 <MiningInProgressTitle
-                    action={lastMineAction}
-                    setIsMiningFinished={setIsMiningFinished}
+                    timeLeft={mineStat?.mining_seconds_left}
+                    setIsMiningFinished={setIsMiningTimerEnd}
                 />
             )}
             <div className={styles.infosWrapper}>
@@ -181,7 +180,7 @@ export const MiningPage: FC = memo(() => {
                                     accountName={accountName}
                                     action={lastMineAction}
                                     isMiningWillEndInFuture={
-                                        !!lastMineAction && !isMiningFinished
+                                        !!lastMineAction && !isMiningTimerEnd
                                     }
                                 />
                             )}

@@ -11,7 +11,7 @@ import {
 } from 'shared';
 import { CheckCircleOutlined } from '@ant-design/icons';
 import { App, Modal, Space } from 'antd';
-import { contractorStore, useSmartContractAction } from 'features';
+import { $mineStat, contractorStore, useSmartContractAction } from 'features';
 import {
     ActionDto,
     ActionState,
