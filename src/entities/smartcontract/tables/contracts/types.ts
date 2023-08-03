@@ -13,6 +13,15 @@ export enum ContractRole {
     client,
 }
 
+export enum AssetType {
+    UNDEFINED = 'UNDEFINED',
+    CUTTER = 'CUTTER',
+    WANDERING_REACTOR = 'WANDERING_REACTOR',
+    PLUNGING_BLOCKS = 'PLUNGING_BLOCKS',
+    DELAMINATOR = 'DELAMINATOR',
+    DME_WIRE = 'DME_WIRE',
+}
+
 export enum ContractStatus {
     undefined,
     signed_by_client,
@@ -137,6 +146,16 @@ export type ContractDto = {
     // rent contract
     owner?: string;
     fee_min_amount?: string;
+    assets?: [
+        {
+            asset_id: number;
+            type: AssetType;
+            level: number;
+            rarity: number;
+        }
+    ];
+    days_left?: number;
+    renter: string;
 };
 
 export const contractName = {

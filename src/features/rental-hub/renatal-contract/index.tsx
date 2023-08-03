@@ -24,6 +24,10 @@ const RentalContract: FC<ContractProps> = ({ contract, accountName }) => {
                                 title={t('General information')}
                                 data={{
                                     [t('Contract ID')]: contract.id,
+                                    [t('Status')]: String(
+                                        contract.status
+                                    ).replaceAll('_', ' '),
+
                                     [t('Creation date')]: toLocaleDate(
                                         contract.create_time
                                     ),
@@ -49,6 +53,14 @@ const RentalContract: FC<ContractProps> = ({ contract, accountName }) => {
                         title={t('Owner')}
                         data={{
                             [t('Owner')]: contract.owner,
+                        }}
+                    />
+                </Col>
+                <Col xs={24} md={12}>
+                    <TableWithTitle
+                        title={t('Renter')}
+                        data={{
+                            [t('Renter')]: contract.renter,
                         }}
                     />
                 </Col>

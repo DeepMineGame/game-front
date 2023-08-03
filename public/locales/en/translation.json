@@ -1040,5 +1040,10 @@
   "Create": "Create",
   "Deposit and buyout": "Deposit and buyout",
   "Days": "Days",
-  "Owner": "Owner"
+  "Owner": "Owner",
+  "Item type": "Item type",
+  "Item level": "Item level",
+  "Days left": "Days left",
+  "Renter": "Renter",
+  "Rent contract": "Rent contract"
 }

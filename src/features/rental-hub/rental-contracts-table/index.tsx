@@ -37,8 +37,14 @@ export const RentalContractsTable = () => {
                     owner: contract.owner,
                     key: contract.id,
                     id: contract.id,
-                    rarity: contract.rarity,
-                    level: contract.level,
+                    rarity: contract.assets?.[0].rarity,
+                    level: contract.assets?.[0].level,
+                    itemType:
+                        Number(contract?.assets?.length) > 1
+                            ? 'Equipment set'
+                            : contract?.assets?.[0].type.replaceAll('_', ' '),
+                    daysLeft: contract.days_left || 'N/A',
+                    status: String(contract.status).replaceAll('_', ' '),
                     contract,
                 };
             }),
@@ -174,11 +180,26 @@ export const RentalContractsTable = () => {
                             );
                         },
                     },
+                    {
+                        title: t('Item type'),
+                        dataIndex: 'itemType',
+                        key: 'itemType',
+                    },
                     rarityColumnWithSorterProps,
                     {
-                        title: t('Level'),
+                        title: t('Item level'),
                         dataIndex: 'level',
                         key: 'level',
+                    },
+                    {
+                        title: t('Days left'),
+                        dataIndex: 'daysLeft',
+                        key: 'daysLeft',
+                    },
+                    {
+                        title: t('Status'),
+                        dataIndex: 'status',
+                        key: 'status',
                     },
                 ]}
                 dataSource={dataSource}
