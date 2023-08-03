@@ -13,13 +13,16 @@ import { CopyOutlined, PlusOutlined } from '@ant-design/icons';
 import { useGate, useStore } from 'effector-react';
 
 import { createRentOrder } from 'app/router/paths';
-import { changeFilterEvent } from '../../service-market';
 import {
     activeRadioButton$,
     changeContractTypeRadioButtonEvent,
     RadioButtonContractTypeNames,
 } from '../../service-market/role-select/model';
-import { RentalContractsGate, rentContractsStore } from './model';
+import {
+    changeRentalFilterEvent,
+    RentalContractsGate,
+    rentContractsStore,
+} from './model';
 import style from './style.module.scss';
 
 export const RentalContractsTable = () => {
@@ -60,7 +63,7 @@ export const RentalContractsTable = () => {
                 <Radio.Group value={activeRadioButton} className={style.radio}>
                     <Radio
                         onChange={() => {
-                            changeFilterEvent({});
+                            changeRentalFilterEvent({});
                             changeContractTypeRadioButtonEvent(
                                 RadioButtonContractTypeNames['All contracts']
                             );
@@ -71,7 +74,7 @@ export const RentalContractsTable = () => {
                     </Radio>
                     <Radio
                         onChange={() => {
-                            changeFilterEvent({
+                            changeRentalFilterEvent({
                                 user: accountName,
                             });
                             changeContractTypeRadioButtonEvent(
@@ -87,7 +90,7 @@ export const RentalContractsTable = () => {
                             RadioButtonContractTypeNames['Contract offerings']
                         }
                         onChange={() => {
-                            changeFilterEvent({
+                            changeRentalFilterEvent({
                                 user: accountName,
                                 offers: true,
                             });

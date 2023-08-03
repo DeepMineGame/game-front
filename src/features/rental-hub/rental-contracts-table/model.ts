@@ -6,14 +6,14 @@ import { getRentOrders } from 'entities/rent-market-api';
 
 export type GetRentOrdersParams = {
     user?: string;
-    offers?: string;
+    offers?: boolean;
 };
 export const RentalContractsGate =
     createGate<GetRentOrdersParams>('ContractsGate');
-export const changeFilterEvent = createEvent<GetRentOrdersParams>();
+export const changeRentalFilterEvent = createEvent<GetRentOrdersParams>();
 
 export const filterStore = createStore<GetRentOrdersParams>({}).on(
-    changeFilterEvent,
+    changeRentalFilterEvent,
     (_state, filter) => filter
 );
 persist({ store: filterStore, key: 'service market filter store' });
@@ -25,10 +25,10 @@ export const rentContractsStore = createStore<null | ContractDto[]>(null)
 
 forward({
     from: RentalContractsGate.open,
-    to: changeFilterEvent,
+    to: changeRentalFilterEvent,
 });
 
 forward({
-    from: changeFilterEvent,
+    from: changeRentalFilterEvent,
     to: getRentContractsByFilterEffect,
 });

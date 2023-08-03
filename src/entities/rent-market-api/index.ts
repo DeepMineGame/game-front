@@ -15,9 +15,16 @@ export const getRentOrder = async ({ id }: GetOrderParams) => {
     return data?.[0];
 };
 
-export const getRentOrders = async () => {
+export const getRentOrders = async ({
+    user,
+    offers,
+}: {
+    user?: string;
+    offers?: boolean;
+}) => {
     const { data } = await axios.get<ContractDto[]>(
-        `${ENDPOINT}/rent-market-api/contract`
+        `${ENDPOINT}/rent-market-api/contract`,
+        { params: { offers, user } }
     );
 
     return data;
