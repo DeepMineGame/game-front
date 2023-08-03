@@ -11,10 +11,13 @@ import {
 } from 'shared';
 import { CheckCircleOutlined } from '@ant-design/icons';
 import { App, Modal, Space } from 'antd';
-import { $mineStat, contractorStore, useSmartContractAction } from 'features';
 import {
-    ActionDto,
-    ActionState,
+    $miningStat,
+    getMiningEffect,
+    MiningStatGate,
+    useSmartContractAction,
+} from 'features';
+import {
     contrclaim,
     getActionEffect,
     getContractByExecutorEffect,
@@ -27,34 +30,33 @@ import { useDisabledState } from '../hooks';
 import styles from './styles.module.scss';
 
 type Props = {
-    action: ActionDto | undefined;
     isMiningWillEndInFuture: boolean;
     accountName: string;
 };
 
 export const MiningAndClaimButton: FC<Props> = memo(
-    ({ action, isMiningWillEndInFuture, accountName }) => {
-        useGate(MiningPageGate, { searchParam: accountName });
-        const contractor = useStore(contractorStore);
+    ({ isMiningWillEndInFuture, accountName }) => {
+        useGate(MiningStatGate, { accountName });
+        const mineStat = useStore($miningStat);
+
         const { modal } = App.useApp();
 
         const [claimModalVisibility, setClaimModalVisibility] = useState(false);
         const reloadPage = useReloadPage();
         const isDesktop = useMediaQuery(desktopS);
         const { t } = useTranslation();
-        const isMining = action?.state === ActionState.active;
+        const isMining = mineStat?.action_state === 'active';
         const isMiningFinished =
             (isMining && !isMiningWillEndInFuture) ||
-            action?.state === ActionState.finished;
-        const isClaimed = action?.state === ActionState.claimed;
-        const mineContract = useStore(miningContractStore);
+            mineStat?.action_state === 'finished';
+        const isClaimed = mineStat?.action_state === 'claimed';
         const toggleMiningCallback = useSmartContractAction<{
             wax_user: string;
             contract_id: number;
         }>({
             action: toggleMining({
                 waxUser: accountName,
-                contractId: mineContract?.id!,
+                contractId: mineStat?.contract_id!,
                 type: isMining ? 'stop' : 'start',
             }),
         });
@@ -63,10 +65,8 @@ export const MiningAndClaimButton: FC<Props> = memo(
         const claimDmeCallback = useSmartContractAction({
             action: contrclaim({ waxUser: accountName }),
         });
-        const isContractsLoading = useStore(
-            getContractByExecutorEffect.pending
-        );
-        const isActionsLoading = useStore(getActionEffect.pending);
+
+        const isMiningStatLoading = useStore(getMiningEffect.pending);
 
         const hideClaimModal = useCallback(
             () => setClaimModalVisibility(false),
@@ -114,12 +114,12 @@ export const MiningAndClaimButton: FC<Props> = memo(
         ]);
 
         const buttonText = {
-            [ActionState.claimed]: t('pages.mining.startMining'),
-            [ActionState.finished]: t('pages.mining.getTheReport'),
-            [ActionState.interrupted]: t('pages.mining.startMining'),
-            [ActionState.active]: t('pages.mining.stopMining'),
-            [ActionState.undefined]: t('pages.mining.startMining'),
-            [ActionState.idle]: undefined,
+            claimed: t('pages.mining.startMining'),
+            finished: t('pages.mining.getTheReport'),
+            interrupted: t('pages.mining.startMining'),
+            active: t('pages.mining.stopMining'),
+            undefined: t('pages.mining.startMining'),
+            idle: undefined,
         };
 
         const okText = isClaimedState
@@ -131,7 +131,7 @@ export const MiningAndClaimButton: FC<Props> = memo(
         return (
             <>
                 <Button
-                    loading={isContractsLoading || isActionsLoading}
+                    loading={isMiningStatLoading}
                     type="primary"
                     block
                     size={isDesktop ? 'large' : 'middle'}
@@ -140,14 +140,14 @@ export const MiningAndClaimButton: FC<Props> = memo(
                     disabled={!isMiningFinished && disabled}
                 >
                     {isMiningFinished
-                        ? buttonText[ActionState.finished]
-                        : buttonText[action?.state || ActionState.interrupted]}
+                        ? buttonText.finished
+                        : buttonText[mineStat?.action_state || 'interrupted']}
                 </Button>
                 <Modal
                     onOk={onClaimButtonClick}
                     onCancel={hideClaimModal}
                     okText={okText}
-                    okButtonProps={{ disabled: !contractor?.finished }}
+                    okButtonProps={{ disabled: !mineStat?.finished }}
                     visible={claimModalVisibility}
                     title={t('Mining has finished successfully!')}
                 >

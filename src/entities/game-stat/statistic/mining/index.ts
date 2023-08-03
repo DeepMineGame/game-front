@@ -16,6 +16,16 @@ export type MineStat = {
     mine_owner: string;
     mining_in_progress: boolean;
     mining_seconds_left: number;
+    est_mining_power_min: number;
+    est_mining_power_max: number;
+    finished: boolean;
+    contract_id: number;
+    time_spent: number;
+    dme_to_claim: number;
+    fee_in_dme: number;
+    dme_to_account: number;
+    est_time_min: number;
+    est_time_max: number;
 };
 
 export const getMiningStat = async ({

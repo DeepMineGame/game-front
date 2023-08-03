@@ -1,17 +1,18 @@
-import { createEffect, createStore, forward } from 'effector';
+import { createEffect, createStore, forward, createEvent } from 'effector';
 import { createGate } from 'effector-react';
 import { getMiningStat, MineStat } from 'entities/game-stat';
 
-const getMiningEffect = createEffect(getMiningStat);
+export const getMiningEffect = createEffect(getMiningStat);
 
-export const $mineStat = createStore<MineStat | null>(null).on(
+export const $miningStat = createStore<MineStat | null>(null).on(
     getMiningEffect.doneData,
     (_, payload) => payload
 );
-
-export const MineStatGate = createGate<{ accountName: string }>('MineStatGate');
+export const MiningStatGate = createGate<{ accountName: string }>(
+    'MineStatGate'
+);
 
 forward({
-    from: MineStatGate.open,
+    from: MiningStatGate.open,
     to: getMiningEffect,
 });
