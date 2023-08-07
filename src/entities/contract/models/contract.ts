@@ -27,7 +27,7 @@ export const contractStore = createStore<ContractDto | null>(null).on(
     getContractEffect.doneData,
     (_, contract) => contract
 );
-
+contractStore.watch(console.log);
 forward({
     from: ContractGate.open,
     to: getContractEffect,

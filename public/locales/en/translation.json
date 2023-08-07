@@ -1045,5 +1045,10 @@
   "Item level": "Item level",
   "Days left": "Days left",
   "Renter": "Renter",
-  "Rent contract": "Rent contract"
+  "Rent contract": "Rent contract",
+  "Sign": "Sign",
+  "Delete": "Delete",
+  "Terminate": "Terminate",
+  "Return equipment": "Return equipment",
+  "You need to fix the equipment first": "You need to fix the equipment first"
 }

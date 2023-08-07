@@ -29,6 +29,22 @@ export enum ContractStatus {
     active,
     terminated,
 }
+export enum RentalContractStatuses {
+    SIGNED_BY_OWNER = 'SIGNED_BY_OWNER',
+    SIGNED_BY_RENTER = 'SIGNED_BY_RENTER',
+    ACTIVE = 'ACTIVE',
+    TERMINATED = 'TERMINATED',
+    COMPLETED = 'COMPLETED',
+}
+
+export enum RentalContractSubStatus {
+    ACTIVE_EQUIPMENT_RETURNING = 'ACTIVE_EQUIPMENT_RETURNING',
+    ACTIVE_EQUIPMENT_RETURNING_EXPIRED = 'ACTIVE_EQUIPMENT_RETURNING_EXPIRED',
+    TERMINATED_BY_OWNER = 'TERMINATED_BY_OWNER',
+    TERMINATED_BY_RENTER = 'TERMINATED_BY_RENTER',
+    COMPLETED_BY_OWNER = 'COMPLETED_BY_OWNER',
+    COMPLETED_BY_RENTER = 'COMPLETED_BY_RENTER',
+}
 
 export enum OrderState {
     undefined = '',
@@ -96,6 +112,10 @@ export type ContractAttrs = {
     area_rarity: RarityType;
     mine_level: number | undefined;
 };
+export enum ViolationDto {
+    FEE_NOT_ENOUGH_PAID = 'FEE_NOT_ENOUGH_PAID',
+    ASSET_IS_BROKEN = 'ASSET_IS_BROKEN',
+}
 
 export type ContractDto = {
     id: number;
@@ -116,7 +136,7 @@ export type ContractDto = {
     contract_duration: number;
     term_initiator: string;
     finishes_at: number;
-    status: ContractStatus;
+    status: ContractStatus | RentalContractStatuses;
     state: OrderState;
     min_amount: number;
     client_warranty_amount: number;
@@ -145,6 +165,7 @@ export type ContractDto = {
     };
     // rent contract
     owner?: string;
+    substatus: RentalContractSubStatus;
     fee_min_amount?: string;
     assets?: [
         {
@@ -156,6 +177,7 @@ export type ContractDto = {
     ];
     days_left?: number;
     renter: string;
+    violations: ViolationDto[];
 };
 
 export const contractName = {

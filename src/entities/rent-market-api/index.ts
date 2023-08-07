@@ -7,24 +7,24 @@ type GetOrderParams = {
 };
 
 export const getRentOrder = async ({ id }: GetOrderParams) => {
-    const { data } = await axios.get<ContractDto[]>(
-        `${ENDPOINT}/rent-market-api/contract`,
-        { params: { id } }
+    const { data } = await axios.get<ContractDto>(
+        `${ENDPOINT}/rent-market-api/contract/${id}`
     );
-
-    return data?.[0];
+    return data;
 };
 
 export const getRentOrders = async ({
     user,
     offers,
+    my_contracts,
 }: {
     user?: string;
     offers?: boolean;
+    my_contracts?: boolean;
 }) => {
     const { data } = await axios.get<ContractDto[]>(
         `${ENDPOINT}/rent-market-api/contract`,
-        { params: { offers, user } }
+        { params: { offers, user, my_contracts } }
     );
 
     return data;

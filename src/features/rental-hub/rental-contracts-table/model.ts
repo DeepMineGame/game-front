@@ -7,6 +7,7 @@ import { getRentOrders } from 'entities/rent-market-api';
 export type GetRentOrdersParams = {
     user?: string;
     offers?: boolean;
+    my_contracts?: boolean;
 };
 export const RentalContractsGate =
     createGate<GetRentOrdersParams>('ContractsGate');

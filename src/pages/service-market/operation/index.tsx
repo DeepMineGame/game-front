@@ -23,9 +23,7 @@ export const OperationPage: FC<{ type: OperationPageType }> = ({
 
     const contract = useStore(contractStore);
     const isContractLoading = useStore(getContractEffect.pending);
-    const isLoading = isContractLoading || !accountName;
-
-    if (isLoading) {
+    if (isContractLoading) {
         return (
             <Page>
                 <Skeleton />

@@ -26,9 +26,10 @@ import {
 import style from './style.module.scss';
 
 export const RentalContractsTable = () => {
-    useGate(RentalContractsGate);
     const activeRadioButton = useStore(activeRadioButton$);
     const accountName = useAccountName();
+    useGate(RentalContractsGate, { user: accountName });
+
     const contracts = useStore(rentContractsStore);
     const navigate = useNavigate();
     const account = useAccountName();
@@ -63,7 +64,9 @@ export const RentalContractsTable = () => {
                 <Radio.Group value={activeRadioButton} className={style.radio}>
                     <Radio
                         onChange={() => {
-                            changeRentalFilterEvent({});
+                            changeRentalFilterEvent({
+                                user: accountName,
+                            });
                             changeContractTypeRadioButtonEvent(
                                 RadioButtonContractTypeNames['All contracts']
                             );
@@ -76,6 +79,7 @@ export const RentalContractsTable = () => {
                         onChange={() => {
                             changeRentalFilterEvent({
                                 user: accountName,
+                                my_contracts: true,
                             });
                             changeContractTypeRadioButtonEvent(
                                 RadioButtonContractTypeNames['My contracts']
