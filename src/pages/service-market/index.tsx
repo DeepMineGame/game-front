@@ -15,14 +15,16 @@ export const ServiceMarketPage: FC<{ type: ServiceMarketPageType }> = ({
     type = ServiceMarketPageType.serviceMarket,
 }) => {
     const { t } = useTranslation();
+    const isServiceMarket = type === ServiceMarketPageType.serviceMarket;
 
     return (
-        <Page className={styles.page} headerTitle={t('SERVICE MARKET')}>
-            {type === ServiceMarketPageType.serviceMarket ? (
-                <Contracts />
-            ) : (
-                <RentalContractsTable />
-            )}
+        <Page
+            className={styles.page}
+            headerTitle={
+                isServiceMarket ? t('SERVICE MARKET') : t('RENTAL HUB')
+            }
+        >
+            {isServiceMarket ? <Contracts /> : <RentalContractsTable />}
         </Page>
     );
 };
