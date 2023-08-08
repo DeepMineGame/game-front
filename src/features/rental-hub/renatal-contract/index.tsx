@@ -40,7 +40,7 @@ const getFrontStatus = ({ status, substatus, violations }: ContractDto) => {
     if (status === RentalContractStatuses.SIGNED_BY_RENTER) {
         return frontStatusMap['Signed contract'];
     }
-    if (status === RentalContractStatuses.ACTIVE && substatus === undefined) {
+    if (status === RentalContractStatuses.ACTIVE && !substatus) {
         return frontStatusMap['Valid Contract'];
     }
     if (substatus === RentalContractSubStatus.TERMINATED_BY_OWNER) {
