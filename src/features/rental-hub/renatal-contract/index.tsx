@@ -95,6 +95,9 @@ const getColorForFrontStatus = (status: frontStatusMap | undefined) => {
     if (status === frontStatusMap['Opened Order']) {
         return neutralColor;
     }
+    if (status === frontStatusMap['Valid Contract']) {
+        return neutralColor;
+    }
     if (status === frontStatusMap['Signed contract']) {
         return neutralColor;
     }
