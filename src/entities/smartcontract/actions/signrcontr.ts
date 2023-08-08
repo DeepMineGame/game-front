@@ -11,7 +11,7 @@ export function signrcontr({
         actions: [
             {
                 account: deepminesmrt,
-                name: 'signcontr',
+                name: 'signrcontr',
                 authorization: [
                     {
                         actor: waxUser,

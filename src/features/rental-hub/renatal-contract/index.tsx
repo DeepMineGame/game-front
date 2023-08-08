@@ -1,7 +1,12 @@
 import React, { FC } from 'react';
 import { Button, Col, Row, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { secondsToDays, toLocaleDate, useAccountName } from 'shared';
+import {
+    secondsToDays,
+    toLocaleDate,
+    useAccountName,
+    useReloadPage,
+} from 'shared';
 import { PageHeader } from '@ant-design/pro-components';
 import {
     ContractDto,
@@ -134,6 +139,7 @@ const useButtons = (
     frontStatus: frontStatusMap | undefined,
     contract: ContractDto
 ) => {
+    const reloadPage = useReloadPage();
     const { t } = useTranslation();
     const accountName = useAccountName();
     const singContract = useSmartContractAction({
@@ -141,12 +147,14 @@ const useButtons = (
             waxUser: accountName,
             contractId: Number(contract.id),
         }),
+        onSignSuccess: reloadPage,
     });
     const trmContract = useSmartContractAction({
         action: trmrcontract({
             waxUser: accountName,
             contractId: Number(contract.id),
         }),
+        onSignSuccess: reloadPage,
     });
 
     const signButton = (

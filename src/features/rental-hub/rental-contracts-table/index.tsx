@@ -114,7 +114,6 @@ export const RentalContractsTable = () => {
                 onClick={() => navigate(createRentOrder)}
                 icon={<PlusOutlined />}
                 className={style.createOrderButton}
-                disabled
             >
                 {t('Create order')}
             </Button>
