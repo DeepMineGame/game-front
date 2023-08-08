@@ -188,9 +188,6 @@ const useButtons = (
     );
 
     if (contract.renter === accountName) {
-        if (frontStatus === frontStatusMap['Opened Order']) {
-            return signButton;
-        }
         if (frontStatus === frontStatusMap['Signed contract']) {
             return depositButton;
         }
@@ -236,6 +233,9 @@ const useButtons = (
         if (frontStatus === frontStatusMap['Ended / Ok with 72 expired']) {
             return returnEquipment;
         }
+    }
+    if (frontStatus === frontStatusMap['Opened Order']) {
+        return signButton;
     }
 };
 
