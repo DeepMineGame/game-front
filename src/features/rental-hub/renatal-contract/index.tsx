@@ -234,7 +234,10 @@ const useButtons = (
             return returnEquipment;
         }
     }
-    if (frontStatus === frontStatusMap['Opened Order']) {
+    if (
+        frontStatus === frontStatusMap['Opened Order'] &&
+        contract.owner !== accountName
+    ) {
         return signButton;
     }
 };
