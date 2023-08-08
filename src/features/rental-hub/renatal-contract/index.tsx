@@ -12,9 +12,9 @@ import {
     ContractDto,
     RentalContractStatuses,
     RentalContractSubStatus,
-    ViolationDto,
     signrcontr,
     trmrcontract,
+    ViolationDto,
 } from 'entities/smartcontract';
 import { ContractProps } from '../../service-market/types';
 import { TableWithTitle } from '../../service-market';
@@ -84,6 +84,9 @@ const getFrontStatus = ({ status, substatus, violations }: ContractDto) => {
     }
     if (status === RentalContractStatuses.COMPLETED) {
         return frontStatusMap.Completed;
+    }
+    if (status === RentalContractStatuses.TERMINATED) {
+        return frontStatusMap['Terminated, Contract terminated'];
     }
 };
 
