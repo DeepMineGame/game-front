@@ -237,14 +237,12 @@ const useButtons = (
             return returnEquipment;
         }
     }
-    return signButton;
 };
 
 const RentalContract: FC<ContractProps> = ({ contract }) => {
     const { t } = useTranslation();
     const frontStatus = getFrontStatus(contract);
     const button = useButtons(frontStatus, contract);
-    console.log(button);
     return (
         <div>
             <PageHeader
