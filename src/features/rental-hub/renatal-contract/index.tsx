@@ -236,7 +236,8 @@ const useButtons = (
     }
     if (
         frontStatus === frontStatusMap['Opened Order'] &&
-        contract.owner !== accountName
+        contract.owner !== accountName &&
+        !contract.renter
     ) {
         return signButton;
     }
