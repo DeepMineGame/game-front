@@ -17,7 +17,6 @@ export enum frontStatusMap {
     'Ended / Ok with 72 hours to return equipment' = 'Ended / Ok with 72 hours to return equipment',
     'Ended / Ok with 72 expired' = 'Ended / Ok with 72 expired',
     'Completed' = 'Completed',
-    // new
     'Ended / Minimum Fee Violation / Item Broken Violation with 72h to fix equipment' = 'Ended / Minimum Fee Violation / Item Broken Violation with 72h to fix equipment',
     'Ended / Minimum Fee Violation / Item Broken Violation with 72h expired' = 'Ended / Minimum Fee Violation / Item Broken Violation with 72h expired',
     'Ended / Minimum Fee Violation / Ok with 72 hours to return equipment' = 'Ended / Minimum Fee Violation / Ok with 72 hours to return equipment',
@@ -172,5 +171,35 @@ export const getColorForFrontStatus = (status: frontStatusMap | undefined) => {
     }
     if (status === frontStatusMap.Completed) {
         return green;
+    }
+    if (
+        status ===
+        frontStatusMap[
+            'Ended / Minimum Fee Violation / Item Broken Violation with 72h to fix equipment'
+        ]
+    ) {
+        return red;
+    }
+    if (
+        status ===
+        frontStatusMap[
+            'Ended / Minimum Fee Violation / Item Broken Violation with 72h expired'
+        ]
+    ) {
+        return red;
+    }
+    if (
+        status ===
+        frontStatusMap[
+            'Ended / Minimum Fee Violation / Ok with 72 hours to return equipment'
+        ]
+    ) {
+        return red;
+    }
+    if (
+        status ===
+        frontStatusMap['Ended / Minimum Fee Violation / Ok with 72 expired']
+    ) {
+        return red;
     }
 };
