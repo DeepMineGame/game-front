@@ -93,10 +93,17 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
 
     useEffect(() => {
         if (isOneItemToLease) {
-            form.setFieldsValue({
+            return form.setFieldsValue({
                 [rentOrderField.asset_ids]: [asset?.asset_id],
             });
         }
+        form.setFieldsValue({
+            [rentOrderField.asset_ids]: [
+                Object.values(selectedEquipmentSet).map(
+                    ({ asset_id }) => asset_id
+                ),
+            ],
+        });
     }, [asset, form, isOneItemToLease, selectedEquipmentSet]);
 
     return (
