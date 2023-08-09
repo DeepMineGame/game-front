@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Col, Row } from 'antd';
+import { Col, Row, Table } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { secondsToDays, toLocaleDate } from 'shared';
 import { PageHeader } from '@ant-design/pro-components';
@@ -64,6 +64,7 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
                         data={{
                             [t('Rental fee')]: contract.fee_percent,
                             [t('Minimum Fee')]: contract.fee_min_amount,
+                            [t('Fee paid')]: contract.fee_counter,
                         }}
                     />
                 </Col>
@@ -81,6 +82,29 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
                         data={{
                             [t('Renter')]: contract.renter,
                         }}
+                    />
+                </Col>
+                <Col xs={24} md={12}>
+                    <Table
+                        columns={[
+                            {
+                                title: 'Item',
+                                dataIndex: 'type',
+                                key: 'type',
+                            },
+                            {
+                                title: 'Id',
+                                dataIndex: 'id',
+                                key: 'id',
+                            },
+                        ]}
+                        dataSource={contract.assets?.map(
+                            ({ type, asset_id }) => ({
+                                type: type.replaceAll('_', ' '),
+                                id: asset_id,
+                            })
+                        )}
+                        pagination={false}
                     />
                 </Col>
                 {/* <Col xs={24} md={12}> */}
