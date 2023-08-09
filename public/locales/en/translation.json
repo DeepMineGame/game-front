@@ -1050,5 +1050,6 @@
   "Delete": "Delete",
   "Terminate": "Terminate",
   "Return equipment": "Return equipment",
-  "You need to fix the equipment first": "You need to fix the equipment first"
+  "You need to fix the equipment first": "You need to fix the equipment first",
+  "Complete": "Complete"
 }
