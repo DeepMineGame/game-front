@@ -32,6 +32,7 @@ export enum rentOrderField {
 }
 const SECONDS_IN_DAY = 86400;
 export const createRentOrder = (orderData: RentOrderDto) => {
+    console.log(orderData.asset_ids);
     return {
         actions: [
             {

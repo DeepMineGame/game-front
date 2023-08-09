@@ -10,10 +10,7 @@ import {
     raritiesTranslationMap,
     rentOrderField,
 } from 'entities/smartcontract';
-import {
-    $mergedInventoryWithAtomicAssets,
-    MergedInventoryWithAtomicAssets,
-} from 'entities/atomicassets';
+import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
 import { inventoriesTabMap } from 'entities/engineer';
 import { GeneralInformationStepProps } from '../interface';
 import styles from '../styles.module.scss';
@@ -97,12 +94,11 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
                 [rentOrderField.asset_ids]: [asset?.asset_id],
             });
         }
+
         form.setFieldsValue({
-            [rentOrderField.asset_ids]: [
-                Object.values(selectedEquipmentSet).map(
-                    ({ asset_id }) => asset_id
-                ),
-            ],
+            [rentOrderField.asset_ids]: Object.values(selectedEquipmentSet).map(
+                ({ asset_id }) => asset_id
+            ),
         });
     }, [asset, form, isOneItemToLease, selectedEquipmentSet]);
 
