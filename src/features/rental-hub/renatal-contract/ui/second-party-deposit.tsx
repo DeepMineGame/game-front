@@ -26,7 +26,7 @@ export const SecondPartyDepositModal: FC<{
                     ],
                     data: {
                         from: contract.renter,
-                        to: contract.owner,
+                        to: 'deepminerent',
                         quantity: `${(
                             Number(contract.ins_wax_amount) *
                             10 ** 8
@@ -76,7 +76,7 @@ export const SecondPartyDepositModal: FC<{
                     ],
                     data: {
                         from: accountName,
-                        to: contract.owner,
+                        to: 'deepminerent',
                         quantity: `${(
                             Number(contract.ins_dme_amount) *
                             10 ** 8
