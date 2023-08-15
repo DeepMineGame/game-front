@@ -1,9 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { Button, Tooltip } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import { useAccountName, useReloadPage } from 'shared';
 import { ContractDto, signrcontr, trmrcontract } from 'entities/smartcontract';
 import { useSmartContractAction } from '../../../hooks';
+import { SecondPartyDepositModal } from '../ui';
 import { frontStatusMap } from './getFrontStatus';
 
 export const useButtons = (
@@ -43,7 +44,22 @@ export const useButtons = (
             {t('Complete')}
         </Button>
     );
-    const depositButton = <Button type="primary">{t('Deposit')}</Button>;
+    const [depositModalVisibility, setDepositModalVisibility] = useState(false);
+    const depositButton = (
+        <>
+            <Button
+                onClick={() => setDepositModalVisibility(true)}
+                type="primary"
+            >
+                {t('Deposit')}
+            </Button>
+            <SecondPartyDepositModal
+                open={depositModalVisibility}
+                contract={contract}
+                onCancel={() => setDepositModalVisibility(false)}
+            />
+        </>
+    );
     const terminate = (
         <Button onClick={trmContract} type="primary">
             {t('Terminate')}

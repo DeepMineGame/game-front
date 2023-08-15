@@ -178,6 +178,10 @@ export type ContractDto = {
     days_left?: number;
     renter: string;
     violations: ViolationDto[];
+    ins_dme_amount: string;
+    ins_dmp_amount: string;
+    ins_type: string;
+    ins_wax_amount: string;
 };
 
 export const contractName = {
