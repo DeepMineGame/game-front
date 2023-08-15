@@ -107,6 +107,16 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
                         pagination={false}
                     />
                 </Col>
+                <Col xs={24} md={12}>
+                    <TableWithTitle
+                        title={t('Deposit')}
+                        data={{
+                            [t('DME')]: contract.ins_dme_amount,
+                            [t('DMP')]: contract.ins_dmp_amount,
+                            [t('WAX')]: contract.ins_wax_amount,
+                        }}
+                    />
+                </Col>
                 {/* <Col xs={24} md={12}> */}
                 {/*    <Row gutter={[32, 32]}> */}
                 {/*        <Col span={24}> */}

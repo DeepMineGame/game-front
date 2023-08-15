@@ -1052,5 +1052,9 @@
   "Return equipment": "Return equipment",
   "You need to fix the equipment first": "You need to fix the equipment first",
   "Complete": "Complete",
-  "Please select a deposit currency": "Please select a deposit currency"
+  "Please select a deposit currency": "Please select a deposit currency",
+  "Deposit, WAX": "Deposit, WAX",
+  "DME": "DME",
+  "DMP": "DMP",
+  "WAX": "WAX"
 }

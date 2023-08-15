@@ -27,7 +27,9 @@ export const SecondPartyDepositModal: FC<{
                     data: {
                         from: contract.renter,
                         to: contract.owner,
-                        quantity: `${contract.ins_wax_amount} WAX`,
+                        quantity: `${Number(contract.ins_wax_amount).toFixed(
+                            8
+                        )} WAX`,
                         memo: contract.id,
                     },
                 },
@@ -49,7 +51,9 @@ export const SecondPartyDepositModal: FC<{
                     data: {
                         from: accountName,
                         to: contract.owner,
-                        quantity: `${contract.ins_dme_amount} DME`,
+                        quantity: `${Number(contract.ins_dme_amount).toFixed(
+                            8
+                        )} DME`,
                         memo: contract.id,
                     },
                 },
@@ -71,7 +75,9 @@ export const SecondPartyDepositModal: FC<{
                     data: {
                         from: accountName,
                         to: contract.owner,
-                        quantity: `${contract.ins_dme_amount} DMP`,
+                        quantity: `${Number(contract.ins_dme_amount).toFixed(
+                            8
+                        )} DMP`,
                         memo: contract.id,
                     },
                 },
