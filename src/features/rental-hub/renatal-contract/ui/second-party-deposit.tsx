@@ -51,7 +51,7 @@ export const SecondPartyDepositModal: FC<{
                     ],
                     data: {
                         from: accountName,
-                        to: contract.owner,
+                        to: 'deepminerent',
                         quantity: `${(
                             Number(contract.ins_dme_amount) *
                             10 ** 8
