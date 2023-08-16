@@ -48,15 +48,18 @@ export const createRentOrder = (orderData: RentOrderDto) => {
                     opt_renter: null,
                     asset_ids: orderData.asset_ids,
                     deposit_type: 1,
-                    deposit_amount: orderData.deposit_amount,
+                    deposit_amount: orderData.fee_min_amount,
                     fee_percent: orderData.fee_percent,
                     contract_duration:
                         orderData.contract_duration * SECONDS_IN_DAY,
                     autorenew_enabled: orderData.autorenew_enabled,
-                    insurance_wax_amount: orderData.insurance_wax_amount,
-                    insurance_dme_amount: orderData.insurance_dme_amount,
-                    insurance_dmp_amount: orderData.insurance_dmp_amount,
-                    buyout_price: orderData.buyout_price,
+                    insurance_wax_amount:
+                        orderData.insurance_wax_amount / 10 ** 8,
+                    insurance_dme_amount:
+                        orderData.insurance_dme_amount / 10 ** 8,
+                    insurance_dmp_amount:
+                        orderData.insurance_dmp_amount / 10 ** 8,
+                    buyout_price: orderData.buyout_price || 0,
                     fee_min_amount: orderData.fee_min_amount,
                 },
             },

@@ -70,19 +70,7 @@ export const Terms: FC<TermsStepProps> = ({
                     }).filter((_, idx) => idx !== 0)}
                 />
             </Form.Item>
-            <Form.Item
-                name={rentOrderField.deposit_amount}
-                label={t('Deposit amount')}
-                className={cn(styles.formField, localStyles.feeInput)}
-                initialValue={1}
-            >
-                <InputNumber
-                    placeholder="DME"
-                    type="number"
-                    controls={false}
-                    className={styles.inputNumber}
-                />
-            </Form.Item>
+
             <Form.Item
                 name={rentOrderField.autorenew_enabled}
                 valuePropName="checked"

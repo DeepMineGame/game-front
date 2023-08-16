@@ -74,6 +74,7 @@ export const DepositAndBuyout: FC<DepositAndBuyoutProps> = ({
                 name={rentOrderField.buyout_price}
             >
                 <InputNumber
+                    disabled
                     type="number"
                     controls={false}
                     className={styles.inputNumber}
