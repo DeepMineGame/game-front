@@ -54,13 +54,13 @@ export const createRentOrder = (orderData: RentOrderDto) => {
                         orderData.contract_duration * SECONDS_IN_DAY,
                     autorenew_enabled: orderData.autorenew_enabled,
                     insurance_wax_amount:
-                        orderData.insurance_wax_amount / 10 ** 8,
+                        orderData.insurance_wax_amount * 10 ** 8,
                     insurance_dme_amount:
-                        orderData.insurance_dme_amount / 10 ** 8,
+                        orderData.insurance_dme_amount * 10 ** 8,
                     insurance_dmp_amount:
-                        orderData.insurance_dmp_amount / 10 ** 8,
+                        orderData.insurance_dmp_amount * 10 ** 8,
                     buyout_price: orderData.buyout_price || 0,
-                    fee_min_amount: orderData.fee_min_amount,
+                    fee_min_amount: orderData.fee_min_amount * 10 ** 8,
                 },
             },
         ],
