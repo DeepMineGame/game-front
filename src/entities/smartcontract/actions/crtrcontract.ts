@@ -48,7 +48,7 @@ export const createRentOrder = (orderData: RentOrderDto) => {
                     opt_renter: null,
                     asset_ids: orderData.asset_ids,
                     deposit_type: 1,
-                    deposit_amount: orderData.fee_min_amount,
+                    deposit_amount: orderData.fee_min_amount * 10 ** 8,
                     fee_percent: orderData.fee_percent,
                     contract_duration:
                         orderData.contract_duration * SECONDS_IN_DAY,
