@@ -4,7 +4,7 @@ import { Form } from 'antd';
 import { FrownOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { rentalHub, serviceMarket } from 'app/router/paths';
+import { rentalHub } from 'app/router/paths';
 import { createRentOrder, rentOrderField } from 'entities/smartcontract';
 import { useSmartContractActionDynamic } from '../../hooks';
 import styles from './styles.module.scss';
