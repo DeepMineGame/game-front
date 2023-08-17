@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Button, Tooltip } from 'antd';
+import { App, Button, Tooltip } from 'antd';
 import React, { useState } from 'react';
 import { useAccountName, useReloadPage } from 'shared';
 import { ContractDto, signrcontr, trmrcontract } from 'entities/smartcontract';
@@ -11,6 +11,8 @@ export const useButtons = (
     frontStatus: frontStatusMap | undefined,
     contract: ContractDto
 ) => {
+    const { modal } = App.useApp();
+
     const reloadPage = useReloadPage();
     const { t } = useTranslation();
     const accountName = useAccountName();
@@ -19,7 +21,12 @@ export const useButtons = (
             waxUser: accountName,
             contractId: Number(contract.id),
         }),
-        onSignSuccess: reloadPage,
+        onSignSuccess: () =>
+            modal.success({
+                title: t('pages.serviceMarket.order.signOrder'),
+                content: t('pages.serviceMarket.order.orderCreated'),
+                onOk: reloadPage,
+            }),
     });
     const trmContract = useSmartContractAction({
         action: trmrcontract({
