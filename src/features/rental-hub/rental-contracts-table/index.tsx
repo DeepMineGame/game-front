@@ -137,7 +137,7 @@ export const RentalContractsTable = () => {
                         dataIndex: 'id',
                         key: 'id',
                         render: (value, props) => (
-                            <Link to={`/service-market/contract/${props.key}`}>
+                            <Link to={`/rental-hub/contract/${props.key}`}>
                                 {value}
                             </Link>
                         ),
