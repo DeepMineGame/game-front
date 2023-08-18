@@ -6,6 +6,7 @@ import {
     useAccountName,
     useSearchByNickNameTableProps,
     rarityColumnWithSorterProps,
+    secondsToDays,
 } from 'shared';
 import { Button, Radio, Space, Table, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
@@ -13,6 +14,7 @@ import { CopyOutlined, PlusOutlined } from '@ant-design/icons';
 import { useGate, useStore } from 'effector-react';
 
 import { createRentOrder } from 'app/router/paths';
+import { RentalContractStatuses } from 'entities/smartcontract';
 import {
     activeRadioButton$,
     changeContractTypeRadioButtonEvent,
@@ -37,6 +39,12 @@ export const RentalContractsTable = () => {
     const dataSource = useMemo(
         () =>
             contracts?.map((contract) => {
+                const daysLeft =
+                    contract.status ===
+                        RentalContractStatuses.SIGNED_BY_OWNER ||
+                    contract.status === RentalContractStatuses.SIGNED_BY_RENTER
+                        ? secondsToDays(contract.contract_duration)
+                        : contract.days_left;
                 return {
                     owner: contract.owner,
                     key: contract.id,
@@ -47,7 +55,7 @@ export const RentalContractsTable = () => {
                         Number(contract?.assets?.length) > 1
                             ? 'Equipment set'
                             : contract?.assets?.[0].type.replaceAll('_', ' '),
-                    daysLeft: contract.days_left || 'N/A',
+                    daysLeft: daysLeft ? Math.ceil(daysLeft) : 'N/A',
                     status: String(contract.status).replaceAll('_', ' '),
                     contract,
                 };
@@ -198,7 +206,11 @@ export const RentalContractsTable = () => {
                         key: 'level',
                     },
                     {
-                        title: t('Days left'),
+                        title:
+                            activeRadioButton ===
+                            RadioButtonContractTypeNames['All contracts']
+                                ? t('Duration')
+                                : t('Days left'),
                         dataIndex: 'daysLeft',
                         key: 'daysLeft',
                     },
