@@ -22,6 +22,7 @@ import {
 } from '../../service-market/role-select/model';
 import {
     changeRentalFilterEvent,
+    filterStore,
     RentalContractsGate,
     rentContractsStore,
 } from './model';
@@ -29,8 +30,9 @@ import style from './style.module.scss';
 
 export const RentalContractsTable = () => {
     const activeRadioButton = useStore(activeRadioButton$);
+    const filters = useStore(filterStore);
     const accountName = useAccountName();
-    useGate(RentalContractsGate, { user: accountName });
+    useGate(RentalContractsGate, { user: accountName, ...filters });
 
     const contracts = useStore(rentContractsStore);
     const navigate = useNavigate();
