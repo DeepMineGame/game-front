@@ -51,10 +51,7 @@ export const RentalContractsTable = () => {
                     id: contract.id,
                     rarity: contract.assets?.[0].rarity,
                     level: contract.assets?.[0].level,
-                    itemType:
-                        Number(contract?.assets?.length) > 1
-                            ? 'Equipment set'
-                            : contract?.assets?.[0].type.replaceAll('_', ' '),
+                    itemType: contract?.assets_type?.replaceAll('_', ' '),
                     daysLeft: daysLeft ? Math.ceil(daysLeft) : 'N/A',
                     status: String(contract.status).replaceAll('_', ' '),
                     contract,

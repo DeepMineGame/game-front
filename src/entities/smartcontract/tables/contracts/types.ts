@@ -182,6 +182,7 @@ export type ContractDto = {
     ins_dmp_amount: string;
     ins_type: string;
     ins_wax_amount: string;
+    assets_type: string;
 };
 
 export const contractName = {
