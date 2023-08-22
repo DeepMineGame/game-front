@@ -79,7 +79,9 @@ export const getFrontStatus = ({
     if (substatus === RentalContractSubStatus.TERMINATED_BY_OWNER) {
         return frontStatusMap.Deleted;
     }
-
+    if (status === RentalContractStatuses.COMPLETED) {
+        return frontStatusMap.Completed;
+    }
     if (substatus === RentalContractSubStatus.COMPLETED_BY_RENTER) {
         return frontStatusMap['Terminated, Contract terminated'];
     }
@@ -115,9 +117,7 @@ export const getFrontStatus = ({
     ) {
         return frontStatusMap['Ended / Ok with 72 expired'];
     }
-    if (status === RentalContractStatuses.COMPLETED) {
-        return frontStatusMap.Completed;
-    }
+
     if (status === RentalContractStatuses.TERMINATED) {
         return frontStatusMap['Terminated, Contract terminated'];
     }

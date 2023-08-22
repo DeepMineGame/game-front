@@ -190,7 +190,6 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
                     {t('components.common.button.next')}
                 </Button>
             </div>
-            {console.log(inventoriesTabMap[type])}
             <Inventory
                 onOpenCard={setSelectedInventoryCard}
                 onSelect={handleItemSelect}
