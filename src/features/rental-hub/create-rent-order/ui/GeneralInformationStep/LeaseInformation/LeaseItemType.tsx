@@ -11,7 +11,6 @@ import {
     rentOrderField,
 } from 'entities/smartcontract';
 import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
-import { inventoriesTabMap } from 'entities/engineer';
 import { GeneralInformationStepProps } from '../interface';
 import styles from '../styles.module.scss';
 import {
@@ -21,6 +20,15 @@ import {
 } from '../../LeaseTypeFormItem';
 import { $rentInventoryAtomicAssets, rentInventoryGate } from '../../../models';
 
+export const inventoriesTabMap = {
+    [EquipmentType.undefined]: InventoryTab.equipment,
+    [EquipmentType.areas]: InventoryTab.areas,
+    [EquipmentType.equipment]: InventoryTab.equipment,
+    [EquipmentType.factory]: InventoryTab.equipment,
+    [EquipmentType.mine]: InventoryTab.mines,
+    [EquipmentType.module]: InventoryTab.modules,
+    [EquipmentType.structures]: InventoryTab.structures,
+};
 export const LeaseItemType: FC<GeneralInformationStepProps> = ({
     goToNextStep,
     form,
@@ -30,7 +38,7 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
     const { hasValue, type } = useWatchUpgradeType(form);
     const equipmentType =
         type === EquipmentType.mine ? ('Mine' as const) : miningEquipmentNames;
-    const isAreaSelected = type === EquipmentType.structures;
+    const isAreaSelected = type === EquipmentType.areas;
     const [selectedEquipmentForFilter, setSelectedEquipmentForFilter] =
         useState<InventoryNameType | InventoryNameType[] | 'Mine'>(
             equipmentType
@@ -48,7 +56,7 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
     const isOneItemToLease =
         equipmentType === 'Mine' ||
         type === EquipmentType.equipment ||
-        type === EquipmentType.structures;
+        type === EquipmentType.areas;
     const hasAllValues = isOneItemToLease
         ? !!asset
         : form.getFieldValue(rentOrderField.asset_ids).length;
@@ -182,20 +190,23 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
                     {t('components.common.button.next')}
                 </Button>
             </div>
+            {console.log(inventoriesTabMap[type])}
             <Inventory
                 onOpenCard={setSelectedInventoryCard}
                 onSelect={handleItemSelect}
                 userInventory={userInventory as any}
                 open={isInventoryOpen}
                 onCancel={() => setIsInventoryOpen(false)}
-                selectedTab={
-                    isAreaSelected
-                        ? InventoryTab.structures
-                        : inventoriesTabMap[type]
-                }
+                selectedTab={0}
                 equipmentTypeFilter={
                     isAreaSelected
-                        ? ['Space Debris']
+                        ? [
+                              'Space Debris',
+                              'DME Springs',
+                              'Lava',
+                              'Glaciers',
+                              'Rock Fields',
+                          ]
                         : selectedEquipmentForFilter
                 }
             />
