@@ -23,6 +23,7 @@ import {
     useWatchUpgradeType,
 } from '../../UpgradeTypeFormItem';
 
+type EquipmentName = 'DME Wire' | 'Plunging Blocks' | 'Сutter' | 'Delaminator';
 export const CitizenInformation: FC<GeneralInformationStepProps> = ({
     goToPreviousStep,
     goToNextStep,
@@ -167,23 +168,30 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
                                         }}
                                         ghost
                                     >
-                                        {selectedEquipmentSet[typeName]
+                                        {selectedEquipmentSet[
+                                            typeName as EquipmentName
+                                        ]
                                             ? `${typeName}, ${t(
                                                   raritiesTranslationMap[
                                                       selectedEquipmentSet[
-                                                          typeName
+                                                          typeName as EquipmentName
                                                       ]?.rarity || 0
                                                   ]
                                               )}, Level ${
-                                                  selectedEquipmentSet[typeName]
-                                                      ?.level
+                                                  selectedEquipmentSet[
+                                                      typeName as EquipmentName
+                                                  ]?.level
                                               }`
                                             : `Select ${typeName}`}
                                     </Button>
-                                    {selectedEquipmentSet[typeName] && (
+                                    {selectedEquipmentSet[
+                                        typeName as EquipmentName
+                                    ] && (
                                         <Button
                                             onClick={handleDeleteAsset(
-                                                selectedEquipmentSet[typeName]
+                                                selectedEquipmentSet[
+                                                    typeName as EquipmentName
+                                                ]
                                             )}
                                             icon={<DeleteOutlined />}
                                             style={{ maxWidth: 32 }}

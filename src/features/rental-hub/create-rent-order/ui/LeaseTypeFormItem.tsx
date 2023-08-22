@@ -11,6 +11,7 @@ export enum EquipmentType {
     equipment,
     factory,
     module,
+    structures,
 }
 export const LeaseTypeFormItem: FC = () => {
     const { t } = useTranslation();
@@ -32,6 +33,10 @@ export const LeaseTypeFormItem: FC = () => {
                     {
                         value: equipmentSet,
                         label: t('Equipment set'),
+                    },
+                    {
+                        value: EquipmentType.structures,
+                        label: t('Area'),
                     },
                 ]}
             />

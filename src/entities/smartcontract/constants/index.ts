@@ -1061,8 +1061,12 @@ export const ID_TO_INVENTORY = isMainNet
           624922: 'Mine',
           624928: 'Mine',
           625019: 'Mine',
-
           [ENGINEER_CERTIFICATE_ID]: 'Engineer Certificate',
+          314744: 'Space Debris',
+          314749: 'DME Springs',
+          314748: 'Lava',
+          314747: 'Glaciers',
+          314743: 'Rock Fields',
       } as const)
     : ({
           177577: 'DME Wire',
@@ -1336,6 +1340,10 @@ export const ID_TO_INVENTORY = isMainNet
           541321: 'Mine',
           541322: 'Mine',
           [ENGINEER_CERTIFICATE_ID]: 'Engineer Certificate',
+          176447: 'Space Debris',
+          176450: 'DME Springs',
+          176448: 'Glaciers',
+          176446: 'Rock Fields',
       } as const);
 
 export const mineAssetTemplateId = isMainNet
