@@ -20,9 +20,6 @@ import { useGate, useStore } from 'effector-react';
 import {
     getMineByAssetEffect,
     MiningAndClaimButton,
-    $currentMine,
-    actionsStore,
-    estimatesMiningTimeStore,
     ContractorCabinGate,
     $isContractorCabinLoading,
     useDisabledState,
@@ -38,11 +35,7 @@ import {
     ExclamationCircleFilled,
     LoadingOutlined,
 } from '@ant-design/icons';
-import {
-    ActionState,
-    ActionType,
-    LOCATION_TO_ID,
-} from 'entities/smartcontract';
+import { LOCATION_TO_ID } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 import { MiningInProgressTitle } from './components/MiningInProgressTitle';
 import { MineStatus } from './components/MineStatus';

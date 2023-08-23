@@ -30,8 +30,8 @@ export const getFrontStatus = ({
 }: ContractDto) => {
     if (
         substatus === RentalContractSubStatus.ACTIVE_EQUIPMENT_RETURNING &&
-        violations.includes(ViolationDto.FEE_NOT_ENOUGH_PAID) &&
-        violations.includes(ViolationDto.ASSET_IS_BROKEN)
+        violations?.includes(ViolationDto.FEE_NOT_ENOUGH_PAID) &&
+        violations?.includes(ViolationDto.ASSET_IS_BROKEN)
     ) {
         return frontStatusMap[
             'Ended / Minimum Fee Violation / Item Broken Violation with 72h to fix equipment'
@@ -41,8 +41,8 @@ export const getFrontStatus = ({
     if (
         substatus ===
             RentalContractSubStatus.ACTIVE_EQUIPMENT_RETURNING_EXPIRED &&
-        violations.includes(ViolationDto.FEE_NOT_ENOUGH_PAID) &&
-        violations.includes(ViolationDto.ASSET_IS_BROKEN)
+        violations?.includes(ViolationDto.FEE_NOT_ENOUGH_PAID) &&
+        violations?.includes(ViolationDto.ASSET_IS_BROKEN)
     ) {
         return frontStatusMap[
             'Ended / Minimum Fee Violation / Item Broken Violation with 72h expired'
@@ -51,7 +51,7 @@ export const getFrontStatus = ({
 
     if (
         substatus === RentalContractSubStatus.ACTIVE_EQUIPMENT_RETURNING &&
-        violations.includes(ViolationDto.FEE_NOT_ENOUGH_PAID)
+        violations?.includes(ViolationDto.FEE_NOT_ENOUGH_PAID)
     ) {
         return frontStatusMap[
             'Ended / Minimum Fee Violation / Ok with 72 hours to return equipment'
@@ -60,7 +60,7 @@ export const getFrontStatus = ({
     if (
         substatus ===
             RentalContractSubStatus.ACTIVE_EQUIPMENT_RETURNING_EXPIRED &&
-        violations.includes(ViolationDto.FEE_NOT_ENOUGH_PAID)
+        violations?.includes(ViolationDto.FEE_NOT_ENOUGH_PAID)
     ) {
         return frontStatusMap[
             'Ended / Minimum Fee Violation / Ok with 72 expired'
@@ -89,14 +89,14 @@ export const getFrontStatus = ({
         (substatus === RentalContractSubStatus.ACTIVE_EQUIPMENT_RETURNING ||
             substatus ===
                 RentalContractSubStatus.ACTIVE_EQUIPMENT_RETURNING_EXPIRED) &&
-        violations.includes(ViolationDto.FEE_NOT_ENOUGH_PAID)
+        violations?.includes(ViolationDto.FEE_NOT_ENOUGH_PAID)
     ) {
         return frontStatusMap['Ended / Minimum Fee Violation'];
     }
 
     if (
         substatus === RentalContractSubStatus.ACTIVE_EQUIPMENT_RETURNING &&
-        violations.includes(ViolationDto.ASSET_IS_BROKEN)
+        violations?.includes(ViolationDto.ASSET_IS_BROKEN)
     ) {
         return frontStatusMap[
             'Ended / Item Broken Violation with 72h to fix equipment'
@@ -105,7 +105,7 @@ export const getFrontStatus = ({
     if (
         substatus ===
             RentalContractSubStatus.ACTIVE_EQUIPMENT_RETURNING_EXPIRED &&
-        violations.includes(ViolationDto.ASSET_IS_BROKEN)
+        violations?.includes(ViolationDto.ASSET_IS_BROKEN)
     ) {
         return frontStatusMap['Ended / Item Broken Violation with 72h expired'];
     }

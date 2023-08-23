@@ -1,20 +1,24 @@
 import React, { FC } from 'react';
 import { Col, Row, Table } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { secondsToDays, toLocaleDate } from 'shared';
+import { secondsToDays, toLocaleDate, useAccountName } from 'shared';
 import { PageHeader } from '@ant-design/pro-components';
 import { ContractProps } from '../../service-market/types';
 import { TableWithTitle } from '../../service-market';
 import { getColorForFrontStatus, getFrontStatus } from './lib/getFrontStatus';
 import { useButtons } from './lib/useButtons';
+import { useRentalTexts } from './lib/getTexts';
 
 const RentalContract: FC<ContractProps> = ({ contract }) => {
+    const accountName = useAccountName();
     const { t } = useTranslation();
     const frontStatus = getFrontStatus(contract);
     const button = useButtons(frontStatus, contract);
+    const subTitle = useRentalTexts(contract, accountName, frontStatus);
     return (
         <div>
             <PageHeader
+                subTitle={subTitle}
                 style={{
                     marginBottom: '20px',
                     border: `1px solid ${getColorForFrontStatus(frontStatus)}`,
