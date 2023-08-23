@@ -75,7 +75,7 @@ export const SecondPartyDepositModal: FC<{
                     data: {
                         from: accountName,
                         to: 'deepminerent',
-                        quantity: `${Number(contract.ins_dme_amount).toFixed(
+                        quantity: `${Number(contract.ins_dmp_amount).toFixed(
                             8
                         )} DMP`,
                         memo: contract.id,
