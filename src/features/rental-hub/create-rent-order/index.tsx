@@ -52,7 +52,12 @@ export const CreateRentOrder = () => {
 
     if (formStatus === Status.success) {
         return (
-            <CreateResult button={{ callback: () => navigate(rentalHub) }} />
+            <CreateResult
+                button={{
+                    callback: () => navigate(rentalHub),
+                    text: t('To the rental hub'),
+                }}
+            />
         );
     }
 
