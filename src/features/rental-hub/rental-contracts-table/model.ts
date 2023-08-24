@@ -17,7 +17,6 @@ export const filterStore = createStore<GetRentOrdersParams>({}).on(
     changeRentalFilterEvent,
     (_state, filter) => filter
 );
-persist({ store: filterStore, key: 'rental market filter store' });
 export const getRentContractsByFilterEffect = createEffect(getRentOrders);
 
 export const rentContractsStore = createStore<null | ContractDto[]>(null)

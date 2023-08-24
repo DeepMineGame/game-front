@@ -32,7 +32,7 @@ export const RentalContractsTable = () => {
     const activeRadioButton = useStore(activeRadioButton$);
     const filters = useStore(filterStore);
     const accountName = useAccountName();
-    useGate(RentalContractsGate, { user: accountName, ...filters });
+    useGate(RentalContractsGate, { user: accountName });
 
     const contracts = useStore(rentContractsStore);
     const navigate = useNavigate();
