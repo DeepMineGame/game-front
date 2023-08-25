@@ -4,6 +4,7 @@ import {
     DiscordIcon,
     neutral3Color,
     primary6,
+    rarityColumnWithSorterProps,
     useAccountName,
     useSearchByNickNameTableProps,
 } from 'shared';
@@ -15,7 +16,6 @@ import { ContractDto, normalizeAttrs } from 'entities/smartcontract';
 import { Link, Table } from '../../../ui-kit';
 import { toLocaleDate } from '../../../utils';
 import styles from '../styles.module.scss';
-import { areaRarityColumnWithSorterProps } from '../lib';
 
 type Props = { contracts: ContractDto[] | null };
 
@@ -37,7 +37,7 @@ export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
             contracts?.map((contract) => {
                 return {
                     deposit: contract.deposit,
-                    level: contract.computed?.mine_level,
+                    level: normalizeAttrs(contract.attrs).mine_level,
                     subLevel: normalizeAttrs(contract.attrs).mine_sublevel,
                     nickName: contract.client,
                     key: contract.id,
@@ -124,7 +124,7 @@ export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
                         );
                     },
                 },
-                areaRarityColumnWithSorterProps,
+                rarityColumnWithSorterProps,
                 {
                     title: 'Mine level',
                     dataIndex: 'level',
