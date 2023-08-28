@@ -8,11 +8,20 @@ import styles from '../../styles.module.scss';
 import localStyles from './styles.module.scss';
 import { TermsStepProps } from './interface';
 
+const { useWatch } = Form;
+
 export const Terms: FC<TermsStepProps> = ({
     goToPreviousStep,
     goToNextStep,
+    form,
 }) => {
     const { t } = useTranslation();
+    const hasFeePercent = useWatch(rentOrderField.fee_percent, form);
+    const hasFeeMinAmount =
+        useWatch(rentOrderField.fee_min_amount, form) !== undefined;
+    const hasContractDuration = useWatch(rentOrderField.contract_duration);
+    const hasAllValues =
+        hasFeePercent && hasFeeMinAmount && hasContractDuration;
 
     return (
         <div>
@@ -79,7 +88,11 @@ export const Terms: FC<TermsStepProps> = ({
             </Form.Item>
             <Space direction="horizontal">
                 <Button onClick={goToPreviousStep}>{t('kit.back')}</Button>
-                <Button onClick={goToNextStep} type="primary">
+                <Button
+                    onClick={goToNextStep}
+                    type="primary"
+                    disabled={!hasAllValues}
+                >
                     {t('Next')}
                 </Button>
             </Space>

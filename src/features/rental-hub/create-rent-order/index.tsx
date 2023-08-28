@@ -143,6 +143,7 @@ export const CreateRentOrder = () => {
             </StepContent>
             <StepContent step={Step.third} currentStep={currentStep}>
                 <DepositAndBuyout
+                    form={form}
                     goToPreviousStep={() => setStep(Step.second)}
                 />
             </StepContent>

@@ -1,4 +1,11 @@
-import { Form, Input, InputNumber, Space, Typography } from 'antd';
+import {
+    Form,
+    FormInstance,
+    Input,
+    InputNumber,
+    Space,
+    Typography,
+} from 'antd';
 import cn from 'classnames';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -7,15 +14,23 @@ import { rentOrderField } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
 import localStyles from '../TermsStep/styles.module.scss';
 
+const { useWatch } = Form;
+
 export interface DepositAndBuyoutProps {
     goToPreviousStep: () => void;
+    form: FormInstance;
 }
 
 export const DepositAndBuyout: FC<DepositAndBuyoutProps> = ({
     goToPreviousStep,
+    form,
 }) => {
     const { t } = useTranslation();
-
+    const hasWax = useWatch(rentOrderField.insurance_wax_amount, form);
+    const hasDme =
+        useWatch(rentOrderField.insurance_dme_amount, form) !== undefined;
+    const hasDmp = useWatch(rentOrderField.insurance_dmp_amount, form);
+    const hasAllValues = hasDme && hasWax && hasDmp;
     return (
         <div>
             <Typography.Title>{t('Deposit')}</Typography.Title>
@@ -82,7 +97,11 @@ export const DepositAndBuyout: FC<DepositAndBuyoutProps> = ({
             </Form.Item>
             <Space direction="horizontal">
                 <Button onClick={goToPreviousStep}>{t('kit.back')}</Button>
-                <Button htmlType="submit" type="primary">
+                <Button
+                    htmlType="submit"
+                    type="primary"
+                    disabled={!hasAllValues}
+                >
                     {t('Create')}
                 </Button>
             </Space>
