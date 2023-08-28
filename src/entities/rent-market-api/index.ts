@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ENDPOINT } from 'app/constants';
+import { defaultConfig, ENDPOINT } from 'app/constants';
 import type { ContractDto } from 'entities';
 
 type GetOrderParams = {
@@ -8,7 +8,8 @@ type GetOrderParams = {
 
 export const getRentOrder = async ({ id }: GetOrderParams) => {
     const { data } = await axios.get<ContractDto>(
-        `${ENDPOINT}/rent-market-api/contract/${id}`
+        `${ENDPOINT}/rent-market-api/contract/${id}`,
+        defaultConfig
     );
     return data;
 };
@@ -24,7 +25,7 @@ export const getRentOrders = async ({
 }) => {
     const { data } = await axios.get<ContractDto[]>(
         `${ENDPOINT}/rent-market-api/contract`,
-        { params: { offers, user, my_contracts } }
+        { params: { offers, user, my_contracts }, ...defaultConfig }
     );
 
     return data;
