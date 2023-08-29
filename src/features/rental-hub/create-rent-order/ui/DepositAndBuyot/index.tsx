@@ -26,11 +26,11 @@ export const DepositAndBuyout: FC<DepositAndBuyoutProps> = ({
     form,
 }) => {
     const { t } = useTranslation();
-    const hasWax = useWatch(rentOrderField.insurance_wax_amount, form);
-    const hasDme =
-        useWatch(rentOrderField.insurance_dme_amount, form) !== undefined;
-    const hasDmp = useWatch(rentOrderField.insurance_dmp_amount, form);
-    const hasAllValues = hasDme && hasWax && hasDmp;
+    // const hasWax = useWatch(rentOrderField.insurance_wax_amount, form);
+    // const hasDme =
+    //     useWatch(rentOrderField.insurance_dme_amount, form) !== undefined;
+    // const hasDmp = useWatch(rentOrderField.insurance_dmp_amount, form);
+    // const hasAllValues = hasDme && hasWax && hasDmp;
     return (
         <div>
             <Typography.Title>{t('Deposit')}</Typography.Title>
@@ -97,11 +97,7 @@ export const DepositAndBuyout: FC<DepositAndBuyoutProps> = ({
             </Form.Item>
             <Space direction="horizontal">
                 <Button onClick={goToPreviousStep}>{t('kit.back')}</Button>
-                <Button
-                    htmlType="submit"
-                    type="primary"
-                    disabled={!hasAllValues}
-                >
+                <Button htmlType="submit" type="primary">
                     {t('Create')}
                 </Button>
             </Space>

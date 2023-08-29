@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Col, Row, Table } from 'antd';
+import { Col, Row, Table, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { secondsToDays, toLocaleDate, useAccountName } from 'shared';
 import { PageHeader } from '@ant-design/pro-components';
@@ -18,7 +18,6 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
     return (
         <div>
             <PageHeader
-                subTitle={subTitle}
                 style={{
                     marginBottom: '20px',
                     border: `1px solid ${getColorForFrontStatus(frontStatus)}`,
@@ -35,6 +34,7 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
                     </span>
                 }
             />
+            <Typography.Title level={5}>{subTitle}</Typography.Title>
             <Row gutter={[32, 32]}>
                 <Col xs={24} md={12}>
                     <Row gutter={[24, 24]}>
