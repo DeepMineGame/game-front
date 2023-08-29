@@ -37,7 +37,7 @@ export const ClaimDME: FC<{ contract: ContractDto | null }> = ({
         ? getDmeAmount(extractFeeToClaimAttr(mineOwnerRole[0]))
         : 0;
 
-    const feeInDme = (dmeToClaim / 100) * (contract?.fee_percent || 1);
+    const feeInDme = dmeToClaim * (contract?.fee_percent || 1);
     const [claimInfoModalVisible, setClaimInfoModalVisible] = useState(false);
 
     const dmeMoreThenZero = Number(dmeToClaim) > 0;
