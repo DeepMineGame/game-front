@@ -1,4 +1,5 @@
 import {
+    App,
     Form,
     FormInstance,
     Input,
@@ -33,6 +34,22 @@ export const DepositAndBuyout: FC<DepositAndBuyoutProps> = ({
     const hasDmp = useWatch(rentOrderField.insurance_dmp_amount, form);
     const oneMoreThanZero =
         Number(hasDme) > 0 || Number(hasWax) > 0 || Number(hasDmp) > 0;
+    const { modal } = App.useApp();
+
+    const onCreateHandler = () => {
+        if (!oneMoreThanZero) {
+            return modal.confirm({
+                title: t(
+                    'Are you sure you want to proceed with 0 Insurance Deposit?'
+                ),
+                content: t(
+                    'This means renters can return your equipment depreciated and you will not be compensated for that'
+                ),
+                onOk: form.submit,
+            });
+        }
+        return form.submit();
+    };
     const selectedLeaseType = useWatch(orderFields.optSchema, form);
     if (
         selectedLeaseType === EquipmentType.mine ||
@@ -136,11 +153,7 @@ export const DepositAndBuyout: FC<DepositAndBuyoutProps> = ({
             </Form.Item>
             <Space direction="horizontal">
                 <Button onClick={goToPreviousStep}>{t('kit.back')}</Button>
-                <Button
-                    htmlType="submit"
-                    type="primary"
-                    disabled={!oneMoreThanZero}
-                >
+                <Button onClick={onCreateHandler} type="primary">
                     {t('Create')}
                 </Button>
             </Space>
