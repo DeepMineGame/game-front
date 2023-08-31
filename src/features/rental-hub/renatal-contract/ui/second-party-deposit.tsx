@@ -88,8 +88,7 @@ export const SecondPartyDepositModal: FC<{
         <Modal
             title={t('Please select a deposit currency')}
             open={open}
-            onCancel={onCancel}
-            onOk={onCancel}
+            footer={[<Button onClick={onCancel}>{t('Cancel')}</Button>]}
         >
             <Space>
                 <Button onClick={dmeTransfer}>
