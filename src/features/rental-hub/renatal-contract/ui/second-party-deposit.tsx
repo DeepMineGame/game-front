@@ -91,15 +91,21 @@ export const SecondPartyDepositModal: FC<{
             footer={[<Button onClick={onCancel}>{t('Cancel')}</Button>]}
         >
             <Space>
-                <Button onClick={dmeTransfer}>
-                    {contract.ins_dme_amount} DME
-                </Button>
-                <Button onClick={waxTransfer}>
-                    {contract.ins_wax_amount} WAX
-                </Button>
-                <Button onClick={dmpTransfer}>
-                    {contract.ins_dmp_amount} DMP
-                </Button>
+                {Number(contract.ins_dme_amount) > 0 && (
+                    <Button onClick={dmeTransfer}>
+                        {contract.ins_dme_amount} DME
+                    </Button>
+                )}
+                {Number(contract.ins_wax_amount) > 0 && (
+                    <Button onClick={waxTransfer}>
+                        {contract.ins_wax_amount} WAX
+                    </Button>
+                )}
+                {Number(contract.ins_dmp_amount) > 0 && (
+                    <Button onClick={dmpTransfer}>
+                        {contract.ins_dmp_amount} DMP
+                    </Button>
+                )}
             </Space>
         </Modal>
     );
