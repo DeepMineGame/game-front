@@ -80,7 +80,7 @@ export const RentalContractsTable = () => {
                         }}
                         value={RadioButtonContractTypeNames['All contracts']}
                     >
-                        {t('All contracts')}
+                        {t('Rent offers')}
                     </Radio>
                     <Radio
                         onChange={() => {
