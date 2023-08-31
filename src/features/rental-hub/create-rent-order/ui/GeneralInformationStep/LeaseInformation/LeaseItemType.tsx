@@ -172,6 +172,9 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
             );
         })
     );
+    const inventoryTab = isAreaSelected
+        ? InventoryTab.areas
+        : InventoryTab.equipment;
     return (
         <>
             <LeaseTypeFormItem />
@@ -196,7 +199,9 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
                 userInventory={userInventory as any}
                 open={isInventoryOpen}
                 onCancel={() => setIsInventoryOpen(false)}
-                selectedTab={0}
+                selectedTab={
+                    equipmentType === 'Mine' ? InventoryTab.mines : inventoryTab
+                }
                 equipmentTypeFilter={
                     isAreaSelected
                         ? [
