@@ -1,4 +1,5 @@
 import {
+    Alert,
     App,
     Form,
     FormInstance,
@@ -112,11 +113,15 @@ export const DepositAndBuyout: FC<DepositAndBuyoutProps> = ({
                     />
                 </Form.Item>
             </Input.Group>
-            <Typography.Paragraph>
-                {t(
-                    'Mines and lands cannot be damaged, so they do not require insurance. The asset will be returned to the owner in any case'
-                )}
-            </Typography.Paragraph>
+            {ifNonRequiredInsurance && (
+                <Alert
+                    type="warning"
+                    message={t(
+                        'Mines and lands cannot be damaged, so they do not require insurance. The asset will be returned to the owner in any case'
+                    )}
+                />
+            )}
+
             <Typography.Title>{t('Buyout')}</Typography.Title>
             <Typography.Paragraph>
                 {t('The buyout can be made in one or more currencies')}
