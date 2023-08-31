@@ -11,8 +11,10 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from 'shared';
 import { rentOrderField } from 'entities/smartcontract';
+import { orderFields } from 'entities/order';
 import styles from '../../styles.module.scss';
 import localStyles from '../TermsStep/styles.module.scss';
+import { EquipmentType } from '../LeaseTypeFormItem';
 
 const { useWatch } = Form;
 
@@ -31,6 +33,40 @@ export const DepositAndBuyout: FC<DepositAndBuyoutProps> = ({
     const hasDmp = useWatch(rentOrderField.insurance_dmp_amount, form);
     const oneMoreThanZero =
         Number(hasDme) > 0 || Number(hasWax) > 0 || Number(hasDmp) > 0;
+    const selectedLeaseType = useWatch(orderFields.optSchema, form);
+    if (
+        selectedLeaseType === EquipmentType.mine ||
+        selectedLeaseType === EquipmentType.areas
+    ) {
+        return (
+            <>
+                {' '}
+                <Typography.Paragraph>
+                    {t('No deposit and buyout available')}
+                    <br />
+                </Typography.Paragraph>
+                <Form.Item
+                    name={rentOrderField.insurance_wax_amount}
+                    initialValue={0}
+                />
+                <Form.Item
+                    name={rentOrderField.insurance_dme_amount}
+                    initialValue={0}
+                />
+                <Form.Item
+                    name={rentOrderField.insurance_dmp_amount}
+                    initialValue={0}
+                />
+                <Space direction="horizontal">
+                    <Button onClick={goToPreviousStep}>{t('kit.back')}</Button>
+
+                    <Button htmlType="submit" type="primary">
+                        {t('Create')}
+                    </Button>
+                </Space>
+            </>
+        );
+    }
     return (
         <div>
             <Typography.Title>{t('Deposit')}</Typography.Title>
