@@ -16,7 +16,8 @@ export const Terms: FC<TermsStepProps> = ({
     form,
 }) => {
     const { t } = useTranslation();
-    const hasFeePercent = useWatch(rentOrderField.fee_percent, form);
+    const hasFeePercent =
+        useWatch(rentOrderField.fee_percent, form) !== undefined;
     const hasFeeMinAmount =
         useWatch(rentOrderField.fee_min_amount, form) !== undefined;
     const hasContractDuration = useWatch(rentOrderField.contract_duration);
@@ -44,7 +45,7 @@ export const Terms: FC<TermsStepProps> = ({
                 >
                     <InputNumber
                         placeholder="%"
-                        min={10}
+                        min={0}
                         max={100}
                         type="number"
                         controls={false}
