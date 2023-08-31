@@ -6,7 +6,7 @@ import {
 } from 'entities/smartcontract';
 
 export enum frontStatusMap {
-    'Opened Order' = 'Opened Order',
+    'Open Order' = 'Open Order',
     'Signed contract' = 'Signed contract',
     'Valid Contract' = 'Valid Contract',
     'Deleted' = 'Deleted',
@@ -68,7 +68,7 @@ export const getFrontStatus = ({
     }
 
     if (status === RentalContractStatuses.SIGNED_BY_OWNER) {
-        return frontStatusMap['Opened Order'];
+        return frontStatusMap['Open Order'];
     }
     if (status === RentalContractStatuses.SIGNED_BY_RENTER) {
         return frontStatusMap['Signed contract'];
@@ -128,7 +128,7 @@ export const getColorForFrontStatus = (status: frontStatusMap | undefined) => {
     const red = '#D32029';
     const green = '#47FF40';
 
-    if (status === frontStatusMap['Opened Order']) {
+    if (status === frontStatusMap['Open Order']) {
         return neutralColor;
     }
     if (status === frontStatusMap['Valid Contract']) {

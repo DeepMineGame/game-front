@@ -149,7 +149,7 @@ export const useButtons = (
         }
     }
     if (contract.owner === accountName) {
-        if (frontStatus === frontStatusMap['Opened Order']) {
+        if (frontStatus === frontStatusMap['Open Order']) {
             return deleteButton;
         }
         if (frontStatus === frontStatusMap['Signed contract']) {
@@ -180,7 +180,7 @@ export const useButtons = (
         return completeButton;
     }
     if (
-        frontStatus === frontStatusMap['Opened Order'] &&
+        frontStatus === frontStatusMap['Open Order'] &&
         contract.owner !== accountName &&
         !contract.renter
     ) {
