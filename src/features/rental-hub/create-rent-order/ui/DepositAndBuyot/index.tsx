@@ -26,13 +26,11 @@ export const DepositAndBuyout: FC<DepositAndBuyoutProps> = ({
     form,
 }) => {
     const { t } = useTranslation();
-    const hasWax =
-        useWatch(rentOrderField.insurance_wax_amount, form) !== undefined;
-    const hasDme =
-        useWatch(rentOrderField.insurance_dme_amount, form) !== undefined;
-    const hasDmp =
-        useWatch(rentOrderField.insurance_dmp_amount, form) !== undefined;
-    const hasAllValues = hasDme && hasWax && hasDmp;
+    const hasWax = useWatch(rentOrderField.insurance_wax_amount, form);
+    const hasDme = useWatch(rentOrderField.insurance_dme_amount, form);
+    const hasDmp = useWatch(rentOrderField.insurance_dmp_amount, form);
+    const oneMoreThanZero =
+        Number(hasDme) > 0 || Number(hasWax) > 0 || Number(hasDmp) > 0;
     return (
         <div>
             <Typography.Title>{t('Deposit')}</Typography.Title>
@@ -44,6 +42,7 @@ export const DepositAndBuyout: FC<DepositAndBuyoutProps> = ({
                     label="WAX"
                     className={cn(styles.formField, localStyles.feeInput)}
                     name={rentOrderField.insurance_wax_amount}
+                    initialValue={0}
                 >
                     <InputNumber
                         placeholder="WAX"
@@ -58,6 +57,7 @@ export const DepositAndBuyout: FC<DepositAndBuyoutProps> = ({
                     label="DME"
                     className={cn(styles.formField, localStyles.feeInput)}
                     name={rentOrderField.insurance_dme_amount}
+                    initialValue={0}
                 >
                     <InputNumber
                         placeholder="DME"
@@ -69,6 +69,7 @@ export const DepositAndBuyout: FC<DepositAndBuyoutProps> = ({
             </Input.Group>
             <Input.Group>
                 <Form.Item
+                    initialValue={0}
                     label="DMP"
                     className={cn(styles.formField, localStyles.feeInput)}
                     name={rentOrderField.insurance_dmp_amount}
@@ -102,7 +103,7 @@ export const DepositAndBuyout: FC<DepositAndBuyoutProps> = ({
                 <Button
                     htmlType="submit"
                     type="primary"
-                    disabled={!hasAllValues}
+                    disabled={!oneMoreThanZero}
                 >
                     {t('Create')}
                 </Button>
