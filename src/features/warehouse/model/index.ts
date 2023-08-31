@@ -137,5 +137,5 @@ export {
 
 forward({
     from: WarehouseGate.open,
-    to: [getAtomicAssetsByUserEffect, getInventoryEffect],
+    to: [getAtomicAssetsByUserEffect, getInventoryEffect, getRentAssetsEffect],
 });
