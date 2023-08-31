@@ -32,12 +32,19 @@ export const DepositAndBuyout: FC<DepositAndBuyoutProps> = ({
     const hasWax = useWatch(rentOrderField.insurance_wax_amount, form);
     const hasDme = useWatch(rentOrderField.insurance_dme_amount, form);
     const hasDmp = useWatch(rentOrderField.insurance_dmp_amount, form);
-    const oneMoreThanZero =
+    const ifOneInsuranceValueBiggerThanZero =
         Number(hasDme) > 0 || Number(hasWax) > 0 || Number(hasDmp) > 0;
     const { modal } = App.useApp();
+    const selectedLeaseType = useWatch(orderFields.optSchema, form);
 
+    const ifNonRequiredInsurance =
+        selectedLeaseType === EquipmentType.mine ||
+        selectedLeaseType === EquipmentType.areas;
     const onCreateHandler = () => {
-        if (!oneMoreThanZero) {
+        if (ifNonRequiredInsurance) {
+            return form.submit();
+        }
+        if (!ifOneInsuranceValueBiggerThanZero) {
             return modal.confirm({
                 title: t(
                     'Are you sure you want to proceed with 0 Insurance Deposit?'
@@ -50,40 +57,7 @@ export const DepositAndBuyout: FC<DepositAndBuyoutProps> = ({
         }
         return form.submit();
     };
-    const selectedLeaseType = useWatch(orderFields.optSchema, form);
-    if (
-        selectedLeaseType === EquipmentType.mine ||
-        selectedLeaseType === EquipmentType.areas
-    ) {
-        return (
-            <>
-                {' '}
-                <Typography.Paragraph>
-                    {t('No deposit and buyout available')}
-                    <br />
-                </Typography.Paragraph>
-                <Form.Item
-                    name={rentOrderField.insurance_wax_amount}
-                    initialValue={0}
-                />
-                <Form.Item
-                    name={rentOrderField.insurance_dme_amount}
-                    initialValue={0}
-                />
-                <Form.Item
-                    name={rentOrderField.insurance_dmp_amount}
-                    initialValue={0}
-                />
-                <Space direction="horizontal">
-                    <Button onClick={goToPreviousStep}>{t('kit.back')}</Button>
 
-                    <Button htmlType="submit" type="primary">
-                        {t('Create')}
-                    </Button>
-                </Space>
-            </>
-        );
-    }
     return (
         <div>
             <Typography.Title>{t('Deposit')}</Typography.Title>
@@ -102,6 +76,7 @@ export const DepositAndBuyout: FC<DepositAndBuyoutProps> = ({
                         type="number"
                         controls={false}
                         className={styles.inputNumber}
+                        disabled={ifNonRequiredInsurance}
                     />
                 </Form.Item>
             </Input.Group>
@@ -117,6 +92,7 @@ export const DepositAndBuyout: FC<DepositAndBuyoutProps> = ({
                         type="number"
                         controls={false}
                         className={styles.inputNumber}
+                        disabled={ifNonRequiredInsurance}
                     />
                 </Form.Item>
             </Input.Group>
@@ -132,9 +108,15 @@ export const DepositAndBuyout: FC<DepositAndBuyoutProps> = ({
                         type="number"
                         controls={false}
                         className={styles.inputNumber}
+                        disabled={ifNonRequiredInsurance}
                     />
                 </Form.Item>
             </Input.Group>
+            <Typography.Paragraph>
+                {t(
+                    'Mines and lands cannot be damaged, so they do not require insurance. The asset will be returned to the owner in any case'
+                )}
+            </Typography.Paragraph>
             <Typography.Title>{t('Buyout')}</Typography.Title>
             <Typography.Paragraph>
                 {t('The buyout can be made in one or more currencies')}

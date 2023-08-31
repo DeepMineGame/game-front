@@ -1082,5 +1082,8 @@
   "No deposit and buyout available": "No deposit and buyout available",
   "Rent offers": "Rent offers",
   "Are you sure you want to proceed with 0 Insurance Deposit?": "Are you sure you want to proceed with 0 Insurance Deposit?",
-  "This means renters can return your equipment depreciated and you will not be compensated for that": "This means renters can return your equipment depreciated and you will not be compensated for that"
+  "This means renters can return your equipment depreciated and you will not be compensated for that": "This means renters can return your equipment depreciated and you will not be compensated for that",
+  "Mines and lands cannot be damaged, so they do not require insurance": {
+    " The asset will be returned to the owner in any case": "Mines and lands cannot be damaged, so they do not require insurance. The asset will be returned to the owner in any case"
+  }
 }
