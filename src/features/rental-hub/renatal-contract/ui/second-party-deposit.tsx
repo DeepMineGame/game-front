@@ -1,17 +1,19 @@
 import { Button, Modal, Space } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { FC } from 'react';
-import { useAccountName } from 'shared';
 import { ContractDto } from 'entities/smartcontract';
+import { useAccountName, useReloadPage } from 'shared/lib/hooks';
 import { useSmartContractAction } from '../../../hooks';
 
 export const SecondPartyDepositModal: FC<{
     contract: ContractDto;
     open: boolean;
     onCancel: () => void;
-}> = ({ contract, open, onCancel }) => {
+    onClose: (value: boolean) => void;
+}> = ({ contract, open, onCancel, onClose }) => {
     const { t } = useTranslation();
     const accountName = useAccountName();
+    const reloadPage = useReloadPage();
     const waxTransfer = useSmartContractAction({
         action: {
             actions: [
@@ -35,6 +37,7 @@ export const SecondPartyDepositModal: FC<{
                 },
             ],
         },
+        onSignSuccess: reloadPage,
     });
     const dmeTransfer = useSmartContractAction({
         action: {
@@ -59,6 +62,7 @@ export const SecondPartyDepositModal: FC<{
                 },
             ],
         },
+        onSignSuccess: reloadPage,
     });
     const dmpTransfer = useSmartContractAction({
         action: {
@@ -83,12 +87,14 @@ export const SecondPartyDepositModal: FC<{
                 },
             ],
         },
+        onSignSuccess: reloadPage,
     });
     return (
         <Modal
             title={t('Please select a deposit currency')}
             open={open}
             footer={[<Button onClick={onCancel}>{t('Cancel')}</Button>]}
+            onCancel={() => onClose(false)}
         >
             <Space>
                 {Number(contract.ins_dme_amount) > 0 && (

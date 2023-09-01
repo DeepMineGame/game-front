@@ -62,6 +62,7 @@ export const useButtons = (
             </Button>
             <SecondPartyDepositModal
                 open={depositModalVisibility}
+                onClose={setDepositModalVisibility}
                 contract={contract}
                 onCancel={() => setDepositModalVisibility(false)}
             />
