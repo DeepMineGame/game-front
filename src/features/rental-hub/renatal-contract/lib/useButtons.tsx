@@ -148,6 +148,12 @@ export const useButtons = (
         ) {
             return completeButton;
         }
+        if (
+            frontStatus ===
+            frontStatusMap['Ended / Ok with 72 hours to return equipment']
+        ) {
+            return completeButton;
+        }
     }
     if (contract.owner === accountName) {
         if (frontStatus === frontStatusMap['Open Order']) {
@@ -177,6 +183,12 @@ export const useButtons = (
     if (
         frontStatus ===
         frontStatusMap['Ended / Minimum Fee Violation / Ok with 72 expired']
+    ) {
+        return completeButton;
+    }
+    if (
+        frontStatus ===
+        frontStatusMap['Ended / Ok with 72 hours to return equipment']
     ) {
         return completeButton;
     }
