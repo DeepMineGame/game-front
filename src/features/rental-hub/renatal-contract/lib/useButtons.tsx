@@ -186,12 +186,7 @@ export const useButtons = (
     ) {
         return completeButton;
     }
-    if (
-        frontStatus ===
-        frontStatusMap['Ended / Ok with 72 hours to return equipment']
-    ) {
-        return completeButton;
-    }
+
     if (
         frontStatus === frontStatusMap['Open Order'] &&
         contract.owner !== accountName &&
