@@ -731,7 +731,7 @@
       "mineNotSet": "Mine is not set",
       "depthChanging": "Mine is undergoing depth change",
       "needShift": "You need to travel here to set a Mine",
-      "needLandLord": "Sign a contract with a landlord to set a Mine",
+      "Sign a contract with a landlord to set a Mine": "Sign a contract with a landlord to set a Mine",
       "depthChangingText": "Go to mine management console for details",
       "needCrew": "You are ready to gather your ultimate mine crew. Sign the Mining Contract with a contractor to be able to activate your Mine.",
       "progress": "Setup in progress",

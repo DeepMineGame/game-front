@@ -40,7 +40,10 @@ export const ContractsRenderByRole: FC = () => {
         user: accountName,
     };
     const hasFilters = Object.keys(filters).length;
-    useGate(ContractsGate, hasFilters ? filters : defaultFilter);
+    useGate(
+        ContractsGate,
+        hasFilters && !searchRoleFromQuery ? filters : defaultFilter
+    );
     const activeRadioButton = useStore(activeRadioButton$);
 
     const contracts = useStore(contractsStore);
