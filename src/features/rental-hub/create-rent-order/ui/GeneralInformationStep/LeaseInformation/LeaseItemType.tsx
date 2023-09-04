@@ -6,15 +6,11 @@ import { useGate, useStore } from 'effector-react';
 import { Form } from 'antd';
 import {
     InventoryNameType,
+    InventoryTab,
     miningEquipmentNames,
-    raritiesTranslationMap,
     rentOrderField,
 } from 'entities/smartcontract';
-import {
-    $mergedInventoryWithAtomicAssets,
-    MergedInventoryWithAtomicAssets,
-} from 'entities/atomicassets';
-import { inventoriesTabMap } from 'entities/engineer';
+import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
 import { GeneralInformationStepProps } from '../interface';
 import styles from '../styles.module.scss';
 import {
@@ -24,15 +20,25 @@ import {
 } from '../../LeaseTypeFormItem';
 import { $rentInventoryAtomicAssets, rentInventoryGate } from '../../../models';
 
+export const inventoriesTabMap = {
+    [EquipmentType.undefined]: InventoryTab.equipment,
+    [EquipmentType.areas]: InventoryTab.areas,
+    [EquipmentType.equipment]: InventoryTab.equipment,
+    [EquipmentType.factory]: InventoryTab.equipment,
+    [EquipmentType.mine]: InventoryTab.mines,
+    [EquipmentType.module]: InventoryTab.modules,
+    [EquipmentType.structures]: InventoryTab.structures,
+};
 export const LeaseItemType: FC<GeneralInformationStepProps> = ({
     goToNextStep,
     form,
 }) => {
     const { t } = useTranslation();
+
     const { hasValue, type } = useWatchUpgradeType(form);
     const equipmentType =
         type === EquipmentType.mine ? ('Mine' as const) : miningEquipmentNames;
-
+    const isAreaSelected = type === EquipmentType.areas;
     const [selectedEquipmentForFilter, setSelectedEquipmentForFilter] =
         useState<InventoryNameType | InventoryNameType[] | 'Mine'>(
             equipmentType
@@ -48,7 +54,9 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
     useGate(rentInventoryGate, { searchParam: useAccountName() });
     const userInventory = useStore($rentInventoryAtomicAssets);
     const isOneItemToLease =
-        equipmentType === 'Mine' || type === EquipmentType.equipment;
+        equipmentType === 'Mine' ||
+        type === EquipmentType.equipment ||
+        type === EquipmentType.areas;
     const hasAllValues = isOneItemToLease
         ? !!asset
         : form.getFieldValue(rentOrderField.asset_ids).length;
@@ -93,89 +101,86 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
 
     useEffect(() => {
         if (isOneItemToLease) {
-            form.setFieldsValue({
+            return form.setFieldsValue({
                 [rentOrderField.asset_ids]: [asset?.asset_id],
             });
         }
-    }, [asset, form, isOneItemToLease, selectedEquipmentSet]);
 
+        form.setFieldsValue({
+            [rentOrderField.asset_ids]: Object.values(
+                selectedEquipmentSet
+            )?.map((item) => item?.asset_id),
+        });
+    }, [asset, form, isOneItemToLease, selectedEquipmentSet]);
+    const equipmentOrMineSelectButton = isOneItemToLease ? (
+        <div className={styles.flexSection}>
+            <Button
+                type="primary"
+                icon={<PlusOutlined />}
+                onClick={() => {
+                    setIsInventoryOpen(true);
+                    if (equipmentType === 'Mine') {
+                        setSelectedEquipmentForFilter('Mine');
+                    }
+                }}
+                ghost
+            >
+                {asset
+                    ? `${asset.name}`
+                    : t('pages.serviceMarket.createOrder.selectItem')}
+            </Button>
+            {asset && (
+                <Button
+                    onClick={handleDeleteAsset(asset)}
+                    icon={<DeleteOutlined />}
+                    style={{ maxWidth: 32 }}
+                />
+            )}
+        </div>
+    ) : (
+        equipmentType.map((typeName, key) => {
+            return (
+                <>
+                    <div className={styles.flexSection}>
+                        <Button
+                            type="primary"
+                            icon={<PlusOutlined />}
+                            onClick={() => {
+                                setIsInventoryOpen(true);
+                                setSelectedEquipmentForFilter(typeName);
+                            }}
+                            ghost
+                        >
+                            {`Select ${typeName}`}
+                        </Button>
+                        {
+                            // @ts-ignore
+                            selectedEquipmentSet[typeName] && (
+                                <Button
+                                    onClick={handleDeleteAsset(
+                                        // @ts-ignore
+                                        selectedEquipmentSet[typeName]
+                                    )}
+                                    icon={<DeleteOutlined />}
+                                    style={{ maxWidth: 32 }}
+                                />
+                            )
+                        }
+                    </div>
+                    <br />
+                </>
+            );
+        })
+    );
+    const inventoryTab = isAreaSelected
+        ? InventoryTab.areas
+        : InventoryTab.equipment;
     return (
         <>
             <LeaseTypeFormItem />
             {hasValue && (
                 <Form.Item name={rentOrderField.asset_ids}>
-                    {isOneItemToLease ? (
-                        <div className={styles.flexSection}>
-                            <Button
-                                type="primary"
-                                icon={<PlusOutlined />}
-                                onClick={() => {
-                                    setIsInventoryOpen(true);
-                                    if (equipmentType === 'Mine') {
-                                        setSelectedEquipmentForFilter('Mine');
-                                    }
-                                }}
-                                ghost
-                            >
-                                {asset
-                                    ? `${asset.name}, ${t(
-                                          raritiesTranslationMap[asset.rarity]
-                                      )}, Level ${asset.level}`
-                                    : t(
-                                          'pages.serviceMarket.createOrder.selectItem'
-                                      )}
-                            </Button>
-                            {asset && (
-                                <Button
-                                    onClick={handleDeleteAsset(asset)}
-                                    icon={<DeleteOutlined />}
-                                    style={{ maxWidth: 32 }}
-                                    ghost
-                                />
-                            )}
-                        </div>
-                    ) : (
-                        equipmentType.map((typeName, key) => (
-                            <>
-                                <div className={styles.flexSection}>
-                                    <Button
-                                        type="primary"
-                                        icon={<PlusOutlined />}
-                                        onClick={() => {
-                                            setIsInventoryOpen(true);
-                                            setSelectedEquipmentForFilter(
-                                                typeName
-                                            );
-                                        }}
-                                        ghost
-                                    >
-                                        {selectedEquipmentSet[typeName]
-                                            ? `${typeName}, ${t(
-                                                  raritiesTranslationMap[
-                                                      selectedEquipmentSet[
-                                                          typeName
-                                                      ]?.rarity || 0
-                                                  ]
-                                              )}, Level ${
-                                                  selectedEquipmentSet[typeName]
-                                                      ?.level
-                                              }`
-                                            : `Select ${typeName}`}
-                                    </Button>
-                                    {selectedEquipmentSet[typeName] && (
-                                        <Button
-                                            onClick={handleDeleteAsset(
-                                                selectedEquipmentSet[typeName]
-                                            )}
-                                            icon={<DeleteOutlined />}
-                                            style={{ maxWidth: 32 }}
-                                        />
-                                    )}
-                                </div>
-                                <br />
-                            </>
-                        ))
-                    )}
+                    {equipmentOrMineSelectButton}
                 </Form.Item>
             )}
             <br />
@@ -194,8 +199,20 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
                 userInventory={userInventory as any}
                 open={isInventoryOpen}
                 onCancel={() => setIsInventoryOpen(false)}
-                selectedTab={inventoriesTabMap[type]}
-                equipmentTypeFilter={selectedEquipmentForFilter}
+                selectedTab={
+                    equipmentType === 'Mine' ? InventoryTab.mines : inventoryTab
+                }
+                equipmentTypeFilter={
+                    isAreaSelected
+                        ? [
+                              'Space Debris',
+                              'DME Springs',
+                              'Lava',
+                              'Glaciers',
+                              'Rock Fields',
+                          ]
+                        : selectedEquipmentForFilter
+                }
             />
             {selectedInventoryCard && (
                 <InventoryCardModal

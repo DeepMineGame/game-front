@@ -21,6 +21,11 @@ function devServerConfig(config) {
                 changeOrigin: true,
                 withCredentials: true,
             },
+            '/rent-market-api': {
+                target: `https://${proxyTarget}.deepmine.world`,
+                changeOrigin: true,
+                withCredentials: true,
+            },
         },
     };
 }

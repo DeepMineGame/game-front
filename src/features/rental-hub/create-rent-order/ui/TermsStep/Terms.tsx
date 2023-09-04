@@ -8,8 +8,21 @@ import styles from '../../styles.module.scss';
 import localStyles from './styles.module.scss';
 import { TermsStepProps } from './interface';
 
-export const Terms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
+const { useWatch } = Form;
+
+export const Terms: FC<TermsStepProps> = ({
+    goToPreviousStep,
+    goToNextStep,
+    form,
+}) => {
     const { t } = useTranslation();
+    const hasFeePercent =
+        useWatch(rentOrderField.fee_percent, form) !== undefined;
+    const hasFeeMinAmount =
+        useWatch(rentOrderField.fee_min_amount, form) !== undefined;
+    const hasContractDuration = useWatch(rentOrderField.contract_duration);
+    const hasAllValues =
+        hasFeePercent && hasFeeMinAmount && hasContractDuration;
 
     return (
         <div>
@@ -32,7 +45,7 @@ export const Terms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                 >
                     <InputNumber
                         placeholder="%"
-                        min={10}
+                        min={0}
                         max={100}
                         type="number"
                         controls={false}
@@ -40,6 +53,18 @@ export const Terms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                     />
                 </Form.Item>
             </Input.Group>
+
+            <Form.Item
+                label={t('Minimum Fee')}
+                className={cn(styles.formField, localStyles.feeInput)}
+                name={rentOrderField.fee_min_amount}
+            >
+                <InputNumber
+                    type="number"
+                    controls={false}
+                    className={styles.inputNumber}
+                />
+            </Form.Item>
 
             <Form.Item
                 name={rentOrderField.contract_duration}
@@ -55,19 +80,7 @@ export const Terms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                     }).filter((_, idx) => idx !== 0)}
                 />
             </Form.Item>
-            <Form.Item
-                name={rentOrderField.deposit_amount}
-                label={t('Deposit amount')}
-                className={cn(styles.formField, localStyles.feeInput)}
-                initialValue={1}
-            >
-                <InputNumber
-                    placeholder="DME"
-                    type="number"
-                    controls={false}
-                    className={styles.inputNumber}
-                />
-            </Form.Item>
+
             <Form.Item
                 name={rentOrderField.autorenew_enabled}
                 valuePropName="checked"
@@ -76,8 +89,12 @@ export const Terms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
             </Form.Item>
             <Space direction="horizontal">
                 <Button onClick={goToPreviousStep}>{t('kit.back')}</Button>
-                <Button htmlType="submit" type="primary">
-                    {t('components.common.button.create')}
+                <Button
+                    onClick={goToNextStep}
+                    type="primary"
+                    disabled={!hasAllValues}
+                >
+                    {t('Next')}
                 </Button>
             </Space>
         </div>

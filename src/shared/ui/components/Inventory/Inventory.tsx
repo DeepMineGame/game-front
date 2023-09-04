@@ -31,7 +31,7 @@ export const Inventory: FC<InventoryProps> = ({
     );
 
     useEffect(() => {
-        if (props.selectedTab) {
+        if (props.selectedTab !== undefined) {
             setSelectedTab(props.selectedTab);
         }
     }, [props.selectedTab]);

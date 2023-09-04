@@ -3,8 +3,7 @@ import cn from 'classnames';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { Tooltip } from 'antd';
-import { serviceMarket } from 'app/router/paths';
+import { rentalHub, serviceMarket } from 'app/router/paths';
 import styles from './styles.module.scss';
 
 export const Hub = () => {
@@ -23,16 +22,17 @@ export const Hub = () => {
                     {t('SERVICE MARKET')}
                 </Title>
             </div>
-            <Tooltip overlay="Coming soon" trigger="click">
-                <div className={styles.hubBottom}>
-                    <Title
-                        level={5}
-                        className={cn(styles.enterLink, styles.rentalHubTitle)}
-                    >
-                        {t('RENTAL HUB')}
-                    </Title>
-                </div>
-            </Tooltip>
+            <div
+                className={styles.hubBottom}
+                onClick={() => navigate(rentalHub)}
+            >
+                <Title
+                    level={5}
+                    className={cn(styles.enterLink, styles.rentalHubTitle)}
+                >
+                    {t('RENTAL HUB')}
+                </Title>
+            </div>
         </div>
     );
 };

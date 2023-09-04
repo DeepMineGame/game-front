@@ -215,7 +215,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                                         })
                                     }
                                 >
-                                    {t('Rent storage')}
+                                    {t('Rent inventory')}
                                 </Radio>
                             </Radio.Group>
                         </Col>

@@ -1,4 +1,3 @@
-export * from './create-rent-order';
 export * from './useLogout';
 export * from './hooks';
 export * from './balances/fetchWaxBalance';
@@ -18,3 +17,4 @@ export * from './action-indicator';
 export * from './blockchain-loader';
 export * from './starter-pack-offer';
 export * from './city';
+export * from './rental-hub';

@@ -92,16 +92,6 @@ export const ConnectionCountLimit = {
     wax: endpoints.wax.length * 2,
 };
 
-export const getNextEndpoint = ({
-    endpointsList,
-    currentEndpoint,
-}: {
-    endpointsList: string[];
-    currentEndpoint: string;
-}) =>
-    endpointsList[endpointsList.indexOf(currentEndpoint) + 1] ||
-    endpointsList[0];
-
 export const ATOMICHUB_URL = isMainNet
     ? 'https://wax.atomichub.io/'
     : 'https://wax-test.atomichub.io/';

@@ -5,13 +5,13 @@ import {
     Plugin,
     useMediaQuery,
     desktopS,
-    neutral4,
     useAccountName,
     useUserLocation,
     useReloadPage,
     gold6,
     red6,
     green6,
+    getTimeLeft,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { Alert, Col, Row, Space, Spin, Tooltip } from 'antd';
@@ -20,15 +20,14 @@ import { useGate, useStore } from 'effector-react';
 import {
     getMineByAssetEffect,
     MiningAndClaimButton,
-    $currentMine,
-    actionsStore,
-    estimatesMiningTimeStore,
     ContractorCabinGate,
     $isContractorCabinLoading,
     useDisabledState,
     CallToTravelNotification,
     $lastMiningStatus,
     LastMiningStatus,
+    $miningStat,
+    MiningStatGate,
 } from 'features';
 import {
     CheckCircleFilled,
@@ -36,11 +35,7 @@ import {
     ExclamationCircleFilled,
     LoadingOutlined,
 } from '@ant-design/icons';
-import {
-    ActionState,
-    ActionType,
-    LOCATION_TO_ID,
-} from 'entities/smartcontract';
+import { LOCATION_TO_ID } from 'entities/smartcontract';
 import styles from './styles.module.scss';
 import { MiningInProgressTitle } from './components/MiningInProgressTitle';
 import { MineStatus } from './components/MineStatus';
@@ -55,61 +50,47 @@ const Icon = {
 };
 
 export const MiningPage: FC = memo(() => {
-    const [isMiningFinished, setIsMiningFinished] = useState(true);
-    const userLocation = useUserLocation();
     const accountName = useAccountName();
+
+    useGate(MiningStatGate, { accountName });
     useGate(ContractorCabinGate, { searchParam: accountName });
+
+    const [isMiningTimerEnd, setIsMiningTimerEnd] = useState(true);
+    const userLocation = useUserLocation();
+    const miningStat = useStore($miningStat);
     const { t } = useTranslation();
     const isDesktop = useMediaQuery(desktopS);
     const subTitleLevel = isDesktop ? 3 : 4;
     const gutter = isDesktop ? 80 : 16;
     const reloadPage = useReloadPage();
-    const actions = useStore(actionsStore);
-    const mineStore = useStore($currentMine);
-    const estTime = useStore(estimatesMiningTimeStore);
     const lastMiningStatus = useStore($lastMiningStatus);
 
     const isMineStoreLoading = useStore(getMineByAssetEffect.pending);
     const isContractorCabinLoading = useStore($isContractorCabinLoading);
 
-    const mineActions = actions?.filter(({ type }) => type === ActionType.mine);
-    const lastMineAction = mineActions?.reverse()?.[0];
-    const estDmeAmount =
-        lastMineAction &&
-        lastMineAction?.attrs?.find(({ first }) => first === 'est_dme_amount')
-            ?.second;
-
     const { disabled, ...alertProps } = useDisabledState();
-
-    const isMiningInProgress =
-        lastMineAction?.state === ActionState.active &&
-        lastMineAction.finishes_at * 1000 > Date.now();
-
     return (
         <Page headerTitle={t('pages.mining.mining')}>
-            {isMiningInProgress && (
+            {Boolean(miningStat?.mining_seconds_left) && (
                 <MiningInProgressTitle
-                    action={lastMineAction}
-                    setIsMiningFinished={setIsMiningFinished}
+                    timeLeft={miningStat?.mining_seconds_left}
+                    setIsMiningFinished={setIsMiningTimerEnd}
                 />
             )}
             <div className={styles.infosWrapper}>
-                {lastMineAction?.state !== ActionState.active &&
-                    lastMiningStatus && (
-                        <Row justify="center">
-                            <Col span={10}>
-                                <Alert
-                                    message={`${t(
-                                        'pages.mining.lastMiningResult'
-                                    )}: ${t(
-                                        `pages.mining.${lastMiningStatus}`
-                                    )}`}
-                                    icon={Icon[lastMiningStatus]}
-                                    showIcon
-                                />
-                            </Col>
-                        </Row>
-                    )}
+                {miningStat?.action_state === 'active' && lastMiningStatus && (
+                    <Row justify="center">
+                        <Col span={10}>
+                            <Alert
+                                message={`${t(
+                                    'pages.mining.lastMiningResult'
+                                )}: ${t(`pages.mining.${lastMiningStatus}`)}`}
+                                icon={Icon[lastMiningStatus]}
+                                showIcon
+                            />
+                        </Col>
+                    </Row>
+                )}
                 {!isContractorCabinLoading && disabled && (
                     <Row justify="center">
                         <Col span={10}>
@@ -127,30 +108,38 @@ export const MiningPage: FC = memo(() => {
                         <MineStatus />
                     </div>
                     <Spin
-                        spinning={isMineStoreLoading && !mineStore}
+                        spinning={isMineStoreLoading}
                         indicator={
                             <LoadingOutlined style={{ fontSize: 24 }} spin />
                         }
                     />
                     <div className={styles.data}>
-                        {mineStore?.length ? (
+                        {miningStat ? (
                             <div className={styles.line}>
                                 <div>{t('pages.mining.mineDepth')}</div>
-                                <div>{mineStore[0]?.layer_depth}</div>
+                                <div>{miningStat?.mine_depth}</div>
                             </div>
                         ) : null}
-                        {lastMineAction && estDmeAmount && (
+                        {miningStat && (
                             <div className={styles.line}>
                                 <div>{t('pages.mining.estimatesDme')}</div>
-                                <div>{estDmeAmount}</div>
+                                <div>{`${
+                                    miningStat.est_mining_power_min / 10 ** 8
+                                }/${
+                                    miningStat.est_mining_power_max / 10 ** 8
+                                }`}</div>
                             </div>
                         )}
-                        {estTime && (
+                        {miningStat && (
                             <div className={styles.line}>
                                 <div>
                                     {t('pages.mining.estimatesMiningTime')}
                                 </div>
-                                <div>{estTime}</div>
+                                <div>{`${getTimeLeft(
+                                    miningStat.est_time_min
+                                )} - ${getTimeLeft(
+                                    miningStat.est_time_max
+                                )}`}</div>
                             </div>
                         )}
                     </div>
@@ -176,15 +165,10 @@ export const MiningPage: FC = memo(() => {
                                     <Plugin />
                                 </Space>
                             </Tooltip>
-                            {accountName && (
-                                <MiningAndClaimButton
-                                    accountName={accountName}
-                                    action={lastMineAction}
-                                    isMiningWillEndInFuture={
-                                        !!lastMineAction && !isMiningFinished
-                                    }
-                                />
-                            )}
+                            <MiningAndClaimButton
+                                accountName={accountName}
+                                isMiningWillEndInFuture={!isMiningTimerEnd}
+                            />
                         </Space>
                     </Space>
                 </Col>

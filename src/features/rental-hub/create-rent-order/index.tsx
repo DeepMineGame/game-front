@@ -4,13 +4,14 @@ import { Form } from 'antd';
 import { FrownOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { serviceMarket } from 'app/router/paths';
+import { rentalHub } from 'app/router/paths';
 import { createRentOrder, rentOrderField } from 'entities/smartcontract';
-import { useSmartContractActionDynamic } from '../hooks';
+import { useSmartContractActionDynamic } from '../../hooks';
 import styles from './styles.module.scss';
 import { GeneralInformationStep } from './ui/GeneralInformationStep';
 import { TermsStep } from './ui/TermsStep';
 import { CreateResult } from './ui/CreateResult';
+import { DepositAndBuyout } from './ui/DepositAndBuyot';
 
 enum Step {
     first,
@@ -52,7 +53,10 @@ export const CreateRentOrder = () => {
     if (formStatus === Status.success) {
         return (
             <CreateResult
-                button={{ callback: () => navigate(serviceMarket) }}
+                button={{
+                    callback: () => navigate(rentalHub),
+                    text: t('To the rental hub'),
+                }}
             />
         );
     }
@@ -115,6 +119,12 @@ export const CreateRentOrder = () => {
                             currentStep === Step.second &&
                             t('components.common.inProgress'),
                     },
+                    {
+                        title: t('Deposit and buyout'),
+                        description:
+                            currentStep === Step.third &&
+                            t('components.common.inProgress'),
+                    },
                 ]}
             />
             <StepContent step={Step.first} currentStep={currentStep}>
@@ -128,6 +138,13 @@ export const CreateRentOrder = () => {
                 <TermsStep
                     form={form}
                     goToPreviousStep={() => setStep(Step.first)}
+                    goToNextStep={() => setStep(Step.third)}
+                />
+            </StepContent>
+            <StepContent step={Step.third} currentStep={currentStep}>
+                <DepositAndBuyout
+                    form={form}
+                    goToPreviousStep={() => setStep(Step.second)}
                 />
             </StepContent>
         </Form>

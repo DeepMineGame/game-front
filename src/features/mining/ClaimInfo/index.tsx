@@ -7,14 +7,8 @@ import {
     KeyValueTable,
     TimerIcon,
 } from 'shared';
-import {
-    $mineOwnerContracts,
-    contractorStore,
-    getContractorEffect,
-    MiningPageGate,
-    useSmartContractAction,
-} from 'features';
-import { useStore, useGate } from 'effector-react';
+import { $miningStat, getMiningEffect, useSmartContractAction } from 'features';
+import { useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
@@ -23,35 +17,26 @@ import { calcmining } from 'entities/smartcontract';
 const THREE_SECONDS = 3000;
 
 export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
-    useGate(MiningPageGate, { searchParam: accountName });
     const [isMiningCalculating, setIsMiningCalculation] = useState(false);
     const { t } = useTranslation();
-
-    const contractor = useStore(contractorStore);
-    const [mineOwnerContract] = useStore($mineOwnerContracts);
+    const miningStat = useStore($miningStat);
 
     const calcMining = useSmartContractAction({
         action: calcmining({ waxUser: accountName }),
         onSignSuccess: () => setIsMiningCalculation(true),
     });
-    const timeSpent =
-        contractor && contractor.finishes_at - contractor.starts_at;
-    const dmeToClaim = (contractor && contractor.params?.amount_to_claim) || 0;
-    const feeInDme = mineOwnerContract
-        ? (getDmeAmount(dmeToClaim) / 100) * mineOwnerContract.fee_percent
-        : 0;
 
     useEffect(() => {
         let interval: ReturnType<typeof setInterval>;
-        if (!contractor?.finished) {
+        if (!miningStat?.finished) {
             interval = setInterval(() => {
-                getContractorEffect({ searchParam: accountName });
+                getMiningEffect({ accountName });
             }, THREE_SECONDS);
         } else {
             setIsMiningCalculation(false);
         }
         return () => clearInterval(interval);
-    }, [accountName, contractor?.finished]);
+    }, [accountName, miningStat?.finished]);
 
     if (isMiningCalculating) {
         return (
@@ -67,7 +52,7 @@ export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
         );
     }
 
-    return contractor?.finished ? (
+    return miningStat?.finished ? (
         <KeyValueTable
             items={[
                 [
@@ -76,28 +61,32 @@ export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
                         <TimerIcon />
                         {t('Time spent')}
                     </>,
-                    timeSpent ? getTimeLeft(timeSpent) : '-',
+                    miningStat?.time_spent
+                        ? getTimeLeft(miningStat.time_spent)
+                        : '-',
                 ],
                 [
                     <>
                         <DMECoinIcon width={24} height={24} />
                         {t('Available for claim')}
                     </>,
-                    getDmeAmount(dmeToClaim),
+                    getDmeAmount(miningStat?.dme_to_claim || 0),
                 ],
                 [
                     <>
                         <DMECoinIcon width={24} height={24} />
                         {t('pages.serviceMarket.contract.fee')}
                     </>,
-                    Number(feeInDme.toFixed(8)),
+                    getDmeAmount(miningStat?.fee_in_dme.toFixed(8)),
                 ],
                 [
                     <>
                         <DMECoinIcon width={24} height={24} />
                         {t('pages.mining.transferredToYourAccount')}
                     </>,
-                    Number((getDmeAmount(dmeToClaim) - feeInDme).toFixed(8)),
+                    Number(
+                        getDmeAmount(miningStat?.dme_to_account || 0).toFixed(8)
+                    ),
                 ],
             ]}
         />

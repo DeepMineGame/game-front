@@ -9,6 +9,11 @@ export type RentOrderDto = BaseOrder & {
     fee_percent: number;
     contract_duration: number;
     autorenew_enabled: boolean;
+    insurance_wax_amount: number;
+    insurance_dme_amount: number;
+    insurance_dmp_amount: number;
+    buyout_price: number;
+    fee_min_amount: number;
 };
 
 export enum rentOrderField {
@@ -19,6 +24,11 @@ export enum rentOrderField {
     fee_percent = 'fee_percent',
     contract_duration = 'contract_duration',
     autorenew_enabled = 'autorenew_enabled',
+    insurance_wax_amount = 'insurance_wax_amount',
+    insurance_dme_amount = 'insurance_dme_amount',
+    insurance_dmp_amount = 'insurance_dmp_amount',
+    buyout_price = 'buyout_price',
+    fee_min_amount = 'fee_min_amount',
 }
 const SECONDS_IN_DAY = 86400;
 export const createRentOrder = (orderData: RentOrderDto) => {
@@ -38,11 +48,19 @@ export const createRentOrder = (orderData: RentOrderDto) => {
                     opt_renter: null,
                     asset_ids: orderData.asset_ids,
                     deposit_type: 1,
-                    deposit_amount: orderData.deposit_amount,
+                    deposit_amount: orderData.fee_min_amount * 10 ** 8,
                     fee_percent: orderData.fee_percent,
                     contract_duration:
                         orderData.contract_duration * SECONDS_IN_DAY,
                     autorenew_enabled: orderData.autorenew_enabled,
+                    insurance_wax_amount:
+                        orderData.insurance_wax_amount * 10 ** 8,
+                    insurance_dme_amount:
+                        orderData.insurance_dme_amount * 10 ** 8,
+                    insurance_dmp_amount:
+                        orderData.insurance_dmp_amount * 10 ** 8,
+                    buyout_price: orderData.buyout_price || 0,
+                    fee_min_amount: orderData.fee_min_amount * 10 ** 8,
                 },
             },
         ],

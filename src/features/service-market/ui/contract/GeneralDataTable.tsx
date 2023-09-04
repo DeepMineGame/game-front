@@ -47,9 +47,9 @@ const GeneralDataTable: FC<ContractProps> = ({ contract }) => {
         [t('pages.serviceMarket.creationDate')]: toLocaleDate(
             contract.create_time * 1000
         ),
-        [t('components.common.duration')]: `${secondsToDays(
-            contract.contract_duration
-        )} ${t('components.common.days').toLowerCase()}`,
+        [t('Duration')]: `${secondsToDays(contract.contract_duration)} ${t(
+            'Days'
+        ).toLowerCase()}`,
         [t('Mine sublevel')]: (
             <Progress
                 percent={mineSubLevelToPercent || 25}
