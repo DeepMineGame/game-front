@@ -9,7 +9,7 @@ export const getRentAssetsTableData = async ({
     searchParam,
     searchType = RentAssetTableSearchType.accountName,
 }: {
-    searchParam?: string;
+    searchParam: string;
     searchType?: RentAssetTableSearchType;
 }) =>
     await getTableData<{ asset_id: string }>({

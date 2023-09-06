@@ -8,11 +8,11 @@ import { AssetDataType, getAssets } from 'entities/atomicassets';
 import { mergeAssets } from 'shared/lib/utils';
 
 export const RentInventoryGate = createGate<{
-    searchParam?: string | undefined;
+    searchParam: string;
     searchType?: RentAssetTableSearchType;
 }>('RentInventoryGate');
 export const getRentAssetsEffect = createEffect<
-    { searchParam?: string | undefined; searchType?: RentAssetTableSearchType },
+    { searchParam: string; searchType?: RentAssetTableSearchType },
     { rows: { asset_id: string }[] } | undefined
 >(getRentAssetsTableData);
 export const $rentInventory = createStore<{ asset_id: string }[]>([]).on(

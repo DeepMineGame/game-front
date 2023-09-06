@@ -21,7 +21,7 @@ export const NftPreviewPage: FC = () => {
         null
     );
     useGate(RentInventoryGate, {
-        searchParam: assetId,
+        searchParam: assetId || '',
         searchType: RentAssetTableSearchType.assetId,
     });
     const rentInventoryAtomicAssets = useStore($mergedRentWithAtomicAssets);
