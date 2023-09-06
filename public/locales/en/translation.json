@@ -620,7 +620,6 @@
       "pickFromStorage": "Pick from storage",
       "engineersInauguration": "Engineers Inauguration",
       "youNeedToAttendInauguration": "You need to attend Engineers Inauguration to start working as an engineer",
-      "attendInauguration": "Attend Inauguration",
       "FindWorkToDo": "Find a work to do",
       "youNeedAnActiveEquipmentUpgradeContract": "You need an active equipment upgrade contract to work and earn DME",
       "getStatsInfo": "Get stats & info",
@@ -1085,5 +1084,6 @@
   "This means renters can return your equipment depreciated and you will not be compensated for that": "This means renters can return your equipment depreciated and you will not be compensated for that",
   "Mines and lands cannot be damaged, so they do not require insurance": {
     " The asset will be returned to the owner in any case": "Mines and lands cannot be damaged, so they do not require insurance. The asset will be returned to the owner in any case"
-  }
+  },
+  "Attend Inauguration": "Attend Inauguration"
 }

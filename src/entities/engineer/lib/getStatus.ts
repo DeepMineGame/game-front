@@ -62,10 +62,6 @@ export const getStatus = ({
         }
     }
 
-    if (!hasUseCertificate) {
-        return CabinStatus.NeedInauguration;
-    }
-
     // todo: for first see stats
     // if (completedContracts.length === 1) {
     //     return CabinStatus.CanSeeStats;
