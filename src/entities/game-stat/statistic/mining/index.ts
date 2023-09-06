@@ -26,6 +26,7 @@ export type MineStat = {
     dme_to_account: number;
     est_time_min: number;
     est_time_max: number;
+    rent_fee_counter?: number;
 };
 
 export const getMiningStat = async ({

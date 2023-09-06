@@ -51,7 +51,6 @@ export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
             />
         );
     }
-
     return miningStat?.finished ? (
         <KeyValueTable
             items={[
@@ -88,6 +87,19 @@ export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
                         getDmeAmount(miningStat?.dme_to_account || 0).toFixed(8)
                     ),
                 ],
+                miningStat.rent_fee_counter
+                    ? [
+                          <>
+                              <DMECoinIcon width={24} height={24} />
+                              {t('Rent fee counter')}
+                          </>,
+                          Number(
+                              getDmeAmount(
+                                  miningStat?.dme_to_account || 0
+                              ).toFixed(8)
+                          ),
+                      ]
+                    : [],
             ]}
         />
     ) : (
