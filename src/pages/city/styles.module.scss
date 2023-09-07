@@ -52,8 +52,8 @@
 .hive {
   @include enter-hover;
 
-  margin-left: 10vw;
-  margin-top: 5vh;
+  margin-left: 8vw;
+  margin-top: -1vh;
   height: 50vh;
   width: 20vw;
   background-image: url("../../shared/ui/images/city/hive-building.webp");
@@ -77,8 +77,13 @@
 
   @media (min-width: $media-tablet)  {
     background-position: left;
-    margin-top: 160px;
+    margin-top: 83px;
   }
+  @media (min-width: $media-desktop-fullHd)  {
+    background-position: left;
+    margin-top: 140px;
+  }
+
 }
 
 .landlordLounge {
@@ -95,6 +100,13 @@
   @media (min-width: $media-tablet)  {
     background-position: center;
     height: 69vh;
+    margin-top: 30px;
+    margin-left: 34px;
+  }
+  @media (min-width: $media-desktop-fullHd)  {
+    margin-top: 21px;
+    margin-left: 63px;
+
   }
 }
 
@@ -103,7 +115,7 @@
 
   height: 20vh;
   width: 20vw;
-  margin-left: 35%;
+  margin-left: 39%;
   background-image: url("../../shared/ui/images/city/specialists.webp");
   background-size: contain !important;
   cursor: pointer;
