@@ -55,7 +55,9 @@ export const RentalContractsTable = () => {
                     level: contract.assets?.[0].level,
                     itemType: contract?.assets_type?.replaceAll('_', ' '),
                     daysLeft: daysLeft ? Math.ceil(daysLeft) : 'N/A',
-                    status: String(contract.status).replaceAll('_', ' '),
+                    status: String(contract.status)
+                        .replaceAll('_', ' ')
+                        .toLowerCase(),
                     contract,
                 };
             }),
