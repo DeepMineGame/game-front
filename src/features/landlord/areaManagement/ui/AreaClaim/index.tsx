@@ -137,7 +137,7 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
             />
             <ActionModal
                 texts={{
-                    onOk: t('components.common.button.activate'),
+                    onOk: t('Activate'),
                     title: t('pages.areaManagement.engage'),
                 }}
                 costs={{ timeSeconds: 1 }}
