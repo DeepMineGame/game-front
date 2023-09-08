@@ -4,7 +4,11 @@ import cn from 'classnames';
 import { ModalProps } from 'antd';
 import { useTableData } from 'shared';
 import { AssetDataType } from 'entities/atomicassets';
-import { getEkiatableConfig, getEkutableConfig } from 'entities/smartcontract';
+import {
+    getEkiatableConfig,
+    getEkutableConfig,
+    getMkatableConfig,
+} from 'entities/smartcontract';
 import { getKitImage } from 'shared/lib/utils';
 import { Modal, Text } from 'shared/ui/ui-kit';
 import { UpgradeKitType } from '../../model/upgrade-kit';
@@ -67,11 +71,23 @@ const UpgradeKitModal: FC<Props> = ({
         equip_level: number;
         rarities: string[];
     }>(getEkiatableConfig);
+    const { data: mineUpgradeCostTableData } = useTableData<{
+        improved_kit: string;
+        mine_level: number;
+        usual_kit: string;
+    }>(getMkatableConfig);
 
     // const { price: commonPrice } = useUpgradeModifiers(
     //     UpgradeKitType.common,
     //     equipment
     // );
+
+    const isMine = equipment?.[0].name === 'Mine';
+    const minePrice = mineUpgradeCostTableData.find(
+        ({ mine_level }) =>
+            equipment?.[0].data.level &&
+            Number(equipment[0].data.level) + 1 === mine_level
+    );
 
     const commonPrice =
         Number(
@@ -97,8 +113,11 @@ const UpgradeKitModal: FC<Props> = ({
     //     UpgradeKitType.uncommon,
     //     equipment
     // );
-
     const isEquipmentSet = equipment?.length === EQUIPMENT_SET_LENGTH;
+    const commonEquipmentPrice = isEquipmentSet ? commonPrice * 5 : commonPrice;
+    const uncommonEquipmentPrice = isEquipmentSet
+        ? uncommonPrice * 5
+        : uncommonPrice;
     return (
         <Modal
             {...props}
@@ -118,7 +137,9 @@ const UpgradeKitModal: FC<Props> = ({
                     bottom={
                         <>
                             <Text strong>
-                                {isEquipmentSet ? commonPrice * 5 : commonPrice}{' '}
+                                {isMine
+                                    ? Number(minePrice?.usual_kit) / 10 ** 8
+                                    : commonEquipmentPrice}{' '}
                                 {t('components.common.button.dme')}
                             </Text>
                             {/* <Text>{t('pages.engineer.noTimeReduction')}</Text> */}
@@ -138,9 +159,9 @@ const UpgradeKitModal: FC<Props> = ({
                     bottom={
                         <>
                             <Text strong>
-                                {isEquipmentSet
-                                    ? uncommonPrice * 5
-                                    : uncommonPrice}{' '}
+                                {isMine
+                                    ? Number(minePrice?.improved_kit) / 10 ** 8
+                                    : uncommonEquipmentPrice}{' '}
                                 {t('components.common.button.dme')}
                             </Text>
                             {/* <Text> */}

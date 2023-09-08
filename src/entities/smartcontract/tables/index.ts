@@ -20,6 +20,7 @@ export * from './statroles';
 export * from './ekutable';
 export * from './ekiatable';
 export * from './rentassets';
+export * from './mkatable';
 export const getUserConfig = (account: string): GetTableDataConfigType => {
     return {
         code: deepminegame,
