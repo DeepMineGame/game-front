@@ -153,7 +153,7 @@ export const routes: AppRoute[] = [
         forLoggedIn: true,
         forAdmin: false,
         forBetaUser: false,
-        titleTag: 'Service-market — DeepMine',
+        titleTag: 'Rental hub — DeepMine',
     },
     {
         path: paths.createRentOrder,
