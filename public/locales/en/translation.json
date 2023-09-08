@@ -182,7 +182,6 @@
       "myEquipment": "MY EQUIPMENT",
       "configure": "CONFIGURE",
       "miningStatus": "Mine: ",
-      "miningInProgress": "Mining in progress",
       "lastMiningResult": "Last mining result",
       "success": "successful",
       "failed": "failed",
@@ -192,7 +191,6 @@
       "cool": "That's cool",
       "tooltipAroundConsumables": "This is where improvements are installed that allow you to make mining more efficient. They will be available for the Mine level 1",
       "estimatesMiningTime": "Estimates mining time",
-      "estimatesDme": "Estimates amount of DME",
       "mineDepth": "Mine depth",
       "doWantStopMining": "Do you really want to stop mining?",
       "consumablesWillBurnOut": "Your consumables will be burned, energy and time used mining will be lost and you won't receive DME",
@@ -293,8 +291,6 @@
       "main": {
         "title": "EQUIPMENT SET",
         "installation": "Equipment installation",
-        "install": "Install the Equipment set",
-        "uninstall": "Uninstall the Equipment set",
         "installed": "Your equipment has been installed",
         "removed": "Your equipment has been removed",
         "remove": "Remove",
@@ -1085,5 +1081,9 @@
   "Mines and lands cannot be damaged, so they do not require insurance": {
     " The asset will be returned to the owner in any case": "Mines and lands cannot be damaged, so they do not require insurance. The asset will be returned to the owner in any case"
   },
-  "Attend Inauguration": "Attend Inauguration"
+  "Attend Inauguration": "Attend Inauguration",
+  "Install the Equipment set": "Install the Equipment set",
+  "Uninstall the Equipment set": "Uninstall the Equipment set",
+  "Mining in progress": "Mining in progress",
+  "Estimates amount of DME": "Estimates amount of DME"
 }

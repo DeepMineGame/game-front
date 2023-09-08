@@ -51,57 +51,56 @@ export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
             />
         );
     }
+
+    const data = miningStat
+        ? [
+              [
+                  <>
+                      {' '}
+                      <TimerIcon />
+                      {t('Time spent')}
+                  </>,
+                  miningStat?.time_spent
+                      ? getTimeLeft(miningStat.time_spent)
+                      : '-',
+              ],
+              [
+                  <>
+                      <DMECoinIcon width={24} height={24} />
+                      {t('Available for claim')}
+                  </>,
+                  getDmeAmount(miningStat?.dme_to_claim || 0),
+              ],
+              [
+                  <>
+                      <DMECoinIcon width={24} height={24} />
+                      {t('pages.serviceMarket.contract.fee')}
+                  </>,
+                  getDmeAmount(miningStat.fee_in_dme.toFixed(8)),
+              ],
+              [
+                  <>
+                      <DMECoinIcon width={24} height={24} />
+                      {t('pages.mining.transferredToYourAccount')}
+                  </>,
+                  Number(
+                      getDmeAmount(miningStat?.dme_to_account || 0).toFixed(8)
+                  ),
+              ],
+          ]
+        : [];
+
+    if (miningStat?.rent_fee_counter) {
+        data.push([
+            <>
+                <DMECoinIcon width={24} height={24} />
+                {t('Rent fee counter')}
+            </>,
+            Number(getDmeAmount(miningStat?.rent_fee_counter || 0).toFixed(8)),
+        ]);
+    }
     return miningStat?.finished ? (
-        <KeyValueTable
-            items={[
-                [
-                    <>
-                        {' '}
-                        <TimerIcon />
-                        {t('Time spent')}
-                    </>,
-                    miningStat?.time_spent
-                        ? getTimeLeft(miningStat.time_spent)
-                        : '-',
-                ],
-                [
-                    <>
-                        <DMECoinIcon width={24} height={24} />
-                        {t('Available for claim')}
-                    </>,
-                    getDmeAmount(miningStat?.dme_to_claim || 0),
-                ],
-                [
-                    <>
-                        <DMECoinIcon width={24} height={24} />
-                        {t('pages.serviceMarket.contract.fee')}
-                    </>,
-                    getDmeAmount(miningStat?.fee_in_dme.toFixed(8)),
-                ],
-                [
-                    <>
-                        <DMECoinIcon width={24} height={24} />
-                        {t('pages.mining.transferredToYourAccount')}
-                    </>,
-                    Number(
-                        getDmeAmount(miningStat?.dme_to_account || 0).toFixed(8)
-                    ),
-                ],
-                miningStat.rent_fee_counter
-                    ? [
-                          <>
-                              <DMECoinIcon width={24} height={24} />
-                              {t('Rent fee counter')}
-                          </>,
-                          Number(
-                              getDmeAmount(
-                                  miningStat?.dme_to_account || 0
-                              ).toFixed(8)
-                          ),
-                      ]
-                    : [],
-            ]}
-        />
+        <KeyValueTable items={data} />
     ) : (
         <Button onClick={calcMining} type="primary">
             {t('pages.mining.calculateMining')}
