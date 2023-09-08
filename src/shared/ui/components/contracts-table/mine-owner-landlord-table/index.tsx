@@ -132,14 +132,14 @@ export const MineOwnerLandlordTable: FC<Props> = ({ contracts }) => {
                     title: t('Minimum fee, DME'),
                     dataIndex: 'deposit',
                     key: 'deposit',
-                    sorter: (a, b) => a.const - b.cost,
+                    sorter: (a, b) => a.deposit - b.deposit,
                     render: (val) => val / 10 ** 8,
                 },
                 {
                     title: t('Min mine level'),
                     dataIndex: 'level',
                     key: 'level',
-                    sorter: (a, b) => a.const - b.cost,
+                    sorter: (a, b) => a.level - b.level,
                     render: (value) => (value === -1 ? t('Any') : value),
                 },
             ]}
