@@ -646,7 +646,6 @@
       "waitCitizenAcceptContract": "Pending acceptance of a contract by a citizen",
       "contractIsSigned": "Contract is signed",
       "goToEquipmentHallToMakeUpgrade": "Go to the equipment hall to perform the upgrade",
-      "signOrCreateContract": "Sign or create Level Upgrade Contract to start operation",
       "waitForCitizenWhoSignOrder": "Wait for a citizen who will sign your order",
       "upgradesPossibleAfterOrderCreated": "Upgrades and repairs are only possible after an order has been created",
       "visitServiceMarket": "Visit Service Market",
@@ -1085,5 +1084,6 @@
   "Install the Equipment set": "Install the Equipment set",
   "Uninstall the Equipment set": "Uninstall the Equipment set",
   "Mining in progress": "Mining in progress",
-  "Estimates amount of DME": "Estimates amount of DME"
+  "Estimates amount of DME": "Estimates amount of DME",
+  "Sign or create Level Upgrade Contract to start operation": "Sign or create Level Upgrade Contract to start operation"
 }

@@ -14,6 +14,7 @@ import {
 import { rarityMap, RarityType } from 'entities/smartcontract';
 import { AssetDataType } from 'entities/atomicassets';
 import { CabinStatus } from 'entities/engineer';
+import { Roles } from 'entities/game-stat';
 import { getImagePath } from 'shared/lib/utils';
 import { Loader, LoadingSpin, Text } from 'shared/ui/ui-kit';
 import { UpgradeSlot } from '../upgrade-slot';
@@ -28,7 +29,8 @@ type Props = {
 };
 
 const tooltipText = {
-    [CabinStatus.NeedContract]: 'pages.engineer.signOrCreateContract',
+    [CabinStatus.NeedContract]:
+        'Sign or create Level Upgrade Contract to start operation',
     [CabinStatus.NeedCitizen]: 'pages.engineer.waitForCitizenWhoSignOrder',
 };
 
@@ -107,7 +109,10 @@ const EquipmentSetup: FC<Props> = ({
                         disabled
                         onClick={
                             status === CabinStatus.NeedContract
-                                ? () => navigate(serviceMarket)
+                                ? () =>
+                                      navigate(
+                                          `${serviceMarket}?user_role=${Roles.engineer}&search_role=${Roles.contractor}`
+                                      )
                                 : undefined
                         }
                         open={
