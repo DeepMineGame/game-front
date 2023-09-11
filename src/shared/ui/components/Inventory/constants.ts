@@ -41,6 +41,6 @@ export const tabsNameMap: Record<InventoryTab, string> = {
     [InventoryTab.petobots]: 'Petobots',
     [InventoryTab.consumables]: 'Consumables',
     [InventoryTab.modules]: 'Modules',
-    [InventoryTab.bages]: 'Bages',
+    [InventoryTab.bages]: 'Badges',
     [InventoryTab.mines]: 'Mines',
 };

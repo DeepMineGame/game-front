@@ -79,7 +79,7 @@ export const EngineersTraining = () => {
                                 )}
                             </Row>
                         </Col>
-                        {status <= CabinStatus.NeedInauguration ? (
+                        {status === CabinStatus.NeedInauguration ? (
                             <AttendInauguration />
                         ) : (
                             <Button>{t('Refuse engineer role')}</Button>

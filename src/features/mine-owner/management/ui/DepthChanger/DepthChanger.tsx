@@ -105,7 +105,7 @@ export const DepthChanger = () => {
             </Dropdown.Button>
             <ActionModal
                 texts={{
-                    onOk: t('components.common.button.activate'),
+                    onOk: t('Active'),
                     title: t('features.mineOwner.management.changeMineDepth'),
                 }}
                 costs={{ timeSeconds: 15 }}

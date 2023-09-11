@@ -3,12 +3,14 @@ import { useParams } from 'react-router';
 import { FC, useEffect, useMemo, useState } from 'react';
 import { Skeleton } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { useStore } from 'effector-react';
+import { useGate, useStore } from 'effector-react';
+import { $mergedRentWithAtomicAssets, RentInventoryGate } from 'features';
 import {
     $mergedInventoryWithAtomicAssets,
     AssetDataType,
     getAtomicAssetsEffect,
 } from 'entities/atomicassets';
+import { RentAssetTableSearchType } from 'entities/smartcontract';
 
 export const NftPreviewPage: FC = () => {
     const { assetId } = useParams();
@@ -18,7 +20,11 @@ export const NftPreviewPage: FC = () => {
     const [cardFromAtomic, setAtomicCard] = useState<AssetDataType[] | null>(
         null
     );
-
+    useGate(RentInventoryGate, {
+        searchParam: assetId || '',
+        searchType: RentAssetTableSearchType.assetId,
+    });
+    const rentInventoryAtomicAssets = useStore($mergedRentWithAtomicAssets);
     const cardFromInventory = useMemo(() => {
         return inventoriedAssets.find(
             (inventoriedAsset) => inventoriedAsset.asset_id === assetId
@@ -38,13 +44,17 @@ export const NftPreviewPage: FC = () => {
             </Page>
         );
     }
-
+    const isRentCard = rentInventoryAtomicAssets.asset_id === assetId;
     return (
         <Page>
-            {cardFromInventory ? (
+            {cardFromInventory || rentInventoryAtomicAssets ? (
                 <InventoryCardModal
                     open
-                    card={cardFromInventory || cardFromAtomic}
+                    card={
+                        isRentCard
+                            ? (rentInventoryAtomicAssets as any)
+                            : cardFromInventory || cardFromAtomic
+                    }
                     onCancel={goBackButton}
                     footer={null}
                 />

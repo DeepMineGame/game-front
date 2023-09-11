@@ -40,7 +40,7 @@ const AttendInauguration: FC = () => {
                     size={isTablet ? 'middle' : 'small'}
                     onClick={onInaugurate}
                 >
-                    {t('pages.engineer.attendInauguration')}
+                    {t('Attend Inauguration')}
                 </Button>
             }
         />

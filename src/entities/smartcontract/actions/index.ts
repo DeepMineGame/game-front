@@ -24,6 +24,7 @@ export * from './disautorenew';
 export * from './crtrcontract';
 export * from './signrcontr';
 export * from './trmrcontract';
+export * from './disrautorew';
 export function toggleMining({
     waxUser,
     contractId,

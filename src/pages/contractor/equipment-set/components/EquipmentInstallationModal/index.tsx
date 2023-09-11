@@ -42,8 +42,8 @@ export const EquipmentInstallationModal = ({
                 className={styles.actionButton}
             >
                 {isInstall
-                    ? t('pages.equipmentSet.main.install')
-                    : t('pages.equipmentSet.main.uninstall')}
+                    ? t('Install the Equipment set')
+                    : t('Uninstall the Equipment set')}
             </Button>
             <ActionModal
                 visible={infoModalVisibility}

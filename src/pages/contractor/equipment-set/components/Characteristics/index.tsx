@@ -74,9 +74,7 @@ export const Characteristics = () => {
                     value={estTime}
                 />
                 <CharacteristicsLine
-                    name={t(
-                        'pages.equipmentSet.characteristics.equipmentBreakageProbabillity'
-                    )}
+                    name={t('Equipment Breakdown Probability')}
                     value={`${t(
                         getMalfunctionProbabilityTranslation(
                             Number(

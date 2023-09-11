@@ -48,7 +48,7 @@ export const MineOwnerMenu: FC<Props> = ({
                 statusThatDisableManagementButton.includes(
                     currentMineOwnerCabinState
                 ),
-            tooltip: t('pages.mineOwner.menu.manageMine'),
+            tooltip: t('Manage the mine'),
         },
         {
             link: mineOwnerMineCrew,
@@ -58,7 +58,7 @@ export const MineOwnerMenu: FC<Props> = ({
                 statusThatDisableTeamButton.includes(
                     currentMineOwnerCabinState
                 ),
-            tooltip: t('pages.mineOwner.menu.team'),
+            tooltip: t('Add contractors'),
             ...(cabinState === mineOwnerCabinState.needCrew && {
                 showTooltip: true,
             }),
@@ -71,7 +71,7 @@ export const MineOwnerMenu: FC<Props> = ({
                 statusThatDisableStatsButton.includes(
                     currentMineOwnerCabinState
                 ),
-            tooltip: t('pages.mineOwner.menu.stats'),
+            tooltip: t('Stats & Info'),
         },
     ];
     return (

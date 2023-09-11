@@ -139,3 +139,4 @@ forward({
     from: WarehouseGate.open,
     to: [getAtomicAssetsByUserEffect, getInventoryEffect, getRentAssetsEffect],
 });
+export * from './rent-inventory';

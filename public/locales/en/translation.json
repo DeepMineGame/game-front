@@ -182,7 +182,6 @@
       "myEquipment": "MY EQUIPMENT",
       "configure": "CONFIGURE",
       "miningStatus": "Mine: ",
-      "miningInProgress": "Mining in progress",
       "lastMiningResult": "Last mining result",
       "success": "successful",
       "failed": "failed",
@@ -192,7 +191,6 @@
       "cool": "That's cool",
       "tooltipAroundConsumables": "This is where improvements are installed that allow you to make mining more efficient. They will be available for the Mine level 1",
       "estimatesMiningTime": "Estimates mining time",
-      "estimatesDme": "Estimates amount of DME",
       "mineDepth": "Mine depth",
       "doWantStopMining": "Do you really want to stop mining?",
       "consumablesWillBurnOut": "Your consumables will be burned, energy and time used mining will be lost and you won't receive DME",
@@ -293,8 +291,6 @@
       "main": {
         "title": "EQUIPMENT SET",
         "installation": "Equipment installation",
-        "install": "Install the Equipment set",
-        "uninstall": "Uninstall the Equipment set",
         "installed": "Your equipment has been installed",
         "removed": "Your equipment has been removed",
         "remove": "Remove",
@@ -330,8 +326,7 @@
         "title": "Characteristics",
         "mineDepth": "Mine Depth",
         "estimatesMiningTime": "Mining Time estimate",
-        "estimatesAmountDME": "Maximum mining capability",
-        "equipmentBreakageProbabillity": "Equipment Breakage Probabillity"
+        "estimatesAmountDME": "Maximum mining capability"
       }
     },
     "contractorStatsAndInfo": {
@@ -373,13 +368,6 @@
     "mineManagement": {
       "mine": "MINE",
       "signNewContract": "Sign new contract"
-    },
-    "mineOwner": {
-      "menu": {
-        "manageMine": "Go here to manage the Mine",
-        "team": "Go here to form a team",
-        "stats": "Stats & Info located here"
-      }
     },
     "landLord": {
       "cabin": {
@@ -620,7 +608,6 @@
       "pickFromStorage": "Pick from storage",
       "engineersInauguration": "Engineers Inauguration",
       "youNeedToAttendInauguration": "You need to attend Engineers Inauguration to start working as an engineer",
-      "attendInauguration": "Attend Inauguration",
       "FindWorkToDo": "Find a work to do",
       "youNeedAnActiveEquipmentUpgradeContract": "You need an active equipment upgrade contract to work and earn DME",
       "getStatsInfo": "Get stats & info",
@@ -651,7 +638,6 @@
       "waitCitizenAcceptContract": "Pending acceptance of a contract by a citizen",
       "contractIsSigned": "Contract is signed",
       "goToEquipmentHallToMakeUpgrade": "Go to the equipment hall to perform the upgrade",
-      "signOrCreateContract": "Sign or create Level Upgrade Contract to start operation",
       "waitForCitizenWhoSignOrder": "Wait for a citizen who will sign your order",
       "upgradesPossibleAfterOrderCreated": "Upgrades and repairs are only possible after an order has been created",
       "visitServiceMarket": "Visit Service Market",
@@ -731,7 +717,7 @@
       "mineNotSet": "Mine is not set",
       "depthChanging": "Mine is undergoing depth change",
       "needShift": "You need to travel here to set a Mine",
-      "needLandLord": "Sign a contract with a landlord to set a Mine",
+      "Sign a contract with a landlord to set a Mine": "Sign a contract with a landlord to set a Mine",
       "depthChangingText": "Go to mine management console for details",
       "needCrew": "You are ready to gather your ultimate mine crew. Sign the Mining Contract with a contractor to be able to activate your Mine.",
       "progress": "Setup in progress",
@@ -761,7 +747,6 @@
         "addons": "ADD-ONS",
         "petobot": "Petobot",
         "modules": "Modules",
-        "unsetup": "Unsetup",
         "abandon": "Abandon mine",
         "terminateContractorsContract": "Terminate contract with contractors first",
         "changeMineDepth": "Change mine depth",
@@ -1085,5 +1070,16 @@
   "This means renters can return your equipment depreciated and you will not be compensated for that": "This means renters can return your equipment depreciated and you will not be compensated for that",
   "Mines and lands cannot be damaged, so they do not require insurance": {
     " The asset will be returned to the owner in any case": "Mines and lands cannot be damaged, so they do not require insurance. The asset will be returned to the owner in any case"
-  }
+  },
+  "Attend Inauguration": "Attend Inauguration",
+  "Install the Equipment set": "Install the Equipment set",
+  "Uninstall the Equipment set": "Uninstall the Equipment set",
+  "Mining in progress": "Mining in progress",
+  "Estimates amount of DME": "Estimates amount of DME",
+  "Sign or create Level Upgrade Contract to start operation": "Sign or create Level Upgrade Contract to start operation",
+  "Uninstall": "Uninstall",
+  "Equipment Breakdown Probability": "Equipment Breakdown Probability",
+  "Add contractors": "Add contractors",
+  "Manage the mine": "Manage the mine",
+  "Stats & Info": "Stats & Info"
 }

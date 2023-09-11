@@ -11,8 +11,8 @@ import { Col, message, Modal, ModalProps, Row, Space, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { createOrder } from 'app/router/paths';
 import { useSmartContractAction } from 'features';
-import { useStore } from 'effector-react';
 import { QuestionCircleOutlined } from '@ant-design/icons';
+import { useStore } from 'effector-react';
 import {
     AssetDataType,
     getAssets,
@@ -22,7 +22,6 @@ import {
     ContractType,
     getMalfunctionProbability,
     getMalfunctionProbabilityTranslation,
-    rarityMap,
     repairEquipment,
 } from 'entities/smartcontract';
 import { balancesStore } from 'entities/user';
@@ -105,8 +104,8 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
 
     const assetIsBroken = getAssetStatus(card) === Status.broken;
 
-    const dmeToLevelUpgrade = card.data['DME to Upgrade'] || 0;
-    const dmeMined = card.data['DME Mined'] || 0;
+    const dmeToLevelUpgrade = card?.data?.['DME to Upgrade'] || 0;
+    const dmeMined = card?.data?.['DME Mined'] || 0;
 
     const numericMalfunctionProbability = getMalfunctionProbability(card);
 
@@ -117,7 +116,8 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     const isAssetPlacedInOurInventoryTable =
         card.rarity !== undefined &&
         card.level !== undefined &&
-        card.in_use !== undefined;
+        // @ts-ignore
+        (card.in_use !== undefined || card.inRentStorage);
 
     return (
         <Modal
@@ -262,10 +262,8 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                                         timeSeconds: 1,
                                                         coinAmount: Number(
                                                             getCost({
-                                                                level: card.level as GetCostParams['level'],
-                                                                rarity: rarityMap[
-                                                                    card.rarity
-                                                                ] as GetCostParams['rarity'],
+                                                                level: 1,
+                                                                rarity: 'Common',
                                                                 isRefurbish:
                                                                     false,
                                                             })
@@ -318,9 +316,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                                         coinAmount: Number(
                                                             getCost({
                                                                 level: card.level as GetCostParams['level'],
-                                                                rarity: rarityMap[
-                                                                    card.rarity
-                                                                ] as GetCostParams['rarity'],
+                                                                rarity: 'Common',
                                                                 isRefurbish:
                                                                     true,
                                                             })

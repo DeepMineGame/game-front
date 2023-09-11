@@ -1,10 +1,10 @@
 import { deepmineengr } from '../constants';
 
-export const getEkiatableConfig = () => ({
+export const getMkatableConfig = () => ({
     json: true,
     code: deepmineengr,
     scope: deepmineengr,
-    table: 'ekiatable',
+    table: 'mkatable',
     index_position: 1,
     key_type: '' as const,
     lower_bound: '',

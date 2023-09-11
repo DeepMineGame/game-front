@@ -1,20 +1,45 @@
-import React, { FC } from 'react';
-import { Col, Row, Table, Typography } from 'antd';
+import React, { FC, useCallback } from 'react';
+import { Col, Modal as ModalAnt, Row, Switch, Table, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { secondsToDays, toLocaleDate, useAccountName } from 'shared';
+import {
+    secondsToDays,
+    toLocaleDate,
+    useAccountName,
+    useReloadPage,
+} from 'shared';
 import { PageHeader } from '@ant-design/pro-components';
+import { disrautorew } from 'entities/smartcontract';
 import { ContractProps } from '../../service-market/types';
 import { TableWithTitle } from '../../service-market';
+import { useSmartContractAction } from '../../hooks';
 import { getColorForFrontStatus, getFrontStatus } from './lib/getFrontStatus';
 import { useButtons } from './lib/useButtons';
 import { useRentalTexts } from './lib/getTexts';
 
 const RentalContract: FC<ContractProps> = ({ contract }) => {
     const accountName = useAccountName();
+    const reloadPage = useReloadPage();
     const { t } = useTranslation();
     const frontStatus = getFrontStatus(contract);
     const button = useButtons(frontStatus, contract);
     const subTitle = useRentalTexts(contract, accountName, frontStatus);
+    const disableAutoRenew = useSmartContractAction({
+        action: disrautorew({
+            waxUser: accountName,
+            contractId: contract?.id,
+        }),
+    });
+    const autoRenewOff = useCallback(async () => {
+        if (contract.autorenew_enabled) {
+            disableAutoRenew().then(() =>
+                ModalAnt.success({
+                    title: t('Auto-renewal'),
+                    content: t('Auto-renewal disabled'),
+                    onOk: reloadPage,
+                })
+            );
+        }
+    }, [contract.autorenew_enabled, disableAutoRenew, reloadPage, t]);
     return (
         <div>
             <PageHeader
@@ -57,6 +82,12 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
                                     [t('Duration')]: `${secondsToDays(
                                         contract.contract_duration
                                     )} ${t('Days').toLowerCase()}`,
+                                    [t('Auto-renewal')]: (
+                                        <Switch
+                                            onClick={autoRenewOff}
+                                            checked={contract.autorenew_enabled}
+                                        />
+                                    ),
                                 }}
                             />
                         </Col>

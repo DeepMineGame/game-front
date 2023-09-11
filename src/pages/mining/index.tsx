@@ -73,7 +73,6 @@ export const MiningPage: FC = memo(() => {
         <Page headerTitle={t('pages.mining.mining')}>
             {Boolean(miningStat?.mining_seconds_left) && (
                 <MiningInProgressTitle
-                    timeLeft={miningStat?.mining_seconds_left}
                     setIsMiningFinished={setIsMiningTimerEnd}
                 />
             )}
@@ -122,12 +121,12 @@ export const MiningPage: FC = memo(() => {
                         ) : null}
                         {miningStat && (
                             <div className={styles.line}>
-                                <div>{t('pages.mining.estimatesDme')}</div>
-                                <div>{`${
+                                <div>{t('Estimates amount of DME')}</div>
+                                <div>{`${Number(
                                     miningStat.est_mining_power_min / 10 ** 8
-                                }/${
+                                ).toFixed(2)}/${Number(
                                     miningStat.est_mining_power_max / 10 ** 8
-                                }`}</div>
+                                ).toFixed(2)}`}</div>
                             </div>
                         )}
                         {miningStat && (
