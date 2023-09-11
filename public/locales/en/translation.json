@@ -369,13 +369,6 @@
       "mine": "MINE",
       "signNewContract": "Sign new contract"
     },
-    "mineOwner": {
-      "menu": {
-        "manageMine": "Go here to manage the Mine",
-        "team": "Go here to form a team",
-        "stats": "Stats & Info located here"
-      }
-    },
     "landLord": {
       "cabin": {
         "noAreaTitle": "Area is not detected",
@@ -1085,5 +1078,8 @@
   "Estimates amount of DME": "Estimates amount of DME",
   "Sign or create Level Upgrade Contract to start operation": "Sign or create Level Upgrade Contract to start operation",
   "Uninstall": "Uninstall",
-  "Equipment Breakdown Probability": "Equipment Breakdown Probability"
+  "Equipment Breakdown Probability": "Equipment Breakdown Probability",
+  "Add contractors": "Add contractors",
+  "Manage the mine": "Manage the mine",
+  "Stats & Info": "Stats & Info"
 }

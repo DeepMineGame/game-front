@@ -101,7 +101,7 @@ export const routes: AppRoute[] = [
         forLoggedIn: true,
         forAdmin: false,
         forBetaUser: false,
-        titleTag: 'Mine owner cabin — DeepMine',
+        titleTag: 'Mine Deck — DeepMine',
     },
     {
         path: paths.mineManagement,
