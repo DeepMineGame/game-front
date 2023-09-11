@@ -326,8 +326,7 @@
         "title": "Characteristics",
         "mineDepth": "Mine Depth",
         "estimatesMiningTime": "Mining Time estimate",
-        "estimatesAmountDME": "Maximum mining capability",
-        "equipmentBreakageProbabillity": "Equipment Breakage Probabillity"
+        "estimatesAmountDME": "Maximum mining capability"
       }
     },
     "contractorStatsAndInfo": {
@@ -755,7 +754,6 @@
         "addons": "ADD-ONS",
         "petobot": "Petobot",
         "modules": "Modules",
-        "unsetup": "Unsetup",
         "abandon": "Abandon mine",
         "terminateContractorsContract": "Terminate contract with contractors first",
         "changeMineDepth": "Change mine depth",
@@ -1085,5 +1083,7 @@
   "Uninstall the Equipment set": "Uninstall the Equipment set",
   "Mining in progress": "Mining in progress",
   "Estimates amount of DME": "Estimates amount of DME",
-  "Sign or create Level Upgrade Contract to start operation": "Sign or create Level Upgrade Contract to start operation"
+  "Sign or create Level Upgrade Contract to start operation": "Sign or create Level Upgrade Contract to start operation",
+  "Uninstall": "Uninstall",
+  "Equipment Breakdown Probability": "Equipment Breakdown Probability"
 }

@@ -28,7 +28,7 @@ export function useDescriptions() {
             'Sign a contract with a landlord to set a Mine'
         ),
         [mineOwnerCabinState.needSetupMine]: isLastActionFinished
-            ? t('Set up the Mine to continue')
+            ? null
             : t('Action in progress'),
         [mineOwnerCabinState.mineIsDepthChanging]: t(
             'features.mineOwner.depthChangingText'

@@ -64,9 +64,7 @@ export const UnsetupMine: FC<{
                                   key: 'unsetup',
                                   onClick,
                                   disabled: isMineActive,
-                                  label: t(
-                                      'features.mineOwner.management.unsetup'
-                                  ),
+                                  label: t('Uninstall'),
                               }
                             : {
                                   key: 'abandon',

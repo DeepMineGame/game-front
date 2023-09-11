@@ -163,10 +163,7 @@ export function useActionsButton() {
                             : () => travelConfirm(reloadPage)
                     }
                 />
-                <Button
-                    type="link"
-                    onClick={() => setSetupMineModalVisible(true)}
-                >
+                <Button onClick={() => setSetupMineModalVisible(true)}>
                     {t('features.mineOwner.setupMine')}
                 </Button>
             </>
