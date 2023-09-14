@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Badge, Modal as ModalAnt, Switch, Table } from 'antd';
+import { Badge, Modal as ModalAnt, Space, Switch, Table } from 'antd';
 import { Link, useAccountName, useReloadPage } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { serviceMarket } from 'app/router/paths';
@@ -62,10 +62,10 @@ export const OccupiedTable: FC<{ mineCrew: MineCrewDto }> = ({ mineCrew }) => {
                     key: 'status',
 
                     render: (status: MineState) => (
-                        <div>
-                            <Badge color={status ? '#D87A16' : '#47FF40'} />{' '}
+                        <Space>
+                            <Badge color={status ? '#D87A16' : '#47FF40'} />
                             {status ? t(`Mining`) : t('Ready to mine')}
-                        </div>
+                        </Space>
                     ),
                 },
                 {
