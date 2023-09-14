@@ -1,112 +1,164 @@
-import { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import {
+    App,
+    Button,
+    Col,
+    Row,
+    Skeleton,
+    Space,
+    Statistic,
+    Table,
+    Typography,
+} from 'antd';
+import {
+    SearchingItem,
+    toLocaleDate,
+    useAccountName,
+    useReloadPage,
+} from 'shared';
 import { useGate, useStore } from 'effector-react';
-
-import { MineCrewTable, useAccountName, AddItem, SearchingItem } from 'shared';
-import { createOrder } from 'app/router/paths';
-import { orderFields } from 'entities/order';
-import { ContractRole, ContractType } from 'entities/smartcontract';
-import {
-    getActiveOrderByType,
-    getActiveSelfSignedContract,
-    getNotSignedContract,
-} from 'entities/contract';
-import {
-    MineConsumerGate,
-    $userMine,
-    $MiningContracts,
-    MiningContractsGate,
-    getMiningContractsFx,
-} from '../../models';
+import { PlusOutlined, UserAddOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
+import { serviceMarket } from 'app/router/paths';
+import { Roles } from 'entities/game-stat';
+import { signOrder } from 'entities/smartcontract';
+import { $mineCrew, getMineCrewEffect, MineCrewGate } from '../model/crew';
+import { useSmartContractAction } from '../../../hooks';
+import styles from './styles.module.scss';
+import { OccupiedTable } from './OccupiedTable';
 import PlaceAsContractor from './PlaceAsContractor';
-
-const getSlot = (id: number, contractor: string, status: number) => ({
-    key: id,
-    discord: '-',
-    contractor,
-    status,
-    ejection: 0,
-    activity: 0,
-});
 
 export const MineOwnerCrew: FC = () => {
     const { t } = useTranslation();
     const accountName = useAccountName();
-    useGate(MiningContractsGate, { searchParam: accountName });
-    useGate(MineConsumerGate, { searchParam: accountName });
-    const userMine = useStore($userMine);
+    const navigate = useNavigate();
+    const { modal } = App.useApp();
+    const reloadPage = useReloadPage();
 
-    const activeContractors =
-        userMine?.contractor_slots.filter((slot) => slot?.contractor) ?? [];
-
-    const contracts = useStore($MiningContracts);
-    const isContractsLoading = useStore(getMiningContractsFx.pending);
-
-    const selfContractsToSign = contracts
-        .filter(getNotSignedContract)
-        .filter(({ client, executor }) => client === executor);
-    const selfSignedContracts = contracts.filter(getActiveSelfSignedContract);
-    const miningOrders = contracts.filter(getActiveOrderByType);
-
-    const selfSigned = selfSignedContracts
-        .filter(
-            ({ client }) =>
-                !activeContractors.some(
-                    ({ contractor }) => contractor === client
-                )
-        )
-        .map(({ id, client }) => getSlot(id, client, 1));
-
-    const activeSlots = activeContractors
-        .map(({ contractor }, idx) => getSlot(idx, contractor, 2))
-        .concat(selfSigned);
-
-    const selfSlots = selfContractsToSign.map((contract) => (
-        <SearchingItem
-            key={contract.id}
-            text={t('Place myself as a contractor')}
-            contract={contract}
-            accountName={accountName}
-        />
-    ));
-
-    const searchingSlots = miningOrders.map((contract) => (
-        <SearchingItem
-            key={contract.id}
-            text={t('features.mineOwner.searchContractor')}
-            contract={contract}
-            accountName={accountName}
-        />
-    ));
-
-    const maxEmptySlots = Math.max(
-        userMine?.contractor_slots.filter((slot) => !slot?.contractor).length ||
-            0 - activeContractors.length - searchingSlots.length,
-        0
+    useGate(MineCrewGate, { mineOwner: accountName });
+    const mineCrew = useStore($mineCrew);
+    const isPlaceMySelfButtonDisabled = mineCrew?.in_progress?.find(
+        ({ self_sign_available }) => self_sign_available
     );
+    const isMineCrewLoading = useStore(getMineCrewEffect.pending);
+    const signContractAction = useSmartContractAction({
+        action: signOrder({
+            waxUser: accountName,
+            contractId:
+                mineCrew?.in_progress?.find(
+                    ({ self_sign_available }) => self_sign_available
+                )?.contract_id || 0,
+            isClient: 0,
+        }),
+    });
 
-    const emptySlots = [...new Array(maxEmptySlots)].map((_, idx) => (
-        <AddItem
-            // eslint-disable-next-line react/no-array-index-key
-            key={idx}
-            text={t('components.common.table.addNewContractor')}
-            link={`${createOrder}?${orderFields.contractType}=${ContractType.mineowner_contractor}&${orderFields.isClient}=${ContractRole.client}`}
-        />
-    ));
+    const handleSignOrder = useCallback(async () => {
+        await signContractAction();
+        modal.success({
+            title: t('pages.serviceMarket.order.signOrder'),
+            content: t('pages.serviceMarket.order.orderCreated'),
+            onOk: reloadPage,
+        });
+    }, [modal, reloadPage, signContractAction, t]);
+
+    if (isMineCrewLoading) {
+        return <Skeleton />;
+    }
 
     return (
         <>
-            <PlaceAsContractor
-                contract={selfContractsToSign[0]}
-                accountName={accountName}
-                isDisabled={!!selfSignedContracts.length || isContractsLoading}
-            />
-            {!!activeContractors?.length && (
-                <MineCrewTable data={activeSlots} />
+            <Row justify="center">
+                <Col span={2}>
+                    <Statistic
+                        title={t('Total slots')}
+                        value={mineCrew?.counters.total}
+                    />
+                </Col>
+                <Col span={2}>
+                    <Statistic
+                        title={t('Locked slots')}
+                        value={mineCrew?.counters.locked}
+                    />
+                </Col>
+                <Col span={2}>
+                    <Statistic
+                        title={t('Available slots')}
+                        value={mineCrew?.counters.available}
+                    />
+                </Col>
+                <Col span={2}>
+                    <Statistic
+                        title={t('In progress')}
+                        value={mineCrew?.counters.in_progress}
+                    />
+                </Col>
+                <Col span={2}>
+                    <Statistic
+                        title={t('Occupied')}
+                        value={mineCrew?.counters.occupied}
+                    />
+                </Col>
+            </Row>
+            <div className={styles.buttonWrapper}>
+                <Space align="center" size="large">
+                    <Button
+                        icon={<PlusOutlined />}
+                        onClick={() =>
+                            navigate(
+                                `${serviceMarket}?user_role=${Roles.mineowner}&search_role=${Roles.contractor}`
+                            )
+                        }
+                    >
+                        {t('Add new Contractor')}
+                    </Button>
+                    <PlaceAsContractor
+                        accountName={accountName}
+                        isDisabled={Boolean(isPlaceMySelfButtonDisabled)}
+                    />
+                </Space>
+            </div>
+            {Boolean(mineCrew?.in_progress?.length) && (
+                <Typography.Paragraph>{t('In progress')}</Typography.Paragraph>
             )}
-            {selfSlots}
-            {searchingSlots}
-            {emptySlots}
+            {mineCrew?.in_progress?.map(
+                ({ contract_id, create_time, self_sign_available }, index) => {
+                    return (
+                        <SearchingItem
+                            accountName={accountName}
+                            contract={{ id: contract_id }}
+                            text={t('Searching for Contractor')}
+                            subText={
+                                self_sign_available && index === 0
+                                    ? t(
+                                          'Sign as a contractor to start working in your mine'
+                                      )
+                                    : toLocaleDate(create_time)
+                            }
+                            actionButton={
+                                self_sign_available && index === 0 ? (
+                                    <Button
+                                        onClick={handleSignOrder}
+                                        type="primary"
+                                        size="small"
+                                    >
+                                        {t('Sign the order')}
+                                    </Button>
+                                ) : undefined
+                            }
+                        />
+                    );
+                }
+            )}
+
+            {mineCrew && (
+                <div className={styles.occupiedTable}>
+                    <Typography.Paragraph>{t('Occupied')}</Typography.Paragraph>
+
+                    <OccupiedTable mineCrew={mineCrew} />
+                </div>
+            )}
         </>
     );
 };

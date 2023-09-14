@@ -19,9 +19,18 @@
     margin-right: 35px;
 }
 
+.subText {
+    font-size: 14px;
+    color: var(--neutral-neutral-7, #7D7D7D);
+}
+
 .contractId {
     margin-left: auto;
     color: $color-primary-primary-6;
+}
+
+.actionButton {
+    margin-left: auto;
 }
 
 .button {
