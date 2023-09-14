@@ -38,7 +38,7 @@ export const OccupiedTable: FC<{ mineCrew: MineCrewDto }> = ({ mineCrew }) => {
                     render: (contractId: string) => {
                         return (
                             <Link
-                                to={`/${serviceMarket}/contract/${contractId}`}
+                                to={`${serviceMarket}/contract/${contractId}`}
                             >
                                 {contractId}
                             </Link>
