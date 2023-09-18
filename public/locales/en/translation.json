@@ -911,7 +911,8 @@
     "00124": "Wrong asset ID. Must not be 0",
     "00125": "you must terminate the Contract with Landlord first",
     "00127": "wrong Location for Contractor role",
-    "00200": "The mine is not set up on the Area. Please contact your mine owner to resolve this problem"
+    "00200": "The mine is not set up on the Area. Please contact your mine owner to resolve this problem",
+    "00221": "Travel to mine deck and claim DME"
   },
   "Mine rarity": "Mine rarity",
   "Mine level": "Mine level",

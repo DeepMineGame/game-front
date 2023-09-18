@@ -3,7 +3,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import { useSmartContractAction } from 'features/hooks';
-import { ContractDto, terminateContract } from 'entities/smartcontract';
+import { terminateContract } from 'entities/smartcontract';
 import { useReloadPage } from 'shared/lib/hooks';
 import { Link } from 'shared/ui/ui-kit';
 import { Button } from '../../../Button';
