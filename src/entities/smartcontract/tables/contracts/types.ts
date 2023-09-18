@@ -155,6 +155,7 @@ export type ContractDto = {
     deposit: number;
     autorenew_enabled: boolean;
     fee_counter: number;
+    fee_counter_previous: number;
     computed?: {
         status: OrderState;
         sub_status: OrderSubState;

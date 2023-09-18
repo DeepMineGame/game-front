@@ -1,5 +1,6 @@
 import React, { FC, useCallback } from 'react';
 import {
+    Button,
     Col,
     Modal as ModalAnt,
     Row,
@@ -108,6 +109,9 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
                             [t('Rental fee')]: contract.fee_percent,
                             [t('Minimum Fee')]: contract.fee_min_amount,
                             [t('Fee paid')]: contract.fee_counter,
+                            [t('Total fee paid')]:
+                                contract.fee_counter +
+                                contract.fee_counter_previous,
                         }}
                     />
                 </Col>
@@ -139,6 +143,15 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
                                 title: 'Id',
                                 dataIndex: 'id',
                                 key: 'id',
+                                render: (id) => (
+                                    <Button
+                                        type="link"
+                                        target="_blank"
+                                        href={`https://wax.atomichub.io/explorer/asset/${id}`}
+                                    >
+                                        {id}
+                                    </Button>
+                                ),
                             },
                         ]}
                         dataSource={contract.assets?.map(
