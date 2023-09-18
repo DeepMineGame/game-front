@@ -22,6 +22,7 @@ import {
     ContractType,
     getMalfunctionProbability,
     getMalfunctionProbabilityTranslation,
+    rarityMap,
     repairEquipment,
 } from 'entities/smartcontract';
 import { balancesStore } from 'entities/user';
@@ -262,8 +263,10 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                                         timeSeconds: 1,
                                                         coinAmount: Number(
                                                             getCost({
-                                                                level: 1,
-                                                                rarity: 'Common',
+                                                                level: card.level as GetCostParams['level'],
+                                                                rarity: rarityMap[
+                                                                    card.rarity
+                                                                ] as GetCostParams['rarity'],
                                                                 isRefurbish:
                                                                     false,
                                                             })
@@ -316,7 +319,9 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                                         coinAmount: Number(
                                                             getCost({
                                                                 level: card.level as GetCostParams['level'],
-                                                                rarity: 'Common',
+                                                                rarity: rarityMap[
+                                                                    card.rarity
+                                                                ] as GetCostParams['rarity'],
                                                                 isRefurbish:
                                                                     true,
                                                             })

@@ -7,8 +7,7 @@ export type MineStatUnit = {
     events: {
         date: number;
         duration: number;
-        amount: number;
-        fossil_mined: number;
+        amount: string;
         breakdowns: number;
     }[];
 };
@@ -21,7 +20,7 @@ export const getMineStats = async ({
     role: Role;
 }) => {
     const { data = [] } = await axios.get<MineStatUnit[]>(
-        `${ENDPOINT}/statistic/mine/stat`,
+        `${ENDPOINT}/statistic/mining/stat`,
         {
             params: {
                 user,

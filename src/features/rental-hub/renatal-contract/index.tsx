@@ -1,5 +1,14 @@
 import React, { FC, useCallback } from 'react';
-import { Col, Modal as ModalAnt, Row, Switch, Table, Typography } from 'antd';
+import {
+    Button,
+    Col,
+    Modal as ModalAnt,
+    Row,
+    Switch,
+    Table,
+    Tag,
+    Typography,
+} from 'antd';
 import { useTranslation } from 'react-i18next';
 import {
     secondsToDays,
@@ -100,6 +109,9 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
                             [t('Rental fee')]: contract.fee_percent,
                             [t('Minimum Fee')]: contract.fee_min_amount,
                             [t('Fee paid')]: contract.fee_counter,
+                            [t('Total fee paid')]:
+                                contract.fee_counter +
+                                contract.fee_counter_previous,
                         }}
                     />
                 </Col>
@@ -131,6 +143,15 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
                                 title: 'Id',
                                 dataIndex: 'id',
                                 key: 'id',
+                                render: (id) => (
+                                    <Button
+                                        type="link"
+                                        target="_blank"
+                                        href={`https://wax.atomichub.io/explorer/asset/${id}`}
+                                    >
+                                        {id}
+                                    </Button>
+                                ),
                             },
                         ]}
                         dataSource={contract.assets?.map(
@@ -146,22 +167,45 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
                     <TableWithTitle
                         title={t('Deposit')}
                         data={{
-                            [t('DME')]: contract.ins_dme_amount,
-                            [t('DMP')]: contract.ins_dmp_amount,
-                            [t('WAX')]: contract.ins_wax_amount,
+                            [t('DME')]: (
+                                <div>
+                                    {contract.ins_type === 'DME' ? (
+                                        <Tag color="success">
+                                            {t('Deposited')}
+                                        </Tag>
+                                    ) : (
+                                        ''
+                                    )}
+                                    {contract.ins_dme_amount}
+                                </div>
+                            ),
+                            [t('DMP')]: (
+                                <div>
+                                    {contract.ins_type === 'DMP' ? (
+                                        <Tag color="success">
+                                            {t('Deposited')}
+                                        </Tag>
+                                    ) : (
+                                        ''
+                                    )}
+                                    {contract.ins_dmp_amount}
+                                </div>
+                            ),
+                            [t('WAX')]: (
+                                <div>
+                                    {contract.ins_type === 'WAX' ? (
+                                        <Tag color="success">
+                                            {t('Deposited')}
+                                        </Tag>
+                                    ) : (
+                                        ''
+                                    )}
+                                    {contract.ins_wax_amount}
+                                </div>
+                            ),
                         }}
                     />
                 </Col>
-                {/* <Col xs={24} md={12}> */}
-                {/*    <Row gutter={[32, 32]}> */}
-                {/*        <Col span={24}> */}
-                {/*            <MineOwnerTable */}
-                {/*                contract={contract} */}
-                {/*                accountName={accountName} */}
-                {/*            /> */}
-                {/*        </Col> */}
-                {/*    </Row> */}
-                {/* </Col> */}
             </Row>
         </div>
     );

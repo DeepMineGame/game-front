@@ -31,10 +31,6 @@ export const MiningStatsTable: FC<{
             render: () => 1,
         },
         {
-            dataIndex: 'fossil_mined',
-            key: 'fossil',
-        },
-        {
             dataIndex: 'breakdowns',
             key: 'breakdowns',
         },
@@ -55,7 +51,10 @@ export const MiningStatsTable: FC<{
             dataIndex: 'events',
             key: 'dme',
             render: (events: MineStatUnit['events']) =>
-                events?.reduce((acc, current) => acc + current.amount, 0),
+                events?.reduce(
+                    (acc, current) => acc + Number(current.amount),
+                    0
+                ),
         },
         {
             title: t('pages.contractorMiningStats.miningEvents'),
@@ -67,13 +66,6 @@ export const MiningStatsTable: FC<{
                     a.events.length - b.events.length,
                 multiple: 3,
             },
-        },
-        {
-            title: t('pages.contractorMiningStats.fossilMined'),
-            dataIndex: 'events',
-            key: 'fossil',
-            render: (events: MineStatUnit['events']) =>
-                events?.reduce((acc, current) => acc + current.fossil_mined, 0),
         },
         {
             title: t('pages.contractorMiningStats.breakdowns'),

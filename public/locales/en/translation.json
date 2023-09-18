@@ -740,7 +740,6 @@
       "contractWasTerminated": "Contract was Terminated",
       "mineIsActiveDescription": "Everything is fine and Mine is running. You can see information about the mining process and efficiency in Stats deck",
       "mineIsActiveDescriptionMobile": "Now you can see the statistics of the mining process and efficiency",
-      "searchContractor": "Searching for Contractor",
       "youNeed": "You signed the contract once, you need 2 signatures",
       "creatingSelfMiningContract": "You are creating the self Mining Contract with 21-day duration. It must be signed twice and can be terminated at any time without penalty.",
       "management": {
@@ -912,7 +911,8 @@
     "00124": "Wrong asset ID. Must not be 0",
     "00125": "you must terminate the Contract with Landlord first",
     "00127": "wrong Location for Contractor role",
-    "00200": "The mine is not set up on the Area. Please contact your mine owner to resolve this problem"
+    "00200": "The mine is not set up on the Area. Please contact your mine owner to resolve this problem",
+    "00221": "Travel to mine deck and claim DME"
   },
   "Mine rarity": "Mine rarity",
   "Mine level": "Mine level",
@@ -1081,5 +1081,17 @@
   "Equipment Breakdown Probability": "Equipment Breakdown Probability",
   "Add contractors": "Add contractors",
   "Manage the mine": "Manage the mine",
-  "Stats & Info": "Stats & Info"
+  "Stats & Info": "Stats & Info",
+  "In progress": "In progress",
+  "Occupied": "Occupied",
+  "Add new Contractor": "Add new Contractor",
+  "Searching for Contractor": "Searching for Contractor",
+  "Sign as a contractor": "Sign as a contractor",
+  "Sign the order": "Sign the order",
+  "Sign as a contractor to start working in your mine": "Sign as a contractor to start working in your mine",
+  "Paid fee": "Paid fee",
+  "Mining": "Mining",
+  "Ready to mine": "Ready to mine",
+  "Deposited": "Deposited",
+  "Total fee paid": "Total fee paid"
 }

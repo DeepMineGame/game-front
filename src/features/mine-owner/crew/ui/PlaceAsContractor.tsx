@@ -2,35 +2,23 @@ import { FC, useState } from 'react';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
-import { App } from 'antd';
-import {
-    useSmartContractAction,
-    useSmartContractActionDynamic,
-} from 'features/hooks';
+import { App, Modal } from 'antd';
+import { useSmartContractActionDynamic } from 'features/hooks';
 
-import {
-    ContractDto,
-    ContractType,
-    signOrder,
-    createMineOrder,
-} from 'entities/smartcontract';
+import { ContractType, createMineOrder } from 'entities/smartcontract';
 import { MinesGate, minesStore } from 'entities/contract';
-import { Select, Text, Modal, Button } from 'shared/ui/ui-kit';
+import { Select, Text, Button } from 'shared/ui/ui-kit';
 import { neutral9 } from 'shared/ui/variables';
 import { useReloadPage } from 'shared/lib/hooks';
 import styles from './styles.module.scss';
 
 type Props = {
-    contract?: ContractDto;
     accountName: string;
     isDisabled: boolean;
 };
+const IS_ORDER_BY_SELF_CREATED = 'IS_ORDER_BY_SELF_CREATED';
 
-const PlaceAsContractor: FC<Props> = ({
-    contract,
-    accountName,
-    isDisabled,
-}) => {
+const PlaceAsContractor: FC<Props> = ({ accountName, isDisabled }) => {
     const { t } = useTranslation();
     const { modal } = App.useApp();
 
@@ -43,7 +31,6 @@ const PlaceAsContractor: FC<Props> = ({
 
     const mines = useStore(minesStore);
 
-    // 1. create
     const handleCreate = async () => {
         await callAction(
             createMineOrder({
@@ -62,69 +49,45 @@ const PlaceAsContractor: FC<Props> = ({
                 autorenew_enabled: true,
             })
         );
-
+        localStorage.setItem(IS_ORDER_BY_SELF_CREATED, 'true');
         setIsVisible(false);
 
         setTimeout(() => reloadPage(), 2000);
     };
 
-    // 2. sign
-    const signContractAction = useSmartContractAction({
-        action: signOrder({
-            waxUser: accountName,
-            assetId: contract?.client_asset_id,
-            contractId: contract?.id!,
-            isClient: 0,
-        }),
-    });
-
     const handleClick = () => {
-        // 1. create order as mine owner
-        if (!contract) {
-            return modal.confirm({
-                title: t('Place myself as a contractor'),
-                content: t('features.mineOwner.creatingSelfMiningContract'),
-                icon: <ExclamationCircleOutlined style={{ color: neutral9 }} />,
-
-                onOk: () => {
-                    setIsVisible(true);
-                },
-            });
-        }
-
-        // 2. sign mine owner contract as contractor
-        modal.confirm({
+        return modal.confirm({
             title: t('Place myself as a contractor'),
-            content: t('pages.areaManagement.youNeedSecond'),
+            content: t('features.mineOwner.creatingSelfMiningContract'),
             icon: <ExclamationCircleOutlined style={{ color: neutral9 }} />,
+
             onOk: () => {
-                signContractAction();
+                setIsVisible(true);
             },
         });
     };
-
+    const isSelfContractCreated =
+        localStorage.getItem(IS_ORDER_BY_SELF_CREATED) === 'true';
     return (
         <div>
             <Button
                 onClick={handleClick}
                 className={styles.button}
-                disabled={isDisabled}
+                disabled={isDisabled || isSelfContractCreated}
             >
                 {t('Place myself as a contractor')}
             </Button>
             <Modal
-                visible={isVisible}
+                open={isVisible}
                 onCancel={() => setIsVisible(false)}
                 onOk={handleCreate}
                 okButtonProps={{ disabled: !mineId }}
             >
                 <div className={styles.selectWrapper}>
-                    <Text className={styles.selectTitle}>
-                        {t('components.common.mine.title')}
-                    </Text>
+                    <Text>{t('components.common.mine.title')}</Text>
+                    <br />
                     <Select
                         onChange={setMineId}
-                        className={styles.select}
                         placeholder={t('pages.serviceMarket.order.selectMine')}
                         options={mines.map(({ id }) => ({
                             value: id,
