@@ -127,7 +127,7 @@ export const EquipmentSetPage: FC = () => {
             })
         );
         return modal.success({
-            title: t('pages.equipmentSet.main.uninstall'),
+            title: t('Uninstall the Equipment set'),
             content: t('pages.equipmentSet.main.removed'),
             onOk: reloadPage,
         });
@@ -143,7 +143,7 @@ export const EquipmentSetPage: FC = () => {
             })
         );
         return modal.success({
-            title: t('pages.equipmentSet.main.uninstall'),
+            title: t('Uninstall the Equipment set'),
             content: t('pages.equipmentSet.main.removed'),
             onOk: reloadPage,
         });
