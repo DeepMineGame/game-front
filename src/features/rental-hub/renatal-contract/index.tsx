@@ -73,10 +73,6 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
                 <Col xs={24} md={12}>
                     <Row gutter={[24, 24]}>
                         <Col span={24}>
-                            {/* <GeneralDataTable */}
-                            {/*    contract={contract} */}
-                            {/*    accountName={accountName} */}
-                            {/* /> */}
                             <TableWithTitle
                                 title={t('General information')}
                                 data={{

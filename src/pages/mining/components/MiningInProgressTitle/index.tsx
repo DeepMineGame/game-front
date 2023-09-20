@@ -37,7 +37,7 @@ export const MiningInProgressTitle: FC<Props> = ({ setIsMiningFinished }) => {
                 className={styles.title}
                 fontFamily="orbitron"
             >
-                {`${t('pages.mining.miningInProgress')}: ${getTimeLeft(
+                {`${t('Mining in progress')}: ${getTimeLeft(
                     Math.round(miningCountDown),
                     true
                 )}`}
