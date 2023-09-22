@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Button, Space, Typography } from 'antd';
 import { LoadingScreen } from 'shared';
 import { GoogleOutlined } from '@ant-design/icons';
+import Lottie from 'lottie-react';
 import {
     userStore,
     getUserFromSessionEffect,
@@ -12,6 +13,8 @@ import {
     getAuthLinks,
 } from 'entities/user';
 import styles from '../styles.module.scss';
+import animation from '../assets/animation.json';
+import animation2 from '../assets/animation2.json';
 
 type Props = {
     onSuccess: () => void;
@@ -73,39 +76,47 @@ export const GoogleAuthPage: React.FC<Props> = ({ onSuccess }) => {
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.panel}>
-                <Typography.Title className={styles.title}>
-                    {t('LOGIN')}
-                </Typography.Title>
-                <Space direction="vertical" size="large">
-                    <Typography.Text className={styles.subTitle}>
-                        {t('Discover the DeepMine universe!')}
-                    </Typography.Text>
-                    <Button
-                        onClick={handleAuthClick}
-                        className={styles.button}
-                        size="large"
-                        type="primary"
-                        ghost
-                        block
-                        loading={isAuthLinkFetching}
-                        icon={<GoogleOutlined />}
-                    >
-                        {t('Sign with Google')}
-                    </Button>
-                </Space>
+            <div>
+                <Lottie animationData={animation} />
             </div>
-            <div className={styles.panel}>
-                <div className={styles.description}>
-                    {t('intro.attention')}
-                    <a
-                        href="https://medium.com/@deepmineworld/deepmine-beta-is-live-63167681173d"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        {t('intro.live')}
-                    </a>
+            <div>
+                <div className={styles.panel}>
+                    <Typography.Title className={styles.title}>
+                        {t('LOGIN')}
+                    </Typography.Title>
+                    <Space direction="vertical" size="large">
+                        <Typography.Text className={styles.subTitle}>
+                            {t('Discover the DeepMine universe!')}
+                        </Typography.Text>
+                        <Button
+                            onClick={handleAuthClick}
+                            className={styles.button}
+                            size="large"
+                            type="primary"
+                            ghost
+                            block
+                            loading={isAuthLinkFetching}
+                            icon={<GoogleOutlined />}
+                        >
+                            {t('Sign with Google')}
+                        </Button>
+                    </Space>
                 </div>
+                <div className={styles.panel}>
+                    <div className={styles.description}>
+                        {t('intro.attention')}
+                        <a
+                            href="https://medium.com/@deepmineworld/deepmine-beta-is-live-63167681173d"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            {t('intro.live')}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <Lottie animationData={animation2} />
             </div>
         </div>
     );
