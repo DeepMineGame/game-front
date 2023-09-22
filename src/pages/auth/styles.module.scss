@@ -11,10 +11,9 @@
   background-size: cover;
   position: relative;
 
-  &:before {
+  &::before {
     background: url("../../shared/ui/images/city/logincontainer.svg") no-repeat center center;
     background-size: cover;
-
     content: '';
     position: absolute;
     top: 0;
@@ -37,6 +36,7 @@
   line-height: 22px;
   color: var(--neutral-neutral-8, #ACACAC);
 }
+
 .email {
   color: var(--neutral-neutral-9, #DBDBDB);
   font-family: $bai;
