@@ -9,6 +9,8 @@
   align-items: center;
   background: black url("../../shared/ui/images/city/blured-city.webp") no-repeat;
   background-size: cover;
+  position: relative;
+
   &:before {
     background: url("../../shared/ui/images/city/logincontainer.svg") no-repeat center center;
     background-size: cover;
@@ -73,7 +75,6 @@
   width: 320px;
   box-sizing: border-box;
   margin-bottom: 16px;
-  position: relative;
 }
 
 h1.title {
