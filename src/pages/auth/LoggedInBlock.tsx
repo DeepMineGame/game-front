@@ -23,7 +23,7 @@ export const LoggedInBlock: React.FC<Props> = ({ user }) => {
                 </Typography.Text>
             </p>
             <p>
-                <Typography.Text className={styles.textColor} strong>
+                <Typography.Text className={styles.email} strong>
                     {user.email}
                 </Typography.Text>
             </p>

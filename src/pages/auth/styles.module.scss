@@ -2,27 +2,23 @@
 
 .wrapper {
   min-height: 100vh;
-  background: black;
   font-family: $bai;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+  background: black url("../../shared/ui/images/city/blured-city.webp") no-repeat;
+  background-size: cover;
+  &:before {
+    background: url("../../shared/ui/images/city/logincontainer.svg") no-repeat center center;
+    background-size: cover;
 
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.actionButton {
-  margin-top: 45px;
-  max-width: 310px;
-  font-family: $orbitron;
-
-  @media (min-width: $media-desktop-s)  {
-    margin-top: 80px;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 }
 
@@ -32,8 +28,20 @@
 }
 
 .textColor {
-  color: $color-neutral-neutral-9;
-  margin: 0;
+  font-family: $bai;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--neutral-neutral-8, #ACACAC);
+}
+.email {
+  color: var(--neutral-neutral-9, #DBDBDB);
+  font-family: $bai;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
 }
 
 .loggedInBlock {
@@ -50,14 +58,53 @@
 }
 
 .logoutButton {
-  font-size: 16px;
-  margin-top: 14px;
-}
-
-.alert {
-  margin: auto 10%;
+  font-size: 14px;
 }
 
 .onboardingButton {
   text-align: center;
+}
+
+.panel {
+  border: 1px solid var(--neutral-neutral-8, #ACACAC);
+  background: rgba(15, 14, 14, 0.50);
+  backdrop-filter: blur(11px);
+  padding: 24px;
+  width: 320px;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+}
+
+h1.title {
+  font-family: $orbitron;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: 0.8px;
+  margin-bottom: 8px;
+  margin-top: 0;
+}
+
+.subTitle {
+  color: var(--neutral-neutral-8, #ACACAC);
+  text-align: center;
+  font-family: $bai;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.button {
+  min-width: 272px;
+}
+
+.description {
+  color: var(--neutral-neutral-8, #ACACAC);
+  font-family: $bai;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
 }
