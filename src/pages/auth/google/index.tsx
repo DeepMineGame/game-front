@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useEvent, useStore } from 'effector-react';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { Alert, Space } from 'antd';
-import { DeepMineLogo, Button, LoadingScreen } from 'shared';
+import { Button, Space, Typography } from 'antd';
+import { LoadingScreen } from 'shared';
+import { GoogleOutlined } from '@ant-design/icons';
 import {
     userStore,
     getUserFromSessionEffect,
@@ -11,7 +12,6 @@ import {
     getAuthLinks,
 } from 'entities/user';
 import styles from '../styles.module.scss';
-import { LoggedInBlock } from '../LoggedInBlock';
 
 type Props = {
     onSuccess: () => void;
@@ -73,38 +73,40 @@ export const GoogleAuthPage: React.FC<Props> = ({ onSuccess }) => {
 
     return (
         <div className={styles.wrapper}>
-            <DeepMineLogo width={240} height={142} />
-
-            <Space direction="vertical" size="large">
-                <div className={styles.content}>
+            <div className={styles.panel}>
+                <Typography.Title className={styles.title}>
+                    {t('LOGIN')}
+                </Typography.Title>
+                <Space direction="vertical" size="large">
+                    <Typography.Text className={styles.subTitle}>
+                        {t('Discover the DeepMine universe!')}
+                    </Typography.Text>
                     <Button
-                        size="large"
                         onClick={handleAuthClick}
-                        className={styles.actionButton}
+                        className={styles.button}
+                        size="large"
                         type="primary"
-                        loading={isAuthLinkFetching}
                         ghost
+                        block
+                        loading={isAuthLinkFetching}
+                        icon={<GoogleOutlined />}
                     >
-                        {t('intro.signInGoogle')}
+                        {t('Sign with Google')}
                     </Button>
+                </Space>
+            </div>
+            <div className={styles.panel}>
+                <div className={styles.description}>
+                    {t('intro.attention')}
+                    <a
+                        href="https://medium.com/@deepmineworld/deepmine-beta-is-live-63167681173d"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        {t('intro.live')}
+                    </a>
                 </div>
-                <Alert
-                    className={styles.alert}
-                    description={
-                        <div>
-                            {t('intro.attention')}
-                            <a
-                                href="https://medium.com/@deepmineworld/deepmine-beta-is-live-63167681173d"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                {t('intro.live')}
-                            </a>
-                        </div>
-                    }
-                />
-            </Space>
-            {!!user && <LoggedInBlock user={user} />}
+            </div>
         </div>
     );
 };

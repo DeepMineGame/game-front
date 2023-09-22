@@ -1,8 +1,10 @@
 import { ConfigProvider, theme, App } from 'antd';
+import styles from './styles.module.scss';
 
 export const withAntdConfigProvider = (AppProvided: React.FC) => () =>
     (
         <ConfigProvider
+            button={{ className: styles.button }}
             theme={{
                 algorithm: theme.darkAlgorithm,
                 inherit: true,

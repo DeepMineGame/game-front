@@ -5,12 +5,12 @@ import { Space, Typography } from 'antd';
 import { WaxUser } from '@eosdacio/ual-wax';
 
 import {
-    DeepMineLogo,
     Button,
     useChainAuthContext,
     LoadingScreen,
     showErrorNotification,
     getTableData,
+    WaxChainIcon,
 } from 'shared';
 import { authorizeUser, getUserConfig } from 'entities/smartcontract';
 import {
@@ -119,19 +119,27 @@ export const BlockchainAuthPage: React.FC<Props> = ({ onSuccess }) => {
 
     return (
         <div className={styles.wrapper}>
-            <DeepMineLogo width={240} height={142} />
-
             <Space size="large" direction="vertical">
-                <div className={styles.content}>
-                    <Button
-                        size="large"
-                        onClick={handleConnectClick}
-                        className={styles.actionButton}
-                        type="primary"
-                        ghost
-                    >
-                        {t('intro.connect')}
-                    </Button>
+                <div className={styles.panel}>
+                    <Typography.Title className={styles.title}>
+                        {t('GREETINGS')}
+                    </Typography.Title>
+                    <Space direction="vertical" size="large">
+                        <Typography.Text className={styles.subTitle}>
+                            {t('Welcome on board')}
+                        </Typography.Text>
+                        <Button
+                            onClick={handleConnectClick}
+                            className={styles.button}
+                            size="large"
+                            type="primary"
+                            ghost
+                            block
+                            icon={<WaxChainIcon />}
+                        >
+                            {t('intro.connect')}
+                        </Button>
+                    </Space>
                     {(!!userError || hasError) && (
                         <p style={{ marginTop: 4 }}>
                             <Typography.Text
@@ -142,6 +150,7 @@ export const BlockchainAuthPage: React.FC<Props> = ({ onSuccess }) => {
                             </Typography.Text>
                         </p>
                     )}
+                    <LoggedInBlock user={user} />
                 </div>
                 <div className={styles.onboardingButton}>
                     {/* <Button */}
@@ -153,7 +162,6 @@ export const BlockchainAuthPage: React.FC<Props> = ({ onSuccess }) => {
                     {/*    {t('intro.onBoarding')} */}
                     {/* </Button> */}
                 </div>
-                <LoggedInBlock user={user} />
             </Space>
         </div>
     );

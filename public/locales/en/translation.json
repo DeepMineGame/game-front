@@ -3,7 +3,6 @@
     "connect": "CONNECT WAX WALLET",
     "disconnect": "DISCONNECT WAX WALLET",
     "only-members": "Only DeepMine team members are allowed access",
-    "signInGoogle": "SIGN IN WITH GOOGLE",
     "onBoarding": "Onboarding game",
     "loggedIn": "You are logged in",
     "Logout": "Logout",
@@ -1093,5 +1092,10 @@
   "Mining": "Mining",
   "Ready to mine": "Ready to mine",
   "Deposited": "Deposited",
-  "Total fee paid": "Total fee paid"
+  "Total fee paid": "Total fee paid",
+  "LOGIN": "LOGIN",
+  "Discover the DeepMine universe!": "Discover the DeepMine universe!",
+  "Sign with Google": "Sign with Google",
+  "GREETINGS": "GREETINGS",
+  "Welcome on board": "Welcome on board"
 }
