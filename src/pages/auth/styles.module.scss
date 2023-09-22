@@ -3,13 +3,15 @@
 .wrapper {
   min-height: 100vh;
   font-family: $bai;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
   background: black url("../../shared/ui/images/city/blured-city.webp") no-repeat;
   background-size: cover;
   position: relative;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px 0px;
+  justify-items: center;
 
   &::before {
     background: url("../../shared/ui/images/city/logincontainer.svg") no-repeat center center;
