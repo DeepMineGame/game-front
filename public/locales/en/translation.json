@@ -1,6 +1,5 @@
 {
   "intro": {
-    "connect": "CONNECT WAX WALLET",
     "disconnect": "DISCONNECT WAX WALLET",
     "only-members": "Only DeepMine team members are allowed access",
     "onBoarding": "Onboarding game",
@@ -1097,5 +1096,6 @@
   "Discover the DeepMine universe!": "Discover the DeepMine universe!",
   "Sign with Google": "Sign with Google",
   "GREETINGS": "GREETINGS",
-  "Welcome on board": "Welcome on board"
+  "Welcome on board": "Welcome on board",
+  "Connect wax wallet": "Connect wax wallet"
 }

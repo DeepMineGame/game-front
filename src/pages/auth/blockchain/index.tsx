@@ -137,7 +137,7 @@ export const BlockchainAuthPage: React.FC<Props> = ({ onSuccess }) => {
                             block
                             icon={<WaxChainIcon />}
                         >
-                            {t('intro.connect')}
+                            {t('Connect wax wallet')}
                         </Button>
                     </Space>
                     {(!!userError || hasError) && (
