@@ -12,6 +12,7 @@ import {
     getTableData,
     WaxChainIcon,
 } from 'shared';
+import Lottie from 'lottie-react';
 import { authorizeUser, getUserConfig } from 'entities/smartcontract';
 import {
     userStore,
@@ -22,6 +23,8 @@ import {
 } from 'entities/user';
 import { LoggedInBlock } from '../LoggedInBlock';
 import styles from '../styles.module.scss';
+import animation from '../assets/animation.json';
+import animation2 from '../assets/animation2.json';
 
 type Props = {
     onSuccess: () => void;
@@ -119,6 +122,9 @@ export const BlockchainAuthPage: React.FC<Props> = ({ onSuccess }) => {
 
     return (
         <div className={styles.wrapper}>
+            <div>
+                <Lottie animationData={animation} />
+            </div>
             <Space size="large" direction="vertical">
                 <div className={styles.panel}>
                     <Typography.Title className={styles.title}>
@@ -163,6 +169,9 @@ export const BlockchainAuthPage: React.FC<Props> = ({ onSuccess }) => {
                     {/* </Button> */}
                 </div>
             </Space>
+            <div>
+                <Lottie animationData={animation2} />
+            </div>
         </div>
     );
 };
