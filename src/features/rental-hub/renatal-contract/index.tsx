@@ -106,7 +106,7 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
                             [t('Minimum Fee')]: contract.fee_min_amount,
                             [t('Fee paid')]: contract?.fee_counter,
                             [t('Total fee paid')]: contract?.fee_counter_total,
-                            [t('Auto renew at')]: contract.autorenew_at
+                            [t('Auto-renewed on')]: contract.autorenew_at
                                 ? toLocaleDate(contract.autorenew_at)
                                 : '-',
                         }}
