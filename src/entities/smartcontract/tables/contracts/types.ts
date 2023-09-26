@@ -184,7 +184,8 @@ export type ContractDto = {
     ins_type: string;
     ins_wax_amount: string;
     assets_type: string;
-    autorenew_at: string;
+    autorenew_at: number;
+    fee_counter_total?: string;
 };
 
 export const contractName = {

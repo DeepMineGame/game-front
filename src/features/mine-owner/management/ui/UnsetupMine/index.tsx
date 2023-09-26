@@ -12,7 +12,6 @@ import {
     abandonMine,
     deactmine,
 } from 'entities/smartcontract';
-import styles from '../MineControlPanel/styles.module.scss';
 import {
     activeContractorsContractsStore,
     UnsetupMineGate,
@@ -97,7 +96,7 @@ export const UnsetupMine: FC<{
             }
         >
             <div>
-                <SettingOutlined className={styles.dropDownIcon} />
+                <SettingOutlined style={{ fontSize: '20px' }} />
             </div>
         </Dropdown>
     );
