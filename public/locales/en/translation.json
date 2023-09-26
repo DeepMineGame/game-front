@@ -548,7 +548,6 @@
       }
     },
     "areaManagement": {
-      "claim": "Claim DME",
       "engage": "Engage the Area",
       "unengage": "Unengage the Area",
       "areaActionSucceed": "Area's action is succeed",
@@ -1097,5 +1096,8 @@
   "Sign with Google": "Sign with Google",
   "GREETINGS": "GREETINGS",
   "Welcome on board": "Welcome on board",
-  "Connect wax wallet": "Connect wax wallet"
+  "Connect wax wallet": "Connect wax wallet",
+  "Autorenew at": "Autorenew at",
+  "Auto renew at": "Auto renew at",
+  "Claim DME": "Claim DME"
 }

@@ -59,7 +59,7 @@ export const ClaimDME: FC<{ contract: ContractDto | null }> = ({
                 onClick={() => setClaimInfoModalVisible(true)}
                 disabled={!dmeMoreThenZero || !inLocation.mineDeck}
             >
-                {t('components.common.button.claim')} {dmeToClaim}{' '}
+                {t('components.common.button.claim')} {dmeToClaim.toFixed(2)}{' '}
                 {t('components.common.button.dme')}
             </Button>
             <ModalWithTable
@@ -67,16 +67,16 @@ export const ClaimDME: FC<{ contract: ContractDto | null }> = ({
                 onCancel={reloadPage}
                 onSubmit={onDmeClick}
                 items={{
-                    [t('Available for claim')]: dmeToClaim.toFixed(8),
+                    [t('Available for claim')]: Number(feeInDme.toFixed(2)),
                     [t('pages.serviceMarket.contract.fee')]: Number(
-                        feeInDme.toFixed(8)
+                        (feeInDme - dmeToClaim).toFixed(2)
                     ),
-                    [t('pages.mining.transferredToYourAccount')]: Number(
-                        (dmeToClaim - feeInDme).toFixed(8)
-                    ),
+
+                    [t('pages.mining.transferredToYourAccount')]:
+                        dmeToClaim.toFixed(2),
                 }}
                 texts={{
-                    title: t('pages.areaManagement.claim'),
+                    title: t('Claim DME'),
                     subtitle: `${t('pages.mining.details')}:`,
                 }}
             />

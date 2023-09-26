@@ -104,10 +104,12 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
                         data={{
                             [t('Rental fee')]: contract.fee_percent,
                             [t('Minimum Fee')]: contract.fee_min_amount,
-                            [t('Fee paid')]: contract.fee_counter,
-                            [t('Total fee paid')]:
+                            [t('Fee paid')]: contract.fee_counter.toFixed(2),
+                            [t('Total fee paid')]: (
                                 contract.fee_counter +
-                                contract.fee_counter_previous,
+                                contract.fee_counter_previous
+                            ).toFixed(2),
+                            [t('Auto renew at')]: contract.autorenew_at,
                         }}
                     />
                 </Col>
