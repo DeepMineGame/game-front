@@ -7,10 +7,9 @@
   background: black url("../../shared/ui/images/city/blured-city.webp") no-repeat;
   background-size: cover;
   position: relative;
-
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 32px 0px;
+  gap: 32px 0;
   justify-items: center;
 
   &::before {
