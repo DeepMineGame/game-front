@@ -111,7 +111,7 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
                     block
                     className={styles.claimButton}
                 >
-                    {t('pages.areaManagement.claim')} {dmeToClaim}
+                    {t('Claim DME')} {dmeToClaim}
                 </Button>
             </div>
 
@@ -153,7 +153,7 @@ export const AreaClaim: FC<Props> = ({ isActive, areaId, accountName }) => {
                     [t('Available for claim')]: getDmeAmount(claimDme),
                 }}
                 texts={{
-                    title: t('pages.areaManagement.claim'),
+                    title: t('Claim DME'),
                     subtitle: `${t('pages.mining.details')}:`,
                 }}
             />

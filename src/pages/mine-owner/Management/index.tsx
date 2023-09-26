@@ -1,6 +1,12 @@
 import Lottie from 'lottie-react';
 import { CallToTravelNotification, MineOwnerManagementPanel } from 'features';
-import { desktopS, useMediaQuery, useReloadPage, useTableData } from 'shared';
+import {
+    desktopS,
+    Header,
+    useMediaQuery,
+    useReloadPage,
+    useTableData,
+} from 'shared';
 import {
     getUserConfig,
     LOCATION_TO_ID,
@@ -23,6 +29,7 @@ export const MineOwnerManagementPage = () => {
     return (
         <>
             <div className={styles.background} />
+            <Header />
 
             {isDesktop && (
                 <div className={styles.left}>

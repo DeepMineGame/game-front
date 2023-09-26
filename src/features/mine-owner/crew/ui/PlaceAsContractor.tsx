@@ -16,7 +16,6 @@ type Props = {
     accountName: string;
     isDisabled: boolean;
 };
-const IS_ORDER_BY_SELF_CREATED = 'IS_ORDER_BY_SELF_CREATED';
 
 const PlaceAsContractor: FC<Props> = ({ accountName, isDisabled }) => {
     const { t } = useTranslation();
@@ -49,7 +48,6 @@ const PlaceAsContractor: FC<Props> = ({ accountName, isDisabled }) => {
                 autorenew_enabled: true,
             })
         );
-        localStorage.setItem(IS_ORDER_BY_SELF_CREATED, 'true');
         setIsVisible(false);
 
         setTimeout(() => reloadPage(), 2000);
@@ -66,14 +64,13 @@ const PlaceAsContractor: FC<Props> = ({ accountName, isDisabled }) => {
             },
         });
     };
-    const isSelfContractCreated =
-        localStorage.getItem(IS_ORDER_BY_SELF_CREATED) === 'true';
+
     return (
         <div>
             <Button
                 onClick={handleClick}
                 className={styles.button}
-                disabled={isDisabled || isSelfContractCreated}
+                disabled={isDisabled}
             >
                 {t('Place myself as a contractor')}
             </Button>
