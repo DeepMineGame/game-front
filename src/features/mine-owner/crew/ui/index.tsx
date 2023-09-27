@@ -9,7 +9,6 @@ import {
     Skeleton,
     Space,
     Statistic,
-    Table,
     Typography,
 } from 'antd';
 import {
@@ -19,7 +18,7 @@ import {
     useReloadPage,
 } from 'shared';
 import { useGate, useStore } from 'effector-react';
-import { PlusOutlined, UserAddOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { serviceMarket } from 'app/router/paths';
 import { Roles } from 'entities/game-stat';
