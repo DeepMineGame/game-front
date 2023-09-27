@@ -14,7 +14,7 @@ export type MinesOnLand = {
 
 export const getMinesOnLand = async ({ id }: { id: number }) => {
     const { data = [] } = await axios.get<MinesOnLand>(
-        `${ENDPOINT}/statistic/land/mines`,
+        `${ENDPOINT}/statistic/area/mines`,
         {
             params: {
                 id,
