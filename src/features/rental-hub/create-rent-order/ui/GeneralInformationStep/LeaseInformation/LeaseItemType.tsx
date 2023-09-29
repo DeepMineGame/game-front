@@ -34,7 +34,6 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
     form,
 }) => {
     const { t } = useTranslation();
-
     const { hasValue, type } = useWatchUpgradeType(form);
     const equipmentType =
         type === EquipmentType.mine ? ('Mine' as const) : miningEquipmentNames;
@@ -177,7 +176,11 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
         : InventoryTab.equipment;
     return (
         <>
-            <LeaseTypeFormItem />
+            <LeaseTypeFormItem
+                setSelectedEquipmentSet={setSelectedEquipmentSet}
+                form={form}
+                setAsset={setAsset}
+            />
             {hasValue && (
                 <Form.Item name={rentOrderField.asset_ids}>
                     {equipmentOrMineSelectButton}
