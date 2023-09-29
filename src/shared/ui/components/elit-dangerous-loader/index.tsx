@@ -2,13 +2,16 @@ import cn from 'classnames';
 import { FC } from 'react';
 import styles from './styles.module.scss';
 
-export const EliteDangerousLoader: FC = () => {
+export const EliteDangerousLoader: FC<{ size?: 'small' | 'big' }> = ({
+    size = 'small',
+}) => {
+    const arrowClass = size === 'small' ? styles.arrow : styles.arrowBig;
     return (
         <div className={styles.dankAssLoader}>
             <div className={styles.row}>
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.up,
                         styles.outer,
                         styles.outer18
@@ -16,7 +19,7 @@ export const EliteDangerousLoader: FC = () => {
                 />
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.down,
                         styles.outer,
                         styles.outer17
@@ -24,7 +27,7 @@ export const EliteDangerousLoader: FC = () => {
                 />
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.up,
                         styles.outer,
                         styles.outer16
@@ -32,7 +35,7 @@ export const EliteDangerousLoader: FC = () => {
                 />
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.down,
                         styles.outer,
                         styles.outer15
@@ -40,7 +43,7 @@ export const EliteDangerousLoader: FC = () => {
                 />
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.up,
                         styles.outer,
                         styles.outer14
@@ -50,7 +53,7 @@ export const EliteDangerousLoader: FC = () => {
             <div className={styles.row}>
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.up,
                         styles.outer,
                         styles.outer1
@@ -58,7 +61,7 @@ export const EliteDangerousLoader: FC = () => {
                 />
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.down,
                         styles.outer,
                         styles.outer2
@@ -66,7 +69,7 @@ export const EliteDangerousLoader: FC = () => {
                 />
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.up,
                         styles.inner,
                         styles.inner6
@@ -74,7 +77,7 @@ export const EliteDangerousLoader: FC = () => {
                 />
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.down,
                         styles.inner,
                         styles.inner5
@@ -82,7 +85,7 @@ export const EliteDangerousLoader: FC = () => {
                 />
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.up,
                         styles.inner,
                         styles.inner4
@@ -90,7 +93,7 @@ export const EliteDangerousLoader: FC = () => {
                 />
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.down,
                         styles.outer,
                         styles.outer13
@@ -98,7 +101,7 @@ export const EliteDangerousLoader: FC = () => {
                 />
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.up,
                         styles.outer,
                         styles.outer12
@@ -108,7 +111,7 @@ export const EliteDangerousLoader: FC = () => {
             <div className={styles.row}>
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.down,
                         styles.outer,
                         styles.outer3
@@ -116,7 +119,7 @@ export const EliteDangerousLoader: FC = () => {
                 />
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.up,
                         styles.outer,
                         styles.outer4
@@ -124,7 +127,7 @@ export const EliteDangerousLoader: FC = () => {
                 />
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.down,
                         styles.inner,
                         styles.inner1
@@ -132,7 +135,7 @@ export const EliteDangerousLoader: FC = () => {
                 />
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.up,
                         styles.inner,
                         styles.inner2
@@ -140,7 +143,7 @@ export const EliteDangerousLoader: FC = () => {
                 />
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.down,
                         styles.inner,
                         styles.inner3
@@ -148,7 +151,7 @@ export const EliteDangerousLoader: FC = () => {
                 />
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.up,
                         styles.outer,
                         styles.outer11
@@ -156,7 +159,7 @@ export const EliteDangerousLoader: FC = () => {
                 />
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.down,
                         styles.outer,
                         styles.outer10
@@ -166,7 +169,7 @@ export const EliteDangerousLoader: FC = () => {
             <div className={styles.row}>
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.down,
                         styles.outer,
                         styles.outer5
@@ -174,7 +177,7 @@ export const EliteDangerousLoader: FC = () => {
                 />
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.up,
                         styles.outer,
                         styles.outer6
@@ -182,7 +185,7 @@ export const EliteDangerousLoader: FC = () => {
                 />
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.down,
                         styles.outer,
                         styles.outer7
@@ -190,7 +193,7 @@ export const EliteDangerousLoader: FC = () => {
                 />
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.up,
                         styles.outer,
                         styles.outer8
@@ -198,7 +201,7 @@ export const EliteDangerousLoader: FC = () => {
                 />
                 <div
                     className={cn(
-                        styles.arrow,
+                        arrowClass,
                         styles.down,
                         styles.outer,
                         styles.outer9

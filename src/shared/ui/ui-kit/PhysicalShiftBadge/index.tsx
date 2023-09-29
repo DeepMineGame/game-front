@@ -17,10 +17,10 @@ export const PhysicalShiftBadge = ({ onClick, onClose }: SignContractProps) => {
                 <CloseOutlined className={styles.close} onClick={onClose} />
             )}
             <div className={styles.text}>
-                {t('pages.contractor.physicalShiftBadge.text')}
+                {t('Do you want to travel here?')}
             </div>
             <div className={styles.button} onClick={onClick}>
-                {t('pages.contractor.physicalShiftBadge.button')}
+                {t('Travel')}
             </div>
         </div>
     );

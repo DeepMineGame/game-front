@@ -37,7 +37,7 @@ export const TrainingModal = ({ onCancel, nftData }: Props) => {
                     ).toUpperCase()}
                 </Text>
             }
-            visible={isVisible}
+            open={isVisible}
             onCancel={onCancel}
             footer={null}
             width={modalWidth}
