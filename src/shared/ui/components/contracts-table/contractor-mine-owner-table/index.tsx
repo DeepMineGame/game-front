@@ -37,14 +37,14 @@ export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
             contracts?.map((contract) => {
                 return {
                     deposit: contract.deposit,
-                    level: normalizeAttrs(contract.attrs).mine_level,
+                    level: contract.level,
                     subLevel: normalizeAttrs(contract.attrs).mine_sublevel,
                     nickName: contract.client,
                     key: contract.id,
                     id: contract.id,
                     fee: contract.fee_percent,
                     date: toLocaleDate(contract.create_time * 1000),
-                    rarity: normalizeAttrs(contract.attrs).area_rarity,
+                    rarity: contract.rarity,
                     contract,
                 };
             }),
