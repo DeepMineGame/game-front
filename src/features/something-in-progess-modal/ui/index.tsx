@@ -75,7 +75,7 @@ export const SomethingInProgress: FC = () => {
                 <ProgressNotification
                     className={styles.minifiedProgress}
                     actionName={thingInProgressName}
-                    finished={somethingCountDown === 0}
+                    finished={!somethingCountDown}
                     finishText={t('components.actionModal.isComplete')}
                     onHideClick={reloadPage}
                     onOkClick={reloadPage}

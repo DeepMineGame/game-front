@@ -6,6 +6,10 @@ import { serviceMarket } from 'app/router/paths';
 import { useSmartContractAction } from 'features/hooks';
 import { terminateContract } from 'entities/smartcontract';
 import { Button } from 'shared/ui/ui-kit';
+import {
+    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
+    setSomethingCountDownEvent,
+} from '../../../../something-in-progess-modal';
 
 type Props = {
     accountName: string;
@@ -22,6 +26,7 @@ const DeleteOrder: FC<Props> = ({ accountName, contractId }) => {
     const handleDeleteOrder = async () => {
         await terminateAction();
         navigate(serviceMarket);
+        setSomethingCountDownEvent(DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME);
     };
 
     return (
