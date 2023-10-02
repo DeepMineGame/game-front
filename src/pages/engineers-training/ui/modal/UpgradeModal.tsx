@@ -37,7 +37,7 @@ export const UpgradeModal = ({ isVisible, onCancel, nftData }: Props) => {
             centered
             footer={[
                 <Button onClick={onCancel} ghost key="cancel">
-                    {t('components.common.button.cancel')}
+                    {t('Cancel')}
                 </Button>,
                 <Button onClick={handleUpgrade} type="primary" key="upgrade">
                     {t('Learn')}

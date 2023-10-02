@@ -52,7 +52,6 @@
       "openContract": "Open Contract",
       "free": "Free",
       "button": {
-        "cancel": "Cancel",
         "install": "Install",
         "uninstall": "Uninstall",
         "deactivate": "Deactivate",
@@ -1096,13 +1095,11 @@
   "Autorenew at": "Autorenew at",
   "Auto-renewed on": "Auto-renewed on",
   "Claim DME": "Claim DME",
-  "We are waiting to receive a response from the blockchain": {
-    " Please refresh the page after the loading is complete": {
-      "": "We are waiting to receive a response from the blockchain. Please refresh the page after the loading is complete."
-    }
-  },
   "Place myself as a Contractor": "Place myself as a Contractor",
   "Minimize": "Minimize",
   "Do you want to travel here?": "Do you want to travel here?",
-  "Travel": "Travel"
+  "Travel": "Travel",
+  "We are waiting to receive a response from the blockchain the page will be reload after the loading is complete": {
+    "": "We are waiting to receive a response from the blockchain the page will be reload after the loading is complete."
+  }
 }

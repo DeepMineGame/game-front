@@ -37,7 +37,7 @@ export const ModalWithTable: FC<ModalWithTableProps> = ({
             onCancel={onCancel}
             onOk={onSubmit}
             okText={texts.onOk || t('components.common.button.okay')}
-            cancelText={t('components.common.button.cancel')}
+            cancelText={t('Cancel')}
         >
             <div className={styles.content}>
                 {texts.subtitle && (

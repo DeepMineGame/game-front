@@ -5,6 +5,7 @@ import { useGate, useStore } from 'effector-react';
 import { App, Modal } from 'antd';
 import {
     $somethingInProgressCountDown,
+    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
     setSomethingCountDownEvent,
 } from 'features';
 import { useSmartContractActionDynamic } from 'features/hooks';
@@ -52,7 +53,7 @@ const PlaceAsContractor: FC<Props> = ({ accountName, isDisabled }) => {
             })
         );
         setIsVisible(false);
-        setSomethingCountDownEvent(30);
+        setSomethingCountDownEvent(DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME);
     };
 
     const handleClick = () => {

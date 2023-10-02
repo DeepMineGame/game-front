@@ -34,7 +34,7 @@ export const ExclamationModal: FC<Props> = ({
             onCancel={onCancel}
             onOk={onSubmit}
             okText={submitText}
-            cancelText={t('components.common.button.cancel')}
+            cancelText={t('Cancel')}
             title={title}
         >
             <div className={styles.content}>

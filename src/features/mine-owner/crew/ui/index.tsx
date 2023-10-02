@@ -25,6 +25,10 @@ import { Roles } from 'entities/game-stat';
 import { signOrder } from 'entities/smartcontract';
 import { $mineCrew, getMineCrewEffect, MineCrewGate } from '../model/crew';
 import { useSmartContractAction } from '../../../hooks';
+import {
+    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
+    setSomethingCountDownEvent,
+} from '../../../something-in-progess-modal';
 import styles from './styles.module.scss';
 import { OccupiedTable } from './OccupiedTable';
 import PlaceAsContractor from './PlaceAsContractor';
@@ -60,6 +64,7 @@ export const MineOwnerCrew: FC = () => {
             content: t('pages.serviceMarket.order.orderCreated'),
             onOk: reloadPage,
         });
+        setSomethingCountDownEvent(DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME);
     }, [modal, reloadPage, signContractAction, t]);
 
     if (isMineCrewLoading) {
