@@ -137,7 +137,7 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
             )}
         </div>
     ) : (
-        equipmentType.map((typeName, key) => {
+        equipmentType.map((typeName) => {
             return (
                 <>
                     <div className={styles.flexSection}>

@@ -31,7 +31,7 @@ export const UpgradeModal = ({ isVisible, onCancel, nftData }: Props) => {
     return (
         <Modal
             title={<Text fontFamily="orbitron">{t('UPGRADE LEVEL')}</Text>}
-            visible={isVisible}
+            open={isVisible}
             onCancel={onCancel}
             width={modalWidth}
             centered
