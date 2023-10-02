@@ -88,7 +88,6 @@
       },
       "reputation": "Reputation",
       "level": "Level",
-      "exp": "Exp",
       "area": "Area",
       "areaInfo": "Area info",
       "warning": "Warning",
@@ -1100,5 +1099,7 @@
   "Travel": "Travel",
   "We are waiting to receive a response from the blockchain the page will be reload after the loading is complete": {
     "": "We are waiting to receive a response from the blockchain the page will be reload after the loading is complete."
-  }
+  },
+  "Blueprint": "Blueprint",
+  "Youtube": "Youtube"
 }

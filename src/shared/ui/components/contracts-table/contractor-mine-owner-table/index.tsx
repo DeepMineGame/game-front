@@ -48,7 +48,7 @@ export const ContractorMineOwnerTable: FC<Props> = ({ contracts }) => {
                     contract,
                 };
             }),
-        [account, contracts]
+        [contracts]
     );
 
     const stopPropagateEvent = (event: SyntheticEvent<any>) =>
