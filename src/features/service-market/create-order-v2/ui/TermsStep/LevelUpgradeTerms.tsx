@@ -62,7 +62,7 @@ export const LevelUpgradeTerms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
 
             <Space size="large">
                 <Form.Item
-                    label={t('Cost of execution')}
+                    label={t('Cost, DME')}
                     className={cn(styles.formField, localStyles.feeInput)}
                     name={orderFields.costOfExecution}
                     initialValue={10}

@@ -2,10 +2,6 @@
 
 $time: 1;
 
-:root {
-  --dankAssLoaderDefaultSize: 3px;
-}
-
 .dankAssLoader {
   display: flex;
   flex-direction: column;
@@ -39,8 +35,8 @@ $time: 1;
 
 .arrow {
   $size: 3px;
-  composes: arrowBase;
 
+  composes: arrowBase;
   margin: 0 (-$size / 2);
   border-left: $size solid transparent;
   border-right: $size solid transparent;
@@ -51,8 +47,8 @@ $time: 1;
 
 .arrowBig {
   $size: 10px;
-  composes: arrowBase;
 
+  composes: arrowBase;
   margin: 0 (-$size / 2);
   border-left: $size solid transparent;
   border-right: $size solid transparent;
