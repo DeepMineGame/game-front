@@ -88,7 +88,7 @@ const SignAsMineOwner: FC<Props> = ({ contract, accountName, isClient }) => {
     return (
         <>
             <Button onClick={handleSign} type="primary" block>
-                {t('pages.serviceMarket.order.selectMineAndSign')}
+                {t('Select mine and sign the order')}
             </Button>
 
             <SignModal
