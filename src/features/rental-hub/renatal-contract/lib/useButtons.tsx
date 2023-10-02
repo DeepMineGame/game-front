@@ -1,10 +1,14 @@
 import { useTranslation } from 'react-i18next';
 import { App, Button, Tooltip } from 'antd';
 import React, { useState } from 'react';
-import { useAccountName, useReloadPage } from 'shared';
+import { useAccountName } from 'shared';
 import { ContractDto, signrcontr, trmrcontract } from 'entities/smartcontract';
 import { useSmartContractAction } from '../../../hooks';
 import { SecondPartyDepositModal } from '../ui';
+import {
+    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
+    setSomethingCountDownEvent,
+} from '../../../something-in-progess-modal';
 import { frontStatusMap } from './getFrontStatus';
 
 export const useButtons = (
@@ -13,7 +17,6 @@ export const useButtons = (
 ) => {
     const { modal } = App.useApp();
 
-    const reloadPage = useReloadPage();
     const { t } = useTranslation();
     const accountName = useAccountName();
     const singContract = useSmartContractAction({
@@ -25,7 +28,10 @@ export const useButtons = (
             modal.success({
                 title: t('pages.serviceMarket.order.signOrder'),
                 content: t('pages.serviceMarket.order.orderCreated'),
-                onOk: reloadPage,
+                onOk: () =>
+                    setSomethingCountDownEvent(
+                        DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME
+                    ),
             }),
     });
     const trmContract = useSmartContractAction({
@@ -33,7 +39,8 @@ export const useButtons = (
             waxUser: accountName,
             contractId: Number(contract.id),
         }),
-        onSignSuccess: reloadPage,
+        onSignSuccess: () =>
+            setSomethingCountDownEvent(DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME),
     });
 
     const signButton = (

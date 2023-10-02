@@ -20,8 +20,7 @@ const contracts = {
 
 const pageTitle = {
     [ContractType.level_upgrade]: 'pages.serviceMarket.levelUpgradeContract',
-    [ContractType.landlord_mineowner]:
-        'pages.serviceMarket.mineOperationContract',
+    [ContractType.landlord_mineowner]: 'Mine operation contract',
     [ContractType.mineowner_contractor]: 'pages.serviceMarket.miningContract',
     [ContractType.undefined]: '',
 } as const;

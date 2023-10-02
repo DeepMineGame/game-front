@@ -1,7 +1,11 @@
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, SuccessModal, useReloadPage, WarningModal } from 'shared';
-import { useSmartContractAction } from 'features';
+import { Button, SuccessModal, WarningModal } from 'shared';
+import {
+    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
+    setSomethingCountDownEvent,
+    useSmartContractAction,
+} from 'features';
 import { terminateContract } from 'entities/smartcontract';
 
 type Props = {
@@ -11,7 +15,6 @@ type Props = {
 
 const TerminateContract: FC<Props> = ({ accountName, contractId }) => {
     const { t } = useTranslation();
-    const reloadPage = useReloadPage();
 
     const [isTerminateModalVisible, setIsTerminateModalVisible] =
         useState(false);
@@ -28,7 +31,7 @@ const TerminateContract: FC<Props> = ({ accountName, contractId }) => {
     const submitSuccessModal = () => {
         closeSuccessModal();
         setIsTerminateModalVisible(false);
-        reloadPage();
+        setSomethingCountDownEvent(DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME);
     };
 
     const getTerminate = useSmartContractAction({

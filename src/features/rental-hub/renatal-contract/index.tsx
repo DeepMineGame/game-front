@@ -10,24 +10,22 @@ import {
     Typography,
 } from 'antd';
 import { useTranslation } from 'react-i18next';
-import {
-    secondsToDays,
-    toLocaleDate,
-    useAccountName,
-    useReloadPage,
-} from 'shared';
+import { secondsToDays, toLocaleDate, useAccountName } from 'shared';
 import { PageHeader } from '@ant-design/pro-components';
 import { disrautorew } from 'entities/smartcontract';
 import { ContractProps } from '../../service-market/types';
 import { TableWithTitle } from '../../service-market';
 import { useSmartContractAction } from '../../hooks';
+import {
+    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
+    setSomethingCountDownEvent,
+} from '../../something-in-progess-modal';
 import { getColorForFrontStatus, getFrontStatus } from './lib/getFrontStatus';
 import { useButtons } from './lib/useButtons';
 import { useRentalTexts } from './lib/getTexts';
 
 const RentalContract: FC<ContractProps> = ({ contract }) => {
     const accountName = useAccountName();
-    const reloadPage = useReloadPage();
     const { t } = useTranslation();
     const frontStatus = getFrontStatus(contract);
     const button = useButtons(frontStatus, contract);
@@ -44,11 +42,14 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
                 ModalAnt.success({
                     title: t('Auto-renewal'),
                     content: t('Auto-renewal disabled'),
-                    onOk: reloadPage,
+                    onOk: () =>
+                        setSomethingCountDownEvent(
+                            DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME
+                        ),
                 })
             );
         }
-    }, [contract.autorenew_enabled, disableAutoRenew, reloadPage, t]);
+    }, [contract.autorenew_enabled, disableAutoRenew, t]);
     return (
         <div>
             <PageHeader

@@ -397,7 +397,6 @@
       "miningOrder": "Mining order",
       "miningContract": "Mining contract",
       "mineOperationOrder": "Mine operation order",
-      "mineOperationContract": "Mine operation contract",
       "levelUpgradeContract": "Level upgrade contract",
       "yourRole": "Your role",
       "all": "All",
