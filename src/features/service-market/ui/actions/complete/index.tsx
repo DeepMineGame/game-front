@@ -1,9 +1,12 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useReloadPage } from 'shared';
 import { useSmartContractAction } from 'features/hooks';
 import { terminateContract } from 'entities/smartcontract';
 import { Alert, Button } from 'shared/ui';
+import {
+    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
+    setSomethingCountDownEvent,
+} from '../../../../something-in-progess-modal';
 
 type Props = {
     accountName: string;
@@ -16,12 +19,12 @@ const CompletedButton: FC<Props> = ({
     contractId,
     onComplete,
 }) => {
-    const reloadPage = useReloadPage();
     const { t } = useTranslation();
 
     const terminateAction = useSmartContractAction({
         action: terminateContract(accountName, contractId),
-        onSignSuccess: reloadPage,
+        onSignSuccess: () =>
+            setSomethingCountDownEvent(DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME),
     });
 
     const handleComplete = async () => {

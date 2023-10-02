@@ -6,11 +6,17 @@ import {
     Drawer,
     KeyValueTable,
     neutral3Color,
+    neutral9,
     Text,
     Title,
     WaxCoinIcon,
 } from 'shared';
-import Icon, { DatabaseOutlined, ThunderboltOutlined } from '@ant-design/icons';
+import Icon, {
+    DatabaseOutlined,
+    ReadOutlined,
+    ThunderboltOutlined,
+    YoutubeOutlined,
+} from '@ant-design/icons';
 import { UserAction } from 'features';
 import { useNavigate } from 'react-router-dom';
 import { useGate, useStore } from 'effector-react';
@@ -108,10 +114,6 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                                 {t('components.common.level')}{' '}
                                 {citizenRole?.level}
                             </div>
-                            {/* <div> */}
-                            {/*    {t('components.common.exp')}{' '} */}
-                            {/*    {citizenRole?.experience} */}
-                            {/* </div> */}
                         </div>
                     </Space>
                     <div className={styles.attrs}>
@@ -176,6 +178,32 @@ export const UserAvatarAndDrawer: FC<Props> = ({ user }) => {
                         {t('Inventory')}
                     </Button>
                 </div>
+                <Space direction="horizontal" size="large">
+                    <Button
+                        type="link"
+                        href="https://docs.deepmine.world/deepmine/"
+                        icon={
+                            <ReadOutlined
+                                color="red"
+                                style={{ color: neutral9 }}
+                            />
+                        }
+                    >
+                        {t('Blueprint')}
+                    </Button>
+                    <Button
+                        type="link"
+                        href="https://www.youtube.com/@deepmineworld"
+                        icon={
+                            <YoutubeOutlined
+                                color="red"
+                                style={{ color: neutral9 }}
+                            />
+                        }
+                    >
+                        {t('Youtube')}
+                    </Button>
+                </Space>
             </Drawer>
         </>
     );

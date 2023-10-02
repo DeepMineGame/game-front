@@ -52,7 +52,6 @@
       "openContract": "Open Contract",
       "free": "Free",
       "button": {
-        "cancel": "Cancel",
         "install": "Install",
         "uninstall": "Uninstall",
         "deactivate": "Deactivate",
@@ -89,7 +88,6 @@
       },
       "reputation": "Reputation",
       "level": "Level",
-      "exp": "Exp",
       "area": "Area",
       "areaInfo": "Area info",
       "warning": "Warning",
@@ -276,10 +274,6 @@
           "hive": "Travel to Hive"
         }
       },
-      "physicalShiftBadge": {
-        "text": "Do you want to travel here?",
-        "button": "Travel"
-      },
       "tooltips": {
         "notReadyMineDesk": "To be able to mine, install the equipment and sign the contract if you haven't done it yet",
         "unableGetStatAccess": "Complete mining first to visit Stats & info desk"
@@ -402,7 +396,6 @@
       "miningOrder": "Mining order",
       "miningContract": "Mining contract",
       "mineOperationOrder": "Mine operation order",
-      "mineOperationContract": "Mine operation contract",
       "levelUpgradeContract": "Level upgrade contract",
       "yourRole": "Your role",
       "all": "All",
@@ -485,7 +478,6 @@
         "orderCreated": "Your order was signed",
         "deleteOrder": "Delete the order",
         "selectMine": "Select the mine",
-        "selectMineAndSign": "Select mine and sign the order",
         "doNotHaveMine": "You do not have a mine that meets the conditions of the order",
         "doNotHaveMineSlot": "You do not have a mine slot that meets the conditions of the order",
         "doNotHaveArea": "You do not have a area that meets the conditions of the order",
@@ -1099,5 +1091,15 @@
   "Connect wax wallet": "Connect wax wallet",
   "Autorenew at": "Autorenew at",
   "Auto-renewed on": "Auto-renewed on",
-  "Claim DME": "Claim DME"
+  "Claim DME": "Claim DME",
+  "Place myself as a Contractor": "Place myself as a Contractor",
+  "Minimize": "Minimize",
+  "Do you want to travel here?": "Do you want to travel here?",
+  "Travel": "Travel",
+  "We are waiting to receive a response from the blockchain the page will be reload after the loading is complete": {
+    "": "We are waiting to receive a response from the blockchain the page will be reload after the loading is complete."
+  },
+  "Blueprint": "Blueprint",
+  "Youtube": "Youtube",
+  "Select mine and sign the order": "Select mine and sign the order"
 }

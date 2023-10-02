@@ -9,7 +9,6 @@ import {
     Skeleton,
     Space,
     Statistic,
-    Table,
     Typography,
 } from 'antd';
 import {
@@ -19,13 +18,17 @@ import {
     useReloadPage,
 } from 'shared';
 import { useGate, useStore } from 'effector-react';
-import { PlusOutlined, UserAddOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { serviceMarket } from 'app/router/paths';
 import { Roles } from 'entities/game-stat';
 import { signOrder } from 'entities/smartcontract';
 import { $mineCrew, getMineCrewEffect, MineCrewGate } from '../model/crew';
 import { useSmartContractAction } from '../../../hooks';
+import {
+    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
+    setSomethingCountDownEvent,
+} from '../../../something-in-progess-modal';
 import styles from './styles.module.scss';
 import { OccupiedTable } from './OccupiedTable';
 import PlaceAsContractor from './PlaceAsContractor';
@@ -61,6 +64,7 @@ export const MineOwnerCrew: FC = () => {
             content: t('pages.serviceMarket.order.orderCreated'),
             onOk: reloadPage,
         });
+        setSomethingCountDownEvent(DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME);
     }, [modal, reloadPage, signContractAction, t]);
 
     if (isMineCrewLoading) {

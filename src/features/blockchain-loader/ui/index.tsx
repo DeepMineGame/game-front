@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { EliteDangerousLoader } from './components/ElitDangerousLoader';
+import { EliteDangerousLoader } from 'shared';
 import styles from './styles.module.scss';
 
 export const BlockchainLoader: FC = () => {

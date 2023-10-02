@@ -31,13 +31,13 @@ export const UpgradeModal = ({ isVisible, onCancel, nftData }: Props) => {
     return (
         <Modal
             title={<Text fontFamily="orbitron">{t('UPGRADE LEVEL')}</Text>}
-            visible={isVisible}
+            open={isVisible}
             onCancel={onCancel}
             width={modalWidth}
             centered
             footer={[
                 <Button onClick={onCancel} ghost key="cancel">
-                    {t('components.common.button.cancel')}
+                    {t('Cancel')}
                 </Button>,
                 <Button onClick={handleUpgrade} type="primary" key="upgrade">
                     {t('Learn')}

@@ -6,14 +6,7 @@ import {
     AtomicHubMarketSections,
     getAtomicHubUrlToSection,
 } from 'app/constants';
-import {
-    Button,
-    Result,
-    Text,
-    Select,
-    useReloadPage,
-    useTableData,
-} from 'shared';
+import { Button, Result, Text, Select, useTableData } from 'shared';
 import { App } from 'antd';
 import { useSmartContractAction } from 'features/hooks';
 import {
@@ -26,6 +19,10 @@ import {
 } from 'entities/smartcontract';
 import { MinesGate, minesStore } from 'entities/contract';
 import { SignModal } from '../SignModal';
+import {
+    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
+    setSomethingCountDownEvent,
+} from '../../../../../something-in-progess-modal';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -43,7 +40,6 @@ const SignLandlordOrder: FC<Props> = ({
     const { modal } = App.useApp();
 
     const { t } = useTranslation();
-    const reloadPage = useReloadPage();
     const [isWarningModalVisible, setIsWarningModalVisible] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [mineId, setMineId] = useState('');
@@ -71,9 +67,12 @@ const SignLandlordOrder: FC<Props> = ({
         modal.success({
             title: t('pages.serviceMarket.order.signOrder'),
             content: t('pages.serviceMarket.order.orderCreated'),
-            onOk: reloadPage,
+            onOk: () =>
+                setSomethingCountDownEvent(
+                    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME
+                ),
         });
-    }, [reloadPage, signContractAction, t]);
+    }, [modal, signContractAction, t]);
 
     const handleSign = () => {
         if (!allowedMine.length && !userMine?.length) {
@@ -86,7 +85,7 @@ const SignLandlordOrder: FC<Props> = ({
     return (
         <>
             <Button onClick={handleSign} type="primary" block>
-                {t('pages.serviceMarket.order.selectMineAndSign')}
+                {t('Select mine and sign the order')}
             </Button>
 
             <SignModal

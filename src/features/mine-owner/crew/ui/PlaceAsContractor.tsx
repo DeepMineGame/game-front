@@ -3,13 +3,17 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
 import { App, Modal } from 'antd';
+import {
+    $somethingInProgressCountDown,
+    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
+    setSomethingCountDownEvent,
+} from 'features';
 import { useSmartContractActionDynamic } from 'features/hooks';
 
 import { ContractType, createMineOrder } from 'entities/smartcontract';
 import { MinesGate, minesStore } from 'entities/contract';
 import { Select, Text, Button } from 'shared/ui/ui-kit';
 import { neutral9 } from 'shared/ui/variables';
-import { useReloadPage } from 'shared/lib/hooks';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -21,7 +25,6 @@ const PlaceAsContractor: FC<Props> = ({ accountName, isDisabled }) => {
     const { t } = useTranslation();
     const { modal } = App.useApp();
 
-    const reloadPage = useReloadPage();
     const callAction = useSmartContractActionDynamic();
 
     useGate(MinesGate, { searchParam: accountName });
@@ -29,6 +32,7 @@ const PlaceAsContractor: FC<Props> = ({ accountName, isDisabled }) => {
     const [mineId, setMineId] = useState('');
 
     const mines = useStore(minesStore);
+    const isSyncIsProgress = useStore($somethingInProgressCountDown);
 
     const handleCreate = async () => {
         await callAction(
@@ -49,8 +53,7 @@ const PlaceAsContractor: FC<Props> = ({ accountName, isDisabled }) => {
             })
         );
         setIsVisible(false);
-
-        setTimeout(() => reloadPage(), 2000);
+        setSomethingCountDownEvent(DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME);
     };
 
     const handleClick = () => {
@@ -70,7 +73,7 @@ const PlaceAsContractor: FC<Props> = ({ accountName, isDisabled }) => {
             <Button
                 onClick={handleClick}
                 className={styles.button}
-                disabled={isDisabled}
+                disabled={Boolean(isSyncIsProgress) || isDisabled}
             >
                 {t('Place myself as a contractor')}
             </Button>

@@ -11,6 +11,10 @@ import {
     createMineOrder,
 } from 'entities/smartcontract';
 import { useSmartContractActionDynamic } from '../../hooks';
+import {
+    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
+    setSomethingCountDownEvent,
+} from '../../something-in-progess-modal';
 import styles from './styles.module.scss';
 import { TypeStep } from './ui/TypeStep';
 import { GeneralInformationStep } from './ui/GeneralInformationStep';
@@ -102,6 +106,9 @@ export const CreateOrderFormV2 = () => {
                     createOrder({ ...orderData, wax_user: accountName })
                 );
                 setFormStatus(Status.success);
+                setSomethingCountDownEvent(
+                    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME
+                );
             } catch (error) {
                 setFormStatus(Status.error);
             }

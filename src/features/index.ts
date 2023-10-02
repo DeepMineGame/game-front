@@ -18,3 +18,4 @@ export * from './blockchain-loader';
 export * from './starter-pack-offer';
 export * from './city';
 export * from './rental-hub';
+export * from './something-in-progess-modal';

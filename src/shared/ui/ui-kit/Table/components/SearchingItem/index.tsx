@@ -2,6 +2,10 @@ import { FC, ReactNode } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
+import {
+    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
+    setSomethingCountDownEvent,
+} from 'features';
 import { useSmartContractAction } from 'features/hooks';
 import { terminateContract } from 'entities/smartcontract';
 import { useReloadPage } from 'shared/lib/hooks';
@@ -45,6 +49,7 @@ export const SearchingItem: FC<Props> = ({
 
     const handleCancel = async () => {
         await terminateAction();
+        setSomethingCountDownEvent(DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME);
     };
 
     return (
@@ -58,7 +63,7 @@ export const SearchingItem: FC<Props> = ({
                 type="ghost"
                 className={cn(styles.button)}
             >
-                {t('components.common.button.cancel')}
+                {t('Cancel')}
             </Button>
         </div>
     );

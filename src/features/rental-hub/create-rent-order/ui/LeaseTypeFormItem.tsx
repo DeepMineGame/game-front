@@ -1,9 +1,9 @@
 import { Form, FormInstance } from 'antd';
 import { Select } from 'shared';
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { orderFields } from 'entities/order';
-import { equipmentSet } from 'entities/smartcontract';
+import { equipmentSet, rentOrderField } from 'entities/smartcontract';
 
 export enum EquipmentType {
     undefined,
@@ -14,13 +14,22 @@ export enum EquipmentType {
     structures,
     areas,
 }
-export const LeaseTypeFormItem: FC = () => {
+export const LeaseTypeFormItem: FC<{
+    setSelectedEquipmentSet: any;
+    form: FormInstance;
+    setAsset: any;
+}> = ({ setSelectedEquipmentSet, form, setAsset }) => {
     const { t } = useTranslation();
-
+    const clearSelectedAssets = useCallback(() => {
+        setSelectedEquipmentSet({});
+        setAsset(undefined);
+        form.setFieldValue([rentOrderField.asset_ids], []);
+    }, [form, setAsset, setSelectedEquipmentSet]);
     return (
         <Form.Item label={t('Lease item type')} name={orderFields.optSchema}>
             <Select
                 placeholder={t('pages.serviceMarket.createOrder.selectType')}
+                onSelect={clearSelectedAssets}
                 options={[
                     {
                         value: EquipmentType.equipment,

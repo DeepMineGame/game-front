@@ -32,12 +32,12 @@ export const ModalWithTable: FC<ModalWithTableProps> = ({
             okButtonProps={{ size: 'large' }}
             cancelButtonProps={{ size: 'large' }}
             className={className}
-            visible={visible}
+            open={visible}
             title={texts.title}
             onCancel={onCancel}
             onOk={onSubmit}
             okText={texts.onOk || t('components.common.button.okay')}
-            cancelText={t('components.common.button.cancel')}
+            cancelText={t('Cancel')}
         >
             <div className={styles.content}>
                 {texts.subtitle && (

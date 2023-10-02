@@ -7,6 +7,10 @@ import { useNavigate } from 'react-router-dom';
 import { rentalHub } from 'app/router/paths';
 import { createRentOrder, rentOrderField } from 'entities/smartcontract';
 import { useSmartContractActionDynamic } from '../../hooks';
+import {
+    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
+    setSomethingCountDownEvent,
+} from '../../something-in-progess-modal';
 import styles from './styles.module.scss';
 import { GeneralInformationStep } from './ui/GeneralInformationStep';
 import { TermsStep } from './ui/TermsStep';
@@ -86,6 +90,7 @@ export const CreateRentOrder = () => {
                 createRentOrder({ ...orderData, wax_user: accountName })
             );
             setFormStatus(Status.success);
+            setSomethingCountDownEvent(DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME);
         } catch (error) {
             setFormStatus(Status.error);
         }

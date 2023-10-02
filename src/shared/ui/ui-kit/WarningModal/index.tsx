@@ -35,9 +35,7 @@ export const WarningModal: FC<Props> = ({
             title={title}
             footer={
                 footer || [
-                    <Button onClick={onCancel}>
-                        {t('components.common.button.cancel')}
-                    </Button>,
+                    <Button onClick={onCancel}>{t('Cancel')}</Button>,
                     <Button onClick={onSubmit} type="primary">
                         {submitText || 'Ok'}
                     </Button>,

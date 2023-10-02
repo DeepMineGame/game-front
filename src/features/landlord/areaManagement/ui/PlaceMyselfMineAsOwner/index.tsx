@@ -25,8 +25,12 @@ import {
 } from 'entities/smartcontract';
 import { MinesGate, minesStore } from 'entities/contract';
 import { Button, Modal, Result, Select, Text } from 'shared/ui/ui-kit';
-import { useReloadPage, useTableData } from 'shared/lib/hooks';
+import { useTableData } from 'shared/lib/hooks';
 import { neutral9 } from 'shared/ui/variables';
+import {
+    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
+    setSomethingCountDownEvent,
+} from '../../../../something-in-progess-modal';
 import styles from './styles.module.scss';
 import { LandlordAreasGate, landlordAreasStore } from './model';
 
@@ -47,7 +51,6 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
     });
 
     const { t } = useTranslation();
-    const reloadPage = useReloadPage();
     const callAction = useSmartContractActionDynamic();
     const [isVisible, setIsVisible] = useState(false);
     const [isWarningVisible, setIsWarningVisible] = useState(false);
@@ -90,7 +93,7 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
             })
         );
 
-        setTimeout(() => reloadPage(), 2000);
+        setSomethingCountDownEvent(DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME);
     };
 
     const handleClick = () => {
@@ -132,7 +135,7 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
     const handleSignOrder = async () => {
         await signContractAction();
         setIsVisible(false);
-        setTimeout(() => reloadPage(), 2000);
+        setSomethingCountDownEvent(DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME);
     };
 
     const mines = useMemo(

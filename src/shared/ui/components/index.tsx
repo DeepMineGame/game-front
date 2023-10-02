@@ -12,3 +12,4 @@ export * from './LogAs';
 export * from './full-screen-background';
 export * from './countdown';
 export * from './upgrade-report';
+export * from './elit-dangerous-loader';
