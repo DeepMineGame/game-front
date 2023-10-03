@@ -12,7 +12,6 @@ export const AddNewMine = () => {
         <>
             <Button
                 block
-                type="ghost"
                 icon={<PlusOutlined />}
                 onClick={() => setIsAddModalVisible(true)}
             >

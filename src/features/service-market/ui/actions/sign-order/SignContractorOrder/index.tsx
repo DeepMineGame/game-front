@@ -129,7 +129,7 @@ const SignAsMineOwner: FC<Props> = ({ contract, accountName, isClient }) => {
                     <Select
                         onChange={setMineId}
                         className={styles.select}
-                        placeholder={t('pages.serviceMarket.order.selectMine')}
+                        placeholder={t('Select the mine')}
                         options={mines.map((props) => ({
                             value: 'id' in props ? props.id : props.asset_id,
                             label: `ID ${

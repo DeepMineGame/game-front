@@ -1,4 +1,4 @@
-import { Page, PageWithTabs, useAccountName } from 'shared';
+import { Page } from 'shared';
 import { MineOwnerCrew } from 'features';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';

@@ -6,7 +6,7 @@ import {
     ExclamationCircleFilled,
 } from '@ant-design/icons';
 import { ATOMICHUB_URL } from 'app/constants';
-import { App } from 'antd';
+import { App, Modal } from 'antd';
 import { getEmptySlot } from 'features/service-market';
 import {
     useSmartContractAction,
@@ -24,7 +24,7 @@ import {
     UserInventoryType,
 } from 'entities/smartcontract';
 import { MinesGate, minesStore } from 'entities/contract';
-import { Button, Modal, Result, Select, Text } from 'shared/ui/ui-kit';
+import { Button, Result, Select, Text } from 'shared/ui/ui-kit';
 import { useTableData } from 'shared/lib/hooks';
 import { neutral9 } from 'shared/ui/variables';
 import {
@@ -154,12 +154,12 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
 
     return (
         <>
-            <Button type="ghost" onClick={handleClick} disabled={isDisabled}>
+            <Button onClick={handleClick} disabled={isDisabled}>
                 {t('pages.areaManagement.placeAsMineOwner')}
             </Button>
 
             <Modal
-                visible={isWarningVisible}
+                open={isWarningVisible}
                 okText={t('components.common.button.visitMarketplace')}
                 onCancel={() => setIsWarningVisible(false)}
                 onOk={() => window.open(ATOMICHUB_URL, '_blank')}
@@ -178,8 +178,8 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
             </Modal>
 
             <Modal
-                visible={isVisible}
-                title={t('pages.serviceMarket.order.selectMine')}
+                open={isVisible}
+                title={t('Select the mine')}
                 okText={t('components.common.button.sign')}
                 onCancel={() => setIsVisible(false)}
                 onOk={handleSignOrder}
@@ -191,7 +191,7 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
                     <Select
                         onChange={setMineId}
                         className={styles.select}
-                        placeholder={t('pages.serviceMarket.order.selectMine')}
+                        placeholder={t('Select the mine')}
                         options={mines}
                     />
                 </div>

@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Button, Modal } from 'shared';
+import { Button } from 'shared';
 import { useNavigate } from 'react-router-dom';
 import { createOrder, serviceMarket } from 'app/router/paths';
+import { Modal } from 'antd';
 import { ContractRole, ContractType } from 'entities/smartcontract';
 import { orderFields } from 'entities/order';
 import { Roles } from 'entities/game-stat';
@@ -24,28 +25,29 @@ export const AddMineOwnerModal: FC<Props> = ({ visible, onCancel }) => {
             width={458}
             open={visible}
             onCancel={onCancel}
-            title={t('pages.areaManagement.add')}
+            title={t('Add new mine')}
+            footer={null}
         >
-            <Button
-                className={styles.button}
-                block
-                onClick={() =>
-                    navigate(`${serviceMarket}?user_role=${Roles.landlord}`)
-                }
-            >
-                {t('pages.areaManagement.findMineOwner')}
-            </Button>
-            <Button
-                className={styles.button}
-                block
-                onClick={() =>
-                    navigate(
-                        `${createOrder}?${orderFields.contractType}=${ContractType.landlord_mineowner}&${orderFields.isClient}=${ContractRole.client}`
-                    )
-                }
-            >
-                {t('pages.areaManagement.createOrder')}
-            </Button>
+            <div className={styles.modalContent}>
+                <Button
+                    className={styles.button}
+                    onClick={() =>
+                        navigate(`${serviceMarket}?user_role=${Roles.landlord}`)
+                    }
+                >
+                    {t('pages.areaManagement.findMineOwner')}
+                </Button>
+                <Button
+                    className={styles.button}
+                    onClick={() =>
+                        navigate(
+                            `${createOrder}?${orderFields.contractType}=${ContractType.landlord_mineowner}&${orderFields.isClient}=${ContractRole.client}`
+                        )
+                    }
+                >
+                    {t('pages.areaManagement.createOrder')}
+                </Button>
+            </div>
         </Modal>
     );
 };

@@ -103,7 +103,6 @@ export const AreaManagementPage = () => {
                             <Col span={4}>
                                 <Button
                                     block
-                                    type="ghost"
                                     disabled
                                     icon={<UnlockOutlined />}
                                 >

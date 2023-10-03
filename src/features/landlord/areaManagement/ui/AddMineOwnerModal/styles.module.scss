@@ -1,11 +1,14 @@
 @import "src/shared";
 
-.modal {
-  :global {
-    .ant-modal-body {
-      padding: 66px 90px;
-    }
-  }
+.modalContent {
+  padding-top: 20%;
+  text-align: center;
+  padding-bottom: 20%;
+}
+
+.button {
+  width: 70%;
+  margin: auto;
 }
 
 .button:first-child {

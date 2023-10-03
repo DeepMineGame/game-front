@@ -11,12 +11,7 @@ import {
     Statistic,
     Typography,
 } from 'antd';
-import {
-    SearchingItem,
-    toLocaleDate,
-    useAccountName,
-    useReloadPage,
-} from 'shared';
+import { SearchingItem, toLocaleDate, useAccountName } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { PlusOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
@@ -38,7 +33,6 @@ export const MineOwnerCrew: FC = () => {
     const accountName = useAccountName();
     const navigate = useNavigate();
     const { modal } = App.useApp();
-    const reloadPage = useReloadPage();
 
     useGate(MineCrewGate, { mineOwner: accountName });
     const mineCrew = useStore($mineCrew);
@@ -62,10 +56,12 @@ export const MineOwnerCrew: FC = () => {
         modal.success({
             title: t('pages.serviceMarket.order.signOrder'),
             content: t('pages.serviceMarket.order.orderCreated'),
-            onOk: reloadPage,
+            onOk: () =>
+                setSomethingCountDownEvent(
+                    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME
+                ),
         });
-        setSomethingCountDownEvent(DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME);
-    }, [modal, reloadPage, signContractAction, t]);
+    }, [modal, signContractAction, t]);
 
     if (isMineCrewLoading) {
         return <Skeleton />;
