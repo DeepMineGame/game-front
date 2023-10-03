@@ -477,7 +477,6 @@
         "signOrder": "Sign the order",
         "orderCreated": "Your order was signed",
         "deleteOrder": "Delete the order",
-        "selectMine": "Select the mine",
         "doNotHaveMine": "You do not have a mine that meets the conditions of the order",
         "doNotHaveMineSlot": "You do not have a mine slot that meets the conditions of the order",
         "doNotHaveArea": "You do not have a area that meets the conditions of the order",
@@ -548,7 +547,6 @@
       "mineSlots": "Mine slots",
       "status": "Mine status",
       "activity": "Mine activity",
-      "add": "Add new mine",
       "searching": "Searching for Mine owner",
       "findMineOwner": "Find a Mine owner on the Service Market",
       "createOrder": "Create an order for a Mine owner",
@@ -1101,5 +1099,8 @@
   },
   "Blueprint": "Blueprint",
   "Youtube": "Youtube",
-  "Select mine and sign the order": "Select mine and sign the order"
+  "Select mine and sign the order": "Select mine and sign the order",
+  "Sign as a mine owner to start working in your mine": "Sign as a mine owner to start working in your mine",
+  "Select the mine": "Select the mine",
+  "Go to the mine ": "Go to the mine "
 }

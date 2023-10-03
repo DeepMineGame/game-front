@@ -1,7 +1,7 @@
 import { createEffect, createStore, forward } from 'effector';
 import { createGate } from 'effector-react';
 import { ContractDto, ContractType } from 'entities/smartcontract';
-import { FilterOrderStatus, getOrders, Role } from 'entities/game-stat';
+import { getMarketOrders, OrderStatus, Roles } from 'entities/game-stat';
 
 export const MineOwnerContractsGate = createGate<{
     searchParam: string;
@@ -9,9 +9,9 @@ export const MineOwnerContractsGate = createGate<{
 
 export const getMineOwnerContractsFx = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
-        return getOrders({
-            userRole: Role.all,
-            status: FilterOrderStatus.current,
+        return getMarketOrders({
+            user_role: Roles.landlord,
+            statuses: OrderStatus.current,
             user: searchParam,
         });
     }

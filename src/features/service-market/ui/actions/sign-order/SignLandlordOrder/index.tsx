@@ -122,7 +122,7 @@ const SignLandlordOrder: FC<Props> = ({
                     <Select
                         onChange={setMineId}
                         className={styles.select}
-                        placeholder={t('pages.serviceMarket.order.selectMine')}
+                        placeholder={t('Select the mine')}
                         options={[
                             ...userMine.map(({ id }) => ({
                                 value: id,

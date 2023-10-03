@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Modal } from 'shared/ui';
+import { Modal } from 'antd';
 
 type Props = {
     isVisible: boolean;
@@ -22,8 +22,8 @@ const SignModal: FC<Props> = ({
 
     return (
         <Modal
-            visible={isVisible}
-            title={title || t('pages.serviceMarket.order.selectMine')}
+            open={isVisible}
+            title={title || t('Select the mine')}
             onCancel={onCancel}
             onOk={onOk}
             okText={okText || t('components.common.button.sign')}

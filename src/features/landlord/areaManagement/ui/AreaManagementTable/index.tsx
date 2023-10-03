@@ -1,16 +1,25 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { SearchingItem, useAccountName } from 'shared';
+import { SearchingItem, Select, Text, useAccountName } from 'shared';
 import { useGate, useStore } from 'effector-react';
-import { Result } from 'antd';
-import { ContractDto } from 'entities/smartcontract';
+import { App, Button, Modal, Result } from 'antd';
+import { mineOwner } from 'app/router/paths';
+import { useNavigate } from 'react-router';
+import { ContractDto, signOrder } from 'entities/smartcontract';
+import { MinesGate, minesStore } from 'entities/contract';
 import { AreaManagementTableContent } from '../AreaManagementTableContent';
 import {
     $minesOnLand,
     getMinesOnLandEffect,
     LandGate,
 } from '../../../models/mines-on-land';
+import {
+    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
+    setSomethingCountDownEvent,
+} from '../../../../something-in-progess-modal';
+import { useSmartContractAction } from '../../../../hooks';
+import styles from '../../../../mine-owner/crew/ui/styles.module.scss';
 
 type Props = {
     ownContracts: ContractDto[];
@@ -23,24 +32,79 @@ export const AreaManagementTable: FC<Props> = ({
     areaId,
     signedContracts,
 }) => {
-    useGate(LandGate, { searchParam: areaId });
     const accountName = useAccountName();
+    const navigate = useNavigate();
+
+    useGate(LandGate, { searchParam: areaId });
+    useGate(MinesGate, { searchParam: accountName });
+
+    const { modal } = App.useApp();
+
     const { t } = useTranslation();
     const mines = useStore($minesOnLand);
+    const userMine = useStore(minesStore);
+
     const idsSetupMineContracts = mines.map(({ id }) => id);
     const isLoading = useStore(getMinesOnLandEffect.pending);
     const unSetupMine = signedContracts.filter(
         ({ id }) => !idsSetupMineContracts.includes(id)
     );
+    const selfContract = ownContracts?.find(
+        ({ client, executor }) => client === executor
+    );
+    const [selfMineId, setSelfMineId] = useState('');
+    const [selfMineSelectModalVisibility, setSelfMineSelectModalVisibility] =
+        useState(false);
 
-    const searchingSlots = ownContracts.map((contract) => (
+    const signContractAction = useSmartContractAction({
+        action: signOrder({
+            waxUser: accountName,
+            contractId: selfContract?.id || 0,
+            isClient: 0,
+            assetId: selfMineId,
+        }),
+    });
+    const handleSignOrder = useCallback(async () => {
+        await signContractAction();
+        modal.success({
+            title: t('pages.serviceMarket.order.signOrder'),
+            content: t('pages.serviceMarket.order.orderCreated'),
+            onOk: () =>
+                setSomethingCountDownEvent(
+                    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME
+                ),
+        });
+    }, [modal, signContractAction, t]);
+
+    const selfContractSlot = selfContract && (
         <SearchingItem
-            key={contract.id}
+            key={selfContract.id}
             text={t('Searching for Mine owner')}
-            contract={contract}
+            contract={selfContract}
             accountName={accountName}
+            subText={t('Sign as a mine owner to start working in your mine')}
+            actionButton={
+                <Button
+                    onClick={() => setSelfMineSelectModalVisibility(true)}
+                    type="primary"
+                    size="small"
+                >
+                    {t('Sign the order')}
+                </Button>
+            }
         />
-    ));
+    );
+
+    const searchingSlots = ownContracts
+        .filter(({ client, executor }) => client !== executor)
+        .map((contract) => (
+            <SearchingItem
+                key={contract.id}
+                text={t('Searching for Mine owner')}
+                contract={contract}
+                accountName={accountName}
+            />
+        ));
 
     const unSetupMinePlug = unSetupMine.map((contract) => (
         <SearchingItem
@@ -48,20 +112,50 @@ export const AreaManagementTable: FC<Props> = ({
             text={t('Waiting for Mine set up')}
             contract={contract}
             accountName={accountName}
+            actionButton={
+                <Button type="link" onClick={() => navigate(mineOwner)}>
+                    {t('Go to the mine ')}
+                </Button>
+            }
         />
     ));
     if (isLoading) {
         return null;
     }
 
-    if (mines?.length || searchingSlots.length) {
+    if (
+        mines?.length ||
+        searchingSlots.length ||
+        unSetupMinePlug.length ||
+        selfContractSlot
+    ) {
         return (
             <div>
                 {Boolean(mines?.length) && (
                     <AreaManagementTableContent data={mines} />
                 )}
+                {selfContractSlot}
                 {searchingSlots}
                 {unSetupMinePlug}
+                <Modal
+                    open={selfMineSelectModalVisibility}
+                    onCancel={() => setSelfMineSelectModalVisibility(false)}
+                    onOk={handleSignOrder}
+                    okButtonProps={{ disabled: !selfMineId }}
+                >
+                    <div className={styles.selectWrapper}>
+                        <Text>{t('components.common.mine.title')}</Text>
+                        <br />
+                        <Select
+                            onChange={setSelfMineId}
+                            placeholder={t('Select the mine')}
+                            options={userMine.map(({ id }) => ({
+                                value: id,
+                                label: `ID${id}`,
+                            }))}
+                        />
+                    </div>
+                </Modal>
             </div>
         );
     }

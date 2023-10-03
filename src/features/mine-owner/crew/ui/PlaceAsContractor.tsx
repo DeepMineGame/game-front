@@ -88,7 +88,7 @@ const PlaceAsContractor: FC<Props> = ({ accountName, isDisabled }) => {
                     <br />
                     <Select
                         onChange={setMineId}
-                        placeholder={t('pages.serviceMarket.order.selectMine')}
+                        placeholder={t('Select the mine')}
                         options={mines.map(({ id }) => ({
                             value: id,
                             label: `ID${id}`,
