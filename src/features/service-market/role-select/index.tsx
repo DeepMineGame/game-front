@@ -3,8 +3,9 @@ import { useCallback } from 'react';
 import { useStore } from 'effector-react';
 import { useAccountName } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { e_upg_asset_type, Roles } from 'entities/game-stat';
+import { Roles } from 'entities/game-stat';
 import { changeFilterEvent, filterStore } from '../contractor-table/model';
+import { e_upg_asset_type } from '../constants';
 import {
     availableSelectItemByRole,
     contractorItem,

@@ -8,7 +8,7 @@ import {
     contractStore,
     ContractType,
 } from 'entities/smartcontract';
-import { Role } from 'entities/game-stat';
+import { Roles } from 'entities/game-stat';
 
 enum Tabs {
     stats,
@@ -22,7 +22,7 @@ export const MineOwnerStatAndInfoPage: FC = () => {
     useGate(ContractsGate);
     useGate(MineStatsGate, {
         searchParam: accountName,
-        role: Role.mineowner,
+        role: Roles.mineowner,
     });
 
     const contracts = useStore(contractStore);

@@ -47,7 +47,6 @@ const EquipmentHallPage: FC = () => {
         accountName,
         engineerStore.contracts
     );
-
     return (
         <Page headerTitle={t('Equipment hall').toUpperCase()}>
             {isCabinLoading ? (

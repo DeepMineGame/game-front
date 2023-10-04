@@ -1,6 +1,6 @@
 import { createEffect, createStore, forward } from 'effector';
 import { createGate } from 'effector-react';
-import { getMineStats, MineStatUnit, Role } from 'entities/game-stat';
+import { getMineStats, MineStatUnit, Roles } from 'entities/game-stat';
 
 const getMineOwnerStatEffect = createEffect(getMineStats);
 
@@ -11,7 +11,7 @@ export const $mineStats = createStore<MineStatUnit[]>([]).on(
 
 export const MineStatsGate = createGate<{
     searchParam: string;
-    role: Role;
+    role: Roles;
 }>('MineStatsGate');
 
 forward({

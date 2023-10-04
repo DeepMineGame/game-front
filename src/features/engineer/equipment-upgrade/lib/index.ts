@@ -1,4 +1,4 @@
-import { ContractDto } from 'entities/smartcontract';
+import { ContractDto, ContractStatus } from 'entities/smartcontract';
 import { AssetDataType } from 'entities/atomicassets';
 import upgrades from '../data/upgrade-time.json';
 import timeModification from '../data/time-modification.json';
@@ -53,7 +53,10 @@ const getEngineerActiveContract = (
     }
 
     return (contracts || []).find(
-        (contract) => !contract.deleted_at && contract.executor === user
+        (contract) =>
+            !contract.deleted_at &&
+            contract.executor === user &&
+            contract.status === ContractStatus.active
     );
 };
 

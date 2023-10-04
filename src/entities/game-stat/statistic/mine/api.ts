@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ENDPOINT } from 'app/constants';
-import { Role } from '../user';
+import { Roles } from '../market';
 
 export type MineStatUnit = {
     date: number;
@@ -17,7 +17,7 @@ export const getMineStats = async ({
     role,
 }: {
     searchParam: string;
-    role: Role;
+    role: Roles;
 }) => {
     const { data = [] } = await axios.get<MineStatUnit[]>(
         `${ENDPOINT}/statistic/mining/stat`,
