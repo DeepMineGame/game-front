@@ -1,7 +1,7 @@
 import { FC, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
-import { ModalProps } from 'antd';
+import { Modal, ModalProps } from 'antd';
 import { useTableData } from 'shared';
 import { AssetDataType } from 'entities/atomicassets';
 import {
@@ -10,7 +10,7 @@ import {
     getMkatableConfig,
 } from 'entities/smartcontract';
 import { getKitImage } from 'shared/lib/utils';
-import { Modal, Text } from 'shared/ui/ui-kit';
+import { Text } from 'shared/ui/ui-kit';
 import { UpgradeKitType } from '../../model/upgrade-kit';
 import { EQUIPMENT_SET_LENGTH } from '../../constants';
 import styles from './styles.module.scss';

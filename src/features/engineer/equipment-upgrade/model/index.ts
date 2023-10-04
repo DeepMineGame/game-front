@@ -1,15 +1,19 @@
 import { createEffect, createStore, sample } from 'effector';
 
 import { AssetDataType, getAssets } from 'entities/atomicassets';
-import { getOrders, Role, FilterOrderStatus } from 'entities/game-stat';
-import { ContractDto, ContractType } from 'entities/smartcontract';
+import { getMarketOrders, OrderStatus, Roles } from 'entities/game-stat';
+import {
+    ContractDto,
+    ContractStatus,
+    ContractType,
+} from 'entities/smartcontract';
 import { getContractWithoutReport } from '../lib';
 
 const getContractsExecutorEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
-        return getOrders({
-            userRole: Role.engineer,
-            status: FilterOrderStatus.current,
+        return getMarketOrders({
+            user_role: Roles.engineer,
+            statuses: OrderStatus.current,
             user: searchParam,
         });
     }
@@ -42,7 +46,11 @@ sample({
 
         return (
             contracts
-                ?.find((contract) => !contract.deleted_at)
+                ?.find(
+                    (contract) =>
+                        !contract.deleted_at &&
+                        contract.status === ContractStatus.active
+                )
                 ?.attrs?.find(({ key }) => key === 'asset_ids')?.value || ''
         );
     },
