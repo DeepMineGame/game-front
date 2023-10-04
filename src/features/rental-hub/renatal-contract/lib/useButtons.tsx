@@ -2,7 +2,12 @@ import { useTranslation } from 'react-i18next';
 import { App, Button, Tooltip } from 'antd';
 import React, { useState } from 'react';
 import { useAccountName } from 'shared';
-import { ContractDto, signrcontr, trmrcontract } from 'entities/smartcontract';
+import {
+    ContractDto,
+    RentalContractStatuses,
+    signrcontr,
+    trmrcontract,
+} from 'entities/smartcontract';
 import { useSmartContractAction } from '../../../hooks';
 import { SecondPartyDepositModal } from '../ui';
 import {
@@ -198,6 +203,13 @@ export const useButtons = (
         frontStatus === frontStatusMap['Open Order'] &&
         contract.owner !== accountName &&
         !contract.renter
+    ) {
+        return signButton;
+    }
+    if (
+        frontStatus === frontStatusMap['Open Order'] &&
+        contract.renter === accountName &&
+        contract.status === RentalContractStatuses.SIGNED_BY_OWNER
     ) {
         return signButton;
     }

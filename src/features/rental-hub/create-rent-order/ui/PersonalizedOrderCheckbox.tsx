@@ -1,25 +1,29 @@
-import { Checkbox, Input } from 'shared';
+import { Checkbox, Input, useAccountName } from 'shared';
 import { Form, FormInstance, Space } from 'antd';
 import { FC, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { orderFields } from 'entities/order';
 
+import { ValidateStatus } from 'antd/es/form/FormItem';
+import { rentOrderField } from 'entities/smartcontract';
 import styles from '../styles.module.scss';
 
 export const PersonalizedOrderCheckbox: FC<{
     form: FormInstance;
-    isSelfClient: boolean;
-}> = ({ form, isSelfClient }) => {
+}> = ({ form }) => {
     const [isPersonalizedOrder, setIsPersonalizedOrder] = useState(false);
     const { t } = useTranslation();
-
+    const accountName = useAccountName();
+    const [inputMeta, setInputMeta] = useState<{
+        value: string;
+        validateStatus?: ValidateStatus;
+        errorMsg?: string | null;
+    }>({ value: '' });
     const handleChange = useCallback(
         (event) => {
             if (!event.target.checked) {
                 form.setFieldsValue({
                     ...form.getFieldsValue(),
-                    [orderFields.optClient]: null,
-                    [orderFields.optExecutor]: null,
+                    [rentOrderField.opt_renter]: null,
                 });
             }
             setIsPersonalizedOrder(event.target.checked);
@@ -34,19 +38,24 @@ export const PersonalizedOrderCheckbox: FC<{
             </Checkbox>
             {isPersonalizedOrder ? (
                 <Form.Item
-                    label={
-                        isSelfClient
-                            ? t('components.common.client')
-                            : t('components.common.executor')
-                    }
+                    label={t('components.common.client')}
                     className={styles.formField}
-                    name={
-                        isSelfClient
-                            ? orderFields.optClient
-                            : orderFields.optExecutor
-                    }
+                    name={rentOrderField.opt_renter}
+                    validateStatus={inputMeta.validateStatus}
+                    help={inputMeta.errorMsg}
                 >
-                    <Input />
+                    <Input
+                        onChange={(e) => {
+                            if (accountName === e.target.value) {
+                                return setInputMeta({
+                                    value: e.target.value,
+                                    errorMsg: 'Can not assign to yourself',
+                                    validateStatus: 'error',
+                                });
+                            }
+                            setInputMeta({ value: e.target.value });
+                        }}
+                    />
                 </Form.Item>
             ) : (
                 <div />
