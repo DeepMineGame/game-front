@@ -8,9 +8,9 @@ import {
 import { Space, Tooltip } from 'antd';
 import { useNavigate } from 'react-router';
 import { CopyOutlined } from '@ant-design/icons';
+import { e_upg_asset_type, equipmentNames } from 'features';
 import { ContractDto, normalizeAttrs } from 'entities/smartcontract';
 
-import { e_upg_asset_type, equipmentNames } from 'entities/game-stat';
 import { Link, Table } from '../../../ui-kit';
 import { toLocaleDate } from '../../../utils';
 import styles from '../styles.module.scss';

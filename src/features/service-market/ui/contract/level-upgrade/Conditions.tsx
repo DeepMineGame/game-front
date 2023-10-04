@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toLocaleDate } from 'shared';
 import { ContractDto, normalizeAttrs, rarityMap } from 'entities/smartcontract';
-import { e_upg_asset_type, equipmentNames } from 'entities/game-stat';
 import { TableWithTitle } from '../..';
+import { e_upg_asset_type, equipmentNames } from '../../../constants';
 
 type Props = {
     contract: ContractDto;

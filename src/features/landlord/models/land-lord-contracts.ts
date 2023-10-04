@@ -1,15 +1,14 @@
 import { createEffect, createStore, forward } from 'effector';
 import { createGate } from 'effector-react';
 import { ContractDto, ContractType } from 'entities/smartcontract';
-
-import { getMyOrders } from 'entities/game-stat';
+import { getMarketOrders } from 'entities/game-stat';
 
 export const LandlordContractsGate = createGate<{ searchParam: string }>(
     'LandlordContractsGate'
 );
 export const getLandLordContractsEffect = createEffect(
     async ({ searchParam }: { searchParam: string }) => {
-        return getMyOrders({
+        return getMarketOrders({
             user: searchParam,
         });
     }

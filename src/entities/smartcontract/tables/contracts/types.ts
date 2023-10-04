@@ -1,4 +1,4 @@
-import { e_upg_asset_type } from 'entities/game-stat';
+import { e_upg_asset_type } from 'features';
 import { RarityType } from '../inventories';
 
 export enum ContractType {
