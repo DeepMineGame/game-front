@@ -1,10 +1,9 @@
 import { FC } from 'react';
-import { Badge } from 'antd';
+import { Badge, Space } from 'antd';
 import type { ColumnsType } from 'antd/lib/table';
 import { useTranslation } from 'react-i18next';
 import {
     Table,
-    DiscordIcon,
     neutral8,
     green6,
     gold6,
@@ -15,7 +14,6 @@ import {
 } from 'shared';
 import { MinesOnLand } from 'entities/game-stat';
 import { MineState } from 'entities/smartcontract';
-import styles from './styles.module.scss';
 
 const getStatusColor = (status: MineState) => {
     switch (status) {
@@ -43,20 +41,6 @@ export const AreaManagementTableContent: FC<Props> = ({ data }) => {
         return <div>{t('components.common.noData')}</div>;
     }
     const columns: ColumnsType<MinesOnLand> = [
-        {
-            dataIndex: 'mine_owner_discord',
-            key: 'mine_owner_discord',
-            width: 56,
-            render: (discord: string) => {
-                return (
-                    discord && (
-                        <a href={discord}>
-                            <DiscordIcon style={{ verticalAlign: 'middle' }} />
-                        </a>
-                    )
-                );
-            },
-        },
         {
             title: t('Mine owner'),
             dataIndex: 'mine_owner',
@@ -101,10 +85,10 @@ export const AreaManagementTableContent: FC<Props> = ({ data }) => {
             key: 'status',
 
             render: (status: MineState) => (
-                <div className={styles.status}>
+                <Space>
                     <Badge color={getStatusColor(status)} />{' '}
                     {t(`components.common.status.${MineState[status]}`)}
-                </div>
+                </Space>
             ),
         },
         {
@@ -116,7 +100,7 @@ export const AreaManagementTableContent: FC<Props> = ({ data }) => {
             title: t('Mine crew'),
             dataIndex: 'current_crew',
             key: 'crew',
-            render: (crew) => <div className={styles.crew}>{crew}</div>,
+            render: (crew) => <div>{crew}</div>,
         },
         {
             title: t('pages.areaManagement.activity'),
