@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import { rentOrderField } from 'entities/smartcontract';
 import styles from '../../styles.module.scss';
+import { PersonalizedOrderCheckbox } from '../PersonalizedOrderCheckbox';
 import localStyles from './styles.module.scss';
 import { TermsStepProps } from './interface';
 
@@ -87,15 +88,18 @@ export const Terms: FC<TermsStepProps> = ({
             >
                 <Checkbox>{t('Auto-renewal')}</Checkbox>
             </Form.Item>
-            <Space direction="horizontal">
-                <Button onClick={goToPreviousStep}>{t('kit.back')}</Button>
-                <Button
-                    onClick={goToNextStep}
-                    type="primary"
-                    disabled={!hasAllValues}
-                >
-                    {t('Next')}
-                </Button>
+            <Space direction="vertical" size="large">
+                <PersonalizedOrderCheckbox form={form} />
+                <Space direction="horizontal">
+                    <Button onClick={goToPreviousStep}>{t('kit.back')}</Button>
+                    <Button
+                        onClick={goToNextStep}
+                        type="primary"
+                        disabled={!hasAllValues}
+                    >
+                        {t('Next')}
+                    </Button>
+                </Space>
             </Space>
         </div>
     );

@@ -45,7 +45,7 @@ export const createRentOrder = (orderData: RentOrderDto) => {
                 ],
                 data: {
                     wax_user: orderData.wax_user,
-                    opt_renter: null,
+                    opt_renter: orderData.opt_renter,
                     asset_ids: orderData.asset_ids,
                     deposit_type: 1,
                     deposit_amount: orderData.fee_min_amount * 10 ** 8,
