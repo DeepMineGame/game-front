@@ -7,7 +7,11 @@ import { App, Button, Modal, Result } from 'antd';
 import { mineOwner } from 'app/router/paths';
 import { useNavigate } from 'react-router';
 import { ContractDto, signOrder } from 'entities/smartcontract';
-import { MinesGate, minesStore } from 'entities/contract';
+import {
+    $mineInActiveInventory,
+    MinesGate,
+    minesStore,
+} from 'entities/contract';
 import { AreaManagementTableContent } from '../AreaManagementTableContent';
 import {
     $minesOnLand,
@@ -43,6 +47,10 @@ export const AreaManagementTable: FC<Props> = ({
     const { t } = useTranslation();
     const mines = useStore($minesOnLand);
     const userMine = useStore(minesStore);
+    const mineInActiveInventory = useStore($mineInActiveInventory);
+    const minesFromTableAndInventory = userMine.length
+        ? userMine
+        : mineInActiveInventory;
 
     const idsSetupMineContracts = mines.map(({ id }) => id);
     const isLoading = useStore(getMinesOnLandEffect.pending);
@@ -149,10 +157,19 @@ export const AreaManagementTable: FC<Props> = ({
                         <Select
                             onChange={setSelfMineId}
                             placeholder={t('Select the mine')}
-                            options={userMine.map(({ id }) => ({
-                                value: id,
-                                label: `ID${id}`,
-                            }))}
+                            options={minesFromTableAndInventory.map(
+                                (props) => ({
+                                    value:
+                                        'id' in props
+                                            ? props.id
+                                            : props.asset_id,
+                                    label: `ID ${
+                                        'id' in props
+                                            ? props.id
+                                            : props.asset_id
+                                    }`,
+                                })
+                            )}
                         />
                     </div>
                 </Modal>

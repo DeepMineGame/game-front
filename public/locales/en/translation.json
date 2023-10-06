@@ -923,7 +923,6 @@
   "Add new mine": "Add new mine",
   "Open new mine spot": "Open new mine spot",
   "Mined after ejection": "Mined after ejection",
-  "Place myself as a Mine owner": "Place myself as a Mine owner",
   "There are no mines installed here yet": "There are no mines installed here yet",
   "You need to create a contract to install the mine or choose from the existing ones on the Service Market. Also, you can become the Mineowner and install the mine on your land.": "You need to create a contract to install the mine or choose from the existing ones on the Service Market. Also, you can become the Mineowner and install the mine on your land.",
   "Mine crew": "Mine crew",
@@ -1102,5 +1101,6 @@
   "Select mine and sign the order": "Select mine and sign the order",
   "Sign as a mine owner to start working in your mine": "Sign as a mine owner to start working in your mine",
   "Select the mine": "Select the mine",
-  "Go to the mine ": "Go to the mine "
+  "Go to the mine ": "Go to the mine ",
+  "You don't have setuped mines": "You don't have setuped mines"
 }

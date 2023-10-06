@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from 'react';
+import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
 import {
@@ -8,24 +8,15 @@ import {
 import { ATOMICHUB_URL } from 'app/constants';
 import { App, Modal } from 'antd';
 import { getEmptySlot } from 'features/service-market';
-import {
-    useSmartContractAction,
-    useSmartContractActionDynamic,
-} from 'features/hooks';
+import { useSmartContractActionDynamic } from 'features/hooks';
 
 import {
     ContractDto,
     ContractType,
     createMineOrder,
-    getInventoryConfig,
-    InUseType,
-    signOrder,
-    StructType,
-    UserInventoryType,
 } from 'entities/smartcontract';
-import { MinesGate, minesStore } from 'entities/contract';
-import { Button, Result, Select, Text } from 'shared/ui/ui-kit';
-import { useTableData } from 'shared/lib/hooks';
+import { MinesGate } from 'entities/contract';
+import { Button, Result } from 'shared/ui/ui-kit';
 import { neutral9 } from 'shared/ui/variables';
 import {
     DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
@@ -52,22 +43,9 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
 
     const { t } = useTranslation();
     const callAction = useSmartContractActionDynamic();
-    const [isVisible, setIsVisible] = useState(false);
     const [isWarningVisible, setIsWarningVisible] = useState(false);
-    const [mineId, setMineId] = useState('');
-    const userMine = useStore(minesStore);
     const userAreas = useStore(landlordAreasStore) || [];
     const { modal } = App.useApp();
-
-    const { data: userInventory } =
-        useTableData<UserInventoryType>(getInventoryConfig);
-
-    const allowedMine = userInventory.filter(
-        (inventory) =>
-            inventory.struct_type === StructType.mine &&
-            inventory.in_use === InUseType.notInUse
-    );
-
     const activeArea = userAreas.filter(
         (area) => area.owner === accountName
     )[0];
@@ -113,44 +91,7 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
                 },
             });
         }
-
-        // 2. sign ll contract as mine owner
-        modal.confirm({
-            title: t('pages.areaManagement.placeAsMineOwner'),
-            content: t('pages.areaManagement.youNeedSecond'),
-            icon: <ExclamationCircleOutlined style={{ color: neutral9 }} />,
-            onOk: () => setIsVisible(true),
-        });
     };
-
-    const signContractAction = useSmartContractAction({
-        action: signOrder({
-            waxUser: accountName,
-            assetId: mineId,
-            contractId: contract?.id!,
-            isClient: 0,
-        }),
-    });
-
-    const handleSignOrder = async () => {
-        await signContractAction();
-        setIsVisible(false);
-        setSomethingCountDownEvent(DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME);
-    };
-
-    const mines = useMemo(
-        () => [
-            ...userMine.map(({ id }) => ({
-                value: id,
-                label: `ID ${id}`,
-            })),
-            ...allowedMine.map(({ asset_id }) => ({
-                value: asset_id,
-                label: `ID ${asset_id}`,
-            })),
-        ],
-        [userMine, allowedMine]
-    );
 
     return (
         <>
@@ -175,26 +116,6 @@ export const PlaceMyselfMineAsOwner: FC<Props> = ({
                             : 'pages.serviceMarket.order.doNotHaveAreaSlot'
                     )}
                 />
-            </Modal>
-
-            <Modal
-                open={isVisible}
-                title={t('Select the mine')}
-                okText={t('components.common.button.sign')}
-                onCancel={() => setIsVisible(false)}
-                onOk={handleSignOrder}
-            >
-                <div className={styles.selectWrapper}>
-                    <Text className={styles.selectTitle}>
-                        {t('components.common.mine.title')}
-                    </Text>
-                    <Select
-                        onChange={setMineId}
-                        className={styles.select}
-                        placeholder={t('Select the mine')}
-                        options={mines}
-                    />
-                </div>
             </Modal>
         </>
     );

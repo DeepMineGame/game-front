@@ -72,13 +72,7 @@ export const AreaManagementPage = () => {
     const selfContractToSign = contractsToSign.find(
         ({ client, executor }) => client === executor
     );
-    const setSelfButton = (
-        <PlaceMyselfMineAsOwner
-            contract={selfContractToSign}
-            accountName={accountName}
-            isDisabled={!!selfSignedContracts.length || isContractsLoading}
-        />
-    );
+
     return (
         <Page headerTitle={t('Area management')} className={styles.body}>
             <Space
@@ -112,7 +106,16 @@ export const AreaManagementPage = () => {
                             <Col span={4} flex="center">
                                 <AddNewMine />
                             </Col>
-                            <Col span={4}>{setSelfButton}</Col>
+                            <Col span={4}>
+                                <PlaceMyselfMineAsOwner
+                                    contract={selfContractToSign}
+                                    accountName={accountName}
+                                    isDisabled={
+                                        !!selfSignedContracts.length ||
+                                        isContractsLoading
+                                    }
+                                />
+                            </Col>
                         </Row>
                     </div>
                     {areaItem?.template_id && (
