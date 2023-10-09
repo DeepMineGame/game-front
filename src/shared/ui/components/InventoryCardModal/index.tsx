@@ -156,9 +156,29 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                     <div className={styles.info}>
                         <Row align="middle">
                             <Col span={7}>
-                                <Text>
-                                    {t('pages.equipmentSet.cardModal.rarity')}
-                                </Text>
+                                <Text>{t('ID')}</Text>
+                            </Col>
+                            <Col span={7} className={styles.alignRight}>
+                                <Text>{cardData?.asset_id}</Text>
+                            </Col>
+                            <Col span={10} className={styles.rightCol}>
+                                <Space>
+                                    <Button
+                                        type="link"
+                                        className={styles.atomicButton}
+                                        onClick={() =>
+                                            navigator.clipboard.writeText(
+                                                card.asset_id
+                                            )
+                                        }
+                                    >
+                                        {t('Copy')}
+                                    </Button>
+                                </Space>
+                            </Col>
+                            <Divider verticalMargin={Margin.small} />
+                            <Col span={7}>
+                                <Text>{t('Rarity')}</Text>
                             </Col>
                             <Col span={7} className={styles.alignRight}>
                                 <Text>{cardData?.data.rarity}</Text>
@@ -168,9 +188,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                     <Link
                                         to={`${createOrder}?${orderFields.contractType}=${ContractType.level_upgrade}`}
                                     >
-                                        {t(
-                                            'pages.equipmentSet.cardModal.levelUpgrade'
-                                        )}
+                                        {t('Level upgrade')}
                                     </Link>
                                     <Tooltip
                                         overlay={t(
@@ -185,9 +203,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                         <Divider verticalMargin={Margin.small} />
                         <Row align="middle">
                             <Col span={7}>
-                                <Text>
-                                    {t('pages.equipmentSet.cardModal.level')}
-                                </Text>
+                                <Text>{t('Level')}</Text>
                             </Col>
                             <Col span={7} className={styles.alignRight}>
                                 <Text>{cardData?.data.level}</Text>
@@ -254,7 +270,6 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                 <Col span={10}>
                                     <Space>
                                         <Button
-                                            size="large"
                                             type="link"
                                             onClick={() => {
                                                 setModalData({
@@ -310,7 +325,6 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                     <Space>
                                         <Button
                                             type="link"
-                                            size="large"
                                             onClick={() => {
                                                 setModalData({
                                                     type: ModalType.refurbish,

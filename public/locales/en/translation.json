@@ -292,13 +292,10 @@
       },
       "cardModal": {
         "select": "Select",
-        "rarity": "Rarity",
-        "level": "Level",
         "depreciation": "Depreciation",
         "breakageProbability": "Malfunction probability",
         "mineLevel": "Mine level",
         "mineSublevel": "Mine sublevel",
-        "levelUpgrade": "Level upgrade",
         "rarityUpgrade": "Rarity upgrade",
         "repair": "Repair",
         "refurbish": "Refurbish",
@@ -1102,5 +1099,7 @@
   "Sign as a mine owner to start working in your mine": "Sign as a mine owner to start working in your mine",
   "Select the mine": "Select the mine",
   "Go to the mine ": "Go to the mine ",
-  "You don't have setuped mines": "You don't have setuped mines"
+  "You don't have setuped mines": "You don't have setuped mines",
+  "ID": "ID",
+  "Copy": "Copy"
 }

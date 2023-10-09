@@ -5,6 +5,7 @@ import {
     Button,
     complement,
     getImagePath,
+    Link,
     Page,
     useAccountName,
     useReloadPage,
@@ -119,11 +120,16 @@ export const AreaManagementPage = () => {
                         </Row>
                     </div>
                     {areaItem?.template_id && (
-                        <img
-                            src={getImagePath(areaItem.template_id)}
-                            alt="area nft"
-                            className={styles.areaNftImage}
-                        />
+                        <Space direction="vertical" align="center">
+                            <img
+                                src={getImagePath(areaItem.template_id)}
+                                alt="area nft"
+                                className={styles.areaNftImage}
+                            />
+                            <Link to={`/inventory/${areaItem.asset_id}`}>
+                                {t('Details')}
+                            </Link>
+                        </Space>
                     )}
                 </div>
 
