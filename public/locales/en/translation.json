@@ -424,7 +424,6 @@
         "removeEquipFirst": "You need to remove installed equipment in contractor's cabin to proceed",
         "personalOrder": "Personalized order",
         "levelUpgrade": "Level upgrade",
-        "selectType": "Select type",
         "upgradeTypeList": [
           "",
           "Mine upgrade",
@@ -523,7 +522,6 @@
         "reputation": "Reputation",
         "creationDate": "Creation date",
         "cost": "Cost",
-        "upgradeType": "Upgrade type",
         "startOfOperations": "Start of operations",
         "lookingForEngineer": "Looking for Engineer",
         "lookingForCitizen": "Looking for Citizen",
@@ -1101,5 +1099,6 @@
   "Go to the mine ": "Go to the mine ",
   "You don't have setuped mines": "You don't have setuped mines",
   "ID": "ID",
-  "Copy": "Copy"
+  "Copy": "Copy",
+  "Select type": "Select type"
 }

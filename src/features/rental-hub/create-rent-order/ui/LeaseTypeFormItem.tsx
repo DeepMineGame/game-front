@@ -28,7 +28,7 @@ export const LeaseTypeFormItem: FC<{
     return (
         <Form.Item label={t('Lease item type')} name={orderFields.optSchema}>
             <Select
-                placeholder={t('pages.serviceMarket.createOrder.selectType')}
+                placeholder={t('Select type')}
                 onSelect={clearSelectedAssets}
                 options={[
                     {
