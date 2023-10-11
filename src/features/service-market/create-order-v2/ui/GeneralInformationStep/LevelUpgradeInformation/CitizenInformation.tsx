@@ -110,7 +110,11 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
 
     return (
         <>
-            <UpgradeTypeFormItem />
+            <UpgradeTypeFormItem
+                setSelectedEquipmentSet={setSelectedEquipmentSet}
+                setAsset={setAsset}
+                form={form}
+            />
             {hasValue && (
                 <div>
                     {isOneItemToUpgrade ? (
