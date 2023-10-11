@@ -1,7 +1,6 @@
 import {
     createErrorMessage,
     getTimeLeftFromUtc,
-    showErrorNotification,
     useChainAuthContext,
 } from 'shared';
 import { useTranslation } from 'react-i18next';
@@ -87,7 +86,6 @@ export const useSmartContractActionDynamic = () => {
             ?.signTransaction(action, options)
             .catch((e) => {
                 const err = e as Error;
-                showErrorNotification(err);
 
                 modal.error({
                     title: t('components.common.status.error'),
