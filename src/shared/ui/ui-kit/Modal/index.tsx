@@ -31,7 +31,6 @@ export const Modal: FC<Props> = (props) => {
                     <div>
                         {props.onCancel && (
                             <Button
-                                ghost
                                 onClick={props.onCancel as any}
                                 {...props.cancelButtonProps}
                             >
