@@ -126,10 +126,13 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
                                     onClick={() => {
                                         setIsInventoryOpen(true);
                                         if (equipmentType === 'Mine') {
-                                            setSelectedEquipmentForFilter(
+                                            return setSelectedEquipmentForFilter(
                                                 'Mine'
                                             );
                                         }
+                                        setSelectedEquipmentForFilter(
+                                            equipmentType
+                                        );
                                     }}
                                     ghost
                                 >
