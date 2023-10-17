@@ -192,7 +192,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                     </Link>
                                     <Tooltip
                                         overlay={t(
-                                            'pages.equipmentSet.cardModal.levelUpgradeTooltip'
+                                            'Sign a level upgrade contract with Engineer. Equipment should be placed in Active Inventory to be available for upgrade'
                                         )}
                                     >
                                         <QuestionCircleOutlined />

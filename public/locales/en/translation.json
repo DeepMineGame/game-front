@@ -301,7 +301,6 @@
         "refurbish": "Refurbish",
         "insufficientFunds": "Insufficient funds for {{action}}",
         "rarityUpgradeTooltip": "The amount of DME mined by this item necessary to enable level upgrade through Engineer.",
-        "levelUpgradeTooltip": "Conclude level upgrade contract with Engineer for Equipment and Mines that mined a required amount of DME. Upgrade is possible when a card is placed in the active inventory.",
         "repairTooltip": "Restores the number of available mining actions without restoring the equipment wear",
         "refurbishTooltip": "Restores all the numbers and makes your equipment as good as new",
         "depreciationTooltip": "Mining actions performed/current wear capacity (maximum wear capacity)",
@@ -897,7 +896,7 @@
   },
   "Mine rarity": "Mine rarity",
   "Mine level": "Mine level",
-  "Specify the preferred level and rarity of the mine you want to work on": "Specify the preferred level and rarity of the mine you want to work on",
+  "Specify the preferred level and rarity of the mine you want to work with": "Specify the preferred level and rarity of the mine you want to work with",
   "Auto-renewal": "Auto-renewal",
   "Auto-renewal disabled": "Auto-renewal disabled",
   "Minimum Fee": "Minimum Fee",
@@ -1109,5 +1108,8 @@
         }
       }
     }
+  },
+  "Sign a level upgrade contract with Engineer": {
+    " Equipment should be placed in Active Inventory to be available for upgrade": "Sign a level upgrade contract with Engineer. Equipment should be placed in Active Inventory to be available for upgrade"
   }
 }
