@@ -404,7 +404,6 @@
         "selectRole": "Select role",
         "selectItem": "Select item",
         "fee": "Fee",
-        "feeTooltip": "If during the entire contract, the executor has: x days or more with the output less than: Y executor can be fined and the contract can be terminated with: deposit",
         "startOfOperation": "Start of operation",
         "effectiveDate": "Effective date",
         "startOfOperationTooltip": "The date when agreement or transaction becomes binding",
@@ -1100,5 +1099,15 @@
   "You don't have setuped mines": "You don't have setuped mines",
   "ID": "ID",
   "Copy": "Copy",
-  "Select type": "Select type"
+  "Select type": "Select type",
+  "Fee The amount of DME the counterparty receives for each extraction": "Fee The amount of DME the counterparty receives for each extraction",
+  "The minimum amount of DME that the performing party must produce": {
+    " The same amount is deposited by both parties": {
+      " The one who violated the terms of the contract and terminated it prematurely does not get its deposit back": {
+        " It is transferred to the other party": {
+          "": "The minimum amount of DME that the performing party must produce. The same amount is deposited by both parties. The one who violated the terms of the contract and terminated it prematurely does not get its deposit back. It is transferred to the other party."
+        }
+      }
+    }
+  }
 }

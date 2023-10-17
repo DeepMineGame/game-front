@@ -24,7 +24,9 @@ export const Terms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                             title={t('pages.serviceMarket.createOrder.fee')}
                             className={styles.tooltipCard}
                         >
-                            {t('pages.serviceMarket.createOrder.feeTooltip')}
+                            {t(
+                                'Fee The amount of DME the counterparty receives for each extraction'
+                            )}
                         </Card>
                     }
                 >
@@ -47,7 +49,9 @@ export const Terms: FC<TermsStepProps> = ({ goToPreviousStep }) => {
                             title={t('pages.serviceMarket.createOrder.fee')}
                             className={styles.tooltipCard}
                         >
-                            {t('pages.serviceMarket.createOrder.feeTooltip')}
+                            {t(
+                                'The minimum amount of DME that the performing party must produce. The same amount is deposited by both parties. The one who violated the terms of the contract and terminated it prematurely does not get its deposit back. It is transferred to the other party.'
+                            )}
                         </Card>
                     }
                 >
