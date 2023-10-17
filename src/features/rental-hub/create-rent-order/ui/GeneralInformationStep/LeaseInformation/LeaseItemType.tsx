@@ -118,9 +118,11 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
                 icon={<PlusOutlined />}
                 onClick={() => {
                     setIsInventoryOpen(true);
+                    console.log(equipmentType);
                     if (equipmentType === 'Mine') {
-                        setSelectedEquipmentForFilter('Mine');
+                        return setSelectedEquipmentForFilter('Mine');
                     }
+                    setSelectedEquipmentForFilter(equipmentType);
                 }}
                 ghost
             >
@@ -145,8 +147,8 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
                             type="primary"
                             icon={<PlusOutlined />}
                             onClick={() => {
-                                setIsInventoryOpen(true);
                                 setSelectedEquipmentForFilter(typeName);
+                                setIsInventoryOpen(true);
                             }}
                             ghost
                         >

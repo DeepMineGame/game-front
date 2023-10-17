@@ -98,7 +98,7 @@ export const EquipmentSetPage: FC = () => {
             .map(([, equipment]) => equipment?.asset_id)
             .filter((v) => v) as string[];
         if (!contractId) {
-            modal.warning({
+            return modal.warning({
                 title: t('You have no contracts'),
                 content: t('You have no contracts'),
             });
