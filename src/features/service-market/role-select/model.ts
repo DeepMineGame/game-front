@@ -3,7 +3,7 @@ import { createEvent, createStore } from 'effector';
 export const enum RadioButtonContractTypeNames {
     'All contracts',
     'My contracts',
-    'Contract offerings',
+    'Contract offers',
 }
 
 export const changeContractTypeRadioButtonEvent =

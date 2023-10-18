@@ -56,7 +56,7 @@ export const ContractsRenderByRole: FC = () => {
 
     if (
         activeRadioButton === RadioButtonContractTypeNames['My contracts'] ||
-        activeRadioButton === RadioButtonContractTypeNames['Contract offerings']
+        activeRadioButton === RadioButtonContractTypeNames['Contract offers']
     ) {
         return <MyContractsTable contracts={contracts} />;
     }

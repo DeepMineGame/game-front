@@ -170,22 +170,18 @@ export const RoleSelect = () => {
                         {t('My contracts')}
                     </Radio>
                     <Radio
-                        value={
-                            RadioButtonContractTypeNames['Contract offerings']
-                        }
+                        value={RadioButtonContractTypeNames['Contract offers']}
                         onChange={() => {
                             changeFilterEvent({
                                 user: accountName,
                                 offers: true,
                             });
                             changeContractTypeRadioButtonEvent(
-                                RadioButtonContractTypeNames[
-                                    'Contract offerings'
-                                ]
+                                RadioButtonContractTypeNames['Contract offers']
                             );
                         }}
                     >
-                        {t('Contract offerings')}
+                        {t('Contract offers')}
                     </Radio>
                 </Radio.Group>
             </Space>
