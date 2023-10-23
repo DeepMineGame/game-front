@@ -29,8 +29,6 @@ export const ModalWithTable: FC<ModalWithTableProps> = ({
 
     return (
         <Modal
-            okButtonProps={{ size: 'large' }}
-            cancelButtonProps={{ size: 'large' }}
             className={className}
             open={visible}
             title={texts.title}

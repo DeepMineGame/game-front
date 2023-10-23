@@ -14,7 +14,7 @@ export const Plugin: FC<Props> = ({ text }) => {
     return (
         <Button disabled className={styles.plugin}>
             <PlusOutlined />
-            <span>{text || t('kit.addConsumable')}</span>
+            <span style={{ margin: 0 }}>{text || t('add consumable')}</span>
         </Button>
     );
 };

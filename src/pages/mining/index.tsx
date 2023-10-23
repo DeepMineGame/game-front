@@ -131,9 +131,7 @@ export const MiningPage: FC = memo(() => {
                         )}
                         {miningStat && (
                             <div className={styles.line}>
-                                <div>
-                                    {t('pages.mining.estimatesMiningTime')}
-                                </div>
+                                <div>{t('Estimated mining time')}</div>
                                 <div>{`${getTimeLeft(
                                     miningStat.est_time_min
                                 )} - ${getTimeLeft(

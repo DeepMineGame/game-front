@@ -68,9 +68,7 @@ export const Characteristics = () => {
                     value={mineStore?.[0]?.layer_depth ?? '-'}
                 />
                 <CharacteristicsLine
-                    name={t(
-                        'pages.equipmentSet.characteristics.estimatesMiningTime'
-                    )}
+                    name={t('Estimated mining time')}
                     value={estTime}
                 />
                 <CharacteristicsLine

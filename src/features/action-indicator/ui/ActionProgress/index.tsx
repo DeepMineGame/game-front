@@ -107,11 +107,7 @@ export const ActionProgress = () => {
             actionName={actionName}
             finished={isFinished}
             finishText={t('components.actionModal.isComplete')}
-            onHideClick={() =>
-                getActionForIndicate({
-                    searchParam: accountName,
-                })
-            }
+            onHideClick={reloadPage}
             onOkClick={reloadPage}
             timeLeft={timeLeft}
             timeToPercentage={timeToPercentage}

@@ -3,6 +3,9 @@ import React from 'react';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import { useStore } from 'effector-react';
+import { Button } from 'shared';
+import { mineManagement } from 'app/router/paths';
+import { useNavigate } from 'react-router';
 import { MineStat } from '../ui/components/mineStat';
 import { mineOwnerCabinState } from '../../models';
 import { $indicateActionDetails } from '../../../action-indicator';
@@ -19,6 +22,7 @@ export function useDescriptions() {
             </Tooltip>
         </div>
     );
+    const navigate = useNavigate();
     return {
         [mineOwnerCabinState.initial]: needNftCardTextAndInformer,
         [mineOwnerCabinState.needPhysicalShift]: t(
@@ -34,9 +38,20 @@ export function useDescriptions() {
             'features.mineOwner.depthChangingText'
         ),
         [mineOwnerCabinState.needMineNft]: needNftCardTextAndInformer,
-        [mineOwnerCabinState.needActivateMine]: t(
-            'features.mineOwner.mineManagementDescription'
+        [mineOwnerCabinState.needActivateMine]: (
+            <div>
+                <Button
+                    style={{ paddingRight: '3px' }}
+                    size="large"
+                    type="link"
+                    onClick={() => navigate(mineManagement)}
+                >
+                    {t('Go to mine management')}
+                </Button>
+                {t('unit to activate the mine')}
+            </div>
         ),
+
         [mineOwnerCabinState.needCrew]: t(
             'features.mineOwner.needTeamDescription'
         ),
