@@ -32,7 +32,9 @@ export const AddMineOwnerModal: FC<Props> = ({ visible, onCancel }) => {
                 <Button
                     className={styles.button}
                     onClick={() =>
-                        navigate(`${serviceMarket}?user_role=${Roles.landlord}`)
+                        navigate(
+                            `${serviceMarket}?user_role=${Roles.landlord}&search_role=${Roles.mineowner}`
+                        )
                     }
                 >
                     {t('pages.areaManagement.findMineOwner')}

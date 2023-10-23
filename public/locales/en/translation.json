@@ -225,7 +225,6 @@
     },
     "contractor": {
       "signingContract": {
-        "title": "Signing the contract",
         "description": "You should find or create a contract with a Mine Owner to start mining",
         "findButton": "Find a contract",
         "createButton": "Create a contract"
@@ -366,7 +365,7 @@
         "engageDescription": "You need to travel to this location",
         "engageButton": "Operate",
         "setupTitle": "Add a new mine",
-        "setupDescription": "You need to make a contract with a Mineowner to add a mine on your land",
+        "setupDescription": "Go to Area Management and add a new mine",
         "searching": "Searching for a Mine owner",
         "mineIsSetTitle": "The Mine is installed",
         "mineIsSetDescription": "Now you can see the full stastistics",
