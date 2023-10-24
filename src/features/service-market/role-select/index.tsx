@@ -1,7 +1,7 @@
 import { Radio, Select, Space } from 'antd';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useStore } from 'effector-react';
-import { useAccountName } from 'shared';
+import { useAccountName, useQuery } from 'shared';
 import { useTranslation } from 'react-i18next';
 import { Roles } from 'entities/game-stat';
 import { changeFilterEvent, filterStore } from '../contractor-table/model';
@@ -31,6 +31,16 @@ export const RoleSelect = () => {
     const filter = useStore(filterStore);
     const accountName = useAccountName();
     const { t } = useTranslation();
+    const query = useQuery();
+    const searchRoleFromQuery = query.get('search_role') as Roles;
+    const userRoleFromQuery = query.get('user_role') as Roles;
+    useEffect(() => {
+        if (searchRoleFromQuery || userRoleFromQuery) {
+            changeContractTypeRadioButtonEvent(
+                RadioButtonContractTypeNames['All contracts']
+            );
+        }
+    }, [searchRoleFromQuery, userRoleFromQuery]);
     const onChangeSelfRole = useCallback(
         (userRole: Roles) => {
             const searchRole = availableSelectItemByRole[userRole][0].value;
@@ -70,7 +80,7 @@ export const RoleSelect = () => {
                 user: accountName,
             });
         },
-        [filter]
+        [accountName]
     );
     const onChangeSearchRole = useCallback(
         (role) => {
@@ -170,22 +180,18 @@ export const RoleSelect = () => {
                         {t('My contracts')}
                     </Radio>
                     <Radio
-                        value={
-                            RadioButtonContractTypeNames['Contract offerings']
-                        }
+                        value={RadioButtonContractTypeNames['Contract offers']}
                         onChange={() => {
                             changeFilterEvent({
                                 user: accountName,
                                 offers: true,
                             });
                             changeContractTypeRadioButtonEvent(
-                                RadioButtonContractTypeNames[
-                                    'Contract offerings'
-                                ]
+                                RadioButtonContractTypeNames['Contract offers']
                             );
                         }}
                     >
-                        {t('Contract offerings')}
+                        {t('Contract offers')}
                     </Radio>
                 </Radio.Group>
             </Space>

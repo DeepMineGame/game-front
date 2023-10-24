@@ -38,7 +38,7 @@ const FindWork: FC = () => {
                         size={isTablet ? 'middle' : 'small'}
                         onClick={() =>
                             navigate(
-                                `${serviceMarket}?user_role=${Roles.engineer}`
+                                `${serviceMarket}?user_role=${Roles.engineer}&search_role=${Roles.contractor}`
                             )
                         }
                     >

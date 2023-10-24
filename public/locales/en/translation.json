@@ -11,7 +11,6 @@
   },
   "kit": {
     "back": "Back",
-    "addConsumable": "add consumable",
     "statuses": {
       "installed": "Installed",
       "broken": "Broken",
@@ -186,7 +185,6 @@
       "finished": "finished",
       "cool": "That's cool",
       "tooltipAroundConsumables": "This is where improvements are installed that allow you to make mining more efficient. They will be available for the Mine level 1",
-      "estimatesMiningTime": "Estimates mining time",
       "mineDepth": "Mine depth",
       "doWantStopMining": "Do you really want to stop mining?",
       "consumablesWillBurnOut": "Your consumables will be burned, energy and time used mining will be lost and you won't receive DME",
@@ -227,7 +225,6 @@
     },
     "contractor": {
       "signingContract": {
-        "title": "Signing the contract",
         "description": "You should find or create a contract with a Mine Owner to start mining",
         "findButton": "Find a contract",
         "createButton": "Create a contract"
@@ -240,9 +237,9 @@
         "goToMarket": "Go to Market"
       },
       "noEquipments": {
-        "title": "set up the Equipment",
-        "description": "To start mining you need to install the equipment \nand you need to travel to this location.",
-        "descriptionShort": "To start mining we need to install the equipment"
+        "title": "Install equipment",
+        "description": "To start mining you need to travel here and install the equipment",
+        "descriptionShort": "Install equipment to start mining"
       },
       "ready": {
         "title": "ready to mine",
@@ -301,7 +298,6 @@
         "refurbish": "Refurbish",
         "insufficientFunds": "Insufficient funds for {{action}}",
         "rarityUpgradeTooltip": "The amount of DME mined by this item necessary to enable level upgrade through Engineer.",
-        "levelUpgradeTooltip": "Conclude level upgrade contract with Engineer for Equipment and Mines that mined a required amount of DME. Upgrade is possible when a card is placed in the active inventory.",
         "repairTooltip": "Restores the number of available mining actions without restoring the equipment wear",
         "refurbishTooltip": "Restores all the numbers and makes your equipment as good as new",
         "depreciationTooltip": "Mining actions performed/current wear capacity (maximum wear capacity)",
@@ -313,8 +309,7 @@
       },
       "characteristics": {
         "title": "Characteristics",
-        "mineDepth": "Mine Depth",
-        "estimatesMiningTime": "Mining Time estimate",
+        "mineDepth": "Mine depth",
         "estimatesAmountDME": "Maximum mining capability"
       }
     },
@@ -370,7 +365,7 @@
         "engageDescription": "You need to travel to this location",
         "engageButton": "Operate",
         "setupTitle": "Add a new mine",
-        "setupDescription": "You need to make a contract with a Mineowner to add a mine on your land",
+        "setupDescription": "Go to Area Management and add a new mine",
         "searching": "Searching for a Mine owner",
         "mineIsSetTitle": "The Mine is installed",
         "mineIsSetDescription": "Now you can see the full stastistics",
@@ -404,7 +399,6 @@
         "selectRole": "Select role",
         "selectItem": "Select item",
         "fee": "Fee",
-        "feeTooltip": "If during the entire contract, the executor has: x days or more with the output less than: Y executor can be fined and the contract can be terminated with: deposit",
         "startOfOperation": "Start of operation",
         "effectiveDate": "Effective date",
         "startOfOperationTooltip": "The date when agreement or transaction becomes binding",
@@ -684,8 +678,8 @@
   "features": {
     "connectToBlockchain": "Connection to blockchain",
     "mining": {
-      "mineLevel": "Mine Level",
-      "mineSublevel": "Mine Sublevel",
+      "mineLevel": "Mine level",
+      "mineSublevel": "Mine sublevel",
       "currentDepthLevel": "Current depth level"
     },
     "mineOwner": {
@@ -717,7 +711,6 @@
       "mineNotInArea": "Mine is not set up on the Area",
       "needTeamTitle": "Time to form a team",
       "mineManagement": "Mine Management",
-      "mineManagementDescription": "Go to Mine Management unit to activate the Mine",
       "mineIsActive": "Mine is Active",
       "contractWasTerminated": "Contract was Terminated",
       "mineIsActiveDescription": "Everything is fine and Mine is running. You can see information about the mining process and efficiency in Stats deck",
@@ -898,7 +891,7 @@
   },
   "Mine rarity": "Mine rarity",
   "Mine level": "Mine level",
-  "Specify the preferred level and rarity of the mine you want to work on": "Specify the preferred level and rarity of the mine you want to work on",
+  "Specify the preferred level and rarity of the mine you want to work with": "Specify the preferred level and rarity of the mine you want to work with",
   "Auto-renewal": "Auto-renewal",
   "Auto-renewal disabled": "Auto-renewal disabled",
   "Minimum Fee": "Minimum Fee",
@@ -923,7 +916,7 @@
   "Mine crew": "Mine crew",
   "Mine": "Mine",
   "Set up the Mine to continue": "Set up the Mine to continue",
-  "Action in progress" : "Some action in progress, wait...",
+  "Action in progress" : "Action in progress, wait...",
   "Equipment set": "Equipment set",
   "undefined": "Undefined",
   "area": "Area",
@@ -1056,10 +1049,10 @@
   "Install the Equipment set": "Install the Equipment set",
   "Uninstall the Equipment set": "Uninstall the Equipment set",
   "Mining in progress": "Mining in progress",
-  "Estimates amount of DME": "Estimates amount of DME",
+  "Estimated amount of DME": "Estimated amount of DME",
   "Sign or create Level Upgrade Contract to start operation": "Sign or create Level Upgrade Contract to start operation",
   "Uninstall": "Uninstall",
-  "Equipment Breakdown Probability": "Equipment Breakdown Probability",
+  "Equipment Breakdown Probability": "Equipment breakdown probability",
   "Add contractors": "Add contractors",
   "Manage the mine": "Manage the mine",
   "Stats & Info": "Stats & Info",
@@ -1100,5 +1093,23 @@
   "You don't have setuped mines": "You don't have setuped mines",
   "ID": "ID",
   "Copy": "Copy",
-  "Select type": "Select type"
+  "Select type": "Select type",
+  "Fee The amount of DME the counterparty receives for each extraction": "Fee The amount of DME the counterparty receives for each extraction",
+  "The minimum amount of DME that the performing party must produce": {
+    " The same amount is deposited by both parties": {
+      " The one who violated the terms of the contract and terminated it prematurely does not get its deposit back": {
+        " It is transferred to the other party": {
+          "": "The minimum amount of DME that the performing party must produce. The same amount is deposited by both parties. The one who violated the terms of the contract and terminated it prematurely does not get its deposit back. It is transferred to the other party."
+        }
+      }
+    }
+  },
+  "Sign a level upgrade contract with Engineer": {
+    " Equipment should be placed in Active Inventory to be available for upgrade": "Sign a level upgrade contract with Engineer. Equipment should be placed in Active Inventory to be available for upgrade"
+  },
+  "add consumable": "add consumable",
+  "Estimated mining time": "Estimated mining time",
+  "Sign a contract with a landlord to set a Mine": "Sign a contract with a landlord to set a Mine",
+  "Go to mine management": "Go to mine management",
+  "unit to activate the mine": "unit to activate the mine"
 }

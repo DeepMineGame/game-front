@@ -11,7 +11,7 @@
   "Select your role": "Select your role",
   "I am": "I am",
   "Select role": "Select role",
-  "Contract offerings": "Contract offerings",
+  "Contract offers": "Contract offers",
   "My contracts": "My contracts",
   "All contracts": "All contracts",
   "Creation date": "Creation date",
@@ -33,5 +33,6 @@
   "Deposit, DME": "Deposit, DME",
   "Not assigned yet": "Not assigned yet",
   "Create order": "Create order",
-  "Equipment": "Equipment"
+  "Equipment": "Equipment",
+  "Signing the contract": "Signing the contract"
 }

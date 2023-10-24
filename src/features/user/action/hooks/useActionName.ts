@@ -5,7 +5,7 @@ export const useActionName = (actionType: ActionType) => {
     const { t } = useTranslation();
 
     return {
-        [ActionType.mine]: t('features.actions.mine'),
+        [ActionType.mine]: t('Mining'),
         [ActionType.mine_activation]: t('features.actions.mineActivation'),
         [ActionType.mine_deactivation]: t('features.actions.mineDeactivation'),
         [ActionType.mine_setup]: t('features.actions.mineSetup'),

@@ -21,7 +21,7 @@ export const LandlordInformation: FC<GeneralInformationStepProps> = ({
         <Form.Item>
             <Typography.Paragraph>
                 {t(
-                    'Specify the preferred level and rarity of the mine you want to work on'
+                    'Specify the preferred level and rarity of the mine you want to work with'
                 )}
             </Typography.Paragraph>
             <div className={localStyles.flexSection}>

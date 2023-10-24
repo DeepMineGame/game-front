@@ -121,7 +121,7 @@ export const MiningPage: FC = memo(() => {
                         ) : null}
                         {miningStat && (
                             <div className={styles.line}>
-                                <div>{t('Estimates amount of DME')}</div>
+                                <div>{t('Estimated amount of DME')}</div>
                                 <div>{`${Number(
                                     miningStat.est_mining_power_min / 10 ** 8
                                 ).toFixed(2)}/${Number(
@@ -131,9 +131,7 @@ export const MiningPage: FC = memo(() => {
                         )}
                         {miningStat && (
                             <div className={styles.line}>
-                                <div>
-                                    {t('pages.mining.estimatesMiningTime')}
-                                </div>
+                                <div>{t('Estimated mining time')}</div>
                                 <div>{`${getTimeLeft(
                                     miningStat.est_time_min
                                 )} - ${getTimeLeft(

@@ -129,7 +129,7 @@ export const DepositAndBuyout: FC<DepositAndBuyoutProps> = ({
             <Form.Item
                 label={t('Buyout price')}
                 className={cn(styles.formField, localStyles.feeInput)}
-                name={rentOrderField.buyout_price}
+                name={rentOrderField.buyout_wax_amount}
             >
                 <InputNumber
                     disabled

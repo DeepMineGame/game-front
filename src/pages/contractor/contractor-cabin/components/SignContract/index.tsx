@@ -17,7 +17,7 @@ export const SignContract: FC = () => {
     return (
         <div className={styles.container}>
             <div className={cn(contractorStyles.title, styles.title)}>
-                {t('pages.contractor.signingContract.title')}
+                {t('Signing the contract')}
             </div>
             <div
                 className={cn(contractorStyles.description, styles.description)}
@@ -31,7 +31,7 @@ export const SignContract: FC = () => {
                     className={cn(contractorStyles.coloredText)}
                     onClick={() =>
                         navigate(
-                            `${serviceMarket}?user_role=${Roles.contractor}`
+                            `${serviceMarket}?user_role=${Roles.contractor}&search_role=${Roles.mineowner}`
                         )
                     }
                 >

@@ -99,22 +99,18 @@ export const RentalContractsTable = () => {
                         {t('My contracts')}
                     </Radio>
                     <Radio
-                        value={
-                            RadioButtonContractTypeNames['Contract offerings']
-                        }
+                        value={RadioButtonContractTypeNames['Contract offers']}
                         onChange={() => {
                             changeRentalFilterEvent({
                                 user: accountName,
                                 offers: true,
                             });
                             changeContractTypeRadioButtonEvent(
-                                RadioButtonContractTypeNames[
-                                    'Contract offerings'
-                                ]
+                                RadioButtonContractTypeNames['Contract offers']
                             );
                         }}
                     >
-                        {t('Contract offerings')}
+                        {t('Contract offers')}
                     </Radio>
                 </Radio.Group>
             </Space>
