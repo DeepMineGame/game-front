@@ -19,13 +19,11 @@ import {
 } from 'features';
 import {
     contrclaim,
-    getActionEffect,
     getContractByExecutorEffect,
     mapSearchParamForIndexPositionToFindContracts,
     toggleMining,
 } from 'entities/smartcontract';
 import { ClaimInfo } from '../ClaimInfo';
-import { miningContractStore, MiningPageGate } from '../models';
 import { useDisabledState } from '../hooks';
 import styles from './styles.module.scss';
 
@@ -148,7 +146,7 @@ export const MiningAndClaimButton: FC<Props> = memo(
                     onCancel={hideClaimModal}
                     okText={okText}
                     okButtonProps={{ disabled: !mineStat?.finished }}
-                    visible={claimModalVisibility}
+                    open={claimModalVisibility}
                     title={t('Mining has finished successfully!')}
                 >
                     {isClaimedState ? (
