@@ -20,7 +20,7 @@ export function trmrcontract({
                 ],
                 data: {
                     wax_user: waxUser,
-                    contract_id: contractId,
+                    rent_contract_id: contractId,
                 },
             },
         ],
