@@ -1,6 +1,27 @@
 import axios from 'axios';
 import { ENDPOINT } from 'app/constants';
 
+export type AssetStruct = {
+    asset_id: number;
+    template_id: number;
+    name: string;
+    schema_name: string;
+    level: number;
+    rarity: string;
+    type: string;
+    class: string;
+    description: string;
+    broken: boolean;
+    dme_mined: string;
+    total_dme_mined: string;
+    dme_to_upgrade: string;
+    depreciation: number;
+    current_capacity: number;
+    maximal_capacity: number;
+    rent_contract_id: number;
+    in_use: boolean;
+    available_from: number;
+};
 export type MineStat = {
     action_state: 'active' | 'interrupted' | 'finished' | 'claimed' | 'idle';
     mining_result: 'success' | 'mining' | 'interrupted';
@@ -27,6 +48,7 @@ export type MineStat = {
     est_time_min: number;
     est_time_max: number;
     rent_fee_counter?: number;
+    assets: AssetStruct[];
 };
 
 export const getMiningStat = async ({

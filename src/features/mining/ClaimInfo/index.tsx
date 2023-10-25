@@ -69,14 +69,16 @@ export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
                       <DMECoinIcon width={24} height={24} />
                       {t('Available for claim')}
                   </>,
-                  getDmeAmount(miningStat?.dme_to_claim || 0).toFixed(2),
+                  getDmeAmount(Number(miningStat?.dme_to_claim || 0))?.toFixed(
+                      3
+                  ),
               ],
               [
                   <>
                       <DMECoinIcon width={24} height={24} />
                       {t('pages.serviceMarket.contract.fee')}
                   </>,
-                  getDmeAmount(miningStat.fee_in_dme.toFixed(3)),
+                  getDmeAmount(Number(miningStat?.fee_in_dme || 0))?.toFixed(3),
               ],
               [
                   <>
@@ -84,7 +86,9 @@ export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
                       {t('pages.mining.transferredToYourAccount')}
                   </>,
                   Number(
-                      getDmeAmount(miningStat?.dme_to_account || 0).toFixed(3)
+                      getDmeAmount(
+                          Number(miningStat?.dme_to_account || 0)
+                      )?.toFixed(3)
                   ),
               ],
           ]
@@ -96,7 +100,7 @@ export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
                 <DMECoinIcon width={24} height={24} />
                 {t('Rent fee counter')}
             </>,
-            Number(getDmeAmount(miningStat?.rent_fee_counter || 0).toFixed(3)),
+            Number(getDmeAmount(miningStat?.rent_fee_counter || 0)?.toFixed(3)),
         ]);
     }
     return miningStat?.finished ? (

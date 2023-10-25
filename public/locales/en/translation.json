@@ -174,7 +174,6 @@
       "startMining": "Start Mining",
       "stopMining": "Stop Mining",
       "getTheReport": "Get the report",
-      "myEquipment": "MY EQUIPMENT",
       "configure": "CONFIGURE",
       "miningStatus": "Mine: ",
       "lastMiningResult": "Last mining result",
@@ -1111,5 +1110,6 @@
   "Estimated mining time": "Estimated mining time",
   "Sign a contract with a landlord to set a Mine": "Sign a contract with a landlord to set a Mine",
   "Go to mine management": "Go to mine management",
-  "unit to activate the mine": "unit to activate the mine"
+  "unit to activate the mine": "unit to activate the mine",
+  "My equipment": "My equipment"
 }
