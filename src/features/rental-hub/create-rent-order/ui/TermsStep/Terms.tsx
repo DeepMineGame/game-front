@@ -77,8 +77,7 @@ export const Terms: FC<TermsStepProps> = ({
                     options={getLabelSelectItem({
                         amount: 30,
                         label: t('components.common.day'),
-                        // temporary solution because contract for 1 day isn't possible yet
-                    }).filter((_, idx) => idx !== 0)}
+                    })}
                 />
             </Form.Item>
 

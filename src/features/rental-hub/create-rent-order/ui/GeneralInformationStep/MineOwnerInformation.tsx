@@ -36,8 +36,7 @@ export const MineOwnerInformation: FC<GeneralInformationStepProps> = ({
                             options={getLabelSelectItem({
                                 amount: 21,
                                 label: t('components.common.day'),
-                                // temporary solution because contract for 1 day isn't possible yet
-                            }).filter((_, idx) => idx !== 0)}
+                            })}
                         />
                     </Form.Item>
                     <Form.Item
