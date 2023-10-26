@@ -32,7 +32,7 @@ export const SecondPartyDepositModal: FC<{
                         quantity: `${Number(contract.ins_wax_amount).toFixed(
                             8
                         )} WAX`,
-                        memo: contract.id,
+                        memo: `pay_insurance-${contract.id}`,
                     },
                 },
             ],
@@ -57,7 +57,7 @@ export const SecondPartyDepositModal: FC<{
                         quantity: `${Number(contract.ins_dme_amount).toFixed(
                             8
                         )} DME`,
-                        memo: contract.id,
+                        memo: `pay_insurance-${contract.id}`,
                     },
                 },
             ],
@@ -82,7 +82,7 @@ export const SecondPartyDepositModal: FC<{
                         quantity: `${Number(contract.ins_dmp_amount).toFixed(
                             8
                         )} DMP`,
-                        memo: contract.id,
+                        memo: `pay_insurance-${contract.id}`,
                     },
                 },
             ],

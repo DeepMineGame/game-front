@@ -63,9 +63,12 @@ export const createRentOrder = (orderData: RentOrderDto) => {
                         orderData.insurance_dme_amount * 10 ** 8,
                     insurance_dmp_amount:
                         orderData.insurance_dmp_amount * 10 ** 8,
-                    buyout_wax_amount: orderData.buyout_wax_amount || 0,
-                    buyout_dme_amount: orderData.buyout_dme_amount || 0,
-                    buyout_dmp_amount: orderData.buyout_dmp_amount || 0,
+                    buyout_wax_amount:
+                        orderData.buyout_wax_amount * 10 ** 8 || 0,
+                    buyout_dme_amount:
+                        orderData.buyout_dme_amount * 10 ** 8 || 0,
+                    buyout_dmp_amount:
+                        orderData.buyout_dmp_amount * 10 ** 8 || 0,
                     fee_min_amount: orderData.fee_min_amount * 10 ** 8,
                 },
             },
