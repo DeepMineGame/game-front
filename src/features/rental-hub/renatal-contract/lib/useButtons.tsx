@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { App, Button, Tooltip } from 'antd';
-import React, { useState } from 'react';
+import React from 'react';
 import { useAccountName } from 'shared';
 import {
     ContractDto,
@@ -9,7 +9,7 @@ import {
     trmrcontract,
 } from 'entities/smartcontract';
 import { useSmartContractAction } from '../../../hooks';
-import { SecondPartyDepositModal } from '../ui';
+import { DepositButton } from '../ui';
 import {
     DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
     setSomethingCountDownEvent,
@@ -63,23 +63,7 @@ export const useButtons = (
             {t('Complete')}
         </Button>
     );
-    const [depositModalVisibility, setDepositModalVisibility] = useState(false);
-    const depositButton = (
-        <>
-            <Button
-                onClick={() => setDepositModalVisibility(true)}
-                type="primary"
-            >
-                {t('Deposit')}
-            </Button>
-            <SecondPartyDepositModal
-                open={depositModalVisibility}
-                onClose={setDepositModalVisibility}
-                contract={contract}
-                onCancel={() => setDepositModalVisibility(false)}
-            />
-        </>
-    );
+
     const terminate = (
         <Button onClick={trmContract} type="primary">
             {t('Terminate')}
@@ -109,7 +93,7 @@ export const useButtons = (
 
     if (contract.renter === accountName) {
         if (frontStatus === frontStatusMap['Signed contract']) {
-            return depositButton;
+            return <DepositButton contract={contract} />;
         }
         if (frontStatus === frontStatusMap['Valid Contract']) {
             return terminate;

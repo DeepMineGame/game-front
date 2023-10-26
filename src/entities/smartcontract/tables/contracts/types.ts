@@ -183,6 +183,9 @@ export type ContractDto = {
     ins_dmp_amount: string;
     ins_type: string;
     ins_wax_amount: string;
+    buyout_wax_amount: string;
+    buyout_dme_amount: string;
+    buyout_dmp_amount: string;
     assets_type: string;
     autorenew_at: number;
     fee_counter_total?: string;
