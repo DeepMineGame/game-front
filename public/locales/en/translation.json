@@ -994,7 +994,7 @@
   "The deposit can be made in one or more currencies": "The deposit can be made in one or more currencies",
   "Buyout": "Buyout",
   "The buyout can be made in one or more currencies": "The buyout can be made in one or more currencies",
-  "Buyout price": "Buyout price",
+  "Buyout wax price": "Buyout wax price",
   "Create": "Create",
   "Deposit and buyout": "Deposit and buyout",
   "Days": "Days",
@@ -1111,5 +1111,7 @@
   "Sign a contract with a landlord to set a Mine": "Sign a contract with a landlord to set a Mine",
   "Go to mine management": "Go to mine management",
   "unit to activate the mine": "unit to activate the mine",
-  "My equipment": "My equipment"
+  "My equipment": "My equipment",
+  "Buyout dmp price": "Buyout dmp price",
+  "Buyout dme price": "Buyout dme price"
 }
