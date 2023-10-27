@@ -63,16 +63,7 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
                     border: `1px solid ${getColorForFrontStatus(frontStatus)}`,
                 }}
                 ghost={false}
-                extra={[
-                    button,
-                    (contract.status === RentalContractStatuses.ACTIVE ||
-                        contract.substatus ===
-                            RentalContractSubStatus.ACTIVE_EQUIPMENT_RETURNING ||
-                        contract.substatus ===
-                            RentalContractSubStatus.ACTIVE_EQUIPMENT_RETURNING_EXPIRED) && (
-                        <DepositButton contract={contract} type="buyout" />
-                    ),
-                ]}
+                extra={[button]}
                 title={
                     <span
                         style={{
@@ -193,7 +184,7 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
                         data={{
                             [t('DME')]: (
                                 <div>
-                                    {contract.ins_type === 'DME' ? (
+                                    {contract.buyout_type === 'DME' ? (
                                         <Tag color="success">
                                             {t('Deposited')}
                                         </Tag>
@@ -205,7 +196,7 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
                             ),
                             [t('DMP')]: (
                                 <div>
-                                    {contract.ins_type === 'DMP' ? (
+                                    {contract.buyout_type === 'DMP' ? (
                                         <Tag color="success">
                                             {t('Deposited')}
                                         </Tag>
@@ -217,7 +208,7 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
                             ),
                             [t('WAX')]: (
                                 <div>
-                                    {contract.ins_type === 'WAX' ? (
+                                    {contract.buyout_type === 'WAX' ? (
                                         <Tag color="success">
                                             {t('Deposited')}
                                         </Tag>
@@ -229,6 +220,14 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
                             ),
                         }}
                     />
+                    <br />
+                    {(contract.status === RentalContractStatuses.ACTIVE ||
+                        contract.substatus ===
+                            RentalContractSubStatus.ACTIVE_EQUIPMENT_RETURNING ||
+                        contract.substatus ===
+                            RentalContractSubStatus.ACTIVE_EQUIPMENT_RETURNING_EXPIRED) && (
+                        <DepositButton contract={contract} type="buyout" />
+                    )}
                 </Col>
                 <Col xs={24} md={12}>
                     <Table

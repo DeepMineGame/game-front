@@ -189,6 +189,7 @@ export type ContractDto = {
     assets_type: string;
     autorenew_at: number;
     fee_counter_total?: string;
+    buyout_type?: string;
 };
 
 export const contractName = {
