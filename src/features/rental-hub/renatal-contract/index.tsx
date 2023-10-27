@@ -12,7 +12,11 @@ import {
 import { useTranslation } from 'react-i18next';
 import { secondsToDays, toLocaleDate, useAccountName } from 'shared';
 import { PageHeader } from '@ant-design/pro-components';
-import { disrautorew, RentalContractStatuses } from 'entities/smartcontract';
+import {
+    disrautorew,
+    RentalContractStatuses,
+    RentalContractSubStatus,
+} from 'entities/smartcontract';
 import { ContractProps } from '../../service-market/types';
 import { TableWithTitle } from '../../service-market';
 import { useSmartContractAction } from '../../hooks';
@@ -62,8 +66,10 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
                 extra={[
                     button,
                     (contract.status === RentalContractStatuses.ACTIVE ||
-                        contract.status ===
-                            RentalContractStatuses.TERMINATED) && (
+                        contract.substatus ===
+                            RentalContractSubStatus.ACTIVE_EQUIPMENT_RETURNING ||
+                        contract.substatus ===
+                            RentalContractSubStatus.ACTIVE_EQUIPMENT_RETURNING_EXPIRED) && (
                         <DepositButton contract={contract} type="buyout" />
                     ),
                 ]}
