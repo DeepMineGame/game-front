@@ -209,4 +209,7 @@ export const getColorForFrontStatus = (status: frontStatusMap | undefined) => {
     ) {
         return red;
     }
+    if (status === frontStatusMap['Ended / Item was Buyout ']) {
+        return neutralColor;
+    }
 };
