@@ -91,6 +91,10 @@ export const useButtons = (
         </Tooltip>
     );
 
+    if (frontStatus === frontStatusMap['Ended / Item was Buyout ']) {
+        return completeButton;
+    }
+
     if (contract.renter === accountName) {
         if (frontStatus === frontStatusMap['Signed contract']) {
             return <DepositButton contract={contract} />;

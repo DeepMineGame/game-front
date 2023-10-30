@@ -9,6 +9,19 @@ export const useRentalTexts = (
 ) => {
     const { t } = useTranslation();
 
+    if (frontStatusMap['Ended / Item was Buyout ']) {
+        if (contract.renter === accountName) {
+            return t(
+                "You've made a deposit and initiated equipment buyout. Complete the contract to acquire the equipment"
+            );
+        }
+        if (contract.owner === accountName) {
+            return t(
+                'Your equipment was buyouted by renter. You can complete the contract'
+            );
+        }
+    }
+
     if (frontStatusMap['Signed contract'] === status) {
         if (contract.renter === accountName) {
             return t(
