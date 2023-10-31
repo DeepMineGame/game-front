@@ -16,7 +16,7 @@ import {
 import { ProgressNotification } from '../../action-indicator';
 import styles from './styles.module.scss';
 
-export const DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME = 30;
+export const DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME = 10;
 export const SomethingInProgress: FC = () => {
     const { t } = useTranslation();
     const thingInProgressName = useStore($thingInProgressName);
