@@ -127,12 +127,36 @@ export const DepositAndBuyout: FC<DepositAndBuyoutProps> = ({
                 {t('The buyout can be made in one or more currencies')}
             </Typography.Paragraph>
             <Form.Item
-                label={t('Buyout price')}
+                label={t('Buyout wax price')}
                 className={cn(styles.formField, localStyles.feeInput)}
                 name={rentOrderField.buyout_wax_amount}
+                initialValue={0}
             >
                 <InputNumber
-                    disabled
+                    type="number"
+                    controls={false}
+                    className={styles.inputNumber}
+                />
+            </Form.Item>
+            <Form.Item
+                label={t('Buyout dmp price')}
+                className={cn(styles.formField, localStyles.feeInput)}
+                name={rentOrderField.buyout_dmp_amount}
+                initialValue={0}
+            >
+                <InputNumber
+                    type="number"
+                    controls={false}
+                    className={styles.inputNumber}
+                />
+            </Form.Item>
+            <Form.Item
+                label={t('Buyout dme price')}
+                className={cn(styles.formField, localStyles.feeInput)}
+                name={rentOrderField.buyout_dme_amount}
+                initialValue={0}
+            >
+                <InputNumber
                     type="number"
                     controls={false}
                     className={styles.inputNumber}

@@ -21,6 +21,7 @@ export enum frontStatusMap {
     'Ended / Minimum Fee Violation / Item Broken Violation with 72h expired' = 'Ended / Minimum Fee Violation / Item Broken Violation with 72h expired',
     'Ended / Minimum Fee Violation / Ok with 72 hours to return equipment' = 'Ended / Minimum Fee Violation / Ok with 72 hours to return equipment',
     'Ended / Minimum Fee Violation / Ok with 72 expired' = 'Ended / Minimum Fee Violation / Ok with 72 expired',
+    'Ended / Item was Buyout ' = 'Ended / Item was Buyout ',
 }
 
 export const getFrontStatus = ({
@@ -28,6 +29,12 @@ export const getFrontStatus = ({
     substatus,
     violations,
 }: ContractDto) => {
+    if (
+        status === RentalContractStatuses.ENDED &&
+        substatus === RentalContractSubStatus.ACTIVE_EQUIPMENT_BUYOUT
+    ) {
+        return frontStatusMap['Ended / Item was Buyout '];
+    }
     if (
         substatus === RentalContractSubStatus.ACTIVE_EQUIPMENT_RETURNING &&
         violations?.includes(ViolationDto.FEE_NOT_ENOUGH_PAID) &&
@@ -201,5 +208,8 @@ export const getColorForFrontStatus = (status: frontStatusMap | undefined) => {
         frontStatusMap['Ended / Minimum Fee Violation / Ok with 72 expired']
     ) {
         return red;
+    }
+    if (status === frontStatusMap['Ended / Item was Buyout ']) {
+        return neutralColor;
     }
 };

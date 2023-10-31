@@ -51,7 +51,7 @@ export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
             />
         );
     }
-
+    console.log(Number(miningStat?.dme_to_claim || 0)?.toFixed(3));
     const data = miningStat
         ? [
               [
@@ -69,34 +69,33 @@ export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
                       <DMECoinIcon width={24} height={24} />
                       {t('Available for claim')}
                   </>,
-                  getDmeAmount(miningStat?.dme_to_claim || 0).toFixed(2),
+                  Number(miningStat?.dme_to_claim).toFixed(2),
               ],
               [
                   <>
                       <DMECoinIcon width={24} height={24} />
                       {t('pages.serviceMarket.contract.fee')}
                   </>,
-                  getDmeAmount(miningStat.fee_in_dme.toFixed(3)),
+                  Number(miningStat?.fee_in_dme || 0)?.toFixed(2),
               ],
               [
                   <>
                       <DMECoinIcon width={24} height={24} />
                       {t('pages.mining.transferredToYourAccount')}
                   </>,
-                  Number(
-                      getDmeAmount(miningStat?.dme_to_account || 0).toFixed(3)
-                  ),
+
+                  Number(miningStat?.dme_to_account || 0).toFixed(2),
               ],
           ]
         : [];
 
-    if (miningStat?.rent_fee_counter) {
+    if (Number(miningStat?.rent_fee_counter) > 0) {
         data.push([
             <>
                 <DMECoinIcon width={24} height={24} />
                 {t('Rent fee counter')}
             </>,
-            Number(getDmeAmount(miningStat?.rent_fee_counter || 0).toFixed(3)),
+            String(miningStat?.rent_fee_counter),
         ]);
     }
     return miningStat?.finished ? (

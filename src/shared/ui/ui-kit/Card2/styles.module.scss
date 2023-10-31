@@ -1,0 +1,73 @@
+@import "src/shared";
+
+.image {
+  max-width: 144px;
+  margin-bottom: 15px;
+}
+
+.progress {
+  max-width: 144px;
+  padding-bottom: 10px;
+
+  @media only screen and (min-width: $media-desktop-s)  {
+    max-width: 198px;
+  }
+}
+
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: fit-content;
+}
+
+.lvlTooltipContent {
+  padding-top: 4px;
+  color: $color-primary-primary-6;
+}
+
+.status {
+  margin-bottom: 4px;
+
+  & > span {
+    color: $color-neutral-neutral-7;
+  }
+}
+
+.statusEmpty {
+  height: 18px;
+  width: 1px;
+  margin-bottom: 4px;
+}
+
+.button {
+  margin: 0 auto;
+}
+
+.cardState {
+  // FIXME: REMOVE IMPORTANT AT THIS PLACE AFTER FIX MODAL STYLES
+  background-color: rgba($color-neutral-neutral-1, 0.7) !important;
+  width: 100%;
+  padding: 6px 0;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  align-self: center;
+}
+
+.stateWrapper {
+    height: 204px;
+    position: absolute;
+    width: 100%;
+    display: grid;
+
+    // FIXME: REMOVE IMPORTANT AT THIS PLACE AFTER FIX MODAL STYLES
+    background-color: transparent !important;
+}
+
+.iconTool {
+  font-size: 14px;
+}

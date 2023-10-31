@@ -2,16 +2,15 @@ import { FC, memo } from 'react';
 import { Progress, Tooltip } from 'antd';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
-import { AssetDataType } from 'entities/atomicassets';
 import styles from '../styles.module.scss';
 import { neutral3Color, primary6 } from '../../../variables';
 
 type DepreciationProgressBarProps = {
-    depreciation?: AssetDataType['data']['depreciation'];
-    currentCapacity?: AssetDataType['data']['current capacity'];
-    maximalCapacity?: AssetDataType['data']['maximal capacity'];
+    depreciation?: number | string;
+    currentCapacity?: number | string;
+    maximalCapacity?: number | string;
     className?: string;
-    rarity: AssetDataType['data']['rarity'] | undefined;
+    rarity: string | undefined;
 };
 
 export const DepreciationProgressBar: FC<DepreciationProgressBarProps> = memo(

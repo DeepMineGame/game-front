@@ -35,6 +35,7 @@ export enum RentalContractStatuses {
     ACTIVE = 'ACTIVE',
     TERMINATED = 'TERMINATED',
     COMPLETED = 'COMPLETED',
+    ENDED = 'ENDED',
 }
 
 export enum RentalContractSubStatus {
@@ -44,6 +45,7 @@ export enum RentalContractSubStatus {
     TERMINATED_BY_RENTER = 'TERMINATED_BY_RENTER',
     COMPLETED_BY_OWNER = 'COMPLETED_BY_OWNER',
     COMPLETED_BY_RENTER = 'COMPLETED_BY_RENTER',
+    ACTIVE_EQUIPMENT_BUYOUT = 'ACTIVE_EQUIPMENT_BUYOUT',
 }
 
 export enum OrderState {
@@ -183,9 +185,13 @@ export type ContractDto = {
     ins_dmp_amount: string;
     ins_type: string;
     ins_wax_amount: string;
+    buyout_wax_amount: string;
+    buyout_dme_amount: string;
+    buyout_dmp_amount: string;
     assets_type: string;
     autorenew_at: number;
     fee_counter_total?: string;
+    buyout_type?: string;
 };
 
 export const contractName = {

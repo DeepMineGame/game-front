@@ -12,7 +12,11 @@ import {
 import { useTranslation } from 'react-i18next';
 import { secondsToDays, toLocaleDate, useAccountName } from 'shared';
 import { PageHeader } from '@ant-design/pro-components';
-import { disrautorew } from 'entities/smartcontract';
+import {
+    disrautorew,
+    RentalContractStatuses,
+    RentalContractSubStatus,
+} from 'entities/smartcontract';
 import { ContractProps } from '../../service-market/types';
 import { TableWithTitle } from '../../service-market';
 import { useSmartContractAction } from '../../hooks';
@@ -23,6 +27,7 @@ import {
 import { getColorForFrontStatus, getFrontStatus } from './lib/getFrontStatus';
 import { useButtons } from './lib/useButtons';
 import { useRentalTexts } from './lib/getTexts';
+import { DepositButton } from './ui';
 
 const RentalContract: FC<ContractProps> = ({ contract }) => {
     const accountName = useAccountName();
@@ -129,38 +134,7 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
                         }}
                     />
                 </Col>
-                <Col xs={24} md={12}>
-                    <Table
-                        columns={[
-                            {
-                                title: 'Item',
-                                dataIndex: 'type',
-                                key: 'type',
-                            },
-                            {
-                                title: 'Id',
-                                dataIndex: 'id',
-                                key: 'id',
-                                render: (id) => (
-                                    <Button
-                                        type="link"
-                                        target="_blank"
-                                        href={`https://wax.atomichub.io/explorer/asset/${id}`}
-                                    >
-                                        {id}
-                                    </Button>
-                                ),
-                            },
-                        ]}
-                        dataSource={contract.assets?.map(
-                            ({ type, asset_id }) => ({
-                                type: type.replaceAll('_', ' '),
-                                id: asset_id,
-                            })
-                        )}
-                        pagination={false}
-                    />
-                </Col>
+
                 <Col xs={24} md={12}>
                     <TableWithTitle
                         title={t('Deposit')}
@@ -202,6 +176,89 @@ const RentalContract: FC<ContractProps> = ({ contract }) => {
                                 </div>
                             ),
                         }}
+                    />
+                </Col>
+                <Col xs={24} md={12}>
+                    <TableWithTitle
+                        title={t('Buyout')}
+                        data={{
+                            [t('DME')]: (
+                                <div>
+                                    {contract.buyout_type === 'DME' ? (
+                                        <Tag color="success">
+                                            {t('Deposited')}
+                                        </Tag>
+                                    ) : (
+                                        ''
+                                    )}
+                                    {contract.buyout_dme_amount}
+                                </div>
+                            ),
+                            [t('DMP')]: (
+                                <div>
+                                    {contract.buyout_type === 'DMP' ? (
+                                        <Tag color="success">
+                                            {t('Deposited')}
+                                        </Tag>
+                                    ) : (
+                                        ''
+                                    )}
+                                    {contract.buyout_dmp_amount}
+                                </div>
+                            ),
+                            [t('WAX')]: (
+                                <div>
+                                    {contract.buyout_type === 'WAX' ? (
+                                        <Tag color="success">
+                                            {t('Deposited')}
+                                        </Tag>
+                                    ) : (
+                                        ''
+                                    )}
+                                    {contract.buyout_wax_amount}
+                                </div>
+                            ),
+                        }}
+                    />
+                    <br />
+                    {(contract.status === RentalContractStatuses.ACTIVE ||
+                        contract.substatus ===
+                            RentalContractSubStatus.ACTIVE_EQUIPMENT_RETURNING ||
+                        contract.substatus ===
+                            RentalContractSubStatus.ACTIVE_EQUIPMENT_RETURNING_EXPIRED) && (
+                        <DepositButton contract={contract} type="buyout" />
+                    )}
+                </Col>
+                <Col xs={24} md={12}>
+                    <Table
+                        columns={[
+                            {
+                                title: 'Item',
+                                dataIndex: 'type',
+                                key: 'type',
+                            },
+                            {
+                                title: 'Id',
+                                dataIndex: 'id',
+                                key: 'id',
+                                render: (id) => (
+                                    <Button
+                                        type="link"
+                                        target="_blank"
+                                        href={`https://wax.atomichub.io/explorer/asset/${id}`}
+                                    >
+                                        {id}
+                                    </Button>
+                                ),
+                            },
+                        ]}
+                        dataSource={contract.assets?.map(
+                            ({ type, asset_id }) => ({
+                                type: type.replaceAll('_', ' '),
+                                id: asset_id,
+                            })
+                        )}
+                        pagination={false}
                     />
                 </Col>
             </Row>
