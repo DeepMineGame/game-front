@@ -8,6 +8,10 @@ import {
     getAtomicHubUrlToSection,
 } from 'app/constants';
 import { App } from 'antd';
+import {
+    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
+    setSomethingCountDownEvent,
+} from 'features';
 import { useSmartContractAction } from 'features/hooks';
 import {
     ContractDto,
@@ -20,10 +24,6 @@ import {
 import { AreasGate, areasStore } from 'entities/contract';
 import { SignModal } from '../SignModal';
 import styles from '../SignLandlordOrder/styles.module.scss';
-import {
-    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
-    setSomethingCountDownEvent,
-} from '../../../../../something-in-progess-modal';
 
 type Props = {
     contract: ContractDto;
