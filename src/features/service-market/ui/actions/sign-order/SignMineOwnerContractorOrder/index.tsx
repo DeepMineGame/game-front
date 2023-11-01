@@ -1,7 +1,11 @@
 import React, { FC, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, useReloadPage } from 'shared';
+import { Button } from 'shared';
 import { App } from 'antd';
+import {
+    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
+    setSomethingCountDownEvent,
+} from 'features';
 import { useSmartContractAction } from 'features/hooks';
 import { ContractDto, signOrder } from 'entities/smartcontract';
 
@@ -14,7 +18,6 @@ type Props = {
 const SignAsContractor: FC<Props> = React.memo(
     ({ contract, accountName, isSelfContract }) => {
         const { t } = useTranslation();
-        const reloadPage = useReloadPage();
         const { modal } = App.useApp();
 
         const signContractAction = useSmartContractAction({
@@ -31,9 +34,12 @@ const SignAsContractor: FC<Props> = React.memo(
             modal.success({
                 title: t('pages.serviceMarket.order.signOrder'),
                 content: t('pages.serviceMarket.order.orderCreated'),
-                onOk: reloadPage,
+                onOk: () =>
+                    setSomethingCountDownEvent(
+                        DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME
+                    ),
             });
-        }, [reloadPage, signContractAction, t]);
+        }, [modal, signContractAction, t]);
 
         return (
             <Button onClick={handleSignOrder} type="primary" block>
