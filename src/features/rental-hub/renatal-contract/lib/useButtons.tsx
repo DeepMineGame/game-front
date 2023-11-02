@@ -91,10 +91,6 @@ export const useButtons = (
         </Tooltip>
     );
 
-    if (contract.renter !== accountName && contract.owner !== accountName) {
-        return;
-    }
-
     if (frontStatus === frontStatusMap['Ended / Item was Buyout ']) {
         return completeButton;
     }

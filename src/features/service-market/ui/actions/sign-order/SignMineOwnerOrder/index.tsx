@@ -2,12 +2,16 @@ import React, { FC, useCallback, useState } from 'react';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
 import { ExclamationCircleFilled } from '@ant-design/icons';
-import { Button, Result, useReloadPage } from 'shared';
+import { Button, Result } from 'shared';
 import {
     AtomicHubMarketSections,
     getAtomicHubUrlToSection,
 } from 'app/constants';
 import { App } from 'antd';
+import {
+    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
+    setSomethingCountDownEvent,
+} from 'features';
 import { useSmartContractAction } from 'features/hooks';
 import {
     ContractDto,
@@ -43,7 +47,6 @@ const SignAsLandlord: FC<Props> = React.memo(
         const { modal } = App.useApp();
 
         const { t } = useTranslation();
-        const reloadPage = useReloadPage();
 
         const [isModalVisible, setIsModalVisible] = useState(false);
         const userAreas = useStore(areasStore) || [];
@@ -72,9 +75,12 @@ const SignAsLandlord: FC<Props> = React.memo(
             modal.success({
                 title: t('pages.serviceMarket.order.signOrder'),
                 content: t('pages.serviceMarket.order.orderCreated'),
-                onOk: reloadPage,
+                onOk: () =>
+                    setSomethingCountDownEvent(
+                        DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME
+                    ),
             });
-        }, [reloadPage, signContractAction, t]);
+        }, [modal, signContractAction, t]);
 
         const handleSign = () => {
             if (!activeArea || emptySlotId < 0) {

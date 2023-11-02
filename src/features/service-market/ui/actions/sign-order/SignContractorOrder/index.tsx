@@ -6,15 +6,12 @@ import {
     AtomicHubMarketSections,
     getAtomicHubUrlToSection,
 } from 'app/constants';
-import {
-    Button,
-    Result,
-    Text,
-    Select,
-    useReloadPage,
-    isEmptyContractorSlot,
-} from 'shared';
+import { Button, Result, Text, Select, isEmptyContractorSlot } from 'shared';
 import { App } from 'antd';
+import {
+    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
+    setSomethingCountDownEvent,
+} from 'features';
 import { useSmartContractAction } from 'features/hooks';
 import {
     $isActiveInventoryHasMineAsset,
@@ -42,7 +39,6 @@ const getEmptySlot = (slots: ContractorSlots) =>
 const SignAsMineOwner: FC<Props> = ({ contract, accountName, isClient }) => {
     const { t } = useTranslation();
     const { modal } = App.useApp();
-    const reloadPage = useReloadPage();
     const [isWarningModalVisible, setIsWarningModalVisible] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [mineId, setMineId] = useState('');
@@ -73,9 +69,12 @@ const SignAsMineOwner: FC<Props> = ({ contract, accountName, isClient }) => {
         modal.success({
             title: t('pages.serviceMarket.order.signOrder'),
             content: t('pages.serviceMarket.order.orderCreated'),
-            onOk: reloadPage,
+            onOk: () =>
+                setSomethingCountDownEvent(
+                    DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME
+                ),
         });
-    }, [reloadPage, signContractAction, t]);
+    }, [modal, signContractAction, t]);
 
     const handleSign = () => {
         if (!isActiveInventoryHasMineAsset) {

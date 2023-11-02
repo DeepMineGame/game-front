@@ -8,7 +8,13 @@ import {
 import { createGate } from 'effector-react';
 import { getMiningStat, MineStat } from 'entities/game-stat';
 
-export const getMiningEffect = createEffect(getMiningStat);
+let accountName: { accountName: string };
+export const getMiningEffect = createEffect(
+    (account: { accountName: string }) => {
+        accountName = account;
+        return getMiningStat(account);
+    }
+);
 
 export const $miningStat = createStore<MineStat | null>(null).on(
     getMiningEffect.doneData,
@@ -42,4 +48,11 @@ $miningCountDown.subscribe((miningCountDown) => {
             setMiningCountDownEvent(miningCountDown - 1);
         }
     }, 1000);
+});
+
+// refetch on window focus to correct timer display
+window.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+        getMiningEffect(accountName);
+    }
 });

@@ -2,7 +2,6 @@ import React, { memo, useEffect, useState } from 'react';
 import {
     Button,
     DMECoinIcon,
-    getDmeAmount,
     getTimeLeft,
     KeyValueTable,
     TimerIcon,
@@ -51,7 +50,6 @@ export const ClaimInfo = memo(({ accountName }: { accountName: string }) => {
             />
         );
     }
-    console.log(Number(miningStat?.dme_to_claim || 0)?.toFixed(3));
     const data = miningStat
         ? [
               [
