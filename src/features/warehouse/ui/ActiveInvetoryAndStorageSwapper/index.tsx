@@ -18,36 +18,22 @@ import {
     LOCATION_TO_ID,
     withdrawAssets,
 } from 'entities/smartcontract';
+import { atomicTransfer } from 'entities/atomicassets';
+import { AssetStruct } from 'entities/game-stat';
 import {
-    atomicTransfer,
-    MergedInventoryWithAtomicAssets,
-} from 'entities/atomicassets';
-import { $mergedStorageWithAtomicAssets, WarehouseGate } from '../../model';
+    $storage,
+    WarehouseGate,
+    $rentInventoryAtomicAssets,
+    getRentAssetsEffect,
+    $inventoryAssets,
+} from '../../model';
 import { useSmartContractAction } from '../../../hooks';
-import { TypeFilter } from '../filters/TypeFilter';
-import { NameFilter } from '../filters/NameFilter';
-import {
-    $activeInventoryAssetName,
-    $assetType,
-    $filteredActiveInventoryAssets,
-    $filteredActiveInventoryAssetsByType,
-    $filteredStorageAssets,
-    $filteredStorageAssetsByType,
-    $storageAssetName,
-    changeActiveInventoryAssetName,
-    changeStorageAssetName,
-    changeType,
-    DraggableAssetsGate,
-} from '../../model/filter';
+
 import {
     $inventoryTypeToggleState,
     InventoryTypeRadioButtonValues,
     inventoryTypeToggle,
 } from '../../model/inventory-type-toggle';
-import {
-    $rentInventoryAtomicAssets,
-    getRentAssetsEffect,
-} from '../../model/rent-inventory';
 import styles from './styles.module.scss';
 import { useRenderCards } from './utils/useRenderCards';
 import { removeDraggedElementFromState } from './utils/removeDraggedElementFromState';
@@ -61,42 +47,22 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     const isInHive = useStore(isUserInHive);
     const { travelConfirm } = useTravelConfirm(LOCATION_TO_ID.hive);
     const renderCards = useRenderCards();
-    const mergedStorageWithAtomicAssets = useStore(
-        $mergedStorageWithAtomicAssets
-    );
+    const storageAssets = useStore($storage);
+    const inventoryAssets = useStore($inventoryAssets);
 
-    const assetTypeFilter = useStore($assetType);
-    const activeInventoryAssetNameFilter = useStore($activeInventoryAssetName);
-    const storageAssetNameFilter = useStore($storageAssetName);
-    const filteredActiveInventoryAssetsByType = useStore(
-        $filteredActiveInventoryAssetsByType
+    const [draggedElement, setDraggedElement] = useState<null | AssetStruct>(
+        null
     );
-    const filteredStorageAssetsByType = useStore($filteredStorageAssetsByType);
-    const filteredActiveInventoryAssets = useStore(
-        $filteredActiveInventoryAssets
-    );
-    const filteredStorageAssets = useStore($filteredStorageAssets);
-
-    const [draggedElement, setDraggedElement] = useState<
-        null | MergedInventoryWithAtomicAssets[number]
-    >(null);
 
     const reloadPage = useReloadPage();
     const [draggedElements, setDraggedElements] = useState(
-        new Set<MergedInventoryWithAtomicAssets[number]>()
+        new Set<AssetStruct>()
     );
 
-    useGate(DraggableAssetsGate, { assets: draggedElements });
-
     const isAtomicIncludesDragged =
-        mergedStorageWithAtomicAssets.filter((item) =>
-            draggedElements.has(item)
-        )?.length > 0;
+        storageAssets.filter((item) => draggedElements.has(item))?.length > 0;
 
-    const toggleDraggedElements = (
-        e?: DragEvent,
-        element?: MergedInventoryWithAtomicAssets[number]
-    ) => {
+    const toggleDraggedElements = (e?: DragEvent, element?: AssetStruct) => {
         e?.preventDefault();
         const selectedElem = element || draggedElement;
 
@@ -155,9 +121,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
         return reloadPage();
     };
 
-    const handleDragCard = (
-        element: MergedInventoryWithAtomicAssets[number]
-    ) => {
+    const handleDragCard = (element: AssetStruct) => {
         if (!isInHive) {
             return;
         }
@@ -221,19 +185,6 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                         </Col>
                         <Col style={{ height: 40 }} />
                     </Row>
-                    {!isStorageAssetDragging && (
-                        <div>
-                            <TypeFilter
-                                activeTab={assetTypeFilter}
-                                onChange={changeType}
-                            />
-                            <NameFilter
-                                items={filteredActiveInventoryAssetsByType}
-                                value={activeInventoryAssetNameFilter}
-                                onChange={changeActiveInventoryAssetName}
-                            />
-                        </div>
-                    )}
                 </Space>
                 <div>
                     {isStorageAssetDragging ? (
@@ -245,7 +196,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                             {renderCards(
                                 isRentStorageSelected
                                     ? (rentInventoryAtomicAssets as any)
-                                    : filteredActiveInventoryAssets,
+                                    : inventoryAssets,
                                 handleDragCard
                             )}
                         </div>
@@ -281,19 +232,6 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                             </Button>
                         </Col>
                     </Row>
-                    {!isActiveInventoryAssetDragging && (
-                        <div>
-                            <TypeFilter
-                                onChange={changeType}
-                                activeTab={assetTypeFilter}
-                            />
-                            <NameFilter
-                                items={filteredStorageAssetsByType}
-                                value={storageAssetNameFilter}
-                                onChange={changeStorageAssetName}
-                            />
-                        </div>
-                    )}
                 </Space>
                 <div className={styles.cardsWrapper}>
                     {isActiveInventoryAssetDragging ? (
@@ -301,7 +239,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                             {renderCards(draggedElements, handleDragCard)}
                         </div>
                     ) : (
-                        renderCards(filteredStorageAssets, handleDragCard)
+                        renderCards(storageAssets, handleDragCard)
                     )}
                 </div>
             </Col>

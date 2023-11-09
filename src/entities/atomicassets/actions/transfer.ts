@@ -6,7 +6,7 @@ export const atomicTransfer = ({
     to = deepminegame,
 }: {
     accountName: string;
-    ids: string[];
+    ids: number[];
     to?: string;
 }) => ({
     actions: [

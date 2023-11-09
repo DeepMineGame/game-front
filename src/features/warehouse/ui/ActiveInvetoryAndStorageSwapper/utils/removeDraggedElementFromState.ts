@@ -1,8 +1,7 @@
-import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
+import { AssetStruct } from 'entities/game-stat';
 
 export const removeDraggedElementFromState =
-    (draggedElement: MergedInventoryWithAtomicAssets[number]) =>
-    (state: Set<MergedInventoryWithAtomicAssets[number]>) =>
+    (draggedElement: AssetStruct) => (state: Set<AssetStruct>) =>
         new Set(
             [...state].filter(
                 ({ asset_id }) => asset_id !== draggedElement?.asset_id

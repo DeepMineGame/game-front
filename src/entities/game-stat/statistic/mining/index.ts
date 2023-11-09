@@ -1,6 +1,14 @@
 import axios from 'axios';
 import { ENDPOINT } from 'app/constants';
 
+export enum AssetStructType {
+    Areas = 'Areas',
+    Equipment = 'Equipment',
+    Structures = 'Structures',
+    Badges = 'Badges',
+    Schemas = 'Schemas',
+    'Upgrade kit' = 'Upgrade kit',
+}
 export type AssetStruct = {
     asset_id: number;
     template_id: number;
@@ -8,7 +16,7 @@ export type AssetStruct = {
     schema_name: string;
     level: number;
     rarity: string;
-    type: string;
+    type: AssetStructType;
     class: string;
     description: string;
     broken: boolean;

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { Card, desktopS, useMediaQuery } from 'shared';
+import { Card2, desktopS, useMediaQuery } from 'shared';
 import { useTranslation } from 'react-i18next';
-import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
+import { AssetStruct } from 'entities/game-stat';
 import { isAssetAvailable } from 'shared/lib/utils';
 import styles from '../styles.module.scss';
 
@@ -11,11 +11,8 @@ export function useRenderCards() {
     const { t } = useTranslation();
 
     return (
-        items:
-            | Set<MergedInventoryWithAtomicAssets[number]>
-            | MergedInventoryWithAtomicAssets,
-
-        onDragStart: (element: MergedInventoryWithAtomicAssets[number]) => void
+        items: Set<AssetStruct> | AssetStruct[],
+        onDragStart: (element: AssetStruct) => void
     ) => {
         return Array.from(items)?.map((card) => (
             <div
@@ -25,8 +22,8 @@ export function useRenderCards() {
                 }
                 key={card.asset_id}
             >
-                <Card
-                    inventory={card}
+                <Card2
+                    inventory={card as unknown as AssetStruct}
                     className={styles.card}
                     key={card.asset_id}
                     buttonText={t('Details')}
