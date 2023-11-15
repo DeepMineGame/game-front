@@ -9,11 +9,11 @@ import {
 } from 'shared';
 import { ID_TO_INVENTORY, miningEquipmentNames } from 'entities/smartcontract';
 import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
+import { AssetStruct } from 'entities/game-stat';
 import { ProgressProps } from '../ProgressBar/NftProgressBar';
 import styles from './styles.module.scss';
 import { CardBadge } from './components/CardBadge';
 import { CardState } from './components/CardState';
-import { AssetStruct } from '../../../../entities';
 
 export enum Status {
     installed = 'installed',

@@ -1,6 +1,5 @@
 import { KeyValueTable, useAccountName } from 'shared';
 import { useGate, useStore } from 'effector-react';
-import { $xp } from 'features/engineer';
 import { $engineerRole, EngineerInfoGate } from './model';
 
 export const EngineerInfo = () => {

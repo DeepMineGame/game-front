@@ -1,6 +1,5 @@
 import { isMainNet } from 'app/constants';
 import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
-import { AssetStruct } from '../../game-stat';
 
 export const ENGINEER_CERTIFICATE_ID = isMainNet ? 619715 : 528605;
 

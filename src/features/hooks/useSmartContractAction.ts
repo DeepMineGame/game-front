@@ -24,10 +24,7 @@ type UseSmartContractActionParams<T> = {
     options?: typeof defaultTransactionOptions;
     onSignSuccess?: () => void;
 };
-const config = {
-    title: 'Use Hook!',
-    content: 'error',
-};
+
 export const useSmartContractAction = <T>({
     action,
     options = defaultTransactionOptions,

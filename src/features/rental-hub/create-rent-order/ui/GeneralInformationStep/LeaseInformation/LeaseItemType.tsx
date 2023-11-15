@@ -19,7 +19,7 @@ import {
     useWatchUpgradeType,
 } from '../../LeaseTypeFormItem';
 import { $rentInventoryAtomicAssets, rentInventoryGate } from '../../../models';
-import { AssetStruct } from '../../../../../../entities';
+import { AssetStruct } from 'entities/game-stat';
 
 export const inventoriesTabMap = {
     [EquipmentType.undefined]: InventoryTab.equipment,
