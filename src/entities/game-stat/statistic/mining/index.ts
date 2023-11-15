@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ENDPOINT } from 'app/constants';
+import { NumericMalfunctionProbability } from '../../../smartcontract';
 
 export enum AssetStructType {
     Areas = 'Areas',
@@ -20,15 +21,18 @@ export type AssetStruct = {
     class: string;
     description: string;
     broken: boolean;
-    dme_mined: string;
+    dme_mined: number;
     total_dme_mined: string;
-    dme_to_upgrade: string;
+    dme_to_upgrade: number;
     depreciation: number;
     current_capacity: number;
     maximal_capacity: number;
     rent_contract_id: number;
     in_use: boolean;
     available_from: number;
+    malfunction_probability: NumericMalfunctionProbability;
+    repair_cost: number;
+    refurbish_cost: number;
 };
 export type MineStat = {
     action_state: 'active' | 'interrupted' | 'finished' | 'claimed' | 'idle';

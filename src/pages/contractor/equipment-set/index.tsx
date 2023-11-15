@@ -33,6 +33,7 @@ import {
     $mergedInventoryWithAtomicAssets,
     MergedInventoryWithAtomicAssets,
 } from 'entities/atomicassets';
+import { AssetStruct } from 'entities/game-stat';
 import styles from './styles.module.scss';
 import { EquipmentInstallationModal } from './components/EquipmentInstallationModal';
 import { Characteristics } from './components/Characteristics';
@@ -155,7 +156,7 @@ export const EquipmentSetPage: FC = () => {
     };
 
     const handleCardSelect = (
-        card: MergedInventoryWithAtomicAssets[number]
+        card: MergedInventoryWithAtomicAssets[number] | AssetStruct
     ) => {
         if (selectedEquipmentName) {
             setSelectedEquipment({

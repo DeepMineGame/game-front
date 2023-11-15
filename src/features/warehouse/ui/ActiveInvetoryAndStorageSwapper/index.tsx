@@ -23,7 +23,7 @@ import { AssetStruct } from 'entities/game-stat';
 import {
     $storage,
     WarehouseGate,
-    $rentInventoryAtomicAssets,
+    $rentInventory,
     getRentAssetsEffect,
     $inventoryAssets,
 } from '../../model';
@@ -137,7 +137,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
 
     const isStorageAssetDragging =
         isAtomicIncludesDragged && hasDraggingElement;
-    const rentInventoryAtomicAssets = useStore($rentInventoryAtomicAssets);
+    const rentInventoryAtomicAssets = useStore($rentInventory);
 
     return (
         <Row>

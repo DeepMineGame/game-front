@@ -13,6 +13,7 @@ import { ProgressProps } from '../ProgressBar/NftProgressBar';
 import styles from './styles.module.scss';
 import { CardBadge } from './components/CardBadge';
 import { CardState } from './components/CardState';
+import { AssetStruct } from '../../../../entities';
 
 export enum Status {
     installed = 'installed',
@@ -21,9 +22,17 @@ export enum Status {
 }
 
 export const getAssetStatus = (
-    inventory?: MergedInventoryWithAtomicAssets[number]
+    inventory?: MergedInventoryWithAtomicAssets[number] | AssetStruct
 ): Status => {
-    if (inventory?.data?.broken) return Status.broken;
+    if ('data' in (inventory || {})) {
+        if (
+            (inventory as MergedInventoryWithAtomicAssets[number])?.data?.broken
+        )
+            return Status.broken;
+    }
+    if ((inventory as AssetStruct).broken) {
+        return Status.broken;
+    }
     if (inventory?.in_use) return Status.installed;
 
     return Status.notInstalled;

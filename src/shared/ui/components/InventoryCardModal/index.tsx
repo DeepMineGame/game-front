@@ -1,4 +1,5 @@
 import {
+    Card2,
     DMECoinIcon,
     GetCostParams,
     isAssetAvailable,
@@ -27,6 +28,7 @@ import {
 } from 'entities/smartcontract';
 import { balancesStore } from 'entities/user';
 import { orderFields } from 'entities/order';
+import { AssetStruct } from 'entities/game-stat';
 import {
     ActionModal,
     Button,
@@ -43,8 +45,10 @@ import {
 import styles from './styles.module.scss';
 
 type InventoryCardModalProps = ModalProps & {
-    card: MergedInventoryWithAtomicAssets[number];
-    onSelect?: (card: MergedInventoryWithAtomicAssets[number]) => void;
+    card: MergedInventoryWithAtomicAssets[number] | AssetStruct;
+    onSelect?: (
+        card: MergedInventoryWithAtomicAssets[number] | AssetStruct
+    ) => void;
 };
 
 enum ModalType {
@@ -104,21 +108,25 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     });
 
     const assetIsBroken = getAssetStatus(card) === Status.broken;
+    const isNftDataFromBlockchain = 'data' in card;
+    const dmeToLevelUpgrade = isNftDataFromBlockchain
+        ? card?.data?.['DME to Upgrade']
+        : card.dme_to_upgrade || 0;
+    const dmeMined = isNftDataFromBlockchain
+        ? card?.data?.['DME Mined']
+        : card.dme_mined || 0;
 
-    const dmeToLevelUpgrade = card?.data?.['DME to Upgrade'] || 0;
-    const dmeMined = card?.data?.['DME Mined'] || 0;
-
-    const numericMalfunctionProbability = getMalfunctionProbability(card);
+    const numericMalfunctionProbability =
+        'malfunction_probability' in card
+            ? card.malfunction_probability
+            : getMalfunctionProbability(card);
 
     const malfunctionProbabilityTranslation = numericMalfunctionProbability
         ? t(getMalfunctionProbabilityTranslation(numericMalfunctionProbability))
         : '-';
 
     const isAssetPlacedInOurInventoryTable =
-        card.rarity !== undefined &&
-        card.level !== undefined &&
-        // @ts-ignore
-        (card.in_use !== undefined || card.inRentStorage);
+        card.rarity !== undefined && card.level !== undefined;
 
     return (
         <Modal
@@ -129,12 +137,21 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         >
             <div className={styles.container}>
                 <div>
-                    <Card
-                        inventory={card}
-                        onRepairFinish={reload}
-                        showCardBadgeStatus={assetIsBroken}
-                        withDepreciationBar={false}
-                    />
+                    {isNftDataFromBlockchain ? (
+                        <Card
+                            inventory={card}
+                            onRepairFinish={reload}
+                            showCardBadgeStatus={assetIsBroken}
+                            withDepreciationBar={false}
+                        />
+                    ) : (
+                        <Card2
+                            inventory={card}
+                            onRepairFinish={reload}
+                            showCardBadgeStatus={assetIsBroken}
+                            withDepreciationBar={false}
+                        />
+                    )}
                     {onSelect && (
                         <Button
                             disabled={assetIsBroken || !isAssetAvailable(card)}
@@ -168,7 +185,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                         className={styles.atomicButton}
                                         onClick={() =>
                                             navigator.clipboard.writeText(
-                                                card.asset_id
+                                                String(card.asset_id)
                                             )
                                         }
                                     >
@@ -276,16 +293,20 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                                     type: ModalType.repair,
                                                     costs: {
                                                         timeSeconds: 1,
-                                                        coinAmount: Number(
-                                                            getCost({
-                                                                level: card.level as GetCostParams['level'],
-                                                                rarity: rarityMap[
-                                                                    card.rarity
-                                                                ] as GetCostParams['rarity'],
-                                                                isRefurbish:
-                                                                    false,
-                                                            })
-                                                        ),
+                                                        coinAmount:
+                                                            isNftDataFromBlockchain
+                                                                ? Number(
+                                                                      getCost({
+                                                                          level: card.level as GetCostParams['level'],
+                                                                          rarity: rarityMap[
+                                                                              card
+                                                                                  .rarity
+                                                                          ] as GetCostParams['rarity'],
+                                                                          isRefurbish:
+                                                                              false,
+                                                                      })
+                                                                  )
+                                                                : card.repair_cost,
                                                         energy: 0,
                                                     },
                                                 });
@@ -330,16 +351,20 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                                     type: ModalType.refurbish,
                                                     costs: {
                                                         timeSeconds: 120,
-                                                        coinAmount: Number(
-                                                            getCost({
-                                                                level: card.level as GetCostParams['level'],
-                                                                rarity: rarityMap[
-                                                                    card.rarity
-                                                                ] as GetCostParams['rarity'],
-                                                                isRefurbish:
-                                                                    true,
-                                                            })
-                                                        ),
+                                                        coinAmount:
+                                                            isNftDataFromBlockchain
+                                                                ? Number(
+                                                                      getCost({
+                                                                          level: card.level as GetCostParams['level'],
+                                                                          rarity: rarityMap[
+                                                                              card
+                                                                                  .rarity
+                                                                          ] as GetCostParams['rarity'],
+                                                                          isRefurbish:
+                                                                              true,
+                                                                      })
+                                                                  )
+                                                                : card.refurbish_cost,
                                                         energy: 0,
                                                     },
                                                 });

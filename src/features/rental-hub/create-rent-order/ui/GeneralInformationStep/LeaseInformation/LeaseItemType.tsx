@@ -19,6 +19,7 @@ import {
     useWatchUpgradeType,
 } from '../../LeaseTypeFormItem';
 import { $rentInventoryAtomicAssets, rentInventoryGate } from '../../../models';
+import { AssetStruct } from '../../../../../../entities';
 
 export const inventoriesTabMap = {
     [EquipmentType.undefined]: InventoryTab.equipment,
@@ -43,7 +44,7 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
             equipmentType
         );
     const [asset, setAsset] = useState<
-        MergedInventoryWithAtomicAssets[number] | undefined
+        MergedInventoryWithAtomicAssets[number] | undefined | AssetStruct
     >();
 
     const [isInventoryOpen, setIsInventoryOpen] = useState(false);
@@ -70,7 +71,7 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
         'Engineer Certificate'?: MergedInventoryWithAtomicAssets[number];
     }>({});
     const handleItemSelect = (
-        item: MergedInventoryWithAtomicAssets[number]
+        item: MergedInventoryWithAtomicAssets[number] | AssetStruct
     ) => {
         setIsInventoryOpen(false);
         setSelectedInventoryCard(undefined);
@@ -84,7 +85,10 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
         return setAsset(item);
     };
     const handleDeleteAsset =
-        (deletedAsset?: MergedInventoryWithAtomicAssets[number]) => () => {
+        (
+            deletedAsset?: MergedInventoryWithAtomicAssets[number] | AssetStruct
+        ) =>
+        () => {
             setAsset(undefined);
 
             if (

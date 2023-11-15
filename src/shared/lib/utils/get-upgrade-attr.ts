@@ -5,6 +5,7 @@ import {
     EngineerSkillKey,
     rarityMap,
 } from 'entities/smartcontract';
+import { AssetStruct } from 'entities/game-stat';
 
 type UpgradeRarity = keyof typeof rarityMap;
 
@@ -51,14 +52,17 @@ export const getUpgradeType = ({
     asset,
 }: {
     contract?: ContractDto;
-    asset?: MergedInventoryWithAtomicAssets[number];
+    asset?: MergedInventoryWithAtomicAssets[number] | AssetStruct;
 }) => {
     if (contract)
         return upgradeTypeMap[
             parseAttrs(contract)?.schema_type as EngineerSchema
         ];
 
-    return upgradeTypeMap[asset?.schema_type as EngineerSchema];
+    return upgradeTypeMap[
+        (asset as MergedInventoryWithAtomicAssets[number])
+            ?.schema_type as EngineerSchema
+    ];
 };
 
 export const getUpgradeRarity = ({
@@ -66,7 +70,7 @@ export const getUpgradeRarity = ({
     asset,
 }: {
     contract?: ContractDto;
-    asset?: MergedInventoryWithAtomicAssets[number];
+    asset?: MergedInventoryWithAtomicAssets[number] | AssetStruct;
 }) => {
     if (contract)
         return rarityMap[parseAttrs(contract)?.rarity as UpgradeRarity];
