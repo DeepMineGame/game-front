@@ -11,6 +11,7 @@ import {
     rentOrderField,
 } from 'entities/smartcontract';
 import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
+import { AssetStruct } from 'entities/game-stat';
 import { GeneralInformationStepProps } from '../interface';
 import styles from '../styles.module.scss';
 import {
@@ -19,7 +20,6 @@ import {
     useWatchUpgradeType,
 } from '../../LeaseTypeFormItem';
 import { $rentInventoryAtomicAssets, rentInventoryGate } from '../../../models';
-import { AssetStruct } from 'entities/game-stat';
 
 export const inventoriesTabMap = {
     [EquipmentType.undefined]: InventoryTab.equipment,
