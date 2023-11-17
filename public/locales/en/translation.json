@@ -99,6 +99,7 @@
       "you": "You",
       "status": {
         "active": "Active",
+        "depth_changing": "Depth changing",
         "inactive": "Inactive",
         "idle": "Idle",
         "working": "Working",
