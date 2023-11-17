@@ -100,6 +100,7 @@
       "status": {
         "active": "Active",
         "inactive": "Inactive",
+        "depth_changing": "Depth changing",
         "idle": "Idle",
         "working": "Working",
         "setuped": "Setuped",
