@@ -12,7 +12,8 @@ export function useRenderCards() {
 
     return (
         items: Set<AssetStruct> | AssetStruct[],
-        onDragStart: (element: AssetStruct) => void
+        onDragStart: (element: AssetStruct) => void,
+        onWheel?: () => any
     ) => {
         return Array.from(items)?.map((card) => (
             <div
@@ -21,6 +22,7 @@ export function useRenderCards() {
                     !isDesktop && isAssetAvailable(card) && onDragStart(card)
                 }
                 key={card.asset_id}
+                onWheel={onWheel}
             >
                 <Card2
                     inventory={card as unknown as AssetStruct}
