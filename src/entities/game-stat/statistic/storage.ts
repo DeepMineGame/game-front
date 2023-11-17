@@ -7,7 +7,7 @@ export const getStorageAssets = async ({
     offset,
 }: {
     searchParam: string;
-    offset?: string;
+    offset?: number;
 }) => {
     const { data } = await axios.get<{ user: string }, { data: AssetStruct[] }>(
         `${ENDPOINT}/statistic/storage`,

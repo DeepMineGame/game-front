@@ -16,7 +16,7 @@ const getInventoryEffect = createEffect(getInventoryAssets);
 
 const $storage = createStore<AssetStruct[]>([]).on(
     getUserStorageAssets.doneData,
-    (_, payload) => payload
+    (state, payload) => [...state, ...payload]
 );
 
 export const $inventoryAssets = createStore<AssetStruct[]>([]).on(

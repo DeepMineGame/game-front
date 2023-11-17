@@ -85,3 +85,4 @@ export { poolRequest, RequestSubject } from './node-url-switcher';
 export * from './prop';
 export * from './complement';
 export * from './colorizeUpgradeStatus';
+export * from './debounce';

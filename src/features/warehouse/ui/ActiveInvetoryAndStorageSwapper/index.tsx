@@ -1,4 +1,4 @@
-import { DragEventHandler, FC, useState } from 'react';
+import { DragEventHandler, FC, useCallback, useState } from 'react';
 import { Col, Radio, RadioChangeEvent, Row, Space } from 'antd';
 import {
     Button,
@@ -7,6 +7,7 @@ import {
     useMediaQuery,
     useReloadPage,
     useTravelConfirm,
+    debounce,
 } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
@@ -23,33 +24,47 @@ import { AssetStruct } from 'entities/game-stat';
 import {
     $storage,
     WarehouseGate,
-    $rentInventory,
-    getRentAssetsEffect,
     $inventoryAssets,
+    getUserStorageAssets,
 } from '../../model';
 import { useSmartContractAction } from '../../../hooks';
-
 import {
     $inventoryTypeToggleState,
     InventoryTypeRadioButtonValues,
     inventoryTypeToggle,
 } from '../../model/inventory-type-toggle';
+import {
+    $rentInventory,
+    getRentAssetsEffect,
+} from '../../../rental-hub/create-rent-order/models';
 import styles from './styles.module.scss';
 import { useRenderCards } from './utils/useRenderCards';
 import { removeDraggedElementFromState } from './utils/removeDraggedElementFromState';
+
+export const DEFAULT_AMOUNT_STORAGE_NFT = 100;
 
 export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     accountName,
 }) => {
     const { t } = useTranslation();
     useGate(WarehouseGate, { searchParam: accountName });
+    const [storageOffset, setStorageOffset] = useState(0);
     const isDesktop = useMediaQuery(desktopS);
     const isInHive = useStore(isUserInHive);
     const { travelConfirm } = useTravelConfirm(LOCATION_TO_ID.hive);
     const renderCards = useRenderCards();
     const storageAssets = useStore($storage);
     const inventoryAssets = useStore($inventoryAssets);
-
+    const [debounceFn] = debounce(() => {
+        getUserStorageAssets({
+            searchParam: accountName,
+            offset: storageOffset,
+        });
+    }, 3000);
+    const onScrollLoadStorage = useCallback(() => {
+        setStorageOffset(storageOffset + DEFAULT_AMOUNT_STORAGE_NFT);
+        debounceFn(null);
+    }, [accountName, storageOffset]);
     const [draggedElement, setDraggedElement] = useState<null | AssetStruct>(
         null
     );
@@ -239,7 +254,11 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                             {renderCards(draggedElements, handleDragCard)}
                         </div>
                     ) : (
-                        renderCards(storageAssets, handleDragCard)
+                        renderCards(
+                            storageAssets,
+                            handleDragCard,
+                            onScrollLoadStorage
+                        )
                     )}
                 </div>
             </Col>

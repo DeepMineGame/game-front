@@ -2,7 +2,7 @@ import { deepminegame } from '../index';
 
 export function withdrawAssets(
     waxUser: string,
-    ids: number[],
+    ids: number[] | string[],
     account = deepminegame
 ) {
     return {
