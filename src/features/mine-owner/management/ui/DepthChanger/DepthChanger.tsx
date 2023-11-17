@@ -27,8 +27,8 @@ export const DepthChanger = () => {
     useGate(ChangeDepthGate, { searchParam: accountName });
     const changeDepthAction = useStore($changeDepthAction);
     const changeDepthToAttr = changeDepthAction?.attrs.find(
-        ({ key }) => key === 'depth_to'
-    )?.value;
+        ({ first }) => first === 'depth_to'
+    )?.second;
     const isTimeExpire =
         Date.now() >= (changeDepthAction?.finishes_at || 0) * 1000;
     const ableToFinalise =
