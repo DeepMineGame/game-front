@@ -2,7 +2,7 @@ import { createEffect, createStore, forward } from 'effector';
 import { createGate } from 'effector-react';
 import { RentAssetTableSearchType } from 'entities/smartcontract';
 import { AssetStruct } from 'entities/game-stat';
-import { getRentInventory } from '../../../entities';
+import { getRentInventory } from 'entities/rent-market-api';
 
 export const RentInventoryGate = createGate<{
     searchParam: string;
