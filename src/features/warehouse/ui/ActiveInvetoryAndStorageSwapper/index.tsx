@@ -37,6 +37,7 @@ import {
     $rentInventory,
     getRentAssetsEffect,
 } from '../../../rental-hub/create-rent-order/models';
+import { TypeFilter } from '../filters/TypeFilter';
 import styles from './styles.module.scss';
 import { useRenderCards } from './utils/useRenderCards';
 import { removeDraggedElementFromState } from './utils/removeDraggedElementFromState';
@@ -237,6 +238,9 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                     <Row justify="space-between" align="middle">
                         <Col>
                             <Title level={4}>{t('Storage')}</Title>
+                        </Col>
+                        <Col>
+                            <TypeFilter />
                         </Col>
                         <Col>
                             <Button

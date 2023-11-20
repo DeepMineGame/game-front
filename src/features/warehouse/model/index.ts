@@ -1,5 +1,5 @@
 import { createGate } from 'effector-react';
-import { createEffect, createStore, forward } from 'effector';
+import { createEffect, createEvent, createStore, forward } from 'effector';
 
 import { getUniqueItems } from 'shared';
 import {
@@ -13,15 +13,16 @@ const WarehouseGate = createGate<{ searchParam: string }>('warehouseGate');
 
 const getUserStorageAssets = createEffect(getStorageAssets);
 
-const getInventoryEffect = createEffect(getInventoryAssets);
+export const getInventoryEffect = createEffect(getInventoryAssets);
 
-const $storage = createStore<AssetStruct[]>([]).on(
-    getUserStorageAssets.doneData,
-    (state, payload) =>
+export const resetStorage = createEvent();
+const $storage = createStore<AssetStruct[]>([])
+    .on(getUserStorageAssets.doneData, (state, payload) =>
         getUniqueItems([...state, ...payload], ({ asset_id }) =>
             String(asset_id)
         )
-);
+    )
+    .reset(resetStorage);
 
 export const $inventoryAssets = createStore<AssetStruct[]>([]).on(
     getInventoryEffect.doneData,
