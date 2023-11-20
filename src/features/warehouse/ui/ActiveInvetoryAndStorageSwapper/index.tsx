@@ -1,4 +1,4 @@
-import { DragEventHandler, FC, useCallback, useState } from 'react';
+import { DragEventHandler, FC, useCallback, useRef, useState } from 'react';
 import { Col, Radio, RadioChangeEvent, Row, Space } from 'antd';
 import {
     Button,
@@ -7,7 +7,7 @@ import {
     useMediaQuery,
     useReloadPage,
     useTravelConfirm,
-    debounce,
+    throttle,
 } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
@@ -55,15 +55,17 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     const renderCards = useRenderCards();
     const storageAssets = useStore($storage);
     const inventoryAssets = useStore($inventoryAssets);
-    const [debounceFn] = debounce(() => {
-        getUserStorageAssets({
-            searchParam: accountName,
-            offset: storageOffset,
-        });
-    }, 3000);
+    const throttleGetUserStorage = useRef(
+        throttle(() => {
+            getUserStorageAssets({
+                searchParam: accountName,
+                offset: storageOffset,
+            });
+        }, 1000)
+    );
     const onScrollLoadStorage = useCallback(() => {
         setStorageOffset(storageOffset + DEFAULT_AMOUNT_STORAGE_NFT);
-        debounceFn(null);
+        throttleGetUserStorage.current();
     }, [accountName, storageOffset]);
     const [draggedElement, setDraggedElement] = useState<null | AssetStruct>(
         null
