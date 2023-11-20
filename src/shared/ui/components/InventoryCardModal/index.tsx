@@ -131,7 +131,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
     return (
         <Modal
             {...props}
-            title="Active inventory"
+            title="Asset information"
             className={styles.modal}
             onOk={handleSelect}
         >
