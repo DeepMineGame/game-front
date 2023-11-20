@@ -55,17 +55,17 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
     const renderCards = useRenderCards();
     const storageAssets = useStore($storage);
     const inventoryAssets = useStore($inventoryAssets);
-    const throttleGetUserStorage = useRef(
+    const throttleGetUserStorage = useRef((offset: number) =>
         throttle(() => {
             getUserStorageAssets({
                 searchParam: accountName,
-                offset: storageOffset,
+                offset,
             });
         }, 1000)
     );
     const onScrollLoadStorage = useCallback(() => {
         setStorageOffset(storageOffset + DEFAULT_AMOUNT_STORAGE_NFT);
-        throttleGetUserStorage.current();
+        throttleGetUserStorage.current(storageOffset)();
     }, [accountName, storageOffset]);
     const [draggedElement, setDraggedElement] = useState<null | AssetStruct>(
         null

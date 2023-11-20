@@ -1,6 +1,7 @@
 import { createGate } from 'effector-react';
 import { createEffect, createStore, forward } from 'effector';
 
+import { getUniqueItems } from 'shared';
 import {
     AssetStruct,
     getStorageAssets,
@@ -16,7 +17,10 @@ const getInventoryEffect = createEffect(getInventoryAssets);
 
 const $storage = createStore<AssetStruct[]>([]).on(
     getUserStorageAssets.doneData,
-    (state, payload) => [...state, ...payload]
+    (state, payload) =>
+        getUniqueItems([...state, ...payload], ({ asset_id }) =>
+            String(asset_id)
+        )
 );
 
 export const $inventoryAssets = createStore<AssetStruct[]>([]).on(

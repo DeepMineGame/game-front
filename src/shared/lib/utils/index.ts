@@ -86,3 +86,4 @@ export * from './prop';
 export * from './complement';
 export * from './colorizeUpgradeStatus';
 export * from './throttle';
+export * from './getUniqueItems';
