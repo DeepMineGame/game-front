@@ -26,6 +26,8 @@ import {
     WarehouseGate,
     $inventoryAssets,
     getUserStorageAssets,
+    $rentInventory,
+    getRentAssetsEffect,
 } from '../../model';
 import { useSmartContractAction } from '../../../hooks';
 import {
@@ -33,10 +35,6 @@ import {
     InventoryTypeRadioButtonValues,
     inventoryTypeToggle,
 } from '../../model/inventory-type-toggle';
-import {
-    $rentInventory,
-    getRentAssetsEffect,
-} from '../../../rental-hub/create-rent-order/models';
 import { TypeFilter } from '../filters/TypeFilter';
 import styles from './styles.module.scss';
 import { useRenderCards } from './utils/useRenderCards';
@@ -155,7 +153,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
 
     const isStorageAssetDragging =
         isAtomicIncludesDragged && hasDraggingElement;
-    const rentInventoryAtomicAssets = useStore($rentInventory);
+    const rentInventory = useStore($rentInventory);
 
     return (
         <Row>
@@ -213,7 +211,7 @@ export const ActiveInventoryAndStorageSwapper: FC<{ accountName: string }> = ({
                         <div className={styles.cardsWrapper}>
                             {renderCards(
                                 isRentStorageSelected
-                                    ? (rentInventoryAtomicAssets as any)
+                                    ? (rentInventory as any)
                                     : inventoryAssets,
                                 handleDragCard
                             )}
