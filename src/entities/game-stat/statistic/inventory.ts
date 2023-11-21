@@ -10,7 +10,7 @@ export const getInventoryAssets = async ({
     offset?: string;
 }) => {
     const { data } = await axios.get<{ user: string }, { data: AssetStruct[] }>(
-        `${ENDPOINT}/statistic/inventory`,
+        `${ENDPOINT}/statistic/unused_inventory`,
         {
             params: {
                 user: searchParam,
