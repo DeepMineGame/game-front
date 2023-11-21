@@ -116,10 +116,9 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
         ? card?.data?.['DME Mined']
         : card.dme_mined || 0;
 
-    const numericMalfunctionProbability =
-        'malfunction_probability' in card
-            ? card.malfunction_probability
-            : getMalfunctionProbability(card);
+    const numericMalfunctionProbability = isNftDataFromBlockchain
+        ? getMalfunctionProbability(card)
+        : card.malfunction_probability;
 
     const malfunctionProbabilityTranslation = numericMalfunctionProbability
         ? t(getMalfunctionProbabilityTranslation(numericMalfunctionProbability))
