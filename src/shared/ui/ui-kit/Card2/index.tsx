@@ -1,12 +1,7 @@
 import { FC } from 'react';
 import { Tooltip } from 'antd';
 import cn from 'classnames';
-import {
-    Button,
-    getImagePath,
-    DepreciationProgressBar,
-    isUtcDateExpired,
-} from 'shared';
+import { Button, getImagePath, DepreciationProgressBar } from 'shared';
 import { ID_TO_INVENTORY, miningEquipmentNames } from 'entities/smartcontract';
 import { AssetStruct } from 'entities/game-stat';
 import { ProgressProps } from '../ProgressBar/NftProgressBar';
