@@ -1,4 +1,4 @@
-import { ToolOutlined } from '@ant-design/icons';
+import { DownSquareOutlined, ToolOutlined } from '@ant-design/icons';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -9,43 +9,53 @@ import {
     Text,
     BrokenOutlined,
 } from 'shared';
+import { AssetStruct } from 'entities/game-stat';
 import styles from '../styles.module.scss';
 
 export const CardState: FC<{
     status?: Status;
-    finishesAt?: number;
     onFinish?: () => void;
-}> = ({ status, finishesAt, onFinish }) => {
+    card: AssetStruct;
+}> = ({ status, onFinish, card }) => {
     const { t } = useTranslation();
-    const isFinishesAtExist = finishesAt !== undefined;
-    useTick(isFinishesAtExist && !isUtcDateExpired(finishesAt));
+    const isFinishesAtExist = card.available_from !== undefined;
+    useTick(isFinishesAtExist && !isUtcDateExpired(card.available_from));
 
     const isBrokenAndNotInRepair =
         isFinishesAtExist &&
-        isUtcDateExpired(finishesAt) &&
+        isUtcDateExpired(card.available_from) &&
         status === Status.broken;
 
     if (
         isFinishesAtExist &&
         status !== Status.broken &&
-        isUtcDateExpired(finishesAt)
+        isUtcDateExpired(card.available_from)
     )
         onFinish?.();
-
-    return (
-        <div className={styles.stateWrapper}>
-            <div className={styles.cardState}>
-                {isBrokenAndNotInRepair ? (
-                    <BrokenOutlined />
-                ) : (
-                    <ToolOutlined className={styles.iconTool} />
-                )}
-                <Text type="secondary">
-                    {isBrokenAndNotInRepair
-                        ? t('kit.cardStates.broken')
-                        : getTimeLeftFromUtc(finishesAt!)}
-                </Text>
-            </div>
-        </div>
+    const brokenText = isBrokenAndNotInRepair
+        ? t('kit.cardStates.broken')
+        : getTimeLeftFromUtc(card.available_from);
+    const brokenIcon = isBrokenAndNotInRepair ? (
+        <BrokenOutlined />
+    ) : (
+        <ToolOutlined className={styles.iconTool} />
     );
+    const inRent = card.rent_contract_id;
+    const isBroken =
+        card.broken ||
+        (!!card?.available_from && !isUtcDateExpired(card?.available_from));
+
+    if (inRent || isBroken) {
+        return (
+            <div className={styles.stateWrapper}>
+                <div className={styles.cardState}>
+                    {inRent ? <DownSquareOutlined /> : brokenIcon}
+                    <Text type="secondary">
+                        {inRent ? t('Rented') : brokenText}
+                    </Text>
+                </div>
+            </div>
+        );
+    }
+    return null;
 };
