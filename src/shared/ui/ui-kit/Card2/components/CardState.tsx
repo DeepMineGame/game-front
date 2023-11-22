@@ -25,11 +25,14 @@ export const CardState: FC<{
         isFinishesAtExist &&
         isUtcDateExpired(card.available_from) &&
         status === Status.broken;
-
+    const isBroken =
+        card.broken ||
+        (!!card?.available_from && !isUtcDateExpired(card?.available_from));
     if (
         isFinishesAtExist &&
         status !== Status.broken &&
-        isUtcDateExpired(card.available_from)
+        isUtcDateExpired(card.available_from) &&
+        isBroken
     )
         onFinish?.();
     const brokenText = isBrokenAndNotInRepair
@@ -41,9 +44,6 @@ export const CardState: FC<{
         <ToolOutlined className={styles.iconTool} />
     );
     const inRent = card.rent_contract_id;
-    const isBroken =
-        card.broken ||
-        (!!card?.available_from && !isUtcDateExpired(card?.available_from));
 
     if (inRent || isBroken) {
         return (
