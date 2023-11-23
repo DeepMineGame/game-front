@@ -30,3 +30,4 @@ export const getRentOrders = async ({
 
     return data;
 };
+export * from './inventory';

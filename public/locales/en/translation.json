@@ -99,6 +99,7 @@
       "you": "You",
       "status": {
         "active": "Active",
+        "depth_changing": "Depth changing",
         "inactive": "Inactive",
         "depth_changing": "Depth changing",
         "idle": "Idle",
@@ -1120,5 +1121,6 @@
   },
   "Your equipment was buyouted by renter": {
     " You can complete the contract": "Your equipment was buyouted by renter. You can complete the contract"
-  }
+  },
+  "Rented": "Rented"
 }

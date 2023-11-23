@@ -18,6 +18,7 @@ import {
 } from 'entities/atomicassets';
 import { signOrder, ContractDto, EngineerSchema } from 'entities/smartcontract';
 import { inventoriesTabMap } from 'entities/engineer';
+import { AssetStruct } from 'entities/game-stat';
 import { neutral8 } from 'shared/ui/variables';
 import { useAccountName } from 'shared/lib/hooks';
 import styles from './index.module.scss';
@@ -48,7 +49,7 @@ export const SignLevelUpgradeOrderModal: FC<Props> = ({
         MergedInventoryWithAtomicAssets[number] | undefined
     >();
     const [selectedAsset, setSelectedAsset] = useState<
-        MergedInventoryWithAtomicAssets[number] | undefined
+        MergedInventoryWithAtomicAssets[number] | AssetStruct | undefined
     >();
     const [isInventoryOpen, setIsInventoryOpen] = useState(false);
 
@@ -56,14 +57,14 @@ export const SignLevelUpgradeOrderModal: FC<Props> = ({
         action: signOrder({
             waxUser: accountName,
             contractId: contract.id,
-            assetId: selectedAsset?.asset_id,
+            assetId: String(selectedAsset?.asset_id),
             isClient: 1,
         }),
         onSignSuccess,
     });
 
     const handleAssetSelect = (
-        asset: MergedInventoryWithAtomicAssets[number]
+        asset: MergedInventoryWithAtomicAssets[number] | AssetStruct
     ) => {
         setSelectedAsset(asset);
         setIsInventoryOpen(false);

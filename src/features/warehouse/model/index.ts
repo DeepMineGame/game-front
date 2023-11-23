@@ -1,142 +1,38 @@
 import { createGate } from 'effector-react';
-import { createEffect, createStore, forward, sample, combine } from 'effector';
-import { getTableData } from 'shared';
+import { createEffect, createEvent, createStore, forward } from 'effector';
+
+import { getUniqueItems } from 'shared';
 import {
-    AssetDataType,
-    getAssets,
-    getAtomicAssetsByUser,
-} from 'entities/atomicassets';
-import {
-    getInventoryConfig,
-    InventoryType,
-    UserInventoryType,
-} from 'entities/smartcontract';
-import { mergeAssets, getGameAssets } from 'shared/lib/utils';
+    AssetStruct,
+    getStorageAssets,
+    getInventoryAssets,
+} from 'entities/game-stat';
 import { getRentAssetsEffect } from './rent-inventory';
-import { getInventoryAtomicAssetsEffect } from './effects';
 
 const WarehouseGate = createGate<{ searchParam: string }>('warehouseGate');
 
-const getAtomicAssetsByUserEffect = createEffect(getAtomicAssetsByUser);
+const getUserStorageAssets = createEffect(getStorageAssets);
 
-const getInventoryEffect = createEffect<
-    { searchParam: string },
-    { rows: UserInventoryType[] } | undefined
->(({ searchParam }) => getTableData(getInventoryConfig(searchParam)));
+export const getInventoryEffect = createEffect(getInventoryAssets);
 
-const $storage = createStore<UserInventoryType[]>([]).on(
-    getAtomicAssetsByUserEffect.doneData,
-    (_, payload) => payload
-);
+export const resetStorage = createEvent();
+const $storage = createStore<AssetStruct[]>([])
+    .on(getUserStorageAssets.doneData, (state, payload) =>
+        getUniqueItems([...state, ...payload], ({ asset_id }) =>
+            String(asset_id)
+        )
+    )
+    .reset(resetStorage);
 
-const $inventory = createStore<UserInventoryType[]>([]).on(
+export const $inventoryAssets = createStore<AssetStruct[]>([]).on(
     getInventoryEffect.doneData,
-    (_, data) => data?.rows
-);
-
-const getStorageAtomicAssetsEffect = createEffect<string[], AssetDataType[]>(
-    getAssets
-);
-
-const $storageAssetsIds = createStore<string[]>([]);
-const $inventoryAssetsIds = createStore<string[]>([]);
-
-const $storageAtomicAssets = createStore<AssetDataType[]>([]).on(
-    getStorageAtomicAssetsEffect.doneData,
     (_, data) => data
 );
 
-const $inventoryAtomicAssets = createStore<AssetDataType[]>([]).on(
-    getInventoryAtomicAssetsEffect.doneData,
-    (_, data) => data
-);
-
-const $mergedInventoryWithAtomicAssets = combine(
-    $inventory,
-    $inventoryAtomicAssets,
-    (...assets) => mergeAssets(...assets).filter(({ in_use }) => !in_use)
-);
-
-const parseAtomicAssetType = ({
-    schema: { schema_name },
-}: AssetDataType): InventoryType => {
-    switch (schema_name) {
-        case 'areas':
-            return InventoryType.areas;
-        case 'equipment':
-            return InventoryType.equipment;
-        case 'structures':
-            return InventoryType.structures;
-        case 'badges':
-            return InventoryType.badges;
-        case 'schemas':
-            return InventoryType.schemas;
-        case 'modules':
-            return InventoryType.modules;
-        case 'packs':
-            return InventoryType.packs;
-        case 'stickers':
-            return InventoryType.stickers;
-        case 'cards':
-            return InventoryType.cards;
-        default:
-            return InventoryType.undefined;
-    }
-};
-
-const $mergedStorageWithAtomicAssets = combine(
-    $storage,
-    $storageAtomicAssets,
-    (...assets) =>
-        mergeAssets(...assets).map((asset) => ({
-            ...asset,
-            inv_type: parseAtomicAssetType(asset),
-        }))
-);
-
-sample({
-    source: $inventory,
-    target: $inventoryAssetsIds,
-    fn: (assets) =>
-        getGameAssets(assets)?.map((asset) => String(asset.asset_id)),
-});
-
-sample({
-    source: $storage,
-    target: $storageAssetsIds,
-    fn: (assets) =>
-        getGameAssets(assets)?.map((asset) => String(asset.asset_id)),
-});
-
-sample({
-    source: $inventory,
-    target: getInventoryAtomicAssetsEffect,
-    filter: (inventory) => inventory.length > 0,
-    fn: (assets) => assets?.map((asset) => String(asset.asset_id)),
-});
-
-sample({
-    source: $storageAssetsIds,
-    filter: (ids) => !!ids.length,
-    target: getStorageAtomicAssetsEffect,
-});
-
-sample({
-    source: $inventoryAssetsIds,
-    filter: (ids) => !!ids.length,
-    target: getInventoryAtomicAssetsEffect,
-});
-
-export {
-    WarehouseGate,
-    getAtomicAssetsByUserEffect,
-    $storage,
-    $mergedInventoryWithAtomicAssets,
-    $mergedStorageWithAtomicAssets,
-};
+export { WarehouseGate, getUserStorageAssets, $storage };
 
 forward({
     from: WarehouseGate.open,
-    to: [getAtomicAssetsByUserEffect, getInventoryEffect, getRentAssetsEffect],
+    to: [getUserStorageAssets, getInventoryEffect, getRentAssetsEffect],
 });
 export * from './rent-inventory';

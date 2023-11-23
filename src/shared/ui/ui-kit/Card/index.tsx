@@ -9,6 +9,7 @@ import {
 } from 'shared';
 import { ID_TO_INVENTORY, miningEquipmentNames } from 'entities/smartcontract';
 import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
+import { AssetStruct } from 'entities/game-stat';
 import { ProgressProps } from '../ProgressBar/NftProgressBar';
 import styles from './styles.module.scss';
 import { CardBadge } from './components/CardBadge';
@@ -21,9 +22,17 @@ export enum Status {
 }
 
 export const getAssetStatus = (
-    inventory?: MergedInventoryWithAtomicAssets[number]
+    inventory?: MergedInventoryWithAtomicAssets[number] | AssetStruct
 ): Status => {
-    if (inventory?.data?.broken) return Status.broken;
+    if ('data' in (inventory || {})) {
+        if (
+            (inventory as MergedInventoryWithAtomicAssets[number])?.data?.broken
+        )
+            return Status.broken;
+    }
+    if ((inventory as AssetStruct).broken) {
+        return Status.broken;
+    }
     if (inventory?.in_use) return Status.installed;
 
     return Status.notInstalled;

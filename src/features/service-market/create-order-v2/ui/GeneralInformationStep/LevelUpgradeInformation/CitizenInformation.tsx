@@ -16,6 +16,7 @@ import {
 } from 'entities/atomicassets';
 import { orderFields } from 'entities/order';
 import { inventoriesTabMap } from 'entities/engineer';
+import { AssetStruct } from 'entities/game-stat';
 import { GeneralInformationStepProps } from '../interface';
 import styles from '../styles.module.scss';
 import {
@@ -39,7 +40,7 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
             equipmentType
         );
     const [asset, setAsset] = useState<
-        MergedInventoryWithAtomicAssets[number] | undefined
+        MergedInventoryWithAtomicAssets[number] | AssetStruct | undefined
     >();
 
     const [isInventoryOpen, setIsInventoryOpen] = useState(false);
@@ -63,7 +64,7 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
         'Engineer Certificate'?: MergedInventoryWithAtomicAssets[number];
     }>({});
     const handleItemSelect = (
-        item: MergedInventoryWithAtomicAssets[number]
+        item: MergedInventoryWithAtomicAssets[number] | AssetStruct
     ) => {
         setIsInventoryOpen(false);
         setSelectedInventoryCard(undefined);
@@ -77,7 +78,10 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
         return setAsset(item);
     };
     const handleDeleteAsset =
-        (deletedAsset?: MergedInventoryWithAtomicAssets[number]) => () => {
+        (
+            deletedAsset?: MergedInventoryWithAtomicAssets[number] | AssetStruct
+        ) =>
+        () => {
             setAsset(undefined);
 
             if (
@@ -138,6 +142,7 @@ export const CitizenInformation: FC<GeneralInformationStepProps> = ({
                                 >
                                     {asset
                                         ? `${asset.name}, ${t(
+                                              // @ts-ignore
                                               raritiesTranslationMap[
                                                   asset.rarity
                                               ]

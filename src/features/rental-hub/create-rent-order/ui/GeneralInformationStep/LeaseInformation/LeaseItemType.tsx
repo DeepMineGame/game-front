@@ -11,6 +11,7 @@ import {
     rentOrderField,
 } from 'entities/smartcontract';
 import { MergedInventoryWithAtomicAssets } from 'entities/atomicassets';
+import { AssetStruct } from 'entities/game-stat';
 import { GeneralInformationStepProps } from '../interface';
 import styles from '../styles.module.scss';
 import {
@@ -43,7 +44,7 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
             equipmentType
         );
     const [asset, setAsset] = useState<
-        MergedInventoryWithAtomicAssets[number] | undefined
+        MergedInventoryWithAtomicAssets[number] | undefined | AssetStruct
     >();
 
     const [isInventoryOpen, setIsInventoryOpen] = useState(false);
@@ -70,7 +71,7 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
         'Engineer Certificate'?: MergedInventoryWithAtomicAssets[number];
     }>({});
     const handleItemSelect = (
-        item: MergedInventoryWithAtomicAssets[number]
+        item: MergedInventoryWithAtomicAssets[number] | AssetStruct
     ) => {
         setIsInventoryOpen(false);
         setSelectedInventoryCard(undefined);
@@ -84,7 +85,10 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
         return setAsset(item);
     };
     const handleDeleteAsset =
-        (deletedAsset?: MergedInventoryWithAtomicAssets[number]) => () => {
+        (
+            deletedAsset?: MergedInventoryWithAtomicAssets[number] | AssetStruct
+        ) =>
+        () => {
             setAsset(undefined);
 
             if (

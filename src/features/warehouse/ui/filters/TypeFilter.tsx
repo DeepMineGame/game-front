@@ -1,51 +1,33 @@
-import { useStore } from 'effector-react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Tabs as TabsComponent } from 'shared';
-import { InventoryType } from 'entities/smartcontract';
+import { Select, useAccountName } from 'shared';
+import { EquipmentTypes } from 'entities/game-stat';
+import { getUserStorageAssets, resetStorage } from '../../model';
 
-import { $allTypes } from '../../model/filter';
-
-const tabNamesMap: Record<InventoryType, string> = {
-    [InventoryType.undefined]: 'all',
-    [InventoryType.areas]: 'areas',
-    [InventoryType.structures]: 'structures',
-    [InventoryType.equipment]: 'equipment',
-    [InventoryType.schemas]: 'schemas',
-    [InventoryType.upgrade_kits]: 'upgradeKits',
-    [InventoryType.badges]: 'badges',
-    [InventoryType.cards]: 'cards',
-    [InventoryType.packs]: 'packs',
-    [InventoryType.stickers]: 'stickers',
-    [InventoryType.modules]: 'modules',
-};
-
-type Props = {
-    activeTab?: InventoryType;
-    className?: string;
-    onChange?: (activeKey: InventoryType) => void;
-    isDisabled?: boolean;
-};
-
-export const TypeFilter = ({
-    className = '',
-    onChange,
-    activeTab,
-    isDisabled = false,
-}: Props) => {
+export const TypeFilter = () => {
     const { t } = useTranslation();
-    const tabList = useStore($allTypes);
+    const accountName = useAccountName();
+    const options = useMemo(() => {
+        return Object.values(EquipmentTypes).map((type) => ({
+            value: type,
+            label: type.replace('_', ' '),
+        }));
+    }, []);
 
     return (
-        <TabsComponent
-            activeKey={activeTab?.toString()}
-            className={className}
-            onChange={(selected) => onChange?.(+selected)}
-            items={tabList.map((tab) => ({
-                key: String(tab),
-                label: t(tabNamesMap[tab]),
-                children: null,
-                disabled: isDisabled,
-            }))}
+        <Select
+            placeholder={t('components.common.selectByName')}
+            size="large"
+            options={options}
+            onChange={async (type: typeof EquipmentTypes) => {
+                await resetStorage();
+                getUserStorageAssets({
+                    searchParam: accountName,
+                    inventory_type: type,
+                });
+            }}
+            style={{ minWidth: 200 }}
+            allowClear
         />
     );
 };

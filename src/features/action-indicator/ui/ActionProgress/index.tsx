@@ -13,11 +13,7 @@ import { CheckCircleOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 import { useActionName } from 'features/user';
-import {
-    $indicateActionDetails,
-    getActionForIndicate,
-    LastActionGate,
-} from '../../model';
+import { $indicateActionDetails, LastActionGate } from '../../model';
 import styles from './styles.module.scss';
 
 export function ProgressNotification(props: {
@@ -83,7 +79,6 @@ export function ProgressNotification(props: {
 }
 
 export const ActionProgress = () => {
-    const accountName = useAccountName();
     const lastAction = useStore($indicateActionDetails);
     const isFinished = Date.now() >= lastAction.finishAt;
     const reloadPage = useReloadPage();

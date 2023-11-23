@@ -1,12 +1,7 @@
 import { FC } from 'react';
 import { Tooltip } from 'antd';
 import cn from 'classnames';
-import {
-    Button,
-    getImagePath,
-    DepreciationProgressBar,
-    isUtcDateExpired,
-} from 'shared';
+import { Button, getImagePath, DepreciationProgressBar } from 'shared';
 import { ID_TO_INVENTORY, miningEquipmentNames } from 'entities/smartcontract';
 import { AssetStruct } from 'entities/game-stat';
 import { ProgressProps } from '../ProgressBar/NftProgressBar';
@@ -62,15 +57,15 @@ export const Card2: FC<CardProps> = ({
             <div className={cn(styles.wrapper, className)}>
                 <div onClick={onClick}>
                     {showCardBadgeStatus && <CardBadge status={status} />}
-                    {(inventory?.broken ||
-                        (!!inventory?.available_from &&
-                            !isUtcDateExpired(inventory?.available_from))) && (
+
+                    {inventory && (
                         <CardState
                             status={status}
-                            finishesAt={inventory?.available_from!}
                             onFinish={onRepairFinish}
+                            card={inventory}
                         />
                     )}
+
                     <div className={styles.image}>
                         <img
                             height="100%"
