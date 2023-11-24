@@ -6,3 +6,4 @@ export * from './mining';
 export * from './storage';
 export * from './inventory';
 export * from './asset';
+export * from './availableRentAssets';

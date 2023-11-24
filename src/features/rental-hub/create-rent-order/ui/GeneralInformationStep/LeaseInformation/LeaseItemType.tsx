@@ -19,7 +19,7 @@ import {
     LeaseTypeFormItem,
     useWatchUpgradeType,
 } from '../../LeaseTypeFormItem';
-import { $rentInventoryAtomicAssets, rentInventoryGate } from '../../../models';
+import { $rentInventory, rentInventoryGate } from '../../../models';
 
 export const inventoriesTabMap = {
     [EquipmentType.undefined]: InventoryTab.equipment,
@@ -52,7 +52,7 @@ export const LeaseItemType: FC<GeneralInformationStepProps> = ({
         MergedInventoryWithAtomicAssets[number] | undefined
     >();
     useGate(rentInventoryGate, { searchParam: useAccountName() });
-    const userInventory = useStore($rentInventoryAtomicAssets);
+    const userInventory = useStore($rentInventory);
     const isOneItemToLease =
         equipmentType === 'Mine' ||
         type === EquipmentType.equipment ||

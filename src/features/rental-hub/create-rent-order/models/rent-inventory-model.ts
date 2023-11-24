@@ -1,31 +1,11 @@
-import { createEffect, createStore, forward, sample } from 'effector';
+import { createEffect, createStore, forward } from 'effector';
 import { createGate } from 'effector-react';
-import { getRentAssetsTableData } from 'entities/smartcontract';
-import { AssetDataType, getAssets } from 'entities/atomicassets';
+import { AssetStruct, getAvailableRentAsset } from 'entities/game-stat';
 
-export const getRentAssetsEffect = createEffect<
-    { searchParam: string },
-    { rows: { asset_id: string }[] } | undefined
->(getRentAssetsTableData);
-export const $rentInventory = createStore<{ asset_id: string }[]>([]).on(
+export const getRentAssetsEffect = createEffect(getAvailableRentAsset);
+export const $rentInventory = createStore<AssetStruct[]>([]).on(
     getRentAssetsEffect.doneData,
-    (data, payload) => payload?.rows
-);
-export const getInventoryAtomicAssetsEffect = createEffect<
-    string[],
-    AssetDataType[]
->(getAssets);
-
-sample({
-    source: $rentInventory,
-    target: getInventoryAtomicAssetsEffect,
-    filter: (inventory) => inventory.length > 0,
-    fn: (assets) => assets?.map((asset) => String(asset.asset_id)),
-});
-
-export const $rentInventoryAtomicAssets = createStore<AssetDataType[]>([]).on(
-    getInventoryAtomicAssetsEffect.doneData,
-    (_, data) => data
+    (data, payload) => payload
 );
 
 export const rentInventoryGate = createGate<{ searchParam: string }>(
