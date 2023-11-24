@@ -1,4 +1,4 @@
-import { Button, Modal, Dropdown, useReloadPage, Card } from 'shared';
+import { Button, Modal, Dropdown, useReloadPage, Card, Card2 } from 'shared';
 import React, { FC, useEffect, useState } from 'react';
 import { ModalProps, Space } from 'antd';
 import { SortAscendingOutlined, FilterOutlined } from '@ant-design/icons';
@@ -93,18 +93,32 @@ export const Inventory: FC<InventoryProps> = ({
                 </div>
                 {cards && (
                     <div className={styles.content}>
-                        {cards.map((card) => (
-                            <Card
-                                inventory={card}
-                                className={styles.card}
-                                onClick={handleCardSelect(card)}
-                                key={card.asset_id}
-                                buttonText="Details"
-                                onButtonClick={handleDetailsClick(card)}
-                                onRepairFinish={reload}
-                                showCardBadgeStatus={false}
-                            />
-                        ))}
+                        {cards.map((card) => {
+                            return 'data' in card ? (
+                                <Card
+                                    inventory={card}
+                                    className={styles.card}
+                                    onClick={handleCardSelect(card)}
+                                    key={card.asset_id}
+                                    buttonText="Details"
+                                    onButtonClick={handleDetailsClick(card)}
+                                    onRepairFinish={reload}
+                                    showCardBadgeStatus={false}
+                                />
+                            ) : (
+                                <Card2
+                                    inventory={card}
+                                    className={styles.card}
+                                    onClick={handleCardSelect(card)}
+                                    // @ts-ignore
+                                    key={card.asset_id}
+                                    buttonText="Details"
+                                    onButtonClick={handleDetailsClick(card)}
+                                    onRepairFinish={reload}
+                                    showCardBadgeStatus={false}
+                                />
+                            );
+                        })}
                     </div>
                 )}
             </div>
