@@ -66,7 +66,7 @@ export const SomethingInProgress: FC = () => {
                         </div>
 
                         {t(
-                            'We are waiting to receive a response from the blockchain the page will be reload after the loading is complete.'
+                            'Awaiting the blockchain response. Page will be reloaded automatically when finished.'
                         )}
                     </Space>
                 </Modal>

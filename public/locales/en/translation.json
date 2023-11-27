@@ -1081,9 +1081,6 @@
   "Minimize": "Minimize",
   "Do you want to travel here?": "Do you want to travel here?",
   "Travel": "Travel",
-  "We are waiting to receive a response from the blockchain the page will be reload after the loading is complete": {
-    "": "We are waiting to receive a response from the blockchain the page will be reload after the loading is complete."
-  },
   "Blueprint": "Blueprint",
   "Youtube": "Youtube",
   "Select mine and sign the order": "Select mine and sign the order",
@@ -1123,5 +1120,10 @@
   },
   "Rented": "Rented",
   "Decline": "Decline",
-  "Accept": "Accept"
+  "Accept": "Accept",
+  "Awaiting the blockchain response": {
+    " Page will be reloaded automatically when finished": {
+      "": "Awaiting the blockchain response. Page will be reloaded automatically when finished."
+    }
+  }
 }
