@@ -169,8 +169,8 @@ export const RentalContractsTable = () => {
                 <>
                     <Button
                         type="link"
-                        onClick={() => {
-                            callAction(
+                        onClick={async () => {
+                            await callAction(
                                 refrentcontr({
                                     waxUser: accountName,
                                     contractId: Number(id),
@@ -185,8 +185,8 @@ export const RentalContractsTable = () => {
                     </Button>
                     <Button
                         type="link"
-                        onClick={() => {
-                            callAction(
+                        onClick={async () => {
+                            await callAction(
                                 signrcontr({
                                     waxUser: accountName,
                                     contractId: Number(id),
