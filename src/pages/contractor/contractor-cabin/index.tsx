@@ -65,7 +65,8 @@ export const ContractorCabin: FC = () => {
     const hasInstalledEquipment = useStore($hasInstalledEquipment);
     const isContractorCabinLoading = useStore($isContractorCabinLoading);
     const unableToVisitMiningDesk = status < ContractorCabinStatus.ready;
-    const unableToVisitStats = status <= ContractorCabinStatus.mining_over;
+    const unableToVisitStats = status <= ContractorCabinStatus.ready;
+
     const unableToVisitEquipment = !hasInstalledEquipment && !inLocation;
     const State = states[status];
 
@@ -149,7 +150,7 @@ export const ContractorCabin: FC = () => {
             <ContractorMenu
                 config={{
                     disabledItems: {
-                        [ContractorMenuItems.InfoPanel]: unableToVisitStats,
+                        [ContractorMenuItems.InfoPanel]: !unableToVisitStats,
                         [ContractorMenuItems.MiningDeck]:
                             unableToVisitMiningDesk,
                         [ContractorMenuItems.Equipment]: unableToVisitEquipment,

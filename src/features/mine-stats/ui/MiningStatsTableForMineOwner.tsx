@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { ColumnsType } from 'antd/lib/table';
 import { Table, toLocaleDate } from 'shared';
-import { ContractorStats, MineStatUnit } from 'entities/game-stat';
+import { MineStatUnit } from 'entities/game-stat';
 import styles from './styles.module.scss';
 
-export const MiningStatsTable: FC<{
-    data: ContractorStats[] | null;
+export const MiningStatsTableForMineOwner: FC<{
+    data: MineStatUnit[];
 }> = ({ data }) => {
     const { t } = useTranslation();
 
@@ -15,14 +15,14 @@ export const MiningStatsTable: FC<{
             title: t('pages.contractorMiningStats.date'),
             dataIndex: 'date',
             key: 'date',
-            render: (date: number) => toLocaleDate(date),
+            render: (date: number) => toLocaleDate(date * 1000),
             sorter: {
                 compare: (a: MineStatUnit, b: MineStatUnit) => a.date - b.date,
                 multiple: 1,
             },
         },
         {
-            dataIndex: 'mined',
+            dataIndex: 'amount',
             key: 'dme',
         },
         {
@@ -31,65 +31,56 @@ export const MiningStatsTable: FC<{
             render: () => 1,
         },
         {
-            title: t('Mining time'),
-            dataIndex: 'duration',
-            key: 'duration',
-        },
-        {
-            title: t('Fossil mined'),
-            dataIndex: 'failed_count',
-            key: 'failed_count',
-        },
-        {
             dataIndex: 'breakdowns',
             key: 'breakdowns',
         },
     ];
-    const columns: ColumnsType<ContractorStats> = [
+    const columns: ColumnsType<MineStatUnit> = [
         {
             title: t('pages.contractorMiningStats.date'),
             dataIndex: 'date',
             key: 'date',
-            render: (date: number) => toLocaleDate(date),
+            render: (date: number) => toLocaleDate(date * 1000),
+            sorter: {
+                compare: (a: MineStatUnit, b: MineStatUnit) => a.date - b.date,
+                multiple: 1,
+            },
         },
         {
             title: t('pages.contractorMiningStats.dme'),
-            dataIndex: 'minings_mined',
+            dataIndex: 'events',
             key: 'dme',
+            render: (events: MineStatUnit['events']) =>
+                events?.reduce(
+                    (acc, current) => acc + Number(current.amount),
+                    0
+                ),
         },
         {
             title: t('pages.contractorMiningStats.miningEvents'),
-            dataIndex: 'minings',
-            key: 'minings',
+            dataIndex: 'events',
+            key: 'events',
             render: (events) => events?.length,
             sorter: {
-                compare: (a: ContractorStats, b: ContractorStats) =>
-                    a.minings_count - b.minings_count,
+                compare: (a: MineStatUnit, b: MineStatUnit) =>
+                    a.events.length - b.events.length,
                 multiple: 3,
             },
         },
         {
-            title: t('Mining time'),
-            dataIndex: 'minings_duration',
-            key: 'minings_duration',
-        },
-        {
-            title: t('Fossil mined'),
-            dataIndex: 'minings_failed',
-            key: 'minings_failed',
-        },
-        {
             title: t('pages.contractorMiningStats.breakdowns'),
-            dataIndex: 'minings_breakdowns',
-            key: 'minings_breakdowns',
+            dataIndex: 'events',
+            key: 'breakdowns',
+            render: (events: MineStatUnit['events']) =>
+                events?.reduce((acc, current) => acc + current.breakdowns, 0),
         },
     ];
 
-    const expandedRowRender = (value: ContractorStats) => {
+    const expandedRowRender = (value: MineStatUnit) => {
         return (
             <Table
                 className={styles.expandedTable}
-                dataSource={value.minings}
+                dataSource={value.events}
                 columns={expandedColumns}
                 showHeader={false}
                 bordered={false}
@@ -99,7 +90,7 @@ export const MiningStatsTable: FC<{
     };
     return (
         <Table
-            dataSource={data?.map((stat) => ({ ...stat, key: stat.date }))}
+            dataSource={data.map((stat) => ({ ...stat, key: stat.date }))}
             columns={columns}
             tableLayout="fixed"
             expandable={{

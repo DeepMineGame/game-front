@@ -24,25 +24,19 @@ enum StatsAndInfoTab {
 }
 export const ContractorStatsAndInfoPage: FC = () => {
     const { t } = useTranslation();
-    const accountName = useAccountName();
-    useGate(ContractsGate);
-    useGate(MineStatsGate, {
-        searchParam: accountName,
-        role: Roles.contractor,
-    });
+
     const contracts = useStore(contractStore);
 
     const contract = contracts?.filter(
         ({ type }) => type === ContractType.mineowner_contractor
     )?.[0];
 
-    const mineOwnerStats = useStore($mineStats);
     return (
         <PageWithTabs
             tabs={[
                 {
                     key: String(StatsAndInfoTab.miningStats),
-                    children: <MiningStats stats={mineOwnerStats} />,
+                    children: <MiningStats />,
                     label: t(`pages.contractorStatsAndInfo.miningStats`),
                 },
                 {

@@ -1,22 +1,38 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-    MiningStatsTable,
-    Title,
-    TabsCard,
-    TabsCardPane,
-    useAccountName,
-} from 'shared';
+import { Title, TabsCard, TabsCardPane, AreaChart, toLocaleDate } from 'shared';
 import { UnorderedListOutlined, BarChartOutlined } from '@ant-design/icons';
-import { useGate, useStore } from 'effector-react';
-import { $contractorStats, ContractorStatsGate } from '../../models';
+import { MineStatUnit } from 'entities/game-stat';
 import styles from './styles.module.scss';
+import { MiningStatsTableForMineOwner } from './MiningStatsTableForMineOwner';
 
-export const MiningStats: FC = () => {
+export const MiningStatsForMineOwner: FC<{ stats: MineStatUnit[] }> = ({
+    stats,
+}) => {
     const { t } = useTranslation();
-    const accountName = useAccountName();
-    useGate(ContractorStatsGate, { user: accountName });
-    const stats = useStore($contractorStats);
+
+    const chartOptions = useMemo(
+        () => ({
+            data: stats.map((statItem) => ({
+                date: toLocaleDate(statItem.date * 1000),
+                events: statItem.events.length,
+            })),
+            xField: 'date',
+            yField: 'events',
+            tooltip: {
+                customItems: (originalItems: any[]) => {
+                    return originalItems.map((item) => {
+                        if (item.name === 'events')
+                            item.name = t(
+                                'pages.contractorMiningStats.miningEvents'
+                            );
+                        return item;
+                    });
+                },
+            },
+        }),
+        [stats, t]
+    );
 
     return (
         <div className={styles.miningStats}>
@@ -34,7 +50,7 @@ export const MiningStats: FC = () => {
                 >
                     <div className={styles.miningStatsTableWrapper}>
                         <div className={styles.miningStatsTable}>
-                            <MiningStatsTable data={stats} />
+                            <MiningStatsTableForMineOwner data={stats} />
                         </div>
                     </div>
                 </TabsCardPane>
@@ -55,6 +71,7 @@ export const MiningStats: FC = () => {
                     >
                         {t('pages.contractorMiningStats.miningEvents')}
                     </Title>
+                    {stats?.length && <AreaChart options={chartOptions} />}
                 </TabsCardPane>
             </TabsCard>
         </div>

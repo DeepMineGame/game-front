@@ -26,6 +26,11 @@ function devServerConfig(config) {
                 changeOrigin: true,
                 withCredentials: true,
             },
+            '/game-api': {
+                target: `https://${proxyTarget}.deepmine.world`,
+                changeOrigin: true,
+                withCredentials: true,
+            },
         },
     };
 }

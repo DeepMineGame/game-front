@@ -1,6 +1,11 @@
 import { FC } from 'react';
 import { Contract, PageWithTabs, useAccountName } from 'shared';
-import { $mineStats, MineAreaInfo, MineStatsGate, MiningStats } from 'features';
+import {
+    $mineStats,
+    MineAreaInfo,
+    MineStatsGate,
+    MiningStatsForMineOwner,
+} from 'features';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
 import {
@@ -36,7 +41,9 @@ export const MineOwnerStatAndInfoPage: FC = () => {
             tabs={[
                 {
                     key: String(Tabs.stats),
-                    children: <MiningStats stats={mineOwnerStats} />,
+                    children: (
+                        <MiningStatsForMineOwner stats={mineOwnerStats} />
+                    ),
                     label: t(`pages.contractorStatsAndInfo.miningStats`),
                 },
                 {

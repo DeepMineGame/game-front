@@ -7,3 +7,4 @@ export * from './storage';
 export * from './inventory';
 export * from './asset';
 export * from './availableRentAssets';
+export * from './contractor';
