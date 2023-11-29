@@ -6,7 +6,7 @@ import { ContractorStats, MineStatUnit } from 'entities/game-stat';
 import styles from './styles.module.scss';
 
 export const MiningStatsTable: FC<{
-    data: ContractorStats[] | null;
+    data: ContractorStats[] | null | undefined;
 }> = ({ data }) => {
     const { t } = useTranslation();
 

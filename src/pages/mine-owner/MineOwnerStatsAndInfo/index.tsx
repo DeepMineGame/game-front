@@ -1,11 +1,6 @@
 import { FC } from 'react';
-import { Contract, PageWithTabs, useAccountName } from 'shared';
-import {
-    $mineStats,
-    MineAreaInfo,
-    MineStatsGate,
-    MiningStatsForMineOwner,
-} from 'features';
+import { Contract, MiningStats, PageWithTabs, useAccountName } from 'shared';
+import { $mineStats, MineAreaInfo, MineStatsGate } from 'features';
 import { useTranslation } from 'react-i18next';
 import { useGate, useStore } from 'effector-react';
 import {
@@ -24,9 +19,8 @@ enum Tabs {
 export const MineOwnerStatAndInfoPage: FC = () => {
     const { t } = useTranslation();
     const accountName = useAccountName();
-    useGate(ContractsGate);
     useGate(MineStatsGate, {
-        searchParam: accountName,
+        user: accountName,
         role: Roles.mineowner,
     });
 
@@ -41,9 +35,7 @@ export const MineOwnerStatAndInfoPage: FC = () => {
             tabs={[
                 {
                     key: String(Tabs.stats),
-                    children: (
-                        <MiningStatsForMineOwner stats={mineOwnerStats} />
-                    ),
+                    children: <MiningStats stats={mineOwnerStats} />,
                     label: t(`pages.contractorStatsAndInfo.miningStats`),
                 },
                 {
