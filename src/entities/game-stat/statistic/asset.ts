@@ -8,12 +8,7 @@ export const getAssetsStatistic = async ({
     searchParam: string;
 }) => {
     const { data } = await axios.get<{ user: string }, { data: AssetStruct }>(
-        `${ENDPOINT}/statistic/asset`,
-        {
-            params: {
-                asset_id: searchParam,
-            },
-        }
+        `${ENDPOINT}/game-api/assets/asset/${searchParam}`
     );
     return data;
 };

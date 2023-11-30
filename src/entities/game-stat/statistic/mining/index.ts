@@ -33,6 +33,8 @@ export type AssetStruct = {
     malfunction_probability: NumericMalfunctionProbability;
     repair_cost: number;
     refurbish_cost: number;
+    is_repairable: boolean;
+    is_refurbishable: boolean;
 };
 export type MineStat = {
     action_state: 'active' | 'interrupted' | 'finished' | 'claimed' | 'idle';

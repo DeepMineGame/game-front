@@ -126,7 +126,9 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
 
     const isAssetPlacedInOurInventoryTable =
         card.rarity !== undefined && card.level !== undefined;
-
+    const isRepairable =
+        isAssetPlacedInOurInventoryTable &&
+        (card as AssetStruct)?.is_repairable !== false;
     return (
         <Modal
             {...props}
@@ -282,7 +284,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                                     rarity={cardData?.data.rarity}
                                 />
                             </Col>
-                            {isAssetPlacedInOurInventoryTable && (
+                            {isRepairable && (
                                 <Col span={10}>
                                     <Space>
                                         <Button
@@ -340,7 +342,7 @@ export const InventoryCardModal: FC<InventoryCardModalProps> = ({
                             <Col span={4} className={styles.alignRight}>
                                 <Text>{malfunctionProbabilityTranslation}</Text>
                             </Col>
-                            {isAssetPlacedInOurInventoryTable && (
+                            {isRepairable && (
                                 <Col span={10}>
                                     <Space>
                                         <Button
