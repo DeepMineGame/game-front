@@ -1,3 +1,12 @@
+export type MineEvent = {
+    date?: string;
+    contractor?: string;
+    mined: string;
+    count: number;
+    duration: string;
+    failed_count: number;
+    breakdowns: number;
+};
 export type ContractorStats = {
     date: string;
     minings_mined: string;
@@ -5,12 +14,5 @@ export type ContractorStats = {
     minings_duration: string;
     minings_failed: number;
     minings_breakdowns: number;
-    minings: {
-        date: string;
-        mined: string;
-        count: number;
-        duration: string;
-        failed_count: number;
-        breakdowns: number;
-    }[];
+    minings: MineEvent[];
 };

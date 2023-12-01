@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { ColumnsType } from 'antd/lib/table';
-import { Table, toLocaleDate } from 'shared';
-import { ContractorStats, MineStatUnit } from 'entities/game-stat';
+import { Link, Table, toLocaleDate } from 'shared';
+import { ContractorStats, MineEvent, MineStatUnit } from 'entities/game-stat';
 import styles from './styles.module.scss';
 
 export const MiningStatsTable: FC<{
@@ -15,7 +15,14 @@ export const MiningStatsTable: FC<{
             title: t('pages.contractorMiningStats.date'),
             dataIndex: 'date',
             key: 'date',
-            render: (date: number) => toLocaleDate(date),
+            render: (date: number, event: MineEvent) =>
+                'contractor' in event ? (
+                    <Link to={`/user/${event.contractor}`}>
+                        {event.contractor}
+                    </Link>
+                ) : (
+                    toLocaleDate(date)
+                ),
             sorter: {
                 compare: (a: MineStatUnit, b: MineStatUnit) => a.date - b.date,
                 multiple: 1,
