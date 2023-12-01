@@ -150,7 +150,9 @@ export const ContractorCabin: FC = () => {
             <ContractorMenu
                 config={{
                     disabledItems: {
-                        [ContractorMenuItems.InfoPanel]: !unableToVisitStats,
+                        // [ContractorMenuItems.InfoPanel]: !unableToVisitStats,
+                        [ContractorMenuItems.InfoPanel]: true,
+
                         [ContractorMenuItems.MiningDeck]:
                             unableToVisitMiningDesk,
                         [ContractorMenuItems.Equipment]: unableToVisitEquipment,
