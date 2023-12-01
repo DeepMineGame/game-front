@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { ColumnsType } from 'antd/lib/table';
-import { Table, toLocaleDate } from 'shared';
-import { MineStatUnit } from 'entities/game-stat';
+import { Link, Table, toLocaleDate } from 'shared';
+import { ContractorStats, MineEvent, MineStatUnit } from 'entities/game-stat';
 import styles from './styles.module.scss';
 
 export const MiningStatsTable: FC<{
-    data: MineStatUnit[];
+    data: ContractorStats[] | null | undefined;
 }> = ({ data }) => {
     const { t } = useTranslation();
 
@@ -15,14 +15,21 @@ export const MiningStatsTable: FC<{
             title: t('pages.contractorMiningStats.date'),
             dataIndex: 'date',
             key: 'date',
-            render: (date: number) => toLocaleDate(date * 1000),
+            render: (date: number, event: MineEvent) =>
+                'contractor' in event ? (
+                    <Link to={`/user/${event.contractor}`}>
+                        {event.contractor}
+                    </Link>
+                ) : (
+                    toLocaleDate(date)
+                ),
             sorter: {
                 compare: (a: MineStatUnit, b: MineStatUnit) => a.date - b.date,
                 multiple: 1,
             },
         },
         {
-            dataIndex: 'amount',
+            dataIndex: 'mined',
             key: 'dme',
         },
         {
@@ -31,56 +38,65 @@ export const MiningStatsTable: FC<{
             render: () => 1,
         },
         {
+            title: t('Mining time'),
+            dataIndex: 'duration',
+            key: 'duration',
+        },
+        {
+            title: t('Fossil mined'),
+            dataIndex: 'failed_count',
+            key: 'failed_count',
+        },
+        {
             dataIndex: 'breakdowns',
             key: 'breakdowns',
         },
     ];
-    const columns: ColumnsType<MineStatUnit> = [
+    const columns: ColumnsType<ContractorStats> = [
         {
             title: t('pages.contractorMiningStats.date'),
             dataIndex: 'date',
             key: 'date',
-            render: (date: number) => toLocaleDate(date * 1000),
-            sorter: {
-                compare: (a: MineStatUnit, b: MineStatUnit) => a.date - b.date,
-                multiple: 1,
-            },
+            render: (date: number) => toLocaleDate(date),
         },
         {
             title: t('pages.contractorMiningStats.dme'),
-            dataIndex: 'events',
+            dataIndex: 'minings_mined',
             key: 'dme',
-            render: (events: MineStatUnit['events']) =>
-                events?.reduce(
-                    (acc, current) => acc + Number(current.amount),
-                    0
-                ),
         },
         {
             title: t('pages.contractorMiningStats.miningEvents'),
-            dataIndex: 'events',
-            key: 'events',
+            dataIndex: 'minings',
+            key: 'minings',
             render: (events) => events?.length,
             sorter: {
-                compare: (a: MineStatUnit, b: MineStatUnit) =>
-                    a.events.length - b.events.length,
+                compare: (a: ContractorStats, b: ContractorStats) =>
+                    a.minings_count - b.minings_count,
                 multiple: 3,
             },
         },
         {
+            title: t('Mining time'),
+            dataIndex: 'minings_duration',
+            key: 'minings_duration',
+        },
+        {
+            title: t('Fossil mined'),
+            dataIndex: 'minings_failed',
+            key: 'minings_failed',
+        },
+        {
             title: t('pages.contractorMiningStats.breakdowns'),
-            dataIndex: 'events',
-            key: 'breakdowns',
-            render: (events: MineStatUnit['events']) =>
-                events?.reduce((acc, current) => acc + current.breakdowns, 0),
+            dataIndex: 'minings_breakdowns',
+            key: 'minings_breakdowns',
         },
     ];
 
-    const expandedRowRender = (value: MineStatUnit) => {
+    const expandedRowRender = (value: ContractorStats) => {
         return (
             <Table
                 className={styles.expandedTable}
-                dataSource={value.events}
+                dataSource={value.minings}
                 columns={expandedColumns}
                 showHeader={false}
                 bordered={false}
@@ -90,7 +106,7 @@ export const MiningStatsTable: FC<{
     };
     return (
         <Table
-            dataSource={data.map((stat) => ({ ...stat, key: stat.date }))}
+            dataSource={data?.map((stat) => ({ ...stat, key: stat.date }))}
             columns={columns}
             tableLayout="fixed"
             expandable={{

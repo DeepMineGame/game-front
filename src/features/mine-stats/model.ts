@@ -1,16 +1,30 @@
 import { createEffect, createStore, forward } from 'effector';
 import { createGate } from 'effector-react';
-import { getMineStats, MineStatUnit, Roles } from 'entities/game-stat';
+import axios from 'axios';
+import { ENDPOINT } from 'app/constants';
+import { ContractorStats, Roles } from 'entities/game-stat';
 
-const getMineOwnerStatEffect = createEffect(getMineStats);
+export const getMineOwnerStatEffect = createEffect(
+    async ({ user }: { user: string }) => {
+        const { data = [] } = await axios.get<ContractorStats[]>(
+            `${ENDPOINT}/game-api/statistic/mineowner/mine_stats`,
+            {
+                params: {
+                    user,
+                },
+            }
+        );
 
-export const $mineStats = createStore<MineStatUnit[]>([]).on(
+        return data;
+    }
+);
+export const $mineStats = createStore<ContractorStats[]>([]).on(
     getMineOwnerStatEffect.doneData,
     (_, data) => data
 );
 
 export const MineStatsGate = createGate<{
-    searchParam: string;
+    user: string;
     role: Roles;
 }>('MineStatsGate');
 

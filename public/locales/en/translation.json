@@ -1126,5 +1126,7 @@
     " Page will be reloaded automatically when finished": {
       "": "Awaiting the blockchain response. Page will be reloaded automatically when finished."
     }
-  }
+  },
+  "Mining time": "Mining time",
+  "Fossil mined": "Fossil mined"
 }
