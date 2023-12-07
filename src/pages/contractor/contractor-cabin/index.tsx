@@ -65,7 +65,7 @@ export const ContractorCabin: FC = () => {
     const hasInstalledEquipment = useStore($hasInstalledEquipment);
     const isContractorCabinLoading = useStore($isContractorCabinLoading);
     const unableToVisitMiningDesk = status < ContractorCabinStatus.ready;
-    const unableToVisitStats = status <= ContractorCabinStatus.ready;
+    const unableToVisitStats = true;
 
     const unableToVisitEquipment = !hasInstalledEquipment && !inLocation;
     const State = states[status];
