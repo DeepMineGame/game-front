@@ -333,7 +333,6 @@
       "date": "Date",
       "dme": "DME",
       "miningTime": "Mining time",
-      "fossilMined": "Fossil mined",
       "miningEvents": "Mining events",
       "breakdowns": "Breakdowns"
     },
@@ -1128,5 +1127,6 @@
     }
   },
   "Mining time": "Mining time",
-  "Fossil mined": "Fossil mined"
+  "Mining failures": "Mining failures",
+  "Tools breakdowns": "Tools breakdowns"
 }
