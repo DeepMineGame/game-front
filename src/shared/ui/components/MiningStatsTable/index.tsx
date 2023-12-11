@@ -43,7 +43,7 @@ export const MiningStatsTable: FC<{
             key: 'duration',
         },
         {
-            title: t('Fossil mined'),
+            title: t('Mining failures'),
             dataIndex: 'failed_count',
             key: 'failed_count',
         },
@@ -81,12 +81,12 @@ export const MiningStatsTable: FC<{
             key: 'minings_duration',
         },
         {
-            title: t('Fossil mined'),
+            title: t('Mining failures'),
             dataIndex: 'minings_failed',
             key: 'minings_failed',
         },
         {
-            title: t('pages.contractorMiningStats.breakdowns'),
+            title: t('Tools breakdowns'),
             dataIndex: 'minings_breakdowns',
             key: 'minings_breakdowns',
         },
