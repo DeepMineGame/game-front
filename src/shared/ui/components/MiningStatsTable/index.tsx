@@ -48,7 +48,7 @@ export const MiningStatsTable: FC<{
             dataIndex: 'failed_count',
             key: 'failed_count',
             render: (value: number) =>
-                value === 0 ? <Badge color={red6} /> : <Badge color={green6} />,
+                value === 0 ? <Badge color={green6} /> : <Badge color={red6} />,
         },
         {
             dataIndex: 'breakdowns',
