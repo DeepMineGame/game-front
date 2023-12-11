@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { ColumnsType } from 'antd/lib/table';
-import { Link, Table, toLocaleDate } from 'shared';
+import { green6, Link, red6, Table, toLocaleDate } from 'shared';
+import { Badge } from 'antd';
 import { ContractorStats, MineEvent, MineStatUnit } from 'entities/game-stat';
 import styles from './styles.module.scss';
 
@@ -84,6 +85,8 @@ export const MiningStatsTable: FC<{
             title: t('Mining failures'),
             dataIndex: 'minings_failed',
             key: 'minings_failed',
+            render: (value) =>
+                value === 0 ? <Badge color={red6} /> : <Badge color={green6} />,
         },
         {
             title: t('Tools breakdowns'),
