@@ -47,6 +47,8 @@ export const MiningStatsTable: FC<{
             title: t('Mining failures'),
             dataIndex: 'failed_count',
             key: 'failed_count',
+            render: (value: number) =>
+                value === 0 ? <Badge color={red6} /> : <Badge color={green6} />,
         },
         {
             dataIndex: 'breakdowns',
@@ -85,8 +87,6 @@ export const MiningStatsTable: FC<{
             title: t('Mining failures'),
             dataIndex: 'minings_failed',
             key: 'minings_failed',
-            render: (value) =>
-                value === 0 ? <Badge color={red6} /> : <Badge color={green6} />,
         },
         {
             title: t('Tools breakdowns'),
