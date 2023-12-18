@@ -1,14 +1,19 @@
-import { FC, memo, useCallback, useEffect } from 'react';
+import { FC, memo, ReactNode, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DocumentTitle } from 'app/router/components/DocumentTitle';
-import { Empty, TabsProps } from 'antd';
+import { Empty, Tabs, TabsProps } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'shared';
 import { useLocation } from 'react-router';
-import { Page, Tab, Tabs } from '../../ui-kit';
+import { Page } from '../../ui-kit';
 
 type Props = {
-    tabs: Tab[];
+    tabs: {
+        label: ReactNode;
+        key: string;
+        children?: ReactNode;
+        disabled?: boolean;
+    }[];
     documentTitleScope?: string;
     title?: string;
     className?: string;
@@ -66,6 +71,7 @@ export const PageWithTabs: FC<Props> = memo(
                 )}
                 {tabs?.length ? (
                     <Tabs
+                        centered
                         activeKey={tabId!}
                         onChange={handleTabSelect}
                         items={tabs}

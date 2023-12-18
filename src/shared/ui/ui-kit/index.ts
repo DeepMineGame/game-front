@@ -19,7 +19,6 @@ export * from './ProgressBar/DepreciationProgressBar';
 export * from './KeyValueTable';
 export * from './Table';
 export * from './Drawer';
-export * from './Tabs';
 export * from './AreaChart';
 export * from './Steps';
 export * from './Select';

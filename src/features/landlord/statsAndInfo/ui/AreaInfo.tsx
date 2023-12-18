@@ -12,7 +12,7 @@ import {
     reservedSlotsCountStore,
 } from '../model';
 
-export const AreaStats: FC<{ accountName: string }> = ({ accountName }) => {
+export const AreaInfo: FC<{ accountName: string }> = ({ accountName }) => {
     useGate(AreaStateGate, { searchParam: accountName });
     const areaNft = useStore(landlordAreaNftStore);
     const area = useStore(landlordAreaTableStore);

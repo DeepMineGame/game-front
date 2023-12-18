@@ -1,1 +1,2 @@
-export * from './Area';
+export * from './AreaInfo';
+export * from './AreaStats';

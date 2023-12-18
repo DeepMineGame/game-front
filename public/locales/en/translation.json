@@ -1127,5 +1127,10 @@
   },
   "Mining time": "Mining time",
   "Mining failures": "Mining failures",
-  "Tools breakdowns": "Tools breakdowns"
+  "Tools breakdowns": "Tools breakdowns",
+  "Area stats": "Area stats",
+  "No data": "No data",
+  "DME per Ejection": "DME per Ejection",
+  "Active mines": "Active mines",
+  "Mining events": "Mining events"
 }

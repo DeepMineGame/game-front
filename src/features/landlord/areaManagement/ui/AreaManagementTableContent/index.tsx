@@ -38,7 +38,7 @@ export const AreaManagementTableContent: FC<Props> = ({ data }) => {
     const accountName = useAccountName();
 
     if (!data) {
-        return <div>{t('components.common.noData')}</div>;
+        return <div>{t('No data')}</div>;
     }
     const columns: ColumnsType<MinesOnLand> = [
         {
