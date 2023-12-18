@@ -13,6 +13,7 @@ import {
 import { useSmartContractActionDynamic } from '../../hooks';
 import {
     DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
+    setInProgressThingFinishCallback,
     setSomethingCountDownEvent,
 } from '../../something-in-progess-modal';
 import styles from './styles.module.scss';
@@ -109,6 +110,7 @@ export const CreateOrderFormV2 = () => {
                 setSomethingCountDownEvent(
                     DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME
                 );
+                setInProgressThingFinishCallback(() => navigate(serviceMarket));
             } catch (error) {
                 setFormStatus(Status.error);
             }
