@@ -9,3 +9,4 @@ export * from './asset';
 export * from './availableRentAssets';
 export * from './contractor';
 export * from './landlordAreaStat';
+export * from './landLordAreaInfo';

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Button, KeyValueTable } from '../../../ui-kit';
 
 export const Area: FC<{
-    area: string;
+    area: number | string;
     landlord: string;
     rarity: string;
     slots: string;
