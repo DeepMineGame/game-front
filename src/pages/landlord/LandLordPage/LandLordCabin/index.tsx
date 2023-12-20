@@ -24,9 +24,7 @@ import {
     CallToTravelNotification,
     CABIN_STATUS,
     useLandLordStatus,
-    UserAreaGate,
 } from 'features';
-import { useGate } from 'effector-react';
 import {
     getUserConfig,
     LOCATION_TO_ID,
@@ -57,7 +55,6 @@ const getBackground = (
 };
 
 export const LandLordCabin: FC<{ accountName: string }> = ({ accountName }) => {
-    useGate(UserAreaGate, { searchParam: accountName });
     const { status } = useLandLordStatus();
     const reloadPage = useReloadPage();
     const { data: userInfo } = useTableData<UserInfoType>(getUserConfig);
