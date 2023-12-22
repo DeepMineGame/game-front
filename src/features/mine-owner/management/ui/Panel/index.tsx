@@ -16,38 +16,46 @@ import { serviceMarket } from 'app/router/paths';
 import { useSmartContractAction } from 'features';
 import {
     activatemine,
-    getMinesByOwnerEffect,
     LOCATION_TO_ID,
-    MineState,
     setupMine,
 } from 'entities/smartcontract';
-import { Roles } from 'entities/game-stat';
+import { Roles, MineStates } from 'entities/game-stat';
 import { UnsetupMine } from '../UnsetupMine';
-import { activeMineOwnerExecutorContractStore } from '../../../models/unsetupMineModel';
-import { $userMine, MineManagementGate } from '../../../models';
 import { ClaimDME } from '../ClaimDME';
 import { MineTable } from '../MineTable';
+import {
+    $mineOwnerContract,
+    $mineOwnerManagementData,
+    getMineOwnerManagementData,
+    MineOwnerManagementDataGate,
+} from '../../../models/mineOwnerManagement';
 import styles from './styles.module.scss';
 
 export const MineOwnerManagementPanel = () => {
     const accountName = useAccountName();
-    useGate(MineManagementGate, {
-        searchParam: accountName,
+    useGate(MineOwnerManagementDataGate, {
+        user: accountName,
     });
-    const mine = useStore($userMine);
-    const isMinesLoading = useStore(getMinesByOwnerEffect.pending);
+    const mineOwnerManagementData = useStore($mineOwnerManagementData);
+    const isMineOwnerDataLoading = useStore(getMineOwnerManagementData.pending);
+    const contract = useStore($mineOwnerContract);
+
     const navigate = useNavigate();
     const goToBack = () => navigate(-1);
     const { travelConfirm } = useTravelConfirm(LOCATION_TO_ID.mine_deck);
     const inLocation = useUserLocation();
     const reloadPage = useReloadPage();
     const activateMine = useSmartContractAction({
-        action: activatemine({ waxUser: accountName, mineId: mine?.id }),
+        action: activatemine({
+            waxUser: accountName,
+            mineId: mineOwnerManagementData?.mine_asset.asset_id,
+        }),
     });
     const { t } = useTranslation();
-    const contract = useStore(activeMineOwnerExecutorContractStore);
-    const isMineSetuped = mine?.state === MineState.setuped;
-    const isMineDeactivated = mine?.state === MineState.deactivated;
+    const isMineSetuped =
+        mineOwnerManagementData?.mine_state === MineStates.setuped;
+    const isMineDeactivated =
+        mineOwnerManagementData?.mine_state === MineStates.deactivated;
     const { modal } = App.useApp();
 
     const setupMineAction = useSmartContractAction({
@@ -56,7 +64,8 @@ export const MineOwnerManagementPanel = () => {
             contractId: contract?.id!,
         }),
     });
-    const isMineActive = mine?.state === MineState.activated;
+    const isMineActive =
+        mineOwnerManagementData?.mine_state === MineStates.activated;
     const statusText = isMineActive ? t('Active') : t('Inactive');
     const onActivationButtonClick = async () => {
         if (!inLocation.mineDeck) {
@@ -109,7 +118,7 @@ export const MineOwnerManagementPanel = () => {
                             block
                             type={isMineActive ? 'ghost' : 'primary'}
                             onClick={onActivationButtonClick}
-                            loading={isMinesLoading}
+                            loading={isMineOwnerDataLoading}
                         >
                             {contract
                                 ? toggleMineText
