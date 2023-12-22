@@ -1,11 +1,11 @@
 export enum MineStates {
     undefined,
-    setuped,
-    activated,
-    deactivated,
-    unsetuped,
-    abandoned,
-    depth_changing,
+    setuped = 'setuped',
+    activated = 'activated',
+    deactivated = 'deactivated',
+    unsetuped = 'unsetuped',
+    abandoned = 'abandoned',
+    depth_changing = 'depth_changing',
 }
 export type MineOwnerManagementData = {
     contract_id: number;
