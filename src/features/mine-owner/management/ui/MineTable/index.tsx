@@ -1,4 +1,4 @@
-import { Progress, Tooltip } from 'antd';
+import { Progress, Space, Tooltip } from 'antd';
 import { DMECoinIcon, neutral3Color, primary6 } from 'shared';
 import Icon, { InfoCircleOutlined } from '@ant-design/icons';
 import React from 'react';
@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 
 import { $mineOwnerManagementData } from '../../../models/mineOwnerManagement';
+import { DepthChanger } from '../DepthChanger';
 import styles from './styles.module.scss';
 
 const SUB_LEVELS_MAX_AMOUNT = 5;
@@ -67,16 +68,16 @@ export const MineTable = () => {
                     />
                 </div>
             </div>
-            {/* <div className={styles.line}> */}
-            {/*    <div>{t('Depth level')}</div> */}
-            {/*    <Space> */}
-            {/*        <div> */}
-            {/*            {t('features.mining.currentDepthLevel')}{' '} */}
-            {/*            {mine?.layer_depth} */}
-            {/*        </div> */}
-            {/*        <DepthChanger /> */}
-            {/*    </Space> */}
-            {/* </div> */}
+            <div className={styles.line}>
+                <div>{t('Depth level')}</div>
+                <Space>
+                    <div>
+                        {t('features.mining.currentDepthLevel')}{' '}
+                        {mineOwnerManagementData?.mine_depth}
+                    </div>
+                    <DepthChanger />
+                </Space>
+            </div>
         </div>
     );
 };
