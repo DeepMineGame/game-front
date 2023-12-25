@@ -8,6 +8,9 @@ export enum MineStates {
     depth_changing = 'depth_changing',
 }
 export type MineOwnerManagementData = {
+    change_depth_state: string;
+    change_depth_in_progress: boolean;
+    change_depth_seconds_left: number;
     contract_id: number;
     mine_level: number;
     mine_sublevel: number;
