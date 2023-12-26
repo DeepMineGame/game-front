@@ -11,6 +11,7 @@ export type MineOwnerManagementData = {
     change_depth_state: string;
     change_depth_in_progress: boolean;
     change_depth_seconds_left: number;
+    change_depth_able_to_finalise: boolean;
     contract_id: number;
     mine_level: number;
     mine_sublevel: number;

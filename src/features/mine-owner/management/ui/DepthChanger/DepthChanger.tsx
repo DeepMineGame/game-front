@@ -33,9 +33,12 @@ export const DepthChanger = () => {
     )?.second;
     const isTimeExpire =
         Date.now() >= (changeDepthAction?.finishes_at || 0) * 1000;
-    const ableToFinalise = mineOwnerManagementData?.change_depth_in_progress
-        ? getTimeLeftFromUtc(mineOwnerManagementData.change_depth_seconds_left)
-        : '';
+    const ableToFinalise =
+        mineOwnerManagementData?.change_depth_able_to_finalise
+            ? getTimeLeftFromUtc(
+                  mineOwnerManagementData.change_depth_seconds_left
+              )
+            : '';
     const callAction = useSmartContractActionDynamic();
     const getMenuItemsByCount = (amount: number) =>
         Array.from(Array(amount).keys()).map((key) => ({
