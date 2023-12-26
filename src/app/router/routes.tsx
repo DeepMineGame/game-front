@@ -34,6 +34,7 @@ import {
 
 import { OperationPageType } from 'entities/contract';
 import * as paths from './paths';
+import { EngineerStatPage } from '../../pages/engineer/stat';
 
 export type AppRoute = {
     titleTag: string;
@@ -284,6 +285,14 @@ export const routes: AppRoute[] = [
         forAdmin: false,
         forBetaUser: false,
         titleTag: 'Engineers Training — DeepMine',
+    },
+    {
+        path: paths.engineerStatAndInfo,
+        Component: EngineerStatPage,
+        forLoggedIn: true,
+        forAdmin: false,
+        forBetaUser: false,
+        titleTag: 'Engineers Stat — DeepMine',
     },
 ];
 

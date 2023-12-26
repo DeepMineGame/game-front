@@ -1,3 +1,5 @@
+import { EngineerStatPage } from '../../pages/engineer/stat';
+
 export const root = '/';
 export const intro = '/intro';
 export const contractorCabin = '/contractor-cabin';
@@ -31,3 +33,4 @@ export const engineer = '/engineer';
 export const engineerEquipmentHall = '/engineer/equipment-hall';
 export const unidentifiedActivity = '/unidentified-activity';
 export const engineerTraining = '/engineer/training';
+export const engineerStatAndInfo = '/engineer/stat-and-info';
