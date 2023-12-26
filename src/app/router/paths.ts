@@ -1,5 +1,3 @@
-import { EngineerStatPage } from '../../pages/engineer/stat';
-
 export const root = '/';
 export const intro = '/intro';
 export const contractorCabin = '/contractor-cabin';
