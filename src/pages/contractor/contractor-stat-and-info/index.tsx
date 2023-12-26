@@ -45,7 +45,7 @@ export const ContractorStatsAndInfoPage: FC = () => {
                     children: contract ? (
                         <Contract contract={contract} />
                     ) : (
-                        <div>{t('components.common.noData')}</div>
+                        <div>{t('No data')}</div>
                     ),
                     label: t(`pages.contractorStatsAndInfo.contract`),
                 },

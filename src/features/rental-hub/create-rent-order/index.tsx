@@ -9,6 +9,7 @@ import { createRentOrder, rentOrderField } from 'entities/smartcontract';
 import { useSmartContractActionDynamic } from '../../hooks';
 import {
     DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME,
+    setInProgressThingFinishCallback,
     setSomethingCountDownEvent,
 } from '../../something-in-progess-modal';
 import styles from './styles.module.scss';
@@ -91,6 +92,7 @@ export const CreateRentOrder = () => {
             );
             setFormStatus(Status.success);
             setSomethingCountDownEvent(DEFAULT_BLOCKCHAIN_BACKEND_SYNC_TIME);
+            setInProgressThingFinishCallback(() => navigate(rentalHub));
         } catch (error) {
             setFormStatus(Status.error);
         }

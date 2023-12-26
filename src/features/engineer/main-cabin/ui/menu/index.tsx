@@ -6,7 +6,11 @@ import {
     ToolOutlined,
     ProjectOutlined,
 } from '@ant-design/icons';
-import { engineerEquipmentHall, engineerTraining } from 'app/router/paths';
+import {
+    engineerEquipmentHall,
+    engineerStatAndInfo,
+    engineerTraining,
+} from 'app/router/paths';
 import { CabinStatus } from 'entities/engineer';
 import { Menu, MenuItem } from 'shared/ui';
 import styles from './styles.module.scss';
@@ -24,8 +28,8 @@ const menuItems = [
     },
     {
         icon: <ProjectOutlined />,
-        path: '',
-        unlockedAt: CabinStatus.CanSeeStats,
+        path: engineerStatAndInfo,
+        unlockedAt: true,
     },
 ];
 

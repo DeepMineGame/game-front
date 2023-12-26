@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import React, { FC } from 'react';
 import { useAccountName, useReloadPage } from 'shared';
-import { useGate, useStore } from 'effector-react';
+import { useStore } from 'effector-react';
 import { useNavigate } from 'react-router-dom';
 import { mineOwner } from 'app/router/paths';
 import { Dropdown, Menu, Tooltip } from 'antd';
@@ -12,30 +12,28 @@ import {
     abandonMine,
     deactmine,
 } from 'entities/smartcontract';
-import {
-    activeContractorsContractsStore,
-    UnsetupMineGate,
-    userMineStore,
-} from '../../../models/unsetupMineModel';
 import { useSmartContractAction } from '../../../../hooks';
+import { $mineOwnerManagementData } from '../../../models/mineOwnerManagement';
 
 export const UnsetupMine: FC<{
     isMineActive: boolean;
     activeContract: ContractDto | null;
 }> = ({ isMineActive, activeContract }) => {
     const accountName = useAccountName();
-    useGate(UnsetupMineGate, { searchParams: accountName });
-    const contractorsContracts = useStore(activeContractorsContractsStore);
-    const userMine = useStore(userMineStore);
+    const mineOwnerManagementData = useStore($mineOwnerManagementData);
     const { t } = useTranslation();
     const navigate = useNavigate();
     const reloadPage = useReloadPage();
-    const isDisabled = Boolean(contractorsContracts?.length);
+    const isDisabled =
+        mineOwnerManagementData?.mine_has_active_contractors_contracts;
     const terminateContractAction = useSmartContractAction({
         action: terminateContract(accountName, activeContract?.id!),
     });
     const abandonMineAction = useSmartContractAction({
-        action: abandonMine(accountName, userMine?.id!),
+        action: abandonMine(
+            accountName,
+            mineOwnerManagementData?.mine_asset?.asset_id!
+        ),
     });
     const onAbandonClick = async () => {
         await abandonMineAction();

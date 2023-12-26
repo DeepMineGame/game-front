@@ -7,3 +7,5 @@ export * from './equipment-upgrade/model';
 export * from './equipment-upgrade/model/upgrade-kit';
 export * from './equipment-upgrade/lib';
 export * from './engineer-training';
+
+export * from './stat';

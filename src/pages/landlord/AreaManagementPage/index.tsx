@@ -20,11 +20,11 @@ import {
     getMineOwnerContractsFx,
     userAreaNftStore,
     PlaceMyselfMineAsOwner,
-    $area,
-    UserAreaGate,
+    LandLordManagementData,
     SlotStatistics,
     AddNewMine,
     AreaGate,
+    $landLordManagementData,
 } from 'features';
 
 import { Col, Row, Space } from 'antd';
@@ -45,10 +45,10 @@ export const AreaManagementPage = () => {
     const accountName = useAccountName();
 
     useGate(MineOwnerContractsGate, { searchParam: accountName });
-    useGate(UserAreaGate, { searchParam: accountName });
+    useGate(LandLordManagementData, { user: accountName });
     useGate(AreaGate, { searchParam: accountName });
 
-    const area = useStore($area);
+    const landLordManagementData = useStore($landLordManagementData);
     const userLocation = useUserLocation();
     const areas = useStore(userAreaNftStore);
 
@@ -92,7 +92,9 @@ export const AreaManagementPage = () => {
                         </div>
 
                         <div className={styles.statistics}>
-                            <SlotStatistics area={area} />
+                            <SlotStatistics
+                                landLordManagementData={landLordManagementData}
+                            />
                         </div>
                         <Row justify="center" gutter={16}>
                             <Col span={4}>

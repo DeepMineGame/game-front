@@ -1128,5 +1128,21 @@
   },
   "Mining time": "Mining time",
   "Mining failures": "Mining failures",
-  "Tools breakdowns": "Tools breakdowns"
+  "Tools breakdowns": "Tools breakdowns",
+  "Area stats": "Area stats",
+  "No data": "No data",
+  "DME per Ejection": "DME per Ejection",
+  "Active mines": "Active mines",
+  "Mining events": "Mining events",
+  "My info": "My info",
+  "Engineers info": "Engineers info",
+  "Certificate": "Certificate",
+  "Skills learned": "Skills learned",
+  "Average start time of the contract after the offer": "Average start time of the contract after the offer",
+  "Date": "Date",
+  "Upgrades": "Upgrades",
+  "DME earned": "DME earned",
+  "Total upgrades": "Total upgrades",
+  "Total fails": "Total fails",
+  "Total DME earned": "Total DME earned"
 }

@@ -1,6 +1,6 @@
 import { App, Dropdown, Menu } from 'antd';
 import React, { useState } from 'react';
-import { $userMine, useSmartContractActionDynamic } from 'features';
+import { useSmartContractActionDynamic } from 'features';
 import {
     ActionModal,
     getTimeLeftFromUtc,
@@ -11,12 +11,14 @@ import {
 } from 'shared';
 import { useGate, useStore } from 'effector-react';
 import { useTranslation } from 'react-i18next';
-import { ActionState, cmdStart, cmdFinish } from 'entities/smartcontract';
+import { cmdStart, cmdFinish } from 'entities/smartcontract';
 import { $changeDepthAction, ChangeDepthGate } from '../../model';
+import { $mineOwnerManagementData } from '../../../models/mineOwnerManagement';
 import styles from './styles.module.scss';
 
 export const DepthChanger = () => {
     const { modal } = App.useApp();
+    const mineOwnerManagementData = useStore($mineOwnerManagementData);
 
     const accountName = useAccountName();
     const reloadPage = useReloadPage();
@@ -32,11 +34,11 @@ export const DepthChanger = () => {
     const isTimeExpire =
         Date.now() >= (changeDepthAction?.finishes_at || 0) * 1000;
     const ableToFinalise =
-        changeDepthAction?.state === ActionState.active && isTimeExpire;
-    const timeLeft = changeDepthAction?.finishes_at
-        ? getTimeLeftFromUtc(changeDepthAction.finishes_at)
-        : '';
-    const mine = useStore($userMine);
+        mineOwnerManagementData?.change_depth_able_to_finalise
+            ? getTimeLeftFromUtc(
+                  mineOwnerManagementData.change_depth_seconds_left
+              )
+            : '';
     const callAction = useSmartContractActionDynamic();
     const getMenuItemsByCount = (amount: number) =>
         Array.from(Array(amount).keys()).map((key) => ({
@@ -53,7 +55,9 @@ export const DepthChanger = () => {
     ) : (
         <div>
             <Loader className={styles.loader} size="small" />{' '}
-            <span className={styles.timer}>{timeLeft}</span>{' '}
+            <span className={styles.timer}>
+                {mineOwnerManagementData?.change_depth_seconds_left}
+            </span>{' '}
             {t('features.mineOwner.management.changeMineDepth')}
         </div>
     );
@@ -63,7 +67,7 @@ export const DepthChanger = () => {
         callAction(
             cmdFinish({
                 waxUser: accountName,
-                mineId: mine!.id,
+                mineId: mineOwnerManagementData?.mine_asset.asset_id!,
             })
         )?.then(reloadPage);
     const notifyAboutToChangeDepthNeeded = () =>
@@ -74,7 +78,7 @@ export const DepthChanger = () => {
         callAction(
             cmdStart({
                 waxUser: accountName,
-                mineId: mine!.id,
+                mineId: mineOwnerManagementData?.mine_asset.asset_id!,
                 depthTo: selectedDepth,
             })
         )?.then(reloadPage);
@@ -85,11 +89,16 @@ export const DepthChanger = () => {
                     <Menu
                         disabled={!isTimeExpire && !ableToFinalise}
                         items={getMenuItemsByCount(
-                            mine?.level ? Number(mine.level + 1) : 0
+                            mineOwnerManagementData?.mine_asset.level
+                                ? Number(
+                                      (mineOwnerManagementData?.mine_asset
+                                          .level || 0) + 1
+                                  )
+                                : 0
                         )}
                     />
                 }
-                disabled={mine?.level === 0}
+                disabled={mineOwnerManagementData?.mine_asset.level === 0}
                 icon={amountSection}
                 onClick={
                     ableToFinalise

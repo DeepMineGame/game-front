@@ -32,6 +32,7 @@ import {
     Wasteland,
 } from 'pages';
 
+import { EngineerStatPage } from 'pages/engineer';
 import { OperationPageType } from 'entities/contract';
 import * as paths from './paths';
 
@@ -284,6 +285,14 @@ export const routes: AppRoute[] = [
         forAdmin: false,
         forBetaUser: false,
         titleTag: 'Engineers Training — DeepMine',
+    },
+    {
+        path: paths.engineerStatAndInfo,
+        Component: EngineerStatPage,
+        forLoggedIn: true,
+        forAdmin: false,
+        forBetaUser: false,
+        titleTag: 'Engineers Stat — DeepMine',
     },
 ];
 

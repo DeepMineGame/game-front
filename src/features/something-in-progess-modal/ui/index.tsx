@@ -10,7 +10,9 @@ import { useTranslation } from 'react-i18next';
 import { useStore } from 'effector-react';
 import {
     $somethingInProgressCountDown,
+    $thingInProgressCallback,
     $thingInProgressName,
+    setInProgressThingFinishCallback,
     setSomethingCountDownEvent,
 } from '../model';
 import { ProgressNotification } from '../../action-indicator';
@@ -21,6 +23,7 @@ export const SomethingInProgress: FC = () => {
     const { t } = useTranslation();
     const thingInProgressName = useStore($thingInProgressName);
     const somethingCountDown = useStore($somethingInProgressCountDown);
+    const thingInProgressCallback = useStore($thingInProgressCallback);
     const reloadPage = useReloadPage();
     const [isModalMinimized, setIsModalMinimized] = useState(false);
     const timeToPercents =
@@ -34,9 +37,17 @@ export const SomethingInProgress: FC = () => {
             thingInProgressName
         ) {
             setSomethingCountDownEvent(null);
+            thingInProgressCallback?.();
+            setInProgressThingFinishCallback(null);
             return reloadPage();
         }
-    }, [isModalMinimized, reloadPage, somethingCountDown, thingInProgressName]);
+    }, [
+        isModalMinimized,
+        reloadPage,
+        somethingCountDown,
+        thingInProgressCallback,
+        thingInProgressName,
+    ]);
     return (
         <>
             {!isModalMinimized && (
