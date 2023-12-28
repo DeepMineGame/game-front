@@ -48,7 +48,7 @@ export const EngineerStatPage: FC = () => {
                 {
                     key: String(Tabs.stat),
                     children: <EngineerStat data={engineerStat} />,
-                    label: t(`pages.contractorStatsAndInfo.mineAreaInfo`),
+                    label: t(`My stat`),
                 },
             ]}
             documentTitleScope="Engineer stat and info"
