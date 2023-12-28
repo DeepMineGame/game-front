@@ -37,10 +37,6 @@ export const EngineerStat: FC<{
             dataIndex: 'fails_count',
             key: 'fails_count',
         },
-        {
-            dataIndex: 'cost_of_execution',
-            key: 'cost_of_execution',
-        },
     ];
     const columns: ColumnsType<ContractorStats> = [
         {
@@ -71,11 +67,6 @@ export const EngineerStat: FC<{
         },
         {
             title: t('Total fails'),
-            dataIndex: 'upgrades_fails_count',
-            key: 'upgrades_fails_count',
-        },
-        {
-            title: t('Total DME earned'),
             dataIndex: 'upgrades_fails_count',
             key: 'upgrades_fails_count',
         },
